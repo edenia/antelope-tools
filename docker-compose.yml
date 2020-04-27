@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  webapp:
+    container_name: eoscr-webapp
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    environment:
+      REACT_APP_API_ENTRYPOINT: '${REACT_APP_API_ENTRYPOINT}'
+    restart: on-failure
+    volumes:
+      - ./build:/usr/share/nginx/html
