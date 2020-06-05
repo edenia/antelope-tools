@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import * as colors from '@material-ui/core/colors'
 import DeviceHubIcon from '@material-ui/icons/DeviceHub'
 import CloudIcon from '@material-ui/icons/Cloud'
+import CreditCardIcon from '@material-ui/icons/CreditCard'
 
 import CustomRouterLink from '../../components/CustomRouterLink'
 
@@ -57,9 +58,14 @@ const DashboardSidebarContent = () => {
       icon: <DeviceHubIcon />
     },
     {
-      title: 'Nodes',
+      title: 'Nodes distribution',
       href: '/dashboard/nodes',
       icon: <CloudIcon />
+    },
+    {
+      title: 'Reward distribution',
+      href: '/dashboard/countries',
+      icon: <CreditCardIcon />
     }
   ]
 

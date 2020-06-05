@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { MainContainer } from '../../containers'
 import { formatWithThousandSeparator } from '../../utils'
 
+import DashboardCountries from './DashboardCountries'
 import DashboardTopbar from './DashboardTopbar'
 import DashboardSidebar from './DashboardSidebar'
 import DashboardProducers from './DashboardProducers'
@@ -71,6 +72,11 @@ const Dashboard = () => {
             component={DashboardProducers}
           />
           <Route exact path="/dashboard/nodes" component={DashboardNodes} />
+          <Route
+            exact
+            path="/dashboard/countries"
+            component={DashboardCountries}
+          />
           <Redirect from="/dashboard" to="/dashboard/producers" />
         </Switch>
       </Grid>

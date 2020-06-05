@@ -92,7 +92,7 @@ const Producers = () => {
                   </TableCell>
                   <TableCell>
                     <span
-                      className={`flag-icon flag-icon-squared flag-icon-${product.bpJSON?.org?.location?.country.toLocaleLowerCase()}`}
+                      className={`flag-icon flag-icon-squared flag-icon-${product.bpJSON?.org?.location?.country?.toLocaleLowerCase()}`}
                     />
                     <span className={classes.country}>
                       {product.bpJSON?.org?.location?.name || 'N/A'}
