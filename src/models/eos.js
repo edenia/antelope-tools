@@ -61,7 +61,7 @@ export default {
       }
 
       const handle = () => {
-        eos.getProducers(true).then((result) => {
+        eos.getProducers({ limit: 50, json: true }).then((result) => {
           dispatch.eos.updateProducers(result)
           result.rows.forEach((producer) =>
             dispatch.eos.getProducerInfo(producer)
