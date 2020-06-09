@@ -25,18 +25,18 @@ const Producers = () => {
   const classes = useStyles()
 
   useEffect(() => {
-    dispatch.eos.startTrackingProducers({ interval: 60000 })
+    dispatch.eos.getProducers()
   }, [dispatch])
 
   useEffect(() => {
     const items = []
     producers.rows.forEach((producer) => {
-      if (!producer.bpJSON) {
+      if (!producer?.bp_json?.nodes) {
         return
       }
 
-      producer.bpJSON.nodes.forEach((node) => {
-        if (!node.location.latitude || !node.location.longitude) {
+      producer.bp_json.nodes.forEach((node) => {
+        if (!node?.location?.latitude || !node?.location?.longitude) {
           return
         }
 

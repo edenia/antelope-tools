@@ -64,7 +64,7 @@ const DashboardSidebarContent = () => {
     },
     {
       title: 'Reward distribution',
-      href: '/dashboard/countries',
+      href: '/dashboard/rewards',
       icon: <CreditCardIcon />
     }
   ]
