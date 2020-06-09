@@ -1,13 +1,44 @@
 import EosApi from 'eosjs-api'
 import axios from 'axios'
 
+import { parseVotesToEOS } from '../utils'
+
 const eos = EosApi({
   httpEndpoint: 'https://eos.greymass.com',
   verbose: false,
   fetchConfiguration: {}
 })
-let producersInterval
 let infoInterval
+
+const getInflation = async () => {
+  const systemData = await eos.getCurrencyStats({
+    symbol: 'EOS',
+    code: 'eosio.token'
+  })
+
+  if (!systemData.EOS || !systemData.EOS.supply) {
+    return 0
+  }
+
+  const totalSupply = parseInt(systemData.EOS.supply.split(' ')[0])
+
+  return totalSupply / 100 / 365
+}
+
+const getBpJSON = async (producer) => {
+  try {
+    const { data: bpJson } = await axios.get(
+      `https://cors-anywhere.herokuapp.com/${producer.url}/bp.json`,
+      {
+        timeout: 5000
+      }
+    )
+
+    return bpJson
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export default {
   state: {
@@ -55,22 +86,90 @@ export default {
       handle()
       infoInterval = setInterval(handle, interval)
     },
-    async startTrackingProducers({ interval = 1000 } = {}) {
-      if (producersInterval) {
-        return
-      }
+    async getProducers() {
+      const {
+        total_producer_vote_weight: voteWeight,
+        rows,
+        ...args
+      } = await eos.getProducers({ limit: 100, json: true })
+      const inflation = await getInflation()
+      const blockReward = 0.25 // reward for each block produced
+      const voteReward = 0.75 // reward according to producer total_votes
+      const minimumPercenToGetVoteReward = 100 / (inflation * voteReward) // calculate the minimum percen to get vote reward
 
-      const handle = () => {
-        eos.getProducers({ limit: 50, json: true }).then((result) => {
-          dispatch.eos.updateProducers(result)
-          result.rows.forEach((producer) =>
-            dispatch.eos.getProducerInfo(producer)
-          )
+      let distributedVoteRewardPercent = 0
+      let undistributedVoteRewardPercent = 0
+
+      rows.forEach((producer) => {
+        const producerVotePercent = producer.total_votes / voteWeight
+        if (producerVotePercent > minimumPercenToGetVoteReward) {
+          distributedVoteRewardPercent += producerVotePercent
+        } else {
+          undistributedVoteRewardPercent += producerVotePercent
+        }
+      })
+
+      let producers = rows
+        .sort((a, b) => {
+          if (parseInt(a.total_votes) > parseInt(b.total_votes)) {
+            return -1
+          }
+
+          if (parseInt(a.total_votes) < parseInt(b.total_votes)) {
+            return 1
+          }
+
+          return 0
         })
-      }
+        .map((producer, i) => ({ ...producer, isBlockProducer: i < 21 }))
+        .map((producer) => {
+          const producerVotePercent = producer.total_votes / voteWeight
+          let expectedVoteReward = 0
+          let expectedBlockReward = 0
 
-      handle()
-      producersInterval = setInterval(handle, interval)
+          if (producerVotePercent > minimumPercenToGetVoteReward) {
+            const producerDistributionPercent =
+              producerVotePercent / distributedVoteRewardPercent // calculates the percentage that the producer represents of the distributed vote reward percent
+
+            const producerUndistributedRewardPercent =
+              producerDistributionPercent * undistributedVoteRewardPercent //  calculate the percentage that corresponds to the producer of the undistributed vote reward percent
+
+            expectedVoteReward =
+              inflation *
+              voteReward *
+              (producerUndistributedRewardPercent + producerVotePercent)
+          }
+
+          if (producer.isBlockProducer) {
+            expectedBlockReward = inflation * blockReward * (1 / 21)
+          }
+
+          return {
+            ...producer,
+            total_votes: parseInt(producer.total_votes),
+            total_votes_percent: producerVotePercent,
+            total_votes_eos: parseVotesToEOS(producer.total_votes),
+            vote_reward: expectedVoteReward,
+            block_reward: expectedBlockReward,
+            total_reward: expectedVoteReward + expectedBlockReward
+          }
+        })
+
+      producers = await Promise.all(
+        producers.map(async (producer) => {
+          const bpJSON = await getBpJSON(producer)
+
+          return {
+            ...producer,
+            bp_json: bpJSON
+          }
+        })
+      )
+
+      dispatch.eos.updateProducers({
+        ...args,
+        rows: producers
+      })
     },
     async getProducerInfo(producer) {
       try {

@@ -9,9 +9,10 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Skeleton from '@material-ui/lab/Skeleton'
 import 'flag-icon-css/css/flag-icon.min.css'
 
-import { parseVotesToEOS, formatWithThousandSeparator } from '../../utils'
+import { formatWithThousandSeparator } from '../../utils'
 
 const defaultLogo = 'https://bloks.io/img/eosio.png'
 
@@ -23,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
   owner: {
     display: 'flex',
     justifyContent: 'start',
+    alignItems: 'center'
+  },
+  loader: {
+    display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   logo: {
@@ -45,7 +51,7 @@ const Producers = () => {
   }
 
   useEffect(() => {
-    dispatch.eos.startTrackingProducers({ interval: 300000 })
+    dispatch.eos.getProducers({ interval: 300000 })
   }, [dispatch])
 
   return (
@@ -59,47 +65,99 @@ const Producers = () => {
                 <TableCell>Votes %</TableCell>
                 <TableCell>Total Votes</TableCell>
                 <TableCell>Location</TableCell>
+                <TableCell>Expected Rewards</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {producers.rows.map((product, index) => (
+              {producers.rows.map((producer, index) => (
                 <TableRow key={`product-table-row-${index}`}>
                   <TableCell className={classes.owner}>
                     <img
                       className={classes.logo}
                       src={
-                        product.bpJSON?.org?.branding?.logo_256 || defaultLogo // eslint-disable-line camelcase
+                        producer.bp_json?.org?.branding?.logo_256 || defaultLogo // eslint-disable-line camelcase
                       }
                       onError={useDefaultLogo}
                       alt="logo"
                     />
-                    {product.owner}
+                    {producer.owner}
                   </TableCell>
                   <TableCell>
                     {formatWithThousandSeparator(
-                      (product.total_votes /
-                        producers.total_producer_vote_weight) *
-                        100,
+                      producer.total_votes_percent * 100,
                       3
                     )}
                     %
                   </TableCell>
                   <TableCell>
-                    {formatWithThousandSeparator(
-                      parseVotesToEOS(product.total_votes),
-                      0
-                    )}
+                    {formatWithThousandSeparator(producer.total_votes_eos, 0)}
                   </TableCell>
                   <TableCell>
                     <span
-                      className={`flag-icon flag-icon-squared flag-icon-${product.bpJSON?.org?.location?.country?.toLocaleLowerCase()}`}
+                      className={`flag-icon flag-icon-squared flag-icon-${producer.bp_json?.org?.location?.country?.toLocaleLowerCase()}`}
                     />
                     <span className={classes.country}>
-                      {product.bpJSON?.org?.location?.name || 'N/A'}
+                      {producer.bp_json?.org?.location?.name || 'N/A'}
                     </span>
+                  </TableCell>
+                  <TableCell>
+                    {formatWithThousandSeparator(producer.total_reward, 2)}
                   </TableCell>
                 </TableRow>
               ))}
+              {!producers.rows.length &&
+                [1, 2, 3].map((_) => (
+                  <TableRow key={`product-table-row--1`}>
+                    <TableCell>
+                      <div className={classes.loader}>
+                        <Skeleton
+                          variant="circle"
+                          width={30}
+                          height={30}
+                          animation="wave"
+                        />
+                        <Skeleton
+                          variant="text"
+                          width={'calc(100% - 40px)'}
+                          height={30}
+                          animation="wave"
+                        />
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton
+                        variant="text"
+                        width={'100%'}
+                        height={30}
+                        animation="wave"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton
+                        variant="text"
+                        width={'100%'}
+                        height={30}
+                        animation="wave"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton
+                        variant="text"
+                        width={'100%'}
+                        height={30}
+                        animation="wave"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton
+                        variant="text"
+                        width={'100%'}
+                        height={30}
+                        animation="wave"
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </CardContent>

@@ -15,6 +15,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import TreeItem from '@material-ui/lab/TreeItem'
 import Tooltip from '@material-ui/core/Tooltip'
 
+import { formatWithThousandSeparator } from '../../utils'
+
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json'
 
@@ -37,7 +39,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const Countries = () => {
+const Rewards = () => {
   const dispatch = useDispatch()
   const producers = useSelector((state) => state.eos.producers)
   const [nodes, setNodes] = useState([])
@@ -61,38 +63,41 @@ const Countries = () => {
   )
 
   useEffect(() => {
-    dispatch.eos.startTrackingProducers({ interval: 60000 })
+    dispatch.eos.getProducers()
   }, [dispatch])
 
   useEffect(() => {
     let stats = {}
     producers.rows.forEach((producer) => {
-      if (!producer?.bpJSON?.org?.location?.country) {
+      if (!producer?.bp_json?.org?.location?.country) {
         return
       }
 
-      if (!stats[producer.bpJSON.org.location.country]) {
+      if (!stats[producer.bp_json.org.location.country]) {
         stats = {
           ...stats,
-          [producer.bpJSON.org.location.country]: {
-            code: producer.bpJSON.org.location.country,
-            name: producer.bpJSON.org.location.name,
+          [producer.bp_json.org.location.country]: {
+            code: producer.bp_json.org.location.country,
+            name: producer.bp_json.org.location.name,
             quantity: 1,
             coordinates: [
-              producer.bpJSON.org.location.longitude,
-              producer.bpJSON.org.location.latitude
+              producer.bp_json.org.location.longitude,
+              producer.bp_json.org.location.latitude
             ],
-            items: [producer.bpJSON.org.candidate_name]
+            items: [producer.bp_json.org.candidate_name],
+            rewards: producer.total_reward
           }
         }
       } else {
-        stats[producer.bpJSON.org.location.country].items.push(
-          producer.bpJSON.org.candidate_name
+        stats[producer.bp_json.org.location.country].items.push(
+          producer.bp_json.org.candidate_name
         )
-        stats[producer.bpJSON.org.location.country].quantity += 1
-        stats[producer.bpJSON.org.location.country].coordinates = [
-          producer.bpJSON.org.location.longitude,
-          producer.bpJSON.org.location.latitude
+        stats[producer.bp_json.org.location.country].rewards +=
+          producer.total_reward
+        stats[producer.bp_json.org.location.country].quantity += 1
+        stats[producer.bp_json.org.location.country].coordinates = [
+          producer.bp_json.org.location.longitude,
+          producer.bp_json.org.location.latitude
         ]
       }
     })
@@ -112,7 +117,12 @@ const Countries = () => {
             <TreeItem
               key={`tree-${i}`}
               nodeId={`tree-${i}`}
-              label={`${node.code} (${node.quantity})`}
+              label={`${node.code} (${
+                node.quantity
+              } producers) (${formatWithThousandSeparator(
+                node.rewards,
+                2
+              )} EOS)`}
             >
               {node.items.map((label, j) => (
                 <TreeItem
@@ -189,6 +199,6 @@ const Countries = () => {
   )
 }
 
-Countries.propTypes = {}
+Rewards.propTypes = {}
 
-export default Countries
+export default Rewards
