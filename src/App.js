@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -11,13 +11,15 @@ export default () => {
   return (
     <BrowserRouter>
       <Snackbar {...snackbarState} />
-      <Switch>
-        {routes.map((route, index) => (
-          <Route {...route} key={`route-${index}`} />
-        ))}
-        <Redirect exact from="/" to="/dashboard" />
-        <Redirect to="/" />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          {routes.map((route, index) => (
+            <Route {...route} key={`route-${index}`} />
+          ))}
+          <Redirect exact from="/" to="/dashboard" />
+          <Redirect to="/" />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   )
 }
