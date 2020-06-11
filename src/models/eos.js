@@ -28,16 +28,16 @@ const getInflation = async () => {
 const getBpJSON = async (producer) => {
   try {
     const { data: bpJson } = await axios.get(
-      `https://cors-anywhere.herokuapp.com/${producer.url}/bp.json`,
+      producer.owner === 'okcapitalbp1'
+        ? `${producer.url}/bp.json`
+        : `https://cors-anywhere.herokuapp.com/${producer.url}/bp.json`,
       {
         timeout: 5000
       }
     )
 
     return bpJson
-  } catch (error) {
-    console.error(error)
-  }
+  } catch (error) {}
 }
 
 export default {
@@ -159,9 +159,28 @@ export default {
         producers.map(async (producer) => {
           const bpJSON = await getBpJSON(producer)
 
+          if (!bpJSON || typeof bpJSON !== 'object') {
+            return producer
+          }
+
           return {
             ...producer,
-            bp_json: bpJSON
+            bp_json: {
+              ...bpJSON,
+              org: {
+                ...bpJSON.org,
+                location: {
+                  ...bpJSON.org.location,
+                  country: /china/gi.test(
+                    typeof bpJSON.org.location === 'string'
+                      ? bpJSON.org.location
+                      : bpJSON.org.location.country
+                  )
+                    ? 'CN'
+                    : bpJSON.org.location.country
+                }
+              }
+            }
           }
         })
       )

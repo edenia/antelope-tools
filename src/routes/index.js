@@ -1,5 +1,7 @@
-import Dashboard from './Dashboard'
-import Login from './Login'
+import { lazy } from 'react'
+
+const Dashboard = lazy(() => import('./Dashboard'))
+const Login = lazy(() => import('./Login'))
 
 export default [
   {
