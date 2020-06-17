@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
+import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
@@ -9,17 +10,26 @@ import Popover from '@material-ui/core/Popover'
 import CloseIcon from '@material-ui/icons/Close'
 import Link from '@material-ui/core/Link'
 import Skeleton from '@material-ui/lab/Skeleton'
-import { scaleQuantile } from 'd3-scale'
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Marker
+  Marker,
+  ZoomableGroup
 } from 'react-simple-maps'
+import { geoPath } from 'd3-geo'
+import { geoTimes } from 'd3-geo-projection'
+import { scaleLinear } from 'd3-scale'
+import { interpolateHcl } from 'd3-interpolate'
 
 import UnknowFlagIcon from '../../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../../utils'
 
+const lowestRewardsColor = '#B6EBF3'
+const highestRewardsColor = '#265F63'
+const defaultScale = 170
+const maxZoom = 3
+const projection = geoTimes()
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json'
 
@@ -70,10 +80,35 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   geography: {
-    outline: 'none'
+    outline: 'none',
+    cursor: 'zoom-in'
+  },
+  geographyZoomOut: {
+    cursor: 'zoom-out'
   },
   marker: {
     cursor: 'pointer'
+  },
+  lowestRewards: {
+    backgroundColor: lowestRewardsColor,
+    width: 16,
+    height: 16,
+    borderRadius: 4,
+    display: 'inline-block',
+    marginLeft: theme.spacing(1)
+  },
+  highestRewards: {
+    backgroundColor: highestRewardsColor,
+    width: 16,
+    height: 16,
+    borderRadius: 4,
+    display: 'inline-block',
+    marginLeft: theme.spacing(1)
+  },
+  rewardsColorSchema: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: 4
   }
 }))
 
@@ -85,6 +120,11 @@ const Rewards = () => {
   const producers = useSelector((state) => state.eos.producers)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
+  const [mapState, setMapState] = useState({
+    scale: defaultScale,
+    center: [0, 0],
+    zoom: 1
+  })
 
   const handlePopoverOpen = (node) => (event) => {
     if (!nodes.length > 0) {
@@ -99,21 +139,35 @@ const Rewards = () => {
     setAnchorEl(null)
   }
 
+  const toogleZoom = (geography) => {
+    if (mapState.zoom === maxZoom) {
+      setMapState((state) => ({
+        ...state,
+        center: [0, 0],
+        zoom: 1,
+        scale: defaultScale
+      }))
+
+      return
+    }
+
+    const path = geoPath().projection(projection)
+    const center = projection.invert(path.centroid(geography))
+
+    setMapState((state) => ({
+      ...state,
+      center,
+      zoom: maxZoom,
+      scale: defaultScale * maxZoom
+    }))
+  }
+
   const colorScale = useCallback(
-    scaleQuantile()
-      .domain(nodes.map((stat) => stat.quantity))
-      .range([
-        '#ffedea',
-        '#ffcec5',
-        '#ffad9f',
-        '#ff8a75',
-        '#ff5533',
-        '#e2492d',
-        '#be3d26',
-        '#9a311f',
-        '#782618'
-      ]),
-    [nodes]
+    scaleLinear()
+      .domain([0, summary?.topCountryByRewards?.rewards - 1])
+      .range([lowestRewardsColor, highestRewardsColor])
+      .interpolate(interpolateHcl),
+    [summary]
   )
 
   useEffect(() => {
@@ -181,7 +235,7 @@ const Rewards = () => {
       }
     })
 
-    const nodes = Object.values(stats)
+    const nodes = Object.values(stats).filter((a) => a.rewards > 100)
     const topCountryByRewards = nodes.reduce((prev, current) => {
       return prev.rewards > current.rewards ? prev : current
     }, {})
@@ -261,59 +315,67 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Producers analyzed</Typography>
-            <Typography variant="h3">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
-              )}
-              {nodes.length > 0 && producers.rows.length}
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              Lowest rewards: <span className={classes.lowestRewards}></span>
+            </Typography>
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              Highest rewards: <span className={classes.highestRewards}></span>
             </Typography>
           </CardContent>
         </Card>
       </Grid>
       <Grid item sm={12} className={classes.mapWrapper}>
         <ComposableMap
-          projection="geoEqualEarth"
           projectionConfig={{
-            scale: 170
+            scale: mapState.scale
           }}
         >
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo, i) => {
-                const nodeData = nodes.find(
-                  (node) => node.code === geo.properties.ISO_A2
-                )
+          <ZoomableGroup center={mapState.center} maxZoom={1}>
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo, i) => {
+                  const nodeData = nodes.find(
+                    (node) => node.code === geo.properties.ISO_A2
+                  )
 
-                return (
-                  <Geography
-                    className={classes.geography}
-                    key={geo.rsmKey}
-                    geography={geo}
-                    stroke="#D6D6DA"
-                    fill={nodeData ? colorScale(nodeData.quantity) : '#EEE'}
-                  />
-                )
-              })
-            }
-          </Geographies>
-          {nodes.map(({ coordinates, ...node }, i) => (
-            <Marker
-              key={`marker-${i}`}
-              coordinates={coordinates}
-              onClick={handlePopoverOpen(node)}
-              className={classes.marker}
-            >
-              <g
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                transform="translate(-12, -24)"
+                  return (
+                    <Geography
+                      onClick={() => toogleZoom(geo)}
+                      className={clsx({
+                        [classes.geography]: true,
+                        [classes.geographyZoomOut]: mapState.zoom === maxZoom
+                      })}
+                      key={geo.rsmKey}
+                      geography={geo}
+                      stroke="#8F9DA4"
+                      fill={
+                        nodeData && nodeData.rewards > 0
+                          ? colorScale(parseInt(nodeData.rewards))
+                          : '#EEEEEE'
+                      }
+                    />
+                  )
+                })
+              }
+            </Geographies>
+            {nodes.map(({ coordinates, ...node }, i) => (
+              <Marker
+                key={`marker-${i}`}
+                coordinates={coordinates}
+                onClick={handlePopoverOpen(node)}
+                className={classes.marker}
               >
-                <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
-                <circle cx="12" cy="10" r="3" fill="white" />
-              </g>
-            </Marker>
-          ))}
+                <g
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  transform="translate(-12, -24)"
+                >
+                  <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
+                  <circle cx="12" cy="10" r="3" fill="white" />
+                </g>
+              </Marker>
+            ))}
+          </ZoomableGroup>
         </ComposableMap>
       </Grid>
       <Popover

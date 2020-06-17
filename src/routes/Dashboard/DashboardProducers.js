@@ -101,6 +101,7 @@ const Producers = () => {
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableCell>Rank</TableCell>
                   <TableCell>Block Producer</TableCell>
                   <TableCell>Votes %</TableCell>
                   <TableCell>Total Votes</TableCell>
@@ -111,6 +112,7 @@ const Producers = () => {
               <TableBody>
                 {producers.rows.map((producer, index) => (
                   <TableRow key={`producer-table-row-${index}`}>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell className={classes.owner}>
                       <img
                         className={classes.logo}
@@ -152,6 +154,14 @@ const Producers = () => {
                 {!producers.rows.length &&
                   [1, 2, 3].map((_, i) => (
                     <TableRow key={`producer-table-row-${i}`}>
+                      <TableCell>
+                        <Skeleton
+                          variant="text"
+                          width={'100%'}
+                          height={30}
+                          animation="wave"
+                        />
+                      </TableCell>
                       <TableCell>
                         <div className={classes.loader}>
                           <Skeleton
