@@ -4,9 +4,9 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Button from '@material-ui/core/Button'
 import * as colors from '@material-ui/core/colors'
-import DeviceHubIcon from '@material-ui/icons/DeviceHub'
-import CloudIcon from '@material-ui/icons/Cloud'
-import CreditCardIcon from '@material-ui/icons/CreditCard'
+import StorageIcon from '@material-ui/icons/Storage'
+import CloudIcon from '@material-ui/icons/Language'
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 
 import CustomRouterLink from '../../components/CustomRouterLink'
 
@@ -55,7 +55,7 @@ const DashboardSidebarContent = () => {
     {
       title: 'Producers',
       href: '/dashboard/producers',
-      icon: <DeviceHubIcon />
+      icon: <StorageIcon />
     },
     {
       title: 'Nodes distribution',
@@ -65,7 +65,7 @@ const DashboardSidebarContent = () => {
     {
       title: 'Reward distribution',
       href: '/dashboard/rewards',
-      icon: <CreditCardIcon />
+      icon: <AccountBalanceWalletIcon />
     }
   ]
 
