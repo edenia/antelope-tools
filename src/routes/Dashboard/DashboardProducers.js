@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { formatWithThousandSeparator } from '../../utils'
+import ProducersChart from '../../components/ProducersChart'
+import TransactionsChart from '../../components/TransactionsChart'
 
 const defaultLogo = 'https://bloks.io/img/eosio.png'
 
@@ -39,12 +41,37 @@ const useStyles = makeStyles((theme) => ({
     width: '2em',
     height: '2em',
     borderRadius: '500rem'
+  },
+  scheduleChartWrapper: {
+    minWidth: 100,
+    maxWidth: 500,
+    width: '100%'
+  },
+  scheduleChartSkeletonWrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  gridWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  },
+  gridItem: {
+    marginBottom: 16
+  },
+  tableWrapper: {
+    width: ' 100%',
+    overflow: 'scroll'
   }
 }))
 
 const Producers = () => {
   const dispatch = useDispatch()
   const info = useSelector((state) => state.eos.info)
+  const rate = useSelector((state) => state.eos.rate)
+  const tps = useSelector((state) => state.eos.tps)
   const producers = useSelector((state) => state.eos.producers)
   const classes = useStyles()
 
@@ -55,49 +82,83 @@ const Producers = () => {
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 1000 })
     dispatch.eos.getProducers()
+    dispatch.eos.getRate()
   }, [dispatch])
 
   return (
     <>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
+      <Grid item xl={3} lg={6} sm={6} xs={12} className={classes.gridWrapper}>
+        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Last Block</Typography>
+              <Typography variant="h3">
+                {formatWithThousandSeparator(info.head_block_num)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Current Producer</Typography>
+              <Typography variant="h3">{info.head_block_producer}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Last Irreversible Block</Typography>
+              <Typography variant="h3">
+                {formatWithThousandSeparator(info.last_irreversible_block_num)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">EOS Price</Typography>
+              <Typography variant="h3">
+                ${formatWithThousandSeparator(rate, 2)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid className={classes.gridItem} item xl={3} lg={12} sm={12} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">Transactions Per Blocks</Typography>
+              <TransactionsChart data={tps} />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Grid item sm={6} lg={6} className={classes.scheduleChartWrapper}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Last Block</Typography>
-            <Typography variant="h3">
-              {formatWithThousandSeparator(info.head_block_num)}
-            </Typography>
+            <Typography variant="h6">Top 21 Block Producer Schedule</Typography>
+            {!producers.rows.length && (
+              <div className={classes.scheduleChartSkeletonWrapper}>
+                <Skeleton
+                  variant="circle"
+                  width={200}
+                  height={200}
+                  animation="wave"
+                />
+              </div>
+            )}
+            {producers.rows.length > 0 && (
+              <ProducersChart info={info} producers={producers.rows} />
+            )}
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
+      <Grid item sm={12} className={classes.tableWrapper}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Produced by</Typography>
-            <Typography variant="h3">{info.head_block_producer}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Last irreversible block</Typography>
-            <Typography variant="h3">
-              {formatWithThousandSeparator(info.last_irreversible_block_num)}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Server version</Typography>
-            <Typography variant="h3">{info.server_version_string}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item sm={12}>
-        <Card>
-          <CardContent>
+            <Typography variant="h6">Block Producer Votes</Typography>
             <Table>
               <TableHead>
                 <TableRow>

@@ -125,6 +125,7 @@ const Rewards = () => {
     center: [0, 0],
     zoom: 1
   })
+  const rate = useSelector((state) => state.eos.rate)
 
   const handlePopoverOpen = (node) => (event) => {
     if (!nodes.length > 0) {
@@ -172,70 +173,72 @@ const Rewards = () => {
 
   useEffect(() => {
     dispatch.eos.getProducers()
+    dispatch.eos.getRate()
   }, [dispatch])
 
   useEffect(() => {
     let stats = {}
     let daylyRewars = 0
 
-    producers.rows.forEach((producer) => {
-      daylyRewars += producer.total_reward || 0
+    producers.rows
+      .filter((a) => a.total_reward >= 100)
+      .forEach((producer) => {
+        daylyRewars += producer.total_reward || 0
 
-      if (!producer?.bp_json?.org?.location?.country) {
-        if (!stats['N/A']) {
+        if (!producer?.bp_json?.org?.location?.country) {
+          if (!stats['N/A']) {
+            stats = {
+              ...stats,
+              'N/A': {
+                code: 'N/A',
+                name: 'Not available',
+                quantity: 1,
+                items: [producer],
+                rewards: producer.total_reward
+              }
+            }
+          } else {
+            stats['N/A'].items.push(producer)
+            stats['N/A'].rewards += producer.total_reward
+            stats['N/A'].quantity += 1
+          }
+          return
+        }
+
+        if (!stats[producer.bp_json.org.location.country]) {
           stats = {
             ...stats,
-            'N/A': {
-              code: 'N/A',
-              name: 'Bermuda Triangle',
+            [producer.bp_json.org.location.country]: {
+              code: producer.bp_json.org.location.country,
+              name: countries[producer.bp_json.org.location.country]?.name,
+              flag: countries[producer.bp_json.org.location.country]?.flag,
               quantity: 1,
-              coordinates: [-77.0877282, 25.003077],
+              coordinates: [
+                producer.bp_json.org.location.longitude,
+                producer.bp_json.org.location.latitude
+              ],
               items: [producer],
               rewards: producer.total_reward
             }
           }
         } else {
-          stats['N/A'].items.push(producer)
-          stats['N/A'].rewards += producer.total_reward
-          stats['N/A'].quantity += 1
-        }
-        return
-      }
-
-      if (!stats[producer.bp_json.org.location.country]) {
-        stats = {
-          ...stats,
-          [producer.bp_json.org.location.country]: {
-            code: producer.bp_json.org.location.country,
-            name: countries[producer.bp_json.org.location.country]?.name,
-            flag: countries[producer.bp_json.org.location.country]?.flag,
-            quantity: 1,
-            coordinates: [
+          stats[producer.bp_json.org.location.country].items.push(producer)
+          stats[producer.bp_json.org.location.country].rewards +=
+            producer.total_reward
+          stats[producer.bp_json.org.location.country].quantity += 1
+          if (
+            producer.bp_json.org.location.longitude &&
+            producer.bp_json.org.location.latitude
+          ) {
+            stats[producer.bp_json.org.location.country].coordinates = [
               producer.bp_json.org.location.longitude,
               producer.bp_json.org.location.latitude
-            ],
-            items: [producer],
-            rewards: producer.total_reward
+            ]
           }
         }
-      } else {
-        stats[producer.bp_json.org.location.country].items.push(producer)
-        stats[producer.bp_json.org.location.country].rewards +=
-          producer.total_reward
-        stats[producer.bp_json.org.location.country].quantity += 1
-        if (
-          producer.bp_json.org.location.longitude &&
-          producer.bp_json.org.location.latitude
-        ) {
-          stats[producer.bp_json.org.location.country].coordinates = [
-            producer.bp_json.org.location.longitude,
-            producer.bp_json.org.location.latitude
-          ]
-        }
-      }
-    })
+      })
 
-    const nodes = Object.values(stats).filter((a) => a.rewards > 100)
+    const nodes = Object.values(stats)
     const topCountryByRewards = nodes.reduce((prev, current) => {
       return prev.rewards > current.rewards ? prev : current
     }, {})
@@ -251,28 +254,13 @@ const Rewards = () => {
   return (
     <>
       <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
+        <Card
+          className={classes.action}
+          onClick={handlePopoverOpen(summary?.topCountryByRewards)}
+        >
           <CardContent>
-            <Typography variant="h6">Daily rewards</Typography>
+            <Typography variant="h6">Top Country By Daily Rewards</Typography>
             <Typography variant="h3">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
-              )}
-              {nodes.length > 0 &&
-                formatWithThousandSeparator(summary.daylyRewars, 2)}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Top country by rewards</Typography>
-            <Typography
-              variant="h3"
-              className={classes.action}
-              onClick={handlePopoverOpen(summary?.topCountryByRewards)}
-            >
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width={'100%'} animation="wave" />
               )}
@@ -282,8 +270,32 @@ const Rewards = () => {
                     {summary.topCountryByRewards.flag}
                   </span>
                   {summary.topCountryByRewards.name}{' '}
+                </>
+              )}
+            </Typography>
+            <Typography variant="body1">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width={'100%'} animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <>
                   {formatWithThousandSeparator(
                     summary.topCountryByRewards.rewards,
+                    2
+                  )}{' '}
+                  EOS
+                </>
+              )}
+            </Typography>
+            <Typography variant="body1">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width={'100%'} animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <>
+                  $
+                  {formatWithThousandSeparator(
+                    summary.topCountryByRewards.rewards * rate,
                     2
                   )}
                 </>
@@ -295,9 +307,35 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6">
-              Producers without a proper bpjson
+            <Typography variant="h6">Total Daily Rewards</Typography>
+            <Typography variant="h3">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width={'100%'} animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <span>
+                  {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
+                </span>
+              )}
             </Typography>
+            <Typography variant="h3">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width={'100%'} animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <span>
+                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 2)}
+                </span>
+              )}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xl={3} lg={3} sm={6} xs={12}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6">Unknown Location</Typography>
             <Typography
               variant="h3"
               className={classes.action}
@@ -316,10 +354,10 @@ const Rewards = () => {
         <Card>
           <CardContent>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Lowest rewards: <span className={classes.lowestRewards}></span>
+              Lowest Rewards: <span className={classes.lowestRewards}></span>
             </Typography>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Highest rewards: <span className={classes.highestRewards}></span>
+              Highest Rewards: <span className={classes.highestRewards}></span>
             </Typography>
           </CardContent>
         </Card>
@@ -358,23 +396,25 @@ const Rewards = () => {
                 })
               }
             </Geographies>
-            {nodes.map(({ coordinates, ...node }, i) => (
-              <Marker
-                key={`marker-${i}`}
-                coordinates={coordinates}
-                onClick={handlePopoverOpen(node)}
-                className={classes.marker}
-              >
-                <g
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  transform="translate(-12, -24)"
+            {nodes
+              .filter((item) => !!item.coordinates)
+              .map(({ coordinates, ...node }, i) => (
+                <Marker
+                  key={`marker-${i}`}
+                  coordinates={coordinates}
+                  onClick={handlePopoverOpen(node)}
+                  className={classes.marker}
                 >
-                  <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
-                  <circle cx="12" cy="10" r="3" fill="white" />
-                </g>
-              </Marker>
-            ))}
+                  <g
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    transform="translate(-12, -24)"
+                  >
+                    <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
+                    <circle cx="12" cy="10" r="3" fill="white" />
+                  </g>
+                </Marker>
+              ))}
           </ZoomableGroup>
         </ComposableMap>
       </Grid>
@@ -429,6 +469,8 @@ const Rewards = () => {
                 >
                   {producer?.bp_json?.org?.candidate_name || producer.owner}
                 </Link>
+                <br />
+                {formatWithThousandSeparator(producer.total_reward, 2)} EOS
               </li>
             ))}
           </ul>
