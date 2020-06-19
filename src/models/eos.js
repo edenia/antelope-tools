@@ -10,6 +10,10 @@ const eos = EosApi({
 })
 let infoInterval
 
+// @todo: move exchange logic to backend service
+const exchangeRateApi =
+  'http://api.coinlayer.com/api/live?symbols=EOS&access_key=e7146e1015657fa7bc3495bdf6302052'
+
 const getInflation = async () => {
   const systemData = await eos.getCurrencyStats({
     symbol: 'EOS',
@@ -43,7 +47,8 @@ const getBpJSON = async (producer) => {
 export default {
   state: {
     producers: { rows: [] },
-    info: {}
+    info: {},
+    tps: []
   },
   reducers: {
     updateInfo(state, info) {
@@ -71,6 +76,26 @@ export default {
           rows
         }
       }
+    },
+    updateTps(state, item) {
+      let tps = state.tps
+
+      if (state.tps.length >= 10) {
+        tps = tps.splice(1, state.tps.length)
+      }
+
+      tps = [...tps, item]
+
+      return {
+        ...state,
+        tps
+      }
+    },
+    updateRate(state, rate) {
+      return {
+        ...state,
+        rate
+      }
     }
   },
   effects: (dispatch) => ({
@@ -79,11 +104,13 @@ export default {
         return
       }
 
-      const handle = () => {
-        eos.getInfo({}).then((result) => dispatch.eos.updateInfo(result))
+      const handle = async () => {
+        const info = await eos.getInfo({})
+        dispatch.eos.updateInfo(info)
+        dispatch.eos.updateTransactionsPerSecond(info.head_block_num)
       }
 
-      handle()
+      await handle()
       infoInterval = setInterval(handle, interval)
     },
     async getProducers() {
@@ -206,6 +233,29 @@ export default {
         })
       } catch (error) {
         console.error(error)
+      }
+    },
+    async updateTransactionsPerSecond(block) {
+      try {
+        const data = await eos.getBlock(block)
+        dispatch.eos.updateTps({
+          block,
+          transactions: data.transactions.length
+        })
+      } catch (error) {}
+    },
+    async getRate() {
+      try {
+        const { data } = await axios.get(exchangeRateApi)
+
+        if (!data) {
+          return
+        }
+
+        dispatch.eos.updateRate(data.rates.EOS)
+      } catch (error) {
+        console.error(error)
+        dispatch.eos.updateRate(2.54)
       }
     }
   })
