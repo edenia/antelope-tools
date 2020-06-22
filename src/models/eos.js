@@ -4,7 +4,7 @@ import axios from 'axios'
 import { parseVotesToEOS } from '../utils'
 
 const eos = EosApi({
-  httpEndpoint: 'https://eos.greymass.com',
+  httpEndpoint: 'https://latamlink.eosio.cr',
   verbose: false,
   fetchConfiguration: {}
 })
