@@ -42,24 +42,18 @@ const useStyles = makeStyles((theme) => ({
     height: '2em',
     borderRadius: '500rem'
   },
-  scheduleChartWrapper: {
-    minWidth: 100,
-    maxWidth: 500,
+  chartWrapper: {
+    minWidth: 280,
     width: '100%'
   },
-  scheduleChartSkeletonWrapper: {
+  chartSkeletonWrapper: {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  gridWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
-  },
   gridItem: {
-    marginBottom: 16
+    marginBottom: theme.spacing(2)
   },
   tableWrapper: {
     width: ' 100%',
@@ -70,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
 const Producers = () => {
   const dispatch = useDispatch()
   const info = useSelector((state) => state.eos.info)
-  const rate = useSelector((state) => state.eos.rate)
   const tps = useSelector((state) => state.eos.tps)
   const producers = useSelector((state) => state.eos.producers)
   const classes = useStyles()
@@ -80,15 +73,15 @@ const Producers = () => {
   }
 
   useEffect(() => {
-    dispatch.eos.startTrackingInfo({ interval: 1000 })
+    dispatch.eos.startTrackingInfo({ interval: 500 })
     dispatch.eos.getProducers()
     dispatch.eos.getRate()
   }, [dispatch])
 
   return (
-    <>
-      <Grid item xl={3} lg={6} sm={6} xs={12} className={classes.gridWrapper}>
-        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+    <Grid item xs={12}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
               <Typography variant="h6">Last Block</Typography>
@@ -98,7 +91,7 @@ const Producers = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+        <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
               <Typography variant="h6">Current Producer</Typography>
@@ -106,7 +99,7 @@ const Producers = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+        <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
               <Typography variant="h6">Last Irreversible Block</Typography>
@@ -116,46 +109,50 @@ const Producers = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid className={classes.gridItem} item xl={3} lg={5} sm={5} xs={12}>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6">EOS Price</Typography>
-              <Typography variant="h3">
-                ${formatWithThousandSeparator(rate, 2)}
+              <Typography variant="h6">
+                Top 21 Block Producer Schedule
               </Typography>
+              {!producers.rows.length && (
+                <div className={classes.chartSkeletonWrapper}>
+                  <Skeleton
+                    variant="circle"
+                    width={280}
+                    height={280}
+                    animation="wave"
+                  />
+                </div>
+              )}
+              {producers.rows.length > 0 && (
+                <ProducersChart info={info} producers={producers.rows} />
+              )}
             </CardContent>
           </Card>
         </Grid>
-        <Grid className={classes.gridItem} item xl={3} lg={12} sm={12} xs={12}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Typography variant="h6">Transactions Per Blocks</Typography>
-              <TransactionsChart data={tps} />
+              {!producers.rows.length && (
+                <div className={classes.chartSkeletonWrapper}>
+                  <Skeleton
+                    variant="rect"
+                    width={280}
+                    height={280}
+                    animation="wave"
+                  />
+                </div>
+              )}
+              {producers.rows.length > 0 && <TransactionsChart data={tps} />}
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      <Grid item sm={6} lg={6} className={classes.scheduleChartWrapper}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Top 21 Block Producer Schedule</Typography>
-            {!producers.rows.length && (
-              <div className={classes.scheduleChartSkeletonWrapper}>
-                <Skeleton
-                  variant="circle"
-                  width={200}
-                  height={200}
-                  animation="wave"
-                />
-              </div>
-            )}
-            {producers.rows.length > 0 && (
-              <ProducersChart info={info} producers={producers.rows} />
-            )}
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item sm={12} className={classes.tableWrapper}>
+      <Grid item xs={12} className={classes.tableWrapper}>
         <Card>
           <CardContent>
             <Typography variant="h6">Block Producer Votes</Typography>
@@ -178,8 +175,9 @@ const Producers = () => {
                       <img
                         className={classes.logo}
                         src={
+                          // eslint-disable-line camelcase
                           producer?.bp_json?.org?.branding?.logo_256 ||
-                          defaultLogo // eslint-disable-line camelcase
+                          defaultLogo
                         }
                         onError={useDefaultLogo}
                         alt="logo"
@@ -188,6 +186,7 @@ const Producers = () => {
                     </TableCell>
                     <TableCell>
                       {formatWithThousandSeparator(
+                        // eslint-disable-line camelcase
                         producer?.total_votes_percent * 100,
                         3
                       )}
@@ -195,6 +194,7 @@ const Producers = () => {
                     </TableCell>
                     <TableCell>
                       {formatWithThousandSeparator(
+                        // eslint-disable-line camelcase
                         producer?.total_votes_eos,
                         0
                       )}
@@ -204,11 +204,13 @@ const Producers = () => {
                         className={`flag-icon flag-icon-squared flag-icon-${producer?.bp_json?.org?.location?.country?.toLocaleLowerCase()}`}
                       />
                       <span className={classes.country}>
-                        {producer?.bp_json?.org?.location?.name || 'N/A'}
+                        {// eslint-disable-line camelcase
+                        producer?.bp_json?.org?.location?.name || 'N/A'}
                       </span>
                     </TableCell>
                     <TableCell>
-                      {formatWithThousandSeparator(producer?.total_reward, 2)}
+                      {// eslint-disable-line camelcase
+                      formatWithThousandSeparator(producer?.total_reward, 2)}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -218,7 +220,7 @@ const Producers = () => {
                       <TableCell>
                         <Skeleton
                           variant="text"
-                          width={'100%'}
+                          width="100%"
                           height={30}
                           animation="wave"
                         />
@@ -233,7 +235,7 @@ const Producers = () => {
                           />
                           <Skeleton
                             variant="text"
-                            width={'calc(100% - 40px)'}
+                            width="calc(100% - 40px)"
                             height={30}
                             animation="wave"
                           />
@@ -242,7 +244,7 @@ const Producers = () => {
                       <TableCell>
                         <Skeleton
                           variant="text"
-                          width={'100%'}
+                          width="100%"
                           height={30}
                           animation="wave"
                         />
@@ -250,7 +252,7 @@ const Producers = () => {
                       <TableCell>
                         <Skeleton
                           variant="text"
-                          width={'100%'}
+                          width="100%"
                           height={30}
                           animation="wave"
                         />
@@ -258,7 +260,7 @@ const Producers = () => {
                       <TableCell>
                         <Skeleton
                           variant="text"
-                          width={'100%'}
+                          width="100%"
                           height={30}
                           animation="wave"
                         />
@@ -266,7 +268,7 @@ const Producers = () => {
                       <TableCell>
                         <Skeleton
                           variant="text"
-                          width={'100%'}
+                          width="100%"
                           height={30}
                           animation="wave"
                         />
@@ -278,7 +280,7 @@ const Producers = () => {
           </CardContent>
         </Card>
       </Grid>
-    </>
+    </Grid>
   )
 }
 

@@ -185,6 +185,7 @@ const Rewards = () => {
       .forEach((producer) => {
         daylyRewars += producer.total_reward || 0
 
+        // eslint-disable-line camelcase
         if (!producer?.bp_json?.org?.location?.country) {
           if (!stats['N/A']) {
             stats = {
@@ -262,7 +263,7 @@ const Rewards = () => {
             <Typography variant="h6">Top Country By Daily Rewards</Typography>
             <Typography variant="h3">
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <>
@@ -275,7 +276,7 @@ const Rewards = () => {
             </Typography>
             <Typography variant="body1">
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <>
@@ -289,7 +290,7 @@ const Rewards = () => {
             </Typography>
             <Typography variant="body1">
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <>
@@ -310,7 +311,7 @@ const Rewards = () => {
             <Typography variant="h6">Total Daily Rewards</Typography>
             <Typography variant="h3">
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <span>
@@ -320,7 +321,7 @@ const Rewards = () => {
             </Typography>
             <Typography variant="h3">
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <span>
@@ -342,7 +343,7 @@ const Rewards = () => {
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
               {!nodes.length > 0 && (
-                <Skeleton variant="text" width={'100%'} animation="wave" />
+                <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 &&
                 summary.producersWithoutProperBpJson.quantity}
@@ -354,10 +355,10 @@ const Rewards = () => {
         <Card>
           <CardContent>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Lowest Rewards: <span className={classes.lowestRewards}></span>
+              Lowest Rewards: <span className={classes.lowestRewards} />
             </Typography>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Highest Rewards: <span className={classes.highestRewards}></span>
+              Highest Rewards: <span className={classes.highestRewards} />
             </Typography>
           </CardContent>
         </Card>
@@ -467,7 +468,8 @@ const Rewards = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {producer?.bp_json?.org?.candidate_name || producer.owner}
+                  {// eslint-disable-line camelcase
+                  producer?.bp_json?.org?.candidate_name || producer.owner}
                 </Link>
                 <br />
                 {formatWithThousandSeparator(producer.total_reward, 2)} EOS
