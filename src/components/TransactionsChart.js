@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 import { ResponsiveContainer, YAxis, AreaChart, Area, Tooltip } from 'recharts'
@@ -16,51 +17,60 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default ({ data }) => {
+const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
 
-  const renderCustomTooltip = ({ active, payload }) => {
-    if (active) {
-      return (
-        <div className={classes.wrapper}>
-          <Typography variant="h6">
-            Block:{' '}
-            <span className={classes.description}>
-              {' '}
-              {payload[0].payload.block}
-            </span>
-          </Typography>
-          <Typography variant="h6">
-            Transactions:{' '}
-            <span className={classes.description}>
-              {' '}
-              {payload[0].payload.transactions}
-            </span>
-          </Typography>
-        </div>
-      )
-    }
-
-    return null
+  if (active) {
+    return (
+      <div className={classes.wrapper}>
+        <Typography variant="h6">
+          Block:{' '}
+          <span className={classes.description}>
+            {' '}
+            {payload[0].payload.block}
+          </span>
+        </Typography>
+        <Typography variant="h6">
+          Transactions:{' '}
+          <span className={classes.description}>
+            {' '}
+            {payload[0].payload.transactions}
+          </span>
+        </Typography>
+      </div>
+    )
   }
 
+  return null
+}
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.object
+}
+
+const TransactionsChart = ({ data }) => {
   return (
-    <>
-      <ResponsiveContainer width="100%" aspect={2}>
-        <AreaChart
-          data={data}
-          margin={{ top: 16, right: 16, left: 16, bottom: 16 }}
-        >
-          <Tooltip content={renderCustomTooltip} />
-          <YAxis />
-          <Area
-            type="monotone"
-            dataKey="transactions"
-            stroke="#265F63"
-            fill="#B6EBF3"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </>
+    <ResponsiveContainer width="100%" aspect={1}>
+      <AreaChart
+        data={data}
+        margin={{ top: 16, right: 16, left: 16, bottom: 16 }}
+      >
+        <Tooltip content={<CustomTooltip />} />
+        <YAxis />
+        <Area
+          type="monotone"
+          dataKey="transactions"
+          stroke="#265F63"
+          fill="#B6EBF3"
+        />
+      </AreaChart>
+    </ResponsiveContainer>
   )
 }
+
+TransactionsChart.propTypes = {
+  data: PropTypes.array
+}
+
+export default TransactionsChart

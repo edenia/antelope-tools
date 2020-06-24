@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
 
 import { formatWithThousandSeparator } from '../utils'
 
 const defaultLogo = 'https://bloks.io/img/eosio.png'
 
-export const RADIAN = Math.PI / 180
+const RADIAN = Math.PI / 180
 
-export const polarToCartesian = (cx, cy, radius, angle) => ({
+const polarToCartesian = (cx, cy, radius, angle) => ({
   x: cx + Math.cos(-RADIAN * angle) * radius,
   y: cy + Math.sin(-RADIAN * angle) * radius
 })
@@ -27,78 +30,124 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ProducersChart = ({ producers, info }) => {
-  const [entries, setEntries] = useState([])
+const CustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
+  const theme = useTheme()
+  const sm = useMediaQuery(theme.breakpoints.up('sm'), {
+    defaultMatches: true
+  })
+  const md = useMediaQuery(theme.breakpoints.up('md'), {
+    defaultMatches: true
+  })
+  const lg = useMediaQuery(theme.breakpoints.up('lg'), {
+    defaultMatches: true
+  })
+  const xl = useMediaQuery(theme.breakpoints.up('xl'), {
+    defaultMatches: true
+  })
+
+  let gap = 16
+
+  if (sm) {
+    gap = 32
+  }
+
+  if (md) {
+    gap = 24
+  }
+
+  if (lg) {
+    gap = 32
+  }
+
+  if (xl) {
+    gap = 48
+  }
+
+  const cartesian = polarToCartesian(cx, cy, outerRadius + gap, midAngle)
+
+  return (
+    <g transform={`translate(${cartesian.x}, ${cartesian.y})`}>
+      <defs>
+        <pattern
+          id={`image${payload.owner}`}
+          height="100%"
+          width="100%"
+          viewBox="0 0 512 512"
+        >
+          <rect height="512" width="512" fill="#fff" />
+          <image
+            x="0"
+            y="0"
+            width="512"
+            height="512"
+            href={payload.logo || defaultLogo}
+          ></image>
+        </pattern>
+      </defs>
+
+      <circle
+        id={`${payload.value}-ds`}
+        r="5%"
+        fill={`url(#image${payload.owner})`}
+        stroke="grey"
+      />
+    </g>
+  )
+}
+
+CustomBarLabel.propTypes = {
+  cx: PropTypes.bool,
+  cy: PropTypes.number,
+  payload: PropTypes.object,
+  outerRadius: PropTypes.number,
+  midAngle: PropTypes.number
+}
+
+const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
 
-  const renderCustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
-    const cartesian = polarToCartesian(cx, cy, outerRadius + 30, midAngle)
-
+  if (active) {
     return (
-      <g transform={`translate(${cartesian.x}, ${cartesian.y})`}>
-        <defs>
-          <pattern
-            id={`image${payload.owner}`}
-            height="100%"
-            width="100%"
-            viewBox="0 0 512 512"
-          >
-            <rect height="512" width="512" fill="#fff" />
-            <image
-              x="0"
-              y="0"
-              width="512"
-              height="512"
-              href={payload.logo || defaultLogo}
-            ></image>
-          </pattern>
-        </defs>
-
-        <circle
-          id={`${payload.value}-ds`}
-          r="5%"
-          fill={`url(#image${payload.owner})`}
-          stroke="grey"
-        />
-      </g>
+      <div className={classes.wrapper}>
+        <Typography variant="h6">
+          Name:{' '}
+          <span className={classes.description}>
+            {' '}
+            {payload[0].payload.owner}
+          </span>
+        </Typography>
+        <Typography variant="h6">
+          Rewards:{' '}
+          <span className={classes.description}>
+            {' '}
+            {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
+          </span>
+        </Typography>
+        <Typography variant="h6">
+          Votes:{' '}
+          <span className={classes.description}>
+            {' '}
+            {formatWithThousandSeparator(
+              payload[0].payload.total_votes_percent,
+              3
+            )}
+            %
+          </span>
+        </Typography>
+      </div>
     )
   }
 
-  const renderCustomTooltip = ({ active, payload }) => {
-    if (active) {
-      return (
-        <div className={classes.wrapper}>
-          <Typography variant="h6">
-            Name:{' '}
-            <span className={classes.description}>
-              {' '}
-              {payload[0].payload.owner}
-            </span>
-          </Typography>
-          <Typography variant="h6">
-            Rewards:{' '}
-            <span className={classes.description}>
-              {' '}
-              {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
-            </span>
-          </Typography>
-          <Typography variant="h6">
-            Votes:{' '}
-            <span className={classes.description}>
-              {' '}
-              {formatWithThousandSeparator(
-                payload[0].payload.total_votes_percent,
-                3
-              )}
-              %
-            </span>
-          </Typography>
-        </div>
-      )
-    }
+  return null
+}
 
-    return null
-  }
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.object
+}
+
+const ProducersChart = ({ producers, info }) => {
+  const [entries, setEntries] = useState([])
 
   useEffect(() => {
     setEntries(
@@ -106,11 +155,11 @@ const ProducersChart = ({ producers, info }) => {
         .filter((a) => a.isBlockProducer)
         .sort((a, b) => {
           if (a.owner < b.owner) {
-            return -1
+            return 1
           }
 
           if (a.owner > b.owner) {
-            return 1
+            return -1
           }
 
           return 0
@@ -127,14 +176,13 @@ const ProducersChart = ({ producers, info }) => {
 
   return (
     <ResponsiveContainer width="100%" aspect={1}>
-      <PieChart margin={{ top: 24, right: 24, left: 24, bottom: 24 }}>
-        <Tooltip content={renderCustomTooltip} />
+      <PieChart margin={{ top: 16, right: 16, left: 16, bottom: 16 }}>
+        <Tooltip content={<CustomTooltip />} />
         <Pie
           data={entries}
-          innerRadius={'75%'}
+          innerRadius="75%"
           fill="#8884d8"
-          label={renderCustomBarLabel}
-          // labelLine={false}
+          label={<CustomBarLabel />}
           paddingAngle={1}
           dataKey="value"
           isAnimationActive={false}
@@ -155,6 +203,11 @@ const ProducersChart = ({ producers, info }) => {
       </PieChart>
     </ResponsiveContainer>
   )
+}
+
+ProducersChart.propTypes = {
+  producers: PropTypes.array,
+  info: PropTypes.object
 }
 
 export default ProducersChart
