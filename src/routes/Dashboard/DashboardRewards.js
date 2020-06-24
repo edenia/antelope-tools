@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { useEffect, useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
@@ -185,7 +186,6 @@ const Rewards = () => {
       .forEach((producer) => {
         daylyRewars += producer.total_reward || 0
 
-        // eslint-disable-line camelcase
         if (!producer?.bp_json?.org?.location?.country) {
           if (!stats['N/A']) {
             stats = {
@@ -468,8 +468,7 @@ const Rewards = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {// eslint-disable-line camelcase
-                  producer?.bp_json?.org?.candidate_name || producer.owner}
+                  {producer?.bp_json?.org?.candidate_name || producer.owner}
                 </Link>
                 <br />
                 {formatWithThousandSeparator(producer.total_reward, 2)} EOS

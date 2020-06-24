@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'

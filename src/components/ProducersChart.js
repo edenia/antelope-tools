@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
@@ -81,7 +82,7 @@ const CustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
             width="512"
             height="512"
             href={payload.logo || defaultLogo}
-          ></image>
+          />
         </pattern>
       </defs>
 
@@ -96,7 +97,7 @@ const CustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
 }
 
 CustomBarLabel.propTypes = {
-  cx: PropTypes.bool,
+  cx: PropTypes.number,
   cy: PropTypes.number,
   payload: PropTypes.object,
   outerRadius: PropTypes.number,
@@ -143,7 +144,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.object
+  payload: PropTypes.array
 }
 
 const ProducersChart = ({ producers, info }) => {
