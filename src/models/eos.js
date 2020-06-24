@@ -2,9 +2,10 @@ import EosApi from 'eosjs-api'
 import axios from 'axios'
 
 import { parseVotesToEOS } from '../utils'
+import { eosConfig } from '../config'
 
 const eos = EosApi({
-  httpEndpoint: 'https://eos.greymass.com',
+  httpEndpoint: eosConfig.endpoint,
   verbose: false,
   fetchConfiguration: {}
 })
@@ -48,7 +49,8 @@ export default {
   state: {
     producers: { rows: [] },
     info: {},
-    tps: []
+    tps: [],
+    waiting: null
   },
   reducers: {
     updateInfo(state, info) {
@@ -78,17 +80,31 @@ export default {
       }
     },
     updateTps(state, item) {
+      if (!state.waiting) {
+        return {
+          ...state,
+          waiting: item
+        }
+      }
+
       let tps = state.tps
 
       if (state.tps.length >= 10) {
-        tps = tps.splice(1, state.tps.length)
+        tps = state.tps.splice(1, state.tps.length)
       }
 
-      tps = [...tps, item]
+      tps = [
+        ...tps,
+        {
+          blocks: [state.waiting.block, item.block],
+          transactions: state.waiting.transactions + item.transactions
+        }
+      ]
 
       return {
         ...state,
-        tps
+        tps,
+        waiting: null
       }
     },
     updateRate(state, rate) {

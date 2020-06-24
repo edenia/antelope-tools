@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -136,7 +137,7 @@ const Producers = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Transactions Per Blocks</Typography>
+              <Typography variant="h6">Transactions Per Second</Typography>
               {!producers.rows.length && (
                 <div className={classes.chartSkeletonWrapper}>
                   <Skeleton
@@ -175,7 +176,6 @@ const Producers = () => {
                       <img
                         className={classes.logo}
                         src={
-                          // eslint-disable-line camelcase
                           producer?.bp_json?.org?.branding?.logo_256 ||
                           defaultLogo
                         }
@@ -186,7 +186,6 @@ const Producers = () => {
                     </TableCell>
                     <TableCell>
                       {formatWithThousandSeparator(
-                        // eslint-disable-line camelcase
                         producer?.total_votes_percent * 100,
                         3
                       )}
@@ -194,7 +193,6 @@ const Producers = () => {
                     </TableCell>
                     <TableCell>
                       {formatWithThousandSeparator(
-                        // eslint-disable-line camelcase
                         producer?.total_votes_eos,
                         0
                       )}
@@ -204,13 +202,11 @@ const Producers = () => {
                         className={`flag-icon flag-icon-squared flag-icon-${producer?.bp_json?.org?.location?.country?.toLocaleLowerCase()}`}
                       />
                       <span className={classes.country}>
-                        {// eslint-disable-line camelcase
-                        producer?.bp_json?.org?.location?.name || 'N/A'}
+                        {producer?.bp_json?.org?.location?.name || 'N/A'}
                       </span>
                     </TableCell>
                     <TableCell>
-                      {// eslint-disable-line camelcase
-                      formatWithThousandSeparator(producer?.total_reward, 2)}
+                      {formatWithThousandSeparator(producer?.total_reward, 2)}
                     </TableCell>
                   </TableRow>
                 ))}

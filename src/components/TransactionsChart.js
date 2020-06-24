@@ -24,10 +24,10 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
-          Block:{' '}
+          Blocks:{' '}
           <span className={classes.description}>
             {' '}
-            {payload[0].payload.block}
+            {payload[0].payload.blocks.join(', ')}
           </span>
         </Typography>
         <Typography variant="h6">
@@ -46,7 +46,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.object
+  payload: PropTypes.array
 }
 
 const TransactionsChart = ({ data }) => {
