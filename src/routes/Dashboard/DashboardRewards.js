@@ -332,7 +332,6 @@ const Rewards = () => {
           </CardContent>
         </Card>
       </Grid>
-
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
