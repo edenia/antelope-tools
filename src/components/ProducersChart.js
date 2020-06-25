@@ -107,7 +107,7 @@ CustomBarLabel.propTypes = {
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
 
-  if (active) {
+  if (active && payload.length > 0) {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
