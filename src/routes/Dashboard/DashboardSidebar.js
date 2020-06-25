@@ -53,12 +53,12 @@ const DashboardSidebarContent = () => {
 
   const pages = [
     {
-      title: 'Producers',
+      title: 'Block Producers',
       href: '/dashboard/producers',
       icon: <StorageIcon />
     },
     {
-      title: 'Nodes distribution',
+      title: 'Node distribution',
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     },
