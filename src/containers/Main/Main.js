@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +31,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  toolbarBrand: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  toolbarBrandTitle: {
+    color: theme.palette.primary.contrastText
+  },
   logo: {
-    height: 36
+    height: 36,
+    marginRight: theme.spacing(1)
   },
   drawer: {
     width: 240,
@@ -77,13 +86,18 @@ const Main = ({ children, sidebarContent, topbarContent }) => {
     >
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <RouterLink to="/">
-            <img
-              className={classes.logo}
-              alt="Logo"
-              src="https://eoscostarica.io/wp-content/uploads/2019/07/EOSCRlogo-main-darkOverWhite-1.png"
-            />
-          </RouterLink>
+          <div className={classes.toolbarBrand}>
+            <RouterLink to="/">
+              <img
+                className={classes.logo}
+                alt="Logo"
+                src="https://eoscostarica.io/wp-content/uploads/2019/07/EOSCRlogo-main-darkOverWhite-1.png"
+              />
+            </RouterLink>
+            <Typography variant="h2" className={classes.toolbarBrandTitle}>
+              EOS Mainnet Network Monitor
+            </Typography>
+          </div>
           <Hidden mdDown>{topbarContent}</Hidden>
           <Hidden lgUp>
             <IconButton color="inherit" onClick={handleSidebarOpen}>
