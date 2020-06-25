@@ -116,7 +116,7 @@ const Producers = () => {
           <Card>
             <CardContent>
               <Typography variant="h6">
-                Top 21 Block Producer Schedule
+                Block Producer Schedule
               </Typography>
               {!producers.rows.length && (
                 <div className={classes.chartSkeletonWrapper}>
