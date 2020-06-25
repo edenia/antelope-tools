@@ -11,10 +11,6 @@ const eos = EosApi({
 })
 let infoInterval
 
-// @todo: move exchange logic to backend service
-const exchangeRateApi =
-  'http://api.coinlayer.com/api/live?symbols=EOS&access_key=e7146e1015657fa7bc3495bdf6302052'
-
 const getInflation = async () => {
   const systemData = await eos.getCurrencyStats({
     symbol: 'EOS',
@@ -262,16 +258,16 @@ export default {
     },
     async getRate() {
       try {
-        const { data } = await axios.get(exchangeRateApi)
+        const { data } = await axios.get(eosConfig.exchangeRateApi)
 
-        if (!data) {
+        if (!data || !data.success) {
           return
         }
 
         dispatch.eos.updateRate(data.rates.EOS)
       } catch (error) {
         console.error(error)
-        dispatch.eos.updateRate(2.54)
+        dispatch.eos.updateRate(eosConfig.exchangeRate)
       }
     }
   })
