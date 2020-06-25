@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
+import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
@@ -11,10 +12,17 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  Marker
+  Marker,
+  ZoomableGroup
 } from 'react-simple-maps'
+import { geoTimes } from 'd3-geo-projection'
+import { geoPath } from 'd3-geo'
 
 import { countries, formatWithThousandSeparator } from '../../utils'
+
+const defaultScale = 170
+const maxZoom = 3
+const projection = geoTimes()
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json'
 
@@ -23,7 +31,11 @@ const useStyles = makeStyles((theme) => ({
     margin: '-64px 0'
   },
   geography: {
-    outline: 'none'
+    outline: 'none',
+    cursor: 'zoom-in'
+  },
+  geographyZoomOut: {
+    cursor: 'zoom-out'
   },
   marker: {
     cursor: 'pointer'
@@ -34,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   popoverItem: {
     fontWeight: 'bold'
+  },
+  popoverCapitalize: {
+    textTransform: 'capitalize'
   },
   popoverClose: {
     textAlign: 'right',
@@ -58,6 +73,11 @@ const Producers = () => {
   const [currentNode, setCurrentNode] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const classes = useStyles()
+  const [mapState, setMapState] = useState({
+    scale: defaultScale,
+    center: [0, 0],
+    zoom: 1
+  })
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrentNode(node)
@@ -66,6 +86,29 @@ const Producers = () => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
+  }
+
+  const toogleZoom = (geography) => {
+    if (mapState.zoom === maxZoom) {
+      setMapState((state) => ({
+        ...state,
+        center: [0, 0],
+        zoom: 1,
+        scale: defaultScale
+      }))
+
+      return
+    }
+
+    const path = geoPath().projection(projection)
+    const center = projection.invert(path.centroid(geography))
+
+    setMapState((state) => ({
+      ...state,
+      center,
+      zoom: maxZoom,
+      scale: defaultScale * maxZoom
+    }))
   }
 
   useEffect(() => {
@@ -86,6 +129,7 @@ const Producers = () => {
 
         items.push({
           coordinates: [node.location.longitude, node.location.latitude],
+          node_type: node.node_type,
           country: {
             name: countries[producer.bp_json.org.location.country]?.name,
             flag: countries[producer.bp_json.org.location.country]?.flag
@@ -100,41 +144,46 @@ const Producers = () => {
   return (
     <Grid item sm={12} className={classes.map}>
       <ComposableMap
-        projection="geoEqualEarth"
         projectionConfig={{
-          scale: 170
+          scale: mapState.scale
         }}
       >
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                className={classes.geography}
-                fill="#EAEAEC"
-                stroke="#D6D6DA"
-              />
-            ))
-          }
-        </Geographies>
-        {nodes.map(({ coordinates, ...node }, i) => (
-          <Marker
-            key={`marker-${i}`}
-            coordinates={coordinates}
-            className={classes.marker}
-            onClick={handlePopoverOpen(node)}
-          >
-            <g
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              transform="translate(-12, -24)"
+        <ZoomableGroup center={mapState.center} maxZoom={1}>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  onClick={() => toogleZoom(geo)}
+                  className={clsx({
+                    [classes.geography]: true,
+                    [classes.geographyZoomOut]: mapState.zoom === maxZoom
+                  })}
+                  key={geo.rsmKey}
+                  geography={geo}
+                  stroke="#8F9DA4"
+                  fill="#EEEEEE"
+                />
+              ))
+            }
+          </Geographies>
+          {nodes.map(({ coordinates, ...node }, i) => (
+            <Marker
+              key={`marker-${i}`}
+              coordinates={coordinates}
+              className={classes.marker}
+              onClick={handlePopoverOpen(node)}
             >
-              <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
-              <circle cx="12" cy="10" r="3" fill="white" />
-            </g>
-          </Marker>
-        ))}
+              <g
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                transform="translate(-12, -24)"
+              >
+                <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
+                <circle cx="12" cy="10" r="3" fill="white" />
+              </g>
+            </Marker>
+          ))}
+        </ZoomableGroup>
       </ComposableMap>
       <Popover
         open={anchorEl !== null}
@@ -162,7 +211,15 @@ const Producers = () => {
           </Typography>
           <Typography>
             <span className={classes.popoverItem}>Website: </span>
-            <span>{currentNode?.url}</span>
+            <span>
+              <Link
+                href={currentNode?.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {currentNode?.url}
+              </Link>
+            </span>
           </Typography>
           <Typography>
             <span className={classes.popoverItem}>Votes: </span>
@@ -177,27 +234,17 @@ const Producers = () => {
             </span>
           </Typography>
           <Typography>
-            <span className={classes.popoverItem}>Country: </span>
+            <span className={classes.popoverItem}>Producer country: </span>
             <span className={classes.countryFlag}>
               {currentNode?.country?.flag}
             </span>
             <span>{currentNode?.country?.name}</span>
           </Typography>
           <Typography>
-            <span className={classes.popoverItem}>Location: </span>
-            <span>{currentNode?.bp_json?.org?.location?.name || 'N/A'}</span>
-          </Typography>
-          <Typography>
-            <span className={classes.popoverItem}>Data from: </span>
-            <Link
-              href={`${currentNode?.owner === 'eosrainbowbp' ? 'http://' : ''}${
-                currentNode?.url
-              }/bp.json`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              bp.json
-            </Link>
+            <span className={classes.popoverItem}>Node type: </span>
+            <span className={classes.popoverCapitalize}>
+              {currentNode?.node_type || 'N/A'}
+            </span>
           </Typography>
         </div>
       </Popover>
