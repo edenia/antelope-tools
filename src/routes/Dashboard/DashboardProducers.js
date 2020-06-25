@@ -85,18 +85,18 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Last Block</Typography>
-              <Typography variant="h3">
-                {formatWithThousandSeparator(info.head_block_num)}
-              </Typography>
+              <Typography variant="h6">Current Producer</Typography>
+              <Typography variant="h3">{info.head_block_producer}</Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Current Producer</Typography>
-              <Typography variant="h3">{info.head_block_producer}</Typography>
+              <Typography variant="h6">Head Block</Typography>
+              <Typography variant="h3">
+                {formatWithThousandSeparator(info.head_block_num)}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>

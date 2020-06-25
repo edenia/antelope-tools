@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, useCallback } from 'react'
-import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
@@ -15,11 +14,8 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  Marker,
   ZoomableGroup
 } from 'react-simple-maps'
-import { geoPath } from 'd3-geo'
-import { geoTimes } from 'd3-geo-projection'
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
 
@@ -28,9 +24,6 @@ import { countries, formatWithThousandSeparator } from '../../utils'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
-const defaultScale = 170
-const maxZoom = 3
-const projection = geoTimes()
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json'
 
@@ -82,12 +75,6 @@ const useStyles = makeStyles((theme) => ({
   },
   geography: {
     outline: 'none',
-    cursor: 'zoom-in'
-  },
-  geographyZoomOut: {
-    cursor: 'zoom-out'
-  },
-  marker: {
     cursor: 'pointer'
   },
   lowestRewards: {
@@ -121,11 +108,6 @@ const Rewards = () => {
   const producers = useSelector((state) => state.eos.producers)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
-  const [mapState, setMapState] = useState({
-    scale: defaultScale,
-    center: [0, 0],
-    zoom: 1
-  })
   const rate = useSelector((state) => state.eos.rate)
 
   const handlePopoverOpen = (node) => (event) => {
@@ -139,29 +121,6 @@ const Rewards = () => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
-  }
-
-  const toogleZoom = (geography) => {
-    if (mapState.zoom === maxZoom) {
-      setMapState((state) => ({
-        ...state,
-        center: [0, 0],
-        zoom: 1,
-        scale: defaultScale
-      }))
-
-      return
-    }
-
-    const path = geoPath().projection(projection)
-    const center = projection.invert(path.centroid(geography))
-
-    setMapState((state) => ({
-      ...state,
-      center,
-      zoom: maxZoom,
-      scale: defaultScale * maxZoom
-    }))
   }
 
   const colorScale = useCallback(
@@ -365,10 +324,10 @@ const Rewards = () => {
       <Grid item sm={12} className={classes.mapWrapper}>
         <ComposableMap
           projectionConfig={{
-            scale: mapState.scale
+            scale: 170
           }}
         >
-          <ZoomableGroup center={mapState.center} maxZoom={1}>
+          <ZoomableGroup maxZoom={1}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo, i) => {
@@ -378,11 +337,10 @@ const Rewards = () => {
 
                   return (
                     <Geography
-                      onClick={() => toogleZoom(geo)}
-                      className={clsx({
-                        [classes.geography]: true,
-                        [classes.geographyZoomOut]: mapState.zoom === maxZoom
-                      })}
+                      onClick={
+                        nodeData ? handlePopoverOpen(nodeData) : () => {}
+                      }
+                      className={classes.geography}
                       key={geo.rsmKey}
                       geography={geo}
                       stroke="#8F9DA4"
@@ -396,25 +354,6 @@ const Rewards = () => {
                 })
               }
             </Geographies>
-            {nodes
-              .filter((item) => !!item.coordinates)
-              .map(({ coordinates, ...node }, i) => (
-                <Marker
-                  key={`marker-${i}`}
-                  coordinates={coordinates}
-                  onClick={handlePopoverOpen(node)}
-                  className={classes.marker}
-                >
-                  <g
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    transform="translate(-12, -24)"
-                  >
-                    <path d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z" />
-                    <circle cx="12" cy="10" r="3" fill="white" />
-                  </g>
-                </Marker>
-              ))}
           </ZoomableGroup>
         </ComposableMap>
       </Grid>
