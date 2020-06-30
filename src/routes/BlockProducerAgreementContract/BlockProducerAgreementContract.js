@@ -30,10 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 const BlockProducerAgreementContract = () => {
   const classes = useStyles()
-  // TODO: update the contract name when new version of RicardianContract is released with support for mainnet network
+
   return (
     <Box className={classes.root}>
-      <RicardianContract name="consent2life" />
+      <RicardianContract
+        contractName="eosio"
+        actionName={'regproducer'}
+        httpEndpoint="https://api.eosio.cr"
+        LinearProgressColor="primary"
+      />
     </Box>
   )
 }

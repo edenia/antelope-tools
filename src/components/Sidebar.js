@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1)
   },
   active: {
-    backgroundColor: theme.palette.secondary[50],
+    backgroundColor: theme.palette.primary[200],
     borderRadius: 0,
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.main
     },
     '&:hover': {
-      backgroundColor: theme.palette.secondary[50]
+      backgroundColor: theme.palette.primary[200]
     }
   }
 }))
