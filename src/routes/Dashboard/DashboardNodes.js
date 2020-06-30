@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Link from '@material-ui/core/Link'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import {
   ComposableMap,
   Geographies,
@@ -329,6 +330,7 @@ const Producers = () => {
             </Card>
           </Grid>
         </Grid>
+        {!nodes.length && <LinearProgress />}
       </Grid>
       <Grid item sm={12} className={classes.mapWrapper}>
         <ComposableMap

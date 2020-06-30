@@ -5,22 +5,22 @@ export const exchangeRateApi =
 export const nodeTypes = [
   {
     name: 'producer',
-    color: 'blue',
+    color: '#2F828E',
     description: 'Node with signing key'
   },
   {
     name: 'full',
-    color: 'green',
+    color: '#47C5DA',
     description: 'Node in front of producer'
   },
   {
     name: 'query',
-    color: 'yellow',
+    color: '#000',
     description: 'Node that provides HTTP(S) API to the public'
   },
   {
     name: 'seed',
-    color: 'red',
+    color: '#9E9E9E',
     description: 'Node that provides P2P and/or BNET to the public'
   }
 ]

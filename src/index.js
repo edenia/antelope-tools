@@ -8,6 +8,7 @@ import App from './App'
 import store from './store'
 import theme from './theme'
 import * as serviceWorker from './serviceWorker'
+import './i18n'
 
 render(
   <Provider store={store}>

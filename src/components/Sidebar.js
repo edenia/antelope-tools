@@ -7,8 +7,10 @@ import * as colors from '@material-ui/core/colors'
 import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
+import Divider from '@material-ui/core/Divider'
 
-import CustomRouterLink from '../../components/CustomRouterLink'
+import { generalConfig } from '../config'
+import CustomRouterLink from './CustomRouterLink'
 
 const useStyles = makeStyles((theme) => ({
   nav: {
@@ -23,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0
   },
   button: {
+    padding: theme.spacing(1, 2),
     color: colors.blueGrey[800],
-    padding: '10px 8px',
     justifyContent: 'flex-start',
     textTransform: 'none',
     letterSpacing: 0,
@@ -40,10 +42,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1)
   },
   active: {
+    backgroundColor: theme.palette.secondary[50],
+    borderRadius: 0,
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
     '& $icon': {
       color: theme.palette.primary.main
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.secondary[50]
     }
   }
 }))
@@ -51,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 const DashboardSidebarContent = () => {
   const classes = useStyles()
 
-  const pages = [
+  const mainPages = [
     {
       title: 'Block Producers',
       href: '/dashboard/producers',
@@ -61,18 +68,40 @@ const DashboardSidebarContent = () => {
       title: 'Node distribution',
       href: '/dashboard/nodes',
       icon: <CloudIcon />
-    },
-    {
+    }
+  ]
+
+  if (generalConfig.useRewards) {
+    mainPages.push({
       title: 'Reward distribution',
       href: '/dashboard/rewards',
       icon: <AccountBalanceWalletIcon />
+    })
+  }
+
+  const helperPages = [
+    {
+      title: 'About',
+      href: '/about'
     }
   ]
+
+  if (generalConfig.useBlockProducerAgreementContract) {
+    helperPages.push({
+      title: 'Block Producer Agreement Contract',
+      href: '/agreement-contract'
+    })
+  }
+
+  helperPages.push({
+    title: 'Help',
+    href: '/help'
+  })
 
   return (
     <>
       <List className={classes.nav}>
-        {pages.map((page) => (
+        {mainPages.map((page) => (
           <ListItem className={classes.item} disableGutters key={page.title}>
             <Button
               activeClassName={classes.active}
@@ -80,7 +109,21 @@ const DashboardSidebarContent = () => {
               component={CustomRouterLink}
               to={page.href}
             >
-              <div className={classes.icon}>{page.icon}</div>
+              {page.icon && <div className={classes.icon}>{page.icon}</div>}
+              {page.title}
+            </Button>
+          </ListItem>
+        ))}
+        <Divider className={classes.divider} />
+        {helperPages.map((page) => (
+          <ListItem className={classes.item} disableGutters key={page.title}>
+            <Button
+              activeClassName={classes.active}
+              className={classes.button}
+              component={CustomRouterLink}
+              to={page.href}
+            >
+              {page.icon && <div className={classes.icon}>{page.icon}</div>}
               {page.title}
             </Button>
           </ListItem>

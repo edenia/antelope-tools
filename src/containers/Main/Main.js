@@ -13,6 +13,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Typography from '@material-ui/core/Typography'
 
+import { generalConfig } from '../../config'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 72,
@@ -32,8 +34,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   toolbarBrand: {
+    width: '100%',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   toolbarBrandTitle: {
     color: theme.palette.primary.contrastText
@@ -51,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerContent: {
     backgroundColor: theme.palette.white,
-    height: '100%',
-    padding: theme.spacing(2)
+    height: '100%'
   }
 }))
 
@@ -95,7 +98,7 @@ const Main = ({ children, sidebarContent, topbarContent }) => {
               />
             </RouterLink>
             <Typography variant="h2" className={classes.toolbarBrandTitle}>
-              EOS Mainnet Network Monitor
+              {generalConfig.title}
             </Typography>
           </div>
           <Hidden mdDown>{topbarContent}</Hidden>
