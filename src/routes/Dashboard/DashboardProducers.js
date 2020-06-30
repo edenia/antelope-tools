@@ -12,9 +12,11 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { formatWithThousandSeparator } from '../../utils'
+import { generalConfig } from '../../config'
 import ProducersChart from '../../components/ProducersChart'
 import TransactionsChart from '../../components/TransactionsChart'
 
@@ -111,6 +113,7 @@ const Producers = () => {
           </Card>
         </Grid>
       </Grid>
+      {!producers.rows.length && <LinearProgress />}
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Card>
@@ -162,10 +165,16 @@ const Producers = () => {
                 <TableRow>
                   <TableCell>Rank</TableCell>
                   <TableCell>Block Producer</TableCell>
-                  <TableCell>Votes %</TableCell>
-                  <TableCell>Total Votes</TableCell>
+                  {generalConfig.useVotes && (
+                    <>
+                      <TableCell>Votes %</TableCell>
+                      <TableCell>Total Votes</TableCell>
+                    </>
+                  )}
                   <TableCell>Location</TableCell>
-                  <TableCell>Expected Rewards</TableCell>
+                  {generalConfig.useRewards && (
+                    <TableCell>Expected Rewards</TableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -184,19 +193,23 @@ const Producers = () => {
                       />
                       {producer?.owner}
                     </TableCell>
-                    <TableCell>
-                      {formatWithThousandSeparator(
-                        producer?.total_votes_percent * 100,
-                        3
-                      )}
-                      %
-                    </TableCell>
-                    <TableCell>
-                      {formatWithThousandSeparator(
-                        producer?.total_votes_eos,
-                        0
-                      )}
-                    </TableCell>
+                    {generalConfig.useVotes && (
+                      <>
+                        <TableCell>
+                          {formatWithThousandSeparator(
+                            (producer?.total_votes_percent || 0) * 100,
+                            3
+                          )}
+                          %
+                        </TableCell>
+                        <TableCell>
+                          {formatWithThousandSeparator(
+                            producer?.total_votes_eos,
+                            0
+                          )}
+                        </TableCell>
+                      </>
+                    )}
                     <TableCell>
                       <span
                         className={`flag-icon flag-icon-squared flag-icon-${producer?.bp_json?.org?.location?.country?.toLocaleLowerCase()}`}
@@ -205,9 +218,11 @@ const Producers = () => {
                         {producer?.bp_json?.org?.location?.name || 'N/A'}
                       </span>
                     </TableCell>
-                    <TableCell>
-                      {formatWithThousandSeparator(producer?.total_reward, 2)}
-                    </TableCell>
+                    {generalConfig.useRewards && (
+                      <TableCell>
+                        {formatWithThousandSeparator(producer?.total_reward, 2)}
+                      </TableCell>
+                    )}
                   </TableRow>
                 ))}
                 {!producers.rows.length &&
@@ -237,6 +252,26 @@ const Producers = () => {
                           />
                         </div>
                       </TableCell>
+                      {generalConfig.useVotes && (
+                        <>
+                          <TableCell>
+                            <Skeleton
+                              variant="text"
+                              width="100%"
+                              height={30}
+                              animation="wave"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Skeleton
+                              variant="text"
+                              width="100%"
+                              height={30}
+                              animation="wave"
+                            />
+                          </TableCell>
+                        </>
+                      )}
                       <TableCell>
                         <Skeleton
                           variant="text"
@@ -245,30 +280,16 @@ const Producers = () => {
                           animation="wave"
                         />
                       </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
+                      {generalConfig.useRewards && (
+                        <TableCell>
+                          <Skeleton
+                            variant="text"
+                            width="100%"
+                            height={30}
+                            animation="wave"
+                          />
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
               </TableBody>

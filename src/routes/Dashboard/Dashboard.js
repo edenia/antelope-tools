@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 
-import { MainContainer } from '../../containers'
-
-import DashboardTopbar from './DashboardTopbar'
-import DashboardSidebar from './DashboardSidebar'
+import { generalConfig } from '../../config'
 
 const DashboardRewards = lazy(() => import('./DashboardRewards'))
 const DashboardProducers = lazy(() => import('./DashboardProducers'))
@@ -20,29 +17,26 @@ const Dashboard = () => {
   }, [dispatch])
 
   return (
-    <MainContainer
-      topbarContent={<DashboardTopbar />}
-      sidebarContent={<DashboardSidebar />}
-    >
-      <Grid container spacing={4}>
-        <Suspense fallback={<></>}>
-          <Switch>
-            <Route
-              exact
-              path="/dashboard/producers"
-              component={DashboardProducers}
-            />
-            <Route exact path="/dashboard/nodes" component={DashboardNodes} />
+    <Grid container spacing={4}>
+      <Suspense fallback={<></>}>
+        <Switch>
+          <Route
+            exact
+            path="/dashboard/producers"
+            component={DashboardProducers}
+          />
+          <Route exact path="/dashboard/nodes" component={DashboardNodes} />
+          {generalConfig.useRewards && (
             <Route
               exact
               path="/dashboard/rewards"
               component={DashboardRewards}
             />
-            <Redirect from="/dashboard" to="/dashboard/producers" />
-          </Switch>
-        </Suspense>
-      </Grid>
-    </MainContainer>
+          )}
+          <Redirect from="/dashboard" to="/dashboard/producers" />
+        </Switch>
+      </Suspense>
+    </Grid>
   )
 }
 

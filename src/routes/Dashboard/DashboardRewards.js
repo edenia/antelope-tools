@@ -10,6 +10,7 @@ import Popover from '@material-ui/core/Popover'
 import CloseIcon from '@material-ui/icons/Close'
 import Link from '@material-ui/core/Link'
 import Skeleton from '@material-ui/lab/Skeleton'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import {
   ComposableMap,
   Geographies,
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       width: 'calc(100% - 288px)',
-      marginTop: theme.spacing(4)
+      marginTop: theme.spacing(8)
     }
   },
   geography: {
@@ -82,21 +83,27 @@ const useStyles = makeStyles((theme) => ({
     width: 16,
     height: 16,
     borderRadius: 4,
-    display: 'inline-block',
-    marginLeft: theme.spacing(1)
+    display: 'inline-block'
   },
   highestRewards: {
     backgroundColor: highestRewardsColor,
     width: 16,
     height: 16,
     borderRadius: 4,
-    display: 'inline-block',
-    marginLeft: theme.spacing(1)
+    display: 'inline-block'
   },
   rewardsColorSchema: {
     display: 'flex',
     alignItems: 'center',
     marginBottom: 4
+  },
+  linearLoader: {
+    width: 'calc(100% - 32px)',
+    marginTop: -16,
+    marginLeft: 16
+  },
+  itemLabel: {
+    minWidth: 120
   }
 }))
 
@@ -214,6 +221,26 @@ const Rewards = () => {
   return (
     <>
       <Grid item xl={3} lg={3} sm={6} xs={12}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <span className={classes.itemLabel}>Lowest Rewards: </span>
+              <span className={classes.lowestRewards} />
+            </Typography>
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <span className={classes.itemLabel}>Highest Rewards: </span>
+              <span className={classes.highestRewards} />
+            </Typography>
+            {rate && (
+              <Typography variant="h6" className={classes.rewardsColorSchema}>
+                <span className={classes.itemLabel}>Exchange Rate: </span>$
+                {formatWithThousandSeparator(rate, 2)}
+              </Typography>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card
           className={classes.action}
           onClick={handlePopoverOpen(summary?.topCountryByRewards)}
@@ -233,7 +260,7 @@ const Rewards = () => {
                 </>
               )}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -243,17 +270,7 @@ const Rewards = () => {
                     summary.topCountryByRewards.rewards,
                     2
                   )}{' '}
-                  EOS
-                </>
-              )}
-            </Typography>
-            <Typography variant="body1">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <>
-                  $
+                  EOS, $
                   {formatWithThousandSeparator(
                     summary.topCountryByRewards.rewards * rate,
                     2
@@ -309,18 +326,7 @@ const Rewards = () => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Lowest Rewards: <span className={classes.lowestRewards} />
-            </Typography>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              Highest Rewards: <span className={classes.highestRewards} />
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+      {!nodes.length && <LinearProgress className={classes.linearLoader} />}
       <Grid item sm={12} className={classes.mapWrapper}>
         <ComposableMap
           projectionConfig={{
