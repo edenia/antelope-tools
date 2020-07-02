@@ -46,6 +46,7 @@ export default {
     producers: { rows: [] },
     info: {},
     tps: [],
+    tpb: [],
     waiting: null
   },
   reducers: {
@@ -76,9 +77,24 @@ export default {
       }
     },
     updateTps(state, item) {
+      let tpb = state.tpb
+
+      if (state.tpb.length >= 10) {
+        tpb = state.tpb.splice(1, state.tpb.length)
+      }
+
+      tpb = [
+        ...tpb,
+        {
+          blocks: [item.block],
+          transactions: item.transactions
+        }
+      ]
+
       if (!state.waiting) {
         return {
           ...state,
+          tpb,
           waiting: item
         }
       }
@@ -100,6 +116,7 @@ export default {
       return {
         ...state,
         tps,
+        tpb,
         waiting: null
       }
     },

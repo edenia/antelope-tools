@@ -79,19 +79,19 @@ const DashboardSidebarContent = () => {
     })
   }
 
-  if (generalConfig.useBlockProducerAgreementContract) {
-    helperPages.push({
-      title: 'BP Ricardian Contract',
-      href: '/ricardian-contract'
-    })
-  }
-
   const helperPages = [
     {
       title: 'About',
       href: '/about'
     }
   ]
+
+  if (generalConfig.useBlockProducerAgreementContract) {
+    helperPages.push({
+      title: 'BP Ricardian Contract',
+      href: '/ricardian-contract'
+    })
+  }
 
   helperPages.push({
     title: 'Help',

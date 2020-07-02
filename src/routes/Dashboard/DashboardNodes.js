@@ -25,10 +25,9 @@ import {
 import { geoTimes } from 'd3-geo-projection'
 import { geoPath } from 'd3-geo'
 
-import { countries, formatWithThousandSeparator } from '../../utils'
-import { eosConfig } from '../../config'
+import { countries, formatWithThousandSeparator, onImgError } from '../../utils'
+import { eosConfig, generalConfig } from '../../config'
 
-const defaultLogo = 'https://bloks.io/img/eosio.png'
 const defaultScale = 170
 const maxZoom = 3
 const projection = geoTimes()
@@ -157,10 +156,6 @@ const Producers = () => {
     zoom: 1
   })
 
-  const useDefaultLogo = (ev) => {
-    ev.target.src = defaultLogo
-  }
-
   const handlePopoverOpen = (node) => (event) => {
     setCurrentNode(node)
     setAnchorEl(event.currentTarget)
@@ -267,9 +262,11 @@ const Producers = () => {
                           className={classes.logo}
                           src={
                             producer?.bp_json?.org?.branding?.logo_256 ||
-                            defaultLogo
+                            generalConfig.defaultProducerLogo
                           }
-                          onError={useDefaultLogo}
+                          onError={onImgError(
+                            generalConfig.defaultProducerLogo
+                          )}
                           alt="logo"
                         />
                         {producer.owner}
