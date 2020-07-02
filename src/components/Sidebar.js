@@ -65,7 +65,7 @@ const DashboardSidebarContent = () => {
       icon: <StorageIcon />
     },
     {
-      title: 'Node distribution',
+      title: 'Node Distribution',
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     }
@@ -73,9 +73,16 @@ const DashboardSidebarContent = () => {
 
   if (generalConfig.useRewards) {
     mainPages.push({
-      title: 'Reward distribution',
+      title: 'Rewards Distribution',
       href: '/dashboard/rewards',
       icon: <AccountBalanceWalletIcon />
+    })
+  }
+
+  if (generalConfig.useBlockProducerAgreementContract) {
+    helperPages.push({
+      title: 'BP Ricardian Contract',
+      href: '/ricardian-contract'
     })
   }
 
@@ -85,13 +92,6 @@ const DashboardSidebarContent = () => {
       href: '/about'
     }
   ]
-
-  if (generalConfig.useBlockProducerAgreementContract) {
-    helperPages.push({
-      title: 'Block Producer Agreement Contract',
-      href: '/agreement-contract'
-    })
-  }
 
   helperPages.push({
     title: 'Help',

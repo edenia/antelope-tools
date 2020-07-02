@@ -31,7 +31,7 @@ const routes = [
 
 if (generalConfig.useBlockProducerAgreementContract) {
   routes.push({
-    path: '/agreement-contract',
+    path: '/ricardian-contract',
     component: BlockProducerAgreementContract
   })
 }
