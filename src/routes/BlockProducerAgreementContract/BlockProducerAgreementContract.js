@@ -35,7 +35,7 @@ const BlockProducerAgreementContract = () => {
     <Box className={classes.root}>
       <RicardianContract
         contractName="eosio"
-        actionName={'regproducer'}
+        actionName="regproducer"
         httpEndpoint="https://api.eosio.cr"
         LinearProgressColor="primary"
       />

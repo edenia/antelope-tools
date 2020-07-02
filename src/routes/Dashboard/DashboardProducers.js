@@ -15,12 +15,10 @@ import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import 'flag-icon-css/css/flag-icon.min.css'
 
-import { formatWithThousandSeparator } from '../../utils'
+import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
 import ProducersChart from '../../components/ProducersChart'
 import TransactionsChart from '../../components/TransactionsChart'
-
-const defaultLogo = 'https://bloks.io/img/eosio.png'
 
 const useStyles = makeStyles((theme) => ({
   country: {
@@ -68,12 +66,9 @@ const Producers = () => {
   const dispatch = useDispatch()
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
+  const tpb = useSelector((state) => state.eos.tpb)
   const producers = useSelector((state) => state.eos.producers)
   const classes = useStyles()
-
-  const useDefaultLogo = (ev) => {
-    ev.target.src = defaultLogo
-  }
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 500 })
@@ -115,12 +110,10 @@ const Producers = () => {
       </Grid>
       {!producers.rows.length && <LinearProgress />}
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">
-                Block Producer Schedule
-              </Typography>
+              <Typography variant="h6">Block Producer Schedule</Typography>
               {!producers.rows.length && (
                 <div className={classes.chartSkeletonWrapper}>
                   <Skeleton
@@ -137,23 +130,49 @@ const Producers = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Transactions Per Second</Typography>
-              {!producers.rows.length && (
-                <div className={classes.chartSkeletonWrapper}>
-                  <Skeleton
-                    variant="rect"
-                    width={280}
-                    height={280}
-                    animation="wave"
-                  />
-                </div>
-              )}
-              {producers.rows.length > 0 && <TransactionsChart data={tps} />}
-            </CardContent>
-          </Card>
+        <Grid item xs={12} md={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6">Transactions Per Second</Typography>
+                  {!producers.rows.length && (
+                    <div className={classes.chartSkeletonWrapper}>
+                      <Skeleton
+                        variant="rect"
+                        width={280}
+                        height={100}
+                        animation="wave"
+                      />
+                    </div>
+                  )}
+                  {producers.rows.length > 0 && (
+                    <TransactionsChart data={tps} />
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6">Transactions Per Block</Typography>
+                  {!producers.rows.length && (
+                    <div className={classes.chartSkeletonWrapper}>
+                      <Skeleton
+                        variant="rect"
+                        width={280}
+                        height={100}
+                        animation="wave"
+                      />
+                    </div>
+                  )}
+                  {producers.rows.length > 0 && (
+                    <TransactionsChart data={tpb} />
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} className={classes.tableWrapper}>
@@ -186,9 +205,9 @@ const Producers = () => {
                         className={classes.logo}
                         src={
                           producer?.bp_json?.org?.branding?.logo_256 ||
-                          defaultLogo
+                          generalConfig.defaultProducerLogo
                         }
-                        onError={useDefaultLogo}
+                        onError={onImgError(generalConfig.defaultProducerLogo)}
                         alt="logo"
                       />
                       {producer?.owner}

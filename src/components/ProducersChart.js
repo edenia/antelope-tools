@@ -7,9 +7,8 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
 
-import { formatWithThousandSeparator } from '../utils'
-
-const defaultLogo = 'https://bloks.io/img/eosio.png'
+import { formatWithThousandSeparator, onImgError } from '../utils'
+import { generalConfig } from '../config'
 
 const RADIAN = Math.PI / 180
 
@@ -31,7 +30,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
+const CustomBarLabel = ({
+  x,
+  cx,
+  cy,
+  payload,
+  outerRadius,
+  midAngle,
+  fill
+}) => {
   const theme = useTheme()
   const sm = useMediaQuery(theme.breakpoints.up('sm'), {
     defaultMatches: true
@@ -48,55 +55,67 @@ const CustomBarLabel = ({ cx, cy, payload, outerRadius, midAngle }) => {
 
   let gap = 16
 
-  if (sm) {
+  if (sm || md) {
     gap = 32
-  }
-
-  if (md) {
-    gap = 24
   }
 
   if (lg) {
-    gap = 32
+    gap = 40
   }
 
   if (xl) {
-    gap = 48
+    gap = 52
   }
 
-  const cartesian = polarToCartesian(cx, cy, outerRadius + gap, midAngle)
+  const cartesianCircle = polarToCartesian(cx, cy, outerRadius - gap, midAngle)
+  const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
 
   return (
-    <g transform={`translate(${cartesian.x}, ${cartesian.y})`}>
-      <defs>
-        <pattern
-          id={`image${payload.owner}`}
-          height="100%"
-          width="100%"
-          viewBox="0 0 512 512"
-        >
-          <rect height="512" width="512" fill="#fff" />
-          <image
-            x="0"
-            y="0"
-            width="512"
-            height="512"
-            href={payload.logo || defaultLogo}
-          />
-        </pattern>
-      </defs>
+    <>
+      <text
+        transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central"
+        fill={fill === '#265F63' ? '#265F63' : '#EEEEEE'}
+        fontFamily="Roboto, Helvetica, Arial, sans-serif;"
+        fontWeight="bold"
+      >
+        {payload.owner}
+      </text>
+      <g transform={`translate(${cartesianCircle.x}, ${cartesianCircle.y})`}>
+        <defs>
+          <pattern
+            id={`image${payload.owner}`}
+            height="100%"
+            width="100%"
+            viewBox="0 0 100 100"
+          >
+            <rect height="100" width="100" fill="#fff" />
+            <image
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              href={payload.logo || generalConfig.defaultProducerLogo}
+              onError={onImgError(generalConfig.defaultProducerLogo)}
+            />
+          </pattern>
+        </defs>
 
-      <circle
-        id={`${payload.value}-ds`}
-        r="5%"
-        fill={`url(#image${payload.owner})`}
-        stroke="grey"
-      />
-    </g>
+        <circle
+          id={`${payload.value}-ds`}
+          r="3%"
+          fill={`url(#image${payload.owner})`}
+          stroke={fill}
+        />
+      </g>
+    </>
   )
 }
 
 CustomBarLabel.propTypes = {
+  x: PropTypes.number,
+  fill: PropTypes.string,
   cx: PropTypes.number,
   cy: PropTypes.number,
   payload: PropTypes.object,
@@ -176,8 +195,8 @@ const ProducersChart = ({ producers, info }) => {
   }, [producers, info])
 
   return (
-    <ResponsiveContainer width="100%" aspect={1}>
-      <PieChart margin={{ top: 16, right: 16, left: 16, bottom: 16 }}>
+    <ResponsiveContainer width="100%" aspect={1.45}>
+      <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip content={<CustomTooltip />} />
         <Pie
           data={entries}
@@ -187,6 +206,7 @@ const ProducersChart = ({ producers, info }) => {
           paddingAngle={1}
           dataKey="value"
           isAnimationActive={false}
+          labelLine={false}
         >
           {entries.map((entry, index) => {
             return (
