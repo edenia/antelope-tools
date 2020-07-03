@@ -423,7 +423,13 @@ const Producers = () => {
             <>
               <Typography>
                 <span className={classes.popoverItem}>Account:</span>
-                <span>{currentNode?.owner}</span>
+                <Link
+                  href={`${generalConfig.eosRateLink}/block-producers/${currentNode?.owner}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {currentNode?.owner}
+                </Link>
               </Typography>
               <Typography>
                 <span className={classes.popoverItem}>Website:</span>

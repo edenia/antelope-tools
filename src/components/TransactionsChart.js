@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
+import { useTheme } from '@material-ui/core/styles'
 import { ResponsiveContainer, YAxis, Tooltip, BarChart, Bar } from 'recharts'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.white,
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
     boxShadow:
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
 
-  if (active && payload.length > 0) {
+  if (active && payload && payload.length > 0) {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
@@ -50,6 +51,8 @@ CustomTooltip.propTypes = {
 }
 
 const TransactionsChart = ({ data }) => {
+  const theme = useTheme()
+
   return (
     <ResponsiveContainer width="100%" aspect={1.6}>
       <BarChart
@@ -59,10 +62,10 @@ const TransactionsChart = ({ data }) => {
         <Tooltip content={<CustomTooltip />} />
         <YAxis />
         <Bar
-          // type="monotone"
+          isAnimationActive={true}
           dataKey="transactions"
-          stroke="#265F63"
-          fill="#B6EBF3"
+          stroke={theme.palette.secondary[900]}
+          fill={theme.palette.secondary[100]}
         />
       </BarChart>
     </ResponsiveContainer>
