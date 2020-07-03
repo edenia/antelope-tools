@@ -10,6 +10,7 @@ const eos = EosApi({
   fetchConfiguration: {}
 })
 let infoInterval
+let scheduleInterval
 
 const getInflation = async () => {
   const systemData = await eos.getCurrencyStats({
@@ -44,10 +45,15 @@ const getBpJSON = async (producer) => {
 export default {
   state: {
     producers: { rows: [] },
+    schedule: {
+      version: '',
+      producers: []
+    },
     info: {},
     tps: [],
     tpb: [],
-    waiting: null
+    tpsWaitingBlock: null,
+    rate: null
   },
   reducers: {
     updateInfo(state, info) {
@@ -62,21 +68,7 @@ export default {
         producers
       }
     },
-    updateProducer(state, { owner, bpJSON }) {
-      const rows = state.producers.rows
-      const index = rows.findIndex((info) => info.owner === owner)
-      const newProducer = { ...rows[index], bpJSON }
-      rows[index] = newProducer
-
-      return {
-        ...state,
-        producers: {
-          ...state.producers,
-          rows
-        }
-      }
-    },
-    updateTps(state, item) {
+    updateTransactionsStats(state, item) {
       let tpb = state.tpb
 
       if (state.tpb.length >= 10) {
@@ -91,11 +83,11 @@ export default {
         }
       ]
 
-      if (!state.waiting) {
+      if (!state.tpsWaitingBlock) {
         return {
           ...state,
           tpb,
-          waiting: item
+          tpsWaitingBlock: item
         }
       }
 
@@ -108,8 +100,8 @@ export default {
       tps = [
         ...tps,
         {
-          blocks: [state.waiting.block, item.block],
-          transactions: state.waiting.transactions + item.transactions
+          blocks: [state.tpsWaitingBlock.block, item.block],
+          transactions: state.tpsWaitingBlock.transactions + item.transactions
         }
       ]
 
@@ -117,7 +109,7 @@ export default {
         ...state,
         tps,
         tpb,
-        waiting: null
+        tpsWaitingBlock: null
       }
     },
     updateRate(state, rate) {
@@ -125,10 +117,34 @@ export default {
         ...state,
         rate
       }
+    },
+    updateSchedule(state, schedule) {
+      const producers = schedule.producers.map((item) => {
+        const data =
+          state.producers.rows.find(
+            (producer) => producer.owner === item.producer_name
+          ) || {}
+
+        return {
+          logo: data?.bp_json?.org?.branding?.logo_256,
+          owner: data.owner,
+          rewards: data.total_reward,
+          total_votes_percent: data.total_votes_percent * 100,
+          value: 20
+        }
+      })
+
+      return {
+        ...state,
+        schedule: {
+          producers,
+          version: schedule.version
+        }
+      }
     }
   },
   effects: (dispatch) => ({
-    async startTrackingInfo({ interval = 1000 } = {}) {
+    async startTrackingInfo({ interval = 1 } = {}) {
       if (infoInterval) {
         return
       }
@@ -136,11 +152,19 @@ export default {
       const handle = async () => {
         const info = await eos.getInfo({})
         dispatch.eos.updateInfo(info)
-        dispatch.eos.updateTransactionsPerSecond(info.head_block_num)
+        dispatch.eos.getBlock(info.head_block_num)
       }
 
       await handle()
-      infoInterval = setInterval(handle, interval)
+      infoInterval = setInterval(handle, interval * 1000)
+    },
+    async stopTrackingInfo() {
+      if (!infoInterval) {
+        return
+      }
+
+      clearInterval(infoInterval)
+      infoInterval = null
     },
     async getProducers() {
       const {
@@ -246,28 +270,10 @@ export default {
         rows: producers
       })
     },
-    async getProducerInfo(producer) {
-      try {
-        const { data } = await axios.get(
-          `https://cors-anywhere.herokuapp.com/${producer.url}/bp.json`
-        )
-
-        if (!data) {
-          return
-        }
-
-        dispatch.eos.updateProducer({
-          owner: producer.owner,
-          bpJSON: data
-        })
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async updateTransactionsPerSecond(block) {
+    async getBlock(block) {
       try {
         const data = await eos.getBlock(block)
-        dispatch.eos.updateTps({
+        dispatch.eos.updateTransactionsStats({
           block,
           transactions: data.transactions.length
         })
@@ -286,6 +292,31 @@ export default {
         console.error(error)
         dispatch.eos.updateRate(eosConfig.exchangeRate)
       }
+    },
+    async startTrackingProducerSchedule({ interval = 120 } = {}) {
+      if (scheduleInterval) {
+        return
+      }
+
+      const handle = async () => {
+        try {
+          const result = await eos.getProducerSchedule(true)
+          dispatch.eos.updateSchedule(result.active)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      await handle()
+      scheduleInterval = setInterval(handle, interval * 1000)
+    },
+    async stopTrackingProducerSchedule() {
+      if (!scheduleInterval) {
+        return
+      }
+
+      clearInterval(scheduleInterval)
+      scheduleInterval = null
     }
   })
 }

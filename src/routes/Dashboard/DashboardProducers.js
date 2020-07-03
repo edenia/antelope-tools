@@ -13,6 +13,8 @@ import TableRow from '@material-ui/core/TableRow'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import Link from '@material-ui/core/Link'
+import clsx from 'clsx'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
@@ -41,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     width: '2em',
     height: '2em',
-    borderRadius: '500rem'
+    borderRadius: '500rem',
+    backgroundColor: theme.palette.primary.contrastText
   },
   chartWrapper: {
     minWidth: 280,
@@ -59,6 +62,13 @@ const useStyles = makeStyles((theme) => ({
   tableWrapper: {
     width: ' 100%',
     overflow: 'scroll'
+  },
+  currentProducerRow: {
+    backgroundColor: theme.palette.secondary[900],
+    color: theme.palette.primary.contrastText,
+    '& td, & td a': {
+      color: theme.palette.primary.contrastText
+    }
   }
 }))
 
@@ -68,12 +78,28 @@ const Producers = () => {
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
   const producers = useSelector((state) => state.eos.producers)
+  const schedule = useSelector((state) => state.eos.schedule)
   const classes = useStyles()
 
   useEffect(() => {
-    dispatch.eos.startTrackingInfo({ interval: 500 })
+    dispatch.eos.startTrackingInfo({ interval: 0.5 })
     dispatch.eos.getProducers()
     dispatch.eos.getRate()
+  }, [dispatch])
+
+  useEffect(() => {
+    if (!producers.rows.length) {
+      return
+    }
+
+    dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
+  }, [dispatch, producers])
+
+  useEffect(() => {
+    return () => {
+      dispatch.eos.stopTrackingInfo()
+      dispatch.eos.stopTrackingProducerSchedule()
+    }
   }, [dispatch])
 
   return (
@@ -113,8 +139,11 @@ const Producers = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Block Producer Schedule</Typography>
-              {!producers.rows.length && (
+              <Typography variant="h6">
+                Block Producer Schedule {schedule.version ? 'v' : ''}
+                {schedule.version}
+              </Typography>
+              {!schedule.producers.length && (
                 <div className={classes.chartSkeletonWrapper}>
                   <Skeleton
                     variant="circle"
@@ -124,8 +153,8 @@ const Producers = () => {
                   />
                 </div>
               )}
-              {producers.rows.length > 0 && (
-                <ProducersChart info={info} producers={producers.rows} />
+              {schedule.producers.length > 0 && (
+                <ProducersChart info={info} producers={schedule.producers} />
               )}
             </CardContent>
           </Card>
@@ -198,19 +227,37 @@ const Producers = () => {
               </TableHead>
               <TableBody>
                 {producers.rows.map((producer, index) => (
-                  <TableRow key={`producer-table-row-${index}`}>
+                  <TableRow
+                    key={`producer-table-row-${index}`}
+                    className={clsx({
+                      [classes.currentProducerRow]:
+                        info.head_block_producer === producer?.owner
+                    })}
+                  >
                     <TableCell>{index + 1}</TableCell>
-                    <TableCell className={classes.owner}>
-                      <img
-                        className={classes.logo}
-                        src={
-                          producer?.bp_json?.org?.branding?.logo_256 ||
-                          generalConfig.defaultProducerLogo
-                        }
-                        onError={onImgError(generalConfig.defaultProducerLogo)}
-                        alt="logo"
-                      />
-                      {producer?.owner}
+                    <TableCell>
+                      <Link
+                        href={`${generalConfig.eosRateLink}/block-producers/${producer?.owner}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={classes.owner}
+                      >
+                        <img
+                          className={classes.logo}
+                          src={
+                            producer?.bp_json?.org?.branding?.logo_256 ||
+                            generalConfig.defaultProducerLogo
+                          }
+                          onError={onImgError(
+                            generalConfig.defaultProducerLogo
+                          )}
+                          alt="logo"
+                        />
+                        {producer?.owner}
+                        {info.head_block_producer === producer?.owner
+                          ? 'current'
+                          : 'VPLP'}
+                      </Link>
                     </TableCell>
                     {generalConfig.useVotes && (
                       <>

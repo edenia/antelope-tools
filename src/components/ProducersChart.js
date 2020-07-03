@@ -19,7 +19,7 @@ const polarToCartesian = (cx, cy, radius, angle) => ({
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.white,
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
     boxShadow:
@@ -72,16 +72,26 @@ const CustomBarLabel = ({
 
   return (
     <>
-      <text
-        transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
-        textAnchor={x > cx ? 'start' : 'end'}
-        dominantBaseline="central"
-        fill={fill === '#265F63' ? '#265F63' : '#EEEEEE'}
-        fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-        fontWeight="bold"
+      <a
+        href={`${generalConfig.eosRateLink}/block-producers/${payload.owner}`}
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        {payload.owner}
-      </text>
+        <text
+          transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
+          textAnchor={x > cx ? 'start' : 'end'}
+          dominantBaseline="central"
+          fill={
+            fill === theme.palette.secondary[900]
+              ? theme.palette.secondary[900]
+              : theme.palette.primary[300]
+          }
+          fontFamily="Roboto, Helvetica, Arial, sans-serif;"
+          fontWeight={fill === theme.palette.secondary[900] ? 'bold' : 'normal'}
+        >
+          {payload.owner}
+        </text>
+      </a>
       <g transform={`translate(${cartesianCircle.x}, ${cartesianCircle.y})`}>
         <defs>
           <pattern
@@ -102,12 +112,18 @@ const CustomBarLabel = ({
           </pattern>
         </defs>
 
-        <circle
-          id={`${payload.value}-ds`}
-          r="3%"
-          fill={`url(#image${payload.owner})`}
-          stroke={fill}
-        />
+        <a
+          href={`${generalConfig.eosRateLink}/block-producers/${payload.owner}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <circle
+            id={`${payload.value}-ds`}
+            r="3%"
+            fill={`url(#image${payload.owner})`}
+            stroke={fill}
+          />
+        </a>
       </g>
     </>
   )
@@ -168,40 +184,19 @@ CustomTooltip.propTypes = {
 
 const ProducersChart = ({ producers, info }) => {
   const [entries, setEntries] = useState([])
+  const theme = useTheme()
 
   useEffect(() => {
-    setEntries(
-      producers
-        .filter((a) => a.isBlockProducer)
-        .sort((a, b) => {
-          if (a.owner < b.owner) {
-            return 1
-          }
-
-          if (a.owner > b.owner) {
-            return -1
-          }
-
-          return 0
-        })
-        .map((producer) => ({
-          logo: producer?.bp_json?.org?.branding?.logo_256,
-          owner: producer.owner,
-          rewards: producer.total_reward,
-          total_votes_percent: producer.total_votes_percent * 100,
-          value: 20
-        }))
-    )
-  }, [producers, info])
+    setEntries(producers.reverse())
+  }, [producers])
 
   return (
     <ResponsiveContainer width="100%" aspect={1.45}>
       <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip content={<CustomTooltip />} />
         <Pie
-          data={entries}
+          data={producers}
           innerRadius="75%"
-          fill="#8884d8"
           label={<CustomBarLabel />}
           paddingAngle={1}
           dataKey="value"
@@ -214,8 +209,8 @@ const ProducersChart = ({ producers, info }) => {
                 key={`cell-${index}`}
                 fill={
                   entry.owner === info.head_block_producer
-                    ? '#265F63'
-                    : '#B6EBF3'
+                    ? theme.palette.secondary[900]
+                    : theme.palette.secondary[100]
                 }
               />
             )
