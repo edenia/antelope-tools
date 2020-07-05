@@ -28,12 +28,6 @@ const About = () => {
             <Typography variant="body2" align="justify" paragraph>
               {t('body1.paragraph1')}
             </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body1.paragraph2')}
-            </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body1.paragraph3')}
-            </Typography>
           </Grid>
         </Grid>
 
@@ -43,12 +37,6 @@ const About = () => {
             <Typography variant="body2" align="justify" paragraph>
               {t('body2.paragraph1')}
             </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body2.paragraph2')}
-            </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body2.paragraph3')}
-            </Typography>
           </Grid>
         </Grid>
 
@@ -57,12 +45,6 @@ const About = () => {
             <Typography variant="h3">{t('subtitle3')}</Typography>
             <Typography variant="body2" align="justify" paragraph>
               {t('body3.paragraph1')}
-            </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body3.paragraph2')}
-            </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('body3.paragraph3')}
             </Typography>
           </Grid>
         </Grid>

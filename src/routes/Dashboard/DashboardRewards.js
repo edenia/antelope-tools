@@ -234,7 +234,7 @@ const Rewards = () => {
                 </span>
               )}
             </Typography>
-            <Typography variant="h3">
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -305,7 +305,7 @@ const Rewards = () => {
                 summary.producersWithoutProperBpJson.quantity}
             </Typography>
             <Typography
-              variant="h6"
+              variant="subtitle1"
               className={classes.action}
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
@@ -326,7 +326,7 @@ const Rewards = () => {
               <span className={classes.highestRewards} />
             </Typography>
             {rate && (
-              <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <Typography variant="subtitle1" className={classes.rewardsColorSchema}>
                 <span className={classes.itemLabel}>Exchange Rate: </span> $  
                 {formatWithThousandSeparator(rate, 2)}
               </Typography>
