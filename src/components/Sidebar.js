@@ -65,7 +65,7 @@ const DashboardSidebarContent = () => {
       icon: <StorageIcon />
     },
     {
-      title: 'Node Distribution',
+      title: 'Nodes Distribution',
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     }
