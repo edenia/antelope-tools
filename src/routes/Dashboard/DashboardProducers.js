@@ -140,7 +140,10 @@ const Producers = () => {
           <Card>
             <CardContent>
               <Typography variant="h6">
-                Block Producer Schedule {schedule.version ? 'v' : ''}
+                Block Producer Schedule
+              </Typography>
+              <Typography variant="caption">
+                {schedule.version ? 'Ver. ' : ''} {schedule.version}
                 {schedule.version}
               </Typography>
               {!schedule.producers.length && (
@@ -254,9 +257,6 @@ const Producers = () => {
                           alt="logo"
                         />
                         {producer?.owner}
-                        {info.head_block_producer === producer?.owner
-                          ? 'current'
-                          : 'VPLP'}
                       </Link>
                     </TableCell>
                     {generalConfig.useVotes && (

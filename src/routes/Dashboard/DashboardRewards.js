@@ -223,20 +223,27 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>Lowest Rewards: </span>
-              <span className={classes.lowestRewards} />
+            <Typography variant="h6">Total Daily Rewards</Typography>
+            <Typography variant="h3">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width="100%" animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <span>
+                  {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
+                </span>
+              )}
             </Typography>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>Highest Rewards: </span>
-              <span className={classes.highestRewards} />
+            <Typography variant="subtitle1">
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width="100%" animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <span>
+                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 0)} USD
+                </span>
+              )}
             </Typography>
-            {rate && (
-              <Typography variant="h6" className={classes.rewardsColorSchema}>
-                <span className={classes.itemLabel}>Exchange Rate: </span>$
-                {formatWithThousandSeparator(rate, 2)}
-              </Typography>
-            )}
           </CardContent>
         </Card>
       </Grid>
@@ -268,13 +275,14 @@ const Rewards = () => {
                 <>
                   {formatWithThousandSeparator(
                     summary.topCountryByRewards.rewards,
-                    2
+                    0
                   )}{' '}
-                  EOS, $
+                  EOS / $
                   {formatWithThousandSeparator(
                     summary.topCountryByRewards.rewards * rate,
-                    2
-                  )}
+                    0
+                  )}{' '}
+                  USD
                 </>
               )}
             </Typography>
@@ -284,34 +292,7 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Total Daily Rewards</Typography>
-            <Typography variant="h3">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <span>
-                  {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
-                </span>
-              )}
-            </Typography>
-            <Typography variant="h3">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <span>
-                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 2)}
-                </span>
-              )}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Unknown BP Location</Typography>
+            <Typography variant="h6">Paid Producers Not Located</Typography>
             <Typography
               variant="h3"
               className={classes.action}
@@ -323,6 +304,33 @@ const Rewards = () => {
               {nodes.length > 0 &&
                 summary.producersWithoutProperBpJson.quantity}
             </Typography>
+            <Typography
+              variant="subtitle1"
+              className={classes.action}
+              onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
+            >
+             Click to view non-compliant BPs
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xl={3} lg={3} sm={6} xs={12}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <span className={classes.itemLabel}>Lowest Rewards: </span>
+              <span className={classes.lowestRewards} />
+            </Typography>
+            <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <span className={classes.itemLabel}>Highest Rewards: </span>
+              <span className={classes.highestRewards} />
+            </Typography>
+            {rate && (
+              <Typography variant="subtitle1" className={classes.rewardsColorSchema}>
+                <span className={classes.itemLabel}>Exchange Rate: </span> $  
+                {formatWithThousandSeparator(rate, 2)}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Grid>

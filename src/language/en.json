@@ -1,26 +1,23 @@
 {
   "about": {
-    "title": "EOS Network Monitor",
-    "subtitle1": "What is the EOS Monitor",
+    "title": "EOSIO Dashboard",
+    "subtitle1": "What is the EOSIO Dashboard",
     "body1": {
-      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure the impact of our solutions. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network.",
-      "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin nulla ut justo tristique finibus. Cras lectus elit, ornare sed lacinia ac, laoreet a diam. Sed dui elit, mattis ac purus vitae, dictum sodales sapien. Nullam semper nec turpis aliquam pharetra. Integer vitae justo viverra, placerat ligula nec, fringilla arcu. Praesent elementum enim in purus auctor varius."
+      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
     },
-    "subtitle2": "What is the EOS Monitor?",
+    "subtitle2": "Why is it important?",
     "body2": {
-      "paragraph1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin nulla ut justo tristique finibus. Cras lectus elit, ornare sed lacinia ac, laoreet a diam. Sed dui elit, mattis ac purus vitae, dictum sodales sapien. Nullam semper nec turpis aliquam pharetra. Integer vitae justo viverra, placerat ligula nec, fringilla arcu. Praesent elementum enim in purus auctor varius.",
-      "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin nulla ut justo tristique finibus. Cras lectus elit, ornare sed lacinia ac, laoreet a diam. Sed dui elit, mattis ac purus vitae, dictum sodales sapien. Nullam semper nec turpis aliquam pharetra. Integer vitae justo viverra, placerat ligula nec, fringilla arcu. Praesent elementum enim in purus auctor varius."
+      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
     },
-    "subtitle3": "What is the EOS Monitor?",
+    "subtitle3": "Where does the data come from?",
     "body3": {
-      "paragraph1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin nulla ut justo tristique finibus. Cras lectus elit, ornare sed lacinia ac, laoreet a diam. Sed dui elit, mattis ac purus vitae, dictum sodales sapien. Nullam semper nec turpis aliquam pharetra. Integer vitae justo viverra, placerat ligula nec, fringilla arcu. Praesent elementum enim in purus auctor varius.",
-      "paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sollicitudin nulla ut justo tristique finibus. Cras lectus elit, ornare sed lacinia ac, laoreet a diam. Sed dui elit, mattis ac purus vitae, dictum sodales sapien. Nullam semper nec turpis aliquam pharetra. Integer vitae justo viverra, placerat ligula nec, fringilla arcu. Praesent elementum enim in purus auctor varius."
+      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
     }
   },
   "help": {
     "title": "Thank you for using EOS Network Monitor!",
-    "paragraph": "EOS Network Monitor is still in progress. If you are experiencing any issues, please contact us using the following links:",
-    "githubEOSCR": "Github EOS Costa Rica",
+    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
+    "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
   }
