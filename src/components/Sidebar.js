@@ -79,7 +79,12 @@ const DashboardSidebarContent = () => {
     })
   }
 
-  const helperPages = []
+  const helperPages = [
+    {
+      title: 'About',
+      href: '/about'
+    }
+  ]
 
   if (generalConfig.useBlockProducerAgreementContract) {
     helperPages.push({
@@ -87,12 +92,6 @@ const DashboardSidebarContent = () => {
       href: '/ricardian-contract'
     })
   }
-
-  helperPages.push(
-  {
-    title: 'About',
-    href: '/about'
-  })
 
   helperPages.push({
     title: 'Help',

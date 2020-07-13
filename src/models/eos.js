@@ -42,6 +42,55 @@ const getBpJSON = async (producer) => {
   } catch (error) {}
 }
 
+const getProducerInfoOffChain = (producers) => {
+  return Promise.all(
+    producers.map(async (producer) => {
+      const bpJSON = await getBpJSON(producer)
+
+      if (!bpJSON || typeof bpJSON !== 'object') {
+        return producer
+      }
+
+      return {
+        ...producer,
+        bp_json: {
+          ...bpJSON,
+          org: {
+            ...bpJSON.org,
+            location: {
+              ...bpJSON.org.location,
+              country: /china/gi.test(
+                typeof bpJSON.org.location === 'string'
+                  ? bpJSON.org.location
+                  : bpJSON.org.location.country
+              )
+                ? 'CN'
+                : bpJSON.org.location.country
+            }
+          }
+        }
+      }
+    })
+  )
+}
+
+const getProducerInfoOnChain = async (producers) => {
+  const { rows } = await eos.getTableRows({
+    code: eosConfig.producerInfoOnChainContractName,
+    scope: eosConfig.producerInfoOnScopeName,
+    table: eosConfig.producerInfoOnChainTableName,
+    json: true
+  })
+
+  return producers.map((item) => {
+    const data = JSON.parse(
+      (rows.find((i) => i.entity_name === item.owner) || {}).json || '{}'
+    )
+
+    return { ...item, bp_json: data }
+  })
+}
+
 export default {
   state: {
     producers: { rows: [] },
@@ -235,35 +284,13 @@ export default {
           }
         })
 
-      producers = await Promise.all(
-        producers.map(async (producer) => {
-          const bpJSON = await getBpJSON(producer)
+      if (eosConfig.producerInfoOnChainContractName) {
+        producers = await getProducerInfoOnChain(producers)
+      } else {
+        producers = await getProducerInfoOffChain(producers)
+      }
 
-          if (!bpJSON || typeof bpJSON !== 'object') {
-            return producer
-          }
-
-          return {
-            ...producer,
-            bp_json: {
-              ...bpJSON,
-              org: {
-                ...bpJSON.org,
-                location: {
-                  ...bpJSON.org.location,
-                  country: /china/gi.test(
-                    typeof bpJSON.org.location === 'string'
-                      ? bpJSON.org.location
-                      : bpJSON.org.location.country
-                  )
-                    ? 'CN'
-                    : bpJSON.org.location.country
-                }
-              }
-            }
-          }
-        })
-      )
+      console.log(producers)
 
       dispatch.eos.updateProducers({
         ...args,
