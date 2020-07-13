@@ -176,6 +176,7 @@ export default {
 
         return {
           logo: data?.bp_json?.org?.branding?.logo_256,
+          url: data?.url,
           owner: data.owner,
           rewards: data.total_reward,
           total_votes_percent: data.total_votes_percent * 100,
@@ -289,8 +290,6 @@ export default {
       } else {
         producers = await getProducerInfoOffChain(producers)
       }
-
-      console.log(producers)
 
       dispatch.eos.updateProducers({
         ...args,

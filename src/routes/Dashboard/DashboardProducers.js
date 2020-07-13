@@ -139,9 +139,7 @@ const Producers = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">
-                Block Producer Schedule
-              </Typography>
+              <Typography variant="h6">Block Producer Schedule</Typography>
               <Typography variant="caption">
                 {schedule.version ? 'Ver. ' : ''} {schedule.version}
                 {schedule.version}
@@ -240,7 +238,11 @@ const Producers = () => {
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <Link
-                        href={`${generalConfig.eosRateLink}/block-producers/${producer?.owner}`}
+                        href={
+                          generalConfig.eosRateLink
+                            ? `${generalConfig.eosRateLink}/block-producers/${producer?.owner}`
+                            : producer?.url
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                         className={classes.owner}

@@ -69,14 +69,13 @@ const CustomBarLabel = ({
 
   const cartesianCircle = polarToCartesian(cx, cy, outerRadius - gap, midAngle)
   const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
+  const link = generalConfig.eosRateLink
+    ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
+    : payload.url
 
   return (
     <>
-      <a
-        href={`${generalConfig.eosRateLink}/block-producers/${payload.owner}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={link} target="_blank" rel="noopener noreferrer">
         <text
           transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
           textAnchor={x > cx ? 'start' : 'end'}
@@ -112,11 +111,7 @@ const CustomBarLabel = ({
           </pattern>
         </defs>
 
-        <a
-          href={`${generalConfig.eosRateLink}/block-producers/${payload.owner}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={link} target="_blank" rel="noopener noreferrer">
           <circle
             id={`${payload.value}-ds`}
             r="3%"
