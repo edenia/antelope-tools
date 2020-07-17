@@ -81,7 +81,7 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
-      title: 'BP JSON',
+      title: 'Update Node Info',
       href: '/bpjson'
     },
     {
@@ -92,7 +92,7 @@ const DashboardSidebarContent = () => {
 
   if (generalConfig.useBlockProducerAgreementContract) {
     helperPages.push({
-      title: 'BP Ricardian Contract',
+      title: 'Ricardian Contract',
       href: '/ricardian-contract'
     })
   }

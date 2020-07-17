@@ -87,7 +87,7 @@ const EditBPJson = ({ ual }) => {
       setError(
         error?.cause?.message ||
           error?.message ||
-          'Unknown error on submit BP JSON'
+          'Unknown error on submit.'
       )
       setTimeout(() => {
         setError(null)
@@ -134,17 +134,17 @@ const EditBPJson = ({ ual }) => {
           {loading && (
             <>
               <Typography variant="h5" align="center">
-                LOADING BP JSON...
+                Loading node information . . .
               </Typography>
               <LinearProgress color="primary" />
             </>
           )}
           {!ual.activeUser && !loading && (
-            <Alert severity="warning">PLEASE LOGIN TO USE THIS TOOL!</Alert>
+            <Alert severity="warning">Please log in to use this tool.</Alert>
           )}
           {ual.activeUser && !producer && !loading && (
             <Alert severity="warning">
-              YOU NEED TO BE REGISTERED AS BLOCK PRODUCER TO USE THIS TOOL!
+              You must have an accunt registered as an active node to use this toool.
             </Alert>
           )}
           {error && <Alert severity="error">{error}</Alert>}
