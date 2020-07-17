@@ -3,20 +3,30 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { UALProvider, withUAL } from 'ual-reactjs-renderer'
 
 import App from './App'
 import store from './store'
 import theme from './theme'
 import * as serviceWorker from './serviceWorker'
 import './i18n'
+import { ualConfig } from './config'
+
+const AppWithUAL = withUAL(App)
 
 render(
-  <Provider store={store}>
-    <CssBaseline />
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </Provider>,
+  <UALProvider
+    chains={[ualConfig.network]}
+    authenticators={ualConfig.authenticators}
+    appName={ualConfig.appName}
+  >
+    <Provider store={store}>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <AppWithUAL />
+      </ThemeProvider>
+    </Provider>
+  </UALProvider>,
   document.getElementById('root')
 )
 

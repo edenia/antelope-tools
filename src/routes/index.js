@@ -9,6 +9,7 @@ const Help = lazy(() => import('./Help'))
 const BlockProducerAgreementContract = lazy(() =>
   import('./BlockProducerAgreementContract')
 )
+const EditBPJson = lazy(() => import('./EditBPJson'))
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/help',
     component: Help
+  },
+  {
+    path: '/bpjson',
+    component: EditBPJson
   }
 ]
 

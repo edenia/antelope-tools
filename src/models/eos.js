@@ -76,15 +76,19 @@ const getProducerInfoOffChain = (producers) => {
 
 const getProducerInfoOnChain = async (producers) => {
   const { rows } = await eos.getTableRows({
-    code: eosConfig.producerInfoOnChainContractName,
-    scope: eosConfig.producerInfoOnScopeName,
-    table: eosConfig.producerInfoOnChainTableName,
+    code: eosConfig.bpJsonOnChainContract,
+    scope: eosConfig.bpJsonOnChainScope,
+    table: eosConfig.bpJsonOnChainTable,
     json: true
   })
 
   return producers.map((item) => {
     const data = JSON.parse(
-      (rows.find((i) => i.entity_name === item.owner) || {}).json || '{}'
+      (
+        rows.find(
+          (i) => i.entity_name === item.owner || i.owner === item.owner
+        ) || {}
+      ).json || '{}'
     )
 
     return { ...item, bp_json: data }
@@ -285,7 +289,7 @@ export default {
           }
         })
 
-      if (eosConfig.producerInfoOnChainContractName) {
+      if (eosConfig.useBpJsonOnChain) {
         producers = await getProducerInfoOnChain(producers)
       } else {
         producers = await getProducerInfoOffChain(producers)

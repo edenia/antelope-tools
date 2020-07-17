@@ -81,6 +81,10 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
+      title: 'BP JSON',
+      href: '/bpjson'
+    },
+    {
       title: 'About',
       href: '/about'
     }
