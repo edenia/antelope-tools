@@ -144,7 +144,7 @@ const EditBPJson = ({ ual }) => {
           )}
           {ual.activeUser && !producer && !loading && (
             <Alert severity="warning">
-              You must have an accunt registered as an active node to use this toool.
+              You must have an account registered as an active node to use this toool.
             </Alert>
           )}
           {error && <Alert severity="error">{error}</Alert>}

@@ -14,7 +14,7 @@ const network = {
     {
       blockchain: 'eos',
       protocol: process.env.REACT_APP_EOS_API_PROTOCOL || 'https',
-      host: process.env.REACT_APP_EOS_API_HOST || 'jungle2.eosio.cr',
+      host: process.env.REACT_APP_EOS_API_HOST || 'jungle.eosio.cr',
       port: parseInt(process.env.REACT_APP_EOS_API_PORT || '443')
     }
   ]
