@@ -93,8 +93,8 @@ const Main = ({ children, sidebarContent, topbarContent }) => {
             <RouterLink to="/">
               <img
                 className={classes.logo}
-                alt="Logo"
-                src="https://eoscostarica.io/wp-content/uploads/2019/07/EOSCRlogo-main-darkOverWhite-1.png"
+                alt="EOS Costa Rica - Open Source Projects"
+                src="/eoscr-logo.png"
               />
             </RouterLink>
             <Typography variant="h2" className={classes.toolbarBrandTitle}>
