@@ -2,38 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: webapp
-  name: webapp
+    io.kompose.service: monitor-webapp
+  name: monitor-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: webapp
+      io.kompose.service: monitor-webapp
   template:
     metadata:
       labels:
         io.kompose.network/default: "true"
-        io.kompose.service: webapp
+        io.kompose.service: monitor-webapp
     spec:
       containers:
-      - image: eoscostarica506/eoscr-webapp:latest
+      - image: eoscostarica506/monitor-webapp:latest
         imagePullPolicy: ""
-        name: eoscr-webapp
+        name: monitor-webapp
         envFrom:
         - configMapRef:
-            name: webapp-config
+            name: monitor-webapp-config
         ports:
-        - containerPort: 80
-        volumeMounts:
-        - mountPath: /etc/nginx/ssl-certs
-          name: secret-volume
-        - mountPath: /etc/nginx/conf.d
-          name: configmap-volume
+        - containerPort: 3000
       restartPolicy: Always
-      volumes:
-        - name: secret-volume
-          secret:
-             secretName: eoscr-webapp.keys
-        - name: configmap-volume
-          configMap:
-            name:  eoscr-webapp.conf
