@@ -8,17 +8,28 @@ import Snackbar from './components/Snackbar'
 import Topbar from './components/Topbar'
 import Sidebar from './components/Sidebar'
 
-export default () => {
+export default ({ ual }) => {
   const snackbarState = useSelector((state) => state.snackbar)
 
   return (
     <BrowserRouter>
       <Snackbar {...snackbarState} />
-      <MainContainer topbarContent={<Topbar />} sidebarContent={<Sidebar />}>
+      <MainContainer
+        topbarContent={
+          <Topbar
+            user={ual.activeUser}
+            onLogout={() => ual.logout()}
+            onLogin={() => ual.showModal()}
+          />
+        }
+        sidebarContent={<Sidebar />}
+      >
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            {routes.map((route, index) => (
-              <Route {...route} key={`route-${index}`} />
+            {routes.map(({ path, component: Component }) => (
+              <Route key={`path-${path}`} path={path}>
+                <Component ual={ual} />
+              </Route>
             ))}
             <Redirect exact from="/" to="/dashboard" />
             <Redirect to="/" />

@@ -1,10 +1,12 @@
-export const endpoint = process.env.REACT_APP_EOS_ENDPOINT
-export const producerInfoOnChainContractName =
-  process.env.REACT_APP_PRODUCER_INFO_ON_CHAIN_CONTRACT_NAME
-export const producerInfoOnChainTableName =
-  process.env.REACT_APP_PRODUCER_INFO_ON_CHAIN_TABLE_NAME
-export const producerInfoOnScopeName =
-  process.env.REACT_APP_PRODUCER_INFO_ON_CHAIN_SCOPE_NAME
+export const endpoint = `${process.env.REACT_APP_EOS_API_PROTOCOL}://${process.env.REACT_APP_EOS_API_HOST}`
+export const useBpJsonOnChain =
+  process.env.REACT_APP_EOS_USE_BP_JSON_ON_CHAIN === 'true'
+export const bpJsonOnChainContract =
+  process.env.REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT
+export const bpJsonOnChainTable =
+  process.env.REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE
+export const bpJsonOnChainScope =
+  process.env.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE
 export const exchangeRate = process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE
 export const exchangeRateApi =
   process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API

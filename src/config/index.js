@@ -1,4 +1,5 @@
-import * as eosConfig from './eos'
+import * as eosConfig from './eos.config'
 import * as generalConfig from './general'
+import { ualConfig } from './ual.config'
 
-export { eosConfig, generalConfig }
+export { eosConfig, generalConfig, ualConfig }
