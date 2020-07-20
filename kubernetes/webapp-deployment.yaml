@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: monitor-webapp
+  name: monitor-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: monitor-webapp
+  template:
+    metadata:
+      labels:
+        io.kompose.network/default: "true"
+        io.kompose.service: monitor-webapp
+    spec:
+      containers:
+      - image: eoscostarica506/monitor-webapp:latest
+        imagePullPolicy: ""
+        name: monitor-webapp
+        envFrom:
+        - configMapRef:
+            name: monitor-webapp-config
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always
