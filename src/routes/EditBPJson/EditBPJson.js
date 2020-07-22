@@ -104,6 +104,7 @@ const EditBPJson = ({ ual }) => {
         limit: 1,
         lower_bound: ual.activeUser.accountName
       })
+      console.log(rows)
       const producer = rows.find(
         (item) => item.owner === ual.activeUser.accountName
       )
