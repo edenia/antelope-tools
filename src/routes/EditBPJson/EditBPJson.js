@@ -85,9 +85,7 @@ const EditBPJson = ({ ual }) => {
       )
     } catch (error) {
       setError(
-        error?.cause?.message ||
-          error?.message ||
-          'Unknown error on submit.'
+        error?.cause?.message || error?.message || 'Unknown error on submit.'
       )
       setTimeout(() => {
         setError(null)
@@ -108,13 +106,13 @@ const EditBPJson = ({ ual }) => {
         (item) => item.owner === ual.activeUser.accountName
       )
 
-      const bpJson = eosConfig.useBpJsonOnChain
-        ? await getBpJSONOnChain(producer)
-        : await getBpJSONOffChain(producer)
+      if (producer) {
+        const bpJson = eosConfig.useBpJsonOnChain
+          ? await getBpJSONOnChain(producer)
+          : await getBpJSONOffChain(producer)
+        setProducer({ ...producer, bpJson })
+      }
 
-      producer && bpJson
-        ? setProducer({ ...producer, bpJson })
-        : setProducer(null)
       setLoading(false)
     }
 
@@ -144,7 +142,8 @@ const EditBPJson = ({ ual }) => {
           )}
           {ual.activeUser && !producer && !loading && (
             <Alert severity="warning">
-              You must have an account registered as an active node to use this toool.
+              You must have an account registered as an active node to use this
+              toool.
             </Alert>
           )}
           {error && <Alert severity="error">{error}</Alert>}
