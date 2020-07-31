@@ -17,11 +17,24 @@ spec:
     spec:
       containers:
       - image: eoscostarica506/monitor-webapp:latest
-        imagePullPolicy: ""
+        imagePullPolicy: "Always"
         name: monitor-webapp
         envFrom:
         - configMapRef:
             name: monitor-webapp-config
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+        - mountPath: /etc/nginx/ssl-certs
+          name: secret-volume
+        - mountPath: /etc/nginx/conf.d
+          name: configmap-volume
       restartPolicy: Always
+      volumes:
+        - name: secret-volume
+          secret:
+             secretName: monitor.io.keys
+        - name: configmap-volume
+          configMap:
+            name:  monitor.io.conf
