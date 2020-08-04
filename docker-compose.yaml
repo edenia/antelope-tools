@@ -1,0 +1,81 @@
+version: "3.6"
+services:
+  wallet:
+    container_name: "${STAGE}-${APP_NAME}-wallet"
+    build: ./wallet
+    ports:
+      - "8888:8888"
+    volumes:
+      - ${WALLET_DATA}:/opt/application/data
+  postgres:
+    container_name: "${STAGE}-${APP_NAME}-postgres"
+    image: postgres:11.5-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${POSTGRES_DATA}:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    restart: on-failure
+  hapi:
+    container_name: "${STAGE}-${APP_NAME}-hapi"
+    build: ./hapi
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./hapi:/usr/app
+    environment:
+      EOS_API_ENDPOINT: "${HAPI_EOS_API_ENDPOINT}"
+      EOS_API_CHAIN_ID: "${HAPI_EOS_API_CHAIN_ID}"
+      EOS_BASE_ACCOUNT: "${HAPI_EOS_BASE_ACCOUNT}"
+      EOS_BASE_ACCOUNT_PASSWORD: "${HAPI_EOS_BASE_ACCOUNT_PASSWORD}"
+      EOS_WALLET_URL: "${HAPI_EOS_WALLET_URL}"
+      HASURA_URL: "${HAPI_HASURA_URL}"
+      HASURA_ADMIN_SECRET: "${HAPI_HASURA_ADMIN_SECRET}"
+      SERVER_PORT: "${HAPI_SERVER_PORT}"
+      SERVER_ADDRESS: "${HAPI_SERVER_ADDRESS}"
+    restart: on-failure
+  hasura:
+    container_name: "${STAGE}-${APP_NAME}-hasura"
+    image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./hasura/migrations:/hasura-migrations
+      - ./hasura/metadata:/hasura-metadata
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: "${HASURA_GRAPHQL_DATABASE_URL}"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE}"
+      HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}"
+    restart: on-failure
+    depends_on:
+      - postgres
+  webapp:
+    container_name: "${STAGE}-${APP_NAME}-webapp"
+    build:
+      context: ./webapp
+      args:
+        REACT_APP_TITLE: "${REACT_APP_TITLE}"
+        REACT_APP_DEFAULT_PRODUCER_LOGO: "${REACT_APP_DEFAULT_PRODUCER_LOGO}"
+        REACT_APP_EOS_RATE_LINK: "${REACT_APP_EOS_RATE_LINK}"
+        REACT_APP_USE_REWARDS: "${REACT_APP_USE_REWARDS}"
+        REACT_APP_USE_VOTES: "${REACT_APP_USE_VOTES}"
+        REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: "${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}"
+        REACT_APP_EOS_API_HOST: "${REACT_APP_EOS_API_HOST}"
+        REACT_APP_EOS_API_PORT: "${REACT_APP_EOS_API_PORT}"
+        REACT_APP_EOS_API_PROTOCOL: "${REACT_APP_EOS_API_PROTOCOL}"
+        REACT_APP_EOS_CHAIN_ID: "${REACT_APP_EOS_CHAIN_ID}"
+        REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: "${REACT_APP_EOS_DEFAULT_EXCHANGE_RATE}"
+        REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: "${REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API}"
+        REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: "${REACT_APP_EOS_USE_BP_JSON_ON_CHAIN}"
+        REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: "${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}"
+        REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: "${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}"
+        REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: "${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}"
+        REACT_APP_EOS_ENDPOINT: "${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hasura
