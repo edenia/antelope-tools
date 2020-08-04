@@ -179,6 +179,7 @@ export default {
           ) || {}
 
         return {
+          // eslint-disable-next-line camelcase
           logo: data?.bp_json?.org?.branding?.logo_256,
           url: data?.url,
           owner: data.owner,

@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -8,7 +9,7 @@ import Snackbar from './components/Snackbar'
 import Topbar from './components/Topbar'
 import Sidebar from './components/Sidebar'
 
-export default ({ ual }) => {
+const App = ({ ual }) => {
   const snackbarState = useSelector((state) => state.snackbar)
 
   return (
@@ -39,3 +40,9 @@ export default ({ ual }) => {
     </BrowserRouter>
   )
 }
+
+App.propTypes = {
+  ual: PropTypes.object
+}
+
+export default App

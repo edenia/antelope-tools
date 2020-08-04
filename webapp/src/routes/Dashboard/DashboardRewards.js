@@ -240,7 +240,8 @@ const Rewards = () => {
               )}
               {nodes.length > 0 && (
                 <span>
-                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 0)} USD
+                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 0)}{' '}
+                  USD
                 </span>
               )}
             </Typography>
@@ -309,7 +310,7 @@ const Rewards = () => {
               className={classes.action}
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
-             Click to view non-compliant BPs
+              Click to view non-compliant BPs
             </Typography>
           </CardContent>
         </Card>
@@ -326,8 +327,11 @@ const Rewards = () => {
               <span className={classes.highestRewards} />
             </Typography>
             {rate && (
-              <Typography variant="subtitle1" className={classes.rewardsColorSchema}>
-                <span className={classes.itemLabel}>Exchange Rate: </span> $  
+              <Typography
+                variant="subtitle1"
+                className={classes.rewardsColorSchema}
+              >
+                <span className={classes.itemLabel}>Exchange Rate: </span> $
                 {formatWithThousandSeparator(rate, 2)}
               </Typography>
             )}

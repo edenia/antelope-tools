@@ -1,7 +1,28 @@
 {
-  "name": "eoscrwebappboilerplate",
+  "name": "eosiomonitor",
   "version": "1.0.0",
-  "private": true,
+  "description": "EOSIO Monitor WebApp",
+  "repository": "https://github.com/eoscostarica/eosio-monitor.git",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "eject": "react-scripts eject",
+    "format": "precise-commits --check-only",
+    "lint": "eslint --ext .jsx,.js src",
+    "test": "react-app-rewired test --env=jsdom"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint && CI=true npm run test"
+    }
+  },
+  "license": "MIT",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@eoscostarica/eoscr-components": "~1.1.5",
     "@material-ui/core": "^4.9.10",
@@ -39,25 +60,6 @@
     "ual-reactjs-renderer": "^0.3.1",
     "ual-scatter": "^0.3.0",
     "ual-token-pocket": "^0.3.0"
-  },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "eject": "react-scripts eject",
-    "format": "precise-commits --check-only",
-    "lint": "eslint --ext .jsx,.js src",
-    "test": "react-app-rewired test --env=jsdom"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && npm run lint && CI=true npm run test"
-    }
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",

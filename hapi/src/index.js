@@ -14,7 +14,7 @@ const init = async () => {
       validate: {
         failAction: async (request, h, err) => {
           if (process.env.NODE_ENV === 'production') {
-            throw Boom.badRequest(`Invalid request payload input`)
+            throw Boom.badRequest('Invalid request payload input')
           } else {
             throw err
           }

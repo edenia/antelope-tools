@@ -62,7 +62,7 @@ const TransactionsChart = ({ data }) => {
         <Tooltip content={<CustomTooltip />} />
         <YAxis />
         <Bar
-          isAnimationActive={true}
+          isAnimationActive
           dataKey="transactions"
           stroke={theme.palette.secondary[900]}
           fill={theme.palette.secondary[100]}
