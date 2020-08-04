@@ -1,18 +1,6 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
 .env*
 !.env.example
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+db_data
+wallet_data
+certificates
+node_modules

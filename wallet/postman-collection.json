@@ -1,0 +1,393 @@
+{
+  "info": {
+    "_postman_id": "8d2b5c12-cf97-4162-b9d2-ad8b74e81718",
+    "name": "KEOSD RPC API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/v1/wallet/create",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\"lbacccreator\""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/create",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/create_key",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    \"lbacccreator\",\n    \"\"\n]"
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/create_key",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "create_key"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/get_public_keys",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/get_public_keys",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "get_public_keys"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/import_key",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    \"lbacccreator\",\n    \"5JUHF9m1Y5VJsvLcqnN8SBptsCDbmkM5dzxVNtxhGciqM27s1mc\"\n]"
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/import_key",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "import_key"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/list_keys",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    \"lbacccreator\",\n    \"PW5JLhj4yk6hooBknBSvEXnk8WGreucZ7Mx1HmwpMDrjAXhjqr4Cz\"\n]"
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/list_keys",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "list_keys"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/list_wallets",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "[{\"key\":\"Content-Type\",\"name\":\"Content-Type\",\"value\":\"application/x-www-form-urlencoded; charset=UTF-8\",\"description\":\"\",\"type\":\"text\"}]",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/list_wallets",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "list_wallets"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/lock",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "text/plain",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\"lbacccreator\""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/lock",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "lock"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/lock_all",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/lock_all",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "lock_all"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/open",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/open",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "open"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/remove_key",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/remove_key",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "remove_key"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/set_timeout",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/set_timeout",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "set_timeout"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/sign_digest",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/sign_digest",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "sign_digest"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/sign_transaction",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\n    \"expiration\": \"2018-10-26T15:30:32.000\",\n    \"ref_block_num\": 21149807,\n    \"ref_block_prefix\": 3590041248,\n    \"context_free_actions\": [],\n    \"actions\": [{\n\t\t\"account\": \"eosio.token\",\n\t\t\"name\": \"transfer\",\n\t\t\"authorization\": [{\n\t\t    \"actor\": \"testertimohe\",\n\t\t    \"permission\": \"active\"\n\t\t}],\n\t\t\"data\": \"0000000000ea305500000000487a2b9d102700000000000004454f53000000001163726561746564206279206e6f70726f6d\"\n    }],\n    \"signatures\": []\n    },\n    [\"EOS78RuuHNgtmDv9jwAzhxZ9LmC6F295snyQ9eUDQ5YtVHJ1udE6p\"], \"aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906\"\n]"
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/sign_transaction",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "sign_transaction"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/v1/wallet/unlock",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    \"lbacccreator\",\n    \"PW5JLhj4yk6hooBknBSvEXnk8WGreucZ7Mx1HmwpMDrjAXhjqr4Cz\"\n]"
+        },
+        "url": {
+          "raw": "{{SERVER}}/v1/wallet/unlock",
+          "host": ["{{SERVER}}"],
+          "path": ["v1", "wallet", "unlock"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "af5aceaa-c626-45d5-a39f-c015de387bfd",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "36e3817e-6853-41f9-bbf9-878fe075b53f",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "2db0b21b-9dfc-427f-8aa1-e4287d7d66be",
+      "key": "SERVER",
+      "value": "http://localhost:8888",
+      "type": "string"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
