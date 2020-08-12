@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Typography from '@material-ui/core/Typography'
+import { useTranslation } from 'react-i18next'
 import Alert from '@material-ui/lab/Alert'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
 
@@ -54,6 +55,7 @@ const EditBPJson = ({ ual }) => {
   const [producer, setProducer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { t } = useTranslation('updateNodeInfo')
 
   const handleOnSubmit = async (owner, json) => {
     if (!ual.activeUser) return
@@ -132,18 +134,17 @@ const EditBPJson = ({ ual }) => {
           {loading && (
             <>
               <Typography variant="h5" align="center">
-                Loading node information . . .
+                {t('loadText')}
               </Typography>
               <LinearProgress color="primary" />
             </>
           )}
           {!ual.activeUser && !loading && (
-            <Alert severity="warning">Please log in to use this tool.</Alert>
+            <Alert severity="warning">{t('notLogin')}</Alert>
           )}
           {ual.activeUser && !producer && !loading && (
             <Alert severity="warning">
-              You must have an account registered as an active node to use this
-              toool.
+              {t('notRegisterNode')}
             </Alert>
           )}
           {error && <Alert severity="error">{error}</Alert>}

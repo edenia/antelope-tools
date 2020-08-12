@@ -14,6 +14,11 @@
       "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
     }
   },
+  "updateNodeInfo": {
+    "loadText": "Loading node information . . .",
+    "notLogin": "Please log in to use this tool.",
+    "notRegisterNode": "You must have an account registered as an active node to use this tool."
+  },
   "help": {
     "title": "Thank you for using EOS Network Monitor!",
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",

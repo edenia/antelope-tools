@@ -1,3 +1,30 @@
 {
-  "translations": {}
+  "about": {
+    "title": "Panel EOSIO",
+    "subtitle1": "¿Qué es el panel EOSIO?",
+    "body1": {
+      "paragraph1": "El Panel EOSIO es un proyecto de código abierto para visualizar datos en la infraestructura de red EOS de distribución de recompensas y nodos productores en bloque."
+    },
+    "subtitle2": "¿Por qué es importante?",
+    "body2": {
+      "paragraph1": "El monitoreo de lo que está sucediendo en la red es esencial para mejorarlo y medir la transparencia del nodo del impacto de las soluciones que se ejecutan en la red. El objetivo principal de las herramientas de monitoreo es producir información descentralizada y confiable sobre cada nodo y la actividad de la red."
+    },
+    "subtitle3": "¿De dónde provienen los datos?",
+    "body3": {
+      "paragraph1": "El tablero de instrumentos está destinado a permitir que la comunidad obtenga una vista gráfica transparente de la información del productor de bloques. Obtenemos datos directamente de la cadena de bloques y de la información proporcionada en su archivo bp.json. El archivo bp.json es esencialmente un archivo de información / configuración proporcionado por cada productor de bloques. Puede ver un ejemplo de archivo bp.json aquí: https://eoscostarica.io/bp.json"
+    }
+  },
+  "updateNodeInfo": {
+    "loadText": "Cargando información del nodo . . .",
+    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
+    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  },
+  "help": {
+    "title": "Gracias por usar EOS Network Monitor!",
+    "paragraph": "EOSIO Dashboard todavía está en progreso. Siéntase libre de dejar sugerencias de actualización, errores de registro o usar el código usted mismo. También puede encontrarnos en Telegram o visitar nuestro sitio web.",
+    "githubEOSCR": "GitHub EOS Costa Rica",
+    "telegramChannel": "Canales de Telegram",
+    "websiteEOSCR": "Sitio web EOS Costa Rica"
+  }
 }
+
