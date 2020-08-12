@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -150,6 +151,7 @@ const Producers = () => {
   const [producerFilter, setProducerFilter] = useState('all')
   const [allNodes, setAllNodes] = useState([])
   const classes = useStyles()
+  const { t } = useTranslation('dashboardNodes')
   const [mapState, setMapState] = useState({
     scale: defaultScale,
     center: [0, 0],
@@ -241,7 +243,7 @@ const Producers = () => {
             <Card>
               <CardContent>
                 <FormControl className={classes.formControl}>
-                  <InputLabel id="producerFilterLabel">Producer</InputLabel>
+                  <InputLabel id="producerFilterLabel">{t('producer')}</InputLabel>
                   <Select
                     classes={{
                       root: classes.centerVertically
@@ -281,7 +283,7 @@ const Producers = () => {
             <Card>
               <CardContent>
                 <FormControl className={classes.formControl}>
-                  <InputLabel id="nodeTypeFilterLabel">Node type</InputLabel>
+                  <InputLabel id="nodeTypeFilterLabel">{t('nodeType')}</InputLabel>
                   <Select
                     classes={{
                       root: classes.capitalize
@@ -406,15 +408,15 @@ const Producers = () => {
           {currentNode?.color && (
             <>
               <Typography>
-                <span className={classes.popoverItem}>Type:</span>
+                <span className={classes.popoverItem}>{t('type')}:</span>
                 <span className={classes.capitalize}>{currentNode?.name}</span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Description:</span>
+                <span className={classes.popoverItem}>{t('description')}:</span>
                 <span>{currentNode?.description}</span>
               </Typography>
               <Typography className={classes.centerVertically}>
-                <span className={classes.popoverItem}>Color:</span>
+                <span className={classes.popoverItem}>{t('color')}:</span>
                 <span className={classes[currentNode?.name]} />
               </Typography>
             </>
@@ -422,7 +424,7 @@ const Producers = () => {
           {currentNode?.owner && (
             <>
               <Typography>
-                <span className={classes.popoverItem}>Account:</span>
+                <span className={classes.popoverItem}>{t('account')}:</span>
                 <Link
                   href={
                     generalConfig.eosRateLink
@@ -436,7 +438,7 @@ const Producers = () => {
                 </Link>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Website:</span>
+                <span className={classes.popoverItem}>{t('website')}:</span>
                 <span>
                   <Link
                     href={currentNode?.url}
@@ -448,26 +450,26 @@ const Producers = () => {
                 </span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Votes:</span>
+                <span className={classes.popoverItem}>{t('votes')}:</span>
                 <span>
                   {formatWithThousandSeparator(currentNode?.total_votes_eos, 2)}
                 </span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Rewards:</span>
+                <span className={classes.popoverItem}>{t('rewards')}:</span>
                 <span>
                   {formatWithThousandSeparator(currentNode?.total_reward, 2)}
                 </span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Producer country:</span>
+                <span className={classes.popoverItem}>{t('producerCountry')}:</span>
                 <span className={classes.countryFlag}>
                   {currentNode?.country?.flag}
                 </span>
                 <span>{currentNode?.country?.name}</span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>Node type:</span>
+                <span className={classes.popoverItem}>{t('nodeType')}:</span>
                 <span className={classes.capitalize}>
                   {currentNode?.node_type || 'N/A'}
                 </span>

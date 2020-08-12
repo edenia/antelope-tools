@@ -1,4 +1,62 @@
 {
+  "sidebar": {
+    "item1": "Block Producers",
+    "item2": "Node Distribution",
+    "item3": "Rewards Distribution",
+    "item4": "Update Node Info",
+    "item5": "About",
+    "item6": "Ricardian Contract",
+    "item7": "Help"
+  },
+  "dashboardProducer": {
+    "currentProducer": "Current Producer",
+    "headBlock": "Head Block",
+    "lastBlock": "Last Irreversible Block",
+    "bpSchedule": "Block Producer Schedule",
+    "transPerSecond": "Transactions Per Second",
+    "transPerBlock": "Transactions Per Block",
+    "blockProducerVotes": "Block Producer Votes",
+    "rank": "Rank",
+    "blockProducer": "Block Producer",
+    "votes": "Votes",
+    "totalVotes": "Total Votes",
+    "location": "Location",
+    "expectedRewards": "Expected Rewards"
+  },
+  "producersChartToolTip": {
+    "name": "Name",
+    "rewards": "Rewards",
+    "votes": "Votes"
+  },
+  "transactionsChartToolTip": {
+    "block": "Block",
+    "transactions": "Transactions"
+  },
+  "dashboardNodes": {
+    "producer": "Producer",
+    "nodeType": "Node type",
+    "type": "Type",
+    "description": "Description",
+    "color": "Color",
+    "account": "Account",
+    "website": "Website",
+    "votes": "Votes",
+    "rewards": "Rewards",
+    "producerCountry": "Producer country"
+  },
+  "dashboardRewards": {
+    "dailyRewards": "Total Daily Rewards",
+    "TopCountryDailyRwards": "Top Country By Daily Rewards",
+    "notAvailable": "Not available",
+    "paidProducers": "Paid Producers Not Located",
+    "clickToViewBPs": "Click to view non-compliant BPs",
+    "lowestRewards": "Lowest Rewards",
+    "highestRewards": "Highest Rewards",
+    "exchangeRate": "Exchange Rate",
+    "country": "Country",
+    "rewards": "Rewards",
+    "producers": "Producers"
+  },
   "about": {
     "title": "EOSIO Dashboard",
     "subtitle1": "What is the EOSIO Dashboard",
