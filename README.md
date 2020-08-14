@@ -256,7 +256,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
         </sub>
       </a>
       <br />
-      🏡💻❤️
+      🚇💻❤️
     </td>
   </tr>
 </table>
