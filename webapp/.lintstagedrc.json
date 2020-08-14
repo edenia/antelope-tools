@@ -1,4 +1,0 @@
-{
-  "*.{css,less,scss,graphql,gql,html,jsx,json,md,markdown,mdown,mkdn,mdx,ts,tsx,vue,yaml,yml}": "prettier --write",
-  "*.js": "eslint --fix"
-}
