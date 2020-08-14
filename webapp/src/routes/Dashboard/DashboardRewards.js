@@ -148,9 +148,9 @@ const Rewards = () => {
     let daylyRewars = 0
 
     producers.rows
-      .filter((a) => a.total_reward >= 100)
+      .filter((a) => a.total_rewards >= 100)
       .forEach((producer) => {
-        daylyRewars += producer.total_reward || 0
+        daylyRewars += producer.total_rewards || 0
 
         if (!producer?.bp_json?.org?.location?.country) {
           if (!stats['N/A']) {
@@ -161,12 +161,12 @@ const Rewards = () => {
                 name: 'Not available',
                 quantity: 1,
                 items: [producer],
-                rewards: producer.total_reward
+                rewards: producer.total_rewards
               }
             }
           } else {
             stats['N/A'].items.push(producer)
-            stats['N/A'].rewards += producer.total_reward
+            stats['N/A'].rewards += producer.total_rewards
             stats['N/A'].quantity += 1
           }
           return
@@ -185,13 +185,13 @@ const Rewards = () => {
                 producer.bp_json.org.location.latitude
               ],
               items: [producer],
-              rewards: producer.total_reward
+              rewards: producer.total_rewards
             }
           }
         } else {
           stats[producer.bp_json.org.location.country].items.push(producer)
           stats[producer.bp_json.org.location.country].rewards +=
-            producer.total_reward
+            producer.total_rewards
           stats[producer.bp_json.org.location.country].quantity += 1
           if (
             producer.bp_json.org.location.longitude &&
@@ -427,7 +427,7 @@ const Rewards = () => {
                   {producer?.bp_json?.org?.candidate_name || producer.owner}
                 </Link>
                 <br />
-                {formatWithThousandSeparator(producer.total_reward, 2)} EOS
+                {formatWithThousandSeparator(producer.total_rewards, 2)} EOS
               </li>
             ))}
           </ul>

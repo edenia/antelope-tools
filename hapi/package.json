@@ -6,26 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "format": "precise-commits --check-only",
-    "lint": "eslint --ext .js src"
+    "lint": "lint-staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format && yarn lint"
+      "pre-commit": "lint-staged"
     }
   },
   "license": "MIT",
   "dependencies": {
     "@hapi/boom": "^9.0.0",
     "@hapi/hapi": "^19.1.1",
-    "@hapi/inert": "^6.0.1",
     "@hapi/joi": "^17.1.0",
+    "axios": "^0.19.2",
     "eosjs": "^20.0.3",
     "eosjs-api": "^7.0.4",
     "graphql-request": "^1.8.2",
     "hapi-pino": "^6.5.0",
-    "http-status-codes": "^1.4.0",
-    "i18next": "^19.3.2"
+    "http-status-codes": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -37,7 +35,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.3",
-    "precise-commits": "^1.0.2",
+    "lint-staged": ">=10",
     "prettier": "^1.19.1"
   }
 }
