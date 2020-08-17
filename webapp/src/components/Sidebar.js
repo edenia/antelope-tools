@@ -62,12 +62,12 @@ const DashboardSidebarContent = () => {
 
   const mainPages = [
     {
-      title: t('item1'),
+      title: t('sidebar_BlockProducer'),
       href: '/dashboard/producers',
       icon: <StorageIcon />
     },
     {
-      title: t('item2'),
+      title: t('sidebar_NodeDistribution'),
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     }
@@ -75,7 +75,7 @@ const DashboardSidebarContent = () => {
 
   if (generalConfig.useRewards) {
     mainPages.push({
-      title: t('item3'),
+      title: t('sidebar_RewardDistribution'),
       href: '/dashboard/rewards',
       icon: <AccountBalanceWalletIcon />
     })
@@ -83,24 +83,24 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
-      title: t('item4'),
+      title: t('sidebar_NodeInfo'),
       href: '/bpjson'
     },
     {
-      title: t('item5'),
+      title: t('sidebar_About'),
       href: '/about'
     }
   ]
 
   if (generalConfig.useBlockProducerAgreementContract) {
     helperPages.push({
-      title: t('item6'),
+      title: t('sidebar_RicardianContract'),
       href: '/ricardian-contract'
     })
   }
 
   helperPages.push({
-    title: t('item7'),
+    title: t('sidebar_Help'),
     href: '/help'
   })
 

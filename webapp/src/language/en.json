@@ -1,12 +1,12 @@
 {
   "sidebar": {
-    "item1": "Block Producers",
-    "item2": "Node Distribution",
-    "item3": "Rewards Distribution",
-    "item4": "Update Node Info",
-    "item5": "About",
-    "item6": "Ricardian Contract",
-    "item7": "Help"
+    "sidebar_BlockProducer": "Block Producers",
+    "sidebar_NodeDistribution": "Node Distribution",
+    "sidebar_RewardDistribution": "Rewards Distribution",
+    "sidebar_NodeInfo": "Update Node Info",
+    "sidebar_About": "About",
+    "sidebar_RicardianContract": "Ricardian Contract",
+    "sidebar_Help": "Help"
   },
   "dashboardProducer": {
     "currentProducer": "Current Producer",

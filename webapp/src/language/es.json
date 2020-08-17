@@ -1,12 +1,12 @@
 {
   "sidebar": {
-    "item1": "Productor de Bloques",
-    "item2": "Distribución de nodos",
-    "item3": "Distribución de recompensas",
-    "item4": "Actualizar información del nodo",
-    "item5": "Acerca de",
-    "item6": "Contrato ricardiano",
-    "item7": "Ayuda"
+    "sidebar_BlockProducer": "Productor de Bloques",
+    "sidebar_NodeDistribution": "Distribución de nodos",
+    "sidebar_RewardDistribution": "Distribución de recompensas",
+    "sidebar_NodeInfo": "Actualizar información del nodo",
+    "sidebar_About": "Acerca de",
+    "sidebar_RicardianContract": "Contrato ricardiano",
+    "sidebar_Help": "Ayuda"
   },
   "dashboardProducer": {
     "currentProducer": "Productor actual",
