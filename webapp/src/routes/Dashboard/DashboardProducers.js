@@ -17,6 +17,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import Link from '@material-ui/core/Link'
 import clsx from 'clsx'
 import 'flag-icon-css/css/flag-icon.min.css'
+import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
@@ -86,6 +87,7 @@ const Producers = () => {
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
   const classes = useStyles()
+  const { t } = useTranslation('dashboardProducer')
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
@@ -133,7 +135,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Current Producer</Typography>
+              <Typography variant="h6">{t("currentProducer")}</Typography>
               <Typography variant="h3">{info.head_block_producer}</Typography>
             </CardContent>
           </Card>
@@ -141,7 +143,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Head Block</Typography>
+              <Typography variant="h6">{t("headBlock")}</Typography>
               <Typography variant="h3">
                 {formatWithThousandSeparator(info.head_block_num)}
               </Typography>
@@ -151,7 +153,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Last Irreversible Block</Typography>
+              <Typography variant="h6">{t("lastBlock")}</Typography>
               <Typography variant="h3">
                 {formatWithThousandSeparator(info.last_irreversible_block_num)}
               </Typography>
@@ -164,7 +166,7 @@ const Producers = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">Block Producer Schedule</Typography>
+              <Typography variant="h6">{t("bpSchedule")}</Typography>
               <Typography variant="caption">
                 {schedule.version ? 'Ver. ' : ''} {schedule.version}
                 {schedule.version}
@@ -190,8 +192,8 @@ const Producers = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">Transactions Per Second</Typography>
-                  {!producers.length && (
+                  <Typography variant="h6">{t("transPerSecond")}</Typography>
+                  {!producers.rows.length && (
                     <div className={classes.chartSkeletonWrapper}>
                       <Skeleton
                         variant="rect"
@@ -208,8 +210,8 @@ const Producers = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">Transactions Per Block</Typography>
-                  {!producers.length && (
+                  <Typography variant="h6">{t("transPerBlock")}</Typography>
+                  {!producers.rows.length && (
                     <div className={classes.chartSkeletonWrapper}>
                       <Skeleton
                         variant="rect"
@@ -229,21 +231,21 @@ const Producers = () => {
       <Grid item xs={12} className={classes.tableWrapper}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Block Producer Votes</Typography>
+            <Typography variant="h6">{t("blockProducerVotes")}</Typography>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Rank</TableCell>
-                  <TableCell>Block Producer</TableCell>
+                  <TableCell>{t("rank")}</TableCell>
+                  <TableCell>{t("blockProducer")}</TableCell>
                   {generalConfig.useVotes && (
                     <>
-                      <TableCell>Votes %</TableCell>
-                      <TableCell>Total Votes</TableCell>
+                      <TableCell>{t("votes")} %</TableCell>
+                      <TableCell>{t("totalVotes")}</TableCell>
                     </>
                   )}
-                  <TableCell>Location</TableCell>
+                  <TableCell>{t("location")}</TableCell>
                   {generalConfig.useRewards && (
-                    <TableCell>Expected Rewards</TableCell>
+                    <TableCell>{t("expectedRewards")}</TableCell>
                   )}
                   <TableCell>Ping from Costa Rica</TableCell>
                 </TableRow>

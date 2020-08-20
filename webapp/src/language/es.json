@@ -4,27 +4,84 @@
     "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
   },
+  "sidebar": {
+    "sidebar_BlockProducer": "Productor de Bloques",
+    "sidebar_NodeDistribution": "Distribución de nodos",
+    "sidebar_RewardDistribution": "Distribución de recompensas",
+    "sidebar_NodeInfo": "Actualizar información del nodo",
+    "sidebar_About": "Acerca de",
+    "sidebar_RicardianContract": "Contrato ricardiano",
+    "sidebar_Help": "Ayuda"
+  },
+  "dashboardProducer": {
+    "currentProducer": "Productor actual",
+    "headBlock": "Bloque de la cabeza",
+    "lastBlock": "Último Bloque Irreversible",
+    "bpSchedule": "Programa de Productor de Bloque",
+    "transPerSecond": "Transacciones por Segundo",
+    "transPerBlock": "Transacciones por Bloque",
+    "blockProducerVotes": "Votos de Productores de Bloque",
+    "rank": "Rango",
+    "blockProducer": "Productor de Bloques",
+    "votes": "Votos",
+    "totalVotes": "Total de Votos",
+    "location": "Ubicación",
+    "expectedRewards": "Recompensas esperadas"
+  },
+  "producerChartToolTip": {
+    "name": "Nombre",
+    "rewards": "Recompensas",
+    "votes": "Votos"
+  },
+  "transactionsChartToolTip": {
+    "block": "Bloque",
+    "transactions": "Transacciones"
+  },
+  "dashboardNodes": {
+    "producer": "Productor",
+    "nodeType": "Tipo De Nodo",
+    "type": "Tipo",
+    "description": "Descripción",
+    "color": "Color",
+    "account": "Cuenta",
+    "website": "Sitio Web",
+    "votes": "Votos",
+    "rewards": "Recompensas",
+    "producerCountry": "País Productor"
+  },
+  "dashboardRewards": {
+    "dailyRewards": "Recompensas Diarias Totales",
+    "TopCountryDailyRwards": "País Superior Por Recompensas Diarias",
+    "notAvailable": "No Disponible",
+    "paidProducers": "Productores Pagados No Ubicados",
+    "clickToViewBPs": "Haga clic para ver los PB no conformes",
+    "lowestRewards": "Recompensas Más Bajas",
+    "highestRewards": "Recompensas Más Altas",
+    "exchangeRate": "Tipo De Cambio",
+    "country": "País",
+    "rewards": "Recompensas",
+    "producers": "Productores"
+  },
   "about": {
-    "title": "Panel EOSIO",
-    "subtitle1": "¿Qué es el panel EOSIO?",
+    "title": "EOSIO Tablero",
+    "subtitle1": "What is the EOSIO Dashboard",
     "body1": {
-      "paragraph1": "El Panel EOSIO es un proyecto de código abierto para visualizar datos en la infraestructura de red EOS de distribución de recompensas y nodos productores en bloque."
+      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
     },
-    "subtitle2": "¿Por qué es importante?",
+    "subtitle2": "Why is it important?",
     "body2": {
-      "paragraph1": "El monitoreo de lo que está sucediendo en la red es esencial para mejorarlo y medir la transparencia del nodo del impacto de las soluciones que se ejecutan en la red. El objetivo principal de las herramientas de monitoreo es producir información descentralizada y confiable sobre cada nodo y la actividad de la red."
+      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
     },
-    "subtitle3": "¿De dónde provienen los datos?",
+    "subtitle3": "Where does the data come from?",
     "body3": {
-      "paragraph1": "El tablero de instrumentos está destinado a permitir que la comunidad obtenga una vista gráfica transparente de la información del productor de bloques. Obtenemos datos directamente de la cadena de bloques y de la información proporcionada en su archivo bp.json. El archivo bp.json es esencialmente un archivo de información / configuración proporcionado por cada productor de bloques. Puede ver un ejemplo de archivo bp.json aquí: https://eoscostarica.io/bp.json"
+      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
     }
   },
   "help": {
-    "title": "Gracias por usar EOS Network Monitor!",
-    "paragraph": "EOSIO Dashboard todavía está en progreso. Siéntase libre de dejar sugerencias de actualización, errores de registro o usar el código usted mismo. También puede encontrarnos en Telegram o visitar nuestro sitio web.",
+    "title": "Thank you for using EOS Network Monitor!",
+    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
-    "telegramChannel": "Canales de Telegram",
-    "websiteEOSCR": "Sitio web EOS Costa Rica"
+    "telegramChannel": "Telegram Channel",
+    "websiteEOSCR": "Website EOS Costa Rica"
   }
 }
-
