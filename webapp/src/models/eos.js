@@ -172,29 +172,9 @@ export default {
       }
     },
     updateSchedule(state, schedule) {
-      const producers = schedule.producers.map((item) => {
-        const data =
-          state.producers.rows.find(
-            (producer) => producer.owner === item.producer_name
-          ) || {}
-
-        return {
-          // eslint-disable-next-line camelcase
-          logo: data?.bp_json?.org?.branding?.logo_256,
-          url: data?.url,
-          owner: data.owner,
-          rewards: data.total_reward,
-          total_votes_percent: data.total_votes_percent * 100,
-          value: 20
-        }
-      })
-
       return {
         ...state,
-        schedule: {
-          producers,
-          version: schedule.version
-        }
+        schedule
       }
     }
   },
