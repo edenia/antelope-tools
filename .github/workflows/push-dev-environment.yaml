@@ -1,0 +1,23 @@
+name: Push code to dev environment
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup-docker
+      uses: docker-practice/actions-setup-docker@0.0.1
+    - name: run push
+      run: |
+        docker build -t eosio-monitor-deployer-test \
+          --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
+          --build-arg branch="dev" \
+          .
+        docker run \
+          -e USER="${{secrets.USER}}" \
+          -e branch="dev" \
+          eosio-monitor-deployer-test
