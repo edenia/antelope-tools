@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -115,6 +116,7 @@ const Rewards = () => {
   const producers = useSelector((state) => state.eos.producers)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
+  const { t } = useTranslation('dashboardRewards')
   const rate = useSelector((state) => state.eos.rate)
 
   const handlePopoverOpen = (node) => (event) => {
@@ -223,7 +225,7 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Total Daily Rewards</Typography>
+            <Typography variant="h6">{t('dailyRewards')}</Typography>
             <Typography variant="h3">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
@@ -254,7 +256,7 @@ const Rewards = () => {
           onClick={handlePopoverOpen(summary?.topCountryByRewards)}
         >
           <CardContent>
-            <Typography variant="h6">Top Country By Daily Rewards</Typography>
+            <Typography variant="h6">{t('TopCountryDailyRwards')}</Typography>
             <Typography variant="h3">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
@@ -293,7 +295,7 @@ const Rewards = () => {
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h6">Paid Producers Not Located</Typography>
+            <Typography variant="h6">{t('paidProducers')}</Typography>
             <Typography
               variant="h3"
               className={classes.action}
@@ -310,7 +312,7 @@ const Rewards = () => {
               className={classes.action}
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
-              Click to view non-compliant BPs
+              {t('clickToViewBPs')}
             </Typography>
           </CardContent>
         </Card>
@@ -319,11 +321,11 @@ const Rewards = () => {
         <Card>
           <CardContent>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>Lowest Rewards: </span>
+              <span className={classes.itemLabel}>{t('lowestRewards')}: </span>
               <span className={classes.lowestRewards} />
             </Typography>
             <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>Highest Rewards: </span>
+              <span className={classes.itemLabel}>{t('highestRewards')}: </span>
               <span className={classes.highestRewards} />
             </Typography>
             {rate && (
@@ -331,7 +333,7 @@ const Rewards = () => {
                 variant="subtitle1"
                 className={classes.rewardsColorSchema}
               >
-                <span className={classes.itemLabel}>Exchange Rate: </span> $
+                <span className={classes.itemLabel}>{t('exchangeRate')}: </span> $
                 {formatWithThousandSeparator(rate, 2)}
               </Typography>
             )}
@@ -356,7 +358,7 @@ const Rewards = () => {
                   return (
                     <Geography
                       onClick={
-                        nodeData ? handlePopoverOpen(nodeData) : () => {}
+                        nodeData ? handlePopoverOpen(nodeData) : () => { }
                       }
                       className={classes.geography}
                       key={geo.rsmKey}
@@ -396,7 +398,7 @@ const Rewards = () => {
             />
           </div>
           <Typography>
-            <span className={classes.popoverItem}>Country: </span>
+            <span className={classes.popoverItem}>{t('country')}: </span>
             {!currentNode?.flag && (
               <span className={classes.countryFlagUnknown}>
                 <UnknowFlagIcon />
@@ -408,19 +410,19 @@ const Rewards = () => {
             <span>{currentNode?.name}</span>
           </Typography>
           <Typography>
-            <span className={classes.popoverItem}>Rewards: </span>
+            <span className={classes.popoverItem}>{t('rewards')}: </span>
             <span>
               {formatWithThousandSeparator(currentNode?.rewards, 2)} EOS
             </span>
           </Typography>
-          <Typography className={classes.popoverItem}>Producers:</Typography>
+          <Typography className={classes.popoverItem}>{t('producers')}:</Typography>
           <ul className={classes.producersList}>
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
                 <Link
                   href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
                     producer.url
-                  }/bp.json`}
+                    }/bp.json`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

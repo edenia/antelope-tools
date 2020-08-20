@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
 import { useTheme } from '@material-ui/core/styles'
 import { ResponsiveContainer, YAxis, Tooltip, BarChart, Bar } from 'recharts'
+import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -20,19 +21,20 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
+  const { t } = useTranslation('transactionsChartToolTip')
 
   if (active && payload && payload.length > 0) {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
-          Block{`${payload[0].payload.blocks.length > 1 ? 's:' : ''} `}
+          {t('block')}{`${payload[0].payload.blocks.length > 1 ? 's:' : ''} `}
           <span className={classes.description}>
             {' '}
             {payload[0].payload.blocks.join(', ')}
           </span>
         </Typography>
         <Typography variant="h6">
-          Transactions:{' '}
+          {t('transactions')}:{' '}
           <span className={classes.description}>
             {' '}
             {payload[0].payload.transactions}
