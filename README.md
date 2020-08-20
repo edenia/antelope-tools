@@ -221,7 +221,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
     </td>
     <td align="center">
       <a href="https://github.com/adriexnet">
-        <img src="https://avatars3.githubusercontent.com/u/13205620?s=400&u=9adad6d2e42165c184894b9175785d15a903f58b&v=4" width="100px;" alt="Adriel Diaz"/>
+        <img src="https://avatars3.githubusercontent.com/u/13205620?s=400&u=9adad6d2e42165c184894b9175785d15a903f58b&v=4" width="100px;" alt="Rubén Abarca Navarro"/>
         <br />
         <sub>
           <b>
@@ -244,6 +244,19 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
       </a>
       <br />
       🏡💻❤️
+    </td>
+    <td align="center">
+      <a href="https://github.com/kuronosec">
+        <img src="https://avatars2.githubusercontent.com/u/6999429?s=460&u=adc2cbd3b7c2c8c26cad54ac9784c3f4e278b3cd&v=4" width="100px;" alt="Andres Gomez"/>
+        <br />
+        <sub>
+          <b>
+            Andres Gomez
+          </b>
+        </sub>
+      </a>
+      <br />
+      🚇💻❤️
     </td>
   </tr>
 </table>
