@@ -3,6 +3,12 @@ const EosApi = require('eosjs-api')
 const { hasuraUtil, axiosUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
+const eosApi = EosApi({
+  httpEndpoint: eosConfig.apiEndpoint,
+  verbose: false,
+  fetchConfiguration: {}
+})
+
 const UPSERT = `
   mutation ($producers: [producer_insert_input!]!) {
     insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards]}) {
@@ -43,11 +49,6 @@ const find = async where => {
 }
 
 const addExpectedReward = async (producers, totalVotes) => {
-  const eosApi = EosApi({
-    httpEndpoint: eosConfig.apiEndpoint,
-    verbose: false,
-    fetchConfiguration: {}
-  })
   const systemData = await eosApi.getCurrencyStats({
     symbol: 'EOS',
     code: 'eosio.token'
@@ -128,31 +129,6 @@ const parseVotesToEOS = votes => {
   return parseFloat(votes) / 2 ** weight / 10000
 }
 
-const syncProducers = async () => {
-  try {
-    const eosApi = EosApi({
-      httpEndpoint: eosConfig.apiEndpoint,
-      verbose: false,
-      fetchConfiguration: {}
-    })
-    const response = await eosApi.getProducers({ limit: 100, json: true })
-    let producers = response.rows.map(producer => ({
-      ...producer,
-      is_active: !!producer.is_active,
-      total_votes_percent:
-        producer.total_votes / response.total_producer_vote_weight,
-      total_votes_eos: parseVotesToEOS(producer.total_votes)
-    }))
-    producers = await addExpectedReward(
-      producers,
-      response.total_producer_vote_weight
-    )
-    await hasuraUtil.request(UPSERT, { producers })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
-
 const getBPJsonUrl = (producer = {}) => {
   let newUrl = producer.url || ''
 
@@ -191,6 +167,27 @@ const syncBPJson = async () => {
       } catch (error) {}
     })
   )
+}
+
+const syncProducers = async () => {
+  try {
+    const response = await eosApi.getProducers({ limit: 100, json: true })
+    let producers = response.rows.map(producer => ({
+      ...producer,
+      is_active: !!producer.is_active,
+      total_votes_percent:
+        producer.total_votes / response.total_producer_vote_weight,
+      total_votes_eos: parseVotesToEOS(producer.total_votes)
+    }))
+    producers = await addExpectedReward(
+      producers,
+      response.total_producer_vote_weight
+    )
+    await hasuraUtil.request(UPSERT, { producers })
+    await syncBPJson()
+  } catch (error) {
+    console.log(error.message)
+  }
 }
 
 const getApiEndpoints = (producer = {}) => {
@@ -256,7 +253,6 @@ const syncProducersInfo = async () => {
 }
 
 module.exports = {
-  syncBPJson,
   syncProducers,
   syncProducersInfo
 }
