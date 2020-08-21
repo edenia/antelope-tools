@@ -9,7 +9,7 @@ import Snackbar from './components/Snackbar'
 import Topbar from './components/Topbar'
 import Sidebar from './components/Sidebar'
 
-const App = ({ ual }) => {
+const App = ({ ual = {} }) => {
   const snackbarState = useSelector((state) => state.snackbar)
 
   return (

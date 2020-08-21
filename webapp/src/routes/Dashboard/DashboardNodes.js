@@ -458,7 +458,7 @@ const Producers = () => {
               <Typography>
                 <span className={classes.popoverItem}>{t('rewards')}:</span>
                 <span>
-                  {formatWithThousandSeparator(currentNode?.total_reward, 2)}
+                  {formatWithThousandSeparator(currentNode?.total_rewards, 2)}
                 </span>
               </Typography>
               <Typography>

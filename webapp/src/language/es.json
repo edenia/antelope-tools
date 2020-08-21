@@ -1,4 +1,9 @@
 {
+  "updateNodeInfo": {
+    "loadText": "Cargando información del nodo . . .",
+    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
+    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  },
   "sidebar": {
     "sidebar_BlockProducer": "Productor de Bloques",
     "sidebar_NodeDistribution": "Distribución de nodos",

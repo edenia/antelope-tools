@@ -3,3 +3,4 @@ import * as generalConfig from './general'
 import { ualConfig } from './ual.config'
 
 export { eosConfig, generalConfig, ualConfig }
+export * from './graphql.config'

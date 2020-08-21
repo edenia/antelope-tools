@@ -1,7 +1,8 @@
 /* eslint camelcase: 0 */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSubscription } from '@apollo/react-hooks'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
@@ -22,6 +23,7 @@ import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
 import ProducersChart from '../../components/ProducersChart'
 import TransactionsChart from '../../components/TransactionsChart'
+import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 
 const useStyles = makeStyles((theme) => ({
   country: {
@@ -75,27 +77,50 @@ const useStyles = makeStyles((theme) => ({
 
 const Producers = () => {
   const dispatch = useDispatch()
+  const {
+    data: { producer: producers = [] } = { producers: [] }
+  } = useSubscription(PRODUCERS_SUBSCRIPTION)
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
-  const producers = useSelector((state) => state.eos.producers)
-  const schedule = useSelector((state) => state.eos.schedule)
+  // const producers = useSelector((state) => state.eos.producers)
+  const scheduleInfo = useSelector((state) => state.eos.schedule)
+  const [schedule, setSchedule] = useState({ producers: [] })
   const classes = useStyles()
   const { t } = useTranslation('dashboardProducer')
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
-    dispatch.eos.getProducers()
+    dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
     dispatch.eos.getRate()
   }, [dispatch])
 
   useEffect(() => {
-    if (!producers.rows.length) {
-      return
-    }
+    // console.log(schedule)
+    const newProducers = scheduleInfo.producers.map((item) => {
+      const data =
+        producers.find((producer) => producer.owner === item.producer_name) ||
+        {}
 
-    dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
-  }, [dispatch, producers])
+      return {
+        // eslint-disable-next-line camelcase
+        logo: data?.bp_json?.org?.branding?.logo_256,
+        url: data?.url,
+        owner: data.owner,
+        rewards: data.total_rewards,
+        total_votes_percent: data.total_votes_percent * 100,
+        value: 20
+      }
+    })
+    setSchedule({
+      ...scheduleInfo,
+      producers: newProducers
+    })
+    // if (!producers.rows.length) {
+    //   return
+    // }
+    // dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
+  }, [scheduleInfo, producers])
 
   useEffect(() => {
     return () => {
@@ -136,7 +161,7 @@ const Producers = () => {
           </Card>
         </Grid>
       </Grid>
-      {!producers.rows.length && <LinearProgress />}
+      {!producers.length && <LinearProgress />}
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Card>
@@ -178,9 +203,7 @@ const Producers = () => {
                       />
                     </div>
                   )}
-                  {producers.rows.length > 0 && (
-                    <TransactionsChart data={tps} />
-                  )}
+                  {producers.length > 0 && <TransactionsChart data={tps} />}
                 </CardContent>
               </Card>
             </Grid>
@@ -198,9 +221,7 @@ const Producers = () => {
                       />
                     </div>
                   )}
-                  {producers.rows.length > 0 && (
-                    <TransactionsChart data={tpb} />
-                  )}
+                  {producers.length > 0 && <TransactionsChart data={tpb} />}
                 </CardContent>
               </Card>
             </Grid>
@@ -226,10 +247,11 @@ const Producers = () => {
                   {generalConfig.useRewards && (
                     <TableCell>{t("expectedRewards")}</TableCell>
                   )}
+                  <TableCell>Ping from Costa Rica</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {producers.rows.map((producer, index) => (
+                {producers.map((producer, index) => (
                   <TableRow
                     key={`producer-table-row-${index}`}
                     className={clsx({
@@ -290,12 +312,18 @@ const Producers = () => {
                     </TableCell>
                     {generalConfig.useRewards && (
                       <TableCell>
-                        {formatWithThousandSeparator(producer?.total_reward, 2)}
+                        {formatWithThousandSeparator(
+                          producer?.total_rewards,
+                          2
+                        )}
                       </TableCell>
                     )}
+                    <TableCell>
+                      {producer.ping ? `${producer.ping}ms` : '-'}
+                    </TableCell>
                   </TableRow>
                 ))}
-                {!producers.rows.length &&
+                {!producers.length &&
                   [1, 2, 3].map((_, i) => (
                     <TableRow key={`producer-table-row-${i}`}>
                       <TableCell>
@@ -360,6 +388,14 @@ const Producers = () => {
                           />
                         </TableCell>
                       )}
+                      <TableCell>
+                        <Skeleton
+                          variant="text"
+                          width="100%"
+                          height={30}
+                          animation="wave"
+                        />
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
