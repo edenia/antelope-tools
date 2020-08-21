@@ -8,6 +8,7 @@ import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import Divider from '@material-ui/core/Divider'
+import { useTranslation } from 'react-i18next'
 
 import { generalConfig } from '../config'
 import CustomRouterLink from './CustomRouterLink'
@@ -57,15 +58,16 @@ const useStyles = makeStyles((theme) => ({
 
 const DashboardSidebarContent = () => {
   const classes = useStyles()
+  const { t } = useTranslation('sidebar')
 
   const mainPages = [
     {
-      title: 'Block Producers',
+      title: t('sidebar_BlockProducer'),
       href: '/dashboard/producers',
       icon: <StorageIcon />
     },
     {
-      title: 'Nodes Distribution',
+      title: t('sidebar_NodeDistribution'),
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     }
@@ -73,7 +75,7 @@ const DashboardSidebarContent = () => {
 
   if (generalConfig.useRewards) {
     mainPages.push({
-      title: 'Rewards Distribution',
+      title: t('sidebar_RewardDistribution'),
       href: '/dashboard/rewards',
       icon: <AccountBalanceWalletIcon />
     })
@@ -81,24 +83,24 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
-      title: 'Update Node Info',
+      title: t('sidebar_NodeInfo'),
       href: '/bpjson'
     },
     {
-      title: 'About',
+      title: t('sidebar_About'),
       href: '/about'
     }
   ]
 
   if (generalConfig.useBlockProducerAgreementContract) {
     helperPages.push({
-      title: 'Ricardian Contract',
+      title: t('sidebar_RicardianContract'),
       href: '/ricardian-contract'
     })
   }
 
   helperPages.push({
-    title: 'Help',
+    title: t('sidebar_Help'),
     href: '/help'
   })
 

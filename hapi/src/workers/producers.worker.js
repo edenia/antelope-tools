@@ -18,16 +18,13 @@ const run = async (name, action, sleep) => {
 }
 
 const start = async () => {
-  await sleepFor(60)
+  console.log('waiting...')
+  await sleepFor(300)
+  console.log('ready')
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,
     workersConfig.syncProducersInterval
-  )
-  run(
-    'SYNC BP JSON',
-    producerService.syncBPJson,
-    workersConfig.syncBPJsonInterval
   )
   run(
     'SYNC PRODUCER INFO',

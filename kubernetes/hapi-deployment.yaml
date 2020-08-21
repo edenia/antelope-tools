@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: monitor-hapi
+  name: monitor-hapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: monitor-hapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network: "true"
+        io.kompose.service: monitor-hapi
+    spec:
+      containers:
+      - image: eoscostarica506/monitor-hapi
+        imagePullPolicy: "Always"
+        name: "monitor-hapi"
+        envFrom:
+        - configMapRef:
+            name: monitor-hapi-config
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - mountPath: /hapi
+          name: hapi
+          subPathExpr: $(CODE_DIRECTORY)
+      restartPolicy: Always
+      volumes:
+      - name: hapi
+        nfs:
+          server: nfs-server-new
+          path: /home/ubuntu/

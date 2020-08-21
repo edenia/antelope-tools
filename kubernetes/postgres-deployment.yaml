@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: monitor-postgres
+  name: monitor-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: monitor-postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network: "true"
+        io.kompose.service: monitor-postgres
+    spec:
+      containers:
+      - image: postgres:11.5-alpine
+        imagePullPolicy: "Always"
+        name: monitor-postgres
+        envFrom:
+        - configMapRef:
+            name: monitor-postgres-config
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres
+          subPathExpr: $(DATABASE_DIRECTORY)
+      restartPolicy: Always
+      volumes:
+      - name: postgres
+        nfs:
+          server: nfs-server-new
+          path: /mnt/
