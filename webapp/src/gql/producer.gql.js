@@ -12,6 +12,7 @@ export const PRODUCERS_SUBSCRIPTION = gql`
       total_votes_percent
       total_votes_eos
       total_rewards
+      server_version_string
     }
   }
 `
