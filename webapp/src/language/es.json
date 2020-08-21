@@ -1,3 +1,87 @@
 {
-  "translations": {}
+  "updateNodeInfo": {
+    "loadText": "Cargando información del nodo . . .",
+    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
+    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  },
+  "sidebar": {
+    "sidebar_BlockProducer": "Productor de Bloques",
+    "sidebar_NodeDistribution": "Distribución de nodos",
+    "sidebar_RewardDistribution": "Distribución de recompensas",
+    "sidebar_NodeInfo": "Actualizar información del nodo",
+    "sidebar_About": "Acerca de",
+    "sidebar_RicardianContract": "Contrato ricardiano",
+    "sidebar_Help": "Ayuda"
+  },
+  "dashboardProducer": {
+    "currentProducer": "Productor actual",
+    "headBlock": "Bloque de la cabeza",
+    "lastBlock": "Último Bloque Irreversible",
+    "bpSchedule": "Programa de Productor de Bloque",
+    "transPerSecond": "Transacciones por Segundo",
+    "transPerBlock": "Transacciones por Bloque",
+    "blockProducerVotes": "Votos de Productores de Bloque",
+    "rank": "Rango",
+    "blockProducer": "Productor de Bloques",
+    "votes": "Votos",
+    "totalVotes": "Total de Votos",
+    "location": "Ubicación",
+    "expectedRewards": "Recompensas esperadas"
+  },
+  "producerChartToolTip": {
+    "name": "Nombre",
+    "rewards": "Recompensas",
+    "votes": "Votos"
+  },
+  "transactionsChartToolTip": {
+    "block": "Bloque",
+    "transactions": "Transacciones"
+  },
+  "dashboardNodes": {
+    "producer": "Productor",
+    "nodeType": "Tipo De Nodo",
+    "type": "Tipo",
+    "description": "Descripción",
+    "color": "Color",
+    "account": "Cuenta",
+    "website": "Sitio Web",
+    "votes": "Votos",
+    "rewards": "Recompensas",
+    "producerCountry": "País Productor"
+  },
+  "dashboardRewards": {
+    "dailyRewards": "Recompensas Diarias Totales",
+    "TopCountryDailyRwards": "País Superior Por Recompensas Diarias",
+    "notAvailable": "No Disponible",
+    "paidProducers": "Productores Pagados No Ubicados",
+    "clickToViewBPs": "Haga clic para ver los PB no conformes",
+    "lowestRewards": "Recompensas Más Bajas",
+    "highestRewards": "Recompensas Más Altas",
+    "exchangeRate": "Tipo De Cambio",
+    "country": "País",
+    "rewards": "Recompensas",
+    "producers": "Productores"
+  },
+  "about": {
+    "title": "EOSIO Tablero",
+    "subtitle1": "What is the EOSIO Dashboard",
+    "body1": {
+      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
+    },
+    "subtitle2": "Why is it important?",
+    "body2": {
+      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
+    },
+    "subtitle3": "Where does the data come from?",
+    "body3": {
+      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
+    }
+  },
+  "help": {
+    "title": "Thank you for using EOS Network Monitor!",
+    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
+    "githubEOSCR": "GitHub EOS Costa Rica",
+    "telegramChannel": "Telegram Channel",
+    "websiteEOSCR": "Website EOS Costa Rica"
+  }
 }

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
+import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../utils'
 import { generalConfig } from '../config'
@@ -136,26 +137,27 @@ CustomBarLabel.propTypes = {
 
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
+  const { t } = useTranslation('producersChartToolTip')
 
   if (active && payload.length > 0) {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
-          Name:{' '}
+          {t('name')}:{' '}
           <span className={classes.description}>
             {' '}
             {payload[0].payload.owner}
           </span>
         </Typography>
         <Typography variant="h6">
-          Rewards:{' '}
+          {t('rewards')}:{' '}
           <span className={classes.description}>
             {' '}
             {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
           </span>
         </Typography>
         <Typography variant="h6">
-          Votes:{' '}
+          {t('votes')}:{' '}
           <span className={classes.description}>
             {' '}
             {formatWithThousandSeparator(
