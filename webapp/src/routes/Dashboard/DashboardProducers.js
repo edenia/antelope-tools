@@ -247,6 +247,7 @@ const Producers = () => {
                   {generalConfig.useRewards && (
                     <TableCell>{t("expectedRewards")}</TableCell>
                   )}
+                  <TableCell>Server Version</TableCell>
                   <TableCell>Ping from Costa Rica</TableCell>
                 </TableRow>
               </TableHead>
@@ -318,6 +319,7 @@ const Producers = () => {
                         )}
                       </TableCell>
                     )}
+                    <TableCell>{producer.server_version_string}</TableCell>
                     <TableCell>
                       {producer.ping ? `${producer.ping}ms` : '-'}
                     </TableCell>
@@ -388,6 +390,14 @@ const Producers = () => {
                           />
                         </TableCell>
                       )}
+                      <TableCell>
+                        <Skeleton
+                          variant="text"
+                          width="100%"
+                          height={30}
+                          animation="wave"
+                        />
+                      </TableCell>
                       <TableCell>
                         <Skeleton
                           variant="text"
