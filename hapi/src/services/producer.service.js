@@ -147,7 +147,7 @@ const getBPJsonUrl = (producer = {}) => {
   return `${newUrl}/bp.json`
 }
 
-const syncBPJson = async () => {
+const syncBPJsonOffChain = async () => {
   const producers = await find()
   await Promise.all(
     producers.map(async producer => {
@@ -162,6 +162,41 @@ const syncBPJson = async () => {
           { owner: { _eq: producer.owner } },
           {
             bp_json: data
+          }
+        )
+      } catch (error) {}
+    })
+  )
+}
+
+const syncBPJsonOnChain = async () => {
+  const producers = await find()
+  const { rows } = await eosApi.getTableRows({
+    code: eosConfig.bpJsonOnChainContract,
+    scope: eosConfig.bpJsonOnChainScope,
+    table: eosConfig.bpJsonOnChainTable,
+    json: true
+  })
+  await Promise.all(
+    producers.map(async producer => {
+      try {
+        const data = JSON.parse(
+          (
+            rows.find(
+              i =>
+                i.entity_name === producer.owner || i.owner === producer.owner
+            ) || {}
+          ).json || '{}'
+        )
+
+        if (!Object.keys(data).length > 0) {
+          return
+        }
+
+        await update(
+          { owner: { _eq: producer.owner } },
+          {
+            bp_json: Object.keys(data).length > 0 ? data : null
           }
         )
       } catch (error) {}
@@ -184,7 +219,11 @@ const syncProducers = async () => {
       response.total_producer_vote_weight
     )
     await hasuraUtil.request(UPSERT, { producers })
-    await syncBPJson()
+    if (eosConfig.bpJsonOnChain) {
+      await syncBPJsonOnChain()
+    } else {
+      await syncBPJsonOffChain()
+    }
   } catch (error) {
     console.log(error.message)
   }
@@ -225,6 +264,12 @@ const syncProducersInfo = async () => {
   const producers = await find()
   await Promise.all(
     producers.map(async producer => {
+      await update(
+        { owner: { _eq: producer.owner } },
+        {
+          updated_at: new Date()
+        }
+      )
       try {
         const endpoints = getApiEndpoints(producer)
 

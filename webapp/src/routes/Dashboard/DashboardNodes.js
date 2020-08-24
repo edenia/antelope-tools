@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSubscription } from '@apollo/react-hooks'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
@@ -28,6 +28,7 @@ import { geoPath } from 'd3-geo'
 
 import { countries, formatWithThousandSeparator, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
+import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 
 const defaultScale = 170
 const maxZoom = 3
@@ -142,8 +143,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Producers = () => {
-  const dispatch = useDispatch()
-  const producers = useSelector((state) => state.eos.producers)
+  const {
+    data: { producer: producers = [] } = { producers: [] }
+  } = useSubscription(PRODUCERS_SUBSCRIPTION)
   const [nodes, setNodes] = useState([])
   const [currentNode, setCurrentNode] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
@@ -191,12 +193,8 @@ const Producers = () => {
   }
 
   useEffect(() => {
-    dispatch.eos.getProducers()
-  }, [dispatch])
-
-  useEffect(() => {
     const items = []
-    producers.rows.forEach((producer) => {
+    producers.forEach((producer) => {
       if (!producer?.bp_json?.nodes) {
         return
       }
@@ -243,7 +241,9 @@ const Producers = () => {
             <Card>
               <CardContent>
                 <FormControl className={classes.formControl}>
-                  <InputLabel id="producerFilterLabel">{t('producer')}</InputLabel>
+                  <InputLabel id="producerFilterLabel">
+                    {t('producer')}
+                  </InputLabel>
                   <Select
                     classes={{
                       root: classes.centerVertically
@@ -254,7 +254,7 @@ const Producers = () => {
                     onChange={(e) => setProducerFilter(e.target.value)}
                   >
                     <MenuItem value="all">All</MenuItem>
-                    {producers.rows.map((producer) => (
+                    {producers.map((producer) => (
                       <MenuItem
                         key={`menu-item-${producer.owner}`}
                         value={producer.owner}
@@ -283,7 +283,9 @@ const Producers = () => {
             <Card>
               <CardContent>
                 <FormControl className={classes.formControl}>
-                  <InputLabel id="nodeTypeFilterLabel">{t('nodeType')}</InputLabel>
+                  <InputLabel id="nodeTypeFilterLabel">
+                    {t('nodeType')}
+                  </InputLabel>
                   <Select
                     classes={{
                       root: classes.capitalize
@@ -462,7 +464,9 @@ const Producers = () => {
                 </span>
               </Typography>
               <Typography>
-                <span className={classes.popoverItem}>{t('producerCountry')}:</span>
+                <span className={classes.popoverItem}>
+                  {t('producerCountry')}:
+                </span>
                 <span className={classes.countryFlag}>
                   {currentNode?.country?.flag}
                 </span>

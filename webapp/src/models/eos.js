@@ -97,7 +97,7 @@ const getProducerInfoOnChain = async (producers) => {
 
 export default {
   state: {
-    producers: { rows: [] },
+    producers: [],
     schedule: {
       version: '',
       producers: []
@@ -312,6 +312,7 @@ export default {
       const handle = async () => {
         try {
           const result = await eos.getProducerSchedule(true)
+          console.log(result)
           dispatch.eos.updateSchedule(result.active)
         } catch (error) {
           console.error(error)

@@ -167,8 +167,6 @@ REACT_APP_EOS_USE_BP_JSON_ON_CHAIN=true
 REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT=producerjson
 REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE=producerjson
 REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE=producerjson
-REACT_APP_EOS_ENDPOINT=https://jungle.eosio.cr
-
 ```
 
 ### Quick start

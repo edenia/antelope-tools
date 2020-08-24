@@ -8,20 +8,24 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
+import Tooltip from '@material-ui/core/Tooltip'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Link from '@material-ui/core/Link'
+import Popover from '@material-ui/core/Popover'
+import StarIcon from '@material-ui/icons/Star'
 import clsx from 'clsx'
 import 'flag-icon-css/css/flag-icon.min.css'
+import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
 import ProducersChart from '../../components/ProducersChart'
+import ProducerSummary from '../../components/ProducerSummary'
 import TransactionsChart from '../../components/TransactionsChart'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 
@@ -72,6 +76,18 @@ const useStyles = makeStyles((theme) => ({
     '& td, & td a': {
       color: theme.palette.primary.contrastText
     }
+  },
+  row: {
+    cursor: 'pointer'
+  },
+  valid: {
+    color: 'green'
+  },
+  error: {
+    color: 'red'
+  },
+  warning: {
+    color: 'yellow'
   }
 }))
 
@@ -83,20 +99,29 @@ const Producers = () => {
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
-  // const producers = useSelector((state) => state.eos.producers)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
+  const [producer, setProducer] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const classes = useStyles()
   const { t } = useTranslation('dashboardProducer')
 
+  const handlePopoverOpen = (producer) => (event) => {
+    setProducer(producer)
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
-    dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
+    dispatch.eos.startTrackingProducerSchedule({ interval: 60 })
     dispatch.eos.getRate()
   }, [dispatch])
 
   useEffect(() => {
-    // console.log(schedule)
     const newProducers = scheduleInfo.producers.map((item) => {
       const data =
         producers.find((producer) => producer.owner === item.producer_name) ||
@@ -116,10 +141,6 @@ const Producers = () => {
       ...scheduleInfo,
       producers: newProducers
     })
-    // if (!producers.rows.length) {
-    //   return
-    // }
-    // dispatch.eos.startTrackingProducerSchedule({ interval: 120 })
   }, [scheduleInfo, producers])
 
   useEffect(() => {
@@ -135,7 +156,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t("currentProducer")}</Typography>
+              <Typography variant="h6">{t('currentProducer')}</Typography>
               <Typography variant="h3">{info.head_block_producer}</Typography>
             </CardContent>
           </Card>
@@ -143,7 +164,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t("headBlock")}</Typography>
+              <Typography variant="h6">{t('headBlock')}</Typography>
               <Typography variant="h3">
                 {formatWithThousandSeparator(info.head_block_num)}
               </Typography>
@@ -153,7 +174,7 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t("lastBlock")}</Typography>
+              <Typography variant="h6">{t('lastBlock')}</Typography>
               <Typography variant="h3">
                 {formatWithThousandSeparator(info.last_irreversible_block_num)}
               </Typography>
@@ -166,10 +187,9 @@ const Producers = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t("bpSchedule")}</Typography>
+              <Typography variant="h6">{t('bpSchedule')}</Typography>
               <Typography variant="caption">
-                {schedule.version ? 'Ver. ' : ''} {schedule.version}
-                {schedule.version}
+                {schedule.version ? `Ver. ${schedule.version}` : ''}
               </Typography>
               {!schedule.producers.length && (
                 <div className={classes.chartSkeletonWrapper}>
@@ -192,8 +212,8 @@ const Producers = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">{t("transPerSecond")}</Typography>
-                  {!producers.rows.length && (
+                  <Typography variant="h6">{t('transPerSecond')}</Typography>
+                  {!producers.length && (
                     <div className={classes.chartSkeletonWrapper}>
                       <Skeleton
                         variant="rect"
@@ -210,8 +230,8 @@ const Producers = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">{t("transPerBlock")}</Typography>
-                  {!producers.rows.length && (
+                  <Typography variant="h6">{t('transPerBlock')}</Typography>
+                  {!producers.length && (
                     <div className={classes.chartSkeletonWrapper}>
                       <Skeleton
                         variant="rect"
@@ -231,24 +251,26 @@ const Producers = () => {
       <Grid item xs={12} className={classes.tableWrapper}>
         <Card>
           <CardContent>
-            <Typography variant="h6">{t("blockProducerVotes")}</Typography>
+            <Typography variant="h6">{t('blockProducerVotes')}</Typography>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>{t("rank")}</TableCell>
-                  <TableCell>{t("blockProducer")}</TableCell>
+                  <TableCell>{t('rank')}</TableCell>
+                  <TableCell>{t('blockProducer')}</TableCell>
                   {generalConfig.useVotes && (
                     <>
-                      <TableCell>{t("votes")} %</TableCell>
-                      <TableCell>{t("totalVotes")}</TableCell>
+                      <TableCell>{t('votes')} %</TableCell>
+                      <TableCell>{t('totalVotes')}</TableCell>
                     </>
                   )}
-                  <TableCell>{t("location")}</TableCell>
+                  <TableCell>{t('location')}</TableCell>
                   {generalConfig.useRewards && (
-                    <TableCell>{t("expectedRewards")}</TableCell>
+                    <TableCell>{t('expectedRewards')}</TableCell>
                   )}
-                  <TableCell>Server Version</TableCell>
-                  <TableCell>Ping from Costa Rica</TableCell>
+                  <TableCell>{t('serverVersion')}</TableCell>
+                  <TableCell>{t('pingFromCR')}</TableCell>
+                  <TableCell>{t('healthIndicators')}</TableCell>
+                  <TableCell>{t('lastTimeChecked')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -256,35 +278,24 @@ const Producers = () => {
                   <TableRow
                     key={`producer-table-row-${index}`}
                     className={clsx({
+                      [classes.row]: true,
                       [classes.currentProducerRow]:
                         info.head_block_producer === producer?.owner
                     })}
+                    onClick={handlePopoverOpen(producer)}
                   >
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
-                      <Link
-                        href={
-                          generalConfig.eosRateLink
-                            ? `${generalConfig.eosRateLink}/block-producers/${producer?.owner}`
-                            : producer?.url
+                      <img
+                        className={classes.logo}
+                        src={
+                          producer?.bp_json?.org?.branding?.logo_256 ||
+                          generalConfig.defaultProducerLogo
                         }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.owner}
-                      >
-                        <img
-                          className={classes.logo}
-                          src={
-                            producer?.bp_json?.org?.branding?.logo_256 ||
-                            generalConfig.defaultProducerLogo
-                          }
-                          onError={onImgError(
-                            generalConfig.defaultProducerLogo
-                          )}
-                          alt="logo"
-                        />
-                        {producer?.owner}
-                      </Link>
+                        onError={onImgError(generalConfig.defaultProducerLogo)}
+                        alt="logo"
+                      />
+                      {producer?.owner}
                     </TableCell>
                     {generalConfig.useVotes && (
                       <>
@@ -322,6 +333,72 @@ const Producers = () => {
                     <TableCell>{producer.server_version_string}</TableCell>
                     <TableCell>
                       {producer.ping ? `${producer.ping}ms` : '-'}
+                    </TableCell>
+                    <TableCell>
+                      <Tooltip
+                        title={
+                          producer.bp_json
+                            ? 'BP JSON found'
+                            : 'No BP JSON found'
+                        }
+                        aria-label="add"
+                      >
+                        <StarIcon
+                          className={clsx({
+                            [classes.valid]: !!producer.bp_json,
+                            [classes.error]: !producer.bp_json
+                          })}
+                        />
+                      </Tooltip>
+                      <Tooltip
+                        title={
+                          producer.ping
+                            ? 'API Responding'
+                            : 'API Not Responding'
+                        }
+                        aria-label="add"
+                      >
+                        <StarIcon
+                          className={clsx({
+                            [classes.valid]: !!producer.ping,
+                            [classes.error]: !producer.ping
+                          })}
+                        />
+                      </Tooltip>
+                      {producer.head_block_time && (
+                        <Tooltip
+                          title={
+                            moment().diff(producer.head_block_time, 'minutes') <
+                            3
+                              ? 'Synced'
+                              : 'Not syncing'
+                          }
+                          aria-label="add"
+                        >
+                          <StarIcon
+                            className={clsx({
+                              [classes.valid]:
+                                moment().diff(
+                                  producer.head_block_time,
+                                  'minutes'
+                                ) < 3,
+                              [classes.error]:
+                                moment().diff(
+                                  producer.head_block_time,
+                                  'minutes'
+                                ) >= 3
+                            })}
+                          />
+                        </Tooltip>
+                      )}
+                      {!producer.head_block_time && (
+                        <Tooltip title="Unknow sync status" aria-label="add">
+                          <StarIcon className={classes.warning} />
+                        </Tooltip>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {moment().diff(producer.updated_at, 'seconds')}s ago
                     </TableCell>
                   </TableRow>
                 ))}
@@ -406,6 +483,22 @@ const Producers = () => {
                           animation="wave"
                         />
                       </TableCell>
+                      <TableCell>
+                        <Skeleton
+                          variant="text"
+                          width="100%"
+                          height={30}
+                          animation="wave"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton
+                          variant="text"
+                          width="100%"
+                          height={30}
+                          animation="wave"
+                        />
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
@@ -413,6 +506,21 @@ const Producers = () => {
           </CardContent>
         </Card>
       </Grid>
+      <Popover
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+        anchorEl={anchorEl}
+        // anchorOrigin={{
+        //   vertical: 'center',
+        //   horizontal: 'center'
+        // }}
+        // transformOrigin={{
+        //   vertical: 'center',
+        //   horizontal: 'center'
+        // }}
+      >
+        <ProducerSummary producer={producer} onClose={handlePopoverClose} />
+      </Popover>
     </Grid>
   )
 }
