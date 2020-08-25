@@ -26,7 +26,11 @@
     "votes": "Votes",
     "totalVotes": "Total Votes",
     "location": "Location",
-    "expectedRewards": "Expected Rewards"
+    "expectedRewards": "Expected Rewards",
+    "serverVersion": "Server Version",
+    "pingFromCR": "Ping from Costa Rica",
+    "healthIndicators": "Health Indicators",
+    "lastTimeChecked": "Last Time Checked"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -83,5 +87,15 @@
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
+  },
+  "producerSummary": {
+    "account": "Account",
+    "website": "Website",
+    "votes": "Votes",
+    "rewards": "Rewards",
+    "country": "Country",
+    "eosRate": "EOS RATE",
+    "p2pEndpoints": "Endpoints (P2P)",
+    "apiEndpoints": "Endpoints (HTTPS / HTTPS)"
   }
 }

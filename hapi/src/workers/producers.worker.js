@@ -1,5 +1,6 @@
 const { producerService } = require('../services')
-const { workersConfig } = require('../config')
+const { workersConfig, hasuraConfig } = require('../config')
+const { axiosUtil } = require('../utils')
 
 const sleepFor = seconds => {
   return new Promise(resolve => {
@@ -18,9 +19,18 @@ const run = async (name, action, sleep) => {
 }
 
 const start = async () => {
-  console.log('waiting...')
-  await sleepFor(300)
-  console.log('ready')
+  let hasuraReady = false
+  while (!hasuraReady) {
+    try {
+      const result = await axiosUtil.instance.get(
+        hasuraConfig.url.replace('/v1/graphql', '/healthz')
+      )
+      hasuraReady = true
+    } catch (error) {
+      hasuraReady = false
+      console.log('waiting for hasura...')
+    }
+  }
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,

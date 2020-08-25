@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
@@ -31,99 +31,100 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CustomBarLabel = ({
-  x,
-  cx,
-  cy,
-  payload,
-  outerRadius,
-  midAngle,
-  fill
-}) => {
-  const theme = useTheme()
-  const sm = useMediaQuery(theme.breakpoints.up('sm'), {
-    defaultMatches: true
-  })
-  const md = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true
-  })
-  const lg = useMediaQuery(theme.breakpoints.up('lg'), {
-    defaultMatches: true
-  })
-  const xl = useMediaQuery(theme.breakpoints.up('xl'), {
-    defaultMatches: true
-  })
+const CustomBarLabel = memo(
+  ({ x, cx, cy, payload, outerRadius, midAngle, fill }) => {
+    const theme = useTheme()
+    const sm = useMediaQuery(theme.breakpoints.up('sm'), {
+      defaultMatches: true
+    })
+    const md = useMediaQuery(theme.breakpoints.up('md'), {
+      defaultMatches: true
+    })
+    const lg = useMediaQuery(theme.breakpoints.up('lg'), {
+      defaultMatches: true
+    })
+    const xl = useMediaQuery(theme.breakpoints.up('xl'), {
+      defaultMatches: true
+    })
 
-  let gap = 16
+    let gap = 16
 
-  if (sm || md) {
-    gap = 32
-  }
+    if (sm || md) {
+      gap = 32
+    }
 
-  if (lg) {
-    gap = 40
-  }
+    if (lg) {
+      gap = 40
+    }
 
-  if (xl) {
-    gap = 52
-  }
+    if (xl) {
+      gap = 52
+    }
 
-  const cartesianCircle = polarToCartesian(cx, cy, outerRadius - gap, midAngle)
-  const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
-  const link = generalConfig.eosRateLink
-    ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
-    : payload.url
+    const cartesianCircle = polarToCartesian(
+      cx,
+      cy,
+      outerRadius - gap,
+      midAngle
+    )
+    const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
+    const link = generalConfig.eosRateLink
+      ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
+      : payload.url
 
-  return (
-    <>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <text
-          transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
-          textAnchor={x > cx ? 'start' : 'end'}
-          dominantBaseline="central"
-          fill={
-            fill === theme.palette.secondary[900]
-              ? theme.palette.secondary[900]
-              : theme.palette.primary[300]
-          }
-          fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-          fontWeight={fill === theme.palette.secondary[900] ? 'bold' : 'normal'}
-        >
-          {payload.owner}
-        </text>
-      </a>
-      <g transform={`translate(${cartesianCircle.x}, ${cartesianCircle.y})`}>
-        <defs>
-          <pattern
-            id={`image${payload.owner}`}
-            height="100%"
-            width="100%"
-            viewBox="0 0 100 100"
-          >
-            <rect height="100" width="100" fill="#fff" />
-            <image
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              href={payload.logo || generalConfig.defaultProducerLogo}
-              onError={onImgError(generalConfig.defaultProducerLogo)}
-            />
-          </pattern>
-        </defs>
-
+    return (
+      <>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          <circle
-            id={`${payload.value}-ds`}
-            r="3%"
-            fill={`url(#image${payload.owner})`}
-            stroke={fill}
-          />
+          <text
+            transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
+            textAnchor={x > cx ? 'start' : 'end'}
+            dominantBaseline="central"
+            fill={
+              fill === theme.palette.secondary[900]
+                ? theme.palette.secondary[900]
+                : theme.palette.primary[300]
+            }
+            fontFamily="Roboto, Helvetica, Arial, sans-serif;"
+            fontWeight={
+              fill === theme.palette.secondary[900] ? 'bold' : 'normal'
+            }
+          >
+            {payload.owner}
+          </text>
         </a>
-      </g>
-    </>
-  )
-}
+        <g transform={`translate(${cartesianCircle.x}, ${cartesianCircle.y})`}>
+          <defs>
+            <pattern
+              id={`image${payload.owner}`}
+              height="100%"
+              width="100%"
+              viewBox="0 0 100 100"
+            >
+              <rect height="100" width="100" fill="#fff" />
+              <image
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+                href={payload.logo || generalConfig.defaultProducerLogo}
+                onError={onImgError(generalConfig.defaultProducerLogo)}
+              />
+            </pattern>
+          </defs>
+
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <circle
+              id={`${payload.value}-ds`}
+              r="3%"
+              fill={`url(#image${payload.owner})`}
+              stroke={fill}
+            />
+          </a>
+        </g>
+      </>
+    )
+  }
+)
 
 CustomBarLabel.propTypes = {
   x: PropTypes.number,
@@ -135,7 +136,7 @@ CustomBarLabel.propTypes = {
   midAngle: PropTypes.number
 }
 
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = memo(({ active, payload }) => {
   const classes = useStyles()
   const { t } = useTranslation('producersChartToolTip')
 
@@ -172,7 +173,7 @@ const CustomTooltip = ({ active, payload }) => {
   }
 
   return null
-}
+})
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
@@ -223,4 +224,4 @@ ProducersChart.propTypes = {
   info: PropTypes.object
 }
 
-export default ProducersChart
+export default memo(ProducersChart)
