@@ -1,7 +1,7 @@
 # EOSIO Dashboard
 
 [![N|Solid](https://github.com/eoscostarica/eos-rate/raw/master/docs/eoscostarica-logo-black.png)](https://eoscostarica.io/)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-monitor) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-monitor) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-monitor?style=social)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
 
 Network and Infrastructure Monitoring Dashboard for EOSIO networks.
 
@@ -52,7 +52,7 @@ This project use all the latest tools and practices in the industry
 Within the download you'll find the following directories and files:
 
 ```bash
-eosio-monitor/
+eosio-dashboard/
 ├── hapi
 │ ├── src
 │ | ├── config
@@ -119,7 +119,7 @@ Somethings you need before getting started:
 ```
 # global
 STAGE=dev
-APP_NAME=eoscr-backend-boilerplate
+APP_NAME=eosio-dashboard
 
 # wallet
 WALLET_DATA=./wallet_data
@@ -137,33 +137,38 @@ HASURA_GRAPHQL_ADMIN_SECRET=myadminsecretkey
 HASURA_GRAPHQL_UNAUTHORIZED_ROLE=guest
 
 # hapi
-HAPI_EOS_API_ENDPOINT=https://jungle2.eosio.cr
+HAPI_EOS_API_ENDPOINT=https://jungle3.cryptolions.io
 HAPI_EOS_API_CHAIN_ID=e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473
 HAPI_EOS_BASE_ACCOUNT=baseaccount
 HAPI_EOS_BASE_ACCOUNT_PASSWORD=PW...
 HAPI_EOS_WALLET_URL=http://wallet:8888
+HAPI_EOS_BP_JSON_ON_CHAIN=false
+HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT=
+HAPI_EOS_BP_JSON_ON_CHAIN_TABLE=
+HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE=
 HAPI_HASURA_URL=http://hasura:8080/v1/graphql
 HAPI_HASURA_ADMIN_SECRET=myadminsecretkey
 HAPI_SERVER_PORT=9090
 HAPI_SERVER_ADDRESS=hapi
-SYNC_PRODUCERS_INTERVAL=86400
-SYNC_PRODUCER_INFO_INTERVAL=1
+HAPI_SYNC_PRODUCERS_INTERVAL=86400
+HAPI_SYNC_PRODUCER_INFO_INTERVAL=1
 
 #webapp
 PORT=3000
-REACT_APP_TITLE=EOS Jungle Testnet Network Monitor
-REACT_APP_DEFAULT_PRODUCER_LOGO=
+REACT_APP_TITLE="EOS Jungle Testnet Network Monitor"
+REACT_APP_DEFAULT_PRODUCER_LOGO=https://bloks.io/img/eosio.png
 REACT_APP_EOS_RATE_LINK=https://jungle.eosrate.io:8080
 REACT_APP_USE_REWARDS=true
 REACT_APP_USE_VOTES=true
 REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT=true
+REACT_APP_HASURA_URL=http://localhost:8080/v1/graphql
 REACT_APP_EOS_API_HOST=jungle.eosio.cr
 REACT_APP_EOS_API_PORT=443
 REACT_APP_EOS_API_PROTOCOL=https
 REACT_APP_EOS_CHAIN_ID=e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473
 REACT_APP_EOS_DEFAULT_EXCHANGE_RATE=2.49
 REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API=http://api.coinlayer.com/api/live?symbols=EOS&access_key=e7146e1015657fa7bc3495bdf6302052
-REACT_APP_EOS_USE_BP_JSON_ON_CHAIN=true
+REACT_APP_EOS_USE_BP_JSON_ON_CHAIN=false
 REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT=producerjson
 REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE=producerjson
 REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE=producerjson

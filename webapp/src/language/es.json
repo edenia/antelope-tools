@@ -26,7 +26,11 @@
     "votes": "Votos",
     "totalVotes": "Total de Votos",
     "location": "Ubicación",
-    "expectedRewards": "Recompensas esperadas"
+    "expectedRewards": "Recompensas esperadas",
+    "serverVersion": "Versión del servidor",
+    "pingFromCR": "Ping desde Costa Rica",
+    "healthIndicators": "Indicadores de salud",
+    "lastTimeChecked": "Verificado por última vez"
   },
   "producerChartToolTip": {
     "name": "Nombre",
