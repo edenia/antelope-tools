@@ -70,6 +70,7 @@ services:
         react_app_use_rewards: '${REACT_APP_USE_REWARDS}'
         react_app_use_votes: '${REACT_APP_USE_VOTES}'
         react_app_use_block_producer_agreement_contract: '${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}'
+        react_app_hasura_url: '${REACT_APP_HASURA_URL}'
         react_app_eos_api_host: '${REACT_APP_EOS_API_HOST}'
         react_app_eos_api_port: '${REACT_APP_EOS_API_PORT}'
         react_app_eos_api_protocol: '${REACT_APP_EOS_API_PROTOCOL}'
