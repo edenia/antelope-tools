@@ -2,7 +2,7 @@
   "name": "eosiomonitor",
   "version": "1.0.0",
   "description": "EOSIO Monitor BackEnd",
-  "repository": "https://github.com/eoscostarica/eosio-monitor.git",
+  "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",

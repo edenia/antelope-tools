@@ -2,22 +2,22 @@ name: Push code to master environment
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: setup-docker
-      uses: docker-practice/actions-setup-docker@0.0.1
-    - name: run push
-      run: |
-        docker build -t eosio-monitor-deployer-prod \
-          --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
-          --build-arg branch="master" \
-          .
-        docker run \
-          -e USER="${{secrets.USER}}" \
-          -e branch="master" \
-          eosio-monitor-deployer-prod
+      - uses: actions/checkout@v1
+      - name: setup-docker
+        uses: docker-practice/actions-setup-docker@0.0.1
+      - name: run push
+        run: |
+          docker build -t eosio-dashboard-deployer-prod \
+            --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
+            --build-arg branch="master" \
+            .
+          docker run \
+            -e USER="${{secrets.USER}}" \
+            -e branch="master" \
+            eosio-dashboard-deployer-prod

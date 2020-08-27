@@ -2,7 +2,7 @@
   "name": "eosiomonitor",
   "version": "1.0.0",
   "description": "EOSIO Monitor WebApp",
-  "repository": "https://github.com/eoscostarica/eosio-monitor.git",
+  "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
     "start": "env-cmd -f ../.env react-app-rewired start",
     "build": "react-app-rewired build",
