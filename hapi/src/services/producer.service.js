@@ -302,7 +302,6 @@ const syncProducersInfo = async () => {
         const ping = Date.now() - startTs
 
         if (eosConfig.chainId !== info.chain_id) {
-          console.log('wrong', producer.owner, info.chain_id)
           return
         }
 
