@@ -30,7 +30,7 @@
     "serverVersion": "Server Version",
     "pingFromCR": "Ping from Costa Rica",
     "healthIndicators": "Health Indicators",
-    "lastTimeChecked": "Last Time Checked"
+    "secondsAgo": "s ago"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -97,5 +97,14 @@
     "eosRate": "EOS RATE",
     "p2pEndpoints": "Endpoints (P2P)",
     "apiEndpoints": "Endpoints (HTTPS / HTTPS)"
+  },
+  "producerHealthIndicators": {
+    "lastTimeChecked": "Last Time Checked",
+    "synced": "Synced",
+    "notSyncing": "Not syncing",
+    "apiResponding": "API Responding",
+    "apiNotResponding": "API Not Responding",
+    "bpJsonFound": "BP JSON found",
+    "noBpJsonFound": "No BP JSON found"
   }
 }
