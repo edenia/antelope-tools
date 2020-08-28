@@ -22,7 +22,7 @@ const start = async () => {
   let hasuraReady = false
   while (!hasuraReady) {
     try {
-      const result = await axiosUtil.instance.get(
+      await axiosUtil.instance.get(
         hasuraConfig.url.replace('/v1/graphql', '/healthz')
       )
       hasuraReady = true

@@ -30,7 +30,7 @@
     "serverVersion": "Versión del servidor",
     "pingFromCR": "Ping desde Costa Rica",
     "healthIndicators": "Indicadores de salud",
-    "lastTimeChecked": "Verificado por última vez"
+    "secondsAgo": "s"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -87,5 +87,14 @@
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
+  },
+  "producerHealthIndicators": {
+    "lastTimeChecked": "Verificado por última vez",
+    "synced": "Sincronizado",
+    "notSyncing": "Sin sincronizar",
+    "apiResponding": "API Respondiendo",
+    "apiNotResponding": "API No Respondiendo",
+    "bpJsonFound": "BP JSON encontrado",
+    "noBpJsonFound": "No se encontro un BP JSON"
   }
 }

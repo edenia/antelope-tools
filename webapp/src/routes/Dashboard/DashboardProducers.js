@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
+import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSubscription } from '@apollo/react-hooks'
@@ -8,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
-import Tooltip from '@material-ui/core/Tooltip'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
@@ -16,14 +16,13 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Popover from '@material-ui/core/Popover'
-import StarIcon from '@material-ui/icons/Star'
-import clsx from 'clsx'
 import 'flag-icon-css/css/flag-icon.min.css'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
+import ProducerHealthIndicators from '../../components/ProducerHealthIndicators'
 import ProducersChart from '../../components/ProducersChart'
 import ProducerSummary from '../../components/ProducerSummary'
 import TransactionsChart from '../../components/TransactionsChart'
@@ -79,15 +78,6 @@ const useStyles = makeStyles((theme) => ({
   },
   row: {
     cursor: 'pointer'
-  },
-  valid: {
-    color: 'green'
-  },
-  error: {
-    color: 'red'
-  },
-  warning: {
-    color: 'yellow'
   }
 }))
 
@@ -335,70 +325,11 @@ const Producers = () => {
                       {producer.ping ? `${producer.ping}ms` : '-'}
                     </TableCell>
                     <TableCell>
-                      <Tooltip
-                        title={
-                          producer.bp_json
-                            ? 'BP JSON found'
-                            : 'No BP JSON found'
-                        }
-                        aria-label="add"
-                      >
-                        <StarIcon
-                          className={clsx({
-                            [classes.valid]: !!producer.bp_json,
-                            [classes.error]: !producer.bp_json
-                          })}
-                        />
-                      </Tooltip>
-                      <Tooltip
-                        title={
-                          producer.ping
-                            ? 'API Responding'
-                            : 'API Not Responding'
-                        }
-                        aria-label="add"
-                      >
-                        <StarIcon
-                          className={clsx({
-                            [classes.valid]: !!producer.ping,
-                            [classes.error]: !producer.ping
-                          })}
-                        />
-                      </Tooltip>
-                      {producer.head_block_time && (
-                        <Tooltip
-                          title={
-                            moment().diff(producer.head_block_time, 'minutes') <
-                            3
-                              ? 'Synced'
-                              : 'Not syncing'
-                          }
-                          aria-label="add"
-                        >
-                          <StarIcon
-                            className={clsx({
-                              [classes.valid]:
-                                moment().diff(
-                                  producer.head_block_time,
-                                  'minutes'
-                                ) < 3,
-                              [classes.error]:
-                                moment().diff(
-                                  producer.head_block_time,
-                                  'minutes'
-                                ) >= 3
-                            })}
-                          />
-                        </Tooltip>
-                      )}
-                      {!producer.head_block_time && (
-                        <Tooltip title="Unknow sync status" aria-label="add">
-                          <StarIcon className={classes.warning} />
-                        </Tooltip>
-                      )}
+                      <ProducerHealthIndicators producer={producer} />
                     </TableCell>
                     <TableCell>
-                      {moment().diff(producer.updated_at, 'seconds')}s ago
+                      {moment().diff(producer.updated_at, 'seconds')}
+                      {t('secondsAgo')}
                     </TableCell>
                   </TableRow>
                 ))}
