@@ -129,7 +129,7 @@ const parseVotesToEOS = votes => {
   return parseFloat(votes) / 2 ** weight / 10000
 }
 
-const getBPJsonUrl = (producer = {}) => {
+const getBPJsonUrl = async (producer = {}) => {
   let newUrl = producer.url || ''
 
   if (!newUrl.startsWith('http')) {
@@ -144,6 +144,14 @@ const getBPJsonUrl = (producer = {}) => {
     newUrl = 'https://infinitystones.io'
   }
 
+  try {
+    const {
+      data: { chains }
+    } = await axiosUtil.instance.get(`${newUrl}/chains.json`)
+
+    return `${newUrl}/${chains[eosConfig.chainId] || '/bp.json'}`
+  } catch (error) {}
+
   return `${newUrl}/bp.json`
 }
 
@@ -152,7 +160,8 @@ const syncBPJsonOffChain = async () => {
   await Promise.all(
     producers.map(async producer => {
       try {
-        const { data } = await axiosUtil.instance.get(getBPJsonUrl(producer))
+        const bpJsonUrl = await getBPJsonUrl(producer)
+        const { data } = await axiosUtil.instance.get(bpJsonUrl)
 
         if (typeof data !== 'object') {
           return
@@ -285,6 +294,11 @@ const syncProducersInfo = async () => {
         const startTs = Date.now()
         const { website, ...info } = await eosApi.getInfo({})
         const ping = Date.now() - startTs
+
+        if (eosConfig.chainId !== info.chain_id) {
+          return
+        }
+
         await update(
           { owner: { _eq: producer.owner } },
           {
