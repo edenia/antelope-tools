@@ -149,12 +149,6 @@ const getBPJsonUrl = async (producer = {}) => {
       data: { chains }
     } = await axiosUtil.instance.get(`${newUrl}/chains.json`)
 
-    // if (producer.owner === 'eosnationftw') {
-    //   console.log(chains)
-    //   console.log('++++++++++++++++++++++++++0')
-    //   console.log('=>', eosConfig.chainId)
-    // }
-
     return `${newUrl}/${chains[eosConfig.chainId] || '/bp.json'}`
   } catch (error) {}
 
