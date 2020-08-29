@@ -15,6 +15,7 @@ import { formatWithThousandSeparator } from '../../utils'
 import ProducersChart from '../../components/ProducersChart'
 import TransactionsChart from '../../components/TransactionsChart'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const useStyles = makeStyles((theme) => ({
   country: {
@@ -123,6 +124,8 @@ const Producers = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
+              <PageTitle title={t('htmlTitle')} />
+
               <Typography variant="h6">{t('currentProducer')}</Typography>
               <Typography variant="h3">{info.head_block_producer}</Typography>
             </CardContent>

@@ -29,6 +29,7 @@ import { geoPath } from 'd3-geo'
 import { countries, formatWithThousandSeparator, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const defaultScale = 170
 const maxZoom = 3
@@ -235,6 +236,7 @@ const Producers = () => {
 
   return (
     <>
+      <PageTitle title={t('htmlTitle')} />
       <Grid item sm={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>

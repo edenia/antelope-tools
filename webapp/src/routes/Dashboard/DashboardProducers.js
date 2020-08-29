@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 import ProducerCard from '../../components/ProducerCard'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const Producers = () => {
   const dispatch = useDispatch()
@@ -29,6 +30,7 @@ const Producers = () => {
 
   return (
     <Grid item xs={12}>
+      <PageTitle title={t('htmlTitle')} />
       <Typography variant="h1">{t('title')}</Typography>
       {loading && <LinearProgress />}
       <Grid container justify="flex-start" spacing={1}>
