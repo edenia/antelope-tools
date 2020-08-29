@@ -5,32 +5,25 @@
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
   },
   "sidebar": {
-    "sidebar_BlockProducer": "Productor de Bloques",
-    "sidebar_NodeDistribution": "Distribución de nodos",
-    "sidebar_RewardDistribution": "Distribución de recompensas",
-    "sidebar_NodeInfo": "Actualizar información del nodo",
-    "sidebar_About": "Acerca de",
-    "sidebar_RicardianContract": "Contrato ricardiano",
-    "sidebar_Help": "Ayuda"
+    "dashboard": "Panel",
+    "blockProducer": "Productores de Bloques",
+    "nodeDistribution": "Distribución de nodos",
+    "rewardDistribution": "Distribución de recompensas",
+    "nodeInfo": "Actualizar información del nodo",
+    "about": "Acerca de",
+    "ricardianContract": "Contrato ricardiano",
+    "help": "Ayuda"
   },
-  "dashboardProducer": {
+  "dashboardHome": {
     "currentProducer": "Productor actual",
     "headBlock": "Bloque de la cabeza",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
-    "transPerBlock": "Transacciones por Bloque",
-    "blockProducerVotes": "Votos de Productores de Bloque",
-    "rank": "Rango",
-    "blockProducer": "Productor de Bloques",
-    "votes": "Votos",
-    "totalVotes": "Total de Votos",
-    "location": "Ubicación",
-    "expectedRewards": "Recompensas esperadas",
-    "serverVersion": "Versión del servidor",
-    "pingFromCR": "Ping desde Costa Rica",
-    "healthIndicators": "Indicadores de salud",
-    "secondsAgo": "s"
+    "transPerBlock": "Transacciones por Bloque"
+  },
+  "dashboardProducer": {
+    "title": "Productores de Bloque"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -87,6 +80,17 @@
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
+  },
+  "producerSummary": {
+    "rank": "Rango",
+    "account": "Cuenta",
+    "website": "Sitio Web",
+    "votes": "Votos",
+    "rewards": "Recompensas",
+    "country": "País",
+    "eosRate": "EOS RATE",
+    "p2pEndpoints": "(P2P)",
+    "apiEndpoints": "(HTTPS / HTTPS)"
   },
   "producerHealthIndicators": {
     "lastTimeChecked": "Verificado por última vez",
