@@ -25,7 +25,7 @@ const ProducerHealthIndicators = ({ producer }) => {
   const { t } = useTranslation('producerHealthIndicators')
 
   return (
-    <>
+    <div>
       <Tooltip
         title={producer.bp_json ? t('bpJsonFound') : t('noBpJsonFound')}
         aria-label="add"
@@ -81,7 +81,7 @@ const ProducerHealthIndicators = ({ producer }) => {
           <FiberManualRecordIcon className={classes.warning} />
         </Tooltip>
       )}
-    </>
+    </div>
   )
 }
 

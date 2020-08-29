@@ -20,10 +20,12 @@
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
-    "transPerBlock": "Transactions Per Block"
+    "transPerBlock": "Transactions Per Block",
+    "htmlTitle": "Home - Dashboard"
   },
   "dashboardProducer": {
-    "title": "Block Producers"
+    "title": "Block Producers",
+    "htmlTitle": "Block Producers - Dashboard"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -44,7 +46,8 @@
     "website": "Website",
     "votes": "Votes",
     "rewards": "Rewards",
-    "producerCountry": "Producer country"
+    "producerCountry": "Producer country",
+    "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
     "dailyRewards": "Total Daily Rewards",
@@ -57,7 +60,8 @@
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "producers": "Producers"
+    "producers": "Producers",
+    "htmlTitle": "Rewards Distribution - Dashboard"
   },
   "about": {
     "title": "EOSIO Dashboard",

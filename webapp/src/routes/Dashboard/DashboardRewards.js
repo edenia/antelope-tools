@@ -25,6 +25,7 @@ import { interpolateHcl } from 'd3-interpolate'
 import UnknowFlagIcon from '../../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../../utils'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -230,6 +231,7 @@ const Rewards = () => {
 
   return (
     <>
+      <PageTitle title={t('htmlTitle')} />
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>

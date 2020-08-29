@@ -20,10 +20,12 @@
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
-    "transPerBlock": "Transacciones por Bloque"
+    "transPerBlock": "Transacciones por Bloque",
+    "htmlTitle": "Home - Dashboard"
   },
   "dashboardProducer": {
-    "title": "Productores de Bloque"
+    "title": "Productores de Bloques",
+    "htmlTitle": "Productores de Bloques - Dashboard"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -44,7 +46,8 @@
     "website": "Sitio Web",
     "votes": "Votos",
     "rewards": "Recompensas",
-    "producerCountry": "País Productor"
+    "producerCountry": "País Productor",
+    "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
     "dailyRewards": "Recompensas Diarias Totales",
@@ -57,7 +60,8 @@
     "exchangeRate": "Tipo De Cambio",
     "country": "País",
     "rewards": "Recompensas",
-    "producers": "Productores"
+    "producers": "Productores",
+    "htmlTitle": "Distribución de recompensas - Dashboard"
   },
   "about": {
     "title": "EOSIO Tablero",
