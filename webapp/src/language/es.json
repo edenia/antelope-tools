@@ -1,4 +1,7 @@
 {
+  "user": {
+    "login": "Ingresar"
+  },
   "updateNodeInfo": {
     "loadText": "Cargando información del nodo . . .",
     "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
@@ -51,7 +54,7 @@
   },
   "dashboardRewards": {
     "dailyRewards": "Recompensas Diarias Totales",
-    "TopCountryDailyRwards": "País Superior Por Recompensas Diarias",
+    "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
     "clickToViewBPs": "Haga clic para ver los PB no conformes",
@@ -79,7 +82,7 @@
     }
   },
   "help": {
-    "title": "Thank you for using EOS Network Monitor!",
+    "title": "Thank you for using EOS Network Dashboard!",
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",

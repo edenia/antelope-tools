@@ -1,29 +1,58 @@
+import { EOSCR_THEME } from '@eoscostarica/eoscr-theme'
+
+import palette from './palette'
+
 export default {
   h1: {
-    fontSize: '35px'
+    ...EOSCR_THEME.typography.h1,
+    color: palette.text.primary
   },
   h2: {
-    fontSize: '29px'
+    ...EOSCR_THEME.typography.h2,
+    color: palette.text.primary
   },
   h3: {
-    fontSize: '24px'
+    ...EOSCR_THEME.typography.h3,
+    color: palette.text.primary
   },
   h4: {
-    fontSize: '20px'
+    color: palette.text.primary,
+    ...EOSCR_THEME.typography.h4
   },
   h5: {
-    fontSize: '16px'
+    color: palette.text.primary,
+    ...EOSCR_THEME.typography.h5
   },
   h6: {
-    fontSize: '14px'
+    color: palette.text.primary,
+    ...EOSCR_THEME.typography.h6
   },
   subtitle1: {
-    fontSize: '16px'
+    ...EOSCR_THEME.typography.subtitle1,
+    color: palette.text.primary
   },
   subtitle2: {
-    fontSize: '14px'
+    ...EOSCR_THEME.typography.subtitle2,
+    color: palette.text.secondary
   },
   body1: {
-    fontSize: '14px'
+    ...EOSCR_THEME.typography.body1,
+    color: palette.text.primary
+  },
+  body2: {
+    ...EOSCR_THEME.typography.body1,
+    color: palette.text.secondary
+  },
+  button: {
+    ...EOSCR_THEME.typography.button,
+    color: palette.text.primary
+  },
+  caption: {
+    ...EOSCR_THEME.typography.caption,
+    color: palette.text.secondary
+  },
+  overline: {
+    ...EOSCR_THEME.typography.overline,
+    color: palette.text.secondary
   }
 }

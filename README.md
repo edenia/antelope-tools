@@ -3,7 +3,7 @@
 [![N|Solid](https://github.com/eoscostarica/eos-rate/raw/master/docs/eoscostarica-logo-black.png)](https://eoscostarica.io/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
 
-Network and Infrastructure Monitoring Dashboard for EOSIO networks.
+Network and Infrastructure Dashboard for EOSIO networks.
 
 ## About EOSIO Dashboard:
 
@@ -155,7 +155,7 @@ HAPI_SYNC_PRODUCER_INFO_INTERVAL=1
 
 #webapp
 PORT=3000
-REACT_APP_TITLE="EOS Jungle Testnet Network Monitor"
+REACT_APP_TITLE="EOS Jungle Testnet Network Dashboard"
 REACT_APP_DEFAULT_PRODUCER_LOGO=https://bloks.io/img/eosio.png
 REACT_APP_EOS_RATE_LINK=https://jungle.eosrate.io:8080
 REACT_APP_USE_REWARDS=true

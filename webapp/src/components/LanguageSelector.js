@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit'
   },
   languageText: {
-    fontSize: '1rem',
     marginLeft: 3,
     display: 'none',
     color: theme.palette.primary.contrastText,
@@ -56,7 +55,7 @@ const LanguageSelector = ({ alt }) => {
     <>
       <IconButton className={classes.wrapper} onClick={handleClick}>
         <LanguageIcon alt={alt} className={classes.iconLanguage} />
-        <Typography variant="h5" className={classes.languageText}>
+        <Typography variant="body1" className={classes.languageText}>
           {(i18n.language || '').toLocaleUpperCase().substring(0, 2)}
         </Typography>
       </IconButton>

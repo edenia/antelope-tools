@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import 'flag-icon-css/css/flag-icon.min.css'
 import { useTranslation } from 'react-i18next'
 
 import ProducerCard from '../../components/ProducerCard'
@@ -31,7 +30,7 @@ const Producers = () => {
   return (
     <Grid item xs={12}>
       <PageTitle title={t('htmlTitle')} />
-      <Typography variant="h1">{t('title')}</Typography>
+      <Typography variant="h3">{t('title')}</Typography>
       {loading && <LinearProgress />}
       <Grid container justify="flex-start" spacing={1}>
         {producers.map((producer, index) => (

@@ -1262,14 +1262,15 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@eoscostarica/eoscr-components@~1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-1.1.5.tgz#56e25911e38a907482f91a26e85eddabd63f58af"
-  integrity sha512-oCAHar3gti/BFU9eE8ccrs+Dsabn1zIY5P2fyg1y+E9mIiZNwP+ahLRQMEakojpO5I+hroQqE2ACxXl6Q0KnQw==
+"@eoscostarica/eoscr-components@~2.0.3":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-2.0.2.tgz#f3ac38fa3ef7f7cafb5645e10ecf129753b3f955"
+  integrity sha512-CV4/PGxcYCCmCB6u3iO3XBpy0XuYW1JrkJYIFCo5bZEGyrzaDnpl5GjBmwALZwyM4wSlwacczDZfI+7fLqm13Q==
   dependencies:
     "@eoscostarica/eoscr-theme" "^1.0.3"
     "@material-ui/core" "^4.10.2"
     "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "^4.0.0-alpha.56"
     "@material-ui/styles" "^4.9.14"
     babel-eslint "^10.0.3"
     babel-loader "^8.1.0"
@@ -1556,7 +1557,7 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/lab@^4.0.0-alpha.55":
+"@material-ui/lab@^4.0.0-alpha.55", "@material-ui/lab@^4.0.0-alpha.56":
   version "4.0.0-alpha.56"
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.56.tgz#ff63080949b55b40625e056bbda05e130d216d34"
   integrity sha512-xPlkK+z/6y/24ka4gVJgwPfoCF4RCh8dXb1BNE7MtF9bXEBLN/lBxNTK8VAa0qm3V2oinA6xtUIdcRh0aeRtVw==
