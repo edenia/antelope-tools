@@ -222,8 +222,6 @@ const Rewards = () => {
       { rewards: 0 }
     )
 
-    console.log(topCountryByRewards)
-
     setSummary({
       daylyRewars,
       topCountryByRewards,
