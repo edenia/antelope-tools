@@ -150,24 +150,28 @@ const CustomTooltip = memo(({ active, payload }) => {
             {payload[0].payload.owner}
           </span>
         </Typography>
-        <Typography variant="h6">
-          {t('rewards')}:{' '}
-          <span className={classes.description}>
-            {' '}
-            {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
-          </span>
-        </Typography>
-        <Typography variant="h6">
-          {t('votes')}:{' '}
-          <span className={classes.description}>
-            {' '}
-            {formatWithThousandSeparator(
-              payload[0].payload.total_votes_percent,
-              3
-            )}
-            %
-          </span>
-        </Typography>
+        {generalConfig.useRewards && (
+          <Typography variant="h6">
+            {t('rewards')}:{' '}
+            <span className={classes.description}>
+              {' '}
+              {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
+            </span>
+          </Typography>
+        )}
+        {generalConfig.useVotes && (
+          <Typography variant="h6">
+            {t('votes')}:{' '}
+            <span className={classes.description}>
+              {' '}
+              {formatWithThousandSeparator(
+                payload[0].payload.total_votes_percent,
+                3
+              )}
+              %
+            </span>
+          </Typography>
+        )}
       </div>
     )
   }

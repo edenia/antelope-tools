@@ -81,6 +81,7 @@ services:
         react_app_eos_bp_json_on_chain_contract: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}'
         react_app_eos_bp_json_on_chain_table: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}'
         react_app_eos_bp_json_on_chain_scope: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}'
+        react_app_eos_custom_node_types: '${REACT_APP_EOS_CUSTOM_NODE_TYPES}'
     ports:
       - '3000:3000'
     depends_on:

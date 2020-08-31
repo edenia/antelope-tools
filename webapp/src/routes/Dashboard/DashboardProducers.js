@@ -34,13 +34,13 @@ const Producers = () => {
       {loading && <LinearProgress />}
       <Grid container justify="flex-start" spacing={1}>
         {producers.map((producer, index) => (
-          <Grid item xs={3} key={`producer-card-${index}`}>
+          <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
             <ProducerCard producer={producer} rank={index + 1} />
           </Grid>
         ))}
         {loading &&
           [0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
-            <Grid item xs={3} key={`producer-card-${index}`}>
+            <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
               <Skeleton variant="rect" width={300} height={260} />
             </Grid>
           ))}
