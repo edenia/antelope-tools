@@ -40,7 +40,7 @@ const Help = () => {
       <Grid container direction="column">
         <Grid item xs>
           <Grid container direction="column">
-            <Typography variant="h1" className={classes.title}>
+            <Typography variant="h4" className={classes.title}>
               {t('title')}
             </Typography>
             <Typography variant="body2" align="justify" paragraph>

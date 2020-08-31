@@ -1,7 +1,7 @@
 {
-  "name": "eosiomonitor",
+  "name": "eosiodashboard",
   "version": "1.0.0",
-  "description": "EOSIO Monitor WebApp",
+  "description": "EOSIO Dashboard WebApp",
   "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
     "start": "env-cmd -f ../.env react-app-rewired start",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
-    "@eoscostarica/eoscr-components": "~1.1.5",
+    "@eoscostarica/eoscr-components": "~2.0.2",
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.55",

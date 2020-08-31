@@ -125,7 +125,6 @@ const Producers = () => {
           <Card>
             <CardContent>
               <PageTitle title={t('htmlTitle')} />
-
               <Typography variant="h6">{t('currentProducer')}</Typography>
               <Typography variant="h3">{info.head_block_producer}</Typography>
             </CardContent>

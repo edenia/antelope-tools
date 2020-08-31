@@ -1,4 +1,7 @@
 {
+  "user": {
+    "login": "Login"
+  },
   "updateNodeInfo": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
@@ -51,7 +54,7 @@
   },
   "dashboardRewards": {
     "dailyRewards": "Total Daily Rewards",
-    "TopCountryDailyRwards": "Top Country By Daily Rewards",
+    "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid Producers Not Located",
     "clickToViewBPs": "Click to view non-compliant BPs",

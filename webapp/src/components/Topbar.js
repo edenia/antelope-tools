@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Topbar = ({ user, onLogout, onLogin }) => {
   const classes = useStyles()
-  const { t } = useTranslation('translations')
+  const { t } = useTranslation('user')
 
   return (
     <Box className={classes.box}>
@@ -42,7 +42,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
         <>
           <IconButton color="inherit">
             <AccountCircleIcon />
-            <Typography className={classes.sessionText} variant="subtitle1">
+            <Typography className={classes.sessionText} variant="body1">
               {user.accountName}
             </Typography>
           </IconButton>
@@ -54,7 +54,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
       {!user && (
         <IconButton color="inherit" onClick={onLogin}>
           <FingerprintIcon />
-          <Typography className={classes.sessionText} variant="subtitle1">
+          <Typography className={classes.sessionText} variant="body1">
             {t('login')}
           </Typography>
         </IconButton>

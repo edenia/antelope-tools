@@ -26,6 +26,7 @@ import UnknowFlagIcon from '../../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../../utils'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 import PageTitle from '../../components/PageTitle'
+import CountryFlag from '../../components/CountryFlag'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -236,7 +237,7 @@ const Rewards = () => {
         <Card>
           <CardContent>
             <Typography variant="h6">{t('dailyRewards')}</Typography>
-            <Typography variant="h3">
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -266,17 +267,15 @@ const Rewards = () => {
           onClick={handlePopoverOpen(summary?.topCountryByRewards)}
         >
           <CardContent>
-            <Typography variant="h6">{t('TopCountryDailyRwards')}</Typography>
-            <Typography variant="h3">
+            <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <>
-                  <span className={classes.countryFlag}>
-                    {summary.topCountryByRewards.flag}
-                  </span>
-                  {summary.topCountryByRewards.name}{' '}
+                  <CountryFlag code={summary.topCountryByRewards.code} />
+                  {summary.topCountryByRewards.name}
                 </>
               )}
             </Typography>
@@ -307,7 +306,7 @@ const Rewards = () => {
           <CardContent>
             <Typography variant="h6">{t('paidProducers')}</Typography>
             <Typography
-              variant="h3"
+              variant="subtitle1"
               className={classes.action}
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
@@ -339,10 +338,7 @@ const Rewards = () => {
               <span className={classes.highestRewards} />
             </Typography>
             {rate && (
-              <Typography
-                variant="subtitle1"
-                className={classes.rewardsColorSchema}
-              >
+              <Typography variant="h6" className={classes.rewardsColorSchema}>
                 <span className={classes.itemLabel}>{t('exchangeRate')}: </span>{' '}
                 ${formatWithThousandSeparator(rate, 2)}
               </Typography>

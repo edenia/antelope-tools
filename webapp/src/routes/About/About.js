@@ -21,10 +21,10 @@ const About = () => {
       <Grid container direction="column">
         <Grid item xs>
           <Grid container direction="column">
-            <Typography variant="h1" className={classes.title}>
+            <Typography variant="h3" className={classes.title}>
               {t('title')}
             </Typography>
-            <Typography variant="h3">{t('subtitle1')}</Typography>
+            <Typography variant="h4">{t('subtitle1')}</Typography>
             <Typography variant="body2" align="justify" paragraph>
               {t('body1.paragraph1')}
             </Typography>
@@ -33,7 +33,7 @@ const About = () => {
 
         <Grid item xs>
           <Grid container direction="column">
-            <Typography variant="h3">{t('subtitle2')}</Typography>
+            <Typography variant="h4">{t('subtitle2')}</Typography>
             <Typography variant="body2" align="justify" paragraph>
               {t('body2.paragraph1')}
             </Typography>
@@ -42,7 +42,7 @@ const About = () => {
 
         <Grid item xs>
           <Grid container direction="column">
-            <Typography variant="h3">{t('subtitle3')}</Typography>
+            <Typography variant="h4">{t('subtitle3')}</Typography>
             <Typography variant="body2" align="justify" paragraph>
               {t('body3.paragraph1')}
             </Typography>

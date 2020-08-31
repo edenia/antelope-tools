@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText
   },
   logo: {
-    height: 36,
+    height: 48,
     marginRight: theme.spacing(1)
   },
   drawer: {
@@ -94,10 +94,10 @@ const Main = ({ children, sidebarContent, topbarContent }) => {
               <img
                 className={classes.logo}
                 alt="EOS Costa Rica - Open Source Projects"
-                src="/eoscr-logo.png"
+                src="/eosio-dashboard.svg"
               />
             </RouterLink>
-            <Typography variant="h2" className={classes.toolbarBrandTitle}>
+            <Typography variant="h5" className={classes.toolbarBrandTitle}>
               {generalConfig.title}
             </Typography>
           </div>
