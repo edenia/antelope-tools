@@ -130,11 +130,21 @@ const ProducerCard = ({ producer, rank }) => {
             </Link>
           </dd>
 
-          <dt className={classes.dt}>{t('votes')}:</dt>
-          <dd>{formatWithThousandSeparator(producer?.total_votes_eos, 2)}</dd>
+          {generalConfig.useVotes && (
+            <>
+              <dt className={classes.dt}>{t('votes')}:</dt>
+              <dd>
+                {formatWithThousandSeparator(producer?.total_votes_eos, 2)}
+              </dd>
+            </>
+          )}
 
-          <dt className={classes.dt}>{t('rewards')}:</dt>
-          <dd>{formatWithThousandSeparator(producer?.total_rewards, 2)}</dd>
+          {generalConfig.useRewards && (
+            <>
+              <dt className={classes.dt}>{t('rewards')}:</dt>
+              <dd>{formatWithThousandSeparator(producer?.total_rewards, 2)}</dd>
+            </>
+          )}
 
           {apiEndpoints.length > 0 && (
             <>
