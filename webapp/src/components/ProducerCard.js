@@ -116,8 +116,12 @@ const ProducerCard = ({ producer, rank }) => {
       />
       <CardContent className={classes.content}>
         <dl className={classes.dl}>
-          <dt className={classes.dt}>{t('rank')}:</dt>
-          <dd>#{rank}</dd>
+          {generalConfig.useVotes && (
+            <>
+              <dt className={classes.dt}>{t('rank')}:</dt>
+              <dd>#{rank}</dd>
+            </>
+          )}
 
           <dt className={classes.dt}>{t('website')}:</dt>
           <dd>
