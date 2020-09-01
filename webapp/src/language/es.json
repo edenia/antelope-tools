@@ -97,10 +97,13 @@
     "country": "País",
     "eosRate": "EOS RATE",
     "p2pEndpoints": "(P2P)",
-    "apiEndpoints": "(HTTPS / HTTPS)"
+    "apiEndpoints": "(HTTPS / HTTPS)",
+    "pingFromCostaRica": "Ping desde Costa Rica",
+    "serverVersion": "Versión del servidor",
+    "secondsAgo": "s atras",
+    "lastTimeChecked": "Verificado por última vez"
   },
   "producerHealthIndicators": {
-    "lastTimeChecked": "Verificado por última vez",
     "synced": "Sincronizado",
     "notSyncing": "Sin sincronizar",
     "apiResponding": "API Respondiendo",
