@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSubscription } from '@apollo/react-hooks'
+import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
@@ -12,8 +13,16 @@ import ProducerCard from '../../components/ProducerCard'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 import PageTitle from '../../components/PageTitle'
 
+const useStyles = makeStyles((theme) => ({
+  linearProgress: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  }
+}))
+
 const Producers = () => {
   const dispatch = useDispatch()
+  const classes = useStyles()
   const {
     loading = true,
     data: { producer: producers = [] } = { producers: [] }
@@ -31,7 +40,7 @@ const Producers = () => {
     <Grid item xs={12}>
       <PageTitle title={t('htmlTitle')} />
       <Typography variant="h3">{t('title')}</Typography>
-      {loading && <LinearProgress />}
+      {loading && <LinearProgress className={classes.linearProgress} />}
       <Grid container justify="flex-start" spacing={1}>
         {producers.map((producer, index) => (
           <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>

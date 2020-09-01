@@ -8,6 +8,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Link from '@material-ui/core/Link'
+import moment from 'moment'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { generalConfig } from '../config'
@@ -123,16 +124,34 @@ const ProducerCard = ({ producer, rank }) => {
             </>
           )}
 
-          <dt className={classes.dt}>{t('website')}:</dt>
-          <dd>
-            <Link
-              href={producer?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {producer?.url}
-            </Link>
-          </dd>
+          {producer.url && (
+            <>
+              <dt className={classes.dt}>{t('website')}:</dt>
+              <dd>
+                <Link
+                  href={producer?.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {producer?.url}
+                </Link>
+              </dd>
+            </>
+          )}
+
+          {producer.server_version_string && (
+            <>
+              <dt className={classes.dt}>{t('serverVersion')}:</dt>
+              <dd>{producer.server_version_string}</dd>
+            </>
+          )}
+
+          {producer.ping && (
+            <>
+              <dt className={classes.dt}>{t('pingFromCostaRica')}:</dt>
+              <dd>{producer.ping}ms</dd>
+            </>
+          )}
 
           {generalConfig.useVotes && (
             <>
@@ -167,6 +186,14 @@ const ProducerCard = ({ producer, rank }) => {
               ))}
             </>
           )}
+
+          <dt className={classes.dt}>
+            {t('lastTimeChecked')}:{producer.updated_at}
+          </dt>
+          <dd>
+            {moment(new Date()).diff(moment(producer.updated_at), 'seconds')}
+            {t('secondsAgo')}
+          </dd>
         </dl>
       </CardContent>
       <CardActions disableSpacing>

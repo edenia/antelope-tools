@@ -45,7 +45,7 @@ services:
     restart: on-failure
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
-    image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
+    image: hasura/graphql-engine:v1.3.1.cli-migrations-v2
     ports:
       - '8080:8080'
     volumes:
