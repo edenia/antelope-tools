@@ -187,9 +187,7 @@ const ProducerCard = ({ producer, rank }) => {
             </>
           )}
 
-          <dt className={classes.dt}>
-            {t('lastTimeChecked')}:{producer.updated_at}
-          </dt>
+          <dt className={classes.dt}>{t('lastTimeChecked')}</dt>
           <dd>
             {moment(new Date()).diff(moment(producer.updated_at), 'seconds')}
             {t('secondsAgo')}
