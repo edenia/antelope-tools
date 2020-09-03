@@ -7,11 +7,13 @@ import { generalConfig } from '../../config'
 const DashboardRewards = lazy(() => import('./DashboardRewards'))
 const DashboardProducers = lazy(() => import('./DashboardProducers'))
 const DashboardNodes = lazy(() => import('./DashboardNodes'))
+const DashboardHome = lazy(() => import('./DashboardHome'))
 
 const Dashboard = () => (
   <Grid container spacing={4}>
     <Suspense fallback={<></>}>
       <Switch>
+        <Route exact path="/dashboard/home" component={DashboardHome} />
         <Route
           exact
           path="/dashboard/producers"
@@ -21,7 +23,7 @@ const Dashboard = () => (
         {generalConfig.useRewards && (
           <Route exact path="/dashboard/rewards" component={DashboardRewards} />
         )}
-        <Redirect from="/dashboard" to="/dashboard/producers" />
+        <Redirect from="/dashboard" to="/dashboard/home" />
       </Switch>
     </Suspense>
   </Grid>

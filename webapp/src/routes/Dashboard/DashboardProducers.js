@@ -1,137 +1,33 @@
 /* eslint camelcase: 0 */
-import React, { useEffect, useState } from 'react'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/styles'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSubscription } from '@apollo/react-hooks'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Popover from '@material-ui/core/Popover'
-import 'flag-icon-css/css/flag-icon.min.css'
-import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 
-import { formatWithThousandSeparator, onImgError } from '../../utils'
-import { generalConfig } from '../../config'
-import ProducerHealthIndicators from '../../components/ProducerHealthIndicators'
-import ProducersChart from '../../components/ProducersChart'
-import ProducerSummary from '../../components/ProducerSummary'
-import TransactionsChart from '../../components/TransactionsChart'
+import ProducerCard from '../../components/ProducerCard'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const useStyles = makeStyles((theme) => ({
-  country: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  owner: {
-    display: 'flex',
-    justifyContent: 'start',
-    alignItems: 'center'
-  },
-  loader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  logo: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    display: 'inline-block',
-    width: '2em',
-    height: '2em',
-    borderRadius: '500rem',
-    backgroundColor: theme.palette.primary.contrastText
-  },
-  chartWrapper: {
-    minWidth: 280,
-    width: '100%'
-  },
-  chartSkeletonWrapper: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  gridItem: {
+  linearProgress: {
+    marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2)
-  },
-  tableWrapper: {
-    width: ' 100%',
-    overflow: 'scroll'
-  },
-  currentProducerRow: {
-    backgroundColor: theme.palette.secondary[900],
-    color: theme.palette.primary.contrastText,
-    '& td, & td a': {
-      color: theme.palette.primary.contrastText
-    }
-  },
-  row: {
-    cursor: 'pointer'
   }
 }))
 
 const Producers = () => {
   const dispatch = useDispatch()
+  const classes = useStyles()
   const {
+    loading = true,
     data: { producer: producers = [] } = { producers: [] }
   } = useSubscription(PRODUCERS_SUBSCRIPTION)
-  const info = useSelector((state) => state.eos.info)
-  const tps = useSelector((state) => state.eos.tps)
-  const tpb = useSelector((state) => state.eos.tpb)
-  const scheduleInfo = useSelector((state) => state.eos.schedule)
-  const [schedule, setSchedule] = useState({ producers: [] })
-  const [producer, setProducer] = useState(null)
-  const [anchorEl, setAnchorEl] = useState(null)
-  const classes = useStyles()
   const { t } = useTranslation('dashboardProducer')
-
-  const handlePopoverOpen = (producer) => (event) => {
-    setProducer(producer)
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
-
-  useEffect(() => {
-    dispatch.eos.startTrackingInfo({ interval: 0.5 })
-    dispatch.eos.startTrackingProducerSchedule({ interval: 60 })
-    dispatch.eos.getRate()
-  }, [dispatch])
-
-  useEffect(() => {
-    const newProducers = scheduleInfo.producers.map((item) => {
-      const data =
-        producers.find((producer) => producer.owner === item.producer_name) ||
-        {}
-
-      return {
-        // eslint-disable-next-line camelcase
-        logo: data?.bp_json?.org?.branding?.logo_256,
-        url: data?.url,
-        owner: data.owner,
-        rewards: data.total_rewards,
-        total_votes_percent: data.total_votes_percent * 100,
-        value: 20
-      }
-    })
-    setSchedule({
-      ...scheduleInfo,
-      producers: newProducers
-    })
-  }, [scheduleInfo, producers])
 
   useEffect(() => {
     return () => {
@@ -142,316 +38,22 @@ const Producers = () => {
 
   return (
     <Grid item xs={12}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">{t('currentProducer')}</Typography>
-              <Typography variant="h3">{info.head_block_producer}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">{t('headBlock')}</Typography>
-              <Typography variant="h3">
-                {formatWithThousandSeparator(info.head_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">{t('lastBlock')}</Typography>
-              <Typography variant="h3">
-                {formatWithThousandSeparator(info.last_irreversible_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      {!producers.length && <LinearProgress />}
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">{t('bpSchedule')}</Typography>
-              <Typography variant="caption">
-                {schedule.version ? `Ver. ${schedule.version}` : ''}
-              </Typography>
-              {!schedule.producers.length && (
-                <div className={classes.chartSkeletonWrapper}>
-                  <Skeleton
-                    variant="circle"
-                    width={280}
-                    height={280}
-                    animation="wave"
-                  />
-                </div>
-              )}
-              {schedule.producers.length > 0 && (
-                <ProducersChart info={info} producers={schedule.producers} />
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{t('transPerSecond')}</Typography>
-                  {!producers.length && (
-                    <div className={classes.chartSkeletonWrapper}>
-                      <Skeleton
-                        variant="rect"
-                        width={280}
-                        height={100}
-                        animation="wave"
-                      />
-                    </div>
-                  )}
-                  {producers.length > 0 && <TransactionsChart data={tps} />}
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{t('transPerBlock')}</Typography>
-                  {!producers.length && (
-                    <div className={classes.chartSkeletonWrapper}>
-                      <Skeleton
-                        variant="rect"
-                        width={280}
-                        height={100}
-                        animation="wave"
-                      />
-                    </div>
-                  )}
-                  {producers.length > 0 && <TransactionsChart data={tpb} />}
-                </CardContent>
-              </Card>
-            </Grid>
+      <PageTitle title={t('htmlTitle')} />
+      <Typography variant="h3">{t('title')}</Typography>
+      {loading && <LinearProgress className={classes.linearProgress} />}
+      <Grid container justify="flex-start" spacing={1}>
+        {producers.map((producer, index) => (
+          <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
+            <ProducerCard producer={producer} rank={index + 1} />
           </Grid>
-        </Grid>
+        ))}
+        {loading &&
+          [0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
+            <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
+              <Skeleton variant="rect" width={300} height={260} />
+            </Grid>
+          ))}
       </Grid>
-      <Grid item xs={12} className={classes.tableWrapper}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">{t('blockProducerVotes')}</Typography>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('rank')}</TableCell>
-                  <TableCell>{t('blockProducer')}</TableCell>
-                  {generalConfig.useVotes && (
-                    <>
-                      <TableCell>{t('votes')} %</TableCell>
-                      <TableCell>{t('totalVotes')}</TableCell>
-                    </>
-                  )}
-                  <TableCell>{t('location')}</TableCell>
-                  {generalConfig.useRewards && (
-                    <TableCell>{t('expectedRewards')}</TableCell>
-                  )}
-                  <TableCell>{t('serverVersion')}</TableCell>
-                  <TableCell>{t('pingFromCR')}</TableCell>
-                  <TableCell>{t('healthIndicators')}</TableCell>
-                  <TableCell>{t('lastTimeChecked')}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {producers.map((producer, index) => (
-                  <TableRow
-                    key={`producer-table-row-${index}`}
-                    className={clsx({
-                      [classes.row]: true,
-                      [classes.currentProducerRow]:
-                        info.head_block_producer === producer?.owner
-                    })}
-                    onClick={handlePopoverOpen(producer)}
-                  >
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>
-                      <img
-                        className={classes.logo}
-                        src={
-                          producer?.bp_json?.org?.branding?.logo_256 ||
-                          generalConfig.defaultProducerLogo
-                        }
-                        onError={onImgError(generalConfig.defaultProducerLogo)}
-                        alt="logo"
-                      />
-                      {producer?.owner}
-                    </TableCell>
-                    {generalConfig.useVotes && (
-                      <>
-                        <TableCell>
-                          {formatWithThousandSeparator(
-                            (producer?.total_votes_percent || 0) * 100,
-                            3
-                          )}
-                          %
-                        </TableCell>
-                        <TableCell>
-                          {formatWithThousandSeparator(
-                            producer?.total_votes_eos,
-                            0
-                          )}
-                        </TableCell>
-                      </>
-                    )}
-                    <TableCell>
-                      <span
-                        className={`flag-icon flag-icon-squared flag-icon-${producer?.bp_json?.org?.location?.country?.toLocaleLowerCase()}`}
-                      />
-                      <span className={classes.country}>
-                        {producer?.bp_json?.org?.location?.name || 'N/A'}
-                      </span>
-                    </TableCell>
-                    {generalConfig.useRewards && (
-                      <TableCell>
-                        {formatWithThousandSeparator(
-                          producer?.total_rewards,
-                          2
-                        )}
-                      </TableCell>
-                    )}
-                    <TableCell>{producer.server_version_string}</TableCell>
-                    <TableCell>
-                      {producer.ping ? `${producer.ping}ms` : '-'}
-                    </TableCell>
-                    <TableCell>
-                      <ProducerHealthIndicators producer={producer} />
-                    </TableCell>
-                    <TableCell>
-                      {moment().diff(producer.updated_at, 'seconds')}
-                      {t('secondsAgo')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {!producers.length &&
-                  [1, 2, 3].map((_, i) => (
-                    <TableRow key={`producer-table-row-${i}`}>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <div className={classes.loader}>
-                          <Skeleton
-                            variant="circle"
-                            width={30}
-                            height={30}
-                            animation="wave"
-                          />
-                          <Skeleton
-                            variant="text"
-                            width="calc(100% - 40px)"
-                            height={30}
-                            animation="wave"
-                          />
-                        </div>
-                      </TableCell>
-                      {generalConfig.useVotes && (
-                        <>
-                          <TableCell>
-                            <Skeleton
-                              variant="text"
-                              width="100%"
-                              height={30}
-                              animation="wave"
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton
-                              variant="text"
-                              width="100%"
-                              height={30}
-                              animation="wave"
-                            />
-                          </TableCell>
-                        </>
-                      )}
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      {generalConfig.useRewards && (
-                        <TableCell>
-                          <Skeleton
-                            variant="text"
-                            width="100%"
-                            height={30}
-                            animation="wave"
-                          />
-                        </TableCell>
-                      )}
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton
-                          variant="text"
-                          width="100%"
-                          height={30}
-                          animation="wave"
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Popover
-        open={anchorEl !== null}
-        onClose={handlePopoverClose}
-        anchorEl={anchorEl}
-        // anchorOrigin={{
-        //   vertical: 'center',
-        //   horizontal: 'center'
-        // }}
-        // transformOrigin={{
-        //   vertical: 'center',
-        //   horizontal: 'center'
-        // }}
-      >
-        <ProducerSummary producer={producer} onClose={handlePopoverClose} />
-      </Popover>
     </Grid>
   )
 }

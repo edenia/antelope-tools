@@ -29,6 +29,7 @@ import { geoPath } from 'd3-geo'
 import { countries, formatWithThousandSeparator, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
 
 const defaultScale = 170
 const maxZoom = 3
@@ -67,13 +68,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 0
   },
   popoverItem: {
+    fontFamily: "'PT Sans', sans-serif",
     fontWeight: 'bold',
     marginRight: 4
   },
   popoverClose: {
     textAlign: 'right',
     position: 'sticky',
-    background: 'white',
     paddingTop: theme.spacing(2),
 
     top: 0
@@ -95,30 +96,31 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: '50%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontWeight: 'bold'
   },
-  producer: {
+  [eosConfig.nodeTypes[0].name]: {
     backgroundColor: eosConfig.nodeTypes[0].color,
     width: 16,
     height: 16,
     borderRadius: 4,
     marginRight: 4
   },
-  full: {
+  [eosConfig.nodeTypes[1].name]: {
     backgroundColor: eosConfig.nodeTypes[1].color,
     width: 16,
     height: 16,
     borderRadius: 4,
     marginRight: 4
   },
-  query: {
+  [eosConfig.nodeTypes[2].name]: {
     backgroundColor: eosConfig.nodeTypes[2].color,
     width: 16,
     height: 16,
     borderRadius: 4,
     marginRight: 4
   },
-  seed: {
+  [eosConfig.nodeTypes[3].name]: {
     backgroundColor: eosConfig.nodeTypes[3].color,
     width: 16,
     height: 16,
@@ -235,6 +237,7 @@ const Producers = () => {
 
   return (
     <>
+      <PageTitle title={t('htmlTitle')} />
       <Grid item sm={12}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
@@ -319,7 +322,7 @@ const Producers = () => {
                 {eosConfig.nodeTypes.map((nodeType) => (
                   <Typography
                     key={`node-type=${nodeType.name}`}
-                    variant="h6"
+                    variant="subtitle1"
                     className={classes.nodeTypeColorItem}
                     onClick={handlePopoverOpen(nodeType)}
                   >
@@ -377,7 +380,7 @@ const Producers = () => {
                         eosConfig.nodeTypes.find(
                           (noteType) => noteType.name === node.node_type
                         ) || {}
-                      ).color
+                      ).color || '#f58a42'
                     }
                   />
                   <circle cx="12" cy="10" r="3" fill="white" />

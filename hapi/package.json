@@ -1,7 +1,7 @@
 {
-  "name": "eosiomonitor",
+  "name": "eosiodashboard",
   "version": "1.0.0",
-  "description": "EOSIO Monitor BackEnd",
+  "description": "EOSIO Dashboard BackEnd",
   "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

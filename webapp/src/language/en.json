@@ -1,36 +1,34 @@
 {
+  "user": {
+    "login": "Login"
+  },
   "updateNodeInfo": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
   },
   "sidebar": {
-    "sidebar_BlockProducer": "Block Producers",
-    "sidebar_NodeDistribution": "Node Distribution",
-    "sidebar_RewardDistribution": "Rewards Distribution",
-    "sidebar_NodeInfo": "Update Node Info",
-    "sidebar_About": "About",
-    "sidebar_RicardianContract": "Ricardian Contract",
-    "sidebar_Help": "Help"
+    "dashboard": "Dashboard",
+    "blockProducer": "Block Producers",
+    "nodeDistribution": "Node Distribution",
+    "rewardDistribution": "Rewards Distribution",
+    "nodeInfo": "Update Node Info",
+    "about": "About",
+    "ricardianContract": "Ricardian Contract",
+    "help": "Help"
   },
-  "dashboardProducer": {
+  "dashboardHome": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "blockProducerVotes": "Block Producer Votes",
-    "rank": "Rank",
-    "blockProducer": "Block Producer",
-    "votes": "Votes",
-    "totalVotes": "Total Votes",
-    "location": "Location",
-    "expectedRewards": "Expected Rewards",
-    "serverVersion": "Server Version",
-    "pingFromCR": "Ping from Costa Rica",
-    "healthIndicators": "Health Indicators",
-    "secondsAgo": "s ago"
+    "htmlTitle": "Home - Dashboard"
+  },
+  "dashboardProducer": {
+    "title": "Block Producers",
+    "htmlTitle": "Block Producers - Dashboard"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -51,11 +49,12 @@
     "website": "Website",
     "votes": "Votes",
     "rewards": "Rewards",
-    "producerCountry": "Producer country"
+    "producerCountry": "Producer country",
+    "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
     "dailyRewards": "Total Daily Rewards",
-    "TopCountryDailyRwards": "Top Country By Daily Rewards",
+    "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid Producers Not Located",
     "clickToViewBPs": "Click to view non-compliant BPs",
@@ -64,7 +63,8 @@
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "producers": "Producers"
+    "producers": "Producers",
+    "htmlTitle": "Rewards Distribution - Dashboard"
   },
   "about": {
     "title": "EOSIO Dashboard",
@@ -89,6 +89,7 @@
     "websiteEOSCR": "Website EOS Costa Rica"
   },
   "producerSummary": {
+    "rank": "Rank",
     "account": "Account",
     "website": "Website",
     "votes": "Votes",
@@ -96,10 +97,13 @@
     "country": "Country",
     "eosRate": "EOS RATE",
     "p2pEndpoints": "Endpoints (P2P)",
-    "apiEndpoints": "Endpoints (HTTPS / HTTPS)"
+    "apiEndpoints": "Endpoints (HTTPS / HTTPS)",
+    "pingFromCostaRica": "Ping from Costa Rica",
+    "serverVersion": "Server version",
+    "secondsAgo": "s ago",
+    "lastTimeChecked": "Last Time Checked"
   },
   "producerHealthIndicators": {
-    "lastTimeChecked": "Last Time Checked",
     "synced": "Synced",
     "notSyncing": "Not syncing",
     "apiResponding": "API Responding",

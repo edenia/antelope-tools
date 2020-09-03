@@ -1,36 +1,34 @@
 {
+  "user": {
+    "login": "Ingresar"
+  },
   "updateNodeInfo": {
     "loadText": "Cargando información del nodo . . .",
     "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
   },
   "sidebar": {
-    "sidebar_BlockProducer": "Productor de Bloques",
-    "sidebar_NodeDistribution": "Distribución de nodos",
-    "sidebar_RewardDistribution": "Distribución de recompensas",
-    "sidebar_NodeInfo": "Actualizar información del nodo",
-    "sidebar_About": "Acerca de",
-    "sidebar_RicardianContract": "Contrato ricardiano",
-    "sidebar_Help": "Ayuda"
+    "dashboard": "Panel",
+    "blockProducer": "Productores de Bloques",
+    "nodeDistribution": "Distribución de nodos",
+    "rewardDistribution": "Distribución de recompensas",
+    "nodeInfo": "Actualizar información del nodo",
+    "about": "Acerca de",
+    "ricardianContract": "Contrato ricardiano",
+    "help": "Ayuda"
   },
-  "dashboardProducer": {
+  "dashboardHome": {
     "currentProducer": "Productor actual",
     "headBlock": "Bloque de la cabeza",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
-    "blockProducerVotes": "Votos de Productores de Bloque",
-    "rank": "Rango",
-    "blockProducer": "Productor de Bloques",
-    "votes": "Votos",
-    "totalVotes": "Total de Votos",
-    "location": "Ubicación",
-    "expectedRewards": "Recompensas esperadas",
-    "serverVersion": "Versión del servidor",
-    "pingFromCR": "Ping desde Costa Rica",
-    "healthIndicators": "Indicadores de salud",
-    "secondsAgo": "s"
+    "htmlTitle": "Home - Dashboard"
+  },
+  "dashboardProducer": {
+    "title": "Productores de Bloques",
+    "htmlTitle": "Productores de Bloques - Dashboard"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -51,11 +49,12 @@
     "website": "Sitio Web",
     "votes": "Votos",
     "rewards": "Recompensas",
-    "producerCountry": "País Productor"
+    "producerCountry": "País Productor",
+    "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
     "dailyRewards": "Recompensas Diarias Totales",
-    "TopCountryDailyRwards": "País Superior Por Recompensas Diarias",
+    "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
     "clickToViewBPs": "Haga clic para ver los PB no conformes",
@@ -64,7 +63,8 @@
     "exchangeRate": "Tipo De Cambio",
     "country": "País",
     "rewards": "Recompensas",
-    "producers": "Productores"
+    "producers": "Productores",
+    "htmlTitle": "Distribución de recompensas - Dashboard"
   },
   "about": {
     "title": "EOSIO Tablero",
@@ -82,14 +82,28 @@
     }
   },
   "help": {
-    "title": "Thank you for using EOS Network Monitor!",
+    "title": "Thank you for using EOS Network Dashboard!",
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
   },
+  "producerSummary": {
+    "rank": "Rango",
+    "account": "Cuenta",
+    "website": "Sitio Web",
+    "votes": "Votos",
+    "rewards": "Recompensas",
+    "country": "País",
+    "eosRate": "EOS RATE",
+    "p2pEndpoints": "(P2P)",
+    "apiEndpoints": "(HTTPS / HTTPS)",
+    "pingFromCostaRica": "Ping desde Costa Rica",
+    "serverVersion": "Versión del servidor",
+    "secondsAgo": "s atras",
+    "lastTimeChecked": "Verificado por última vez"
+  },
   "producerHealthIndicators": {
-    "lastTimeChecked": "Verificado por última vez",
     "synced": "Sincronizado",
     "notSyncing": "Sin sincronizar",
     "apiResponding": "API Respondiendo",

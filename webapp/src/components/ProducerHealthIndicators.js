@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import Tooltip from '@material-ui/core/Tooltip'
-import StarIcon from '@material-ui/icons/Star'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     color: 'green'
   },
   error: {
-    color: 'red'
+    color: 'orange'
   },
   warning: {
     color: 'yellow'
@@ -25,12 +25,12 @@ const ProducerHealthIndicators = ({ producer }) => {
   const { t } = useTranslation('producerHealthIndicators')
 
   return (
-    <>
+    <div>
       <Tooltip
         title={producer.bp_json ? t('bpJsonFound') : t('noBpJsonFound')}
         aria-label="add"
       >
-        <StarIcon
+        <FiberManualRecordIcon
           className={clsx({
             [classes.valid]: !!producer.bp_json,
             [classes.error]: !producer.bp_json
@@ -41,7 +41,7 @@ const ProducerHealthIndicators = ({ producer }) => {
         title={producer.ping ? t('apiResponding') : t('apiNotResponding')}
         aria-label="add"
       >
-        <StarIcon
+        <FiberManualRecordIcon
           className={clsx({
             [classes.valid]: !!producer.ping,
             [classes.error]: !producer.ping
@@ -60,7 +60,7 @@ const ProducerHealthIndicators = ({ producer }) => {
           }
           aria-label="add"
         >
-          <StarIcon
+          <FiberManualRecordIcon
             className={clsx({
               [classes.valid]:
                 moment(producer.updated_at).diff(
@@ -78,10 +78,10 @@ const ProducerHealthIndicators = ({ producer }) => {
       )}
       {!producer.head_block_time && (
         <Tooltip title="Unknow sync status" aria-label="add">
-          <StarIcon className={classes.warning} />
+          <FiberManualRecordIcon className={classes.warning} />
         </Tooltip>
       )}
-    </>
+    </div>
   )
 }
 

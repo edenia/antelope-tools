@@ -273,12 +273,6 @@ const syncProducersInfo = async () => {
   const producers = await find()
   await Promise.all(
     producers.map(async producer => {
-      await update(
-        { owner: { _eq: producer.owner } },
-        {
-          updated_at: new Date()
-        }
-      )
       try {
         const endpoints = getApiEndpoints(producer)
 
