@@ -26,12 +26,12 @@ spec:
         - name: HASURA_GRAPHQL_ADMIN_SECRET
           valueFrom:
             secretKeyRef:
-              name: hasura-secret
+              name: dashboard-secret
               key: HASURA_GRAPHQL_ADMIN_SECRET
         - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
           valueFrom:
             secretKeyRef:
-              name: hasura-secret
+              name: dashboard-secret
               key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
         envFrom:
         - configMapRef:

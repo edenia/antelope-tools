@@ -8,13 +8,22 @@ fi
 
 echo "Building docker containers..."
 if [ "$1" == "production" ]; then
-    docker build -t eoscostarica506/monitor-webapp:latest --target run-stage webapp/
+    cp .env.mainnet .env
+    docker-compose build
+    docker image tag eosio-dashboard_webapp:latest eoscostarica506/monitor-webapp:latest
+    docker image tag eosio-dashboard_hapi:latest eoscostarica506/monitor-hapi
+    docker image tag eosio-dashboard_wallet:latest eoscostarica506/wallet
     docker push eoscostarica506/monitor-webapp:latest
-    docker build -t eoscostarica506/monitor-hapi hapi/
     docker push eoscostarica506/monitor-hapi
-    docker build -t eoscostarica506/wallet wallet/
     docker push eoscostarica506/wallet
 elif [ "$1" == "testing" ]; then
-    docker build -t eoscostarica506/monitor-webapp:testing webapp/
-    docker push eoscostarica506/monitor-webapp:testing hapi/
+    cp .env.jungle .env
+    docker-compose build webapp
+    docker image tag eosio-dashboard_webapp:latest eoscostarica506/monitor-webapp:testing
+    docker push eoscostarica506/monitor-webapp:testing
+elif [ "$1" == "lacchain" ]; then
+    cp .env.lacchain .env
+    docker-compose build webapp
+    docker image tag eosio-dashboard_webapp:latest eoscostarica506/monitor-webapp:lacchain
+    docker push eoscostarica506/monitor-webapp:lacchain
 fi
