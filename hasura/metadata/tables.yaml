@@ -1,43 +1,116 @@
 - table:
     schema: public
-    name: producer
+    name: cpu
+  object_relationships:
+  - name: producerByProducer
+    using:
+      foreign_key_constraint_on: producer
   select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - owner
-          - total_votes
-          - producer_key
-          - is_active
-          - url
-          - unpaid_blocks
-          - last_claim_time
-          - location
-          - producer_authority
-          - bp_json
-          - server_version
-          - chain_id
-          - head_block_num
-          - last_irreversible_block_num
-          - last_irreversible_block_id
-          - head_block_id
-          - head_block_time
-          - head_block_producer
-          - virtual_block_cpu_limit
-          - virtual_block_net_limit
-          - block_cpu_limit
-          - block_net_limit
-          - server_version_string
-          - fork_db_head_block_num
-          - fork_db_head_block_id
-          - server_full_version_string
-          - ping
-          - total_votes_percent
-          - total_votes_eos
-          - block_rewards
-          - vote_rewards
-          - total_rewards
-          - created_at
-          - updated_at
-        filter: {}
+  - role: guest
+    permission:
+      columns:
+      - id
+      - producer
+      - usage
+      - created_at
+      - updated_at
+      filter: {}
+- table:
+    schema: public
+    name: net
+  object_relationships:
+  - name: producerByProducer
+    using:
+      foreign_key_constraint_on: producer
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - producer
+      - usage
+      - created_at
+      - updated_at
+      filter: {}
+- table:
+    schema: public
+    name: producer
+  array_relationships:
+  - name: cpus
+    using:
+      foreign_key_constraint_on:
+        column: producer
+        table:
+          schema: public
+          name: cpu
+  - name: nets
+    using:
+      foreign_key_constraint_on:
+        column: producer
+        table:
+          schema: public
+          name: net
+  - name: rams
+    using:
+      foreign_key_constraint_on:
+        column: producer
+        table:
+          schema: public
+          name: ram
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - owner
+      - total_votes
+      - producer_key
+      - is_active
+      - url
+      - unpaid_blocks
+      - last_claim_time
+      - location
+      - producer_authority
+      - bp_json
+      - server_version
+      - chain_id
+      - head_block_num
+      - last_irreversible_block_num
+      - last_irreversible_block_id
+      - head_block_id
+      - head_block_time
+      - head_block_producer
+      - virtual_block_cpu_limit
+      - virtual_block_net_limit
+      - block_cpu_limit
+      - block_net_limit
+      - server_version_string
+      - fork_db_head_block_num
+      - fork_db_head_block_id
+      - server_full_version_string
+      - ping
+      - total_votes_percent
+      - total_votes_eos
+      - block_rewards
+      - vote_rewards
+      - total_rewards
+      - created_at
+      - updated_at
+      filter: {}
+- table:
+    schema: public
+    name: ram
+  object_relationships:
+  - name: producerByProducer
+    using:
+      foreign_key_constraint_on: producer
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - producer
+      - usage
+      - created_at
+      - updated_at
+      filter: {}

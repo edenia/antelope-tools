@@ -16,6 +16,7 @@ import { formatWithThousandSeparator, onImgError } from '../utils'
 
 import CountryFlag from './CountryFlag'
 import ProducerHealthIndicators from './ProducerHealthIndicators'
+import UsageChart from './UsageChart'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -192,11 +193,23 @@ const ProducerCard = ({ producer, rank }) => {
             {moment(new Date()).diff(moment(producer.updated_at), 'seconds')}
             {t('secondsAgo')}
           </dd>
+
+          <dt className={classes.dt}>{t('healthStatus')}</dt>
+          <dd>
+            <ProducerHealthIndicators producer={producer} />
+          </dd>
+
+          {producer?.cpus?.length > 0 && (
+            <>
+              <dt className={classes.dt}>{t('cpuUsage')}</dt>
+              <dd>
+                <UsageChart items={producer.cpus} />
+              </dd>
+            </>
+          )}
         </dl>
       </CardContent>
-      <CardActions disableSpacing>
-        <ProducerHealthIndicators producer={producer} />
-      </CardActions>
+      <CardActions disableSpacing />
     </Card>
   )
 }

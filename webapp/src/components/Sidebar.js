@@ -7,6 +7,7 @@ import * as colors from '@material-ui/core/colors'
 import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
 import DashboardIcon from '@material-ui/icons/Dashboard'
+import LiveHelpIcon from '@material-ui/icons/LiveHelp'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import Divider from '@material-ui/core/Divider'
 import { useTranslation } from 'react-i18next'
@@ -66,6 +67,11 @@ const DashboardSidebarContent = () => {
       title: t('dashboard'),
       href: '/dashboard/home',
       icon: <DashboardIcon />
+    },
+    {
+      title: t('networkInfo'),
+      href: '/dashboard/network',
+      icon: <LiveHelpIcon />
     },
     {
       title: t('blockProducer'),

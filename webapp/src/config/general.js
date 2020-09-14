@@ -7,3 +7,4 @@ export const eosRateLink = process.env.REACT_APP_EOS_RATE_LINK
 export const defaultProducerLogo =
   process.env.REACT_APP_DEFAULT_PRODUCER_LOGO ||
   'https://bloks.io/img/eosio.png'
+export const useLanguageSufix = process.env.REACT_APP_USELANGUAGE_SUFIX

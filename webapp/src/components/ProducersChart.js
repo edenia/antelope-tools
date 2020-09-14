@@ -20,7 +20,7 @@ const polarToCartesian = (cx, cy, radius, angle) => ({
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: theme.palette.white,
+    backgroundColor: theme.palette.primary[50],
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
     boxShadow:

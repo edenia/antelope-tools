@@ -20,6 +20,7 @@ const run = async (name, action, sleep) => {
 
 const start = async () => {
   let hasuraReady = false
+
   while (!hasuraReady) {
     try {
       await axiosUtil.instance.get(
@@ -28,9 +29,14 @@ const start = async () => {
       hasuraReady = true
     } catch (error) {
       hasuraReady = false
-      console.log('waiting for hasura...')
+      console.log(
+        'waiting for hasura...',
+        hasuraConfig.url.replace('/v1/graphql', '/healthz')
+      )
+      await sleepFor(3)
     }
   }
+
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,
@@ -40,6 +46,11 @@ const start = async () => {
     'SYNC PRODUCER INFO',
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
+  )
+  run(
+    'SYNC CPU USAGE',
+    producerService.syncCpuUsage,
+    workersConfig.syncProducerCpuInterval
   )
 }
 

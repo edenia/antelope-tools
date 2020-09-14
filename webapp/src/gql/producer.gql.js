@@ -16,6 +16,18 @@ export const PRODUCERS_SUBSCRIPTION = gql`
       head_block_producer
       head_block_time
       updated_at
+      cpus(limit: 10, order_by: { created_at: desc }) {
+        usage
+        updated_at
+      }
+      rams(limit: 10, order_by: { created_at: desc }) {
+        usage
+        updated_at
+      }
+      nets(limit: 10, order_by: { created_at: desc }) {
+        usage
+        updated_at
+      }
     }
   }
 `
