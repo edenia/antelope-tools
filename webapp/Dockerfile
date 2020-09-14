@@ -18,6 +18,7 @@ ARG react_app_eos_bp_json_on_chain_contract
 ARG react_app_eos_bp_json_on_chain_table
 ARG react_app_eos_bp_json_on_chain_scope
 ARG react_app_eos_custom_node_types
+ARG react_app_use_language_sufix
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -41,6 +42,7 @@ ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT $react_app_eos_bp_json_on_chain_cont
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE $react_app_eos_bp_json_on_chain_table
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE $react_app_eos_bp_json_on_chain_scope
 ENV REACT_APP_EOS_CUSTOM_NODE_TYPES $react_app_eos_custom_node_types
+ENV REACT_APP_USE_LANGUAGE_SUFIX $react_app_use_language_sufix
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR
