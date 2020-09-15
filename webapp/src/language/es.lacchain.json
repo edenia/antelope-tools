@@ -20,7 +20,7 @@
   },
   "dashboardHome": {
     "currentProducer": "Productor actual",
-    "headBlock": "Bloque de la cabeza",
+    "headBlock": "Ultimo Bloque",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
