@@ -104,7 +104,7 @@
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
     "healthStatus": "Salud del nodo",
-    "cpuUsage": "Uso del CPU"
+    "cpuUsage": "Benchmark de CPU"
   },
   "producerHealthIndicators": {
     "synced": "Sincronizado",

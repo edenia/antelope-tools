@@ -104,7 +104,7 @@
     "secondsAgo": "s ago",
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
-    "cpuUsage": "CPU Usage"
+    "cpuUsage": "CPU Benchmark"
   },
   "producerHealthIndicators": {
     "synced": "Synced",
