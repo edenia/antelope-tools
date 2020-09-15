@@ -8,6 +8,7 @@ const DashboardRewards = lazy(() => import('./DashboardRewards'))
 const DashboardProducers = lazy(() => import('./DashboardProducers'))
 const DashboardNodes = lazy(() => import('./DashboardNodes'))
 const DashboardHome = lazy(() => import('./DashboardHome'))
+const DashboardNetwork = lazy(() => import('./DashboardNetwork'))
 
 const Dashboard = () => (
   <Grid container spacing={4}>
@@ -20,6 +21,7 @@ const Dashboard = () => (
           component={DashboardProducers}
         />
         <Route exact path="/dashboard/nodes" component={DashboardNodes} />
+        <Route exact path="/dashboard/network" component={DashboardNetwork} />
         {generalConfig.useRewards && (
           <Route exact path="/dashboard/rewards" component={DashboardRewards} />
         )}

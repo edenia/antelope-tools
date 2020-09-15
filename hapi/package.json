@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
+    "watch": "env-cmd -f ../.env node src/index.js",
     "lint": "lint-staged"
   },
   "husky": {
@@ -19,6 +20,7 @@
     "@hapi/hapi": "^19.1.1",
     "@hapi/joi": "^17.1.0",
     "axios": "^0.19.2",
+    "env-cmd": "^10.1.0",
     "eosjs": "^20.0.3",
     "eosjs-api": "^7.0.4",
     "graphql-request": "^1.8.2",

@@ -1,6 +1,6 @@
 const EosApi = require('eosjs-api')
 
-const { hasuraUtil, axiosUtil } = require('../utils')
+const { hasuraUtil, axiosUtil, eosmechanicsUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const eosApi = EosApi({
@@ -36,6 +36,36 @@ const FIND = `
   }
 `
 
+const INSERT_CPU_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_cpu_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
+const INSERT_NET_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_net_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
+const INSERT_RAM_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_ram_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
 const update = async (where, payload) => {
   const data = await hasuraUtil.request(UPDATE, { where, payload })
 
@@ -46,6 +76,33 @@ const find = async where => {
   const data = await hasuraUtil.request(FIND, { where })
 
   return data.producer
+}
+
+const insertUsage = async (type = '', payload) => {
+  let mutation = null
+
+  switch (type) {
+    case 'cpu':
+      mutation = INSERT_CPU_USAGE
+      break
+    case 'net':
+      mutation = INSERT_NET_USAGE
+      break
+    case 'ram':
+      mutation = INSERT_RAM_USAGE
+      break
+
+    default:
+      break
+  }
+
+  if (!mutation) {
+    return
+  }
+
+  const data = await hasuraUtil.request(mutation, payload)
+
+  return data[`insert_${type}_one`]
 }
 
 const addExpectedReward = async (producers, totalVotes) => {
@@ -305,7 +362,46 @@ const syncProducersInfo = async () => {
   )
 }
 
+const syncCpuUsage = async () => {
+  const { block, transaction } = (await eosmechanicsUtil.cpu()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('cpu', {
+    producer: producer.id,
+    usage: transaction.processed.receipt.cpu_usage_us
+  })
+}
+
+const syncRamUsage = async () => {
+  const { block } = (await eosmechanicsUtil.ram()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('ram', {
+    producer: producer.id,
+    usage: 1 // TODO: get ram usage from transaction or block
+  })
+}
+
+const syncNetUsage = async () => {
+  const { block } = (await eosmechanicsUtil.net()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('net', {
+    producer: producer.id,
+    usage: 1 // TODO: get net usage from transaction or block
+  })
+}
+
 module.exports = {
   syncProducers,
-  syncProducersInfo
+  syncProducersInfo,
+  syncCpuUsage,
+  syncRamUsage,
+  syncNetUsage
 }
