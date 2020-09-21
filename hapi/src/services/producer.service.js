@@ -398,6 +398,11 @@ const syncNetUsage = async () => {
   })
 }
 
+const checkForMissedBlocks = async () => {
+  const info = await eosApi.getInfo({})
+  console.log(info)
+}
+
 module.exports = {
   syncProducers,
   syncProducersInfo,
