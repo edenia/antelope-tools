@@ -17,6 +17,23 @@
       filter: {}
 - table:
     schema: public
+    name: missed_block
+  object_relationships:
+  - name: producerByProducer
+    using:
+      foreign_key_constraint_on: producer
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - producer
+      - value
+      - created_at
+      - updated_at
+      filter: {}
+- table:
+    schema: public
     name: net
   object_relationships:
   - name: producerByProducer
@@ -43,6 +60,13 @@
         table:
           schema: public
           name: cpu
+  - name: missed_blocks
+    using:
+      foreign_key_constraint_on:
+        column: producer
+        table:
+          schema: public
+          name: missed_block
   - name: nets
     using:
       foreign_key_constraint_on:

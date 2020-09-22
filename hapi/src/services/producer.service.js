@@ -66,6 +66,16 @@ const INSERT_RAM_USAGE = `
   }
 `
 
+const INSERT_MISSED_BLOCK = `
+  mutation ($producer: Int!, $value: Int!) {
+    insert_missed_block_one(object: {producer: $producer, value: $value}) {
+      id
+      producer
+      value
+    }
+  }
+`
+
 const update = async (where, payload) => {
   const data = await hasuraUtil.request(UPDATE, { where, payload })
 
@@ -103,6 +113,12 @@ const insertUsage = async (type = '', payload) => {
   const data = await hasuraUtil.request(mutation, payload)
 
   return data[`insert_${type}_one`]
+}
+
+const insertMissedBlock = async payload => {
+  const data = await hasuraUtil.request(INSERT_MISSED_BLOCK, payload)
+
+  return data.insert_missed_block_one
 }
 
 const addExpectedReward = async (producers, totalVotes) => {
@@ -400,10 +416,36 @@ const syncNetUsage = async () => {
 
 const checkForMissedBlocks = async () => {
   const info = await eosApi.getInfo({})
+  let currentBlock = info.head_block_num
+  let currentProducer = info.head_block_producer
   console.log(info)
+
+  while (currentBlock) {
+    const newInfo = await eosApi.getInfo({})
+
+    if (newInfo.head_block_num === currentBlock) {
+      console.log('new missed block')
+
+      const schedule = await eosApi.getProducerSchedule()
+      const index = schedule.findIndex(item => item.owner === currentProducer)
+      const producers = await find({
+        owner: { _eq: schedule[index + 1].owner }
+      })
+      const producer = producers.length ? producers[0] : null
+      await insertMissedBlock({
+        producer: producer.id,
+        value: 1
+      })
+    }
+
+    currentBlock = newInfo.head_block_num
+    currentProducer = newInfo.head_block_producer
+  }
+  console.log(currentBlock, currentProducer)
 }
 
 module.exports = {
+  checkForMissedBlocks,
   syncProducers,
   syncProducersInfo,
   syncCpuUsage,

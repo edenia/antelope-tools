@@ -37,21 +37,22 @@ const start = async () => {
     }
   }
 
-  run(
-    'SYNC PRODUCERS',
-    producerService.syncProducers,
-    workersConfig.syncProducersInterval
-  )
-  run(
-    'SYNC PRODUCER INFO',
-    producerService.syncProducersInfo,
-    workersConfig.syncProducerInfoInterval
-  )
-  run(
-    'SYNC CPU USAGE',
-    producerService.syncCpuUsage,
-    workersConfig.syncProducerCpuInterval
-  )
+  // run(
+  //   'SYNC PRODUCERS',
+  //   producerService.syncProducers,
+  //   workersConfig.syncProducersInterval
+  // )
+  // run(
+  //   'SYNC PRODUCER INFO',
+  //   producerService.syncProducersInfo,
+  //   workersConfig.syncProducerInfoInterval
+  // )
+  // run(
+  //   'SYNC CPU USAGE',
+  //   producerService.syncCpuUsage,
+  //   workersConfig.syncProducerCpuInterval
+  // )
+  run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks, 0.5)
 }
 
 module.exports = {

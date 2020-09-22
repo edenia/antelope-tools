@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -11,11 +12,11 @@ import CardActions from '@material-ui/core/CardActions'
 import { useTranslation } from 'react-i18next'
 
 import PageTitle from '../../components/PageTitle'
+import CpuBenchmarkChart from '../../components/CpuBenchmarkChart'
+import { PRODUCERS_QUERY } from '../../gql'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    minWidth: 300,
     height: '100%',
     display: 'flex',
     flexFlow: 'column'
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   dt: {
     fontWeight: 'bold'
+  },
+  dd: {
+    wordBreak: 'break-word'
   }
 }))
 
@@ -46,6 +50,9 @@ const Producers = () => {
   const classes = useStyles()
   const info = useSelector((state) => state.eos.info)
   const { t } = useTranslation('dashboardNetwork')
+  const { data: { producer: producers = [] } = { producers: [] } } = useQuery(
+    PRODUCERS_QUERY
+  )
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
@@ -54,7 +61,6 @@ const Producers = () => {
   useEffect(() => {
     return () => {
       dispatch.eos.stopTrackingInfo()
-      dispatch.eos.stopTrackingProducerSchedule()
     }
   }, [dispatch])
 
@@ -63,22 +69,63 @@ const Producers = () => {
       <PageTitle title={t('htmlTitle')} />
       <Typography variant="h3">{t('title')}</Typography>
       <Grid container justify="flex-start" spacing={1}>
-        <Card className={classes.root}>
-          <CardHeader
-            title={t('chainLimits')}
-            avatar={<span className={classes.avatar}>CL</span>}
-          />
-          <CardContent className={classes.content}>
-            <dl className={classes.dl}>
-              <dt className={classes.dt}>{t('cpuLimitPerBlock')}:</dt>
-              <dd>{(info.block_cpu_limit / 1000000).toFixed(2)}s</dd>
+        <Grid item xs={12} sm={6} md={2}>
+          <Card className={classes.root}>
+            <CardHeader
+              title={t('chainLimits')}
+              avatar={<span className={classes.avatar}>CL</span>}
+            />
+            <CardContent className={classes.content}>
+              <dl className={classes.dl}>
+                <dt className={classes.dt}>{t('chainId')}</dt>
+                <dd className={classes.dd}>{info.chain_id}</dd>
 
-              <dt className={classes.dt}>{t('netLimitPerBlock')}:</dt>
-              <dd>{(info.block_net_limit / 1024).toFixed(0)}kb</dd>
-            </dl>
-          </CardContent>
-          <CardActions disableSpacing />
-        </Card>
+                <dt className={classes.dt}>{t('cpuLimitPerBlock')}:</dt>
+                <dd className={classes.dd}>
+                  {(info.block_cpu_limit / 1000000).toFixed(2)}s
+                </dd>
+
+                <dt className={classes.dt}>{t('netLimitPerBlock')}:</dt>
+                <dd className={classes.dd}>
+                  {(info.block_net_limit / 1024).toFixed(0)}kb
+                </dd>
+              </dl>
+            </CardContent>
+            <CardActions disableSpacing />
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={5}>
+          <Card className={classes.root}>
+            <CardHeader
+              title={t('cpuBenchmarks')}
+              avatar={<span className={classes.avatar}>CPU</span>}
+            />
+            <CardContent className={classes.content}>
+              <CpuBenchmarkChart
+                producers={producers}
+                dataKey="cpus"
+                valueKey="usage"
+              />
+            </CardContent>
+            <CardActions disableSpacing />
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={5}>
+          <Card className={classes.root}>
+            <CardHeader
+              title={t('missedBlocks')}
+              avatar={<span className={classes.avatar}>MB</span>}
+            />
+            <CardContent className={classes.content}>
+              <CpuBenchmarkChart
+                producers={producers}
+                dataKey="missed_blocks"
+                valueKey="value"
+              />
+            </CardContent>
+            <CardActions disableSpacing />
+          </Card>
+        </Grid>
       </Grid>
     </Grid>
   )
