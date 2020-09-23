@@ -27,7 +27,7 @@ spec:
         ports:
         - containerPort: 9090
         volumeMounts:
-        - mountPath: /hapi
+        - mountPath: /usr/app
           name: hapi
           subPathExpr: $(CODE_DIRECTORY)
       restartPolicy: Always
