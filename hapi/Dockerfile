@@ -1,15 +1,16 @@
-FROM node:14.2.0
+# ---------- Base ----------
+FROM node:14.2.0 as base
+WORKDIR /app
 
-# Create app directory
-WORKDIR /usr/app
+# ---------- Builder ----------
+FROM base AS builder
+COPY package.json yarn.lock ./
+RUN yarn --ignore-optional --frozen-lockfile
+COPY ./src ./src
 
-# Install app dependencies
-COPY package*.json ./
-COPY yarn.lock ./
-RUN yarn
-
-# Bundle app source
-COPY . .
-
-EXPOSE 9090
-CMD node src/index.js
+# ---------- Release ----------
+FROM base AS release
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/src ./src
+USER node
+CMD ["node", "./src/index.js"]

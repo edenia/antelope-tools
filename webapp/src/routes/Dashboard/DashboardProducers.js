@@ -50,7 +50,7 @@ const Producers = () => {
         {loading &&
           [0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
             <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
-              <Skeleton variant="rect" width={300} height={260} />
+              <Skeleton variant="rect" width={280} height={560} />
             </Grid>
           ))}
       </Grid>

@@ -14,6 +14,11 @@ const run = async (name, action, sleep) => {
     await action()
   } catch (error) {}
   console.log(`[WORKER ${name}] finished at `, new Date().getTime())
+
+  if (!sleep) {
+    return
+  }
+
   await sleepFor(sleep)
   run(name, action, sleep)
 }
@@ -52,6 +57,7 @@ const start = async () => {
     producerService.syncCpuUsage,
     workersConfig.syncProducerCpuInterval
   )
+  run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
 }
 
 module.exports = {

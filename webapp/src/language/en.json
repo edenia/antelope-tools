@@ -104,7 +104,8 @@
     "secondsAgo": "s ago",
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
-    "cpuUsage": "CPU Benchmark"
+    "cpuUsage": "CPU Benchmark",
+    "missedBlocks": "Missed Blocks"
   },
   "producerHealthIndicators": {
     "synced": "Synced",
@@ -119,6 +120,9 @@
     "title": "Network Info",
     "chainLimits": "Chain Limits",
     "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
-    "netLimitPerBlock": "NET LIMIT PER BLOCK"
+    "netLimitPerBlock": "NET LIMIT PER BLOCK",
+    "chainId": "CHAIN ID",
+    "cpuBenchmarks": "CPU Benchmarks",
+    "missedBlocks": "Missed Blocks"
   }
 }
