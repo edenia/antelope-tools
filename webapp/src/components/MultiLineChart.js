@@ -13,7 +13,7 @@ import {
 } from 'recharts'
 import moment from 'moment'
 
-const ProducersChart = ({ producers, dataKey, valueKey }) => {
+const MultiLineChart = ({ producers, dataKey, valueKey }) => {
   const theme = useTheme()
   const colors = [theme.palette.secondary[100], theme.palette.secondary[800]]
   const [minDate, setMinDate] = useState()
@@ -42,7 +42,7 @@ const ProducersChart = ({ producers, dataKey, valueKey }) => {
     setMinDate(allDates[0])
     setMaxDate(allDates[allDates.length - 1])
     setSeries(series)
-  }, [producers])
+  }, [producers, dataKey])
 
   return (
     <ResponsiveContainer width="100%" aspect={1}>
@@ -71,10 +71,10 @@ const ProducersChart = ({ producers, dataKey, valueKey }) => {
   )
 }
 
-ProducersChart.propTypes = {
+MultiLineChart.propTypes = {
   producers: PropTypes.array,
   dataKey: PropTypes.string,
   valueKey: PropTypes.string
 }
 
-export default memo(ProducersChart)
+export default memo(MultiLineChart)

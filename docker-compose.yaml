@@ -6,22 +6,14 @@ services:
     ports:
       - '8888:8888'
     volumes:
-      - type: volume
-        source: dbdata
-        target: /opt/application/data
-        volume:
-          nocopy: true
+      - ${WALLET_DATA}:/opt/application/data
   postgres:
     container_name: '${STAGE}-${APP_NAME}-postgres'
     image: postgres:11.5-alpine
     ports:
       - '5432:5432'
     volumes:
-      - type: volume
-        source: dbdata
-        target: /var/lib/postgresql/data
-        volume:
-          nocopy: true
+      - ${POSTGRES_DATA}:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: '${POSTGRES_USER}'
       POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
@@ -32,14 +24,10 @@ services:
     ports:
       - '9090:9090'
     volumes:
+      - ./modules/hapi:/app/node_modules
       - type: bind
         source: ./hapi
         target: /app
-      - type: volume
-        source: hapimodules
-        target: /app/node_modules
-        volume:
-          nocopy: true
     working_dir: /app
     command: bash -c "yarn && yarn watch"
     environment:
@@ -81,14 +69,10 @@ services:
     ports:
       - '3000:3000'
     volumes:
+      - ./modules/webapp:/app/node_modules
       - type: bind
         source: ./webapp
         target: /app
-      - type: volume
-        source: webappmodules
-        target: /app/node_modules
-        volume:
-          nocopy: true
     working_dir: /app
     command: bash -c "yarn && yarn start"
     environment:
@@ -110,8 +94,3 @@ services:
       REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}'
       REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}'
       REACT_APP_EOS_CUSTOM_NODE_TYPES: '${REACT_APP_EOS_CUSTOM_NODE_TYPES}'
-volumes:
-  dbdata:
-  walletdata:
-  webappmodules:
-  hapimodules:

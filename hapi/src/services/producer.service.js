@@ -115,12 +115,6 @@ const insertUsage = async (type = '', payload) => {
   return data[`insert_${type}_one`]
 }
 
-const insertMissedBlock = async payload => {
-  const data = await hasuraUtil.request(INSERT_MISSED_BLOCK, payload)
-
-  return data.insert_missed_block_one
-}
-
 const addExpectedReward = async (producers, totalVotes) => {
   const systemData = await eosApi.getCurrencyStats({
     symbol: 'EOS',
@@ -414,34 +408,108 @@ const syncNetUsage = async () => {
   })
 }
 
+const saveMissedBlocksFor = async (producerName, missedBlocks) => {
+  if (missedBlocks < 1) {
+    return
+  }
+
+  const producers = await find({
+    owner: { _eq: producerName }
+  })
+  const producer = producers.length ? producers[0] : null
+  await hasuraUtil.request(INSERT_MISSED_BLOCK, {
+    producer: producer.id,
+    value: missedBlocks
+  })
+}
+
 const checkForMissedBlocks = async () => {
-  const info = await eosApi.getInfo({})
-  let currentBlock = info.head_block_num
+  let info = await eosApi.getInfo({})
+  let lastProducer = info.head_block_producer
   let currentProducer = info.head_block_producer
-  console.log(info)
 
-  while (currentBlock) {
-    const newInfo = await eosApi.getInfo({})
+  // wait until first turn change
+  while (currentProducer === lastProducer) {
+    console.log('waiting for first turn change')
+    info = await eosApi.getInfo({})
+    lastProducer = currentProducer
+    currentProducer = info.head_block_producer
+    await new Promise(resolve => setTimeout(() => resolve(), 250))
+  }
 
-    if (newInfo.head_block_num === currentBlock) {
-      console.log('new missed block')
+  lastProducer = info.head_block_producer
+  const lastBlockNum = info.head_block_num
+  let currentBlockNum = null
+  let missedBlocks = 0
+  let producedBlocks = 0
 
-      const schedule = await eosApi.getProducerSchedule()
-      const index = schedule.findIndex(item => item.owner === currentProducer)
-      const producers = await find({
-        owner: { _eq: schedule[index + 1].owner }
-      })
-      const producer = producers.length ? producers[0] : null
-      await insertMissedBlock({
-        producer: producer.id,
-        value: 1
-      })
+  // start an infinity loop to track missed blocks until main process ends
+  while (true) {
+    const startTime = new Date()
+    info = await eosApi.getInfo({})
+    currentProducer = info.head_block_producer
+    currentBlockNum = info.head_block_num
+
+    const currentSchedule = await eosApi.getProducerSchedule({})
+    const lastProducerIndex = currentSchedule.active.producers.findIndex(
+      item => item.producer_name === lastProducer
+    )
+    const newProducerIndex = currentSchedule.active.producers.findIndex(
+      item => item.producer_name === currentProducer
+    )
+
+    if (lastProducerIndex > newProducerIndex && newProducerIndex !== 0) {
+      // change producer in case that the network is stuck in a previous producer
+      console.log('check point', lastProducer, currentProducer)
+      currentProducer = lastProducer
     }
 
-    currentBlock = newInfo.head_block_num
-    currentProducer = newInfo.head_block_producer
+    if (missedBlocks + producedBlocks >= 12) {
+      // change producer in case that the currentProducer and the next one are missing blocks
+      console.log(
+        'check point',
+        lastProducerIndex + 1,
+        currentSchedule.active.producers.length
+      )
+      const nextProducerIndex =
+        lastProducerIndex + 1 > currentSchedule.active.producers.length
+          ? 0
+          : lastProducerIndex + 1
+      currentProducer =
+        currentSchedule.active.producers[nextProducerIndex].producer_name
+    }
+
+    if (lastProducer !== currentProducer) {
+      // we have a new producer so we should save the missed blocks for the previous one
+      console.log(
+        `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
+      )
+      await saveMissedBlocksFor(lastProducer, missedBlocks)
+      producedBlocks = 0
+      missedBlocks = 0
+    }
+
+    if (currentBlockNum === lastBlockNum) {
+      // when the previous block and the current block are equals we have a missed block
+      console.log(
+        `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
+      )
+      missedBlocks += 1
+    } else {
+      // when the previous block and the current block are diferent we have a new block
+      console.log(`new block from ${currentProducer}`)
+      producedBlocks += 1
+    }
+
+    lastProducer = currentProducer
+    const endTime = new Date()
+    const msDiff = endTime.getTime() - startTime.getTime()
+    console.log(`finished after ${msDiff}`)
+
+    if (msDiff < 500) {
+      await new Promise(resolve => setTimeout(() => resolve(), msDiff))
+    }
   }
-  console.log(currentBlock, currentProducer)
 }
 
 module.exports = {

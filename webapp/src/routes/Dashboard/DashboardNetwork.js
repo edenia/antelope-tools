@@ -12,7 +12,7 @@ import CardActions from '@material-ui/core/CardActions'
 import { useTranslation } from 'react-i18next'
 
 import PageTitle from '../../components/PageTitle'
-import CpuBenchmarkChart from '../../components/CpuBenchmarkChart'
+import MultiLineChart from '../../components/MultiLineChart'
 import { PRODUCERS_QUERY } from '../../gql'
 
 const useStyles = makeStyles((theme) => ({
@@ -101,7 +101,7 @@ const Producers = () => {
               avatar={<span className={classes.avatar}>CPU</span>}
             />
             <CardContent className={classes.content}>
-              <CpuBenchmarkChart
+              <MultiLineChart
                 producers={producers}
                 dataKey="cpus"
                 valueKey="usage"
@@ -117,7 +117,7 @@ const Producers = () => {
               avatar={<span className={classes.avatar}>MB</span>}
             />
             <CardContent className={classes.content}>
-              <CpuBenchmarkChart
+              <MultiLineChart
                 producers={producers}
                 dataKey="missed_blocks"
                 valueKey="value"
