@@ -35,14 +35,14 @@ run-hasura:
 	@docker-compose stop hasura
 	@docker-compose up -d --build hasura
 	@until \
-		curl http://localhost:8080/healthz; \
+		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
 		sleep 5; done;
-	@cd hasura && hasura console --endpoint http://localhost:8080 --skip-update-check --no-browser;
+	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser;
 
 run-webapp:
 	@until \
-		curl http://localhost:8080/v1/version; \
+		curl http://localhost:8585/v1/version; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
 	@docker-compose up -d --build webapp

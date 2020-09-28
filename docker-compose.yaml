@@ -4,7 +4,7 @@ services:
     container_name: '${STAGE}-${APP_NAME}-wallet'
     build: ./wallet
     ports:
-      - '8888:8888'
+      - '9999:8888'
     volumes:
       - ${WALLET_DATA}:/opt/application/data
   postgres:
@@ -53,7 +53,7 @@ services:
     container_name: '${STAGE}-${APP_NAME}-hasura'
     image: hasura/graphql-engine:v1.3.1.cli-migrations-v2
     ports:
-      - '8080:8080'
+      - '8585:8080'
     volumes:
       - ./hasura/migrations:/hasura-migrations
       - ./hasura/metadata:/hasura-metadata
@@ -93,4 +93,5 @@ services:
       REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}'
       REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}'
       REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: '${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}'
+      REACT_APP_EOS_INCLUDE_DEFAULT_TRANSACTION: '${REACT_APP_EOS_INCLUDE_DEFAULT_TRANSACTION}'
       REACT_APP_EOS_CUSTOM_NODE_TYPES: '${REACT_APP_EOS_CUSTOM_NODE_TYPES}'

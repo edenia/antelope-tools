@@ -10,6 +10,7 @@ const BlockProducerAgreementContract = lazy(() =>
   import('./BlockProducerAgreementContract')
 )
 const EditBPJson = lazy(() => import('./EditBPJson'))
+const SmartContract = lazy(() => import('./SmartContract'))
 
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/bpjson',
     component: EditBPJson
+  },
+  {
+    path: '/smart-contract',
+    component: SmartContract
   }
 ]
 
