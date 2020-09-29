@@ -6,7 +6,6 @@ metadata:
   name: monitor-webapp
 spec:
   ports:
-  ports:
   - name: "80"
     port: 80
     targetPort: 80
