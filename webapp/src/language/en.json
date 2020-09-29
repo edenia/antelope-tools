@@ -16,7 +16,8 @@
     "nodeInfo": "Update Node Info",
     "about": "About",
     "ricardianContract": "Ricardian Contract",
-    "help": "Help"
+    "help": "Help",
+    "smartContract": "Smart Contract"
   },
   "dashboardHome": {
     "currentProducer": "Current Producer",
@@ -124,5 +125,30 @@
     "chainId": "CHAIN ID",
     "cpuBenchmarks": "CPU Benchmarks",
     "missedBlocks": "Missed Blocks"
+  },
+  "smartContract": {
+    "htmlTitle": "Account Info - Dashboard",
+    "title": "Account Info",
+    "loginBeforeUseAction": "Please login before execute an action",
+    "unknownError": "Unknown error processing action",
+    "accountNotFound": "Account not found",
+    "account": "Account"
+  },
+  "accountInfo": {
+    "resources": "Resources",
+    "keys": "Keys",
+    "contractActions": "Contract Actions",
+    "contractTables": "Contract Tables",
+    "ricardianContract": "Ricardian Contract",
+    "account": "Account",
+    "action": "Action",
+    "executeTransaction": "Execute Transaction",
+    "table": "Table",
+    "scope": "Scope",
+    "lowerBound": "Lower Bound",
+    "upperBound": "Upper Bound",
+    "limit": "Limit",
+    "getData": "Get Data",
+    "emptyTable": "Empty Table"
   }
 }

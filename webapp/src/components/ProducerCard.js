@@ -189,7 +189,12 @@ const ProducerCard = ({ producer, rank }) => {
           )}
 
           <dt className={classes.dt}>{t('missedBlocks')}</dt>
-          <dd>{producer?.missed_blocks?.length}</dd>
+          <dd>
+            {(producer?.missed_blocks || []).reduce(
+              (result, current) => result + current.value,
+              0
+            )}
+          </dd>
 
           <dt className={classes.dt}>{t('lastTimeChecked')}</dt>
           <dd>

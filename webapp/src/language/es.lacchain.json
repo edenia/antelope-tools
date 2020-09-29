@@ -16,7 +16,8 @@
     "nodeInfo": "Actualizar información del nodo",
     "about": "Acerca de",
     "ricardianContract": "Contrato ricardiano",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "smartContract": "Contratos Inteligentes"
   },
   "dashboardHome": {
     "currentProducer": "Productor actual",
@@ -120,5 +121,30 @@
     "chainLimits": "Límites de la cadena",
     "cpuLimitPerBlock": "Límite de CPU por bloque",
     "netLimitPerBlock": "Límite de NET por bloque"
+  },
+  "smartContract": {
+    "htmlTitle": "Información de la cuenta - Dashboard",
+    "title": "Información de la cuenta",
+    "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
+    "unknownError": "Error desconocido al procesar la acción",
+    "accountNotFound": "Cuenta no encontrada",
+    "account": "Cuenta"
+  },
+  "accountInfo": {
+    "resources": "Recursos",
+    "keys": "Claves",
+    "contractActions": "Acciones del Contrato",
+    "contractTables": "Tablas del Contrato",
+    "ricardianContract": "Contratos Ricardianos",
+    "account": "Cuenta",
+    "action": "Acción",
+    "executeTransaction": "Ejecutar Transacción",
+    "table": "Tabla",
+    "scope": "Alcance",
+    "lowerBound": "Límite inferior",
+    "upperBound": "Límite superior",
+    "limit": "Límite",
+    "getData": "Obtener Datos",
+    "emptyTable": "Table vacía"
   }
 }
