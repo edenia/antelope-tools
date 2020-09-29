@@ -374,6 +374,7 @@ const syncProducersInfo = async () => {
 
 const syncCpuUsage = async () => {
   await eosmechanicsUtil.cpu()
+  const { block, transaction } = (await eosmechanicsUtil.cpu()) || {}
   const producers = await find({
     owner: { _eq: block.producer }
   })
