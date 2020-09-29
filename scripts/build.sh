@@ -25,6 +25,7 @@ elif [ "$1" == "testing" ]; then
     docker push eoscostarica506/monitor-webapp:testing
 elif [ "$1" == "lacchain" ]; then
     cp .env.lacchain .env
+    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8080\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/dashboard-graphql.latamlink.io\/v1\/graphql/g' .env
     docker-compose build webapp
     docker image tag eosio-dashboard_webapp:latest eoscostarica506/monitor-webapp:lacchain
     docker push eoscostarica506/monitor-webapp:lacchain
