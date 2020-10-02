@@ -1,4 +1,4 @@
 module.exports = {
-  url: process.env.HASURA_URL || 'http://localhost:8080/v1/graphql',
-  adminSecret: process.env.HASURA_ADMIN_SECRET || 'secret'
+  url: process.env.HAPI_HASURA_URL,
+  adminSecret: process.env.HAPI_HASURA_ADMIN_SECRET
 }

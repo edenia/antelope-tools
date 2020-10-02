@@ -26,12 +26,12 @@ spec:
         - name: HASURA_GRAPHQL_ADMIN_SECRET
           valueFrom:
             secretKeyRef:
-              name: hasura-secret
+              name: dashboard-secret
               key: HASURA_GRAPHQL_ADMIN_SECRET
         - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
           valueFrom:
             secretKeyRef:
-              name: hasura-secret
+              name: dashboard-secret
               key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
         envFrom:
         - configMapRef:
@@ -45,7 +45,7 @@ spec:
         - mountPath: /hasura-migrations
           name: monitor-hasura1
           subPathExpr: $(MIGRATION_DIRECTORY)
-        - mountPath: /hasura-metadata       
+        - mountPath: /hasura-metadata
           name: monitor-hasura2
           subPathExpr: $(METADATA_DIRECTORY)
       restartPolicy: Always

@@ -5,7 +5,7 @@ import { TokenPocket } from 'ual-token-pocket'
 import { MeetOne } from 'ual-meetone'
 import { Anchor } from 'ual-anchor'
 
-const appName = process.env.REACT_APP_EOS_APP_NAME || 'eosiomonitor'
+const appName = process.env.REACT_APP_EOS_APP_NAME || 'eosiodashboard'
 const network = {
   chainId:
     process.env.REACT_APP_EOS_CHAIN_ID ||

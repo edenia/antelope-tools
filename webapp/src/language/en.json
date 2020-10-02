@@ -1,32 +1,36 @@
 {
+  "user": {
+    "login": "Login"
+  },
   "updateNodeInfo": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
   },
   "sidebar": {
-    "sidebar_BlockProducer": "Block Producers",
-    "sidebar_NodeDistribution": "Node Distribution",
-    "sidebar_RewardDistribution": "Rewards Distribution",
-    "sidebar_NodeInfo": "Update Node Info",
-    "sidebar_About": "About",
-    "sidebar_RicardianContract": "Ricardian Contract",
-    "sidebar_Help": "Help"
+    "dashboard": "Dashboard",
+    "networkInfo": "Network Info",
+    "blockProducer": "Block Producers",
+    "nodeDistribution": "Node Distribution",
+    "rewardDistribution": "Rewards Distribution",
+    "nodeInfo": "Update Node Info",
+    "about": "About",
+    "ricardianContract": "Ricardian Contract",
+    "help": "Help",
+    "smartContract": "Smart Contract"
   },
-  "dashboardProducer": {
+  "dashboardHome": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "blockProducerVotes": "Block Producer Votes",
-    "rank": "Rank",
-    "blockProducer": "Block Producer",
-    "votes": "Votes",
-    "totalVotes": "Total Votes",
-    "location": "Location",
-    "expectedRewards": "Expected Rewards"
+    "htmlTitle": "Home - Dashboard"
+  },
+  "dashboardProducer": {
+    "title": "Block Producers",
+    "htmlTitle": "Block Producers - Dashboard"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -47,11 +51,12 @@
     "website": "Website",
     "votes": "Votes",
     "rewards": "Rewards",
-    "producerCountry": "Producer country"
+    "producerCountry": "Producer country",
+    "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
     "dailyRewards": "Total Daily Rewards",
-    "TopCountryDailyRwards": "Top Country By Daily Rewards",
+    "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid Producers Not Located",
     "clickToViewBPs": "Click to view non-compliant BPs",
@@ -60,7 +65,8 @@
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "producers": "Producers"
+    "producers": "Producers",
+    "htmlTitle": "Rewards Distribution - Dashboard"
   },
   "about": {
     "title": "EOSIO Dashboard",
@@ -83,5 +89,66 @@
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
+  },
+  "producerSummary": {
+    "rank": "Rank",
+    "account": "Account",
+    "website": "Website",
+    "votes": "Votes",
+    "rewards": "Rewards",
+    "country": "Country",
+    "eosRate": "EOS RATE",
+    "p2pEndpoints": "Endpoints (P2P)",
+    "apiEndpoints": "Endpoints (HTTPS / HTTPS)",
+    "pingFromCostaRica": "Ping from Costa Rica",
+    "serverVersion": "Server version",
+    "secondsAgo": "s ago",
+    "lastTimeChecked": "Last Time Checked",
+    "healthStatus": "Health Status",
+    "cpuUsage": "CPU Benchmark",
+    "missedBlocks": "Missed Blocks"
+  },
+  "producerHealthIndicators": {
+    "synced": "Synced",
+    "notSyncing": "Not syncing",
+    "apiResponding": "API Responding",
+    "apiNotResponding": "API Not Responding",
+    "bpJsonFound": "BP JSON found",
+    "noBpJsonFound": "No BP JSON found"
+  },
+  "dashboardNetwork": {
+    "htmlTitle": "Network Info - Dashboard",
+    "title": "Network Info",
+    "chainLimits": "Chain Limits",
+    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
+    "netLimitPerBlock": "NET LIMIT PER BLOCK",
+    "chainId": "CHAIN ID",
+    "cpuBenchmarks": "CPU Benchmarks",
+    "missedBlocks": "Missed Blocks"
+  },
+  "smartContract": {
+    "htmlTitle": "Account Info - Dashboard",
+    "title": "Account Info",
+    "loginBeforeUseAction": "Please login before execute an action",
+    "unknownError": "Unknown error processing action",
+    "accountNotFound": "Account not found",
+    "account": "Account"
+  },
+  "accountInfo": {
+    "resources": "Resources",
+    "keys": "Keys",
+    "contractActions": "Contract Actions",
+    "contractTables": "Contract Tables",
+    "ricardianContract": "Ricardian Contract",
+    "account": "Account",
+    "action": "Action",
+    "executeTransaction": "Execute Transaction",
+    "table": "Table",
+    "scope": "Scope",
+    "lowerBound": "Lower Bound",
+    "upperBound": "Upper Bound",
+    "limit": "Limit",
+    "getData": "Get Data",
+    "emptyTable": "Empty Table"
   }
 }

@@ -1,11 +1,12 @@
 {
-  "name": "eosiomonitor",
+  "name": "eosiodashboard",
   "version": "1.0.0",
-  "description": "EOSIO Monitor BackEnd",
-  "repository": "https://github.com/eoscostarica/eosio-monitor.git",
+  "description": "EOSIO Dashboard BackEnd",
+  "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
+    "watch": "nodemon --enable-source-maps src/index.js",
     "lint": "lint-staged"
   },
   "husky": {
@@ -26,6 +27,7 @@
     "http-status-codes": "^1.4.0"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
@@ -36,6 +38,10 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.3",
     "lint-staged": ">=10",
+    "nodemon": "^2.0.4",
     "prettier": "^1.19.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "2.1.3"
   }
 }

@@ -11,7 +11,7 @@ run:
 	make -j 3 run-hapi run-hasura run-webapp
 
 run-env:
-	@[ -f .env ] && source .env || echo "$(YELLOW)WARNING:$(RESET) .env file not found"
+	@[ -f .env ] && echo "$(BLUE)INFO:$(RESET) Using .env file" || echo "$(YELLOW)WARNING:$(RESET) .env file not found"
 
 run-postgres:
 	@docker-compose up -d --build postgres
@@ -20,11 +20,8 @@ run-wallet:
 	@docker-compose up -d --build wallet
 
 run-hapi:
-	@cd hapi && yarn
 	@docker-compose up -d --build hapi
-	@if [ $(STAGE) = "dev" ]; then\
-		docker-compose logs -f hapi;\
-	fi
+	@docker-compose logs -f hapi
 
 run-hasura:
 	@until \
@@ -38,27 +35,18 @@ run-hasura:
 	@docker-compose stop hasura
 	@docker-compose up -d --build hasura
 	@until \
-		curl http://localhost:8080/healthz; \
+		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
 		sleep 5; done;
-	@echo ""
-	@if [ $(STAGE) = "dev" ]; then\
-	 	cd hasura;\
-	 	hasura console --endpoint http://localhost:8080 --skip-update-check --no-browser;\
-	fi
+	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser;
 
 run-webapp:
 	@until \
-		curl http://localhost:8080/v1/version; \
+		curl http://localhost:8585/v1/version; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
-	@if [ $(STAGE) = "dev" ]; then\
-		cd webapp && yarn;\
-		FORCE_COLOR=true yarn start | cat;\
-	else\
-		docker-compose up -d --build webapp;\
-		docker-compose up -d --build nginx;\
-	fi
+	@docker-compose up -d --build webapp
+	@docker-compose logs -f webapp
 
 stop: ##@local Stops the development instance
 stop:

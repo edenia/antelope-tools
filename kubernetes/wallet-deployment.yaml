@@ -21,6 +21,23 @@ spec:
       - image: eoscostarica506/wallet
         imagePullPolicy: "Always"
         name: "wallet"
+        envFrom:
+        - configMapRef:
+            name: monitor-wallet-config
         ports:
         - containerPort: 8888
+        volumeMounts:
+        - mountPath: /opt/application/data
+          name: wallet
+          subPathExpr: $(WALLET_DIRECTORY)
+        - mountPath: /opt/application/config
+          name: config-volume
       restartPolicy: Always
+      volumes:
+      - name: config-volume
+        configMap:
+          name:  wallet-config
+      - name: wallet
+        nfs:
+          server: nfs-server-new
+          path: /mnt/

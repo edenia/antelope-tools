@@ -97,7 +97,7 @@ const getProducerInfoOnChain = async (producers) => {
 
 export default {
   state: {
-    producers: { rows: [] },
+    producers: [],
     schedule: {
       version: '',
       producers: []

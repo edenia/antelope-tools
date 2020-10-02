@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
+import { useSubscription } from '@apollo/react-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -23,6 +24,9 @@ import { interpolateHcl } from 'd3-interpolate'
 
 import UnknowFlagIcon from '../../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../../utils'
+import { PRODUCERS_SUBSCRIPTION } from '../../gql'
+import PageTitle from '../../components/PageTitle'
+import CountryFlag from '../../components/CountryFlag'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -113,7 +117,9 @@ const Rewards = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const [summary, setSummary] = useState(null)
-  const producers = useSelector((state) => state.eos.producers)
+  const {
+    data: { producer: producers = [] } = { producers: [] }
+  } = useSubscription(PRODUCERS_SUBSCRIPTION)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
   const { t } = useTranslation('dashboardRewards')
@@ -141,7 +147,6 @@ const Rewards = () => {
   )
 
   useEffect(() => {
-    dispatch.eos.getProducers()
     dispatch.eos.getRate()
   }, [dispatch])
 
@@ -149,7 +154,7 @@ const Rewards = () => {
     let stats = {}
     let daylyRewars = 0
 
-    producers.rows
+    producers
       .filter((a) => a.total_rewards >= 100)
       .forEach((producer) => {
         daylyRewars += producer.total_rewards || 0
@@ -160,7 +165,7 @@ const Rewards = () => {
               ...stats,
               'N/A': {
                 code: 'N/A',
-                name: 'Not available',
+                name: t('notAvailable'),
                 quantity: 1,
                 items: [producer],
                 rewards: producer.total_rewards
@@ -208,9 +213,14 @@ const Rewards = () => {
       })
 
     const nodes = Object.values(stats)
-    const topCountryByRewards = nodes.reduce((prev, current) => {
-      return prev.rewards > current.rewards ? prev : current
-    }, {})
+    const topCountryByRewards = nodes.reduce(
+      (prev, current) => {
+        return current.rewards > prev.rewards && current.code !== 'N/A'
+          ? current
+          : prev
+      },
+      { rewards: 0 }
+    )
 
     setSummary({
       daylyRewars,
@@ -218,15 +228,16 @@ const Rewards = () => {
       producersWithoutProperBpJson: stats['N/A']
     })
     setNodes(nodes)
-  }, [producers])
+  }, [producers, t])
 
   return (
     <>
+      <PageTitle title={t('htmlTitle')} />
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
           <CardContent>
             <Typography variant="h6">{t('dailyRewards')}</Typography>
-            <Typography variant="h3">
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -256,17 +267,15 @@ const Rewards = () => {
           onClick={handlePopoverOpen(summary?.topCountryByRewards)}
         >
           <CardContent>
-            <Typography variant="h6">{t('TopCountryDailyRwards')}</Typography>
-            <Typography variant="h3">
+            <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
+            <Typography variant="subtitle1">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 && (
                 <>
-                  <span className={classes.countryFlag}>
-                    {summary.topCountryByRewards.flag}
-                  </span>
-                  {summary.topCountryByRewards.name}{' '}
+                  <CountryFlag code={summary.topCountryByRewards.code} />
+                  {summary.topCountryByRewards.name}
                 </>
               )}
             </Typography>
@@ -297,7 +306,7 @@ const Rewards = () => {
           <CardContent>
             <Typography variant="h6">{t('paidProducers')}</Typography>
             <Typography
-              variant="h3"
+              variant="subtitle1"
               className={classes.action}
               onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
             >
@@ -329,12 +338,9 @@ const Rewards = () => {
               <span className={classes.highestRewards} />
             </Typography>
             {rate && (
-              <Typography
-                variant="subtitle1"
-                className={classes.rewardsColorSchema}
-              >
-                <span className={classes.itemLabel}>{t('exchangeRate')}: </span> $
-                {formatWithThousandSeparator(rate, 2)}
+              <Typography variant="h6" className={classes.rewardsColorSchema}>
+                <span className={classes.itemLabel}>{t('exchangeRate')}: </span>{' '}
+                ${formatWithThousandSeparator(rate, 2)}
               </Typography>
             )}
           </CardContent>
@@ -358,7 +364,7 @@ const Rewards = () => {
                   return (
                     <Geography
                       onClick={
-                        nodeData ? handlePopoverOpen(nodeData) : () => { }
+                        nodeData ? handlePopoverOpen(nodeData) : () => {}
                       }
                       className={classes.geography}
                       key={geo.rsmKey}
@@ -415,14 +421,16 @@ const Rewards = () => {
               {formatWithThousandSeparator(currentNode?.rewards, 2)} EOS
             </span>
           </Typography>
-          <Typography className={classes.popoverItem}>{t('producers')}:</Typography>
+          <Typography className={classes.popoverItem}>
+            {t('producers')}:
+          </Typography>
           <ul className={classes.producersList}>
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
                 <Link
                   href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
                     producer.url
-                    }/bp.json`}
+                  }/bp.json`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

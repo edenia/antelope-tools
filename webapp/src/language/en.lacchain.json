@@ -1,0 +1,150 @@
+{
+  "user": {
+    "login": "Login"
+  },
+  "updateNodeInfo": {
+    "loadText": "Loading node information . . .",
+    "notLogin": "Please log in to use this tool.",
+    "notRegisterNode": "You must have an account registered as an active node to use this tool."
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "networkInfo": "Network Info",
+    "blockProducer": "Block Producers",
+    "nodeDistribution": "Node Distribution",
+    "rewardDistribution": "Rewards Distribution",
+    "nodeInfo": "Update Node Info",
+    "about": "About",
+    "ricardianContract": "Ricardian Contract",
+    "help": "Help",
+    "smartContract": "Smart Contract"
+  },
+  "dashboardHome": {
+    "currentProducer": "Current Producer",
+    "headBlock": "Head Block",
+    "lastBlock": "Last Irreversible Block",
+    "bpSchedule": "Block Producer Schedule",
+    "transPerSecond": "Transactions Per Second",
+    "transPerBlock": "Transactions Per Block",
+    "htmlTitle": "Home - Dashboard"
+  },
+  "dashboardProducer": {
+    "title": "Block Producers",
+    "htmlTitle": "Block Producers - Dashboard"
+  },
+  "producersChartToolTip": {
+    "name": "Name",
+    "rewards": "Rewards",
+    "votes": "Votes"
+  },
+  "transactionsChartToolTip": {
+    "block": "Block",
+    "transactions": "Transactions"
+  },
+  "dashboardNodes": {
+    "producer": "Producer",
+    "nodeType": "Node type",
+    "type": "Type",
+    "description": "Description",
+    "color": "Color",
+    "account": "Account",
+    "website": "Website",
+    "votes": "Votes",
+    "rewards": "Rewards",
+    "producerCountry": "Producer country",
+    "htmlTitle": "Node Distribution - Dashboard"
+  },
+  "dashboardRewards": {
+    "dailyRewards": "Total Daily Rewards",
+    "topCountryDailyRwards": "Top Country By Daily Rewards",
+    "notAvailable": "Not available",
+    "paidProducers": "Paid Producers Not Located",
+    "clickToViewBPs": "Click to view non-compliant BPs",
+    "lowestRewards": "Lowest Rewards",
+    "highestRewards": "Highest Rewards",
+    "exchangeRate": "Exchange Rate",
+    "country": "Country",
+    "rewards": "Rewards",
+    "producers": "Producers",
+    "htmlTitle": "Rewards Distribution - Dashboard"
+  },
+  "about": {
+    "title": "EOSIO Dashboard",
+    "subtitle1": "What is the EOSIO Dashboard",
+    "body1": {
+      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
+    },
+    "subtitle2": "Why is it important?",
+    "body2": {
+      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
+    },
+    "subtitle3": "Where does the data come from?",
+    "body3": {
+      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
+    }
+  },
+  "help": {
+    "title": "Thank you for using EOS Network Monitor!",
+    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
+    "githubEOSCR": "GitHub EOS Costa Rica",
+    "telegramChannel": "Telegram Channel",
+    "websiteEOSCR": "Website EOS Costa Rica"
+  },
+  "producerSummary": {
+    "rank": "Rank",
+    "account": "Account",
+    "website": "Website",
+    "votes": "Votes",
+    "rewards": "Rewards",
+    "country": "Country",
+    "eosRate": "EOS RATE",
+    "p2pEndpoints": "Endpoints (P2P)",
+    "apiEndpoints": "Endpoints (HTTPS / HTTPS)",
+    "pingFromCostaRica": "Ping from Costa Rica",
+    "serverVersion": "Server version",
+    "secondsAgo": "s ago",
+    "lastTimeChecked": "Last Time Checked",
+    "healthStatus": "Health Status",
+    "cpuUsage": "CPU Benchmark"
+  },
+  "producerHealthIndicators": {
+    "synced": "Synced",
+    "notSyncing": "Not syncing",
+    "apiResponding": "API Responding",
+    "apiNotResponding": "API Not Responding",
+    "bpJsonFound": "BP JSON found",
+    "noBpJsonFound": "No BP JSON found"
+  },
+  "dashboardNetwork": {
+    "htmlTitle": "Network Info - Dashboard",
+    "title": "Network Info",
+    "chainLimits": "Chain Limits",
+    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
+    "netLimitPerBlock": "NET LIMIT PER BLOCK"
+  },
+  "smartContract": {
+    "htmlTitle": "Account Info - Dashboard",
+    "title": "Account Info",
+    "loginBeforeUseAction": "Please login before execute an action",
+    "unknownError": "Unknown error processing action",
+    "accountNotFound": "Account not found",
+    "account": "Account"
+  },
+  "accountInfo": {
+    "resources": "Resources",
+    "keys": "Keys",
+    "contractActions": "Contract Actions",
+    "contractTables": "Contract Tables",
+    "ricardianContract": "Ricardian Contract",
+    "account": "Account",
+    "action": "Action",
+    "executeTransaction": "Execute Transaction",
+    "table": "Table",
+    "scope": "Scope",
+    "lowerBound": "Lower Bound",
+    "upperBound": "Upper Bound",
+    "limit": "Limit",
+    "getData": "Get Data",
+    "emptyTable": "Empty Table"
+  }
+}

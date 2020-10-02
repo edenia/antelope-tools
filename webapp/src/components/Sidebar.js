@@ -6,7 +6,10 @@ import Button from '@material-ui/core/Button'
 import * as colors from '@material-ui/core/colors'
 import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import LiveHelpIcon from '@material-ui/icons/LiveHelp'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
+import ListAltIcon from '@material-ui/icons/ListAlt'
 import Divider from '@material-ui/core/Divider'
 import { useTranslation } from 'react-i18next'
 
@@ -62,12 +65,27 @@ const DashboardSidebarContent = () => {
 
   const mainPages = [
     {
-      title: t('sidebar_BlockProducer'),
+      title: t('dashboard'),
+      href: '/dashboard/home',
+      icon: <DashboardIcon />
+    },
+    {
+      title: t('networkInfo'),
+      href: '/dashboard/network',
+      icon: <LiveHelpIcon />
+    },
+    {
+      title: t('blockProducer'),
       href: '/dashboard/producers',
       icon: <StorageIcon />
     },
     {
-      title: t('sidebar_NodeDistribution'),
+      title: t('smartContract'),
+      href: '/smart-contract',
+      icon: <ListAltIcon />
+    },
+    {
+      title: t('nodeDistribution'),
       href: '/dashboard/nodes',
       icon: <CloudIcon />
     }
@@ -75,7 +93,7 @@ const DashboardSidebarContent = () => {
 
   if (generalConfig.useRewards) {
     mainPages.push({
-      title: t('sidebar_RewardDistribution'),
+      title: t('rewardDistribution'),
       href: '/dashboard/rewards',
       icon: <AccountBalanceWalletIcon />
     })
@@ -83,24 +101,24 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
-      title: t('sidebar_NodeInfo'),
+      title: t('nodeInfo'),
       href: '/bpjson'
     },
     {
-      title: t('sidebar_About'),
+      title: t('about'),
       href: '/about'
     }
   ]
 
   if (generalConfig.useBlockProducerAgreementContract) {
     helperPages.push({
-      title: t('sidebar_RicardianContract'),
+      title: t('ricardianContract'),
       href: '/ricardian-contract'
     })
   }
 
   helperPages.push({
-    title: t('sidebar_Help'),
+    title: t('help'),
     href: '/help'
   })
 

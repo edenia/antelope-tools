@@ -1,5 +1,6 @@
 const { producerService } = require('../services')
-const { workersConfig } = require('../config')
+const { workersConfig, hasuraConfig } = require('../config')
+const { axiosUtil } = require('../utils')
 
 const sleepFor = seconds => {
   return new Promise(resolve => {
@@ -13,14 +14,34 @@ const run = async (name, action, sleep) => {
     await action()
   } catch (error) {}
   console.log(`[WORKER ${name}] finished at `, new Date().getTime())
+
+  if (!sleep) {
+    return
+  }
+
   await sleepFor(sleep)
   run(name, action, sleep)
 }
 
 const start = async () => {
-  console.log('waiting...')
-  await sleepFor(300)
-  console.log('ready')
+  let hasuraReady = false
+
+  while (!hasuraReady) {
+    try {
+      await axiosUtil.instance.get(
+        hasuraConfig.url.replace('/v1/graphql', '/healthz')
+      )
+      hasuraReady = true
+    } catch (error) {
+      hasuraReady = false
+      console.log(
+        'waiting for hasura...',
+        hasuraConfig.url.replace('/v1/graphql', '/healthz')
+      )
+      await sleepFor(3)
+    }
+  }
+
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,
@@ -31,6 +52,12 @@ const start = async () => {
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
   )
+  run(
+    'SYNC CPU USAGE',
+    producerService.syncCpuUsage,
+    workersConfig.syncProducerCpuInterval
+  )
+  run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
 }
 
 module.exports = {

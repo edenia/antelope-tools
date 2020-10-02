@@ -23,10 +23,10 @@ RUN mkdir -p /root/.ssh && \
 RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
     chmod 600 /root/.ssh/id_rsa
 
-RUN git clone --branch "$branch" https://github.com/eoscostarica/eosio-monitor.git /opt/eosio-monitor
+RUN git clone --branch "$branch" https://github.com/eoscostarica/eosio-dashboard.git /opt/eosio-dashboard
 
-WORKDIR /opt/eosio-monitor
+WORKDIR /opt/eosio-dashboard
 
 CMD eval `ssh-agent` && ssh-add \
   && export GIT_SSH_COMMAND="/usr/bin/ssh -i /root/.ssh/id_rsa" \
-  && git push "ssh://${USER}@190.171.41.51/var/repo/eosio-monitor.git" HEAD:"$branch"
+  && git push "ssh://${USER}@190.171.41.51/var/repo/eosio-dashboard.git" HEAD:"$branch"

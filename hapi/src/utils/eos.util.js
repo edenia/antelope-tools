@@ -152,6 +152,16 @@ const getAccount = async account => {
   }
 }
 
+const getBlock = async blockNumber => {
+  try {
+    const block = await eosApi.getBlock(blockNumber)
+
+    return block
+  } catch (error) {
+    return null
+  }
+}
+
 const getCodeHash = account => eosApi.getCodeHash(account)
 
 const getCurrencyBalance = (code, account, symbol) =>
@@ -192,6 +202,7 @@ module.exports = {
   newAccount,
   generateRandomAccountName,
   getAccount,
+  getBlock,
   getAbi,
   getCodeHash,
   getCurrencyBalance,

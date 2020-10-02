@@ -1,6 +1,6 @@
 const EosApi = require('eosjs-api')
 
-const { hasuraUtil, axiosUtil } = require('../utils')
+const { hasuraUtil, axiosUtil, eosmechanicsUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const eosApi = EosApi({
@@ -36,6 +36,46 @@ const FIND = `
   }
 `
 
+const INSERT_CPU_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_cpu_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
+const INSERT_NET_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_net_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
+const INSERT_RAM_USAGE = `
+  mutation ($producer: Int!, $usage: Int!) {
+    insert_ram_one (object: {producer: $producer, usage: $usage}) {
+      id
+      producer
+      usage
+    }
+  }
+`
+
+const INSERT_MISSED_BLOCK = `
+  mutation ($producer: Int!, $value: Int!) {
+    insert_missed_block_one(object: {producer: $producer, value: $value}) {
+      id
+      producer
+      value
+    }
+  }
+`
+
 const update = async (where, payload) => {
   const data = await hasuraUtil.request(UPDATE, { where, payload })
 
@@ -46,6 +86,33 @@ const find = async where => {
   const data = await hasuraUtil.request(FIND, { where })
 
   return data.producer
+}
+
+const insertUsage = async (type = '', payload) => {
+  let mutation = null
+
+  switch (type) {
+    case 'cpu':
+      mutation = INSERT_CPU_USAGE
+      break
+    case 'net':
+      mutation = INSERT_NET_USAGE
+      break
+    case 'ram':
+      mutation = INSERT_RAM_USAGE
+      break
+
+    default:
+      break
+  }
+
+  if (!mutation) {
+    return
+  }
+
+  const data = await hasuraUtil.request(mutation, payload)
+
+  return data[`insert_${type}_one`]
 }
 
 const addExpectedReward = async (producers, totalVotes) => {
@@ -129,7 +196,7 @@ const parseVotesToEOS = votes => {
   return parseFloat(votes) / 2 ** weight / 10000
 }
 
-const getBPJsonUrl = (producer = {}) => {
+const getBPJsonUrl = async (producer = {}) => {
   let newUrl = producer.url || ''
 
   if (!newUrl.startsWith('http')) {
@@ -144,15 +211,24 @@ const getBPJsonUrl = (producer = {}) => {
     newUrl = 'https://infinitystones.io'
   }
 
+  try {
+    const {
+      data: { chains }
+    } = await axiosUtil.instance.get(`${newUrl}/chains.json`)
+
+    return `${newUrl}/${chains[eosConfig.chainId] || '/bp.json'}`
+  } catch (error) {}
+
   return `${newUrl}/bp.json`
 }
 
-const syncBPJson = async () => {
+const syncBPJsonOffChain = async () => {
   const producers = await find()
   await Promise.all(
     producers.map(async producer => {
       try {
-        const { data } = await axiosUtil.instance.get(getBPJsonUrl(producer))
+        const bpJsonUrl = await getBPJsonUrl(producer)
+        const { data } = await axiosUtil.instance.get(bpJsonUrl)
 
         if (typeof data !== 'object') {
           return
@@ -162,6 +238,41 @@ const syncBPJson = async () => {
           { owner: { _eq: producer.owner } },
           {
             bp_json: data
+          }
+        )
+      } catch (error) {}
+    })
+  )
+}
+
+const syncBPJsonOnChain = async () => {
+  const producers = await find()
+  const { rows } = await eosApi.getTableRows({
+    code: eosConfig.bpJsonOnChainContract,
+    scope: eosConfig.bpJsonOnChainScope,
+    table: eosConfig.bpJsonOnChainTable,
+    json: true
+  })
+  await Promise.all(
+    producers.map(async producer => {
+      try {
+        const data = JSON.parse(
+          (
+            rows.find(
+              i =>
+                i.entity_name === producer.owner || i.owner === producer.owner
+            ) || {}
+          ).json || '{}'
+        )
+
+        if (!Object.keys(data).length > 0) {
+          return
+        }
+
+        await update(
+          { owner: { _eq: producer.owner } },
+          {
+            bp_json: Object.keys(data).length > 0 ? data : null
           }
         )
       } catch (error) {}
@@ -184,7 +295,11 @@ const syncProducers = async () => {
       response.total_producer_vote_weight
     )
     await hasuraUtil.request(UPSERT, { producers })
-    await syncBPJson()
+    if (eosConfig.bpJsonOnChain) {
+      await syncBPJsonOnChain()
+    } else {
+      await syncBPJsonOffChain()
+    }
   } catch (error) {
     console.log(error.message)
   }
@@ -240,6 +355,11 @@ const syncProducersInfo = async () => {
         const startTs = Date.now()
         const { website, ...info } = await eosApi.getInfo({})
         const ping = Date.now() - startTs
+
+        if (eosConfig.chainId !== info.chain_id) {
+          return
+        }
+
         await update(
           { owner: { _eq: producer.owner } },
           {
@@ -252,7 +372,164 @@ const syncProducersInfo = async () => {
   )
 }
 
+const syncCpuUsage = async () => {
+  await eosmechanicsUtil.cpu()
+  const { block, transaction } = (await eosmechanicsUtil.cpu()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('cpu', {
+    producer: producer.id,
+    usage: transaction.processed.receipt.cpu_usage_us
+  })
+}
+
+const syncRamUsage = async () => {
+  const { block } = (await eosmechanicsUtil.ram()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('ram', {
+    producer: producer.id,
+    usage: 1 // TODO: get ram usage from transaction or block
+  })
+}
+
+const syncNetUsage = async () => {
+  const { block } = (await eosmechanicsUtil.net()) || {}
+  const producers = await find({
+    owner: { _eq: block.producer }
+  })
+  const producer = producers.length ? producers[0] : null
+  await insertUsage('net', {
+    producer: producer.id,
+    usage: 1 // TODO: get net usage from transaction or block
+  })
+}
+
+const saveMissedBlocksFor = async (producerName, missedBlocks) => {
+  if (missedBlocks < 1) {
+    return
+  }
+
+  const producers = await find({
+    owner: { _eq: producerName }
+  })
+  const producer = producers.length ? producers[0] : null
+  await hasuraUtil.request(INSERT_MISSED_BLOCK, {
+    producer: producer.id,
+    value: missedBlocks
+  })
+}
+
+const checkForMissedBlocks = async () => {
+  let info = await eosApi.getInfo({})
+  let lastProducer = info.head_block_producer
+  let currentProducer = info.head_block_producer
+
+  // wait until first turn change
+  while (currentProducer === lastProducer) {
+    console.log('waiting for first turn change')
+    info = await eosApi.getInfo({})
+    lastProducer = currentProducer
+    currentProducer = info.head_block_producer
+    await new Promise(resolve => setTimeout(() => resolve(), 1000))
+  }
+
+  lastProducer = info.head_block_producer
+  let lastBlockNum = info.head_block_num
+  let currentBlockNum = null
+  let missedBlocks = 0
+  let producedBlocks = 0
+
+  // start an infinity loop to track missed blocks until main process ends
+  while (true) {
+    const startTime = new Date()
+
+    try {
+      info = await eosApi.getInfo({})
+      currentProducer = info.head_block_producer
+      currentBlockNum = info.head_block_num
+
+      const currentSchedule = await eosApi.getProducerSchedule({})
+      const lastProducerIndex = currentSchedule.active.producers.findIndex(
+        item => item.producer_name === lastProducer
+      )
+      const newProducerIndex = currentSchedule.active.producers.findIndex(
+        item => item.producer_name === currentProducer
+      )
+
+      if (lastProducerIndex > newProducerIndex && newProducerIndex !== 0) {
+        // change producer in case that the network is stuck in a previous producer
+        currentProducer = lastProducer
+      }
+
+      if (
+        missedBlocks + producedBlocks >= 12 &&
+        currentProducer === lastProducer
+      ) {
+        // change producer in case that the currentProducer and the next one are missing blocks
+        console.log(
+          'check point',
+          lastProducerIndex + 1,
+          currentSchedule.active.producers.length
+        )
+        const nextProducerIndex =
+          lastProducerIndex + 1 >= currentSchedule.active.producers.length
+            ? 0
+            : lastProducerIndex + 1
+        currentProducer =
+          currentSchedule.active.producers[nextProducerIndex].producer_name
+      }
+
+      if (lastProducer !== currentProducer) {
+        // we have a new producer so we should save the missed blocks for the previous one
+        console.log(
+          `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
+        )
+        await saveMissedBlocksFor(lastProducer, missedBlocks)
+        producedBlocks = 0
+        missedBlocks = 0
+      }
+
+      if (currentBlockNum === lastBlockNum) {
+        // when the previous block and the current block are equals we have a missed block
+        console.log(
+          `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
+        )
+        missedBlocks += 1
+      } else {
+        // when the previous block and the current block are diferent we have a new block
+        console.log(`new block from ${currentProducer}`)
+        producedBlocks += 1
+      }
+      console.log(
+        `current producer is : ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
+      )
+      lastProducer = currentProducer
+      lastBlockNum = currentBlockNum
+    } catch (error) {
+      console.log(error)
+    }
+
+    const endTime = new Date()
+    const msDiff = endTime.getTime() - startTime.getTime()
+    console.log(`finished after ${msDiff}`)
+
+    if (msDiff < 500) {
+      console.log(`will run again in ${500 - msDiff}`)
+      await new Promise(resolve => setTimeout(() => resolve(), 501 - msDiff))
+    }
+  }
+}
+
 module.exports = {
+  checkForMissedBlocks,
   syncProducers,
-  syncProducersInfo
+  syncProducersInfo,
+  syncCpuUsage,
+  syncRamUsage,
+  syncNetUsage
 }
