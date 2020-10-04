@@ -1,0 +1,23 @@
+name: Push code to lacchain environment
+
+on:
+  push:
+    branches: [lacchain]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: setup-docker
+        uses: docker-practice/actions-setup-docker@0.0.1
+      - name: run push
+        run: |
+          docker build -t eosio-dashboard-deployer-lacchain \
+            --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
+            --build-arg branch="lacchain" \
+            .
+          docker run \
+            -e USER="${{secrets.USER}}" \
+            -e branch="lacchain" \
+            eosio-dashboard-deployer-lacchain
