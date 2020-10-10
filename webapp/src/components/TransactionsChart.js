@@ -27,7 +27,8 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className={classes.wrapper}>
         <Typography variant="h6">
-          {t('block')}{`${payload[0].payload.blocks.length > 1 ? 's:' : ''} `}
+          {t('block')}
+          {`${payload[0].payload.blocks.length > 1 ? 's:' : ''} `}
           <span className={classes.description}>
             {' '}
             {payload[0].payload.blocks.join(', ')}

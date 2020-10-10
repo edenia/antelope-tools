@@ -1,4 +1,8 @@
-export const endpoint = `${process.env.REACT_APP_EOS_API_PROTOCOL}://${process.env.REACT_APP_EOS_API_HOST}:${process.env.REACT_APP_EOS_API_PORT}`
+export const endpoint = `${process.env.REACT_APP_EOS_API_PROTOCOL}://${
+  process.env.REACT_APP_EOS_API_HOST
+}${process.env.REACT_APP_EOS_API_PORT ? ':' : ''}${
+  process.env.REACT_APP_EOS_API_PORT
+}`
 export const useBpJsonOnChain =
   process.env.REACT_APP_EOS_USE_BP_JSON_ON_CHAIN === 'true'
 export const bpJsonOnChainContract =

@@ -68,7 +68,7 @@ const SmartContract = ({ ual }) => {
       actions.push({
         authorization: [
           {
-            actor: accountName,
+            actor: ual.activeUser.accountName,
             permission: 'active'
           }
         ],
@@ -99,7 +99,9 @@ const SmartContract = ({ ual }) => {
       // TODO: implement load next page
       const tableData = await eosApi.getTableRows(payload)
       setTableData(tableData)
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
     setLoading(false)
   }
 
@@ -125,7 +127,9 @@ const SmartContract = ({ ual }) => {
       setAbi(abi)
       const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
       setHash(hash)
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
 
     setLoading(false)
   }

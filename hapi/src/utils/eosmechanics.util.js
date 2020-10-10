@@ -3,21 +3,27 @@ const { eosConfig } = require('../config')
 const eosUtil = require('./eos.util')
 
 const cpu = async () => {
+  const actions = []
+
+  if (eosConfig.eosmechanics.includeTransaction) {
+    actions.push(eosConfig.eosmechanics.includeTransaction)
+  }
+
+  actions.push({
+    authorization: [
+      {
+        actor: eosConfig.eosmechanics.account,
+        permission: 'active'
+      }
+    ],
+    account: eosConfig.eosmechanics.account,
+    name: 'cpu',
+    data: {}
+  })
+
   try {
     const transaction = await eosUtil.transact(
-      [
-        {
-          authorization: [
-            {
-              actor: eosConfig.eosmechanics.account,
-              permission: 'active'
-            }
-          ],
-          account: eosConfig.eosmechanics.account,
-          name: 'cpu',
-          data: {}
-        }
-      ],
+      actions,
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
@@ -32,23 +38,29 @@ const cpu = async () => {
   }
 }
 const net = async (input = '') => {
+  const actions = []
+
+  if (eosConfig.eosmechanics.includeTransaction) {
+    actions.push(eosConfig.eosmechanics.includeTransaction)
+  }
+
+  actions.push({
+    authorization: [
+      {
+        actor: eosConfig.eosmechanics.account,
+        permission: 'active'
+      }
+    ],
+    account: eosConfig.eosmechanics.account,
+    name: 'net',
+    data: {
+      input
+    }
+  })
+
   try {
     const transaction = await eosUtil.transact(
-      [
-        {
-          authorization: [
-            {
-              actor: eosConfig.eosmechanics.account,
-              permission: 'active'
-            }
-          ],
-          account: eosConfig.eosmechanics.account,
-          name: 'net',
-          data: {
-            input
-          }
-        }
-      ],
+      actions,
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
@@ -63,21 +75,27 @@ const net = async (input = '') => {
   }
 }
 const ram = async () => {
+  const actions = []
+
+  if (eosConfig.eosmechanics.includeTransaction) {
+    actions.push(eosConfig.eosmechanics.includeTransaction)
+  }
+
+  actions.push({
+    authorization: [
+      {
+        actor: eosConfig.eosmechanics.account,
+        permission: 'active'
+      }
+    ],
+    account: eosConfig.eosmechanics.account,
+    name: 'ram',
+    data: {}
+  })
+
   try {
     const transaction = await eosUtil.transact(
-      [
-        {
-          authorization: [
-            {
-              actor: eosConfig.eosmechanics.account,
-              permission: 'active'
-            }
-          ],
-          account: eosConfig.eosmechanics.account,
-          name: 'ram',
-          data: {}
-        }
-      ],
+      actions,
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )

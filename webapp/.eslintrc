@@ -1,13 +1,22 @@
 {
   "parser": "babel-eslint",
-  "extends": ["standard", "standard-react", "prettier", "prettier/react"],
-  "plugins": ["prettier"],
+  "extends": [
+    "standard",
+    "standard-react",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "prettier/standard"
+  ],
   "env": {
     "jest": true,
     "browser": true
   },
   "rules": {
-    "prettier/prettier": "error",
-    "arrow-parens": "off"
+    "complexity": [
+      "error",
+      {
+        "max": 21
+      }
+    ]
   }
 }

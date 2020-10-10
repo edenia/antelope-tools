@@ -11,6 +11,8 @@ import Sidebar from './components/Sidebar'
 
 const App = ({ ual = {} }) => {
   const snackbarState = useSelector((state) => state.snackbar)
+  const handleOnLogout = () => ual.logout()
+  const handleOnLogin = () => ual.showModal()
 
   return (
     <BrowserRouter>
@@ -19,8 +21,8 @@ const App = ({ ual = {} }) => {
         topbarContent={
           <Topbar
             user={ual.activeUser}
-            onLogout={() => ual.logout()}
-            onLogin={() => ual.showModal()}
+            onLogout={handleOnLogout}
+            onLogin={handleOnLogin}
           />
         }
         sidebarContent={<Sidebar />}

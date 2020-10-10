@@ -48,6 +48,19 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [limit, setLimit] = useState(100)
   const { t } = useTranslation('accountInfo')
 
+  const handleTableChange = (value) => {
+    setTable(value)
+
+    if (!onGetTableRows) return
+
+    onGetTableRows({
+      scope,
+      table: value,
+      code: accountName,
+      json: true
+    })
+  }
+
   const handleSubmit = () => {
     if (!onGetTableRows) return
 
@@ -98,7 +111,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
             labelId="tableLabel"
             id="table"
             value={table}
-            onChange={(event) => setTable(event.target.value)}
+            onChange={(event) => handleTableChange(event.target.value)}
             label={t('table')}
           >
             {tables.map((item) => (
