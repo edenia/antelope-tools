@@ -31,7 +31,9 @@ const getBpJSONOffChain = async (producer) => {
     )
 
     return bpJson
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const getBpJSONOnChain = async (producer) => {

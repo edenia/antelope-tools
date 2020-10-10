@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSubscription } from '@apollo/react-hooks'
 import Card from '@material-ui/core/Card'
@@ -17,53 +16,6 @@ import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 import PageTitle from '../../components/PageTitle'
 import ChartSkeleton from '../../components/ChartSkeleton'
 
-const useStyles = makeStyles((theme) => ({
-  country: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  owner: {
-    display: 'flex',
-    justifyContent: 'start',
-    alignItems: 'center'
-  },
-  loader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  logo: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    display: 'inline-block',
-    width: '2em',
-    height: '2em',
-    borderRadius: '500rem',
-    backgroundColor: theme.palette.primary.contrastText
-  },
-  chartWrapper: {
-    minWidth: 280,
-    width: '100%'
-  },
-  gridItem: {
-    marginBottom: theme.spacing(2)
-  },
-  tableWrapper: {
-    width: ' 100%',
-    overflow: 'scroll'
-  },
-  currentProducerRow: {
-    backgroundColor: theme.palette.secondary[900],
-    color: theme.palette.primary.contrastText,
-    '& td, & td a': {
-      color: theme.palette.primary.contrastText
-    }
-  },
-  row: {
-    cursor: 'pointer'
-  }
-}))
-
 const Producers = () => {
   const dispatch = useDispatch()
   const {
@@ -74,7 +26,6 @@ const Producers = () => {
   const tpb = useSelector((state) => state.eos.tpb)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
-  const classes = useStyles()
   const { t } = useTranslation('dashboardHome')
 
   useEffect(() => {
