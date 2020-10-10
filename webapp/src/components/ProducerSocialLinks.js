@@ -31,7 +31,6 @@ const icons = {
 }
 
 const ProducerSocialLinks = ({ items }) => {
-  console.log(items)
   return Object.keys(items)
     .filter((key) => !!items[key])
     .map((key, i) => (

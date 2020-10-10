@@ -42,7 +42,8 @@ const Producers = () => {
     producers.forEach((producer) => {
       const id =
         producer?.bp_json?.org?.candidate_name ||
-        producer?.bp_json?.organization_name
+        producer?.bp_json?.organization_name ||
+        producer.owner
       const previousEntity = uniqueProducers[id]
       let missedBlocks = producer.missed_blocks
       let cpus = producer.cpus

@@ -72,7 +72,8 @@ const ProducerCard = ({ producer, rank }) => {
         }
         title={
           producer.bp_json?.candidate_name ||
-          producer.bp_json?.organization_name
+          producer.bp_json?.organization_name ||
+          producer.owner
         }
         subheader={
           <>
@@ -160,16 +161,18 @@ const ProducerCard = ({ producer, rank }) => {
             </>
           )}
 
-          {producer.bp_json?.chain_resources?.length > 0 && (
+          {producer.bp_json?.chain_resources && (
             <>
               <dt className={classes.dt}>{t('chainResources')}:</dt>
-              {producer.bp_json.chain_resources.map((url, i) => (
-                <dd key={i}>
-                  <Link href={url} target="_blank" rel="noopener noreferrer">
-                    {url}
-                  </Link>
-                </dd>
-              ))}
+              <dd>
+                <Link
+                  href={producer.bp_json?.chain_resources}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {producer.bp_json?.chain_resources}
+                </Link>
+              </dd>
             </>
           )}
 

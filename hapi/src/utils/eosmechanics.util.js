@@ -23,7 +23,7 @@ const cpu = async () => {
 
   try {
     const transaction = await eosUtil.transact(
-      acttions,
+      actions,
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
