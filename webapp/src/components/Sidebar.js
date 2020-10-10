@@ -80,14 +80,14 @@ const DashboardSidebarContent = () => {
       icon: <StorageIcon />
     },
     {
-      title: t('smartContract'),
-      href: '/smart-contract',
-      icon: <ListAltIcon />
-    },
-    {
       title: t('nodeDistribution'),
       href: '/dashboard/nodes',
       icon: <CloudIcon />
+    },
+    {
+      title: t('smartContract'),
+      href: '/smart-contract',
+      icon: <ListAltIcon />
     }
   ]
 
@@ -123,37 +123,35 @@ const DashboardSidebarContent = () => {
   })
 
   return (
-    <>
-      <List className={classes.nav}>
-        {mainPages.map((page) => (
-          <ListItem className={classes.item} disableGutters key={page.title}>
-            <Button
-              activeClassName={classes.active}
-              className={classes.button}
-              component={CustomRouterLink}
-              to={page.href}
-            >
-              {page.icon && <div className={classes.icon}>{page.icon}</div>}
-              {page.title}
-            </Button>
-          </ListItem>
-        ))}
-        <Divider className={classes.divider} />
-        {helperPages.map((page) => (
-          <ListItem className={classes.item} disableGutters key={page.title}>
-            <Button
-              activeClassName={classes.active}
-              className={classes.button}
-              component={CustomRouterLink}
-              to={page.href}
-            >
-              {page.icon && <div className={classes.icon}>{page.icon}</div>}
-              {page.title}
-            </Button>
-          </ListItem>
-        ))}
-      </List>
-    </>
+    <List className={classes.nav}>
+      {mainPages.map((page) => (
+        <ListItem className={classes.item} disableGutters key={page.title}>
+          <Button
+            activeClassName={classes.active}
+            className={classes.button}
+            component={CustomRouterLink}
+            to={page.href}
+          >
+            {page.icon && <div className={classes.icon}>{page.icon}</div>}
+            {page.title}
+          </Button>
+        </ListItem>
+      ))}
+      <Divider className={classes.divider} />
+      {helperPages.map((page) => (
+        <ListItem className={classes.item} disableGutters key={page.title}>
+          <Button
+            activeClassName={classes.active}
+            className={classes.button}
+            component={CustomRouterLink}
+            to={page.href}
+          >
+            {page.icon && <div className={classes.icon}>{page.icon}</div>}
+            {page.title}
+          </Button>
+        </ListItem>
+      ))}
+    </List>
   )
 }
 

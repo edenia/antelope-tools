@@ -143,9 +143,7 @@ const EditBPJson = ({ ual }) => {
             <Alert severity="warning">{t('notLogin')}</Alert>
           )}
           {ual.activeUser && !producer && !loading && (
-            <Alert severity="warning">
-              {t('notRegisterNode')}
-            </Alert>
+            <Alert severity="warning">{t('notRegisterNode')}</Alert>
           )}
           {error && <Alert severity="error">{error}</Alert>}
           {producer && (

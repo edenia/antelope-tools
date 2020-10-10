@@ -68,7 +68,7 @@ const SmartContract = ({ ual }) => {
       actions.push({
         authorization: [
           {
-            actor: accountName,
+            actor: ual.activeUser.accountName,
             permission: 'active'
           }
         ],

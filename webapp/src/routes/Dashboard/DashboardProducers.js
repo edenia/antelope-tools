@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSubscription } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Producers = () => {
   const dispatch = useDispatch()
+  const [uniqueProducers, setUniqueProducers] = useState([])
   const classes = useStyles()
   const {
     loading = true,
@@ -36,13 +37,48 @@ const Producers = () => {
     }
   }, [dispatch])
 
+  useEffect(() => {
+    let uniqueProducers = {}
+    producers.forEach((producer) => {
+      const id =
+        producer?.bp_json?.org?.candidate_name ||
+        producer?.bp_json?.organization_name
+      const previousEntity = uniqueProducers[id]
+      let missedBlocks = producer.missed_blocks
+      let cpus = producer.cpus
+
+      if (previousEntity) {
+        missedBlocks = [...previousEntity.missed_blocks, ...missedBlocks]
+        cpus = [...previousEntity.cpus, ...cpus]
+      }
+
+      const { org, ...bpJson } = producer.bp_json || {}
+      let newBpJson = bpJson
+
+      if (org) {
+        newBpJson = { ...newBpJson, ...org }
+      }
+
+      uniqueProducers = {
+        ...uniqueProducers,
+        [id]: {
+          ...producer,
+          cpus,
+          missed_blocks: missedBlocks,
+          bp_json: newBpJson
+        }
+      }
+    })
+    setUniqueProducers(Object.values(uniqueProducers))
+  }, [producers])
+
   return (
     <Grid item xs={12}>
       <PageTitle title={t('htmlTitle')} />
       <Typography variant="h3">{t('title')}</Typography>
       {loading && <LinearProgress className={classes.linearProgress} />}
       <Grid container justify="flex-start" spacing={1}>
-        {producers.map((producer, index) => (
+        {uniqueProducers.map((producer, index) => (
           <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
             <ProducerCard producer={producer} rank={index + 1} />
           </Grid>

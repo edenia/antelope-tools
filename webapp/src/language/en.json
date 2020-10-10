@@ -42,6 +42,10 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
+    "name": "Name",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "features": "Features",
     "producer": "Producer",
     "nodeType": "Node type",
     "type": "Type",
@@ -106,7 +110,13 @@
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
     "cpuUsage": "CPU Benchmark",
-    "missedBlocks": "Missed Blocks"
+    "missedBlocks": "Missed Blocks",
+    "businessContact": "Business Contact",
+    "technicalContact": "Technical Contact",
+    "social": "Social",
+    "ownershipDisclosure": "Ownership Disclosure",
+    "chainResources": "Chain Resources",
+    "otherResources": "Other Resources"
   },
   "producerHealthIndicators": {
     "synced": "Synced",
