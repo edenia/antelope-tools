@@ -10,5 +10,13 @@
   "env": {
     "jest": true,
     "browser": true
+  },
+  "rules": {
+    "complexity": [
+      "error",
+      {
+        "max": 20
+      }
+    ]
   }
 }
