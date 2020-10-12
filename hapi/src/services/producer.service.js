@@ -76,6 +76,14 @@ const INSERT_MISSED_BLOCK = `
   }
 `
 
+const CLEAR_OLD_PRODUCERS = `
+  mutation ($owners: [String!]) {
+    delete_producer(where: {owner: {_nin: $owners}}) {
+      affected_rows
+    }
+  }
+`
+
 const update = async (where, payload) => {
   const data = await hasuraUtil.request(UPDATE, { where, payload })
 
@@ -367,6 +375,9 @@ const syncProducers = async () => {
       response.total_producer_vote_weight
     )
     await hasuraUtil.request(UPSERT, { producers })
+    await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
+      owners: producers.map(producer => producer.owner)
+    })
     if (eosConfig.networkName === eosConfig.knownNetworks.lacchain) {
       await syncBPJsonForLacchain()
     } else if (eosConfig.bpJsonOnChain) {

@@ -17,7 +17,8 @@
     "about": "About",
     "ricardianContract": "Ricardian Contract",
     "help": "Help",
-    "smartContract": "Smart Contract"
+    "smartContract": "Smart Contract",
+    "lacchainBoard": "Lacchain Board"
   },
   "dashboardHome": {
     "currentProducer": "Current Producer",
@@ -146,5 +147,12 @@
     "limit": "Limit",
     "getData": "Get Data",
     "emptyTable": "Empty Table"
+  }, 
+  "board": {
+    "loginWarning": "Please login to use this board",
+    "noneActionWarning": "There is none action for your account",
+    "setentinfoTitle": "Set entity info",
+    "setentinfoTooltip": "Set info for an entity",
+    "setnodeinfoTitle": "Set node info"
   }
 }

@@ -11,6 +11,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import Divider from '@material-ui/core/Divider'
+import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
 import { useTranslation } from 'react-i18next'
 
 import { generalConfig } from '../config'
@@ -98,6 +99,12 @@ const DashboardSidebarContent = () => {
       icon: <AccountBalanceWalletIcon />
     })
   }
+
+  mainPages.push({
+    title: t('lacchainBoard'),
+    href: '/lacchain',
+    icon: <DeveloperBoardIcon />
+  })
 
   const helperPages = [
     {
