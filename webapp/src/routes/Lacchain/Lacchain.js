@@ -245,7 +245,7 @@ const Lacchain = ({ ual }) => {
               {abi && (
                 <Box className={classes.body}>
                   <ContractActionForm
-                    accountName={'eosio'}
+                    accountName="eosio"
                     action={action}
                     abi={abi}
                     onSubmitAction={handleOnSubmitAction}
@@ -263,8 +263,14 @@ Lacchain.propTypes = {
   ual: PropTypes.object
 }
 
-export default ({ ual }) => (
+const LacchainWrapper = ({ ual }) => (
   <SharedStateProvider>
     <Lacchain ual={ual} />
   </SharedStateProvider>
 )
+
+LacchainWrapper.propTypes = {
+  ual: PropTypes.object
+}
+
+export default LacchainWrapper

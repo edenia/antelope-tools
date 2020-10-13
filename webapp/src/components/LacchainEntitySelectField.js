@@ -55,7 +55,11 @@ const LacchainEntitySelectField = ({
 }
 
 LacchainEntitySelectField.propTypes = {
-  children: PropTypes.node
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  variant: PropTypes.string,
+  className: PropTypes.string
 }
 
 export default LacchainEntitySelectField

@@ -10,7 +10,7 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
-    "blockProducer": "Block Producers",
+    "blockProducer": "Entities",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
@@ -147,7 +147,7 @@
     "limit": "Limit",
     "getData": "Get Data",
     "emptyTable": "Empty Table"
-  }, 
+  },
   "board": {
     "loginWarning": "Please login to use this board",
     "noneActionWarning": "There is none action for your account",
