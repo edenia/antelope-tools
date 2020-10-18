@@ -7,7 +7,7 @@ GREEN  := $(shell tput -Txterm setaf 2)
 RESET  := $(shell tput -Txterm sgr0)
 
 run:
-	@echo action $(filter-out $@,$(MAKECMDGOALS))
+	@echo "$(BLUE)running action $(filter-out $@,$(MAKECMDGOALS))$(RESET)"
 %:
 @:
 
@@ -23,7 +23,7 @@ lacchain:
 
 local:
 	cp .env.local .env
-	# make stop
+	make stop
 	make start
 
 mainnet:
@@ -37,7 +37,10 @@ stop:
 start:
 	make start-postgres
 	# make start-wallet
-	make -j 3 start-hapi start-hasura start-webapp
+	make start-hapi
+	make start-hasura
+	make start-webapp
+	make -j 2 start-hasura-cli start-logs
 
 start-postgres:
 	@docker-compose up -d --build postgres
@@ -47,7 +50,6 @@ start-wallet:
 
 start-hapi:
 	@docker-compose up -d --build hapi
-	@docker-compose logs -f hapi
 
 start-hasura:
 	$(eval -include .env)
@@ -59,8 +61,12 @@ start-hasura:
 		curl http://localhost:9090/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi service"; \
 		sleep 5; done;
+	@echo "\n"
 	@docker-compose stop hasura
 	@docker-compose up -d --build hasura
+
+start-hasura-cli:
+	$(eval -include .env)
 	@until \
 		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
@@ -70,8 +76,11 @@ start-hasura:
 start-webapp:
 	$(eval -include .env)
 	@until \
-		curl http://localhost:8585/v1/version; \
+		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
+	@echo "\n"
 	@docker-compose up -d --build webapp
-	@docker-compose logs -f webapp
+
+start-logs:
+	@docker-compose logs -f hapi webapp
