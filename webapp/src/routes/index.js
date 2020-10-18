@@ -12,6 +12,7 @@ const BlockProducerAgreementContract = lazy(() =>
 const EditBPJson = lazy(() => import('./EditBPJson'))
 const SmartContract = lazy(() => import('./SmartContract'))
 const Lacchain = lazy(() => import('./Lacchain'))
+const LacchainNodesNetwork = lazy(() => import('./LacchainNodesNetwork'))
 
 const routes = [
   {
@@ -37,12 +38,19 @@ const routes = [
   {
     path: '/smart-contract',
     component: SmartContract
-  },
-  {
-    path: '/lacchain',
-    component: Lacchain
   }
 ]
+
+if (generalConfig.useLanguageSufix === 'lacchain') {
+  routes.push({
+    path: '/lacchain',
+    component: Lacchain
+  })
+  routes.push({
+    path: '/lacchain-nodes-network',
+    component: LacchainNodesNetwork
+  })
+}
 
 if (generalConfig.useBlockProducerAgreementContract) {
   routes.push({

@@ -195,6 +195,7 @@ const Lacchain = ({ ual }) => {
 
     setMessage(null)
     checkAccount()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ual.activeUser, t])
 
   return (

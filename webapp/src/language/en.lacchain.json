@@ -18,7 +18,8 @@
     "ricardianContract": "Ricardian Contract",
     "help": "Help",
     "smartContract": "Smart Contract",
-    "lacchainBoard": "Lacchain Board"
+    "lacchainBoard": "Lacchain Board",
+    "nodesNetwork": "Node Network"
   },
   "dashboardHome": {
     "currentProducer": "Current Producer",

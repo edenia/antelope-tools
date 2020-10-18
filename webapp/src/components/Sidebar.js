@@ -12,6 +12,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import Divider from '@material-ui/core/Divider'
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
+import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
 import { useTranslation } from 'react-i18next'
 
 import { generalConfig } from '../config'
@@ -84,13 +85,27 @@ const DashboardSidebarContent = () => {
       title: t('nodeDistribution'),
       href: '/dashboard/nodes',
       icon: <CloudIcon />
-    },
-    {
-      title: t('smartContract'),
-      href: '/smart-contract',
-      icon: <ListAltIcon />
     }
   ]
+
+  if (generalConfig.useLanguageSufix === 'lacchain') {
+    mainPages.push({
+      title: t('nodesNetwork'),
+      href: '/lacchain-nodes-network',
+      icon: <SettingsInputAntennaIcon />
+    })
+    mainPages.push({
+      title: t('lacchainBoard'),
+      href: '/lacchain',
+      icon: <DeveloperBoardIcon />
+    })
+  }
+
+  mainPages.push({
+    title: t('smartContract'),
+    href: '/smart-contract',
+    icon: <ListAltIcon />
+  })
 
   if (generalConfig.useRewards) {
     mainPages.push({
@@ -99,12 +114,6 @@ const DashboardSidebarContent = () => {
       icon: <AccountBalanceWalletIcon />
     })
   }
-
-  mainPages.push({
-    title: t('lacchainBoard'),
-    href: '/lacchain',
-    icon: <DeveloperBoardIcon />
-  })
 
   const helperPages = [
     {

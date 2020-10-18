@@ -54,6 +54,7 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
       lacchain.currentEntity ? JSON.parse(lacchain.currentEntity.info) : {}
     )
     onChange(lacchain.currentEntity?.info || '{}')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lacchain.currentEntity])
 
   return (
