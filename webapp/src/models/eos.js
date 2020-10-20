@@ -39,7 +39,9 @@ const getBpJSON = async (producer) => {
     )
 
     return bpJson
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const getProducerInfoOffChain = (producers) => {
@@ -288,7 +290,9 @@ export default {
           block,
           transactions: data.transactions.length
         })
-      } catch (error) {}
+      } catch (error) {
+        console.log(error)
+      }
     },
     async getRate() {
       try {

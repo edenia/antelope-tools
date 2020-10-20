@@ -280,6 +280,78 @@ const syncBPJsonOnChain = async () => {
   )
 }
 
+const syncBPJsonForLacchain = async () => {
+  const nodeTypes = {
+    1: 'validator',
+    2: 'writer',
+    3: 'boot',
+    4: 'observer'
+  }
+  const { rows: entities } = await eosApi.getTableRows({
+    code: eosConfig.lacchain.account,
+    scope: eosConfig.lacchain.account,
+    table: eosConfig.lacchain.entityTable,
+    json: true
+  })
+  const { rows: nodes } = await eosApi.getTableRows({
+    code: eosConfig.lacchain.account,
+    scope: eosConfig.lacchain.account,
+    table: eosConfig.lacchain.nodeTable,
+    json: true
+  })
+  const bpJons = entities.map(entity => {
+    const bpJson = JSON.parse(entity.info)
+    const entityNodes = nodes
+      .filter(node => node.entity === entity.name)
+      .map(node => {
+        const nodeType = nodeTypes[node.type] || 'N/A'
+        const nodeInfo = JSON.parse(node.info)
+        const keys = Object.keys(nodeInfo)
+        let newNodeInfo = {}
+
+        for (const key of keys) {
+          newNodeInfo = {
+            ...newNodeInfo,
+            [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
+          }
+        }
+
+        return {
+          ...newNodeInfo,
+          node_name: node.name,
+          node_type: nodeType
+        }
+      })
+
+    return {
+      ...bpJson,
+      nodes: entityNodes
+    }
+  })
+  const producers = await find()
+  await Promise.all(
+    producers.map(async producer => {
+      try {
+        const bpJson = bpJons.find(
+          bpJson =>
+            !!bpJson.nodes.find(node => node.node_name === producer.owner)
+        )
+
+        if (!Object.keys(bpJson).length > 0) {
+          return
+        }
+
+        await update(
+          { owner: { _eq: producer.owner } },
+          {
+            bp_json: bpJson
+          }
+        )
+      } catch (error) {}
+    })
+  )
+}
+
 const syncProducers = async () => {
   try {
     const response = await eosApi.getProducers({ limit: 100, json: true })
@@ -295,7 +367,9 @@ const syncProducers = async () => {
       response.total_producer_vote_weight
     )
     await hasuraUtil.request(UPSERT, { producers })
-    if (eosConfig.bpJsonOnChain) {
+    if (eosConfig.networkName === eosConfig.knownNetworks.lacchain) {
+      await syncBPJsonForLacchain()
+    } else if (eosConfig.bpJsonOnChain) {
       await syncBPJsonOnChain()
     } else {
       await syncBPJsonOffChain()

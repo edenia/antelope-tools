@@ -75,7 +75,7 @@ const AccountInfo = ({
     const net = ((netLimit.used * 100) / netLimit.max || 0).toFixed()
     const keys = permissions.map((item) => ({
       label: item.perm_name,
-      value: item.required_auth.keys[0].key
+      value: item.required_auth?.keys[0]?.key || '-'
     }))
 
     setInfo({ ...account, ram, cpu, net, keys })

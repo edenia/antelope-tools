@@ -14,7 +14,6 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import Link from '@material-ui/core/Link'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import {
   ComposableMap,
@@ -26,7 +25,7 @@ import {
 import { geoTimes } from 'd3-geo-projection'
 import { geoPath } from 'd3-geo'
 
-import { countries, formatWithThousandSeparator, onImgError } from '../../utils'
+import { countries, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
 import { PRODUCERS_SUBSCRIPTION } from '../../gql'
 import PageTitle from '../../components/PageTitle'
@@ -141,12 +140,16 @@ const useStyles = makeStyles((theme) => ({
   centerVertically: {
     display: 'flex',
     alignItems: 'center'
+  },
+  dl: {
+    margin: 0
   }
 }))
 
 const Producers = () => {
+  const [uniqueProducers, setUniqueProducers] = useState([])
   const {
-    data: { producer: producers = [] } = { producers: [] }
+    data: { loading, producer: producers = [] } = { producers: [] }
   } = useSubscription(PRODUCERS_SUBSCRIPTION)
   const [nodes, setNodes] = useState([])
   const [currentNode, setCurrentNode] = useState(null)
@@ -195,8 +198,43 @@ const Producers = () => {
   }
 
   useEffect(() => {
-    const items = []
+    let uniqueProducers = {}
     producers.forEach((producer) => {
+      const id =
+        producer?.bp_json?.org?.candidate_name ||
+        producer?.bp_json?.organization_name
+      const previousEntity = uniqueProducers[id]
+      let missedBlocks = producer.missed_blocks
+      let cpus = producer.cpus
+
+      if (previousEntity) {
+        missedBlocks = [...previousEntity.missed_blocks, ...missedBlocks]
+        cpus = [...previousEntity.cpus, ...cpus]
+      }
+
+      const { org, ...bpJson } = producer.bp_json || {}
+      let newBpJson = bpJson
+
+      if (org) {
+        newBpJson = { ...newBpJson, ...org }
+      }
+
+      uniqueProducers = {
+        ...uniqueProducers,
+        [id]: {
+          ...producer,
+          cpus,
+          missed_blocks: missedBlocks,
+          bp_json: newBpJson
+        }
+      }
+    })
+    setUniqueProducers(Object.values(uniqueProducers))
+  }, [producers])
+
+  useEffect(() => {
+    const items = []
+    uniqueProducers.forEach((producer) => {
       if (!producer?.bp_json?.nodes) {
         return
       }
@@ -206,20 +244,25 @@ const Producers = () => {
           return
         }
 
+        const country =
+          producer?.bp_json.org?.location?.country ||
+          producer?.bp_json?.location?.country
+
         items.push({
           coordinates: [node.location.longitude, node.location.latitude],
           node_type: node.node_type,
           country: {
-            name: countries[producer.bp_json.org.location.country]?.name,
-            flag: countries[producer.bp_json.org.location.country]?.flag
+            name: countries[country]?.name,
+            flag: countries[country]?.flag
           },
-          ...producer
+          owner: producer.owner,
+          ...node
         })
       })
     })
 
     setAllNodes(items)
-  }, [producers])
+  }, [uniqueProducers])
 
   useEffect(() => {
     let items = allNodes
@@ -257,7 +300,7 @@ const Producers = () => {
                     onChange={(e) => setProducerFilter(e.target.value)}
                   >
                     <MenuItem value="all">All</MenuItem>
-                    {producers.map((producer) => (
+                    {uniqueProducers.map((producer) => (
                       <MenuItem
                         key={`menu-item-${producer.owner}`}
                         value={producer.owner}
@@ -266,7 +309,7 @@ const Producers = () => {
                         <img
                           className={classes.logo}
                           src={
-                            producer?.bp_json?.org?.branding?.logo_256 ||
+                            producer?.bp_json?.branding?.logo_256 ||
                             generalConfig.defaultProducerLogo
                           }
                           onError={onImgError(
@@ -274,7 +317,8 @@ const Producers = () => {
                           )}
                           alt="logo"
                         />
-                        {producer.owner}
+                        {producer.bp_json?.candidate_name ||
+                          producer.bp_json?.organization_name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -334,7 +378,7 @@ const Producers = () => {
             </Card>
           </Grid>
         </Grid>
-        {!nodes.length && <LinearProgress />}
+        {loading && <LinearProgress />}
       </Grid>
       <Grid item sm={12} className={classes.mapWrapper}>
         <ComposableMap
@@ -426,46 +470,20 @@ const Producers = () => {
               </Typography>
             </>
           )}
-          {currentNode?.owner && (
+          {currentNode?.node_name && (
             <>
               <Typography>
-                <span className={classes.popoverItem}>{t('account')}:</span>
-                <Link
-                  href={
-                    generalConfig.eosRateLink
-                      ? `${generalConfig.eosRateLink}/block-producers/${currentNode?.owner}`
-                      : currentNode?.url
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {currentNode?.owner}
-                </Link>
+                <span className={classes.popoverItem}>{t('name')}:</span>
+                {currentNode?.node_name}
               </Typography>
+
               <Typography>
-                <span className={classes.popoverItem}>{t('website')}:</span>
-                <span>
-                  <Link
-                    href={currentNode?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {currentNode?.url}
-                  </Link>
+                <span className={classes.popoverItem}>{t('nodeType')}:</span>
+                <span className={classes.capitalize}>
+                  {currentNode?.node_type || 'N/A'}
                 </span>
               </Typography>
-              <Typography>
-                <span className={classes.popoverItem}>{t('votes')}:</span>
-                <span>
-                  {formatWithThousandSeparator(currentNode?.total_votes_eos, 2)}
-                </span>
-              </Typography>
-              <Typography>
-                <span className={classes.popoverItem}>{t('rewards')}:</span>
-                <span>
-                  {formatWithThousandSeparator(currentNode?.total_rewards, 2)}
-                </span>
-              </Typography>
+
               <Typography>
                 <span className={classes.popoverItem}>
                   {t('producerCountry')}:
@@ -475,12 +493,51 @@ const Producers = () => {
                 </span>
                 <span>{currentNode?.country?.name}</span>
               </Typography>
-              <Typography>
-                <span className={classes.popoverItem}>{t('nodeType')}:</span>
-                <span className={classes.capitalize}>
-                  {currentNode?.node_type || 'N/A'}
-                </span>
-              </Typography>
+
+              {currentNode.features && (
+                <dl className={classes.dl}>
+                  <dt>
+                    <Typography className={classes.popoverItem}>
+                      {t('features')}
+                    </Typography>
+                  </dt>
+                  {currentNode.features.map((feature, i) => (
+                    <dd key={i}>{feature}</dd>
+                  ))}
+                </dl>
+              )}
+
+              {currentNode.endpoints && (
+                <dl className={classes.dl}>
+                  <dt>
+                    <Typography className={classes.popoverItem}>
+                      {t('endpoints')}
+                    </Typography>
+                  </dt>
+                  {Object.keys(currentNode.endpoints).map((key, i) => (
+                    <dd key={i}>
+                      <span className={classes.popoverItem}>{key}</span>:{' '}
+                      {currentNode.endpoints[key]}
+                    </dd>
+                  ))}
+                </dl>
+              )}
+
+              {currentNode.keys && (
+                <dl className={classes.dl}>
+                  <dt>
+                    <Typography className={classes.popoverItem}>
+                      {t('keys')}
+                    </Typography>
+                  </dt>
+                  {Object.keys(currentNode.keys).map((key, i) => (
+                    <dd key={i}>
+                      <span className={classes.popoverItem}>{key}</span>:{' '}
+                      {currentNode.keys[key]}
+                    </dd>
+                  ))}
+                </dl>
+              )}
             </>
           )}
         </div>
