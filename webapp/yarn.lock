@@ -1300,10 +1300,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@eoscostarica/eoscr-components@~3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-3.0.0.tgz#0c6caeb717b96c3701fdb5c7d395dbfdce338b0b"
-  integrity sha512-Roq+Fjkl+xXy7d0Muy+0oqxM6pCF3i5x1Ql33vJpvfO7uNzaLRZXlOnr+vH7lf6vizLsfqLiuF8xkqCdJYmD9g==
+"@eoscostarica/eoscr-components@~3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-3.1.0.tgz#f4f5a238da53845cb7344e24c66fd7f96d9d5f44"
+  integrity sha512-yTfurrlYdWj5zOO/Yp0Is6Jn8/zy2fKmBhmjCZ+59BgHvJpO9b7kmpDtZNKieMTmvZgHwpZn6gU3vZLb/sPAvQ==
   dependencies:
     "@material-ui/core" "^4.11.0"
     "@material-ui/icons" "^4.9.1"

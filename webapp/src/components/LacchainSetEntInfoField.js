@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { TextField } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
+import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../context/state.context'
 import { countries } from '../utils/countries'
@@ -29,7 +30,7 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
         ...payload,
         [parent]: {
           ...payload[parent],
-          [child]: event?.target?.value
+          [child]: event?.target?.value || event
         }
       }
     } else {
@@ -115,11 +116,11 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
         value={payload.ownership_disclosure || ''}
         onChange={handleOnFieldChange('ownership_disclosure')}
       />
-      <TextField
+      <ArrayTextField
         label="github_user"
         variant={variant}
         className={className}
-        value={payload.github_user || ''}
+        value={payload.github_user || []}
         onChange={handleOnFieldChange('github_user')}
       />
       <TextField
@@ -129,11 +130,11 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
         value={payload.chain_resources || ''}
         onChange={handleOnFieldChange('chain_resources')}
       />
-      <TextField
+      <ArrayTextField
         label="other_resources"
         variant={variant}
         className={className}
-        value={payload.other_resources || ''}
+        value={payload.other_resources || []}
         onChange={handleOnFieldChange('other_resources')}
       />
       <TextField

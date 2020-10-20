@@ -153,7 +153,7 @@ const Lacchain = ({ ual }) => {
       )
 
       if (currentEntity) {
-        actions = ['setentinfo', 'setnodeinfo', 'newaccount', 'addboot']
+        actions = ['setentinfo', 'setnodeinfo', 'newaccount']
       }
 
       setValidActions(actions)

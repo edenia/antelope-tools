@@ -44,6 +44,10 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
+    "name": "Name",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "features": "Features",
     "producer": "Producer",
     "nodeType": "Node type",
     "type": "Type",
@@ -154,6 +158,9 @@
     "noneActionWarning": "There is none action for your account",
     "setentinfoTitle": "Set entity info",
     "setentinfoTooltip": "Set info for an entity",
-    "setnodeinfoTitle": "Set node info"
+    "setnodeinfoTitle": "Set node info",
+    "setnodeinfoTooltip": "Set info for a node",
+    "newaccountTitle": "New account",
+    "newaccountTooltip": "Allow create a new account"
   }
 }

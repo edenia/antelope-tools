@@ -61,7 +61,7 @@ start-hasura:
 		curl http://localhost:9090/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi service"; \
 		sleep 5; done;
-	@echo "\n"
+	@echo "..."
 	@docker-compose stop hasura
 	@docker-compose up -d --build hasura
 
@@ -71,6 +71,7 @@ start-hasura-cli:
 		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
 		sleep 5; done;
+	@echo "..."
 	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser;
 
 start-webapp:
@@ -79,7 +80,7 @@ start-webapp:
 		curl http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
-	@echo "\n"
+	@echo "..."
 	@docker-compose up -d --build webapp
 
 start-logs:
