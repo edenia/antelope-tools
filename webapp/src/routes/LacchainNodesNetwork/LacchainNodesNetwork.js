@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { Graph } from 'react-d3-graph'
 
 import eosApi from '../../utils/eosapi'
@@ -151,8 +150,6 @@ const LacchainNodesNetwork = () => {
   )
 }
 
-LacchainNodesNetwork.propTypes = {
-  ual: PropTypes.object
-}
+LacchainNodesNetwork.propTypes = {}
 
 export default LacchainNodesNetwork

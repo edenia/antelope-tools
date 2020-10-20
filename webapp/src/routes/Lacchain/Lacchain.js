@@ -176,7 +176,7 @@ const Lacchain = ({ ual }) => {
         entities,
         nodes,
         currentEntity,
-        allowChangeEntity: ual.activeUser.accountName === 'eosio'
+        isAdmin: ual.activeUser.accountName === 'eosio'
       })
     }
 
@@ -192,7 +192,7 @@ const Lacchain = ({ ual }) => {
 
     setMessage(null)
     checkAccount()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [ual.activeUser, t])
 
   return (

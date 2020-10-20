@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core'
 
 import { useSharedState } from '../context/state.context'
 
-const LacchainEntitySelectField = ({
+const LacchainSetNodeInfoActionNodeField = ({
   value,
   onChange,
   label,
@@ -13,32 +13,37 @@ const LacchainEntitySelectField = ({
   className
 }) => {
   const [lacchain, { update }] = useSharedState()
-  const [entities, setEntities] = useState([])
+  const [nodes, setNodes] = useState([])
   const [options, setOptions] = useState([])
 
   const handleOnFieldChange = (event, newValue) => {
     onChange(newValue)
     update({
-      currentEntity: entities.find((entity) => entity.name === newValue)
+      currentNode: nodes.find((node) => node.name === newValue)
     })
   }
 
   useEffect(() => {
-    if (
-      lacchain?.currentEntity?.name === value ||
-      !lacchain?.currentEntity?.name
-    ) {
+    if (lacchain?.currentNode?.name === value || !lacchain?.currentNode?.name) {
       return
     }
 
-    onChange(lacchain.currentEntity.name)
-  }, [lacchain.currentEntity, value, onChange])
+    onChange(lacchain.currentNode.name)
+  }, [lacchain.currentNode, value, onChange])
 
   useEffect(() => {
-    const entities = lacchain.entities || []
-    setEntities(entities)
-    setOptions(entities.map((entity) => entity.name))
-  }, [lacchain.entities])
+    const nodes = lacchain.nodes || []
+
+    setNodes(nodes)
+    setOptions(
+      nodes
+        .filter(
+          (node) =>
+            lacchain.isAmin || node.entity === lacchain.currentEntity?.name
+        )
+        .map((entity) => entity.name)
+    )
+  }, [lacchain.nodes, lacchain.isAmin, lacchain.currentEntity])
 
   return (
     <Autocomplete
@@ -46,7 +51,6 @@ const LacchainEntitySelectField = ({
       options={options}
       value={value}
       onChange={handleOnFieldChange}
-      disabled={!lacchain.isAdmin}
       renderInput={(params) => (
         <TextField {...params} label={label} variant={variant} />
       )}
@@ -54,7 +58,7 @@ const LacchainEntitySelectField = ({
   )
 }
 
-LacchainEntitySelectField.propTypes = {
+LacchainSetNodeInfoActionNodeField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
@@ -62,4 +66,4 @@ LacchainEntitySelectField.propTypes = {
   className: PropTypes.string
 }
 
-export default LacchainEntitySelectField
+export default LacchainSetNodeInfoActionNodeField

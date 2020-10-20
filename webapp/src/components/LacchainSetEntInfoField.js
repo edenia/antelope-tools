@@ -8,6 +8,7 @@ import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../context/state.context'
 import { countries } from '../utils/countries'
+import { getNewFieldPayload } from '../utils/lacchain'
 
 const useStyles = makeStyles((theme) => ({
   flag: {
@@ -21,25 +22,8 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
   const [payload, setPayload] = useState({})
   const [optionsForCountry, setOptionsForCountry] = useState([])
 
-  const handleOnFieldChange = (field) => (event) => {
-    let newPayload = {}
-
-    if (field.includes('.')) {
-      const [parent, child] = field.split('.')
-      newPayload = {
-        ...payload,
-        [parent]: {
-          ...payload[parent],
-          [child]: event?.target?.value || event
-        }
-      }
-    } else {
-      newPayload = {
-        ...payload,
-        [field]: event?.target?.value
-      }
-    }
-
+  const handleOnFieldChange = (field) => (event, value) => {
+    const newPayload = getNewFieldPayload(field, event, value, payload)
     setPayload(newPayload)
     onChange(JSON.stringify(newPayload))
   }
@@ -55,7 +39,7 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
       lacchain.currentEntity ? JSON.parse(lacchain.currentEntity.info) : {}
     )
     onChange(lacchain.currentEntity?.info || '{}')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [lacchain.currentEntity])
 
   return (
@@ -167,7 +151,8 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
       />
       <Autocomplete
         className={className}
-        value={payload.location?.country}
+        value={payload.location?.country || ''}
+        onInputChange={handleOnFieldChange('location.country')}
         options={optionsForCountry}
         autoHighlight
         renderOption={(option) => (

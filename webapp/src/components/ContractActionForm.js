@@ -9,6 +9,8 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 
 import LacchainEntitySelectField from './LacchainEntitySelectField'
 import LacchainSetEntInfoField from './LacchainSetEntInfoField'
+import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
+import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -68,6 +70,28 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
       case 'eosio.setentinfo.info':
         return (
           <LacchainSetEntInfoField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.setnodeinfo.node':
+        return (
+          <LacchainSetNodeInfoActionNodeField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.setnodeinfo.info':
+        return (
+          <LacchainSetNodeInfoActionInfoField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"
