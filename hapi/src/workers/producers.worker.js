@@ -47,17 +47,13 @@ const start = async () => {
     producerService.syncProducers,
     workersConfig.syncProducersInterval
   )
-  // run(
-  //   'SYNC PRODUCER INFO',
-  //   producerService.syncProducersInfo,
-  //   workersConfig.syncProducerInfoInterval
-  // )
-  // run(
-  //   'SYNC CPU USAGE',
-  //   producerService.syncCpuUsage,
-  //   workersConfig.syncProducerCpuInterval * 3
-  // )
-  // run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
+  run(
+    'SYNC PRODUCER INFO',
+    producerService.syncProducersInfo,
+    workersConfig.syncProducerInfoInterval
+  )
+  run('SYNC CPU USAGE', producerService.syncCpuUsage)
+  run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
 }
 
 module.exports = {

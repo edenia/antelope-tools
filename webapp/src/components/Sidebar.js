@@ -15,7 +15,7 @@ import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
 import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
 import { useTranslation } from 'react-i18next'
 
-import { generalConfig } from '../config'
+import { generalConfig, eosConfig } from '../config'
 import CustomRouterLink from './CustomRouterLink'
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +88,7 @@ const DashboardSidebarContent = () => {
     }
   ]
 
-  if (generalConfig.useLanguageSufix === 'lacchain') {
+  if (eosConfig.networkName === 'lacchain') {
     mainPages.push({
       title: t('nodesNetwork'),
       href: '/lacchain-nodes-network',

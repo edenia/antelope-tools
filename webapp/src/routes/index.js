@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-import { generalConfig } from '../config'
+import { generalConfig, eosConfig } from '../config'
 
 const Dashboard = lazy(() => import('./Dashboard'))
 const Login = lazy(() => import('./Login'))
@@ -41,7 +41,7 @@ const routes = [
   }
 ]
 
-if (generalConfig.useLanguageSufix === 'lacchain') {
+if (eosConfig.networkName === 'lacchain') {
   routes.push({
     path: '/lacchain',
     component: Lacchain

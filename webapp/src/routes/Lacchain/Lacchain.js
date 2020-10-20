@@ -15,10 +15,7 @@ import EosApi from 'eosjs-api'
 import { eosConfig } from '../../config'
 import ContractActionForm from '../../components/ContractActionForm'
 import BreakpointMasonry from '../../components/BreakpointMasonry'
-import {
-  SharedStateProvider,
-  useSharedState
-} from '../../context/state.context'
+import { useSharedState } from '../../context/state.context'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,
@@ -264,14 +261,4 @@ Lacchain.propTypes = {
   ual: PropTypes.object
 }
 
-const LacchainWrapper = ({ ual }) => (
-  <SharedStateProvider>
-    <Lacchain ual={ual} />
-  </SharedStateProvider>
-)
-
-LacchainWrapper.propTypes = {
-  ual: PropTypes.object
-}
-
-export default LacchainWrapper
+export default Lacchain
