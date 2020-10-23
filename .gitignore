@@ -1,5 +1,6 @@
 .env*
 !.env.example
+!.env.local
 db_data
 wallet_data
 certificates

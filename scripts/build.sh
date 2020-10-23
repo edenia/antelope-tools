@@ -19,6 +19,7 @@ if [ "$1" == "production" ]; then
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
        --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
+       --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \
        --build-arg react_app_eos_api_port="${REACT_APP_EOS_API_PORT}" \
        --build-arg react_app_eos_api_protocol="${REACT_APP_EOS_API_PROTOCOL}" \
@@ -29,9 +30,6 @@ if [ "$1" == "production" ]; then
        --build-arg react_app_eos_bp_json_on_chain_contract="${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}" \
        --build-arg react_app_eos_bp_json_on_chain_table="${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}" \
        --build-arg react_app_eos_bp_json_on_chain_scope="${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}" \
-       --build-arg react_app_eos_custom_node_types="${REACT_APP_EOS_CUSTOM_NODE_TYPES}" \
-       --build-arg react_app_include_default_transaction="${REACT_APP_INCLUDE_DEFAULT_TRANSACTION}" \
-       --build-arg react_app_use_language_sufix="${REACT_APP_USE_LANGUAGE_SUFIX}" \
     && docker push eoscostarica506/monitor-webapp:latest
     docker build -t eoscostarica506/monitor-hapi hapi/ && docker push eoscostarica506/monitor-hapi
     docker build -t eoscostarica506/wallet wallet/ && docker push eoscostarica506/wallet
@@ -47,6 +45,7 @@ elif [ "$1" == "testing" ]; then
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
        --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
+       --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \
        --build-arg react_app_eos_api_port="${REACT_APP_EOS_API_PORT}" \
        --build-arg react_app_eos_api_protocol="${REACT_APP_EOS_API_PROTOCOL}" \
@@ -57,9 +56,6 @@ elif [ "$1" == "testing" ]; then
        --build-arg react_app_eos_bp_json_on_chain_contract="${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}" \
        --build-arg react_app_eos_bp_json_on_chain_table="${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}" \
        --build-arg react_app_eos_bp_json_on_chain_scope="${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}" \
-       --build-arg react_app_eos_custom_node_types="${REACT_APP_EOS_CUSTOM_NODE_TYPES}" \
-       --build-arg react_app_include_default_transaction="${REACT_APP_INCLUDE_DEFAULT_TRANSACTION}" \
-       --build-arg react_app_use_language_sufix="${REACT_APP_USE_LANGUAGE_SUFIX}" \
     && docker push eoscostarica506/monitor-webapp:testing
 elif [ "$1" == "lacchain" ]; then
     cp .env.lacchain .env
@@ -73,6 +69,7 @@ elif [ "$1" == "lacchain" ]; then
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
        --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
+       --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \
        --build-arg react_app_eos_api_port="${REACT_APP_EOS_API_PORT}" \
        --build-arg react_app_eos_api_protocol="${REACT_APP_EOS_API_PROTOCOL}" \
@@ -83,8 +80,5 @@ elif [ "$1" == "lacchain" ]; then
        --build-arg react_app_eos_bp_json_on_chain_contract="${REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT}" \
        --build-arg react_app_eos_bp_json_on_chain_table="${REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE}" \
        --build-arg react_app_eos_bp_json_on_chain_scope="${REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE}" \
-       --build-arg react_app_eos_custom_node_types="${REACT_APP_EOS_CUSTOM_NODE_TYPES}" \
-       --build-arg react_app_include_default_transaction="${REACT_APP_INCLUDE_DEFAULT_TRANSACTION}" \
-       --build-arg react_app_use_language_sufix="${REACT_APP_USE_LANGUAGE_SUFIX}" \
     && docker push eoscostarica506/monitor-webapp:lacchain
 fi

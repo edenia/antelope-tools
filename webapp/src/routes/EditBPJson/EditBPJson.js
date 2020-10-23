@@ -59,8 +59,45 @@ const EditBPJson = ({ ual }) => {
   const [error, setError] = useState(null)
   const { t } = useTranslation('updateNodeInfo')
 
-  const handleOnSubmit = async (owner, json) => {
-    if (!ual.activeUser) return
+  const initData = {
+    account_name: '',
+    org: {
+      candidate_name: '',
+      website: '',
+      code_of_conduct: '',
+      ownership_disclosure: '',
+      email: '',
+      github_user: [],
+      chain_resources: '',
+      other_resources: [],
+      branding: {
+        logo_256: '',
+        logo_1024: '',
+        logo_svg: ''
+      },
+      location: {
+        name: '',
+        country: '',
+        latitude: null,
+        longitude: null
+      },
+      social: {
+        keybase: '',
+        telegram: '',
+        twitter: '',
+        github: '',
+        youtube: '',
+        facebook: '',
+        hive: '',
+        reddit: '',
+        wechat: ''
+      }
+    },
+    nodes: []
+  }
+
+  const handleOnSubmit = async (payload) => {
+    if (!ual.activeUser || !payload.shouldUpdateChain) return
 
     setLoading(true)
     try {
@@ -77,8 +114,8 @@ const EditBPJson = ({ ual }) => {
                 }
               ],
               data: {
-                owner,
-                json
+                owner: ual.activeUser.accountName,
+                json: payload.bpJson
               }
             }
           ]
@@ -141,20 +178,12 @@ const EditBPJson = ({ ual }) => {
               <LinearProgress color="primary" />
             </>
           )}
-          {!ual.activeUser && !loading && (
-            <Alert severity="warning">{t('notLogin')}</Alert>
-          )}
-          {ual.activeUser && !producer && !loading && (
-            <Alert severity="warning">{t('notRegisterNode')}</Alert>
-          )}
           {error && <Alert severity="error">{error}</Alert>}
-          {producer && (
-            <BPJsonGenerator
-              accountName={producer?.owner}
-              bpJson={producer.bpJson}
-              onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
-            />
-          )}
+          <BPJsonGenerator
+            accountName={ual.activeUser?.accountName || initData.account_name}
+            bpJson={producer?.bpJson || initData}
+            onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
+          />
         </CardContent>
       </Card>
     </Grid>

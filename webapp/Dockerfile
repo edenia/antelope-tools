@@ -7,6 +7,7 @@ ARG react_app_use_rewards
 ARG react_app_use_votes
 ARG react_app_use_block_producer_agreement_contract
 ARG react_app_hasura_url
+ARG react_app_eos_api_network_name
 ARG react_app_eos_api_host
 ARG react_app_eos_api_port
 ARG react_app_eos_api_protocol
@@ -17,9 +18,6 @@ ARG react_app_eos_use_bp_json_on_chain
 ARG react_app_eos_bp_json_on_chain_contract
 ARG react_app_eos_bp_json_on_chain_table
 ARG react_app_eos_bp_json_on_chain_scope
-ARG react_app_eos_custom_node_types
-ARG react_app_include_default_transaction
-ARG react_app_use_language_sufix
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -32,6 +30,7 @@ ENV REACT_APP_USE_REWARDS $react_app_use_rewards
 ENV REACT_APP_USE_VOTES $react_app_use_votes
 ENV REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT $react_app_use_block_producer_agreement_contract
 ENV REACT_APP_HASURA_URL $react_app_hasura_url
+ENV REACT_APP_EOS_API_NETWORK_NAME $react_app_eos_api_network_name
 ENV REACT_APP_EOS_API_HOST $react_app_eos_api_host
 ENV REACT_APP_EOS_API_PORT $react_app_eos_api_port
 ENV REACT_APP_EOS_API_PROTOCOL $react_app_eos_api_protocol
@@ -42,9 +41,6 @@ ENV REACT_APP_EOS_USE_BP_JSON_ON_CHAIN $react_app_eos_use_bp_json_on_chain
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT $react_app_eos_bp_json_on_chain_contract
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE $react_app_eos_bp_json_on_chain_table
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE $react_app_eos_bp_json_on_chain_scope
-ENV REACT_APP_EOS_CUSTOM_NODE_TYPES $react_app_eos_custom_node_types
-ENV REACT_APP_EOS_INCLUDE_DEFAULT_TRANSACTION $react_app_include_default_transaction
-ENV REACT_APP_USE_LANGUAGE_SUFIX $react_app_use_language_sufix
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR

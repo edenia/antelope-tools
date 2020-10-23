@@ -17,7 +17,9 @@
     "about": "Acerca de",
     "ricardianContract": "Contrato ricardiano",
     "help": "Ayuda",
-    "smartContract": "Contratos Inteligentes"
+    "smartContract": "Contratos Inteligentes",
+    "lacchainBoard": "Lacchain Panel",
+    "nodesNetwork": "Topología de red"
   },
   "dashboardHome": {
     "currentProducer": "Productor actual",
@@ -42,16 +44,20 @@
     "transactions": "Transacciones"
   },
   "dashboardNodes": {
-    "producer": "Productor",
-    "nodeType": "Tipo De Nodo",
+    "name": "Nombre",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "features": "Caracteristicas",
+    "producer": "Producer",
+    "nodeType": "Tipo de nodo",
     "type": "Tipo",
     "description": "Descripción",
     "color": "Color",
     "account": "Cuenta",
-    "website": "Sitio Web",
+    "website": "Sitio web",
     "votes": "Votos",
     "rewards": "Recompensas",
-    "producerCountry": "País Productor",
+    "producerCountry": "País del productor",
     "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {

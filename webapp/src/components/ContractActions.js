@@ -5,12 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
-import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
-import Chip from '@material-ui/core/Chip'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import ContractActionForm from './ContractActionForm'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,28 +20,7 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
   const classes = useStyles()
   const [actions, setActions] = useState([])
   const [action, setAction] = useState('')
-  const [fields, setFields] = useState([])
-  const [payload, setPayload] = useState({})
   const { t } = useTranslation('accountInfo')
-
-  const handleSubmit = () => {
-    if (!onSubmitAction) return
-
-    onSubmitAction({
-      account: accountName,
-      name: action,
-      data: payload
-    })
-  }
-
-  const handleFieldChange = (name) => (event) => {
-    const value = event.target.value
-
-    setPayload((prevValue) => ({
-      ...prevValue,
-      [name]: value
-    }))
-  }
 
   useEffect(() => {
     if (!abi) {
@@ -55,17 +31,6 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
 
     setActions(abi.actions.map(({ name }) => name))
   }, [abi])
-
-  useEffect(() => {
-    if (!action) {
-      setFields([])
-
-      return
-    }
-
-    const struct = abi.structs.find((struct) => struct.name === action)
-    setFields(struct.fields)
-  }, [action, abi])
 
   return (
     <Box width="100%">
@@ -86,34 +51,12 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
         </Select>
       </FormControl>
 
-      {fields.map((field) => (
-        <TextField
-          key={`action-field-${field.name}`}
-          label={field.name}
-          variant="outlined"
-          className={classes.formControl}
-          value={payload[field.name] || ''}
-          onChange={handleFieldChange(field.name)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Chip label={field.type} />
-              </InputAdornment>
-            )
-          }}
-        />
-      ))}
-
-      {action && (
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-        >
-          {t('executeTransaction')}
-        </Button>
-      )}
+      <ContractActionForm
+        accountName={accountName}
+        action={action}
+        abi={abi}
+        onSubmitAction={onSubmitAction}
+      />
     </Box>
   )
 }

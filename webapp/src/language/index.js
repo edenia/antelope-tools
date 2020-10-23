@@ -1,4 +1,4 @@
-import { generalConfig } from '../config'
+import { eosConfig } from '../config'
 
 import en from './en.json'
 import es from './es.json'
@@ -17,14 +17,9 @@ const languajes = {
 }
 
 const getLanguaje = (languaje) => {
-  if (generalConfig.useLanguageSufix) {
-    return (
-      languajes[languaje][generalConfig.useLanguageSufix] ||
-      languajes[languaje].default
-    )
-  }
-
-  return languajes[languaje].default
+  return (
+    languajes[languaje][eosConfig.networkName] || languajes[languaje].default
+  )
 }
 
 export default {
