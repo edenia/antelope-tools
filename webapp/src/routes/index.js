@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-import { generalConfig } from '../config'
+import { generalConfig, eosConfig } from '../config'
 
 const Dashboard = lazy(() => import('./Dashboard'))
 const Login = lazy(() => import('./Login'))
@@ -11,6 +11,8 @@ const BlockProducerAgreementContract = lazy(() =>
 )
 const EditBPJson = lazy(() => import('./EditBPJson'))
 const SmartContract = lazy(() => import('./SmartContract'))
+const Lacchain = lazy(() => import('./Lacchain'))
+const LacchainNodesNetwork = lazy(() => import('./LacchainNodesNetwork'))
 
 const routes = [
   {
@@ -38,6 +40,17 @@ const routes = [
     component: SmartContract
   }
 ]
+
+if (eosConfig.networkName === 'lacchain') {
+  routes.push({
+    path: '/lacchain',
+    component: Lacchain
+  })
+  routes.push({
+    path: '/lacchain-nodes-network',
+    component: LacchainNodesNetwork
+  })
+}
 
 if (generalConfig.useBlockProducerAgreementContract) {
   routes.push({

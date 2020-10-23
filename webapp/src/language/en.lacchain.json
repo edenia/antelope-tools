@@ -10,14 +10,16 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
-    "blockProducer": "Block Producers",
+    "blockProducer": "Entities",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
     "about": "About",
     "ricardianContract": "Ricardian Contract",
     "help": "Help",
-    "smartContract": "Smart Contract"
+    "smartContract": "Smart Contract",
+    "lacchainBoard": "Lacchain Board",
+    "nodesNetwork": "Node Network"
   },
   "dashboardHome": {
     "currentProducer": "Current Producer",
@@ -42,7 +44,11 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
-    "producer": "Producer",
+    "name": "Name",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "features": "Features",
+    "producer": "Entity",
     "nodeType": "Node type",
     "type": "Type",
     "description": "Description",
@@ -51,7 +57,7 @@
     "website": "Website",
     "votes": "Votes",
     "rewards": "Rewards",
-    "producerCountry": "Producer country",
+    "producerCountry": "Entity country",
     "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
@@ -146,5 +152,15 @@
     "limit": "Limit",
     "getData": "Get Data",
     "emptyTable": "Empty Table"
+  },
+  "board": {
+    "loginWarning": "Please login to use this board",
+    "noneActionWarning": "There is none action for your account",
+    "setentinfoTitle": "Set entity info",
+    "setentinfoTooltip": "Set info for an entity",
+    "setnodeinfoTitle": "Set node info",
+    "setnodeinfoTooltip": "Set info for a node",
+    "newaccountTitle": "New account",
+    "newaccountTooltip": "Allow create a new account"
   }
 }

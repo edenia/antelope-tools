@@ -42,16 +42,20 @@
     "transactions": "Transacciones"
   },
   "dashboardNodes": {
-    "producer": "Productor",
-    "nodeType": "Tipo De Nodo",
+    "name": "Nombre",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "features": "Caracteristicas",
+    "producer": "Entidad",
+    "nodeType": "Tipo de nodo",
     "type": "Tipo",
     "description": "Descripción",
     "color": "Color",
     "account": "Cuenta",
-    "website": "Sitio Web",
+    "website": "Sitio web",
     "votes": "Votos",
     "rewards": "Recompensas",
-    "producerCountry": "País Productor",
+    "producerCountry": "País de la entidad",
     "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
@@ -146,5 +150,16 @@
     "limit": "Límite",
     "getData": "Obtener Datos",
     "emptyTable": "Table vacía"
+  },
+  "board": {
+    "loginWarning": "Inicie sesión para usar esta herramienta",
+    "noneActionWarning": "No hay ninguna opción para su cuenta",
+    "setentinfoTitle": "Establecer información de entidad",
+    "setentinfoTooltip": "Establecer información para una entidad",
+    "setnodeinfoTitle": "Establecer información de un nodo",
+    "setnodeinfoTooltip": "Establecer información para un nodo",
+    "newaccountTitle": "Nueva cuenta",
+    "newaccountTooltip": "Permitir crear una nueva cuenta"
+    
   }
 }

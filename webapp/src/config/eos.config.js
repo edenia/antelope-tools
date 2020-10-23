@@ -14,31 +14,34 @@ export const bpJsonOnChainScope =
 export const exchangeRate = process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE
 export const exchangeRateApi =
   process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API
-export const includeDefaultTransaction = process.env
-  .REACT_APP_EOS_INCLUDE_DEFAULT_TRANSACTION
-  ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_DEFAULT_TRANSACTION)
-  : null
-export const nodeTypes = process.env.REACT_APP_EOS_CUSTOM_NODE_TYPES
-  ? JSON.parse(process.env.REACT_APP_EOS_CUSTOM_NODE_TYPES)
-  : [
+
+export const networkName = process.env.REACT_APP_EOS_API_NETWORK_NAME
+
+let _nodeTypes = null
+let _includeDefaultTransaction = null
+
+switch (networkName) {
+  case 'lacchain':
+    _includeDefaultTransaction = {
+      account: 'writer',
+      name: 'run',
+      authorization: [{ actor: 'latamlink', permission: 'writer' }],
+      data: {}
+    }
+    _nodeTypes = [
       {
-        name: 'producer',
+        name: 'validator',
         color: '#4f4363',
         description: 'Node with signing key'
       },
-      {
-        name: 'full',
-        color: '#6ec4e0',
-        description: 'Node in front of producer'
-      },
-      {
-        name: 'query',
-        color: '#5484b3',
-        description: 'Node that provides HTTP(S) API to the public'
-      },
-      {
-        name: 'seed',
-        color: '#000',
-        description: 'Node that provides P2P and/or BNET to the public'
-      }
+      { name: 'boot', color: '#6ec4e0', description: 'Boot node' },
+      { name: 'writer', color: '#5484b3', description: 'Writer node' },
+      { name: 'observer', color: '#000', description: 'Observer node' }
     ]
+    break
+  default:
+    break
+}
+
+export const nodeTypes = _nodeTypes
+export const includeDefaultTransaction = _includeDefaultTransaction
