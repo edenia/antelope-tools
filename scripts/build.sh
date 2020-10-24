@@ -9,7 +9,7 @@ fi
 echo "Building docker containers..."
 if [ "$1" == "production" ]; then
     cp .env.mainnet .env
-    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8080\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/graphql-mainnet.eosio.cr\/v1\/graphql/g' .env
+    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8585\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/graphql-mainnet.eosio.cr\/v1\/graphql/g' .env
     eval $(scripts/dotenv export)
     docker build -t eoscostarica506/monitor-webapp:latest webapp/ \
        --build-arg react_app_title="${REACT_APP_TITLE}" \
@@ -35,7 +35,7 @@ if [ "$1" == "production" ]; then
     docker build -t eoscostarica506/wallet wallet/ && docker push eoscostarica506/wallet
 elif [ "$1" == "testing" ]; then
     cp .env.jungle .env
-    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8080\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/graphql-testnet.eosio.cr\:3000\/v1\/graphql/g' .env
+    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8585\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/graphql-testnet.eosio.cr\:3000\/v1\/graphql/g' .env
     eval $(scripts/dotenv export)
     docker build -t eoscostarica506/monitor-webapp:testing webapp/ \
        --build-arg react_app_title="${REACT_APP_TITLE}" \
@@ -59,7 +59,7 @@ elif [ "$1" == "testing" ]; then
     && docker push eoscostarica506/monitor-webapp:testing
 elif [ "$1" == "lacchain" ]; then
     cp .env.lacchain .env
-    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8080\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/dashboard-graphql.latamlink.io\/v1\/graphql/g' .env
+    sed -i 's/REACT_APP_HASURA_URL\=http:\/\/localhost:8585\/v1\/graphql/REACT_APP_HASURA_URL\=https\:\/\/dashboard-graphql.latamlink.io\/v1\/graphql/g' .env
     eval $(scripts/dotenv export)
     docker build -t eoscostarica506/monitor-webapp:lacchain webapp/ \
        --build-arg react_app_title="${REACT_APP_TITLE}" \
