@@ -40,6 +40,28 @@ switch (networkName) {
     ]
     break
   default:
+    _nodeTypes = [
+      {
+        name: 'producer',
+        color: '#4f4363',
+        description: 'Node with signing key'
+      },
+      {
+        name: 'full',
+        color: '#6ec4e0',
+        description: 'Node in front of producer'
+      },
+      {
+        name: 'query',
+        color: '#5484b3',
+        description: 'Node that provides HTTP(S) API to the public'
+      },
+      {
+        name: 'seed',
+        color: '#000',
+        description: 'Node that provides P2P and/or BNET to the public'
+      }
+    ]
     break
 }
 

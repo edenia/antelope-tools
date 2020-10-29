@@ -8,6 +8,7 @@ import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import LiveHelpIcon from '@material-ui/icons/LiveHelp'
+import FileCopyIcon from '@material-ui/icons/FileCopy'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import Divider from '@material-ui/core/Divider'
@@ -117,16 +118,17 @@ const DashboardSidebarContent = () => {
 
   const helperPages = [
     {
-      title: t('nodeInfo'),
-      href: '/bpjson'
-    },
-    {
       title: t('about'),
       href: '/about'
     }
   ]
 
   if (generalConfig.useBlockProducerAgreementContract) {
+    mainPages.push({
+      title: t('nodeInfo'),
+      href: '/bpjson',
+      icon: <FileCopyIcon />
+    })
     helperPages.push({
       title: t('ricardianContract'),
       href: '/ricardian-contract'
