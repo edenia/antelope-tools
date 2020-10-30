@@ -25,14 +25,14 @@
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
     "lastBlock": "Last Irreversible Block",
-    "bpSchedule": "Block Producer Schedule",
+    "bpSchedule": "Block Production Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
     "htmlTitle": "Home - Dashboard"
   },
   "dashboardProducer": {
-    "title": "Block Producers",
-    "htmlTitle": "Block Producers - Dashboard"
+    "title": "Validators",
+    "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -78,7 +78,7 @@
     "title": "EOSIO Dashboard",
     "subtitle1": "What is the EOSIO Dashboard",
     "body1": {
-      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
+      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the LACChain EOSIO network infrastructure and Validator Node"
     },
     "subtitle2": "Why is it important?",
     "body2": {
@@ -86,7 +86,7 @@
     },
     "subtitle3": "Where does the data come from?",
     "body3": {
-      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
+      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block production information."
     }
   },
   "help": {

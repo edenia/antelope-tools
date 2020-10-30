@@ -10,7 +10,7 @@
   "sidebar": {
     "dashboard": "Panel",
     "networkInfo": "Información de la red",
-    "blockProducer": "Productores de Bloques",
+    "blockProducer": "Entidades",
     "nodeDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
@@ -20,17 +20,17 @@
     "smartContract": "Contratos Inteligentes"
   },
   "dashboardHome": {
-    "currentProducer": "Productor actual",
+    "currentProducer": "Validador actual",
     "headBlock": "Ultimo Bloque",
     "lastBlock": "Último Bloque Irreversible",
-    "bpSchedule": "Programa de Productor de Bloque",
+    "bpSchedule": "Programa de Producción de Bloques",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
     "htmlTitle": "Home - Dashboard"
   },
   "dashboardProducer": {
-    "title": "Productores de Bloques",
-    "htmlTitle": "Productores de Bloques - Dashboard"
+    "title": "Validadores",
+    "htmlTitle": "Validadores - Dashboard"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -62,7 +62,7 @@
     "dailyRewards": "Recompensas Diarias Totales",
     "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
-    "paidProducers": "Productores Pagados No Ubicados",
+    "paidProducers": "Validadores No Ubicados",
     "clickToViewBPs": "Haga clic para ver los PB no conformes",
     "lowestRewards": "Recompensas Más Bajas",
     "highestRewards": "Recompensas Más Altas",
@@ -149,7 +149,7 @@
     "upperBound": "Límite superior",
     "limit": "Límite",
     "getData": "Obtener Datos",
-    "emptyTable": "Table vacía"
+    "emptyTable": "Tabla vacía"
   },
   "board": {
     "loginWarning": "Inicie sesión para usar esta herramienta",
@@ -160,6 +160,5 @@
     "setnodeinfoTooltip": "Establecer información para un nodo",
     "newaccountTitle": "Nueva cuenta",
     "newaccountTooltip": "Permitir crear una nueva cuenta"
-    
   }
 }
