@@ -1,7 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSubscription } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -9,9 +8,9 @@ import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranslation } from 'react-i18next'
 
-import ProducerCard from '../../components/ProducerCard'
-import { PRODUCERS_SUBSCRIPTION } from '../../gql'
-import PageTitle from '../../components/PageTitle'
+import ProducerCard from '../components/ProducerCard'
+import { PRODUCERS_QUERY } from '../gql'
+import PageTitle from '../components/PageTitle'
 
 const useStyles = makeStyles((theme) => ({
   linearProgress: {
@@ -21,21 +20,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Producers = () => {
-  const dispatch = useDispatch()
   const [uniqueProducers, setUniqueProducers] = useState([])
   const classes = useStyles()
   const {
     loading = true,
     data: { producer: producers = [] } = { producers: [] }
-  } = useSubscription(PRODUCERS_SUBSCRIPTION)
+  } = useQuery(PRODUCERS_QUERY)
   const { t } = useTranslation('dashboardProducer')
-
-  useEffect(() => {
-    return () => {
-      dispatch.eos.stopTrackingInfo()
-      dispatch.eos.stopTrackingProducerSchedule()
-    }
-  }, [dispatch])
 
   useEffect(() => {
     let uniqueProducers = {}

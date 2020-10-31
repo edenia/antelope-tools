@@ -1,58 +1,57 @@
-import { EOSCR_THEME } from '@eoscostarica/eoscr-theme'
-
-import palette from './palette'
-
-export default {
+const typography = {
+  fontFamily: [
+    'Nunito',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"'
+  ].join(','),
+  fontSize: 14,
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
   h1: {
-    ...EOSCR_THEME.typography.h1,
-    color: palette.text.primary
+    fontSize: '2rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   h2: {
-    ...EOSCR_THEME.typography.h2,
-    color: palette.text.primary
+    fontSize: '1.75rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   h3: {
-    ...EOSCR_THEME.typography.h3,
-    color: palette.text.primary
+    fontSize: '1.5rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   h4: {
-    color: palette.text.primary,
-    ...EOSCR_THEME.typography.h4
+    fontSize: '1.25rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   h5: {
-    color: palette.text.primary,
-    ...EOSCR_THEME.typography.h5
+    fontSize: '1.125rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   h6: {
-    color: palette.text.primary,
-    ...EOSCR_THEME.typography.h6
-  },
-  subtitle1: {
-    ...EOSCR_THEME.typography.subtitle1,
-    color: palette.text.primary
-  },
-  subtitle2: {
-    ...EOSCR_THEME.typography.subtitle2,
-    color: palette.text.secondary
+    fontSize: '1.0625rem',
+    fontWeight: 600,
+    lineHeight: 1.2
   },
   body1: {
-    ...EOSCR_THEME.typography.body1,
-    color: palette.text.primary
-  },
-  body2: {
-    ...EOSCR_THEME.typography.body1,
-    color: palette.text.secondary
+    fontSize: 14
   },
   button: {
-    ...EOSCR_THEME.typography.button,
-    color: palette.text.primary
-  },
-  caption: {
-    ...EOSCR_THEME.typography.caption,
-    color: palette.text.secondary
-  },
-  overline: {
-    ...EOSCR_THEME.typography.overline,
-    color: palette.text.secondary
+    textTransform: 'none'
   }
 }
+
+export default typography

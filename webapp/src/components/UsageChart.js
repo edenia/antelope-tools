@@ -56,8 +56,8 @@ const UsageChart = ({ items }) => {
         <Tooltip content={<CustomTooltip />} />
         <Bar
           dataKey="usage"
-          stroke={theme.palette.secondary[900]}
-          fill={theme.palette.secondary[100]}
+          stroke={theme.palette.primary.dark}
+          fill={theme.palette.primary.light}
         />
       </BarChart>
     </ResponsiveContainer>

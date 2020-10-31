@@ -5,7 +5,6 @@ ARG react_app_default_producer_logo
 ARG react_app_eos_rate_link
 ARG react_app_use_rewards
 ARG react_app_use_votes
-ARG react_app_use_block_producer_agreement_contract
 ARG react_app_hasura_url
 ARG react_app_eos_api_network_name
 ARG react_app_eos_api_host
@@ -28,7 +27,6 @@ ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
 ENV REACT_APP_EOS_RATE_LINK $react_app_eos_rate_link
 ENV REACT_APP_USE_REWARDS $react_app_use_rewards
 ENV REACT_APP_USE_VOTES $react_app_use_votes
-ENV REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT $react_app_use_block_producer_agreement_contract
 ENV REACT_APP_HASURA_URL $react_app_hasura_url
 ENV REACT_APP_EOS_API_NETWORK_NAME $react_app_eos_api_network_name
 ENV REACT_APP_EOS_API_HOST $react_app_eos_api_host

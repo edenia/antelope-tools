@@ -67,8 +67,8 @@ const TransactionsChart = ({ data }) => {
         <Bar
           isAnimationActive
           dataKey="transactions"
-          stroke={theme.palette.secondary[900]}
-          fill={theme.palette.secondary[100]}
+          stroke={theme.palette.primary.dark}
+          fill={theme.palette.primary.light}
         />
       </BarChart>
     </ResponsiveContainer>

@@ -1,15 +1,32 @@
-import { createMuiTheme } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles'
 
-import palette from './palette'
+import variants from './variants'
 import typography from './typography'
+import overrides from './overrides'
+import breakpoints from './breakpoints'
+import props from './props'
+import shadows from './shadows'
 
-const theme = createMuiTheme({
-  palette,
-  typography,
-  zIndex: {
-    appBar: 1200,
-    drawer: 1100
-  }
-})
+const theme = (variant) => {
+  return createMuiTheme(
+    {
+      spacing: 4,
+      breakpoints: breakpoints,
+      overrides: overrides,
+      props: props,
+      typography: typography,
+      shadows: shadows,
+      palette: variant.palette
+    },
+    {
+      name: variant.name,
+      body: variant.body,
+      header: variant.header,
+      sidebar: variant.sidebar
+    }
+  )
+}
 
-export default theme
+const themes = variants.map((variant) => theme(variant))
+
+export default themes

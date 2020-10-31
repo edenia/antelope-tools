@@ -22,11 +22,11 @@ import {
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
 
-import UnknowFlagIcon from '../../components/UnknowFlagIcon'
-import { countries, formatWithThousandSeparator } from '../../utils'
-import { PRODUCERS_SUBSCRIPTION } from '../../gql'
-import PageTitle from '../../components/PageTitle'
-import CountryFlag from '../../components/CountryFlag'
+import UnknowFlagIcon from '../components/UnknowFlagIcon'
+import { countries, formatWithThousandSeparator } from '../utils'
+import { PRODUCERS_SUBSCRIPTION } from '../gql'
+import PageTitle from '../components/PageTitle'
+import CountryFlag from '../components/CountryFlag'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -65,19 +65,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0
   },
   mapWrapper: {
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      position: 'absolute',
-      zIndex: -999,
-      marginTop: theme.spacing(24)
-    },
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(20)
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 'calc(100% - 288px)',
-      marginTop: theme.spacing(8)
-    }
+    width: '100%'
   },
   geography: {
     outline: 'none',
@@ -231,7 +219,7 @@ const Rewards = () => {
   }, [producers, t])
 
   return (
-    <>
+    <Grid container spacing={2}>
       <PageTitle title={t('htmlTitle')} />
       <Grid item xl={3} lg={3} sm={6} xs={12}>
         <Card>
@@ -443,7 +431,7 @@ const Rewards = () => {
           </ul>
         </div>
       </Popover>
-    </>
+    </Grid>
   )
 }
 

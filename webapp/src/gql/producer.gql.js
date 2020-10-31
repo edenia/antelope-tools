@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const PRODUCERS_SUBSCRIPTION = gql`
-  subscription {
+  query {
     producer(order_by: { total_votes_percent: desc, owner: asc }) {
       id
       owner
@@ -31,7 +31,7 @@ export const PRODUCERS_SUBSCRIPTION = gql`
 
 export const PRODUCERS_QUERY = gql`
   query {
-    producer(order_by: { total_votes_percent: desc }, limit: 21) {
+    producer(order_by: { total_votes_percent: desc, owner: asc }, limit: 21) {
       id
       owner
       url
@@ -45,12 +45,12 @@ export const PRODUCERS_QUERY = gql`
       head_block_producer
       head_block_time
       updated_at
-      cpus(order_by: { created_at: desc }) {
+      cpus(limit: 10, order_by: { created_at: desc }) {
         usage
         updated_at
         created_at
       }
-      missed_blocks {
+      missed_blocks(limit: 100, order_by: { created_at: desc }) {
         id
         value
         created_at

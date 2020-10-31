@@ -17,7 +17,6 @@ if [ "$1" == "production" ]; then
        --build-arg react_app_eos_rate_link="${REACT_APP_EOS_RATE_LINK}" \
        --build-arg react_app_use_rewards="${REACT_APP_USE_REWARDS}" \
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
-       --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
        --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \
@@ -43,7 +42,6 @@ elif [ "$1" == "testing" ]; then
        --build-arg react_app_eos_rate_link="${REACT_APP_EOS_RATE_LINK}" \
        --build-arg react_app_use_rewards="${REACT_APP_USE_REWARDS}" \
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
-       --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
        --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \
@@ -67,7 +65,6 @@ elif [ "$1" == "lacchain" ]; then
        --build-arg react_app_eos_rate_link="${REACT_APP_EOS_RATE_LINK}" \
        --build-arg react_app_use_rewards="${REACT_APP_USE_REWARDS}" \
        --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
-       --build-arg react_app_use_block_producer_agreement_contract="${REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT}" \
        --build-arg react_app_hasura_url="${REACT_APP_HASURA_URL}" \
        --build-arg react_app_eos_api_network_name="${REACT_APP_EOS_API_NETWORK_NAME}" \
        --build-arg react_app_eos_api_host="${REACT_APP_EOS_API_HOST}" \

@@ -25,10 +25,10 @@ import {
 import { geoTimes } from 'd3-geo-projection'
 import { geoPath } from 'd3-geo'
 
-import { countries, onImgError } from '../../utils'
-import { eosConfig, generalConfig } from '../../config'
-import { PRODUCERS_SUBSCRIPTION } from '../../gql'
-import PageTitle from '../../components/PageTitle'
+import { countries, onImgError } from '../utils'
+import { eosConfig, generalConfig } from '../config'
+import { PRODUCERS_SUBSCRIPTION } from '../gql'
+import PageTitle from '../components/PageTitle'
 
 const defaultScale = 170
 const maxZoom = 3
@@ -38,19 +38,7 @@ const geoUrl =
 
 const useStyles = makeStyles((theme) => ({
   mapWrapper: {
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      position: 'absolute',
-      zIndex: -999,
-      marginTop: theme.spacing(24)
-    },
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(20)
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 'calc(100% - 288px)',
-      marginTop: theme.spacing(4)
-    }
+    width: '100%'
   },
   geography: {
     outline: 'none',
@@ -146,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Producers = () => {
+const Nodes = () => {
   const [uniqueProducers, setUniqueProducers] = useState([])
   const {
     data: { loading, producer: producers = [] } = { producers: [] }
@@ -546,6 +534,6 @@ const Producers = () => {
   )
 }
 
-Producers.propTypes = {}
+Nodes.propTypes = {}
 
-export default Producers
+export default Nodes
