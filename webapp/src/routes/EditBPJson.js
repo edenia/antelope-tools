@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
 
-import { eosConfig } from '../../config'
+import { eosConfig } from '../config'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,

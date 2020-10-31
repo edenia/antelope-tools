@@ -11,9 +11,9 @@ import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import { useTranslation } from 'react-i18next'
 
-import PageTitle from '../../components/PageTitle'
-import MultiLineChart from '../../components/MultiLineChart'
-import { PRODUCERS_QUERY } from '../../gql'
+import PageTitle from '../components/PageTitle'
+import MultiLineChart from '../components/MultiLineChart'
+import { PRODUCERS_QUERY } from '../gql'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Producers = () => {
+const Network = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const info = useSelector((state) => state.eos.info)
@@ -131,6 +131,6 @@ const Producers = () => {
   )
 }
 
-Producers.propTypes = {}
+Network.propTypes = {}
 
-export default Producers
+export default Network

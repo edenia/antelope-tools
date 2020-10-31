@@ -7,6 +7,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    load: 'unspecific',
     resources,
     fallbackLng: 'en',
     interpolation: {
