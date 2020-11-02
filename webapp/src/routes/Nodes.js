@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
-import { useSubscription } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
@@ -25,10 +25,10 @@ import {
 import { geoTimes } from 'd3-geo-projection'
 import { geoPath } from 'd3-geo'
 
-import { countries, onImgError } from '../../utils'
-import { eosConfig, generalConfig } from '../../config'
-import { PRODUCERS_SUBSCRIPTION } from '../../gql'
-import PageTitle from '../../components/PageTitle'
+import { countries, onImgError } from '../utils'
+import { eosConfig, generalConfig } from '../config'
+import { PRODUCERS_QUERY } from '../gql'
+import PageTitle from '../components/PageTitle'
 
 const defaultScale = 170
 const maxZoom = 3
@@ -38,19 +38,7 @@ const geoUrl =
 
 const useStyles = makeStyles((theme) => ({
   mapWrapper: {
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      position: 'absolute',
-      zIndex: -999,
-      marginTop: theme.spacing(24)
-    },
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(20)
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 'calc(100% - 288px)',
-      marginTop: theme.spacing(4)
-    }
+    width: '100%'
   },
   geography: {
     outline: 'none',
@@ -146,11 +134,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Producers = () => {
+const Nodes = () => {
   const [uniqueProducers, setUniqueProducers] = useState([])
   const {
     data: { loading, producer: producers = [] } = { producers: [] }
-  } = useSubscription(PRODUCERS_SUBSCRIPTION)
+  } = useQuery(PRODUCERS_QUERY)
   const [nodes, setNodes] = useState([])
   const [currentNode, setCurrentNode] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
@@ -381,58 +369,60 @@ const Producers = () => {
         {loading && <LinearProgress />}
       </Grid>
       <Grid item sm={12} className={classes.mapWrapper}>
-        <ComposableMap
-          className={classes.map}
-          projectionConfig={{
-            scale: mapState.scale
-          }}
-        >
-          <ZoomableGroup center={mapState.center} maxZoom={1}>
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo) => (
-                  <Geography
-                    onClick={() => toogleZoom(geo)}
-                    className={clsx({
-                      [classes.geography]: true,
-                      [classes.geographyZoomOut]: mapState.zoom === maxZoom
-                    })}
-                    key={geo.rsmKey}
-                    geography={geo}
-                    stroke="#8F9DA4"
-                    fill="#EEEEEE"
-                  />
-                ))
-              }
-            </Geographies>
-            {nodes.map(({ coordinates, ...node }, i) => (
-              <Marker
-                key={`marker-${i}`}
-                coordinates={coordinates}
-                className={classes.marker}
-                onClick={handlePopoverOpen(node)}
-              >
-                <g
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  transform="translate(-12, -24)"
+        {!loading && (
+          <ComposableMap
+            className={classes.map}
+            projectionConfig={{
+              scale: mapState.scale
+            }}
+          >
+            <ZoomableGroup center={mapState.center} maxZoom={1}>
+              <Geographies geography={geoUrl}>
+                {({ geographies }) =>
+                  geographies.map((geo) => (
+                    <Geography
+                      onClick={() => toogleZoom(geo)}
+                      className={clsx({
+                        [classes.geography]: true,
+                        [classes.geographyZoomOut]: mapState.zoom === maxZoom
+                      })}
+                      key={geo.rsmKey}
+                      geography={geo}
+                      stroke="#8F9DA4"
+                      fill="#EEEEEE"
+                    />
+                  ))
+                }
+              </Geographies>
+              {nodes.map(({ coordinates, ...node }, i) => (
+                <Marker
+                  key={`marker-${i}`}
+                  coordinates={coordinates}
+                  className={classes.marker}
+                  onClick={handlePopoverOpen(node)}
                 >
-                  <path
-                    d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z"
-                    fill={
-                      (
-                        eosConfig.nodeTypes.find(
-                          (noteType) => noteType.name === node.node_type
-                        ) || {}
-                      ).color || '#f58a42'
-                    }
-                  />
-                  <circle cx="12" cy="10" r="3" fill="white" />
-                </g>
-              </Marker>
-            ))}
-          </ZoomableGroup>
-        </ComposableMap>
+                  <g
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    transform="translate(-12, -24)"
+                  >
+                    <path
+                      d="M12 21.7 C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 12z"
+                      fill={
+                        (
+                          eosConfig.nodeTypes.find(
+                            (noteType) => noteType.name === node.node_type
+                          ) || {}
+                        ).color || '#f58a42'
+                      }
+                    />
+                    <circle cx="12" cy="10" r="3" fill="white" />
+                  </g>
+                </Marker>
+              ))}
+            </ZoomableGroup>
+          </ComposableMap>
+        )}
       </Grid>
       <Popover
         open={anchorEl !== null}
@@ -546,6 +536,6 @@ const Producers = () => {
   )
 }
 
-Producers.propTypes = {}
+Nodes.propTypes = {}
 
-export default Producers
+export default Nodes

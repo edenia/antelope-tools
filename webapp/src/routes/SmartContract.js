@@ -12,9 +12,9 @@ import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 
-import AccountInfo from '../../components/AccountInfo'
-import PageTitle from '../../components/PageTitle'
-import { eosConfig } from '../../config'
+import AccountInfo from '../components/AccountInfo'
+import PageTitle from '../components/PageTitle'
+import { eosConfig } from '../config'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,

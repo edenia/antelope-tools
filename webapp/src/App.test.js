@@ -19,7 +19,7 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme[0]}>
         <App />
       </ThemeProvider>
     </Provider>,

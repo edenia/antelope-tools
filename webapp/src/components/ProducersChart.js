@@ -80,14 +80,12 @@ const CustomBarLabel = memo(
             textAnchor={x > cx ? 'start' : 'end'}
             dominantBaseline="central"
             fill={
-              fill === theme.palette.secondary[900]
-                ? theme.palette.secondary[900]
-                : theme.palette.primary[300]
+              fill === theme.palette.primary.dark
+                ? theme.palette.primary.dark
+                : theme.palette.primary.light
             }
             fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-            fontWeight={
-              fill === theme.palette.secondary[900] ? 'bold' : 'normal'
-            }
+            fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
           >
             {payload.owner}
           </text>
@@ -211,8 +209,8 @@ const ProducersChart = ({ producers, info }) => {
                 key={`cell-${index}`}
                 fill={
                   entry.owner === info.head_block_producer
-                    ? theme.palette.secondary[900]
-                    : theme.palette.secondary[100]
+                    ? theme.palette.primary.dark
+                    : theme.palette.primary.light
                 }
               />
             )

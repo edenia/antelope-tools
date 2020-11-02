@@ -1,10 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
 import { UALProvider, withUAL } from 'ual-reactjs-renderer'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import { StylesProvider } from '@material-ui/styles'
+import { ThemeProvider } from 'styled-components'
 
 import App from './App'
 import store from './store'
@@ -24,10 +25,13 @@ render(
   >
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <CssBaseline />
-        <ThemeProvider theme={theme}>
-          <AppWithUAL />
-        </ThemeProvider>
+        <StylesProvider injectFirst>
+          <MuiThemeProvider theme={theme[4]}>
+            <ThemeProvider theme={theme[4]}>
+              <AppWithUAL />
+            </ThemeProvider>
+          </MuiThemeProvider>
+        </StylesProvider>
       </Provider>
     </ApolloProvider>
   </UALProvider>,

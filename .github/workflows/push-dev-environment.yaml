@@ -13,7 +13,7 @@ jobs:
         uses: docker-practice/actions-setup-docker@0.0.1
       - name: run push
         run: |
-          docker build -t eosio-dashboard-deployer-test \
+          docker build -t eosio-dashboard-deployer-test --no-cache \
             --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
             --build-arg branch="dev" \
             .

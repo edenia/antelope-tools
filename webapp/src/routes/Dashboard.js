@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSubscription } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
@@ -9,18 +9,18 @@ import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranslation } from 'react-i18next'
 
-import { formatWithThousandSeparator } from '../../utils'
-import ProducersChart from '../../components/ProducersChart'
-import TransactionsChart from '../../components/TransactionsChart'
-import { PRODUCERS_SUBSCRIPTION } from '../../gql'
-import PageTitle from '../../components/PageTitle'
-import ChartSkeleton from '../../components/ChartSkeleton'
+import { formatWithThousandSeparator } from '../utils'
+import ProducersChart from '../components/ProducersChart'
+import TransactionsChart from '../components/TransactionsChart'
+import { PRODUCERS_QUERY } from '../gql'
+import PageTitle from '../components/PageTitle'
+import ChartSkeleton from '../components/ChartSkeleton'
 
-const Producers = () => {
+const Dashboard = () => {
   const dispatch = useDispatch()
   const {
     data: { loading, producer: producers = [] } = { producers: [] }
-  } = useSubscription(PRODUCERS_SUBSCRIPTION)
+  } = useQuery(PRODUCERS_QUERY)
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
@@ -144,6 +144,6 @@ const Producers = () => {
   )
 }
 
-Producers.propTypes = {}
+Dashboard.propTypes = {}
 
-export default Producers
+export default Dashboard
