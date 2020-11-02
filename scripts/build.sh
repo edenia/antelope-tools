@@ -6,6 +6,8 @@ if [ $# -eq 0 ]
     exit 0
 fi
 
+# TODO: review if there is a better way to do this compilation
+yarn; cd webapp; yarn; cd ../hapi; yarn; cd ../hasura; yarn; cd ../
 echo "Building docker containers..."
 if [ "$1" == "production" ]; then
     cp .env.mainnet .env
