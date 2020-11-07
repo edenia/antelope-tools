@@ -26,8 +26,8 @@ render(
     <ApolloProvider client={client}>
       <Provider store={store}>
         <StylesProvider injectFirst>
-          <MuiThemeProvider theme={theme[4]}>
-            <ThemeProvider theme={theme[4]}>
+          <MuiThemeProvider theme={theme[0]}>
+            <ThemeProvider theme={theme[0]}>
               <AppWithUAL />
             </ThemeProvider>
           </MuiThemeProvider>

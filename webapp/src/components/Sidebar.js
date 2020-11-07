@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import {
   Box,
@@ -54,6 +55,7 @@ const Brand = styled(Box)`
   padding-left: ${(props) => props.theme.spacing(6)}px;
   padding-right: ${(props) => props.theme.spacing(6)}px;
   cursor: default;
+  padding-bottom: 16px;
 
   ${(props) => props.theme.breakpoints.up('sm')} {
     min-height: 64px;
@@ -235,6 +237,15 @@ const SidebarCategory = ({
   )
 }
 
+SidebarCategory.propTypes = {
+  name: PropTypes.string,
+  icon: PropTypes.node,
+  classes: PropTypes.any,
+  isOpen: PropTypes.bool,
+  isCollapsable: PropTypes.bool,
+  badge: PropTypes.string
+}
+
 const SidebarLink = ({ name, to, badge }) => {
   return (
     <Link
@@ -251,6 +262,12 @@ const SidebarLink = ({ name, to, badge }) => {
   )
 }
 
+SidebarLink.propTypes = {
+  name: PropTypes.string,
+  to: PropTypes.string,
+  badge: PropTypes.string
+}
+
 const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   const { t } = useTranslation('sidebar')
   const initOpenRoutes = () => {
@@ -262,7 +279,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
     routes.forEach((route, index) => {
       const isActive = pathName.indexOf(route.path) === 0
       const isOpen = route.open
-      const isHome = route.containsHome && pathName === '/' ? true : false
+      const isHome = route.containsHome && pathName === '/'
 
       _routes = Object.assign({}, _routes, {
         [index]: isActive || isOpen || isHome
@@ -309,11 +326,11 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                   <React.Fragment key={index}>
                     <SidebarCategory
                       isOpen={!openRoutes[index]}
-                      isCollapsable={true}
                       name={t(category.name)}
                       icon={category.icon}
-                      button={true}
                       onClick={() => toggle(index)}
+                      isCollapsable
+                      button
                     />
 
                     <Collapse
@@ -364,6 +381,12 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
       </SidebarFooter>
     </Drawer>
   )
+}
+
+Sidebar.propTypes = {
+  classes: PropTypes.any,
+  staticContext: PropTypes.any,
+  location: PropTypes.any
 }
 
 export default withRouter(Sidebar)
