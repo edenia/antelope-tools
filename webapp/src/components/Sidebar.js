@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import {
+  Box,
   Chip,
   Collapse,
   Drawer as MuiDrawer,
   Grid,
   List as MuiList,
-  ListItem,
+  ListItem as MuiListItem,
   ListItemText,
   Typography
 } from '@material-ui/core'
@@ -39,12 +40,11 @@ const List = styled(MuiList)`
   background-color: ${(props) => props.theme.sidebar.background};
 `
 
-const Items = styled.div`
-  padding-top: ${(props) => props.theme.spacing(2.5)}px;
-  padding-bottom: ${(props) => props.theme.spacing(2.5)}px;
+const ListItem = styled(MuiListItem)`
+  padding: 0;
 `
 
-const Brand = styled(ListItem)`
+const Brand = styled(Box)`
   font-size: ${(props) => props.theme.typography.h5.fontSize};
   font-weight: ${(props) => props.theme.typography.fontWeightMedium};
   color: ${(props) => props.theme.sidebar.header.color};
@@ -65,7 +65,12 @@ const Brand = styled(ListItem)`
 `
 
 const DashboardIcon = () => (
-  <img alt="EOS Costa Rica - Open Source Projects" src="/eosio-dashboard.svg" />
+  <img
+    alt="EOS Costa Rica - Open Source Projects"
+    src="/eosio-dashboard.svg"
+    width="200px"
+    height="100px"
+  />
 )
 
 const BrandIcon = styled(DashboardIcon)`
@@ -292,57 +297,55 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
       </Brand>
       <Scrollbar>
         <List disablePadding>
-          <Items>
-            {routes
-              .filter(({ name }) => !!name)
-              .map((category, index) => (
-                <React.Fragment key={index}>
-                  {category.header ? (
-                    <SidebarSection>{category.header}</SidebarSection>
-                  ) : null}
+          {routes
+            .filter(({ name }) => !!name)
+            .map((category, index) => (
+              <ListItem key={index}>
+                {category.header ? (
+                  <SidebarSection>{category.header}</SidebarSection>
+                ) : null}
 
-                  {category.children ? (
-                    <React.Fragment key={index}>
-                      <SidebarCategory
-                        isOpen={!openRoutes[index]}
-                        isCollapsable={true}
-                        name={t(category.name)}
-                        icon={category.icon}
-                        button={true}
-                        onClick={() => toggle(index)}
-                      />
-
-                      <Collapse
-                        in={openRoutes[index]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        {category.children.map((route, index) => (
-                          <SidebarLink
-                            key={index}
-                            name={route.name}
-                            to={route.path}
-                            icon={route.icon}
-                            badge={route.badge}
-                          />
-                        ))}
-                      </Collapse>
-                    </React.Fragment>
-                  ) : (
+                {category.children ? (
+                  <React.Fragment key={index}>
                     <SidebarCategory
-                      isCollapsable={false}
+                      isOpen={!openRoutes[index]}
+                      isCollapsable={true}
                       name={t(category.name)}
-                      to={category.path}
-                      activeClassName="active"
-                      component={NavLink}
                       icon={category.icon}
-                      exact
-                      badge={category.badge}
+                      button={true}
+                      onClick={() => toggle(index)}
                     />
-                  )}
-                </React.Fragment>
-              ))}
-          </Items>
+
+                    <Collapse
+                      in={openRoutes[index]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      {category.children.map((route, index) => (
+                        <SidebarLink
+                          key={index}
+                          name={route.name}
+                          to={route.path}
+                          icon={route.icon}
+                          badge={route.badge}
+                        />
+                      ))}
+                    </Collapse>
+                  </React.Fragment>
+                ) : (
+                  <SidebarCategory
+                    isCollapsable={false}
+                    name={t(category.name)}
+                    to={category.path}
+                    activeClassName="active"
+                    component={NavLink}
+                    icon={category.icon}
+                    exact
+                    badge={category.badge}
+                  />
+                )}
+              </ListItem>
+            ))}
         </List>
       </Scrollbar>
       <SidebarFooter>

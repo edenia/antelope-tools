@@ -1,20 +1,20 @@
 /* eslint camelcase: 0 */
-import React, { useEffect, useState } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator } from '../utils'
-import ProducersChart from '../components/ProducersChart'
-import TransactionsChart from '../components/TransactionsChart'
 import { PRODUCERS_QUERY } from '../gql'
-import PageTitle from '../components/PageTitle'
-import ChartSkeleton from '../components/ChartSkeleton'
+
+const Card = lazy(() => import('@material-ui/core/Card'))
+const CardContent = lazy(() => import('@material-ui/core/CardContent'))
+const Grid = lazy(() => import('@material-ui/core/Grid'))
+const Typography = lazy(() => import('@material-ui/core/Typography'))
+const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
+const ProducersChart = lazy(() => import('../components/ProducersChart'))
+const TransactionsChart = lazy(() => import('../components/TransactionsChart'))
+const PageTitle = lazy(() => import('../components/PageTitle'))
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -70,7 +70,7 @@ const Dashboard = () => {
             <CardContent>
               <PageTitle title={t('htmlTitle')} />
               <Typography variant="h6">{t('currentProducer')}</Typography>
-              <Typography variant="h3">{info.head_block_producer}</Typography>
+              <Typography variant="h6">{info.head_block_producer}</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -78,7 +78,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography variant="h6">{t('headBlock')}</Typography>
-              <Typography variant="h3">
+              <Typography variant="h6">
                 {formatWithThousandSeparator(info.head_block_num)}
               </Typography>
             </CardContent>
@@ -88,7 +88,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography variant="h6">{t('lastBlock')}</Typography>
-              <Typography variant="h3">
+              <Typography variant="h6">
                 {formatWithThousandSeparator(info.last_irreversible_block_num)}
               </Typography>
             </CardContent>
@@ -102,14 +102,9 @@ const Dashboard = () => {
             <CardContent>
               <Typography variant="h6">{t('bpSchedule')}</Typography>
               <Typography variant="caption">
-                {schedule.version ? `Ver. ${schedule.version}` : ''}
+                Ver. {schedule?.version}
               </Typography>
-              {loading && (
-                <ChartSkeleton variant="circle" width={280} height={280} />
-              )}
-              {schedule.producers.length > 0 && (
-                <ProducersChart info={info} producers={schedule.producers} />
-              )}
+              <ProducersChart info={info} producers={schedule.producers} />
             </CardContent>
           </Card>
         </Grid>
@@ -119,10 +114,7 @@ const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant="h6">{t('transPerSecond')}</Typography>
-                  {loading && (
-                    <ChartSkeleton variant="rect" width={280} height={100} />
-                  )}
-                  {!loading && <TransactionsChart data={tps} />}
+                  <TransactionsChart data={tps} />
                 </CardContent>
               </Card>
             </Grid>
@@ -130,10 +122,7 @@ const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant="h6">{t('transPerBlock')}</Typography>
-                  {loading && (
-                    <ChartSkeleton variant="rect" width={280} height={100} />
-                  )}
-                  {!loading && <TransactionsChart data={tpb} />}
+                  <TransactionsChart data={tpb} />
                 </CardContent>
               </Card>
             </Grid>

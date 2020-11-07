@@ -295,6 +295,10 @@ export default {
       }
     },
     async getRate() {
+      if (eosConfig.networkName === 'lacchain') {
+        return
+      }
+
       try {
         const { data } = await axios.get(eosConfig.exchangeRateApi)
 

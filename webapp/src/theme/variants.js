@@ -241,7 +241,7 @@ const lightVariant = {
       }
     },
     footer: {
-      color: '#969BA0',
+      color: '#424242',
       background: '#FFF',
       online: {
         background: green[500]
