@@ -43,20 +43,6 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
-    "name": "Name",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Features",
-    "producer": "Producer",
-    "nodeType": "Node type",
-    "type": "Type",
-    "description": "Description",
-    "color": "Color",
-    "account": "Account",
-    "website": "Website",
-    "votes": "Votes",
-    "rewards": "Rewards",
-    "producerCountry": "Producer country",
     "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
@@ -117,7 +103,8 @@
     "social": "Social",
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
-    "otherResources": "Other Resources"
+    "otherResources": "Other Resources",
+    "nodes": "Nodes"
   },
   "nodeSummary": {
     "nodeName": "Node name",

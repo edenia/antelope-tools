@@ -45,20 +45,6 @@
     "transactions": "Transacciones"
   },
   "dashboardNodes": {
-    "name": "Nombre",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Caracteristicas",
-    "producer": "Producer",
-    "nodeType": "Tipo de nodo",
-    "type": "Tipo",
-    "description": "Descripción",
-    "color": "Color",
-    "account": "Cuenta",
-    "website": "Sitio web",
-    "votes": "Votos",
-    "rewards": "Recompensas",
-    "producerCountry": "País del productor",
     "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
@@ -119,7 +105,8 @@
     "social": "Social",
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
-    "otherResources": "Otros recursos"
+    "otherResources": "Otros recursos",
+    "nodes": "Nodos"
   },
   "nodeSummary": {
     "nodeName": "Nombre del nodo",
