@@ -28,7 +28,7 @@
     "bpSchedule": "Block Production Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "Home - Dashboard"
+    "htmlTitle": "LACChain EOSIO Dashboard"
   },
   "dashboardProducer": {
     "title": "Entities",
@@ -94,7 +94,7 @@
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Website EOS Costa Rica"
+    "websiteEOSCR": "EOS Costa Rica Website"
   },
   "producerSummary": {
     "rank": "Rank",

@@ -26,7 +26,7 @@
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "Home - Dashboard"
+    "htmlTitle": "EOSIO Dashboard"
   },
   "dashboardProducer": {
     "title": "Block Producers",
