@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": { "esmodules": true },
+        "useBuiltIns": "usage",
+        "corejs": 2,
+        "modules": false
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}

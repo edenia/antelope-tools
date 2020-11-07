@@ -141,6 +141,7 @@ const SmartContract = ({ ual }) => {
       <Typography variant="h3">{t('title')}</Typography>
 
       <TextField
+        id="accountTxt"
         label={t('account')}
         variant="outlined"
         value={accountName || ''}
@@ -151,7 +152,11 @@ const SmartContract = ({ ual }) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={handleOnSearch} edge="end">
+              <IconButton
+                onClick={handleOnSearch}
+                edge="end"
+                aria-label="search"
+              >
                 <SearchOutlinedIcon />
               </IconButton>
             </InputAdornment>

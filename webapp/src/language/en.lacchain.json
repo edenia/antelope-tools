@@ -31,7 +31,7 @@
     "htmlTitle": "Home - Dashboard"
   },
   "dashboardProducer": {
-    "title": "Validators",
+    "title": "Entities",
     "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard"
   },
   "producersChartToolTip": {

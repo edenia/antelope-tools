@@ -307,13 +307,21 @@ const syncBPJsonForLacchain = async () => {
     table: eosConfig.lacchain.nodeTable,
     json: true
   })
-  const bpJons = entities.map(entity => {
-    const bpJson = JSON.parse(entity.info)
+  const producers = entities.map(entity => {
+    let bpJson = {}
+    try {
+      bpJson = JSON.parse(entity.info)
+    } catch (error) {}
     const entityNodes = nodes
       .filter(node => node.entity === entity.name)
       .map(node => {
         const nodeType = nodeTypes[node.type] || 'N/A'
-        const nodeInfo = JSON.parse(node.info)
+        let nodeInfo = {}
+
+        try {
+          nodeInfo = JSON.parse(node.info)
+        } catch (error) {}
+
         const keys = Object.keys(nodeInfo)
         let newNodeInfo = {}
 
@@ -332,35 +340,21 @@ const syncBPJsonForLacchain = async () => {
       })
 
     return {
-      ...bpJson,
-      nodes: entityNodes
+      owner: entity.name,
+      bp_json: {
+        ...bpJson,
+        nodes: entityNodes
+      }
     }
   })
-  const producers = await find()
-  await Promise.all(
-    producers.map(async producer => {
-      try {
-        const bpJson = bpJons.find(
-          bpJson =>
-            !!bpJson.nodes.find(node => node.node_name === producer.owner)
-        )
 
-        if (!Object.keys(bpJson).length > 0) {
-          return
-        }
-
-        await update(
-          { owner: { _eq: producer.owner } },
-          {
-            bp_json: bpJson
-          }
-        )
-      } catch (error) {}
-    })
-  )
+  await hasuraUtil.request(UPSERT, { producers })
+  await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
+    owners: producers.map(producer => producer.owner)
+  })
 }
 
-const syncProducers = async () => {
+const syncBPJsonForDefaultNetworks = async () => {
   try {
     const response = await eosApi.getProducers({ limit: 100, json: true })
     let producers = response.rows.map(producer => ({
@@ -378,15 +372,24 @@ const syncProducers = async () => {
     await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
       owners: producers.map(producer => producer.owner)
     })
-    if (eosConfig.networkName === eosConfig.knownNetworks.lacchain) {
-      await syncBPJsonForLacchain()
-    } else if (eosConfig.bpJsonOnChain) {
+    if (eosConfig.bpJsonOnChain) {
       await syncBPJsonOnChain()
     } else {
       await syncBPJsonOffChain()
     }
   } catch (error) {
     console.log(error.message)
+  }
+}
+
+const syncProducers = async () => {
+  switch (eosConfig.networkName) {
+    case eosConfig.knownNetworks.lacchain:
+      await syncBPJsonForLacchain()
+      break
+    default:
+      await syncBPJsonForDefaultNetworks()
+      break
   }
 }
 

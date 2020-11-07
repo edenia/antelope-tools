@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled, { withTheme } from 'styled-components'
-import { connect } from 'react-redux'
-import { darken } from 'polished'
 import {
-  Badge,
   Grid,
   Hidden,
-  InputBase,
   Menu,
   MenuItem,
   AppBar as MuiAppBar,
@@ -14,12 +10,7 @@ import {
   Toolbar
 } from '@material-ui/core'
 import { Menu as MenuIcon } from '@material-ui/icons'
-import {
-  Bell,
-  MessageSquare,
-  Search as SearchIcon,
-  Power as PowerIcon
-} from 'react-feather'
+import { Power as PowerIcon } from 'react-feather'
 import { useTranslation } from 'react-i18next'
 
 const AppBar = styled(MuiAppBar)`
@@ -35,62 +26,8 @@ const IconButton = styled(MuiIconButton)`
   }
 `
 
-const Indicator = styled(Badge)`
-  .MuiBadge-badge {
-    background: ${(props) => props.theme.header.indicator.background};
-    color: ${(props) => props.theme.palette.common.white};
-  }
-`
-
-const Search = styled.div`
-  border-radius: 2px;
-  background-color: ${(props) => props.theme.header.background};
-  display: none;
-  position: relative;
-  width: 100%;
-
-  &:hover {
-    background-color: ${(props) => darken(0.05, props.theme.header.background)};
-  }
-
-  ${(props) => props.theme.breakpoints.up('md')} {
-    display: block;
-  }
-`
-
-const SearchIconWrapper = styled.div`
-  width: 50px;
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    width: 22px;
-    height: 22px;
-  }
-`
-
-const Input = styled(InputBase)`
-  color: inherit;
-  width: 100%;
-
-  > input {
-    color: ${(props) => props.theme.header.search.color};
-    padding-top: ${(props) => props.theme.spacing(2.5)}px;
-    padding-right: ${(props) => props.theme.spacing(2.5)}px;
-    padding-bottom: ${(props) => props.theme.spacing(2.5)}px;
-    padding-left: ${(props) => props.theme.spacing(12)}px;
-    width: 160px;
-  }
-`
-
 const Flag = styled.img`
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
 `
 
 const languages = [
@@ -133,7 +70,13 @@ const LanguageMenu = () => {
         onClick={toggleMenu}
         color="inherit"
       >
-        <Flag src={`/languages/${currentLanguaje}.png`} alt={currentLanguaje} />
+        <Flag
+          width="22px"
+          height="22px"
+          srcset={`languages/${currentLanguaje}.png, languages/${currentLanguaje}-2x.png 2x, languages/${currentLanguaje}-3x.png 3x`}
+          src={`/languages/${currentLanguaje}.png`}
+          alt={currentLanguaje}
+        />
       </IconButton>
       <Menu
         id="menu-appbar"
@@ -182,6 +125,7 @@ const UserMenu = ({ ual }) => {
         aria-haspopup="true"
         onClick={toggleMenu}
         color="inherit"
+        aria-label="account"
       >
         <PowerIcon />
       </IconButton>
@@ -216,26 +160,9 @@ const Header = ({ ual, onDrawerToggle }) => (
               </IconButton>
             </Grid>
           </Hidden>
-          <Grid item>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <Input placeholder="Search topics" />
-            </Search>
-          </Grid>
+          <Grid item />
           <Grid item xs />
           <Grid item>
-            <IconButton color="inherit">
-              <Indicator badgeContent={3}>
-                <MessageSquare />
-              </Indicator>
-            </IconButton>
-            <IconButton color="inherit">
-              <Indicator badgeContent={7}>
-                <Bell />
-              </Indicator>
-            </IconButton>
             <LanguageMenu />
             <UserMenu ual={ual} />
           </Grid>
@@ -245,4 +172,4 @@ const Header = ({ ual, onDrawerToggle }) => (
   </React.Fragment>
 )
 
-export default connect()(withTheme(Header))
+export default withTheme(Header)
