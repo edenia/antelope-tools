@@ -11,6 +11,7 @@
     "dashboard": "Panel",
     "networkInfo": "Información de la red",
     "blockProducer": "Productores de Bloques",
+    "nodes": "Nodos",
     "nodeDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
@@ -111,7 +112,25 @@
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
     "healthStatus": "Salud del nodo",
-    "cpuUsage": "Benchmark de CPU"
+    "cpuUsage": "Benchmark de CPU",
+    "missedBlocks": "Bloques perdidos",
+    "businessContact": "Contacto del negocio",
+    "technicalContact": "Contacto técnico",
+    "social": "Social",
+    "ownershipDisclosure": "Divulgación de propiedad",
+    "chainResources": "Recursos de la cadena",
+    "otherResources": "Otros recursos"
+  },
+  "nodeSummary": {
+    "nodeName": "Nombre del nodo",
+    "nodeType": "Tipo de nodo",
+    "features": "Características",
+    "endpoints": "Endpoints",
+    "keys": "Llaves",
+    "description": "Descripción",
+    "color": "Color",
+    "producer": "Productor",
+    "all": "Todos"
   },
   "producerHealthIndicators": {
     "synced": "Sincronizado",

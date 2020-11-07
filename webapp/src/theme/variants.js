@@ -242,10 +242,7 @@ const lightVariant = {
     },
     footer: {
       color: '#424242',
-      background: '#FFF',
-      online: {
-        background: green[500]
-      }
+      background: '#FFF'
     },
     category: {
       fontWeight: 600

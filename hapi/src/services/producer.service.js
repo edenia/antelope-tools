@@ -11,7 +11,7 @@ const eosApi = EosApi({
 
 const UPSERT = `
   mutation ($producers: [producer_insert_input!]!) {
-    insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards]}) {
+    insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards]}) {
       affected_rows
     }
   }

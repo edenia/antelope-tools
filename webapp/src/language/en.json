@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
     "blockProducer": "Block Producers",
+    "nodes": "Nodes",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
@@ -117,6 +118,17 @@
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources"
+  },
+  "nodeSummary": {
+    "nodeName": "Node name",
+    "nodeType": "Node type",
+    "features": "Features",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "description": "Description",
+    "color": "Color",
+    "producer": "Producer",
+    "all": "All"
   },
   "producerHealthIndicators": {
     "synced": "Synced",

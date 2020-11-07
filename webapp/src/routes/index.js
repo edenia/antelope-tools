@@ -28,6 +28,7 @@ const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const LacchainBoard = lazy(() => import('./Lacchain/LacchainBoard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
+const LacchainNodes = lazy(() => import('./Lacchain/LacchainNodes'))
 
 const defaultRoutes = [
   {
@@ -144,7 +145,15 @@ const lacchainRoutes = [
     icon: <StorageIcon />,
     layout: DashboardLayout,
     component: Producers,
-    path: '/producers',
+    path: '/entities',
+    exact: true
+  },
+  {
+    name: 'nodes',
+    icon: <StorageIcon />,
+    layout: DashboardLayout,
+    component: LacchainNodes,
+    path: '/nodes',
     exact: true
   },
   {
@@ -152,15 +161,15 @@ const lacchainRoutes = [
     icon: <CloudIcon />,
     layout: DashboardLayout,
     component: Nodes,
-    path: '/nodes',
+    path: '/nodes-distribution',
     exact: true
   },
   {
-    name: 'smartContract',
-    icon: <ListAltIcon />,
+    name: 'nodesNetwork',
+    icon: <SettingsInputAntennaIcon />,
     layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
+    component: LacchainNetwork,
+    path: '/lacchain/network',
     exact: true
   },
   {
@@ -172,11 +181,11 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'nodesNetwork',
-    icon: <SettingsInputAntennaIcon />,
+    name: 'smartContract',
+    icon: <ListAltIcon />,
     layout: DashboardLayout,
-    component: LacchainNetwork,
-    path: '/lacchain/network',
+    component: SmartContract,
+    path: '/smart-contract',
     exact: true
   },
   {
