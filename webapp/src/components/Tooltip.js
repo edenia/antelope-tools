@@ -57,6 +57,7 @@ const NodeCard = ({ anchorEl, open, onClose, children }) => {
 
 NodeCard.propTypes = {
   anchorEl: PropTypes.any,
+  open: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.node
 }
