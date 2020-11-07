@@ -383,6 +383,7 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
 
 ProducerCard.propTypes = {
   producer: PropTypes.any,
-  rank: PropTypes.number
+  rank: PropTypes.number,
+  onNodeClick: PropTypes.func
 }
 export default ProducerCard
