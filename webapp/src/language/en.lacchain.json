@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
     "blockProducer": "Entities",
+    "nodes": "Nodes",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
@@ -111,7 +112,25 @@
     "secondsAgo": "s ago",
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
-    "cpuUsage": "CPU Benchmark"
+    "cpuUsage": "CPU Benchmark",
+    "missedBlocks": "Missed Blocks",
+    "businessContact": "Business Contact",
+    "technicalContact": "Technical Contact",
+    "social": "Social",
+    "ownershipDisclosure": "Ownership Disclosure",
+    "chainResources": "Chain Resources",
+    "otherResources": "Other Resources"
+  },
+  "nodeSummary": {
+    "nodeName": "Node name",
+    "nodeType": "Node type",
+    "features": "Features",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "description": "Description",
+    "color": "Color",
+    "producer": "Entity",
+    "all": "All"
   },
   "producerHealthIndicators": {
     "synced": "Synced",

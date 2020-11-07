@@ -58,3 +58,13 @@ export const PRODUCERS_QUERY = gql`
     }
   }
 `
+
+export const NODES_QUERY = gql`
+  query {
+    producer(order_by: { total_votes_percent: desc, owner: asc }, limit: 21) {
+      id
+      owner
+      bp_json
+    }
+  }
+`
