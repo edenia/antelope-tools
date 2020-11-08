@@ -10,7 +10,11 @@ import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../context/state.context'
 import { countries } from '../utils/countries'
-import { getNodeTypes, getNewFieldPayload } from '../utils/lacchain'
+import {
+  getNodeTypes,
+  getNewFieldPayload,
+  getNodeFeatures
+} from '../utils/lacchain'
 import Checkbox from '@material-ui/core/Checkbox'
 import ListItemText from '@material-ui/core/ListItemText'
 
@@ -43,24 +47,7 @@ const LacchainSetNodeInfoActionInfoField = ({
   const [optionsForCountry, setOptionsForCountry] = useState([])
   const [nodeType, setNodeType] = useState([])
 
-  const features = [
-    {
-      label: 'chain-api',
-      value: 'chain-api'
-    },
-    {
-      label: 'snapshot-api',
-      value: 'snapshot-api'
-    },
-    {
-      label: 'account-query',
-      value: 'account-query'
-    },
-    {
-      label: 'dfuse',
-      value: 'dfuse'
-    }
-  ]
+  const features = getNodeFeatures()
 
   const handleOnFieldChange = (field) => (event, value) => {
     const newPayload = getNewFieldPayload(field, event, value, payload)
