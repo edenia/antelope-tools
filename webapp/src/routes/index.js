@@ -16,7 +16,7 @@ import { DashboardLayout, StandAloneLayout } from '../layouts'
 const Dashboard = lazy(() => import('./Dashboard'))
 const Network = lazy(() => import('./Network'))
 const Producers = lazy(() => import('./Producers'))
-const Nodes = lazy(() => import('./Nodes'))
+const NodesDistribution = lazy(() => import('./NodesDistribution'))
 const SmartContract = lazy(() => import('./SmartContract'))
 const Rewards = lazy(() => import('./Rewards'))
 const EditBPJson = lazy(() => import('./EditBPJson'))
@@ -28,7 +28,7 @@ const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const LacchainBoard = lazy(() => import('./Lacchain/LacchainBoard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
-const LacchainNodes = lazy(() => import('./Lacchain/LacchainNodes'))
+const Nodes = lazy(() => import('./Nodes'))
 
 const defaultRoutes = [
   {
@@ -61,22 +61,6 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'nodeDistribution',
-    icon: <CloudIcon />,
-    layout: DashboardLayout,
-    component: Nodes,
-    path: '/nodes',
-    exact: true
-  },
-  {
-    name: 'smartContract',
-    icon: <ListAltIcon />,
-    layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
-    exact: true
-  },
-  {
     name: 'rewardDistribution',
     icon: <AccountBalanceWalletIcon />,
     layout: DashboardLayout,
@@ -85,11 +69,35 @@ const defaultRoutes = [
     exact: true
   },
   {
+    name: 'nodes',
+    icon: <StorageIcon />,
+    layout: DashboardLayout,
+    component: Nodes,
+    path: '/nodes',
+    exact: true
+  },
+  {
+    name: 'nodesDistribution',
+    icon: <CloudIcon />,
+    layout: DashboardLayout,
+    component: NodesDistribution,
+    path: '/nodes-distribution',
+    exact: true
+  },
+  {
     name: 'nodeInfo',
     icon: <FileCopyIcon />,
     layout: DashboardLayout,
     component: EditBPJson,
     path: '/bpjson',
+    exact: true
+  },
+  {
+    name: 'smartContract',
+    icon: <ListAltIcon />,
+    layout: DashboardLayout,
+    component: SmartContract,
+    path: '/smart-contract',
     exact: true
   },
   {
@@ -152,7 +160,7 @@ const lacchainRoutes = [
     name: 'nodes',
     icon: <StorageIcon />,
     layout: DashboardLayout,
-    component: LacchainNodes,
+    component: Nodes,
     path: '/nodes',
     exact: true
   },
@@ -160,7 +168,7 @@ const lacchainRoutes = [
     name: 'nodeDistribution',
     icon: <CloudIcon />,
     layout: DashboardLayout,
-    component: Nodes,
+    component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
   },
