@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 import { spacing } from '@material-ui/system'
 import {
@@ -99,6 +100,12 @@ const Dashboard = ({ children, width, ual }) => {
       </AppContent>
     </Root>
   )
+}
+
+Dashboard.propTypes = {
+  children: PropTypes.node,
+  width: PropTypes.any,
+  ual: PropTypes.any
 }
 
 export default withWidth()(Dashboard)
