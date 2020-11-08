@@ -75,10 +75,12 @@ const LacchainSetNodeInfoActionInfoField = ({
   }, [])
 
   useEffect(() => {
-    setPayload(
-      lacchain.currentNode ? JSON.parse(lacchain.currentNode.info) : {}
-    )
-    onChange(lacchain.currentNode?.info || '{}')
+    let info = {}
+    try {
+      info = lacchain.currentNode ? JSON.parse(lacchain.currentNode.info) : {}
+    } catch (error) {}
+    setPayload(info)
+    onChange(JSON.stringify(info))
     const nodeTypes = getNodeTypes()
     setNodeType(nodeTypes[lacchain.currentNode?.type] || '')
     // eslint-disable-next-line
