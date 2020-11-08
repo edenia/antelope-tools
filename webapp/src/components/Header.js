@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 import {
   Grid,
@@ -63,7 +64,7 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <React.Fragment>
+    <>
       <IconButton
         aria-owns={Boolean(anchorMenu) ? 'menu-appbar' : undefined}
         aria-haspopup="true"
@@ -93,7 +94,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </React.Fragment>
+    </>
   )
 }
 
@@ -119,7 +120,7 @@ const UserMenu = ({ ual }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <IconButton
         aria-owns={Boolean(anchorMenu) ? 'menu-appbar' : undefined}
         aria-haspopup="true"
@@ -140,12 +141,16 @@ const UserMenu = ({ ual }) => {
           <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
         )}
       </Menu>
-    </React.Fragment>
+    </>
   )
 }
 
+UserMenu.propTypes = {
+  ual: PropTypes.any
+}
+
 const Header = ({ ual, onDrawerToggle }) => (
-  <React.Fragment>
+  <>
     <AppBar position="sticky" elevation={0}>
       <Toolbar>
         <Grid container alignItems="center">
@@ -169,7 +174,12 @@ const Header = ({ ual, onDrawerToggle }) => (
         </Grid>
       </Toolbar>
     </AppBar>
-  </React.Fragment>
+  </>
 )
+
+Header.propTypes = {
+  ual: PropTypes.any,
+  onDrawerToggle: PropTypes.func
+}
 
 export default withTheme(Header)

@@ -323,7 +323,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                 ) : null}
 
                 {category.children ? (
-                  <React.Fragment key={index}>
+                  <Box key={index}>
                     <SidebarCategory
                       isOpen={!openRoutes[index]}
                       name={t(category.name)}
@@ -348,7 +348,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                         />
                       ))}
                     </Collapse>
-                  </React.Fragment>
+                  </Box>
                 ) : (
                   <SidebarCategory
                     isCollapsable={false}
