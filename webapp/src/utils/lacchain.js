@@ -5,6 +5,25 @@ export const getNodeTypes = () => ({
   4: 'observer'
 })
 
+export const getNodeFeatures = () => [
+  {
+    label: 'chain-api',
+    value: 'chain-api'
+  },
+  {
+    label: 'snapshot-api',
+    value: 'snapshot-api'
+  },
+  {
+    label: 'account-query',
+    value: 'account-query'
+  },
+  {
+    label: 'dfuse',
+    value: 'dfuse'
+  }
+]
+
 export const getNewFieldPayload = (field, event, value, payload = {}) => {
   let newPayload = {}
   let newValue = ''

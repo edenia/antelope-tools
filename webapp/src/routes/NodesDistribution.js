@@ -130,7 +130,9 @@ const Nodes = () => {
     }
 
     if (filters.producer !== 'all') {
-      items = items.filter((current) => current.node.owner === filters.producer)
+      items = items.filter(
+        (current) => current.producer.owner === filters.producer
+      )
     }
 
     setNodes(items)

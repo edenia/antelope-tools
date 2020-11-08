@@ -16,11 +16,6 @@ import MultiLineChart from '../components/MultiLineChart'
 import { PRODUCERS_QUERY } from '../gql'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100%',
-    display: 'flex',
-    flexFlow: 'column'
-  },
   content: {
     flex: 1
   },
@@ -28,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: '3em',
     height: '3em',
     borderRadius: '100%',
-    backgroundColor: theme.palette.secondary[100],
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.contrastText,
     fontSize: 16,
     padding: theme.spacing(1)
@@ -70,7 +65,7 @@ const Network = () => {
       <Typography variant="h3">{t('title')}</Typography>
       <Grid container justify="flex-start" spacing={1}>
         <Grid item xs={12} sm={6} md={2}>
-          <Card className={classes.root}>
+          <Card>
             <CardHeader
               title={t('chainLimits')}
               avatar={<span className={classes.avatar}>CL</span>}

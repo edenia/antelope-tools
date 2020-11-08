@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
   const classes = useStyles()
   const [lacchain] = useSharedState()
-  const [payload, setPayload] = useState({})
   const [optionsForCountry, setOptionsForCountry] = useState([])
+  const [payload, setPayload] = useState({})
 
   const handleOnFieldChange = (field) => (event, value) => {
     const newPayload = getNewFieldPayload(field, event, value, payload)

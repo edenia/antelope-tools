@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator } from '../utils'
-import { PRODUCERS_QUERY } from '../gql'
+import { NODES_QUERY } from '../gql'
 
 const Card = lazy(() => import('@material-ui/core/Card'))
 const CardContent = lazy(() => import('@material-ui/core/CardContent'))
@@ -20,7 +20,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const {
     data: { loading, producer: producers = [] } = { producers: [] }
-  } = useQuery(PRODUCERS_QUERY)
+  } = useQuery(NODES_QUERY)
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
@@ -37,13 +37,22 @@ const Dashboard = () => {
   useEffect(() => {
     const newProducers = scheduleInfo.producers.map((item) => {
       const data =
-        producers.find((producer) => producer.owner === item.producer_name) ||
-        {}
+        producers.find((producer) => {
+          let result = producer.owner === item.producer_name
+
+          if (!result) {
+            result = producer.bp_json?.nodes.find(
+              (node) => node.node_name === item.producer_name
+            )
+          }
+
+          return result
+        }) || {}
 
       return {
         logo: data?.bp_json?.org?.branding?.logo_256,
         url: data?.url,
-        owner: data.owner || item.producer_name,
+        owner: item.producer_name || data.owner,
         rewards: data.total_rewards,
         total_votes_percent: data.total_votes_percent * 100,
         value: 20
