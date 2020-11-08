@@ -113,17 +113,6 @@ const defaultRoutes = [
     component: BlockProducerAgreementContract,
     path: '/ricardian-contract',
     exact: true
-  },
-  {
-    name: 'Help',
-    layout: DashboardLayout,
-    component: Help,
-    path: '/help',
-    exact: true
-  },
-  {
-    layout: StandAloneLayout,
-    component: Page404
   }
 ]
 const lacchainRoutes = [
@@ -202,7 +191,9 @@ const lacchainRoutes = [
     component: About,
     path: '/about',
     exact: true
-  },
+  }
+]
+const helpRoutes = [
   {
     name: 'Help',
     layout: DashboardLayout,
@@ -220,10 +211,10 @@ let routes = []
 
 switch (eosConfig.networkName) {
   case 'lacchain':
-    routes = lacchainRoutes
+    routes = [...lacchainRoutes, ...helpRoutes]
     break
   default:
-    routes = defaultRoutes
+    routes = [...defaultRoutes, ...helpRoutes]
     break
 }
 
