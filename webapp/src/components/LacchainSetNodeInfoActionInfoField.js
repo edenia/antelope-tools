@@ -62,13 +62,19 @@ const LacchainSetNodeInfoActionInfoField = ({
   }, [])
 
   useEffect(() => {
-    let info = {}
-    try {
-      info = lacchain.currentNode ? JSON.parse(lacchain.currentNode.info) : {}
-    } catch (error) {}
+    const getInfo = () => {
+      try {
+        return lacchain.currentNode ? JSON.parse(lacchain.currentNode.info) : {}
+      } catch (error) {}
+
+      return {}
+    }
+
+    const info = getInfo()
+    const nodeTypes = getNodeTypes()
+
     setPayload(info)
     onChange(JSON.stringify(info))
-    const nodeTypes = getNodeTypes()
     setNodeType(nodeTypes[lacchain.currentNode?.type] || '')
     // eslint-disable-next-line
   }, [lacchain.currentNode])
