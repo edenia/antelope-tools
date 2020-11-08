@@ -101,13 +101,6 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'About',
-    layout: DashboardLayout,
-    component: About,
-    path: '/about',
-    exact: true
-  },
-  {
     name: 'ricardianContract',
     layout: DashboardLayout,
     component: BlockProducerAgreementContract,
@@ -184,16 +177,16 @@ const lacchainRoutes = [
     component: SmartContract,
     path: '/smart-contract',
     exact: true
-  },
+  }
+]
+const helpRoutes = [
   {
     name: 'About',
     layout: DashboardLayout,
     component: About,
     path: '/about',
     exact: true
-  }
-]
-const helpRoutes = [
+  },
   {
     name: 'Help',
     layout: DashboardLayout,
