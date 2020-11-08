@@ -7,20 +7,14 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
-import EosApi from 'eosjs-api'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 
 import AccountInfo from '../components/AccountInfo'
 import PageTitle from '../components/PageTitle'
-import { eosConfig } from '../config'
-
-const eosApi = EosApi({
-  httpEndpoint: eosConfig.endpoint,
-  verbose: false,
-  fetchConfiguration: {}
-})
+import { signTransaction } from '../utils/eos'
+import eosApi from '../utils/eosapi'
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -59,13 +53,7 @@ const SmartContract = ({ ual }) => {
     setLoading(true)
 
     try {
-      const actions = []
-
-      if (eosConfig.includeDefaultTransaction) {
-        actions.push(eosConfig.includeDefaultTransaction)
-      }
-
-      actions.push({
+      const result = await signTransaction(ual, {
         authorization: [
           {
             actor: ual.activeUser.accountName,
@@ -74,15 +62,6 @@ const SmartContract = ({ ual }) => {
         ],
         ...action
       })
-
-      const result = await ual.activeUser.signTransaction(
-        {
-          actions
-        },
-        {
-          broadcast: true
-        }
-      )
       setSuccessMessage(`Success transaction ${result.transactionId}`)
     } catch (error) {
       setErrorMessage(

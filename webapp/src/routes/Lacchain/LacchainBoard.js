@@ -10,18 +10,12 @@ import Popover from '@material-ui/core/Popover'
 import Divider from '@material-ui/core/Divider'
 import Box from '@material-ui/core/Box'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import EosApi from 'eosjs-api'
 
-import { eosConfig } from '../../config'
+import { signTransaction } from '../../utils/eos'
+import eosApi from '../../utils/eosapi'
 import ContractActionForm from '../../components/ContractActionForm'
 import BreakpointMasonry from '../../components/BreakpointMasonry'
 import { useSharedState } from '../../context/state.context'
-
-const eosApi = EosApi({
-  httpEndpoint: eosConfig.endpoint,
-  verbose: false,
-  fetchConfiguration: {}
-})
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,13 +67,7 @@ const Lacchain = ({ ual }) => {
     setLoading(true)
 
     try {
-      const actions = []
-
-      if (eosConfig.includeDefaultTransaction) {
-        actions.push(eosConfig.includeDefaultTransaction)
-      }
-
-      actions.push({
+      const result = await signTransaction(ual, {
         authorization: [
           {
             actor: ual.activeUser.accountName,
@@ -88,15 +76,6 @@ const Lacchain = ({ ual }) => {
         ],
         ...action
       })
-
-      const result = await ual.activeUser.signTransaction(
-        {
-          actions
-        },
-        {
-          broadcast: true
-        }
-      )
       setMessage({
         type: 'success',
         content: `Success transaction ${result.transactionId}`
