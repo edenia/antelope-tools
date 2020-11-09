@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import { CssBaseline } from '@material-ui/core'
@@ -30,5 +31,9 @@ const StandAlone = ({ children }) => (
     {children}
   </Root>
 )
+
+StandAlone.propTypes = {
+  children: PropTypes.node
+}
 
 export default StandAlone

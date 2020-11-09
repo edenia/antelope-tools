@@ -1,16 +1,18 @@
 /* eslint camelcase: 0 */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
-import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import Box from '@material-ui/core/Box'
 import { useTranslation } from 'react-i18next'
 
-import ProducerCard from '../components/ProducerCard'
 import { PRODUCERS_QUERY } from '../gql'
+import ProducerCard from '../components/ProducerCard'
 import PageTitle from '../components/PageTitle'
+import Tooltip from '../components/Tooltip'
+import NodeCard from '../components/NodeCard'
 
 const useStyles = makeStyles((theme) => ({
   linearProgress: {
@@ -20,69 +22,54 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Producers = () => {
-  const [uniqueProducers, setUniqueProducers] = useState([])
   const classes = useStyles()
-  const {
-    loading = true,
-    data: { producer: producers = [] } = { producers: [] }
-  } = useQuery(PRODUCERS_QUERY)
+  const { loading = true, data: { producer: producers } = {} } = useQuery(
+    PRODUCERS_QUERY
+  )
   const { t } = useTranslation('dashboardProducer')
+  const [current, setCurrent] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
 
-  useEffect(() => {
-    let uniqueProducers = {}
-    producers.forEach((producer) => {
-      const id =
-        producer?.bp_json?.org?.candidate_name ||
-        producer?.bp_json?.organization_name ||
-        producer.owner
-      const previousEntity = uniqueProducers[id]
-      let missedBlocks = producer.missed_blocks
-      let cpus = producer.cpus
-
-      if (previousEntity) {
-        missedBlocks = [...previousEntity.missed_blocks, ...missedBlocks]
-        cpus = [...previousEntity.cpus, ...cpus]
-      }
-
-      const { org, ...bpJson } = producer.bp_json || {}
-      let newBpJson = bpJson
-
-      if (org) {
-        newBpJson = { ...newBpJson, ...org }
-      }
-
-      uniqueProducers = {
-        ...uniqueProducers,
-        [id]: {
-          ...producer,
-          cpus,
-          missed_blocks: missedBlocks,
-          bp_json: newBpJson
-        }
-      }
-    })
-    setUniqueProducers(Object.values(uniqueProducers))
-  }, [producers])
+  const handlePopoverOpen = (node) => (event) => {
+    setCurrent(node)
+    setAnchorEl(event.currentTarget)
+    console.log(event.currentTarget)
+  }
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
 
   return (
-    <Grid item xs={12}>
+    <Box>
       <PageTitle title={t('htmlTitle')} />
       <Typography variant="h3">{t('title')}</Typography>
+      <Tooltip
+        anchorEl={anchorEl}
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+      >
+        <NodeCard node={current?.node} producer={current?.producer} />
+      </Tooltip>
       {loading && <LinearProgress className={classes.linearProgress} />}
-      <Grid container justify="flex-start" spacing={1}>
-        {uniqueProducers.map((producer, index) => (
-          <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
-            <ProducerCard producer={producer} rank={index + 1} />
+      <Grid container spacing={2}>
+        {(producers || []).map((producer, index) => (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            key={`producer-card-${index}`}
+          >
+            <ProducerCard
+              producer={producer}
+              rank={index + 1}
+              onNodeClick={handlePopoverOpen}
+            />
           </Grid>
         ))}
-        {loading &&
-          [0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
-            <Grid item xs={12} sm={6} md={3} key={`producer-card-${index}`}>
-              <Skeleton variant="rect" width={280} height={560} />
-            </Grid>
-          ))}
       </Grid>
-    </Grid>
+    </Box>
   )
 }
 

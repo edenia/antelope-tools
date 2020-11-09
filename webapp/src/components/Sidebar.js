@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import {
+  Box,
   Chip,
   Collapse,
   Drawer as MuiDrawer,
   Grid,
   List as MuiList,
-  ListItem,
+  ListItem as MuiListItem,
   ListItemText,
   Typography
 } from '@material-ui/core'
@@ -39,12 +41,11 @@ const List = styled(MuiList)`
   background-color: ${(props) => props.theme.sidebar.background};
 `
 
-const Items = styled.div`
-  padding-top: ${(props) => props.theme.spacing(2.5)}px;
-  padding-bottom: ${(props) => props.theme.spacing(2.5)}px;
+const ListItem = styled(MuiListItem)`
+  padding: 0;
 `
 
-const Brand = styled(ListItem)`
+const Brand = styled(Box)`
   font-size: ${(props) => props.theme.typography.h5.fontSize};
   font-weight: ${(props) => props.theme.typography.fontWeightMedium};
   color: ${(props) => props.theme.sidebar.header.color};
@@ -54,6 +55,7 @@ const Brand = styled(ListItem)`
   padding-left: ${(props) => props.theme.spacing(6)}px;
   padding-right: ${(props) => props.theme.spacing(6)}px;
   cursor: default;
+  padding-bottom: 16px;
 
   ${(props) => props.theme.breakpoints.up('sm')} {
     min-height: 64px;
@@ -65,7 +67,12 @@ const Brand = styled(ListItem)`
 `
 
 const DashboardIcon = () => (
-  <img alt="EOS Costa Rica - Open Source Projects" src="/eosio-dashboard.svg" />
+  <img
+    alt="EOS Costa Rica - Open Source Projects"
+    src="/eosio-dashboard.svg"
+    width="200px"
+    height="100px"
+  />
 )
 
 const BrandIcon = styled(DashboardIcon)`
@@ -230,6 +237,15 @@ const SidebarCategory = ({
   )
 }
 
+SidebarCategory.propTypes = {
+  name: PropTypes.string,
+  icon: PropTypes.node,
+  classes: PropTypes.any,
+  isOpen: PropTypes.bool,
+  isCollapsable: PropTypes.bool,
+  badge: PropTypes.string
+}
+
 const SidebarLink = ({ name, to, badge }) => {
   return (
     <Link
@@ -246,6 +262,12 @@ const SidebarLink = ({ name, to, badge }) => {
   )
 }
 
+SidebarLink.propTypes = {
+  name: PropTypes.string,
+  to: PropTypes.string,
+  badge: PropTypes.string
+}
+
 const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   const { t } = useTranslation('sidebar')
   const initOpenRoutes = () => {
@@ -257,7 +279,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
     routes.forEach((route, index) => {
       const isActive = pathName.indexOf(route.path) === 0
       const isOpen = route.open
-      const isHome = route.containsHome && pathName === '/' ? true : false
+      const isHome = route.containsHome && pathName === '/'
 
       _routes = Object.assign({}, _routes, {
         [index]: isActive || isOpen || isHome
@@ -292,57 +314,55 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
       </Brand>
       <Scrollbar>
         <List disablePadding>
-          <Items>
-            {routes
-              .filter(({ name }) => !!name)
-              .map((category, index) => (
-                <React.Fragment key={index}>
-                  {category.header ? (
-                    <SidebarSection>{category.header}</SidebarSection>
-                  ) : null}
+          {routes
+            .filter(({ name }) => !!name)
+            .map((category, index) => (
+              <ListItem key={index}>
+                {category.header ? (
+                  <SidebarSection>{category.header}</SidebarSection>
+                ) : null}
 
-                  {category.children ? (
-                    <React.Fragment key={index}>
-                      <SidebarCategory
-                        isOpen={!openRoutes[index]}
-                        isCollapsable={true}
-                        name={t(category.name)}
-                        icon={category.icon}
-                        button={true}
-                        onClick={() => toggle(index)}
-                      />
-
-                      <Collapse
-                        in={openRoutes[index]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        {category.children.map((route, index) => (
-                          <SidebarLink
-                            key={index}
-                            name={route.name}
-                            to={route.path}
-                            icon={route.icon}
-                            badge={route.badge}
-                          />
-                        ))}
-                      </Collapse>
-                    </React.Fragment>
-                  ) : (
+                {category.children ? (
+                  <Box key={index}>
                     <SidebarCategory
-                      isCollapsable={false}
+                      isOpen={!openRoutes[index]}
                       name={t(category.name)}
-                      to={category.path}
-                      activeClassName="active"
-                      component={NavLink}
                       icon={category.icon}
-                      exact
-                      badge={category.badge}
+                      onClick={() => toggle(index)}
+                      isCollapsable
+                      button
                     />
-                  )}
-                </React.Fragment>
-              ))}
-          </Items>
+
+                    <Collapse
+                      in={openRoutes[index]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      {category.children.map((route, index) => (
+                        <SidebarLink
+                          key={index}
+                          name={route.name}
+                          to={route.path}
+                          icon={route.icon}
+                          badge={route.badge}
+                        />
+                      ))}
+                    </Collapse>
+                  </Box>
+                ) : (
+                  <SidebarCategory
+                    isCollapsable={false}
+                    name={t(category.name)}
+                    to={category.path}
+                    activeClassName="active"
+                    component={NavLink}
+                    icon={category.icon}
+                    exact
+                    badge={category.badge}
+                  />
+                )}
+              </ListItem>
+            ))}
         </List>
       </Scrollbar>
       <SidebarFooter>
@@ -361,6 +381,12 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
       </SidebarFooter>
     </Drawer>
   )
+}
+
+Sidebar.propTypes = {
+  classes: PropTypes.any,
+  staticContext: PropTypes.any,
+  location: PropTypes.any
 }
 
 export default withRouter(Sidebar)

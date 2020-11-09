@@ -72,24 +72,58 @@ const CustomBarLabel = memo(
       ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
       : payload.url
 
+    const ProducerName = () => {
+      const Content = () => (
+        <text
+          transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
+          textAnchor={x > cx ? 'start' : 'end'}
+          dominantBaseline="central"
+          fill={
+            fill === theme.palette.primary.dark
+              ? theme.palette.primary.dark
+              : theme.palette.primary.light
+          }
+          fontFamily="Roboto, Helvetica, Arial, sans-serif;"
+          fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
+        >
+          {payload.owner}
+        </text>
+      )
+      if (!link) {
+        return <Content />
+      }
+
+      return (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          <Content />
+        </a>
+      )
+    }
+
+    const ProducerLogo = () => {
+      const Content = () => (
+        <circle
+          id={`${payload.value}-ds`}
+          r="3%"
+          fill={`url(#image${payload.owner})`}
+          stroke={fill}
+        />
+      )
+
+      if (!link) {
+        return <Content />
+      }
+
+      return (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          <Content />
+        </a>
+      )
+    }
+
     return (
       <>
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          <text
-            transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
-            textAnchor={x > cx ? 'start' : 'end'}
-            dominantBaseline="central"
-            fill={
-              fill === theme.palette.primary.dark
-                ? theme.palette.primary.dark
-                : theme.palette.primary.light
-            }
-            fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-            fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
-          >
-            {payload.owner}
-          </text>
-        </a>
+        <ProducerName />
         <g transform={`translate(${cartesianCircle.x}, ${cartesianCircle.y})`}>
           <defs>
             <pattern
@@ -109,15 +143,7 @@ const CustomBarLabel = memo(
               />
             </pattern>
           </defs>
-
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            <circle
-              id={`${payload.value}-ds`}
-              r="3%"
-              fill={`url(#image${payload.owner})`}
-              stroke={fill}
-            />
-          </a>
+          <ProducerLogo />
         </g>
       </>
     )

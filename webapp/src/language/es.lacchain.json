@@ -11,6 +11,7 @@
     "dashboard": "Panel",
     "networkInfo": "Información de la red",
     "blockProducer": "Entidades",
+    "nodes": "Nodos",
     "nodeDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
@@ -26,7 +27,7 @@
     "bpSchedule": "Programa de Producción de Bloques",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
-    "htmlTitle": "Home - Dashboard"
+    "htmlTitle": "LAC Chain EOSIO Dashboard"
   },
   "dashboardProducer": {
     "title": "Validadores",
@@ -42,20 +43,6 @@
     "transactions": "Transacciones"
   },
   "dashboardNodes": {
-    "name": "Nombre",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Caracteristicas",
-    "producer": "Entidad",
-    "nodeType": "Tipo de nodo",
-    "type": "Tipo",
-    "description": "Descripción",
-    "color": "Color",
-    "account": "Cuenta",
-    "website": "Sitio web",
-    "votes": "Votos",
-    "rewards": "Recompensas",
-    "producerCountry": "País de la entidad",
     "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
@@ -109,7 +96,26 @@
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
     "healthStatus": "Salud del nodo",
-    "cpuUsage": "Benchmark de CPU"
+    "cpuUsage": "Benchmark de CPU",
+    "missedBlocks": "Bloques perdidos",
+    "businessContact": "Contacto del negocio",
+    "technicalContact": "Contacto técnico",
+    "social": "Social",
+    "ownershipDisclosure": "Divulgación de propiedad",
+    "chainResources": "Recursos de la cadena",
+    "otherResources": "Otros recursos",
+    "nodes": "Nodos"
+  },
+  "nodeSummary": {
+    "nodeName": "Nombre del nodo",
+    "nodeType": "Tipo de nodo",
+    "features": "Características",
+    "endpoints": "Endpoints",
+    "keys": "Llaves",
+    "description": "Descripción",
+    "color": "Color",
+    "producer": "Entidad",
+    "all": "Todos"
   },
   "producerHealthIndicators": {
     "synced": "Sincronizado",

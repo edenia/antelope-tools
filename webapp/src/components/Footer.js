@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
 import {
   Grid,
   Hidden,
@@ -36,17 +36,17 @@ function Footer() {
         <Hidden smDown>
           <Grid container item xs={12} md={6}>
             <List>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Support" />
+              <ListItem>
+                <ListItemText primary={<Link to="#">Support</Link>} />
               </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Help Center" />
+              <ListItem>
+                <ListItemText primary={<Link to="#">Help Center</Link>} />
               </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Privacy" />
+              <ListItem>
+                <ListItemText primary={<Link to="#">Privacy</Link>} />
               </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Terms of Service" />
+              <ListItem>
+                <ListItemText primary={<Link to="#">Terms of Service</Link>} />
               </ListItem>
             </List>
           </Grid>

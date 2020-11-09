@@ -26,8 +26,8 @@ render(
     <ApolloProvider client={client}>
       <Provider store={store}>
         <StylesProvider injectFirst>
-          <MuiThemeProvider theme={theme[4]}>
-            <ThemeProvider theme={theme[4]}>
+          <MuiThemeProvider theme={theme[0]}>
+            <ThemeProvider theme={theme[0]}>
               <AppWithUAL />
             </ThemeProvider>
           </MuiThemeProvider>
@@ -41,4 +41,4 @@ render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister()
+serviceWorker.register()

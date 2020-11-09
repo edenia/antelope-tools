@@ -16,7 +16,7 @@ import { DashboardLayout, StandAloneLayout } from '../layouts'
 const Dashboard = lazy(() => import('./Dashboard'))
 const Network = lazy(() => import('./Network'))
 const Producers = lazy(() => import('./Producers'))
-const Nodes = lazy(() => import('./Nodes'))
+const NodesDistribution = lazy(() => import('./NodesDistribution'))
 const SmartContract = lazy(() => import('./SmartContract'))
 const Rewards = lazy(() => import('./Rewards'))
 const EditBPJson = lazy(() => import('./EditBPJson'))
@@ -28,6 +28,7 @@ const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const LacchainBoard = lazy(() => import('./Lacchain/LacchainBoard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
+const Nodes = lazy(() => import('./Nodes'))
 
 const defaultRoutes = [
   {
@@ -60,27 +61,27 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'nodeDistribution',
-    icon: <CloudIcon />,
+    name: 'rewardDistribution',
+    icon: <AccountBalanceWalletIcon />,
+    layout: DashboardLayout,
+    component: Rewards,
+    path: '/rewards',
+    exact: true
+  },
+  {
+    name: 'nodes',
+    icon: <StorageIcon />,
     layout: DashboardLayout,
     component: Nodes,
     path: '/nodes',
     exact: true
   },
   {
-    name: 'smartContract',
-    icon: <ListAltIcon />,
+    name: 'nodesDistribution',
+    icon: <CloudIcon />,
     layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
-    exact: true
-  },
-  {
-    name: 'rewardDistribution',
-    icon: <AccountBalanceWalletIcon />,
-    layout: DashboardLayout,
-    component: Rewards,
-    path: '/rewards',
+    component: NodesDistribution,
+    path: '/nodes-distribution',
     exact: true
   },
   {
@@ -92,10 +93,11 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'About',
+    name: 'smartContract',
+    icon: <ListAltIcon />,
     layout: DashboardLayout,
-    component: About,
-    path: '/about',
+    component: SmartContract,
+    path: '/smart-contract',
     exact: true
   },
   {
@@ -104,17 +106,6 @@ const defaultRoutes = [
     component: BlockProducerAgreementContract,
     path: '/ricardian-contract',
     exact: true
-  },
-  {
-    name: 'Help',
-    layout: DashboardLayout,
-    component: Help,
-    path: '/help',
-    exact: true
-  },
-  {
-    layout: StandAloneLayout,
-    component: Page404
   }
 ]
 const lacchainRoutes = [
@@ -144,23 +135,31 @@ const lacchainRoutes = [
     icon: <StorageIcon />,
     layout: DashboardLayout,
     component: Producers,
-    path: '/producers',
+    path: '/entities',
     exact: true
   },
   {
-    name: 'nodeDistribution',
-    icon: <CloudIcon />,
+    name: 'nodes',
+    icon: <StorageIcon />,
     layout: DashboardLayout,
     component: Nodes,
     path: '/nodes',
     exact: true
   },
   {
-    name: 'smartContract',
-    icon: <ListAltIcon />,
+    name: 'nodeDistribution',
+    icon: <CloudIcon />,
     layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
+    component: NodesDistribution,
+    path: '/nodes-distribution',
+    exact: true
+  },
+  {
+    name: 'nodesNetwork',
+    icon: <SettingsInputAntennaIcon />,
+    layout: DashboardLayout,
+    component: LacchainNetwork,
+    path: '/lacchain/network',
     exact: true
   },
   {
@@ -172,13 +171,15 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'nodesNetwork',
-    icon: <SettingsInputAntennaIcon />,
+    name: 'smartContract',
+    icon: <ListAltIcon />,
     layout: DashboardLayout,
-    component: LacchainNetwork,
-    path: '/lacchain/network',
+    component: SmartContract,
+    path: '/smart-contract',
     exact: true
-  },
+  }
+]
+const helpRoutes = [
   {
     name: 'About',
     layout: DashboardLayout,
@@ -203,10 +204,10 @@ let routes = []
 
 switch (eosConfig.networkName) {
   case 'lacchain':
-    routes = lacchainRoutes
+    routes = [...lacchainRoutes, ...helpRoutes]
     break
   default:
-    routes = defaultRoutes
+    routes = [...defaultRoutes, ...helpRoutes]
     break
 }
 

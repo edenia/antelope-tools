@@ -55,6 +55,7 @@ RUN yarn build
 FROM nginx:1.17.10-alpine as run-stage
 
 COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
+COPY --from=build-stage /usr/src/app/compression.conf /etc/nginx/conf.d/compression.conf
 COPY --from=build-stage /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

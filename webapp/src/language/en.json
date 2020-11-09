@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
     "blockProducer": "Block Producers",
+    "nodes": "Nodes",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
@@ -26,7 +27,7 @@
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "Home - Dashboard"
+    "htmlTitle": "EOSIO Dashboard"
   },
   "dashboardProducer": {
     "title": "Block Producers",
@@ -42,20 +43,6 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
-    "name": "Name",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Features",
-    "producer": "Producer",
-    "nodeType": "Node type",
-    "type": "Type",
-    "description": "Description",
-    "color": "Color",
-    "account": "Account",
-    "website": "Website",
-    "votes": "Votes",
-    "rewards": "Rewards",
-    "producerCountry": "Producer country",
     "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
@@ -116,7 +103,19 @@
     "social": "Social",
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
-    "otherResources": "Other Resources"
+    "otherResources": "Other Resources",
+    "nodes": "Nodes"
+  },
+  "nodeSummary": {
+    "nodeName": "Node name",
+    "nodeType": "Node type",
+    "features": "Features",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "description": "Description",
+    "color": "Color",
+    "producer": "Producer",
+    "all": "All"
   },
   "producerHealthIndicators": {
     "synced": "Synced",

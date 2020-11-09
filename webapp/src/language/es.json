@@ -11,6 +11,7 @@
     "dashboard": "Panel",
     "networkInfo": "Información de la red",
     "blockProducer": "Productores de Bloques",
+    "nodes": "Nodos",
     "nodeDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
@@ -44,20 +45,6 @@
     "transactions": "Transacciones"
   },
   "dashboardNodes": {
-    "name": "Nombre",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Caracteristicas",
-    "producer": "Producer",
-    "nodeType": "Tipo de nodo",
-    "type": "Tipo",
-    "description": "Descripción",
-    "color": "Color",
-    "account": "Cuenta",
-    "website": "Sitio web",
-    "votes": "Votos",
-    "rewards": "Recompensas",
-    "producerCountry": "País del productor",
     "htmlTitle": "Distribución de nodos - Dashboard"
   },
   "dashboardRewards": {
@@ -111,7 +98,26 @@
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
     "healthStatus": "Salud del nodo",
-    "cpuUsage": "Benchmark de CPU"
+    "cpuUsage": "Benchmark de CPU",
+    "missedBlocks": "Bloques perdidos",
+    "businessContact": "Contacto del negocio",
+    "technicalContact": "Contacto técnico",
+    "social": "Social",
+    "ownershipDisclosure": "Divulgación de propiedad",
+    "chainResources": "Recursos de la cadena",
+    "otherResources": "Otros recursos",
+    "nodes": "Nodos"
+  },
+  "nodeSummary": {
+    "nodeName": "Nombre del nodo",
+    "nodeType": "Tipo de nodo",
+    "features": "Características",
+    "endpoints": "Endpoints",
+    "keys": "Llaves",
+    "description": "Descripción",
+    "color": "Color",
+    "producer": "Productor",
+    "all": "Todos"
   },
   "producerHealthIndicators": {
     "synced": "Sincronizado",

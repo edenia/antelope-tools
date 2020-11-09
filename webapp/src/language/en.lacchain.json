@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "networkInfo": "Network Info",
     "blockProducer": "Entities",
+    "nodes": "Nodes",
     "nodeDistribution": "Node Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
@@ -28,10 +29,10 @@
     "bpSchedule": "Block Production Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "Home - Dashboard"
+    "htmlTitle": "LACChain EOSIO Dashboard"
   },
   "dashboardProducer": {
-    "title": "Validators",
+    "title": "Entities",
     "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard"
   },
   "producersChartToolTip": {
@@ -44,20 +45,6 @@
     "transactions": "Transactions"
   },
   "dashboardNodes": {
-    "name": "Name",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "features": "Features",
-    "producer": "Entity",
-    "nodeType": "Node type",
-    "type": "Type",
-    "description": "Description",
-    "color": "Color",
-    "account": "Account",
-    "website": "Website",
-    "votes": "Votes",
-    "rewards": "Rewards",
-    "producerCountry": "Entity country",
     "htmlTitle": "Node Distribution - Dashboard"
   },
   "dashboardRewards": {
@@ -94,7 +81,7 @@
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Website EOS Costa Rica"
+    "websiteEOSCR": "EOS Costa Rica Website"
   },
   "producerSummary": {
     "rank": "Rank",
@@ -111,7 +98,26 @@
     "secondsAgo": "s ago",
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
-    "cpuUsage": "CPU Benchmark"
+    "cpuUsage": "CPU Benchmark",
+    "missedBlocks": "Missed Blocks",
+    "businessContact": "Business Contact",
+    "technicalContact": "Technical Contact",
+    "social": "Social",
+    "ownershipDisclosure": "Ownership Disclosure",
+    "chainResources": "Chain Resources",
+    "otherResources": "Other Resources",
+    "nodes": "Nodes"
+  },
+  "nodeSummary": {
+    "nodeName": "Node name",
+    "nodeType": "Node type",
+    "features": "Features",
+    "endpoints": "Endpoints",
+    "keys": "Keys",
+    "description": "Description",
+    "color": "Color",
+    "producer": "Entity",
+    "all": "All"
   },
   "producerHealthIndicators": {
     "synced": "Synced",
