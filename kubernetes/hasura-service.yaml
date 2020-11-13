@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: monitor-hasura
+    app: monitor-hasura
   name: monitor-hasura
 spec:
   ports:
-  - name: "8080"
+  - name: hasura
     port: 8080
     targetPort: 8080
   selector:
-    io.kompose.service: monitor-hasura
+    app: monitor-hasura

@@ -2,20 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: wallet
+    app: wallet
   name: wallet
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: wallet
+      app: wallet
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.network: "true"
-        io.kompose.service: wallet
+        app: wallet
     spec:
       containers:
       - image: eoscostarica506/wallet

@@ -2,20 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: monitor-hapi
+    app: monitor-hapi
   name: monitor-hapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: monitor-hapi
+      app: monitor-hapi
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.network: "true"
-        io.kompose.service: monitor-hapi
+        app: monitor-hapi
     spec:
       containers:
       - image: eoscostarica506/monitor-hapi
