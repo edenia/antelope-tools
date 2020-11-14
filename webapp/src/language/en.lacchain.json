@@ -19,7 +19,7 @@
     "ricardianContract": "Ricardian Contract",
     "help": "Help",
     "smartContract": "Smart Contract",
-    "lacchainBoard": "LAC-Chain Management",
+    "lacchainBoard": "LACChain Management",
     "nodesNetwork": "Node Network"
   },
   "dashboardHome": {
@@ -160,10 +160,10 @@
     "emptyTable": "Empty Table"
   },
   "board": {
-    "loginWarning": "Please login with your lacchain account to use this feature.",
+    "loginWarning": "Please login with your LACChain account to use this feature.",
     "noneActionWarning": "There is no actions available for your account.",
     "setentinfoTitle": "Set entity info",
-    "setentinfoTooltip": "Set on-chain information for your LAC-Chain entity.",
+    "setentinfoTooltip": "Set on-chain information for your LACChain entity.",
     "setnodeinfoTitle": "Set node info",
     "setnodeinfoTooltip": "Set on-chain information for a node you manage.",
     "newaccountTitle": "New account",
