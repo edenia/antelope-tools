@@ -19,7 +19,7 @@
     "ricardianContract": "Ricardian Contract",
     "help": "Help",
     "smartContract": "Smart Contract",
-    "lacchainBoard": "Lacchain Board",
+    "lacchainBoard": "LAC-Chain Management",
     "nodesNetwork": "Node Network"
   },
   "dashboardHome": {
@@ -160,13 +160,27 @@
     "emptyTable": "Empty Table"
   },
   "board": {
-    "loginWarning": "Please login to use this board",
-    "noneActionWarning": "There is none action for your account",
+    "loginWarning": "Please login with your lacchain account to use this feature.",
+    "noneActionWarning": "There is no actions available for your account.",
     "setentinfoTitle": "Set entity info",
-    "setentinfoTooltip": "Set info for an entity",
+    "setentinfoTooltip": "Set on-chain information for your LAC-Chain entity.",
     "setnodeinfoTitle": "Set node info",
-    "setnodeinfoTooltip": "Set info for a node",
+    "setnodeinfoTooltip": "Set on-chain information for a node you manage.",
     "newaccountTitle": "New account",
-    "newaccountTooltip": "Allow create a new account"
+    "newaccountTooltip": "Create a new account",
+    "addentityTitle": "Add Entity",
+    "addentityTooltip": "Register a new entity on the network.",
+    "addbootTitle": "Add Boot Node",
+    "addbootTooltip": "Register a new boot node on the network.",
+    "addobserverTitle": "Add Observer Node",
+    "addobserverTooltip": "Register a new observer node on the network.",
+    "setscheduleTitle": "Set Validator Schedule",
+    "setscheduleTooltip": "Set the group of block-producing validator nodes.",
+    "addvalidatorTitle": "Add Validator Node",
+    "addvalidatorTooltip": "Register a new validator node on the network.",
+    "addwriter": "Add Writer Node",
+    "addwriterTooltip": "Register a new writer node on the network.",
+    "setalimitsTitle": "Set Account Limits",
+    "setalimitsTooltip": "Set account CPU and NET resource limits."
   }
 }
