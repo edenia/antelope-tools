@@ -47,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
   },
   keyLabel: {
     wordBreak: 'break-all'
+  },
+  resourceWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex'
   }
 }))
 
@@ -156,35 +161,47 @@ const AccountInfo = ({
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <dl>
-                  <dt>
-                    <Typography>RAM:</Typography>
-                  </dt>
-                  <dd>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
                     <ResourceUsage
+                      title="RAM"
                       percent={info.ram.percent}
                       label={info.ram.label}
                     />
-                  </dd>
-                  <dt>
-                    <Typography>CPU:</Typography>
-                  </dt>
-                  <dd>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
                     <ResourceUsage
+                      title="CPU"
                       percent={info.cpu.percent}
                       label={info.cpu.label}
                     />
-                  </dd>
-                  <dt>
-                    <Typography>NET:</Typography>
-                  </dt>
-                  <dd>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
                     <ResourceUsage
+                      title="NET"
                       percent={info.net.percent}
                       label={info.net.label}
                     />
-                  </dd>
-                </dl>
+                  </Grid>
+                </Grid>
               </AccordionDetails>
             </Accordion>
           </Grid>

@@ -4,9 +4,9 @@ import { useTheme } from '@material-ui/core/styles'
 
 import { RadialBarChart, RadialBar, PolarAngleAxis } from 'recharts'
 
-const circleSize = 150
+const circleSize = 250
 
-const ResourceUsage = ({ percent, label }) => {
+const ResourceUsage = ({ percent, title, label }) => {
   const theme = useTheme()
 
   return (
@@ -40,7 +40,7 @@ const ResourceUsage = ({ percent, label }) => {
         dominantBaseline="middle"
         className="progress-label"
       >
-        {(percent * 100).toFixed(2)}%
+        {title} {(percent * 100).toFixed(2)}%
       </text>
       <text
         x={circleSize / 2}
