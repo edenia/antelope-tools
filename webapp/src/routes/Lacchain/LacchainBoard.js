@@ -116,7 +116,7 @@ const Lacchain = ({ ual }) => {
           'setschedule',
           'setalimits',
           'netrmgroup',
-          'setnetgroup',
+          'netsetgroup',
           'netaddgroup',
           'setram',
           'setentxinfo',

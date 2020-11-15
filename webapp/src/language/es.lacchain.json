@@ -181,9 +181,21 @@
     "setscheduleTooltip": "Establezca el grupo de nodos validadores que producen bloques.",
     "addvalidatorTitle": "Agregar Nodo Validador",
     "addvalidatorTooltip": "Registrar un nodo validador nuevo en la red.",
-    "addwriter": "Agregar Nodo Escritor",
+    "addwriterTitle": "Agregar Nodo Escritor",
     "addwriterTooltip": "Registrar un nodo escritor nuevo en la red.",
     "setalimitsTitle": "Limites de Cuenta",
-    "setalimitsTooltip": "Establecer límites de recursos de CPU y NET de la cuenta."
+    "setalimitsTooltip": "Establecer límites de recursos de CPU y NET de la cuenta.",
+    "netrmgroupTitle": "Eliminar grupo de red",
+    "netrmgroupTooltip": "Eliminar un grupo.",
+    "netsetgroupTitle": "Establecer grupo de red",
+    "netsetgroupTooltip": "Establecer grupo red.",
+    "netaddgroupTitle": "Agregar grupo de red",
+    "netaddgroupTooltip": "Agregar grupo de red",
+    "setramTitle": "Establecer RAM",
+    "setramTooltip": "Establecer RAM para una cuenta.",
+    "setentxinfoTitle": "Establecer información extendida de una entidad",
+    "setentxinfoTooltip": "Establecer información extendida de una entidad.",
+    "setnodexinfoTitle": "Establecer información extendida de un nodo",
+    "setnodexinfoTooltip": "Establecer información extendida de un nodo."
   }
 }
