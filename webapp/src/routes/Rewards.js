@@ -122,6 +122,57 @@ const Rewards = () => {
     let stats = {}
     let daylyRewars = 0
     const items = producers || []
+    const handleInvalidCountry = (producer) => {
+      if (!stats['N/A']) {
+        stats = {
+          ...stats,
+          'N/A': {
+            code: 'N/A',
+            name: t('notAvailable'),
+            quantity: 1,
+            items: [producer],
+            rewards: producer.total_rewards
+          }
+        }
+      } else {
+        stats['N/A'].items.push(producer)
+        stats['N/A'].rewards += producer.total_rewards
+        stats['N/A'].quantity += 1
+      }
+    }
+    const handleValidCountry = (producer) => {
+      if (!stats[producer.bp_json.org.location.country]) {
+        stats = {
+          ...stats,
+          [producer.bp_json.org.location.country]: {
+            code: producer.bp_json.org.location.country,
+            name: countries[producer.bp_json.org.location.country]?.name,
+            flag: countries[producer.bp_json.org.location.country]?.flag,
+            quantity: 1,
+            coordinates: [
+              producer.bp_json.org.location.longitude,
+              producer.bp_json.org.location.latitude
+            ],
+            items: [producer],
+            rewards: producer.total_rewards
+          }
+        }
+      } else {
+        stats[producer.bp_json.org.location.country].items.push(producer)
+        stats[producer.bp_json.org.location.country].rewards +=
+          producer.total_rewards
+        stats[producer.bp_json.org.location.country].quantity += 1
+        if (
+          producer.bp_json.org.location.longitude &&
+          producer.bp_json.org.location.latitude
+        ) {
+          stats[producer.bp_json.org.location.country].coordinates = [
+            producer.bp_json.org.location.longitude,
+            producer.bp_json.org.location.latitude
+          ]
+        }
+      }
+    }
 
     items
       .filter((a) => a.total_rewards >= 100)
@@ -129,56 +180,11 @@ const Rewards = () => {
         daylyRewars += producer.total_rewards || 0
 
         if (!producer?.bp_json?.org?.location?.country) {
-          if (!stats['N/A']) {
-            stats = {
-              ...stats,
-              'N/A': {
-                code: 'N/A',
-                name: t('notAvailable'),
-                quantity: 1,
-                items: [producer],
-                rewards: producer.total_rewards
-              }
-            }
-          } else {
-            stats['N/A'].items.push(producer)
-            stats['N/A'].rewards += producer.total_rewards
-            stats['N/A'].quantity += 1
-          }
+          handleInvalidCountry(producer)
           return
         }
 
-        if (!stats[producer.bp_json.org.location.country]) {
-          stats = {
-            ...stats,
-            [producer.bp_json.org.location.country]: {
-              code: producer.bp_json.org.location.country,
-              name: countries[producer.bp_json.org.location.country]?.name,
-              flag: countries[producer.bp_json.org.location.country]?.flag,
-              quantity: 1,
-              coordinates: [
-                producer.bp_json.org.location.longitude,
-                producer.bp_json.org.location.latitude
-              ],
-              items: [producer],
-              rewards: producer.total_rewards
-            }
-          }
-        } else {
-          stats[producer.bp_json.org.location.country].items.push(producer)
-          stats[producer.bp_json.org.location.country].rewards +=
-            producer.total_rewards
-          stats[producer.bp_json.org.location.country].quantity += 1
-          if (
-            producer.bp_json.org.location.longitude &&
-            producer.bp_json.org.location.latitude
-          ) {
-            stats[producer.bp_json.org.location.country].coordinates = [
-              producer.bp_json.org.location.longitude,
-              producer.bp_json.org.location.latitude
-            ]
-          }
-        }
+        handleValidCountry(producer)
       })
 
     const nodes = Object.values(stats)

@@ -108,7 +108,7 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const EntityType = () => {
     return (
       <>
-        {producer.bp_json.type && (
+        {producer.bp_json?.type && (
           <>
             <dt className={classes.dt}>{t('entityType')}:</dt>
             <dd>{t(`entityType${producer.bp_json.type}`)}</dd>
