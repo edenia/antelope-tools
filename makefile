@@ -72,7 +72,7 @@ start-hasura-cli:
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
 		sleep 5; done;
 	@echo "..."
-	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser;
+	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser --admin-secret $(HASURA_GRAPHQL_ADMIN_SECRET);
 
 start-webapp:
 	$(eval -include .env)

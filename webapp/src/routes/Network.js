@@ -45,7 +45,7 @@ const Network = () => {
   const classes = useStyles()
   const info = useSelector((state) => state.eos.info)
   const { t } = useTranslation('dashboardNetwork')
-  const { data: { producer: producers = [] } = { producers: [] } } = useQuery(
+  const { data: { producers = [] } = { producers: [] } } = useQuery(
     PRODUCERS_QUERY
   )
 

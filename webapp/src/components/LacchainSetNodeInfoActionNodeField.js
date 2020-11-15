@@ -32,18 +32,17 @@ const LacchainSetNodeInfoActionNodeField = ({
   }, [lacchain.currentNode, value, onChange])
 
   useEffect(() => {
-    const nodes = lacchain.nodes || []
+    let nodes = lacchain.nodes || []
+
+    if (!lacchain.isAdmin) {
+      nodes = nodes.filter(
+        (node) => node.entity === lacchain.currentEntity?.name
+      )
+    }
 
     setNodes(nodes)
-    setOptions(
-      nodes
-        .filter(
-          (node) =>
-            lacchain.isAmin || node.entity === lacchain.currentEntity?.name
-        )
-        .map((entity) => entity.name)
-    )
-  }, [lacchain.nodes, lacchain.isAmin, lacchain.currentEntity])
+    setOptions(nodes.map((node) => node.name))
+  }, [lacchain.nodes, lacchain.isAdmin, lacchain.currentEntity])
 
   return (
     <Autocomplete

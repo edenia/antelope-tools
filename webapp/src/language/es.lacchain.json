@@ -12,7 +12,7 @@
     "networkInfo": "Información de la red",
     "blockProducer": "Entidades",
     "nodes": "Nodos",
-    "nodeDistribution": "Distribución de nodos",
+    "nodesDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
     "about": "Acerca de",
@@ -31,7 +31,8 @@
   },
   "dashboardProducer": {
     "title": "Validadores",
-    "htmlTitle": "Validadores - Dashboard"
+    "htmlTitle": "Validadores - Dashboard",
+    "producerName": "Nombre de la entidad"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -83,6 +84,9 @@
   },
   "producerSummary": {
     "rank": "Rango",
+    "entityType": "Tipo de entidad",
+    "entityType1": "Asociada",
+    "entityType2": "Entidad no asociada",
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
@@ -104,7 +108,8 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos"
+    "nodes": "Nodos",
+    "email": "Correo electrónico"
   },
   "nodeSummary": {
     "nodeName": "Nombre del nodo",
@@ -176,9 +181,21 @@
     "setscheduleTooltip": "Establezca el grupo de nodos validadores que producen bloques.",
     "addvalidatorTitle": "Agregar Nodo Validador",
     "addvalidatorTooltip": "Registrar un nodo validador nuevo en la red.",
-    "addwriter": "Agregar Nodo Escritor",
+    "addwriterTitle": "Agregar Nodo Escritor",
     "addwriterTooltip": "Registrar un nodo escritor nuevo en la red.",
     "setalimitsTitle": "Limites de Cuenta",
-    "setalimitsTooltip": "Establecer límites de recursos de CPU y NET de la cuenta."
+    "setalimitsTooltip": "Establecer límites de recursos de CPU y NET de la cuenta.",
+    "netrmgroupTitle": "Eliminar grupo de red",
+    "netrmgroupTooltip": "Eliminar un grupo.",
+    "netsetgroupTitle": "Establecer grupo de red",
+    "netsetgroupTooltip": "Establecer grupo red.",
+    "netaddgroupTitle": "Agregar grupo de red",
+    "netaddgroupTooltip": "Agregar grupo de red",
+    "setramTitle": "Establecer RAM",
+    "setramTooltip": "Establecer RAM para una cuenta.",
+    "setentxinfoTitle": "Establecer información extendida de una entidad",
+    "setentxinfoTooltip": "Establecer información extendida de una entidad.",
+    "setnodexinfoTitle": "Establecer información extendida de un nodo",
+    "setnodexinfoTooltip": "Establecer información extendida de un nodo."
   }
 }

@@ -12,7 +12,7 @@
     "networkInfo": "Información de la red",
     "blockProducer": "Productores de Bloques",
     "nodes": "Nodos",
-    "nodeDistribution": "Distribución de nodos",
+    "nodesDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
     "about": "Acerca de",
@@ -33,7 +33,8 @@
   },
   "dashboardProducer": {
     "title": "Productores de Bloques",
-    "htmlTitle": "Productores de Bloques - Dashboard"
+    "htmlTitle": "Productores de Bloques - Dashboard",
+    "producerName": "Nombre del productor"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -59,7 +60,8 @@
     "country": "País",
     "rewards": "Recompensas",
     "producers": "Productores",
-    "htmlTitle": "Distribución de recompensas - Dashboard"
+    "htmlTitle": "Distribución de recompensas - Dashboard",
+    "rewardsPercentage": "Porcentaje de recompensas"
   },
   "about": {
     "title": "EOSIO Tablero",
@@ -106,7 +108,8 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos"
+    "nodes": "Nodos",
+    "email": "Correo electrónico"
   },
   "nodeSummary": {
     "nodeName": "Nombre del nodo",

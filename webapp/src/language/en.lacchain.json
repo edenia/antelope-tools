@@ -12,7 +12,7 @@
     "networkInfo": "Network Info",
     "blockProducer": "Entities",
     "nodes": "Nodes",
-    "nodeDistribution": "Node Distribution",
+    "nodesDistribution": "Nodes Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
     "about": "About",
@@ -33,7 +33,8 @@
   },
   "dashboardProducer": {
     "title": "Entities",
-    "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard"
+    "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard",
+    "producerName": "Entity name"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -85,6 +86,9 @@
   },
   "producerSummary": {
     "rank": "Rank",
+    "entityType": "Entity type",
+    "entityType1": "Partner",
+    "entityType2": "Non-Partner",
     "account": "Account",
     "website": "Website",
     "votes": "Votes",
@@ -106,7 +110,8 @@
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
-    "nodes": "Nodes"
+    "nodes": "Nodes",
+    "email": "Email"
   },
   "nodeSummary": {
     "nodeName": "Node name",
@@ -178,9 +183,21 @@
     "setscheduleTooltip": "Set the group of block-producing validator nodes.",
     "addvalidatorTitle": "Add Validator Node",
     "addvalidatorTooltip": "Register a new validator node on the network.",
-    "addwriter": "Add Writer Node",
+    "addwriterTitle": "Add Writer Node",
     "addwriterTooltip": "Register a new writer node on the network.",
     "setalimitsTitle": "Set Account Limits",
-    "setalimitsTooltip": "Set account CPU and NET resource limits."
+    "setalimitsTooltip": "Set account CPU and NET resource limits.",
+    "netrmgroupTitle": "Remove net group",
+    "netrmgroupTooltip": "Remove a group.",
+    "netsetgroupTitle": "Set net group",
+    "netsetgroupTooltip": "Set net group.",
+    "netaddgroupTitle": "Add net group",
+    "netaddgroupTooltip": "Add net group.",
+    "setramTitle": "Set RAM",
+    "setramTooltip": "Set RAM for an account.",
+    "setentxinfoTitle": "Set extended entity info",
+    "setentxinfoTooltip": "Set extended entity info.",
+    "setnodexinfoTitle": "Set extended node info",
+    "setnodexinfoTooltip": "Set extended node info."
   }
 }
