@@ -12,7 +12,7 @@
     "networkInfo": "Información de la red",
     "blockProducer": "Entidades",
     "nodes": "Nodos",
-    "nodeDistribution": "Distribución de nodos",
+    "nodesDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
     "about": "Acerca de",
@@ -31,7 +31,8 @@
   },
   "dashboardProducer": {
     "title": "Validadores",
-    "htmlTitle": "Validadores - Dashboard"
+    "htmlTitle": "Validadores - Dashboard",
+    "producerName": "Nombre de la entidad"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -83,6 +84,9 @@
   },
   "producerSummary": {
     "rank": "Rango",
+    "entityType": "Tipo de entidad",
+    "entityType1": "Asociada",
+    "entityType2": "Entidad no asociada",
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
@@ -104,7 +108,8 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos"
+    "nodes": "Nodos",
+    "email": "Correo electrónico"
   },
   "nodeSummary": {
     "nodeName": "Nombre del nodo",

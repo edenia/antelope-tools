@@ -15,6 +15,7 @@ import VpnKey from '@material-ui/icons/VpnKey'
 import RicardianContract from './RicardianContract'
 import ContractActions from './ContractActions'
 import ContractTables from './ContractTables'
+import ResourceUsage from './ResourceUsage'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,6 +62,26 @@ const AccountInfo = ({
   const [info, setInfo] = useState(null)
   const { t } = useTranslation('accountInfo')
 
+  const getBytesLabel = (bytes) => {
+    if (bytes === 0) {
+      return `0 kb`
+    }
+
+    if (bytes === -1) {
+      return `∞ kb`
+    }
+
+    return `${(bytes / 1024).toFixed(2)} kb`
+  }
+
+  const getMicrosecondsLabel = (microseconds) => {
+    if (microseconds === -1) {
+      return `∞ µs`
+    }
+
+    return `${microseconds} µs`
+  }
+
   useEffect(() => {
     const {
       ram_usage: ramUsage,
@@ -70,9 +91,20 @@ const AccountInfo = ({
       permissions
     } = account
 
-    const ram = ((ramUsage * 100) / ramQuota || 0).toFixed()
-    const cpu = ((cpuLimit.used * 100) / cpuLimit.max || 0).toFixed()
-    const net = ((netLimit.used * 100) / netLimit.max || 0).toFixed()
+    const ram = {
+      percent: ramUsage / ramQuota || 0,
+      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`
+    }
+    const cpu = {
+      percent: cpuLimit.used / cpuLimit.max || 0,
+      label: `${getMicrosecondsLabel(cpuLimit.used)} / ${getMicrosecondsLabel(
+        cpuLimit.max
+      )}`
+    }
+    const net = {
+      percent: netLimit.used / netLimit.max || 0,
+      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`
+    }
     const keys = permissions.map((item) => ({
       label: item.perm_name,
       value: item.required_auth?.keys[0]?.key || '-'
@@ -129,25 +161,28 @@ const AccountInfo = ({
                     <Typography>RAM:</Typography>
                   </dt>
                   <dd>
-                    <Typography>
-                      {info.total_resources?.ram_bytes || 0}
-                    </Typography>
+                    <ResourceUsage
+                      percent={info.ram.percent}
+                      label={info.ram.label}
+                    />
                   </dd>
                   <dt>
                     <Typography>CPU:</Typography>
                   </dt>
                   <dd>
-                    <Typography>
-                      {info.total_resources?.cpu_weight || 0}
-                    </Typography>
+                    <ResourceUsage
+                      percent={info.cpu.percent}
+                      label={info.cpu.label}
+                    />
                   </dd>
                   <dt>
                     <Typography>NET:</Typography>
                   </dt>
                   <dd>
-                    <Typography>
-                      {info.total_resources?.net_weight || 0}
-                    </Typography>
+                    <ResourceUsage
+                      percent={info.net.percent}
+                      label={info.net.label}
+                    />
                   </dd>
                 </dl>
               </AccordionDetails>

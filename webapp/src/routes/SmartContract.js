@@ -15,6 +15,7 @@ import AccountInfo from '../components/AccountInfo'
 import PageTitle from '../components/PageTitle'
 import { signTransaction } from '../utils/eos'
 import eosApi from '../utils/eosapi'
+import { Card, CardContent } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -119,29 +120,33 @@ const SmartContract = ({ ual }) => {
 
       <Typography variant="h3">{t('title')}</Typography>
 
-      <TextField
-        id="accountTxt"
-        label={t('account')}
-        variant="outlined"
-        value={accountName || ''}
-        onChange={(event) => {
-          setAccountName(event.target.value)
-        }}
-        className={classes.field}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleOnSearch}
-                edge="end"
-                aria-label="search"
-              >
-                <SearchOutlinedIcon />
-              </IconButton>
-            </InputAdornment>
-          )
-        }}
-      />
+      <Card>
+        <CardContent>
+          <TextField
+            id="accountTxt"
+            label={t('account')}
+            variant="outlined"
+            value={accountName || ''}
+            onChange={(event) => {
+              setAccountName(event.target.value)
+            }}
+            className={classes.field}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleOnSearch}
+                    edge="end"
+                    aria-label="search"
+                  >
+                    <SearchOutlinedIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+        </CardContent>
+      </Card>
 
       {loading && <LinearProgress className={classes.loader} color="primary" />}
 

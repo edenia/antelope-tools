@@ -342,8 +342,9 @@ const syncBPJsonForLacchain = async () => {
     return {
       owner: entity.name,
       bp_json: {
-        ...bpJson,
-        nodes: entityNodes
+        org: bpJson,
+        nodes: entityNodes,
+        type: entity.type
       }
     }
   })
@@ -594,7 +595,7 @@ const checkForMissedBlocks = async () => {
         producedBlocks += 1
       }
       console.log(
-        `current producer is : ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
+        `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
       )
       lastProducer = currentProducer
       lastBlockNum = currentBlockNum

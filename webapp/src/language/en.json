@@ -12,7 +12,7 @@
     "networkInfo": "Network Info",
     "blockProducer": "Block Producers",
     "nodes": "Nodes",
-    "nodeDistribution": "Node Distribution",
+    "nodesDistribution": "Nodes Distribution",
     "rewardDistribution": "Rewards Distribution",
     "nodeInfo": "Update Node Info",
     "about": "About",
@@ -31,7 +31,8 @@
   },
   "dashboardProducer": {
     "title": "Block Producers",
-    "htmlTitle": "Block Producers - Dashboard"
+    "htmlTitle": "Block Producers - Dashboard",
+    "producerName": "Producer name"
   },
   "producersChartToolTip": {
     "name": "Name",
@@ -57,7 +58,8 @@
     "country": "Country",
     "rewards": "Rewards",
     "producers": "Producers",
-    "htmlTitle": "Rewards Distribution - Dashboard"
+    "htmlTitle": "Rewards Distribution - Dashboard",
+    "rewardsPercentage": "Percentage of rewards"
   },
   "about": {
     "title": "EOSIO Dashboard",
@@ -104,7 +106,8 @@
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
-    "nodes": "Nodes"
+    "nodes": "Nodes",
+    "email": "Email"
   },
   "nodeSummary": {
     "nodeName": "Node name",

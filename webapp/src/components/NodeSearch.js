@@ -125,14 +125,14 @@ const NodeCard = ({ producers, filters, onChange }) => {
                       height="30px"
                       className={classes.logo}
                       src={
-                        producer?.bp_json?.branding?.logo_256 ||
+                        producer?.bp_json?.org?.branding?.logo_256 ||
                         generalConfig.defaultProducerLogo
                       }
                       onError={onImgError(generalConfig.defaultProducerLogo)}
                       alt="logo"
                     />
-                    {producer.bp_json?.candidate_name ||
-                      producer.bp_json?.organization_name ||
+                    {producer.bp_json?.org?.candidate_name ||
+                      producer.bp_json?.org?.organization_name ||
                       producer.owner}
                   </MenuItem>
                 ))}

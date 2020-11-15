@@ -147,7 +147,7 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'nodeDistribution',
+    name: 'nodesDistribution',
     icon: <CloudIcon />,
     layout: DashboardLayout,
     component: NodesDistribution,

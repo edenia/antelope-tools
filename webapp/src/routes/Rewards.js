@@ -2,14 +2,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
-import { useSubscription } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import Popover from '@material-ui/core/Popover'
-import CloseIcon from '@material-ui/icons/Close'
 import Link from '@material-ui/core/Link'
 import Skeleton from '@material-ui/lab/Skeleton'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -21,12 +19,14 @@ import {
 } from 'react-simple-maps'
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
+import Box from '@material-ui/core/Box'
 
 import UnknowFlagIcon from '../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../utils'
-import { PRODUCERS_SUBSCRIPTION } from '../gql'
+import { PRODUCERS_QUERY } from '../gql'
 import PageTitle from '../components/PageTitle'
 import CountryFlag from '../components/CountryFlag'
+import Tooltip from '../components/Tooltip'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -37,23 +37,8 @@ const useStyles = makeStyles((theme) => ({
   action: {
     cursor: 'pointer'
   },
-  popover: {
-    padding: theme.spacing(2),
-    paddingTop: 0
-  },
   popoverItem: {
     fontWeight: 'bold'
-  },
-  popoverClose: {
-    textAlign: 'right',
-    position: 'sticky',
-    background: 'white',
-    paddingTop: theme.spacing(2),
-
-    top: 0
-  },
-  popoverCloseIcon: {
-    cursor: 'pointer'
   },
   countryFlag: {
     marginRight: theme.spacing(1)
@@ -63,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   producersList: {
     margin: 0
-  },
-  mapWrapper: {
-    width: '100%'
   },
   geography: {
     outline: 'none',
@@ -105,9 +87,7 @@ const Rewards = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const [summary, setSummary] = useState(null)
-  const {
-    data: { producer: producers = [] } = { producers: [] }
-  } = useSubscription(PRODUCERS_SUBSCRIPTION)
+  const { loading = true, data: { producers } = {} } = useQuery(PRODUCERS_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
   const { t } = useTranslation('dashboardRewards')
@@ -141,8 +121,9 @@ const Rewards = () => {
   useEffect(() => {
     let stats = {}
     let daylyRewars = 0
+    const items = producers || []
 
-    producers
+    items
       .filter((a) => a.total_rewards >= 100)
       .forEach((producer) => {
         daylyRewars += producer.total_rewards || 0
@@ -219,123 +200,196 @@ const Rewards = () => {
   }, [producers, t])
 
   return (
-    <Grid container spacing={2}>
+    <Box>
       <PageTitle title={t('htmlTitle')} />
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">{t('dailyRewards')}</Typography>
-            <Typography variant="subtitle1">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <span>
-                  {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
-                </span>
-              )}
-            </Typography>
-            <Typography variant="subtitle1">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <span>
-                  ${formatWithThousandSeparator(summary.daylyRewars * rate, 0)}{' '}
-                  USD
-                </span>
-              )}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card
-          className={classes.action}
-          onClick={handlePopoverOpen(summary?.topCountryByRewards)}
-        >
-          <CardContent>
-            <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
-            <Typography variant="subtitle1">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <>
-                  <CountryFlag code={summary.topCountryByRewards.code} />
-                  {summary.topCountryByRewards.name}
-                </>
-              )}
-            </Typography>
-            <Typography variant="subtitle1">
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 && (
-                <>
-                  {formatWithThousandSeparator(
-                    summary.topCountryByRewards.rewards,
-                    0
-                  )}{' '}
-                  EOS / $
-                  {formatWithThousandSeparator(
-                    summary.topCountryByRewards.rewards * rate,
-                    0
-                  )}{' '}
-                  USD
-                </>
-              )}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6">{t('paidProducers')}</Typography>
-            <Typography
-              variant="subtitle1"
-              className={classes.action}
-              onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
-            >
-              {!nodes.length > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {nodes.length > 0 &&
-                summary.producersWithoutProperBpJson.quantity}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              className={classes.action}
-              onClick={handlePopoverOpen(summary?.producersWithoutProperBpJson)}
-            >
-              {t('clickToViewBPs')}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xl={3} lg={3} sm={6} xs={12}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>{t('lowestRewards')}: </span>
-              <span className={classes.lowestRewards} />
-            </Typography>
-            <Typography variant="h6" className={classes.rewardsColorSchema}>
-              <span className={classes.itemLabel}>{t('highestRewards')}: </span>
-              <span className={classes.highestRewards} />
-            </Typography>
-            {rate && (
-              <Typography variant="h6" className={classes.rewardsColorSchema}>
-                <span className={classes.itemLabel}>{t('exchangeRate')}: </span>{' '}
-                ${formatWithThousandSeparator(rate, 2)}
-              </Typography>
+      <Tooltip
+        anchorEl={anchorEl}
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+      >
+        <Box>
+          <Typography>
+            <span className={classes.popoverItem}>{t('country')}: </span>
+            {!currentNode?.flag && (
+              <span className={classes.countryFlagUnknown}>
+                <UnknowFlagIcon />
+              </span>
             )}
-          </CardContent>
-        </Card>
+            {currentNode?.flag && (
+              <span className={classes.countryFlag}>{currentNode?.flag}</span>
+            )}
+            <span>{currentNode?.name}</span>
+          </Typography>
+          {summary && (
+            <Typography>
+              <span className={classes.popoverItem}>
+                {t('rewardsPercentage')}:{' '}
+              </span>
+              <span>
+                {formatWithThousandSeparator(
+                  (currentNode?.rewards / summary.daylyRewars) * 100,
+                  2
+                )}
+                %
+              </span>
+            </Typography>
+          )}
+          <Typography>
+            <span className={classes.popoverItem}>{t('rewards')}: </span>
+            <span>
+              {formatWithThousandSeparator(currentNode?.rewards, 2)} EOS
+            </span>
+          </Typography>
+          <Typography className={classes.popoverItem}>
+            {t('producers')}:
+          </Typography>
+          <ul className={classes.producersList}>
+            {currentNode?.items?.map((producer, i) => (
+              <li key={`node-${i}`}>
+                <Link
+                  href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
+                    producer.url
+                  }/bp.json`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {producer?.bp_json?.org?.candidate_name || producer.owner}
+                </Link>
+                <br />
+                {formatWithThousandSeparator(producer.total_rewards, 2)} EOS
+              </li>
+            ))}
+          </ul>
+        </Box>
+      </Tooltip>
+      {loading && <LinearProgress className={classes.linearLoader} />}
+      <Grid container spacing={2}>
+        <Grid item xl={3} lg={3} sm={6} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">{t('dailyRewards')}</Typography>
+              <Typography variant="subtitle1">
+                {!nodes.length > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {nodes.length > 0 && (
+                  <span>
+                    {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
+                  </span>
+                )}
+              </Typography>
+              <Typography variant="subtitle1">
+                {!nodes.length > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {nodes.length > 0 && (
+                  <span>
+                    $
+                    {formatWithThousandSeparator(summary.daylyRewars * rate, 0)}{' '}
+                    USD
+                  </span>
+                )}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xl={3} lg={3} sm={6} xs={12}>
+          <Card
+            className={classes.action}
+            onClick={handlePopoverOpen(summary?.topCountryByRewards)}
+          >
+            <CardContent>
+              <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
+              <Typography variant="subtitle1">
+                {!nodes.length > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {nodes.length > 0 && (
+                  <>
+                    <CountryFlag code={summary.topCountryByRewards.code} />
+                    {summary.topCountryByRewards.name}
+                  </>
+                )}
+              </Typography>
+              <Typography variant="subtitle1">
+                {!nodes.length > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {nodes.length > 0 && (
+                  <>
+                    {formatWithThousandSeparator(
+                      summary.topCountryByRewards.rewards,
+                      0
+                    )}{' '}
+                    EOS / $
+                    {formatWithThousandSeparator(
+                      summary.topCountryByRewards.rewards * rate,
+                      0
+                    )}{' '}
+                    USD
+                  </>
+                )}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xl={3} lg={3} sm={6} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6">{t('paidProducers')}</Typography>
+              <Typography
+                variant="subtitle1"
+                className={classes.action}
+                onClick={handlePopoverOpen(
+                  summary?.producersWithoutProperBpJson
+                )}
+              >
+                {!nodes.length > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {nodes.length > 0 &&
+                  summary.producersWithoutProperBpJson.quantity}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                className={classes.action}
+                onClick={handlePopoverOpen(
+                  summary?.producersWithoutProperBpJson
+                )}
+              >
+                {t('clickToViewBPs')}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xl={3} lg={3} sm={6} xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" className={classes.rewardsColorSchema}>
+                <span className={classes.itemLabel}>
+                  {t('lowestRewards')}:{' '}
+                </span>
+                <span className={classes.lowestRewards} />
+              </Typography>
+              <Typography variant="h6" className={classes.rewardsColorSchema}>
+                <span className={classes.itemLabel}>
+                  {t('highestRewards')}:{' '}
+                </span>
+                <span className={classes.highestRewards} />
+              </Typography>
+              {rate && (
+                <Typography variant="h6" className={classes.rewardsColorSchema}>
+                  <span className={classes.itemLabel}>
+                    {t('exchangeRate')}:{' '}
+                  </span>{' '}
+                  ${formatWithThousandSeparator(rate, 2)}
+                </Typography>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
-      {!nodes.length && <LinearProgress className={classes.linearLoader} />}
-      <Grid item sm={12} className={classes.mapWrapper}>
+      {!loading && (
         <ComposableMap
           projectionConfig={{
             scale: 170
@@ -370,68 +424,8 @@ const Rewards = () => {
             </Geographies>
           </ZoomableGroup>
         </ComposableMap>
-      </Grid>
-      <Popover
-        open={anchorEl !== null}
-        onClose={handlePopoverClose}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'center',
-          horizontal: 'center'
-        }}
-      >
-        <div className={classes.popover}>
-          <div className={classes.popoverClose}>
-            <CloseIcon
-              className={classes.popoverCloseIcon}
-              onClick={handlePopoverClose}
-            />
-          </div>
-          <Typography>
-            <span className={classes.popoverItem}>{t('country')}: </span>
-            {!currentNode?.flag && (
-              <span className={classes.countryFlagUnknown}>
-                <UnknowFlagIcon />
-              </span>
-            )}
-            {currentNode?.flag && (
-              <span className={classes.countryFlag}>{currentNode?.flag}</span>
-            )}
-            <span>{currentNode?.name}</span>
-          </Typography>
-          <Typography>
-            <span className={classes.popoverItem}>{t('rewards')}: </span>
-            <span>
-              {formatWithThousandSeparator(currentNode?.rewards, 2)} EOS
-            </span>
-          </Typography>
-          <Typography className={classes.popoverItem}>
-            {t('producers')}:
-          </Typography>
-          <ul className={classes.producersList}>
-            {currentNode?.items?.map((producer, i) => (
-              <li key={`node-${i}`}>
-                <Link
-                  href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
-                    producer.url
-                  }/bp.json`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {producer?.bp_json?.org?.candidate_name || producer.owner}
-                </Link>
-                <br />
-                {formatWithThousandSeparator(producer.total_rewards, 2)} EOS
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Popover>
-    </Grid>
+      )}
+    </Box>
   )
 }
 

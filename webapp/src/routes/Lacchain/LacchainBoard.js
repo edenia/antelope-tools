@@ -114,7 +114,13 @@ const Lacchain = ({ ual }) => {
           'addvalidator',
           'setnodeinfo',
           'setschedule',
-          'setalimits'
+          'setalimits',
+          'netrmgroup',
+          'setnetgroup',
+          'netaddgroup',
+          'setram',
+          'setentxinfo',
+          'setnodexinfo'
         ]
       }
 

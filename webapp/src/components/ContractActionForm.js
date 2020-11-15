@@ -11,6 +11,7 @@ import LacchainEntitySelectField from './LacchainEntitySelectField'
 import LacchainSetEntInfoField from './LacchainSetEntInfoField'
 import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
+import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -56,6 +57,17 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
 
   const renderField = (field) => {
     switch (`${accountName}.${action}.${field.name}`) {
+      case 'eosio.addentity.entity_type':
+        return (
+          <LacchainAddEntityActionEntityTypeField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name]}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
       case 'eosio.setentinfo.entity':
         return (
           <LacchainEntitySelectField
