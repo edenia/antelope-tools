@@ -35,10 +35,14 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
   }, [])
 
   useEffect(() => {
-    setPayload(
-      lacchain.currentEntity ? JSON.parse(lacchain.currentEntity.info) : {}
-    )
-    onChange(lacchain.currentEntity?.info || '{}')
+    let info = {}
+
+    try {
+      info = JSON.parse(lacchain.currentEntity?.info || '{}')
+    } catch (error) {}
+
+    setPayload(info)
+    onChange(JSON.stringify(info))
     // eslint-disable-next-line
   }, [lacchain.currentEntity])
 

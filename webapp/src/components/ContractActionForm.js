@@ -52,7 +52,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
     }
 
     const struct = abi?.structs?.find((struct) => struct.name === action)
-    setFields(struct.fields)
+    setFields(struct?.fields || [])
   }, [action, abi])
 
   const renderField = (field) => {
