@@ -30,6 +30,14 @@ const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
     onSearch(filters)
   }
 
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode !== 13) {
+      return
+    }
+
+    onSearch(filters)
+  }
+
   useEffect(() => {
     setFilters(rootFilters || {})
   }, [rootFilters])
@@ -57,6 +65,7 @@ const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
                   </InputAdornment>
                 )
               }}
+              onKeyDown={handleOnKeyDown}
               onChange={handleOnChange('owner')}
             />
           </CardContent>
