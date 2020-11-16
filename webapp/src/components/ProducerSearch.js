@@ -34,6 +34,7 @@ const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
     if (event.keyCode !== 13) {
       return
     }
+
     onSearch(filters)
   }
 

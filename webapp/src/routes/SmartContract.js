@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     width: '100%'
   },
-  loader: {
-    marginBottom: theme.spacing(2)
-  },
   alert: {
     marginBottom: theme.spacing(2)
   }
@@ -118,6 +115,7 @@ const SmartContract = ({ ual }) => {
     if (event.keyCode !== 13) {
       return
     }
+
     handleOnSearch()
   }
 
@@ -153,7 +151,7 @@ const SmartContract = ({ ual }) => {
           />
         </CardContent>
       </Card>
-      {loading && <LinearProgress className={classes.loader} color="primary" />}
+      {loading && <LinearProgress color="primary" />}
       {errorMessage && (
         <Alert
           severity="error"

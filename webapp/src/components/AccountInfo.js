@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     '&:focus': {
       outline: 'none'
-    }
+    },
+    marginTop: theme.spacing(2)
   },
   accordion: {
     boxShadow: 'none',
