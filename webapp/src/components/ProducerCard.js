@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import React from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,6 +8,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Link from '@material-ui/core/Link'
+import Typography from '@material-ui/core/Typography'
 import moment from 'moment'
 import 'flag-icon-css/css/flag-icon.min.css'
 
@@ -18,7 +19,6 @@ import CountryFlag from './CountryFlag'
 import ProducerHealthIndicators from './ProducerHealthIndicators'
 import UsageChart from './UsageChart'
 import ProducerSocialLinks from './ProducerSocialLinks'
-import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,14 +63,20 @@ const useStyles = makeStyles((theme) => ({
 const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerSummary')
+  const [producerOrg, setProducerOrg] = useState({})
+  const [producerNodes, setProducerNodes] = useState([])
+
+  useEffect(() => {
+    setProducerOrg(producer.bp_json?.org || {})
+    setProducerNodes(producer.bp_json?.nodes || [])
+  }, [producer])
 
   const Avatar = () => {
     return (
       <img
         className={classes.avatar}
         src={
-          producer.bp_json?.branding?.logo_256 ||
-          generalConfig.defaultProducerLogo
+          producerOrg.branding?.logo_256 || generalConfig.defaultProducerLogo
         }
         onError={onImgError(generalConfig.defaultProducerLogo)}
         alt="avatar"
@@ -80,9 +86,9 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const SubHeader = () => {
     return (
       <>
-        <CountryFlag code={producer.bp_json?.location?.country} />
+        <CountryFlag code={producerOrg.location?.country} />
         <span className={classes.country}>
-          {producer.bp_json?.location?.name || 'N/A'}
+          {producerOrg.location?.name || 'N/A'}
         </span>
       </>
     )
@@ -90,7 +96,7 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const Rank = () => {
     return (
       <>
-        {generalConfig.useVotes && (
+        {generalConfig.useVotes && rank > 0 && (
           <>
             <dt className={classes.dt}>{t('rank')}:</dt>
             <dd>#{rank}</dd>
@@ -99,13 +105,25 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
       </>
     )
   }
+  const EntityType = () => {
+    return (
+      <>
+        {producer.bp_json?.type && (
+          <>
+            <dt className={classes.dt}>{t('entityType')}:</dt>
+            <dd>{t(`entityType${producer.bp_json.type}`)}</dd>
+          </>
+        )}
+      </>
+    )
+  }
   const BusinessContact = () => {
     return (
       <>
-        {producer.bp_json?.business_contact && (
+        {producerOrg.business_contact && (
           <>
             <dt className={classes.dt}>{t('businessContact')}:</dt>
-            <dd>{producer.bp_json.business_contact}</dd>
+            <dd>{producerOrg.business_contact}</dd>
           </>
         )}
       </>
@@ -114,10 +132,10 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const TechnicalContact = () => {
     return (
       <>
-        {producer.bp_json?.technical_contact && (
+        {producerOrg.technical_contact && (
           <>
             <dt className={classes.dt}>{t('technicalContact')}:</dt>
-            <dd>{producer.bp_json.technical_contact}</dd>
+            <dd>{producerOrg.technical_contact}</dd>
           </>
         )}
       </>
@@ -126,16 +144,16 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const Email = () => {
     return (
       <>
-        {producer.bp_json?.email && (
+        {producerOrg.email && (
           <>
             <dt className={classes.dt}>{t('email')}:</dt>
             <dd>
               <Link
-                href={`mailto:${producer.bp_json.email}`}
+                href={`mailto:${producerOrg.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {producer.bp_json.email}
+                {producerOrg.email}
               </Link>
             </dd>
           </>
@@ -146,16 +164,16 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const Website = () => {
     return (
       <>
-        {producer.bp_json?.website && (
+        {producerOrg.website && (
           <>
             <dt className={classes.dt}>{t('website')}:</dt>
             <dd>
               <Link
-                href={producer.bp_json.website}
+                href={producerOrg.website}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {producer.bp_json.website}
+                {producerOrg.website}
               </Link>
             </dd>
           </>
@@ -166,11 +184,11 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const Social = () => {
     return (
       <>
-        {producer.bp_json?.social && (
+        {producerOrg.social && (
           <>
             <dt className={classes.dt}>{t('social')}:</dt>
             <dd className={classes.social}>
-              <ProducerSocialLinks items={producer.bp_json.social} />
+              <ProducerSocialLinks items={producerOrg.social} />
             </dd>
           </>
         )}
@@ -180,16 +198,16 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const OwnershipDisclosure = () => {
     return (
       <>
-        {producer.bp_json?.ownership_disclosure && (
+        {producerOrg.ownership_disclosure && (
           <>
             <dt className={classes.dt}>{t('ownershipDisclosure')}:</dt>
             <dd>
               <Link
-                href={producer.bp_json.ownership_disclosure}
+                href={producerOrg.ownership_disclosure}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {producer.bp_json.ownership_disclosure}
+                {producerOrg.ownership_disclosure}
               </Link>
             </dd>
           </>
@@ -200,16 +218,16 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const ChainResources = () => {
     return (
       <>
-        {producer.bp_json?.chain_resources && (
+        {producerOrg.chain_resources && (
           <>
             <dt className={classes.dt}>{t('chainResources')}:</dt>
             <dd>
               <Link
-                href={producer.bp_json?.chain_resources}
+                href={producerOrg.chain_resources}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {producer.bp_json?.chain_resources}
+                {producerOrg.chain_resources}
               </Link>
             </dd>
           </>
@@ -220,10 +238,10 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const OtherResources = () => {
     return (
       <>
-        {producer.bp_json?.other_resources?.length > 0 && (
+        {producerOrg.other_resources?.length > 0 && (
           <>
             <dt className={classes.dt}>{t('otherResources')}:</dt>
-            {producer.bp_json.other_resources.map((url, i) => (
+            {producerOrg.other_resources.map((url, i) => (
               <dd key={i}>
                 <Link href={url} target="_blank" rel="noopener noreferrer">
                   {url}
@@ -337,8 +355,8 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
       <CardHeader
         avatar={<Avatar />}
         title={
-          producer.bp_json?.candidate_name ||
-          producer.bp_json?.organization_name ||
+          producerOrg.candidate_name ||
+          producerOrg.organization_name ||
           producer.owner
         }
         subheader={<SubHeader />}
@@ -346,6 +364,7 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
       <CardContent className={classes.content}>
         <dl className={classes.dl}>
           <Rank />
+          <EntityType />
           <BusinessContact />
           <TechnicalContact />
           <Email />
@@ -354,10 +373,10 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
           <OwnershipDisclosure />
           <ChainResources />
           <OtherResources />
-          {producer.bp_json?.nodes?.length > 0 && (
+          {producerNodes.length > 0 && (
             <>
               <dt className={classes.dt}>{t('nodes')}:</dt>
-              {producer.bp_json.nodes.map((node, i) => (
+              {producerNodes.map((node, i) => (
                 <dd className={classes.action} key={`node-${i}`}>
                   <Typography onClick={onNodeClick({ node, producer })}>
                     {node.node_name || node.node_type}
@@ -386,4 +405,4 @@ ProducerCard.propTypes = {
   rank: PropTypes.number,
   onNodeClick: PropTypes.func
 }
-export default ProducerCard
+export default memo(ProducerCard)

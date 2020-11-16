@@ -12,7 +12,7 @@
     "networkInfo": "Información de la red",
     "blockProducer": "Entidades",
     "nodes": "Nodos",
-    "nodeDistribution": "Distribución de nodos",
+    "nodesDistribution": "Distribución de nodos",
     "rewardDistribution": "Distribución de recompensas",
     "nodeInfo": "Actualizar información del nodo",
     "about": "Acerca de",
@@ -31,7 +31,8 @@
   },
   "dashboardProducer": {
     "title": "Validadores",
-    "htmlTitle": "Validadores - Dashboard"
+    "htmlTitle": "Validadores - Dashboard",
+    "producerName": "Nombre de la entidad"
   },
   "producerChartToolTip": {
     "name": "Nombre",
@@ -83,6 +84,9 @@
   },
   "producerSummary": {
     "rank": "Rango",
+    "entityType": "Tipo de entidad",
+    "entityType1": "Asociada",
+    "entityType2": "Entidad no asociada",
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
@@ -104,7 +108,8 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos"
+    "nodes": "Nodos",
+    "email": "Correo electrónico"
   },
   "nodeSummary": {
     "nodeName": "Nombre del nodo",
@@ -161,10 +166,36 @@
     "loginWarning": "Inicie sesión para usar esta herramienta",
     "noneActionWarning": "No hay ninguna opción para su cuenta",
     "setentinfoTitle": "Establecer información de entidad",
-    "setentinfoTooltip": "Establecer información para una entidad",
+    "setentinfoTooltip": "Establecer información on-chain para su entidad",
     "setnodeinfoTitle": "Establecer información de un nodo",
-    "setnodeinfoTooltip": "Establecer información para un nodo",
+    "setnodeinfoTooltip": "Establecer información on-chain para su nodo",
     "newaccountTitle": "Nueva cuenta",
-    "newaccountTooltip": "Permitir crear una nueva cuenta"
+    "newaccountTooltip": "Crear una cuenta nueva bajo mi entidad.",
+    "addentityTitle": "Agregar Entidad",
+    "addentityTooltip": "Registrar una nueva entidad en la red.",
+    "addbootTitle": "Agregar Nodo Boot",
+    "addbootTooltip": "Registrar un nodo boot nuevo en la red.",
+    "addobserverTitle": "Agregar Nodo Observador",
+    "addobserverTooltip": "Registrar un nodo observador nuevo en la red.",
+    "setscheduleTitle": "Cronograma de Producción",
+    "setscheduleTooltip": "Establezca el grupo de nodos validadores que producen bloques.",
+    "addvalidatorTitle": "Agregar Nodo Validador",
+    "addvalidatorTooltip": "Registrar un nodo validador nuevo en la red.",
+    "addwriterTitle": "Agregar Nodo Escritor",
+    "addwriterTooltip": "Registrar un nodo escritor nuevo en la red.",
+    "setalimitsTitle": "Limites de Cuenta",
+    "setalimitsTooltip": "Establecer límites de recursos de CPU y NET de la cuenta.",
+    "netrmgroupTitle": "Eliminar grupo de red",
+    "netrmgroupTooltip": "Eliminar un grupo.",
+    "netsetgroupTitle": "Establecer grupo de red",
+    "netsetgroupTooltip": "Establecer grupo red.",
+    "netaddgroupTitle": "Agregar grupo de red",
+    "netaddgroupTooltip": "Agregar grupo de red",
+    "setramTitle": "Establecer RAM",
+    "setramTooltip": "Establecer RAM para una cuenta.",
+    "setentxinfoTitle": "Establecer información extendida de una entidad",
+    "setentxinfoTooltip": "Establecer información extendida de una entidad.",
+    "setnodexinfoTitle": "Establecer información extendida de un nodo",
+    "setnodexinfoTooltip": "Establecer información extendida de un nodo."
   }
 }
