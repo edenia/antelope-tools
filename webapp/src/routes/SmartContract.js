@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { lazy, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -11,12 +11,12 @@ import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 
-import AccountInfo from '../components/AccountInfo'
 import PageTitle from '../components/PageTitle'
 import { signTransaction } from '../utils/eos'
 import eosApi from '../utils/eosapi'
 import { Card, CardContent } from '@material-ui/core'
 
+const AccountInfo = lazy(() => import('../components/AccountInfo'))
 const useStyles = makeStyles((theme) => ({
   field: {
     marginBottom: theme.spacing(2),
@@ -114,12 +114,17 @@ const SmartContract = ({ ual }) => {
     setLoading(false)
   }
 
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode !== 13) {
+      return
+    }
+    handleOnSearch()
+  }
+
   return (
     <Grid item xs={12}>
       <PageTitle title={t('htmlTitle')} />
-
       <Typography variant="h3">{t('title')}</Typography>
-
       <Card>
         <CardContent>
           <TextField
@@ -130,6 +135,7 @@ const SmartContract = ({ ual }) => {
             onChange={(event) => {
               setAccountName(event.target.value)
             }}
+            onKeyDown={handleOnKeyDown}
             className={classes.field}
             InputProps={{
               endAdornment: (
@@ -147,9 +153,7 @@ const SmartContract = ({ ual }) => {
           />
         </CardContent>
       </Card>
-
       {loading && <LinearProgress className={classes.loader} color="primary" />}
-
       {errorMessage && (
         <Alert
           severity="error"
@@ -159,7 +163,6 @@ const SmartContract = ({ ual }) => {
           {errorMessage}
         </Alert>
       )}
-
       {successMessage && (
         <Alert
           severity="success"
@@ -169,7 +172,6 @@ const SmartContract = ({ ual }) => {
           {successMessage}
         </Alert>
       )}
-
       {account && (
         <AccountInfo
           account={account}
