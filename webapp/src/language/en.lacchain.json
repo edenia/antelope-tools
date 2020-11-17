@@ -1,26 +1,36 @@
 {
+  "routes": {
+    "/dashboard>sidebar": "Dashboard",
+    "/dashboard>title": "LACChain EOSIO Dashboard",
+    "/dashboard>heading": "Welcome",
+    "/network-info>sidebar": "Network Info",
+    "/network-info>title": "Network Info - Dashboard",
+    "/network-info>heading": "Network Info",
+    "/entities>sidebar": "Entities",
+    "/entities>title": "Entities",
+    "/entities>heading": "Entities",
+    "/nodes>sidebar": "Nodes",
+    "/nodes-distribution>sidebar": "Nodes Distribution",
+    "/lacchain/network>sidebar": "Node Network",
+    "/lacchain/board>sidebar": "LACChain Management",
+    "/smart-contract>sidebar": "Smart Contract",
+    "/about>sidebar": "About",
+    "/help>sidebar": "Help"
+  },
   "user": {
     "login": "Login"
+  },
+  "networkInfo": {
+    "chainLimits": "Chain Limits",
+    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
+    "netLimitPerBlock": "NET LIMIT PER BLOCK",
+    "cpuBenchmarks": "CPU Benchmarks",
+    "missedBlocks": "Missed Blocks"
   },
   "updateNodeInfo": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
-  },
-  "sidebar": {
-    "dashboard": "Dashboard",
-    "networkInfo": "Network Info",
-    "blockProducer": "Entities",
-    "nodes": "Nodes",
-    "nodesDistribution": "Nodes Distribution",
-    "rewardDistribution": "Rewards Distribution",
-    "nodeInfo": "Update Node Info",
-    "about": "About",
-    "ricardianContract": "Ricardian Contract",
-    "help": "Help",
-    "smartContract": "Smart Contract",
-    "lacchainBoard": "LACChain Management",
-    "nodesNetwork": "Node Network"
   },
   "dashboardHome": {
     "currentProducer": "Current Producer",
@@ -28,8 +38,7 @@
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Production Schedule",
     "transPerSecond": "Transactions Per Second",
-    "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "LACChain EOSIO Dashboard"
+    "transPerBlock": "Transactions Per Block"
   },
   "dashboardProducer": {
     "title": "Entities",
@@ -132,13 +141,7 @@
     "bpJsonFound": "BP JSON found",
     "noBpJsonFound": "No BP JSON found"
   },
-  "dashboardNetwork": {
-    "htmlTitle": "Network Info - Dashboard",
-    "title": "Network Info",
-    "chainLimits": "Chain Limits",
-    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
-    "netLimitPerBlock": "NET LIMIT PER BLOCK"
-  },
+
   "smartContract": {
     "htmlTitle": "Account Info - Dashboard",
     "title": "Account Info",

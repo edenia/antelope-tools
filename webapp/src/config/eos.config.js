@@ -16,6 +16,8 @@ export const exchangeRateApi =
   process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API
 
 export const networkName = process.env.REACT_APP_EOS_API_NETWORK_NAME
+export const networkLabel = process.env.REACT_APP_EOS_API_NETWORK_LABEL
+export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
 
 let _nodeTypes = null
 let _includeDefaultTransaction = null

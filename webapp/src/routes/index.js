@@ -11,24 +11,21 @@ import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
 import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
 
 import { eosConfig } from '../config'
-import { DashboardLayout, StandAloneLayout } from '../layouts'
 
-const Dashboard = lazy(() => import('./Dashboard'))
-const Network = lazy(() => import('./Network'))
-const Producers = lazy(() => import('./Producers'))
+const Home = lazy(() => import('./Home'))
+const NetworkInfo = lazy(() => import('./NetworkInfo'))
+const BlockProducers = lazy(() => import('./BlockProducers'))
+const RewardsDistribution = lazy(() => import('./RewardsDistribution'))
+const Nodes = lazy(() => import('./Nodes'))
 const NodesDistribution = lazy(() => import('./NodesDistribution'))
-const SmartContract = lazy(() => import('./SmartContract'))
-const Rewards = lazy(() => import('./Rewards'))
-const EditBPJson = lazy(() => import('./EditBPJson'))
+const Accounts = lazy(() => import('./Accounts'))
+const BPJson = lazy(() => import('./BPJson'))
+const RicardianContract = lazy(() => import('./RicardianContract'))
 const About = lazy(() => import('./About'))
-const BlockProducerAgreementContract = lazy(() =>
-  import('./BlockProducerAgreementContract')
-)
 const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const LacchainBoard = lazy(() => import('./Lacchain/LacchainBoard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
-const Nodes = lazy(() => import('./Nodes'))
 
 const defaultRoutes = [
   {
@@ -37,41 +34,36 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'dashboard',
+    name: 'home',
     icon: <DashboardIcon />,
-    layout: DashboardLayout,
-    component: Dashboard,
+    component: Home,
     path: '/dashboard',
     exact: true
   },
   {
     name: 'networkInfo',
     icon: <LiveHelpIcon />,
-    layout: DashboardLayout,
-    component: Network,
-    path: '/network',
+    component: NetworkInfo,
+    path: '/network-info',
     exact: true
   },
   {
-    name: 'blockProducer',
+    name: 'blockProducers',
     icon: <StorageIcon />,
-    layout: DashboardLayout,
-    component: Producers,
-    path: '/producers',
+    component: BlockProducers,
+    path: '/block-producers',
     exact: true
   },
   {
-    name: 'rewardDistribution',
+    name: 'rewardsDistribution',
     icon: <AccountBalanceWalletIcon />,
-    layout: DashboardLayout,
-    component: Rewards,
-    path: '/rewards',
+    component: RewardsDistribution,
+    path: '/rewards-distribution',
     exact: true
   },
   {
     name: 'nodes',
     icon: <StorageIcon />,
-    layout: DashboardLayout,
     component: Nodes,
     path: '/nodes',
     exact: true
@@ -79,31 +71,27 @@ const defaultRoutes = [
   {
     name: 'nodesDistribution',
     icon: <CloudIcon />,
-    layout: DashboardLayout,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
   },
   {
-    name: 'nodeInfo',
+    name: 'accounts',
+    icon: <ListAltIcon />,
+    component: Accounts,
+    path: '/accounts',
+    exact: true
+  },
+  {
+    name: 'bpJson',
     icon: <FileCopyIcon />,
-    layout: DashboardLayout,
-    component: EditBPJson,
+    component: BPJson,
     path: '/bpjson',
     exact: true
   },
   {
-    name: 'smartContract',
-    icon: <ListAltIcon />,
-    layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
-    exact: true
-  },
-  {
     name: 'ricardianContract',
-    layout: DashboardLayout,
-    component: BlockProducerAgreementContract,
+    component: RicardianContract,
     path: '/ricardian-contract',
     exact: true
   }
@@ -115,33 +103,29 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'dashboard',
+    name: 'home',
     icon: <DashboardIcon />,
-    layout: DashboardLayout,
-    component: Dashboard,
+    component: Home,
     path: '/dashboard',
     exact: true
   },
   {
     name: 'networkInfo',
     icon: <LiveHelpIcon />,
-    layout: DashboardLayout,
-    component: Network,
-    path: '/network',
+    component: NetworkInfo,
+    path: '/network-info',
     exact: true
   },
   {
-    name: 'blockProducer',
+    name: 'entities',
     icon: <StorageIcon />,
-    layout: DashboardLayout,
-    component: Producers,
+    component: BlockProducers,
     path: '/entities',
     exact: true
   },
   {
     name: 'nodes',
     icon: <StorageIcon />,
-    layout: DashboardLayout,
     component: Nodes,
     path: '/nodes',
     exact: true
@@ -149,15 +133,13 @@ const lacchainRoutes = [
   {
     name: 'nodesDistribution',
     icon: <CloudIcon />,
-    layout: DashboardLayout,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
   },
   {
-    name: 'nodesNetwork',
+    name: 'lacchainNetwork',
     icon: <SettingsInputAntennaIcon />,
-    layout: DashboardLayout,
     component: LacchainNetwork,
     path: '/lacchain/network',
     exact: true
@@ -165,37 +147,32 @@ const lacchainRoutes = [
   {
     name: 'lacchainBoard',
     icon: <DeveloperBoardIcon />,
-    layout: DashboardLayout,
     component: LacchainBoard,
     path: '/lacchain/board',
     exact: true
   },
   {
-    name: 'smartContract',
+    name: 'accounts',
     icon: <ListAltIcon />,
-    layout: DashboardLayout,
-    component: SmartContract,
-    path: '/smart-contract',
+    component: Accounts,
+    path: '/accounts',
     exact: true
   }
 ]
 const helpRoutes = [
   {
     name: 'About',
-    layout: DashboardLayout,
     component: About,
     path: '/about',
     exact: true
   },
   {
     name: 'Help',
-    layout: DashboardLayout,
     component: Help,
     path: '/help',
     exact: true
   },
   {
-    layout: StandAloneLayout,
     component: Page404
   }
 ]

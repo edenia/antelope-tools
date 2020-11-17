@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
-  const { t } = useTranslation('nodeSummary')
+  const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
   useEffect(() => {
