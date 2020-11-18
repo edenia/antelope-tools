@@ -53,11 +53,11 @@ const getBpJSONOnChain = async (producer) => {
   return row.json ? JSON.parse(row.json) : null
 }
 
-const EditBPJson = ({ ual }) => {
+const BPJson = ({ ual }) => {
   const [producer, setProducer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { t } = useTranslation('updateNodeInfo')
+  const { t } = useTranslation('bpJsonRoute')
 
   const initData = {
     account_name: '',
@@ -190,8 +190,8 @@ const EditBPJson = ({ ual }) => {
   )
 }
 
-EditBPJson.propTypes = {
+BPJson.propTypes = {
   ual: PropTypes.object
 }
 
-export default EditBPJson
+export default BPJson

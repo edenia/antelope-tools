@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const About = () => {
   const classes = useStyles()
-  const { t } = useTranslation('about')
+  const { t } = useTranslation('aboutRoute')
 
   return (
     <Box>

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
-  const { t } = useTranslation('transactionsChartToolTip')
+  const { t } = useTranslation('transactionsChartComponent')
 
   if (active && payload && payload.length > 0) {
     return (

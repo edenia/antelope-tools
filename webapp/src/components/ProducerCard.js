@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ProducerCard = ({ producer, onNodeClick, rank }) => {
   const classes = useStyles()
-  const { t } = useTranslation('producerSummary')
+  const { t } = useTranslation('producerCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
   const [producerNodes, setProducerNodes] = useState([])
 

@@ -7,6 +7,8 @@ ARG react_app_use_rewards
 ARG react_app_use_votes
 ARG react_app_hasura_url
 ARG react_app_eos_api_network_name
+ARG react_app_eos_api_network_label
+ARG react_app_eos_api_network_logo
 ARG react_app_eos_api_host
 ARG react_app_eos_api_port
 ARG react_app_eos_api_protocol
@@ -29,6 +31,8 @@ ENV REACT_APP_USE_REWARDS $react_app_use_rewards
 ENV REACT_APP_USE_VOTES $react_app_use_votes
 ENV REACT_APP_HASURA_URL $react_app_hasura_url
 ENV REACT_APP_EOS_API_NETWORK_NAME $react_app_eos_api_network_name
+ENV REACT_APP_EOS_API_NETWORK_LABEL $react_app_eos_api_network_label
+ENV REACT_APP_EOS_API_NETWORK_LOGO $react_app_eos_api_network_logo
 ENV REACT_APP_EOS_API_HOST $react_app_eos_api_host
 ENV REACT_APP_EOS_API_PORT $react_app_eos_api_port
 ENV REACT_APP_EOS_API_PROTOCOL $react_app_eos_api_protocol

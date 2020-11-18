@@ -24,7 +24,6 @@ import Box from '@material-ui/core/Box'
 import UnknowFlagIcon from '../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../utils'
 import { PRODUCERS_QUERY } from '../gql'
-import PageTitle from '../components/PageTitle'
 import CountryFlag from '../components/CountryFlag'
 import Tooltip from '../components/Tooltip'
 
@@ -82,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Rewards = () => {
+const RewardsDistribution = () => {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
@@ -90,7 +89,7 @@ const Rewards = () => {
   const { loading = true, data: { producers } = {} } = useQuery(PRODUCERS_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
-  const { t } = useTranslation('dashboardRewards')
+  const { t } = useTranslation('rewardsDistributionRoute')
   const rate = useSelector((state) => state.eos.rate)
 
   const handlePopoverOpen = (node) => (event) => {
@@ -207,7 +206,6 @@ const Rewards = () => {
 
   return (
     <Box>
-      <PageTitle title={t('htmlTitle')} />
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -435,6 +433,6 @@ const Rewards = () => {
   )
 }
 
-Rewards.propTypes = {}
+RewardsDistribution.propTypes = {}
 
-export default Rewards
+export default RewardsDistribution

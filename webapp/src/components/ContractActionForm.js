@@ -24,7 +24,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   const classes = useStyles()
   const [fields, setFields] = useState([])
   const [payload, setPayload] = useState({})
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('contractActionFormComponent')
 
   const handleSubmit = () => {
     if (!onSubmitAction) return
@@ -136,7 +136,6 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   return (
     <>
       {fields.map(renderField)}
-
       {action && (
         <Button
           type="submit"

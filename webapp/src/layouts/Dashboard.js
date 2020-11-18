@@ -8,11 +8,17 @@ import {
   Paper as MuiPaper,
   withWidth
 } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import PageTitle from '../components/PageTitle'
+import { eosConfig } from '../config'
 
 const drawerWidth = 260
 
@@ -50,6 +56,8 @@ const AppContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
 `
 
 const Paper = styled(MuiPaper)(spacing)
@@ -67,8 +75,34 @@ const MainContent = styled(Paper)`
   }
 `
 
+const SubHeader = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${(props) => props.theme.spacing(4)}px;
+`
+
+const Network = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${(props) => props.theme.palette.primary.main};
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    background-color: ${(props) => props.theme.palette.primary.contrastText};
+  }
+  border-radius: 8px 16px 16px 8px;
+  padding-left: 24px;
+  min-width: 220px;
+  color: ${(props) => props.theme.palette.primary.contrastText};
+`
+
 const Dashboard = ({ children, width, ual }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t } = useTranslation('routes')
+  const location = useLocation()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -78,6 +112,7 @@ const Dashboard = ({ children, width, ual }) => {
     <Root>
       <CssBaseline />
       <GlobalStyle />
+      <PageTitle title={t(`${location.pathname}>title`)} />
       <Drawer>
         <Hidden mdUp implementation="js">
           <Sidebar
@@ -93,7 +128,18 @@ const Dashboard = ({ children, width, ual }) => {
       </Drawer>
       <AppContent>
         <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
-        <MainContent p={isWidthUp('lg', width) ? 10 : 5}>
+        <MainContent p={isWidthUp('lg', width) ? 6 : 4}>
+          <SubHeader>
+            <Typography variant="h3">
+              {t(`${location.pathname}>heading`)}
+            </Typography>
+            <Network>
+              <Typography component="p" variant="h5">
+                {eosConfig.networkLabel}
+              </Typography>
+              <img src={eosConfig.networkLogo} alt="network logo" />
+            </Network>
+          </SubHeader>
           {children}
         </MainContent>
         <Footer />

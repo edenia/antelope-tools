@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@material-ui/core/Box'
 import { makeStyles } from '@material-ui/styles'
-import { RicardianContract } from '@eoscostarica/eoscr-components'
+import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const BlockProducerAgreementContract = () => {
+const RicardianContract = () => {
   const classes = useStyles()
 
   return (
     <Box className={classes.root}>
-      <RicardianContract
+      <RicardianContractComponent
         contractName="eosio"
         actionName="regproducer"
         httpEndpoint="https://api.eosio.cr"
@@ -43,4 +43,4 @@ const BlockProducerAgreementContract = () => {
   )
 }
 
-export default BlockProducerAgreementContract
+export default RicardianContract

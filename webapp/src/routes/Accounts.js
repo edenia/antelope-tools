@@ -4,19 +4,18 @@ import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranslation } from 'react-i18next'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 
-import PageTitle from '../components/PageTitle'
 import { signTransaction } from '../utils/eos'
 import eosApi from '../utils/eosapi'
 import { Card, CardContent } from '@material-ui/core'
 
 const AccountInfo = lazy(() => import('../components/AccountInfo'))
+
 const useStyles = makeStyles((theme) => ({
   field: {
     marginBottom: theme.spacing(2),
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const SmartContract = ({ ual }) => {
+const Accounts = ({ ual }) => {
   const classes = useStyles()
   const [accountName, setAccountName] = useState(null)
   const [account, setAccount] = useState(null)
@@ -37,7 +36,7 @@ const SmartContract = ({ ual }) => {
   const [loading, setLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
-  const { t } = useTranslation('smartContract')
+  const { t } = useTranslation('accountsRoute')
 
   const handleSubmitAction = async (action) => {
     if (!ual.activeUser) {
@@ -121,8 +120,6 @@ const SmartContract = ({ ual }) => {
 
   return (
     <Grid item xs={12}>
-      <PageTitle title={t('htmlTitle')} />
-      <Typography variant="h3">{t('title')}</Typography>
       <Card>
         <CardContent>
           <TextField
@@ -184,8 +181,8 @@ const SmartContract = ({ ual }) => {
   )
 }
 
-SmartContract.propTypes = {
+Accounts.propTypes = {
   ual: PropTypes.object
 }
 
-export default SmartContract
+export default Accounts

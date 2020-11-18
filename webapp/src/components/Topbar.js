@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Topbar = ({ user, onLogout, onLogin }) => {
   const classes = useStyles()
-  const { t } = useTranslation('user')
+  const { t } = useTranslation('topbarComponent')
 
   return (
     <Box className={classes.box}>

@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Lacchain = ({ ual }) => {
+const LacchainManagement = ({ ual }) => {
   const classes = useStyles()
-  const { t } = useTranslation('board')
+  const { t } = useTranslation('lacchainManagement')
   const [abi, setAbi] = useState(null)
   const [tooltip, setTooltip] = useState({})
   const [message, setMessage] = useState(null)
@@ -242,8 +242,8 @@ const Lacchain = ({ ual }) => {
   )
 }
 
-Lacchain.propTypes = {
+LacchainManagement.propTypes = {
   ual: PropTypes.object
 }
 
-export default Lacchain
+export default LacchainManagement

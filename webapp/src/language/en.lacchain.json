@@ -1,176 +1,32 @@
 {
-  "user": {
-    "login": "Login"
+  "routes": {
+    "/entities>sidebar": "Entities",
+    "/entities>title": "Entities - Dashboard",
+    "/entities>heading": "Entities",
+    "/lacchain/network>sidebar": "LACChain Network",
+    "/lacchain/network>title": "LACChain Network - Dashboard",
+    "/lacchain/network>heading": "LACChain Network",
+    "/lacchain/management>sidebar": "LACChain Management",
+    "/lacchain/management>title": "LACChain Management - Dashboard",
+    "/lacchain/management>heading": "LACChain Management"
   },
-  "updateNodeInfo": {
-    "loadText": "Loading node information . . .",
-    "notLogin": "Please log in to use this tool.",
-    "notRegisterNode": "You must have an account registered as an active node to use this tool."
+  "common": {
+    "producerName": "Entity name",
+    "producers": "Entities",
+    "producer": "Entity"
   },
-  "sidebar": {
-    "dashboard": "Dashboard",
-    "networkInfo": "Network Info",
-    "blockProducer": "Entities",
-    "nodes": "Nodes",
-    "nodesDistribution": "Nodes Distribution",
-    "rewardDistribution": "Rewards Distribution",
-    "nodeInfo": "Update Node Info",
-    "about": "About",
-    "ricardianContract": "Ricardian Contract",
-    "help": "Help",
-    "smartContract": "Smart Contract",
-    "lacchainBoard": "LACChain Management",
-    "nodesNetwork": "Node Network"
-  },
-  "dashboardHome": {
-    "currentProducer": "Current Producer",
-    "headBlock": "Head Block",
-    "lastBlock": "Last Irreversible Block",
-    "bpSchedule": "Block Production Schedule",
-    "transPerSecond": "Transactions Per Second",
-    "transPerBlock": "Transactions Per Block",
-    "htmlTitle": "LACChain EOSIO Dashboard"
-  },
-  "dashboardProducer": {
-    "title": "Entities",
-    "htmlTitle": "LACChain EOSIO Validator Nodes - Dashboard",
-    "producerName": "Entity name"
-  },
-  "producersChartToolTip": {
-    "name": "Name",
-    "rewards": "Rewards",
-    "votes": "Votes"
-  },
-  "transactionsChartToolTip": {
-    "block": "Block",
-    "transactions": "Transactions"
-  },
-  "dashboardNodes": {
-    "htmlTitle": "Node Distribution - Dashboard"
-  },
-  "dashboardRewards": {
-    "dailyRewards": "Total Daily Rewards",
-    "topCountryDailyRwards": "Top Country By Daily Rewards",
-    "notAvailable": "Not available",
-    "paidProducers": "Paid Producers Not Located",
-    "clickToViewBPs": "Click to view non-compliant BPs",
-    "lowestRewards": "Lowest Rewards",
-    "highestRewards": "Highest Rewards",
-    "exchangeRate": "Exchange Rate",
-    "country": "Country",
-    "rewards": "Rewards",
-    "producers": "Producers",
-    "htmlTitle": "Rewards Distribution - Dashboard"
-  },
-  "about": {
-    "title": "EOSIO Dashboard",
-    "subtitle1": "What is the EOSIO Dashboard",
-    "body1": {
-      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the LACChain EOSIO network infrastructure and Validator Node"
-    },
-    "subtitle2": "Why is it important?",
-    "body2": {
-      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
-    },
-    "subtitle3": "Where does the data come from?",
-    "body3": {
-      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block production information."
-    }
-  },
-  "help": {
-    "title": "Thank you for using EOS Network Monitor!",
-    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "GitHub EOS Costa Rica",
-    "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "EOS Costa Rica Website"
-  },
-  "producerSummary": {
-    "rank": "Rank",
+  "producerCardComponent": {
     "entityType": "Entity type",
     "entityType1": "Partner",
-    "entityType2": "Non-Partner",
-    "account": "Account",
-    "website": "Website",
-    "votes": "Votes",
-    "rewards": "Rewards",
-    "country": "Country",
-    "eosRate": "EOS RATE",
-    "p2pEndpoints": "Endpoints (P2P)",
-    "apiEndpoints": "Endpoints (HTTPS / HTTPS)",
-    "pingFromCostaRica": "Ping from Costa Rica",
-    "serverVersion": "Server version",
-    "secondsAgo": "s ago",
-    "lastTimeChecked": "Last Time Checked",
-    "healthStatus": "Health Status",
-    "cpuUsage": "CPU Benchmark",
-    "missedBlocks": "Missed Blocks",
-    "businessContact": "Business Contact",
-    "technicalContact": "Technical Contact",
-    "social": "Social",
-    "ownershipDisclosure": "Ownership Disclosure",
-    "chainResources": "Chain Resources",
-    "otherResources": "Other Resources",
-    "nodes": "Nodes",
-    "email": "Email"
+    "entityType2": "Non-Partner"
   },
-  "nodeSummary": {
-    "nodeName": "Node name",
-    "nodeType": "Node type",
-    "features": "Features",
-    "endpoints": "Endpoints",
-    "keys": "Keys",
-    "description": "Description",
-    "color": "Color",
-    "producer": "Entity",
-    "all": "All"
-  },
-  "producerHealthIndicators": {
-    "synced": "Synced",
-    "notSyncing": "Not syncing",
-    "apiResponding": "API Responding",
-    "apiNotResponding": "API Not Responding",
-    "bpJsonFound": "BP JSON found",
-    "noBpJsonFound": "No BP JSON found"
-  },
-  "dashboardNetwork": {
-    "htmlTitle": "Network Info - Dashboard",
-    "title": "Network Info",
-    "chainLimits": "Chain Limits",
-    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
-    "netLimitPerBlock": "NET LIMIT PER BLOCK"
-  },
-  "smartContract": {
-    "htmlTitle": "Account Info - Dashboard",
-    "title": "Account Info",
-    "loginBeforeUseAction": "Please login before execute an action",
-    "unknownError": "Unknown error processing action",
-    "accountNotFound": "Account not found",
-    "account": "Account"
-  },
-  "accountInfo": {
-    "resources": "Resources",
-    "keys": "Keys",
-    "contractActions": "Contract Actions",
-    "contractTables": "Contract Tables",
-    "ricardianContract": "Ricardian Contract",
-    "account": "Account",
-    "action": "Action",
-    "executeTransaction": "Execute Transaction",
-    "table": "Table",
-    "scope": "Scope",
-    "lowerBound": "Lower Bound",
-    "upperBound": "Upper Bound",
-    "limit": "Limit",
-    "getData": "Get Data",
-    "emptyTable": "Empty Table"
-  },
-  "board": {
+  "lacchainManagement": {
     "loginWarning": "Please login with your LACChain account to use this feature.",
     "noneActionWarning": "There is no actions available for your account.",
     "setentinfoTitle": "Set entity info",
-    "setentinfoTooltip": "Set on-chain information for your LACChain entity.",
+    "setentinfoTooltip": "Set onchain information for your LACChain entity.",
     "setnodeinfoTitle": "Set node info",
-    "setnodeinfoTooltip": "Set on-chain information for a node you manage.",
+    "setnodeinfoTooltip": "Set onchain information for a node you manage.",
     "newaccountTitle": "New account",
     "newaccountTooltip": "Create a new account",
     "addentityTitle": "Add Entity",
@@ -180,7 +36,7 @@
     "addobserverTitle": "Add Observer Node",
     "addobserverTooltip": "Register a new observer node on the network.",
     "setscheduleTitle": "Set Validator Schedule",
-    "setscheduleTooltip": "Set the group of block-producing validator nodes.",
+    "setscheduleTooltip": "Set the group of blockproducing validator nodes.",
     "addvalidatorTitle": "Add Validator Node",
     "addvalidatorTooltip": "Register a new validator node on the network.",
     "addwriterTitle": "Add Writer Node",

@@ -2,7 +2,6 @@
 import React, { useEffect, useState, lazy } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
-import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/react-hooks'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
@@ -18,7 +17,6 @@ import { geoPath } from 'd3-geo'
 
 import { eosConfig } from '../config'
 import { NODES_QUERY } from '../gql'
-import PageTitle from '../components/PageTitle'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
 
@@ -54,7 +52,6 @@ const Nodes = () => {
   const [filters, setFilters] = useState({ producer: 'all', nodeType: 'all' })
   const [allNodes, setAllNodes] = useState([])
   const classes = useStyles()
-  const { t } = useTranslation('dashboardNodes')
   const [mapState, setMapState] = useState({
     scale: defaultScale,
     center: [0, 0],
@@ -140,7 +137,6 @@ const Nodes = () => {
 
   return (
     <Box>
-      <PageTitle title={t('htmlTitle')} />
       <NodeSearch
         producers={producers}
         filters={filters}
