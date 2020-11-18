@@ -25,7 +25,7 @@ const Home = () => {
   const tpb = useSelector((state) => state.eos.tpb)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
-  const { t } = useTranslation('home')
+  const { t } = useTranslation('homeRoute')
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })

@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
   const classes = useStyles()
-  const { t } = useTranslation('dashboardProducer')
+  const { t } = useTranslation('producerSearchComponent')
   const [filters, setFilters] = useState({})
 
   const handleOnChange = (key) => (event) => {

@@ -89,7 +89,7 @@ const RewardsDistribution = () => {
   const { loading = true, data: { producers } = {} } = useQuery(PRODUCERS_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
-  const { t } = useTranslation('rewardsDistribution')
+  const { t } = useTranslation('rewardsDistributionRoute')
   const rate = useSelector((state) => state.eos.rate)
 
   const handlePopoverOpen = (node) => (event) => {

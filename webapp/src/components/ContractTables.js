@@ -46,7 +46,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [lowerBound, setLowerBound] = useState(null)
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('common', 'contractTablesComponent')
 
   const handleTableChange = (value) => {
     setTable(value)

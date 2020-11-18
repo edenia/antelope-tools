@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const NodeCard = ({ producers, filters, onChange }) => {
+const NodeSearch = ({ producers, filters, onChange }) => {
   const classes = useStyles()
-  const { t } = useTranslation('nodeSummary')
+  const { t } = useTranslation('nodeSearchComponent')
   const [nodeType, setNodeType] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -210,16 +210,16 @@ const NodeCard = ({ producers, filters, onChange }) => {
   )
 }
 
-NodeCard.propTypes = {
+NodeSearch.propTypes = {
   producers: PropTypes.array,
   filters: PropTypes.any,
   onChange: PropTypes.func
 }
 
-NodeCard.defaultProps = {
+NodeSearch.defaultProps = {
   producers: [],
   filters: {},
   onChange: () => {}
 }
 
-export default NodeCard
+export default NodeSearch

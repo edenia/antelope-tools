@@ -103,7 +103,6 @@ const Dashboard = ({ children, width, ual, title }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { t } = useTranslation('routes')
   const location = useLocation()
-  console.log(location)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)

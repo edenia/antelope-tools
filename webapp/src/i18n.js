@@ -9,6 +9,7 @@ i18n
   .init({
     load: 'unspecific',
     resources,
+    fallbackNS: 'common',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false

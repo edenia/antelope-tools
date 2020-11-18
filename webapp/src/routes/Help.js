@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Help = () => {
   const classes = useStyles()
-  const { t } = useTranslation('help')
+  const { t } = useTranslation('helpRoute')
 
   return (
     <Box>

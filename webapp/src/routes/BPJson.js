@@ -57,7 +57,7 @@ const BPJson = ({ ual }) => {
   const [producer, setProducer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { t } = useTranslation('bpJson')
+  const { t } = useTranslation('bpJsonRoute')
 
   const initData = {
     account_name: '',

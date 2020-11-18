@@ -20,7 +20,7 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
   const classes = useStyles()
   const [actions, setActions] = useState([])
   const [action, setAction] = useState('')
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('contractActionsComponent')
 
   useEffect(() => {
     if (!abi) {

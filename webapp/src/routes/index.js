@@ -24,8 +24,8 @@ const RicardianContract = lazy(() => import('./RicardianContract'))
 const About = lazy(() => import('./About'))
 const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
-const LacchainBoard = lazy(() => import('./Lacchain/LacchainBoard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
+const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 
 const defaultRoutes = [
   {
@@ -145,10 +145,10 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'lacchainBoard',
+    name: 'lacchainManagement',
     icon: <DeveloperBoardIcon />,
-    component: LacchainBoard,
-    path: '/lacchain/board',
+    component: LacchainManagement,
+    path: '/lacchain/management',
     exact: true
   },
   {

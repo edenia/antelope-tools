@@ -1,4 +1,22 @@
 {
+  "common": {
+    "all": "All",
+    "account": "Account",
+    "name": "Name",
+    "rewards": "Rewards",
+    "votes": "Votes",
+    "block": "Block",
+    "transactions": "Transactions",
+    "producerName": "Producer name",
+    "nodeName": "Node name",
+    "nodeType": "Node type",
+    "description": "Description",
+    "color": "Color",
+    "producers": "Producers",
+    "producer": "Producer",
+    "login": "Login",
+    "keys": "Keys"
+  },
   "routes": {
     "/dashboard>sidebar": "Dashboard",
     "/dashboard>title": "EOSIO Dashboard",
@@ -34,18 +52,7 @@
     "/help>title": "Help - Dashboard",
     "/help>heading": "Help"
   },
-  "common": {
-    "account": "Account",
-    "name": "Name",
-    "rewards": "Rewards",
-    "votes": "Votes",
-    "block": "Block",
-    "transactions": "Transactions"
-  },
-  "user": {
-    "login": "Login"
-  },
-  "home": {
+  "homeRoute": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
     "lastBlock": "Last Irreversible Block",
@@ -53,15 +60,15 @@
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block"
   },
-  "networkInfo": {
+  "networkInfoRoute": {
     "chainLimits": "Chain Limits",
     "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
     "netLimitPerBlock": "NET LIMIT PER BLOCK",
     "cpuBenchmarks": "CPU Benchmarks",
     "missedBlocks": "Missed Blocks"
   },
-  "blockProducers": {},
-  "rewardsDistribution": {
+  "blockProducersRoute": {},
+  "rewardsDistributionRoute": {
     "dailyRewards": "Total Daily Rewards",
     "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
@@ -72,23 +79,22 @@
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "producers": "Producers",
     "rewardsPercentage": "Percentage of rewards"
   },
-  "nodes": {},
-  "nodesDistribution": {},
-  "accounts": {
+  "nodesRoute": {},
+  "nodesDistributionRoute": {},
+  "accountsRoute": {
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
     "accountNotFound": "Account not found"
   },
-  "bpJson": {
+  "bpJsonRoute": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
   },
-  "ricardianContract": {},
-  "about": {
+  "ricardianContractRoute": {},
+  "aboutRoute": {
     "title": "EOSIO Dashboard",
     "subtitle1": "What is the EOSIO Dashboard",
     "body1": {
@@ -103,7 +109,7 @@
       "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
     }
   },
-  "help": {
+  "helpRoute": {
     "title": "Thank you for using EOS Network Monitor!",
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
@@ -137,15 +143,11 @@
     "email": "Email"
   },
   "nodeCardComponent": {
-    "nodeName": "Node name",
-    "nodeType": "Node type",
     "features": "Features",
     "endpoints": "Endpoints",
-    "keys": "Keys",
     "description": "Description",
     "color": "Color",
-    "producer": "Producer",
-    "all": "All"
+    "producer": "Producer"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Synced",
@@ -157,13 +159,11 @@
   },
   "accountInfoComponent": {
     "resources": "Resources",
-    "keys": "Keys",
     "contractActions": "Contract Actions",
     "contractTables": "Contract Tables",
-    "ricardianContract": "Ricardian Contract",
-    "account": "Account",
-    "action": "Action",
-    "executeTransaction": "Execute Transaction",
+    "ricardianContract": "Ricardian Contract"
+  },
+  "contractTablesComponent": {
     "table": "Table",
     "scope": "Scope",
     "lowerBound": "Lower Bound",
@@ -171,5 +171,11 @@
     "limit": "Limit",
     "getData": "Get Data",
     "emptyTable": "Empty Table"
+  },
+  "contractActionsComponent": {
+    "action": "Action"
+  },
+  "contractActionFormComponent": {
+    "executeTransaction": "Execute Transaction"
   }
 }

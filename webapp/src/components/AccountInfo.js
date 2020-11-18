@@ -66,7 +66,7 @@ const AccountInfo = ({
 }) => {
   const classes = useStyles()
   const [info, setInfo] = useState(null)
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('accountInfoComponent')
 
   const getBytesLabel = (bytes) => {
     if (bytes === 0) {

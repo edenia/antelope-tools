@@ -42,7 +42,7 @@ const Network = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const info = useSelector((state) => state.eos.info)
-  const { t } = useTranslation('networkInfo')
+  const { t } = useTranslation('networkInfoRoute')
   const { data: { producers = [] } = { producers: [] } } = useQuery(
     PRODUCERS_QUERY
   )

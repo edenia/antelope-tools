@@ -36,7 +36,7 @@ const Accounts = ({ ual }) => {
   const [loading, setLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
-  const { t } = useTranslation(['common', 'accounts'])
+  const { t } = useTranslation('accountsRoute')
 
   const handleSubmitAction = async (action) => {
     if (!ual.activeUser) {
