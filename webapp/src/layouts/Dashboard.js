@@ -99,7 +99,7 @@ const Network = styled(Box)`
   color: ${(props) => props.theme.palette.primary.contrastText};
 `
 
-const Dashboard = ({ children, width, ual, title }) => {
+const Dashboard = ({ children, width, ual }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { t } = useTranslation('routes')
   const location = useLocation()
