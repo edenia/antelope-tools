@@ -77,9 +77,20 @@ const MainContent = styled(Paper)`
 
 const SubHeader = styled(Box)`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column-reverse;
   margin-bottom: ${(props) => props.theme.spacing(4)}px;
+  width: 100%;
+  h3 {
+    margin-top: ${(props) => props.theme.spacing(4)}px;
+  }
+  ${(props) => props.theme.breakpoints.up('sm')} {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      margin-top: 0;
+    }
+  }
 `
 
 const Network = styled(Box)`

@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
 import Pagination from '@material-ui/lab/Pagination'
+import { useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 import { PRODUCERS_QUERY } from '../gql'
 import ProducerSearch from '../components/ProducerSearch'
@@ -34,10 +36,12 @@ const Producers = () => {
     loadProducers,
     { loading = true, data: { producers, info } = {} }
   ] = useLazyQuery(PRODUCERS_QUERY)
+  const location = useLocation()
   const [pagination, setPagination] = useState({ page: 1, limit: 21 })
   const [totalPages, setTotalPages] = useState(1)
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [filters, setFilters] = useState({})
 
   useEffect(() => {
     loadProducers({
@@ -48,7 +52,7 @@ const Producers = () => {
       }
     })
     // eslint-disable-next-line
-  }, [pagination])
+  }, [pagination.where, pagination.page, pagination.limit])
 
   useEffect(() => {
     if (!info) {
@@ -57,6 +61,24 @@ const Producers = () => {
 
     setTotalPages(Math.ceil(info.producers?.count / pagination.limit))
   }, [info, pagination.limit])
+
+  useEffect(() => {
+    const params = queryString.parse(location.search)
+
+    if (!params.name) {
+      return
+    }
+
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      where: { owner: { _like: `%${params.name}%` } }
+    }))
+
+    setFilters({
+      owner: params.name
+    })
+  }, [location.search])
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
@@ -97,7 +119,7 @@ const Producers = () => {
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
       <Box className={classes.searchWrapper}>
-        <ProducerSearch onSearch={handleOnSearch} />
+        <ProducerSearch onSearch={handleOnSearch} filters={filters} />
       </Box>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
