@@ -142,14 +142,9 @@
     "email": "Correo electrónico"
   },
   "nodeCardComponent": {
-    "nodeName": "Nombre del nodo",
-    "nodeType": "Tipo de nodo",
     "features": "Características",
     "endpoints": "Endpoints",
-    "keys": "Llaves",
-    "description": "Descripción",
-    "color": "Color",
-    "producer": "Productor"
+    "emptyNode": "Empty info for nodos"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Sincronizado",

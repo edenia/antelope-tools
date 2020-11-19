@@ -80,6 +80,12 @@ const NodeCard = ({ producer, node }) => {
       />
       <CardContent className={classes.content}>
         <dl className={classes.dl}>
+          {!node && (
+            <>
+              <dt className={classes.bold}>{t('emptyNode')}</dt>
+            </>
+          )}
+
           {node?.node_name && (
             <>
               <dt className={classes.bold}>{t('nodeName')}</dt>
@@ -87,10 +93,14 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          <dt className={classes.bold}>{t('nodeType')}</dt>
-          <dd>{node?.node_type || 'N/A'}</dd>
+          {node?.node_type && (
+            <>
+              <dt className={classes.bold}>{t('nodeType')}</dt>
+              <dd>{node?.node_type}</dd>
+            </>
+          )}
 
-          {node.features && (
+          {node?.features && (
             <>
               <dt className={classes.bold}>{t('features')}</dt>
               {node.features.map((feature, i) => (
@@ -99,7 +109,7 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          {node.endpoints && (
+          {node?.endpoints && (
             <>
               <dt className={classes.bold}>{t('endpoints')}</dt>
               {Object.keys(node.endpoints).map((key, i) => (
@@ -111,7 +121,7 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          {node.keys && (
+          {node?.keys && (
             <>
               <dt className={classes.bold}>{t('keys')}</dt>
               {Object.keys(node.keys).map((key, i) => (
