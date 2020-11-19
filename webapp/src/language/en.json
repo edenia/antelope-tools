@@ -145,7 +145,7 @@
   "nodeCardComponent": {
     "features": "Features",
     "endpoints": "Endpoints",
-    "emptyNode": "Empty info for nodos"
+    "emptyNode": "Empty info for nodes"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Synced",
