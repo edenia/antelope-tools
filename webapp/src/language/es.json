@@ -18,9 +18,9 @@
     "keys": "Llaves"
   },
   "routes": {
-    "/dashboard>sidebar": "Panel",
-    "/dashboard>title": "EOSIO Panel",
-    "/dashboard>heading": "Bienvenido",
+    "/>sidebar": "Panel",
+    "/>title": "EOSIO Panel",
+    "/>heading": "Bienvenido",
     "/network-info>sidebar": "Información de la red",
     "/network-info>title": "Información de la red - Panel",
     "/network-info>heading": "Información de la red",

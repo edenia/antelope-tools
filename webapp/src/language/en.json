@@ -18,9 +18,9 @@
     "keys": "Keys"
   },
   "routes": {
-    "/dashboard>sidebar": "Dashboard",
-    "/dashboard>title": "EOSIO Dashboard",
-    "/dashboard>heading": "Welcome",
+    "/>sidebar": "Dashboard",
+    "/>title": "EOSIO Dashboard",
+    "/>heading": "Welcome",
     "/network-info>sidebar": "Network Info",
     "/network-info>title": "Network Info - Dashboard",
     "/network-info>heading": "Network Info",
