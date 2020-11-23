@@ -121,6 +121,25 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
+          {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
+            <dt className={classes.bold}>{t('endpoints')}</dt>
+          )}
+          {node?.p2p_endpoint && (
+            <dd>
+              <span className={classes.bold}>P2P</span>: {node.p2p_endpoint}
+            </dd>
+          )}
+          {node?.api_endpoint && (
+            <dd>
+              <span className={classes.bold}>API</span>: {node.api_endpoint}
+            </dd>
+          )}
+          {node?.ssl_endpoint && (
+            <dd>
+              <span className={classes.bold}>SSL</span>: {node.ssl_endpoint}
+            </dd>
+          )}
+
           {node?.keys && (
             <>
               <dt className={classes.bold}>{t('keys')}</dt>
