@@ -1,5 +1,4 @@
 import React, { lazy } from 'react'
-import { Redirect } from 'react-router-dom'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import LiveHelpIcon from '@material-ui/icons/LiveHelp'
 import StorageIcon from '@material-ui/icons/Storage'
@@ -29,15 +28,10 @@ const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 
 const defaultRoutes = [
   {
-    component: () => <Redirect to="/dashboard" />,
-    path: '/',
-    exact: true
-  },
-  {
     name: 'home',
     icon: <DashboardIcon />,
     component: Home,
-    path: '/dashboard',
+    path: '/',
     exact: true
   },
   {
@@ -98,15 +92,10 @@ const defaultRoutes = [
 ]
 const lacchainRoutes = [
   {
-    component: () => <Redirect to="/dashboard" />,
-    path: '/',
-    exact: true
-  },
-  {
     name: 'home',
     icon: <DashboardIcon />,
     component: Home,
-    path: '/dashboard',
+    path: '/',
     exact: true
   },
   {
