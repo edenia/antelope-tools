@@ -44,6 +44,61 @@ const NodeCard = ({ producer, node }) => {
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
+  const Endpoints = () => {
+    if (node?.endpoints) {
+      return (
+        <>
+          <dt className={classes.bold}>{t('endpoints')}</dt>
+          {Object.keys(node.endpoints).map((key, i) => (
+            <dd key={i}>
+              <span className={classes.bold}>{key}</span>: {node.endpoints[key]}
+            </dd>
+          ))}
+        </>
+      )
+    }
+
+    return (
+      <>
+        {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
+          <dt className={classes.bold}>{t('endpoints')}</dt>
+        )}
+        {node?.p2p_endpoint && (
+          <dd>
+            <span className={classes.bold}>P2P</span>: {node.p2p_endpoint}
+          </dd>
+        )}
+        {node?.api_endpoint && (
+          <dd>
+            <span className={classes.bold}>API</span>: {node.api_endpoint}
+          </dd>
+        )}
+        {node?.ssl_endpoint && (
+          <dd>
+            <span className={classes.bold}>SSL</span>: {node.ssl_endpoint}
+          </dd>
+        )}
+      </>
+    )
+  }
+  const Keys = () => {
+    if (!node?.keys) {
+      return <></>
+    }
+
+    return (
+      <>
+        <dt className={classes.bold}>{t('keys')}</dt>
+        {Object.keys(node.keys).map((key, i) => (
+          <dd key={i}>
+            <span className={classes.bold}>{key}</span>:{' '}
+            <span className={classes.breakLine}>{node.keys[key]}</span>
+          </dd>
+        ))}
+      </>
+    )
+  }
+
   useEffect(() => {
     setProducerOrg(producer.bp_json?.org || {})
   }, [producer])
@@ -109,48 +164,8 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          {node?.endpoints && (
-            <>
-              <dt className={classes.bold}>{t('endpoints')}</dt>
-              {Object.keys(node.endpoints).map((key, i) => (
-                <dd key={i}>
-                  <span className={classes.bold}>{key}</span>:{' '}
-                  {node.endpoints[key]}
-                </dd>
-              ))}
-            </>
-          )}
-
-          {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
-            <dt className={classes.bold}>{t('endpoints')}</dt>
-          )}
-          {node?.p2p_endpoint && (
-            <dd>
-              <span className={classes.bold}>P2P</span>: {node.p2p_endpoint}
-            </dd>
-          )}
-          {node?.api_endpoint && (
-            <dd>
-              <span className={classes.bold}>API</span>: {node.api_endpoint}
-            </dd>
-          )}
-          {node?.ssl_endpoint && (
-            <dd>
-              <span className={classes.bold}>SSL</span>: {node.ssl_endpoint}
-            </dd>
-          )}
-
-          {node?.keys && (
-            <>
-              <dt className={classes.bold}>{t('keys')}</dt>
-              {Object.keys(node.keys).map((key, i) => (
-                <dd key={i}>
-                  <span className={classes.bold}>{key}</span>:{' '}
-                  <span className={classes.breakLine}>{node.keys[key]}</span>
-                </dd>
-              ))}
-            </>
-          )}
+          <Endpoints />
+          <Keys />
         </dl>
       </CardContent>
       <CardActions disableSpacing />
