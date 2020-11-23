@@ -48,7 +48,7 @@ const Network = () => {
   )
 
   useEffect(() => {
-    dispatch.eos.startTrackingInfo({ interval: 0.5 })
+    dispatch.eos.startTrackingInfo({ interval: 0 })
   }, [dispatch])
 
   useEffect(() => {
