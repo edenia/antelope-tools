@@ -1,4 +1,4 @@
-const { producerService } = require('../services')
+const { producerService, settingService } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil } = require('../utils')
 
@@ -46,6 +46,11 @@ const start = async () => {
     'SYNC PRODUCERS',
     producerService.syncProducers,
     workersConfig.syncProducersInterval
+  )
+  run(
+    'SYNC EXCHANGE RATE',
+    settingService.syncEOSPrice,
+    workersConfig.syncExchangeRate
   )
   run(
     'SYNC PRODUCER INFO',
