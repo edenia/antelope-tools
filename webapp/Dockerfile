@@ -1,5 +1,6 @@
 FROM node:12.16.2-alpine  as build-stage
 
+ARG port
 ARG react_app_title
 ARG react_app_default_producer_logo
 ARG react_app_eos_rate_link
@@ -22,6 +23,7 @@ ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
 ENV NODE_ENV production
 ENV NODE_PATH ./src
+ENV PORT $port
 ENV REACT_APP_TITLE $react_app_title
 ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
 ENV REACT_APP_EOS_RATE_LINK $react_app_eos_rate_link
