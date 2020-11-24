@@ -242,10 +242,31 @@ const syncBPJsonOffChain = async () => {
           return
         }
 
+        const nodes = await Promise.all(
+          (data?.nodes || []).map(async node => {
+            const api = node?.ssl_endpoint || node?.api_endpoint
+
+            if (!api) {
+              return node
+            }
+
+            const nodeInfo = await getNodeInfo(api)
+            console.log(producer.owner, nodeInfo.server_version_string)
+
+            return {
+              ...node,
+              server_version_string: nodeInfo.server_version_string
+            }
+          })
+        )
+
         await update(
           { owner: { _eq: producer.owner } },
           {
-            bp_json: data
+            bp_json: {
+              ...data,
+              nodes
+            }
           }
         )
       } catch (error) {}
@@ -334,25 +355,21 @@ const syncBPJsonForLacchain = async () => {
           .map(async node => {
             const nodeType = nodeTypes[node.type] || 'N/A'
             const nodeInfo = getJson(node.info)
-            const keys = Object.keys(nodeInfo)
             let newNodeInfo = {}
 
-            for (const key of keys) {
+            for (const key of Object.keys(nodeInfo)) {
               newNodeInfo = {
                 ...newNodeInfo,
                 [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
               }
             }
 
-            if (
-              newNodeInfo.endpoints &&
-              (newNodeInfo.endpoints[`${nodeType}_ssl`] ||
-                newNodeInfo.endpoints[`${nodeType}_api`])
-            ) {
-              const nodeInfo = await getNodeInfo(
-                newNodeInfo.endpoints[`${nodeType}_ssl`] ||
-                  newNodeInfo.endpoints[`${nodeType}_api`]
-              )
+            const api =
+              newNodeInfo.endpoints?.[`${nodeType}_ssl`] ||
+              newNodeInfo.endpoints?.[`${nodeType}_api`]
+
+            if (api) {
+              const nodeInfo = await getNodeInfo(api)
               newNodeInfo = {
                 ...newNodeInfo,
                 server_version_string: nodeInfo.server_version_string
