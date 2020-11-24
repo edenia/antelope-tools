@@ -33,7 +33,6 @@ const Nodes = () => {
   const classes = useStyles()
 
   const handleOnFiltersChange = (newFilters) => {
-    console.log('handleOnFiltersChange')
     if (!newFilters.owner && filters.owner) {
       setPagination((prev) => ({ ...prev, page: 1, where: null }))
     }
@@ -57,7 +56,6 @@ const Nodes = () => {
   }
 
   useEffect(() => {
-    console.log('load producers')
     loadProducers({
       variables: {
         where: pagination.where,
@@ -77,7 +75,6 @@ const Nodes = () => {
       ...prev,
       pages: Math.ceil(info.producers?.count / pagination.limit)
     }))
-    console.log('udpate pages')
   }, [info, pagination.limit])
 
   useEffect(() => {
@@ -94,7 +91,6 @@ const Nodes = () => {
     }))
 
     setFilters((prev) => ({ ...prev, owner: params.owner }))
-    console.log('handle params changes')
   }, [location.search])
 
   useEffect(() => {
@@ -120,8 +116,6 @@ const Nodes = () => {
     }
 
     setItems(items)
-    console.log(items)
-    console.log('handle local chanhges')
   }, [filters, producers])
 
   return (
