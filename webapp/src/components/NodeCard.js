@@ -98,6 +98,19 @@ const NodeCard = ({ producer, node }) => {
       </>
     )
   }
+  const Features = () => {
+    if (!node?.features) {
+      return <></>
+    }
+    return (
+      <>
+        <dt className={classes.bold}>{t('features')}</dt>
+        {node.features.map((feature, i) => (
+          <dd key={i}>{feature}</dd>
+        ))}
+      </>
+    )
+  }
 
   useEffect(() => {
     setProducerOrg(producer.bp_json?.org || {})
@@ -155,15 +168,14 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          {node?.features && (
+          {node?.server_version_string && (
             <>
-              <dt className={classes.bold}>{t('features')}</dt>
-              {node.features.map((feature, i) => (
-                <dd key={i}>{feature}</dd>
-              ))}
+              <dt className={classes.bold}>{t('nodeVersion')}</dt>
+              <dd>{node?.server_version_string}</dd>
             </>
           )}
 
+          <Features />
           <Endpoints />
           <Keys />
         </dl>

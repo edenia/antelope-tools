@@ -288,6 +288,24 @@ const syncBPJsonOnChain = async () => {
   )
 }
 
+const getNodeInfo = async api => {
+  try {
+    const response = await axiosUtil.instance.get(`${api}/v1/chain/get_info`)
+
+    return response.data
+  } catch (error) {}
+
+  return {}
+}
+
+const getJson = string => {
+  try {
+    const json = JSON.parse(string)
+    return json
+  } catch (error) {}
+  return {}
+}
+
 const syncBPJsonForLacchain = async () => {
   const nodeTypes = {
     1: 'validator',
@@ -307,47 +325,58 @@ const syncBPJsonForLacchain = async () => {
     table: eosConfig.lacchain.nodeTable,
     json: true
   })
-  const producers = entities.map(entity => {
-    let bpJson = {}
-    try {
-      bpJson = JSON.parse(entity.info)
-    } catch (error) {}
-    const entityNodes = nodes
-      .filter(node => node.entity === entity.name)
-      .map(node => {
-        const nodeType = nodeTypes[node.type] || 'N/A'
-        let nodeInfo = {}
+  const producers = await Promise.all(
+    entities.map(async entity => {
+      const bpJson = getJson(entity.info)
+      const entityNodes = await Promise.all(
+        nodes
+          .filter(node => node.entity === entity.name)
+          .map(async node => {
+            const nodeType = nodeTypes[node.type] || 'N/A'
+            const nodeInfo = getJson(node.info)
+            const keys = Object.keys(nodeInfo)
+            let newNodeInfo = {}
 
-        try {
-          nodeInfo = JSON.parse(node.info)
-        } catch (error) {}
+            for (const key of keys) {
+              newNodeInfo = {
+                ...newNodeInfo,
+                [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
+              }
+            }
 
-        const keys = Object.keys(nodeInfo)
-        let newNodeInfo = {}
+            if (
+              newNodeInfo.endpoints &&
+              (newNodeInfo.endpoints[`${nodeType}_ssl`] ||
+                newNodeInfo.endpoints[`${nodeType}_api`])
+            ) {
+              const nodeInfo = await getNodeInfo(
+                newNodeInfo.endpoints[`${nodeType}_ssl`] ||
+                  newNodeInfo.endpoints[`${nodeType}_api`]
+              )
+              newNodeInfo = {
+                ...newNodeInfo,
+                server_version_string: nodeInfo.server_version_string
+              }
+            }
 
-        for (const key of keys) {
-          newNodeInfo = {
-            ...newNodeInfo,
-            [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
-          }
+            return {
+              ...newNodeInfo,
+              node_name: node.name,
+              node_type: nodeType
+            }
+          })
+      )
+
+      return {
+        owner: entity.name,
+        bp_json: {
+          org: bpJson,
+          nodes: entityNodes,
+          type: entity.type
         }
-
-        return {
-          ...newNodeInfo,
-          node_name: node.name,
-          node_type: nodeType
-        }
-      })
-
-    return {
-      owner: entity.name,
-      bp_json: {
-        org: bpJson,
-        nodes: entityNodes,
-        type: entity.type
       }
-    }
-  })
+    })
+  )
 
   await hasuraUtil.request(UPSERT, { producers })
   await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
@@ -373,6 +402,7 @@ const syncBPJsonForDefaultNetworks = async () => {
     await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
       owners: producers.map(producer => producer.owner)
     })
+
     if (eosConfig.bpJsonOnChain) {
       await syncBPJsonOnChain()
     } else {
@@ -507,6 +537,11 @@ const saveMissedBlocksFor = async (producerName, missedBlocks) => {
     owner: { _eq: producerName }
   })
   const producer = producers.length ? producers[0] : null
+
+  if (!producer) {
+    return
+  }
+
   await hasuraUtil.request(INSERT_MISSED_BLOCK, {
     producer: producer.id,
     value: missedBlocks

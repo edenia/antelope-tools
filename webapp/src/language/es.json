@@ -144,6 +144,7 @@
   "nodeCardComponent": {
     "features": "Características",
     "endpoints": "Endpoints",
+    "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos"
   },
   "producerHealthIndicatorsComponent": {
