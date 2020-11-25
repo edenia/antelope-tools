@@ -7,7 +7,9 @@ module.exports = {
   eosmechanics: {
     account: process.env.HAPI_EOS_MECHANICS_ACCOUNT,
     password: process.env.HAPI_EOS_MECHANICS_PASSWORD,
-    includeTransaction: process.env.HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION
+    includeTransaction: JSON.parse(
+      process.env.HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION
+    )
   },
   walletUrl: process.env.HAPI_EOS_WALLET_URL,
   exchangeRateApi: process.env.HAPI_EOS_EXCHANGE_RATE_API,

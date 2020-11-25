@@ -21,12 +21,9 @@ let _includeDefaultTransaction = null
 
 switch (networkName) {
   case 'lacchain':
-    _includeDefaultTransaction = {
-      account: 'writer',
-      name: 'run',
-      authorization: [{ actor: 'latamlink', permission: 'writer' }],
-      data: {}
-    }
+    _includeDefaultTransaction = JSON.parse(
+      process.env.REACT_APP_EOS_INCLUDE_TRANSACTION
+    )
     _nodeTypes = [
       {
         name: 'validator',
