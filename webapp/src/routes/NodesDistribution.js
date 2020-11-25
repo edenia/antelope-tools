@@ -2,7 +2,7 @@
 import React, { useEffect, useState, lazy } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
 import {
@@ -20,6 +20,7 @@ import { NODES_QUERY } from '../gql'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
 
+const Pagination = lazy(() => import('@material-ui/lab/Pagination'))
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
 
 const defaultScale = 170
@@ -39,24 +40,56 @@ const useStyles = makeStyles((theme) => ({
   geographyZoomOut: {
     cursor: 'zoom-out'
   },
+  pagination: {
+    padding: theme.spacing(3),
+    display: 'flex',
+    justifyContent: 'center'
+  },
   marker: {
     cursor: 'pointer'
   }
 }))
 
 const Nodes = () => {
-  const { data: { loading, producer: producers } = {} } = useQuery(NODES_QUERY)
+  const [
+    loadProducers,
+    { loading = true, data: { producers, info } = {} }
+  ] = useLazyQuery(NODES_QUERY)
   const [nodes, setNodes] = useState([])
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
-  const [filters, setFilters] = useState({ producer: 'all', nodeType: 'all' })
+  const [filters, setFilters] = useState({ nodeType: 'all' })
   const [allNodes, setAllNodes] = useState([])
+  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 21 })
   const classes = useStyles()
   const [mapState, setMapState] = useState({
     scale: defaultScale,
     center: [0, 0],
     zoom: 1
   })
+
+  const handleOnFiltersChange = (newFilters) => {
+    if (!newFilters.owner && filters.owner) {
+      setPagination((prev) => ({ ...prev, page: 1, where: null }))
+    }
+
+    if (newFilters.owner) {
+      setPagination((prev) => ({
+        ...prev,
+        page: 1,
+        where: { owner: { _like: `%${newFilters.owner}%` } }
+      }))
+    }
+
+    setFilters(newFilters)
+  }
+
+  const handleOnPageChange = (_, page) => {
+    setPagination((prev) => ({
+      ...prev,
+      page
+    }))
+  }
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
@@ -89,6 +122,28 @@ const Nodes = () => {
       scale: defaultScale * maxZoom
     }))
   }
+
+  useEffect(() => {
+    loadProducers({
+      variables: {
+        where: pagination.where,
+        offset: (pagination.page - 1) * pagination.limit,
+        limit: pagination.limit
+      }
+    })
+    // eslint-disable-next-line
+  }, [pagination.where, pagination.page, pagination.limit])
+
+  useEffect(() => {
+    if (!info) {
+      return
+    }
+
+    setPagination((prev) => ({
+      ...prev,
+      pages: Math.ceil(info.producers?.count / pagination.limit)
+    }))
+  }, [info, pagination.limit])
 
   useEffect(() => {
     if (!producers?.length) {
@@ -126,12 +181,6 @@ const Nodes = () => {
       )
     }
 
-    if (filters.producer !== 'all') {
-      items = items.filter(
-        (current) => current.producer.owner === filters.producer
-      )
-    }
-
     setNodes(items)
   }, [allNodes, filters])
 
@@ -140,7 +189,7 @@ const Nodes = () => {
       <NodeSearch
         producers={producers}
         filters={filters}
-        onChange={setFilters}
+        onChange={handleOnFiltersChange}
       />
       {loading && <LinearProgress />}
       {!loading && (
@@ -204,6 +253,16 @@ const Nodes = () => {
       >
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
+      {!loading && pagination.pages > 1 && (
+        <Pagination
+          className={classes.pagination}
+          count={pagination.pages}
+          page={pagination.page}
+          onChange={handleOnPageChange}
+          variant="outlined"
+          shape="rounded"
+        />
+      )}
     </Box>
   )
 }
