@@ -1,5 +1,4 @@
 import EosApi from 'eosjs-api'
-import axios from 'axios'
 
 import { eosConfig } from '../config'
 
@@ -20,8 +19,7 @@ export default {
     info: {},
     tps: [],
     tpb: [],
-    tpsWaitingBlock: null,
-    rate: null
+    tpsWaitingBlock: null
   },
   reducers: {
     updateInfo(state, info) {
@@ -74,12 +72,6 @@ export default {
         tpsWaitingBlock: null
       }
     },
-    updateRate(state, rate) {
-      return {
-        ...state,
-        rate
-      }
-    },
     updateSchedule(state, schedule) {
       return {
         ...state,
@@ -94,9 +86,18 @@ export default {
       }
 
       const handle = async () => {
-        const info = await eos.getInfo({})
-        dispatch.eos.updateInfo(info)
-        dispatch.eos.getBlock(info.head_block_num)
+        try {
+          const info = await eos.getInfo({})
+          dispatch.eos.updateInfo(info)
+          dispatch.eos.getBlock(info.head_block_num)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      if (interval === 0) {
+        await handle()
+        return
       }
 
       await handle()
@@ -119,24 +120,6 @@ export default {
         })
       } catch (error) {
         console.log(error)
-      }
-    },
-    async getRate() {
-      if (eosConfig.networkName === 'lacchain') {
-        return
-      }
-
-      try {
-        const { data } = await axios.get(eosConfig.exchangeRateApi)
-
-        if (!data || !data.success) {
-          return
-        }
-
-        dispatch.eos.updateRate(data.rates.EOS)
-      } catch (error) {
-        console.error(error)
-        dispatch.eos.updateRate(eosConfig.exchangeRate)
       }
     },
     async startTrackingProducerSchedule({ interval = 120 } = {}) {

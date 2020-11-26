@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 const ProducerHealthIndicators = ({ producer }) => {
   const classes = useStyles()
-  const { t } = useTranslation('producerHealthIndicators')
+  const { t } = useTranslation('producerHealthIndicatorsComponent')
 
   return (
     <div>

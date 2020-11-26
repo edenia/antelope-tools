@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/react-hooks'
-import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -11,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import Skeleton from '@material-ui/lab/Skeleton'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import Box from '@material-ui/core/Box'
 import {
   ComposableMap,
   Geographies,
@@ -19,12 +19,10 @@ import {
 } from 'react-simple-maps'
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
-import Box from '@material-ui/core/Box'
 
 import UnknowFlagIcon from '../components/UnknowFlagIcon'
 import { countries, formatWithThousandSeparator } from '../utils'
-import { PRODUCERS_QUERY } from '../gql'
-import PageTitle from '../components/PageTitle'
+import { PRODUCERS_QUERY, SETTING_QUERY } from '../gql'
 import CountryFlag from '../components/CountryFlag'
 import Tooltip from '../components/Tooltip'
 
@@ -82,16 +80,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Rewards = () => {
-  const dispatch = useDispatch()
+const RewardsDistribution = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const [summary, setSummary] = useState(null)
   const { loading = true, data: { producers } = {} } = useQuery(PRODUCERS_QUERY)
+  const { data: { setting } = {} } = useQuery(SETTING_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
-  const { t } = useTranslation('dashboardRewards')
-  const rate = useSelector((state) => state.eos.rate)
+  const { t } = useTranslation('rewardsDistributionRoute')
 
   const handlePopoverOpen = (node) => (event) => {
     if (!nodes.length > 0) {
@@ -113,10 +110,6 @@ const Rewards = () => {
       .interpolate(interpolateHcl),
     [summary]
   )
-
-  useEffect(() => {
-    dispatch.eos.getRate()
-  }, [dispatch])
 
   useEffect(() => {
     let stats = {}
@@ -207,7 +200,6 @@ const Rewards = () => {
 
   return (
     <Box>
-      <PageTitle title={t('htmlTitle')} />
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -288,10 +280,13 @@ const Rewards = () => {
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes.length > 0 && (
+                {nodes.length > 0 && setting?.eos_price && (
                   <span>
                     $
-                    {formatWithThousandSeparator(summary.daylyRewars * rate, 0)}{' '}
+                    {formatWithThousandSeparator(
+                      summary.daylyRewars * setting?.eos_price,
+                      0
+                    )}{' '}
                     USD
                   </span>
                 )}
@@ -321,7 +316,7 @@ const Rewards = () => {
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes.length > 0 && (
+                {nodes.length > 0 && setting?.eos_price && (
                   <>
                     {formatWithThousandSeparator(
                       summary.topCountryByRewards.rewards,
@@ -329,7 +324,7 @@ const Rewards = () => {
                     )}{' '}
                     EOS / $
                     {formatWithThousandSeparator(
-                      summary.topCountryByRewards.rewards * rate,
+                      summary.topCountryByRewards.rewards * setting?.eos_price,
                       0
                     )}{' '}
                     USD
@@ -383,12 +378,12 @@ const Rewards = () => {
                 </span>
                 <span className={classes.highestRewards} />
               </Typography>
-              {rate && (
+              {setting?.eos_price && (
                 <Typography variant="h6" className={classes.rewardsColorSchema}>
                   <span className={classes.itemLabel}>
                     {t('exchangeRate')}:{' '}
                   </span>{' '}
-                  ${formatWithThousandSeparator(rate, 2)}
+                  ${formatWithThousandSeparator(setting.eos_price, 2)}
                 </Typography>
               )}
             </CardContent>
@@ -435,6 +430,6 @@ const Rewards = () => {
   )
 }
 
-Rewards.propTypes = {}
+RewardsDistribution.propTypes = {}
 
-export default Rewards
+export default RewardsDistribution

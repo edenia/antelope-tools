@@ -2,20 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: monitor-hasura
+    app: monitor-hasura
   name: monitor-hasura
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: monitor-hasura
+      app: monitor-hasura
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.network: "true"
-        io.kompose.service: monitor-hasura
+        app: monitor-hasura
     spec:
       containers:
       - args:

@@ -1,54 +1,74 @@
 {
-  "user": {
-    "login": "Ingresar"
+  "common": {
+    "all": "Todos",
+    "account": "Cuenta",
+    "name": "Nombre",
+    "rewards": "Recompensas",
+    "votes": "Votos",
+    "block": "Bloque",
+    "transactions": "Transacciones",
+    "producerName": "Nombre del productor",
+    "nodeName": "Nombre del nodo",
+    "nodeType": "Tipo de nodo",
+    "description": "Descripción",
+    "color": "Color",
+    "producers": "Productores",
+    "producer": "Productor",
+    "login": "Ingresar",
+    "keys": "Llaves"
   },
-  "updateNodeInfo": {
-    "loadText": "Cargando información del nodo . . .",
-    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
-    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  "routes": {
+    "/>sidebar": "Panel",
+    "/>title": "EOSIO Panel",
+    "/>heading": "Bienvenido",
+    "/network-info>sidebar": "Información de la red",
+    "/network-info>title": "Información de la red - Panel",
+    "/network-info>heading": "Información de la red",
+    "/block-producers>sidebar": "Productores de Bloques",
+    "/block-producers>title": "Productores de Bloques - Panel",
+    "/block-producers>heading": "Productores de Bloques",
+    "/rewards-distribution>sidebar": "Distribución de recompensas",
+    "/rewards-distribution>title": "Distribución de recompensas - Panel",
+    "/rewards-distribution>heading": "Distribución de recompensas",
+    "/nodes>sidebar": "Nodos",
+    "/nodes>title": "Nodos - Panel",
+    "/nodes>heading": "Nodos",
+    "/nodes-distribution>sidebar": "Distribución de nodos",
+    "/nodes-distribution>title": "Distribución de nodos - Panel",
+    "/nodes-distribution>heading": "Distribución de nodos",
+    "/accounts>sidebar": "Cuentas",
+    "/accounts>title": "Cuentas - Panel",
+    "/accounts>heading": "Cuentas",
+    "/bpjson>sidebar": "BP JSON",
+    "/bpjson>title": "BP JSON - Panel",
+    "/bpjson>heading": "BP JSON",
+    "/ricardian-contract>sidebar": "Contrato ricardiano",
+    "/ricardian-contract>title": "Contrato ricardiano - Panel",
+    "/ricardian-contract>heading": "",
+    "/about>sidebar": "Acerca de",
+    "/about>title": "Acerca de - Panel",
+    "/about>heading": "Acerca de",
+    "/help>sidebar": "Ayuda",
+    "/help>title": "Ayuda - Panel",
+    "/help>heading": "Ayuda"
   },
-  "sidebar": {
-    "dashboard": "Panel",
-    "networkInfo": "Información de la red",
-    "blockProducer": "Productores de Bloques",
-    "nodes": "Nodos",
-    "nodesDistribution": "Distribución de nodos",
-    "rewardDistribution": "Distribución de recompensas",
-    "nodeInfo": "Actualizar información del nodo",
-    "about": "Acerca de",
-    "ricardianContract": "Contrato ricardiano",
-    "help": "Ayuda",
-    "smartContract": "Contratos Inteligentes",
-    "lacchainBoard": "Lacchain Panel",
-    "nodesNetwork": "Topología de red"
-  },
-  "dashboardHome": {
+  "homeRoute": {
     "currentProducer": "Productor actual",
     "headBlock": "Ultimo Bloque",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
-    "transPerBlock": "Transacciones por Bloque",
-    "htmlTitle": "Home - Dashboard"
+    "transPerBlock": "Transacciones por Bloque"
   },
-  "dashboardProducer": {
-    "title": "Productores de Bloques",
-    "htmlTitle": "Productores de Bloques - Dashboard",
-    "producerName": "Nombre del productor"
+  "networkInfoRoute": {
+    "chainLimits": "Límites de la cadena",
+    "cpuLimitPerBlock": "Límite de CPU por bloque",
+    "netLimitPerBlock": "Límite de NET por bloque",
+    "cpuBenchmarks": "CPU Benchmarks",
+    "missedBlocks": "Bloques perdidos"
   },
-  "producerChartToolTip": {
-    "name": "Nombre",
-    "rewards": "Recompensas",
-    "votes": "Votos"
-  },
-  "transactionsChartToolTip": {
-    "block": "Bloque",
-    "transactions": "Transacciones"
-  },
-  "dashboardNodes": {
-    "htmlTitle": "Distribución de nodos - Dashboard"
-  },
-  "dashboardRewards": {
+  "blockProducersRoute": {},
+  "rewardsDistributionRoute": {
     "dailyRewards": "Recompensas Diarias Totales",
     "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
@@ -58,12 +78,22 @@
     "highestRewards": "Recompensas Más Altas",
     "exchangeRate": "Tipo De Cambio",
     "country": "País",
-    "rewards": "Recompensas",
-    "producers": "Productores",
-    "htmlTitle": "Distribución de recompensas - Dashboard",
     "rewardsPercentage": "Porcentaje de recompensas"
   },
-  "about": {
+  "nodesRoute": {},
+  "nodesDistributionRoute": {},
+  "accountsRoute": {
+    "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
+    "unknownError": "Error desconocido al procesar la acción",
+    "accountNotFound": "Cuenta no encontrada"
+  },
+  "bpJsonRoute": {
+    "loadText": "Cargando información del nodo . . .",
+    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
+    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  },
+  "ricardianContractRoute": {},
+  "aboutRoute": {
     "title": "EOSIO Tablero",
     "subtitle1": "What is the EOSIO Dashboard",
     "body1": {
@@ -78,14 +108,14 @@
       "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
     }
   },
-  "help": {
+  "helpRoute": {
     "title": "Thank you for using EOS Network Dashboard!",
     "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
     "websiteEOSCR": "Website EOS Costa Rica"
   },
-  "producerSummary": {
+  "producerCardComponent": {
     "rank": "Rango",
     "account": "Cuenta",
     "website": "Sitio Web",
@@ -111,18 +141,13 @@
     "nodes": "Nodos",
     "email": "Correo electrónico"
   },
-  "nodeSummary": {
-    "nodeName": "Nombre del nodo",
-    "nodeType": "Tipo de nodo",
+  "nodeCardComponent": {
     "features": "Características",
     "endpoints": "Endpoints",
-    "keys": "Llaves",
-    "description": "Descripción",
-    "color": "Color",
-    "producer": "Productor",
-    "all": "Todos"
+    "nodeVersion": "Versión",
+    "emptyNode": "Sin información para nodos"
   },
-  "producerHealthIndicators": {
+  "producerHealthIndicatorsComponent": {
     "synced": "Sincronizado",
     "notSyncing": "Sin sincronizar",
     "apiResponding": "API Respondiendo",
@@ -130,30 +155,14 @@
     "bpJsonFound": "BP JSON encontrado",
     "noBpJsonFound": "No se encontro un BP JSON"
   },
-  "dashboardNetwork": {
-    "htmlTitle": "Información de la red - Dashboard",
-    "title": "Información",
-    "chainLimits": "Límites de la cadena",
-    "cpuLimitPerBlock": "Límite de CPU por bloque",
-    "netLimitPerBlock": "Límite de NET por bloque"
-  },
-  "smartContract": {
-    "htmlTitle": "Información de la cuenta - Dashboard",
-    "title": "Información de la cuenta",
-    "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
-    "unknownError": "Error desconocido al procesar la acción",
-    "accountNotFound": "Cuenta no encontrada",
-    "account": "Cuenta"
-  },
-  "accountInfo": {
+  "accountInfoComponent": {
     "resources": "Recursos",
     "keys": "Claves",
     "contractActions": "Acciones del Contrato",
     "contractTables": "Tablas del Contrato",
-    "ricardianContract": "Contratos Ricardianos",
-    "account": "Cuenta",
-    "action": "Acción",
-    "executeTransaction": "Ejecutar Transacción",
+    "ricardianContract": "Contratos Ricardianos"
+  },
+  "contractTablesComponent": {
     "table": "Tabla",
     "scope": "Alcance",
     "lowerBound": "Límite inferior",
@@ -161,5 +170,11 @@
     "limit": "Límite",
     "getData": "Obtener Datos",
     "emptyTable": "Table vacía"
+  },
+  "contractActionsComponent": {
+    "action": "Acción"
+  },
+  "contractActionFormComponent": {
+    "executeTransaction": "Ejecutar Transacción"
   }
 }

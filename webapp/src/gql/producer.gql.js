@@ -45,8 +45,18 @@ export const PRODUCERS_QUERY = gql`
 `
 
 export const NODES_QUERY = gql`
-  query {
-    producer(order_by: { total_votes_percent: desc, owner: asc }, limit: 21) {
+  query($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc, owner: asc }
+      offset: $offset
+      limit: $limit
+    ) {
       id
       owner
       bp_json

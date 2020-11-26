@@ -1,168 +1,26 @@
 {
-  "user": {
-    "login": "Ingresar"
+  "routes": {
+    "/entities>sidebar": "Entidades",
+    "/entities>title": "Entities - Panel",
+    "/entities>heading": "Entities",
+    "/lacchain/network>sidebar": "LACChain Topologia de rede",
+    "/lacchain/network>title": "LACChain Topologia de rede - Panel",
+    "/lacchain/network>heading": "LACChain Topologia de rede",
+    "/lacchain/management>sidebar": "LACChain administración",
+    "/lacchain/management>title": "LACChain administración - Panel",
+    "/lacchain/management>heading": "LACChain administración"
   },
-  "updateNodeInfo": {
-    "loadText": "Cargando información del nodo . . .",
-    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
-    "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
+  "common": {
+    "producerName": "Nombre de la entidad",
+    "producers": "Entidades",
+    "producer": "Entidad"
   },
-  "sidebar": {
-    "dashboard": "Panel",
-    "networkInfo": "Información de la red",
-    "blockProducer": "Entidades",
-    "nodes": "Nodos",
-    "nodesDistribution": "Distribución de nodos",
-    "rewardDistribution": "Distribución de recompensas",
-    "nodeInfo": "Actualizar información del nodo",
-    "about": "Acerca de",
-    "ricardianContract": "Contrato ricardiano",
-    "help": "Ayuda",
-    "smartContract": "Contratos Inteligentes"
-  },
-  "dashboardHome": {
-    "currentProducer": "Validador actual",
-    "headBlock": "Ultimo Bloque",
-    "lastBlock": "Último Bloque Irreversible",
-    "bpSchedule": "Programa de Producción de Bloques",
-    "transPerSecond": "Transacciones por Segundo",
-    "transPerBlock": "Transacciones por Bloque",
-    "htmlTitle": "LAC Chain EOSIO Dashboard"
-  },
-  "dashboardProducer": {
-    "title": "Validadores",
-    "htmlTitle": "Validadores - Dashboard",
-    "producerName": "Nombre de la entidad"
-  },
-  "producerChartToolTip": {
-    "name": "Nombre",
-    "rewards": "Recompensas",
-    "votes": "Votos"
-  },
-  "transactionsChartToolTip": {
-    "block": "Bloque",
-    "transactions": "Transacciones"
-  },
-  "dashboardNodes": {
-    "htmlTitle": "Distribución de nodos - Dashboard"
-  },
-  "dashboardRewards": {
-    "dailyRewards": "Recompensas Diarias Totales",
-    "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
-    "notAvailable": "No Disponible",
-    "paidProducers": "Validadores No Ubicados",
-    "clickToViewBPs": "Haga clic para ver los PB no conformes",
-    "lowestRewards": "Recompensas Más Bajas",
-    "highestRewards": "Recompensas Más Altas",
-    "exchangeRate": "Tipo De Cambio",
-    "country": "País",
-    "rewards": "Recompensas",
-    "producers": "Productores",
-    "htmlTitle": "Distribución de recompensas - Dashboard"
-  },
-  "about": {
-    "title": "EOSIO Tablero",
-    "subtitle1": "What is the EOSIO Dashboard",
-    "body1": {
-      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
-    },
-    "subtitle2": "Why is it important?",
-    "body2": {
-      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
-    },
-    "subtitle3": "Where does the data come from?",
-    "body3": {
-      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
-    }
-  },
-  "help": {
-    "title": "Thank you for using EOS Network Dashboard!",
-    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "GitHub EOS Costa Rica",
-    "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Website EOS Costa Rica"
-  },
-  "producerSummary": {
-    "rank": "Rango",
+  "producerCardComponent": {
     "entityType": "Tipo de entidad",
-    "entityType1": "Asociada",
-    "entityType2": "Entidad no asociada",
-    "account": "Cuenta",
-    "website": "Sitio Web",
-    "votes": "Votos",
-    "rewards": "Recompensas",
-    "country": "País",
-    "eosRate": "EOS RATE",
-    "p2pEndpoints": "(P2P)",
-    "apiEndpoints": "(HTTPS / HTTPS)",
-    "pingFromCostaRica": "Ping desde Costa Rica",
-    "serverVersion": "Versión del servidor",
-    "secondsAgo": "s atras",
-    "lastTimeChecked": "Verificado por última vez",
-    "healthStatus": "Salud del nodo",
-    "cpuUsage": "Benchmark de CPU",
-    "missedBlocks": "Bloques perdidos",
-    "businessContact": "Contacto del negocio",
-    "technicalContact": "Contacto técnico",
-    "social": "Social",
-    "ownershipDisclosure": "Divulgación de propiedad",
-    "chainResources": "Recursos de la cadena",
-    "otherResources": "Otros recursos",
-    "nodes": "Nodos",
-    "email": "Correo electrónico"
+    "entityType1": "Partner",
+    "entityType2": "Non-Partner"
   },
-  "nodeSummary": {
-    "nodeName": "Nombre del nodo",
-    "nodeType": "Tipo de nodo",
-    "features": "Características",
-    "endpoints": "Endpoints",
-    "keys": "Llaves",
-    "description": "Descripción",
-    "color": "Color",
-    "producer": "Entidad",
-    "all": "Todos"
-  },
-  "producerHealthIndicators": {
-    "synced": "Sincronizado",
-    "notSyncing": "Sin sincronizar",
-    "apiResponding": "API Respondiendo",
-    "apiNotResponding": "API No Respondiendo",
-    "bpJsonFound": "BP JSON encontrado",
-    "noBpJsonFound": "No se encontro un BP JSON"
-  },
-  "dashboardNetwork": {
-    "htmlTitle": "Información de la red - Dashboard",
-    "title": "Información",
-    "chainLimits": "Límites de la cadena",
-    "cpuLimitPerBlock": "Límite de CPU por bloque",
-    "netLimitPerBlock": "Límite de NET por bloque"
-  },
-  "smartContract": {
-    "htmlTitle": "Información de la cuenta - Dashboard",
-    "title": "Información de la cuenta",
-    "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
-    "unknownError": "Error desconocido al procesar la acción",
-    "accountNotFound": "Cuenta no encontrada",
-    "account": "Cuenta"
-  },
-  "accountInfo": {
-    "resources": "Recursos",
-    "keys": "Claves",
-    "contractActions": "Acciones del Contrato",
-    "contractTables": "Tablas del Contrato",
-    "ricardianContract": "Contratos Ricardianos",
-    "account": "Cuenta",
-    "action": "Acción",
-    "executeTransaction": "Ejecutar Transacción",
-    "table": "Tabla",
-    "scope": "Alcance",
-    "lowerBound": "Límite inferior",
-    "upperBound": "Límite superior",
-    "limit": "Límite",
-    "getData": "Obtener Datos",
-    "emptyTable": "Tabla vacía"
-  },
-  "board": {
+  "lacchainManagement": {
     "loginWarning": "Inicie sesión para usar esta herramienta",
     "noneActionWarning": "No hay ninguna opción para su cuenta",
     "setentinfoTitle": "Establecer información de entidad",

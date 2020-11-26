@@ -7,5 +7,6 @@ module.exports = {
   ),
   syncProducerCpuInterval: parseInt(
     process.env.HAPI_SYNC_PRODUCER_CPU_INTERVAL || 6
-  )
+  ),
+  syncExchangeRate: parseInt(process.env.HAPI_SYNC_EXCHANGE_RATE || 86400)
 }

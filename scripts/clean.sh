@@ -8,4 +8,4 @@ fi
 
 kubectl delete deployment wallet monitor-postgres monitor-webapp monitor-hapi monitor-hasura -n "$1"
 kubectl delete svc        wallet monitor-postgres monitor-webapp monitor-hapi monitor-hasura \
-                          monitor-port monitor-port-ssl hasura-port -n "$1"
+                          monitor-port monitor-port-ssl -n "$1"

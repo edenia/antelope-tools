@@ -41,8 +41,76 @@ const useStyles = makeStyles((theme) => ({
 
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
-  const { t } = useTranslation('nodeSummary')
+  const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
+
+  const Endpoints = () => {
+    if (node?.endpoints) {
+      return (
+        <>
+          <dt className={classes.bold}>{t('endpoints')}</dt>
+          {Object.keys(node.endpoints).map((key, i) => (
+            <dd key={i}>
+              <span className={classes.bold}>{key}</span>: {node.endpoints[key]}
+            </dd>
+          ))}
+        </>
+      )
+    }
+
+    return (
+      <>
+        {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
+          <dt className={classes.bold}>{t('endpoints')}</dt>
+        )}
+        {node?.p2p_endpoint && (
+          <dd>
+            <span className={classes.bold}>P2P</span>: {node.p2p_endpoint}
+          </dd>
+        )}
+        {node?.api_endpoint && (
+          <dd>
+            <span className={classes.bold}>API</span>: {node.api_endpoint}
+          </dd>
+        )}
+        {node?.ssl_endpoint && (
+          <dd>
+            <span className={classes.bold}>SSL</span>: {node.ssl_endpoint}
+          </dd>
+        )}
+      </>
+    )
+  }
+  const Keys = () => {
+    if (!node?.keys) {
+      return <></>
+    }
+
+    return (
+      <>
+        <dt className={classes.bold}>{t('keys')}</dt>
+        {Object.keys(node.keys).map((key, i) => (
+          <dd key={i}>
+            <span className={classes.bold}>{key}</span>:{' '}
+            <span className={classes.breakLine}>{node.keys[key]}</span>
+          </dd>
+        ))}
+      </>
+    )
+  }
+  const Features = () => {
+    if (!node?.features) {
+      return <></>
+    }
+    return (
+      <>
+        <dt className={classes.bold}>{t('features')}</dt>
+        {node.features.map((feature, i) => (
+          <dd key={i}>{feature}</dd>
+        ))}
+      </>
+    )
+  }
 
   useEffect(() => {
     setProducerOrg(producer.bp_json?.org || {})
@@ -80,6 +148,12 @@ const NodeCard = ({ producer, node }) => {
       />
       <CardContent className={classes.content}>
         <dl className={classes.dl}>
+          {!node && (
+            <>
+              <dt className={classes.bold}>{t('emptyNode')}</dt>
+            </>
+          )}
+
           {node?.node_name && (
             <>
               <dt className={classes.bold}>{t('nodeName')}</dt>
@@ -87,41 +161,23 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          <dt className={classes.bold}>{t('nodeType')}</dt>
-          <dd>{node?.node_type || 'N/A'}</dd>
-
-          {node.features && (
+          {node?.node_type && (
             <>
-              <dt className={classes.bold}>{t('features')}</dt>
-              {node.features.map((feature, i) => (
-                <dd key={i}>{feature}</dd>
-              ))}
+              <dt className={classes.bold}>{t('nodeType')}</dt>
+              <dd>{node?.node_type}</dd>
             </>
           )}
 
-          {node.endpoints && (
+          {node?.server_version_string && (
             <>
-              <dt className={classes.bold}>{t('endpoints')}</dt>
-              {Object.keys(node.endpoints).map((key, i) => (
-                <dd key={i}>
-                  <span className={classes.bold}>{key}</span>:{' '}
-                  {node.endpoints[key]}
-                </dd>
-              ))}
+              <dt className={classes.bold}>{t('nodeVersion')}</dt>
+              <dd>{node?.server_version_string}</dd>
             </>
           )}
 
-          {node.keys && (
-            <>
-              <dt className={classes.bold}>{t('keys')}</dt>
-              {Object.keys(node.keys).map((key, i) => (
-                <dd key={i}>
-                  <span className={classes.bold}>{key}</span>:{' '}
-                  <span className={classes.breakLine}>{node.keys[key]}</span>
-                </dd>
-              ))}
-            </>
-          )}
+          <Features />
+          <Endpoints />
+          <Keys />
         </dl>
       </CardContent>
       <CardActions disableSpacing />

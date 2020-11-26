@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { SharedStateProvider } from './context/state.context'
 import routes from './routes'
 import Loader from './components/Loader'
+import DashboardLayout from './layouts/Dashboard'
 
 const App = ({ ual = {} }) => {
   const renderRoutes = ({ children, component, ...props }, index) => {
@@ -22,9 +23,10 @@ const App = ({ ual = {} }) => {
   const renderRoute = (
     {
       name,
+      header,
       icon,
       path,
-      layout: Layout = ({ children }) => <>{children}</>,
+      // layout: Layout = ({ children }) => <>{children}</>,
       component: Component,
       ...props
     },
@@ -34,20 +36,23 @@ const App = ({ ual = {} }) => {
       key={`path-${name}-${index}`}
       path={path}
       {...props}
-      render={(props) => (
-        <Layout ual={ual}>
-          <Suspense fallback={<Loader />}>
-            <Component ual={ual} {...props} />
-          </Suspense>
-        </Layout>
-      )}
-    />
+      state={{ a: true }}
+      // render={(props) => (
+
+      // )}
+    >
+      <Component ual={ual} {...props} />
+    </Route>
   )
 
   return (
     <SharedStateProvider>
       <BrowserRouter>
-        <Switch>{routes.map(renderRoutes)}</Switch>
+        <DashboardLayout ual={ual}>
+          <Suspense fallback={<Loader />}>
+            <Switch>{routes.map(renderRoutes)}</Switch>
+          </Suspense>
+        </DashboardLayout>
       </BrowserRouter>
     </SharedStateProvider>
   )

@@ -3,16 +3,15 @@ import React, { memo, useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
 import Pagination from '@material-ui/lab/Pagination'
-import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 import { PRODUCERS_QUERY } from '../gql'
 import ProducerSearch from '../components/ProducerSearch'
 import ProducerCard from '../components/ProducerCard'
-import PageTitle from '../components/PageTitle'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
 
@@ -37,11 +36,12 @@ const Producers = () => {
     loadProducers,
     { loading = true, data: { producers, info } = {} }
   ] = useLazyQuery(PRODUCERS_QUERY)
-  const { t } = useTranslation('dashboardProducer')
+  const location = useLocation()
   const [pagination, setPagination] = useState({ page: 1, limit: 21 })
   const [totalPages, setTotalPages] = useState(1)
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [filters, setFilters] = useState({})
 
   useEffect(() => {
     loadProducers({
@@ -52,7 +52,7 @@ const Producers = () => {
       }
     })
     // eslint-disable-next-line
-  }, [pagination])
+  }, [pagination.where, pagination.page, pagination.limit])
 
   useEffect(() => {
     if (!info) {
@@ -61,6 +61,24 @@ const Producers = () => {
 
     setTotalPages(Math.ceil(info.producers?.count / pagination.limit))
   }, [info, pagination.limit])
+
+  useEffect(() => {
+    const params = queryString.parse(location.search)
+
+    if (!params.name) {
+      return
+    }
+
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      where: { owner: { _like: `%${params.name}%` } }
+    }))
+
+    setFilters({
+      owner: params.name
+    })
+  }, [location.search])
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
@@ -93,8 +111,6 @@ const Producers = () => {
 
   return (
     <Box>
-      <PageTitle title={t('htmlTitle')} />
-      <Typography variant="h3">{t('title')}</Typography>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -103,7 +119,7 @@ const Producers = () => {
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
       <Box className={classes.searchWrapper}>
-        <ProducerSearch onSearch={handleOnSearch} />
+        <ProducerSearch onSearch={handleOnSearch} filters={filters} />
       </Box>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>

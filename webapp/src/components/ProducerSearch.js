@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
   const classes = useStyles()
-  const { t } = useTranslation('dashboardProducer')
+  const { t } = useTranslation('producerSearchComponent')
   const [filters, setFilters] = useState({})
 
   const handleOnChange = (key) => (event) => {
@@ -27,6 +27,14 @@ const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
   }
 
   const handleOnSearch = () => {
+    onSearch(filters)
+  }
+
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode !== 13) {
+      return
+    }
+
     onSearch(filters)
   }
 
@@ -57,6 +65,7 @@ const ProducerSearch = ({ filters: rootFilters, onSearch }) => {
                   </InputAdornment>
                 )
               }}
+              onKeyDown={handleOnKeyDown}
               onChange={handleOnChange('owner')}
             />
           </CardContent>

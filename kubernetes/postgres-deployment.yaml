@@ -2,20 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: monitor-postgres
+    app: monitor-postgres
   name: monitor-postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: monitor-postgres
+      app: monitor-postgres
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.network: "true"
-        io.kompose.service: monitor-postgres
+        app: monitor-postgres
     spec:
       containers:
       - image: postgres:11.5-alpine

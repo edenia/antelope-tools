@@ -11,7 +11,9 @@ const LacchainAddEntityActionEntityTypeField = ({
   variant,
   className
 }) => {
-  const { t } = useTranslation('producerSummary')
+  const { t } = useTranslation(
+    'lacchainAddEntityActionEntityTypeFieldComponent'
+  )
 
   const options = [
     { value: 1, label: t('entityType1') },
