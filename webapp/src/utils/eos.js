@@ -7,7 +7,10 @@ export const signTransaction = (ual, transaction) => {
 
   const actions = []
 
-  if (eosConfig.includeDefaultTransaction) {
+  if (
+    ual.activeUser.accountName !== 'eosio' &&
+    eosConfig.includeDefaultTransaction
+  ) {
     actions.push(eosConfig.includeDefaultTransaction)
   }
 
