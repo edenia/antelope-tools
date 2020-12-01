@@ -17,7 +17,7 @@ import { formatWithThousandSeparator, onImgError } from '../utils'
 
 import CountryFlag from './CountryFlag'
 import ProducerHealthIndicators from './ProducerHealthIndicators'
-import UsageChart from './UsageChart'
+
 import ProducerSocialLinks from './ProducerSocialLinks'
 
 const useStyles = makeStyles((theme) => ({
@@ -335,20 +335,6 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
       </>
     )
   }
-  const CpuBenchmark = () => {
-    return (
-      <>
-        {producer.cpus?.length > 0 && (
-          <>
-            <dt className={classes.dt}>{t('cpuUsage')}</dt>
-            <dd>
-              <UsageChart items={producer.cpus} />
-            </dd>
-          </>
-        )}
-      </>
-    )
-  }
 
   return (
     <Card className={classes.root}>
@@ -392,7 +378,6 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
           <MissedBlocks />
           <LastTimeChecked />
           <HealthStatus />
-          <CpuBenchmark />
         </dl>
       </CardContent>
       <CardActions disableSpacing />

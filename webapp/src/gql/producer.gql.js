@@ -30,16 +30,6 @@ export const PRODUCERS_QUERY = gql`
       head_block_producer
       head_block_time
       updated_at
-      cpus(limit: 10, order_by: { created_at: desc }) {
-        usage
-        updated_at
-        created_at
-      }
-      missed_blocks(limit: 100, order_by: { created_at: desc }) {
-        id
-        value
-        created_at
-      }
     }
   }
 `
@@ -60,6 +50,34 @@ export const NODES_QUERY = gql`
       id
       owner
       bp_json
+    }
+  }
+`
+
+export const NODE_CPU_BENCHMARK = gql`
+  query($account: String) {
+    cpu(
+      where: { account: { _eq: $account } }
+      limit: 10
+      order_by: { created_at: desc }
+    ) {
+      usage
+      created_at
+    }
+  }
+`
+
+export const NETWORK_STATS = gql`
+  query {
+    cpu(limit: 100, order_by: { created_at: desc }) {
+      account
+      usage
+      created_at
+    }
+    missed_block(limit: 100, order_by: { created_at: desc }) {
+      account
+      value
+      created_at
     }
   }
 `

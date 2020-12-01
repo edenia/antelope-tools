@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions'
 import { useTranslation } from 'react-i18next'
 
 import MultiLineChart from '../components/MultiLineChart'
-import { PRODUCERS_QUERY } from '../gql'
+import { NETWORK_STATS } from '../gql'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -43,9 +43,7 @@ const Network = () => {
   const classes = useStyles()
   const info = useSelector((state) => state.eos.info)
   const { t } = useTranslation('networkInfoRoute')
-  const { data: { producers = [] } = { producers: [] } } = useQuery(
-    PRODUCERS_QUERY
-  )
+  const { data: stats } = useQuery(NETWORK_STATS)
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0 })
@@ -92,9 +90,9 @@ const Network = () => {
           />
           <CardContent className={classes.content}>
             <MultiLineChart
-              producers={producers}
-              dataKey="cpus"
+              data={stats?.cpu || []}
               valueKey="usage"
+              tooltipFormatter={(value) => `${value}us`}
             />
           </CardContent>
           <CardActions disableSpacing />
@@ -108,9 +106,9 @@ const Network = () => {
           />
           <CardContent className={classes.content}>
             <MultiLineChart
-              producers={producers}
-              dataKey="missed_blocks"
+              data={stats?.missed_block || []}
               valueKey="value"
+              tooltipFormatter={(value) => `${value} ${t('blocks')}`}
             />
           </CardContent>
           <CardActions disableSpacing />

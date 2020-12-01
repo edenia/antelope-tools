@@ -1,86 +1,45 @@
 - table:
     schema: public
     name: cpu
-  object_relationships:
-  - name: producerByProducer
-    using:
-      foreign_key_constraint_on: producer
   select_permissions:
   - role: guest
     permission:
       columns:
       - id
-      - producer
       - usage
       - created_at
       - updated_at
+      - account
       filter: {}
 - table:
     schema: public
     name: missed_block
-  object_relationships:
-  - name: producerByProducer
-    using:
-      foreign_key_constraint_on: producer
   select_permissions:
   - role: guest
     permission:
       columns:
       - id
-      - producer
       - value
       - created_at
       - updated_at
+      - account
       filter: {}
 - table:
     schema: public
     name: net
-  object_relationships:
-  - name: producerByProducer
-    using:
-      foreign_key_constraint_on: producer
   select_permissions:
   - role: guest
     permission:
       columns:
       - id
-      - producer
       - usage
       - created_at
       - updated_at
+      - account
       filter: {}
 - table:
     schema: public
     name: producer
-  array_relationships:
-  - name: cpus
-    using:
-      foreign_key_constraint_on:
-        column: producer
-        table:
-          schema: public
-          name: cpu
-  - name: missed_blocks
-    using:
-      foreign_key_constraint_on:
-        column: producer
-        table:
-          schema: public
-          name: missed_block
-  - name: nets
-    using:
-      foreign_key_constraint_on:
-        column: producer
-        table:
-          schema: public
-          name: net
-  - name: rams
-    using:
-      foreign_key_constraint_on:
-        column: producer
-        table:
-          schema: public
-          name: ram
   select_permissions:
   - role: guest
     permission:
@@ -125,17 +84,23 @@
 - table:
     schema: public
     name: ram
-  object_relationships:
-  - name: producerByProducer
-    using:
-      foreign_key_constraint_on: producer
   select_permissions:
   - role: guest
     permission:
       columns:
       - id
-      - producer
       - usage
       - created_at
       - updated_at
+      - account
+      filter: {}
+- table:
+    schema: public
+    name: setting
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - eos_price
       filter: {}

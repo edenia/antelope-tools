@@ -7,12 +7,15 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
+import { useQuery } from '@apollo/react-hooks'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { generalConfig } from '../config'
 import { onImgError } from '../utils'
+import { NODE_CPU_BENCHMARK } from '../gql'
 
 import CountryFlag from './CountryFlag'
+import UsageChart from './UsageChart'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
 
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
+  const { data: { cpu } = {} } = useQuery(NODE_CPU_BENCHMARK, {
+    variables: { account: node.node_name || producer.owner }
+  })
+  console.log(producer.owner)
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
@@ -111,6 +118,20 @@ const NodeCard = ({ producer, node }) => {
       </>
     )
   }
+  const CpuBenchmark = () => {
+    return (
+      <>
+        {cpu?.length > 0 && (
+          <>
+            <dt className={classes.bold}>{t('cpuBenchmark')}</dt>
+            <dd>
+              <UsageChart items={cpu} />
+            </dd>
+          </>
+        )}
+      </>
+    )
+  }
 
   useEffect(() => {
     setProducerOrg(producer.bp_json?.org || {})
@@ -178,6 +199,7 @@ const NodeCard = ({ producer, node }) => {
           <Features />
           <Endpoints />
           <Keys />
+          <CpuBenchmark />
         </dl>
       </CardContent>
       <CardActions disableSpacing />

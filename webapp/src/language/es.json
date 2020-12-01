@@ -6,6 +6,7 @@
     "rewards": "Recompensas",
     "votes": "Votos",
     "block": "Bloque",
+    "blocks": "Bloques",
     "transactions": "Transacciones",
     "producerName": "Nombre del productor",
     "nodeName": "Nombre del nodo",
@@ -130,7 +131,6 @@
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
     "healthStatus": "Salud del nodo",
-    "cpuUsage": "Benchmark de CPU",
     "missedBlocks": "Bloques perdidos",
     "businessContact": "Contacto del negocio",
     "technicalContact": "Contacto técnico",
@@ -145,7 +145,8 @@
     "features": "Características",
     "endpoints": "Endpoints",
     "nodeVersion": "Versión",
-    "emptyNode": "Sin información para nodos"
+    "emptyNode": "Sin información para nodos",
+    "cpuBenchmark": "Benchmark de CPU"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Sincronizado",
