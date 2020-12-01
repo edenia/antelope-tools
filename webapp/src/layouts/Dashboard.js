@@ -148,7 +148,12 @@ const Dashboard = ({ children, width, ual }) => {
               <Typography component="p" variant="h5">
                 {eosConfig.networkLabel}
               </Typography>
-              <img src={eosConfig.networkLogo} alt="network logo" />
+              <img
+                src={eosConfig.networkLogo}
+                alt="network logo"
+                width="56px"
+                height="56px"
+              />
             </Network>
           </SubHeader>
           {children}
