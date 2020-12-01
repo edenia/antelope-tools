@@ -67,10 +67,10 @@ const INSERT_RAM_USAGE = `
 `
 
 const INSERT_MISSED_BLOCK = `
-  mutation ($producer: Int!, $value: Int!) {
-    insert_missed_block_one(object: {producer: $producer, value: $value}) {
+  mutation ($account: String!, $value: Int!) {
+    insert_missed_block_one(object: {account: $account, value: $value}) {
       id
-      producer
+      account
       value
     }
   }
@@ -537,17 +537,8 @@ const saveMissedBlocksFor = async (producerName, missedBlocks) => {
     return
   }
 
-  const producers = await find({
-    owner: { _eq: producerName }
-  })
-  const producer = producers.length ? producers[0] : null
-
-  if (!producer) {
-    return
-  }
-
   await hasuraUtil.request(INSERT_MISSED_BLOCK, {
-    producer: producer.id,
+    account: producerName,
     value: missedBlocks
   })
 }
