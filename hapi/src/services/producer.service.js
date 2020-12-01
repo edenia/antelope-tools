@@ -57,10 +57,10 @@ const INSERT_NET_USAGE = `
 `
 
 const INSERT_RAM_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_ram_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_ram_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
@@ -517,13 +517,9 @@ const syncCpuUsage = async () => {
 }
 
 const syncRamUsage = async () => {
-  const { block } = (await eosmechanicsUtil.ram()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block } = await eosmechanicsUtil.ram()
   await insertUsage('ram', {
-    producer: producer.id,
+    account: block.producer,
     usage: 1 // TODO: get ram usage from transaction or block
   })
 }

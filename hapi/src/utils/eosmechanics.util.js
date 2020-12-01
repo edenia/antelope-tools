@@ -40,6 +40,7 @@ const cpu = async () => {
 
   return {}
 }
+
 const net = async (input = '') => {
   const actions = []
 
@@ -77,6 +78,7 @@ const net = async (input = '') => {
     console.log('error', error)
   }
 }
+
 const ram = async () => {
   const actions = []
 
@@ -102,6 +104,7 @@ const ram = async () => {
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
+    await new Promise(resolve => setTimeout(() => resolve(), 500))
     const block = await eosUtil.getBlock(transaction.processed.block_num)
 
     return {
