@@ -68,6 +68,7 @@ const net = async (input = '') => {
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
+    await new Promise(resolve => setTimeout(() => resolve(), 500))
     const block = await eosUtil.getBlock(transaction.processed.block_num)
 
     return {
@@ -77,6 +78,8 @@ const net = async (input = '') => {
   } catch (error) {
     console.log('error', error)
   }
+
+  return {}
 }
 
 const ram = async () => {
@@ -114,6 +117,8 @@ const ram = async () => {
   } catch (error) {
     console.log('error', error)
   }
+
+  return {}
 }
 
 module.exports = {

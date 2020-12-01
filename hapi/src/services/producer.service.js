@@ -47,10 +47,10 @@ const INSERT_CPU_USAGE = `
 `
 
 const INSERT_NET_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_net_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_net_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
@@ -525,13 +525,9 @@ const syncRamUsage = async () => {
 }
 
 const syncNetUsage = async () => {
-  const { block } = (await eosmechanicsUtil.net()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block } = await eosmechanicsUtil.net()
   await insertUsage('net', {
-    producer: producer.id,
+    account: block.producer,
     usage: 1 // TODO: get net usage from transaction or block
   })
 }
