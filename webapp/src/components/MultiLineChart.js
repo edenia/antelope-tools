@@ -29,6 +29,14 @@ const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
   const [maxDate, setMaxDate] = useState()
   const [series, setSeries] = useState([])
 
+  const color = useCallback(
+    scaleLinear()
+      .domain([0, series.length])
+      .range([theme.palette.success.main, theme.palette.error.main])
+      .interpolate(interpolateHcl),
+    [series]
+  )
+
   useEffect(() => {
     let allDates = []
     let tempSeries = {}
@@ -90,10 +98,10 @@ const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
         {series.map((item, i) => (
           <Line
             dataKey={valueKey}
-            stroke={colors[i] || theme.palette.secondary[100]}
             data={item.data}
             name={item.account}
             key={item.account}
+            stroke={color(i)}
             strokeWidth={2}
           />
         ))}
