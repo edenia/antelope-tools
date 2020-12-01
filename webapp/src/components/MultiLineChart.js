@@ -38,7 +38,7 @@ const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
   )
 
   useEffect(() => {
-    let allDates = []
+    const allDates = []
     let tempSeries = {}
 
     data.forEach((item) => {
