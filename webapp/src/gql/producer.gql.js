@@ -66,3 +66,18 @@ export const NODE_CPU_BENCHMARK = gql`
     }
   }
 `
+
+export const NETWORK_STATS = gql`
+  query {
+    cpu(limit: 100, order_by: { created_at: desc }) {
+      account
+      usage
+      created_at
+    }
+    missed_block(limit: 100, order_by: { created_at: desc }) {
+      account
+      value
+      created_at
+    }
+  }
+`
