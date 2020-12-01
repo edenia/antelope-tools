@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { useTheme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
 import Typography from '@material-ui/core/Typography'
-import moment from 'moment'
 import { ResponsiveContainer, BarChart, Bar, Tooltip } from 'recharts'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: theme.palette.primary[50],
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
     boxShadow:
@@ -33,9 +33,7 @@ const CustomTooltip = memo(({ active, payload }) => {
   return (
     <div className={classes.wrapper}>
       <Typography variant="body1">
-        <span className={classes.label}>
-          {moment(payload[0].payload.updated_at).format('MMM/DD hh:m:ss')}:{' '}
-        </span>
+        <span className={classes.label}>us: </span>
         <span className={classes.description}>{payload[0].payload.usage}</span>
       </Typography>
     </div>
