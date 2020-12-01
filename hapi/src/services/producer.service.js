@@ -37,10 +37,10 @@ const FIND = `
 `
 
 const INSERT_CPU_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_cpu_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_cpu_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
@@ -509,14 +509,9 @@ const syncProducersInfo = async () => {
 }
 
 const syncCpuUsage = async () => {
-  await eosmechanicsUtil.cpu()
-  const { block, transaction } = (await eosmechanicsUtil.cpu()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block, transaction } = await eosmechanicsUtil.cpu()
   await insertUsage('cpu', {
-    producer: producer.id,
+    account: block.producer,
     usage: transaction.processed.receipt.cpu_usage_us
   })
 }
