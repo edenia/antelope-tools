@@ -6,6 +6,7 @@
     "rewards": "Rewards",
     "votes": "Votes",
     "block": "Block",
+    "blocks": "Blocks",
     "transactions": "Transactions",
     "producerName": "Producer name",
     "nodeName": "Node name",
