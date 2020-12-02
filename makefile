@@ -1,3 +1,5 @@
+include utils/meta.mk utils/help.mk
+
 SHELL := /bin/bash
 #COLORS
 WHITE  := $(shell tput -Txterm setaf 7)
@@ -88,15 +90,15 @@ start-logs:
 
 
 build-kubernetes: ##@devops Generate proper k8s files based on the templates
-build-kubernetes: ./k8s
-        @rm -Rf $(K8S_BUILD_DIR) && mkdir -p $(K8S_BUILD_DIR)
-        @for file in $(K8S_FILES); do \
-                mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
-                $(SHELL_EXPORT) envsubst <./k8s/$$file >$(K8S_BUILD_DIR)/$$file; \
-        done
+build-kubernetes: ./kubernetes
+	@rm -Rf $(K8S_BUILD_DIR) && mkdir -p $(K8S_BUILD_DIR)
+	@for file in $(K8S_FILES); do \
+		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
+		$(SHELL_EXPORT) envsubst <./kubernetes/$$file >$(K8S_BUILD_DIR)/$$file; \
+	done
 
 deploy-kubernetes: ##@devops Publish the build k8s files
 deploy-kubernetes: $(K8S_BUILD_DIR)
-        @for file in $(shell find $(K8S_BUILD_DIR) -name '*.yml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
-                kubectl apply -f $(K8S_BUILD_DIR)/$$file; \
-        done
+	@for file in $(shell find $(K8S_BUILD_DIR) -name '*.yaml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
+        	kubectl apply -f $(K8S_BUILD_DIR)/$$file; \
+	done
