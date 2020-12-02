@@ -15,6 +15,7 @@ import VpnKey from '@material-ui/icons/VpnKey'
 import RicardianContract from './RicardianContract'
 import ContractActions from './ContractActions'
 import ContractTables from './ContractTables'
+import ResourceUsage from './ResourceUsage'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     '&:focus': {
       outline: 'none'
-    }
+    },
+    marginTop: theme.spacing(2)
   },
   accordion: {
     boxShadow: 'none',
@@ -46,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
   },
   keyLabel: {
     wordBreak: 'break-all'
+  },
+  resourceWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex'
   }
 }))
 
@@ -59,7 +66,27 @@ const AccountInfo = ({
 }) => {
   const classes = useStyles()
   const [info, setInfo] = useState(null)
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('accountInfoComponent')
+
+  const getBytesLabel = (bytes) => {
+    if (bytes === 0) {
+      return `0 kb`
+    }
+
+    if (bytes === -1) {
+      return `∞ kb`
+    }
+
+    return `${(bytes / 1024).toFixed(2)} kb`
+  }
+
+  const getMicrosecondsLabel = (microseconds) => {
+    if (microseconds === -1) {
+      return `∞ µs`
+    }
+
+    return `${microseconds} µs`
+  }
 
   useEffect(() => {
     const {
@@ -70,9 +97,20 @@ const AccountInfo = ({
       permissions
     } = account
 
-    const ram = ((ramUsage * 100) / ramQuota || 0).toFixed()
-    const cpu = ((cpuLimit.used * 100) / cpuLimit.max || 0).toFixed()
-    const net = ((netLimit.used * 100) / netLimit.max || 0).toFixed()
+    const ram = {
+      percent: ramUsage / ramQuota || 0,
+      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`
+    }
+    const cpu = {
+      percent: cpuLimit.used / cpuLimit.max || 0,
+      label: `${getMicrosecondsLabel(cpuLimit.used)} / ${getMicrosecondsLabel(
+        cpuLimit.max
+      )}`
+    }
+    const net = {
+      percent: netLimit.used / netLimit.max || 0,
+      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`
+    }
     const keys = permissions.map((item) => ({
       label: item.perm_name,
       value: item.required_auth?.keys[0]?.key || '-'
@@ -124,32 +162,47 @@ const AccountInfo = ({
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <dl>
-                  <dt>
-                    <Typography>RAM:</Typography>
-                  </dt>
-                  <dd>
-                    <Typography>
-                      {info.total_resources?.ram_bytes || 0}
-                    </Typography>
-                  </dd>
-                  <dt>
-                    <Typography>CPU:</Typography>
-                  </dt>
-                  <dd>
-                    <Typography>
-                      {info.total_resources?.cpu_weight || 0}
-                    </Typography>
-                  </dd>
-                  <dt>
-                    <Typography>NET:</Typography>
-                  </dt>
-                  <dd>
-                    <Typography>
-                      {info.total_resources?.net_weight || 0}
-                    </Typography>
-                  </dd>
-                </dl>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
+                    <ResourceUsage
+                      title="RAM"
+                      percent={info.ram.percent}
+                      label={info.ram.label}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
+                    <ResourceUsage
+                      title="CPU"
+                      percent={info.cpu.percent}
+                      label={info.cpu.label}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.resourceWrapper}
+                  >
+                    <ResourceUsage
+                      title="NET"
+                      percent={info.net.percent}
+                      label={info.net.label}
+                    />
+                  </Grid>
+                </Grid>
               </AccordionDetails>
             </Accordion>
           </Grid>

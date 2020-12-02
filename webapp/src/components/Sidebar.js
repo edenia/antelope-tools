@@ -181,15 +181,6 @@ const CategoryBadge = styled(LinkBadge)`
   top: 12px;
 `
 
-const SidebarSection = styled(Typography)`
-  color: ${(props) => props.theme.sidebar.color};
-  padding: ${(props) => props.theme.spacing(4)}px
-    ${(props) => props.theme.spacing(6)}px
-    ${(props) => props.theme.spacing(1)}px;
-  opacity: 0.9;
-  display: block;
-`
-
 const SidebarFooter = styled.div`
   background-color: ${(props) =>
     props.theme.sidebar.footer.background} !important;
@@ -246,7 +237,7 @@ SidebarCategory.propTypes = {
   badge: PropTypes.string
 }
 
-const SidebarLink = ({ name, to, badge }) => {
+const SidebarLink = ({ name, icon, to, badge }) => {
   return (
     <Link
       button
@@ -256,6 +247,7 @@ const SidebarLink = ({ name, to, badge }) => {
       to={to}
       activeClassName="active"
     >
+      {icon}
       <LinkText>{name}</LinkText>
       {badge ? <LinkBadge label={badge} /> : ''}
     </Link>
@@ -263,13 +255,14 @@ const SidebarLink = ({ name, to, badge }) => {
 }
 
 SidebarLink.propTypes = {
+  icon: PropTypes.node,
   name: PropTypes.string,
   to: PropTypes.string,
   badge: PropTypes.string
 }
 
 const Sidebar = ({ classes, staticContext, location, ...rest }) => {
-  const { t } = useTranslation('sidebar')
+  const { t } = useTranslation('routes')
   const initOpenRoutes = () => {
     /* Open collapse element that matches current url */
     const pathName = location.pathname
@@ -318,15 +311,11 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
             .filter(({ name }) => !!name)
             .map((category, index) => (
               <ListItem key={index}>
-                {category.header ? (
-                  <SidebarSection>{category.header}</SidebarSection>
-                ) : null}
-
                 {category.children ? (
-                  <Box key={index}>
+                  <Box width="100%" key={index}>
                     <SidebarCategory
                       isOpen={!openRoutes[index]}
-                      name={t(category.name)}
+                      name={t(`${category.path}>sidebar`)}
                       icon={category.icon}
                       onClick={() => toggle(index)}
                       isCollapsable
@@ -352,7 +341,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                 ) : (
                   <SidebarCategory
                     isCollapsable={false}
-                    name={t(category.name)}
+                    name={t(`${category.path}>sidebar`)}
                     to={category.path}
                     activeClassName="active"
                     component={NavLink}

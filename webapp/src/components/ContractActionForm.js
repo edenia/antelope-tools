@@ -11,6 +11,7 @@ import LacchainEntitySelectField from './LacchainEntitySelectField'
 import LacchainSetEntInfoField from './LacchainSetEntInfoField'
 import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
+import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,7 +24,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   const classes = useStyles()
   const [fields, setFields] = useState([])
   const [payload, setPayload] = useState({})
-  const { t } = useTranslation('accountInfo')
+  const { t } = useTranslation('contractActionFormComponent')
 
   const handleSubmit = () => {
     if (!onSubmitAction) return
@@ -51,11 +52,22 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
     }
 
     const struct = abi?.structs?.find((struct) => struct.name === action)
-    setFields(struct.fields)
+    setFields(struct?.fields || [])
   }, [action, abi])
 
   const renderField = (field) => {
     switch (`${accountName}.${action}.${field.name}`) {
+      case 'eosio.addentity.entity_type':
+        return (
+          <LacchainAddEntityActionEntityTypeField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name]}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
       case 'eosio.setentinfo.entity':
         return (
           <LacchainEntitySelectField
@@ -124,7 +136,6 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   return (
     <>
       {fields.map(renderField)}
-
       {action && (
         <Button
           type="submit"

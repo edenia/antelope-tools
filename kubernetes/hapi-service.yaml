@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: monitor-hapi
+    app: monitor-hapi
   name: monitor-hapi
 spec:
   ports:
-  - name: "9090"
+  - name: hapi
     port: 9090
     targetPort: 9090
   selector:
-    io.kompose.service: monitor-hapi
+    app: monitor-hapi

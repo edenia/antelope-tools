@@ -162,7 +162,7 @@ CustomBarLabel.propTypes = {
 
 const CustomTooltip = memo(({ active, payload }) => {
   const classes = useStyles()
-  const { t } = useTranslation('producersChartToolTip')
+  const { t } = useTranslation('producersChartComponent')
 
   if (active && payload.length > 0) {
     return (

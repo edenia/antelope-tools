@@ -14,41 +14,34 @@ const Typography = lazy(() => import('@material-ui/core/Typography'))
 const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
 const ProducersChart = lazy(() => import('../components/ProducersChart'))
 const TransactionsChart = lazy(() => import('../components/TransactionsChart'))
-const PageTitle = lazy(() => import('../components/PageTitle'))
 
-const Dashboard = () => {
+const Home = () => {
   const dispatch = useDispatch()
-  const {
-    data: { loading, producer: producers = [] } = { producers: [] }
-  } = useQuery(NODES_QUERY)
+  const { data: { loading, producer: producers } = {} } = useQuery(NODES_QUERY)
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
-  const { t } = useTranslation('dashboardHome')
+  const { t } = useTranslation('homeRoute')
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
     dispatch.eos.startTrackingProducerSchedule({ interval: 60 })
-    dispatch.eos.getRate()
   }, [dispatch])
 
   useEffect(() => {
     const newProducers = scheduleInfo.producers.map((item) => {
       const data =
-        producers.find((producer) => {
+        (producers || []).find((producer) => {
           let result = producer.owner === item.producer_name
-
           if (!result) {
             result = producer.bp_json?.nodes.find(
               (node) => node.node_name === item.producer_name
             )
           }
-
           return result
         }) || {}
-
       return {
         logo: data?.bp_json?.org?.branding?.logo_256,
         url: data?.url,
@@ -77,17 +70,22 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <PageTitle title={t('htmlTitle')} />
-              <Typography variant="h6">{t('currentProducer')}</Typography>
-              <Typography variant="h6">{info.head_block_producer}</Typography>
+              <Typography component="p" variant="h6">
+                {t('currentProducer')}
+              </Typography>
+              <Typography component="p" variant="h6">
+                {info.head_block_producer}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t('headBlock')}</Typography>
-              <Typography variant="h6">
+              <Typography component="p" variant="h6">
+                {t('headBlock')}
+              </Typography>
+              <Typography component="p" variant="h6">
                 {formatWithThousandSeparator(info.head_block_num)}
               </Typography>
             </CardContent>
@@ -96,8 +94,10 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t('lastBlock')}</Typography>
-              <Typography variant="h6">
+              <Typography component="p" variant="h6">
+                {t('lastBlock')}
+              </Typography>
+              <Typography component="p" variant="h6">
                 {formatWithThousandSeparator(info.last_irreversible_block_num)}
               </Typography>
             </CardContent>
@@ -109,7 +109,9 @@ const Dashboard = () => {
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
-              <Typography variant="h6">{t('bpSchedule')}</Typography>
+              <Typography component="p" variant="h6">
+                {t('bpSchedule')}
+              </Typography>
               <Typography variant="caption">
                 Ver. {schedule?.version}
               </Typography>
@@ -122,7 +124,9 @@ const Dashboard = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">{t('transPerSecond')}</Typography>
+                  <Typography component="p" variant="h6">
+                    {t('transPerSecond')}
+                  </Typography>
                   <TransactionsChart data={tps} />
                 </CardContent>
               </Card>
@@ -130,7 +134,9 @@ const Dashboard = () => {
             <Grid item xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h6">{t('transPerBlock')}</Typography>
+                  <Typography component="p" variant="h6">
+                    {t('transPerBlock')}
+                  </Typography>
                   <TransactionsChart data={tpb} />
                 </CardContent>
               </Card>
@@ -142,6 +148,6 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.propTypes = {}
+Home.propTypes = {}
 
-export default Dashboard
+export default Home

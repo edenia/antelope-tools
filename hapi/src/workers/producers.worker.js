@@ -1,4 +1,4 @@
-const { producerService } = require('../services')
+const { producerService, settingService } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil } = require('../utils')
 
@@ -48,11 +48,20 @@ const start = async () => {
     workersConfig.syncProducersInterval
   )
   run(
+    'SYNC EXCHANGE RATE',
+    settingService.syncEOSPrice,
+    workersConfig.syncExchangeRate
+  )
+  run(
     'SYNC PRODUCER INFO',
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
   )
-  run('SYNC CPU USAGE', producerService.syncCpuUsage)
+  run(
+    'SYNC CPU USAGE',
+    producerService.syncCpuUsage,
+    workersConfig.syncProducerCpuInterval
+  )
   run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
 }
 

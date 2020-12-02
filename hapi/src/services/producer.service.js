@@ -37,40 +37,40 @@ const FIND = `
 `
 
 const INSERT_CPU_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_cpu_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_cpu_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
 `
 
 const INSERT_NET_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_net_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_net_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
 `
 
 const INSERT_RAM_USAGE = `
-  mutation ($producer: Int!, $usage: Int!) {
-    insert_ram_one (object: {producer: $producer, usage: $usage}) {
+  mutation ($account: String!, $usage: Int!) {
+    insert_ram_one (object: {account: $account, usage: $usage}) {
       id
-      producer
+      account
       usage
     }
   }
 `
 
 const INSERT_MISSED_BLOCK = `
-  mutation ($producer: Int!, $value: Int!) {
-    insert_missed_block_one(object: {producer: $producer, value: $value}) {
+  mutation ($account: String!, $value: Int!) {
+    insert_missed_block_one(object: {account: $account, value: $value}) {
       id
-      producer
+      account
       value
     }
   }
@@ -242,10 +242,31 @@ const syncBPJsonOffChain = async () => {
           return
         }
 
+        const nodes = await Promise.all(
+          (data?.nodes || []).map(async node => {
+            const api = node?.ssl_endpoint || node?.api_endpoint
+
+            if (!api) {
+              return node
+            }
+
+            const nodeInfo = await getNodeInfo(api)
+            console.log(producer.owner, nodeInfo.server_version_string)
+
+            return {
+              ...node,
+              server_version_string: nodeInfo.server_version_string
+            }
+          })
+        )
+
         await update(
           { owner: { _eq: producer.owner } },
           {
-            bp_json: data
+            bp_json: {
+              ...data,
+              nodes
+            }
           }
         )
       } catch (error) {}
@@ -288,6 +309,24 @@ const syncBPJsonOnChain = async () => {
   )
 }
 
+const getNodeInfo = async api => {
+  try {
+    const response = await axiosUtil.instance.get(`${api}/v1/chain/get_info`)
+
+    return response.data
+  } catch (error) {}
+
+  return {}
+}
+
+const getJson = string => {
+  try {
+    const json = JSON.parse(string)
+    return json
+  } catch (error) {}
+  return {}
+}
+
 const syncBPJsonForLacchain = async () => {
   const nodeTypes = {
     1: 'validator',
@@ -307,46 +346,54 @@ const syncBPJsonForLacchain = async () => {
     table: eosConfig.lacchain.nodeTable,
     json: true
   })
-  const producers = entities.map(entity => {
-    let bpJson = {}
-    try {
-      bpJson = JSON.parse(entity.info)
-    } catch (error) {}
-    const entityNodes = nodes
-      .filter(node => node.entity === entity.name)
-      .map(node => {
-        const nodeType = nodeTypes[node.type] || 'N/A'
-        let nodeInfo = {}
+  const producers = await Promise.all(
+    entities.map(async entity => {
+      const bpJson = getJson(entity.info)
+      const entityNodes = await Promise.all(
+        nodes
+          .filter(node => node.entity === entity.name)
+          .map(async node => {
+            const nodeType = nodeTypes[node.type] || 'N/A'
+            const nodeInfo = getJson(node.info)
+            let newNodeInfo = {}
 
-        try {
-          nodeInfo = JSON.parse(node.info)
-        } catch (error) {}
+            for (const key of Object.keys(nodeInfo)) {
+              newNodeInfo = {
+                ...newNodeInfo,
+                [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
+              }
+            }
 
-        const keys = Object.keys(nodeInfo)
-        let newNodeInfo = {}
+            const api =
+              newNodeInfo.endpoints?.[`${nodeType}_ssl`] ||
+              newNodeInfo.endpoints?.[`${nodeType}_api`]
 
-        for (const key of keys) {
-          newNodeInfo = {
-            ...newNodeInfo,
-            [key.replace(`${nodeType}_`, '')]: nodeInfo[key]
-          }
+            if (api) {
+              const nodeInfo = await getNodeInfo(api)
+              newNodeInfo = {
+                ...newNodeInfo,
+                server_version_string: nodeInfo.server_version_string
+              }
+            }
+
+            return {
+              ...newNodeInfo,
+              node_name: node.name,
+              node_type: nodeType
+            }
+          })
+      )
+
+      return {
+        owner: entity.name,
+        bp_json: {
+          org: bpJson,
+          nodes: entityNodes,
+          type: entity.type
         }
-
-        return {
-          ...newNodeInfo,
-          node_name: node.name,
-          node_type: nodeType
-        }
-      })
-
-    return {
-      owner: entity.name,
-      bp_json: {
-        ...bpJson,
-        nodes: entityNodes
       }
-    }
-  })
+    })
+  )
 
   await hasuraUtil.request(UPSERT, { producers })
   await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
@@ -372,6 +419,7 @@ const syncBPJsonForDefaultNetworks = async () => {
     await hasuraUtil.request(CLEAR_OLD_PRODUCERS, {
       owners: producers.map(producer => producer.owner)
     })
+
     if (eosConfig.bpJsonOnChain) {
       await syncBPJsonOnChain()
     } else {
@@ -461,38 +509,25 @@ const syncProducersInfo = async () => {
 }
 
 const syncCpuUsage = async () => {
-  await eosmechanicsUtil.cpu()
-  const { block, transaction } = (await eosmechanicsUtil.cpu()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block, transaction } = await eosmechanicsUtil.cpu()
   await insertUsage('cpu', {
-    producer: producer.id,
+    account: block.producer,
     usage: transaction.processed.receipt.cpu_usage_us
   })
 }
 
 const syncRamUsage = async () => {
-  const { block } = (await eosmechanicsUtil.ram()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block } = await eosmechanicsUtil.ram()
   await insertUsage('ram', {
-    producer: producer.id,
+    account: block.producer,
     usage: 1 // TODO: get ram usage from transaction or block
   })
 }
 
 const syncNetUsage = async () => {
-  const { block } = (await eosmechanicsUtil.net()) || {}
-  const producers = await find({
-    owner: { _eq: block.producer }
-  })
-  const producer = producers.length ? producers[0] : null
+  const { block } = await eosmechanicsUtil.net()
   await insertUsage('net', {
-    producer: producer.id,
+    account: block.producer,
     usage: 1 // TODO: get net usage from transaction or block
   })
 }
@@ -502,12 +537,8 @@ const saveMissedBlocksFor = async (producerName, missedBlocks) => {
     return
   }
 
-  const producers = await find({
-    owner: { _eq: producerName }
-  })
-  const producer = producers.length ? producers[0] : null
   await hasuraUtil.request(INSERT_MISSED_BLOCK, {
-    producer: producer.id,
+    account: producerName,
     value: missedBlocks
   })
 }
@@ -594,7 +625,7 @@ const checkForMissedBlocks = async () => {
         producedBlocks += 1
       }
       console.log(
-        `current producer is : ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
+        `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
       )
       lastProducer = currentProducer
       lastBlockNum = currentBlockNum

@@ -11,23 +11,15 @@ export const bpJsonOnChainTable =
   process.env.REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE
 export const bpJsonOnChainScope =
   process.env.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE
-export const exchangeRate = process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE
-export const exchangeRateApi =
-  process.env.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API
 
 export const networkName = process.env.REACT_APP_EOS_API_NETWORK_NAME
+export const networkLabel = process.env.REACT_APP_EOS_API_NETWORK_LABEL
+export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
 
 let _nodeTypes = null
-let _includeDefaultTransaction = null
 
 switch (networkName) {
   case 'lacchain':
-    _includeDefaultTransaction = {
-      account: 'writer',
-      name: 'run',
-      authorization: [{ actor: 'latamlink', permission: 'writer' }],
-      data: {}
-    }
     _nodeTypes = [
       {
         name: 'validator',
@@ -66,4 +58,7 @@ switch (networkName) {
 }
 
 export const nodeTypes = _nodeTypes
-export const includeDefaultTransaction = _includeDefaultTransaction
+export const includeDefaultTransaction = process.env
+  .REACT_APP_EOS_INCLUDE_TRANSACTION
+  ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)
+  : null
