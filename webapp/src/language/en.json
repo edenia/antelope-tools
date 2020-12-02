@@ -6,6 +6,7 @@
     "rewards": "Rewards",
     "votes": "Votes",
     "block": "Block",
+    "blocks": "Blocks",
     "transactions": "Transactions",
     "producerName": "Producer name",
     "nodeName": "Node name",
@@ -131,7 +132,6 @@
     "secondsAgo": "s ago",
     "lastTimeChecked": "Last Time Checked",
     "healthStatus": "Health Status",
-    "cpuUsage": "CPU Benchmark",
     "missedBlocks": "Missed Blocks",
     "businessContact": "Business Contact",
     "technicalContact": "Technical Contact",
@@ -146,7 +146,8 @@
     "features": "Features",
     "endpoints": "Endpoints",
     "nodeVersion": "Version",
-    "emptyNode": "Empty info for nodes"
+    "emptyNode": "Empty info for nodes",
+    "cpuBenchmark": "CPU Benchmark"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Synced",

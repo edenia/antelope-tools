@@ -27,6 +27,7 @@ const cpu = async () => {
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
+    await new Promise(resolve => setTimeout(() => resolve(), 500))
     const block = await eosUtil.getBlock(transaction.processed.block_num)
 
     return {
@@ -36,7 +37,10 @@ const cpu = async () => {
   } catch (error) {
     console.log('error', error)
   }
+
+  return {}
 }
+
 const net = async (input = '') => {
   const actions = []
 
@@ -64,6 +68,7 @@ const net = async (input = '') => {
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
+    await new Promise(resolve => setTimeout(() => resolve(), 500))
     const block = await eosUtil.getBlock(transaction.processed.block_num)
 
     return {
@@ -73,7 +78,10 @@ const net = async (input = '') => {
   } catch (error) {
     console.log('error', error)
   }
+
+  return {}
 }
+
 const ram = async () => {
   const actions = []
 
@@ -99,6 +107,7 @@ const ram = async () => {
       eosConfig.eosmechanics.account,
       eosConfig.eosmechanics.password
     )
+    await new Promise(resolve => setTimeout(() => resolve(), 500))
     const block = await eosUtil.getBlock(transaction.processed.block_num)
 
     return {
@@ -108,6 +117,8 @@ const ram = async () => {
   } catch (error) {
     console.log('error', error)
   }
+
+  return {}
 }
 
 module.exports = {

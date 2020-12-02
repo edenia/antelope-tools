@@ -36,7 +36,7 @@ stop:
 
 start:
 	make start-postgres
-	# make start-wallet
+	make start-wallet
 	make start-hapi
 	make start-hasura
 	make start-webapp
