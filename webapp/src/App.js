@@ -21,15 +21,7 @@ const App = ({ ual = {} }) => {
   }
 
   const renderRoute = (
-    {
-      name,
-      header,
-      icon,
-      path,
-      // layout: Layout = ({ children }) => <>{children}</>,
-      component: Component,
-      ...props
-    },
+    { name, header, icon, path, component: Component, ...props },
     index
   ) => (
     <Route
@@ -37,9 +29,6 @@ const App = ({ ual = {} }) => {
       path={path}
       {...props}
       state={{ a: true }}
-      // render={(props) => (
-
-      // )}
     >
       <Component ual={ual} {...props} />
     </Route>
