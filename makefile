@@ -104,6 +104,7 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	done
 
 build-all:
+	echo "Building docker containers..."
 	for dir in $(SUBDIRS); do \
 		$(MAKE) build-docker -C $$dir; \
 	done
