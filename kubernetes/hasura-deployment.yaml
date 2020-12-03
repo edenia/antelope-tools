@@ -36,7 +36,7 @@ spec:
         - configMapRef:
             name: monitor-hasura-config
         image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
-        imagePullPolicy: "Always"
+        imagePullPolicy: "IfNotPresent"
         name: "monitor-hasura"
         ports:
         - containerPort: 8080
