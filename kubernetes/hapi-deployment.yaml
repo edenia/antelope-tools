@@ -17,23 +17,23 @@ spec:
         app: monitor-hapi
     spec:
       containers:
-      - image: eoscostarica506/monitor-hapi
-        imagePullPolicy: "Always"
-        name: "monitor-hapi"
-        imagePullSecrets:
-        name: regcred
-        envFrom:
-        - configMapRef:
-            name: monitor-hapi-config
-        ports:
-        - containerPort: 9090
-        volumeMounts:
-        - mountPath: /usr/app
-          name: hapi
-          subPathExpr: $(CODE_DIRECTORY)
+        - image: eoscostarica506/monitor-hapi
+          imagePullPolicy: "Always"
+          name: "monitor-hapi"
+          imagePullSecrets:
+            - name: regcred
+          envFrom:
+            - configMapRef:
+                name: monitor-hapi-config
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /usr/app
+              name: hapi
+              subPathExpr: $(CODE_DIRECTORY)
       restartPolicy: Always
       volumes:
-      - name: hapi
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu/
+        - name: hapi
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu/

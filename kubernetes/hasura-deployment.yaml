@@ -17,45 +17,45 @@ spec:
         app: monitor-hasura
     spec:
       containers:
-      - args:
-        - graphql-engine
-        - serve
-        - --enable-console
-        env:
-        - name: HASURA_GRAPHQL_ADMIN_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: dashboard-secret
-              key: HASURA_GRAPHQL_ADMIN_SECRET
-        - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-          valueFrom:
-            secretKeyRef:
-              name: dashboard-secret
-              key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-        envFrom:
-        - configMapRef:
-            name: monitor-hasura-config
-        image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
-        imagePullPolicy: "Always"
-        name: "monitor-hasura"
-        imagePullSecrets:
-        name: regcred
-        ports:
-        - containerPort: 8080
-        volumeMounts:
-        - mountPath: /hasura-migrations
-          name: monitor-hasura1
-          subPathExpr: $(MIGRATION_DIRECTORY)
-        - mountPath: /hasura-metadata
-          name: monitor-hasura2
-          subPathExpr: $(METADATA_DIRECTORY)
+        - args:
+            - graphql-engine
+            - serve
+            - --enable-console
+          env:
+            - name: HASURA_GRAPHQL_ADMIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: HASURA_GRAPHQL_ADMIN_SECRET
+            - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+          envFrom:
+            - configMapRef:
+                name: monitor-hasura-config
+          image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
+          imagePullPolicy: "Always"
+          name: "monitor-hasura"
+          imagePullSecrets:
+            - name: regcred
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /hasura-migrations
+              name: monitor-hasura1
+              subPathExpr: $(MIGRATION_DIRECTORY)
+            - mountPath: /hasura-metadata
+              name: monitor-hasura2
+              subPathExpr: $(METADATA_DIRECTORY)
       restartPolicy: Always
       volumes:
-      - name: monitor-hasura1
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu
-      - name: monitor-hasura2
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu
+        - name: monitor-hasura1
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu
+        - name: monitor-hasura2
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu
