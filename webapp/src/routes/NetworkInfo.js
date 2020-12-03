@@ -67,7 +67,7 @@ const Network = () => {
             <MultiLineChart
               data={stats?.missed_block || []}
               valueKey="value"
-              tooltipFormatter={(value) => `${value} ${t('blocks')}`}
+              tooltipFormatter={(value) => `${value} ${t('missedBlocks')}`}
             />
           </CardContent>
           <CardActions disableSpacing />
