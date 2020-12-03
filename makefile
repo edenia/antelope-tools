@@ -109,7 +109,7 @@ build-all:
 		$(MAKE) build-docker -C $$dir; \
 	done
 
-push-image:
+push-images:
 	for dir in $(SUBDIRS); do \
         	$(MAKE) push-image -C $$dir; \
 	done
