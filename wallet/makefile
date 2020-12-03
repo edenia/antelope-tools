@@ -1,3 +1,5 @@
+include ../utils/meta.mk ../utils/help.mk
+
 LATEST_TAG ?= latest
 
 install: ##@local Install all dependencies
@@ -15,12 +17,11 @@ run: node_modules
 
 build-docker: ##@devops Build the docker image
 build-docker: ./Dockerfile
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) || true
 	@docker build \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
-		--target prod-stage \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest \
+		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) \
+		--target run-stage \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
@@ -38,7 +39,7 @@ build-docker-cached: ./Dockerfile
 
 push-image: ##@devops Push the freshly built image and tag with release or latest tag
 push-image:
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION)
+	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION)
 ifeq ($(strip $(RELEASE_TAG)),)
 	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG)
 else
