@@ -37,7 +37,7 @@ const lightVariant = {
       background: '#FFF'
     },
     category: {
-      fontWeight: 600
+      fontWeight: 'normal'
     },
     badge: {
       color: '#FFF',

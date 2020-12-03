@@ -22,9 +22,9 @@
     "/>sidebar": "Panel",
     "/>title": "EOSIO Panel",
     "/>heading": "Bienvenido",
-    "/network-info>sidebar": "Información de la red",
-    "/network-info>title": "Información de la red - Panel",
-    "/network-info>heading": "Información de la red",
+    "/node-performance>sidebar": "Rendimiento del nodo",
+    "/node-performance>title": "Rendimiento del nodo - Panel",
+    "/node-performance>heading": "Rendimiento del nodo",
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/block-producers>heading": "Productores de Bloques",
@@ -62,6 +62,7 @@
     "transPerBlock": "Transacciones por Bloque"
   },
   "networkInfoRoute": {
+    "chainId": "Identificador de la cadena",
     "chainLimits": "Límites de la cadena",
     "cpuLimitPerBlock": "Límite de CPU por bloque",
     "netLimitPerBlock": "Límite de NET por bloque",

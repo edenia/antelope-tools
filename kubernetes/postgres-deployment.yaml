@@ -16,6 +16,8 @@ spec:
       labels:
         app: monitor-postgres
     spec:
+      imagePullSecrets:
+          - name: regcred
       containers:
       - image: postgres:11.5-alpine
         imagePullPolicy: "Always"
