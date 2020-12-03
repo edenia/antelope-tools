@@ -36,25 +36,25 @@ const ResponsiveContainerWrapper = styled(ResponsiveContainer)`
   }
 `
 
-const TooltipContent = (item) => {
-  if (!item.active || item.payload === null || item.payload[0] === null) {
+const TooltipContent = (props) => {
+  if (!props.active || props.payload === null || props.payload[0] === null) {
     return <></>
   }
 
   return (
     <div className="recharts-tooltip">
       <p className="recharts-tooltip-label">
-        {moment.unix(item.label).format('HH:mm:ss A')}
+        {moment.unix(props.label).format('HH:mm:ss A')}
       </p>
       <ul className="recharts-tooltip-list">
-        {item.payload.map((data, i) => (
+        {props.payload.map((data, i) => (
           <li key={i} className="recharts-tooltip-list-item">
             <span className="recharts-tooltip-list-item-name">{data.name}</span>
             <span className="recharts-tooltip-list-item-separator">
-              {item.separator}
+              {props.separator}
             </span>
             <span className="recharts-tooltip-list-item-value">
-              {item.formatter(data.value)}
+              {props.formatter(data.value)}
             </span>
           </li>
         ))}
@@ -63,9 +63,7 @@ const TooltipContent = (item) => {
   )
 }
 
-TooltipContent.propTypes = {
-  item: PropTypes.any
-}
+TooltipContent.propTypes = {}
 
 const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
   const [lines, setLines] = useState([])
