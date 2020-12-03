@@ -20,6 +20,10 @@
     "entityType1": "Partner",
     "entityType2": "Non-Partner"
   },
+  "lacchainAddEntityActionEntityTypeFieldComponent": {
+    "entityType1": "Partner",
+    "entityType2": "Non-Partner"
+  },
   "lacchainManagement": {
     "loginWarning": "Inicie sesión para usar esta herramienta",
     "noneActionWarning": "No hay ninguna opción para su cuenta",
