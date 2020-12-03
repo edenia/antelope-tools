@@ -182,14 +182,14 @@ const helpRoutes = [
     exact: true
   },
   {
-    header: 'external',
+    header: 'community',
     name: 'github',
     path: 'https://github.com/eoscostarica/eosio-dashboard',
     icon: <GitHubIcon />
   },
   {
     name: 'telegram',
-    path: 'https://github.com/eoscostarica/eosio-dashboard',
+    path: 'https://t.me/blockchaincostarica',
     icon: <TelegramIcon />
   },
   {

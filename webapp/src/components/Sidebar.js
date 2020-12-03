@@ -396,11 +396,14 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
         <Grid container spacing={2}>
           <Grid item>
             <SidebarFooterText variant="body2">
-              Made with{' '}
-              <span role="img" aria-label="love">
-                ❤️
-              </span>{' '}
-              by EOS Costa Rica
+              An open source project by{' '}
+              <a
+                href="https://eoscostarica.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                EOS Costa Rica
+              </a>
             </SidebarFooterText>
             <SidebarFooterSubText />
           </Grid>
