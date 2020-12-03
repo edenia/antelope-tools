@@ -38,6 +38,8 @@ spec:
         image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
         imagePullPolicy: "Always"
         name: "monitor-hasura"
+        imagePullSecrets:
+        name: regcred
         ports:
         - containerPort: 8080
         volumeMounts:

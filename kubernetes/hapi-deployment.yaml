@@ -20,6 +20,8 @@ spec:
       - image: eoscostarica506/monitor-hapi
         imagePullPolicy: "Always"
         name: "monitor-hapi"
+        imagePullSecrets:
+        name: regcred
         envFrom:
         - configMapRef:
             name: monitor-hapi-config
