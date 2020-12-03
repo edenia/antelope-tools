@@ -63,7 +63,13 @@ const TooltipContent = (props) => {
   )
 }
 
-TooltipContent.propTypes = {}
+TooltipContent.propTypes = {
+  payload: PropTypes.array,
+  formatter: PropTypes.func,
+  separator: PropTypes.string,
+  label: PropTypes.string,
+  active: PropTypes.bool
+}
 
 const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
   const [lines, setLines] = useState([])
