@@ -39,7 +39,11 @@ const App = ({ ual = {} }) => {
       <BrowserRouter>
         <DashboardLayout ual={ual}>
           <Suspense fallback={<Loader />}>
-            <Switch>{routes.map(renderRoutes)}</Switch>
+            <Switch>
+              {routes
+                .filter((route) => !route?.path?.includes('http'))
+                .map(renderRoutes)}
+            </Switch>
           </Suspense>
         </DashboardLayout>
       </BrowserRouter>
