@@ -16,23 +16,23 @@ spec:
       labels:
         app: wallet
     spec:
+      imagePullSecrets:
+          - name: regcred
       containers:
-      - image: eoscostarica506/wallet
-        imagePullPolicy: "IfNotPresent"
-        imagePullSecrets:
-        - name: regcred
-        name: "wallet"
-        envFrom:
-        - configMapRef:
-            name: monitor-wallet-config
-        ports:
-        - containerPort: 8888
-        volumeMounts:
-        - mountPath: /opt/application/data
-          name: wallet
-          subPathExpr: $(WALLET_DIRECTORY)
-        - mountPath: /opt/application/config
-          name: config-volume
+        - image: eoscostarica506/wallet
+          imagePullPolicy: "IfNotPresent"
+          name: "wallet"
+          envFrom:
+            - configMapRef:
+                name: monitor-wallet-config
+          ports:
+            - containerPort: 8888
+          volumeMounts:
+            - mountPath: /opt/application/data
+              name: wallet
+              subPathExpr: $(WALLET_DIRECTORY)
+            - mountPath: /opt/application/config
+              name: config-volume
       restartPolicy: Always
       volumes:
         - name: config-volume
