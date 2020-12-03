@@ -16,12 +16,12 @@ spec:
       labels:
         app: monitor-hapi
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - image: eoscostarica506/monitor-hapi
           imagePullPolicy: "Always"
           name: "monitor-hapi"
-          imagePullSecrets:
-            - name: regcred
           envFrom:
             - configMapRef:
                 name: monitor-hapi-config
