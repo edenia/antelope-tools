@@ -102,3 +102,13 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	@for file in $(shell find $(K8S_BUILD_DIR) -name '*.yaml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
         	kubectl apply -f $(K8S_BUILD_DIR)/$$file; \
 	done
+
+build-all:
+	for dir in $(SUBDIRS); do \
+		$(MAKE) build-docker -C $$dir; \
+	done
+
+push-image:
+	for dir in $(SUBDIRS); do \
+        	$(MAKE) push-image -C $$dir; \
+	done
