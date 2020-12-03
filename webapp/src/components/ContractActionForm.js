@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import LacchainEntitySelectField from './LacchainEntitySelectField'
 import LacchainSetEntInfoField from './LacchainSetEntInfoField'
@@ -109,6 +110,17 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.netsetgroup.group':
+        return (
+          <ArrayTextField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || []}
             onChange={handleFieldChange(field.name)}
           />
         )

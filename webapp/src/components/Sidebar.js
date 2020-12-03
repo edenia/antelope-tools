@@ -43,6 +43,10 @@ const List = styled(MuiList)`
 
 const ListItem = styled(MuiListItem)`
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 `
 
 const Brand = styled(Box)`
@@ -86,25 +90,23 @@ const Category = styled(ListItem)`
   padding-left: ${(props) => props.theme.spacing(6)}px;
   padding-right: ${(props) => props.theme.spacing(5)}px;
   font-weight: ${(props) => props.theme.typography.fontWeightRegular};
+  color: ${(props) => props.theme.sidebar.color};
+  display: flex;
+  flex-direction: row;
 
   svg {
-    color: ${(props) => props.theme.sidebar.color};
+    opacity: 0.5;
     font-size: 20px;
     width: 20px;
     height: 20px;
-    opacity: 0.5;
   }
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.08);
-  }
-
+  &:hover,
   &.${(props) => props.activeClassName} {
     background-color: ${(props) =>
       darken(0.05, props.theme.sidebar.background)};
-
-    span {
-      color: ${(props) => props.theme.sidebar.color};
+    svg {
+      opacity: 1;
     }
   }
 `
@@ -179,6 +181,16 @@ const LinkBadge = styled(Chip)`
 
 const CategoryBadge = styled(LinkBadge)`
   top: 12px;
+`
+
+const SidebarSection = styled(Typography)`
+  color: ${(props) => props.theme.sidebar.color};
+  padding: ${(props) => props.theme.spacing(4)}px
+    ${(props) => props.theme.spacing(6)}px
+    ${(props) => props.theme.spacing(1)}px;
+  opacity: 0.9;
+  display: block;
+  font-weight: 600;
 `
 
 const SidebarFooter = styled.div`
@@ -311,6 +323,10 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
             .filter(({ name }) => !!name)
             .map((category, index) => (
               <ListItem key={index}>
+                {category.header ? (
+                  <SidebarSection>{category.header}</SidebarSection>
+                ) : null}
+
                 {category.children ? (
                   <Box width="100%" key={index}>
                     <SidebarCategory

@@ -1,6 +1,5 @@
 import React, { lazy } from 'react'
 import DashboardIcon from '@material-ui/icons/Dashboard'
-import LiveHelpIcon from '@material-ui/icons/LiveHelp'
 import StorageIcon from '@material-ui/icons/Storage'
 import CloudIcon from '@material-ui/icons/Language'
 import ListAltIcon from '@material-ui/icons/ListAlt'
@@ -8,6 +7,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
 import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
+import { Activity as ActivityIcon } from 'react-feather'
 
 import { eosConfig } from '../config'
 
@@ -36,9 +36,9 @@ const defaultRoutes = [
   },
   {
     name: 'networkInfo',
-    icon: <LiveHelpIcon />,
+    icon: <ActivityIcon />,
     component: NetworkInfo,
-    path: '/network-info',
+    path: '/node-performance',
     exact: true
   },
   {
@@ -92,6 +92,7 @@ const defaultRoutes = [
 ]
 const lacchainRoutes = [
   {
+    header: 'Network Information',
     name: 'home',
     icon: <DashboardIcon />,
     component: Home,
@@ -100,9 +101,9 @@ const lacchainRoutes = [
   },
   {
     name: 'networkInfo',
-    icon: <LiveHelpIcon />,
+    icon: <ActivityIcon />,
     component: NetworkInfo,
-    path: '/network-info',
+    path: '/node-performance',
     exact: true
   },
   {
@@ -134,6 +135,7 @@ const lacchainRoutes = [
     exact: true
   },
   {
+    header: 'Tools',
     name: 'lacchainManagement',
     icon: <DeveloperBoardIcon />,
     component: LacchainManagement,
@@ -150,6 +152,7 @@ const lacchainRoutes = [
 ]
 const helpRoutes = [
   {
+    header: 'Docs',
     name: 'About',
     component: About,
     path: '/about',
