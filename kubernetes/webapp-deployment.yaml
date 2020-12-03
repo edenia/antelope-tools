@@ -15,14 +15,15 @@ spec:
         app: monitor-webapp
     spec:
       containers:
-      - image: eoscostarica506/monitor-webapp:testing
+      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WEBAPP}:${VERSION}
         imagePullPolicy: "Always"
         name: monitor-webapp
         envFrom:
         - configMapRef:
             name: monitor-webapp-config
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+        - containerPort: 443
         volumeMounts:
         - mountPath: /etc/nginx/ssl-certs
           name: secret-volume

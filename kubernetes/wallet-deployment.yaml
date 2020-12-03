@@ -17,7 +17,7 @@ spec:
         app: wallet
     spec:
       containers:
-      - image: eoscostarica506/wallet
+      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
         imagePullPolicy: "Always"
         name: "wallet"
         envFrom:
