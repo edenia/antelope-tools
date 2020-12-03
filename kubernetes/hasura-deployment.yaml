@@ -38,6 +38,8 @@ spec:
         image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
         imagePullPolicy: "IfNotPresent"
         name: "monitor-hasura"
+        imagePullSecrets:
+        - name: regcred
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -49,11 +51,11 @@ spec:
           subPathExpr: $(METADATA_DIRECTORY)
       restartPolicy: Always
       volumes:
-      - name: monitor-hasura1
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu
-      - name: monitor-hasura2
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu
+        - name: monitor-hasura1
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu
+        - name: monitor-hasura2
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu
