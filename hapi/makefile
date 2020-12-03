@@ -1,3 +1,5 @@
+include ../utils/meta.mk ../utils/help.mk
+
 LATEST_TAG ?= latest
 
 install: ##@local Install all dependencies
@@ -15,12 +17,10 @@ run: node_modules
 
 build-docker: ##@devops Build the docker image
 build-docker: ./Dockerfile
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) || true
 	@docker build \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
-		--target prod-stage \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest \
+		--target release \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

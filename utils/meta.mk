@@ -8,7 +8,7 @@ IMAGE_NAME_WALLET=wallet
 DOCKER_REGISTRY=docker.pkg.github.com/eoscostarica/eosio-dashboard
 K8S_BUILD_DIR ?= ./build_k8s
 K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
-SUBDIRS = webapp
+SUBDIRS = webapp hapi
 
 MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME
 
