@@ -62,6 +62,7 @@
     "transPerBlock": "Transacciones por Bloque"
   },
   "networkInfoRoute": {
+    "chainId": "Identificador de la cadena",
     "chainLimits": "Límites de la cadena",
     "cpuLimitPerBlock": "Límite de CPU por bloque",
     "netLimitPerBlock": "Límite de NET por bloque",
