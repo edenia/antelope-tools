@@ -11,8 +11,7 @@ import {
   Legend,
   Tooltip
 } from 'recharts'
-import { scaleLinear } from 'd3-scale'
-import { interpolateHcl } from 'd3-interpolate'
+import { scaleOrdinal } from 'd3-scale'
 import moment from 'moment'
 import styled from 'styled-components'
 
@@ -75,11 +74,32 @@ const MultiLineChart = ({ data, valueKey, tooltipFormatter }) => {
   const [maxDate, setMaxDate] = useState()
 
   const color = useCallback(
-    scaleLinear()
-      .domain([0, series.length])
-      .range([theme.palette.success.main, theme.palette.error.main])
-      .interpolate(interpolateHcl),
-    [series]
+    scaleOrdinal()
+      .domain([...Array(lines.length).keys()])
+      .range([
+        '#00C853',
+        '#1E88E5',
+        '#c5639c',
+        '#faff16',
+        '#20c773',
+        '#8b696d',
+        '#78762d',
+        '#e154c6',
+        '#40835f',
+        '#d73656',
+        '#1afd5c',
+        '#c4f546',
+        '#3d88d8',
+        '#d47270',
+        '#e8ac48',
+        '#cf7c97',
+        '#cebb11',
+        '#e78139',
+        '#ff7463',
+        '#bea1fd',
+        '#d73656'
+      ]),
+    [lines]
   )
 
   useEffect(() => {
