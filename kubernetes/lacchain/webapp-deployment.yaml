@@ -14,12 +14,12 @@ spec:
       labels:
         app: monitor-webapp
     spec:
+      imagePullSecrets:
+          - name: regcred
       containers:
         - image: eoscostarica506/monitor-webapp:lacchain
           imagePullPolicy: "Always"
           name: monitor-webapp
-          imagePullSecrets:
-            - name: regcred
           envFrom:
             - configMapRef:
                 name: monitor-webapp-config

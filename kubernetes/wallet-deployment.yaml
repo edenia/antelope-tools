@@ -16,6 +16,8 @@ spec:
       labels:
         app: wallet
     spec:
+      imagePullSecrets:
+          - name: regcred
       containers:
         - image: eoscostarica506/wallet
           imagePullPolicy: "IfNotPresent"
@@ -31,8 +33,6 @@ spec:
               subPathExpr: $(WALLET_DIRECTORY)
             - mountPath: /opt/application/config
               name: config-volume
-        imagePullSecrets:
-          - name: regcred
       restartPolicy: Always
       volumes:
         - name: config-volume
