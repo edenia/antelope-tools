@@ -25,6 +25,24 @@ const NavLink = React.forwardRef((props, ref) => (
   <RouterNavLink innerRef={ref} {...props} />
 ))
 
+const ExternalLink = React.forwardRef(({ to, children, className }, ref) => (
+  <a
+    ref={ref}
+    href={to}
+    className={className}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {children}
+  </a>
+))
+
+ExternalLink.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string
+}
+
 const Drawer = styled(MuiDrawer)`
   border-right: 0;
 
@@ -168,7 +186,7 @@ const LinkBadge = styled(Chip)`
   position: absolute;
   right: 12px;
   top: 8px;
-  background: ${(props) => props.theme.sidebar.badge.background};
+  background-color: ${(props) => props.theme.palette.secondary.main};
 
   span.MuiChip-label,
   span.MuiChip-label:hover {
@@ -249,22 +267,21 @@ SidebarCategory.propTypes = {
   badge: PropTypes.string
 }
 
-const SidebarLink = ({ name, icon, to, badge }) => {
-  return (
-    <Link
-      button
-      dense
-      component={NavLink}
-      exact
-      to={to}
-      activeClassName="active"
-    >
-      {icon}
-      <LinkText>{name}</LinkText>
-      {badge ? <LinkBadge label={badge} /> : ''}
-    </Link>
-  )
-}
+const SidebarLink = ({ name, icon, to, badge }) => (
+  <Link
+    button
+    dense
+    component={NavLink}
+    exact
+    to={to}
+    activeClassName="active"
+    href={to}
+  >
+    {icon}
+    <LinkText>{name}</LinkText>
+    {badge ? <LinkBadge label={badge} /> : ''}
+  </Link>
+)
 
 SidebarLink.propTypes = {
   icon: PropTypes.node,
@@ -324,11 +341,11 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
             .map((category, index) => (
               <ListItem key={index}>
                 {category.header ? (
-                  <SidebarSection>{category.header}</SidebarSection>
+                  <SidebarSection>{t(category.header)}</SidebarSection>
                 ) : null}
 
                 {category.children ? (
-                  <Box width="100%" key={index}>
+                  <Box width="100%">
                     <SidebarCategory
                       isOpen={!openRoutes[index]}
                       name={t(`${category.path}>sidebar`)}
@@ -345,7 +362,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                     >
                       {category.children.map((route, index) => (
                         <SidebarLink
-                          key={index}
+                          key={`sidebar-link${index}`}
                           name={route.name}
                           to={route.path}
                           icon={route.icon}
@@ -357,10 +374,16 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                 ) : (
                   <SidebarCategory
                     isCollapsable={false}
-                    name={t(`${category.path}>sidebar`)}
+                    name={t(
+                      category.path.includes('http')
+                        ? category.name
+                        : `${category.path}>sidebar`
+                    )}
                     to={category.path}
                     activeClassName="active"
-                    component={NavLink}
+                    component={
+                      category.path.includes('http') ? ExternalLink : NavLink
+                    }
                     icon={category.icon}
                     exact
                     badge={category.badge}
@@ -374,11 +397,14 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
         <Grid container spacing={2}>
           <Grid item>
             <SidebarFooterText variant="body2">
-              Made with{' '}
-              <span role="img" aria-label="love">
-                ❤️
-              </span>{' '}
-              by EOS Costa Rica
+              An open source project by{' '}
+              <a
+                href="https://eoscostarica.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                EOS Costa Rica
+              </a>
             </SidebarFooterText>
             <SidebarFooterSubText />
           </Grid>

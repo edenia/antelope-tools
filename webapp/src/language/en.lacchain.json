@@ -6,9 +6,9 @@
     "/lacchain/network>sidebar": "LACChain Network",
     "/lacchain/network>title": "LACChain Network - Dashboard",
     "/lacchain/network>heading": "LACChain Network",
-    "/lacchain/management>sidebar": "LACChain Management",
-    "/lacchain/management>title": "LACChain Management - Dashboard",
-    "/lacchain/management>heading": "LACChain Management"
+    "/management>sidebar": "Management",
+    "/management>title": "Management - Dashboard",
+    "/management>heading": "Management"
   },
   "common": {
     "producerName": "Entity name",
