@@ -16,6 +16,7 @@
     "producers": "Productores",
     "producer": "Productor",
     "login": "Ingresar",
+    "logout": "Salir",
     "keys": "Llaves"
   },
   "routes": {
