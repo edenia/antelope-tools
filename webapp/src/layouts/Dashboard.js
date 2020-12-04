@@ -5,7 +5,6 @@ import { spacing } from '@material-ui/system'
 import Hidden from '@material-ui/core/Hidden'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import MuiPaper from '@material-ui/core/Paper'
-import withWidth from '@material-ui/core/withWidth'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
@@ -170,4 +169,4 @@ Dashboard.propTypes = {
   ual: PropTypes.any
 }
 
-export default withWidth()(Dashboard)
+export default Dashboard
