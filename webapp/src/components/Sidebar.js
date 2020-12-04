@@ -267,24 +267,21 @@ SidebarCategory.propTypes = {
   badge: PropTypes.string
 }
 
-const SidebarLink = ({ name, icon, to, badge }) => {
-  console.log('=>', to)
-  return (
-    <Link
-      button
-      dense
-      component={to.includes('https://') ? 'a' : NavLink}
-      exact
-      // to={to}
-      activeClassName="active"
-      href={to}
-    >
-      {icon}
-      <LinkText>{name}</LinkText>
-      {badge ? <LinkBadge label={badge} /> : ''}
-    </Link>
-  )
-}
+const SidebarLink = ({ name, icon, to, badge }) => (
+  <Link
+    button
+    dense
+    component={NavLink}
+    exact
+    to={to}
+    activeClassName="active"
+    href={to}
+  >
+    {icon}
+    <LinkText>{name}</LinkText>
+    {badge ? <LinkBadge label={badge} /> : ''}
+  </Link>
+)
 
 SidebarLink.propTypes = {
   icon: PropTypes.node,
