@@ -58,7 +58,7 @@
     "community": "Community",
     "changelog": "Changelog",
     "github": "Github Repository",
-    "telegram": "Telegram Room"
+    "telegram": "Telegram Channel"
   },
   "homeRoute": {
     "currentProducer": "Current Producer",

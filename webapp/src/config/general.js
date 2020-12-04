@@ -6,4 +6,4 @@ export const defaultProducerLogo =
   process.env.REACT_APP_DEFAULT_PRODUCER_LOGO ||
   'https://bloks.io/img/eosio.png'
 export const appVersion = process.env.REACT_APP_VERSION || 'v1.0'
-export const appName = process.env.REACT_APP_NAME || 'eosiodasboard'
+export const appName = process.env.REACT_APP_NAME || 'eosiodashboard'
