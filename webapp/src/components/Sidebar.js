@@ -25,19 +25,23 @@ const NavLink = React.forwardRef((props, ref) => (
   <RouterNavLink innerRef={ref} {...props} />
 ))
 
-const ExternalLink = React.forwardRef(
-  ({ to, children, className, ...props }, ref) => (
-    <a
-      ref={ref}
-      href={to}
-      className={className}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children}
-    </a>
-  )
-)
+const ExternalLink = React.forwardRef(({ to, children, className }, ref) => (
+  <a
+    ref={ref}
+    href={to}
+    className={className}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {children}
+  </a>
+))
+
+ExternalLink.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string
+}
 
 const Drawer = styled(MuiDrawer)`
   border-right: 0;
