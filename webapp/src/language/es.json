@@ -16,6 +16,7 @@
     "producers": "Productores",
     "producer": "Productor",
     "login": "Ingresar",
+    "logout": "Salir",
     "keys": "Llaves"
   },
   "routes": {
@@ -34,12 +35,12 @@
     "/nodes>sidebar": "Nodos",
     "/nodes>title": "Nodos - Panel",
     "/nodes>heading": "Nodos",
-    "/nodes-distribution>sidebar": "Distribución de nodos",
-    "/nodes-distribution>title": "Distribución de nodos - Panel",
-    "/nodes-distribution>heading": "Distribución de nodos",
-    "/accounts>sidebar": "Cuentas",
-    "/accounts>title": "Cuentas - Panel",
-    "/accounts>heading": "Cuentas",
+    "/nodes-distribution>sidebar": "Distribución",
+    "/nodes-distribution>title": "Distribución - Panel",
+    "/nodes-distribution>heading": "Distribución",
+    "/accounts>sidebar": "Cuentas y Contratos",
+    "/accounts>title": "Cuentas y Contratos - Panel",
+    "/accounts>heading": "Cuentas y Contratos",
     "/bpjson>sidebar": "BP JSON",
     "/bpjson>title": "BP JSON - Panel",
     "/bpjson>heading": "BP JSON",
@@ -51,7 +52,14 @@
     "/about>heading": "Acerca de",
     "/help>sidebar": "Ayuda",
     "/help>title": "Ayuda - Panel",
-    "/help>heading": "Ayuda"
+    "/help>heading": "Ayuda",
+    "networkInformation": "Información de a red",
+    "tools": "Herramientas",
+    "docs": "Documentación",
+    "community": "Comunidad",
+    "changelog": "Registro de cambios",
+    "github": "Repositorio de Github",
+    "telegram": "Grupo en Telegram"
   },
   "homeRoute": {
     "currentProducer": "Productor actual",

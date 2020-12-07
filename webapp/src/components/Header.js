@@ -7,11 +7,16 @@ import {
   Menu,
   MenuItem,
   AppBar as MuiAppBar,
-  IconButton as MuiIconButton,
-  Toolbar
+  IconButton as MuiIconButton
 } from '@material-ui/core'
-import { Menu as MenuIcon } from '@material-ui/icons'
-import { Power as PowerIcon } from 'react-feather'
+import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+import MenuIcon from '@material-ui/icons/Menu'
+import LanguageIcon from '@material-ui/icons/Language'
+import FingerprintIcon from '@material-ui/icons/Fingerprint'
+import AccountIcon from '@material-ui/icons/AccountCircle'
+import ExitIcon from '@material-ui/icons/ExitToApp'
 import { useTranslation } from 'react-i18next'
 
 const AppBar = styled(MuiAppBar)`
@@ -27,18 +32,23 @@ const IconButton = styled(MuiIconButton)`
   }
 `
 
-const Flag = styled.img`
-  border-radius: 50%;
+const UserBox = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    color: #757575;
+  }
 `
 
 const languages = [
   {
     value: 'en',
-    label: 'English'
+    label: 'EN'
   },
   {
     value: 'es',
-    label: 'Español'
+    label: 'ES'
   }
 ]
 
@@ -64,21 +74,10 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <>
-      <IconButton
-        aria-owns={Boolean(anchorMenu) ? 'menu-appbar' : undefined}
-        aria-haspopup="true"
-        onClick={toggleMenu}
-        color="inherit"
-      >
-        <Flag
-          width="22px"
-          height="22px"
-          srcset={`languages/${currentLanguaje}.png, languages/${currentLanguaje}-2x.png 2x, languages/${currentLanguaje}-3x.png 3x`}
-          src={`/languages/${currentLanguaje}.png`}
-          alt={currentLanguaje}
-        />
-      </IconButton>
+    <Box>
+      <Button startIcon={<LanguageIcon />} onClick={toggleMenu}>
+        {currentLanguaje.toUpperCase()}
+      </Button>
       <Menu
         id="menu-appbar"
         anchorEl={anchorMenu}
@@ -94,54 +93,39 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </Box>
   )
 }
 
 const UserMenu = ({ ual }) => {
-  const [anchorMenu, setAnchorMenu] = useState(null)
-
-  const toggleMenu = (event) => {
-    setAnchorMenu(event.currentTarget)
-  }
-
-  const closeMenu = () => {
-    setAnchorMenu(null)
-  }
+  const { t } = useTranslation()
 
   const handleOnLogin = () => {
     ual.showModal()
-    setAnchorMenu(null)
   }
 
   const handleSignOut = () => {
     ual.logout()
-    setAnchorMenu(null)
   }
 
   return (
-    <>
-      <IconButton
-        aria-owns={Boolean(anchorMenu) ? 'menu-appbar' : undefined}
-        aria-haspopup="true"
-        onClick={toggleMenu}
-        color="inherit"
-        aria-label="account"
-      >
-        <PowerIcon />
-      </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorMenu}
-        open={Boolean(anchorMenu)}
-        onClose={closeMenu}
-      >
-        {!ual.activeUser && <MenuItem onClick={handleOnLogin}>Login</MenuItem>}
-        {ual.activeUser && (
-          <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
-        )}
-      </Menu>
-    </>
+    <Box>
+      {ual.activeUser && (
+        <>
+          <Button startIcon={<AccountIcon />}>
+            {ual.activeUser.accountName}
+          </Button>
+          <Button startIcon={<ExitIcon />} onClick={handleSignOut}>
+            {t('logout')}
+          </Button>
+        </>
+      )}
+      {!ual.activeUser && (
+        <Button startIcon={<FingerprintIcon />} onClick={handleOnLogin}>
+          {t('login')}
+        </Button>
+      )}
+    </Box>
   )
 }
 
@@ -150,31 +134,31 @@ UserMenu.propTypes = {
 }
 
 const Header = ({ ual, onDrawerToggle }) => (
-  <>
-    <AppBar position="sticky" elevation={0}>
-      <Toolbar>
-        <Grid container alignItems="center">
-          <Hidden mdUp>
-            <Grid item>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={onDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Grid>
-          </Hidden>
-          <Grid item />
-          <Grid item xs />
+  <AppBar position="sticky" elevation={0}>
+    <Toolbar>
+      <Grid container alignItems="center">
+        <Hidden mdUp>
           <Grid item>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={onDrawerToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Grid>
+        </Hidden>
+        <Grid item />
+        <Grid item xs />
+        <Grid item>
+          <UserBox>
             <LanguageMenu />
             <UserMenu ual={ual} />
-          </Grid>
+          </UserBox>
         </Grid>
-      </Toolbar>
-    </AppBar>
-  </>
+      </Grid>
+    </Toolbar>
+  </AppBar>
 )
 
 Header.propTypes = {

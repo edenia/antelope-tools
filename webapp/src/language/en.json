@@ -16,6 +16,7 @@
     "producers": "Producers",
     "producer": "Producer",
     "login": "Login",
+    "logout": "Logout",
     "keys": "Keys"
   },
   "routes": {
@@ -34,12 +35,12 @@
     "/nodes>sidebar": "Nodes",
     "/nodes>title": "Nodes - Dashboard",
     "/nodes>heading": "Nodes",
-    "/nodes-distribution>sidebar": "Nodes Distribution",
-    "/nodes-distribution>title": "Nodes Distribution - Dashboard",
-    "/nodes-distribution>heading": "Nodes Distribution",
-    "/accounts>sidebar": "Accounts",
-    "/accounts>title": "Accounts - Dashboard",
-    "/accounts>heading": "Accounts",
+    "/nodes-distribution>sidebar": "Distribution",
+    "/nodes-distribution>title": "Distribution - Dashboard",
+    "/nodes-distribution>heading": "Distribution",
+    "/accounts>sidebar": "Accounts and Contracts",
+    "/accounts>title": "Accounts and Contracts - Dashboard",
+    "/accounts>heading": "Accounts and Contracts",
     "/bpjson>sidebar": "BP JSON",
     "/bpjson>title": "BP JSON - Dashboard",
     "/bpjson>heading": "BP JSON",
@@ -51,7 +52,14 @@
     "/about>heading": "About",
     "/help>sidebar": "Help",
     "/help>title": "Help - Dashboard",
-    "/help>heading": "Help"
+    "/help>heading": "Help",
+    "networkInformation": "Network Information",
+    "tools": "Tools",
+    "docs": "Docs",
+    "community": "Community",
+    "changelog": "Changelog",
+    "github": "Github Repository",
+    "telegram": "Telegram Channel"
   },
   "homeRoute": {
     "currentProducer": "Current Producer",

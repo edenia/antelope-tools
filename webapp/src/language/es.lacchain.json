@@ -6,9 +6,9 @@
     "/lacchain/network>sidebar": "LACChain Topologia de rede",
     "/lacchain/network>title": "LACChain Topologia de rede - Panel",
     "/lacchain/network>heading": "LACChain Topologia de rede",
-    "/lacchain/management>sidebar": "LACChain administración",
-    "/lacchain/management>title": "LACChain administración - Panel",
-    "/lacchain/management>heading": "LACChain administración"
+    "/management>sidebar": "Administración",
+    "/management>title": "Administración - Panel",
+    "/management>heading": "Administración"
   },
   "common": {
     "producerName": "Nombre de la entidad",
