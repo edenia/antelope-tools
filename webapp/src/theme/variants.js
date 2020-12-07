@@ -40,8 +40,7 @@ const lightVariant = {
       fontWeight: 'normal'
     },
     badge: {
-      color: '#FFF',
-      background: green[600]
+      color: '#FFF'
     }
   },
   body: {

@@ -47,7 +47,6 @@ const NodeCard = ({ producer, node }) => {
   const { data: { cpu } = {} } = useQuery(NODE_CPU_BENCHMARK, {
     variables: { account: node.node_name || producer.owner }
   })
-  console.log(producer.owner)
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
