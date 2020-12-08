@@ -111,11 +111,11 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
         value={payload.github_user || []}
         onChange={handleOnFieldChange('github_user')}
       />
-      <TextField
+      <ArrayTextField
         label="chain_resources"
         variant={variant}
         className={className}
-        value={payload.chain_resources || ''}
+        value={payload.chain_resources || []}
         onChange={handleOnFieldChange('chain_resources')}
       />
       <ArrayTextField
