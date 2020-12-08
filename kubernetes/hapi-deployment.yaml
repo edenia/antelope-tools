@@ -16,6 +16,8 @@ spec:
       labels:
         app: monitor-hapi
     spec:
+      imagePullSecrets:
+          - name: regcred
       containers:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HAPI}:${VERSION}
         imagePullPolicy: "Always"
@@ -31,7 +33,7 @@ spec:
           subPathExpr: $(CODE_DIRECTORY)
       restartPolicy: Always
       volumes:
-      - name: hapi
-        nfs:
-          server: nfs-server-new
-          path: /home/ubuntu/
+        - name: hapi
+          nfs:
+            server: nfs-server-new
+            path: /home/ubuntu/

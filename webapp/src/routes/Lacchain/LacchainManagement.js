@@ -138,6 +138,20 @@ const LacchainManagement = ({ ual }) => {
         actions = ['setentinfo', 'setnodeinfo', 'newaccount']
       }
 
+      if (currentEntity?.type === 1) {
+        actions = [
+          ...actions,
+          'addboot',
+          'addobserver',
+          'addwriter',
+          'addvalidator'
+        ]
+      }
+
+      if (currentEntity?.type === 2) {
+        actions = [...actions, 'addobserver', 'addwriter']
+      }
+
       setValidActions(actions)
 
       if (!actions.length) {

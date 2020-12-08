@@ -1,15 +1,23 @@
 import React, { lazy } from 'react'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import LiveHelpIcon from '@material-ui/icons/LiveHelp'
-import StorageIcon from '@material-ui/icons/Storage'
-import CloudIcon from '@material-ui/icons/Language'
-import ListAltIcon from '@material-ui/icons/ListAlt'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
-import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard'
 import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
+import {
+  Activity as ActivityIcon,
+  Grid as GridIcon,
+  Users as UsersIcon,
+  Server as ServerIcon,
+  Map as MapIcon,
+  Sliders as SlidersIcon,
+  User as UserIcon,
+  Info as InfoIcon,
+  HelpCircle as HelpIcon,
+  GitMerge as GitMergeIcon,
+  GitHub as GitHubIcon,
+  Send as TelegramIcon
+} from 'react-feather'
 
-import { eosConfig } from '../config'
+import { eosConfig, generalConfig } from '../config'
 
 const Home = lazy(() => import('./Home'))
 const NetworkInfo = lazy(() => import('./NetworkInfo'))
@@ -29,21 +37,21 @@ const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const defaultRoutes = [
   {
     name: 'home',
-    icon: <DashboardIcon />,
+    icon: <GridIcon />,
     component: Home,
     path: '/',
     exact: true
   },
   {
     name: 'networkInfo',
-    icon: <LiveHelpIcon />,
+    icon: <ActivityIcon />,
     component: NetworkInfo,
-    path: '/network-info',
+    path: '/node-performance',
     exact: true
   },
   {
     name: 'blockProducers',
-    icon: <StorageIcon />,
+    icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
     exact: true
@@ -57,21 +65,21 @@ const defaultRoutes = [
   },
   {
     name: 'nodes',
-    icon: <StorageIcon />,
+    icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
     exact: true
   },
   {
     name: 'nodesDistribution',
-    icon: <CloudIcon />,
+    icon: <MapIcon />,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
   },
   {
     name: 'accounts',
-    icon: <ListAltIcon />,
+    icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
     exact: true
@@ -92,36 +100,37 @@ const defaultRoutes = [
 ]
 const lacchainRoutes = [
   {
+    header: 'networkInformation',
     name: 'home',
-    icon: <DashboardIcon />,
+    icon: <GridIcon />,
     component: Home,
     path: '/',
     exact: true
   },
   {
     name: 'networkInfo',
-    icon: <LiveHelpIcon />,
+    icon: <ActivityIcon />,
     component: NetworkInfo,
-    path: '/network-info',
+    path: '/node-performance',
     exact: true
   },
   {
     name: 'entities',
-    icon: <StorageIcon />,
+    icon: <UsersIcon />,
     component: BlockProducers,
     path: '/entities',
     exact: true
   },
   {
     name: 'nodes',
-    icon: <StorageIcon />,
+    icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
     exact: true
   },
   {
     name: 'nodesDistribution',
-    icon: <CloudIcon />,
+    icon: <MapIcon />,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
@@ -134,15 +143,16 @@ const lacchainRoutes = [
     exact: true
   },
   {
+    header: 'tools',
     name: 'lacchainManagement',
-    icon: <DeveloperBoardIcon />,
+    icon: <SlidersIcon />,
     component: LacchainManagement,
-    path: '/lacchain/management',
+    path: '/management',
     exact: true
   },
   {
     name: 'accounts',
-    icon: <ListAltIcon />,
+    icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
     exact: true
@@ -150,16 +160,37 @@ const lacchainRoutes = [
 ]
 const helpRoutes = [
   {
+    header: 'docs',
     name: 'About',
+    icon: <InfoIcon />,
     component: About,
     path: '/about',
     exact: true
   },
   {
     name: 'Help',
+    icon: <HelpIcon />,
     component: Help,
     path: '/help',
     exact: true
+  },
+  {
+    name: 'changelog',
+    badge: generalConfig.appVersion,
+    path: 'https://github.com/eoscostarica/eosio-dashboard/tags',
+    icon: <GitMergeIcon />,
+    exact: true
+  },
+  {
+    header: 'community',
+    name: 'github',
+    path: 'https://github.com/eoscostarica/eosio-dashboard',
+    icon: <GitHubIcon />
+  },
+  {
+    name: 'telegram',
+    path: 'https://t.me/blockchaincostarica',
+    icon: <TelegramIcon />
   },
   {
     component: Page404

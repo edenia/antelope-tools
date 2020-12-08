@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 import { spacing } from '@material-ui/system'
-import {
-  Hidden,
-  CssBaseline,
-  Paper as MuiPaper,
-  withWidth
-} from '@material-ui/core'
+import Hidden from '@material-ui/core/Hidden'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import MuiPaper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
@@ -79,6 +76,8 @@ const SubHeader = styled(Box)`
   display: flex;
   flex-direction: column-reverse;
   margin-bottom: ${(props) => props.theme.spacing(4)}px;
+  padding-bottom: ${(props) => props.theme.spacing(4)}px;
+  border-bottom: 1px solid #e0e0e0;
   width: 100%;
   h3 {
     margin-top: ${(props) => props.theme.spacing(4)}px;
@@ -170,4 +169,4 @@ Dashboard.propTypes = {
   ual: PropTypes.any
 }
 
-export default withWidth()(Dashboard)
+export default Dashboard
