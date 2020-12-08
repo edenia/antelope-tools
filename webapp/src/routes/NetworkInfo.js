@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 
 import MultiLineChart from '../components/MultiLineChart'
 import { NETWORK_STATS } from '../gql'
+import { generalConfig } from '../config'
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -47,19 +48,21 @@ const Network = () => {
 
   return (
     <Grid container justify="flex-start" spacing={4}>
-      <Grid item xs={12}>
-        <Card className={classes.root}>
-          <CardHeader title={t('cpuBenchmarks')} />
-          <CardContent className={classes.content}>
-            <MultiLineChart
-              data={stats?.cpu || []}
-              valueKey="usage"
-              tooltipFormatter={(value) => `${value}us`}
-            />
-          </CardContent>
-          <CardActions disableSpacing />
-        </Card>
-      </Grid>
+      {generalConfig.useCpuBenchmark && (
+        <Grid item xs={12}>
+          <Card className={classes.root}>
+            <CardHeader title={t('cpuBenchmarks')} />
+            <CardContent className={classes.content}>
+              <MultiLineChart
+                data={stats?.cpu || []}
+                valueKey="usage"
+                tooltipFormatter={(value) => `${value}us`}
+              />
+            </CardContent>
+            <CardActions disableSpacing />
+          </Card>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Card className={classes.root}>
           <CardHeader title={t('missedBlocks')} />

@@ -57,11 +57,13 @@ const start = async () => {
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
   )
-  run(
-    'SYNC CPU USAGE',
-    producerService.syncCpuUsage,
-    workersConfig.syncProducerCpuInterval
-  )
+  if (workersConfig.syncProducerCpuInterval > 0) {
+    run(
+      'SYNC CPU USAGE',
+      producerService.syncCpuUsage,
+      workersConfig.syncProducerCpuInterval
+    )
+  }
   run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
 }
 
