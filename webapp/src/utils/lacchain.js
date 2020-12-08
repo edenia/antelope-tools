@@ -21,6 +21,10 @@ export const getNodeFeatures = () => [
   {
     label: 'dfuse',
     value: 'dfuse'
+  },
+  {
+    label: 'state history plugin',
+    value: 'state history plugin'
   }
 ]
 
