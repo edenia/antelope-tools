@@ -1,0 +1,33 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: http
+  namespace: ${NAMESPACE}
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: Host(`${HOST}`)
+    services:
+    - kind: Service
+      name: monitor-webapp
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https
+  namespace: ${NAMESPACE}
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`${HOST}`)
+    services:
+    - kind: Service
+      name: monitor-webapp
+      port: 80
+  tls:
+    secretName: tls-secret
