@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
   const { data: { cpu } = {} } = useQuery(NODE_CPU_BENCHMARK, {
-    variables: { account: node.node_name || producer.owner }
+    variables: { account: node?.node_name || producer.owner }
   })
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
