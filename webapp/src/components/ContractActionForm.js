@@ -39,7 +39,11 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   }
 
   const handleFieldChange = (name) => (event) => {
-    const value = event?.target?.value || event
+    const value =
+      typeof event === 'object' && !Array.isArray(event)
+        ? event?.target?.value
+        : event
+
     setPayload((prevValue) => ({
       ...prevValue,
       [name]: value
