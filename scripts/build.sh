@@ -28,6 +28,7 @@ docker build -t eoscostarica506/monitor-webapp:"${CONTAINER}" --target run-stage
    --build-arg port="${PORT}" \
    --build-arg react_app_title="${REACT_APP_TITLE}" \
    --build-arg react_app_default_producer_logo="${REACT_APP_DEFAULT_PRODUCER_LOGO}" \
+   --build-arg react_app_footer_links="${REACT_APP_FOOTER_LINKS}" \
    --build-arg react_app_eos_rate_link="${REACT_APP_EOS_RATE_LINK}" \
    --build-arg react_app_use_rewards="${REACT_APP_USE_REWARDS}" \
    --build-arg react_app_use_votes="${REACT_APP_USE_VOTES}" \
