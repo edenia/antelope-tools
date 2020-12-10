@@ -1,13 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   Grid,
-  Hidden,
   List,
   ListItemText,
   ListItem as MuiListItem
 } from '@material-ui/core'
+
+import { generalConfig } from '../config'
 
 const Wrapper = styled.div`
   padding: ${(props) => props.theme.spacing(1) / 4}px
@@ -32,32 +32,20 @@ const ListItem = styled(MuiListItem)`
 function Footer() {
   return (
     <Wrapper>
-      <Grid container spacing={0}>
-        <Hidden smDown>
-          <Grid container item xs={12} md={6}>
-            <List>
-              <ListItem>
-                <ListItemText primary={<Link to="#">Support</Link>} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary={<Link to="#">Help Center</Link>} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary={<Link to="#">Privacy</Link>} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary={<Link to="#">Terms of Service</Link>} />
-              </ListItem>
-            </List>
-          </Grid>
-        </Hidden>
-        <Grid container item xs={12} md={6} justify="flex-end">
-          <List>
-            <ListItem>
-              <ListItemText primary="" />
+      <Grid container item xs={12}>
+        <List>
+          {generalConfig.footerLinks.map((link, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={
+                  <a href={link.src} target="_blank" rel="noopener noreferrer">
+                    {link.text}
+                  </a>
+                }
+              />
             </ListItem>
-          </List>
-        </Grid>
+          ))}
+        </List>
       </Grid>
     </Wrapper>
   )
