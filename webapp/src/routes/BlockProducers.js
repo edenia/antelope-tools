@@ -37,7 +37,7 @@ const Producers = () => {
     { loading = true, data: { producers, info } = {} }
   ] = useLazyQuery(PRODUCERS_QUERY)
   const location = useLocation()
-  const [pagination, setPagination] = useState({ page: 1, limit: 21 })
+  const [pagination, setPagination] = useState({ page: 1, limit: 28 })
   const [totalPages, setTotalPages] = useState(1)
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
