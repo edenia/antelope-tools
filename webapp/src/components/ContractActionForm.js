@@ -13,6 +13,7 @@ import LacchainSetEntInfoField from './LacchainSetEntInfoField'
 import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
+import LacchainAddValidatorActionEntityField from './LacchainAddValidatorActionEntityField'
 import LacchainAddValidatorActionValidatorAuthorityField from './LacchainAddValidatorActionValidatorAuthorityField'
 
 const useStyles = makeStyles((theme) => ({
@@ -110,6 +111,17 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
       case 'eosio.setnodeinfo.info':
         return (
           <LacchainSetNodeInfoActionInfoField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.addvalidator.entity':
+        return (
+          <LacchainAddValidatorActionEntityField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"
