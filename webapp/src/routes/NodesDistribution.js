@@ -60,7 +60,7 @@ const Nodes = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [filters, setFilters] = useState({ nodeType: 'all' })
   const [allNodes, setAllNodes] = useState([])
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 21 })
+  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
   const classes = useStyles()
   const [mapState, setMapState] = useState({
     scale: defaultScale,
