@@ -2,37 +2,23 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import Chip from '@material-ui/core/Chip'
 import { makeStyles } from '@material-ui/core/styles'
 import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../context/state.context'
 import { countries } from '../utils/countries'
 import {
-  getNodeTypes,
+  NODE_TYPE_LABEL,
   getNewFieldPayload,
   getNodeFeatures
 } from '../utils/lacchain'
-import Checkbox from '@material-ui/core/Checkbox'
-import ListItemText from '@material-ui/core/ListItemText'
+
+import MultipleSelect from './MultipleSelect'
 
 const useStyles = makeStyles((theme) => ({
   flag: {
     marginRight: theme.spacing(1)
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginBottom: theme.spacing(1)
-  },
-  chip: {
-    marginBottom: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  selectChips: {
-    paddingBottom: 0
   }
 }))
 
@@ -71,11 +57,10 @@ const LacchainSetNodeInfoActionInfoField = ({
     }
 
     const info = getInfo()
-    const nodeTypes = getNodeTypes()
 
     setPayload(info)
     onChange(JSON.stringify(info))
-    setNodeType(nodeTypes[lacchain.currentNode?.type] || '')
+    setNodeType(NODE_TYPE_LABEL[lacchain.currentNode?.type] || '')
     // eslint-disable-next-line
   }, [lacchain.currentNode])
 
@@ -183,46 +168,14 @@ const LacchainSetNodeInfoActionInfoField = ({
         onChange={handleOnFieldChange(`${nodeType}_location.longitude`)}
       />
       {(nodeType === 'observer' || nodeType === 'writer') && (
-        <TextField
+        <MultipleSelect
           onChange={handleOnFieldChange(`${nodeType}_features`)}
-          variant="outlined"
-          label="features"
-          select
-          SelectProps={{
-            multiple: true,
-            classes: {
-              root: payload[`${nodeType}_features`]?.length
-                ? classes.selectChips
-                : ''
-            },
-            renderValue: (selected) => (
-              <div className={classes.chips}>
-                {selected.map((value, index) => (
-                  <Chip
-                    key={`chip-item-${index}`}
-                    label={value}
-                    className={classes.chip}
-                  />
-                ))}
-              </div>
-            )
-          }}
-          value={payload[`${nodeType}_features`] || []}
+          variant={variant}
           className={className}
-        >
-          {features.map((option, index) => (
-            <MenuItem key={`menu-item-${index}`} value={option.value}>
-              <Checkbox
-                checked={
-                  (payload[`${nodeType}_features`] || []).indexOf(
-                    option.value
-                  ) > -1
-                }
-              />
-              <ListItemText primary={option.label} />
-            </MenuItem>
-          ))}
-        </TextField>
+          label="features"
+          value={payload[`${nodeType}_features`] || []}
+          options={features}
+        />
       )}
     </>
   )

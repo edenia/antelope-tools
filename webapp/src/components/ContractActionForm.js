@@ -15,6 +15,7 @@ import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoF
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
 import LacchainAddValidatorActionEntityField from './LacchainAddValidatorActionEntityField'
 import LacchainAddValidatorActionValidatorAuthorityField from './LacchainAddValidatorActionValidatorAuthorityField'
+import LacchainSetScheduleActionValidatorsField from './LacchainSetScheduleActionValidatorsField'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -144,6 +145,17 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
       case 'eosio.netsetgroup.group':
         return (
           <ArrayTextField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || []}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.setschedule.validators':
+        return (
+          <LacchainSetScheduleActionValidatorsField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"
