@@ -2,26 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wallet
-  name: wallet
+    app: monitor-wallet
+  name: monitor-wallet
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wallet
+      app: monitor-wallet
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wallet
+        app: monitor-wallet
     spec:
       imagePullSecrets:
           - name: regcred
       containers:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
         imagePullPolicy: "Always"
-        name: "wallet"
+        name: "monitor-wallet"
         envFrom:
         - configMapRef:
             name: monitor-wallet-config
@@ -29,7 +29,7 @@ spec:
         - containerPort: 8888
         volumeMounts:
         - mountPath: /opt/application/data
-          name: wallet
+          name: monitor-wallet
           subPathExpr: $(WALLET_DIRECTORY)
         - mountPath: /opt/application/config
           name: config-volume
@@ -37,8 +37,8 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: wallet-config
-        - name: wallet
+            name: monitor-wallet-config
+        - name: monitor-wallet
           nfs:
             server: nfs-server-new
             path: /mnt/

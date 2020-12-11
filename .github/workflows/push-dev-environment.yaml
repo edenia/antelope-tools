@@ -59,6 +59,8 @@ jobs:
             build-kubernetes \
             deploy-kubernetes
         env:
+          # general
+          NAMESPACE: jungle
           # webapp
           PORT: "3000"
           REACT_APP_TTILE: "EOS Jungle Testnet Network Dashboard"

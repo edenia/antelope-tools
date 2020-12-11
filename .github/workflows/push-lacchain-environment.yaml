@@ -59,6 +59,8 @@ jobs:
             build-kubernetes \
             deploy-kubernetes
         env:
+          # general
+          NAMESPACE: lacchain
           # Webapp
           PORT: "3000"
           REACT_APP_TTILE: "LACChain Network Dashboard"

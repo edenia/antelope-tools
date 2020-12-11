@@ -15,7 +15,7 @@ endif
 
 IMAGE_NAME_WEBAPP=monitor-webapp
 IMAGE_NAME_HAPI=monitor-hapi
-IMAGE_NAME_WALLET=wallet
+IMAGE_NAME_WALLET=monitor-wallet
 
 DOCKER_REGISTRY=docker.pkg.github.com/eoscostarica/eosio-dashboard
 K8S_BUILD_DIR ?= ./build_k8s

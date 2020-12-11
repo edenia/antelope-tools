@@ -58,6 +58,8 @@ jobs:
             build-kubernetes \
             deploy-kubernetes
         env:
+          # general
+          NAMESPACE: mainnet
           # Webapp
           PORT: "3000"
           REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
