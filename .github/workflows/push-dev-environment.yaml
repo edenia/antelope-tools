@@ -61,6 +61,7 @@ jobs:
         env:
           # general
           NAMESPACE: jungle
+          INGRESS_HOST: testnet.eosio.cr
           # webapp
           PORT: "3000"
           REACT_APP_TTILE: "EOS Jungle Testnet Network Dashboard"

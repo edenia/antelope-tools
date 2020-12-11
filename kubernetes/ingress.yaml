@@ -7,7 +7,7 @@ spec:
     - web
   routes:
   - kind: Rule
-    match: Host(`${HOST}`)
+    match: Host(`${INGRESS_HOST}`)
     services:
     - kind: Service
       name: monitor-webapp
@@ -17,13 +17,12 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: https
-  namespace: ${NAMESPACE}
 spec:
   entryPoints:
     - websecure
   routes:
   - kind: Rule
-    match: Host(`${HOST}`)
+    match: Host(`${INGRESS_HOST}`)
     services:
     - kind: Service
       name: monitor-webapp
