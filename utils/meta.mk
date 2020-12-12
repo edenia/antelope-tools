@@ -18,8 +18,6 @@ IMAGE_NAME_HAPI=monitor-hapi
 IMAGE_NAME_WALLET=monitor-wallet
 
 DOCKER_REGISTRY=docker.pkg.github.com/eoscostarica/eosio-dashboard
-K8S_BUILD_DIR ?= ./build_k8s
-K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
 SUBDIRS = webapp hapi wallet
 
 MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME

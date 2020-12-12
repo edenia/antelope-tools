@@ -8,6 +8,9 @@ YELLOW := $(shell tput -Txterm setaf 3)
 GREEN  := $(shell tput -Txterm setaf 2)
 RESET  := $(shell tput -Txterm sgr0)
 
+K8S_BUILD_DIR ?= ./build_k8s
+K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
+
 run:
 	@echo "$(BLUE)running action $(filter-out $@,$(MAKECMDGOALS))$(RESET)"
 %:
