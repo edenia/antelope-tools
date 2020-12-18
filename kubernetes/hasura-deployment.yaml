@@ -42,20 +42,3 @@ spec:
           name: "monitor-hasura"
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - mountPath: /hasura-migrations
-              name: monitor-hasura1
-              subPathExpr: $(MIGRATION_DIRECTORY)
-            - mountPath: /hasura-metadata
-              name: monitor-hasura2
-              subPathExpr: $(METADATA_DIRECTORY)
-      restartPolicy: Always
-      volumes:
-        - name: monitor-hasura1
-          nfs:
-            server: nfs-server-new
-            path: /home/ubuntu
-        - name: monitor-hasura2
-          nfs:
-            server: nfs-server-new
-            path: /home/ubuntu

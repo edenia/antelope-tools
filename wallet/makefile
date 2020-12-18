@@ -26,15 +26,15 @@ build-docker: ./Dockerfile
 
 pull-image: ##@devops Pull the latest image from registry for caching
 pull-image:
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(LATEST_TAG) || true
 
 build-docker-cached: ##@devops Build the docker image using cached layers
 build-docker-cached: ./Dockerfile
 	@docker build \
 		--target prod-stage \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
+		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(LATEST_TAG) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(LATEST_TAG) \
 		.
 
 push-image: ##@devops Push the freshly built image and tag with release or latest tag

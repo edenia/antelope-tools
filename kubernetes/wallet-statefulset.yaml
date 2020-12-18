@@ -1,20 +1,22 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: monitor-wallet
+    version: ${VERSION}
   name: monitor-wallet
 spec:
+  serviceName: monitor-wallet
   replicas: 1
   selector:
     matchLabels:
       app: monitor-wallet
-  strategy:
-    type: Recreate
+      version: ${VERSION}
   template:
     metadata:
       labels:
         app: monitor-wallet
+        version: ${VERSION}
     spec:
       imagePullSecrets:
           - name: regcred
@@ -30,7 +32,6 @@ spec:
         volumeMounts:
         - mountPath: /opt/application/data
           name: monitor-wallet
-          subPathExpr: $(WALLET_DIRECTORY)
         - mountPath: /opt/application/config
           name: config-volume
       restartPolicy: Always
@@ -38,7 +39,12 @@ spec:
         - name: config-volume
           configMap:
             name: monitor-wallet-config
-        - name: monitor-wallet
-          nfs:
-            server: nfs-server-new
-            path: /mnt/
+  volumeClaimTemplates:
+    - metadata:
+        name: monitor-wallet
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: jungle
+        resources:
+          requests:
+            storage: 50Gi

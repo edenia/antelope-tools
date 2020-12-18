@@ -20,7 +20,7 @@ IMAGE_NAME_WALLET=monitor-wallet
 DOCKER_REGISTRY=docker.pkg.github.com/eoscostarica/eosio-dashboard
 SUBDIRS = webapp hapi wallet
 
-MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME
+MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME_WEBAPP IMAGE_NAME_HAPI IMAGE_NAME_WALLET
 
 SHELL_EXPORT := $(foreach v,$(MAKE_ENV),$(v)='$($(v))')
 
