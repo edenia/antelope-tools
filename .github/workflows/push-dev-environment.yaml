@@ -59,7 +59,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: jungle
+          NAMESPACE: jungle-dashboard
           INGRESS_HOST: testnet.eosio.cr
           # webapp
           PORT: "3000"
