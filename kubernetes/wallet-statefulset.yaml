@@ -24,21 +24,16 @@ spec:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
         imagePullPolicy: "Always"
         name: "monitor-wallet"
-        envFrom:
-        - configMapRef:
-            name: monitor-wallet-config
         ports:
         - containerPort: 8888
         volumeMounts:
-        - mountPath: /opt/application/data
+        - mountPath: /opt/application
           name: monitor-wallet
-        - mountPath: /opt/application/config
-          name: config-volume
+          subPath: data
+        - mountPath: /opt/application/
+          name: monitor-wallet
+          subPath: config
       restartPolicy: Always
-      volumes:
-        - name: config-volume
-          configMap:
-            name: monitor-wallet-config
   volumeClaimTemplates:
     - metadata:
         name: monitor-wallet
