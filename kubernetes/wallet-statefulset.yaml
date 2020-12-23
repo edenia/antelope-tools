@@ -24,19 +24,24 @@ spec:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
         imagePullPolicy: "Always"
         name: "monitor-wallet"
+        env:
+          - name: DATA_DIR
+            value: /opt/application/data
+          - name: CONFIG_DIR
+            value: /opt/application/config
         ports:
         - containerPort: 8888
         volumeMounts:
-        - mountPath: /opt/application
-          name: monitor-wallet
+        - mountPath: /opt/application/data
           subPath: data
-        - mountPath: /opt/application/
-          name: monitor-wallet
+          name: data-directory
+        - mountPath: /opt/application/config
           subPath: config
+          name: data-directory
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:
-        name: monitor-wallet
+        name: data-directory
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: jungle
