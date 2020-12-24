@@ -61,6 +61,7 @@ jobs:
           # general
           NAMESPACE: jungle-dashboard
           INGRESS_HOST: testnet.eosio.cr
+          INGRESS_GRAPHQL_HOST: graphql-testnet.eosio.cr
           # webapp
           PORT: "3000"
           REACT_APP_TTILE: "EOS Jungle Testnet Network Dashboard"

@@ -102,6 +102,12 @@ build-kubernetes: ./kubernetes
 
 deploy-kubernetes: ##@devops Publish the build k8s files
 deploy-kubernetes: $(K8S_BUILD_DIR)
+	echo "Creating SSL certificates..."
+	@kubectl create secret tls \
+		tls-secret \
+		--key ./ssl/monitor.cr.priv.key \
+		--cert ./ssl/monitor.cr.crt \
+		-n $(NAMESPACE)  || echo "SSL cert already configured.";
 	echo "Applying kubernetes files..."
 	@for file in $(shell find $(K8S_BUILD_DIR) -name '*.yaml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
         	kubectl apply -f $(K8S_BUILD_DIR)/$$file -n $(NAMESPACE); \
