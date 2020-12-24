@@ -6,7 +6,7 @@ CURRENT_BRANCH ?= $(git rev-parse --abbrev-ref HEAD)
 ifeq ($(CURRENT_BRANCH),master)
 	REACT_APP_HASURA_URL := https://graphql-mainnet.eosio.cr/v1/graphql
 else ifeq ($(CURRENT_BRANCH),dev)
-	REACT_APP_HASURA_URL := https://graphql-testnet.eosio.cr:3000/v1/graphql
+	REACT_APP_HASURA_URL := https://graphql-testnet.eosio.cr/v1/graphql
 else ifeq ($(CURRENT_BRANCH),lacchain)
 	REACT_APP_HASURA_URL := https://dashboard-graphql.latamlink.io/v1/graphql
 else
