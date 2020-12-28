@@ -26,8 +26,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: monitor-hasura-config
-          image: hasura/graphql-engine:v1.2.1.cli-migrations-v2
+          image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HASURA}:${VERSION}
           imagePullPolicy: "IfNotPresent"
           name: "monitor-hasura"
           ports:
             - containerPort: 8080
+      restartPolicy: Always

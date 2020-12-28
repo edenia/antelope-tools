@@ -1,3 +1,5 @@
+include ../utils/meta.mk ../utils/help.mk
+
 LATEST_TAG ?= latest
 
 install: ##@local Install all dependencies
@@ -15,32 +17,27 @@ run: node_modules
 
 build-docker: ##@devops Build the docker image
 build-docker: ./Dockerfile
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(VERSION) || true
 	@docker build \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
-		--target prod-stage \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest \
+                --build-arg hasura_graphql_migrations_dir=hasura-migrations \
+                --build-arg hasura_graphql_metadata_dir=/hasura-metadata \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(VERSION) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
 pull-image:
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(LATEST_TAG) || true
 
 build-docker-cached: ##@devops Build the docker image using cached layers
 build-docker-cached: ./Dockerfile
 	@docker build \
-		--target prod-stage \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG) \
+		--build-arg hasura_graphql_migrations_dir=/hasura-migrations \
+		--build-arg hasura_graphql_metadata_dir=/hasura-metadata \
+		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(LATEST_TAG) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(LATEST_TAG) \
 		.
 
 push-image: ##@devops Push the freshly built image and tag with release or latest tag
 push-image:
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(VERSION)
-ifeq ($(strip $(RELEASE_TAG)),)
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(LATEST_TAG)
-else
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(RELEASE_TAG)
-endif
+	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(VERSION)
