@@ -1,9 +1,18 @@
-export const getNodeTypes = () => ({
+import eosApi from './eosapi'
+
+export const NODE_TYPE_LABEL = {
   1: 'validator',
   2: 'writer',
   3: 'boot',
   4: 'observer'
-})
+}
+
+export const NODE_TYPE_ID = {
+  validator: 1,
+  writer: 2,
+  boot: 3,
+  observer: 4
+}
 
 export const getNodeFeatures = () => [
   {
@@ -21,8 +30,29 @@ export const getNodeFeatures = () => [
   {
     label: 'dfuse',
     value: 'dfuse'
+  },
+  {
+    label: 'state history plugin',
+    value: 'state history plugin'
   }
 ]
+
+export const getNodes = async (type) => {
+  const { rows: nodes } = await eosApi.getTableRows({
+    json: true,
+    code: 'eosio',
+    scope: 'eosio',
+    table: 'node'
+  })
+
+  if (type) {
+    return nodes.filter((node) => node.type === type)
+  }
+
+  return nodes
+}
+
+export const getSchedule = () => eosApi.getProducerSchedule({})
 
 export const getNewFieldPayload = (field, event, value, payload = {}) => {
   let newPayload = {}

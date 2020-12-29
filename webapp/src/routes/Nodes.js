@@ -28,7 +28,7 @@ const Nodes = () => {
   ] = useLazyQuery(NODES_QUERY)
   const location = useLocation()
   const [filters, setFilters] = useState({ nodeType: 'all' })
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 21 })
+  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
   const [items, setItems] = useState([])
   const classes = useStyles()
 

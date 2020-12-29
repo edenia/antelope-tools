@@ -17,7 +17,7 @@ const TransactionsChart = lazy(() => import('../components/TransactionsChart'))
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { data: { loading, producer: producers } = {} } = useQuery(NODES_QUERY)
+  const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
   const info = useSelector((state) => state.eos.info)
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
@@ -35,13 +35,16 @@ const Home = () => {
       const data =
         (producers || []).find((producer) => {
           let result = producer.owner === item.producer_name
+
           if (!result) {
             result = producer.bp_json?.nodes.find(
               (node) => node.node_name === item.producer_name
             )
           }
+
           return result
         }) || {}
+
       return {
         logo: data?.bp_json?.org?.branding?.logo_256,
         url: data?.url,

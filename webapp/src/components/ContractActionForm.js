@@ -13,6 +13,9 @@ import LacchainSetEntInfoField from './LacchainSetEntInfoField'
 import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
+import LacchainAddValidatorActionEntityField from './LacchainAddValidatorActionEntityField'
+import LacchainAddValidatorActionValidatorAuthorityField from './LacchainAddValidatorActionValidatorAuthorityField'
+import LacchainSetScheduleActionValidatorsField from './LacchainSetScheduleActionValidatorsField'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,7 +41,11 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   }
 
   const handleFieldChange = (name) => (event) => {
-    const value = event?.target?.value || event
+    const value =
+      typeof event === 'object' && !Array.isArray(event)
+        ? event?.target?.value
+        : event
+
     setPayload((prevValue) => ({
       ...prevValue,
       [name]: value
@@ -113,9 +120,42 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             onChange={handleFieldChange(field.name)}
           />
         )
+      case 'eosio.addvalidator.entity':
+        return (
+          <LacchainAddValidatorActionEntityField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.addvalidator.validator_authority':
+        return (
+          <LacchainAddValidatorActionValidatorAuthorityField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || []}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
       case 'eosio.netsetgroup.group':
         return (
           <ArrayTextField
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || []}
+            onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.setschedule.validators':
+        return (
+          <LacchainSetScheduleActionValidatorsField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"

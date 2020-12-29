@@ -3,9 +3,11 @@ FROM node:12.16.2-alpine  as build-stage
 ARG port
 ARG react_app_title
 ARG react_app_default_producer_logo
+ARG react_app_footer_links
 ARG react_app_eos_rate_link
 ARG react_app_use_rewards
 ARG react_app_use_votes
+ARG react_app_use_cpu_benchmark
 ARG react_app_hasura_url
 ARG react_app_eos_api_network_name
 ARG react_app_eos_api_network_label
@@ -27,9 +29,11 @@ ENV NODE_PATH ./src
 ENV PORT $port
 ENV REACT_APP_TITLE $react_app_title
 ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
+ENV REACT_APP_FOOTER_LINKS $react_app_footer_links
 ENV REACT_APP_EOS_RATE_LINK $react_app_eos_rate_link
 ENV REACT_APP_USE_REWARDS $react_app_use_rewards
 ENV REACT_APP_USE_VOTES $react_app_use_votes
+ENV REACT_APP_USE_CPU_BENCHMARK $react_app_use_cpu_benchmark
 ENV REACT_APP_HASURA_URL $react_app_hasura_url
 ENV REACT_APP_EOS_API_NETWORK_NAME $react_app_eos_api_network_name
 ENV REACT_APP_EOS_API_NETWORK_LABEL $react_app_eos_api_network_label
