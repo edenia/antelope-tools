@@ -18,9 +18,8 @@ jobs:
 
       - name: Log in to docker registry
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login \
-            docker.pkg.github.com \
-            --username ${{ github.actor }} \
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
+            --username ${{ secrets.DOCKER_HUB_USER }} \
             --password-stdin
 
       - name: Build new images and push
