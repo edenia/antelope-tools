@@ -21,6 +21,7 @@ build-docker: ./Dockerfile
 	@docker build \
 		--target release \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

@@ -22,6 +22,7 @@ build-docker: ./Dockerfile
 		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) \
 		--target run-stage \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WALLET):$(LATEST_TAG) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

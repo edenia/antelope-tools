@@ -22,6 +22,7 @@ build-docker: ./Dockerfile
                 --build-arg hasura_graphql_migrations_dir=hasura-migrations \
                 --build-arg hasura_graphql_metadata_dir=/hasura-metadata \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HASURA):$(LATEST_TAG) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

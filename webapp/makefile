@@ -21,6 +21,7 @@ build-docker: ./Dockerfile
 	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) || true
 	@docker build \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION) --target run-stage \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) --target run-stage \
 		--build-arg port="$(PORT)" \
 		--build-arg react_app_title="$(REACT_APP_TITLE)" \
 		--build-arg react_app_default_producer_logo="$(REACT_APP_DEFAULT_PRODUCER_LOGO)" \
