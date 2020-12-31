@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: monitor-wallet
+    version: ${VERSION}
+  name: monitor-wallet
+spec:
+  serviceName: monitor-wallet
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor-wallet
+      version: ${VERSION}
+  template:
+    metadata:
+      labels:
+        app: monitor-wallet
+        version: ${VERSION}
+    spec:
+      imagePullSecrets:
+          - name: regcred
+      containers:
+      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
+        imagePullPolicy: "Always"
+        name: "monitor-wallet"
+        env:
+          - name: DATA_DIR
+            value: /opt/application/data
+          - name: CONFIG_DIR
+            value: /opt/application/config
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+        - mountPath: /opt/application/data
+          subPath: data
+          name: data-directory
+        - mountPath: /opt/application/config
+          subPath: config
+          name: data-directory
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: data-directory
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: jungle
+        resources:
+          requests:
+            storage: 50Gi

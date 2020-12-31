@@ -1,20 +1,22 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: monitor-postgres
+    version: ${VERSION}
   name: monitor-postgres
 spec:
+  serviceName: monitor-postgres
   replicas: 1
   selector:
     matchLabels:
       app: monitor-postgres
-  strategy:
-    type: Recreate
+      version: ${VERSION}
   template:
     metadata:
       labels:
         app: monitor-postgres
+        version: ${VERSION}
     spec:
       imagePullSecrets:
           - name: regcred
@@ -30,10 +32,13 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: postgres
-          subPathExpr: $(DATABASE_DIRECTORY)
-      restartPolicy: Always
-      volumes:
-      - name: postgres
-        nfs:
-          server: nfs-server-new
-          path: /mnt/
+          subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: jungle
+        resources:
+          requests:
+            storage: 100Gi 

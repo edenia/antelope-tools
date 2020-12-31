@@ -1,23 +1,127 @@
-name: Push code to lacchain environment
+name: Build images from latest dev branch
 
 on:
   push:
-    branches: [lacchain]
+    branches:
+      - dev
 
 jobs:
-  build:
+  create-dev-image:
+    name:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: setup-docker
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+
+      - name: Setup Docker
         uses: docker-practice/actions-setup-docker@0.0.1
-      - name: run push
+
+      - name: Log in to docker registry
         run: |
-          docker build -t eosio-dashboard-deployer-lacchain \
-            --build-arg ssh_prv_key="$(echo $"${{secrets.SSH_PRV_KEY}}")" \
-            --build-arg branch="lacchain" \
-            .
-          docker run \
-            -e USER="${{secrets.USER}}" \
-            -e branch="lacchain" \
-            eosio-dashboard-deployer-lacchain
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
+            --username ${{ secrets.DOCKER_HUB_USER }} \
+            --password-stdin
+
+      - name: Build new images and push
+        run: |
+          make \
+            build-all \
+            push-images
+        env:
+          # Webapp
+          PORT: "3000"
+          REACT_APP_TTILE: "LACChain Network Dashboard"
+          REACT_APP_DEFAULT_PRODUCER_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
+          REACT_APP_EOS_RATE_LINK: ""
+          REACT_APP_USE_REWARDS: "false"
+          REACT_APP_USE_VOTES: "false"
+          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: "false"
+          REACT_APP_HASURA_URL: "https://dashboard-graphql.latamlink.io/v1/graphql"
+          REACT_APP_EOS_API_NETWORK_NAME: "lacchain"
+          REACT_APP_EOS_API_NETWORK_LABEL: "LACChain"
+          REACT_APP_EOS_API_NETWORK_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
+          REACT_APP_EOS_API_HOST: "lacchain.eosio.cr"
+          REACT_APP_EOS_API_PORT: "443"
+          REACT_APP_EOS_API_PROTOCOL: "https"
+          REACT_APP_EOS_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: ""
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ""
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: "false"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: "producerjson"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: "producerjson"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: "producerjson"
+
+      - name: Build and deploy kubernetes files
+        id: build_kubernetes_files
+        run: |
+          make \
+            build-kubernetes \
+            deploy-kubernetes
+        env:
+          # general
+          NAMESPACE: lacchain-dashboard
+          # Webapp
+          PORT: "3000"
+          REACT_APP_TTILE: "LACChain Network Dashboard"
+          REACT_APP_DEFAULT_PRODUCER_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
+          REACT_APP_EOS_RATE_LINK: ""
+          REACT_APP_USE_REWARDS: "false"
+          REACT_APP_USE_VOTES: "false"
+          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: "false"
+          REACT_APP_HASURA_URL: "https://dashboard-graphql.latamlink.io/v1/graphql"
+          REACT_APP_EOS_API_NETWORK_NAME: "lacchain"
+          REACT_APP_EOS_API_NETWORK_LABEL: "LACChain"
+          REACT_APP_EOS_API_NETWORK_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
+          REACT_APP_EOS_API_HOST: "lacchain.eosio.cr"
+          REACT_APP_EOS_API_PORT: "443"
+          REACT_APP_EOS_API_PROTOCOL: "https"
+          REACT_APP_EOS_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: ""
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ""
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: "false"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: "producerjson"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: "producerjson"
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: "producerjson"
+          # postgres
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
+          DATABASE_DIRECTORY: ${{ secrets.DATABASE_DIRECTORY }}
+          # hapi
+          CODE_DIRECTORY: "lacchain/eosio-dashboard/hapi"
+          HAPI_EOS_API_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"
+          HAPI_EOS_API_ENDPOINT: "https://lacchain.eosio.cr"
+          HAPI_EOS_API_NETWORK_NAME: "lacchain"
+          HAPI_EOS_BP_JSON_ON_CHAIN: "false"
+          HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: ""
+          HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: ""
+          HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: ""
+          HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
+          HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
+          HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
+          HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION: "{\"account\":\"writer\",\"name\":\"run\",\"authorization\":[{\"actor\":\"costarica\",\"permission\":\"writer\"}],\"data\":{}}"
+          HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_WALLET_URL: "http://wallet.lacchain:8888"
+          HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          HAPI_HASURA_URL: "http://monitor-hasura:8080/v1/graphql"
+          HAPI_SERVER_ADDRESS: "127.0.0.1"
+          HAPI_SERVER_PORT: "9090"
+          HAPI_SYNC_PRODUCERS_INTERVAL: "86400"
+          HAPI_SYNC_PRODUCER_CPU_INTERVAL: "6"
+          HAPI_SYNC_PRODUCER_INFO_INTERVAL: "1"
+          # hasura
+          HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+          HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+          HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
+          HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
+          MIGRATION_DIRECTORY: "lacchain/eosio-dashboard/hasura/migrations"
+          METADATA_DIRECTORY: "lacchain/eosio-dashboard/hasura/metadata"
+          # wallet
+          WALLET_DIRECTORY: "wallet-lacchain"
+
+      - name: Verify deployment
+        id: verify_deployment
+        run: |
+          kubectl rollout status deployment/hapi
