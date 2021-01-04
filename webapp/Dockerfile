@@ -58,6 +58,7 @@ RUN yarn install --frozen-lockfile --production=true
 
 COPY ./ $WORK_DIR
 
+RUN npm i react-app-rewired
 RUN yarn build
 
 FROM nginx:1.17.10-alpine as run-stage
@@ -69,4 +70,3 @@ COPY --from=build-stage /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-
