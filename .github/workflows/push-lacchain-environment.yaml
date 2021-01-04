@@ -3,7 +3,7 @@ name: Build images from latest dev branch
 on:
   push:
     branches:
-      - dev
+      - lacchain
 
 jobs:
   create-dev-image:
@@ -25,11 +25,11 @@ jobs:
       - name: Build new images and push
         run: |
           make \
-            build-all \
-            push-images
+            build-docker-images \
+            push-docker-images
         env:
           # Webapp
-          PORT: "3000"
+          PORT: "80"
           REACT_APP_TTILE: "LACChain Network Dashboard"
           REACT_APP_DEFAULT_PRODUCER_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
           REACT_APP_EOS_RATE_LINK: ""
@@ -61,7 +61,7 @@ jobs:
           # general
           NAMESPACE: lacchain-dashboard
           # Webapp
-          PORT: "3000"
+          PORT: "80"
           REACT_APP_TTILE: "LACChain Network Dashboard"
           REACT_APP_DEFAULT_PRODUCER_LOGO: "https://latamlink.io/images/latamlink_logo-header.svg"
           REACT_APP_EOS_RATE_LINK: ""
