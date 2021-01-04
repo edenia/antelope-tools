@@ -54,8 +54,7 @@ jobs:
         id: build_kubernetes_files
         run: |
           make \
-            build-kubernetes \
-            deploy-kubernetes
+            build-kubernetes
         env:
           # general
           NAMESPACE: mainnet-dashboard
@@ -118,7 +117,14 @@ jobs:
           # wallet
           WALLET_DIRECTORY: "wallet"
 
-      - name: Verify deployment
-        id: verify_deployment
-        run: |
-          kubectl rollout status deployment/hapi
+      - name: Deploy kubernetes files
+        uses: Consensys/kubernetes-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: apply -f build_k8s -n mainnet-dashboard
+
+#      - name: Verify deployment
+#        id: verify_deployment
+#        run: |
+#          kubectl rollout status deployment/hapi
