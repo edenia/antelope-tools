@@ -34,7 +34,7 @@ jobs:
           REACT_APP_NAME: $npm_package_name
           REACT_APP_TITLE: EOS Jungle Testnet Network Dashboard
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://bloks.io/img/eosio.png
-          REACT_APP_FOOTER_LINKS: [{"text":"Website","src":"https://jungletestnet.io/"},{"text":"Block Explorer","src":"https://jungle3.bloks.io"},{"text":"Developer Guidelines","src":"https://guide.eoscostarica.io"},{"text":"GitHub","src":"https://github.com/eoscostarica/eosio-dashboard"}]
+          REACT_APP_FOOTER_LINKS: ""
           REACT_APP_EOS_RATE_LINK: https://jungle.eosrate.io:8080
           REACT_APP_USE_REWARDS: true
           REACT_APP_USE_VOTES: true
