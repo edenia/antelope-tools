@@ -58,7 +58,7 @@ RUN yarn install --frozen-lockfile --production=true
 
 COPY ./ $WORK_DIR
 
-RUN npm i react-app-rewired
+RUN npm install
 RUN yarn build
 
 FROM nginx:1.17.10-alpine as run-stage
