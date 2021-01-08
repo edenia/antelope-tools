@@ -1,5 +1,7 @@
 name: Build images from latest dev branch
 
+environment: dev
+
 on:
   push:
     branches:

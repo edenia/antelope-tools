@@ -1,5 +1,7 @@
 name: Build images from latest dev branch
 
+environment: mainnet
+
 on:
   push:
     branches:
