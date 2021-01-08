@@ -1,7 +1,5 @@
 name: Build images from latest dev branch
 
-environment: mainnet
-
 on:
   push:
     branches:
@@ -11,6 +9,7 @@ jobs:
   create-dev-image:
     name:
     runs-on: ubuntu-latest
+    environment: mainnet
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1

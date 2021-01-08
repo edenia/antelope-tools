@@ -1,7 +1,5 @@
 name: Build images from latest dev branch
 
-environment: lacchain
-
 on:
   push:
     branches:
@@ -11,6 +9,7 @@ jobs:
   create-dev-image:
     name:
     runs-on: ubuntu-latest
+    environment: lacchain
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
