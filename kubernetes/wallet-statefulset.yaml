@@ -36,9 +36,12 @@ spec:
           subPath: data
           name: data-directory
         - mountPath: /opt/application/config
-          subPath: config
-          name: data-directory
+          name: config-directory
       restartPolicy: Always
+      volumes:
+        - name: config-directory
+          configMap:
+            name: dashboard-wallet-config
   volumeClaimTemplates:
     - metadata:
         name: data-directory
