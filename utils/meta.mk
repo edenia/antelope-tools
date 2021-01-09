@@ -1,17 +1,7 @@
 -include .env
 
 VERSION ?= $(shell git rev-parse --short HEAD)
-CURRENT_BRANCH ?= $(git rev-parse --abbrev-ref HEAD)
-
-ifeq ($(CURRENT_BRANCH),master)
-	REACT_APP_HASURA_URL := https://graphql-mainnet.eosio.cr/v1/graphql
-else ifeq ($(CURRENT_BRANCH),dev)
-	REACT_APP_HASURA_URL := https://graphql-testnet.eosio.cr/v1/graphql
-else ifeq ($(CURRENT_BRANCH),lacchain)
-	REACT_APP_HASURA_URL := https://dashboard-graphql.latamlink.io/v1/graphql
-else
-	REACT_APP_HASURA_URL := http://localhost:8585/v1/graphql
-endif
+CURRENT_BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 
 IMAGE_NAME_WEBAPP=monitor-webapp
 IMAGE_NAME_HAPI=monitor-hapi
