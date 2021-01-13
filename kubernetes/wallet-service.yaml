@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: wallet
-  name: wallet
+    app: monitor-wallet
+  name: monitor-wallet
 spec:
   ports:
-  - name: wallet
+  - name: monitor-wallet
     port: 8888
     targetPort: 8888
   selector:
-    app: wallet
+    app: monitor-wallet

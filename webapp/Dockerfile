@@ -54,7 +54,7 @@ WORKDIR $WORK_DIR
 COPY package.json $WORK_DIR/package.json
 COPY yarn.lock $WORK_DIR/yarn.lock
 
-RUN yarn install --frozen-lockfile --production=true
+RUN yarn install --frozen-lockfile --production=false
 
 COPY ./ $WORK_DIR
 
@@ -69,4 +69,3 @@ COPY --from=build-stage /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-

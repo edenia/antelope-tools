@@ -6,8 +6,9 @@ metadata:
   name: monitor-hasura
 spec:
   ports:
-  - name: hasura
-    port: 8080
+  - port: 8080
     targetPort: 8080
+    name: hasura
+    protocol: TCP
   selector:
     app: monitor-hasura
