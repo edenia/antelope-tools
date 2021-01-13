@@ -29,6 +29,8 @@ jobs:
             build-docker-images \
             push-docker-images
         env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # Webapp
           PORT: "80"
           REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
