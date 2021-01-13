@@ -61,6 +61,8 @@ jobs:
         env:
           # general
           NAMESPACE: mainnet-dashboard
+          INGRESS_HOST: mainnet.eosio.cr
+          INGRESS_GRAPHQL_HOST: graphql-mainnet.eosio.cr
           # Webapp
           PORT: "80"
           REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
