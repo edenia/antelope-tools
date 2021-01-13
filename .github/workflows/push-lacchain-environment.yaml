@@ -87,7 +87,6 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
-          DATABASE_DIRECTORY: ${{ secrets.DATABASE_DIRECTORY }}
           # hapi
           CODE_DIRECTORY: "lacchain/eosio-dashboard/hapi"
           HAPI_EOS_API_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"

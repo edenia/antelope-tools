@@ -85,10 +85,9 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
-          DATABASE_DIRECTORY: ${{ secrets.DATABASE_DIRECTORY }}
           # hapi
           HAPI_EOS_API_ENDPOINT: "https://api.eosio.cr"
-          HAPI_EOS_API_CHAIN_ID: ${{ secrets.HAPI_EOS_API_CHAIN_ID }}
+          HAPI_EOS_API_CHAIN_ID: "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473"
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
@@ -113,8 +112,6 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
           HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
-          MIGRATION_DIRECTORY: "production/eosio-dashboard/hasura/migrations"
-          METADATA_DIRECTORY: "production/eosio-dashboard/hasura/metadata"
           # wallet
           WALLET_DIRECTORY: "wallet"
 
