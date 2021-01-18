@@ -93,7 +93,7 @@ start-logs:
 
 build-kubernetes: ##@devops Generate proper k8s files based on the templates
 build-kubernetes: ./kubernetes
-	echo "Build kubernetes files..."
+	@echo "Build kubernetes files..."
 	@rm -Rf $(K8S_BUILD_DIR) && mkdir -p $(K8S_BUILD_DIR)
 	@for file in $(K8S_FILES); do \
 		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
@@ -102,26 +102,25 @@ build-kubernetes: ./kubernetes
 
 deploy-kubernetes: ##@devops Publish the build k8s files
 deploy-kubernetes: $(K8S_BUILD_DIR)
-	echo "Creating SSL certificates..."
+	@echo "Creating SSL certificates..."
 	@kubectl create secret tls \
 		tls-secret \
 		--key ./ssl/monitor.cr.priv.key \
 		--cert ./ssl/monitor.cr.crt \
 		-n $(NAMESPACE)  || echo "SSL cert already configured.";
-	echo "Creating configmaps..."
+	@echo "Creating configmaps..."
 	@kubectl create configmap -n $(NAMESPACE) \
 	dashboard-wallet-config \
 	--from-file wallet/config/;
-	echo "Applying kubernetes files..."
+	@echo "Applying kubernetes files..."
 	@for file in $(shell find $(K8S_BUILD_DIR) -name '*.yaml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
-		cat $(K8S_BUILD_DIR)/$$file \
 		@kubectl apply -f $(K8S_BUILD_DIR)/$$file -n $(NAMESPACE); \
 	done
 
 build-docker-images: ##@devops Build docker images
 build-docker-images:
-	echo "Building docker containers..."
-	for dir in $(SUBDIRS); do \
+	@echo "Building docker containers..."
+	@for dir in $(SUBDIRS); do \
 		$(MAKE) build-docker -C $$dir; \
 	done
 

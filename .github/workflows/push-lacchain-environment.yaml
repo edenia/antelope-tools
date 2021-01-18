@@ -48,6 +48,7 @@ jobs:
           REACT_APP_EOS_API_PORT: "443"
           REACT_APP_EOS_API_PROTOCOL: "https"
           REACT_APP_EOS_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"
+          REACT_APP_EOS_INCLUDE_TRANSACTION: '{"account"\:"writer","name"\:"run","authorization"\:[{"actor"\:"costarica","permission"\:"writer"}],"data"\:{}}'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: ""
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ""
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: "false"
@@ -81,6 +82,7 @@ jobs:
           REACT_APP_EOS_API_PORT: "443"
           REACT_APP_EOS_API_PROTOCOL: "https"
           REACT_APP_EOS_CHAIN_ID: "5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61"
+          REACT_APP_EOS_INCLUDE_TRANSACTION: '{"account"\:"writer","name"\:"run","authorization"\:[{"actor"\:"costarica","permission"\:"writer"}],"data"\:{}}'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: ""
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ""
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: "false"
