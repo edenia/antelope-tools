@@ -3,7 +3,7 @@
 The EOSIO dashboard collects information from different networks but also
 allows users to execute specific administrative actions on certain networks,
 by EOSIO accounts and their respective keys. All this requires to use a 
-a wallet that acts as an intermediary to sign transactions and interact with
+wallet that acts as an intermediary to sign transactions and interact with
 permissioned actions in the networks.
 
 Here we explain how to create and configure such a wallet for the EOSIO
