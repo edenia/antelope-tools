@@ -11,9 +11,9 @@ dashboard. Inside the wallet pod, please execute the following commands:
 
 ```bash
 # Create a default wallet
-cleos --wallet-url http://localhost:8888 wallet create
+cleos --wallet-url http://localhost:8888 wallet create --to-console
 # Create a wallet called eosmechanics
-cleos --wallet-url http://localhost:8888 wallet create -n eosmechanics
+cleos --wallet-url http://localhost:8888 wallet create -n eosmechanics --to-console
 ```
 
 The previews commands will create a default wallet and another wallet called
