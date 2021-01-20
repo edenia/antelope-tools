@@ -14,7 +14,7 @@ dashboard. Inside the wallet pod, please execute the following commands:
 cleos --wallet-url http://localhost:8888 wallet create
 # Create a wallet called eosmechanics
 cleos --wallet-url http://localhost:8888 wallet create -n eosmechanics
-```bash
+```
 
 The previews commands will create a default wallet and another wallet called
 eosmechanics. The returned passwords (a string starting with PW...) should be
@@ -25,23 +25,23 @@ HAPI_EOS_BASE_ACCOUNT=eosmechanics
 HAPI_EOS_BASE_ACCOUNT_PASSWORD=PW...
 HAPI_EOS_MECHANICS_ACCOUNT=eosmechanics
 HAPI_EOS_MECHANICS_PASSWORD=PW...
-```bash
+```
 
 Let's make sure that the wallet was created correctly:
 
 ```bash
 cleos -u https://jungle.eosio.cr --wallet-url http://localhost:8888 wallet list
-```bash
+```
 
 If the wallet is present but locked, then execute the following command:
 
 ```bash
 cleos -u https://jungle.eosio.cr --wallet-url http://localhost:8888 wallet unlock -n eosmechanics
-```bash
+```
 
 Finally, we will import an EOSIO key for reading information about statistics of the block
 producers called eosmechanics (Ask the admins about the key):
 
 ```bash
 cleos -u https://jungle.eosio.cr --wallet-url http://localhost:8888 wallet import -n eosmechanics
-```bash
+```
