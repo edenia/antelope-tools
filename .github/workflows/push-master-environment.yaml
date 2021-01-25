@@ -108,7 +108,6 @@ jobs:
           HAPI_SYNC_PRODUCERS_INTERVAL: "86400"
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: "1"
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: "6"
-          CODE_DIRECTORY: "production/eosio-dashboard/hapi"
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
