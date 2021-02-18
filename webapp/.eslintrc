@@ -3,9 +3,10 @@
   "extends": [
     "standard",
     "standard-react",
-    "plugin:prettier/recommended",
     "prettier/react",
-    "prettier/standard"
+    "prettier/standard",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "jest": true,
