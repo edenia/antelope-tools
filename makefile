@@ -82,11 +82,11 @@ start-hasura-cli:
 start-webapp:
 	$(eval -include .env)
 	@until \
-		curl http://localhost:8585/healthz; \
+		curl -s -o /dev/null -w 'hasura status %{http_code}\n' http://localhost:8585/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
-	@echo "..."
-	@docker-compose up -d --build webapp
+	@cd webapp && yarn && yarn start:local | cat
+	@echo "done webapp"
 
 start-logs:
 	@docker-compose logs -f hapi webapp

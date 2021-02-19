@@ -2,22 +2,6 @@
 # yarn lockfile v1
 
 
-"@adriexnet/ual-reactjs-renderer@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@adriexnet/ual-reactjs-renderer/-/ual-reactjs-renderer-0.3.1.tgz#a9e37783b3f088fa87b1db264fdb5646831c9372"
-  integrity sha512-vSthw0IF82cFxq0+yPq/CjC3VA+em5PM8uAZqf6g3kac1W+l4bT8bNDPp1e3yXeBdjSo6y4nEQz6rW5EHzdBzA==
-  dependencies:
-    "@react-icons/all-files" "^4.1.0"
-    i18next "14.0.1"
-    i18next-browser-languagedetector "2.2.4"
-    prop-types "15.7.2"
-    react "16.13.0"
-    react-dom "16.13.0"
-    react-icons "4.1.0"
-    react-tooltip "3.9.2"
-    styled-components "4.4.1"
-    universal-authenticator-library "0.3.0"
-
 "@apollo/client@latest":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.3.tgz#97433fd50c498197afea2b8da4195d350daebb4c"
@@ -1346,6 +1330,22 @@
   optionalDependencies:
     "@types/node" "*"
     typescript "*"
+
+"@eoscostarica/ual-reactjs-renderer@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@eoscostarica/ual-reactjs-renderer/-/ual-reactjs-renderer-0.3.1.tgz#4f056ea9a14557aee86f16626cf5a25da3e8fed9"
+  integrity sha512-ulEv8hSuZwDOqapqY9JNug6iUTsaXbCJTllFAwGjy0Yk6hOnztcR9+6s/KdIHEpCpVJ1g53rOFznHxw/je8klQ==
+  dependencies:
+    "@react-icons/all-files" "^4.1.0"
+    i18next "14.0.1"
+    i18next-browser-languagedetector "2.2.4"
+    prop-types "15.7.2"
+    react "16.13.0"
+    react-dom "16.13.0"
+    react-icons "4.1.0"
+    react-tooltip "3.9.2"
+    styled-components "4.4.1"
+    universal-authenticator-library "0.3.0"
 
 "@graphql-typed-document-node/core@^3.0.0":
   version "3.1.0"
