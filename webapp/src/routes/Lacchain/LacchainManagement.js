@@ -120,7 +120,9 @@ const LacchainManagement = ({ ual }) => {
           'netaddgroup',
           'setram',
           'setentxinfo',
-          'setnodexinfo'
+          'setnodexinfo',
+          'rmnode',
+          'rmentity'
         ]
       }
 
@@ -144,7 +146,8 @@ const LacchainManagement = ({ ual }) => {
           'addboot',
           'addobserver',
           'addwriter',
-          'addvalidator'
+          'addvalidator',
+          'rmnode'
         ]
       }
 

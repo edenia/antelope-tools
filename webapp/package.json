@@ -8,7 +8,8 @@
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "lint": "lint-staged",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-app-rewired test --env=jsdom",
+    "start:local": "env-cmd -f ../.env react-app-rewired start"
   },
   "husky": {
     "hooks": {
@@ -23,6 +24,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@eoscostarica/ual-reactjs-renderer": "^0.3.1",
     "@apollo/react-hooks": "^4.0.0",
     "@date-io/core": "^2.10.6",
     "@eoscostarica/eoscr-components": "^3.1.0",
@@ -80,7 +82,6 @@
     "ual-ledger": "^0.3.0",
     "ual-lynx": "^0.4.0",
     "ual-meetone": "^0.1.1",
-    "ual-reactjs-renderer": "^0.3.1",
     "ual-scatter": "^0.3.0",
     "ual-token-pocket": "^0.3.0"
   },
