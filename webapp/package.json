@@ -8,7 +8,8 @@
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "lint": "lint-staged",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-app-rewired test --env=jsdom",
+    "start:local": "env-cmd -f ../.env react-app-rewired start"
   },
   "husky": {
     "hooks": {
