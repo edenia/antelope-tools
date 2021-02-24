@@ -3,7 +3,7 @@ kind: StorageClass
 metadata:
   name: dashboard-storage
   labels:
-    version: ead2212
+    version: ${VERSION}
 parameters:
   fromBackup: ""
   numberOfReplicas: "1"
