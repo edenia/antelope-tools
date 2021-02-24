@@ -38,7 +38,7 @@ spec:
         name: postgres
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: jungle
+        storageClassName: dashboard-storage
         resources:
           requests:
             storage: 100Gi 
