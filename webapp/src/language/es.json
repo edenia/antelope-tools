@@ -17,7 +17,8 @@
     "producer": "Productor",
     "login": "Ingresar",
     "logout": "Salir",
-    "keys": "Llaves"
+    "keys": "Llaves",
+    "download": "Descargar"
   },
   "routes": {
     "/>sidebar": "Panel",

@@ -17,7 +17,8 @@
     "producer": "Producer",
     "login": "Login",
     "logout": "Logout",
-    "keys": "Keys"
+    "keys": "Keys",
+    "download": "Download"
   },
   "routes": {
     "/>sidebar": "Dashboard",
