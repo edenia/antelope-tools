@@ -157,7 +157,7 @@
     "endpoints": "Endpoints",
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
-    "cpuBenchmark": "CPU Benchmark"
+    "cpuBenchmark": "CPU Benchmark Average"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Synced",
