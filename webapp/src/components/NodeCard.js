@@ -15,7 +15,6 @@ import { onImgError } from '../utils'
 import { NODE_CPU_BENCHMARK } from '../gql'
 
 import CountryFlag from './CountryFlag'
-import UsageChart from './UsageChart'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,7 +123,10 @@ const NodeCard = ({ producer, node }) => {
           <>
             <dt className={classes.bold}>{t('cpuBenchmark')}</dt>
             <dd>
-              <UsageChart items={cpu} />
+              {(
+                cpu.reduce((total, item) => total + item.usage, 0) / cpu.length
+              ).toFixed(2)}
+              µs
             </dd>
           </>
         )}

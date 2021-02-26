@@ -8,7 +8,10 @@
     "/lacchain/network>heading": "LACChain Network",
     "/management>sidebar": "Management",
     "/management>title": "Management - Dashboard",
-    "/management>heading": "Management"
+    "/management>heading": "Management",
+    "/node-config>sidebar": "Node config",
+    "/node-config>title": "Node config - Dashboard",
+    "/node-config>heading": "Config a New Node"
   },
   "common": {
     "producerName": "Entity name",
