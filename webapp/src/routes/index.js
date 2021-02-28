@@ -33,6 +33,7 @@ const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
+const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
 
 const defaultRoutes = [
   {
@@ -150,6 +151,14 @@ const lacchainRoutes = [
     path: '/management',
     exact: true
   },
+  {
+    name: 'lacchainNodeConfig',
+    icon: <SlidersIcon />,
+    component: LacchainNodeConfig,
+    path: '/node-config',
+    exact: true
+  },
+
   {
     name: 'accounts',
     icon: <UserIcon />,
