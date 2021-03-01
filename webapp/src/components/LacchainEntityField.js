@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core'
 
 import { useSharedState } from '../context/state.context'
 
-const LacchainAddValidatorActionEntityField = ({
+const LacchainEntityField = ({
   value,
   onChange,
   label,
@@ -48,7 +48,7 @@ const LacchainAddValidatorActionEntityField = ({
   )
 }
 
-LacchainAddValidatorActionEntityField.propTypes = {
+LacchainEntityField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
@@ -56,4 +56,4 @@ LacchainAddValidatorActionEntityField.propTypes = {
   className: PropTypes.string
 }
 
-export default LacchainAddValidatorActionEntityField
+export default LacchainEntityField

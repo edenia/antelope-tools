@@ -44,8 +44,7 @@ start:
 	make start-wallet
 	make start-hapi
 	make start-hasura
-	make start-webapp
-	make -j 2 start-hasura-cli start-logs
+	make -j 3 start-hasura-cli start-logs start-webapp
 
 start-postgres:
 	@docker-compose up -d --build postgres
