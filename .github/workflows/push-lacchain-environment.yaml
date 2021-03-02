@@ -1,15 +1,13 @@
-name: Build images from latest dev branch
+name: Build images from latest lacchain branch
 
 on:
   push:
-    branches:
-      - lacchain
     tags:
       - v*
 
 jobs:
-  create-dev-image:
-    name:
+  create-image:
+    if: github.event.base_ref == 'refs/heads/lacchain'
     runs-on: ubuntu-latest
     environment: lacchain
     steps:
