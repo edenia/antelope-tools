@@ -2,6 +2,8 @@ name: Build images from latest dev branch
 
 on:
   push:
+    branches:
+      - master
     tags:
       - v*
 
