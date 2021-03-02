@@ -1,13 +1,13 @@
-name: Build images from latest dev branch
+name: Build images from latest master branch
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - v*
 
 jobs:
-  create-dev-image:
-    name:
+  create-image:
+    if: github.event.base_ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment: mainnet
     steps:
