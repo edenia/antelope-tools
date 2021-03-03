@@ -19,7 +19,8 @@
     "logout": "Salir",
     "keys": "Llaves",
     "download": "Descargar",
-    "healthStatus": "Salud del nodo"
+    "healthStatus": "Salud del nodo",
+    "node": "Nodo"
   },
   "routes": {
     "/>sidebar": "Panel",

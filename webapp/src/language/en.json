@@ -19,7 +19,8 @@
     "logout": "Logout",
     "keys": "Keys",
     "download": "Download",
-    "healthStatus": "Health Status"
+    "healthStatus": "Health Status",
+    "node": "Node"
   },
   "routes": {
     "/>sidebar": "Dashboard",
