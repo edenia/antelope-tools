@@ -326,6 +326,10 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
     )
   }
   const HealthStatus = () => {
+    if (!producer?.health_status?.length) {
+      return <></>
+    }
+
     return (
       <>
         <dt className={classes.dt}>{t('healthStatus')}</dt>
