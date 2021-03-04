@@ -29,6 +29,7 @@ export const PRODUCERS_QUERY = gql`
       server_version_string
       head_block_producer
       head_block_time
+      health_status
       updated_at
     }
   }

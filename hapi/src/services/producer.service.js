@@ -9,9 +9,16 @@ const eosApi = EosApi({
   fetchConfiguration: {}
 })
 
+const nodeTypes = {
+  1: 'validator',
+  2: 'writer',
+  3: 'boot',
+  4: 'observer'
+}
+
 const UPSERT = `
   mutation ($producers: [producer_insert_input!]!) {
-    insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards]}) {
+    insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status]}) {
       affected_rows
     }
   }
@@ -230,17 +237,28 @@ const getBPJsonUrl = async (producer = {}) => {
   return `${newUrl}/bp.json`
 }
 
+const getBPJsonFromUrl = async url => {
+  try {
+    const { data: info } = await axiosUtil.instance.get(url)
+    let data = info || {}
+
+    if (typeof data !== 'object') {
+      data = {}
+    }
+
+    return data
+  } catch (error) {}
+
+  return {}
+}
+
 const syncBPJsonOffChain = async () => {
   const producers = await find()
   await Promise.all(
     producers.map(async producer => {
       try {
         const bpJsonUrl = await getBPJsonUrl(producer)
-        const { data } = await axiosUtil.instance.get(bpJsonUrl)
-
-        if (typeof data !== 'object') {
-          return
-        }
+        const data = await getBPJsonFromUrl(bpJsonUrl)
 
         const nodes = await Promise.all(
           (data?.nodes || []).map(async node => {
@@ -251,7 +269,6 @@ const syncBPJsonOffChain = async () => {
             }
 
             const nodeInfo = await getNodeInfo(api)
-            console.log(producer.owner, nodeInfo.server_version_string)
 
             return {
               ...node,
@@ -260,16 +277,41 @@ const syncBPJsonOffChain = async () => {
           })
         )
 
+        const healthStatus = []
+        healthStatus.push({
+          name: 'organization_name',
+          valid: !!data.org?.candidate_name
+        })
+        healthStatus.push({
+          name: 'email',
+          valid: !!data.org?.email
+        })
+        healthStatus.push({
+          name: 'website',
+          valid: !!data.org?.website
+        })
+        healthStatus.push({
+          name: 'logo_256',
+          valid: !!data?.org?.branding?.logo_256
+        })
+        healthStatus.push({
+          name: 'country',
+          valid: !!data?.org?.location?.country
+        })
+
         await update(
           { owner: { _eq: producer.owner } },
           {
+            health_status: healthStatus,
             bp_json: {
               ...data,
               nodes
             }
           }
         )
-      } catch (error) {}
+      } catch (error) {
+        console.log('syncBPJsonOffChain', producer.owner, error.message)
+      }
     })
   )
 }
@@ -322,18 +364,14 @@ const getNodeInfo = async api => {
 const getJson = string => {
   try {
     const json = JSON.parse(string)
+
     return json
   } catch (error) {}
+
   return {}
 }
 
 const syncBPJsonForLacchain = async () => {
-  const nodeTypes = {
-    1: 'validator',
-    2: 'writer',
-    3: 'boot',
-    4: 'observer'
-  }
   const { rows: entities } = await eosApi.getTableRows({
     code: eosConfig.lacchain.account,
     scope: eosConfig.lacchain.account,
@@ -364,6 +402,20 @@ const syncBPJsonForLacchain = async () => {
               }
             }
 
+            const healthStatus = []
+            healthStatus.push({
+              name: 'peer_keys',
+              valid: (newNodeInfo?.keys?.peer_keys || []).length > 0
+            })
+            healthStatus.push({
+              name: 'endpoint',
+              valid: Object.keys(newNodeInfo?.endpoints || {}).length > 0
+            })
+            healthStatus.push({
+              name: 'country',
+              valid: !!newNodeInfo?.location?.country
+            })
+
             const api =
               newNodeInfo.endpoints?.[`${nodeType}_ssl`] ||
               newNodeInfo.endpoints?.[`${nodeType}_api`]
@@ -379,13 +431,36 @@ const syncBPJsonForLacchain = async () => {
             return {
               ...newNodeInfo,
               node_name: node.name,
-              node_type: nodeType
+              node_type: nodeType,
+              health_status: healthStatus
             }
           })
       )
+      const healthStatus = []
+      healthStatus.push({
+        name: 'organization_name',
+        valid: !!bpJson.organization_name
+      })
+      healthStatus.push({
+        name: 'email',
+        valid: !!bpJson.email
+      })
+      healthStatus.push({
+        name: 'website',
+        valid: !!bpJson.website
+      })
+      healthStatus.push({
+        name: 'logo_256',
+        valid: !!bpJson?.branding?.logo_256
+      })
+      healthStatus.push({
+        name: 'country',
+        valid: !!bpJson?.location?.country
+      })
 
       return {
         owner: entity.name,
+        health_status: healthStatus,
         bp_json: {
           org: bpJson,
           nodes: entityNodes,
