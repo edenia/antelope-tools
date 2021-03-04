@@ -15,6 +15,7 @@ import { onImgError } from '../utils'
 import { NODE_CPU_BENCHMARK } from '../gql'
 
 import CountryFlag from './CountryFlag'
+import ProducerHealthIndicators from './ProducerHealthIndicators'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,6 +108,7 @@ const NodeCard = ({ producer, node }) => {
     if (!node?.features) {
       return <></>
     }
+
     return (
       <>
         <dt className={classes.bold}>{t('features')}</dt>
@@ -130,6 +132,20 @@ const NodeCard = ({ producer, node }) => {
             </dd>
           </>
         )}
+      </>
+    )
+  }
+  const HealthStatus = () => {
+    if (!node?.health_status?.length) {
+      return <></>
+    }
+
+    return (
+      <>
+        <dt className={classes.bold}>{t('healthStatus')}</dt>
+        <dd>
+          <ProducerHealthIndicators producer={node} />
+        </dd>
       </>
     )
   }
@@ -201,6 +217,7 @@ const NodeCard = ({ producer, node }) => {
           <Endpoints />
           <Keys />
           <CpuBenchmark />
+          <HealthStatus />
         </dl>
       </CardContent>
       <CardActions disableSpacing />

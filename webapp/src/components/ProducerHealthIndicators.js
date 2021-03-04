@@ -1,14 +1,19 @@
 /* eslint camelcase: 0 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import clsx from 'clsx'
 import { makeStyles } from '@material-ui/styles'
 import Tooltip from '@material-ui/core/Tooltip'
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { useTranslation } from 'react-i18next'
-import moment from 'moment'
+import WarningIcon from '@material-ui/icons/Warning'
+
+import DoneAllIcon from '@material-ui/icons/DoneAll'
+import { Box, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
   valid: {
     color: 'green'
   },
@@ -26,61 +31,19 @@ const ProducerHealthIndicators = ({ producer }) => {
 
   return (
     <div>
-      <Tooltip
-        title={producer.bp_json ? t('bpJsonFound') : t('noBpJsonFound')}
-        aria-label="add"
-      >
-        <FiberManualRecordIcon
-          className={clsx({
-            [classes.valid]: !!producer.bp_json,
-            [classes.error]: !producer.bp_json
-          })}
-        />
-      </Tooltip>
-      <Tooltip
-        title={producer.ping ? t('apiResponding') : t('apiNotResponding')}
-        aria-label="add"
-      >
-        <FiberManualRecordIcon
-          className={clsx({
-            [classes.valid]: !!producer.ping,
-            [classes.error]: !producer.ping
-          })}
-        />
-      </Tooltip>
-      {producer.head_block_time && (
+      {producer.health_status.map((item, index) => (
         <Tooltip
-          title={
-            moment(producer.updated_at).diff(
-              producer.head_block_time,
-              'minutes'
-            ) < 3
-              ? t('synced')
-              : t('notSyncing')
-          }
+          key={`health-indicator-${index}`}
+          title={t(`hs_${item.name}`)}
           aria-label="add"
         >
-          <FiberManualRecordIcon
-            className={clsx({
-              [classes.valid]:
-                moment(producer.updated_at).diff(
-                  producer.head_block_time,
-                  'minutes'
-                ) < 3,
-              [classes.error]:
-                moment(producer.updated_at).diff(
-                  producer.head_block_time,
-                  'minutes'
-                ) >= 3
-            })}
-          />
+          <Box className={classes.wrapper}>
+            <Typography>{t(`hs_${item.name}`)}</Typography>
+            {item.valid && <DoneAllIcon className={classes.valid} />}
+            {!item.valid && <WarningIcon className={classes.error} />}
+          </Box>
         </Tooltip>
-      )}
-      {!producer.head_block_time && (
-        <Tooltip title="Unknow sync status" aria-label="add">
-          <FiberManualRecordIcon className={classes.warning} />
-        </Tooltip>
-      )}
+      ))}
     </div>
   )
 }
