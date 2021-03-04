@@ -13,9 +13,10 @@ import LacchainSetEntInfoField from './LacchainSetEntInfoField'
 import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeField'
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
-import LacchainAddValidatorActionEntityField from './LacchainAddValidatorActionEntityField'
+import LacchainEntityField from './LacchainEntityField'
 import LacchainAddValidatorActionValidatorAuthorityField from './LacchainAddValidatorActionValidatorAuthorityField'
 import LacchainSetScheduleActionValidatorsField from './LacchainSetScheduleActionValidatorsField'
+import EOSIONewAccountAuthority from './EOSIONewAccountAuthority'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -120,9 +121,12 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             onChange={handleFieldChange(field.name)}
           />
         )
+      case 'eosio.addboot.entity':
+      case 'eosio.addobserver.entity':
+      case 'eosio.addwriter.entity':
       case 'eosio.addvalidator.entity':
         return (
-          <LacchainAddValidatorActionEntityField
+          <LacchainEntityField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"
@@ -162,6 +166,42 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             className={classes.formControl}
             value={payload[field.name] || []}
             onChange={handleFieldChange(field.name)}
+          />
+        )
+      case 'eosio.newaccount.owner':
+        return (
+          <EOSIONewAccountAuthority
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Chip label="public_key" />
+                </InputAdornment>
+              )
+            }}
+          />
+        )
+      case 'eosio.newaccount.active':
+        return (
+          <EOSIONewAccountAuthority
+            key={`action-field-${field.name}`}
+            label={field.name}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || ''}
+            onChange={handleFieldChange(field.name)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Chip label="public_key" />
+                </InputAdornment>
+              )
+            }}
           />
         )
       default:

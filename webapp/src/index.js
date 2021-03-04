@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { UALProvider, withUAL } from 'ual-reactjs-renderer'
+import { UALProvider, withUAL } from '@eoscostarica/ual-reactjs-renderer'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { StylesProvider } from '@material-ui/styles'

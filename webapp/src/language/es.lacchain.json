@@ -8,7 +8,10 @@
     "/lacchain/network>heading": "LACChain Topologia de rede",
     "/management>sidebar": "Administración",
     "/management>title": "Administración - Panel",
-    "/management>heading": "Administración"
+    "/management>heading": "Administración",
+    "/node-config>sidebar": "Configuración de nodo",
+    "/node-config>title": "Configuración de nodo - Dashboard",
+    "/node-config>heading": "Configurar un nuevo nodo"
   },
   "common": {
     "producerName": "Nombre de la entidad",

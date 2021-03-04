@@ -17,7 +17,8 @@
     "producer": "Productor",
     "login": "Ingresar",
     "logout": "Salir",
-    "keys": "Llaves"
+    "keys": "Llaves",
+    "download": "Descargar"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -155,7 +156,7 @@
     "endpoints": "Endpoints",
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
-    "cpuBenchmark": "Benchmark de CPU"
+    "cpuBenchmark": "Promedio del Benchmark de CPU"
   },
   "producerHealthIndicatorsComponent": {
     "synced": "Sincronizado",

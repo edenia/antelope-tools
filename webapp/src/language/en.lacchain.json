@@ -8,7 +8,10 @@
     "/lacchain/network>heading": "LACChain Network",
     "/management>sidebar": "Management",
     "/management>title": "Management - Dashboard",
-    "/management>heading": "Management"
+    "/management>heading": "Management",
+    "/node-config>sidebar": "Node config",
+    "/node-config>title": "Node config - Dashboard",
+    "/node-config>heading": "Config a New Node"
   },
   "common": {
     "producerName": "Entity name",
@@ -58,6 +61,10 @@
     "setentxinfoTitle": "Set extended entity info",
     "setentxinfoTooltip": "Set extended entity info.",
     "setnodexinfoTitle": "Set extended node info",
-    "setnodexinfoTooltip": "Set extended node info."
+    "setnodexinfoTooltip": "Set extended node info.",
+    "rmnodeTitle": "Remove Node",
+    "rmnodeTooltip": "Allow remove a Validator Node from the network.",
+    "rmentityTitle": "Remove Entity",
+    "rmentityTooltip": "Allow remove an entity from the network."
   }
 }

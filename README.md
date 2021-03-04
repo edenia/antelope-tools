@@ -181,6 +181,10 @@ At this point you can run `make run`, you can check the services runing on:
 - hasura at http://localhost:9695
 - webapp at http://localhost:3000
 
+## Release Management Process
+
+- [Create a new release](docs/create-a-release.md)
+
 ## License
 
 MIT © [EOS Costa Rica](https://eoscostarica.io)
