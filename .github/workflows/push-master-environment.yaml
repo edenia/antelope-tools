@@ -2,12 +2,11 @@ name: Build images from latest master branch
 
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - master
 
 jobs:
   create-image:
-    if: github.event.base_ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment: mainnet
     steps:
