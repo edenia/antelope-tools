@@ -18,7 +18,9 @@
     "login": "Ingresar",
     "logout": "Salir",
     "keys": "Llaves",
-    "download": "Descargar"
+    "download": "Descargar",
+    "healthStatus": "Salud del nodo",
+    "node": "Nodo"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -140,7 +142,6 @@
     "serverVersion": "Versión del servidor",
     "secondsAgo": "s atras",
     "lastTimeChecked": "Verificado por última vez",
-    "healthStatus": "Salud del nodo",
     "missedBlocks": "Bloques perdidos",
     "businessContact": "Contacto del negocio",
     "technicalContact": "Contacto técnico",
@@ -159,12 +160,13 @@
     "cpuBenchmark": "Promedio del Benchmark de CPU"
   },
   "producerHealthIndicatorsComponent": {
-    "synced": "Sincronizado",
-    "notSyncing": "Sin sincronizar",
-    "apiResponding": "API Respondiendo",
-    "apiNotResponding": "API No Respondiendo",
-    "bpJsonFound": "BP JSON encontrado",
-    "noBpJsonFound": "No se encontro un BP JSON"
+    "hs_organization_name": "Nombre",
+    "hs_email": "Correo",
+    "hs_website": "Sitio web",
+    "hs_logo_256": "Logo (256px)",
+    "hs_country": "País",
+    "hs_peer_keys": "Peer Keys",
+    "hs_endpoint": "Endpoint"
   },
   "accountInfoComponent": {
     "resources": "Recursos",
