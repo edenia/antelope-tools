@@ -40,25 +40,12 @@ const LacchainSetNodeInfoActionInfoField = ({
       return (
         <>
           <TextField
-            label="endpoints_p2p_out"
+            label={`${nodeType}_p2p`}
             variant={variant}
             className={className}
-            value={
-              payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p_out`] || ''
-            }
+            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
             onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_p2p_out`
-            )}
-          />
-          <TextField
-            label="endpoints_p2p_bidir"
-            variant={variant}
-            className={className}
-            value={
-              payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p_bidir`] || ''
-            }
-            onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_p2p_bidir`
+              `${nodeType}_endpoints.${nodeType}_p2p`
             )}
           />
         </>
