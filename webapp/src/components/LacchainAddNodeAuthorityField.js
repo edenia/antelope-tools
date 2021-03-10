@@ -4,7 +4,7 @@ import { TextField } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import InputAdornment from '@material-ui/core/InputAdornment'
 
-const LacchainAddValidatorActionValidatorAuthorityField = ({
+const LacchainAddNodeAuthorityField = ({
   value,
   onChange,
   label,
@@ -53,7 +53,7 @@ const LacchainAddValidatorActionValidatorAuthorityField = ({
   )
 }
 
-LacchainAddValidatorActionValidatorAuthorityField.propTypes = {
+LacchainAddNodeAuthorityField.propTypes = {
   value: PropTypes.array,
   onChange: PropTypes.func,
   label: PropTypes.string,
@@ -61,4 +61,4 @@ LacchainAddValidatorActionValidatorAuthorityField.propTypes = {
   className: PropTypes.string
 }
 
-export default LacchainAddValidatorActionValidatorAuthorityField
+export default LacchainAddNodeAuthorityField
