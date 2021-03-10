@@ -14,7 +14,7 @@ import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeF
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
 import LacchainEntityField from './LacchainEntityField'
-import LacchainAddValidatorActionValidatorAuthorityField from './LacchainAddValidatorActionValidatorAuthorityField'
+import LacchainAddNodeAuthorityField from './LacchainAddNodeAuthorityField'
 import LacchainSetScheduleActionValidatorsField from './LacchainSetScheduleActionValidatorsField'
 import EOSIONewAccountAuthority from './EOSIONewAccountAuthority'
 
@@ -135,9 +135,10 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             onChange={handleFieldChange(field.name)}
           />
         )
+      case 'eosio.addwriter.writer_authority':
       case 'eosio.addvalidator.validator_authority':
         return (
-          <LacchainAddValidatorActionValidatorAuthorityField
+          <LacchainAddNodeAuthorityField
             key={`action-field-${field.name}`}
             label={field.name}
             variant="outlined"
