@@ -137,7 +137,7 @@ const LacchainManagement = ({ ual }) => {
       )
 
       if (currentEntity) {
-        actions = ['setentinfo', 'setnodeinfo', 'newaccount']
+        actions = ['setentinfo', 'setnodeinfo', 'newaccount', 'setram']
       }
 
       if (currentEntity?.type === 1) {
