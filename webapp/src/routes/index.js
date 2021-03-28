@@ -94,6 +94,7 @@ const defaultRoutes = [
   },
   {
     name: 'ricardianContract',
+    icon: <InfoIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
     exact: true
@@ -141,6 +142,13 @@ const lacchainRoutes = [
     icon: <SettingsInputAntennaIcon />,
     component: LacchainNetwork,
     path: '/lacchain/network',
+    exact: true
+  },
+  {
+    name: 'ricardianContract',
+    icon: <InfoIcon />,
+    component: RicardianContract,
+    path: '/ricardian-contract',
     exact: true
   },
   {

@@ -11,7 +11,10 @@
     "/management>heading": "Administración",
     "/node-config>sidebar": "Configuración de nodo",
     "/node-config>title": "Configuración de nodo - Dashboard",
-    "/node-config>heading": "Configurar un nuevo nodo"
+    "/node-config>heading": "Configurar un nuevo nodo",
+    "/ricardian-contract>sidebar": "Acuerdo de Validador",
+    "/ricardian-contract>title": "Acuerdo de Validador - Dashboard",
+    "/ricardian-contract>heading": ""
   },
   "common": {
     "producerName": "Nombre de la entidad",

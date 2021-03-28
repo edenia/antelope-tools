@@ -11,7 +11,10 @@
     "/management>heading": "Management",
     "/node-config>sidebar": "Node config",
     "/node-config>title": "Node config - Dashboard",
-    "/node-config>heading": "Config a New Node"
+    "/node-config>heading": "Config a New Node",
+    "/ricardian-contract>sidebar": "Validator Agreement",
+    "/ricardian-contract>title": "Validator Agreement - Dashboard",
+    "/ricardian-contract>heading": ""
   },
   "common": {
     "producerName": "Entity name",
