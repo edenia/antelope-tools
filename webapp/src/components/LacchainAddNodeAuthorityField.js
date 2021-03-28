@@ -14,26 +14,25 @@ const LacchainAddNodeAuthorityField = ({
   const [key, setKey] = useState()
 
   const handleOnFieldChange = (event) => {
-    onChange([
-      'block_signing_authority_v0',
-      {
-        threshold: 1,
-        keys: [
-          {
-            key: event.target.value,
-            weight: 1
-          }
-        ]
+    onChange({
+      target: {
+        value: {
+          threshold: 1,
+          keys: [
+            {
+              key: event.target.value,
+              weight: 1
+            }
+          ],
+          waits: [],
+          accounts: []
+        }
       }
-    ])
+    })
   }
 
   useEffect(() => {
-    if (!Array.isArray(value) || value.length < 2) {
-      return
-    }
-
-    setKey(value[1]?.keys[0]?.key)
+    setKey(value?.keys?.[0]?.key || '')
   }, [value])
   return (
     <TextField
@@ -54,7 +53,7 @@ const LacchainAddNodeAuthorityField = ({
 }
 
 LacchainAddNodeAuthorityField.propTypes = {
-  value: PropTypes.array,
+  value: PropTypes.object,
   onChange: PropTypes.func,
   label: PropTypes.string,
   variant: PropTypes.string,

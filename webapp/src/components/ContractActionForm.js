@@ -143,7 +143,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             label={field.name}
             variant="outlined"
             className={classes.formControl}
-            value={payload[field.name] || []}
+            value={payload[field.name] || {}}
             onChange={handleFieldChange(field.name)}
           />
         )
