@@ -82,3 +82,17 @@ export const NETWORK_STATS = gql`
     }
   }
 `
+
+export const BLOCK_TRANSACTIONS_HISTORY = gql`
+  query($start: timestamptz!, $end: timestamptz!) {
+    block: block_history_aggregate(
+      where: { timestamp: { _gte: $start, _lte: $end } }
+    ) {
+      aggregate {
+        sum {
+          transactions_length
+        }
+      }
+    }
+  }
+`
