@@ -95,7 +95,7 @@ const Home = () => {
     })
     loadLastWeekBlockTransactions({
       variables: {
-        start: moment().subtract(1, 'year'),
+        start: moment().subtract(1, 'week'),
         end: moment()
       }
     })
@@ -179,7 +179,7 @@ const Home = () => {
                 </dd>
                 <dt>
                   <Typography component="p" variant="subtitle1">
-                    {t('lastYear')}:
+                    {t('lastWeek')}:
                   </Typography>
                 </dt>
                 <dd>
