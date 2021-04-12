@@ -20,7 +20,11 @@
     "keys": "Llaves",
     "download": "Descargar",
     "healthStatus": "Salud del nodo",
-    "node": "Nodo"
+    "node": "Nodo",
+    "lastHour": "Última hora",
+    "lastDay": "Último día",
+    "lastWeek": "Última semana",
+    "lastYear": "Ultimo año"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -70,7 +74,8 @@
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
-    "transPerBlock": "Transacciones por Bloque"
+    "transPerBlock": "Transacciones por Bloque",
+    "transactionsHistory": "Historial de transacciones"
   },
   "networkInfoRoute": {
     "chainId": "Identificador de la cadena",
