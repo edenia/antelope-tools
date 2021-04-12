@@ -8,13 +8,27 @@ const { hasuraUtil } = require('../utils')
 let types
 let ws
 
+const getLastBlockNumInDatabase = async () => {
+  const query = `
+    query {
+      blocks: block_history (limit:1, order_by:{block_num: desc}) {
+        id
+        block_num
+      }
+    }
+  `
+  const data = await hasuraUtil.request(query)
+
+  return data?.blocks?.length > 0 ? data.blocks[0].block_num : 0
+}
+
 const saveBlockHistory = async payload => {
   const mutation = `
     mutation ($payload: block_history_insert_input!) {
-      block: insert_block_history_one(object: $payload, on_conflict: {constraint: block_history_block_id_key, update_columns: [transactions_length]}) {
+      block: insert_block_history_one(object: $payload, on_conflict: {constraint: block_history_block_num_key, update_columns: [transactions_length]}) {
         id
       }
-    }
+    }  
   `
 
   const data = await hasuraUtil.request(mutation, { payload })
@@ -34,7 +48,7 @@ const deserialize = (type, array) => {
     new Serialize.SerializerState({ bytesAsUint8Array: true })
   )
 
-  if (buffer.readPos != array.length) {
+  if (buffer.readPos !== array.length) {
     throw new Error(type)
   }
 
@@ -58,12 +72,12 @@ const requestBlocks = (requestArgs = {}) => {
       {
         start_block_num: 0,
         end_block_num: 4294967295,
-        max_messages_in_flight: 1,
+        max_messages_in_flight: 1000,
         have_positions: [],
-        irreversible_only: false,
         fetch_block: true,
-        fetch_traces: true,
-        fetch_deltas: true,
+        irreversible_only: false,
+        fetch_traces: false,
+        fetch_deltas: false,
         ...requestArgs
       }
     ])
@@ -105,6 +119,8 @@ const init = async () => {
     return
   }
 
+  const startBlockNum = await getLastBlockNumInDatabase()
+
   ws = new WebSocket(eosConfig.stateHistoryPluginEndpoint, {
     perMessageDeflate: false,
     maxPayload: 2048 * 1024 * 1024
@@ -118,7 +134,7 @@ const init = async () => {
     if (!types) {
       const abi = JSON.parse(data)
       types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
-      requestBlocks()
+      requestBlocks({ start_block_num: startBlockNum })
 
       return
     }
