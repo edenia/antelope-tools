@@ -1,5 +1,21 @@
 - table:
     schema: public
+    name: block_history
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - block_id
+      - block_num
+      - transactions_length
+      - timestamp
+      - created_at
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: cpu
   select_permissions:
   - role: guest

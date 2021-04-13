@@ -24,7 +24,8 @@
     "eosjs-api": "^7.0.4",
     "graphql-request": "^1.8.2",
     "hapi-pino": "^6.5.0",
-    "http-status-codes": "^1.4.0"
+    "http-status-codes": "^1.4.0",
+    "ws": "^7.4.4"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

@@ -1,6 +1,8 @@
 module.exports = {
   networkName: process.env.HAPI_EOS_API_NETWORK_NAME,
   apiEndpoint: process.env.HAPI_EOS_API_ENDPOINT,
+  stateHistoryPluginEndpoint:
+    process.env.HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT,
   chainId: process.env.HAPI_EOS_API_CHAIN_ID,
   baseAccount: process.env.HAPI_EOS_BASE_ACCOUNT,
   baseAccountPassword: process.env.HAPI_EOS_BASE_ACCOUNT_PASSWORD,
