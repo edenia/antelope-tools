@@ -119,7 +119,15 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f build_k8s -n mainnet-dashboard
+          args: version
+
+      - name: Deploy kubernetes files
+        run: |
+          make \
+            deploy-kubernetes
+        env:
+          NAMESPACE: mainnet-dashboard
+          K8S_BUILD_DIR: build_k8s
 
       - name: Create Release
         id: create_release
