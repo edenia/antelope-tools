@@ -1,6 +1,7 @@
 .env*
 !.env.example
 !.env.local
+!.env.telostestnet
 db_data
 wallet_data
 certificates
