@@ -124,7 +124,7 @@ jobs:
           HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
 
       - name: Deploy kubernetes files
-        uses: Consensys/kubernetes-action@master
+        uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
