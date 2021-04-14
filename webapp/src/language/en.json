@@ -20,7 +20,11 @@
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
-    "node": "Node"
+    "node": "Node",
+    "lastHour": "Last Hour",
+    "lastDay": "Last Day",
+    "lastWeek": "Last Week",
+    "lastYear": "Last Year"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -70,7 +74,8 @@
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
-    "transPerBlock": "Transactions Per Block"
+    "transPerBlock": "Transactions Per Block",
+    "transactionsHistory": "Transactions History"
   },
   "networkInfoRoute": {
     "chainId": "Chain Id",

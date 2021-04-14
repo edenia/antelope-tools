@@ -1,4 +1,8 @@
-const { producerService, settingService } = require('../services')
+const {
+  producerService,
+  settingService,
+  stateHistoryPluginService
+} = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil } = require('../utils')
 
@@ -65,6 +69,7 @@ const start = async () => {
     )
   }
   run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
+  stateHistoryPluginService.init()
 }
 
 module.exports = {

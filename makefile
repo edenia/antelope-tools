@@ -21,6 +21,11 @@ jungle:
 	make stop
 	make start
 
+telostestnet:
+	cp .env.telostestnet .env
+	make stop
+	make start
+
 lacchain:
 	cp .env.lacchain .env
 	make stop
