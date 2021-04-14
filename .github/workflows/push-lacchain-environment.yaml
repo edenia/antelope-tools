@@ -7,7 +7,6 @@ on:
 
 jobs:
   create-image:
-    if: github.event.base_ref == 'refs/heads/lacchain'
     runs-on: ubuntu-latest
     environment: lacchain
     steps:
