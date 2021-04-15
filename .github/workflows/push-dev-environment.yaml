@@ -123,14 +123,17 @@ jobs:
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
           HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
 
-      - name: Deploy kubernetes files
+      - name: Setup kubernetes environment
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f build_k8s -n jungle-dashboard
+          args: version
 
-#      - name: Verify deployment
-#        id: verify_deployment
-#        run: |
-#          kubectl rollout status deployment/hapi
+      - name: Deploy kubernetes files
+        run: |
+          make \
+            deploy-kubernetes
+        env:
+          NAMESPACE: jungle-dashboard
+          K8S_BUILD_DIR: build_k8s
