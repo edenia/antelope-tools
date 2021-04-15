@@ -119,5 +119,5 @@
     permission:
       columns:
       - id
-      - eos_price
+      - token_price
       filter: {}

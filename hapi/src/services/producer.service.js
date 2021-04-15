@@ -680,9 +680,9 @@ const checkForMissedBlocks = async () => {
 
       if (lastProducer !== currentProducer) {
         // we have a new producer so we should save the missed blocks for the previous one
-        console.log(
-          `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
-        )
+        // console.log(
+        //   `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
+        // )
         await saveMissedBlocksFor(lastProducer, missedBlocks)
         producedBlocks = 0
         missedBlocks = 0
@@ -690,18 +690,18 @@ const checkForMissedBlocks = async () => {
 
       if (currentBlockNum === lastBlockNum) {
         // when the previous block and the current block are equals we have a missed block
-        console.log(
-          `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
-        )
+        // console.log(
+        //   `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
+        // )
         missedBlocks += 1
       } else {
         // when the previous block and the current block are diferent we have a new block
-        console.log(`new block from ${currentProducer}`)
+        // console.log(`new block from ${currentProducer}`)
         producedBlocks += 1
       }
-      console.log(
-        `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
-      )
+      // console.log(
+      //   `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
+      // )
       lastProducer = currentProducer
       lastBlockNum = currentBlockNum
     } catch (error) {
@@ -710,7 +710,7 @@ const checkForMissedBlocks = async () => {
 
     const endTime = new Date()
     const msDiff = endTime.getTime() - startTime.getTime()
-    console.log(`finished after ${msDiff}`)
+    // console.log(`finished after ${msDiff}`)
 
     if (msDiff < 500) {
       console.log(`will run again in ${500 - msDiff}`)
