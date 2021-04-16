@@ -56,6 +56,8 @@ CustomTooltip.propTypes = {
 const TransactionsChart = ({ data }) => {
   const theme = useTheme()
 
+  // console.log({ data })
+
   return (
     <ResponsiveContainer width="100%" aspect={1.6}>
       <BarChart
