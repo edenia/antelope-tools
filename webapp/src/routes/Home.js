@@ -14,7 +14,9 @@ const Grid = lazy(() => import('@material-ui/core/Grid'))
 const Typography = lazy(() => import('@material-ui/core/Typography'))
 const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
 const ProducersChart = lazy(() => import('../components/ProducersChart'))
-const TransactionsChart = lazy(() => import('../components/TransactionsChart'))
+const TransactionsLineChart = lazy(() =>
+  import('../components/TransactionsLineChart')
+)
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -36,7 +38,28 @@ const Home = () => {
   const tpb = useSelector((state) => state.eos.tpb)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const [schedule, setSchedule] = useState({ producers: [] })
+  const [graphicData, setGraphicData] = useState([])
   const { t } = useTranslation('homeRoute')
+
+  useEffect(() => {
+    const majorLength = tps.length > tpb.length ? tps.length : tpb.length
+    const dataModeled = []
+
+    if (!majorLength) return
+
+    for (let index = 0; index < majorLength; index++) {
+      dataModeled.push({
+        tps: tps[index] ? tps[index].transactions : 0,
+        tpb: tpb[index] ? tpb[index].transactions : 0,
+        blocks: {
+          tps: tps[index] ? tps[index].blocks : [0],
+          tpb: tpb[index] ? tpb[index].blocks : [0]
+        }
+      })
+    }
+
+    setGraphicData(dataModeled)
+  }, [tps, tpb])
 
   useEffect(() => {
     dispatch.eos.startTrackingInfo({ interval: 0.5 })
@@ -210,29 +233,17 @@ const Home = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography component="p" variant="h6">
-                    {t('transPerSecond')}
-                  </Typography>
-                  <TransactionsChart data={tps} />
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography component="p" variant="h6">
-                    {t('transPerBlock')}
-                  </Typography>
-                  <TransactionsChart data={tpb} />
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>
+              <Typography component="p" variant="h6">
+                {t('transactions')}
+              </Typography>
+              <TransactionsLineChart data={graphicData} />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </Grid>

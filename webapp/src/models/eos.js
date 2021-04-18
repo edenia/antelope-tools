@@ -31,7 +31,7 @@ export default {
     updateTransactionsStats(state, item) {
       let tpb = state.tpb
 
-      if (state.tpb.length >= 10) {
+      if (state.tpb.length >= 30) {
         tpb = state.tpb.splice(1, state.tpb.length)
       }
 
@@ -53,7 +53,7 @@ export default {
 
       let tps = state.tps
 
-      if (state.tps.length >= 10) {
+      if (state.tps.length >= 30) {
         tps = state.tps.splice(1, state.tps.length)
       }
 
