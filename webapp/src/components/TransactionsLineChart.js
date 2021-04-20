@@ -97,6 +97,7 @@ const TransactionsChart = ({ data }) => {
           stroke={theme.palette.primary.main}
           activeDot={{ r: 8 }}
           isAnimationActive={false}
+          strokeWidth={2}
         />
         <Line
           type="monotone"
@@ -104,6 +105,7 @@ const TransactionsChart = ({ data }) => {
           name={t('transactionsPerBlock')}
           stroke={theme.palette.success.main}
           isAnimationActive={false}
+          strokeWidth={2}
         />
       </LineChart>
     </ResponsiveContainer>
