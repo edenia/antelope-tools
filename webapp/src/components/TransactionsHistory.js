@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
