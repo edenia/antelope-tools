@@ -1,7 +1,8 @@
 const {
   producerService,
   settingService,
-  stateHistoryPluginService
+  stateHistoryPluginService,
+  statsService
 } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil } = require('../utils')
@@ -69,6 +70,7 @@ const start = async () => {
     )
   }
   run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
+  run('SYNC STATS', statsService.sync, workersConfig.syncStatsInterval)
   stateHistoryPluginService.init()
 }
 
