@@ -69,7 +69,6 @@ const getStats = async () => {
     query {
       stat(limit: 1) {
         id
-        producers
         transactions_in_last_hour
         transactions_in_last_day
         transactions_in_last_week

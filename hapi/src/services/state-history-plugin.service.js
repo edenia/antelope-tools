@@ -85,35 +85,36 @@ const requestBlocks = (requestArgs = {}) => {
 }
 
 const handleBlocksResult = async data => {
-  if (!data.block || !data.block.length) {
+  try {
+    if (!data.block || !data.block.length) {
+      ws.send(
+        serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
+      )
+
+      return
+    }
+
+    const block = {
+      ...deserialize('signed_block', data.block),
+      head: data.head,
+      last_irreversible: data.last_irreversible,
+      this_block: data.this_block,
+      prev_block: data.prev_block
+    }
+    await saveBlockHistory({
+      producer: block.producer,
+      schedule_version: block.schedule_version,
+      block_id: block.this_block.block_id,
+      block_num: block.this_block.block_num,
+      transactions_length: block.transactions.length,
+      timestamp: block.timestamp
+    })
     ws.send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
     )
-
-    return
+  } catch (error) {
+    console.log(error)
   }
-
-  const block = {
-    ...deserialize('signed_block', data.block),
-    head: data.head,
-    last_irreversible: data.last_irreversible,
-    this_block: data.this_block,
-    prev_block: data.prev_block
-  }
-  console.log(
-    `processing block num ${block.this_block.block_num} of ${block.head.block_num}`
-  )
-  await saveBlockHistory({
-    producer: block.producer,
-    schedule_version: block.schedule_version,
-    block_id: block.this_block.block_id,
-    block_num: block.this_block.block_num,
-    transactions_length: block.transactions.length,
-    timestamp: block.timestamp
-  })
-  ws.send(
-    serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
-  )
 }
 
 const init = async () => {
@@ -129,7 +130,7 @@ const init = async () => {
   })
 
   ws.on('open', () => {
-    console.log('connected')
+    console.log('connected to state_history_plugin socket')
   })
 
   ws.on('message', data => {

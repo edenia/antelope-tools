@@ -14,11 +14,11 @@ const sleepFor = seconds => {
 }
 
 const run = async (name, action, sleep) => {
-  console.log(`[WORKER ${name}] started at `, new Date().getTime())
   try {
     await action()
-  } catch (error) {}
-  console.log(`[WORKER ${name}] finished at `, new Date().getTime())
+  } catch (error) {
+    console.log(`${name} ERROR =>`, error.message)
+  }
 
   if (!sleep) {
     return
