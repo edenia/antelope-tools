@@ -130,97 +130,107 @@ const Home = () => {
 
   return (
     <Grid item xs={12}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={3}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="h6">
-                {t('currentProducer')}
-              </Typography>
-              <Typography component="p" variant="h6">
-                {info.head_block_producer}
-              </Typography>
-            </CardContent>
-          </Card>
+      <Grid container spacing={2} justify="space-between">
+        <Grid
+          container
+          item
+          xs={12}
+          md={3}
+          style={{ alignContent: 'baseline' }}
+          justify="flex-start"
+          spacing={2}
+        >
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography component="p" variant="h6">
+                  {t('currentProducer')}
+                </Typography>
+                <Typography component="p" variant="h6">
+                  {info.head_block_producer}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography component="p" variant="h6">
+                  {t('headBlock')}
+                </Typography>
+                <Typography component="p" variant="h6">
+                  {formatWithThousandSeparator(info.head_block_num)}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography component="p" variant="h6">
+                  {t('lastBlock')}
+                </Typography>
+                <Typography component="p" variant="h6">
+                  {formatWithThousandSeparator(
+                    info.last_irreversible_block_num
+                  )}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography component="p" variant="h6">
+                  {t('transactionsHistory')}
+                </Typography>
+                <dl>
+                  <dt>
+                    <Typography component="p" variant="subtitle1">
+                      {t('lastHour')}:
+                    </Typography>
+                  </dt>
+                  <dd>
+                    <Typography component="p" variant="subtitle2">
+                      {formatWithThousandSeparator(
+                        lastHourBlockTransactions?.data?.block?.aggregate?.sum
+                          ?.transactions_length || 0
+                      )}
+                    </Typography>
+                  </dd>
+                  <dt>
+                    <Typography component="p" variant="subtitle1">
+                      {t('lastDay')}:
+                    </Typography>
+                  </dt>
+                  <dd>
+                    <Typography component="p" variant="subtitle2">
+                      {formatWithThousandSeparator(
+                        lastDayBlockTransactions?.data?.block?.aggregate?.sum
+                          ?.transactions_length || 0
+                      )}
+                    </Typography>
+                  </dd>
+                  <dt>
+                    <Typography component="p" variant="subtitle1">
+                      {t('lastWeek')}:
+                    </Typography>
+                  </dt>
+                  <dd>
+                    <Typography component="p" variant="subtitle2">
+                      {formatWithThousandSeparator(
+                        lastWeekBlockTransactions?.data?.block?.aggregate?.sum
+                          ?.transactions_length || 0
+                      )}
+                    </Typography>
+                  </dd>
+                </dl>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={3}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="h6">
-                {t('headBlock')}
-              </Typography>
-              <Typography component="p" variant="h6">
-                {formatWithThousandSeparator(info.head_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="h6">
-                {t('lastBlock')}
-              </Typography>
-              <Typography component="p" variant="h6">
-                {formatWithThousandSeparator(info.last_irreversible_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="h6">
-                {t('transactionsHistory')}
-              </Typography>
-              <dl>
-                <dt>
-                  <Typography component="p" variant="subtitle1">
-                    {t('lastHour')}:
-                  </Typography>
-                </dt>
-                <dd>
-                  <Typography component="p" variant="subtitle2">
-                    {formatWithThousandSeparator(
-                      lastHourBlockTransactions?.data?.block?.aggregate?.sum
-                        ?.transactions_length || 0
-                    )}
-                  </Typography>
-                </dd>
-                <dt>
-                  <Typography component="p" variant="subtitle1">
-                    {t('lastDay')}:
-                  </Typography>
-                </dt>
-                <dd>
-                  <Typography component="p" variant="subtitle2">
-                    {formatWithThousandSeparator(
-                      lastDayBlockTransactions?.data?.block?.aggregate?.sum
-                        ?.transactions_length || 0
-                    )}
-                  </Typography>
-                </dd>
-                <dt>
-                  <Typography component="p" variant="subtitle1">
-                    {t('lastWeek')}:
-                  </Typography>
-                </dt>
-                <dd>
-                  <Typography component="p" variant="subtitle2">
-                    {formatWithThousandSeparator(
-                      lastWeekBlockTransactions?.data?.block?.aggregate?.sum
-                        ?.transactions_length || 0
-                    )}
-                  </Typography>
-                </dd>
-              </dl>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
+        {loading && <LinearProgress />}
+        <Grid item xs={12} md={9}>
           <Card>
             <CardContent>
               <Typography component="p" variant="h6">
