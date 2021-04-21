@@ -54,6 +54,8 @@
     "flag-icon-css": "^3.4.6",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
+    "highcharts": "^9.0.1",
+    "highcharts-react-official": "^3.0.0",
     "history": "^4.10.1",
     "i18next": "^19.5.1",
     "i18next-browser-languagedetector": "^5.0.0",

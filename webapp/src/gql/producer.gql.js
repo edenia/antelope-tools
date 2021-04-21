@@ -84,15 +84,24 @@ export const NETWORK_STATS = gql`
 `
 
 export const BLOCK_TRANSACTIONS_HISTORY = gql`
-  query($start: timestamptz!, $end: timestamptz!) {
-    block: block_history_aggregate(
-      where: { timestamp: { _gte: $start, _lte: $end } }
-    ) {
-      aggregate {
-        sum {
-          transactions_length
-        }
-      }
+  subscription {
+    stats: stat(limit: 1) {
+      id
+      transactions_in_last_hour
+      transactions_in_last_day
+      transactions_in_last_week
+      average_daily_transactions_in_last_week
+      updated_at
+    }
+  }
+`
+
+export const BLOCK_DISTRIBUTION_QUERY = gql`
+  query($range: String!) {
+    items: block_distribution(range: $range) {
+      account
+      blocks
+      percent
     }
   }
 `
