@@ -54,9 +54,10 @@ services:
       HAPI_SYNC_PRODUCER_INFO_INTERVAL: '${HAPI_SYNC_PRODUCER_INFO_INTERVAL}'
       HAPI_SYNC_PRODUCER_CPU_INTERVAL: '${HAPI_SYNC_PRODUCER_CPU_INTERVAL}'
       HAPI_COINGECKO_API_TOKEN_ID: '${HAPI_COINGECKO_API_TOKEN_ID}'
+      HAPI_SYNC_STATS_INTERVAL: '${HAPI_SYNC_STATS_INTERVAL}'
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
-    image: hasura/graphql-engine:v1.3.3.cli-migrations-v2
+    image: hasura/graphql-engine:v2.0.0-alpha.9.cli-migrations-v2
     ports:
       - '8585:8080'
     volumes:
@@ -67,6 +68,7 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: '${HASURA_GRAPHQL_ENABLE_CONSOLE}'
       HASURA_GRAPHQL_ADMIN_SECRET: '${HASURA_GRAPHQL_ADMIN_SECRET}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: '${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}'
+      HASURA_GRAPHQL_ACTION_BASE_URL: '${HASURA_GRAPHQL_ACTION_BASE_URL}'
   webapp:
     container_name: '${STAGE}-${APP_NAME}-webapp'
     image: node:14.2.0
