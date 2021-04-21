@@ -22,6 +22,48 @@ const getTransactionsInTimeRage = async payload => {
   return data.block.info.sum.transactions_length || 0
 }
 
+const getBlockDistribution = async (range = '1 day') => {
+  try {
+    let totalBloks = 0
+    let startTime
+
+    if (range === 'all') {
+      startTime = moment().subtract(20, 'years')
+    } else {
+      const [amount, unit] = range.split(' ')
+      startTime = moment().subtract(parseInt(amount || 1), unit || 'day')
+    }
+
+    const query = `
+      query ($startTime: timestamptz) {
+        items: block_history_by_producer(args: {since: $startTime}) {
+          id
+          producer
+          blocks
+        }
+      }
+    `
+    const data = await hasuraUtil.request(query, { startTime })
+
+    data.items.forEach(item => {
+      totalBloks += item.blocks
+    })
+
+    return data.items
+      .map(item => ({
+        account: item.producer || 'N/A',
+        blocks: item.blocks,
+        percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
+      }))
+      .sort((a, b) => a.percent - b.percent)
+  } catch (error) {
+    console.log(error)
+    throw new Boom.Boom(error.message, {
+      statusCode: BAD_REQUEST
+    })
+  }
+}
+
 const getStats = async () => {
   const query = `
     query {
@@ -93,5 +135,6 @@ const sync = async () => {
 }
 
 module.exports = {
-  sync
+  sync,
+  getBlockDistribution
 }
