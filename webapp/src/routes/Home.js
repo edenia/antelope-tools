@@ -108,9 +108,7 @@ const Home = () => {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <Typography component="p" variant="h6">
-                  {t('currentProducer')}
-                </Typography>
+                <Typography>{t('currentProducer')}</Typography>
                 <Typography component="p" variant="h6">
                   {info.head_block_producer}
                 </Typography>
@@ -120,11 +118,38 @@ const Home = () => {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <Typography component="p" variant="h6">
-                  {t('headBlock')}
-                </Typography>
+                <Typography>{t('headBlock')}</Typography>
                 <Typography component="p" variant="h6">
                   {formatWithThousandSeparator(info.head_block_num)}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography>{t('lastBlock')}</Typography>
+                <Typography component="p" variant="h6">
+                  {formatWithThousandSeparator(
+                    info.last_irreversible_block_num
+                  )}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography>
+                  {`${t('transactions')} ${t('lastHour')}`}
+                </Typography>
+                <Typography component="p" variant="h6">
+                  {formatWithThousandSeparator(
+                    lastHourBlockTransactions?.data?.block?.aggregate?.sum
+                      ?.transactions_length || 0
+                  )}
                 </Typography>
               </CardContent>
             </Card>
@@ -132,12 +157,13 @@ const Home = () => {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <Typography component="p" variant="h6">
-                  {t('lastBlock')}
+                <Typography>
+                  {`${t('transactions')} ${t('lastDay')}`}
                 </Typography>
                 <Typography component="p" variant="h6">
                   {formatWithThousandSeparator(
-                    info.last_irreversible_block_num
+                    lastDayBlockTransactions?.data?.block?.aggregate?.sum
+                      ?.transactions_length || 0
                   )}
                 </Typography>
               </CardContent>

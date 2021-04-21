@@ -29,7 +29,7 @@
   "routes": {
     "/>sidebar": "Dashboard",
     "/>title": "EOSIO Dashboard",
-    "/>heading": "Welcome",
+    "/>heading": "Welcome to",
     "/node-performance>sidebar": "Node Performance ",
     "/node-performance>title": "Node Performance  - Dashboard",
     "/node-performance>heading": "Node Performance ",
