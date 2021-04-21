@@ -54,6 +54,9 @@
     "/ricardian-contract>sidebar": "Acuerdo de productor de bloque",
     "/ricardian-contract>title": "Acuerdo de productor de bloque - Dashboard",
     "/ricardian-contract>heading": "",
+    "/block-distribution>sidebar": "Block Distribution",
+    "/block-distribution>title": "Block Distribution - Dashboard",
+    "/block-distribution>heading": "Block Distribution",
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Panel",
     "/about>heading": "Acerca de",
@@ -194,5 +197,24 @@
   },
   "contractActionFormComponent": {
     "executeTransaction": "Ejecutar Transacción"
+  },
+  "blockDistributionRoute": {
+    "title": "Bloques generados por productor",
+    "timeFrame": "Periodo de tiempo",
+    "blocksProduced": "Bloques producidos",
+    "percent": "Porcentaje",
+    "3 hours": "3 Horas",
+    "6 Hours": "6 Horas",
+    "12 Hours": "12 Horas",
+    "1 Day": "1 Día",
+    "2 Days": "2 Días",
+    "4 Days": "4 Días",
+    "7 Days": "7 Días",
+    "14 Days": "14 Días",
+    "1 Month": "6 Mes",
+    "2 Months": "2 Meses",
+    "3 Months": "3 Meses",
+    "6 Months": "6 Meses",
+    "1 Year": "1 Año"
   }
 }
