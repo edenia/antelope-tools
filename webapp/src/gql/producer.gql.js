@@ -95,6 +95,13 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
     }
   }
 `
+
+export const BLOCK_DISTRIBUTION_QUERY = gql`
+  query($range: String!) {
+    items: block_distribution(range: $range) {
+      account
+      blocks
+      percent
     }
   }
 `
