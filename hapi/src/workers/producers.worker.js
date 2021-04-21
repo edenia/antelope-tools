@@ -1,7 +1,8 @@
 const {
   producerService,
   settingService,
-  stateHistoryPluginService
+  stateHistoryPluginService,
+  statsService
 } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil } = require('../utils')
@@ -13,11 +14,11 @@ const sleepFor = seconds => {
 }
 
 const run = async (name, action, sleep) => {
-  console.log(`[WORKER ${name}] started at `, new Date().getTime())
   try {
     await action()
-  } catch (error) {}
-  console.log(`[WORKER ${name}] finished at `, new Date().getTime())
+  } catch (error) {
+    console.log(`${name} ERROR =>`, error.message)
+  }
 
   if (!sleep) {
     return
@@ -69,6 +70,7 @@ const start = async () => {
     )
   }
   run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
+  run('SYNC STATS', statsService.sync, workersConfig.syncStatsInterval)
   stateHistoryPluginService.init()
 }
 
