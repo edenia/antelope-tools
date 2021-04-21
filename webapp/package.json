@@ -1,6 +1,6 @@
 {
   "name": "eosiodashboard",
-  "version": "1.0.0",
+  "version": "v0.1.11",
   "description": "EOSIO Dashboard WebApp",
   "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
