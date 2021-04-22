@@ -26,7 +26,6 @@ import { countries } from '../utils/countries'
 import { PRODUCERS_QUERY, SETTING_QUERY } from '../gql'
 import CountryFlag from '../components/CountryFlag'
 import Tooltip from '../components/Tooltip'
-import { eosConfig } from '../config'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -237,8 +236,7 @@ const RewardsDistribution = () => {
           <Typography>
             <span className={classes.popoverItem}>{t('rewards')}: </span>
             <span>
-              {formatWithThousandSeparator(currentNode?.rewards, 2)}{' '}
-              {eosConfig.tokenSymbol}
+              {formatWithThousandSeparator(currentNode?.rewards, 2)} EOS
             </span>
           </Typography>
           <Typography className={classes.popoverItem}>
@@ -257,8 +255,7 @@ const RewardsDistribution = () => {
                   {producer?.bp_json?.org?.candidate_name || producer.owner}
                 </Link>
                 <br />
-                {formatWithThousandSeparator(producer.total_rewards, 2)}{' '}
-                {eosConfig.tokenSymbol}
+                {formatWithThousandSeparator(producer.total_rewards, 2)} EOS
               </li>
             ))}
           </ul>
@@ -276,8 +273,7 @@ const RewardsDistribution = () => {
                 )}
                 {nodes.length > 0 && (
                   <span>
-                    {formatWithThousandSeparator(summary.daylyRewars, 2)}{' '}
-                    {eosConfig.tokenSymbol}
+                    {formatWithThousandSeparator(summary.daylyRewars, 2)} EOS
                   </span>
                 )}
               </Typography>
@@ -285,11 +281,11 @@ const RewardsDistribution = () => {
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes.length > 0 && setting?.token_price && (
+                {nodes.length > 0 && setting?.eos_price && (
                   <span>
                     $
                     {formatWithThousandSeparator(
-                      summary.daylyRewars * setting?.token_price,
+                      summary.daylyRewars * setting?.eos_price,
                       0
                     )}{' '}
                     USD
@@ -321,16 +317,15 @@ const RewardsDistribution = () => {
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes.length > 0 && setting?.token_price && (
+                {nodes.length > 0 && setting?.eos_price && (
                   <>
                     {formatWithThousandSeparator(
                       summary.topCountryByRewards.rewards,
                       0
                     )}{' '}
-                    {eosConfig.tokenSymbol} / $
+                    EOS / $
                     {formatWithThousandSeparator(
-                      summary.topCountryByRewards.rewards *
-                        setting?.token_price,
+                      summary.topCountryByRewards.rewards * setting?.eos_price,
                       0
                     )}{' '}
                     USD
@@ -384,12 +379,12 @@ const RewardsDistribution = () => {
                 </span>
                 <span className={classes.highestRewards} />
               </Typography>
-              {setting?.token_price && (
+              {setting?.eos_price && (
                 <Typography variant="h6" className={classes.rewardsColorSchema}>
                   <span className={classes.itemLabel}>
                     {t('exchangeRate')}:{' '}
                   </span>{' '}
-                  ${formatWithThousandSeparator(setting.token_price, 2)}
+                  ${formatWithThousandSeparator(setting.eos_price, 2)}
                 </Typography>
               )}
             </CardContent>

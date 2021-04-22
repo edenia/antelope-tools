@@ -18,11 +18,4 @@
     name: setting
 - table:
     schema: public
-    name: setting
-  select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - token_price
-      filter: {}
+    name: stat

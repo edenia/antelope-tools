@@ -15,7 +15,6 @@ module.exports = {
   },
   walletUrl: process.env.HAPI_EOS_WALLET_URL,
   exchangeRateApi: process.env.HAPI_EOS_EXCHANGE_RATE_API,
-  coingeckoApiTokenId: process.env.HAPI_COINGECKO_API_TOKEN_ID,
   bpJsonOnChain: process.env.HAPI_EOS_BP_JSON_ON_CHAIN === 'true',
   bpJsonOnChainContract: process.env.HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT,
   bpJsonOnChainTable: process.env.HAPI_EOS_BP_JSON_ON_CHAIN_TABLE,
