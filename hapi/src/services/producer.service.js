@@ -584,11 +584,15 @@ const syncProducersInfo = async () => {
 }
 
 const syncCpuUsage = async () => {
-  const { block, transaction } = await eosmechanicsUtil.cpu()
-  await insertUsage('cpu', {
-    account: block.producer,
-    usage: transaction.processed.receipt.cpu_usage_us
-  })
+  try {
+    const { block, transaction } = await eosmechanicsUtil.cpu()
+    await insertUsage('cpu', {
+      account: block.producer,
+      usage: transaction.processed.receipt.cpu_usage_us
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const syncRamUsage = async () => {
@@ -625,7 +629,6 @@ const checkForMissedBlocks = async () => {
 
   // wait until first turn change
   while (currentProducer === lastProducer) {
-    console.log('waiting for first turn change')
     info = await eosApi.getInfo({})
     lastProducer = currentProducer
     currentProducer = info.head_block_producer
@@ -665,11 +668,6 @@ const checkForMissedBlocks = async () => {
         currentProducer === lastProducer
       ) {
         // change producer in case that the currentProducer and the next one are missing blocks
-        console.log(
-          'check point',
-          lastProducerIndex + 1,
-          currentSchedule.active.producers.length
-        )
         const nextProducerIndex =
           lastProducerIndex + 1 >= currentSchedule.active.producers.length
             ? 0
@@ -680,9 +678,6 @@ const checkForMissedBlocks = async () => {
 
       if (lastProducer !== currentProducer) {
         // we have a new producer so we should save the missed blocks for the previous one
-        console.log(
-          `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
-        )
         await saveMissedBlocksFor(lastProducer, missedBlocks)
         producedBlocks = 0
         missedBlocks = 0
@@ -690,18 +685,12 @@ const checkForMissedBlocks = async () => {
 
       if (currentBlockNum === lastBlockNum) {
         // when the previous block and the current block are equals we have a missed block
-        console.log(
-          `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
-        )
         missedBlocks += 1
       } else {
         // when the previous block and the current block are diferent we have a new block
-        console.log(`new block from ${currentProducer}`)
         producedBlocks += 1
       }
-      console.log(
-        `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
-      )
+
       lastProducer = currentProducer
       lastBlockNum = currentBlockNum
     } catch (error) {
@@ -710,10 +699,8 @@ const checkForMissedBlocks = async () => {
 
     const endTime = new Date()
     const msDiff = endTime.getTime() - startTime.getTime()
-    console.log(`finished after ${msDiff}`)
 
     if (msDiff < 500) {
-      console.log(`will run again in ${500 - msDiff}`)
       await new Promise(resolve => setTimeout(() => resolve(), 501 - msDiff))
     }
   }

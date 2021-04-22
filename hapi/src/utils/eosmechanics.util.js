@@ -21,24 +21,18 @@ const cpu = async () => {
     data: {}
   })
 
-  try {
-    const transaction = await eosUtil.transact(
-      actions,
-      eosConfig.eosmechanics.account,
-      eosConfig.eosmechanics.password
-    )
-    await new Promise(resolve => setTimeout(() => resolve(), 500))
-    const block = await eosUtil.getBlock(transaction.processed.block_num)
+  const transaction = await eosUtil.transact(
+    actions,
+    eosConfig.eosmechanics.account,
+    eosConfig.eosmechanics.password
+  )
+  await new Promise(resolve => setTimeout(() => resolve(), 500))
+  const block = await eosUtil.getBlock(transaction.processed.block_num)
 
-    return {
-      transaction,
-      block
-    }
-  } catch (error) {
-    console.log('error', error)
+  return {
+    transaction,
+    block
   }
-
-  return {}
 }
 
 const net = async (input = '') => {
@@ -62,24 +56,18 @@ const net = async (input = '') => {
     }
   })
 
-  try {
-    const transaction = await eosUtil.transact(
-      actions,
-      eosConfig.eosmechanics.account,
-      eosConfig.eosmechanics.password
-    )
-    await new Promise(resolve => setTimeout(() => resolve(), 500))
-    const block = await eosUtil.getBlock(transaction.processed.block_num)
+  const transaction = await eosUtil.transact(
+    actions,
+    eosConfig.eosmechanics.account,
+    eosConfig.eosmechanics.password
+  )
+  await new Promise(resolve => setTimeout(() => resolve(), 500))
+  const block = await eosUtil.getBlock(transaction.processed.block_num)
 
-    return {
-      transaction,
-      block
-    }
-  } catch (error) {
-    console.log('error', error)
+  return {
+    transaction,
+    block
   }
-
-  return {}
 }
 
 const ram = async () => {
@@ -101,24 +89,18 @@ const ram = async () => {
     data: {}
   })
 
-  try {
-    const transaction = await eosUtil.transact(
-      actions,
-      eosConfig.eosmechanics.account,
-      eosConfig.eosmechanics.password
-    )
-    await new Promise(resolve => setTimeout(() => resolve(), 500))
-    const block = await eosUtil.getBlock(transaction.processed.block_num)
+  const transaction = await eosUtil.transact(
+    actions,
+    eosConfig.eosmechanics.account,
+    eosConfig.eosmechanics.password
+  )
+  await new Promise(resolve => setTimeout(() => resolve(), 500))
+  const block = await eosUtil.getBlock(transaction.processed.block_num)
 
-    return {
-      transaction,
-      block
-    }
-  } catch (error) {
-    console.log('error', error)
+  return {
+    transaction,
+    block
   }
-
-  return {}
 }
 
 module.exports = {

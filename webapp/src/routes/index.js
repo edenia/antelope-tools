@@ -14,7 +14,8 @@ import {
   HelpCircle as HelpIcon,
   GitMerge as GitMergeIcon,
   GitHub as GitHubIcon,
-  Send as TelegramIcon
+  Send as TelegramIcon,
+  Inbox as InboxIcon
 } from 'react-feather'
 
 import { eosConfig, generalConfig } from '../config'
@@ -31,6 +32,7 @@ const RicardianContract = lazy(() => import('./RicardianContract'))
 const About = lazy(() => import('./About'))
 const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
+const BlockDistribution = lazy(() => import('./BlockDistribution'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -69,6 +71,13 @@ const defaultRoutes = [
     icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
+    exact: true
+  },
+  {
+    name: 'blockDistribution',
+    icon: <InboxIcon />,
+    component: BlockDistribution,
+    path: 'block-distribution',
     exact: true
   },
   {
@@ -135,6 +144,13 @@ const lacchainRoutes = [
     icon: <MapIcon />,
     component: NodesDistribution,
     path: '/nodes-distribution',
+    exact: true
+  },
+  {
+    name: 'blockDistribution',
+    icon: <InboxIcon />,
+    component: BlockDistribution,
+    path: '/block-distribution',
     exact: true
   },
   {

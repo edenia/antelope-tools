@@ -112,7 +112,7 @@ jobs:
           HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://observer.eosio.cr:8888'
           HAPI_HASURA_URL: 'http://monitor-hasura:8080/v1/graphql'
-          HAPI_SERVER_ADDRESS: '127.0.0.1'
+          HAPI_SERVER_ADDRESS: '0.0.0.0'
           HAPI_SERVER_PORT: '9090'
           HAPI_SYNC_PRODUCERS_INTERVAL: '86400'
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
@@ -123,21 +123,16 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
           HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
+          HASURA_GRAPHQL_ACTION_BASE_URL: http://monitor-hapi:9090
 
-      - name: Deploy kubernetes files
+      - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: version
-
-      - name: Deploy kubernetes files
-        run: |
-          make \
-            deploy-kubernetes
-        env:
           NAMESPACE: lacchain-dashboard
           K8S_BUILD_DIR: build_k8s
+        with:
+          args: version && make deploy-kubernetes
 
       - name: Create Release
         id: create_release
