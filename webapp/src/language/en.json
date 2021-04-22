@@ -29,7 +29,7 @@
   "routes": {
     "/>sidebar": "Dashboard",
     "/>title": "EOSIO Dashboard",
-    "/>heading": "Welcome",
+    "/>heading": "Welcome to",
     "/node-performance>sidebar": "Node Performance ",
     "/node-performance>title": "Node Performance  - Dashboard",
     "/node-performance>heading": "Node Performance ",
@@ -74,7 +74,7 @@
   "homeRoute": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
-    "lastBlock": "Last Irreversible Block",
+    "lastBlock": "Last Irreversible",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",

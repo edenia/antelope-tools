@@ -14,7 +14,7 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
-import { eosConfig } from '../config'
+import { eosConfig, generalConfig } from '../config'
 
 import styles from './styles'
 
@@ -44,6 +44,7 @@ const Dashboard = ({ children, width, ual }) => {
   const classes = useStyles()
   const { t } = useTranslation('routes')
   const location = useLocation()
+  const date = new Date()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -72,7 +73,23 @@ const Dashboard = ({ children, width, ual }) => {
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
             <Typography variant="h3">
-              {t(`${location.pathname}>heading`)}
+              {`${t(`${location.pathname}>heading`)} ${generalConfig.title} `}
+              <span
+                style={{
+                  fontSize: 14,
+                  lineHeight: '20px',
+                  letterSpacing: '0.1px',
+                  color: 'rgba(0, 0, 0, 0.87)',
+                  fontWeight: '400'
+                }}
+              >
+                {date.toLocaleDateString(undefined, {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
             </Typography>
             <Box className={classes.network}>
               <Typography component="p" variant="h5">
