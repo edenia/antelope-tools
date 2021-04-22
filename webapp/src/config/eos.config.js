@@ -15,7 +15,6 @@ export const bpJsonOnChainScope =
 export const networkName = process.env.REACT_APP_EOS_API_NETWORK_NAME
 export const networkLabel = process.env.REACT_APP_EOS_API_NETWORK_LABEL
 export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
-export const tokenSymbol = process.env.REACT_APP_TOKEN_SYMBOL
 
 let _nodeTypes = null
 
