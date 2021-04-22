@@ -74,7 +74,7 @@
   "homeRoute": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
-    "lastBlock": "Last Irreversible Block",
+    "lastBlock": "Last Irreversible",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
