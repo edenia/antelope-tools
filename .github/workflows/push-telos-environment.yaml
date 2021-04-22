@@ -121,17 +121,11 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          # TODO: ${{ secrets.HAPI_TELOS_API_ENDPOINT }}
           HAPI_EOS_API_ENDPOINT: https://telos-testnet.eosio.cr
-          # TODO: ${{ secrets.HAPI_TELOS_API_CHAIN_ID }}
           HAPI_EOS_API_CHAIN_ID: 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
-          # TODO: ${{ secrets.HAPI_TELOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
-          # TODO: ${{ secrets.HAPI_TELOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
-          # TODO: ${{ secrets.HAPI_TELOS_MECHANICS_ACCOUNT }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
-          # TODO: ${{ secrets.HAPI_TELOS_MECHANICS_PASSWORD }}
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
           HAPI_EOS_WALLET_URL: http://monitor-wallet:8888
           HAPI_EOS_BP_JSON_ON_CHAIN: 'false'

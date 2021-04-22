@@ -2,122 +2,122 @@
     schema: public
     name: block_history
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - block_id
-      - block_num
-      - transactions_length
-      - timestamp
-      - created_at
-      - updated_at
-      filter: {}
-      allow_aggregations: true
+    - role: guest
+      permission:
+        columns:
+          - id
+          - block_id
+          - block_num
+          - transactions_length
+          - timestamp
+          - created_at
+          - updated_at
+        filter: {}
+        allow_aggregations: true
 - table:
     schema: public
     name: cpu
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - usage
-      - created_at
-      - updated_at
-      - account
-      filter: {}
+    - role: guest
+      permission:
+        columns:
+          - id
+          - usage
+          - created_at
+          - updated_at
+          - account
+        filter: {}
 - table:
     schema: public
     name: missed_block
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - value
-      - created_at
-      - updated_at
-      - account
-      filter: {}
+    - role: guest
+      permission:
+        columns:
+          - id
+          - value
+          - created_at
+          - updated_at
+          - account
+        filter: {}
 - table:
     schema: public
     name: net
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - usage
-      - created_at
-      - updated_at
-      - account
-      filter: {}
+    - role: guest
+      permission:
+        columns:
+          - id
+          - usage
+          - created_at
+          - updated_at
+          - account
+        filter: {}
 - table:
     schema: public
     name: producer
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - block_cpu_limit
-      - block_net_limit
-      - block_rewards
-      - bp_json
-      - chain_id
-      - created_at
-      - fork_db_head_block_id
-      - fork_db_head_block_num
-      - head_block_id
-      - head_block_num
-      - head_block_producer
-      - head_block_time
-      - health_status
-      - id
-      - is_active
-      - last_claim_time
-      - last_irreversible_block_id
-      - last_irreversible_block_num
-      - location
-      - owner
-      - ping
-      - producer_authority
-      - producer_key
-      - server_full_version_string
-      - server_version
-      - server_version_string
-      - total_rewards
-      - total_votes
-      - total_votes_eos
-      - total_votes_percent
-      - unpaid_blocks
-      - updated_at
-      - url
-      - virtual_block_cpu_limit
-      - virtual_block_net_limit
-      - vote_rewards
-      filter: {}
-      allow_aggregations: true
+    - role: guest
+      permission:
+        columns:
+          - block_cpu_limit
+          - block_net_limit
+          - block_rewards
+          - bp_json
+          - chain_id
+          - created_at
+          - fork_db_head_block_id
+          - fork_db_head_block_num
+          - head_block_id
+          - head_block_num
+          - head_block_producer
+          - head_block_time
+          - health_status
+          - id
+          - is_active
+          - last_claim_time
+          - last_irreversible_block_id
+          - last_irreversible_block_num
+          - location
+          - owner
+          - ping
+          - producer_authority
+          - producer_key
+          - server_full_version_string
+          - server_version
+          - server_version_string
+          - total_rewards
+          - total_votes
+          - total_votes_eos
+          - total_votes_percent
+          - unpaid_blocks
+          - updated_at
+          - url
+          - virtual_block_cpu_limit
+          - virtual_block_net_limit
+          - vote_rewards
+        filter: {}
+        allow_aggregations: true
 - table:
     schema: public
     name: ram
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - usage
-      - created_at
-      - updated_at
-      - account
-      filter: {}
+    - role: guest
+      permission:
+        columns:
+          - id
+          - usage
+          - created_at
+          - updated_at
+          - account
+        filter: {}
 - table:
     schema: public
     name: setting
   select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - eos_price
-      filter: {}
+    - role: guest
+      permission:
+        columns:
+          - id
+          - eos_price
+        filter: {}
