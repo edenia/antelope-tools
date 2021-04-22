@@ -75,7 +75,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: #TODO:
+          NAMESPACE: telos-dashboard
           INGRESS_HOST: #TODO:
           INGRESS_GRAPHQL_HOST: # TODO:
           # webapp
