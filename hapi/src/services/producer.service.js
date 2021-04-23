@@ -259,7 +259,7 @@ const syncBPJsonOffChain = async () => {
       try {
         const bpJsonUrl = await getBPJsonUrl(producer)
         const data = await getBPJsonFromUrl(bpJsonUrl)
-
+        const endpoints = []
         const nodes = await Promise.all(
           (data?.nodes || []).map(async node => {
             const api = node?.ssl_endpoint || node?.api_endpoint
@@ -269,6 +269,18 @@ const syncBPJsonOffChain = async () => {
             }
 
             const nodeInfo = await getNodeInfo(api)
+            endpoints.push({
+              type: 'p2p',
+              value: node.p2p_endpoint
+            })
+            endpoints.push({
+              type: 'api',
+              value: node.api_endpoint
+            })
+            endpoints.push({
+              type: 'ssl',
+              value: node.ssl_endpoint
+            })
 
             return {
               ...node,
@@ -276,8 +288,8 @@ const syncBPJsonOffChain = async () => {
             }
           })
         )
-
         const healthStatus = []
+
         healthStatus.push({
           name: 'organization_name',
           valid: !!data.org?.candidate_name
@@ -305,7 +317,24 @@ const syncBPJsonOffChain = async () => {
             health_status: healthStatus,
             bp_json: {
               ...data,
-              nodes
+              nodes,
+              endpoints: {
+                api: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'api' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value),
+                ssl: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'ssl' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value),
+                p2p: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'p2p' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value)
+              }
             }
           }
         )
@@ -402,6 +431,14 @@ const syncBPJsonForLacchain = async () => {
               }
             }
 
+            let endpoints = {}
+            for (const key of Object.keys(newNodeInfo.endpoints || {})) {
+              endpoints = {
+                ...endpoints,
+                [key.replace(`${nodeType}_`, '')]: newNodeInfo.endpoints[key]
+              }
+            }
+
             const healthStatus = []
             healthStatus.push({
               name: 'peer_keys',
@@ -430,6 +467,8 @@ const syncBPJsonForLacchain = async () => {
 
             return {
               ...newNodeInfo,
+              endpoints:
+                Object.keys(endpoints).length > 0 ? endpoints : undefined,
               node_name: node.name,
               node_type: nodeType,
               health_status: healthStatus
@@ -458,13 +497,33 @@ const syncBPJsonForLacchain = async () => {
         valid: !!bpJson?.location?.country
       })
 
+      const nodesEndpoints = entityNodes
+        .map(node =>
+          Object.keys(node.endpoints || {}).map(key => ({
+            type: key.replace(`${node.node_type}_`, ''),
+            value: node.endpoints[key]
+          }))
+        )
+        .reduce((result, current) => [...result, ...current], [])
+
       return {
         owner: entity.name,
         health_status: healthStatus,
         bp_json: {
           org: bpJson,
           nodes: entityNodes,
-          type: entity.type
+          type: entity.type,
+          endpoints: {
+            api: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'api')
+              .map(endpoint => endpoint.value),
+            ssl: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'ssl')
+              .map(endpoint => endpoint.value),
+            p2p: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'p2p')
+              .map(endpoint => endpoint.value)
+          }
         }
       }
     })
