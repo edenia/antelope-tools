@@ -33,6 +33,7 @@ const About = lazy(() => import('./About'))
 const Help = lazy(() => import('./Help'))
 const Page404 = lazy(() => import('./Page404'))
 const BlockDistribution = lazy(() => import('./BlockDistribution'))
+const EndpointsList = lazy(() => import('./EndpointsList'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -77,7 +78,14 @@ const defaultRoutes = [
     name: 'blockDistribution',
     icon: <InboxIcon />,
     component: BlockDistribution,
-    path: 'block-distribution',
+    path: '/block-distribution',
+    exact: true
+  },
+  {
+    name: 'endpointsList',
+    icon: <InboxIcon />,
+    component: EndpointsList,
+    path: '/endpoints',
     exact: true
   },
   {
@@ -151,6 +159,13 @@ const lacchainRoutes = [
     icon: <InboxIcon />,
     component: BlockDistribution,
     path: '/block-distribution',
+    exact: true
+  },
+  {
+    name: 'endpointsList',
+    icon: <InboxIcon />,
+    component: EndpointsList,
+    path: '/endpoints',
     exact: true
   },
   {

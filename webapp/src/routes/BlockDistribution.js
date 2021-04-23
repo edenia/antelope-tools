@@ -161,7 +161,7 @@ const BlockDistribution = () => {
                             <TableCell align="right">
                               {formatWithThousandSeparator(
                                 Math.ceil(item.percent * 100),
-                                2
+                                1
                               )}
                               %
                             </TableCell>
