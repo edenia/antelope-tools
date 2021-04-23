@@ -24,7 +24,11 @@
     "lastHour": "Última hora",
     "lastDay": "Último día",
     "lastWeek": "Última semana",
-    "lastYear": "Ultimo año"
+    "lastYear": "Ultimo año",
+    "itemsPerPage": "Elementos por página",
+    "api": "API",
+    "ssl": "SSL",
+    "p2p": "P2P"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -54,9 +58,12 @@
     "/ricardian-contract>sidebar": "Acuerdo de productor de bloque",
     "/ricardian-contract>title": "Acuerdo de productor de bloque - Dashboard",
     "/ricardian-contract>heading": "",
-    "/block-distribution>sidebar": "Block Distribution",
-    "/block-distribution>title": "Block Distribution - Dashboard",
-    "/block-distribution>heading": "Block Distribution",
+    "/block-distribution>sidebar": "Distribución de bloques",
+    "/block-distribution>title": "Distribución de bloques - Dashboard",
+    "/block-distribution>heading": "Distribución de bloques",
+    "/endpoints>sidebar": "URL's",
+    "/endpoints>title": "URL's - Dashboard",
+    "/endpoints>heading": "URL's",
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Panel",
     "/about>heading": "Acerca de",
@@ -216,5 +223,8 @@
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
     "1 Year": "1 Año"
+  },
+  "endpointsListRoute": {
+    "title": "Endpoints available by"
   }
 }
