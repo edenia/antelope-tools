@@ -121,6 +121,8 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             onChange={handleFieldChange(field.name)}
           />
         )
+      case 'eosio.newaccount.creator':
+      case 'eosio.setram.entity':
       case 'eosio.addboot.entity':
       case 'eosio.addobserver.entity':
       case 'eosio.addwriter.entity':
