@@ -37,7 +37,7 @@ jobs:
           REACT_APP_NAME: $npm_package_name
           REACT_APP_TITLE: EOS Jungle Testnet Network Dashboard
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://bloks.io/img/eosio.png
-          REACT_APP_FOOTER_LINKS: ""
+          REACT_APP_FOOTER_LINKS: ''
           REACT_APP_EOS_RATE_LINK: https://jungle.eosrate.io:8080
           REACT_APP_USE_REWARDS: true
           REACT_APP_USE_VOTES: true
@@ -55,6 +55,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
+          REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
 
       - name: Build kubernetes files
         id: build_kubernetes_files
@@ -72,7 +73,7 @@ jobs:
           REACT_APP_NAME: $npm_package_name
           REACT_APP_TITLE: EOS Jungle Testnet Network Dashboard
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://bloks.io/img/eosio.png
-          REACT_APP_FOOTER_LINKS: ""
+          REACT_APP_FOOTER_LINKS: ''
           REACT_APP_EOS_RATE_LINK: https://jungle.eosrate.io:8080
           REACT_APP_USE_REWARDS: true
           REACT_APP_USE_VOTES: true
@@ -90,6 +91,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
+          REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -105,11 +107,11 @@ jobs:
           HAPI_EOS_WALLET_URL: http://monitor-wallet:8888
           HAPI_EOS_EXCHANGE_RATE_API: ${{ secrets.HAPI_EOS_EXCHANGE_RATE_API }}
           HAPI_EOS_BP_JSON_ON_CHAIN: false
-          HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: ""
-          HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: ""
-          HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: ""
+          HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: ''
+          HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: ''
+          HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: ''
           HAPI_HASURA_URL: http://monitor-hasura:8080/v1/graphql
-          HAPI_HASURA_ADMIN_SECRET:  ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
           HAPI_SERVER_PORT: 9090
           HAPI_SERVER_ADDRESS: '0.0.0.0'
           HAPI_SYNC_PRODUCERS_INTERVAL: 86400
