@@ -3,7 +3,7 @@ export default (theme) => ({
     alignContent: 'space-between',
     paddingRight: 0,
     '& .MuiCard-root': {
-      height: 125,
+      // height: 125,
       marginBottom: theme.spacing(2),
       '& .MuiTypography-body1': {
         marginBottom: theme.spacing(2)

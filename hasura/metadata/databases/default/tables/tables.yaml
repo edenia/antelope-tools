@@ -1,0 +1,7 @@
+- "!include public_block_history.yaml"
+- "!include public_block_history_by_producer_type.yaml"
+- "!include public_cpu.yaml"
+- "!include public_missed_block.yaml"
+- "!include public_producer.yaml"
+- "!include public_setting.yaml"
+- "!include public_stat.yaml"

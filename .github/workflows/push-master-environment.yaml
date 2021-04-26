@@ -32,7 +32,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # Webapp
           PORT: "80"
-          REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
+          REACT_APP_TITLE: "EOS Mainnet Network Dashboard"
           REACT_APP_DEFAULT_PRODUCER_LOGO: "https://bloks.io/img/eosio.png"
           REACT_APP_EOS_RATE_LINK: "https://eosrate.io"
           REACT_APP_USE_REWARDS: "true"
@@ -64,7 +64,7 @@ jobs:
           INGRESS_GRAPHQL_HOST: graphql-mainnet.eosio.cr
           # Webapp
           PORT: "80"
-          REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
+          REACT_APP_TITLE: "EOS Mainnet Network Dashboard"
           REACT_APP_DEFAULT_PRODUCER_LOGO: "https://bloks.io/img/eosio.png"
           REACT_APP_EOS_RATE_LINK: "https://eosrate.io"
           REACT_APP_USE_REWARDS: "true"

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import Select from '@material-ui/core/Select'
 import Card from '@material-ui/core/Card'
@@ -20,11 +21,11 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import { TRANSACTION_QUERY } from '../../gql'
 
 const options = [
-  'Live (5 min)',
-  'Last Hour',
-  'Last Day',
-  'Last Week',
-  'Last Year'
+  { value: '0', label: 'Live (5 min)' },
+  { value: '1 Hour', label: 'Last Hour' },
+  { value: '1 Day', label: 'Last Day' },
+  { value: '1 Week', label: 'Last Week' },
+  { value: '1 Year', label: 'Last Year' }
 ]
 
 const TransactionInfo = ({ t, classes }) => {
@@ -32,7 +33,7 @@ const TransactionInfo = ({ t, classes }) => {
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
   const [graphicData, setGraphicData] = useState([])
-  const [option, setOption] = useState(options[0])
+  const [option, setOption] = useState(options[0].value)
   const [pause, setPause] = useState(false)
   const [
     getTransactionHistory,
@@ -43,7 +44,7 @@ const TransactionInfo = ({ t, classes }) => {
     const majorLength = tps.length > tpb.length ? tps.length : tpb.length
     const dataModeled = []
 
-    if (!majorLength || pause) return
+    if (!majorLength || pause || option !== '0') return
 
     for (let index = 0; index < majorLength; index++) {
       dataModeled.push({
@@ -60,14 +61,21 @@ const TransactionInfo = ({ t, classes }) => {
   }, [tps, tpb])
 
   useEffect(() => {
-    if (option === 'Live (5 min)') {
-      console.log({ loading: trxHistoryLoading, data: trxHistory })
-    } else {
+    if (option !== '0') {
+      const values = option.split(' ')
+      const date = moment().subtract(values[0], values[1]).utc().toString()
       getTransactionHistory({
-        variables: {}
+        variables: { date }
       })
     }
   }, [option, getTransactionHistory])
+
+  useEffect(() => {
+    console.log(trxHistoryLoading, trxHistory)
+    if (option !== '0') {
+      setGraphicData([])
+    }
+  }, [trxHistoryLoading, trxHistory])
 
   return (
     <Grid container className={classes.bottomRow}>
@@ -88,16 +96,18 @@ const TransactionInfo = ({ t, classes }) => {
                     fullWidth
                   >
                     {options.map((item) => (
-                      <MenuItem key={item} value={item}>
-                        {t(item)}
+                      <MenuItem key={item.label} value={item.value}>
+                        {t(item.label)}
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
                 <Box
-                  onClick={() => option === options[0] && setPause(!pause)}
+                  onClick={() =>
+                    option === options[0].value && setPause(!pause)
+                  }
                   className={clsx(classes.pauseButton, {
-                    [classes.disableButton]: option !== options[0]
+                    [classes.disableButton]: option !== options[0].value
                   })}
                 >
                   {pause ? (
@@ -107,7 +117,7 @@ const TransactionInfo = ({ t, classes }) => {
                       width={20}
                       height={20}
                       color={
-                        option !== options[0]
+                        option !== options[0].value
                           ? theme.palette.action.disabled
                           : theme.palette.common.black
                       }
@@ -118,7 +128,10 @@ const TransactionInfo = ({ t, classes }) => {
               </Box>
             </Box>
 
-            <TransactionsLineChart data={graphicData} />
+            <TransactionsLineChart
+              data={graphicData}
+              loading={trxHistoryLoading}
+            />
           </CardContent>
         </Card>
       </Grid>
