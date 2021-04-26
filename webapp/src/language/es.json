@@ -28,7 +28,9 @@
     "itemsPerPage": "Elementos por página",
     "api": "API",
     "ssl": "SSL",
-    "p2p": "P2P"
+    "p2p": "P2P",
+    "nodes": "Nodos",
+    "total": "Total"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -164,7 +166,6 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos",
     "email": "Correo electrónico"
   },
   "nodeCardComponent": {
