@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Box from '@material-ui/core/Box'
 
-const EqualIcon = ({ width, height }) => {
+const EqualIcon = ({ width, height, color }) => {
   return (
     <Box width={24} height={24}>
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
@@ -10,7 +10,7 @@ const EqualIcon = ({ width, height }) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M6 4H10V20H6V4Z"
-          stroke="black"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -19,7 +19,7 @@ const EqualIcon = ({ width, height }) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M14 4H18V20H14V4Z"
-          stroke="black"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -31,12 +31,14 @@ const EqualIcon = ({ width, height }) => {
 
 EqualIcon.propTypes = {
   width: PropTypes.number,
-  height: PropTypes.number
+  height: PropTypes.number,
+  color: PropTypes.string
 }
 
 EqualIcon.defaultProps = {
   width: 24,
-  height: 24
+  height: 24,
+  color: 'black'
 }
 
 export default EqualIcon

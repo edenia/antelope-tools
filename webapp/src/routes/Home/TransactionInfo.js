@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
+import { useTheme } from '@material-ui/core/styles'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import Select from '@material-ui/core/Select'
 import Card from '@material-ui/core/Card'
@@ -26,6 +28,7 @@ const options = [
 ]
 
 const TransactionInfo = ({ t, classes }) => {
+  const theme = useTheme()
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
   const [graphicData, setGraphicData] = useState([])
@@ -66,8 +69,6 @@ const TransactionInfo = ({ t, classes }) => {
     }
   }, [option, getTransactionHistory])
 
-  console.log({ pause })
-
   return (
     <Grid container className={classes.bottomRow}>
       <Grid item xs={12}>
@@ -94,13 +95,23 @@ const TransactionInfo = ({ t, classes }) => {
                   </Select>
                 </FormControl>
                 <Box
-                  onClick={() => setPause(!pause)}
-                  className={classes.pauseButton}
+                  onClick={() => option === options[0] && setPause(!pause)}
+                  className={clsx(classes.pauseButton, {
+                    [classes.disableButton]: option !== options[0]
+                  })}
                 >
                   {pause ? (
                     <PlayArrowIcon />
                   ) : (
-                    <EqualIcon width={20} height={20} />
+                    <EqualIcon
+                      width={20}
+                      height={20}
+                      color={
+                        option !== options[0]
+                          ? theme.palette.action.disabled
+                          : theme.palette.common.black
+                      }
+                    />
                   )}
                   <Typography>{pause ? t('play') : t('pause')}</Typography>
                 </Box>
