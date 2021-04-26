@@ -88,7 +88,10 @@
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
     "transactions": "Transactions",
-    "transactionsHistory": "Transactions History"
+    "transactionsHistory": "Transactions History",
+    "timeFrame": "Time frame",
+    "pause": "Pause",
+    "play": "Play"
   },
   "networkInfoRoute": {
     "chainId": "Chain Id",
