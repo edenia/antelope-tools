@@ -18,6 +18,7 @@ const ProducersChart = lazy(() => import('../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
   import('../components/TransactionsHistory')
 )
+const NodesSummary = lazy(() => import('../components/NodesSummary'))
 const TransactionsLineChart = lazy(() =>
   import('../components/TransactionsLineChart')
 )
@@ -181,6 +182,7 @@ const Home = () => {
             </Card>
           </Grid>
           <TransactionsHistory t={t} />
+          <NodesSummary t={t} />
         </Grid>
         {loading && <LinearProgress />}
         <Grid item xs={12} md={9} className={classes.rightColumn}>

@@ -99,4 +99,5 @@
       - average_daily_transactions_in_last_week
       - created_at
       - updated_at
+      - nodes_summary
       filter: {}

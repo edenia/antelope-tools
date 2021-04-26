@@ -19,7 +19,11 @@
   "common": {
     "producerName": "Entity name",
     "producers": "Entities",
-    "producer": "Entity"
+    "producer": "Entity",
+    "boot": "Boot",
+    "writer": "Writer",
+    "observer": "Observer",
+    "validator": "Validator"
   },
   "producerCardComponent": {
     "entityType": "Entity type",
