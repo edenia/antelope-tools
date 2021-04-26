@@ -24,12 +24,16 @@
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
     "lastWeek": "Last Week",
-    "lastYear": "Last Year"
+    "lastYear": "Last Year",
+    "itemsPerPage": "Items per page",
+    "api": "API",
+    "ssl": "SSL",
+    "p2p": "P2P"
   },
   "routes": {
     "/>sidebar": "Dashboard",
     "/>title": "EOSIO Dashboard",
-    "/>heading": "Welcome",
+    "/>heading": "Welcome to",
     "/node-performance>sidebar": "Node Performance ",
     "/node-performance>title": "Node Performance  - Dashboard",
     "/node-performance>heading": "Node Performance ",
@@ -57,6 +61,9 @@
     "/block-distribution>sidebar": "Block Distribution",
     "/block-distribution>title": "Block Distribution - Dashboard",
     "/block-distribution>heading": "Block Distribution",
+    "/endpoints>sidebar": "Endpoints",
+    "/endpoints>title": "Endpoints - Dashboard",
+    "/endpoints>heading": "Endpoints",
     "/about>sidebar": "About",
     "/about>title": "About - Dashboard",
     "/about>heading": "About",
@@ -74,7 +81,7 @@
   "homeRoute": {
     "currentProducer": "Current Producer",
     "headBlock": "Head Block",
-    "lastBlock": "Last Irreversible Block",
+    "lastBlock": "Last Irreversible",
     "bpSchedule": "Block Producer Schedule",
     "transPerSecond": "Transactions Per Second",
     "transPerBlock": "Transactions Per Block",
@@ -213,5 +220,8 @@
     "timeFrame": "Time frame",
     "blocksProduced": "Blocks Produced",
     "percent": "Percent"
+  },
+  "endpointsListRoute": {
+    "title": "Endpoints available by"
   }
 }
