@@ -23,6 +23,32 @@ const getTransactionsInTimeRage = async payload => {
   return data.block.info.sum.transactions_length || 0
 }
 
+const getNodesSummary = async payload => {
+  const query = `
+    query {
+      producers: producer {
+        bp_json
+      }
+    }
+  `
+  const data = await hasuraUtil.request(query, payload)
+  let total = 0
+  let totalByType = {}
+
+  data.producers.forEach(producer => {
+    producer.bp_json.nodes.forEach(node => {
+      if (!totalByType[node.node_type]) {
+        totalByType[node.node_type] = 0
+      }
+
+      totalByType[node.node_type]++
+      total++
+    })
+  })
+
+  return { total, ...totalByType }
+}
+
 const getBlockDistribution = async (range = '1 day') => {
   try {
     let totalBloks = 0
@@ -120,7 +146,8 @@ const sync = async () => {
       end: moment()
     }),
     transactions_in_last_week: transactionsInLastWeek,
-    average_daily_transactions_in_last_week: transactionsInLastWeek / 7
+    average_daily_transactions_in_last_week: transactionsInLastWeek / 7,
+    nodes_summary: await getNodesSummary()
   }
 
   const stats = await getStats()
