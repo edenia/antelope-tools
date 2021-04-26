@@ -33,7 +33,7 @@ const getNodesSummary = async payload => {
   `
   const data = await hasuraUtil.request(query, payload)
   let total = 0
-  let totalByType = {}
+  const totalByType = {}
 
   data.producers.forEach(producer => {
     producer.bp_json.nodes.forEach(node => {
