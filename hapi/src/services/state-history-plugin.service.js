@@ -101,6 +101,7 @@ const handleBlocksResult = async data => {
       this_block: data.this_block,
       prev_block: data.prev_block
     }
+
     await saveBlockHistory({
       producer: block.producer,
       schedule_version: block.schedule_version,
