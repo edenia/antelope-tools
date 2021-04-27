@@ -19,7 +19,11 @@
   "common": {
     "producerName": "Nombre de la entidad",
     "producers": "Entidades",
-    "producer": "Entidad"
+    "producer": "Entidad",
+    "boot": "Boot",
+    "writer": "Escritor",
+    "observer": "Observador",
+    "validator": "Validador"
   },
   "producerCardComponent": {
     "entityType": "Tipo de entidad",

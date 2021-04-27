@@ -28,7 +28,9 @@
     "itemsPerPage": "Items per page",
     "api": "API",
     "ssl": "SSL",
-    "p2p": "P2P"
+    "p2p": "P2P",
+    "nodes": "Nodes",
+    "total": "Total"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -166,7 +168,6 @@
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
-    "nodes": "Nodes",
     "email": "Email"
   },
   "nodeCardComponent": {

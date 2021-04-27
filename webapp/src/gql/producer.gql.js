@@ -96,6 +96,16 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
   }
 `
 
+export const NODES_SUMMARY_QUERY = gql`
+  query {
+    stats: stat(limit: 1) {
+      id
+      nodes_summary
+      updated_at
+    }
+  }
+`
+
 export const BLOCK_DISTRIBUTION_QUERY = gql`
   query($range: String!) {
     items: block_distribution(range: $range) {

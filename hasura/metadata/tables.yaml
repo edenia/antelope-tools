@@ -89,14 +89,15 @@
     schema: public
     name: stat
   select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - transactions_in_last_hour
-          - transactions_in_last_day
-          - transactions_in_last_week
-          - average_daily_transactions_in_last_week
-          - created_at
-          - updated_at
-        filter: {}
+  - role: guest
+    permission:
+      columns:
+      - id
+      - transactions_in_last_hour
+      - transactions_in_last_day
+      - transactions_in_last_week
+      - average_daily_transactions_in_last_week
+      - created_at
+      - updated_at
+      - nodes_summary
+      filter: {}
