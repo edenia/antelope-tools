@@ -16,6 +16,7 @@ const ProducersChart = lazy(() => import('../../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
   import('../../components/TransactionsHistory')
 )
+const NodesSummary = lazy(() => import('../components/NodesSummary'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
@@ -94,6 +95,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <TransactionsHistory t={t} />
+        <NodesSummary t={t} />
       </Grid>
       {loading && <LinearProgress />}
       <Grid item xs={12} md={9} className={classes.rightColumn}>

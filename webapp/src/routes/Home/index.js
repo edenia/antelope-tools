@@ -26,8 +26,6 @@ const Home = () => {
     }
   }, [dispatch])
 
-  console.log('home comp')
-
   return (
     <Box>
       <BlockProducerInfo t={t} classes={classes} />
