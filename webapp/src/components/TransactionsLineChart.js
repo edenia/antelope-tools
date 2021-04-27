@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles'
 import { useTheme } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import { useTranslation } from 'react-i18next'
+import Skeleton from '@material-ui/lab/Skeleton'
 import PropTypes from 'prop-types'
 import {
   LineChart,
@@ -24,8 +25,37 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     fontWeight: 'normal'
+  },
+  graphSkeleton: {
+    width: '100%',
+    margin: theme.spacing(1),
+    '& .MuiSkeleton-rect': {
+      width: '100%',
+      height: 300
+    },
+    '& .MuiBox-root': {
+      display: 'flex',
+      justifyContent: 'center',
+      '& .MuiSkeleton-text': {
+        margin: theme.spacing(0, 1)
+      }
+    }
   }
 }))
+
+const GraphSkeleton = () => {
+  const classes = useStyles()
+
+  return (
+    <Box className={classes.graphSkeleton}>
+      <Skeleton variant="rect" />
+      <Box>
+        <Skeleton width="30%" />
+        <Skeleton width="30%" />
+      </Box>
+    </Box>
+  )
+}
 
 const CustomTooltip = ({ active, payload }) => {
   const classes = useStyles()
@@ -72,9 +102,11 @@ CustomTooltip.propTypes = {
   payload: PropTypes.array
 }
 
-const TransactionsChart = ({ data }) => {
+const TransactionsChart = ({ data, loading }) => {
   const theme = useTheme()
   const { t } = useTranslation('transactionsChartComponent')
+
+  if (loading) return <GraphSkeleton />
 
   return (
     <ResponsiveContainer width="100%" maxHeight={300} aspect={1.6}>
@@ -113,7 +145,8 @@ const TransactionsChart = ({ data }) => {
 }
 
 TransactionsChart.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  loading: PropTypes.bool
 }
 
 export default TransactionsChart

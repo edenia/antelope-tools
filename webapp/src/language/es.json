@@ -87,7 +87,14 @@
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
-    "transactionsHistory": "Historial de transacciones"
+    "transactionsHistory": "Historial de transacciones",
+    "timeFrame": "Periodo de tiempo",
+    "pause": "Pausa",
+    "play": "Play",
+    "Last Hour": "Última Hora",
+    "Last Day": "Última Día",
+    "Last Week": "Última Semana",
+    "Last Year": "Último Año"
   },
   "networkInfoRoute": {
     "chainId": "Identificador de la cadena",
