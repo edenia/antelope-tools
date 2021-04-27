@@ -17,7 +17,7 @@ const ProducersChart = lazy(() => import('../../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
   import('../../components/TransactionsHistory')
 )
-const NodesSummary = lazy(() => import('../components/NodesSummary'))
+const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
