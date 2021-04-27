@@ -24,7 +24,13 @@
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
     "lastWeek": "Last Week",
-    "lastYear": "Last Year"
+    "lastYear": "Last Year",
+    "itemsPerPage": "Items per page",
+    "api": "API",
+    "ssl": "SSL",
+    "p2p": "P2P",
+    "nodes": "Nodes",
+    "total": "Total"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -57,6 +63,9 @@
     "/block-distribution>sidebar": "Block Distribution",
     "/block-distribution>title": "Block Distribution - Dashboard",
     "/block-distribution>heading": "Block Distribution",
+    "/endpoints>sidebar": "Endpoints",
+    "/endpoints>title": "Endpoints - Dashboard",
+    "/endpoints>heading": "Endpoints",
     "/about>sidebar": "About",
     "/about>title": "About - Dashboard",
     "/about>heading": "About",
@@ -159,7 +168,6 @@
     "ownershipDisclosure": "Ownership Disclosure",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
-    "nodes": "Nodes",
     "email": "Email"
   },
   "nodeCardComponent": {
@@ -213,5 +221,8 @@
     "timeFrame": "Time frame",
     "blocksProduced": "Blocks Produced",
     "percent": "Percent"
+  },
+  "endpointsListRoute": {
+    "title": "Endpoints available by"
   }
 }
