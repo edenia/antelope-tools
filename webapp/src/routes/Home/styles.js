@@ -3,7 +3,6 @@ export default (theme) => ({
     alignContent: 'space-between',
     paddingRight: 0,
     '& .MuiCard-root': {
-      // height: 125,
       marginBottom: theme.spacing(2),
       '& .MuiTypography-body1': {
         marginBottom: theme.spacing(2)
@@ -67,8 +66,11 @@ export default (theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
+    '& .MuiFormControl-root': {
+      width: 200
+    },
     [theme.breakpoints.up('md')]: {
-      width: 187
+      width: 300
     }
   }
 })

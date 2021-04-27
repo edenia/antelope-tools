@@ -91,7 +91,11 @@
     "transactionsHistory": "Transactions History",
     "timeFrame": "Time frame",
     "pause": "Pause",
-    "play": "Play"
+    "play": "Play",
+    "Last Hour": "Last Hour",
+    "Last Day": "Last Day",
+    "Last Week": "Last Week",
+    "Last Year": "Last Year"
   },
   "networkInfoRoute": {
     "chainId": "Chain Id",

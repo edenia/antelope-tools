@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'normal'
   },
   graphSkeleton: {
-    border: '1px solid red',
     width: '100%',
     margin: theme.spacing(1),
     '& .MuiSkeleton-rect': {

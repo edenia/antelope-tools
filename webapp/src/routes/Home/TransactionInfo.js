@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
@@ -27,6 +28,7 @@ const options = [
   { value: '1 Week', label: 'Last Week' },
   { value: '1 Year', label: 'Last Year' }
 ]
+const baseValues = { block_num: null, transaction_length: 0 }
 
 const TransactionInfo = ({ t, classes }) => {
   const theme = useTheme()
@@ -71,9 +73,32 @@ const TransactionInfo = ({ t, classes }) => {
   }, [option, getTransactionHistory])
 
   useEffect(() => {
-    console.log(trxHistoryLoading, trxHistory)
+    const dataModeled = []
+
     if (option !== '0') {
-      setGraphicData([])
+      if (!trxHistory?.block_history?.length) {
+        setGraphicData(dataModeled)
+
+        return
+      }
+
+      for (let i = 1; i < trxHistory.block_history.length; i = i + 2) {
+        const item = trxHistory.block_history[i] || baseValues
+        const prevItem = trxHistory.block_history[i - 1] || baseValues
+        const trxPer = item.transaction_length + prevItem.transaction_length
+        const blocks = [item.block_num, prevItem.block_num]
+
+        dataModeled.push({
+          tps: trxPer,
+          tpb: trxPer,
+          blocks: {
+            tps: blocks,
+            tpb: blocks
+          }
+        })
+      }
+
+      setGraphicData(dataModeled)
     }
   }, [trxHistoryLoading, trxHistory])
 
