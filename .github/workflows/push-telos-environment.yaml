@@ -66,7 +66,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
-          REACT_APP_TOKEN_SYMBOL: TLOS
+          REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
@@ -114,7 +114,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
-          REACT_APP_TOKEN_SYMBOL: TLOS
+                    REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
