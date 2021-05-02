@@ -259,7 +259,7 @@ const syncBPJsonOffChain = async () => {
       try {
         const bpJsonUrl = await getBPJsonUrl(producer)
         const data = await getBPJsonFromUrl(bpJsonUrl)
-
+        const endpoints = []
         const nodes = await Promise.all(
           (data?.nodes || []).map(async node => {
             const api = node?.ssl_endpoint || node?.api_endpoint
@@ -269,6 +269,18 @@ const syncBPJsonOffChain = async () => {
             }
 
             const nodeInfo = await getNodeInfo(api)
+            endpoints.push({
+              type: 'p2p',
+              value: node.p2p_endpoint
+            })
+            endpoints.push({
+              type: 'api',
+              value: node.api_endpoint
+            })
+            endpoints.push({
+              type: 'ssl',
+              value: node.ssl_endpoint
+            })
 
             return {
               ...node,
@@ -276,8 +288,8 @@ const syncBPJsonOffChain = async () => {
             }
           })
         )
-
         const healthStatus = []
+
         healthStatus.push({
           name: 'organization_name',
           valid: !!data.org?.candidate_name
@@ -305,7 +317,24 @@ const syncBPJsonOffChain = async () => {
             health_status: healthStatus,
             bp_json: {
               ...data,
-              nodes
+              nodes,
+              endpoints: {
+                api: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'api' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value),
+                ssl: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'ssl' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value),
+                p2p: endpoints
+                  .filter(
+                    endpoint => endpoint.type === 'p2p' && !!endpoint.value
+                  )
+                  .map(endpoint => endpoint.value)
+              }
             }
           }
         )
@@ -402,6 +431,14 @@ const syncBPJsonForLacchain = async () => {
               }
             }
 
+            let endpoints = {}
+            for (const key of Object.keys(newNodeInfo.endpoints || {})) {
+              endpoints = {
+                ...endpoints,
+                [key.replace(`${nodeType}_`, '')]: newNodeInfo.endpoints[key]
+              }
+            }
+
             const healthStatus = []
             healthStatus.push({
               name: 'peer_keys',
@@ -430,6 +467,8 @@ const syncBPJsonForLacchain = async () => {
 
             return {
               ...newNodeInfo,
+              endpoints:
+                Object.keys(endpoints).length > 0 ? endpoints : undefined,
               node_name: node.name,
               node_type: nodeType,
               health_status: healthStatus
@@ -458,13 +497,33 @@ const syncBPJsonForLacchain = async () => {
         valid: !!bpJson?.location?.country
       })
 
+      const nodesEndpoints = entityNodes
+        .map(node =>
+          Object.keys(node.endpoints || {}).map(key => ({
+            type: key.replace(`${node.node_type}_`, ''),
+            value: node.endpoints[key]
+          }))
+        )
+        .reduce((result, current) => [...result, ...current], [])
+
       return {
         owner: entity.name,
         health_status: healthStatus,
         bp_json: {
           org: bpJson,
           nodes: entityNodes,
-          type: entity.type
+          type: entity.type,
+          endpoints: {
+            api: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'api')
+              .map(endpoint => endpoint.value),
+            ssl: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'ssl')
+              .map(endpoint => endpoint.value),
+            p2p: nodesEndpoints
+              .filter(endpoint => endpoint.type === 'p2p')
+              .map(endpoint => endpoint.value)
+          }
         }
       }
     })
@@ -584,11 +643,15 @@ const syncProducersInfo = async () => {
 }
 
 const syncCpuUsage = async () => {
-  const { block, transaction } = await eosmechanicsUtil.cpu()
-  await insertUsage('cpu', {
-    account: block.producer,
-    usage: transaction.processed.receipt.cpu_usage_us
-  })
+  try {
+    const { block, transaction } = await eosmechanicsUtil.cpu()
+    await insertUsage('cpu', {
+      account: block.producer,
+      usage: transaction.processed.receipt.cpu_usage_us
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const syncRamUsage = async () => {
@@ -625,7 +688,6 @@ const checkForMissedBlocks = async () => {
 
   // wait until first turn change
   while (currentProducer === lastProducer) {
-    console.log('waiting for first turn change')
     info = await eosApi.getInfo({})
     lastProducer = currentProducer
     currentProducer = info.head_block_producer
@@ -665,11 +727,6 @@ const checkForMissedBlocks = async () => {
         currentProducer === lastProducer
       ) {
         // change producer in case that the currentProducer and the next one are missing blocks
-        console.log(
-          'check point',
-          lastProducerIndex + 1,
-          currentSchedule.active.producers.length
-        )
         const nextProducerIndex =
           lastProducerIndex + 1 >= currentSchedule.active.producers.length
             ? 0
@@ -680,9 +737,6 @@ const checkForMissedBlocks = async () => {
 
       if (lastProducer !== currentProducer) {
         // we have a new producer so we should save the missed blocks for the previous one
-        console.log(
-          `save data for ${lastProducer} missed bloks: ${missedBlocks} produced bloks: ${producedBlocks}`
-        )
         await saveMissedBlocksFor(lastProducer, missedBlocks)
         producedBlocks = 0
         missedBlocks = 0
@@ -690,18 +744,12 @@ const checkForMissedBlocks = async () => {
 
       if (currentBlockNum === lastBlockNum) {
         // when the previous block and the current block are equals we have a missed block
-        console.log(
-          `Houston, we have a problem: one missed block from ${currentProducer} will impact the network`
-        )
         missedBlocks += 1
       } else {
         // when the previous block and the current block are diferent we have a new block
-        console.log(`new block from ${currentProducer}`)
         producedBlocks += 1
       }
-      console.log(
-        `current producer is: ${currentProducer} missedBlocks: ${missedBlocks} producedBlocks: ${producedBlocks}`
-      )
+
       lastProducer = currentProducer
       lastBlockNum = currentBlockNum
     } catch (error) {
@@ -710,10 +758,8 @@ const checkForMissedBlocks = async () => {
 
     const endTime = new Date()
     const msDiff = endTime.getTime() - startTime.getTime()
-    console.log(`finished after ${msDiff}`)
 
     if (msDiff < 500) {
-      console.log(`will run again in ${500 - msDiff}`)
       await new Promise(resolve => setTimeout(() => resolve(), 501 - msDiff))
     }
   }

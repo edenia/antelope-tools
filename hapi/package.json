@@ -25,6 +25,11 @@
     "graphql-request": "^1.8.2",
     "hapi-pino": "^6.5.0",
     "http-status-codes": "^1.4.0",
+<<<<<<< HEAD
+=======
+    "joi": "^17.4.0",
+    "moment": "^2.29.1",
+>>>>>>> dev
     "ws": "^7.4.4"
   },
   "devDependencies": {

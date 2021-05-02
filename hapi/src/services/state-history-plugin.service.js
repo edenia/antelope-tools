@@ -11,7 +11,11 @@ let ws
 const getLastBlockNumInDatabase = async () => {
   const query = `
     query {
+<<<<<<< HEAD
       blocks: block_history (limit:1, order_by:{block_num: desc}) {
+=======
+      blocks: block_history(limit: 1, order_by: {block_num: desc}, where: {producer: {_neq: "NULL"}}) {
+>>>>>>> dev
         id
         block_num
       }
@@ -25,7 +29,11 @@ const getLastBlockNumInDatabase = async () => {
 const saveBlockHistory = async payload => {
   const mutation = `
     mutation ($payload: block_history_insert_input!) {
+<<<<<<< HEAD
       block: insert_block_history_one(object: $payload, on_conflict: {constraint: block_history_block_num_key, update_columns: [transactions_length]}) {
+=======
+      block: insert_block_history_one(object: $payload, on_conflict: {constraint: block_history_block_num_key, update_columns: [producer,schedule_version,block_id,timestamp,transactions_length]}) {
+>>>>>>> dev
         id
       }
     }  
@@ -85,6 +93,7 @@ const requestBlocks = (requestArgs = {}) => {
 }
 
 const handleBlocksResult = async data => {
+<<<<<<< HEAD
   if (!data.block || !data.block.length) {
     ws.send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
@@ -112,6 +121,39 @@ const handleBlocksResult = async data => {
   ws.send(
     serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
   )
+=======
+  try {
+    if (!data.block || !data.block.length) {
+      ws.send(
+        serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
+      )
+
+      return
+    }
+
+    const block = {
+      ...deserialize('signed_block', data.block),
+      head: data.head,
+      last_irreversible: data.last_irreversible,
+      this_block: data.this_block,
+      prev_block: data.prev_block
+    }
+
+    await saveBlockHistory({
+      producer: block.producer,
+      schedule_version: block.schedule_version,
+      block_id: block.this_block.block_id,
+      block_num: block.this_block.block_num,
+      transactions_length: block.transactions.length,
+      timestamp: block.timestamp
+    })
+    ws.send(
+      serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
+    )
+  } catch (error) {
+    console.log(error)
+  }
+>>>>>>> dev
 }
 
 const init = async () => {
@@ -127,7 +169,11 @@ const init = async () => {
   })
 
   ws.on('open', () => {
+<<<<<<< HEAD
     console.log('connected')
+=======
+    console.log('🚀 Connected to state_history_plugin socket')
+>>>>>>> dev
   })
 
   ws.on('message', data => {

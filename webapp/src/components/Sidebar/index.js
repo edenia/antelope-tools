@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import {
   Box,
@@ -13,80 +14,46 @@ import {
   Typography
 } from '@material-ui/core'
 import styled from 'styled-components'
+import { makeStyles } from '@material-ui/styles'
 import { rgba, darken } from 'polished'
 import { NavLink as RouterNavLink, withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
-import routes from '../routes'
+import routes from '../../routes'
 
-const NavLink = React.forwardRef((props, ref) => (
-  <RouterNavLink innerRef={ref} {...props} />
-))
+import EosLogo from './eosLogo'
+import styles from './styles'
 
-const ExternalLink = React.forwardRef(({ to, children, className }, ref) => (
-  <a
-    ref={ref}
-    href={to}
-    className={className}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {children}
-  </a>
-))
+const useStyles = makeStyles((theme) => styles(theme, rgba))
+
+const NavLink = forwardRef(function NavLink(props, ref) {
+  return <RouterNavLink innerRef={ref} {...props} />
+})
+
+const ExternalLink = forwardRef(function ExternalLink(
+  { to, children, className },
+  ref
+) {
+  return (
+    <a
+      ref={ref}
+      href={to}
+      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
+})
 
 ExternalLink.propTypes = {
   to: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string
 }
-
-const Drawer = styled(MuiDrawer)`
-  border-right: 0;
-
-  > div {
-    border-right: 0;
-  }
-`
-
-const Scrollbar = styled(PerfectScrollbar)`
-  background-color: ${(props) => props.theme.sidebar.background};
-`
-
-const List = styled(MuiList)`
-  background-color: ${(props) => props.theme.sidebar.background};
-`
-
-const ListItem = styled(MuiListItem)`
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-`
-
-const Brand = styled(Box)`
-  font-size: ${(props) => props.theme.typography.h5.fontSize};
-  font-weight: ${(props) => props.theme.typography.fontWeightMedium};
-  color: ${(props) => props.theme.sidebar.header.color};
-  background-color: ${(props) => props.theme.sidebar.header.background};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  min-height: 56px;
-  padding-left: ${(props) => props.theme.spacing(6)}px;
-  padding-right: ${(props) => props.theme.spacing(6)}px;
-  cursor: default;
-  padding-bottom: 16px;
-
-  ${(props) => props.theme.breakpoints.up('sm')} {
-    min-height: 64px;
-  }
-
-  &:hover {
-    background-color: ${(props) => props.theme.sidebar.header.background};
-  }
-`
 
 const DashboardIcon = () => (
   <img
@@ -97,12 +64,7 @@ const DashboardIcon = () => (
   />
 )
 
-const BrandIcon = styled(DashboardIcon)`
-  margin-right: ${(props) => props.theme.spacing(2)}px;
-  color: ${(props) => props.theme.sidebar.header.brand.color};
-`
-
-const Category = styled(ListItem)`
+const Category = styled(MuiListItem)`
   padding-top: ${(props) => props.theme.spacing(3)}px;
   padding-bottom: ${(props) => props.theme.spacing(3)}px;
   padding-left: ${(props) => props.theme.spacing(6)}px;
@@ -129,25 +91,7 @@ const Category = styled(ListItem)`
   }
 `
 
-const CategoryText = styled(ListItemText)`
-  margin: 0;
-  span {
-    color: ${(props) => props.theme.sidebar.color};
-    font-size: ${(props) => props.theme.typography.body1.fontSize}px;
-    font-weight: ${(props) => props.theme.sidebar.category.fontWeight};
-    padding: 0 ${(props) => props.theme.spacing(4)}px;
-  }
-`
-
-const CategoryIconLess = styled(ExpandLess)`
-  color: ${(props) => rgba(props.theme.sidebar.color, 0.5)};
-`
-
-const CategoryIconMore = styled(ExpandMore)`
-  color: ${(props) => rgba(props.theme.sidebar.color, 0.5)};
-`
-
-const Link = styled(ListItem)`
+const Link = styled(MuiListItem)`
   padding-left: ${(props) => props.theme.spacing(15)}px;
   padding-top: ${(props) => props.theme.spacing(2)}px;
   padding-bottom: ${(props) => props.theme.spacing(2)}px;
@@ -170,69 +114,6 @@ const Link = styled(ListItem)`
   }
 `
 
-const LinkText = styled(ListItemText)`
-  color: ${(props) => props.theme.sidebar.color};
-  span {
-    font-size: ${(props) => props.theme.typography.body1.fontSize}px;
-  }
-  margin-top: 0;
-  margin-bottom: 0;
-`
-
-const LinkBadge = styled(Chip)`
-  font-size: 11px;
-  font-weight: ${(props) => props.theme.typography.fontWeightBold};
-  height: 20px;
-  position: absolute;
-  right: 12px;
-  top: 8px;
-  background-color: ${(props) => props.theme.palette.secondary.main};
-
-  span.MuiChip-label,
-  span.MuiChip-label:hover {
-    cursor: pointer;
-    color: ${(props) => props.theme.sidebar.badge.color};
-    padding-left: ${(props) => props.theme.spacing(2)}px;
-    padding-right: ${(props) => props.theme.spacing(2)}px;
-  }
-`
-
-const CategoryBadge = styled(LinkBadge)`
-  top: 12px;
-`
-
-const SidebarSection = styled(Typography)`
-  color: ${(props) => props.theme.sidebar.color};
-  padding: ${(props) => props.theme.spacing(4)}px
-    ${(props) => props.theme.spacing(6)}px
-    ${(props) => props.theme.spacing(1)}px;
-  opacity: 0.9;
-  display: block;
-  font-weight: 600;
-`
-
-const SidebarFooter = styled.div`
-  background-color: ${(props) =>
-    props.theme.sidebar.footer.background} !important;
-  padding: ${(props) => props.theme.spacing(2.75)}px
-    ${(props) => props.theme.spacing(4)}px;
-  min-height: 61px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const SidebarFooterText = styled(Typography)`
-  color: ${(props) => props.theme.sidebar.footer.color};
-`
-
-const SidebarFooterSubText = styled(Typography)`
-  color: ${(props) => props.theme.sidebar.footer.color};
-  font-size: 0.725rem;
-  display: block;
-  padding: 1px;
-`
-
 const SidebarCategory = ({
   name,
   icon,
@@ -245,15 +126,22 @@ const SidebarCategory = ({
   return (
     <Category {...rest}>
       {icon}
-      <CategoryText>{name}</CategoryText>
+      <ListItemText className={classes.categoryText}>{name}</ListItemText>
       {isCollapsable ? (
         isOpen ? (
-          <CategoryIconMore />
+          <ExpandMore className={classes.categoryIconMore} />
         ) : (
-          <CategoryIconLess />
+          <ExpandLess className={classes.categoryIconLess} />
         )
       ) : null}
-      {badge ? <CategoryBadge label={badge} /> : ''}
+      {badge ? (
+        <Chip
+          className={clsx(classes.linkBadge, classes.categoryBadge)}
+          label={badge}
+        />
+      ) : (
+        ''
+      )}
     </Category>
   )
 }
@@ -267,7 +155,7 @@ SidebarCategory.propTypes = {
   badge: PropTypes.string
 }
 
-const SidebarLink = ({ name, icon, to, badge }) => (
+const SidebarLink = ({ name, icon, to, badge, classes }) => (
   <Link
     button
     dense
@@ -278,8 +166,8 @@ const SidebarLink = ({ name, icon, to, badge }) => (
     href={to}
   >
     {icon}
-    <LinkText>{name}</LinkText>
-    {badge ? <LinkBadge label={badge} /> : ''}
+    <ListItemText className={classes.linkText}>{name}</ListItemText>
+    {badge ? <Chip className={classes.linkBadge} label={badge} /> : ''}
   </Link>
 )
 
@@ -287,11 +175,13 @@ SidebarLink.propTypes = {
   icon: PropTypes.node,
   name: PropTypes.string,
   to: PropTypes.string,
-  badge: PropTypes.string
+  badge: PropTypes.string,
+  classes: PropTypes.any
 }
 
 const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   const { t } = useTranslation('routes')
+  const classesStyle = useStyles()
   const initOpenRoutes = () => {
     /* Open collapse element that matches current url */
     const pathName = location.pathname
@@ -330,18 +220,20 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   }
 
   return (
-    <Drawer variant="permanent" {...rest}>
-      <Brand>
-        <BrandIcon />
-      </Brand>
-      <Scrollbar>
-        <List disablePadding>
+    <MuiDrawer variant="permanent" className={classesStyle.drawer} {...rest}>
+      <Box className={classesStyle.brand}>
+        <DashboardIcon className={classesStyle.brandIcon} />
+      </Box>
+      <PerfectScrollbar className={classesStyle.scrollbar}>
+        <MuiList className={classesStyle.list} disablePadding>
           {routes
             .filter(({ name }) => !!name)
             .map((category, index) => (
-              <ListItem key={index}>
+              <MuiListItem className={classesStyle.listItem} key={index}>
                 {category.header ? (
-                  <SidebarSection>{t(category.header)}</SidebarSection>
+                  <Typography className={classesStyle.sidebarSection}>
+                    {t(category.header)}
+                  </Typography>
                 ) : null}
 
                 {category.children ? (
@@ -353,6 +245,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                       onClick={() => toggle(index)}
                       isCollapsable
                       button
+                      classes={classesStyle}
                     />
 
                     <Collapse
@@ -367,6 +260,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                           to={route.path}
                           icon={route.icon}
                           badge={route.badge}
+                          classes={classesStyle}
                         />
                       ))}
                     </Collapse>
@@ -387,17 +281,24 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                     icon={category.icon}
                     exact
                     badge={category.badge}
+                    classes={classesStyle}
                   />
                 )}
-              </ListItem>
+              </MuiListItem>
             ))}
-        </List>
-      </Scrollbar>
-      <SidebarFooter>
+        </MuiList>
+      </PerfectScrollbar>
+      <Box className={classesStyle.sidebarFooter}>
         <Grid container spacing={2}>
           <Grid item>
-            <SidebarFooterText variant="body2">
-              An open source project by{' '}
+            <Typography
+              className={classesStyle.sidebarFooterText}
+              variant="body2"
+            >
+              An open source project by
+            </Typography>
+            <Box className={classesStyle.footerBoxLink}>
+              <EosLogo />
               <a
                 href="https://eoscostarica.io/"
                 target="_blank"
@@ -405,12 +306,12 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
               >
                 EOS Costa Rica
               </a>
-            </SidebarFooterText>
-            <SidebarFooterSubText />
+            </Box>
+            <Typography className={classesStyle.sidebarFooterSubText} />
           </Grid>
         </Grid>
-      </SidebarFooter>
-    </Drawer>
+      </Box>
+    </MuiDrawer>
   )
 }
 

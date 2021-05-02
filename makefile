@@ -118,7 +118,7 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	--from-file wallet/config/ || echo "Wallet configuration already created.";
 	@echo "Applying kubernetes files..."
 	@for file in $(shell find $(K8S_BUILD_DIR) -name '*.yaml' | sed 's:$(K8S_BUILD_DIR)/::g'); do \
-		@kubectl apply -f $(K8S_BUILD_DIR)/$$file -n $(NAMESPACE); \
+		kubectl apply -f $(K8S_BUILD_DIR)/$$file -n $(NAMESPACE) || echo "${file} Cannot be updated."; \
 	done
 
 build-docker-images: ##@devops Build docker images

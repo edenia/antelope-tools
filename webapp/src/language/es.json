@@ -24,7 +24,17 @@
     "lastHour": "Última hora",
     "lastDay": "Último día",
     "lastWeek": "Última semana",
+<<<<<<< HEAD
     "lastYear": "Ultimo año"
+=======
+    "lastYear": "Ultimo año",
+    "itemsPerPage": "Elementos por página",
+    "api": "API",
+    "ssl": "SSL",
+    "p2p": "P2P",
+    "nodes": "Nodos",
+    "total": "Total"
+>>>>>>> dev
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -54,6 +64,12 @@
     "/ricardian-contract>sidebar": "Acuerdo de productor de bloque",
     "/ricardian-contract>title": "Acuerdo de productor de bloque - Dashboard",
     "/ricardian-contract>heading": "",
+    "/block-distribution>sidebar": "Distribución de bloques",
+    "/block-distribution>title": "Distribución de bloques - Dashboard",
+    "/block-distribution>heading": "Distribución de bloques",
+    "/endpoints>sidebar": "URL's",
+    "/endpoints>title": "URL's - Dashboard",
+    "/endpoints>heading": "URL's",
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Panel",
     "/about>heading": "Acerca de",
@@ -75,7 +91,18 @@
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
+<<<<<<< HEAD
     "transactionsHistory": "Historial de transacciones"
+=======
+    "transactionsHistory": "Historial de transacciones",
+    "timeFrame": "Periodo de tiempo",
+    "pause": "Pausa",
+    "play": "Play",
+    "Last Hour": "Última Hora",
+    "Last Day": "Última Día",
+    "Last Week": "Última Semana",
+    "Last Year": "Último Año"
+>>>>>>> dev
   },
   "networkInfoRoute": {
     "chainId": "Identificador de la cadena",
@@ -154,7 +181,6 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "nodes": "Nodos",
     "email": "Correo electrónico"
   },
   "nodeCardComponent": {
@@ -194,5 +220,27 @@
   },
   "contractActionFormComponent": {
     "executeTransaction": "Ejecutar Transacción"
+  },
+  "blockDistributionRoute": {
+    "title": "Bloques generados por productor",
+    "timeFrame": "Periodo de tiempo",
+    "blocksProduced": "Bloques producidos",
+    "percent": "Porcentaje",
+    "3 hours": "3 Horas",
+    "6 Hours": "6 Horas",
+    "12 Hours": "12 Horas",
+    "1 Day": "1 Día",
+    "2 Days": "2 Días",
+    "4 Days": "4 Días",
+    "7 Days": "7 Días",
+    "14 Days": "14 Días",
+    "1 Month": "6 Mes",
+    "2 Months": "2 Meses",
+    "3 Months": "3 Meses",
+    "6 Months": "6 Meses",
+    "1 Year": "1 Año"
+  },
+  "endpointsListRoute": {
+    "title": "Endpoints available by"
   }
 }

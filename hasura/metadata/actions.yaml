@@ -1,6 +1,15 @@
-actions: []
+actions:
+- name: block_distribution
+  definition:
+    kind: ""
+    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/block-distribution'
+    forward_client_headers: true
+    timeout: 180
+  permissions:
+  - role: guest
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+  - name: block_distribution_output
   scalars: []
