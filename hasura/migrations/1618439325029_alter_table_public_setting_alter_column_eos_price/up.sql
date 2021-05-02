@@ -1,1 +1,1 @@
-alter table "public"."setting" rename column "token_price" to "token_price";
+alter table "public"."setting" rename column "eos_price" to "token_price";

@@ -21,6 +21,7 @@ ARG react_app_eos_use_bp_json_on_chain
 ARG react_app_eos_bp_json_on_chain_contract
 ARG react_app_eos_bp_json_on_chain_table
 ARG react_app_eos_bp_json_on_chain_scope
+ARG react_app_token_symbol
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -47,6 +48,7 @@ ENV REACT_APP_EOS_USE_BP_JSON_ON_CHAIN $react_app_eos_use_bp_json_on_chain
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT $react_app_eos_bp_json_on_chain_contract
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE $react_app_eos_bp_json_on_chain_table
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE $react_app_eos_bp_json_on_chain_scope
+ENV REACT_APP_TOKEN_SYMBOL $react_app_token_symbol
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR
