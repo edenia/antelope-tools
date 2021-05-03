@@ -11,9 +11,9 @@ import queryString from 'query-string'
 
 import { PRODUCERS_QUERY } from '../gql'
 import ProducerSearch from '../components/ProducerSearch'
-import ProducerCard from '../components/ProducerCard'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
+import InformationCard from '../components/InformationCard'
 
 const useStyles = makeStyles((theme) => ({
   searchWrapper: {
@@ -122,17 +122,10 @@ const Producers = () => {
         <ProducerSearch onSearch={handleOnSearch} filters={filters} />
       </Box>
       {loading && <LinearProgress />}
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.cardBox}>
         {(producers || []).map((producer, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            key={`producer-card-${index}`}
-          >
-            <ProducerCard
+          <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
+            <InformationCard
               producer={producer}
               rank={
                 pagination.where
