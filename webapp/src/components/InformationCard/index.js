@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -17,7 +18,7 @@ import moment from 'moment'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import { onImgError } from '../../utils'
-import { generalConfig } from '../../config'
+import { generalConfig, eosConfig } from '../../config'
 import CountryFlag from '../CountryFlag'
 import ProducerSocialLinks from '../ProducerSocialLinks'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
@@ -30,24 +31,31 @@ const InformationCard = ({ producer, rank, onNodeClick }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { t } = useTranslation('producerCardComponent')
-
   const matches = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(false)
   const [producerOrg, setProducerOrg] = useState({})
   const [producerNodes, setProducerNodes] = useState([])
+  const [cardTitle, setCardTitle] = useState(null)
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
   useEffect(() => {
+    if (producer.bp_json?.org) {
+      if (eosConfig.networkName === 'lacchain') {
+        setCardTitle(`${t(`entityType${producer.bp_json.type}`)} Entity`)
+      } else {
+        setCardTitle(rank ? `Rank #${rank} -Top` : 'No Rank')
+      }
+    }
     setProducerOrg(producer.bp_json?.org || {})
     setProducerNodes(producer.bp_json?.nodes || [])
   }, [producer])
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={rank ? `Rank #${rank} -Top` : 'No Rank'} />
+      <CardHeader title={cardTitle} />
       <Box className={classes.wrapper}>
         <Box className={classes.media}>
           <img
@@ -129,8 +137,12 @@ const InformationCard = ({ producer, rank, onNodeClick }) => {
             <Box className={classes.twoBoxes}>
               <Box className="stats">
                 <Typography variant="overline">Stats</Typography>
-                <Typography variant="body1">Votes: N/A</Typography>
-                <Typography variant="body1">Rewards: 0 eos</Typography>
+                {eosConfig.networkName !== 'lacchain' && (
+                  <>
+                    <Typography variant="body1">Votes: N/A</Typography>
+                    <Typography variant="body1">Rewards: 0 eos</Typography>
+                  </>
+                )}
                 <Typography variant="body1">
                   Last Checked:
                   {` ${moment(new Date()).diff(
@@ -166,7 +178,7 @@ const InformationCard = ({ producer, rank, onNodeClick }) => {
             </Box>
             <Box className={classes.twoBoxes}>
               <Box className="healthStatus">
-                <Typography variant="overline">Health Social</Typography>
+                <Typography variant="overline">Health</Typography>
                 <ProducerHealthIndicators producer={producer} />
               </Box>
               <Box className="social">
