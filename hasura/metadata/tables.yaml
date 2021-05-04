@@ -33,17 +33,7 @@
         filter: {}
 - table:
     schema: public
-    name: missed_block
-  select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - value
-          - created_at
-          - updated_at
-          - account
-        filter: {}
+    name: round_history
 - table:
     schema: public
     name: producer
