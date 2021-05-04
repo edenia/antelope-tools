@@ -154,6 +154,8 @@ const init = async () => {
         break
     }
   })
+
+  ws.on('error', error => console.error(error))
 }
 
 module.exports = {
