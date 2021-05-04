@@ -91,6 +91,22 @@
         allow_aggregations: true
 - table:
     schema: public
+    name: round_history
+  select_permissions:
+  - role: guest
+    permission:
+      columns:
+      - id
+      - missed_blocks
+      - created_at
+      - updated_at
+      - account
+      filter: {}
+- table:
+    schema: public
+    name: schedule_history
+- table:
+    schema: public
     name: setting
   select_permissions:
     - role: guest
