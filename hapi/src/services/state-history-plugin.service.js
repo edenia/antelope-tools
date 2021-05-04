@@ -2,6 +2,7 @@ const WebSocket = require('ws')
 const { TextDecoder, TextEncoder } = require('text-encoding')
 const { Serialize } = require('eosjs')
 
+const statsService = require('./stats.service')
 const { eosConfig } = require('../config')
 const { hasuraUtil } = require('../utils')
 
@@ -110,6 +111,7 @@ const handleBlocksResult = async data => {
       transactions_length: block.transactions.length,
       timestamp: block.timestamp
     })
+    await statsService.udpateStats({ last_block_at: block.timestamp })
     ws.send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
     )
