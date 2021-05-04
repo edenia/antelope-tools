@@ -2,8 +2,8 @@ name: Build images from latest telos branch
 
 on:
   push:
-    branches:
-      - telos
+    tags:
+      - telos-testnet-v*
 
 jobs:
   create-image:
