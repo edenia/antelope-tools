@@ -7,9 +7,18 @@ actions:
     timeout: 180
   permissions:
   - role: guest
+- name: missed_blocks
+  definition:
+    kind: ""
+    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/missed-blocks'
+    forward_client_headers: true
+    timeout: 180
+  permissions:
+  - role: guest
 custom_types:
   enums: []
   input_objects: []
   objects:
   - name: block_distribution_output
+  - name: MissedBlocks
   scalars: []

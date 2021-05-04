@@ -69,5 +69,11 @@
     "setentxinfoTooltip": "Establecer información extendida de una entidad.",
     "setnodexinfoTitle": "Establecer información extendida de un nodo",
     "setnodexinfoTooltip": "Establecer información extendida de un nodo."
+  },
+  "blockDistributionRoute": {
+    "title": "Bloques generados por Nodo"
+  },
+  "missedBlocksRoute": {
+    "title": "Bloques perdidos por Nodo"
   }
 }

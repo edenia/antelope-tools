@@ -45,22 +45,41 @@ const TransactionInfo = ({ t, classes }) => {
 
   useEffect(() => {
     const majorLength = tps.length > tpb.length ? tps.length : tpb.length
-    const dataModeled = []
+    const trxPerSecond = []
+    const trxPerBlock = []
 
     if (!majorLength || pause || option !== '0') return
 
     for (let index = 0; index < majorLength; index++) {
-      dataModeled.push({
-        tps: tps[index] ? tps[index].transactions : 0,
-        tpb: tpb[index] ? tpb[index].transactions : 0,
-        blocks: {
-          tps: tps[index] ? tps[index].blocks : [0],
-          tpb: tpb[index] ? tpb[index].blocks : [0]
-        }
-      })
+      const labelBlockPS = `Blocks:[${(tps[index]
+        ? tps[index].blocks
+        : ['']
+      ).join()}]`
+      const labelBlockPB = `Blocks:[${(tpb[index]
+        ? tpb[index].blocks
+        : []
+      ).join()}]`
+
+      trxPerSecond.push([
+        labelBlockPS,
+        tps[index] ? tps[index].transactions : 0
+      ])
+      trxPerBlock.push([labelBlockPB, tpb[index] ? tpb[index].transactions : 0])
     }
 
-    setGraphicData(dataModeled)
+    setGraphicData([
+      {
+        name: 'Transactions per Second',
+        color: theme.palette.secondary.main,
+        data: trxPerSecond
+      },
+      {
+        name: 'Transactions per Block',
+        color: '#00C853',
+        data: trxPerBlock
+      }
+    ])
+    // eslint-disable-next-line
   }, [tps, tpb])
 
   useEffect(() => {
@@ -74,11 +93,12 @@ const TransactionInfo = ({ t, classes }) => {
   }, [option, getTransactionHistory])
 
   useEffect(() => {
-    const dataModeled = []
+    const trxPerSecond = []
+    const trxPerBlock = []
 
     if (option !== '0') {
       if (!trxHistory?.block_history?.length) {
-        setGraphicData(dataModeled)
+        setGraphicData([])
 
         return
       }
@@ -87,20 +107,26 @@ const TransactionInfo = ({ t, classes }) => {
         const item = trxHistory.block_history[i] || baseValues
         const prevItem = trxHistory.block_history[i - 1] || baseValues
         const trxPer = item.transaction_length + prevItem.transaction_length
-        const blocks = [item.block_num, prevItem.block_num]
+        const blocks = `Blocks:[${item.block_num}, ${prevItem.block_num}]`
 
-        dataModeled.push({
-          tps: trxPer,
-          tpb: trxPer,
-          blocks: {
-            tps: blocks,
-            tpb: blocks
-          }
-        })
+        trxPerSecond.push([blocks, trxPer])
+        trxPerBlock.push([blocks, trxPer])
       }
 
-      setGraphicData(dataModeled)
+      setGraphicData([
+        {
+          name: 'Transactions per Second',
+          color: theme.palette.secondary.main,
+          data: trxPerSecond
+        },
+        {
+          name: 'Transactions per Block',
+          color: '#00C853',
+          data: trxPerBlock
+        }
+      ])
     }
+    // eslint-disable-next-line
   }, [trxHistoryLoading, trxHistory])
 
   return (
@@ -154,10 +180,7 @@ const TransactionInfo = ({ t, classes }) => {
               </Box>
             </Box>
 
-            <TransactionsLineChart
-              data={graphicData}
-              loading={trxHistoryLoading}
-            />
+            <TransactionsLineChart data={graphicData} />
           </CardContent>
         </Card>
       </Grid>
