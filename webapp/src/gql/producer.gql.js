@@ -115,3 +115,15 @@ export const BLOCK_DISTRIBUTION_QUERY = gql`
     }
   }
 `
+
+export const MISSED_BLOCKS = gql`
+  query {
+    items: missed_blocks {
+      account
+      datetime
+      missed
+      produced
+      scheduled
+    }
+  }
+`

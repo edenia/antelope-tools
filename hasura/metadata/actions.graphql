@@ -5,11 +5,24 @@ type Query {
 }
 
 
+type Query {
+  missed_blocks : [MissedBlocks]
+}
+
+
 
 
 type block_distribution_output {
   account : String!
   blocks : Int!
   percent : Float
+}
+
+type MissedBlocks {
+  datetime : String
+  account : String
+  missed : Int
+  produced : Int
+  scheduled : Int
 }
 

@@ -27,6 +27,9 @@
     "http-status-codes": "^1.4.0",
     "joi": "^17.4.0",
     "moment": "^2.29.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2",
     "ws": "^7.4.4"
   },
   "devDependencies": {
