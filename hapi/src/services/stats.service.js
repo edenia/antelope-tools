@@ -4,6 +4,8 @@ const moment = require('moment')
 
 const { hasuraUtil } = require('../utils')
 
+const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
+
 const getTransactionsInTimeRage = async payload => {
   const query = `
     query($start: timestamptz!, $end: timestamptz!) {
@@ -94,22 +96,24 @@ const getBlockDistribution = async (range = '1 day') => {
 const getStats = async () => {
   const query = `
     query {
-      stat(limit: 1) {
+      stat: stat_by_pk(id: "${STAT_ID}") {
         id
         transactions_in_last_hour
         transactions_in_last_day
         transactions_in_last_week
+        last_round
+        last_block_at
         updated_at
         created_at
       }
-    } 
+    }  
   `
   const data = await hasuraUtil.request(query)
 
-  return data.stat.length > 0 ? data.stat[0] : null
+  return data.stat
 }
 
-const udpateStats = async (id, payload) => {
+const udpateStats = async payload => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -117,7 +121,7 @@ const udpateStats = async (id, payload) => {
       }
     }
   `
-  await hasuraUtil.request(mutation, { id, payload })
+  await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
 const insertStats = async payload => {
@@ -128,7 +132,7 @@ const insertStats = async payload => {
       }
     }  
   `
-  await hasuraUtil.request(mutation, { payload })
+  await hasuraUtil.request(mutation, { payload: { id: STAT_ID, ...payload } })
 }
 
 const sync = async () => {
@@ -153,7 +157,7 @@ const sync = async () => {
   const stats = await getStats()
 
   if (stats) {
-    await udpateStats(stats.id, payload)
+    await udpateStats(payload)
 
     return
   }
@@ -163,5 +167,7 @@ const sync = async () => {
 
 module.exports = {
   sync,
-  getBlockDistribution
+  getBlockDistribution,
+  getStats,
+  udpateStats
 }

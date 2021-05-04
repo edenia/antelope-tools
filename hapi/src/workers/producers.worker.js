@@ -1,4 +1,5 @@
 const {
+  missedBlocksService,
   producerService,
   settingService,
   stateHistoryPluginService,
@@ -62,16 +63,19 @@ const start = async () => {
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
   )
-  if (workersConfig.syncProducerCpuInterval > 0) {
-    run(
-      'SYNC CPU USAGE',
-      producerService.syncCpuUsage,
-      workersConfig.syncProducerCpuInterval
-    )
-  }
-  run('CHECK FOR MISSED BLOCK', producerService.checkForMissedBlocks)
-  run('SYNC STATS', statsService.sync, workersConfig.syncStatsInterval)
-  stateHistoryPluginService.init()
+  run(
+    'SYNC CPU USAGE',
+    producerService.syncCpuUsage,
+    workersConfig.syncProducerCpuInterval
+  )
+  run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
+  run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
+  run(
+    'SYNC SCHEDULE HISTORY',
+    missedBlocksService.syncScheduleHistory,
+    workersConfig.syncScheduleHistoryInterval
+  )
+  run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
 }
 
 module.exports = {

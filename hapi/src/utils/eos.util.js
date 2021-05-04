@@ -169,6 +169,8 @@ const getCurrencyBalance = (code, account, symbol) =>
 
 const getTableRows = options => eosApi.getTableRows({ json: true, ...options })
 
+const getProducerSchedule = () => eosApi.getProducerSchedule({})
+
 const transact = async (actions, account, password) => {
   try {
     await walletUtil.unlock(account, password)
@@ -207,5 +209,6 @@ module.exports = {
   getCodeHash,
   getCurrencyBalance,
   getTableRows,
-  transact
+  transact,
+  getProducerSchedule
 }
