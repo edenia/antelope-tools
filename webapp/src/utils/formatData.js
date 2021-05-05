@@ -1,4 +1,5 @@
 /* eslint complexity: 0 */
+/* eslint camelcase: 0 */
 import moment from 'moment'
 
 import { eosConfig } from '../config'
