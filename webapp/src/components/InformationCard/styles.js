@@ -145,5 +145,8 @@ export default (theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'none'
     }
+  },
+  breakLine: {
+    wordBreak: 'break-word'
   }
 })
