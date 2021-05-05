@@ -51,6 +51,7 @@ export const NODES_QUERY = gql`
       id
       owner
       bp_json
+      updated_at
     }
   }
 `
