@@ -76,6 +76,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             <Information
               info={producerOrg.info}
               classes={classes}
+              t={t}
               type={type}
             />
             <Endpoints
@@ -100,7 +101,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             </Box>
             <Box className={classes.twoBoxes}>
               <Box className="healthStatus">
-                <Typography variant="overline">Health</Typography>
+                <Typography variant="overline">{t('health')}</Typography>
                 <ProducerHealthIndicators
                   producer={
                     producerOrg?.healthStatus
@@ -117,7 +118,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
       <CardActions disableSpacing className={classes.cardActions}>
         <Box className={classes.expandMore}>
           <Button color="primary" onClick={handleExpandClick}>
-            {expanded ? 'Collapse' : 'More Info'}
+            {expanded ? t('collapse') : t('moreInfo')}
           </Button>
         </Box>
       </CardActions>

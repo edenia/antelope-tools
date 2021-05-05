@@ -10,7 +10,7 @@ const Social = ({ social, type, t }) => {
 
   return (
     <Box className="social">
-      <Typography variant="overline">Social</Typography>
+      <Typography variant="overline">{t('social')}</Typography>
       <Box>
         <ProducerSocialLinks items={social} />
       </Box>

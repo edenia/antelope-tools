@@ -6,18 +6,18 @@ import Box from '@material-ui/core/Box'
 
 import CountryFlag from '../CountryFlag'
 
-const Information = ({ info, classes, type }) => {
+const Information = ({ info, classes, type, t }) => {
   if (type === 'node') {
     return (
       <Box className={classes.info}>
-        <Typography variant="overline">Info</Typography>
+        <Typography variant="overline">{t('info')}</Typography>
         <Typography variant="body1">
-          Version:{` ${info.version || '- -'}`}
+          {`${t('version')}: ${info.version || '- -'}`}
         </Typography>
         {info.features.length ? (
           <dl>
             <dt>
-              <Typography variant="body1">Features:</Typography>
+              <Typography variant="body1">{`${t('teatures')}:`}</Typography>
             </dt>
             {info.features.map((feature) => (
               <dd key={feature}>
@@ -26,12 +26,12 @@ const Information = ({ info, classes, type }) => {
             ))}
           </dl>
         ) : (
-          <Typography variant="body1">Features: - -</Typography>
+          <Typography variant="body1">{`${t('teatures')}: - -`}</Typography>
         )}
         {info.keys ? (
           <dl>
             <dt>
-              <Typography variant="body1">Keys:</Typography>
+              <Typography variant="body1">{`${t('keys')}:`}</Typography>
             </dt>
             {Object.keys(info.keys).map((key, i) => (
               <dd key={i}>
@@ -41,7 +41,7 @@ const Information = ({ info, classes, type }) => {
             ))}
           </dl>
         ) : (
-          <Typography variant="body1">Keys: - -</Typography>
+          <Typography variant="body1">{`${t('keys')}: - -`}</Typography>
         )}
       </Box>
     )
@@ -49,19 +49,19 @@ const Information = ({ info, classes, type }) => {
 
   return (
     <Box className={classes.info}>
-      <Typography variant="overline">Info</Typography>
+      <Typography variant="overline">{t('info')}</Typography>
       <Typography variant="body1">
-        Location:{` ${info.location || 'N/A'} `}
+        {`${t('location')}: ${info.location || 'N/A'} `}
         <CountryFlag code={info.country} />
       </Typography>
       <Typography variant="body1">
-        Website:{' '}
+        {`${t('website')}: `}
         <Link href={info.website} target="_blank" rel="noopener noreferrer">
           {info.website}
         </Link>
       </Typography>
       <Typography variant="body1">
-        Email:{' '}
+        {`${t('email')}: `}
         {info.email ? (
           <Link
             href={`mailto:${info.email}`}
@@ -75,7 +75,7 @@ const Information = ({ info, classes, type }) => {
         )}
       </Typography>
       <Typography variant="body1">
-        Ownership Disclosure:{' '}
+        {`${t('ownershipDisclosure')}: `}
         {info.ownership ? (
           <Link href={info.ownership} target="_blank" rel="noopener noreferrer">
             {info.ownership}
@@ -85,7 +85,7 @@ const Information = ({ info, classes, type }) => {
         )}
       </Typography>
       <Typography variant="body1">
-        Chain Resources:{' '}
+        {`${t('chainResources')}: `}
         {info.chain ? (
           <Link href={info.chain} target="_blank" rel="noopener noreferrer">
             {info.chain}
@@ -101,7 +101,8 @@ const Information = ({ info, classes, type }) => {
 Information.propTypes = {
   type: PropTypes.string,
   info: PropTypes.object,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  t: PropTypes.func
 }
 
 Information.defaultProps = {

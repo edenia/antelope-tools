@@ -9,21 +9,21 @@ import { eosConfig } from '../../config'
 const Stats = ({ updatedAt, missedBlocks, t }) => {
   return (
     <Box className="stats">
-      <Typography variant="overline">Stats</Typography>
+      <Typography variant="overline">{t('stats')}</Typography>
       {eosConfig.networkName !== 'lacchain' && (
         <>
-          <Typography variant="body1">Votes: N/A</Typography>
-          <Typography variant="body1">Rewards: 0 eos</Typography>
+          <Typography variant="body1">{t('votes')}</Typography>
+          <Typography variant="body1">{t('rewards')}</Typography>
         </>
       )}
       <Typography variant="body1">
-        Last Checked:
-        {` ${moment(new Date()).diff(moment(updatedAt), 'seconds')} ${t(
-          'secondsAgo'
-        )}`}
+        {`${t('lastChecked')} ${moment(new Date()).diff(
+          moment(updatedAt),
+          'seconds'
+        )} ${t('secondsAgo')}`}
       </Typography>
       <Typography variant="body1">
-        Missed Blocks:{' '}
+        {t('missedBlocks')}
         {missedBlocks.reduce((result, current) => result + current.value, 0)}
       </Typography>
     </Box>
