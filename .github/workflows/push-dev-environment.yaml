@@ -35,7 +35,6 @@ jobs:
           PORT: 80
           REACT_APP_NAME: $npm_package_name
           REACT_APP_VERSION: $npm_package_version
-          REACT_APP_TAG: ${{ GITHUB_REF }}
           REACT_APP_TITLE: EOS Jungle Testnet Network Dashboard
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://bloks.io/img/eosio.png
           REACT_APP_FOOTER_LINKS: ''
