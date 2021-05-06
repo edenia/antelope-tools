@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
 import Sidebar from '../components/Sidebar'
+import NetworkSelector from '../components/NetworkSelector'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
@@ -44,7 +45,6 @@ const Dashboard = ({ children, width, ual }) => {
   const classes = useStyles()
   const { t } = useTranslation('routes')
   const location = useLocation()
-  const date = new Date()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -73,32 +73,14 @@ const Dashboard = ({ children, width, ual }) => {
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
             <Typography variant="h3">
-              {`${t(`${location.pathname}>heading`)} ${generalConfig.title} `}
-              <span
-                style={{
-                  fontSize: 14,
-                  lineHeight: '20px',
-                  letterSpacing: '0.1px',
-                  color: 'rgba(0, 0, 0, 0.87)',
-                  fontWeight: '400'
-                }}
-              >
-                {date.toLocaleDateString(undefined, {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </span>
+              {`${t(`${location.pathname}>heading`)} ${
+                location.pathname === '/' ? generalConfig.title : ''
+              }`}
             </Typography>
-            <Box className={classes.network}>
-              <Typography component="p" variant="h5">
-                {eosConfig.networkLabel}
-              </Typography>
-              <Box className={classes.networkLogo}>
-                <img src={eosConfig.networkLogo} alt="network logo" />
-              </Box>
-            </Box>
+            <NetworkSelector
+              title={eosConfig.networkLabel}
+              networkLogo={eosConfig.networkLogo}
+            />
           </Box>
           {children}
         </Box>
