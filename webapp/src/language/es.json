@@ -24,17 +24,28 @@
     "lastHour": "Última hora",
     "lastDay": "Último día",
     "lastWeek": "Última semana",
-<<<<<<< HEAD
-    "lastYear": "Ultimo año"
-=======
     "lastYear": "Ultimo año",
     "itemsPerPage": "Elementos por página",
     "api": "API",
     "ssl": "SSL",
     "p2p": "P2P",
     "nodes": "Nodos",
-    "total": "Total"
->>>>>>> dev
+    "total": "Total",
+    "missedBlocks": "Bloques perdidos",
+    "timeFrame": "Periodo de tiempo",
+    "3 hours": "3 Horas",
+    "6 Hours": "6 Horas",
+    "12 Hours": "12 Horas",
+    "1 Day": "1 Día",
+    "2 Days": "2 Días",
+    "4 Days": "4 Días",
+    "7 Days": "7 Días",
+    "14 Days": "14 Días",
+    "1 Month": "6 Mes",
+    "2 Months": "2 Meses",
+    "3 Months": "3 Meses",
+    "6 Months": "6 Meses",
+    "1 Year": "1 Año"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -91,9 +102,6 @@
     "bpSchedule": "Programa de Productor de Bloque",
     "transPerSecond": "Transacciones por Segundo",
     "transPerBlock": "Transacciones por Bloque",
-<<<<<<< HEAD
-    "transactionsHistory": "Historial de transacciones"
-=======
     "transactionsHistory": "Historial de transacciones",
     "timeFrame": "Periodo de tiempo",
     "pause": "Pausa",
@@ -102,15 +110,13 @@
     "Last Day": "Última Día",
     "Last Week": "Última Semana",
     "Last Year": "Último Año"
->>>>>>> dev
   },
   "networkInfoRoute": {
     "chainId": "Identificador de la cadena",
     "chainLimits": "Límites de la cadena",
     "cpuLimitPerBlock": "Límite de CPU por bloque",
     "netLimitPerBlock": "Límite de NET por bloque",
-    "cpuBenchmarks": "CPU Benchmarks",
-    "missedBlocks": "Bloques perdidos"
+    "cpuBenchmarks": "CPU Benchmarks"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -173,7 +179,7 @@
     "pingFromCostaRica": "Ping desde Costa Rica",
     "serverVersion": "Versión del servidor",
     "secondsAgo": "s atras",
-    "lastTimeChecked": "Verificado por última vez",
+    "lastChecked": "Verificado por última vez",
     "missedBlocks": "Bloques perdidos",
     "businessContact": "Contacto del negocio",
     "technicalContact": "Contacto técnico",
@@ -181,7 +187,20 @@
     "ownershipDisclosure": "Divulgación de propiedad",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
-    "email": "Correo electrónico"
+    "email": "Correo electrónico",
+    "features": "Características",
+    "endpoints": "Endpoints",
+    "nodeVersion": "Versión",
+    "emptyNode": "Sin información para nodos",
+    "cpuBenchmark": "Promedio del Benchmark de CPU",
+    "health": "Salud",
+    "collapse": "Colapsar",
+    "moreInfo": "Más Info",
+    "version": "Versión",
+    "info": "Info",
+    "keys": "Llaves",
+    "location": "Ubicación",
+    "stats": "Estadísticas"
   },
   "nodeCardComponent": {
     "features": "Características",
@@ -223,22 +242,14 @@
   },
   "blockDistributionRoute": {
     "title": "Bloques generados por productor",
-    "timeFrame": "Periodo de tiempo",
     "blocksProduced": "Bloques producidos",
-    "percent": "Porcentaje",
-    "3 hours": "3 Horas",
-    "6 Hours": "6 Horas",
-    "12 Hours": "12 Horas",
-    "1 Day": "1 Día",
-    "2 Days": "2 Días",
-    "4 Days": "4 Días",
-    "7 Days": "7 Días",
-    "14 Days": "14 Días",
-    "1 Month": "6 Mes",
-    "2 Months": "2 Meses",
-    "3 Months": "3 Meses",
-    "6 Months": "6 Meses",
-    "1 Year": "1 Año"
+    "percent": "Porcentaje"
+  },
+  "missedBlocksRoute": {
+    "title": "Bloques perdidos por productor",
+    "producedBlocks": "Bloques producidos",
+    "scheduledBlocks": "Bloques progamados",
+    "availability": "Disponibilidad"
   },
   "endpointsListRoute": {
     "title": "Endpoints available by"

@@ -66,8 +66,6 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
-<<<<<<< HEAD
-=======
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
 
       - name: Build and deploy kubernetes files
@@ -156,4 +154,3 @@ jobs:
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
->>>>>>> dev

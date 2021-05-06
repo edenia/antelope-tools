@@ -9,5 +9,8 @@ module.exports = {
     process.env.HAPI_SYNC_PRODUCER_CPU_INTERVAL || 0
   ),
   syncStatsInterval: parseInt(process.env.HAPI_SYNC_STATS_INTERVAL || 60),
-  syncExchangeRate: parseInt(process.env.HAPI_SYNC_EXCHANGE_RATE || 86400)
+  syncExchangeRate: parseInt(process.env.HAPI_SYNC_EXCHANGE_RATE || 86400),
+  syncScheduleHistoryInterval: parseInt(
+    process.env.HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL || 0
+  )
 }

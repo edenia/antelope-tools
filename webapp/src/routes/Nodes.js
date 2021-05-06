@@ -1,4 +1,6 @@
+/* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import { useLocation } from 'react-router-dom'
@@ -11,7 +13,7 @@ const Grid = lazy(() => import('@material-ui/core/Grid'))
 const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
 const Pagination = lazy(() => import('@material-ui/lab/Pagination'))
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
-const NodeCard = lazy(() => import('../components/NodeCard'))
+const InformationCard = lazy(() => import('../components/InformationCard'))
 
 const useStyles = makeStyles((theme) => ({
   pagination: {
@@ -20,6 +22,30 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   }
 }))
+
+const NodesCards = ({ data }) => {
+  if (!data.bp_json?.nodes) {
+    return (
+      <Grid item xs={12} sm={6} lg={12}>
+        <InformationCard producer={data} type="node" />
+      </Grid>
+    )
+  }
+
+  return (
+    <>
+      {(data.bp_json?.nodes || []).map((node, index) => (
+        <Grid item xs={12} sm={6} lg={12} key={`${node.node_name}_${index}`}>
+          <InformationCard producer={{ ...data, node }} type="node" />
+        </Grid>
+      ))}
+    </>
+  )
+}
+
+NodesCards.propTypes = {
+  data: PropTypes.object
+}
 
 const Nodes = () => {
   const [
@@ -67,9 +93,7 @@ const Nodes = () => {
   }, [pagination.where, pagination.page, pagination.limit])
 
   useEffect(() => {
-    if (!info) {
-      return
-    }
+    if (!info) return
 
     setPagination((prev) => ({
       ...prev,
@@ -80,9 +104,7 @@ const Nodes = () => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.owner) {
-      return
-    }
+    if (!params.owner) return
 
     setPagination((prev) => ({
       ...prev,
@@ -94,11 +116,10 @@ const Nodes = () => {
   }, [location.search])
 
   useEffect(() => {
-    if (!producers?.length) {
-      return
-    }
+    if (!producers?.length) return
 
     let items = producers || []
+
     if (filters.nodeType !== 'all') {
       items = items.map((producer) => {
         const nodes = (producer.bp_json?.nodes || []).filter(
@@ -124,32 +145,7 @@ const Nodes = () => {
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
         {items.map((producer) => (
-          <>
-            {(producer.bp_json?.nodes || []).map((node, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                xl={3}
-                key={`${node.node_name}_${index}`}
-              >
-                <NodeCard producer={producer} node={node} />
-              </Grid>
-            ))}
-            {!producer.bp_json?.nodes && (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                xl={3}
-                key={`producer_${producer.owner}`}
-              >
-                <NodeCard producer={producer} />
-              </Grid>
-            )}
-          </>
+          <NodesCards data={producer} key={`producer_${producer.owner}`} />
         ))}
       </Grid>
       {!loading && pagination.pages > 1 && (

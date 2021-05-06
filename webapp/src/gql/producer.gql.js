@@ -51,6 +51,7 @@ export const NODES_QUERY = gql`
       id
       owner
       bp_json
+      updated_at
     }
   }
 `
@@ -124,6 +125,18 @@ export const BLOCK_DISTRIBUTION_QUERY = gql`
       blocks
       percent
 >>>>>>> dev
+    }
+  }
+`
+
+export const MISSED_BLOCKS = gql`
+  query {
+    items: missed_blocks {
+      account
+      datetime
+      missed
+      produced
+      scheduled
     }
   }
 `

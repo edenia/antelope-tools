@@ -643,6 +643,10 @@ const syncProducersInfo = async () => {
 }
 
 const syncCpuUsage = async () => {
+  if (!eosConfig.eosmechanics.account || !eosConfig.eosmechanics.password) {
+    return
+  }
+
   try {
     const { block, transaction } = await eosmechanicsUtil.cpu()
     await insertUsage('cpu', {
