@@ -55,9 +55,7 @@ const Producers = () => {
   }, [pagination.where, pagination.page, pagination.limit])
 
   useEffect(() => {
-    if (!info) {
-      return
-    }
+    if (!info) return
 
     setTotalPages(Math.ceil(info.producers?.count / pagination.limit))
   }, [info, pagination.limit])
@@ -65,9 +63,7 @@ const Producers = () => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.name) {
-      return
-    }
+    if (!params.name) return
 
     setPagination((prev) => ({
       ...prev,
@@ -92,6 +88,7 @@ const Producers = () => {
   const handleOnSearch = (filters) => {
     if (!filters.owner) {
       setPagination((prev) => ({ ...prev, page: 1, where: null }))
+
       return
     }
 
@@ -122,10 +119,11 @@ const Producers = () => {
         <ProducerSearch onSearch={handleOnSearch} filters={filters} />
       </Box>
       {loading && <LinearProgress />}
-      <Grid container spacing={2} className={classes.cardBox}>
+      <Grid container spacing={2}>
         {(producers || []).map((producer, index) => (
           <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
             <InformationCard
+              type="entity"
               producer={producer}
               rank={
                 pagination.where
