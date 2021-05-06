@@ -34,10 +34,6 @@ jobs:
 
           PORT: "80"
           REACT_APP_TTILE: "EOS Mainnet Network Dashboard"
-<<<<<<< HEAD
-=======
-          REACT_APP_TAG: ${{ GITHUB_REF }}
->>>>>>> dev
           REACT_APP_DEFAULT_PRODUCER_LOGO: "https://bloks.io/img/eosio.png"
           REACT_APP_EOS_RATE_LINK: "https://eosrate.io"
           REACT_APP_USE_REWARDS: "true"
