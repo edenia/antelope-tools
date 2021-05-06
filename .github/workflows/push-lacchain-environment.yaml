@@ -34,7 +34,6 @@ jobs:
           # Webapp
           PORT: '80'
           REACT_APP_TTILE: 'LACChain Network Dashboard'
-          REACT_APP_TAG: ${{ GITHUB_REF }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://latamlink.io/images/latamlink_logo-header.svg'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
@@ -71,7 +70,6 @@ jobs:
           # Webapp
           PORT: '80'
           REACT_APP_TTILE: 'LACChain Network Dashboard'
-          REACT_APP_TAG: ${{ GITHUB_REF }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://latamlink.io/images/latamlink_logo-header.svg'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
