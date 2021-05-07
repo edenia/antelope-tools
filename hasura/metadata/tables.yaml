@@ -22,63 +22,60 @@
     schema: public
     name: cpu
   select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - usage
-          - created_at
-          - updated_at
-          - account
-        filter: {}
-- table:
-    schema: public
-    name: round_history
+  - role: guest
+    permission:
+      columns:
+      - id
+      - usage
+      - created_at
+      - updated_at
+      - account
+      filter: {}
 - table:
     schema: public
     name: producer
   select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - owner
-          - total_votes
-          - producer_key
-          - is_active
-          - url
-          - unpaid_blocks
-          - last_claim_time
-          - location
-          - producer_authority
-          - bp_json
-          - server_version
-          - chain_id
-          - head_block_num
-          - last_irreversible_block_num
-          - last_irreversible_block_id
-          - head_block_id
-          - head_block_time
-          - head_block_producer
-          - virtual_block_cpu_limit
-          - virtual_block_net_limit
-          - block_cpu_limit
-          - block_net_limit
-          - server_version_string
-          - fork_db_head_block_num
-          - fork_db_head_block_id
-          - server_full_version_string
-          - ping
-          - total_votes_percent
-          - total_votes_eos
-          - block_rewards
-          - vote_rewards
-          - total_rewards
-          - created_at
-          - updated_at
-          - health_status
-        filter: {}
-        allow_aggregations: true
+  - role: guest
+    permission:
+      columns:
+      - id
+      - owner
+      - total_votes
+      - producer_key
+      - is_active
+      - url
+      - unpaid_blocks
+      - last_claim_time
+      - location
+      - producer_authority
+      - bp_json
+      - server_version
+      - chain_id
+      - head_block_num
+      - last_irreversible_block_num
+      - last_irreversible_block_id
+      - head_block_id
+      - head_block_time
+      - head_block_producer
+      - virtual_block_cpu_limit
+      - virtual_block_net_limit
+      - block_cpu_limit
+      - block_net_limit
+      - server_version_string
+      - fork_db_head_block_num
+      - fork_db_head_block_id
+      - server_full_version_string
+      - ping
+      - total_votes_percent
+      - total_votes_eos
+      - block_rewards
+      - vote_rewards
+      - total_rewards
+      - created_at
+      - updated_at
+      - health_status
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: round_history
@@ -99,12 +96,12 @@
     schema: public
     name: setting
   select_permissions:
-    - role: guest
-      permission:
-        columns:
-          - id
-          - token_price
-        filter: {}
+  - role: guest
+    permission:
+      columns:
+      - id
+      - token_price
+      filter: {}
 - table:
     schema: public
     name: stat

@@ -6,7 +6,9 @@ type Query {
 
 
 type Query {
-  missed_blocks : [MissedBlocks]
+  missed_blocks (
+    range: String!
+  ): [MissedBlocks]
 }
 
 
