@@ -11,46 +11,38 @@ const useStyles = makeStyles(styles)
 
 const NetworkSelector = ({ title, options, networkLogo }) => {
   const classes = useStyles()
-  const [state, setState] = useState({
-    selected: -1,
-    active: false
-  })
+  const [selected, setSelected] = useState(-1)
+  const [open, setOpen] = useState(false)
 
   const toggleDropdown = () => {
-    setState({
-      ...state,
-      active: !state.active
-    })
+    setOpen(!open)
   }
 
-  const handleClick = (i) => {
-    setState({
-      ...state,
-      selected: i,
-      active: !state.active
-    })
+  const handleClick = (i, url) => {
+    setSelected(i)
+    setOpen(!open)
+
+    window.open(url, '_blank').focus()
   }
 
   return (
     <Box className={classes.dropdown}>
-      <Box onClick={() => toggleDropdown()} className={clsx(classes.toggle)}>
+      <Box onClick={toggleDropdown} className={clsx(classes.toggle)}>
         <Typography component="p" variant="h5">
           {title}
         </Typography>
       </Box>
-      <ul
-        className={clsx(classes.list, { [classes.listActive]: state.active })}
-      >
+      <ul className={clsx(classes.list, { [classes.listActive]: open })}>
         {options.map((option, i) => {
           return (
             <li
-              onClick={() => handleClick(i)}
+              onClick={() => handleClick(i, option.value)}
               key={i}
               className={clsx(classes.listItem, {
-                [classes.listItemActive]: i === state.selected
+                [classes.listItemActive]: i === selected
               })}
             >
-              {option}
+              {option.label}
             </li>
           )
         })}
@@ -70,13 +62,7 @@ NetworkSelector.propTypes = {
 
 NetworkSelector.defaultProps = {
   title: '',
-  options: [
-    'EOS Mainnet',
-    'Jungle Testnet',
-    'Telos Mainnet',
-    'WAX Mainnet',
-    'LACChain Testnet'
-  ],
+  options: [],
   networkLogo: ''
 }
 

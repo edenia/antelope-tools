@@ -80,6 +80,14 @@ const Dashboard = ({ children, width, ual }) => {
             <NetworkSelector
               title={eosConfig.networkLabel}
               networkLogo={eosConfig.networkLogo}
+              options={[
+                { label: 'EOS Mainnet', value: generalConfig.eosMainnet },
+                { label: 'Jungle Testnet', value: generalConfig.jungleTestnet },
+                {
+                  label: 'LACChain Testnet',
+                  value: generalConfig.lacchainTestnet
+                }
+              ]}
             />
           </Box>
           {children}
