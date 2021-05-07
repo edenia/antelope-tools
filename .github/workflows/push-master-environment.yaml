@@ -53,9 +53,9 @@ jobs:
           REACT_APP_EOS_API_NETWORK_LABEL: 'Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_EOS_MAINNET: '${REACT_APP_EOS_MAINNET}'
-          REACT_APP_JUNGLE_TESTNET: '${REACT_APP_JUNGLE_TESTNET}'
-          REACT_APP_LACCHAIN_TESTNET: '${REACT_APP_LACCHAIN_TESTNET}'
+          REACT_APP_EOS_MAINNET: 'https://mainnet.eosio.cr'
+          REACT_APP_JUNGLE_TESTNET: 'https://testnet.eosio.cr'
+          REACT_APP_LACCHAIN_TESTNET: 'https://dashboard.latamlink.io'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
