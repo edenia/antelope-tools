@@ -65,14 +65,14 @@ const rangeOptions = [
 
 const BlockDistribution = () => {
   const { t } = useTranslation('missedBlocksRoute')
-  const [range, setRange] = useState(rangeOptions[rangeOptions.length - 2])
+  const [range, setRange] = useState(rangeOptions[0])
   const [series, setSeries] = useState([])
   const [producers, setProducers] = useState([])
   const [load, { loading, data }] = useLazyQuery(MISSED_BLOCKS)
 
   useEffect(() => {
     load({
-      variables: {}
+      variables: { range }
     })
   }, [load, range])
 

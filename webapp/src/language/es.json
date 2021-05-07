@@ -232,6 +232,7 @@
     "upperBound": "Límite superior",
     "limit": "Límite",
     "getData": "Obtener Datos",
+    "loadMore": "Carga Más",
     "emptyTable": "Table vacía"
   },
   "contractActionsComponent": {
