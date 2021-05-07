@@ -144,7 +144,9 @@ const init = async () => {
 
       return
     }
-
+    console.log('types', types)
+    console.log('startBlockNum', startBlockNum)
+    console.log('data', data)
     const [type, response] = deserialize('result', data)
 
     switch (type) {
