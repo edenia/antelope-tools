@@ -1,3 +1,5 @@
+const Joi = require('joi')
+
 const { missedBlocksService } = require('../services')
 
 module.exports = {
