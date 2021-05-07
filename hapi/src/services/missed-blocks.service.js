@@ -1,7 +1,7 @@
 const moment = require('moment')
 
 const statsService = require('./stats.service')
-const { sequelizeUtil, eosUtil, hasuraUtil } = require('../utils')
+const { sequelizeUtil, eosUtil, hasuraUtil, sleepFor } = require('../utils')
 
 const getCurrentSchedule = async () => {
   const query = `
@@ -191,9 +191,7 @@ const syncMissedBlocks = async () => {
 
   // if there is no round to start try again in 1 minute
   if (!lastRound) {
-    await new Promise(resolve => {
-      setInterval(() => resolve(), 60000)
-    })
+    await sleepFor(60)
     syncMissedBlocks()
 
     return
@@ -204,26 +202,14 @@ const syncMissedBlocks = async () => {
     .add(lastRound.interval, 'seconds')
     .subtract(500, 'milliseconds')
 
-  // if the diference between the last block time and the end time
-  // is less than the round interval we should try later
+  // if the diference between the
+  // last block time and the end time
+  // is less than the round interval
+  // then wait until the round end
   if (
     moment(lastRound.last_block_at).diff(end, 'seconds') < lastRound.interval
   ) {
-    await new Promise(resolve => {
-      setInterval(() => resolve(), 60000)
-    })
-    syncMissedBlocks()
-
-    return
-  }
-
-  // if the diff in seconds between the current time
-  // and round end it's less than the round interval
-  // then wait until the round ends
-  if (moment().diff(end, 'seconds') < lastRound.interval) {
-    await new Promise(resolve => {
-      setInterval(() => resolve(), 60000)
-    })
+    await sleepFor(60)
     syncMissedBlocks()
 
     return
@@ -266,26 +252,55 @@ const syncMissedBlocks = async () => {
   syncMissedBlocks()
 }
 
-const getMissedBlocks = async () => {
+const getMissedBlocks = async (range = '3 Hours') => {
+  let granularity
+
+  switch (range) {
+    case '3 Hours':
+    case '6 Hours':
+    case '12 Hours':
+      granularity = 'minute'
+      break
+    case '1 Day':
+    case '4 Days':
+    case '7 Days':
+    case '14 Days':
+      granularity = 'hour'
+      break
+    case '1 Month':
+    case '2 Months':
+    case '3 Months':
+    case '6 Months':
+      granularity = 'day'
+      break
+    case '1 Year':
+    case 'all':
+      granularity = 'month'
+      break
+    default:
+      granularity = 'minute'
+      break
+  }
+
   const [rows] = await sequelizeUtil.query(`
-    WITH days AS (
+    WITH interval AS (
       SELECT generate_series(
-        date_trunc('day', now()) - '365 days'::interval,
-        date_trunc('day', now()),
-        '1 day'::interval
-      ) AS day
+        date_trunc('${granularity}', now()) - '${range}'::interval,
+        date_trunc('${granularity}', now()),
+        '1 ${granularity}'::interval
+      ) AS value
     )
     
     SELECT
-      days.day as datetime,
+      interval.value as datetime,
       round_history.account,
       sum(round_history.missed_blocks) as missed,
       sum(round_history.produced_blocks) as produced,
       sum(round_history.missed_blocks)+sum(round_history.produced_blocks) as scheduled
     FROM 
-      days
+      interval
     INNER JOIN 
-      round_history ON date_trunc('day', round_history.completed_at) = days.day
+      round_history ON date_trunc('${granularity}', round_history.completed_at) = interval.value
     GROUP BY 
       1, 
       account

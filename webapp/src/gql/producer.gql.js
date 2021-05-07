@@ -76,11 +76,6 @@ export const NETWORK_STATS = gql`
       usage
       created_at
     }
-    missed_block(limit: 100, order_by: { created_at: desc }) {
-      account
-      value
-      created_at
-    }
   }
 `
 
@@ -118,8 +113,8 @@ export const BLOCK_DISTRIBUTION_QUERY = gql`
 `
 
 export const MISSED_BLOCKS = gql`
-  query {
-    items: missed_blocks {
+  query($range: String!) {
+    items: missed_blocks(range: $range) {
       account
       datetime
       missed

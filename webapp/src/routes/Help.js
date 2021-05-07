@@ -8,6 +8,8 @@ import Link from '@material-ui/core/Link'
 import HttpIcon from '@material-ui/icons/Http'
 import TelegramIcon from '@material-ui/icons/Telegram'
 import GitHubIcon from '@material-ui/icons/GitHub'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -37,49 +39,55 @@ const Help = () => {
 
   return (
     <Box>
-      <Grid container direction="column">
-        <Grid item xs>
+      <Card>
+        <CardContent>
           <Grid container direction="column">
-            <Typography variant="h4" className={classes.title}>
-              {t('title')}
-            </Typography>
-            <Typography variant="body2" align="justify" paragraph>
-              {t('paragraph')}
-            </Typography>
+            <Grid item xs>
+              <Grid container direction="column">
+                <Typography variant="h4" className={classes.title}>
+                  {t('title')}
+                </Typography>
+                <Typography variant="body2" align="justify" paragraph>
+                  {t('paragraph')}
+                </Typography>
 
-            <Box className={classes.boxLinks}>
-              <GitHubIcon />
-              <Link
-                href="https://github.com/eoscostarica"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography variant="body1">{t('githubEOSCR')}</Typography>
-              </Link>
-            </Box>
-            <Box className={classes.boxLinks}>
-              <TelegramIcon />
-              <Link
-                href="https://web.telegram.org/#/eoscr"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography variant="body1">{t('telegramChannel')}</Typography>
-              </Link>
-            </Box>
-            <Box className={classes.boxLinks}>
-              <HttpIcon />
-              <Link
-                href="https://eoscostarica.io/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography variant="body1">{t('websiteEOSCR')}</Typography>
-              </Link>
-            </Box>
+                <Box className={classes.boxLinks}>
+                  <GitHubIcon />
+                  <Link
+                    href="https://github.com/eoscostarica"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography variant="body1">{t('githubEOSCR')}</Typography>
+                  </Link>
+                </Box>
+                <Box className={classes.boxLinks}>
+                  <TelegramIcon />
+                  <Link
+                    href="https://web.telegram.org/#/eoscr"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography variant="body1">
+                      {t('telegramChannel')}
+                    </Typography>
+                  </Link>
+                </Box>
+                <Box className={classes.boxLinks}>
+                  <HttpIcon />
+                  <Link
+                    href="https://eoscostarica.io/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography variant="body1">{t('websiteEOSCR')}</Typography>
+                  </Link>
+                </Box>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </CardContent>
+      </Card>
     </Box>
   )
 }

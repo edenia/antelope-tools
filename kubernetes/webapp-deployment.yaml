@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
           - name: regcred
       containers:
-      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WEBAPP}:latest
+      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WEBAPP}:${VERSION}
         imagePullPolicy: "Always"
         name: monitor-webapp
         envFrom:
