@@ -70,11 +70,21 @@ const Accounts = ({ ual }) => {
     setLoading(false)
   }
 
-  const handleGetTableRows = async (payload) => {
+  const handleGetTableRows = async ({ loadMore, ...payload }) => {
     setLoading(true)
     try {
-      // TODO: implement load next page
       const tableData = await eosApi.getTableRows(payload)
+
+      if (loadMore) {
+        setTableData((prev) => ({
+          ...prev,
+          ...tableData,
+          rows: prev.rows.concat(...tableData.rows)
+        }))
+
+        return
+      }
+
       setTableData(tableData)
     } catch (error) {
       console.log(error)

@@ -36,7 +36,6 @@ const Network = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const { t } = useTranslation('networkInfoRoute')
-  const [missedBlock, setMissedBlock] = useState({})
   const [cpuData, setCpuData] = useState({})
   const { data: stats } = useQuery(NETWORK_STATS)
 
@@ -96,10 +95,9 @@ const Network = () => {
 
   useEffect(() => {
     if (stats) {
-      const { cpu, missed_block } = stats
+      const { cpu } = stats
 
       setCpuData(getDataModeled(cpu, 'usage'))
-      setMissedBlock(getDataModeled(missed_block, 'value'))
     }
   }, [stats])
 
@@ -116,15 +114,6 @@ const Network = () => {
           </Card>
         </Grid>
       )}
-      <Grid item xs={12}>
-        <Card className={classes.root}>
-          <CardHeader title={t('missedBlocks')} />
-          <CardContent className={classes.content}>
-            <TransactionsLineChart data={missedBlock.data} />
-          </CardContent>
-          <CardActions disableSpacing />
-        </Card>
-      </Grid>
     </Grid>
   )
 }

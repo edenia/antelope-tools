@@ -6,13 +6,7 @@ const {
   statsService
 } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
-const { axiosUtil } = require('../utils')
-
-const sleepFor = seconds => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), seconds * 1000)
-  })
-}
+const { axiosUtil, sleepFor } = require('../utils')
 
 const run = async (name, action, sleep) => {
   try {
