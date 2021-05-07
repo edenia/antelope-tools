@@ -121,11 +121,16 @@ const handleBlocksResult = async data => {
 }
 
 const init = async () => {
+  console.log(
+    'stateHistoryPluginEndpoint',
+    eosConfig.stateHistoryPluginEndpoint
+  )
   if (!eosConfig.stateHistoryPluginEndpoint) {
     return
   }
 
   const startBlockNum = await getLastBlockNumInDatabase()
+  console.log('startBlockNum', startBlockNum)
 
   ws = new WebSocket(eosConfig.stateHistoryPluginEndpoint, {
     perMessageDeflate: false,
