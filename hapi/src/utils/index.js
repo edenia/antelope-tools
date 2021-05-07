@@ -4,5 +4,6 @@ module.exports = {
   eosmechanicsUtil: require('./eosmechanics.util'),
   hasuraUtil: require('./hasura.util'),
   sequelizeUtil: require('./sequelize.util'),
+  ...require('./sleep-for'),
   walletUtil: require('./wallet.util')
 }

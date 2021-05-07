@@ -400,19 +400,53 @@ const getJson = string => {
   return {}
 }
 
+const getLachainEntities = async () => {
+  const entities = []
+  let hasMore = true
+  let key
+
+  while (hasMore) {
+    const { rows, more, next_key: nextKey } = await eosApi.getTableRows({
+      code: eosConfig.lacchain.account,
+      scope: eosConfig.lacchain.account,
+      table: eosConfig.lacchain.entityTable,
+      json: true,
+      lower_bound: key
+    })
+
+    key = nextKey
+    hasMore = more
+    entities.push(...rows)
+  }
+
+  return entities
+}
+
+const getLachainNodes = async () => {
+  const nodes = []
+  let hasMore = true
+  let key
+
+  while (hasMore) {
+    const { rows, more, next_key: nextKey } = await eosApi.getTableRows({
+      code: eosConfig.lacchain.account,
+      scope: eosConfig.lacchain.account,
+      table: eosConfig.lacchain.nodeTable,
+      json: true,
+      lower_bound: key
+    })
+
+    key = nextKey
+    hasMore = more
+    nodes.push(...rows)
+  }
+
+  return nodes
+}
+
 const syncBPJsonForLacchain = async () => {
-  const { rows: entities } = await eosApi.getTableRows({
-    code: eosConfig.lacchain.account,
-    scope: eosConfig.lacchain.account,
-    table: eosConfig.lacchain.entityTable,
-    json: true
-  })
-  const { rows: nodes } = await eosApi.getTableRows({
-    code: eosConfig.lacchain.account,
-    scope: eosConfig.lacchain.account,
-    table: eosConfig.lacchain.nodeTable,
-    json: true
-  })
+  const entities = await getLachainEntities()
+  const nodes = await getLachainNodes()
   const producers = await Promise.all(
     entities.map(async entity => {
       const bpJson = getJson(entity.info)

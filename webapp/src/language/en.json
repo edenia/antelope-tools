@@ -223,6 +223,7 @@
     "upperBound": "Upper Bound",
     "limit": "Limit",
     "getData": "Get Data",
+    "loadMore": "Load More",
     "emptyTable": "Empty Table"
   },
   "contractActionsComponent": {

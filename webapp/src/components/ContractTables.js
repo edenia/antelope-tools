@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   form: {
     marginBottom: theme.spacing(2),
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexWrap: 'wrap'
   },
   formControl: {
     width: '100%',
@@ -46,7 +47,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [lowerBound, setLowerBound] = useState(null)
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
-  const { t } = useTranslation('common', 'contractTablesComponent')
+  const { t } = useTranslation('contractTablesComponent')
 
   const handleTableChange = (value) => {
     setTable(value)
@@ -55,20 +56,25 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
 
     onGetTableRows({
       scope,
+      limit,
       table: value,
       code: accountName,
       json: true
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (nextKey) => {
     if (!onGetTableRows) return
 
     onGetTableRows({
       scope,
+      limit,
       table,
       code: accountName,
-      json: true
+      json: true,
+      lower_bound: nextKey ? nextKey : lowerBound,
+      upper_bound: upperBound,
+      loadMore: !!nextKey
     })
   }
 
@@ -99,7 +105,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     setTable('')
     setLowerBound(null)
     setUpperBound(null)
-    setLimit(100)
+    setLimit(10)
   }, [accountName])
 
   return (
@@ -206,6 +212,17 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
               )}
             </TableBody>
           </Table>
+          {tableData.more && (
+            <Box display="flex" justifyContent="center" p={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleSubmit(tableData.next_key)}
+              >
+                {t('loadMore')}
+              </Button>
+            </Box>
+          )}
         </TableContainer>
       )}
     </Box>
