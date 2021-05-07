@@ -78,7 +78,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: telos-dashboard
+          NAMESPACE: telos-testnet-dashboard
           INGRESS_HOST: telos.testnet.dashboard.eosio.cr
           INGRESS_GRAPHQL_HOST: graphql-telos.dashboard.eosio.cr
           # webapp
@@ -153,7 +153,7 @@ jobs:
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: jungle-dashboard
+          NAMESPACE: telos-testnet-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
