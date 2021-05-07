@@ -56,6 +56,9 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
+          REACT_APP_EOS_MAINNET: '${REACT_APP_EOS_MAINNET}'
+          REACT_APP_JUNGLE_TESTNET: '${REACT_APP_JUNGLE_TESTNET}'
+          REACT_APP_LACCHAIN_TESTNET: '${REACT_APP_LACCHAIN_TESTNET}'
 
       - name: Build kubernetes files
         id: build_kubernetes_files
