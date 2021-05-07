@@ -29,8 +29,6 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
       selected: i,
       active: !state.active
     })
-
-    // window.open('https://mainnet.eosiodashboard.com', '_blank').focus()
   }
 
   return (
