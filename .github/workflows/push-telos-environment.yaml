@@ -67,6 +67,9 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
+          REACT_APP_EOS_MAINNET: 'https://mainnet.eosio.cr'
+          REACT_APP_JUNGLE_TESTNET: 'https://testnet.eosio.cr'
+          REACT_APP_LACCHAIN_TESTNET: 'https://dashboard.latamlink.io'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
@@ -75,7 +78,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: telos-dashboard
+          NAMESPACE: telos-testnet-dashboard
           INGRESS_HOST: telos.testnet.dashboard.eosio.cr
           INGRESS_GRAPHQL_HOST: graphql-telos.dashboard.eosio.cr
           # webapp
@@ -150,7 +153,7 @@ jobs:
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: jungle-dashboard
+          NAMESPACE: telos-testnet-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes

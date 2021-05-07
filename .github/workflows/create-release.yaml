@@ -1,0 +1,23 @@
+
+name: Create Realease Notes
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  release-production:
+    name:
+    runs-on: ubuntu-latest
+    environment: main
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Create Release
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true

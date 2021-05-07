@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import TextField from '@material-ui/core/TextField'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 
 import { eosConfig } from '../../config'
@@ -152,41 +154,45 @@ const LacchainNodeConfig = ({ ual }) => {
 
   return (
     <Box>
-      <Autocomplete
-        className={classes.formField}
-        options={eosConfig.nodeTypes.map((node) => node.name)}
-        value={nodeType || ''}
-        onChange={handleOnChangeNodeType}
-        renderInput={(params) => (
-          <TextField {...params} label={t('nodeType')} variant="outlined" />
-        )}
-      />
+      <Card>
+        <CardContent>
+          <Autocomplete
+            className={classes.formField}
+            options={eosConfig.nodeTypes.map((node) => node.name)}
+            value={nodeType || ''}
+            onChange={handleOnChangeNodeType}
+            renderInput={(params) => (
+              <TextField {...params} label={t('nodeType')} variant="outlined" />
+            )}
+          />
 
-      {ual.activeUser && (
-        <Autocomplete
-          className={classes.formField}
-          options={entityNodes.map((node) => node.name)}
-          value={node || ''}
-          onChange={handleOnChangeNode}
-          renderInput={(params) => (
-            <TextField {...params} label={t('node')} variant="outlined" />
+          {ual.activeUser && (
+            <Autocomplete
+              className={classes.formField}
+              options={entityNodes.map((node) => node.name)}
+              value={node || ''}
+              onChange={handleOnChangeNode}
+              renderInput={(params) => (
+                <TextField {...params} label={t('node')} variant="outlined" />
+              )}
+            />
           )}
-        />
-      )}
 
-      <Button
-        component="a"
-        target="_blank"
-        rel="noopener"
-        download={`${nodeType}.ini`}
-        href={fileDownloadUrl}
-        type="submit"
-        variant="contained"
-        color="primary"
-        disabled={!fileDownloadUrl}
-      >
-        {t('download')}
-      </Button>
+          <Button
+            component="a"
+            target="_blank"
+            rel="noopener"
+            download={`${nodeType}.ini`}
+            href={fileDownloadUrl}
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={!fileDownloadUrl}
+          >
+            {t('download')}
+          </Button>
+        </CardContent>
+      </Card>
     </Box>
   )
 }

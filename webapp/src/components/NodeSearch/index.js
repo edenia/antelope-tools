@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -17,69 +18,12 @@ import TextField from '@material-ui/core/TextField'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 import 'flag-icon-css/css/flag-icon.min.css'
 
-import { eosConfig } from '../config'
-import Tooltip from './Tooltip'
+import { eosConfig } from '../../config'
+import Tooltip from '../Tooltip'
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    width: '100%'
-  },
-  colorWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  colorItem: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '50%',
-    cursor: 'pointer',
-    fontWeight: 'bold'
-  },
-  [eosConfig.nodeTypes[0].name]: {
-    backgroundColor: eosConfig.nodeTypes[0].color,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    marginRight: 4
-  },
-  [eosConfig.nodeTypes[1].name]: {
-    backgroundColor: eosConfig.nodeTypes[1].color,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    marginRight: 4
-  },
-  [eosConfig.nodeTypes[2].name]: {
-    backgroundColor: eosConfig.nodeTypes[2].color,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    marginRight: 4
-  },
-  [eosConfig.nodeTypes[3].name]: {
-    backgroundColor: eosConfig.nodeTypes[3].color,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    marginRight: 4
-  },
-  logo: {
-    marginRight: theme.spacing(1),
-    display: 'inline-block',
-    borderRadius: '500rem'
-  },
-  capitalize: {
-    textTransform: 'capitalize'
-  },
-  centerVertically: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  bold: {
-    fontWeight: 'bold',
-    paddingRight: 4
-  }
-}))
+import styles from './styles'
+
+const useStyles = makeStyles((theme) => styles(theme, eosConfig))
 
 const NodeSearch = ({ filters: parentFilters, onChange }) => {
   const classes = useStyles()
@@ -123,10 +67,10 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
   }, [parentFilters])
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={classes.nodeSearchWrapper}>
       <Grid item xs={12} md={4}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
             <TextField
               label={t('producer')}
               variant="outlined"
@@ -153,7 +97,7 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
       </Grid>
       <Grid item xs={12} md={4}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
             <FormControl className={classes.formControl}>
               <InputLabel id="nodeTypeFilterLabel">{t('nodeType')}</InputLabel>
               <Select
@@ -183,7 +127,9 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
       </Grid>
       <Grid item xs={12} md={4}>
         <Card>
-          <CardContent className={classes.colorWrapper}>
+          <CardContent
+            className={clsx(classes.colorWrapper, classes.cardContent)}
+          >
             {eosConfig.nodeTypes.map((nodeType) => (
               <Typography
                 key={`node-type=${nodeType.name}`}
