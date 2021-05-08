@@ -4,7 +4,7 @@ const { Serialize } = require('eosjs')
 
 const statsService = require('./stats.service')
 const { eosConfig } = require('../config')
-const { hasuraUtil } = require('../utils')
+const { hasuraUtil, sleepFor } = require('../utils')
 
 let types
 let ws
@@ -66,8 +66,19 @@ const serialize = (type, value) => {
   return buffer.asUint8Array()
 }
 
+const send = async message => {
+  if (ws.readyState === 1) {
+    return ws.send(message)
+  }
+
+  console.log('waiting for ready state before send message')
+  await sleepFor(1)
+
+  return send(message)
+}
+
 const requestBlocks = (requestArgs = {}) => {
-  ws.send(
+  send(
     serialize('request', [
       'get_blocks_request_v0',
       {
@@ -88,7 +99,7 @@ const requestBlocks = (requestArgs = {}) => {
 const handleBlocksResult = async data => {
   try {
     if (!data.block || !data.block.length) {
-      ws.send(
+      send(
         serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
       )
 
@@ -112,7 +123,7 @@ const handleBlocksResult = async data => {
       timestamp: block.timestamp
     })
     await statsService.udpateStats({ last_block_at: block.timestamp })
-    ws.send(
+    send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
     )
   } catch (error) {
@@ -137,23 +148,27 @@ const init = async () => {
   })
 
   ws.on('message', data => {
-    if (!types) {
-      const abi = JSON.parse(data)
-      types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
-      requestBlocks({ start_block_num: startBlockNum })
+    try {
+      if (!types) {
+        const abi = JSON.parse(data)
+        types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
+        requestBlocks({ start_block_num: startBlockNum })
 
-      return
-    }
+        return
+      }
 
-    const [type, response] = deserialize('result', data)
+      const [type, response] = deserialize('result', data)
 
-    switch (type) {
-      case 'get_blocks_result_v0':
-        handleBlocksResult(response)
-        break
-      default:
-        console.log(`unsupported result ${type}`)
-        break
+      switch (type) {
+        case 'get_blocks_result_v0':
+          handleBlocksResult(response)
+          break
+        default:
+          console.log(`unsupported result ${type}`)
+          break
+      }
+    } catch (error) {
+      console.log(`ws message error: ${error.message}`)
     }
   })
 
