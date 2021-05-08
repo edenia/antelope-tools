@@ -19,6 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Pagination from '@material-ui/lab/Pagination'
+import moment from 'moment'
 
 import { PRODUCERS_QUERY } from '../gql'
 
@@ -28,6 +29,7 @@ const EndpointsList = () => {
   const { t } = useTranslation('endpointsListRoute')
   const [load, { loading, data }] = useLazyQuery(PRODUCERS_QUERY)
   const [producers, setProducers] = useState([])
+  const [updatedAt, setUpdatedAt] = useState()
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 80,
@@ -75,6 +77,11 @@ const EndpointsList = () => {
       }))
     )
 
+    if (!data.producers?.[0]?.updated_at) {
+      return
+    }
+
+    setUpdatedAt(data.producers[0].updated_at)
     // eslint-disable-next-line
   }, [data?.producers])
 
@@ -97,9 +104,16 @@ const EndpointsList = () => {
                 alignItems="center"
                 p={1}
               >
-                <Typography component="p" variant="h6">
-                  {t('title')} {t('producer')}
-                </Typography>
+                <Box>
+                  <Typography component="p" variant="h6">
+                    {t('title')} {t('producer')}
+                  </Typography>
+                  {updatedAt && (
+                    <Typography component="p" variant="caption">
+                      {t('updatedAt')}: {moment(updatedAt).format('LL')}
+                    </Typography>
+                  )}
+                </Box>
                 <FormControl>
                   <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
                   <Select
