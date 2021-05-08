@@ -18,6 +18,8 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint'
 import AccountIcon from '@material-ui/icons/AccountCircle'
 import ExitIcon from '@material-ui/icons/ExitToApp'
 import { useTranslation } from 'react-i18next'
+import moment from 'moment'
+import 'moment/locale/es'
 
 const AppBar = styled(MuiAppBar)`
   background: ${(props) => props.theme.header.background};
@@ -65,11 +67,13 @@ const LanguageMenu = () => {
     setAnchorMenu(null)
 
     if (typeof language === 'string') {
+      moment.locale(language)
       i18n.changeLanguage(language)
     }
   }
 
   useEffect(() => {
+    moment.locale(i18n.language.substring(0, 2))
     setCurrentLanguaje(i18n.language.substring(0, 2))
   }, [i18n.language])
 
