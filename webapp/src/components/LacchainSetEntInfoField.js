@@ -16,6 +16,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const socialMediaProps = {
+  keybase: '',
+  telegram: '',
+  twitter: '',
+  github: '',
+  youtube: '',
+  facebook: '',
+  hive: '',
+  reddit: '',
+  wechat: ''
+}
+
 const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
   const classes = useStyles()
   const [lacchain] = useSharedState()
@@ -183,16 +195,18 @@ const LacchainSetEntInfoField = ({ onChange, variant, className }) => {
         value={payload.location?.longitude || ''}
         onChange={handleOnFieldChange('location.longitude')}
       />
-      {Object.keys(payload.social || {}).map((key) => (
-        <TextField
-          key={`social-item-${key}`}
-          label={key}
-          variant={variant}
-          className={className}
-          value={payload.social?.[key] || ''}
-          onChange={handleOnFieldChange(`social.${key}`)}
-        />
-      ))}
+      {Object.keys({ ...(payload.social || {}), ...socialMediaProps }).map(
+        (key) => (
+          <TextField
+            key={`social-item-${key}`}
+            label={key}
+            variant={variant}
+            className={className}
+            value={payload.social?.[key] || ''}
+            onChange={handleOnFieldChange(`social.${key}`)}
+          />
+        )
+      )}
     </>
   )
 }

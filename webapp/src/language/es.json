@@ -253,6 +253,7 @@
     "availability": "Disponibilidad"
   },
   "endpointsListRoute": {
-    "title": "Endpoints available by"
+    "title": "Endpoints available by",
+    "updatedAt": "Actualizado por última vez"
   }
 }
