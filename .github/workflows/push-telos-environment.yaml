@@ -1,4 +1,4 @@
-name: Build images from latest telos branch
+name: Build images for telos environment
 
 on:
   push:
