@@ -226,7 +226,7 @@ const LacchainManagement = ({ ual }) => {
         </Typography>
       </Popover>
       <BreakpointMasonry>
-        {validActions.length &&
+        {!!validActions.length &&
           validActions.map((action, index) => (
             <Paper
               className={classes.paper}
