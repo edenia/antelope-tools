@@ -41,6 +41,9 @@ const options = {
     borderRadius: 10,
     borderWidth: 1
   },
+  credits: {
+    enabled: false
+  },
   plotOptions: {
     pie: {
       allowPointSelect: true,
