@@ -1,26 +1,10 @@
 export default (theme) => ({
-  leftColumn: {
-    alignContent: 'space-between',
-    paddingRight: 0,
+  graphicBox: {
     '& .MuiCard-root': {
-      marginBottom: theme.spacing(2),
-      '& .MuiTypography-body1': {
-        marginBottom: theme.spacing(2)
-      }
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingRight: theme.spacing(2)
-    }
-  },
-  rightColumn: {
-    paddingLeft: 0,
-    marginBottom: theme.spacing(2),
-    [theme.breakpoints.up('md')]: {
-      paddingLeft: theme.spacing(2)
+      height: '100%'
     }
   },
   bottomRow: {
-    paddingTop: 0,
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(1)
     }

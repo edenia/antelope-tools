@@ -9,7 +9,6 @@ const useStyles = makeStyles(styles)
 
 const Box = lazy(() => import('@material-ui/core/Box'))
 const BlockProducerInfo = lazy(() => import('./BlockProducerInfo'))
-const TransactionInfo = lazy(() => import('./TransactionInfo'))
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -29,7 +28,6 @@ const Home = () => {
   return (
     <Box>
       <BlockProducerInfo t={t} classes={classes} />
-      <TransactionInfo t={t} classes={classes} />
     </Box>
   )
 }
