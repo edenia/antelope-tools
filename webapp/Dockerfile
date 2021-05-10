@@ -22,6 +22,7 @@ ARG react_app_eos_bp_json_on_chain_contract
 ARG react_app_eos_bp_json_on_chain_table
 ARG react_app_eos_bp_json_on_chain_scope
 ARG react_app_token_symbol
+ARG react_app_disabled_menu_items
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -49,6 +50,7 @@ ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT $react_app_eos_bp_json_on_chain_cont
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE $react_app_eos_bp_json_on_chain_table
 ENV REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE $react_app_eos_bp_json_on_chain_scope
 ENV REACT_APP_TOKEN_SYMBOL $react_app_token_symbol
+ENV REACT_APP_DISABLED_MENU_ITEMS $react_app_disabled_menu_items
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR
