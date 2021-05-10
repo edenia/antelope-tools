@@ -36,6 +36,9 @@ const options = {
       text: 'Missed blocks'
     }
   },
+  credits: {
+    enabled: false
+  },
   plotOptions: {
     series: {
       label: {

@@ -36,7 +36,7 @@ const TransactionsHistory = ({ t }) => {
 
   return (
     <>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent>
             <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
@@ -50,7 +50,7 @@ const TransactionsHistory = ({ t }) => {
         </Card>
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent>
             <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
@@ -64,7 +64,7 @@ const TransactionsHistory = ({ t }) => {
         </Card>
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>

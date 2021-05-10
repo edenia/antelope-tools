@@ -12,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import CardContent from '@material-ui/core/CardContent'
-import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
@@ -130,61 +129,55 @@ const TransactionInfo = ({ t, classes }) => {
   }, [trxHistoryLoading, trxHistory])
 
   return (
-    <Grid container className={classes.bottomRow}>
-      <Grid item xs={12}>
-        <Card>
-          <CardContent>
-            <Box className={classes.headerTransactionLine}>
-              <Typography component="p" variant="h6">
-                {t('transactions')}
-              </Typography>
-              <Box className={classes.formControl}>
-                <FormControl>
-                  <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
-                  <Select
-                    labelId="option-linebar"
-                    value={option}
-                    onChange={(e) => setOption(e.target.value)}
-                    fullWidth
-                  >
-                    {options.map((item) => (
-                      <MenuItem key={item.label} value={item.value}>
-                        {t(item.label)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <Box
-                  onClick={() =>
-                    option === options[0].value && setPause(!pause)
+    <Card>
+      <CardContent>
+        <Box className={classes.headerTransactionLine}>
+          <Typography component="p" variant="h6">
+            {t('transactions')}
+          </Typography>
+          <Box className={classes.formControl}>
+            <FormControl>
+              <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
+              <Select
+                labelId="option-linebar"
+                value={option}
+                onChange={(e) => setOption(e.target.value)}
+                fullWidth
+              >
+                {options.map((item) => (
+                  <MenuItem key={item.label} value={item.value}>
+                    {t(item.label)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Box
+              onClick={() => option === options[0].value && setPause(!pause)}
+              className={clsx(classes.pauseButton, {
+                [classes.disableButton]: option !== options[0].value
+              })}
+            >
+              {pause ? (
+                <PlayArrowIcon />
+              ) : (
+                <EqualIcon
+                  width={20}
+                  height={20}
+                  color={
+                    option !== options[0].value
+                      ? theme.palette.action.disabled
+                      : theme.palette.common.black
                   }
-                  className={clsx(classes.pauseButton, {
-                    [classes.disableButton]: option !== options[0].value
-                  })}
-                >
-                  {pause ? (
-                    <PlayArrowIcon />
-                  ) : (
-                    <EqualIcon
-                      width={20}
-                      height={20}
-                      color={
-                        option !== options[0].value
-                          ? theme.palette.action.disabled
-                          : theme.palette.common.black
-                      }
-                    />
-                  )}
-                  <Typography>{pause ? t('play') : t('pause')}</Typography>
-                </Box>
-              </Box>
+                />
+              )}
+              <Typography>{pause ? t('play') : t('pause')}</Typography>
             </Box>
+          </Box>
+        </Box>
 
-            <TransactionsLineChart data={graphicData} />
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
+        <TransactionsLineChart data={graphicData} />
+      </CardContent>
+    </Card>
   )
 }
 

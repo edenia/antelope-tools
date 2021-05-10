@@ -48,7 +48,7 @@ const NodesSummary = ({ t }) => {
 
   return (
     <>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent>
             <Typography>{`${t('total')} ${t('nodes')}`}</Typography>
@@ -59,7 +59,7 @@ const NodesSummary = ({ t }) => {
 
       {nodes &&
         Object.keys(nodes).map((type) => (
-          <Grid item xs={12} key={type}>
+          <Grid item xs={12} sm={4} lg={3} key={type}>
             <Card>
               <CardContent>
                 <Typography>{`${t(type)} ${t('nodes')}`}</Typography>

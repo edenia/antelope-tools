@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: monitor-webapp
-  name: monitor-webapp
+    app: dashboard-webapp
+  name: dashboard-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitor-webapp
+      app: dashboard-webapp
   template:
     metadata:
       labels:
-        app: monitor-webapp
+        app: dashboard-webapp
     spec:
       imagePullSecrets:
           - name: regcred
       containers:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WEBAPP}:${VERSION}
         imagePullPolicy: "Always"
-        name: monitor-webapp
+        name: dashboard-webapp
         envFrom:
         - configMapRef:
-            name: monitor-webapp-config
+            name: dashboard-webapp-config
         ports:
         - containerPort: 80
       restartPolicy: Always

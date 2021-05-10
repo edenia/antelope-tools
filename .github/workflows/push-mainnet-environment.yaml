@@ -1,4 +1,4 @@
-name: Build images from latest master branch
+name: Build images for mainnet environment
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - mainnet-v*
 
 jobs:
-  create-image:
+  create-mainnet-image:
     runs-on: ubuntu-latest
     environment: mainnet
     steps:
@@ -67,29 +67,6 @@ jobs:
           NAMESPACE: mainnet-dashboard
           INGRESS_HOST: mainnet.eosio.cr
           INGRESS_GRAPHQL_HOST: graphql-mainnet.eosio.cr
-          # Webapp
-
-          PORT: '80'
-          REACT_APP_TTILE: 'EOS Mainnet Network Dashboard'
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://bloks.io/img/eosio.png'
-          REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
-          REACT_APP_USE_REWARDS: 'true'
-          REACT_APP_USE_VOTES: 'true'
-          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-mainnet.eosio.cr/v1/graphql'
-          REACT_APP_EOS_API_HOST: 'eos.greymass.com'
-          REACT_APP_EOS_API_PORT: '443'
-          REACT_APP_EOS_API_PROTOCOL: 'https'
-          REACT_APP_EOS_CHAIN_ID: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '2.50'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ${{ secrets.REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API }}
-          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
-          REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT }}
-          REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE }}
-          REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE }}
-          REACT_APP_EOS_API_NETWORK_LABEL: 'Mainnet'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
-          REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -102,12 +79,12 @@ jobs:
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
-          HAPI_EOS_WALLET_URL: http://monitor-wallet:8888
+          HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
           HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: ''
           HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: ''
           HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: ''
-          HAPI_HASURA_URL: 'http://monitor-hasura:8080/v1/graphql'
+          HAPI_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
           HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
           HAPI_SERVER_PORT: '9090'
           HAPI_SERVER_ADDRESS: '0.0.0.0'
@@ -122,7 +99,7 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
           HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
-          HASURA_GRAPHQL_ACTION_BASE_URL: http://monitor-hapi:9090
+          HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
 
       - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@master

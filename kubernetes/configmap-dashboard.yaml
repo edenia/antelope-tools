@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: monitor-webapp-config
+  name: dashboard-webapp-config
 data:
   # webapp
   PORT: '${PORT}'
@@ -34,7 +34,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: monitor-postgres-config
+  name: dashboard-postgres-config
 data:
   # postgres
   POSTGRES_USER: '${POSTGRES_USER}'
@@ -45,7 +45,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: monitor-hapi-config
+  name: dashboard-hapi-config
 data:
   # hapi
   HAPI_EOS_API_ENDPOINT: '${HAPI_EOS_API_ENDPOINT}'
@@ -76,7 +76,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: monitor-hasura-config
+  name: dashboard-hasura-config
 data:
   # hasura
   HASURA_GRAPHQL_ENABLE_CONSOLE: '${HASURA_GRAPHQL_ENABLE_CONSOLE}'
