@@ -270,5 +270,8 @@ switch (eosConfig.networkName) {
     routes = [...defaultRoutes, ...helpRoutes]
     break
 }
+routes = routes.filter(
+  (route) => !generalConfig.disabledMenuItems.includes(route.path)
+)
 
 export default routes
