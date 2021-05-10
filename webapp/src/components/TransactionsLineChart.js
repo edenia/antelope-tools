@@ -13,6 +13,9 @@ const LineChart = ({ data, xAxisProps, title }) => {
       animation: false,
       type: 'spline'
     },
+    credits: {
+      enabled: false
+    },
     xAxis: xAxisProps
   }
 
