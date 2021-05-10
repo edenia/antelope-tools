@@ -19,6 +19,8 @@ const TransactionsHistory = lazy(() =>
 )
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 
+const TransactionInfo = lazy(() => import('./TransactionInfo'))
+
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
   const scheduleInfo = useSelector((state) => state.eos.schedule)
@@ -56,16 +58,28 @@ const BlockProducerInfo = ({ t, classes }) => {
   }, [scheduleInfo, producers])
 
   return (
-    <Grid container justify="space-between">
-      <Grid
-        container
-        item
-        xs={12}
-        md={3}
-        className={classes.leftColumn}
-        justify="flex-start"
-      >
-        <Grid item xs={12}>
+    <Grid container spacing={4}>
+      <Grid container item xs={12} className={classes.graphicBox} spacing={4}>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography component="p" variant="h6">
+                {t('bpSchedule')}
+              </Typography>
+              <Typography variant="caption">
+                Ver. {schedule?.version}
+              </Typography>
+              <ProducersChart info={info} producers={schedule.producers} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TransactionInfo t={t} classes={classes} />
+        </Grid>
+      </Grid>
+      {loading && <LinearProgress />}
+      <Grid container item xs={12} spacing={4}>
+        <Grid item xs={12} sm={4} lg={3}>
           <Card>
             <CardContent>
               <Typography>{t('currentProducer')}</Typography>
@@ -75,7 +89,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4} lg={3}>
           <Card>
             <CardContent>
               <Typography>{t('headBlock')}</Typography>
@@ -97,18 +111,6 @@ const BlockProducerInfo = ({ t, classes }) => {
         </Grid>
         <TransactionsHistory t={t} />
         <NodesSummary t={t} />
-      </Grid>
-      {loading && <LinearProgress />}
-      <Grid item xs={12} md={9} className={classes.rightColumn}>
-        <Card>
-          <CardContent>
-            <Typography component="p" variant="h6">
-              {t('bpSchedule')}
-            </Typography>
-            <Typography variant="caption">Ver. {schedule?.version}</Typography>
-            <ProducersChart info={info} producers={schedule.producers} />
-          </CardContent>
-        </Card>
       </Grid>
     </Grid>
   )
