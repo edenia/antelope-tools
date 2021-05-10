@@ -70,7 +70,7 @@ jobs:
           REACT_APP_EOS_MAINNET: 'https://mainnet.eosio.cr'
           REACT_APP_JUNGLE_TESTNET: 'https://testnet.eosio.cr'
           REACT_APP_LACCHAIN_TESTNET: 'https://dashboard.latamlink.io'
-          REACT_APP_DISABLED_MENU_ITEMS: []
+          REACT_APP_DISABLED_MENU_ITEMS: '[]'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
