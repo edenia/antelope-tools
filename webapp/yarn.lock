@@ -1333,9 +1333,9 @@
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
 "@eoscostarica/eoscr-components@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-3.1.3.tgz#68bdf99498d1e81cf1a7225d887de14bdafc1eb4"
-  integrity sha512-pgizw0viUUcCYXGXZMkGh9njnHft6hN7QHYOeqv8vAn3jkAbhlrRfb8SKN4ZBCI43Csr51bVESzbeDFJfi6YGg==
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-3.1.4.tgz#037f205c2e521e693d9ed8026fec1e1a7de7feff"
+  integrity sha512-HmqfGeM24KQRD0JsOBuJT1vZuPjUwTMa4ekl9EfR6j08mO+nkKeTCuxuk2gQFTyJ8cXnft4NQMDjzntLV6GMvA==
   dependencies:
     "@material-ui/core" "^4.11.0"
     "@material-ui/icons" "^4.9.1"
@@ -3494,9 +3494,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219:
-  version "1.0.30001227"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001227.tgz#437fe8b514ac4512d9bdb4ea79f20c400bd0b4d1"
-  integrity sha512-HHZT4QpUw4Pf45IE3xxKAPgAN3q2aRai/x5TSHP8lrrKzARoH0IeBviwStcRi5lsFlscTkBbXC7gXyms43151A==
+  version "1.0.30001228"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa"
+  integrity sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A==
 
 capture-exit@^2.0.0:
   version "2.0.0"
