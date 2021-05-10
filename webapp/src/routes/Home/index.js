@@ -28,7 +28,6 @@ const Home = () => {
   return (
     <Box>
       <BlockProducerInfo t={t} classes={classes} />
-      {/* <TransactionInfo t={t} classes={classes} /> */}
     </Box>
   )
 }
