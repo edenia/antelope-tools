@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: monitor-wallet
+    app: dashboard-wallet
     version: ${VERSION}
-  name: monitor-wallet
+  name: dashboard-wallet
 spec:
-  serviceName: monitor-wallet
+  serviceName: dashboard-wallet
   replicas: 1
   selector:
     matchLabels:
-      app: monitor-wallet
+      app: dashboard-wallet
       version: ${VERSION}
   template:
     metadata:
       labels:
-        app: monitor-wallet
+        app: dashboard-wallet
         version: ${VERSION}
     spec:
       imagePullSecrets:
@@ -23,7 +23,7 @@ spec:
       containers:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_WALLET}:${VERSION}
         imagePullPolicy: "Always"
-        name: "monitor-wallet"
+        name: "dashboard-wallet"
         env:
           - name: DATA_DIR
             value: /opt/application/data

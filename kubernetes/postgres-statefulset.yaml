@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: monitor-postgres
+    app: dashboard-postgres
     version: ${VERSION}
-  name: monitor-postgres
+  name: dashboard-postgres
 spec:
-  serviceName: monitor-postgres
+  serviceName: dashboard-postgres
   replicas: 1
   selector:
     matchLabels:
-      app: monitor-postgres
+      app: dashboard-postgres
       version: ${VERSION}
   template:
     metadata:
       labels:
-        app: monitor-postgres
+        app: dashboard-postgres
         version: ${VERSION}
     spec:
       imagePullSecrets:
@@ -23,10 +23,10 @@ spec:
       containers:
       - image: postgres:11.5-alpine
         imagePullPolicy: "Always"
-        name: monitor-postgres
+        name: dashboard-postgres
         envFrom:
         - configMapRef:
-            name: monitor-postgres-config
+            name: dashboard-postgres-config
         ports:
         - containerPort: 5432
         volumeMounts:

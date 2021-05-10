@@ -2,28 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: monitor-hapi
-  name: monitor-hapi
+    app: dashboard-hapi
+  name: dashboard-hapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitor-hapi
+      app: dashboard-hapi
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: monitor-hapi
+        app: dashboard-hapi
     spec:
       imagePullSecrets:
           - name: regcred
       containers:
       - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HAPI}:${VERSION}
         imagePullPolicy: "Always"
-        name: "monitor-hapi"
+        name: "dashboard-hapi"
         envFrom:
         - configMapRef:
-            name: monitor-hapi-config
+            name: dashboard-hapi-config
         ports:
         - containerPort: 9090

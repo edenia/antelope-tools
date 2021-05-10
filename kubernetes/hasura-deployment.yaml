@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: monitor-hasura
-  name: monitor-hasura
+    app: dashboard-hasura
+  name: dashboard-hasura
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitor-hasura
+      app: dashboard-hasura
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: monitor-hasura
+        app: dashboard-hasura
     spec:
       imagePullSecrets:
           - name: regcred
@@ -25,10 +25,10 @@ spec:
             - --enable-console
           envFrom:
             - configMapRef:
-                name: monitor-hasura-config
+                name: dashboard-hasura-config
           image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HASURA}:${VERSION}
           imagePullPolicy: "IfNotPresent"
-          name: "monitor-hasura"
+          name: "dashboard-hasura"
           ports:
             - containerPort: 8080
       restartPolicy: Always

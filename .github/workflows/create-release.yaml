@@ -7,8 +7,7 @@ on:
       - v*
 
 jobs:
-  release-production:
-    name:
+  release-notes:
     runs-on: ubuntu-latest
     environment: main
     steps:
