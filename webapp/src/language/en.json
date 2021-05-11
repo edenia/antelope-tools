@@ -135,7 +135,9 @@
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
   },
-  "ricardianContractRoute": {},
+  "ricardianContractRoute": {
+    "title": "Block Producer Agreement"
+  },
   "aboutRoute": {
     "title": "EOSIO Dashboard",
     "subtitle1": "What is the EOSIO Dashboard",

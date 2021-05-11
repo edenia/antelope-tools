@@ -12,8 +12,8 @@
     "/node-config>sidebar": "Node config",
     "/node-config>title": "Node config - Dashboard",
     "/node-config>heading": "Configure a new node",
-    "/ricardian-contract>sidebar": "Validator Agreement",
-    "/ricardian-contract>title": "Validator Agreement - Dashboard",
+    "/ricardian-contract>sidebar": "Block Producer Agreement",
+    "/ricardian-contract>title": "Block Producer Agreement - Dashboard",
     "/ricardian-contract>heading": ""
   },
   "common": {
@@ -79,5 +79,8 @@
   },
   "missedBlocksRoute": {
     "title": "Missed Blocks by Node"
+  },
+  "ricardianContractRoute": {
+    "title": "Block Producer Agreement"
   }
 }
