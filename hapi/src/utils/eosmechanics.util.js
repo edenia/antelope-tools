@@ -26,7 +26,6 @@ const cpu = async () => {
     eosConfig.eosmechanics.account,
     eosConfig.eosmechanics.password
   )
-  await new Promise(resolve => setTimeout(() => resolve(), 500))
   const block = await eosUtil.getBlock(transaction.processed.block_num)
 
   return {

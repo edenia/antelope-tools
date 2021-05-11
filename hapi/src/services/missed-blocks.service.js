@@ -1,7 +1,13 @@
 const moment = require('moment')
 
 const statsService = require('./stats.service')
-const { sequelizeUtil, eosUtil, hasuraUtil, sleepFor } = require('../utils')
+const {
+  sequelizeUtil,
+  eosUtil,
+  hasuraUtil,
+  sleepFor,
+  getGranularityFromRange
+} = require('../utils')
 
 const getCurrentSchedule = async () => {
   const query = `
@@ -253,35 +259,7 @@ const syncMissedBlocks = async () => {
 }
 
 const getMissedBlocks = async (range = '3 Hours') => {
-  let granularity
-
-  switch (range) {
-    case '3 Hours':
-    case '6 Hours':
-    case '12 Hours':
-      granularity = 'minute'
-      break
-    case '1 Day':
-    case '4 Days':
-    case '7 Days':
-    case '14 Days':
-      granularity = 'hour'
-      break
-    case '1 Month':
-    case '2 Months':
-    case '3 Months':
-    case '6 Months':
-      granularity = 'day'
-      break
-    case '1 Year':
-    case 'all':
-      granularity = 'month'
-      break
-    default:
-      granularity = 'minute'
-      break
-  }
-
+  const granularity = getGranularityFromRange(range)
   const [rows] = await sequelizeUtil.query(`
     WITH interval AS (
       SELECT generate_series(

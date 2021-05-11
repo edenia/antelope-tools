@@ -1,6 +1,6 @@
 const EosApi = require('eosjs-api')
 
-const { hasuraUtil, axiosUtil, eosmechanicsUtil } = require('../utils')
+const { hasuraUtil, axiosUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const eosApi = EosApi({
@@ -43,36 +43,6 @@ const FIND = `
   }
 `
 
-const INSERT_CPU_USAGE = `
-  mutation ($account: String!, $usage: Int!) {
-    insert_cpu_one (object: {account: $account, usage: $usage}) {
-      id
-      account
-      usage
-    }
-  }
-`
-
-const INSERT_NET_USAGE = `
-  mutation ($account: String!, $usage: Int!) {
-    insert_net_one (object: {account: $account, usage: $usage}) {
-      id
-      account
-      usage
-    }
-  }
-`
-
-const INSERT_RAM_USAGE = `
-  mutation ($account: String!, $usage: Int!) {
-    insert_ram_one (object: {account: $account, usage: $usage}) {
-      id
-      account
-      usage
-    }
-  }
-`
-
 const INSERT_MISSED_BLOCK = `
   mutation ($account: String!, $value: Int!) {
     insert_missed_block_one(object: {account: $account, value: $value}) {
@@ -101,33 +71,6 @@ const find = async where => {
   const data = await hasuraUtil.request(FIND, { where })
 
   return data.producer
-}
-
-const insertUsage = async (type = '', payload) => {
-  let mutation = null
-
-  switch (type) {
-    case 'cpu':
-      mutation = INSERT_CPU_USAGE
-      break
-    case 'net':
-      mutation = INSERT_NET_USAGE
-      break
-    case 'ram':
-      mutation = INSERT_RAM_USAGE
-      break
-
-    default:
-      break
-  }
-
-  if (!mutation) {
-    return
-  }
-
-  const data = await hasuraUtil.request(mutation, payload)
-
-  return data[`insert_${type}_one`]
 }
 
 const addExpectedReward = async (producers, totalVotes) => {
@@ -676,38 +619,6 @@ const syncProducersInfo = async () => {
   )
 }
 
-const syncCpuUsage = async () => {
-  if (!eosConfig.eosmechanics.account || !eosConfig.eosmechanics.password) {
-    return
-  }
-
-  try {
-    const { block, transaction } = await eosmechanicsUtil.cpu()
-    await insertUsage('cpu', {
-      account: block.producer,
-      usage: transaction.processed.receipt.cpu_usage_us
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const syncRamUsage = async () => {
-  const { block } = await eosmechanicsUtil.ram()
-  await insertUsage('ram', {
-    account: block.producer,
-    usage: 1 // TODO: get ram usage from transaction or block
-  })
-}
-
-const syncNetUsage = async () => {
-  const { block } = await eosmechanicsUtil.net()
-  await insertUsage('net', {
-    account: block.producer,
-    usage: 1 // TODO: get net usage from transaction or block
-  })
-}
-
 const saveMissedBlocksFor = async (producerName, missedBlocks) => {
   if (missedBlocks < 1) {
     return
@@ -806,8 +717,5 @@ const checkForMissedBlocks = async () => {
 module.exports = {
   checkForMissedBlocks,
   syncProducers,
-  syncProducersInfo,
-  syncCpuUsage,
-  syncRamUsage,
-  syncNetUsage
+  syncProducersInfo
 }

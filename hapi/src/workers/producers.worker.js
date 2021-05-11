@@ -1,4 +1,5 @@
 const {
+  cpuService,
   missedBlocksService,
   producerService,
   settingService,
@@ -57,11 +58,7 @@ const start = async () => {
     producerService.syncProducersInfo,
     workersConfig.syncProducerInfoInterval
   )
-  run(
-    'SYNC CPU USAGE',
-    producerService.syncCpuUsage,
-    workersConfig.syncProducerCpuInterval
-  )
+  run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
   run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
   run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
   run(
