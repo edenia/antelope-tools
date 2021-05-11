@@ -21,7 +21,7 @@ import {
 import { eosConfig, generalConfig } from '../config'
 
 const Home = lazy(() => import('./Home'))
-const NetworkInfo = lazy(() => import('./NetworkInfo'))
+const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
 const BlockProducers = lazy(() => import('./BlockProducers'))
 const RewardsDistribution = lazy(() => import('./RewardsDistribution'))
 const Nodes = lazy(() => import('./Nodes'))
@@ -48,10 +48,10 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'networkInfo',
+    name: 'cpuBenchmark',
     icon: <ActivityIcon />,
-    component: NetworkInfo,
-    path: '/node-performance',
+    component: CPUBenchmark,
+    path: '/cpu-benchmark',
     exact: true
   },
   {
@@ -135,10 +135,10 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'networkInfo',
+    name: 'cpuBenchmark',
     icon: <ActivityIcon />,
-    component: NetworkInfo,
-    path: '/node-performance',
+    component: CPUBenchmark,
+    path: '/cpu-benchmark',
     exact: true
   },
   {

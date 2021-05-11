@@ -33,7 +33,7 @@
     "total": "Total",
     "missedBlocks": "Bloques perdidos",
     "timeFrame": "Periodo de tiempo",
-    "3 hours": "3 Horas",
+    "3 Hours": "3 Horas",
     "6 Hours": "6 Horas",
     "12 Hours": "12 Horas",
     "1 Day": "1 Día",
@@ -51,9 +51,9 @@
     "/>sidebar": "Panel",
     "/>title": "EOSIO Panel",
     "/>heading": "Bienvenido",
-    "/node-performance>sidebar": "Rendimiento del nodo",
-    "/node-performance>title": "Rendimiento del nodo - Panel",
-    "/node-performance>heading": "Rendimiento del nodo",
+    "/cpu-benchmark>sidebar": "Benchmark de CPU",
+    "/cpu-benchmark>title": "Benchmark de CPU - Panel",
+    "/cpu-benchmark>heading": "Benchmark de CPU",
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/block-producers>heading": "Productores de Bloques",
@@ -110,13 +110,6 @@
     "Last Day": "Última Día",
     "Last Week": "Última Semana",
     "Last Year": "Último Año"
-  },
-  "networkInfoRoute": {
-    "chainId": "Identificador de la cadena",
-    "chainLimits": "Límites de la cadena",
-    "cpuLimitPerBlock": "Límite de CPU por bloque",
-    "netLimitPerBlock": "Límite de NET por bloque",
-    "cpuBenchmarks": "CPU Benchmarks"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -257,5 +250,11 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "updatedAt": "Actualizado por última vez"
+  },
+  "cpuBenchmarkRoute": {
+    "title": "Resumen del uso de la CPU en microsegundos",
+    "lowest": "Más bajo",
+    "highest": "Más alto",
+    "average": "Promedio"
   }
 }
