@@ -1,5 +1,6 @@
 import React from 'react'
 import Box from '@material-ui/core/Box'
+import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/styles'
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RicardianContract = () => {
   const classes = useStyles()
+  const { t } = useTranslation('ricardianContractRoute')
 
   return (
     <Box className={classes.root}>
@@ -38,6 +40,7 @@ const RicardianContract = () => {
         actionName="regproducer"
         httpEndpoint="https://api.eosio.cr"
         LinearProgressColor="primary"
+        title={t('title')}
       />
     </Box>
   )
