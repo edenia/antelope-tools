@@ -21,16 +21,6 @@
 - table:
     schema: public
     name: cpu
-  select_permissions:
-  - role: guest
-    permission:
-      columns:
-      - id
-      - usage
-      - created_at
-      - updated_at
-      - account
-      filter: {}
 - table:
     schema: public
     name: producer
