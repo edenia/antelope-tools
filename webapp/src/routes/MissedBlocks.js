@@ -25,6 +25,9 @@ import { formatWithThousandSeparator } from '../utils'
 import { MISSED_BLOCKS } from '../gql'
 
 const options = {
+  time: {
+    timezoneOffset: new Date().getTimezoneOffset()
+  },
   title: {
     text: ' '
   },
@@ -33,7 +36,7 @@ const options = {
   },
   yAxis: {
     title: {
-      text: 'Missed blocks'
+      text: ' '
     }
   },
   credits: {

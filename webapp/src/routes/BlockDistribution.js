@@ -25,6 +25,9 @@ import { formatWithThousandSeparator } from '../utils'
 import { BLOCK_DISTRIBUTION_QUERY } from '../gql'
 
 const options = {
+  time: {
+    timezoneOffset: new Date().getTimezoneOffset()
+  },
   title: {
     text: ' '
   },
