@@ -38,9 +38,9 @@
     "/>sidebar": "Dashboard",
     "/>title": "EOSIO Dashboard",
     "/>heading": "Welcome to",
-    "/node-performance>sidebar": "Node Performance ",
-    "/node-performance>title": "Node Performance  - Dashboard",
-    "/node-performance>heading": "Node Performance ",
+    "/cpu-benchmark>sidebar": "CPU Benchmark",
+    "/cpu-benchmark>title": "CPU Benchmark  - Dashboard",
+    "/cpu-benchmark>heading": "CPU Benchmark",
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - Dashboard",
     "/block-producers>heading": "Block Producers",
@@ -101,13 +101,6 @@
     "Last Day": "Last Day",
     "Last Week": "Last Week",
     "Last Year": "Last Year"
-  },
-  "networkInfoRoute": {
-    "chainId": "Chain Id",
-    "chainLimits": "Chain Limits",
-    "cpuLimitPerBlock": "CPU LIMIT PER BLOCK",
-    "netLimitPerBlock": "NET LIMIT PER BLOCK",
-    "cpuBenchmarks": "CPU Benchmarks"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -257,5 +250,11 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "updatedAt": "Updated at"
+  },
+  "cpuBenchmarkRoute": {
+    "title": "CPU usage in microseconds",
+    "lowest": "Lowest",
+    "highest": "Highest",
+    "average": "Average"
   }
 }

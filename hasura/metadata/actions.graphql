@@ -6,6 +6,13 @@ type Query {
 
 
 type Query {
+  cpu_benchmark (
+    range: String!
+  ): [CPUBenchmark]
+}
+
+
+type Query {
   missed_blocks (
     range: String!
   ): [MissedBlocks]
@@ -26,5 +33,12 @@ type MissedBlocks {
   missed : Int
   produced : Int
   scheduled : Int
+}
+
+type CPUBenchmark {
+  datetime : String
+  account : String
+  transactions : Int
+  usage : Float
 }
 

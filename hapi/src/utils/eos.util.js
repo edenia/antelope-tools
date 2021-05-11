@@ -153,13 +153,9 @@ const getAccount = async account => {
 }
 
 const getBlock = async blockNumber => {
-  try {
-    const block = await eosApi.getBlock(blockNumber)
+  const block = await eosApi.getBlock(blockNumber)
 
-    return block
-  } catch (error) {
-    return null
-  }
+  return block
 }
 
 const getCodeHash = account => eosApi.getCodeHash(account)

@@ -36,7 +36,7 @@ export const PRODUCERS_QUERY = gql`
 `
 
 export const NODES_QUERY = gql`
-  query($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
+  query ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
     info: producer_aggregate(where: $where) {
       producers: aggregate {
         count
@@ -57,7 +57,7 @@ export const NODES_QUERY = gql`
 `
 
 export const NODE_CPU_BENCHMARK = gql`
-  query($account: String) {
+  query ($account: String) {
     cpu(
       where: { account: { _eq: $account } }
       limit: 10
@@ -103,7 +103,7 @@ export const NODES_SUMMARY_QUERY = gql`
 `
 
 export const BLOCK_DISTRIBUTION_QUERY = gql`
-  query($range: String!) {
+  query ($range: String!) {
     items: block_distribution(range: $range) {
       account
       blocks
@@ -113,13 +113,24 @@ export const BLOCK_DISTRIBUTION_QUERY = gql`
 `
 
 export const MISSED_BLOCKS = gql`
-  query($range: String!) {
+  query ($range: String!) {
     items: missed_blocks(range: $range) {
       account
       datetime
       missed
       produced
       scheduled
+    }
+  }
+`
+
+export const CPU_BENCHMARK = gql`
+  query ($range: String!) {
+    items: cpu_benchmark(range: $range) {
+      account
+      datetime
+      transactions
+      usage
     }
   }
 `

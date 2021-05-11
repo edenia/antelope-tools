@@ -7,6 +7,13 @@ actions:
     timeout: 180
   permissions:
   - role: guest
+- name: cpu_benchmark
+  definition:
+    kind: ""
+    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/cpu-benchmark'
+    forward_client_headers: true
+  permissions:
+  - role: guest
 - name: missed_blocks
   definition:
     kind: ""
@@ -21,4 +28,5 @@ custom_types:
   objects:
   - name: block_distribution_output
   - name: MissedBlocks
+  - name: CPUBenchmark
   scalars: []

@@ -21,8 +21,8 @@ import Select from '@material-ui/core/Select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-import { formatWithThousandSeparator } from '../utils'
-import { BLOCK_DISTRIBUTION_QUERY } from '../gql'
+import { formatWithThousandSeparator, rangeOptions } from '../utils'
+import { CPU_BENCHMARK } from '../gql'
 
 const options = {
   time: {
@@ -31,62 +31,38 @@ const options = {
   title: {
     text: ' '
   },
-  chart: {
-    plotBackgroundColor: null,
-    plotBorderWidth: null,
-    plotShadow: false,
-    type: 'pie'
+  xAxis: {
+    type: 'datetime'
   },
-  tooltip: {
-    pointFormat: '<b>{point.percentage:.1f}%</b>',
-    backgroundColor: '#fff',
-    borderColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 1
+  yAxis: {
+    title: {
+      text: ' '
+    }
   },
   credits: {
     enabled: false
   },
   plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: 'pointer',
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+    series: {
+      label: {
+        connectorAllowed: false
       }
     }
   },
+
   series: []
 }
-const rangeOptions = [
-  '3 Hours',
-  '6 Hours',
-  '12 Hours',
-  '1 Day',
-  '2 Days',
-  '4 Days',
-  '7 Days',
-  '14 Days',
-  '1 Month',
-  '2 Months',
-  '3 Months',
-  '6 Months',
-  '1 Year',
-  'all'
-]
 
-const BlockDistribution = () => {
-  const { t } = useTranslation('blockDistributionRoute')
+const CPUBenchmark = () => {
+  const { t } = useTranslation('cpuBenchmarkRoute')
   const [range, setRange] = useState(rangeOptions[0])
   const [series, setSeries] = useState([])
-  const [load, { loading, data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
+  const [producers, setProducers] = useState([])
+  const [load, { loading, data }] = useLazyQuery(CPU_BENCHMARK)
 
   useEffect(() => {
     load({
-      variables: {
-        range
-      }
+      variables: { range }
     })
   }, [load, range])
 
@@ -95,15 +71,51 @@ const BlockDistribution = () => {
       return
     }
 
-    setSeries([
-      {
-        innerSize: '80%',
-        data: data.items.map((item) => ({
+    const info = {}
+    const summary = {}
+
+    for (let index = 0; index < data.items.length; index++) {
+      const item = data.items[index]
+
+      if (!info[item.account]) {
+        summary[item.account] = {
           name: item.account,
-          y: item.percent * 100
-        }))
+          transactions: 0,
+          count: 0,
+          total: 0,
+          average: 0,
+          lowest: parseInt(item.usage),
+          highest: 0
+        }
+        info[item.account] = {
+          name: item.account,
+          data: []
+        }
       }
-    ])
+
+      summary[item.account].total += parseInt(item.usage)
+      summary[item.account].count++
+      summary[item.account].average =
+        summary[item.account].total / summary[item.account].count
+      summary[item.account].lowest =
+        parseInt(item.usage) < summary[item.account].lowest
+          ? parseInt(item.usage)
+          : summary[item.account].lowest
+      summary[item.account].highest =
+        parseInt(item.usage) > summary[item.account].highest
+          ? parseInt(item.usage)
+          : summary[item.account].highest
+
+      info[item.account].data.push([
+        new Date(item.datetime).getTime(),
+        parseFloat(item.usage)
+      ])
+    }
+    setProducers(
+      Object.values(summary).sort((a, b) => (a.average > b.average ? 1 : -1))
+    )
+
+    setSeries(Object.values(info))
   }, [data])
 
   return (
@@ -151,25 +163,23 @@ const BlockDistribution = () => {
                       <TableHead>
                         <TableRow>
                           <TableCell>{t('account')}</TableCell>
-                          <TableCell align="right">
-                            {t('blocksProduced')}
-                          </TableCell>
-                          <TableCell align="right">{t('percent')}</TableCell>
+                          <TableCell align="right">{t('lowest')}</TableCell>
+                          <TableCell align="right">{t('highest')}</TableCell>
+                          <TableCell align="right">{t('average')}</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {data?.items.map((item, index) => (
+                        {producers.map((item, index) => (
                           <TableRow key={index}>
-                            <TableCell>{item.account}</TableCell>
+                            <TableCell>{item.name}</TableCell>
                             <TableCell align="right">
-                              {formatWithThousandSeparator(item.blocks)}
+                              {formatWithThousandSeparator(item.lowest, 2)}
                             </TableCell>
                             <TableCell align="right">
-                              {formatWithThousandSeparator(
-                                Math.ceil(item.percent * 100),
-                                1
-                              )}
-                              %
+                              {formatWithThousandSeparator(item.highest, 2)}
+                            </TableCell>
+                            <TableCell align="right">
+                              {formatWithThousandSeparator(item.average, 2)}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -186,6 +196,6 @@ const BlockDistribution = () => {
   )
 }
 
-BlockDistribution.propTypes = {}
+CPUBenchmark.propTypes = {}
 
-export default BlockDistribution
+export default CPUBenchmark
