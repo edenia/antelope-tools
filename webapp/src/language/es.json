@@ -72,8 +72,8 @@
     "/bpjson>sidebar": "BP JSON",
     "/bpjson>title": "BP JSON - Panel",
     "/bpjson>heading": "BP JSON",
-    "/ricardian-contract>sidebar": "Acuerdo de productor de bloque",
-    "/ricardian-contract>title": "Acuerdo de productor de bloque - Dashboard",
+    "/ricardian-contract>sidebar": "Acuerdo de Productor de Bloques",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Dashboard",
     "/ricardian-contract>heading": "",
     "/block-distribution>sidebar": "Distribución de bloques",
     "/block-distribution>title": "Distribución de bloques - Dashboard",
@@ -143,7 +143,9 @@
     "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
   },
-  "ricardianContractRoute": {},
+  "ricardianContractRoute": {
+    "title": "Acuerdo de Productor de Bloques"
+  },
   "aboutRoute": {
     "title": "EOSIO Tablero",
     "subtitle1": "What is the EOSIO Dashboard",

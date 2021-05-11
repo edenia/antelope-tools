@@ -1332,7 +1332,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@eoscostarica/eoscr-components@^3.1.3":
+"@eoscostarica/eoscr-components@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-3.1.4.tgz#037f205c2e521e693d9ed8026fec1e1a7de7feff"
   integrity sha512-HmqfGeM24KQRD0JsOBuJT1vZuPjUwTMa4ekl9EfR6j08mO+nkKeTCuxuk2gQFTyJ8cXnft4NQMDjzntLV6GMvA==

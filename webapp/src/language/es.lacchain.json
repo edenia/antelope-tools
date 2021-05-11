@@ -12,8 +12,8 @@
     "/node-config>sidebar": "Configuración de nodo",
     "/node-config>title": "Configuración de nodo - Dashboard",
     "/node-config>heading": "Configurar un nuevo nodo",
-    "/ricardian-contract>sidebar": "Acuerdo de Validador",
-    "/ricardian-contract>title": "Acuerdo de Validador - Dashboard",
+    "/ricardian-contract>sidebar": "Acuerdo de Nodos Validadores",
+    "/ricardian-contract>title": "Acuerdo de Nodos Validadores - Dashboard",
     "/ricardian-contract>heading": ""
   },
   "common": {
@@ -75,5 +75,8 @@
   },
   "missedBlocksRoute": {
     "title": "Bloques perdidos por Nodo"
+  },
+  "ricardianContractRoute": {
+    "title": "Acuerdo de Nodos Validadores"
   }
 }
