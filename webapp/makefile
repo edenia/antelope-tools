@@ -50,7 +50,7 @@ build-docker: ./Dockerfile
 		--build-arg react_app_eos_mainnet="$(REACT_APP_EOS_MAINNET)" \
 		--build-arg react_app_jungle_testnet="$(REACT_APP_JUNGLE_TESTNET)" \
 		--build-arg react_app_lacchain_testnet="$(REACT_APP_LACCHAIN_TESTNET)" \
-		--build-arg react_app_disabled_menu_items="$(REACT_APP_DISABLED_MENU_ITEMS)" \
+		--build-arg react_app_disabled_menu_items='$(REACT_APP_DISABLED_MENU_ITEMS)' \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
