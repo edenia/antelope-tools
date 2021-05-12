@@ -195,7 +195,10 @@
     "info": "Info",
     "keys": "Llaves",
     "location": "Ubicación",
-    "stats": "Estadísticas"
+    "stats": "Estadísticas",
+    "noData": "No hay Datos",
+    "peer_keys": "Peer",
+    "account_key": "Cuenta"
   },
   "nodeCardComponent": {
     "features": "Características",

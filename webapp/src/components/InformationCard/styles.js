@@ -14,15 +14,25 @@ export default (theme) => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
     padding: theme.spacing(4),
+    '& .MuiTypography-overline': {
+      marginLeft: 0
+    },
     '& .bodyWrapper': {
       display: 'flex',
       flexDirection: 'column'
     },
     [theme.breakpoints.up('lg')]: {
+      minWidth: 980,
+      overflowY: 'scroll',
       flexDirection: 'row',
       '& .bodyWrapper': {
         flexDirection: 'row'
+      },
+      '& .MuiTypography-overline': {
+        marginLeft: theme.spacing(3),
+        lineHeight: '0'
       }
     }
   },
@@ -30,7 +40,7 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: 0,
+    padding: theme.spacing(0, 2),
     '& img': {
       width: 82,
       height: 82,
@@ -44,7 +54,8 @@ export default (theme) => ({
       textAlign: 'center'
     },
     [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 6)
+      padding: theme.spacing(0, 6),
+      width: 300
     }
   },
   expand: {
@@ -66,24 +77,35 @@ export default (theme) => ({
     }
   },
   info: {
-    borderLeft: 'none',
-    marginBottom: theme.spacing(3),
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      maxWidth: 350
-    },
+    borderLeft: 'none'
+  },
+  entity: {
     [theme.breakpoints.up('lg')]: {
-      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-
-      padding: theme.spacing(0, 2),
+      width: 350,
       marginBottom: 0
     }
   },
+  node: {
+    [theme.breakpoints.up('lg')]: {
+      width: 400,
+      marginBottom: 0
+    }
+  },
+  textEllipsis: {
+    margin: theme.spacing(1, 0),
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: 350
+  },
+  textWrap: {
+    width: 210,
+    wordWrap: 'break-word',
+    [theme.breakpoints.up('lg')]: {
+      width: 290
+    }
+  },
   twoBoxes: {
-    marginBottom: theme.spacing(3),
     borderLeft: 'none',
     display: 'flex',
     justifyContent: 'space-between',
@@ -94,18 +116,10 @@ export default (theme) => ({
       textOverflow: 'ellipsis',
       overflow: 'hidden'
     },
-    '& .nodes': {
-      borderLeft: 'none',
-      width: 100,
-      '& .MuiSvgIcon-root': {
-        marginLeft: theme.spacing(1),
-        fontSize: 20
-      }
-    },
     '& .healthStatus': {
       '& .MuiSvgIcon-root': {
         marginLeft: theme.spacing(1),
-        fontSize: 20
+        fontSize: 15
       }
     },
     '& .social': {
@@ -128,15 +142,9 @@ export default (theme) => ({
       color: theme.palette.warning.main
     },
     [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 2),
       marginBottom: 0,
-      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-
-      '& .nodes, .social': {
-        borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-
-        paddingLeft: theme.spacing(1),
-        marginRight: theme.spacing(2)
+      '& .healthStatus, .social': {
+        width: 150
       }
     }
   },
@@ -148,5 +156,57 @@ export default (theme) => ({
   },
   breakLine: {
     wordBreak: 'break-word'
+  },
+  borderLine: {
+    borderLeft: 'none',
+    height: 'calc(100% - 25px)',
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.up('lg')]: {
+      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+      padding: theme.spacing(0, 3)
+    }
+  },
+  nodes: {
+    borderLeft: 'none',
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden'
+    },
+    '& .MuiSvgIcon-root': {
+      marginLeft: theme.spacing(1),
+      fontSize: 15
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 150
+    }
+  },
+  rowWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    '& .listBox': {
+      marginLeft: theme.spacing(1)
+    },
+    '& .listLabel': {
+      height: '100%',
+      '& .MuiSvgIcon-root': {
+        marginRight: theme.spacing(1),
+        fontSize: 15
+      },
+      '& .MuiTypography-body1': {
+        whiteSpace: 'nowrap'
+      }
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150
+    }
+  },
+  boxLabel: {
+    alignItems: 'baseline !important'
+  },
+  flexColumn: {
+    flexDirection: 'column !important'
   }
 })

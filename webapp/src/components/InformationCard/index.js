@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { memo, useState, useEffect } from 'react'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -19,7 +20,6 @@ import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import Information from './Information'
 import Nodes from './Nodes'
 import Social from './Social'
-import Stats from './Stats'
 import Media from './Media'
 import Endpoints from './Endpoints'
 import styles from './styles'
@@ -53,7 +53,8 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             dataType: producer.bp_json.type,
             node: producer.node
           },
-          type
+          type,
+          t
         )
       )
     }
@@ -62,55 +63,66 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        title={
-          type === 'node'
-            ? producerOrg.title
-            : `${t(`entityType${producerOrg.title}`)} Entity`
-        }
-      />
+      <CardHeader title={producerOrg.title} />
       <Box className={classes.wrapper}>
-        <Media classes={classes} media={producerOrg.media || {}} />
+        <Box className={classes.media}>
+          <Media classes={classes} media={producerOrg.media || {}} />
+        </Box>
         <Collapse in={matches ? true : expanded} timeout="auto" unmountOnExit>
           <Box className="bodyWrapper">
-            <Information
-              info={producerOrg.info}
-              classes={classes}
-              t={t}
-              type={type}
-            />
+            <Box className={clsx(classes.info, classes[type])}>
+              <Typography variant="overline">{t('info')}</Typography>
+              <Information
+                info={producerOrg.info}
+                classes={classes}
+                t={t}
+                type={type}
+              />
+            </Box>
             <Endpoints
               endpoints={producerOrg.endpoints}
               classes={classes}
               t={t}
               type={type}
             />
-            <Box className={classes.twoBoxes}>
-              <Stats
-                updatedAt={producer.updated_at}
-                missedBlocks={producer.missed_blocks || []}
-                t={t}
-              />
-              <Nodes
-                nodes={producerOrg.nodes}
-                producer={producer}
-                t={t}
-                onNodeClick={onNodeClick}
-                type={type}
-              />
-            </Box>
+            <Nodes
+              nodes={producerOrg.nodes}
+              producer={producer}
+              t={t}
+              onNodeClick={onNodeClick}
+              type={type}
+              classes={classes}
+            />
             <Box className={classes.twoBoxes}>
               <Box className="healthStatus">
                 <Typography variant="overline">{t('health')}</Typography>
-                <ProducerHealthIndicators
-                  producer={
-                    producerOrg?.healthStatus
-                      ? { health_status: producerOrg.healthStatus }
-                      : { health_status: [] }
-                  }
-                />
+                <Box className={classes.borderLine}>
+                  <Box className={classes.rowWrapper}>
+                    <Typography variant="body1">
+                      {`${t('missedBlocks')}: `}
+                      {(producer.missed_blocks || []).reduce(
+                        (result, current) => result + current.value,
+                        0
+                      )}
+                    </Typography>
+                  </Box>
+
+                  <ProducerHealthIndicators
+                    message={t('noData')}
+                    producer={
+                      producerOrg?.healthStatus
+                        ? { health_status: producerOrg.healthStatus }
+                        : { health_status: [] }
+                    }
+                  />
+                </Box>
               </Box>
-              <Social social={producerOrg?.social || {}} type={type} t={t} />
+              <Social
+                social={producerOrg?.social || {}}
+                type={type}
+                t={t}
+                classes={classes}
+              />
             </Box>
           </Box>
         </Collapse>

@@ -5,14 +5,14 @@ import Box from '@material-ui/core/Box'
 
 import ProducerSocialLinks from '../ProducerSocialLinks'
 
-const Social = ({ social, type, t }) => {
+const Social = ({ social, type, t, classes }) => {
   if (type === 'node') return <></>
 
   return (
     <Box className="social">
       <Typography variant="overline">{t('social')}</Typography>
-      <Box>
-        <ProducerSocialLinks items={social} />
+      <Box className={classes.borderLine}>
+        <ProducerSocialLinks items={social} message={t('noData')} />
       </Box>
     </Box>
   )
@@ -21,12 +21,14 @@ const Social = ({ social, type, t }) => {
 Social.propTypes = {
   social: PropTypes.object,
   t: PropTypes.func,
+  classes: PropTypes.object,
   type: PropTypes.string
 }
 
 Social.defaultProps = {
   type: '',
-  social: {}
+  social: {},
+  classes: {}
 }
 
 export default memo(Social)

@@ -8,6 +8,7 @@ import FacebookIcon from '@material-ui/icons/Facebook'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import RedditIcon from '@material-ui/icons/Reddit'
 import TelegramIcon from '@material-ui/icons/Telegram'
+import Typography from '@material-ui/core/Typography'
 
 const prefix = {
   hive: 'https://hive.com/',
@@ -30,8 +31,12 @@ const icons = {
   telegram: <TelegramIcon />
 }
 
-const ProducerSocialLinks = ({ items }) => {
-  return Object.keys(items)
+const ProducerSocialLinks = ({ items, message }) => {
+  const itemsArray = Object.keys(items)
+
+  if (!itemsArray.length) return <Typography>{message}</Typography>
+
+  return itemsArray
     .filter((key) => !!items[key])
     .map((key, i) => (
       <Link
@@ -46,7 +51,8 @@ const ProducerSocialLinks = ({ items }) => {
 }
 
 ProducerSocialLinks.propTypes = {
-  items: PropTypes.object
+  items: PropTypes.object,
+  message: PropTypes.string
 }
 
 export default ProducerSocialLinks

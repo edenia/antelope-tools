@@ -187,7 +187,10 @@
     "info": "Info",
     "keys": "Keys",
     "location": "Location",
-    "stats": "Stats"
+    "stats": "Stats",
+    "noData": "No Data",
+    "peer_keys": "Peer",
+    "account_key": "Account"
   },
   "nodeCardComponent": {
     "features": "Features",
