@@ -17,7 +17,8 @@ export const formatData = (
     dataType,
     node
   },
-  type
+  type,
+  t
 ) => {
   let newData = {
     title: '',
@@ -33,10 +34,12 @@ export const formatData = (
   switch (type) {
     case 'entity':
       if (eosConfig.networkName === 'lacchain') {
-        newData.title = dataType
+        newData.title = `${t(`entityType${dataType}`)} Entity`
       } else {
         newData.title = rank ? `Rank #${rank} -Top` : 'No Rank'
       }
+
+      console.log(newData.title, rank)
 
       newData = {
         ...newData,

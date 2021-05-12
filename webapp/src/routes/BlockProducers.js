@@ -32,10 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Producers = () => {
   const classes = useStyles()
-  const [
-    loadProducers,
-    { loading = true, data: { producers, info } = {} }
-  ] = useLazyQuery(PRODUCERS_QUERY)
+  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
+    useLazyQuery(PRODUCERS_QUERY)
   const location = useLocation()
   const [pagination, setPagination] = useState({ page: 1, limit: 28 })
   const [totalPages, setTotalPages] = useState(1)

@@ -15,9 +15,11 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const ProducerHealthIndicators = ({ producer }) => {
+const ProducerHealthIndicators = ({ producer, message }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerHealthIndicatorsComponent')
+
+  if (!producer.health_status.length) return <Typography>{message}</Typography>
 
   return (
     <div>
@@ -39,7 +41,8 @@ const ProducerHealthIndicators = ({ producer }) => {
 }
 
 ProducerHealthIndicators.propTypes = {
-  producer: PropTypes.any
+  producer: PropTypes.any,
+  message: PropTypes.string
 }
 
 export default ProducerHealthIndicators
