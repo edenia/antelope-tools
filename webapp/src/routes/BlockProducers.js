@@ -104,8 +104,6 @@ const Producers = () => {
     }))
   }
 
-  // console.log({ producers })
-
   return (
     <Box>
       <Tooltip
