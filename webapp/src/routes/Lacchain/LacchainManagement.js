@@ -100,6 +100,58 @@ const LacchainManagement = ({ ual }) => {
     setTooltip({})
   }
 
+  const getEntities = async () => {
+    const entities = []
+    let hasMore = true
+    let key
+
+    while (hasMore) {
+      const {
+        rows,
+        more,
+        next_key: nextKey
+      } = await eosApi.getTableRows({
+        code: 'eosio',
+        scope: 'eosio',
+        table: 'entity',
+        json: true,
+        lower_bound: key
+      })
+      key = nextKey
+      hasMore = more
+
+      entities.push(...rows)
+    }
+
+    return entities
+  }
+
+  const getNodes = async () => {
+    const nodes = []
+    let hasMore = true
+    let key
+
+    while (hasMore) {
+      const {
+        rows,
+        more,
+        next_key: nextKey
+      } = await eosApi.getTableRows({
+        code: 'eosio',
+        scope: 'eosio',
+        table: 'node',
+        json: true,
+        lower_bound: key
+      })
+      key = nextKey
+      hasMore = more
+
+      nodes.push(...rows)
+    }
+
+    return nodes
+  }
+
   useEffect(() => {
     const checkAccount = async () => {
       let actions = []
@@ -126,12 +178,7 @@ const LacchainManagement = ({ ual }) => {
         ]
       }
 
-      const { rows: entities } = await eosApi.getTableRows({
-        json: true,
-        code: 'eosio',
-        scope: 'eosio',
-        table: 'entity'
-      })
+      const entities = await getEntities()
       const currentEntity = entities.find(
         (item) => item.name === ual.activeUser.accountName
       )
@@ -168,12 +215,7 @@ const LacchainManagement = ({ ual }) => {
 
       const { abi } = await eosApi.getAbi('eosio')
       setAbi(abi)
-      const { rows: nodes } = await eosApi.getTableRows({
-        json: true,
-        code: 'eosio',
-        scope: 'eosio',
-        table: 'node'
-      })
+      const nodes = await getNodes()
       update({
         entities,
         nodes,
