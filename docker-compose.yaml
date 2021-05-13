@@ -20,7 +20,7 @@ services:
       POSTGRES_DB: '${POSTGRES_DB}'
   hapi:
     container_name: '${STAGE}-${APP_NAME}-hapi'
-    image: node:14.2.0
+    build: ./hapi
     ports:
       - '9090:9090'
     volumes:
@@ -29,7 +29,7 @@ services:
         source: ./hapi
         target: /app
     working_dir: /app
-    command: bash -c "yarn && yarn watch"
+    command: bash -c "pm2-runtime app.json --watch"
     environment:
       HAPI_EOS_API_NETWORK_NAME: '${HAPI_EOS_API_NETWORK_NAME}'
       HAPI_EOS_API_ENDPOINT: '${HAPI_EOS_API_ENDPOINT}'
