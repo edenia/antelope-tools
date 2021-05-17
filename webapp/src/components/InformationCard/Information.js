@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined'
 import Box from '@material-ui/core/Box'
 
 import CountryFlag from '../CountryFlag'
@@ -17,7 +16,6 @@ const Information = ({ info, classes, type, t }) => {
             {`${t('version')}: ${info.version || '- -'}`}
           </Typography>
         </Box>
-
         <Box className={clsx(classes.rowWrapper, classes.boxLabel)}>
           <Box className="listLabel">
             <Typography variant="body1">{`${t('features')}:`}</Typography>
@@ -34,7 +32,6 @@ const Information = ({ info, classes, type, t }) => {
             )}
           </Box>
         </Box>
-
         {info.keys ? (
           <Box
             className={clsx(
@@ -46,10 +43,7 @@ const Information = ({ info, classes, type, t }) => {
             {Object.keys(info.keys).map((key, i) => (
               <Box display="flex" key={i}>
                 <Box className="listLabel">
-                  <Typography variant="body1">
-                    <VpnKeyOutlinedIcon />
-                    {`${t(key)}:`}
-                  </Typography>
+                  <Typography variant="body1">{`${t(key)}:`}</Typography>
                 </Box>
                 <Box className="listBox">
                   <Typography variant="body1" className={classes.textWrap}>

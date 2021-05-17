@@ -189,8 +189,8 @@
     "location": "Location",
     "stats": "Stats",
     "noData": "No Data",
-    "peer_keys": "Peer",
-    "account_key": "Account"
+    "peer_keys": "Peer Key",
+    "account_key": "Account Key"
   },
   "nodeCardComponent": {
     "features": "Features",
@@ -206,7 +206,9 @@
     "hs_logo_256": "Logo (256px)",
     "hs_country": "Country",
     "hs_peer_keys": "Peer Keys",
-    "hs_endpoint": "Endpoint"
+    "hs_endpoint": "Endpoint",
+    "missing": "Missing",
+    "found": "Found"
   },
   "accountInfoComponent": {
     "resources": "Resources",

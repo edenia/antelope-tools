@@ -26,7 +26,7 @@ const Endpoints = ({ endpoints, classes, type, t }) => {
       <Box className={classes.borderLine}>
         {items.map((endpoint, i) => (
           <Typography variant="body1" key={i}>
-            {`${endpoint}: `}
+            {`${endpoint}:`}
             <Link
               href={endpoints[endpoint]}
               target="_blank"

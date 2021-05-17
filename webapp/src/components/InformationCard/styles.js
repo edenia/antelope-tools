@@ -3,6 +3,9 @@ export default (theme) => ({
     width: '100%',
     marginBottom: theme.spacing(2),
     paddingBottom: 0,
+    '& .MuiCardHeader-title': {
+      textTransform: 'capitalize'
+    },
     [theme.breakpoints.up('sm')]: {
       width: 300
     },
@@ -15,9 +18,10 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    padding: theme.spacing(4),
+    padding: theme.spacing(0, 4, 4, 4),
     '& .MuiTypography-overline': {
-      marginLeft: 0
+      marginLeft: 0,
+      fontWeight: '700'
     },
     '& .bodyWrapper': {
       display: 'flex',
@@ -28,7 +32,9 @@ export default (theme) => ({
       overflowY: 'scroll',
       flexDirection: 'row',
       '& .bodyWrapper': {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%'
       },
       '& .MuiTypography-overline': {
         marginLeft: theme.spacing(3),
@@ -43,8 +49,7 @@ export default (theme) => ({
     padding: theme.spacing(0, 2),
     '& img': {
       width: 82,
-      height: 82,
-      borderRadius: 40
+      height: 82
     },
     '& .bpName': {
       fontSize: 28,
@@ -55,7 +60,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      width: 300
+      width: 300,
+      justifyContent: 'center'
     }
   },
   expand: {
@@ -77,7 +83,14 @@ export default (theme) => ({
     }
   },
   info: {
-    borderLeft: 'none'
+    borderLeft: 'none',
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden'
+    }
   },
   entity: {
     [theme.breakpoints.up('lg')]: {
@@ -101,53 +114,52 @@ export default (theme) => ({
   textWrap: {
     width: 210,
     wordWrap: 'break-word',
+    display: 'block !important',
+    overflow: 'visible !important',
+    whiteSpace: 'normal !important',
     [theme.breakpoints.up('lg')]: {
       width: 290
     }
   },
-  twoBoxes: {
-    borderLeft: 'none',
-    display: 'flex',
-    justifyContent: 'space-between',
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden'
-    },
-    '& .healthStatus': {
-      '& .MuiSvgIcon-root': {
-        marginLeft: theme.spacing(1),
-        fontSize: 15
-      }
-    },
-    '& .social': {
-      borderLeft: 'none',
-      width: 100,
-      '& a': {
-        display: 'flex'
-      },
-      '& svg': {
-        marginRight: theme.spacing(1)
-      }
-    },
-    '& .success': {
-      color: theme.palette.success.main
-    },
-    '& .error': {
-      color: theme.palette.error.main
-    },
-    '& .warning': {
-      color: theme.palette.warning.main
-    },
-    [theme.breakpoints.up('lg')]: {
-      marginBottom: 0,
-      '& .healthStatus, .social': {
-        width: 150
-      }
-    }
-  },
+
+  // twoBoxes: {
+  //   borderLeft: 'none',
+  //   display: 'flex',
+  //   justifyContent: 'space-between',
+
+  //   '& .healthStatus': {
+  //     '& .MuiSvgIcon-root': {
+  //       marginLeft: theme.spacing(1),
+  //       fontSize: 15
+  //     }
+  //   },
+  //   '& .social': {
+  //     borderLeft: 'none',
+  //     width: 100,
+  //     '& a': {
+  //       display: 'flex'
+  //     },
+  //     '& svg': {
+  //       marginRight: theme.spacing(1)
+  //     }
+  //   },
+  //   '& .success': {
+  //     color: theme.palette.success.main
+  //   },
+  //   '& .error': {
+  //     color: theme.palette.error.main
+  //   },
+  //   '& .warning': {
+  //     color: theme.palette.warning.main
+  //   },
+  //   [theme.breakpoints.up('lg')]: {
+  //     marginBottom: 0,
+  //     '& .healthStatus, .social': {
+  //       width: 150
+  //     }
+  //   }
+  // },
+
   cardActions: {
     display: 'flex',
     [theme.breakpoints.up('lg')]: {
@@ -158,6 +170,7 @@ export default (theme) => ({
     wordBreak: 'break-word'
   },
   borderLine: {
+    marginTop: theme.spacing(2),
     borderLeft: 'none',
     height: 'calc(100% - 25px)',
     marginBottom: theme.spacing(3),
@@ -208,5 +221,53 @@ export default (theme) => ({
   },
   flexColumn: {
     flexDirection: 'column !important'
+  },
+  collapse: {
+    width: '100%'
+  },
+  healthStatus: {
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden'
+    },
+    '& .MuiSvgIcon-root': {
+      marginLeft: theme.spacing(1),
+      fontSize: 15
+    },
+    '& .success': {
+      color: theme.palette.success.main
+    },
+    '& .error': {
+      color: theme.palette.error.main
+    },
+    '& .warning': {
+      color: theme.palette.warning.main
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150
+    }
+  },
+  social: {
+    borderLeft: 'none',
+    width: 100,
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden'
+    },
+    '& a': {
+      display: 'flex'
+    },
+    '& svg': {
+      marginRight: theme.spacing(1)
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150
+    }
   }
 })

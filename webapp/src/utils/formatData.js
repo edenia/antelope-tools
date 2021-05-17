@@ -39,8 +39,6 @@ export const formatData = (
         newData.title = rank ? `Rank #${rank} -Top` : 'No Rank'
       }
 
-      console.log(newData.title, rank)
-
       newData = {
         ...newData,
         media: {

@@ -214,7 +214,9 @@
     "hs_logo_256": "Logo (256px)",
     "hs_country": "País",
     "hs_peer_keys": "Peer Keys",
-    "hs_endpoint": "Endpoint"
+    "hs_endpoint": "Endpoint",
+    "missing": "No encontrado",
+    "found": "Encontrado"
   },
   "accountInfoComponent": {
     "resources": "Recursos",

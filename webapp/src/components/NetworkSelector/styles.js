@@ -12,6 +12,9 @@ export default (theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: 0,
       width: 220
+    },
+    '&:hover': {
+      cursor: 'pointer'
     }
   },
   list: {

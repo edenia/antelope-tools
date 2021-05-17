@@ -240,7 +240,7 @@ const helpRoutes = [
   {
     name: 'changelog',
     badge: generalConfig.appVersion,
-    path: 'https://github.com/eoscostarica/eosio-dashboard/tags',
+    path: 'https://github.com/eoscostarica/eosio-dashboard/releases',
     icon: <GitMergeIcon />,
     exact: true
   },

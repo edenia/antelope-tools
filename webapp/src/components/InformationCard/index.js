@@ -68,7 +68,12 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
         <Box className={classes.media}>
           <Media classes={classes} media={producerOrg.media || {}} />
         </Box>
-        <Collapse in={matches ? true : expanded} timeout="auto" unmountOnExit>
+        <Collapse
+          in={matches ? true : expanded}
+          timeout="auto"
+          unmountOnExit
+          className={classes.collapse}
+        >
           <Box className="bodyWrapper">
             <Box className={clsx(classes.info, classes[type])}>
               <Typography variant="overline">{t('info')}</Typography>
@@ -93,37 +98,37 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
               type={type}
               classes={classes}
             />
-            <Box className={classes.twoBoxes}>
-              <Box className="healthStatus">
-                <Typography variant="overline">{t('health')}</Typography>
-                <Box className={classes.borderLine}>
-                  <Box className={classes.rowWrapper}>
-                    <Typography variant="body1">
-                      {`${t('missedBlocks')}: `}
-                      {(producer.missed_blocks || []).reduce(
-                        (result, current) => result + current.value,
-                        0
-                      )}
-                    </Typography>
-                  </Box>
-
-                  <ProducerHealthIndicators
-                    message={t('noData')}
-                    producer={
-                      producerOrg?.healthStatus
-                        ? { health_status: producerOrg.healthStatus }
-                        : { health_status: [] }
-                    }
-                  />
+            {/* <Box className={classes.twoBoxes}> */}
+            <Box className={classes.healthStatus}>
+              <Typography variant="overline">{t('health')}</Typography>
+              <Box className={classes.borderLine}>
+                <Box className={classes.rowWrapper}>
+                  <Typography variant="body1">
+                    {`${t('missedBlocks')}: `}
+                    {(producer.missed_blocks || []).reduce(
+                      (result, current) => result + current.value,
+                      0
+                    )}
+                  </Typography>
                 </Box>
+
+                <ProducerHealthIndicators
+                  message={t('noData')}
+                  producer={
+                    producerOrg?.healthStatus
+                      ? { health_status: producerOrg.healthStatus }
+                      : { health_status: [] }
+                  }
+                />
               </Box>
-              <Social
-                social={producerOrg?.social || {}}
-                type={type}
-                t={t}
-                classes={classes}
-              />
             </Box>
+            <Social
+              social={producerOrg?.social || {}}
+              type={type}
+              t={t}
+              classes={classes}
+            />
+            {/* </Box> */}
           </Box>
         </Collapse>
       </Box>
