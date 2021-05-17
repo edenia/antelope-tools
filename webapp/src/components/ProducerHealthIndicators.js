@@ -30,7 +30,9 @@ const ProducerHealthIndicators = ({ producer, message }) => {
           aria-label="add"
         >
           <Box className={classes.wrapper}>
-            <Typography>{t(`hs_${item.name}`)}</Typography>
+            <Typography>{`${t(`hs_${item.name}`)}: ${
+              item.valid ? t('found') : t('missing')
+            }`}</Typography>
             {item.valid && <DoneOutlinedIcon className="success" />}
             {!item.valid && <ReportProblemOutlinedIcon className="warning" />}
           </Box>

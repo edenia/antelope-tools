@@ -36,18 +36,17 @@ jobs:
           REACT_APP_NAME: $npm_package_name
           REACT_APP_TITLE: Telos Testnet Network Dashboard
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://telos.bloks.io/img/chains/telos.png
-          REACT_APP_FOOTER_LINKS:
-            "[
-              { 'text': 'Website', 'src': '' },
-              { 'text': 'Block Explorer', 'src': 'https://telos.bloks.io' },
-              {
-                'text': 'Developer Guidelines',
-                'src': 'https://guide.eoscostarica.io'
-              },
-              {
-                'text': 'GitHub',
-                'src': 'https://github.com/eoscostarica/eosio-dashboard'
-              }
+          REACT_APP_FOOTER_LINKS: "[
+            { 'text': 'Website', 'src': '' },
+            { 'text': 'Block Explorer', 'src': 'https://telos.bloks.io' },
+            {
+            'text': 'Developer Guidelines',
+            'src': 'https://guide.eoscostarica.io'
+            },
+            {
+            'text': 'GitHub',
+            'src': 'https://github.com/eoscostarica/eosio-dashboard'
+            }
             ]"
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: true
@@ -67,9 +66,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_EOS_MAINNET: 'https://mainnet.eosio.cr'
-          REACT_APP_JUNGLE_TESTNET: 'https://testnet.eosio.cr'
-          REACT_APP_LACCHAIN_TESTNET: 'https://dashboard.latamlink.io'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.cr"},{"label":"Jungle Testnet","value":"https://testnet.eosio.cr"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '[]'
 
       - name: Build and deploy kubernetes files

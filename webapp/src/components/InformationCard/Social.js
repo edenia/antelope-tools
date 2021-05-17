@@ -9,7 +9,7 @@ const Social = ({ social, type, t, classes }) => {
   if (type === 'node') return <></>
 
   return (
-    <Box className="social">
+    <Box className={classes.social}>
       <Typography variant="overline">{t('social')}</Typography>
       <Box className={classes.borderLine}>
         <ProducerSocialLinks items={social} message={t('noData')} />

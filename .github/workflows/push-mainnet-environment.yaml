@@ -33,7 +33,7 @@ jobs:
           # Webapp
 
           PORT: '80'
-          REACT_APP_TTILE: 'EOS Mainnet Network Dashboard'
+          REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://bloks.io/img/eosio.png'
           REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
           REACT_APP_USE_REWARDS: 'true'
@@ -53,9 +53,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_LABEL: 'Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_EOS_MAINNET: 'https://mainnet.eosio.cr'
-          REACT_APP_JUNGLE_TESTNET: 'https://testnet.eosio.cr'
-          REACT_APP_LACCHAIN_TESTNET: 'https://dashboard.latamlink.io'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.cr"},{"label":"Jungle Testnet","value":"https://testnet.eosio.cr"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/node-performance"]'
 
       - name: Build and deploy kubernetes files

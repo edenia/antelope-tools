@@ -74,20 +74,13 @@ const Dashboard = ({ children, width, ual }) => {
           <Box className={classes.subHeader}>
             <Typography variant="h3">
               {`${t(`${location.pathname}>heading`)} ${
-                location.pathname === '/' ? generalConfig.title : ''
+                location.pathname === '/' ? eosConfig.networkLabel : ''
               }`}
             </Typography>
             <NetworkSelector
               title={eosConfig.networkLabel}
               networkLogo={eosConfig.networkLogo}
-              options={[
-                { label: 'EOS Mainnet', value: generalConfig.eosMainnet },
-                { label: 'Jungle Testnet', value: generalConfig.jungleTestnet },
-                {
-                  label: 'LACChain Testnet',
-                  value: generalConfig.lacchainTestnet
-                }
-              ]}
+              options={generalConfig.networkLinks}
             />
           </Box>
           {children}

@@ -15,6 +15,6 @@ export const disabledMenuItems = JSON.parse(
 )
 export const appVersion = process.env.REACT_APP_VERSION || 'v1.0'
 export const appName = process.env.REACT_APP_NAME || 'eosiodashboard'
-export const eosMainnet = process.env.REACT_APP_EOS_MAINNET || ''
-export const jungleTestnet = process.env.REACT_APP_JUNGLE_TESTNET || ''
-export const lacchainTestnet = process.env.REACT_APP_LACCHAIN_TESTNET || ''
+export const networkLinks = process.env.REACT_APP_NETWORK_URL
+  ? JSON.parse(process.env.REACT_APP_NETWORK_URL)
+  : []
