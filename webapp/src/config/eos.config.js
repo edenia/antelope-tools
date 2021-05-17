@@ -63,3 +63,4 @@ export const includeDefaultTransaction = process.env
   .REACT_APP_EOS_INCLUDE_TRANSACTION
   ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)
   : null
+export const blockExplorerUrl = process.env.REACT_APP_BLOCK_EXPLORER_URL

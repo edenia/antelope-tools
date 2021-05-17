@@ -68,6 +68,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.cr"},{"label":"Jungle Testnet","value":"https://testnet.eosio.cr"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '[]'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://telos-test.bloks.io/transaction/${transaction}'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files

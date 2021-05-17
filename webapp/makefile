@@ -51,6 +51,8 @@ build-docker: ./Dockerfile
 		--build-arg react_app_jungle_testnet="$(REACT_APP_JUNGLE_TESTNET)" \
 		--build-arg react_app_lacchain_testnet="$(REACT_APP_LACCHAIN_TESTNET)" \
 		--build-arg react_app_disabled_menu_items='$(REACT_APP_DISABLED_MENU_ITEMS)' \
+		--build-arg react_app_network_url='$(REACT_APP_NETWORK_URL)' \
+		--build-arg react_app_block_explorer_url='$(REACT_APP_BLOCK_EXPLORER_URL)' \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
