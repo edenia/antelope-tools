@@ -15,6 +15,7 @@ import NetworkSelector from '../components/NetworkSelector'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
+import SnackbarMessage from '../components/SnackbarMessage'
 import { eosConfig, generalConfig } from '../config'
 
 import styles from './styles'
@@ -87,6 +88,7 @@ const Dashboard = ({ children, width, ual }) => {
         </Box>
         <Footer />
       </Box>
+      <SnackbarMessage />
     </Box>
   )
 }
