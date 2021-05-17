@@ -121,45 +121,6 @@ export default (theme) => ({
       width: 290
     }
   },
-
-  // twoBoxes: {
-  //   borderLeft: 'none',
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-
-  //   '& .healthStatus': {
-  //     '& .MuiSvgIcon-root': {
-  //       marginLeft: theme.spacing(1),
-  //       fontSize: 15
-  //     }
-  //   },
-  //   '& .social': {
-  //     borderLeft: 'none',
-  //     width: 100,
-  //     '& a': {
-  //       display: 'flex'
-  //     },
-  //     '& svg': {
-  //       marginRight: theme.spacing(1)
-  //     }
-  //   },
-  //   '& .success': {
-  //     color: theme.palette.success.main
-  //   },
-  //   '& .error': {
-  //     color: theme.palette.error.main
-  //   },
-  //   '& .warning': {
-  //     color: theme.palette.warning.main
-  //   },
-  //   [theme.breakpoints.up('lg')]: {
-  //     marginBottom: 0,
-  //     '& .healthStatus, .social': {
-  //       width: 150
-  //     }
-  //   }
-  // },
-
   cardActions: {
     display: 'flex',
     [theme.breakpoints.up('lg')]: {
