@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { SharedStateProvider } from './context/state.context'
+import { SnackbarMessageProvider } from './context/snackbar-message.context'
 import routes from './routes'
 import Loader from './components/Loader'
 import DashboardLayout from './layouts/Dashboard'
@@ -36,17 +37,19 @@ const App = ({ ual = {} }) => {
 
   return (
     <SharedStateProvider>
-      <BrowserRouter>
-        <DashboardLayout ual={ual}>
-          <Suspense fallback={<Loader />}>
-            <Switch>
-              {routes
-                .filter((route) => !route?.path?.includes('http'))
-                .map(renderRoutes)}
-            </Switch>
-          </Suspense>
-        </DashboardLayout>
-      </BrowserRouter>
+      <SnackbarMessageProvider>
+        <BrowserRouter>
+          <DashboardLayout ual={ual}>
+            <Suspense fallback={<Loader />}>
+              <Switch>
+                {routes
+                  .filter((route) => !route?.path?.includes('http'))
+                  .map(renderRoutes)}
+              </Switch>
+            </Suspense>
+          </DashboardLayout>
+        </BrowserRouter>
+      </SnackbarMessageProvider>
     </SharedStateProvider>
   )
 }

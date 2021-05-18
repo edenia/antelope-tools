@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranslation } from 'react-i18next'
 import TextField from '@material-ui/core/TextField'
-import Alert from '@material-ui/lab/Alert'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
@@ -14,6 +13,8 @@ import CardContent from '@material-ui/core/CardContent'
 
 import { signTransaction } from '../utils/eos'
 import eosApi from '../utils/eosapi'
+import getTransactionUrl from '../utils/get-transaction-url'
+import { useSnackbarMessageState } from '../context/snackbar-message.context'
 
 const AccountInfo = lazy(() => import('../components/AccountInfo'))
 
@@ -35,19 +36,20 @@ const Accounts = ({ ual }) => {
   const [hash, setHash] = useState(null)
   const [tableData, setTableData] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [, { showMessage, hideMessage }] = useSnackbarMessageState()
   const { t } = useTranslation('accountsRoute')
 
   const handleSubmitAction = async (action) => {
     if (!ual.activeUser) {
-      setErrorMessage(t('loginBeforeUseAction'))
+      showMessage({
+        type: 'error',
+        content: t('loginBeforeUseAction')
+      })
 
       return
     }
 
-    setErrorMessage(null)
-    setSuccessMessage(null)
+    hideMessage()
     setLoading(true)
 
     try {
@@ -60,11 +62,21 @@ const Accounts = ({ ual }) => {
         ],
         ...action
       })
-      setSuccessMessage(`Success transaction ${result.transactionId}`)
+      const { trxId, explorerUrl } = getTransactionUrl(result.transactionId)
+
+      showMessage({
+        type: 'success',
+        content: (
+          <a href={explorerUrl} target="_blank" rel="noopener noreferrer">
+            {t('successMessage')} {trxId}
+          </a>
+        )
+      })
     } catch (error) {
-      setErrorMessage(
-        error?.cause?.message || error?.message || t('unknownError')
-      )
+      showMessage({
+        type: 'error',
+        content: error?.cause?.message || error?.message || t('unknownError')
+      })
     }
 
     setLoading(false)
@@ -97,8 +109,7 @@ const Accounts = ({ ual }) => {
     setAbi(null)
     setHash(null)
     setTableData(null)
-    setErrorMessage(null)
-    setSuccessMessage(null)
+    hideMessage(null)
     setLoading(true)
     await new Promise((resolve) => setTimeout(resolve, 500))
 
@@ -106,7 +117,10 @@ const Accounts = ({ ual }) => {
       const account = await eosApi.getAccount(accountName)
       setAccount(account)
     } catch (error) {
-      setErrorMessage(t('accountNotFound'))
+      showMessage({
+        type: 'error',
+        content: t('accountNotFound')
+      })
     }
 
     try {
@@ -160,24 +174,6 @@ const Accounts = ({ ual }) => {
         </CardContent>
       </Card>
       {loading && <LinearProgress color="primary" />}
-      {errorMessage && (
-        <Alert
-          severity="error"
-          className={classes.alert}
-          onClose={() => setErrorMessage(null)}
-        >
-          {errorMessage}
-        </Alert>
-      )}
-      {successMessage && (
-        <Alert
-          severity="success"
-          className={classes.alert}
-          onClose={() => setSuccessMessage(null)}
-        >
-          {successMessage}
-        </Alert>
-      )}
       {account && (
         <AccountInfo
           account={account}

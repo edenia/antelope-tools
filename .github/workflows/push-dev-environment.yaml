@@ -57,6 +57,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.cr"},{"label":"Jungle Testnet","value":"https://testnet.eosio.cr"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks"]'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://jungle3.bloks.io/transaction/${transaction}'
 
       - name: Build kubernetes files
         id: build_kubernetes_files

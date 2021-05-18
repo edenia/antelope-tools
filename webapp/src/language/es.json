@@ -129,7 +129,8 @@
   "accountsRoute": {
     "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
-    "accountNotFound": "Cuenta no encontrada"
+    "accountNotFound": "Cuenta no encontrada",
+    "successMessage": "Transacción exitosa"
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",

@@ -121,7 +121,8 @@
   "accountsRoute": {
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
-    "accountNotFound": "Account not found"
+    "accountNotFound": "Account not found",
+    "successMessage": "Success transaction"
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",

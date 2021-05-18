@@ -31,67 +31,9 @@ const LacchainSetNodeInfoActionInfoField = ({
   const [lacchain] = useSharedState()
   const [payload, setPayload] = useState({})
   const [optionsForCountry, setOptionsForCountry] = useState([])
-  const [nodeType, setNodeType] = useState([])
+  const [nodeType, setNodeType] = useState('')
 
   const features = getNodeFeatures()
-
-  const P2pEnpoints = () => {
-    if (nodeType === 'boot' || nodeType === 'validator') {
-      return (
-        <>
-          <TextField
-            label={`${nodeType}_p2p`}
-            variant={variant}
-            className={className}
-            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
-            onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_p2p`
-            )}
-          />
-        </>
-      )
-    }
-
-    return <></>
-  }
-
-  const ApiEndpoints = () => {
-    if (nodeType === 'observer' || nodeType === 'writer') {
-      return (
-        <>
-          <TextField
-            label="endpoints_api"
-            variant={variant}
-            className={className}
-            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_api`] || ''}
-            onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_api`
-            )}
-          />
-          <TextField
-            label="endpoints_ssl"
-            variant={variant}
-            className={className}
-            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_ssl`] || ''}
-            onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_ssl`
-            )}
-          />
-          <TextField
-            label="endpoints_p2p"
-            variant={variant}
-            className={className}
-            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
-            onChange={handleOnFieldChange(
-              `${nodeType}_endpoints.${nodeType}_p2p`
-            )}
-          />
-        </>
-      )
-    }
-
-    return <></>
-  }
 
   const Features = () => {
     if (nodeType === 'observer' || nodeType === 'writer') {
@@ -148,8 +90,48 @@ const LacchainSetNodeInfoActionInfoField = ({
         value={payload[`${nodeType}_keys`]?.peer_keys || []}
         onChange={handleOnFieldChange(`${nodeType}_keys.peer_keys`)}
       />
-      <P2pEnpoints />
-      <ApiEndpoints />
+      {(nodeType === 'boot' || nodeType === 'validator') && (
+        <TextField
+          label={`${nodeType}_p2p`}
+          variant={variant}
+          className={className}
+          value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
+          onChange={handleOnFieldChange(
+            `${nodeType}_endpoints.${nodeType}_p2p`
+          )}
+        />
+      )}
+      {(nodeType === 'observer' || nodeType === 'writer') && (
+        <>
+          <TextField
+            label="endpoints_api"
+            variant={variant}
+            className={className}
+            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_api`] || ''}
+            onChange={handleOnFieldChange(
+              `${nodeType}_endpoints.${nodeType}_api`
+            )}
+          />
+          <TextField
+            label="endpoints_ssl"
+            variant={variant}
+            className={className}
+            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_ssl`] || ''}
+            onChange={handleOnFieldChange(
+              `${nodeType}_endpoints.${nodeType}_ssl`
+            )}
+          />
+          <TextField
+            label="endpoints_p2p"
+            variant={variant}
+            className={className}
+            value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
+            onChange={handleOnFieldChange(
+              `${nodeType}_endpoints.${nodeType}_p2p`
+            )}
+          />
+        </>
+      )}
       <TextField
         label="location_name"
         variant={variant}

@@ -16,6 +16,7 @@ import eosApi from '../../utils/eosapi'
 import ContractActionForm from '../../components/ContractActionForm'
 import BreakpointMasonry from '../../components/BreakpointMasonry'
 import { useSharedState } from '../../context/state.context'
+import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,10 +53,11 @@ const LacchainManagement = ({ ual }) => {
   const [loading, setLoading] = useState(null)
   const [validActions, setValidActions] = useState([])
   const [, { update }] = useSharedState()
+  const [, { showMessage, hideMessage }] = useSnackbarMessageState()
 
   const handleOnSubmitAction = async (action) => {
     if (!ual.activeUser) {
-      setMessage({
+      showMessage({
         type: 'warning',
         conetent: t('loginWarning')
       })
@@ -63,7 +65,7 @@ const LacchainManagement = ({ ual }) => {
       return
     }
 
-    setMessage(null)
+    hideMessage(null)
     setLoading(true)
 
     try {
@@ -76,12 +78,12 @@ const LacchainManagement = ({ ual }) => {
         ],
         ...action
       })
-      setMessage({
+      showMessage({
         type: 'success',
         content: `Success transaction ${result.transactionId}`
       })
     } catch (error) {
-      setMessage({
+      showMessage({
         type: 'error',
         content: error?.cause?.message || error?.message || t('unknownError')
       })
@@ -205,7 +207,7 @@ const LacchainManagement = ({ ual }) => {
       setValidActions(actions)
 
       if (!actions.length) {
-        setMessage({
+        showMessage({
           type: 'warning',
           content: t('noneActionWarning')
         })
@@ -235,6 +237,7 @@ const LacchainManagement = ({ ual }) => {
     }
 
     setMessage(null)
+    hideMessage()
     checkAccount()
     // eslint-disable-next-line
   }, [ual.activeUser, t])
