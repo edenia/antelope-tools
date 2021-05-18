@@ -17,7 +17,9 @@ const stateReducer = (state, action) => {
       }
 
     case 'hideMessage':
-      return {}
+      return {
+        open: false
+      }
 
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
