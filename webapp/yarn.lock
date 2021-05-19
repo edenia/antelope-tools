@@ -1305,6 +1305,11 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.10.7.tgz#0fe1fa0ef02c827919e23c2802a4b25589ac522d"
   integrity sha512-EG/1qDiQvd12RoNJ6H+sZcHVswC/3uMx/ySvfaJ24vB30rLjkgHggEXbgMbfgki7wMuiQ/zXI8QlmF1k3kWRGQ==
 
+"@dvsl/zoomcharts@^1.19.0-1":
+  version "1.19.0-1"
+  resolved "https://registry.yarnpkg.com/@dvsl/zoomcharts/-/zoomcharts-1.19.0-1.tgz#c6211d218accd6f8209760c02293567b707488c8"
+  integrity sha512-RVQZJQC1bwL79GLPlzP5EUAfyrqGnpON8tr6ythxp+TH8jY3AqU/Cwkfhqyf2AZE4jJr5Zvpe8ksT/drMO/+Jw==
+
 "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"

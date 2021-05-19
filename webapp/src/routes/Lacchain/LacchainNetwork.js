@@ -1,105 +1,55 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Graph } from 'react-d3-graph'
+import React, { useCallback, useEffect } from 'react'
+import zc from '@dvsl/zoomcharts'
+import { makeStyles } from '@material-ui/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
-import eosApi from '../../utils/eosapi'
+import lacchain from '../../utils/lacchain'
 
-const LacchainNodesNetwork = () => {
-  const [data, setData] = useState({ links: [], nodes: [] })
-
-  const myConfig = {
-    automaticRearrangeAfterDropNode: true,
-    directed: false,
-    focusAnimationDuration: 0.75,
-    height: window.innerHeight,
-    width: window.innerWidth,
-    nodeHighlightBehavior: true,
-    staticGraphWithDragAndDrop: true,
-    d3: {
-      disableLinkForce: true
-    },
-    node: {
-      fontColor: 'black',
-      fontSize: 18,
-      fontWeight: 'normal',
-      highlightFontSize: 18,
-      size: 500,
-      symbolType: 'circle',
-      mouseCursor: 'pointer'
-    },
-    link: {
-      color: 'lightgray',
-      highlightColor: '#f0a12b',
-      strokeWidth: 2
+const NetChart = zc.NetChart
+const useStyles = makeStyles(() => ({
+  root: {
+    '& .DVSL-menu-container': {
+      display: 'none'
     }
   }
+}))
 
+const LacchainNodesNetwork = () => {
+  const classes = useStyles()
   const initData = useCallback(async () => {
     const nodeTypes = {
       1: {
         type: 'validator',
         color: '#34eba2',
-        y: 100
+        image: '/node-types/validator.svg'
       },
       2: {
         type: 'writer',
         color: '#c23044',
-        y: 300
+        image: '/node-types/writer.svg'
       },
       3: {
         type: 'boot',
         color: '#1836de',
-        y: 200
+        image: '/node-types/boot.svg'
       },
       4: {
         type: 'observer',
         color: '#e8df8b',
-        y: 300
+        image: '/node-types/observer.svg'
       }
     }
-    const { rows } = await eosApi.getTableRows({
-      json: true,
-      code: 'eosio',
-      scope: 'eosio',
-      table: 'node'
-    })
-    const { rows: entities } = await eosApi.getTableRows({
-      json: true,
-      code: 'eosio',
-      scope: 'eosio',
-      table: 'entity'
-    })
+    const rows = await lacchain.getNodes()
     const nodes = rows.map((node) => ({
       ...nodeTypes[node.type],
       id: node.name,
-      entity: entities.find((entity) => entity.name === node.entity)
+      name: node.name,
+      loaded: true
     }))
-
-    const stats = {
-      validator: nodes.filter((item) => item.type === 'validator').length,
-      boot: nodes.filter((item) => item.type === 'boot').length,
-      writer: nodes.filter(
-        (item) => item.type === 'writer' || item.type === 'observer'
-      ).length,
-      observer: nodes.filter(
-        (item) => item.type === 'writer' || item.type === 'observer'
-      ).length
-    }
-
-    nodes.forEach((node, index) => {
-      if (typeof stats[node.y] === 'undefined') {
-        stats[node.y] = 0
-      } else {
-        stats[node.y] += 1
-      }
-
-      if (stats[node.type] === 1) {
-        nodes[index].x = 100 + window.innerWidth / 3
-      } else {
-        nodes[index].x =
-          stats[node.y] * (window.innerWidth / stats[node.type]) + 100
-      }
-    })
-
+    const validators = nodes
+      .filter((node) => node.type === 'validator')
+      .map((node) => node.id)
     const links = []
 
     nodes
@@ -112,8 +62,8 @@ const LacchainNodesNetwork = () => {
           )
           .forEach((otherNode) => {
             links.push({
-              source: otherNode.id,
-              target: node.id
+              from: otherNode.id,
+              to: node.id
             })
           })
       })
@@ -125,16 +75,66 @@ const LacchainNodesNetwork = () => {
           .filter((otherNode) => otherNode.id !== node.id)
           .forEach((otherNode) => {
             links.push({
-              source: otherNode.id,
-              target: node.id
+              from: otherNode.id,
+              to: node.id
             })
           })
       })
 
-    setData({
-      nodes,
-      links
+    const chart = new NetChart({
+      container: document.getElementById('netChart'),
+      area: { height: 600 },
+      navigation: {
+        focusNodeExpansionRadius: 2,
+        initialNodes: validators,
+        numberOfFocusNodes: validators.length,
+        mode: 'focusnodes'
+      },
+      style: {
+        node: {
+          display: 'image',
+          imageCropping: false,
+          cursor: 'crosshair',
+          fillColor: 'transparent',
+          radius: 50
+        },
+        nodeFocused: {
+          fillColor: 'transparent'
+        },
+        nodeHovered: {
+          fillColor: '#e0e0e0',
+          radius: 60
+        },
+        nodeLabel: {
+          padding: 4,
+          backgroundStyle: {
+            fillColor: '#e0e0e0'
+          },
+          textStyle: {
+            fillColor: 'black',
+            font: '18px Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol'
+          }
+        },
+        link: {
+          toDecoration: 'arrow',
+          radius: 2
+        },
+        linkHovered: {
+          fillColor: 'red',
+          radius: 4
+        },
+        nodeStyleFunction: (node) => {
+          node.image = node.data.image
+          node.label = node.data.name
+        }
+      },
+      data: {
+        dataFunction: (data, success) => {
+          success({ nodes, links })
+        }
+      }
     })
+    chart.clearHistory()
   }, [])
 
   useEffect(() => {
@@ -142,11 +142,11 @@ const LacchainNodesNetwork = () => {
   }, [initData])
 
   return (
-    <>
-      {data.links.length > 0 && (
-        <Graph id="graph-id" data={data} config={myConfig} />
-      )}
-    </>
+    <Card className={classes.root}>
+      <CardContent>
+        <div id="netChart" />
+      </CardContent>
+    </Card>
   )
 }
 

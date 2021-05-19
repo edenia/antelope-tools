@@ -37,16 +37,27 @@ export const getNodeFeatures = () => [
   }
 ]
 
-export const getNodes = async (type) => {
-  const { rows: nodes } = await eosApi.getTableRows({
-    json: true,
-    code: 'eosio',
-    scope: 'eosio',
-    table: 'node'
-  })
+export const getNodes = async () => {
+  const nodes = []
+  let hasMore = true
+  let key
 
-  if (type) {
-    return nodes.filter((node) => node.type === type)
+  while (hasMore) {
+    const {
+      rows,
+      more,
+      next_key: nextKey
+    } = await eosApi.getTableRows({
+      code: 'eosio',
+      scope: 'eosio',
+      table: 'node',
+      json: true,
+      lower_bound: key
+    })
+    key = nextKey
+    hasMore = more
+
+    nodes.push(...rows)
   }
 
   return nodes
@@ -86,4 +97,13 @@ export const getNewFieldPayload = (field, event, value, payload = {}) => {
   }
 
   return newPayload
+}
+
+export default {
+  NODE_TYPE_LABEL,
+  NODE_TYPE_ID,
+  getNodeFeatures,
+  getNodes,
+  getSchedule,
+  getNewFieldPayload
 }
