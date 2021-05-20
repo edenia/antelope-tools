@@ -64,6 +64,7 @@
       - created_at
       - updated_at
       - health_status
+      - endpoints
       filter: {}
       allow_aggregations: true
 - table:
