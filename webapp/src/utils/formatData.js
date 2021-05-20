@@ -67,8 +67,7 @@ export const formatData = (
         },
         nodes,
         healthStatus,
-        social: data.social,
-        endpoints
+        social: data.social
       }
 
       break
@@ -96,7 +95,11 @@ export const formatData = (
         nodes: [],
         healthStatus: node?.health_status,
         social: null,
-        endpoints: node?.endpoints || {}
+        endpoints: {
+          p2p: node.p2p_endpoint,
+          api: node.api_endpoint,
+          ssl: node.ssl_endpoint
+        }
       }
 
       break

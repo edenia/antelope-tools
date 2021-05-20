@@ -8,7 +8,7 @@ import Link from '@material-ui/core/Link'
 const Endpoints = ({ endpoints, classes, type, t }) => {
   if (type !== 'node') return <></>
 
-  const items = Object.keys(endpoints)
+  const items = Object.keys(endpoints || {}).filter((key) => !!endpoints[key])
 
   if (!items.length)
     return (
@@ -26,13 +26,13 @@ const Endpoints = ({ endpoints, classes, type, t }) => {
       <Box className={classes.borderLine}>
         {items.map((endpoint, i) => (
           <Typography variant="body1" key={i}>
-            {`${endpoint}:`}
+            {`${endpoint.toUpperCase()}:`}
             <Link
               href={endpoints[endpoint]}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {endpoints[endpoint]}
+              {endpoints[endpoint] || 'N/A'}
             </Link>
           </Typography>
         ))}
