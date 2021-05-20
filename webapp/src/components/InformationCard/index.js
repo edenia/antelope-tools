@@ -26,7 +26,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const InformationCard = ({ producer, rank, onNodeClick, type, node }) => {
+const InformationCard = ({ producer, rank, onNodeClick, type }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { t } = useTranslation('producerCardComponent')
