@@ -107,7 +107,7 @@ const getNodes = async () => {
       return {
         ...newInfo,
         entity: node.entity,
-        node_name: node.name,
+        name: node.name,
         node_type: nodeType,
         health_status: nodeHealthStatus
       }

@@ -75,7 +75,7 @@ export const formatData = (
 
     case 'node':
       newData = {
-        title: node?.node_type || null,
+        title: node?.name || null,
         media: {
           logo: data.branding?.logo_256 || null,
           name: data.candidate_name || data.organization_name || owner,

@@ -45,25 +45,12 @@ const useStyles = makeStyles((theme) => ({
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
   const { data: { cpu } = {} } = useQuery(NODE_CPU_BENCHMARK, {
-    variables: { account: node?.node_name || producer.owner }
+    variables: { account: node?.name || producer.owner }
   })
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
   const Endpoints = () => {
-    if (node?.endpoints) {
-      return (
-        <>
-          <dt className={classes.bold}>{t('endpoints')}</dt>
-          {Object.keys(node.endpoints).map((key, i) => (
-            <dd key={i}>
-              <span className={classes.bold}>{key}</span>: {node.endpoints[key]}
-            </dd>
-          ))}
-        </>
-      )
-    }
-
     return (
       <>
         {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
@@ -192,10 +179,10 @@ const NodeCard = ({ producer, node }) => {
             </>
           )}
 
-          {node?.node_name && (
+          {node?.name && (
             <>
               <dt className={classes.bold}>{t('nodeName')}</dt>
-              <dd>{node?.node_name}</dd>
+              <dd>{node?.name}</dd>
             </>
           )}
 

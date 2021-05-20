@@ -146,7 +146,6 @@ const LacchainNodeConfig = ({ ual }) => {
         type: 'octet/stream'
       })
       setFileDownloadUrl(URL.createObjectURL(blob))
-      console.log('new link')
     }
 
     getTemplate(nodeType, node)
