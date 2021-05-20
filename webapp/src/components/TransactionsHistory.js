@@ -31,14 +31,14 @@ BodyGraphValue.defaultProps = {
   loading: false
 }
 
-const TransactionsHistory = ({ t }) => {
+const TransactionsHistory = ({ t, classes }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
 
   return (
     <>
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -52,7 +52,7 @@ const TransactionsHistory = ({ t }) => {
 
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -66,7 +66,7 @@ const TransactionsHistory = ({ t }) => {
 
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -82,11 +82,13 @@ const TransactionsHistory = ({ t }) => {
 }
 
 TransactionsHistory.propTypes = {
-  t: PropTypes.func
+  t: PropTypes.func,
+  classes: PropTypes.object
 }
 
 TransactionsHistory.defaultProps = {
-  t: (text) => text
+  t: (text) => text,
+  classes: {}
 }
 
 export default memo(TransactionsHistory)

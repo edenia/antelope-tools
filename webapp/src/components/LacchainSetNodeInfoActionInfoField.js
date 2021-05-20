@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
 const LacchainSetNodeInfoActionInfoField = ({
   onChange,
   variant,
-  className
+  className,
+  t
 }) => {
   const classes = useStyles()
   const [lacchain] = useSharedState()
@@ -42,7 +43,7 @@ const LacchainSetNodeInfoActionInfoField = ({
           onChange={handleOnFieldChange(`${nodeType}_features`)}
           variant={variant}
           className={className}
-          label="features"
+          label={t('features')}
           value={payload[`${nodeType}_features`] || []}
           options={features}
         />
@@ -84,7 +85,7 @@ const LacchainSetNodeInfoActionInfoField = ({
   return (
     <>
       <ArrayTextField
-        label="peer_keys"
+        label={t('peer_keys')}
         variant={variant}
         className={className}
         value={payload[`${nodeType}_keys`]?.peer_keys || []}
@@ -92,7 +93,7 @@ const LacchainSetNodeInfoActionInfoField = ({
       />
       {(nodeType === 'boot' || nodeType === 'validator') && (
         <TextField
-          label={`${nodeType}_p2p`}
+          label={t(`${nodeType}_p2p`)}
           variant={variant}
           className={className}
           value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
@@ -104,7 +105,7 @@ const LacchainSetNodeInfoActionInfoField = ({
       {(nodeType === 'observer' || nodeType === 'writer') && (
         <>
           <TextField
-            label="endpoints_api"
+            label={t('endpoints_api')}
             variant={variant}
             className={className}
             value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_api`] || ''}
@@ -113,7 +114,7 @@ const LacchainSetNodeInfoActionInfoField = ({
             )}
           />
           <TextField
-            label="endpoints_ssl"
+            label={t('endpoints_ssl')}
             variant={variant}
             className={className}
             value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_ssl`] || ''}
@@ -122,7 +123,7 @@ const LacchainSetNodeInfoActionInfoField = ({
             )}
           />
           <TextField
-            label="endpoints_p2p"
+            label={t('endpoints_p2p')}
             variant={variant}
             className={className}
             value={payload[`${nodeType}_endpoints`]?.[`${nodeType}_p2p`] || ''}
@@ -133,7 +134,7 @@ const LacchainSetNodeInfoActionInfoField = ({
         </>
       )}
       <TextField
-        label="location_name"
+        label={t('location_name')}
         variant={variant}
         className={className}
         value={payload[`${nodeType}_location`]?.name || ''}
@@ -152,18 +153,22 @@ const LacchainSetNodeInfoActionInfoField = ({
           </>
         )}
         renderInput={(params) => (
-          <TextField {...params} label="location_country" variant={variant} />
+          <TextField
+            {...params}
+            label={t('location_country')}
+            variant={variant}
+          />
         )}
       />
       <TextField
-        label="location_latitude"
+        label={t('location_latitude')}
         variant={variant}
         className={className}
         value={payload[`${nodeType}_location`]?.latitude || ''}
         onChange={handleOnFieldChange(`${nodeType}_location.latitude`)}
       />
       <TextField
-        label="location_longitude"
+        label={t('location_longitude')}
         variant={variant}
         className={className}
         value={payload[`${nodeType}_location`]?.longitude || ''}
@@ -177,7 +182,12 @@ const LacchainSetNodeInfoActionInfoField = ({
 LacchainSetNodeInfoActionInfoField.propTypes = {
   onChange: PropTypes.func,
   variant: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  t: PropTypes.func
+}
+
+LacchainSetNodeInfoActionInfoField.defaultProps = {
+  t: () => {}
 }
 
 export default LacchainSetNodeInfoActionInfoField

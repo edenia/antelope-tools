@@ -1,6 +1,6 @@
+/* eslint complexity: 0 */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -21,15 +21,20 @@ import EOSIONewAccountAuthority from './EOSIONewAccountAuthority'
 const useStyles = makeStyles((theme) => ({
   formControl: {
     width: '100%',
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(4)
   }
 }))
 
-const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
+const ContractActionForm = ({
+  accountName,
+  action,
+  abi,
+  onSubmitAction,
+  t
+}) => {
   const classes = useStyles()
   const [fields, setFields] = useState([])
   const [payload, setPayload] = useState({})
-  const { t } = useTranslation('contractActionFormComponent')
 
   const handleSubmit = () => {
     if (!onSubmitAction) return
@@ -70,7 +75,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainAddEntityActionEntityTypeField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name]}
@@ -81,7 +86,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainEntitySelectField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -92,18 +97,19 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetEntInfoField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
             onChange={handleFieldChange(field.name)}
+            t={t}
           />
         )
       case 'eosio.setnodeinfo.node':
         return (
           <LacchainSetNodeInfoActionNodeField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -114,11 +120,12 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetNodeInfoActionInfoField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
             onChange={handleFieldChange(field.name)}
+            t={t}
           />
         )
       case 'eosio.newaccount.creator':
@@ -130,7 +137,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainEntityField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -142,18 +149,19 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainAddNodeAuthorityField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || {}}
             onChange={handleFieldChange(field.name)}
+            t={t}
           />
         )
       case 'eosio.netsetgroup.group':
         return (
           <ArrayTextField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || []}
@@ -164,7 +172,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetScheduleActionValidatorsField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || []}
@@ -175,7 +183,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <EOSIONewAccountAuthority
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -183,7 +191,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Chip label="public_key" />
+                  <Chip label={t('public_key')} />
                 </InputAdornment>
               )
             }}
@@ -193,7 +201,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <EOSIONewAccountAuthority
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -201,7 +209,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Chip label="public_key" />
+                  <Chip label={t('public_key')} />
                 </InputAdornment>
               )
             }}
@@ -211,7 +219,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <TextField
             key={`action-field-${field.name}`}
-            label={field.name}
+            label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -219,7 +227,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Chip label={field.type} />
+                  <Chip label={t(field.type)} />
                 </InputAdornment>
               )
             }}
@@ -249,9 +257,12 @@ ContractActionForm.propTypes = {
   accountName: PropTypes.string,
   action: PropTypes.string,
   abi: PropTypes.any,
-  onSubmitAction: PropTypes.func
+  onSubmitAction: PropTypes.func,
+  t: PropTypes.func
 }
 
-ContractActionForm.defaultProps = {}
+ContractActionForm.defaultProps = {
+  t: () => {}
+}
 
 export default ContractActionForm

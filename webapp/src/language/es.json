@@ -96,7 +96,7 @@
     "telegram": "Grupo en Telegram"
   },
   "homeRoute": {
-    "currentProducer": "Productor actual",
+    "currentProducer": "Productor de Bloque Actual",
     "headBlock": "Ultimo Bloque",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Productor de Bloque",

@@ -37,8 +37,8 @@ const RicardianContract = () => {
     <Box className={classes.root}>
       <RicardianContractComponent
         contractName="eosio"
-        actionName="regproducer"
-        httpEndpoint="https://api.eosio.cr"
+        actionName=""
+        httpEndpoint="https://lacchain.eosio.cr"
         LinearProgressColor="primary"
         title={t('title')}
       />
