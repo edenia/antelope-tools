@@ -114,26 +114,21 @@ const RewardsDistribution = () => {
   )
 
   useEffect(() => {
-    let stats = {}
+    let stats = {
+      'N/A': {
+        code: 'N/A',
+        name: t('notAvailable'),
+        quantity: 0,
+        items: [],
+        rewards: 0
+      }
+    }
     let daylyRewars = 0
     const items = producers || []
     const handleInvalidCountry = (producer) => {
-      if (!stats['N/A']) {
-        stats = {
-          ...stats,
-          'N/A': {
-            code: 'N/A',
-            name: t('notAvailable'),
-            quantity: 1,
-            items: [producer],
-            rewards: producer.total_rewards
-          }
-        }
-      } else {
-        stats['N/A'].items.push(producer)
-        stats['N/A'].rewards += producer.total_rewards
-        stats['N/A'].quantity += 1
-      }
+      stats['N/A'].items.push(producer)
+      stats['N/A'].rewards += producer.total_rewards
+      stats['N/A'].quantity += 1
     }
     const handleValidCountry = (producer) => {
       if (!stats[producer.bp_json.org.location.country]) {
