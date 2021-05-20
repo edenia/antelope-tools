@@ -34,7 +34,7 @@ const BlockProducerInfo = ({ t, classes }) => {
 
           if (!result) {
             result = producer.bp_json?.nodes.find(
-              (node) => node.node_name === item.producer_name
+              (node) => node.name === item.producer_name
             )
           }
 

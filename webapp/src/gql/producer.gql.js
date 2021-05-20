@@ -13,7 +13,7 @@ export const PRODUCERS_QUERY = gql`
     }
     producers: producer(
       where: $where
-      order_by: { total_votes_percent: desc, owner: asc }
+      order_by: { total_votes_percent: desc }
       offset: $offset
       limit: $limit
     ) {
@@ -30,6 +30,7 @@ export const PRODUCERS_QUERY = gql`
       head_block_producer
       head_block_time
       health_status
+      endpoints
       updated_at
     }
   }
@@ -44,7 +45,7 @@ export const NODES_QUERY = gql`
     }
     producers: producer(
       where: $where
-      order_by: { total_votes_percent: desc, owner: asc }
+      order_by: { total_votes_percent: desc }
       offset: $offset
       limit: $limit
     ) {

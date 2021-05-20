@@ -18,7 +18,7 @@ const syncEOSPrice = async () => {
 
     const { data } = await axiosUtil.instance.get(eosConfig.exchangeRateApi)
 
-    if (!data) {
+    if (!data || !data[eosConfig.coingeckoApiTokenId]) {
       return
     }
 

@@ -67,15 +67,14 @@ export const formatData = (
         },
         nodes,
         healthStatus,
-        social: data.social,
-        endpoints
+        social: data.social
       }
 
       break
 
     case 'node':
       newData = {
-        title: node?.node_type || null,
+        title: node?.name || null,
         media: {
           logo: data.branding?.logo_256 || null,
           name: data.candidate_name || data.organization_name || owner,
@@ -96,7 +95,11 @@ export const formatData = (
         nodes: [],
         healthStatus: node?.health_status,
         social: null,
-        endpoints: node?.endpoints || {}
+        endpoints: {
+          p2p: node.p2p_endpoint,
+          api: node.api_endpoint,
+          ssl: node.ssl_endpoint
+        }
       }
 
       break

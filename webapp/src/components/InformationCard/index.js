@@ -39,25 +39,23 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
   }
 
   useEffect(() => {
-    if (producer.bp_json?.org) {
-      setProducerOrg(
-        formatData(
-          {
-            data: producer.bp_json.org,
-            rank,
-            owner: producer.owner,
-            updatedAt: producer.updated_at,
-            missedBlocks: producer.missed_blocks || [],
-            nodes: producer.bp_json?.nodes || [],
-            healthStatus: producer.health_status,
-            dataType: producer.bp_json.type,
-            node: producer.node
-          },
-          type,
-          t
-        )
+    setProducerOrg(
+      formatData(
+        {
+          data: producer.bp_json?.org || {},
+          rank,
+          owner: producer.owner,
+          updatedAt: producer.updated_at,
+          missedBlocks: producer.missed_blocks || [],
+          nodes: producer.bp_json?.nodes || [],
+          healthStatus: producer.health_status,
+          dataType: producer.bp_json?.type,
+          node: producer.node
+        },
+        type,
+        t
       )
-    }
+    )
     // eslint-disable-next-line
   }, [producer])
 
@@ -98,7 +96,6 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
               type={type}
               classes={classes}
             />
-            {/* <Box className={classes.twoBoxes}> */}
             <Box className={classes.healthStatus}>
               <Typography variant="overline">{t('health')}</Typography>
               <Box className={classes.borderLine}>
@@ -128,7 +125,6 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
               t={t}
               classes={classes}
             />
-            {/* </Box> */}
           </Box>
         </Collapse>
       </Box>

@@ -70,9 +70,9 @@ const EndpointsList = () => {
           producer?.bp_json?.org?.organization_name ||
           producer?.owner,
         endpoints: {
-          api: producer.bp_json?.endpoints?.api,
-          ssl: producer.bp_json?.endpoints?.ssl,
-          p2p: producer.bp_json?.endpoints?.p2p
+          api: producer.endpoints?.api || [],
+          ssl: producer.endpoints?.ssl || [],
+          p2p: producer.endpoints?.p2p || []
         }
       }))
     )

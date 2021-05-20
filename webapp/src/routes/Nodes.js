@@ -35,7 +35,7 @@ const NodesCards = ({ data }) => {
   return (
     <>
       {(data.bp_json?.nodes || []).map((node, index) => (
-        <Grid item xs={12} sm={6} lg={12} key={`${node.node_name}_${index}`}>
+        <Grid item xs={12} sm={6} lg={12} key={`${node.name}_${index}`}>
           <InformationCard producer={{ ...data, node }} type="node" />
         </Grid>
       ))}
@@ -48,10 +48,8 @@ NodesCards.propTypes = {
 }
 
 const Nodes = () => {
-  const [
-    loadProducers,
-    { loading = true, data: { producers, info } = {} }
-  ] = useLazyQuery(NODES_QUERY)
+  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
+    useLazyQuery(NODES_QUERY)
   const location = useLocation()
   const [filters, setFilters] = useState({ nodeType: 'all' })
   const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })

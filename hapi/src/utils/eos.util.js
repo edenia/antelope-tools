@@ -196,6 +196,12 @@ const transact = async (actions, account, password) => {
   return transaction
 }
 
+const getCurrencyStats = options => eosApi.getCurrencyStats(options)
+
+const getProducers = options => eosApi.getProducers(options)
+
+const getInfo = options => eosApi.getInfo(options || {})
+
 module.exports = {
   newAccount,
   generateRandomAccountName,
@@ -206,5 +212,8 @@ module.exports = {
   getCurrencyBalance,
   getTableRows,
   transact,
-  getProducerSchedule
+  getProducerSchedule,
+  getCurrencyStats,
+  getProducers,
+  getInfo
 }

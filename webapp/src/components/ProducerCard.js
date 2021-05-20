@@ -369,7 +369,7 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
               {producerNodes.map((node, i) => (
                 <dd className={classes.action} key={`node-${i}`}>
                   <Typography onClick={onNodeClick({ node, producer })}>
-                    {node.node_name || node.node_type}
+                    {node.node || node.node_type}
                   </Typography>
                 </dd>
               ))}
