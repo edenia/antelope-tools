@@ -30,7 +30,7 @@ BodyGraphValue.defaultProps = {
   loading: false
 }
 
-const NodesSummary = ({ t }) => {
+const NodesSummary = ({ t, classes }) => {
   const { data, loading } = useQuery(NODES_SUMMARY_QUERY)
   const [total, setTotal] = useState()
   const [nodes, setNodes] = useState()
@@ -50,7 +50,7 @@ const NodesSummary = ({ t }) => {
     <>
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
-          <CardContent>
+          <CardContent className={classes.cards}>
             <Typography>{`${t('total')} ${t('nodes')}`}</Typography>
             <BodyGraphValue value={total} loading={loading} />
           </CardContent>
@@ -61,7 +61,7 @@ const NodesSummary = ({ t }) => {
         Object.keys(nodes).map((type) => (
           <Grid item xs={12} sm={4} lg={3} key={type}>
             <Card>
-              <CardContent>
+              <CardContent className={classes.cards}>
                 <Typography>{`${t(type)} ${t('nodes')}`}</Typography>
                 <BodyGraphValue value={nodes[type] || 0} loading={loading} />
               </CardContent>
@@ -73,11 +73,13 @@ const NodesSummary = ({ t }) => {
 }
 
 NodesSummary.propTypes = {
-  t: PropTypes.func
+  t: PropTypes.func,
+  classes: PropTypes.object
 }
 
 NodesSummary.defaultProps = {
-  t: (text) => text
+  t: (text) => text,
+  classes: {}
 }
 
 export default memo(NodesSummary)

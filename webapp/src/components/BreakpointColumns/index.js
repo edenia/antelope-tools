@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import Masonry from 'react-masonry-css'
+
+import ColumnCreator from './ColumnCreator'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,13 +36,13 @@ const BreakpointMasonry = ({ children }) => {
   }
 
   return (
-    <Masonry
+    <ColumnCreator
       breakpointCols={breakpointCols}
       className={classes.masonryGrid}
       columnClassName={classes.masonryColumn}
     >
       {children}
-    </Masonry>
+    </ColumnCreator>
   )
 }
 

@@ -10,7 +10,6 @@ import { NODES_QUERY } from '../../gql'
 const Card = lazy(() => import('@material-ui/core/Card'))
 const CardContent = lazy(() => import('@material-ui/core/CardContent'))
 const Grid = lazy(() => import('@material-ui/core/Grid'))
-const Box = lazy(() => import('@material-ui/core/Box'))
 const Typography = lazy(() => import('@material-ui/core/Typography'))
 const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
@@ -59,6 +58,38 @@ const BlockProducerInfo = ({ t, classes }) => {
 
   return (
     <Grid container spacing={4}>
+      <Grid container item xs={12} spacing={4}>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('currentProducer')}</Typography>
+              <Typography component="p" variant="h6">
+                {info.head_block_producer}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('headBlock')}</Typography>
+              <Typography component="p" variant="h6">
+                {formatWithThousandSeparator(info.head_block_num)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('lastBlock')}</Typography>
+              <Typography component="p" variant="h6">
+                {formatWithThousandSeparator(info.last_irreversible_block_num)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
       <Grid container item xs={12} className={classes.graphicBox} spacing={4}>
         <Grid item xs={12} md={6}>
           <Card>
@@ -79,38 +110,8 @@ const BlockProducerInfo = ({ t, classes }) => {
       </Grid>
       {loading && <LinearProgress />}
       <Grid container item xs={12} spacing={4}>
-        <Grid item xs={12} sm={4} lg={3}>
-          <Card>
-            <CardContent>
-              <Typography>{t('currentProducer')}</Typography>
-              <Typography component="p" variant="h6">
-                {info.head_block_producer}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
-          <Card>
-            <CardContent>
-              <Typography>{t('headBlock')}</Typography>
-              <Typography component="p" variant="h6">
-                {formatWithThousandSeparator(info.head_block_num)}
-              </Typography>
-              <Box className={classes.boxIrreversible}>
-                <Typography>
-                  {`${t('lastBlock')}: `}
-                  <strong>
-                    {formatWithThousandSeparator(
-                      info.last_irreversible_block_num
-                    )}
-                  </strong>
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-        <TransactionsHistory t={t} />
-        <NodesSummary t={t} />
+        <TransactionsHistory t={t} classes={classes} />
+        <NodesSummary t={t} classes={classes} />
       </Grid>
     </Grid>
   )

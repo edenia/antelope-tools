@@ -48,13 +48,6 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'cpuBenchmark',
-    icon: <ActivityIcon />,
-    component: CPUBenchmark,
-    path: '/cpu-benchmark',
-    exact: true
-  },
-  {
     name: 'blockProducers',
     icon: <UsersIcon />,
     component: BlockProducers,
@@ -62,17 +55,31 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'rewardsDistribution',
-    icon: <AccountBalanceWalletIcon />,
-    component: RewardsDistribution,
-    path: '/rewards-distribution',
-    exact: true
-  },
-  {
     name: 'nodes',
     icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
+    exact: true
+  },
+  {
+    name: 'endpointsList',
+    icon: <InboxIcon />,
+    component: EndpointsList,
+    path: '/endpoints',
+    exact: true
+  },
+  {
+    name: 'cpuBenchmark',
+    icon: <ActivityIcon />,
+    component: CPUBenchmark,
+    path: '/cpu-benchmark',
+    exact: true
+  },
+  {
+    name: 'rewardsDistribution',
+    icon: <AccountBalanceWalletIcon />,
+    component: RewardsDistribution,
+    path: '/rewards-distribution',
     exact: true
   },
   {
@@ -89,13 +96,7 @@ const defaultRoutes = [
     path: '/missed-blocks',
     exact: true
   },
-  {
-    name: 'endpointsList',
-    icon: <InboxIcon />,
-    component: EndpointsList,
-    path: '/endpoints',
-    exact: true
-  },
+
   {
     name: 'nodesDistribution',
     icon: <MapIcon />,
@@ -135,13 +136,6 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'cpuBenchmark',
-    icon: <ActivityIcon />,
-    component: CPUBenchmark,
-    path: '/cpu-benchmark',
-    exact: true
-  },
-  {
     name: 'entities',
     icon: <UsersIcon />,
     component: BlockProducers,
@@ -153,6 +147,20 @@ const lacchainRoutes = [
     icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
+    exact: true
+  },
+  {
+    name: 'endpointsList',
+    icon: <InboxIcon />,
+    component: EndpointsList,
+    path: '/endpoints',
+    exact: true
+  },
+  {
+    name: 'lacchainNetwork',
+    icon: <SettingsInputAntennaIcon />,
+    component: LacchainNetwork,
+    path: '/lacchain/network',
     exact: true
   },
   {
@@ -177,17 +185,10 @@ const lacchainRoutes = [
     exact: true
   },
   {
-    name: 'endpointsList',
-    icon: <InboxIcon />,
-    component: EndpointsList,
-    path: '/endpoints',
-    exact: true
-  },
-  {
-    name: 'lacchainNetwork',
-    icon: <SettingsInputAntennaIcon />,
-    component: LacchainNetwork,
-    path: '/lacchain/network',
+    name: 'cpuBenchmark',
+    icon: <ActivityIcon />,
+    component: CPUBenchmark,
+    path: '/cpu-benchmark',
     exact: true
   },
   {
@@ -212,7 +213,6 @@ const lacchainRoutes = [
     path: '/node-config',
     exact: true
   },
-
   {
     name: 'accounts',
     icon: <UserIcon />,

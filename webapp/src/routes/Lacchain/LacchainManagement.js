@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Paper from '@material-ui/core/Paper'
-import HelpIcon from '@material-ui/icons/Help'
 import { useTranslation } from 'react-i18next'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import Popover from '@material-ui/core/Popover'
-import Divider from '@material-ui/core/Divider'
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import Box from '@material-ui/core/Box'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
 import { signTransaction } from '../../utils/eos'
 import eosApi from '../../utils/eosapi'
 import ContractActionForm from '../../components/ContractActionForm'
-import BreakpointMasonry from '../../components/BreakpointMasonry'
+import ColumnCreator from '../../components/BreakpointColumns'
 import { useSharedState } from '../../context/state.context'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
@@ -24,15 +23,20 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     display: 'flex',
-    padding: theme.spacing(2),
+    padding: theme.spacing(4, 4, 0, 4),
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1)
   },
   body: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end'
   },
   helpIcon: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontSize: 20
   },
   tooltip: {
     backgroundColor: 'rgba(97, 97, 97, 0.92)',
@@ -41,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
   },
   tooltipText: {
     color: theme.palette.primary.contrastText
+  },
+  titleLabel: {
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: '1.2',
+    letterSpacing: '0.06px'
   }
 }))
 
@@ -270,7 +280,7 @@ const LacchainManagement = ({ ual }) => {
           {t(tooltip.text)}
         </Typography>
       </Popover>
-      <BreakpointMasonry>
+      <ColumnCreator>
         {!!validActions.length &&
           validActions.map((action, index) => (
             <Paper
@@ -279,14 +289,15 @@ const LacchainManagement = ({ ual }) => {
               key={`action-${index}`}
             >
               <Box className={classes.header}>
-                <Typography variant="h4">{t(`${action}Title`)}</Typography>
+                <Typography variant="h4" className={classes.titleLabel}>
+                  {t(`${action}Title`)}
+                </Typography>
 
-                <HelpIcon
+                <InfoOutlinedIcon
                   className={classes.helpIcon}
                   onClick={handleOnTooltipOpen(`${action}Tooltip`)}
                 />
               </Box>
-              <Divider />
               {abi && (
                 <Box className={classes.body}>
                   <ContractActionForm
@@ -294,12 +305,13 @@ const LacchainManagement = ({ ual }) => {
                     action={action}
                     abi={abi}
                     onSubmitAction={handleOnSubmitAction}
+                    t={t}
                   />
                 </Box>
               )}
             </Paper>
           ))}
-      </BreakpointMasonry>
+      </ColumnCreator>
     </Box>
   )
 }

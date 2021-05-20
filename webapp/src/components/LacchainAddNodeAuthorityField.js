@@ -9,7 +9,8 @@ const LacchainAddNodeAuthorityField = ({
   onChange,
   label,
   variant,
-  className
+  className,
+  t
 }) => {
   const [key, setKey] = useState()
 
@@ -44,7 +45,7 @@ const LacchainAddNodeAuthorityField = ({
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <Chip label="public_key" />
+            <Chip label={t('public_key')} />
           </InputAdornment>
         )
       }}
@@ -57,7 +58,12 @@ LacchainAddNodeAuthorityField.propTypes = {
   onChange: PropTypes.func,
   label: PropTypes.string,
   variant: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  t: PropTypes.func
+}
+
+LacchainAddNodeAuthorityField.defaultProps = {
+  t: () => {}
 }
 
 export default LacchainAddNodeAuthorityField

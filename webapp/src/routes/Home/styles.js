@@ -39,7 +39,7 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'baseline',
     padding: theme.spacing(1),
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row'
@@ -53,8 +53,15 @@ export default (theme) => ({
     '& .MuiFormControl-root': {
       width: 200
     },
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       width: 300
+    }
+  },
+  cards: {
+    padding: `${theme.spacing(4)}px !important`,
+    '& .MuiTypography-h6': {
+      textAlign: 'center',
+      marginTop: theme.spacing(2)
     }
   }
 })
