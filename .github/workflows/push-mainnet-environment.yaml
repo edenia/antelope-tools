@@ -30,7 +30,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          # Webapp
+          # webapp
 
           PORT: '80'
           REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
@@ -50,6 +50,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT }}
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE }}
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE }}
+          REACT_APP_EOS_API_NETWORK_NAME: 'mainnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
@@ -67,6 +68,8 @@ jobs:
           NAMESPACE: mainnet-dashboard
           INGRESS_HOST: mainnet.eosio.cr
           INGRESS_GRAPHQL_HOST: graphql-mainnet.eosio.cr
+          # webapp
+          REACT_APP_EOS_API_NETWORK_NAME: 'mainnet'
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}

@@ -31,7 +31,7 @@ jobs:
           # General
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          # Webapp
+          # webapp
           PORT: '80'
           REACT_APP_TITLE: 'LACChain Network Dashboard'
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://latamlink.io/images/latamlink_logo-header.svg'
@@ -71,6 +71,8 @@ jobs:
           NAMESPACE: lacchain-dashboard
           INGRESS_HOST: dashboard.latamlink.io
           INGRESS_GRAPHQL_HOST: dashboard-graphql.latamlink.io
+          # webapp
+          REACT_APP_EOS_API_NETWORK_NAME: 'lacchain'
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}

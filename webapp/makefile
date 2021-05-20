@@ -20,7 +20,7 @@ build-docker: ./Dockerfile
 	echo "Building containers..."
 	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) || true
 	@docker build \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION) --target run-stage \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION)-$(REACT_APP_EOS_API_NETWORK_NAME) --target run-stage \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) --target run-stage \
 		--build-arg port="$(PORT)" \
 		--build-arg react_app_title="$(REACT_APP_TITLE)" \
@@ -64,10 +64,10 @@ build-docker-cached: ./Dockerfile
 	@docker build \
 		--target prod-stage \
 		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION)-$(REACT_APP_EOS_API_NETWORK_NAME) \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) \
 		.
 
 push-image: ##@devops Push the freshly built image and tag with release or latest tag
 push-image:
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION)
+	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(VERSION)-$(REACT_APP_EOS_API_NETWORK_NAME)
