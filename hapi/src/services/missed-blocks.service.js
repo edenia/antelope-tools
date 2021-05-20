@@ -156,7 +156,7 @@ const getBlocksInRange = async (start, end) => {
       FROM
         block_history
       WHERE 
-        "timestamp" BETWEEN '${start}' AND '${end}'
+        "timestamp" BETWEEN '${start.toISOString()}' AND '${end.toISOString()}'
         AND producer <> ''`)
 
   return rows.map(row => ({
