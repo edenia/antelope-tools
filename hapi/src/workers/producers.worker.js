@@ -53,11 +53,6 @@ const start = async () => {
     settingService.syncEOSPrice,
     workersConfig.syncExchangeRate
   )
-  run(
-    'SYNC PRODUCER INFO',
-    producerService.syncProducersInfo,
-    workersConfig.syncProducerInfoInterval
-  )
   run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
   run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
   run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
