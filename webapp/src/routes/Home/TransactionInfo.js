@@ -22,7 +22,7 @@ import EqualIcon from './EqualIcon'
 import { TRANSACTION_QUERY } from '../../gql'
 
 const options = [
-  { value: '0', label: 'Live (5 min)' },
+  { value: '0', label: 'Live (30s)' },
   { value: '1 Hour', label: 'Last Hour' },
   { value: '1 Day', label: 'Last Day' },
   { value: '1 Week', label: 'Last Week' },
@@ -175,7 +175,28 @@ const TransactionInfo = ({ t, classes }) => {
           </Box>
         </Box>
 
-        <TransactionsLineChart data={graphicData} />
+        <TransactionsLineChart
+          data={graphicData}
+          yAxisProps={{
+            reversed: false,
+            title: {
+              enabled: true,
+              text: t('transactions')
+            },
+            maxPadding: 0.05
+          }}
+          xAxisProps={{
+            reversed: true,
+            title: {
+              enabled: true,
+              text: t('secondsAgo')
+            },
+            labels: {
+              format: '{value}s'
+            },
+            maxPadding: 0.05
+          }}
+        />
       </CardContent>
     </Card>
   )

@@ -100,7 +100,9 @@
     "Last Hour": "Last Hour",
     "Last Day": "Last Day",
     "Last Week": "Last Week",
-    "Last Year": "Last Year"
+    "Last Year": "Last Year",
+    "scheduleVersion": "Schedule Version",
+    "secondsAgo": "Seconds Ago"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -258,7 +260,7 @@
     "updatedAt": "Updated at"
   },
   "cpuBenchmarkRoute": {
-    "title": "CPU usage in microseconds",
+    "title": "CPU Usage in Miliseconds",
     "lowest": "Lowest",
     "highest": "Highest",
     "average": "Average"

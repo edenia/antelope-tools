@@ -109,7 +109,9 @@
     "Last Hour": "Última Hora",
     "Last Day": "Última Día",
     "Last Week": "Última Semana",
-    "Last Year": "Último Año"
+    "Last Year": "Último Año",
+    "scheduleVersion": "Versión de Programa",
+    "secondsAgo": "Hace Segundos"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -258,7 +260,7 @@
     "updatedAt": "Actualizado por última vez"
   },
   "cpuBenchmarkRoute": {
-    "title": "Resumen del uso de la CPU en microsegundos",
+    "title": "Resumen del uso de la CPU en Milisegundos",
     "lowest": "Más bajo",
     "highest": "Más alto",
     "average": "Promedio"
