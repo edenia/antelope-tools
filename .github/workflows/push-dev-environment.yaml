@@ -42,7 +42,7 @@ jobs:
           REACT_APP_USE_VOTES: true
           REACT_APP_USE_CPU_BENCHMARK: true
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: true
-          REACT_APP_HASURA_URL: https://graphql-testnet.eosio.cr/v1/graphql
+          REACT_APP_HASURA_URL: https://graphql-jungle.eosio.online/v1/graphql
           REACT_APP_EOS_API_NETWORK_NAME: jungle
           REACT_APP_EOS_API_NETWORK_LABEL: Jungle
           REACT_APP_EOS_API_NETWORK_LOGO: https://bloks.io/img/eosio.png
@@ -55,7 +55,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.cr"},{"label":"Jungle Testnet","value":"https://testnet.eosio.cr"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://jungle3.bloks.io/transaction/${transaction}'
 
@@ -67,8 +67,8 @@ jobs:
         env:
           # general
           NAMESPACE: jungle-dashboard
-          INGRESS_HOST: testnet.eosio.cr
-          INGRESS_GRAPHQL_HOST: graphql-testnet.eosio.cr
+          INGRESS_HOST: jungle.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-jungle.eosio.online
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: jungle
           # postgres
