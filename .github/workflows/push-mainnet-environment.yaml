@@ -51,10 +51,10 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE }}
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE }}
           REACT_APP_EOS_API_NETWORK_NAME: 'mainnet'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'Mainnet'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'EOS Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_NETWORK_URL: '[{"label":"EOS","value":"https://mainnet.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"LACChain Testnet","value":"https://dashboard.latamlink.io"}]'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/node-performance"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/${transaction}'
 
