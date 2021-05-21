@@ -70,7 +70,7 @@ jobs:
           # general
           NAMESPACE: lacchain-dashboard
           INGRESS_HOST: lacchain.eosio.online
-          INGRESS_GRAPHQL_HOST: dashboard-lacchain.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-lacchain.eosio.online
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: 'lacchain'
           # postgres
