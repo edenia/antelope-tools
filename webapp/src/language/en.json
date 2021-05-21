@@ -86,7 +86,7 @@
     "telegram": "Telegram Channel"
   },
   "homeRoute": {
-    "currentProducer": "Current Producer Producer",
+    "currentProducer": "Current Producer",
     "headBlock": "Head Block",
     "lastBlock": "Last Irreversible Block",
     "bpSchedule": "Block Producer Schedule",

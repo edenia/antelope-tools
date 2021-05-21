@@ -32,9 +32,8 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: 80
-          REACT_APP_VERSION: $npm_package_version
-          REACT_APP_NAME: $npm_package_name
           REACT_APP_TITLE: Telos Testnet Network Dashboard
+          REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://telos.bloks.io/img/chains/telos.png
           REACT_APP_FOOTER_LINKS: "[
             { 'text': 'Website', 'src': '' },
