@@ -110,8 +110,8 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	@echo "Creating SSL certificates..."
 	@kubectl create secret tls \
 		tls-secret \
-		--key ./ssl/monitor.cr.priv.key \
-		--cert ./ssl/monitor.cr.crt \
+		--key ./ssl/eosio.online.priv.key \
+		--cert ./ssl/eosio.online.crt \
 		-n $(NAMESPACE)  || echo "SSL cert already configured.";
 	@echo "Creating configmaps..."
 	@kubectl create configmap -n $(NAMESPACE) \
