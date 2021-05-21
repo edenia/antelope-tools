@@ -1,7 +1,4 @@
 import React, { lazy } from 'react'
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
-import FileCopyIcon from '@material-ui/icons/FileCopy'
-import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna'
 import {
   Activity as ActivityIcon,
   Grid as GridIcon,
@@ -19,6 +16,15 @@ import {
 } from 'react-feather'
 
 import { eosConfig, generalConfig } from '../config'
+import {
+  BlockDistributionSvg,
+  ConfigSvg,
+  RewardsDistributionSvg,
+  BPJsonSvg,
+  EndpointSvg,
+  MissingBlocksSvg,
+  TopologySvg
+} from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
 const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
@@ -63,7 +69,7 @@ const defaultRoutes = [
   },
   {
     name: 'endpointsList',
-    icon: <InboxIcon />,
+    icon: <EndpointSvg />,
     component: EndpointsList,
     path: '/endpoints',
     exact: true
@@ -77,14 +83,14 @@ const defaultRoutes = [
   },
   {
     name: 'rewardsDistribution',
-    icon: <AccountBalanceWalletIcon />,
+    icon: <RewardsDistributionSvg />,
     component: RewardsDistribution,
     path: '/rewards-distribution',
     exact: true
   },
   {
     name: 'blockDistribution',
-    icon: <InboxIcon />,
+    icon: <BlockDistributionSvg />,
     component: BlockDistribution,
     path: '/block-distribution',
     exact: true
@@ -113,7 +119,7 @@ const defaultRoutes = [
   },
   {
     name: 'bpJson',
-    icon: <FileCopyIcon />,
+    icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
     exact: true
@@ -151,14 +157,14 @@ const lacchainRoutes = [
   },
   {
     name: 'endpointsList',
-    icon: <InboxIcon />,
+    icon: <EndpointSvg />,
     component: EndpointsList,
     path: '/endpoints',
     exact: true
   },
   {
     name: 'lacchainNetwork',
-    icon: <SettingsInputAntennaIcon />,
+    icon: <TopologySvg />,
     component: LacchainNetwork,
     path: '/lacchain/network',
     exact: true
@@ -172,14 +178,14 @@ const lacchainRoutes = [
   },
   {
     name: 'blockDistribution',
-    icon: <InboxIcon />,
+    icon: <BlockDistributionSvg />,
     component: BlockDistribution,
     path: '/block-distribution',
     exact: true
   },
   {
     name: 'missedBlocks',
-    icon: <InboxIcon />,
+    icon: <MissingBlocksSvg />,
     component: MissedBlocks,
     path: '/missed-blocks',
     exact: true
@@ -208,7 +214,7 @@ const lacchainRoutes = [
   },
   {
     name: 'lacchainNodeConfig',
-    icon: <SlidersIcon />,
+    icon: <ConfigSvg />,
     component: LacchainNodeConfig,
     path: '/node-config',
     exact: true

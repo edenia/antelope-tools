@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 import Box from '@material-ui/core/Box'
 
-const LineChart = ({ data, xAxisProps, title }) => {
+const LineChart = ({ data, xAxisProps, title, yAxisProps }) => {
   const options = {
     title: {
       text: title
@@ -16,7 +16,8 @@ const LineChart = ({ data, xAxisProps, title }) => {
     credits: {
       enabled: false
     },
-    xAxis: xAxisProps
+    xAxis: xAxisProps,
+    yAxis: yAxisProps
   }
 
   return (
@@ -32,12 +33,14 @@ const LineChart = ({ data, xAxisProps, title }) => {
 LineChart.propTypes = {
   data: PropTypes.array,
   xAxisProps: PropTypes.object,
+  yAxisProps: PropTypes.object,
   title: PropTypes.string
 }
 
 LineChart.defaultProps = {
   data: [],
   xAxisProps: { xAxisVisible: false },
+  yAxisProps: {},
   title: ''
 }
 

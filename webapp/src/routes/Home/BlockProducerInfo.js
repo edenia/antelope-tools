@@ -72,6 +72,16 @@ const BlockProducerInfo = ({ t, classes }) => {
         <Grid item xs={12} sm={4} lg={3}>
           <Card>
             <CardContent className={classes.cards}>
+              <Typography>{t('scheduleVersion')}</Typography>
+              <Typography component="p" variant="h6">
+                {schedule?.version}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
               <Typography>{t('headBlock')}</Typography>
               <Typography component="p" variant="h6">
                 {formatWithThousandSeparator(info.head_block_num)}
@@ -96,9 +106,6 @@ const BlockProducerInfo = ({ t, classes }) => {
             <CardContent>
               <Typography component="p" variant="h6">
                 {t('bpSchedule')}
-              </Typography>
-              <Typography variant="caption">
-                Ver. {schedule?.version}
               </Typography>
               <ProducersChart info={info} producers={schedule.producers} />
             </CardContent>
