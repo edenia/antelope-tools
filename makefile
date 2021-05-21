@@ -109,7 +109,7 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	@kubectl create ns $(NAMESPACE) || echo "Namespace '$(NAMESPACE)' already exists.";
 	@echo "Creating SSL certificates..."
 	@kubectl create secret tls \
-		tls-secret \
+		dashboard-tls-secret \
 		--key ./ssl/eosio.online.priv.key \
 		--cert ./ssl/eosio.online.crt \
 		-n $(NAMESPACE)  || echo "SSL cert already configured.";
