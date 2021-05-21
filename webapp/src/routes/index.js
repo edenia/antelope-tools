@@ -245,7 +245,7 @@ const helpRoutes = [
   },
   {
     name: 'changelog',
-    badge: generalConfig.appVersion,
+    badge: generalConfig.appVersion.split('-').pop(),
     path: 'https://github.com/eoscostarica/eosio-dashboard/releases',
     icon: <GitMergeIcon />,
     exact: true
@@ -258,7 +258,7 @@ const helpRoutes = [
   },
   {
     name: 'telegram',
-    path: 'https://t.me/blockchaincostarica',
+    path: 'https://t.me/eoscr',
     icon: <TelegramIcon />
   },
   {

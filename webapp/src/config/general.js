@@ -13,7 +13,7 @@ export const footerLinks = process.env.REACT_APP_FOOTER_LINKS
 export const disabledMenuItems = JSON.parse(
   process.env.REACT_APP_DISABLED_MENU_ITEMS || '[]'
 )
-export const appVersion = process.env.REACT_APP_VERSION || 'v1.0'
+export const appVersion = process.env.REACT_APP_TAG || 'v1.0'
 export const appName = process.env.REACT_APP_NAME || 'eosiodashboard'
 export const networkLinks = process.env.REACT_APP_NETWORK_URL
   ? JSON.parse(process.env.REACT_APP_NETWORK_URL)
