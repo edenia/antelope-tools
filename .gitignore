@@ -8,3 +8,5 @@ certificates
 node_modules
 modules
 ssl
+build_k8s
+.DS_Store
