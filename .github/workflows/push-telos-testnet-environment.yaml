@@ -1,4 +1,4 @@
-name: Build images for telos testet environment
+name: Build images for telos testnet environment
 
 on:
   push:
