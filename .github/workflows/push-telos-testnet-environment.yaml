@@ -21,6 +21,10 @@ jobs:
           echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
             --username ${{ secrets.DOCKER_HUB_USER }} \
             --password-stdin
+            
+      - name: "step-log"
+        run: |
+          echo "github.ref: ${{github.ref}}"
 
       - name: Build new images and push
         run: |
@@ -33,7 +37,7 @@ jobs:
           # webapp
           PORT: 80
           REACT_APP_TITLE: Telos Testnet Network Dashboard
-          REACT_APP_TAG: ${{ github.ref }}
+          REACT_APP_TAG: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://telos.bloks.io/img/chains/telos.png
           REACT_APP_FOOTER_LINKS: "[
             { 'text': 'Website', 'src': '' },
