@@ -21,7 +21,7 @@ jobs:
           echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
             --username ${{ secrets.DOCKER_HUB_USER }} \
             --password-stdin
-            
+
       - name: "step-log"
         run: |
           echo "github.ref: ${{github.ref}}"
