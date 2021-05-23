@@ -75,10 +75,10 @@ const defaultRoutes = [
     exact: true
   },
   {
-    name: 'cpuBenchmark',
-    icon: <ActivityIcon />,
-    component: CPUBenchmark,
-    path: '/cpu-benchmark',
+    name: 'nodesDistribution',
+    icon: <MapIcon />,
+    component: NodesDistribution,
+    path: '/nodes-distribution',
     exact: true
   },
   {
@@ -102,15 +102,22 @@ const defaultRoutes = [
     path: '/missed-blocks',
     exact: true
   },
-
   {
-    name: 'nodesDistribution',
-    icon: <MapIcon />,
-    component: NodesDistribution,
-    path: '/nodes-distribution',
+    name: 'cpuBenchmark',
+    icon: <ActivityIcon />,
+    component: CPUBenchmark,
+    path: '/cpu-benchmark',
     exact: true
   },
   {
+    name: 'ricardianContract',
+    icon: <InfoIcon />,
+    component: RicardianContract,
+    path: '/ricardian-contract',
+    exact: true
+  },
+  {
+    header: 'tools',
     name: 'accounts',
     icon: <UserIcon />,
     component: Accounts,
@@ -122,13 +129,6 @@ const defaultRoutes = [
     icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
-    exact: true
-  },
-  {
-    name: 'ricardianContract',
-    icon: <InfoIcon />,
-    component: RicardianContract,
-    path: '/ricardian-contract',
     exact: true
   }
 ]
@@ -206,6 +206,13 @@ const lacchainRoutes = [
   },
   {
     header: 'tools',
+    name: 'accounts',
+    icon: <UserIcon />,
+    component: Accounts,
+    path: '/accounts',
+    exact: true
+  },
+  {
     name: 'lacchainManagement',
     icon: <SlidersIcon />,
     component: LacchainManagement,
@@ -217,13 +224,6 @@ const lacchainRoutes = [
     icon: <ConfigSvg />,
     component: LacchainNodeConfig,
     path: '/node-config',
-    exact: true
-  },
-  {
-    name: 'accounts',
-    icon: <UserIcon />,
-    component: Accounts,
-    path: '/accounts',
     exact: true
   }
 ]
