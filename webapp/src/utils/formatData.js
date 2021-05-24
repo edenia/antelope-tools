@@ -36,7 +36,7 @@ export const formatData = (
       if (eosConfig.networkName === 'lacchain') {
         newData.title = `${t(`entityType${dataType}`)} Entity`
       } else {
-        newData.title = rank ? `Rank #${rank} -Top` : 'No Rank'
+        newData.title = rank ? `#${rank} -Top` : 'No Rank'
       }
 
       newData = {
