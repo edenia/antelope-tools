@@ -99,13 +99,13 @@ const ProducerSearch = ({ filters: rootFilters, onSearch, onChange }) => {
                 className={clsx({ [classes.selected]: selected === 'all' })}
               />
               <Chip
-                label="Patners"
+                label="Partners"
                 clickable
                 onClick={() => handleOnClickChip(1)}
                 className={clsx({ [classes.selected]: selected === 1 })}
               />
               <Chip
-                label="Non Patners"
+                label="Non-Partners"
                 clickable
                 onClick={() => handleOnClickChip(2)}
                 className={clsx({ [classes.selected]: selected === 2 })}
