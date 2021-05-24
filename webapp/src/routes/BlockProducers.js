@@ -39,7 +39,39 @@ const Producers = () => {
   const [totalPages, setTotalPages] = useState(1)
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [items, setItems] = useState([])
   const [filters, setFilters] = useState({})
+  const [chipFilter, setChipFilter] = useState('all')
+
+  const handlePopoverOpen = (node) => (event) => {
+    setCurrent(node)
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleOnSearch = (filters) => {
+    if (!filters.owner) {
+      setPagination((prev) => ({ ...prev, page: 1, where: null }))
+
+      return
+    }
+
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      where: { owner: { _like: `%${filters.owner}%` } }
+    }))
+  }
+
+  const handleOnPageChange = (_, page) => {
+    setPagination((prev) => ({
+      ...prev,
+      page
+    }))
+  }
 
   useEffect(() => {
     loadProducers({
@@ -74,35 +106,19 @@ const Producers = () => {
     })
   }, [location.search])
 
-  const handlePopoverOpen = (node) => (event) => {
-    setCurrent(node)
-    setAnchorEl(event.currentTarget)
-  }
+  useEffect(() => {
+    if (!producers?.length) return
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
+    let items = producers || []
 
-  const handleOnSearch = (filters) => {
-    if (!filters.owner) {
-      setPagination((prev) => ({ ...prev, page: 1, where: null }))
-
-      return
+    if (chipFilter !== 'all') {
+      items = items.filter((producer) => producer.bp_json?.type === chipFilter)
     }
 
-    setPagination((prev) => ({
-      ...prev,
-      page: 1,
-      where: { owner: { _like: `%${filters.owner}%` } }
-    }))
-  }
+    setItems(items)
+  }, [chipFilter, producers])
 
-  const handleOnPageChange = (_, page) => {
-    setPagination((prev) => ({
-      ...prev,
-      page
-    }))
-  }
+  console.log({ items })
 
   return (
     <Box>
@@ -114,11 +130,15 @@ const Producers = () => {
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
       <Box className={classes.searchWrapper}>
-        <ProducerSearch onSearch={handleOnSearch} filters={filters} />
+        <ProducerSearch
+          onSearch={handleOnSearch}
+          filters={filters}
+          onChange={setChipFilter}
+        />
       </Box>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
-        {(producers || []).map((producer, index) => (
+        {(items || []).map((producer, index) => (
           <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
             <InformationCard
               type="entity"

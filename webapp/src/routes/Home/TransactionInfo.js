@@ -186,7 +186,7 @@ const TransactionInfo = ({ t, classes }) => {
             maxPadding: 0.05
           }}
           xAxisProps={{
-            reversed: true,
+            reversed: false,
             title: {
               enabled: true,
               text: t('secondsAgo')

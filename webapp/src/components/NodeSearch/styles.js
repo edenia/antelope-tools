@@ -58,10 +58,20 @@ export default (theme, eosConfig) => ({
     paddingRight: 4
   },
   cardContent: {
-    padding: `${theme.spacing(4)}px !important`,
-    height: 90
+    padding: `${theme.spacing(4)}px !important`
   },
   nodeSearchWrapper: {
     marginBottom: theme.spacing(2)
+  },
+  chipWrapper: {
+    marginTop: theme.spacing(2),
+    '& .MuiChip-root': {
+      marginRight: theme.spacing(2)
+    },
+    textTransform: 'capitalize'
+  },
+  selected: {
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    color: '#fff'
   }
 })

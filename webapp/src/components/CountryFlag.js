@@ -7,7 +7,8 @@ import UnknowFlagIcon from './UnknowFlagIcon'
 
 const useStyles = makeStyles((theme) => ({
   country: {
-    marginRight: theme.spacing(0.5)
+    marginRight: theme.spacing(0.5),
+    marginLeft: theme.spacing(1)
   }
 }))
 
