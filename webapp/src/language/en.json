@@ -264,5 +264,10 @@
     "lowest": "Lowest",
     "highest": "Highest",
     "average": "Average"
+  },
+  "producerSearchComponent": {
+    "partner": "Partner",
+    "nonPartner": "Non-Partner",
+    "all": "All"
   }
 }

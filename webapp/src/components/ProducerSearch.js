@@ -93,19 +93,19 @@ const ProducerSearch = ({ filters: rootFilters, onSearch, onChange }) => {
             />
             <Box className={classes.chipWrapper}>
               <Chip
-                label="All Entities"
+                label={t('all')}
                 clickable
                 onClick={() => handleOnClickChip('all')}
                 className={clsx({ [classes.selected]: selected === 'all' })}
               />
               <Chip
-                label="Partners"
+                label={t('partners')}
                 clickable
                 onClick={() => handleOnClickChip(1)}
                 className={clsx({ [classes.selected]: selected === 1 })}
               />
               <Chip
-                label="Non-Partners"
+                label={t('nonPartners')}
                 clickable
                 onClick={() => handleOnClickChip(2)}
                 className={clsx({ [classes.selected]: selected === 2 })}
