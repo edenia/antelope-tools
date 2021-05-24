@@ -9,10 +9,14 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { useSubscription } from '@apollo/react-hooks'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../gql'
-import { formatWithThousandSeparator } from '../utils'
+import { formatWithThousandSeparator, getBlockNumUrl } from '../utils'
 
 const BodyGraphValue = ({ loading, value }) => {
   if (loading) return <LinearProgress />
+
+  if (typeof value !== 'number') {
+    return <>{value}</>
+  }
 
   return (
     <Typography component="p" variant="h6">
@@ -23,7 +27,7 @@ const BodyGraphValue = ({ loading, value }) => {
 
 BodyGraphValue.propTypes = {
   loading: PropTypes.bool,
-  value: PropTypes.number
+  value: PropTypes.any
 }
 
 BodyGraphValue.defaultProps = {
@@ -72,6 +76,49 @@ const TransactionsHistory = ({ t, classes }) => {
               value={formatWithThousandSeparator(
                 data?.stats?.[0]?.transactions_in_last_week || 0
               )}
+              loading={loading}
+            />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} sm={4} lg={3}>
+        <Card>
+          <CardContent className={classes.cards}>
+            <Typography>{t('tpsAllTimeHigh')}</Typography>
+            <BodyGraphValue
+              value={
+                <>
+                  <Typography component="p" variant="h6">
+                    {data?.stats?.[0]?.tps_all_time_high?.transactions_count ||
+                      0}
+                  </Typography>
+                  {data?.stats?.[0]?.tps_all_time_high?.blocks?.map(
+                    (block, index) => (
+                      <Typography component="p" variant="body1" key={index}>
+                        <a
+                          href={getBlockNumUrl(block.block_num)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {block.block_num}
+                        </a>{' '}
+                        {block.transactions_count} {t('net')}:{' '}
+                        {formatWithThousandSeparator(
+                          block.net_usage_percent * 100,
+                          3
+                        )}
+                        % {t('cpu')}:{' '}
+                        {formatWithThousandSeparator(
+                          block.cpu_usage_percent * 100,
+                          4
+                        )}
+                        %
+                      </Typography>
+                    )
+                  )}
+                </>
+              }
               loading={loading}
             />
           </CardContent>

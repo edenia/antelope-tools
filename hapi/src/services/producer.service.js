@@ -27,7 +27,6 @@ const updateProducers = async (producers = []) => {
 }
 
 const syncProducers = async () => {
-  console.log('start')
   let producers = []
 
   switch (eosConfig.networkName) {
@@ -40,7 +39,6 @@ const syncProducers = async () => {
   }
 
   await updateProducers(producers)
-  console.log('end')
 }
 
 module.exports = {

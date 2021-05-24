@@ -88,6 +88,7 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
       transactions_in_last_day
       transactions_in_last_week
       average_daily_transactions_in_last_week
+      tps_all_time_high
       updated_at
     }
   }
