@@ -32,7 +32,9 @@
     "nodes": "Nodes",
     "total": "Total",
     "missedBlocks": "Missed Blocks",
-    "timeFrame": "Time frame"
+    "timeFrame": "Time frame",
+    "net": "NET",
+    "cpu": "CPU"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -102,7 +104,8 @@
     "Last Week": "Last Week",
     "Last Year": "Last Year",
     "scheduleVersion": "Schedule Version",
-    "secondsAgo": "Seconds Ago"
+    "secondsAgo": "Seconds Ago",
+    "tpsAllTimeHigh": "TPS All Time High"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {

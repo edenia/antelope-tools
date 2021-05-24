@@ -90,12 +90,13 @@
   - role: guest
     permission:
       columns:
-      - id
-      - transactions_in_last_hour
-      - transactions_in_last_day
-      - transactions_in_last_week
       - average_daily_transactions_in_last_week
       - created_at
-      - updated_at
+      - id
       - nodes_summary
+      - tps_all_time_high
+      - transactions_in_last_day
+      - transactions_in_last_hour
+      - transactions_in_last_week
+      - updated_at
       filter: {}

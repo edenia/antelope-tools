@@ -9,5 +9,11 @@ export const formatWithThousandSeparator = (value, precision) => {
     newValue = newValue.toFixed(precision)
   }
 
-  return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  const [integer, decimal] = newValue.toString().split('.')
+
+  return parseFloat(
+    `${integer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.${
+      decimal || 0
+    }`
+  )
 }

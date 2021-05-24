@@ -62,6 +62,7 @@ const start = async () => {
     workersConfig.syncScheduleHistoryInterval
   )
   run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
+  run('SYNC TPS', statsService.syncTPSAllTimeHigh)
 }
 
 module.exports = {
