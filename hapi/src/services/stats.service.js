@@ -171,8 +171,7 @@ const getLastTPSAllTimeHigh = async () => {
   return {
     transactions_count: 0,
     last_block_at: stats.last_block_at,
-    // @todo: change this to scheduleHistoryInfo.first_block_at after stress test
-    checked_at: moment()
+    checked_at: moment(scheduleHistoryInfo.first_block_at)
       .subtract(1, 'second')
       .toISOString()
   }
@@ -242,7 +241,7 @@ const syncTPSAllTimeHigh = async () => {
       FROM 
         interval
       INNER JOIN 
-        block_history ON date_trunc('second', block_history.timestamp) = interval.value
+        block_history ON block_history.timestamp between '${start.toISOString()}'::timestamp and '${end.toISOString()}'::timestamp and date_trunc('second', block_history.timestamp) = interval.value
       GROUP BY 
         1
       ORDER BY 
