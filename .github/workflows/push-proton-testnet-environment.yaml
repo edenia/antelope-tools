@@ -61,7 +61,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_TOKEN_SYMBOL: 'XPR'
           REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online"},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online"}]'
-          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution"]'
+          REACT_APP_DISABLED_MENU_ITEMS: '["/cpu-benchmark"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://proton-test.bloks.io/transaction/${transaction}'
 
       - name: Build and deploy kubernetes files
