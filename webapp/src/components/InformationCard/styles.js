@@ -109,7 +109,10 @@ export default (theme) => ({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    width: 350
+    width: 350,
+    '& a': {
+      marginLeft: theme.spacing(1)
+    }
   },
   textWrap: {
     width: 210,

@@ -31,12 +31,22 @@ export const formatData = (
     endpoints: {}
   }
 
+  const getSubTitle = () => {
+    if (eosConfig.networkName === 'lacchain') return owner
+
+    if (rank <= 21) return 'Top 21'
+
+    if (rank > 21 && rank <= 64) return 'Paid Standby'
+
+    return 'Non-Paid Standby'
+  }
+
   switch (type) {
     case 'entity':
       if (eosConfig.networkName === 'lacchain') {
         newData.title = `${t(`entityType${dataType}`)} Entity`
       } else {
-        newData.title = rank ? `#${rank} -Top` : 'No Rank'
+        newData.title = rank ? `#${rank} - ${owner}` : owner
       }
 
       newData = {
@@ -44,12 +54,12 @@ export const formatData = (
         media: {
           logo: data.branding?.logo_256 || null,
           name: data.candidate_name || data.organization_name || owner,
-          account: ''
+          account: getSubTitle()
         },
         info: {
           location: data.location?.name || 'N/A',
           country: data.location?.country || null,
-          website: data.website,
+          website: data?.website || '',
           email: data.email,
           ownership: data?.chain_resources || null,
           bussinesContact: data.bussines_contact || null,
