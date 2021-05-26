@@ -137,6 +137,8 @@ const Nodes = () => {
     setItems(items)
   }, [filters, producers])
 
+  console.log({ items })
+
   return (
     <Box>
       <NodeSearch filters={filters} onChange={handleOnFiltersChange} />

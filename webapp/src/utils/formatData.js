@@ -32,7 +32,8 @@ export const formatData = (
   }
 
   const getSubTitle = () => {
-    if (eosConfig.networkName === 'lacchain') return owner
+    if (eosConfig.networkName === 'lacchain')
+      return `${t(`entityType${dataType}`)} Entity`
 
     if (rank <= 21) return 'Top 21'
 
@@ -44,7 +45,7 @@ export const formatData = (
   switch (type) {
     case 'entity':
       if (eosConfig.networkName === 'lacchain') {
-        newData.title = `${t(`entityType${dataType}`)} Entity`
+        newData.title = owner
       } else {
         newData.title = rank ? `#${rank} - ${owner}` : owner
       }
@@ -84,11 +85,11 @@ export const formatData = (
 
     case 'node':
       newData = {
-        title: node?.name || null,
+        title: owner || null,
         media: {
           logo: data.branding?.logo_256 || null,
-          name: data.candidate_name || data.organization_name || owner,
-          type: node?.node_type || null
+          name: node?.name,
+          account: node?.node_type || null
         },
         info: {
           version: node?.server_version_string || null,
