@@ -40,7 +40,7 @@ const NodesSummary = ({ t, classes }) => {
       return
     }
 
-    const { total, ...nodes } = data?.stats[0]?.nodes_summary
+    const { total, ...nodes } = data?.stats[0]?.nodes_summary || {}
 
     setTotal(total)
     setNodes(nodes)
