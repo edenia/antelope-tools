@@ -4,6 +4,7 @@ const producerService = require('./producer.service')
 const settingService = require('./setting.service')
 const stateHistoryPluginService = require('./state-history-plugin.service')
 const statsService = require('./stats.service')
+const transactionsService = require('./transactions.service')
 
 module.exports = {
   cpuService,
@@ -11,5 +12,6 @@ module.exports = {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService
+  statsService,
+  transactionsService
 }
