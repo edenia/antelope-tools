@@ -111,7 +111,10 @@
     "Last Week": "Última Semana",
     "Last Year": "Último Año",
     "scheduleVersion": "Versión de Programa",
-    "secondsAgo": "Hace Segundos"
+    "secondsAgo": "Hace Segundos",
+    "networkUtilizationAllTimeHigh": "Máxima utilización de la red",
+    "transactionsPerSecond": "Transacciones por segundo",
+    "transactionsPerBlock": "Transacciones por bloque"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
