@@ -17,27 +17,27 @@ run:
 @:
 
 jungle:
-	cp .env.jungle .env
+	@cat ".env.jungle" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
 telostestnet:
-	cp .env.telostestnet .env
+	@cat ".env.telostestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
 lacchain:
-	cp .env.lacchain .env
+	@cat ".env.lacchain" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
 local:
-	cp .env.local .env
+	@cat ".env.local" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
 mainnet:
-	cp .env.mainnet .env
+	@cat ".env.mainnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
