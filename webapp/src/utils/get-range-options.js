@@ -11,6 +11,5 @@ export const rangeOptions = [
   '2 Months',
   '3 Months',
   '6 Months',
-  '1 Year',
-  'all'
+  '1 Year'
 ]
