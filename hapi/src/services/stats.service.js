@@ -156,7 +156,7 @@ const getLastTPSAllTimeHigh = async () => {
 
   const query = `
     query {
-      schedule_history (where: {version: {_eq: 16}}) {
+      schedule_history (where: {version: {_eq: 0}}) {
         first_block_at
       }
     }
@@ -247,12 +247,19 @@ const syncTPSAllTimeHigh = async () => {
       ORDER BY 
         2 DESC
      )
-     SELECT datetime, transactions_count, blocks FROM tps LIMIT 1
+     SELECT datetime, transactions_count::integer, blocks FROM tps LIMIT 1
   `)
 
   if (!rows.length) {
-    await sleepFor(60)
+    await udpateStats({
+      tps_all_time_high: {
+        ...lastValue,
+        checked_at: end.toISOString()
+      }
+    })
     syncTPSAllTimeHigh()
+
+    return
   }
 
   const newValue = rows[0]
