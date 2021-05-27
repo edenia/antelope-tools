@@ -22,6 +22,18 @@ actions:
     timeout: 180
   permissions:
   - role: guest
+- name: producers_summary
+  definition:
+    kind: ""
+    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/producers-summary'
+  permissions:
+  - role: guest
+- name: transactions
+  definition:
+    kind: ""
+    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/transactions'
+  permissions:
+  - role: guest
 custom_types:
   enums: []
   input_objects: []
@@ -29,4 +41,6 @@ custom_types:
   - name: block_distribution_output
   - name: MissedBlocks
   - name: CPUBenchmark
+  - name: Transaction
+  - name: ProducersSummary
   scalars: []

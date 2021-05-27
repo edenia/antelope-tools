@@ -136,3 +136,13 @@ export const CPU_BENCHMARK = gql`
     }
   }
 `
+
+export const PRODUCERS_SUMMARY_QUERY = gql`
+  query {
+    producers_summary {
+      type
+      entities_count
+      entities_count
+    }
+  }
+`

@@ -19,6 +19,18 @@ type Query {
 }
 
 
+type Query {
+  producers_summary : [ProducersSummary]
+}
+
+
+type Query {
+  transactions (
+    range: String!
+  ): [Transaction]
+}
+
+
 
 
 type block_distribution_output {
@@ -40,5 +52,16 @@ type CPUBenchmark {
   account : String
   transactions : Int
   usage : Float
+}
+
+type Transaction {
+  datetime : String
+  transactions_count : Int
+}
+
+type ProducersSummary {
+  type : String
+  entities_count : Int
+  entities : String
 }
 

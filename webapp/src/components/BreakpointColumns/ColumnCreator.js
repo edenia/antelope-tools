@@ -125,6 +125,7 @@ const Masonry = ({
     return () => {
       window.removeEventListener('resize', reCalculateColumnCountDebounce)
     }
+    // eslint-disable-next-line
   }, [])
 
   let classNameOutput = className

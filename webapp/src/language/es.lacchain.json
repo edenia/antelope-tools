@@ -23,7 +23,9 @@
     "boot": "Boot",
     "writer": "Escritor",
     "observer": "Observador",
-    "validator": "Validador"
+    "validator": "Validador",
+    "partner": "Partner",
+    "nonPartner": "Non-Partner"
   },
   "producerCardComponent": {
     "entityType": "Tipo de entidad",

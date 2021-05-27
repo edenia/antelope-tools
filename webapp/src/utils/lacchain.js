@@ -14,6 +14,11 @@ export const NODE_TYPE_ID = {
   observer: 4
 }
 
+export const ENTITY_TYPE = {
+  1: 'partner',
+  2: 'nonPartner'
+}
+
 export const getNodeFeatures = () => [
   {
     label: 'chain-api',
@@ -102,6 +107,7 @@ export const getNewFieldPayload = (field, event, value, payload = {}) => {
 export default {
   NODE_TYPE_LABEL,
   NODE_TYPE_ID,
+  ENTITY_TYPE,
   getNodeFeatures,
   getNodes,
   getSchedule,
