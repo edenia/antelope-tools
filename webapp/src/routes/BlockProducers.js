@@ -27,8 +27,7 @@ const CHIPS_FILTERS = [
   },
   {
     offset: 21,
-    where: { total_rewards: { _neq: 0 } },
-    limit: 43,
+    where: { total_rewards: { _gte: 100 } },
     pibot: 22
   },
   {
