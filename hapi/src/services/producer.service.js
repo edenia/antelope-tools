@@ -1,4 +1,4 @@
-const { hasuraUtil } = require('../utils')
+const { hasuraUtil, sequelizeUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
@@ -41,6 +41,22 @@ const syncProducers = async () => {
   await updateProducers(producers)
 }
 
+const getProducersSummary = async () => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT 
+        bp_json->>'type' as type, 
+        count(*)::integer as entities_count,
+        STRING_AGG (owner, ',') as entities
+    FROM producer
+    GROUP BY 
+        bp_json->>'type'
+    ;
+`)
+
+  return rows
+}
+
 module.exports = {
-  syncProducers
+  syncProducers,
+  getProducersSummary
 }
