@@ -78,7 +78,7 @@ const Information = ({ info, classes, type, t }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {info.website || '- -'}
+            {info.website || 'N/A'}
           </Link>
         </Typography>
       </Box>
@@ -94,7 +94,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.email}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>
@@ -110,7 +110,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.ownership}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>
@@ -122,7 +122,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.chain}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>
