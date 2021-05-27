@@ -86,7 +86,10 @@ const RewardsDistribution = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const [summary, setSummary] = useState(null)
-  const { loading = true, data: { producers } = {} } = useQuery(PRODUCERS_QUERY)
+  const { loading = true, data: { producers } = {} } = useQuery(
+    PRODUCERS_QUERY,
+    { variables: { limit: 2100, where: { total_rewards: { _gte: 100 } } } }
+  )
   const { data: { setting } = {} } = useQuery(SETTING_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()

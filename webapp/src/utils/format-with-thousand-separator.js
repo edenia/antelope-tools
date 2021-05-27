@@ -11,9 +11,7 @@ export const formatWithThousandSeparator = (value, precision) => {
 
   const [integer, decimal] = newValue.toString().split('.')
 
-  return parseFloat(
-    `${integer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.${
-      decimal || 0
-    }`
-  )
+  return `${integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${
+    decimal ? '.' + decimal : ''
+  }`
 }
