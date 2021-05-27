@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/styles'
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
+import { eosConfig } from '../config'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& svg': {
@@ -38,7 +40,7 @@ const RicardianContract = () => {
       <RicardianContractComponent
         contractName="eosio"
         actionName=""
-        httpEndpoint="https://lacchain.eosio.cr"
+        httpEndpoint={eosConfig.endpoint}
         LinearProgressColor="primary"
         title={t('title')}
       />
