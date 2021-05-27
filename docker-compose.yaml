@@ -13,7 +13,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ${POSTGRES_DATA}:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: '${POSTGRES_USER}'
       POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
@@ -109,3 +109,5 @@ services:
       REACT_APP_NETWORK_URL: '${REACT_APP_NETWORK_URL}'
       REACT_APP_DISABLED_MENU_ITEMS: '${REACT_APP_DISABLED_MENU_ITEMS}'
       REACT_APP_BLOCK_EXPLORER_URL: '${REACT_APP_BLOCK_EXPLORER_URL}'
+volumes:
+  postgres_data:
