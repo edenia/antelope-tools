@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -14,6 +15,27 @@ import ProducerSearch from '../components/ProducerSearch'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
 import InformationCard from '../components/InformationCard'
+import { eosConfig } from '../config'
+
+const CHIPS_FILTERS = [
+  { offset: 0, where: null, limit: 28, pibot: 1 },
+  {
+    offset: 0,
+    where: { total_rewards: { _neq: 0 } },
+    limit: 21,
+    pibot: 1
+  },
+  {
+    offset: 21,
+    where: { total_rewards: { _gte: 100 } },
+    pibot: 22
+  },
+  {
+    pibot: 65,
+    where: { total_rewards: { _eq: 0 } },
+    limit: 28
+  }
+]
 
 const useStyles = makeStyles((theme) => ({
   searchWrapper: {
@@ -29,6 +51,38 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }))
+
+const PaginationWrapper = ({
+  classes,
+  totalPages,
+  page,
+  onPageChange,
+  loading,
+  chipFilter
+}) => {
+  if (loading || !totalPages || chipFilter === 1 || chipFilter === 2)
+    return <></>
+
+  return (
+    <Pagination
+      className={classes}
+      count={totalPages}
+      page={page}
+      onChange={onPageChange}
+      variant="outlined"
+      shape="rounded"
+    />
+  )
+}
+
+PaginationWrapper.propTypes = {
+  classes: PropTypes.any,
+  totalPages: PropTypes.number,
+  page: PropTypes.number,
+  onPageChange: PropTypes.func,
+  loading: PropTypes.bool,
+  chipFilter: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
 
 const Producers = () => {
   const classes = useStyles()
@@ -77,10 +131,11 @@ const Producers = () => {
     loadProducers({
       variables: {
         where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
+        offset: pagination.offset || (pagination.page - 1) * pagination.limit,
         limit: pagination.limit
       }
     })
+
     // eslint-disable-next-line
   }, [pagination.where, pagination.page, pagination.limit])
 
@@ -107,18 +162,26 @@ const Producers = () => {
   }, [location.search])
 
   useEffect(() => {
+    if (eosConfig.networkName === 'lacchain') return
+
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      ...CHIPS_FILTERS[chipFilter === 'all' ? 0 : chipFilter]
+    }))
+  }, [chipFilter])
+
+  useEffect(() => {
     if (!producers?.length) return
 
     let items = producers || []
 
-    if (chipFilter !== 'all') {
+    if (eosConfig.networkName === 'lacchain' && chipFilter !== 'all') {
       items = items.filter((producer) => producer.bp_json?.type === chipFilter)
     }
 
     setItems(items)
   }, [chipFilter, producers])
-
-  console.log({ items })
 
   return (
     <Box>
@@ -134,35 +197,35 @@ const Producers = () => {
           onSearch={handleOnSearch}
           filters={filters}
           onChange={setChipFilter}
+          networkName={eosConfig.networkName}
         />
       </Box>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
-        {(items || []).map((producer, index) => (
-          <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
-            <InformationCard
-              type="entity"
-              producer={producer}
-              rank={
-                pagination.where
-                  ? null
-                  : (pagination.page - 1) * pagination.limit + index + 1
-              }
-              onNodeClick={handlePopoverOpen}
-            />
-          </Grid>
-        ))}
+        {(items || []).map((producer, index) => {
+          const pibot =
+            CHIPS_FILTERS[chipFilter === 'all' ? 0 : chipFilter].pibot
+
+          return (
+            <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
+              <InformationCard
+                type="entity"
+                producer={producer}
+                rank={(pagination.page - 1) * pagination.limit + index + pibot}
+                onNodeClick={handlePopoverOpen}
+              />
+            </Grid>
+          )
+        })}
       </Grid>
-      {!loading && totalPages > 1 && (
-        <Pagination
-          className={classes.pagination}
-          count={totalPages}
-          page={pagination.page}
-          onChange={handleOnPageChange}
-          variant="outlined"
-          shape="rounded"
-        />
-      )}
+      <PaginationWrapper
+        classes={classes.pagination}
+        totalPages={totalPages}
+        page={pagination.page}
+        onPageChange={handleOnPageChange}
+        loading={loading}
+        chipFilter={chipFilter}
+      />
     </Box>
   )
 }

@@ -73,8 +73,12 @@ const Information = ({ info, classes, type, t }) => {
       <Box className={classes.rowWrapper}>
         <Typography variant="body1" className={classes.textEllipsis}>
           {`${t('website')}: `}
-          <Link href={info.website} target="_blank" rel="noopener noreferrer">
-            {info.website}
+          <Link
+            href={info.website || ''}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {info.website || 'N/A'}
           </Link>
         </Typography>
       </Box>
@@ -90,7 +94,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.email}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>
@@ -106,7 +110,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.ownership}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>
@@ -118,7 +122,7 @@ const Information = ({ info, classes, type, t }) => {
               {info.chain}
             </Link>
           ) : (
-            '- -'
+            'N/A'
           )}
         </Typography>
       </Box>

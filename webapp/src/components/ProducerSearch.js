@@ -14,6 +14,20 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 
+const CHIPS = {
+  lacchain: [
+    { value: 'all', label: 'all' },
+    { value: 1, label: 'partners' },
+    { value: 2, label: 'nonPartners' }
+  ],
+  net: [
+    { value: 'all', label: 'allBPs' },
+    { value: 1, label: 'top21' },
+    { value: 2, label: 'paidStandby' },
+    { value: 3, label: 'nonPaidStandby' }
+  ]
+}
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     width: '100%'
@@ -34,7 +48,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ProducerSearch = ({ filters: rootFilters, onSearch, onChange }) => {
+const ProducerSearch = ({
+  filters: rootFilters,
+  onSearch,
+  onChange,
+  networkName
+}) => {
   const classes = useStyles()
   const { t } = useTranslation('producerSearchComponent')
   const [selected, setSelected] = useState('all')
@@ -92,24 +111,17 @@ const ProducerSearch = ({ filters: rootFilters, onSearch, onChange }) => {
               onChange={handleOnChange('owner')}
             />
             <Box className={classes.chipWrapper}>
-              <Chip
-                label={t('all')}
-                clickable
-                onClick={() => handleOnClickChip('all')}
-                className={clsx({ [classes.selected]: selected === 'all' })}
-              />
-              <Chip
-                label={t('partners')}
-                clickable
-                onClick={() => handleOnClickChip(1)}
-                className={clsx({ [classes.selected]: selected === 1 })}
-              />
-              <Chip
-                label={t('nonPartners')}
-                clickable
-                onClick={() => handleOnClickChip(2)}
-                className={clsx({ [classes.selected]: selected === 2 })}
-              />
+              {(CHIPS[networkName] || CHIPS.net).map((chip) => (
+                <Chip
+                  key={chip.value}
+                  label={t(chip.label)}
+                  clickable
+                  onClick={() => handleOnClickChip(chip.value)}
+                  className={clsx({
+                    [classes.selected]: selected === chip.value
+                  })}
+                />
+              ))}
             </Box>
           </CardContent>
         </Card>
@@ -121,13 +133,15 @@ const ProducerSearch = ({ filters: rootFilters, onSearch, onChange }) => {
 ProducerSearch.propTypes = {
   filters: PropTypes.any,
   onSearch: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  networkName: PropTypes.string
 }
 
 ProducerSearch.defaultProps = {
   filters: {},
   onSearch: () => {},
-  onChange: () => {}
+  onChange: () => {},
+  networkName: ''
 }
 
 export default memo(ProducerSearch)
