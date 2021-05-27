@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import moment from 'moment'
 import PropTypes from 'prop-types'
 import Select from '@material-ui/core/Select'
 import Card from '@material-ui/core/Card'
@@ -16,38 +15,32 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 
+import { TRANSACTION_QUERY } from '../../gql'
+import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
+
 import EqualIcon from './EqualIcon'
 
-import { TRANSACTION_QUERY } from '../../gql'
-
-const options = [
-  { value: '0', label: 'Live (30s)' },
-  { value: '1 Hour', label: 'Last Hour' },
-  { value: '1 Day', label: 'Last Day' },
-  { value: '1 Week', label: 'Last Week' },
-  { value: '1 Year', label: 'Last Year' }
-]
-const baseValues = { block_num: null, transaction_length: 0 }
+const options = ['Live (30s)', ...rangeOptions]
 
 const TransactionInfo = ({ t, classes }) => {
   const theme = useTheme()
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
   const [graphicData, setGraphicData] = useState([])
-  const [option, setOption] = useState(options[0].value)
+  const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
-  const [
-    getTransactionHistory,
-    { loading: trxHistoryLoading, data: trxHistory }
-  ] = useLazyQuery(TRANSACTION_QUERY)
+  const [getTransactionHistory, { data: trxHistory }] =
+    useLazyQuery(TRANSACTION_QUERY)
 
   useEffect(() => {
     const majorLength = tps.length > tpb.length ? tps.length : tpb.length
     const trxPerSecond = []
     const trxPerBlock = []
 
-    if (!majorLength || pause || option !== '0') return
+    if (pause || option !== options[0]) {
+      return
+    }
 
     for (let index = 0; index < majorLength; index++) {
       const labelBlockPS = `Blocks:[${(tps[index]
@@ -68,65 +61,58 @@ const TransactionInfo = ({ t, classes }) => {
 
     setGraphicData([
       {
-        name: 'Transactions per Second',
+        name: t('transactionsPerSecond'),
         color: theme.palette.secondary.main,
-        data: trxPerSecond
+        data: trxPerSecond.reverse()
       },
       {
-        name: 'Transactions per Block',
+        name: t('transactionsPerBlock'),
+        color: '#00C853',
+        data: trxPerBlock.reverse()
+      }
+    ])
+    // eslint-disable-next-line
+  }, [option, tps, tpb])
+
+  useEffect(() => {
+    if (option === options[0]) {
+      return
+    }
+
+    getTransactionHistory({
+      variables: { range: option }
+    })
+  }, [option, getTransactionHistory])
+
+  useEffect(() => {
+    const trxPerBlock = []
+
+    if (option === option[0]) {
+      return
+    }
+
+    if (!trxHistory?.transactions?.length) {
+      setGraphicData([])
+
+      return
+    }
+
+    for (let i = 0; i < trxHistory.transactions.length; i++) {
+      trxPerBlock.push([
+        new Date(trxHistory.transactions[i].datetime).getTime(),
+        trxHistory.transactions[i].transactions_count || 0
+      ])
+    }
+
+    setGraphicData([
+      {
+        name: t('transactionsPerBlock'),
         color: '#00C853',
         data: trxPerBlock
       }
     ])
     // eslint-disable-next-line
-  }, [tps, tpb])
-
-  useEffect(() => {
-    if (option !== '0') {
-      const values = option.split(' ')
-      const date = moment().subtract(values[0], values[1]).utc().toString()
-      getTransactionHistory({
-        variables: { date }
-      })
-    }
-  }, [option, getTransactionHistory])
-
-  useEffect(() => {
-    const trxPerSecond = []
-    const trxPerBlock = []
-
-    if (option !== '0') {
-      if (!trxHistory?.block_history?.length) {
-        setGraphicData([])
-
-        return
-      }
-
-      for (let i = 1; i < trxHistory.block_history.length; i = i + 2) {
-        const item = trxHistory.block_history[i] || baseValues
-        const prevItem = trxHistory.block_history[i - 1] || baseValues
-        const trxPer = item.transaction_length + prevItem.transaction_length
-        const blocks = `Blocks:[${item.block_num}, ${prevItem.block_num}]`
-
-        trxPerSecond.push([blocks, trxPer])
-        trxPerBlock.push([blocks, trxPer])
-      }
-
-      setGraphicData([
-        {
-          name: 'Transactions per Second',
-          color: theme.palette.secondary.main,
-          data: trxPerSecond
-        },
-        {
-          name: 'Transactions per Block',
-          color: '#00C853',
-          data: trxPerBlock
-        }
-      ])
-    }
-    // eslint-disable-next-line
-  }, [trxHistoryLoading, trxHistory])
+  }, [trxHistory, t])
 
   return (
     <Card>
@@ -144,9 +130,9 @@ const TransactionInfo = ({ t, classes }) => {
                 onChange={(e) => setOption(e.target.value)}
                 fullWidth
               >
-                {options.map((item) => (
-                  <MenuItem key={item.label} value={item.value}>
-                    {t(item.label)}
+                {options.map((item, index) => (
+                  <MenuItem key={index} value={item}>
+                    {t(item)}
                   </MenuItem>
                 ))}
               </Select>
@@ -154,7 +140,7 @@ const TransactionInfo = ({ t, classes }) => {
             <Box
               onClick={() => option === options[0].value && setPause(!pause)}
               className={clsx(classes.pauseButton, {
-                [classes.disableButton]: option !== options[0].value
+                [classes.disableButton]: option !== options[0]
               })}
             >
               {pause ? (
@@ -176,7 +162,6 @@ const TransactionInfo = ({ t, classes }) => {
         </Box>
 
         <TransactionsLineChart
-          data={graphicData}
           yAxisProps={{
             reversed: false,
             title: {
@@ -186,16 +171,18 @@ const TransactionInfo = ({ t, classes }) => {
             maxPadding: 0.05
           }}
           xAxisProps={{
-            reversed: false,
+            type: 'datetime',
+            reversed: true,
             title: {
               enabled: true,
               text: t('secondsAgo')
             },
             labels: {
-              format: '{value}s'
+              format: option === options[0] ? '{value}s' : null
             },
             maxPadding: 0.05
           }}
+          data={graphicData}
         />
       </CardContent>
     </Card>

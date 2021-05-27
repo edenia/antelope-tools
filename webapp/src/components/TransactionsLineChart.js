@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 import Box from '@material-ui/core/Box'
 
-const LineChart = ({ data, xAxisProps, title, yAxisProps }) => {
+const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
   const options = {
+    time: {
+      timezoneOffset: new Date().getTimezoneOffset()
+    },
     title: {
       text: title
     },
@@ -24,24 +27,27 @@ const LineChart = ({ data, xAxisProps, title, yAxisProps }) => {
     <Box>
       <HighchartsReact
         highcharts={Highcharts}
-        options={{ ...options, series: data }}
+        options={{
+          ...options,
+          series: data
+        }}
       />
     </Box>
   )
 }
 
-LineChart.propTypes = {
+TransactionsLineChart.propTypes = {
   data: PropTypes.array,
   xAxisProps: PropTypes.object,
   yAxisProps: PropTypes.object,
   title: PropTypes.string
 }
 
-LineChart.defaultProps = {
+TransactionsLineChart.defaultProps = {
   data: [],
   xAxisProps: { xAxisVisible: false },
   yAxisProps: {},
   title: ''
 }
 
-export default LineChart
+export default TransactionsLineChart
