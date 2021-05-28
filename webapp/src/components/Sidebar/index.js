@@ -7,7 +7,6 @@ import {
   Chip,
   Collapse,
   Drawer as MuiDrawer,
-  Grid,
   List as MuiList,
   ListItem as MuiListItem,
   ListItemText,
@@ -23,7 +22,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import routes from '../../routes'
 
-import EosLogo from './eosLogo'
 import styles from './styles'
 
 const useStyles = makeStyles((theme) => styles(theme, rgba))
@@ -288,29 +286,6 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
             ))}
         </MuiList>
       </PerfectScrollbar>
-      <Box className={classesStyle.sidebarFooter}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <Typography
-              className={classesStyle.sidebarFooterText}
-              variant="body2"
-            >
-              An open source project by
-            </Typography>
-            <Box className={classesStyle.footerBoxLink}>
-              <EosLogo />
-              <a
-                href="https://eoscostarica.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                EOS Costa Rica
-              </a>
-            </Box>
-            <Typography className={classesStyle.sidebarFooterSubText} />
-          </Grid>
-        </Grid>
-      </Box>
     </MuiDrawer>
   )
 }

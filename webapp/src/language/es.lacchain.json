@@ -115,7 +115,10 @@
     "ram_bytes": "Bytes de Ram",
     "account": "Cuenta",
     "executeTransaction": "Ejecutar Transacción",
-    "creator": "Creador"
+    "creator": "Creador",
+    "comiteeAccount": "Administración de cuentas del comité de permisos",
+    "partnerAccount": "Administración Partner Entity",
+    "nonPartnerAccount": "Administración Non-Partner Entity"
   },
   "blockDistributionRoute": {
     "title": "Bloques generados por Nodo"

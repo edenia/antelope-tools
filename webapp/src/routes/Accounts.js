@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react'
+import React, { lazy, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -114,7 +114,7 @@ const Accounts = ({ ual }) => {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     try {
-      const account = await eosApi.getAccount(accountName)
+      const account = await eosApi.getAccount(accountName || 'eosio')
       setAccount(account)
     } catch (error) {
       showMessage({
@@ -124,9 +124,11 @@ const Accounts = ({ ual }) => {
     }
 
     try {
-      const { abi } = await eosApi.getAbi(accountName)
+      const { abi } = await eosApi.getAbi(accountName || 'eosio')
       setAbi(abi)
-      const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
+      const { code_hash: hash = '' } = await eosApi.getCodeHash(
+        accountName || 'eosio'
+      )
       setHash(hash)
     } catch (error) {
       console.log(error)
@@ -142,6 +144,10 @@ const Accounts = ({ ual }) => {
 
     handleOnSearch()
   }
+
+  useEffect(() => {
+    handleOnSearch()
+  }, [])
 
   return (
     <Grid item xs={12}>

@@ -21,7 +21,8 @@ const initialValue = {
   lacchain: {
     nodes: [],
     entities: [],
-    currentEntity: null
+    currentEntity: null,
+    dynamicTitle: ''
   }
 }
 

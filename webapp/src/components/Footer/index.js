@@ -1,9 +1,17 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import { Grid, List, ListItemText, ListItem, Box } from '@material-ui/core'
+import {
+  Grid,
+  List,
+  ListItemText,
+  ListItem,
+  Box,
+  Typography
+} from '@material-ui/core'
 
 import { generalConfig } from '../../config'
 
+import EosLogo from './eosLogo'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -12,8 +20,8 @@ const Footer = () => {
   const classes = useStyles()
 
   return (
-    <Box className={classes.wrapper}>
-      <Grid container item xs={12}>
+    <Box className={classes.wrapper} display="flex">
+      <Grid container item xs={12} sm={8}>
         <List>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
@@ -27,6 +35,27 @@ const Footer = () => {
             </ListItem>
           ))}
         </List>
+      </Grid>
+      <Grid container item xs={12} sm={4} className={classes.gridFooter}>
+        <Box className={classes.sidebarFooter}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Typography className={classes.sidebarFooterText} variant="body2">
+                An open source project by
+              </Typography>
+              <Box className={classes.footerBoxLink}>
+                <EosLogo />
+                <a
+                  href="https://eoscostarica.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  EOS Costa Rica
+                </a>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
       </Grid>
     </Box>
   )

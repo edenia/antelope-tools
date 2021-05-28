@@ -17,6 +17,7 @@ import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
 import SnackbarMessage from '../components/SnackbarMessage'
 import { eosConfig, generalConfig } from '../config'
+import { useSharedState } from '../context/state.context'
 
 import styles from './styles'
 
@@ -46,6 +47,7 @@ const Dashboard = ({ children, width, ual }) => {
   const classes = useStyles()
   const { t } = useTranslation('routes')
   const location = useLocation()
+  const [lacchain] = useSharedState()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -74,9 +76,11 @@ const Dashboard = ({ children, width, ual }) => {
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
             <Typography variant="h3">
-              {`${t(`${location.pathname}>heading`)} ${
-                location.pathname === '/' ? eosConfig.networkLabel : ''
-              }`}
+              {`${
+                location.pathname === '/management'
+                  ? lacchain.dynamicTitle
+                  : t(`${location.pathname}>heading`)
+              } ${location.pathname === '/' ? eosConfig.networkLabel : ''}`}
             </Typography>
             <NetworkSelector
               title={eosConfig.networkLabel}
