@@ -167,8 +167,10 @@ const LacchainManagement = ({ ual }) => {
   useEffect(() => {
     const checkAccount = async () => {
       let actions = []
+      let dynamicTitle = ''
 
       if (ual.activeUser.accountName === 'eosio') {
+        dynamicTitle = t('comiteeAccount')
         actions = [
           'setentinfo',
           'addentity',
@@ -200,6 +202,7 @@ const LacchainManagement = ({ ual }) => {
       }
 
       if (currentEntity?.type === 1) {
+        dynamicTitle = t('partnerAccount')
         actions = [
           ...actions,
           'addboot',
@@ -211,6 +214,7 @@ const LacchainManagement = ({ ual }) => {
       }
 
       if (currentEntity?.type === 2) {
+        dynamicTitle = t('nonPartnerAccount')
         actions = [...actions, 'addobserver', 'addwriter']
       }
 
@@ -232,7 +236,8 @@ const LacchainManagement = ({ ual }) => {
         entities,
         nodes,
         currentEntity,
-        isAdmin: ual.activeUser.accountName === 'eosio'
+        isAdmin: ual.activeUser.accountName === 'eosio',
+        dynamicTitle
       })
     }
 

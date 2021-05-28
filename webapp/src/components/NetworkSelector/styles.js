@@ -62,7 +62,7 @@ export default (theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 22,
       borderRadius: theme.spacing(2, 4, 4, 2),
-      justifyContent: 'space-between'
+      justifyContent: 'flex-start'
     }
   },
   networkLogo: {
@@ -82,5 +82,8 @@ export default (theme) => ({
       right: -10,
       top: -3
     }
+  },
+  expandMoreIcon: {
+    marginTop: theme.spacing(1)
   }
 })

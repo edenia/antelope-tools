@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import Box from '@material-ui/core/Box'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
@@ -31,6 +32,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
         <Typography component="p" variant="h5">
           {title}
         </Typography>
+        <ExpandMoreIcon className={classes.expandMoreIcon} />
       </Box>
       <ul className={clsx(classes.list, { [classes.listActive]: open })}>
         {options.map((option, i) => {

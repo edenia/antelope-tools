@@ -88,42 +88,5 @@ export default (theme, rgba) => ({
     opacity: 0.9,
     display: 'block',
     fontWeight: '600'
-  },
-  sidebarFooter: {
-    backgroundColor: `${theme.sidebar.footer.background} !important`,
-    padding: theme.spacing(2.75, 4),
-    minHeight: 61,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  sidebarFooterText: {
-    color: theme.sidebar.footer.color,
-    fontSize: 14,
-    lineHeight: '20px',
-    textAlign: 'center',
-    letterSpacing: '0.1px'
-  },
-  sidebarFooterSubText: {
-    color: theme.sidebar.footer.color,
-    fontSize: '0.725rem',
-    display: 'block',
-    padding: 1
-  },
-  footerBoxLink: {
-    display: 'flex',
-    justifyContent: 'center',
-    '& a': {
-      color: theme.sidebar.footer.color,
-      fontSize: 14,
-      lineHeight: '20px',
-      textAlign: 'center',
-      letterSpacing: '0.1px',
-      textDecoration: 'none',
-      marginTop: 3
-    },
-    '& svg': {
-      marginRight: theme.spacing(1)
-    }
   }
 })
