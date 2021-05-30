@@ -113,7 +113,7 @@
     "scheduleVersion": "Versión de Programa",
     "secondsAgo": "Hace Segundos",
     "networkUtilizationAllTimeHigh": "Máxima utilización de la red",
-    "tpsAllTimeHigh": "TPS más alto de todos los tiempos",
+    "tpsAllTimeHigh": "TPS máximo histórico",
     "transactionsPerSecond": "Transacciones por segundo",
     "transactionsPerBlock": "Transacciones por bloque",
     "nodes": "Nodos",
@@ -214,7 +214,7 @@
     "noData": "No hay Datos",
     "peer_keys": "Peer",
     "account_key": "Cuenta",
-    "hs_bpJson": "BPJson"
+    "hs_bpJson": "BP Json"
   },
   "nodeCardComponent": {
     "features": "Características",
@@ -233,7 +233,7 @@
     "hs_endpoint": "Endpoint",
     "missing": "No encontrado",
     "found": "Encontrado",
-    "hs_bpJson": "BPJson"
+    "hs_bpJson": "BP Json"
   },
   "accountInfoComponent": {
     "resources": "Recursos",
@@ -285,7 +285,7 @@
     "all": "Todos",
     "allBPs": "Todos los Productores de Bloque",
     "top21": "Top 21",
-    "paidStandby": "Paid Standby",
-    "nonPaidStandby": "Non-Paid Standby"
+    "paidStandby": "Reserva con pago",
+    "nonPaidStandby": "Reserva sin pago"
   }
 }

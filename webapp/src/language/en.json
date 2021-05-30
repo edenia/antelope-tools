@@ -207,7 +207,7 @@
     "noData": "No Data",
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
-    "hs_bpJson": "BPJson"
+    "hs_bpJson": "BP Json"
   },
   "nodeCardComponent": {
     "features": "Features",
@@ -226,7 +226,7 @@
     "hs_endpoint": "Endpoint",
     "missing": "Missing",
     "found": "Found",
-    "hs_bpJson": "BPJson"
+    "hs_bpJson": "BP Json"
   },
   "accountInfoComponent": {
     "resources": "Resources",
