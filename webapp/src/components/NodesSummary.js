@@ -62,7 +62,7 @@ const NodesSummary = ({ t, classes }) => {
           <Grid item xs={12} sm={4} lg={3} key={type}>
             <Card>
               <CardContent className={classes.cards}>
-                <Typography>{`${t(type)} ${t('nodes')}`}</Typography>
+                <Typography>{t(type)}</Typography>
                 <BodyGraphValue value={nodes[type] || 0} loading={loading} />
               </CardContent>
             </Card>

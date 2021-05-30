@@ -62,7 +62,11 @@ const TransactionsHistory = ({ t, classes }) => {
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
               value={
-                <Typography component="p" variant="h6">
+                <Typography
+                  className={classes.cardLink}
+                  component="p"
+                  variant="h6"
+                >
                   {data?.stats?.[0]?.tps_all_time_high?.blocks?.map(
                     (block, index) => (
                       <>

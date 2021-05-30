@@ -11,7 +11,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: 0,
-      width: 220
+      width: 'auto',
+      minWidth: 200
     },
     '&:hover': {
       cursor: 'pointer'
@@ -25,12 +26,12 @@ export default (theme) => ({
     position: 'absolute',
     zIndex: 2,
     padding: 0,
-    width: 186,
+    width: 180,
     top: 48,
     left: 7,
     border: `1px solid ${theme.palette.primary.main}`,
     [theme.breakpoints.up('sm')]: {
-      width: 165
+      width: 160
     }
   },
   listActive: {
@@ -84,6 +85,10 @@ export default (theme) => ({
     }
   },
   expandMoreIcon: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    marginRight: 0,
+    [theme.breakpoints.up('sm')]: {
+      marginRight: theme.spacing(11)
+    }
   }
 })

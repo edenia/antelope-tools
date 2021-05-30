@@ -108,7 +108,14 @@
     "tpsAllTimeHigh": "TPS All Time High",
     "networkUtilizationAllTimeHigh": "Network Utilization All Time High",
     "transactionsPerSecond": "Transactions per Second",
-    "transactionsPerBlock": "Transactions per Block"
+    "transactionsPerBlock": "Transactions per Block",
+    "nodes": "Nodes",
+    "full": "Full Nodes",
+    "seed": "Seed Nodes",
+    "query": " Query Nodes",
+    "producer": "Producer Nodes",
+    "query,seed": "Nodos Query, Seed",
+    "undefined": "Undefined Nodes"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -199,7 +206,8 @@
     "stats": "Stats",
     "noData": "No Data",
     "peer_keys": "Peer Key",
-    "account_key": "Account Key"
+    "account_key": "Account Key",
+    "hs_bpJson": "BPJson"
   },
   "nodeCardComponent": {
     "features": "Features",
@@ -217,7 +225,8 @@
     "hs_peer_keys": "Peer Keys",
     "hs_endpoint": "Endpoint",
     "missing": "Missing",
-    "found": "Found"
+    "found": "Found",
+    "hs_bpJson": "BPJson"
   },
   "accountInfoComponent": {
     "resources": "Resources",

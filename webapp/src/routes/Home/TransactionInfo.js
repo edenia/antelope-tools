@@ -18,6 +18,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import { TRANSACTION_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
+import { eosConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
 
@@ -123,19 +124,23 @@ const TransactionInfo = ({ t, classes }) => {
           </Typography>
           <Box className={classes.formControl}>
             <FormControl>
-              <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
-              <Select
-                labelId="option-linebar"
-                value={option}
-                onChange={(e) => setOption(e.target.value)}
-                fullWidth
-              >
-                {options.map((item, index) => (
-                  <MenuItem key={index} value={item}>
-                    {t(item)}
-                  </MenuItem>
-                ))}
-              </Select>
+              {eosConfig.networkName === 'lacchain' && (
+                <>
+                  <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
+                  <Select
+                    labelId="option-linebar"
+                    value={option}
+                    onChange={(e) => setOption(e.target.value)}
+                    fullWidth
+                  >
+                    {options.map((item, index) => (
+                      <MenuItem key={index} value={item}>
+                        {t(item)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </>
+              )}
             </FormControl>
             <Box
               onClick={() => option === options[0].value && setPause(!pause)}

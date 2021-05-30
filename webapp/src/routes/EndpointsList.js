@@ -64,17 +64,25 @@ const EndpointsList = () => {
     }
 
     setProducers(
-      data.producers.map((producer) => ({
-        name:
-          producer.bp_json?.org?.candidate_name ||
-          producer?.bp_json?.org?.organization_name ||
-          producer?.owner,
-        endpoints: {
-          api: producer.endpoints?.api || [],
-          ssl: producer.endpoints?.ssl || [],
-          p2p: producer.endpoints?.p2p || []
-        }
-      }))
+      data.producers
+        .filter((producer) => {
+          return (
+            producer.endpoints?.api.length ||
+            producer.endpoints?.ssl.length ||
+            producer.endpoints?.p2p.length
+          )
+        })
+        .map((producer) => ({
+          name:
+            producer.bp_json?.org?.candidate_name ||
+            producer?.bp_json?.org?.organization_name ||
+            producer?.owner,
+          endpoints: {
+            api: producer.endpoints?.api || [],
+            ssl: producer.endpoints?.ssl || [],
+            p2p: producer.endpoints?.p2p || []
+          }
+        }))
     )
 
     if (!data.producers?.[0]?.updated_at) {

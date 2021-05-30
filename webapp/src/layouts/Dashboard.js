@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { createGlobalStyle } from 'styled-components'
 import { makeStyles } from '@material-ui/styles'
@@ -18,10 +18,16 @@ import PageTitle from '../components/PageTitle'
 import SnackbarMessage from '../components/SnackbarMessage'
 import { eosConfig, generalConfig } from '../config'
 import { useSharedState } from '../context/state.context'
+import routes from '../routes'
 
 import styles from './styles'
 
 const drawerWidth = 260
+const INIT_VALUES = {
+  dynamicTitle: '',
+  networkTitle: '',
+  pathname: null
+}
 const useStyles = makeStyles((theme) => styles(theme, drawerWidth))
 
 const GlobalStyle = createGlobalStyle`
@@ -48,16 +54,32 @@ const Dashboard = ({ children, width, ual }) => {
   const { t } = useTranslation('routes')
   const location = useLocation()
   const [lacchain] = useSharedState()
+  const [routeName, setRouteName] = useState(INIT_VALUES)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
 
+  useEffect(() => {
+    if (routes.some((route) => route.path === location.pathname)) {
+      setRouteName({
+        dynamicTitle:
+          location.pathname === '/management'
+            ? lacchain.dynamicTitle
+            : t(`${location.pathname}>heading`),
+        networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
+        pathname: location.pathname
+      })
+    } else {
+      setRouteName(INIT_VALUES)
+    }
+  }, [location.pathname])
+
   return (
     <Box className={classes.root}>
       <CssBaseline />
       <GlobalStyle />
-      <PageTitle title={t(`${location.pathname}>title`)} />
+      <PageTitle title={t(`${routeName.pathname}>title`)} />
       <Box className={classes.drawer}>
         <Hidden mdUp implementation="js">
           <Sidebar
@@ -76,11 +98,9 @@ const Dashboard = ({ children, width, ual }) => {
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
             <Typography variant="h3">
-              {`${
-                location.pathname === '/management'
-                  ? lacchain.dynamicTitle
-                  : t(`${location.pathname}>heading`)
-              } ${location.pathname === '/' ? eosConfig.networkLabel : ''}`}
+              {routeName.pathname
+                ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
+                : ''}
             </Typography>
             <NetworkSelector
               title={eosConfig.networkLabel}

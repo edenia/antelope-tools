@@ -29,7 +29,7 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: 980,
-      overflowY: 'scroll',
+      overflowY: 'hidden',
       flexDirection: 'row',
       '& .bodyWrapper': {
         flexDirection: 'row',
@@ -60,7 +60,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      width: 300,
+      minWidth: 200,
+      maxWidth: 300,
       justifyContent: 'center'
     }
   },
