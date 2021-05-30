@@ -5,8 +5,8 @@ import Box from '@material-ui/core/Box'
 
 import { eosConfig } from '../../config'
 
-const Stats = ({ missedBlocks, t, classes, votes, rewards }) => {
-  if (eosConfig.networkName === 'lacchain') return <></>
+const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
+  if (eosConfig.networkName === 'lacchain' || type === 'node') return <></>
 
   return (
     <Box className={classes.healthStatus}>
@@ -44,7 +44,8 @@ Stats.propTypes = {
   t: PropTypes.func,
   classes: PropTypes.object,
   votes: PropTypes.string,
-  rewards: PropTypes.string
+  rewards: PropTypes.string,
+  type: PropTypes.string
 }
 
 Stats.defaultProps = {

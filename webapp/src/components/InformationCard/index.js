@@ -86,6 +86,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             </Box>
             <Stats
               t={t}
+              type={type}
               classes={classes}
               missedBlocks={producer.missed_blocks || []}
               votes={formatWithThousandSeparator(
