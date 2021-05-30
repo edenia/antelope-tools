@@ -58,10 +58,14 @@ export default (theme) => ({
     }
   },
   cards: {
-    padding: `${theme.spacing(4)}px !important`,
+    textTransform: 'capitalize',
     '& .MuiTypography-h6': {
       textAlign: 'center',
       marginTop: theme.spacing(2)
     }
+  },
+  cardLink: {
+    fontSize: 15,
+    marginBottom: 2
   }
 })

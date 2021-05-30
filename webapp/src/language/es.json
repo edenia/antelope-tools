@@ -24,7 +24,7 @@
     "lastHour": "Última hora",
     "lastDay": "Último día",
     "lastWeek": "Última semana",
-    "lastYear": "Ultimo año",
+    "lastYear": "Último año",
     "itemsPerPage": "Elementos por página",
     "api": "API",
     "ssl": "SSL",
@@ -97,7 +97,7 @@
   },
   "homeRoute": {
     "currentProducer": "Productor de Bloque Actual",
-    "headBlock": "Ultimo Bloque",
+    "headBlock": "Último Bloque",
     "lastBlock": "Último Bloque Irreversible",
     "bpSchedule": "Programa de Producción de Bloques",
     "transPerSecond": "Transacciones por Segundo",
@@ -113,8 +113,17 @@
     "scheduleVersion": "Versión de Programa",
     "secondsAgo": "Hace Segundos",
     "networkUtilizationAllTimeHigh": "Máxima utilización de la red",
+    "tpsAllTimeHigh": "TPS máximo histórico",
     "transactionsPerSecond": "Transacciones por segundo",
-    "transactionsPerBlock": "Transacciones por bloque"
+    "transactionsPerBlock": "Transacciones por bloque",
+    "nodes": "Nodos",
+    "full": "Nodos Tipo Full",
+    "seed": "Nodos Tipo Seed",
+    "query": "Nodos Tipo  Query",
+    "producer": "Nodos Tipo Producer",
+    "query,seed": "Nodos Query, Seed",
+    "undefined": "Nodos Indefinidos",
+    "transactions": "Transacciones"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -194,7 +203,7 @@
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
     "cpuBenchmark": "Promedio del Benchmark de CPU",
-    "health": "Salud",
+    "health": "Estado",
     "collapse": "Colapsar",
     "moreInfo": "Más Info",
     "version": "Versión",
@@ -204,7 +213,8 @@
     "stats": "Estadísticas",
     "noData": "No hay Datos",
     "peer_keys": "Peer",
-    "account_key": "Cuenta"
+    "account_key": "Cuenta",
+    "hs_bpJson": "BP Json"
   },
   "nodeCardComponent": {
     "features": "Características",
@@ -222,7 +232,8 @@
     "hs_peer_keys": "Peer Keys",
     "hs_endpoint": "Endpoint",
     "missing": "No encontrado",
-    "found": "Encontrado"
+    "found": "Encontrado",
+    "hs_bpJson": "BP Json"
   },
   "accountInfoComponent": {
     "resources": "Recursos",
@@ -274,7 +285,7 @@
     "all": "Todos",
     "allBPs": "Todos los Productores de Bloque",
     "top21": "Top 21",
-    "paidStandby": "Paid Standby",
-    "nonPaidStandby": "Non-Paid Standby"
+    "paidStandby": "Reserva con pago",
+    "nonPaidStandby": "Reserva sin pago"
   }
 }

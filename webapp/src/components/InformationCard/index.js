@@ -14,13 +14,15 @@ import Button from '@material-ui/core/Button'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import 'flag-icon-css/css/flag-icon.min.css'
 
-import { formatData } from '../../utils'
+import { formatData, formatWithThousandSeparator } from '../../utils'
+import { eosConfig } from '../../config'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
 import Information from './Information'
 import Nodes from './Nodes'
 import Social from './Social'
 import Media from './Media'
+import Stats from './Stats'
 import Endpoints from './Endpoints'
 import styles from './styles'
 
@@ -82,6 +84,20 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
                 type={type}
               />
             </Box>
+            <Stats
+              t={t}
+              type={type}
+              classes={classes}
+              missedBlocks={producer.missed_blocks || []}
+              votes={formatWithThousandSeparator(
+                producer.total_votes_eos || 0,
+                2
+              )}
+              rewards={formatWithThousandSeparator(
+                producer.total_rewards || 0,
+                2
+              )}
+            />
             <Endpoints
               endpoints={producerOrg.endpoints}
               classes={classes}
@@ -99,15 +115,17 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             <Box className={classes.healthStatus}>
               <Typography variant="overline">{t('health')}</Typography>
               <Box className={classes.borderLine}>
-                <Box className={classes.rowWrapper}>
-                  <Typography variant="body1">
-                    {`${t('missedBlocks')}: `}
-                    {(producer.missed_blocks || []).reduce(
-                      (result, current) => result + current.value,
-                      0
-                    )}
-                  </Typography>
-                </Box>
+                {eosConfig.networkName === 'lacchain' && (
+                  <Box className={classes.rowWrapper}>
+                    <Typography variant="body1">
+                      {`${t('missedBlocks')}: `}
+                      {(producer.missed_blocks || []).reduce(
+                        (result, current) => result + current.value,
+                        0
+                      )}
+                    </Typography>
+                  </Box>
+                )}
 
                 <ProducerHealthIndicators
                   message={t('noData')}

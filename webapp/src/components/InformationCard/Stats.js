@@ -2,30 +2,39 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import moment from 'moment'
 
 import { eosConfig } from '../../config'
 
-const Stats = ({ updatedAt, missedBlocks, t }) => {
+const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
+  if (eosConfig.networkName === 'lacchain' || type === 'node') return <></>
+
   return (
-    <Box className="stats">
+    <Box className={classes.healthStatus}>
       <Typography variant="overline">{t('stats')}</Typography>
-      {eosConfig.networkName !== 'lacchain' && (
-        <>
-          <Typography variant="body1">{t('votes')}</Typography>
-          <Typography variant="body1">{t('rewards')}</Typography>
-        </>
-      )}
-      <Typography variant="body1">
-        {`${t('lastChecked')} ${moment(new Date()).diff(
-          moment(updatedAt),
-          'seconds'
-        )} ${t('secondsAgo')}`}
-      </Typography>
-      <Typography variant="body1">
-        {t('missedBlocks')}
-        {missedBlocks.reduce((result, current) => result + current.value, 0)}
-      </Typography>
+      <Box className={classes.borderLine}>
+        <Box className={classes.rowWrapper}>
+          <Typography variant="body1">{`${t(
+            'votes'
+          )}: ${votes}eos`}</Typography>
+        </Box>
+
+        <Box className={classes.rowWrapper}>
+          <Typography variant="body1">{`${t(
+            'rewards'
+          )}: ${rewards}`}</Typography>
+        </Box>
+
+        <Box className={classes.rowWrapper}>
+          {' '}
+          <Typography variant="body1">
+            {`${t('missedBlocks')}: `}
+            {missedBlocks.reduce(
+              (result, current) => result + current.value,
+              0
+            )}
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   )
 }
@@ -33,12 +42,17 @@ const Stats = ({ updatedAt, missedBlocks, t }) => {
 Stats.propTypes = {
   missedBlocks: PropTypes.array,
   t: PropTypes.func,
-  updatedAt: PropTypes.string
+  classes: PropTypes.object,
+  votes: PropTypes.string,
+  rewards: PropTypes.string,
+  type: PropTypes.string
 }
 
 Stats.defaultProps = {
   updatedAt: '',
-  missedBlocks: []
+  classes: {},
+  votes: '0',
+  rewards: '0'
 }
 
 export default memo(Stats)
