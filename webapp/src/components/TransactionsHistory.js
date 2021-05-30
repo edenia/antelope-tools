@@ -69,7 +69,7 @@ const TransactionsHistory = ({ t, classes }) => {
                 >
                   {data?.stats?.[0]?.tps_all_time_high?.blocks?.map(
                     (block, index) => (
-                      <>
+                      <span key={index}>
                         <a
                           href={getBlockNumUrl(block.block_num)}
                           target="_blank"
@@ -87,7 +87,7 @@ const TransactionsHistory = ({ t, classes }) => {
                         data?.stats?.[0]?.tps_all_time_high?.blocks.length - 1
                           ? ', '
                           : ''}
-                      </>
+                      </span>
                     )
                   )}
                 </Typography>
@@ -129,11 +129,39 @@ const TransactionsHistory = ({ t, classes }) => {
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent className={classes.cards}>
+            <Typography>{`${t('transactions')} ${t(
+              'dailyAverage'
+            )}`}</Typography>
+            <BodyGraphValue
+              value={formatWithThousandSeparator(
+                data?.stats?.[0]?.average_daily_transactions_in_last_week || 0
+              )}
+              loading={loading}
+            />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} sm={4} lg={3}>
+        <Card>
+          <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
                 data?.stats?.[0]?.transactions_in_last_week || 0
               )}
+              loading={loading}
+            />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} sm={4} lg={3}>
+        <Card>
+          <CardContent className={classes.cards}>
+            <Typography>{`${t('uniqueLocations')}`}</Typography>
+            <BodyGraphValue
+              value={data?.stats?.[0]?.unique_locations?.count || 0}
               loading={loading}
             />
           </CardContent>
