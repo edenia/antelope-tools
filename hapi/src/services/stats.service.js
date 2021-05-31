@@ -6,49 +6,59 @@ const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
-const getTransactionsInTimeRage = async payload => {
-  const query = `
-    query($start: timestamptz!, $end: timestamptz!) {
-      block: block_history_aggregate(
-        where: { timestamp: { _gte: $start, _lte: $end } }
-      ) {
-        info: aggregate {
-          sum {
-            transactions_length
-          }
-        }
-      }
-    } 
-  `
-  const data = await hasuraUtil.request(query, payload)
+const getTransactionsInTimeRage = async (start, end) => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT
+      sum(transactions_length)::integer as transactions_count
+    FROM
+      block_history
+    WHERE
+      timestamp between '${start.toISOString()}' and '${end.toISOString()}'
+  `)
 
-  return data.block.info.sum.transactions_length || 0
+  return rows?.[0]?.transactions_count || 0
 }
 
-const getNodesSummary = async payload => {
-  const query = `
-    query {
-      producers: producer {
-        bp_json
-      }
-    }
-  `
-  const data = await hasuraUtil.request(query, payload)
+const getNodesSummary = async () => {
   let total = 0
-  const totalByType = {}
+  const payload = {}
+  const [rows] = await sequelizeUtil.query(`
+    SELECT
+      value->>'node_type' as node_type,
+      count(*)::integer as nodes_count
+    FROM 
+      producer,
+      json_array_elements(to_json(bp_json->'nodes'))
+    GROUP BY 
+      value->>'node_type'
+  `)
 
-  data.producers.forEach(producer => {
-    producer.bp_json.nodes.forEach(node => {
-      if (!totalByType[node.node_type]) {
-        totalByType[node.node_type] = 0
-      }
-
-      totalByType[node.node_type]++
-      total++
-    })
+  rows.forEach(row => {
+    payload[row.node_type || 'unknown'] = row.nodes_count
+    total += row.nodes_count
   })
 
-  return { total, ...totalByType }
+  return { ...payload, total }
+}
+
+const getUniqueLocations = async () => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT 
+      bp_json->'org'->'location'->>'country' as type, 
+      count(*)::integer as producers_count, 
+      STRING_AGG (owner, ',') as producers
+    FROM 
+      producer
+    GROUP BY 
+      bp_json->'org'->'location'->>'country'
+    ORDER BY 
+      producers_count DESC
+  `)
+
+  return {
+    count: rows?.length || 0,
+    details: rows
+  }
 }
 
 const getBlockDistribution = async (range = '1 day') => {
@@ -101,6 +111,7 @@ const getStats = async () => {
         transactions_in_last_hour
         transactions_in_last_day
         transactions_in_last_week
+        average_daily_transactions_in_last_week
         last_round
         last_block_at
         tps_all_time_high
@@ -263,12 +274,6 @@ const syncTPSAllTimeHigh = async () => {
   }
 
   const newValue = rows[0]
-  const blocks = newValue.blocks.split(',')
-
-  for (let index = 0; index < blocks.length; index++) {
-    const block = await getBlockUsage(blocks[index])
-    blocks[index] = block
-  }
 
   if (parseInt(newValue.transactions_count) < lastValue.transactions_count) {
     await udpateStats({
@@ -277,8 +282,16 @@ const syncTPSAllTimeHigh = async () => {
         checked_at: end.toISOString()
       }
     })
+    syncTPSAllTimeHigh()
 
     return
+  }
+
+  const blocks = newValue.blocks.split(',')
+
+  for (let index = 0; index < blocks.length; index++) {
+    const block = await getBlockUsage(blocks[index])
+    blocks[index] = block
   }
 
   await udpateStats({
@@ -293,24 +306,26 @@ const syncTPSAllTimeHigh = async () => {
 }
 
 const sync = async () => {
-  const transactionsInLastWeek = await getTransactionsInTimeRage({
-    start: moment().subtract(1, 'week'),
-    end: moment()
-  })
+  const transactionsInLastWeek = await getTransactionsInTimeRage(
+    moment().subtract(1, 'week'),
+    moment()
+  )
   const payload = {
-    transactions_in_last_hour: await getTransactionsInTimeRage({
-      start: moment().subtract(1, 'hour'),
-      end: moment()
-    }),
-    transactions_in_last_day: await getTransactionsInTimeRage({
-      start: moment().subtract(1, 'day'),
-      end: moment()
-    }),
+    transactions_in_last_hour: await getTransactionsInTimeRage(
+      moment().subtract(1, 'hour'),
+      moment()
+    ),
+    transactions_in_last_day: await getTransactionsInTimeRage(
+      moment().subtract(1, 'day'),
+      moment()
+    ),
     transactions_in_last_week: transactionsInLastWeek,
     average_daily_transactions_in_last_week: transactionsInLastWeek / 7,
-    nodes_summary: await getNodesSummary()
+    nodes_summary: await getNodesSummary(),
+    unique_locations: await getUniqueLocations()
   }
   const stats = await getStats()
+
   if (stats) {
     await udpateStats(payload)
     return

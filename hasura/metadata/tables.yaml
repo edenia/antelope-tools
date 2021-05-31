@@ -98,5 +98,6 @@
       - transactions_in_last_day
       - transactions_in_last_hour
       - transactions_in_last_week
+      - unique_locations
       - updated_at
       filter: {}

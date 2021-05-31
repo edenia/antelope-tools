@@ -25,6 +25,7 @@
     "lastDay": "Último día",
     "lastWeek": "Última semana",
     "lastYear": "Último año",
+    "dailyAverage":"Promedio diario",
     "itemsPerPage": "Elementos por página",
     "api": "API",
     "ssl": "SSL",
@@ -123,7 +124,8 @@
     "producer": "Nodos Tipo Producer",
     "query,seed": "Nodos Query, Seed",
     "undefined": "Nodos Indefinidos",
-    "transactions": "Transacciones"
+    "transactions": "Transacciones",
+    "uniqueLocations": "Ubicaciones únicas"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {

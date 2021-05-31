@@ -17,8 +17,8 @@ export default {
       producers: []
     },
     info: {},
-    tps: [],
-    tpb: [],
+    tps: new Array(30).fill({ blocks: [], transactions: 0 }),
+    tpb: new Array(60).fill({ blocks: [], transactions: 0 }),
     tpsWaitingBlock: null
   },
   reducers: {
@@ -31,16 +31,16 @@ export default {
     updateTransactionsStats(state, item) {
       let tpb = state.tpb
 
-      if (state.tpb.length >= 30) {
-        tpb = state.tpb.splice(1, state.tpb.length)
+      if (state.tpb.length >= 60) {
+        tpb.pop()
       }
 
       tpb = [
-        ...tpb,
         {
           blocks: [item.block],
           transactions: item.transactions
-        }
+        },
+        ...tpb
       ]
 
       if (!state.tpsWaitingBlock) {
@@ -54,15 +54,15 @@ export default {
       let tps = state.tps
 
       if (state.tps.length >= 30) {
-        tps = state.tps.splice(1, state.tps.length)
+        tps.pop()
       }
 
       tps = [
-        ...tps,
         {
           blocks: [state.tpsWaitingBlock.block, item.block],
           transactions: state.tpsWaitingBlock.transactions + item.transactions
-        }
+        },
+        ...tps
       ]
 
       return {

@@ -14,6 +14,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 import { TRANSACTION_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
@@ -28,14 +29,22 @@ const TransactionInfo = ({ t, classes }) => {
   const theme = useTheme()
   const tps = useSelector((state) => state.eos.tps)
   const tpb = useSelector((state) => state.eos.tpb)
-  const [graphicData, setGraphicData] = useState([])
+  const [graphicData, setGraphicData] = useState([
+    {
+      name: t('transactionsPerSecond'),
+      color: theme.palette.secondary.main
+    },
+    {
+      name: t('transactionsPerBlock'),
+      color: '#00C853'
+    }
+  ])
   const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
-  const [getTransactionHistory, { data: trxHistory }] =
+  const [getTransactionHistory, { data: trxHistory, loading }] =
     useLazyQuery(TRANSACTION_QUERY)
 
   useEffect(() => {
-    const majorLength = tps.length > tpb.length ? tps.length : tpb.length
     const trxPerSecond = []
     const trxPerBlock = []
 
@@ -43,33 +52,32 @@ const TransactionInfo = ({ t, classes }) => {
       return
     }
 
-    for (let index = 0; index < majorLength; index++) {
-      const labelBlockPS = `Blocks:[${(tps[index]
-        ? tps[index].blocks
-        : ['']
-      ).join()}]`
-      const labelBlockPB = `Blocks:[${(tpb[index]
-        ? tpb[index].blocks
-        : []
-      ).join()}]`
+    for (let index = 0; index < tpb.length; index++) {
+      trxPerBlock.push({
+        name: `Block: ${tpb[index].blocks.join()}`,
+        y: tpb[index].transactions,
+        x: index > 0 ? index / 2 : index
+      })
+    }
 
-      trxPerSecond.push([
-        labelBlockPS,
-        tps[index] ? tps[index].transactions : 0
-      ])
-      trxPerBlock.push([labelBlockPB, tpb[index] ? tpb[index].transactions : 0])
+    for (let index = 0; index < tps.length; index++) {
+      trxPerSecond.push({
+        name: `Blocks: ${tps[index].blocks.join(', ')}`,
+        y: tps[index].transactions,
+        x: index
+      })
     }
 
     setGraphicData([
       {
         name: t('transactionsPerSecond'),
         color: theme.palette.secondary.main,
-        data: trxPerSecond.reverse()
+        data: trxPerSecond
       },
       {
         name: t('transactionsPerBlock'),
         color: '#00C853',
-        data: trxPerBlock.reverse()
+        data: trxPerBlock
       }
     ])
     // eslint-disable-next-line
@@ -80,6 +88,7 @@ const TransactionInfo = ({ t, classes }) => {
       return
     }
 
+    setGraphicData([])
     getTransactionHistory({
       variables: { range: option }
     })
@@ -94,7 +103,6 @@ const TransactionInfo = ({ t, classes }) => {
 
     if (!trxHistory?.transactions?.length) {
       setGraphicData([])
-
       return
     }
 
@@ -143,7 +151,7 @@ const TransactionInfo = ({ t, classes }) => {
               )}
             </FormControl>
             <Box
-              onClick={() => option === options[0].value && setPause(!pause)}
+              onClick={() => option === options[0] && setPause(!pause)}
               className={clsx(classes.pauseButton, {
                 [classes.disableButton]: option !== options[0]
               })}
@@ -155,7 +163,7 @@ const TransactionInfo = ({ t, classes }) => {
                   width={20}
                   height={20}
                   color={
-                    option !== options[0].value
+                    option !== options[0]
                       ? theme.palette.action.disabled
                       : theme.palette.common.black
                   }
@@ -165,7 +173,7 @@ const TransactionInfo = ({ t, classes }) => {
             </Box>
           </Box>
         </Box>
-
+        {loading && <LinearProgress color="primary" />}
         <TransactionsLineChart
           yAxisProps={{
             reversed: false,

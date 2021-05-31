@@ -24,6 +24,7 @@
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
     "lastWeek": "Last Week",
+    "dailyAverage":"Daily Average",
     "lastYear": "Last Year",
     "itemsPerPage": "Items per page",
     "api": "API",
@@ -115,7 +116,8 @@
     "query": " Query Nodes",
     "producer": "Producer Nodes",
     "query,seed": "Nodos Query, Seed",
-    "undefined": "Undefined Nodes"
+    "undefined": "Undefined Nodes",
+    "uniqueLocations": "Unique Locations"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
