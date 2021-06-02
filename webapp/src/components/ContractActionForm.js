@@ -14,7 +14,8 @@ import LacchainSetNodeInfoActionNodeField from './LacchainSetNodeInfoActionNodeF
 import LacchainSetNodeInfoActionInfoField from './LacchainSetNodeInfoActionInfoField'
 import LacchainAddEntityActionEntityTypeField from './LacchainAddEntityActionEntityTypeField'
 import LacchainEntityField from './LacchainEntityField'
-import LacchainAddNodeAuthorityField from './LacchainAddNodeAuthorityField'
+import Authority from './Authority'
+import BlockSigningAuthority from './BlockSigningAuthority'
 import LacchainSetScheduleActionValidatorsField from './LacchainSetScheduleActionValidatorsField'
 import EOSIONewAccountAuthority from './EOSIONewAccountAuthority'
 
@@ -145,14 +146,25 @@ const ContractActionForm = ({
           />
         )
       case 'eosio.addwriter.writer_authority':
-      case 'eosio.addvalidator.validator_authority':
         return (
-          <LacchainAddNodeAuthorityField
+          <Authority
             key={`action-field-${field.name}`}
             label={t(field.name)}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || {}}
+            onChange={handleFieldChange(field.name)}
+            t={t}
+          />
+        )
+      case 'eosio.addvalidator.validator_authority':
+        return (
+          <BlockSigningAuthority
+            key={`action-field-${field.name}`}
+            label={t(field.name)}
+            variant="outlined"
+            className={classes.formControl}
+            value={payload[field.name] || []}
             onChange={handleFieldChange(field.name)}
             t={t}
           />

@@ -4,7 +4,7 @@ import { TextField } from '@material-ui/core'
 import Chip from '@material-ui/core/Chip'
 import InputAdornment from '@material-ui/core/InputAdornment'
 
-const LacchainAddNodeAuthorityField = ({
+const BlockSigningAuthority = ({
   value,
   onChange,
   label,
@@ -17,24 +17,28 @@ const LacchainAddNodeAuthorityField = ({
   const handleOnFieldChange = (event) => {
     onChange({
       target: {
-        value: {
-          threshold: 1,
-          keys: [
-            {
-              key: event.target.value,
-              weight: 1
-            }
-          ],
-          waits: [],
-          accounts: []
-        }
+        value: [
+          'block_signing_authority_v0',
+          {
+            threshold: 1,
+            keys: [
+              {
+                key: event.target.value,
+                weight: 1
+              }
+            ],
+            waits: [],
+            accounts: []
+          }
+        ]
       }
     })
   }
 
   useEffect(() => {
-    setKey(value?.keys?.[0]?.key || '')
+    setKey(value[1]?.keys?.[0]?.key || '')
   }, [value])
+
   return (
     <TextField
       className={className}
@@ -53,8 +57,8 @@ const LacchainAddNodeAuthorityField = ({
   )
 }
 
-LacchainAddNodeAuthorityField.propTypes = {
-  value: PropTypes.object,
+BlockSigningAuthority.propTypes = {
+  value: PropTypes.array,
   onChange: PropTypes.func,
   label: PropTypes.string,
   variant: PropTypes.string,
@@ -62,8 +66,8 @@ LacchainAddNodeAuthorityField.propTypes = {
   t: PropTypes.func
 }
 
-LacchainAddNodeAuthorityField.defaultProps = {
+BlockSigningAuthority.defaultProps = {
   t: () => {}
 }
 
-export default LacchainAddNodeAuthorityField
+export default BlockSigningAuthority
