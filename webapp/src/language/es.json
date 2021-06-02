@@ -98,7 +98,9 @@
     "lacchain": "Monitor de infraestructura y panel de control de red LACChain EOSIO",
     "mainnet": "Monitor de infraestructura y panel de control de la red EOS Mainnet",
     "lacchain>nodes": "Monitor de estado de los nodos LACChain EOSIO",
-    "mainnet>nodes": "Monitor de estado de los nodos productores de bloques de EOS Mainnet"
+    "mainnet>nodes": "Monitor de estado de los nodos productores de bloques de EOS Mainnet",
+    "telos": "Monitor de infraestructura y panel de control de red Telos Testnet",
+    "jungle": "Monitor de infraestructura y panel de control de red Jungle Testnet"
   },
   "homeRoute": {
     "currentProducer": "Productor de Bloque Actual",

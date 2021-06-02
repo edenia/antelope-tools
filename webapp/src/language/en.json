@@ -90,7 +90,9 @@
     "lacchain": "LACChain EOSIO Network Dashboard and Infrastructure Monitor",
     "mainnet": "EOS Mainnet Network Dashboard and Infrastructure Monitor",
     "lacchain>nodes": "LACChain EOSIO Nodes Status Monitor",
-    "mainnet>nodes": "EOS Mainnet Block Producer Nodes Status Monitor"
+    "mainnet>nodes": "EOS Mainnet Block Producer Nodes Status Monitor",
+    "telos": "Telos Testnet Network Dashboard and Infrastructure Monitor",
+    "jungle": "Jungle Testnet Network Dashboard and Infrastructure Monitor"
   },
   "homeRoute": {
     "currentProducer": "Current Producer",

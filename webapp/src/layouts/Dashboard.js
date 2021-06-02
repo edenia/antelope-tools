@@ -68,6 +68,8 @@ const Dashboard = ({ children, width, ual }) => {
       switch (eosConfig.networkName) {
         case 'lacchain':
         case 'mainnet':
+        case 'telos':
+        case 'jungle':
           if (location.pathname === '/') {
             pageTitle = eosConfig.networkName
           }
