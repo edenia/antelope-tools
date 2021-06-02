@@ -58,6 +58,7 @@ jobs:
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/cpu-benchmark"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://jungle3.bloks.io/transaction/${transaction}'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
+          REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
 
       - name: Build kubernetes files
         id: build_kubernetes_files

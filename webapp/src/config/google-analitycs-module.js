@@ -1,8 +1,10 @@
 import ReactGA from 'react-ga'
 
+import { googleAnaliticPageId } from './general'
+
 export const InitGA = () => {
   console.log('GA Init')
-  ReactGA.initialize('G-E6Y0EC9FT8')
+  ReactGA.initialize(googleAnaliticPageId)
 }
 
 export const LogPageView = () => {

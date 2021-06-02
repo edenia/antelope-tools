@@ -20,3 +20,5 @@ export const networkLinks = process.env.REACT_APP_NETWORK_URL
   : []
 export const historyEnabled =
   process.env.REACT_APP_STATE_HISTORY_ENABLED === 'true'
+export const googleAnaliticPageId =
+  process.env.REACT_APP_GOOGLE_ANALITIC_PAGE_ID
