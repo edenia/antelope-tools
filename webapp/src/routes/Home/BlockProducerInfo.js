@@ -63,7 +63,11 @@ const BlockProducerInfo = ({ t, classes }) => {
           <Card>
             <CardContent className={classes.cards}>
               <Typography>{t('currentProducer')}</Typography>
-              <Typography component="p" variant="h6">
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
                 {info.head_block_producer}
               </Typography>
             </CardContent>

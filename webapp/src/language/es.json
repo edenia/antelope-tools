@@ -25,7 +25,7 @@
     "lastDay": "Último día",
     "lastWeek": "Última semana",
     "lastYear": "Último año",
-    "dailyAverage":"Promedio diario",
+    "dailyAverage": "Promedio diario",
     "itemsPerPage": "Elementos por página",
     "api": "API",
     "ssl": "SSL",
@@ -94,7 +94,11 @@
     "community": "Comunidad",
     "changelog": "Registro de cambios",
     "github": "Repositorio de GitHub",
-    "telegram": "Grupo en Telegram"
+    "telegram": "Grupo en Telegram",
+    "lacchain": "Monitor de infraestructura y panel de control de red LACChain EOSIO",
+    "mainnet": "Monitor de infraestructura y panel de control de la red EOS Mainnet",
+    "lacchain>nodes": "Monitor de estado de los nodos LACChain EOSIO",
+    "mainnet>nodes": "Monitor de estado de los nodos productores de bloques de EOS Mainnet"
   },
   "homeRoute": {
     "currentProducer": "Productor de Bloque Actual",

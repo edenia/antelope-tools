@@ -90,11 +90,11 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
               classes={classes}
               missedBlocks={producer.missed_blocks || []}
               votes={formatWithThousandSeparator(
-                producer.total_votes_eos || 0,
+                producer.total_votes_eos || '0',
                 2
               )}
               rewards={formatWithThousandSeparator(
-                producer.total_rewards || 0,
+                producer.total_rewards || '0',
                 2
               )}
             />

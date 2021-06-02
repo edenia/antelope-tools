@@ -18,3 +18,5 @@ export const appName = process.env.REACT_APP_NAME || 'eosiodashboard'
 export const networkLinks = process.env.REACT_APP_NETWORK_URL
   ? JSON.parse(process.env.REACT_APP_NETWORK_URL)
   : []
+export const historyEnabled =
+  process.env.REACT_APP_STATE_HISTORY_ENABLED === 'true'

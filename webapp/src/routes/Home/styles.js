@@ -60,6 +60,8 @@ export default (theme) => ({
   cards: {
     textTransform: 'capitalize',
     '& .MuiTypography-h6': {
+      display: 'flex',
+      justifyContent: 'center',
       textAlign: 'center',
       marginTop: theme.spacing(2)
     }
@@ -67,5 +69,11 @@ export default (theme) => ({
   cardLink: {
     fontSize: 15,
     marginBottom: 2
+  },
+  svgLink: {
+    fontSize: 20
+  },
+  lowercase: {
+    textTransform: 'lowercase !important'
   }
 })

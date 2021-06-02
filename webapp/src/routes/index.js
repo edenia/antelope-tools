@@ -4,7 +4,6 @@ import {
   Grid as GridIcon,
   Users as UsersIcon,
   Server as ServerIcon,
-  Map as MapIcon,
   Sliders as SlidersIcon,
   User as UserIcon,
   Info as InfoIcon,
@@ -23,7 +22,8 @@ import {
   BPJsonSvg,
   EndpointSvg,
   MissingBlocksSvg,
-  TopologySvg
+  TopologySvg,
+  RewardsSvg
 } from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
@@ -76,14 +76,14 @@ const defaultRoutes = [
   },
   {
     name: 'nodesDistribution',
-    icon: <MapIcon />,
+    icon: <RewardsDistributionSvg />,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true
   },
   {
     name: 'rewardsDistribution',
-    icon: <RewardsDistributionSvg />,
+    icon: <RewardsSvg />,
     component: RewardsDistribution,
     path: '/rewards-distribution',
     exact: true
@@ -171,7 +171,7 @@ const lacchainRoutes = [
   },
   {
     name: 'nodesDistribution',
-    icon: <MapIcon />,
+    icon: <RewardsDistributionSvg />,
     component: NodesDistribution,
     path: '/nodes-distribution',
     exact: true

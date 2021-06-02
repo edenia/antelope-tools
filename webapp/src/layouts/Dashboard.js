@@ -10,6 +10,7 @@ import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
+import { InitGA, LogPageView } from '../config/google-analitycs-module'
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
 import Header from '../components/Header'
@@ -62,24 +63,52 @@ const Dashboard = ({ children, width, ual }) => {
 
   useEffect(() => {
     if (routes.some((route) => route.path === location.pathname)) {
+      let pageTitle = `${routeName.pathname}>title`
+
+      switch (eosConfig.networkName) {
+        case 'lacchain':
+        case 'mainnet':
+          if (location.pathname === '/') {
+            pageTitle = eosConfig.networkName
+          }
+
+          if (location.pathname === '/nodes') {
+            pageTitle = `${eosConfig.networkName}>nodes`
+          }
+
+          break
+
+        default:
+          pageTitle = `${routeName.pathname}>title`
+
+          break
+      }
+
       setRouteName({
         dynamicTitle:
           location.pathname === '/management'
             ? lacchain.dynamicTitle
             : t(`${location.pathname}>heading`),
         networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
-        pathname: location.pathname
+        pathname: location.pathname,
+        pageTitle
       })
     } else {
       setRouteName(INIT_VALUES)
     }
-  }, [location.pathname])
+    // eslint-disable-next-line
+  }, [location.pathname, lacchain.dynamicTitle, t])
+
+  useEffect(() => {
+    InitGA()
+    LogPageView()
+  }, [])
 
   return (
     <Box className={classes.root}>
       <CssBaseline />
       <GlobalStyle />
-      <PageTitle title={t(`${routeName.pathname}>title`)} />
+      <PageTitle title={t(routeName.pageTitle)} />
       <Box className={classes.drawer}>
         <Hidden mdUp implementation="js">
           <Sidebar

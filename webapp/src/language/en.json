@@ -24,7 +24,7 @@
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
     "lastWeek": "Last Week",
-    "dailyAverage":"Daily Average",
+    "dailyAverage": "Daily Average",
     "lastYear": "Last Year",
     "itemsPerPage": "Items per page",
     "api": "API",
@@ -86,7 +86,11 @@
     "community": "Community",
     "changelog": "Changelog",
     "github": "Github Repository",
-    "telegram": "Telegram Channel"
+    "telegram": "Telegram Channel",
+    "lacchain": "LACChain EOSIO Network Dashboard and Infrastructure Monitor",
+    "mainnet": "EOS Mainnet Network Dashboard and Infrastructure Monitor",
+    "lacchain>nodes": "LACChain EOSIO Nodes Status Monitor",
+    "mainnet>nodes": "EOS Mainnet Block Producer Nodes Status Monitor"
   },
   "homeRoute": {
     "currentProducer": "Current Producer",

@@ -5,6 +5,7 @@ import BPJsonSvg from './BPJson'
 import EndpointSvg from './Endpoint'
 import MissingBlocksSvg from './MissingBlocks'
 import TopologySvg from './Topology'
+import RewardsSvg from './Rewards'
 
 export {
   BlockDistributionSvg,
@@ -13,5 +14,6 @@ export {
   BPJsonSvg,
   EndpointSvg,
   MissingBlocksSvg,
-  TopologySvg
+  TopologySvg,
+  RewardsSvg
 }
