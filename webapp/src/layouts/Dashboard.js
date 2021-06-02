@@ -63,37 +63,19 @@ const Dashboard = ({ children, width, ual }) => {
 
   useEffect(() => {
     if (routes.some((route) => route.path === location.pathname)) {
-      let pageTitle = `${routeName.pathname}>title`
-
-      switch (eosConfig.networkName) {
-        case 'lacchain':
-        case 'mainnet':
-        case 'telos':
-        case 'jungle':
-          if (location.pathname === '/') {
-            pageTitle = eosConfig.networkName
-          }
-
-          if (location.pathname === '/nodes') {
-            pageTitle = `${eosConfig.networkName}>nodes`
-          }
-
-          break
-
-        default:
-          pageTitle = `${routeName.pathname}>title`
-
-          break
-      }
+      const managementCardTitle = lacchain.dynamicTitle || ''
 
       setRouteName({
         dynamicTitle:
           location.pathname === '/management'
-            ? lacchain.dynamicTitle
+            ? managementCardTitle
             : t(`${location.pathname}>heading`),
         networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
         pathname: location.pathname,
-        pageTitle
+        pageTitle:
+          location.pathname === '/'
+            ? eosConfig.networkName
+            : `${eosConfig.networkName}${location.pathname}>title`
       })
     } else {
       setRouteName(INIT_VALUES)

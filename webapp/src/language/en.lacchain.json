@@ -1,19 +1,19 @@
 {
   "routes": {
     "/entities>sidebar": "Entities",
-    "/entities>title": "Entities  - EOSIO Network Dashboard",
+    "lacchain/entities>title": "Entities  - LACChain EOSIO Network Dashboard",
     "/entities>heading": "Entities",
     "/lacchain/network>sidebar": "Network Topology",
-    "/lacchain/network>title": "Network Topology  - EOSIO Network Dashboard",
+    "lacchain/lacchain/network>title": "Network Topology  - LACChain EOSIO Network Dashboard",
     "/lacchain/network>heading": "Network Topology",
     "/management>sidebar": "Management",
-    "/management>title": "Management  - EOSIO Network Dashboard",
+    "lacchain/management>title": "Management  - LACChain EOSIO Network Dashboard",
     "/management>heading": "Management",
     "/node-config>sidebar": "Node config",
-    "/node-config>title": "Node config  - EOSIO Network Dashboard",
+    "lacchain/node-config>title": "Node config  - LACChain EOSIO Network Dashboard",
     "/node-config>heading": "Configure a new node",
     "/ricardian-contract>sidebar": "Validator Agreement",
-    "/ricardian-contract>title": "Validator Node Agreement  - EOSIO Network Dashboard",
+    "lacchain/ricardian-contract>title": "Validator Node Agreement  - LACChain EOSIO Network Dashboard",
     "/ricardian-contract>heading": ""
   },
   "common": {

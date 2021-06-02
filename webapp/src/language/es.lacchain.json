@@ -1,19 +1,19 @@
 {
   "routes": {
     "/entities>sidebar": "Entidades",
-    "/entities>title": "Entities - Panel",
+    "lacchain/entities>title": "Entities - Panel",
     "/entities>heading": "Entities",
     "/lacchain/network>sidebar": "Topología de red",
-    "/lacchain/network>title": "Topología de red - Panel",
+    "lacchain/lacchain/network>title": "Topología de red - Panel",
     "/lacchain/network>heading": "Topología de red",
     "/management>sidebar": "Administración",
-    "/management>title": "Administración - Panel",
+    "lacchain/management>title": "Administración - Panel",
     "/management>heading": "Administración",
     "/node-config>sidebar": "Configuración de nodo",
-    "/node-config>title": "Configuración de nodo - EOSIO Dashboard",
+    "lacchain/node-config>title": "Configuración de nodo - LACChain EOSIO Dashboard",
     "/node-config>heading": "Configurar un nuevo nodo",
     "/ricardian-contract>sidebar": "Acuerdo de Nodos Validadores",
-    "/ricardian-contract>title": "Acuerdo de Nodos Validadores - EOSIO Dashboard",
+    "lacchain/ricardian-contract>title": "Acuerdo de Nodos Validadores - LACChain EOSIO Dashboard",
     "/ricardian-contract>heading": ""
   },
   "common": {
