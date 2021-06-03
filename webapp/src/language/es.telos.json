@@ -1,0 +1,17 @@
+{
+  "routes": {
+    "/>title": "Monitor de infraestructura y panel de control de red Telos Testnet",
+    "/cpu-benchmark>title": "Benchmark de CPU - Panel",
+    "/block-producers>title": "Productores de Bloques - Panel",
+    "/rewards-distribution>title": "Distribución de recompensas - Panel",
+    "/nodes>title": "Nodos - Panel",
+    "/nodes-distribution>title": "Distribución Geográfica de Nodos",
+    "/accounts>title": "Cuentas y Contratos - Panel",
+    "/bpjson>title": "BP JSON - Panel",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Telos Testnet",
+    "/block-distribution>title": "Distribución de bloques - Telos Testnet",
+    "/endpoints>title": "URL's - Telos Testnet",
+    "/about>title": "Acerca de - Panel",
+    "/help>title": "Ayuda - Panel"
+  }
+}

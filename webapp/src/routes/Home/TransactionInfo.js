@@ -19,7 +19,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { TRANSACTION_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
-import { eosConfig } from '../../config'
+import { generalConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
 
@@ -132,7 +132,7 @@ const TransactionInfo = ({ t, classes }) => {
           </Typography>
           <Box className={classes.formControl}>
             <FormControl>
-              {eosConfig.networkName === 'lacchain' && (
+              {generalConfig.historyEnabled && (
                 <>
                   <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
                   <Select

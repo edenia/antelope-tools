@@ -54,6 +54,8 @@ build-docker: ./Dockerfile
 		--build-arg react_app_disabled_menu_items='$(REACT_APP_DISABLED_MENU_ITEMS)' \
 		--build-arg react_app_network_url='$(REACT_APP_NETWORK_URL)' \
 		--build-arg react_app_block_explorer_url='$(REACT_APP_BLOCK_EXPLORER_URL)' \
+		--build-arg react_app_state_history_enabled='$(REACT_APP_STATE_HISTORY_ENABLED)' \
+		--build-arg react_app_google_analitic_page_id='$(REACT_APP_GOOGLE_ANALITIC_PAGE_ID)' \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

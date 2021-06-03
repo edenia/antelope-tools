@@ -1,42 +1,111 @@
 /* eslint camelcase: 0 */
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import LaunchIcon from '@material-ui/icons/Launch'
 import { useSubscription } from '@apollo/react-hooks'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../gql'
 import { formatWithThousandSeparator, getBlockNumUrl } from '../utils'
+import { generalConfig } from '../config'
 
-const BodyGraphValue = ({ loading, value }) => {
+const BodyGraphValue = ({ loading, value, classes, href }) => {
   if (loading) return <LinearProgress />
-
-  if (typeof value !== 'number') {
-    return <>{value}</>
-  }
 
   return (
     <Typography component="p" variant="h6">
       {value}
+      {href && (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          <LaunchIcon className={classes.svgLink} color="primary" />
+        </a>
+      )}
     </Typography>
   )
 }
 
 BodyGraphValue.propTypes = {
   loading: PropTypes.bool,
-  value: PropTypes.any
+  value: PropTypes.any,
+  classes: PropTypes.object,
+  href: PropTypes.string
 }
 
 BodyGraphValue.defaultProps = {
   value: 0,
-  loading: false
+  loading: false,
+  classes: {}
 }
 
 const TransactionsHistory = ({ t, classes }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
+  const [allTimeHigh, setallTimeHigh] = useState({})
+
+  useEffect(() => {
+    if (data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
+      const result = data.stats[0].tps_all_time_high.blocks.reduce(
+        (prev, current) => {
+          return {
+            tps: {
+              value:
+                prev.value > current.transactions_count
+                  ? prev.value
+                  : current.transactions_count,
+              link: getBlockNumUrl(
+                prev.value > current.transactions_count
+                  ? prev.link
+                  : current.block_num
+              )
+            },
+            cpu: {
+              value: formatWithThousandSeparator(
+                prev.value > current.cpu_usage_percent
+                  ? prev.value
+                  : current.cpu_usage_percent * 100,
+                1
+              ),
+              link: getBlockNumUrl(
+                prev.value > current.cpu_usage_percent
+                  ? prev.link
+                  : current.block_num
+              )
+            }
+          }
+        },
+        {
+          tps: {
+            value: 0,
+            link: ''
+          },
+          cpu: {
+            value: 0,
+            link: ''
+          }
+        }
+      )
+
+      setallTimeHigh(result)
+    }
+  }, [data])
+
+  if (!generalConfig.historyEnabled)
+    return (
+      <Grid item xs={12} sm={4} lg={3}>
+        <Card>
+          <CardContent className={classes.cards}>
+            <Typography>{`${t('uniqueLocations')}`}</Typography>
+            <BodyGraphValue
+              value={data?.stats?.[0]?.unique_locations?.count || 0}
+              loading={loading}
+            />
+          </CardContent>
+        </Card>
+      </Grid>
+    )
 
   return (
     <>
@@ -45,12 +114,10 @@ const TransactionsHistory = ({ t, classes }) => {
           <CardContent className={classes.cards}>
             <Typography>{t('tpsAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={
-                <Typography component="p" variant="h6">
-                  {data?.stats?.[0]?.tps_all_time_high?.transactions_count || 0}
-                </Typography>
-              }
+              value={allTimeHigh?.tps?.value}
               loading={loading}
+              classes={classes}
+              href={allTimeHigh?.tps?.link}
             />
           </CardContent>
         </Card>
@@ -61,37 +128,9 @@ const TransactionsHistory = ({ t, classes }) => {
           <CardContent className={classes.cards}>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={
-                <Typography
-                  className={classes.cardLink}
-                  component="p"
-                  variant="h6"
-                >
-                  {data?.stats?.[0]?.tps_all_time_high?.blocks?.map(
-                    (block, index) => (
-                      <span key={index}>
-                        <a
-                          href={getBlockNumUrl(block.block_num)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {block.block_num}
-                        </a>{' '}
-                        {t('cpu')}:{' '}
-                        {formatWithThousandSeparator(
-                          block.cpu_usage_percent * 100,
-                          4
-                        )}
-                        %
-                        {index <
-                        data?.stats?.[0]?.tps_all_time_high?.blocks.length - 1
-                          ? ', '
-                          : ''}
-                      </span>
-                    )
-                  )}
-                </Typography>
-              }
+              value={`${allTimeHigh?.cpu?.value}%`}
+              classes={classes}
+              href={allTimeHigh?.cpu?.link}
               loading={loading}
             />
           </CardContent>

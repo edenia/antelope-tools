@@ -147,6 +147,7 @@ const Accounts = ({ ual }) => {
 
   useEffect(() => {
     handleOnSearch()
+    // eslint-disable-next-line
   }, [])
 
   return (
