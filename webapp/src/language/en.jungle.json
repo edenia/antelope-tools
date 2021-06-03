@@ -1,0 +1,18 @@
+{
+  "routes": {
+    "/>title": "Jungle Testnet Network Dashboard and Infrastructure Monitor",
+    "/cpu-benchmark>title": "CPU Benchmarks  - Jungle Testnet Network Dashboard",
+    "/block-producers>title": "Block Producers - Jungle Testnet Network Dashboard",
+    "/rewards-distribution>title": "Rewards Distribution - Jungle Testnet Network Dashboard",
+    "/nodes>title": "Nodes - Jungle Testnet Network Dashboard",
+    "/nodes-distribution>title": "Geographic Distribution of Nodes - Jungle Testnet Network Dashboard",
+    "/accounts>title": "Accounts and Contracts - Jungle Testnet Network Dashboard",
+    "/bpjson>title": "BP JSON - Jungle Testnet Network Dashboard",
+    "/ricardian-contract>title": "BP Agreement - Jungle Testnet Network Dashboard",
+    "/block-distribution>title": "Block Production Distribution - Jungle Testnet Network Dashboard",
+    "/missed-blocks>title": "Missed Blocks - Jungle Testnet Network Dashboard",
+    "/endpoints>title": "API Endpoints - Jungle Testnet Network Dashboard",
+    "/about>title": "About - Jungle Testnet Network Dashboard",
+    "/help>title": "Help - Jungle Testnet Network Dashboard"
+  }
+}

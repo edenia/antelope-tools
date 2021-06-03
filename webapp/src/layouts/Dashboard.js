@@ -72,10 +72,7 @@ const Dashboard = ({ children, width, ual }) => {
             : t(`${location.pathname}>heading`),
         networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
         pathname: location.pathname,
-        pageTitle:
-          location.pathname === '/'
-            ? eosConfig.networkName
-            : `${eosConfig.networkName}${location.pathname}>title`
+        pageTitle: `${location.pathname}>title`
       })
     } else {
       setRouteName(INIT_VALUES)
