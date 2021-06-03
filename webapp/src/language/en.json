@@ -35,7 +35,12 @@
     "missedBlocks": "Missed Blocks",
     "timeFrame": "Time frame",
     "net": "NET",
-    "cpu": "CPU"
+    "cpu": "CPU",
+    "boot": "Boot Nodes",
+    "writer": "Writer Nodes",
+    "observer": "Observer Nodes",
+    "validator": "Validator Nodes",
+    "query, seed": "Query, Seed Nodes"
   },
   "routes": {
     "/>sidebar": "Dashboard",
