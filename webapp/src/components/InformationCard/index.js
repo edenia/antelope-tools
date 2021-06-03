@@ -40,6 +40,24 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
     setExpanded(!expanded)
   }
 
+  const missedBlock = (producer, nodeType, type) => {
+    if (eosConfig.networkName !== 'lacchain') return <></>
+
+    if (type !== 'node' || nodeType !== 'validator') return <></>
+
+    return (
+      <Box className={classes.rowWrapper}>
+        <Typography variant="body1">
+          {`${t('missedBlocks')}: `}
+          {(producer.missed_blocks || []).reduce(
+            (result, current) => result + current.value,
+            0
+          )}
+        </Typography>
+      </Box>
+    )
+  }
+
   useEffect(() => {
     setProducerOrg(
       formatData(
@@ -115,18 +133,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             <Box className={classes.healthStatus}>
               <Typography variant="overline">{t('health')}</Typography>
               <Box className={classes.borderLine}>
-                {eosConfig.networkName === 'lacchain' && (
-                  <Box className={classes.rowWrapper}>
-                    <Typography variant="body1">
-                      {`${t('missedBlocks')}: `}
-                      {(producer.missed_blocks || []).reduce(
-                        (result, current) => result + current.value,
-                        0
-                      )}
-                    </Typography>
-                  </Box>
-                )}
-
+                {missedBlock(producer, producerOrg?.media?.account, type)}
                 <ProducerHealthIndicators
                   message={t('noData')}
                   producer={
