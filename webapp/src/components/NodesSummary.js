@@ -60,7 +60,6 @@ const NodesSummary = ({ t, classes }) => {
       {nodes &&
         Object.keys(nodes).map((type) => {
           let label = type
-          console.log({ type })
 
           if (type[0] === '[' && type[type.length - 1] === ']') {
             label = type
