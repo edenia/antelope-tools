@@ -33,9 +33,9 @@
     "producers": "Entidades",
     "producer": "Entidad",
     "boot": "Nodos Boot",
-    "writer": "Nodos Escritor",
-    "observer": "Nodos Observador",
-    "validator": "Nodos Validador",
+    "writer": "Nodos Escritores",
+    "observer": "Nodos Observadores",
+    "validator": "Nodos Validadores",
     "partner": "Partner",
     "nonPartner": "Non-Partner"
   },

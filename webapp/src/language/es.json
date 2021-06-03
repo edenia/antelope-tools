@@ -46,12 +46,7 @@
     "2 Months": "2 Meses",
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
-    "1 Year": "1 Año",
-    "boot": "Nodos Boot",
-    "writer": "Nodos Escritor",
-    "observer": "Nodos Observador",
-    "validator": "Nodos Validador",
-    "query, seed": "Nodos Query, Seed"
+    "1 Year": "1 Año"
   },
   "routes": {
     "/>sidebar": "Panel",
