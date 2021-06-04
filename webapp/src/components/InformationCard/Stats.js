@@ -13,15 +13,13 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
       <Typography variant="overline">{t('stats')}</Typography>
       <Box className={classes.borderLine}>
         <Box className={classes.rowWrapper}>
-          <Typography variant="body1">{`${t(
-            'votes'
-          )}: ${votes}eos`}</Typography>
+          <Typography variant="body1">{`${t('votes')}: ${votes}`}</Typography>
         </Box>
 
         <Box className={classes.rowWrapper}>
           <Typography variant="body1">{`${t(
             'rewards'
-          )}: ${rewards}`}</Typography>
+          )}: ${rewards} EOS`}</Typography>
         </Box>
 
         <Box className={classes.rowWrapper}>

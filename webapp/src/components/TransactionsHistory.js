@@ -49,29 +49,27 @@ const TransactionsHistory = ({ t, classes }) => {
     if (data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
       const result = data.stats[0].tps_all_time_high.blocks.reduce(
         (prev, current) => {
+          const isTpsLinkValid =
+            prev.tps.link && prev.tps.value > current.transactions_count
+          const isCpuLinkValid =
+            prev.cpu.link && prev.cpu.value > current.transactions_count
+
           return {
             tps: {
-              value:
-                prev.value > current.transactions_count
-                  ? prev.value
-                  : current.transactions_count,
+              value: data.stats[0].tps_all_time_high.transactions_count,
               link: getBlockNumUrl(
-                prev.value > current.transactions_count
-                  ? prev.link
-                  : current.block_num
+                isTpsLinkValid ? prev.tps.link : current.block_num
               )
             },
             cpu: {
               value: formatWithThousandSeparator(
-                prev.value > current.cpu_usage_percent
-                  ? prev.value
+                prev.cpu.value > current.cpu_usage_percent
+                  ? prev.cpu.value
                   : current.cpu_usage_percent * 100,
                 1
               ),
               link: getBlockNumUrl(
-                prev.value > current.cpu_usage_percent
-                  ? prev.link
-                  : current.block_num
+                isCpuLinkValid ? prev.cpu.link : current.block_num
               )
             }
           }
@@ -79,11 +77,11 @@ const TransactionsHistory = ({ t, classes }) => {
         {
           tps: {
             value: 0,
-            link: ''
+            link: null
           },
           cpu: {
             value: 0,
-            link: ''
+            link: null
           }
         }
       )
@@ -173,7 +171,8 @@ const TransactionsHistory = ({ t, classes }) => {
             )}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
-                data?.stats?.[0]?.average_daily_transactions_in_last_week || 0
+                data?.stats?.[0]?.average_daily_transactions_in_last_week || 0,
+                0
               )}
               loading={loading}
             />

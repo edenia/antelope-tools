@@ -71,7 +71,8 @@ export default (theme) => ({
     marginBottom: 2
   },
   svgLink: {
-    fontSize: 20
+    fontSize: 18,
+    marginLeft: theme.spacing(2)
   },
   lowercase: {
     textTransform: 'lowercase !important'

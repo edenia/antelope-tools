@@ -58,16 +58,27 @@ const NodesSummary = ({ t, classes }) => {
       </Grid>
 
       {nodes &&
-        Object.keys(nodes).map((type) => (
-          <Grid item xs={12} sm={4} lg={3} key={type}>
-            <Card>
-              <CardContent className={classes.cards}>
-                <Typography>{t(type)}</Typography>
-                <BodyGraphValue value={nodes[type] || 0} loading={loading} />
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+        Object.keys(nodes).map((type) => {
+          let label = type
+
+          if (type[0] === '[' && type[type.length - 1] === ']') {
+            label = type
+              .replace(/\[/g, '')
+              .replace(/\]/g, '')
+              .replace(/['"]+/g, '')
+          }
+
+          return (
+            <Grid item xs={12} sm={4} lg={3} key={type}>
+              <Card>
+                <CardContent className={classes.cards}>
+                  <Typography>{t(label)}</Typography>
+                  <BodyGraphValue value={nodes[type] || 0} loading={loading} />
+                </CardContent>
+              </Card>
+            </Grid>
+          )
+        })}
     </>
   )
 }
