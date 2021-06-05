@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { useQuery } from '@apollo/react-hooks'
+import { useTranslation } from 'react-i18next'
 
 import { NODES_SUMMARY_QUERY } from '../gql'
 
@@ -32,6 +33,8 @@ BodyGraphValue.defaultProps = {
 
 const NodesSummary = ({ t, classes }) => {
   const { data, loading } = useQuery(NODES_SUMMARY_QUERY)
+  const { i18n } = useTranslation('translations')
+  const [currentLanguaje, setCurrentLanguaje] = useState('')
   const [total, setTotal] = useState()
   const [nodes, setNodes] = useState()
 
@@ -41,10 +44,13 @@ const NodesSummary = ({ t, classes }) => {
     }
 
     const { total, ...nodes } = data?.stats[0]?.nodes_summary || {}
-
     setTotal(total)
     setNodes(nodes)
   }, [data])
+
+  useEffect(() => {
+    setCurrentLanguaje(i18n.language.substring(0, 2))
+  }, [i18n.language])
 
   return (
     <>
@@ -59,20 +65,16 @@ const NodesSummary = ({ t, classes }) => {
 
       {nodes &&
         Object.keys(nodes).map((type) => {
-          let label = type
-
-          if (type[0] === '[' && type[type.length - 1] === ']') {
-            label = type
-              .replace(/\[/g, '')
-              .replace(/\]/g, '')
-              .replace(/['"]+/g, '')
-          }
+          const label = type.replaceAll(/("|\[|\])/gi, '')
 
           return (
             <Grid item xs={12} sm={4} lg={3} key={type}>
               <Card>
                 <CardContent className={classes.cards}>
-                  <Typography>{t(label)}</Typography>
+                  <Typography>
+                    {currentLanguaje === 'es' ? t('nodes') : ''} {t(label)}{' '}
+                    {currentLanguaje !== 'es' ? t('nodes') : ''}
+                  </Typography>
                   <BodyGraphValue value={nodes[type] || 0} loading={loading} />
                 </CardContent>
               </Card>
