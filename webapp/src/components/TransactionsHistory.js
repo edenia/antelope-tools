@@ -43,51 +43,21 @@ BodyGraphValue.defaultProps = {
 
 const TransactionsHistory = ({ t, classes }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
-  const [allTimeHigh, setallTimeHigh] = useState({})
+  const [
+    blockWithHighestTransactionsCount,
+    setBlockWithHighestTransactionsCount
+  ] = useState({})
 
   useEffect(() => {
-    if (data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
-      const result = data.stats[0].tps_all_time_high.blocks.reduce(
-        (prev, current) => {
-          const isTpsLinkValid =
-            prev.tps.link && prev.tps.value > current.transactions_count
-          const isCpuLinkValid =
-            prev.cpu.link && prev.cpu.value > current.transactions_count
-
-          return {
-            tps: {
-              value: data.stats[0].tps_all_time_high.transactions_count,
-              link: getBlockNumUrl(
-                isTpsLinkValid ? prev.tps.link : current.block_num
-              )
-            },
-            cpu: {
-              value: formatWithThousandSeparator(
-                prev.cpu.value > current.cpu_usage_percent
-                  ? prev.cpu.value
-                  : current.cpu_usage_percent * 100,
-                1
-              ),
-              link: getBlockNumUrl(
-                isCpuLinkValid ? prev.cpu.link : current.block_num
-              )
-            }
-          }
-        },
-        {
-          tps: {
-            value: 0,
-            link: null
-          },
-          cpu: {
-            value: 0,
-            link: null
-          }
-        }
-      )
-
-      setallTimeHigh(result)
+    if (!data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
+      return
     }
+
+    const blockWithHighestTransactionsCount =
+      data.stats[0].tps_all_time_high.blocks.sort((first, second) =>
+        first.transactions_count > second.transactions_count ? -1 : 1
+      )[0]
+    setBlockWithHighestTransactionsCount(blockWithHighestTransactionsCount)
   }, [data])
 
   if (!generalConfig.historyEnabled)
@@ -112,10 +82,10 @@ const TransactionsHistory = ({ t, classes }) => {
           <CardContent className={classes.cards}>
             <Typography>{t('tpsAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={allTimeHigh?.tps?.value}
+              value={data?.stats[0]?.tps_all_time_high?.transactions_count}
               loading={loading}
               classes={classes}
-              href={allTimeHigh?.tps?.link}
+              href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
             />
           </CardContent>
         </Card>
@@ -126,9 +96,12 @@ const TransactionsHistory = ({ t, classes }) => {
           <CardContent className={classes.cards}>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={`${allTimeHigh?.cpu?.value}%`}
+              value={`${formatWithThousandSeparator(
+                blockWithHighestTransactionsCount.cpu_usage_percent * 100 || 0,
+                2
+              )}%`}
               classes={classes}
-              href={allTimeHigh?.cpu?.link}
+              href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
               loading={loading}
             />
           </CardContent>

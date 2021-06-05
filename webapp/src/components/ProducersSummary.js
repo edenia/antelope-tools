@@ -10,6 +10,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import { PRODUCERS_SUMMARY_QUERY } from '../gql'
 import { ENTITY_TYPE } from '../utils/lacchain'
+import { eosConfig } from '../config'
 
 const BodyGraphValue = ({ loading, value }) => {
   if (loading) return <LinearProgress />
@@ -47,6 +48,10 @@ const ProducersSummary = ({ t, classes }) => {
     for (let index = 0; index < data?.producers_summary?.length; index++) {
       const producer = data?.producers_summary[index]
       total += producer.entities_count
+
+      if (eosConfig.networkName !== 'lacchain') {
+        continue
+      }
 
       producers.push({
         ...producer,
