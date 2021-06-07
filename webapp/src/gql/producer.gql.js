@@ -147,3 +147,16 @@ export const PRODUCERS_SUMMARY_QUERY = gql`
     }
   }
 `
+export const ALL_NODES_QUERY = gql`
+  query ($where: producer_bool_exp) {
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc }
+    ) {
+      id
+      owner
+      bp_json
+      updated_at
+    }
+  }
+`

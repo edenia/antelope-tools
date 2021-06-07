@@ -63,6 +63,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
     "polished": "^4.0.3",
+    "proj4": "^2.7.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-d3-graph": "^2.5.0",

@@ -16,12 +16,13 @@ import { geoTimes } from 'd3-geo-projection'
 import { geoPath } from 'd3-geo'
 
 import { eosConfig } from '../config'
-import { NODES_QUERY } from '../gql'
+import { ALL_NODES_QUERY } from '../gql'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
 
 const Pagination = lazy(() => import('@material-ui/lab/Pagination'))
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
+const CulterMap = lazy(() => import('../components/CulterMap'))
 
 const defaultScale = 170
 const maxZoom = 3
@@ -51,15 +52,14 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Nodes = () => {
-  const [
-    loadProducers,
-    { loading = true, data: { producers, info } = {} }
-  ] = useLazyQuery(NODES_QUERY)
+  const [loadProducers, { loading = true, data: { producers } = {} }] =
+    useLazyQuery(ALL_NODES_QUERY)
   const [nodes, setNodes] = useState([])
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const [filters, setFilters] = useState({ nodeType: 'all' })
   const [allNodes, setAllNodes] = useState([])
+  const [allNodesV2, setAllNodesV2] = useState([])
   const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
   const classes = useStyles()
   const [mapState, setMapState] = useState({
@@ -126,24 +126,25 @@ const Nodes = () => {
   useEffect(() => {
     loadProducers({
       variables: {
-        where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit
+        where: {} // pagination.where
+        // offset: 0, // (pagination.page - 1) * pagination.limit,
+        // limit: 0 // pagination.limit
       }
     })
     // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit])
+  }, [])
+  // }, [pagination.where, pagination.page, pagination.limit])
 
-  useEffect(() => {
-    if (!info) {
-      return
-    }
+  // useEffect(() => {
+  //   if (!info) {
+  //     return
+  //   }
 
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit)
-    }))
-  }, [info, pagination.limit])
+  //   setPagination((prev) => ({
+  //     ...prev,
+  //     pages: Math.ceil(info.producers?.count / pagination.limit)
+  //   }))
+  // }, [info, pagination.limit])
 
   useEffect(() => {
     if (!producers?.length) {
@@ -151,6 +152,7 @@ const Nodes = () => {
     }
 
     const items = []
+    const itemsV2 = []
     producers.forEach((producer) => {
       if (!producer?.bp_json?.nodes) {
         return
@@ -166,10 +168,21 @@ const Nodes = () => {
           producer,
           coordinates: [node.location.longitude, node.location.latitude]
         })
+
+        itemsV2.push({
+          // node,
+          // producer,
+          type: node.node_type,
+          country: node.location.country,
+          lat: node.location.latitude,
+          lon: node.location.longitude,
+          name: producer.owner
+        })
       })
     })
 
     setAllNodes(items)
+    setAllNodesV2(itemsV2)
   }, [producers])
 
   useEffect(() => {
@@ -184,6 +197,8 @@ const Nodes = () => {
     setNodes(items)
   }, [allNodes, filters])
 
+  console.log({ nodes: allNodesV2 })
+
   return (
     <Box>
       <NodeSearch
@@ -191,6 +206,7 @@ const Nodes = () => {
         filters={filters}
         onChange={handleOnFiltersChange}
       />
+      <CulterMap data={allNodesV2 || []} />
       {loading && <LinearProgress />}
       {!loading && (
         <ComposableMap
