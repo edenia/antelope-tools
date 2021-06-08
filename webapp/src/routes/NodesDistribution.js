@@ -114,7 +114,7 @@ const Nodes = () => {
         onChange={handleOnFiltersChange}
       />
       {loading && <LinearProgress />}
-      {!loading && <CulterMap data={nodes || []} />}
+      {!loading && <ClusterMap data={nodes || []} />}
     </Box>
   )
 }
