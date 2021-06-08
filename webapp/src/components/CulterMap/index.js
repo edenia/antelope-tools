@@ -1,12 +1,25 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { findDOMNode } from 'react-dom'
+
+import Tooltip from '../Tooltip'
+import NodeCard from '../NodeCard'
+
 import HighMapsWrapper from './HighMapsWrapper'
 import { mapWorld } from './mapWorld'
-import { EUROPE_DATA } from './europeData'
 
 const ClusterMap = ({ data }) => {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [pointData, setPointData] = useState({})
   const myRef = useRef()
+
+  const handlePopoverOpen = (target, values) => {
+    setPointData(values)
+    setAnchorEl(target)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
 
   const setupMapData = (data) => {
     const options = {
@@ -18,82 +31,96 @@ const ClusterMap = ({ data }) => {
         enabled: false
       },
       title: {
-        text: 'European Train Stations Near Airports'
-      },
-      subtitle: {
-        text:
-          'Source: <a href="https://github.com/trainline-eu/stations">' +
-          'github.com/trainline-eu/stations</a>'
+        text: ''
       },
       mapNavigation: {
         enabled: true,
         enableMouseWheelZoom: false
       },
       tooltip: {
-        formatter: function () {
-          const point = this.point
-
-          console.log(point)
-
-          // return '<b>{point.name}</b><br>Lat: {point.lat:.2f}, Lon: {point.lon:.2f}'
-          return '<div style="border=1px solid red; width=100px; height=100px background-color=blue"></div>'
-        }
-        // headerFormat: '',
-        // pointFormat:
-        //   '<b>{point.name}</b><br>Lat: {point.lat:.2f}, Lon: {point.lon:.2f}'
+        enabled: false
       },
       colorAxis: {
         min: 0,
         max: 20
       },
+      credits: {
+        enabled: false
+      },
       plotOptions: {
+        series: {
+          events: {
+            click: function (e) {
+              if (!e.point.category || e.point.clusteredData) return
+
+              handlePopoverOpen(e.target, e.point.dataGroup.options)
+            }
+          }
+        },
         mappoint: {
           cluster: {
             enabled: true,
-            layoutAlgorithm: {
-              type: 'optimalizedKmeans'
-            },
             allowOverlap: true,
+            marker: {
+              fillColor: '#1565c0'
+            },
             animation: {
               duration: 450
+            },
+            layoutAlgorithm: {
+              type: 'grid',
+              gridSize: 40
             }
           }
         }
       },
       series: [
         {
-          name: 'Basemap',
-          borderColor: '#A0A0A0',
-          // nullColor: 'rgba(177, 244, 177, 0.5)',
+          name: 'NodeDistribution',
+          borderColor: '#8F9DA4',
+          nullColor: '#EEEEEE',
           showInLegend: false
         },
         {
+          cursor: 'pointer',
           type: 'mappoint',
           enableMouseTracking: true,
           colorKey: 'clusterPointsAmount',
           name: 'Countries',
-          data: data || [] //EUROPE_DATA
+          data: data || []
         }
       ]
     }
 
-    new HighMapsWrapper['Map'](findDOMNode(myRef.current), options)
+    // eslint-disable-next-line
+    const highMap = new HighMapsWrapper['Map'](myRef.current, options)
   }
 
   useEffect(() => {
     if (myRef.current) {
       setupMapData()
     }
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     if (myRef.current) {
       setupMapData(data)
     }
+    // eslint-disable-next-line
   }, [data])
 
   return (
-    <div ref={myRef} style={{ border: '1px solid green', height: '100vh' }} />
+    <>
+      <div ref={myRef} style={{ height: '100vh' }} />
+      <Tooltip
+        anchorEl={anchorEl}
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+      >
+        <NodeCard node={pointData?.node} producer={pointData?.producer} />
+      </Tooltip>
+    </>
   )
 }
 
