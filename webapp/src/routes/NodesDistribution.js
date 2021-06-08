@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box'
 import { ALL_NODES_QUERY } from '../gql'
 
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
-const CulterMap = lazy(() => import('../components/CulterMap'))
+const ClusterMap = lazy(() => import('../components/ClusterMap'))
 
 const Nodes = () => {
   const [loadProducers, { loading = true, data: { producers } = {} }] =
