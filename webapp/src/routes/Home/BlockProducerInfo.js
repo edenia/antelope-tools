@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 
 import { formatWithThousandSeparator } from '../../utils'
+import eosApi from '../../utils/eosapi'
+
 import { NODES_QUERY } from '../../gql'
 
 const Card = lazy(() => import('@material-ui/core/Card'))
@@ -124,6 +126,59 @@ const BlockProducerInfo = ({ t, classes }) => {
         <TransactionsHistory t={t} classes={classes} />
         <ProducersSummary t={t} classes={classes} />
         <NodesSummary t={t} classes={classes} />
+
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('cpuLimitPerBlock')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${(info.block_cpu_limit % 60000) / 1000} s`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('netLimitPerBlock')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${(info.block_net_limit % 60000) / 1000} s`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('chainCpuLimit')}</Typography>
+              <Typography component="p" variant="h6">
+                {`${formatWithThousandSeparator(
+                  info.virtual_block_cpu_limit / 1024
+                )} KB`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('chainNetLimit')}</Typography>
+              <Typography component="p" variant="h6">
+                {`${formatWithThousandSeparator(
+                  info.virtual_block_net_limit / 1024
+                )} KB`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
     </Grid>
   )

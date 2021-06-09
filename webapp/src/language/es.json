@@ -126,7 +126,11 @@
     "undefined": "No Identificados",
     "unknown": "No Identificados",
     "transactions": "Transacciones",
-    "uniqueLocations": "Ubicaciones únicas"
+    "uniqueLocations": "Ubicaciones únicas",
+    "cpuLimitPerBlock": "Límite de CPU por bloque",
+    "netLimitPerBlock": "Límite Red por bloque",
+    "chainCpuLimit": "Límite de CPU en cadena",
+    "chainNetLimit": "Límite de Net en cadena"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
