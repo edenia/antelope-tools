@@ -9,7 +9,7 @@ export const getBlockNumUrl = (blockNum) => {
     eosConfig.blockExplorerUrl
       .replace('transaction', 'block')
       // eslint-disable-next-line
-      .replace('${transaction}', blockNum)
+      .replace('(transaction)', blockNum)
   )
 }
 

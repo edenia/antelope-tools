@@ -10,7 +10,6 @@ import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
-import { InitGA, LogPageView } from '../config/google-analitycs-module'
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
 import Header from '../components/Header'
@@ -79,11 +78,6 @@ const Dashboard = ({ children, width, ual }) => {
     }
     // eslint-disable-next-line
   }, [location.pathname, lacchain.dynamicTitle, t])
-
-  useEffect(() => {
-    InitGA()
-    LogPageView()
-  }, [])
 
   return (
     <Box className={classes.root}>

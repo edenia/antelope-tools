@@ -118,7 +118,11 @@
     "query, seed": "Query, Seed",
     "undefined": "Undefined",
     "unknown": "Unknown",
-    "uniqueLocations": "Unique Locations"
+    "uniqueLocations": "Unique Locations",
+    "cpuLimitPerBlock": "CPU Limit Per Block",
+    "netLimitPerBlock": "Net Limit Per Block",
+    "chainCpuLimit": "Chain CPU Limit",
+    "chainNetLimit": "Chain Net Limit"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {

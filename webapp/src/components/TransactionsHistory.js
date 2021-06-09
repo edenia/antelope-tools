@@ -60,9 +60,6 @@ const TransactionsHistory = ({ t, classes }) => {
     setBlockWithHighestTransactionsCount(blockWithHighestTransactionsCount)
   }, [data])
 
-  // this console.log is just for test the production data
-  console.log({ blockWithHighestTransactionsCount })
-
   if (!generalConfig.historyEnabled)
     return (
       <Grid item xs={12} sm={4} lg={3}>
