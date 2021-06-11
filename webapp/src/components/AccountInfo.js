@@ -7,10 +7,10 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Identicon from 'react-identicons'
 import Accordion from '@material-ui/core/Accordion'
+import Box from '@material-ui/core/Box'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import VpnKey from '@material-ui/icons/VpnKey'
 
 import RicardianContract from './RicardianContract'
 import ContractActions from './ContractActions'
@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0
   },
   keyItem: {
-    display: 'flex'
+    display: 'flex',
+    textTransform: 'capitalize'
   },
   keyIcon: {
     marginRight: theme.spacing(1),
@@ -53,6 +54,65 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex'
+  },
+  boxHeaderCard: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& .identicon': {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    '& .resourceUsage': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      '& .recharts-wrapper': {
+        marginBottom: theme.spacing(2)
+      }
+    },
+    [theme.breakpoints.up('sm')]: {
+      '& .resourceUsage': {
+        flexDirection: 'row'
+      }
+    },
+    [theme.breakpoints.up('md')]: {
+      '& .columTitle': {
+        marginLeft: theme.spacing(2)
+      },
+      '& .identicon': {
+        alignItems: 'end'
+      },
+      '& .resourceUsage': {
+        justifyContent: 'space-between',
+        borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+        paddingLeft: theme.spacing(2),
+        height: '100%'
+      },
+      '& .keys': {
+        borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+        paddingLeft: theme.spacing(2),
+        height: '100%'
+      }
+    },
+    [theme.breakpoints.up('lg')]: {
+      flexDirection: 'row',
+      '& .identicon': {
+        alignItems: 'center',
+        width: 200
+      }
+    }
+  },
+  iconBorder: {
+    backgroundColor: '#f0f0f0',
+    borderRadius: 50,
+    width: 85,
+    height: 85,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }))
 
@@ -128,103 +188,55 @@ const AccountInfo = ({
     >
       {info && (
         <>
-          <Grid item xs={12}>
-            <Grid container direction="row" spacing={2}>
-              <Grid item>
+          {/* <Grid item xs={12}></Grid> */}
+          <Box className={classes.boxHeaderCard}>
+            <Box className="identicon">
+              <Box className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
                   fg="#757575"
                 />
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="h4"
-                  color="primary"
-                  className={classes.accountName}
-                >
-                  {info.account_name || 'N/A'}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Accordion classes={{ root: classes.accordion }}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                classes={{
-                  root: classes.accordionSummary
-                }}
+              </Box>
+              <Typography
+                variant="h4"
+                color="primary"
+                className={classes.accountName}
               >
-                <Typography variant="h6" color="primary">
-                  {t('resources')}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Grid container spacing={2}>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    className={classes.resourceWrapper}
-                  >
-                    <ResourceUsage
-                      title="RAM"
-                      percent={info.ram.percent}
-                      label={info.ram.label}
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    className={classes.resourceWrapper}
-                  >
-                    <ResourceUsage
-                      title="CPU"
-                      percent={info.cpu.percent}
-                      label={info.cpu.label}
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    className={classes.resourceWrapper}
-                  >
-                    <ResourceUsage
-                      title="NET"
-                      percent={info.net.percent}
-                      label={info.net.label}
-                    />
-                  </Grid>
-                </Grid>
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Accordion classes={{ root: classes.accordion }}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                classes={{
-                  root: classes.accordionSummary
-                }}
-              >
-                <Typography variant="h6" color="primary">
-                  {t('keys')}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
+                {info.account_name || 'N/A'}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="h6" color="primary" className="columTitle">
+                {t('resources')}
+              </Typography>
+              <Box className="resourceUsage">
+                <ResourceUsage
+                  title="RAM"
+                  percent={info.ram.percent}
+                  label={info.ram.label}
+                />
+                <ResourceUsage
+                  title="CPU"
+                  percent={info.cpu.percent}
+                  label={info.cpu.label}
+                />
+                <ResourceUsage
+                  title="NET"
+                  percent={info.net.percent}
+                  label={info.net.label}
+                />
+              </Box>
+            </Box>
+            <Box>
+              <Typography variant="h6" color="primary" className="columTitle">
+                {t('keys')}
+              </Typography>
+              <Box className="keys">
                 <dl>
                   {info.keys.map((key) => (
                     <span key={`account-key-${key.label}`}>
                       <dt className={classes.keyItem}>
-                        <VpnKey className={classes.keyIcon} />
                         <Typography>{key.label}</Typography>
                       </dt>
                       <dd>
@@ -235,9 +247,9 @@ const AccountInfo = ({
                     </span>
                   ))}
                 </dl>
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
+              </Box>
+            </Box>
+          </Box>
 
           {abi && (
             <>
