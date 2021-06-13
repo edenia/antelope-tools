@@ -41,7 +41,7 @@ BodyGraphValue.defaultProps = {
   classes: {}
 }
 
-const TransactionsHistory = ({ t, classes }) => {
+const TransactionsHistory = ({ t, classes, nodesChildren }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [
     blockWithHighestTransactionsCount,
@@ -62,17 +62,20 @@ const TransactionsHistory = ({ t, classes }) => {
 
   if (!generalConfig.historyEnabled)
     return (
-      <Grid item xs={12} sm={4} lg={3}>
-        <Card>
-          <CardContent className={classes.cards}>
-            <Typography>{`${t('uniqueLocations')}`}</Typography>
-            <BodyGraphValue
-              value={data?.stats?.[0]?.unique_locations?.count || 0}
-              loading={loading}
-            />
-          </CardContent>
-        </Card>
-      </Grid>
+      <>
+        {nodesChildren && nodesChildren}
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{`${t('uniqueLocations')}`}</Typography>
+              <BodyGraphValue
+                value={data?.stats?.[0]?.unique_locations?.count || 0}
+                loading={loading}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+      </>
     )
 
   return (
@@ -166,7 +169,7 @@ const TransactionsHistory = ({ t, classes }) => {
           </CardContent>
         </Card>
       </Grid>
-
+      {nodesChildren && nodesChildren}
       <Grid item xs={12} sm={4} lg={3}>
         <Card>
           <CardContent className={classes.cards}>
@@ -184,7 +187,8 @@ const TransactionsHistory = ({ t, classes }) => {
 
 TransactionsHistory.propTypes = {
   t: PropTypes.func,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  nodesChildren: PropTypes.node
 }
 
 TransactionsHistory.defaultProps = {
