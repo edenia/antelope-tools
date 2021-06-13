@@ -121,9 +121,16 @@ const BlockProducerInfo = ({ t, classes }) => {
       </Grid>
       {loading && <LinearProgress />}
       <Grid container item xs={12} spacing={4}>
-        <TransactionsHistory t={t} classes={classes} />
-        <ProducersSummary t={t} classes={classes} />
-        <NodesSummary t={t} classes={classes} />
+        <TransactionsHistory
+          t={t}
+          classes={classes}
+          nodesChildren={
+            <>
+              <ProducersSummary t={t} classes={classes} />
+              <NodesSummary t={t} classes={classes} />
+            </>
+          }
+        />
 
         <Grid item xs={12} sm={4} lg={3}>
           <Card>
@@ -134,7 +141,7 @@ const BlockProducerInfo = ({ t, classes }) => {
                 variant="h6"
                 className={classes.lowercase}
               >
-                {`${info.block_cpu_limit * 0.001} ms`}
+                {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
               </Typography>
             </CardContent>
           </Card>
@@ -160,7 +167,7 @@ const BlockProducerInfo = ({ t, classes }) => {
                 variant="h6"
                 className={classes.lowercase}
               >
-                {`${info.virtual_block_cpu_limit * 0.001} ms`}
+                {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
               </Typography>
             </CardContent>
           </Card>

@@ -10,6 +10,24 @@ import { useQuery } from '@apollo/react-hooks'
 import { useTranslation } from 'react-i18next'
 
 import { NODES_SUMMARY_QUERY } from '../gql'
+import { generalConfig } from '../config'
+
+const NODES_ORDER = [
+  {
+    boot: 2,
+    observer: 4,
+    validator: 1,
+    writer: 3
+  },
+  {
+    producer: 1,
+    full: 2,
+    query: 3,
+    seed: 4,
+    'query,seed': 5,
+    unknown: 10
+  }
+]
 
 const BodyGraphValue = ({ loading, value }) => {
   if (loading) return <LinearProgress />
@@ -44,8 +62,31 @@ const NodesSummary = ({ t, classes }) => {
     }
 
     const { total, ...nodes } = data?.stats[0]?.nodes_summary || {}
+
     setTotal(total)
-    setNodes(nodes)
+
+    const nodesOrderByNet = generalConfig.historyEnabled
+      ? NODES_ORDER[0]
+      : NODES_ORDER[1]
+    const sortedNodes = Object.keys(nodes)
+      .map((node) => {
+        let type = node
+
+        if (type.includes('[')) {
+          const arrayName = JSON.parse(type)
+
+          type = arrayName.toString()
+        }
+
+        return {
+          value: nodes[type],
+          type,
+          position: nodesOrderByNet[type] || 8
+        }
+      })
+      .sort((a, b) => a.position - b.position)
+
+    setNodes(sortedNodes)
   }, [data])
 
   useEffect(() => {
@@ -64,23 +105,19 @@ const NodesSummary = ({ t, classes }) => {
       </Grid>
 
       {nodes &&
-        Object.keys(nodes).map((type) => {
-          const label = type.replaceAll(/("|\[|\])/gi, '')
-
-          return (
-            <Grid item xs={12} sm={4} lg={3} key={type}>
-              <Card>
-                <CardContent className={classes.cards}>
-                  <Typography>
-                    {currentLanguaje === 'es' ? t('nodes') : ''} {t(label)}{' '}
-                    {currentLanguaje !== 'es' ? t('nodes') : ''}
-                  </Typography>
-                  <BodyGraphValue value={nodes[type] || 0} loading={loading} />
-                </CardContent>
-              </Card>
-            </Grid>
-          )
-        })}
+        nodes.map((node) => (
+          <Grid item xs={12} sm={4} lg={3} key={node.type}>
+            <Card>
+              <CardContent className={classes.cards}>
+                <Typography>
+                  {currentLanguaje === 'es' ? t('nodes') : ''} {t(node.type)}{' '}
+                  {currentLanguaje !== 'es' ? t('nodes') : ''}
+                </Typography>
+                <BodyGraphValue value={node.value || 0} loading={loading} />
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
     </>
   )
 }
