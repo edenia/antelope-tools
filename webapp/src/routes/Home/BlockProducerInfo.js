@@ -152,7 +152,8 @@ const BlockProducerInfo = ({ t, classes }) => {
               <Typography>{t('netLimitPerBlock')}</Typography>
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
-                  info.block_net_limit / 1024
+                  info.block_net_limit / 1024,
+                  0
                 )} KB`}
               </Typography>
             </CardContent>
@@ -178,7 +179,8 @@ const BlockProducerInfo = ({ t, classes }) => {
               <Typography>{t('chainNetLimit')}</Typography>
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
-                  info.virtual_block_net_limit / 1024
+                  info.virtual_block_net_limit / 1024,
+                  0
                 )} KB`}
               </Typography>
             </CardContent>
