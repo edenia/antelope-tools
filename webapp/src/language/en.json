@@ -285,6 +285,12 @@
     "allBPs": "All Block Producers",
     "top21": "Top 21",
     "paidStandby": "Paid Standby",
-    "nonPaidStandby": "Non-Paid Standby"
+    "nonPaidStandby": "Non-Paid Standby",
+    "title": "Search Producer",
+    "producer": "Producer"
+  },
+  "nodeSearchComponent": {
+    "title": "Search Producer",
+    "producer": "Producer"
   }
 }

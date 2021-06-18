@@ -90,6 +90,7 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
       average_daily_transactions_in_last_week
       tps_all_time_high
       unique_locations
+      missed_blocks
       updated_at
     }
   }

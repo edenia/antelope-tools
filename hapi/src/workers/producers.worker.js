@@ -63,6 +63,7 @@ const start = async () => {
   )
   run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
   run('SYNC TPS', statsService.syncTPSAllTimeHigh)
+  run('SYNC TPS', statsService.getCurrentMissedBlock)
 }
 
 module.exports = {

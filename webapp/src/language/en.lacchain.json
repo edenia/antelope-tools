@@ -145,5 +145,8 @@
   },
   "ricardianContractRoute": {
     "title": "LACChain Validator Node Agreement"
+  },
+  "producerSearchComponent": {
+    "title": "Search Entity"
   }
 }

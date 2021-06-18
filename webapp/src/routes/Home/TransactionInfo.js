@@ -125,7 +125,14 @@ const TransactionInfo = ({ t, classes }) => {
 
   return (
     <Card>
-      <CardContent>
+      <CardContent
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}
+      >
         <Box className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {t('transactions')}

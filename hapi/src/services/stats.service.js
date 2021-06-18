@@ -6,6 +6,41 @@ const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
+const _getScheduleHystory = async () => {
+  const query = `
+    query {
+      schedule_history (where: {version: {_eq: 0}}) {
+        first_block_at
+      }
+    }
+  `
+  const { schedule_history: data } = await hasuraUtil.request(query)
+
+  return data.length > 0 ? data[0] : null
+}
+
+const _checkDateGap = (start, end) => {
+  /*
+  if the diference between the
+  last block time and the end time
+  is less than 1 minute lets await
+  */
+
+  return moment(start).diff(end, 'seconds') < 60
+}
+
+const _getMissedBlock = async (start, end) => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT account, sum(missed_blocks)
+    FROM round_history
+    WHERE updated_at
+    BETWEEN '${start}'::timestamp AND '${end}'::timestamp
+    GROUP BY account
+  `)
+
+  return rows
+}
+
 const getTransactionsInTimeRage = async (start, end) => {
   const [rows] = await sequelizeUtil.query(`
     SELECT
@@ -33,7 +68,7 @@ const getNodesSummary = async () => {
       value->>'node_type'
   `)
 
-  rows.forEach(row => {
+  rows.forEach((row) => {
     payload[row.node_type || 'unknown'] = row.nodes_count
     total += row.nodes_count
   })
@@ -84,12 +119,12 @@ const getBlockDistribution = async (range = '1 day') => {
     `
     const data = await hasuraUtil.request(query, { startTime })
 
-    data.items.forEach(item => {
+    data.items.forEach((item) => {
       totalBloks += item.blocks
     })
 
     return data.items
-      .map(item => ({
+      .map((item) => ({
         account: item.producer || 'N/A',
         blocks: item.blocks,
         percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
@@ -115,6 +150,7 @@ const getStats = async () => {
         last_round
         last_block_at
         tps_all_time_high
+        missed_blocks
         updated_at
         created_at
       }
@@ -125,7 +161,94 @@ const getStats = async () => {
   return data.stat
 }
 
-const udpateStats = async payload => {
+const getCurrentMissedBlock = async () => {
+  let lastBlockAt = null
+  let data = null
+  let end = null
+  let start = null
+
+  const stats = await getStats()
+
+  if (!stats) return
+
+  if (stats.missed_blocks) {
+    data = stats.missed_blocks
+    lastBlockAt = stats.last_block_at
+  } else {
+    const scheduleHistoryInfo = await _getScheduleHystory()
+
+    start = moment(scheduleHistoryInfo.first_block_at).add(1, 'second')
+    end = moment(start).add(59, 'seconds')
+
+    const rowsInitial = await _getMissedBlock(
+      start.toISOString(),
+      end.toISOString()
+    )
+
+    if (!rowsInitial.length) {
+      await udpateStats({
+        missed_blocks: {
+          checked_at: end.toISOString()
+        }
+      })
+
+      getCurrentMissedBlock()
+
+      return
+    }
+  }
+
+  start = moment(data.checked_at).add(1, 'second')
+  end = moment(start).add(59, 'seconds')
+
+  if (_checkDateGap(lastBlockAt, end)) {
+    await sleepFor(moment(lastBlockAt).diff(end, 'seconds'))
+    getCurrentMissedBlock()
+
+    return
+  }
+
+  const rows = await _getMissedBlock(start.toISOString(), end.toISOString())
+
+  if (!rows.length) {
+    await udpateStats({
+      missed_blocks: {
+        ...data,
+        checked_at: end.toISOString()
+      }
+    })
+
+    getCurrentMissedBlock()
+
+    return
+  }
+
+  let newData = data
+
+  rows.forEach((element) => {
+    if (newData[element.account]) {
+      newData = {
+        ...newData,
+        [element.account]: `${
+          parseInt(newData[element.account]) + parseInt(element.sum)
+        }`
+      }
+    } else {
+      newData = { ...newData, [element.account]: element.sum }
+    }
+  })
+
+  await udpateStats({
+    missed_blocks: {
+      ...newData,
+      checked_at: end.toISOString()
+    }
+  })
+
+  getCurrentMissedBlock()
+}
+
+const udpateStats = async (payload) => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -136,7 +259,7 @@ const udpateStats = async payload => {
   await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
-const insertStats = async payload => {
+const insertStats = async (payload) => {
   const mutation = `
     mutation ($payload: stat_insert_input!) {
       insert_stat_one(object: $payload) {
@@ -150,13 +273,7 @@ const insertStats = async payload => {
 const getLastTPSAllTimeHigh = async () => {
   const stats = await getStats()
 
-  if (!stats) {
-    return null
-  }
-
-  if (!stats.last_block_at) {
-    return null
-  }
+  if (!stats || !stats.last_block_at) return null
 
   if (stats.tps_all_time_high) {
     return {
@@ -165,19 +282,9 @@ const getLastTPSAllTimeHigh = async () => {
     }
   }
 
-  const query = `
-    query {
-      schedule_history (where: {version: {_eq: 0}}) {
-        first_block_at
-      }
-    }
-  `
-  const { schedule_history: data } = await hasuraUtil.request(query)
-  const scheduleHistoryInfo = data.length > 0 ? data[0] : null
+  const scheduleHistoryInfo = await _getScheduleHystory()
 
-  if (!scheduleHistoryInfo) {
-    return null
-  }
+  if (!scheduleHistoryInfo) return null
 
   return {
     transactions_count: 0,
@@ -188,13 +295,13 @@ const getLastTPSAllTimeHigh = async () => {
   }
 }
 
-const getBlockUsage = async blockNum => {
+const getBlockUsage = async (blockNum) => {
   const block = await eosUtil.getBlock(blockNum)
   const info = await eosUtil.getInfo()
   let cpuUsage = 0
   let netUsage = 0
 
-  block.transactions.forEach(transaction => {
+  block.transactions.forEach((transaction) => {
     cpuUsage += transaction.cpu_usage_us
     netUsage += transaction.net_usage_words
   })
@@ -225,10 +332,7 @@ const syncTPSAllTimeHigh = async () => {
   const start = moment(lastValue.checked_at).add(1, 'second')
   const end = moment(start).add(59, 'seconds')
 
-  // if the diference between the
-  // last block time and the end time
-  // is less than 1 minute lets await
-  if (moment(lastValue.last_block_at).diff(end, 'seconds') < 60) {
+  if (_checkDateGap(lastValue.last_block_at, end)) {
     await sleepFor(moment(lastValue.last_block_at).diff(end, 'seconds'))
     syncTPSAllTimeHigh()
 
@@ -338,5 +442,6 @@ module.exports = {
   syncTPSAllTimeHigh,
   getBlockDistribution,
   getStats,
-  udpateStats
+  udpateStats,
+  getCurrentMissedBlock
 }

@@ -140,5 +140,8 @@
   },
   "ricardianContractRoute": {
     "title": "Acuerdo de LACChain Validadores"
+  },
+  "producerSearchComponent": {
+    "title": "Buscar Entidad"
   }
 }

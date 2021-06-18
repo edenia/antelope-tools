@@ -65,6 +65,8 @@ export default {
         ...tps
       ]
 
+      // console.log({ tps, tpb })
+
       return {
         ...state,
         tps,
@@ -88,6 +90,9 @@ export default {
       const handle = async () => {
         try {
           const info = await eos.getInfo({})
+
+          console.log({ info })
+
           dispatch.eos.updateInfo(info)
           dispatch.eos.getBlock(info.head_block_num)
         } catch (error) {

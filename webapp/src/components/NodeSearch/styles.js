@@ -58,7 +58,7 @@ export default (theme, eosConfig) => ({
     paddingRight: 4
   },
   cardContent: {
-    padding: `${theme.spacing(4)}px !important`
+    padding: `${theme.spacing(2)}px !important`
   },
   nodeSearchWrapper: {
     marginBottom: theme.spacing(2)
@@ -73,5 +73,13 @@ export default (theme, eosConfig) => ({
   selected: {
     backgroundColor: `${theme.palette.primary.main} !important`,
     color: '#fff'
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: '1.2',
+    letterSpacing: '0.06px',
+    textAlign: 'left',
+    marginBottom: theme.spacing(2)
   }
 })

@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 const CHIPS = {
   lacchain: [
@@ -44,7 +45,15 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff'
   },
   cardContent: {
-    padding: `${theme.spacing(4)}px !important`
+    padding: `${theme.spacing(2)}px !important`
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: '1.2',
+    letterSpacing: '0.06px',
+    textAlign: 'left',
+    marginBottom: theme.spacing(2)
   }
 }))
 
@@ -89,6 +98,9 @@ const ProducerSearch = ({
       <Grid item xs={12}>
         <Card>
           <CardContent className={classes.cardContent}>
+            <Typography className={classes.title}>{`${t(
+              'title'
+            )}:`}</Typography>
             <TextField
               label={t('producerName')}
               variant="outlined"
