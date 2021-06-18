@@ -36,7 +36,7 @@ jobs:
           REACT_APP_TITLE: 'LACChain EOSIO Network Dashboard'
           REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://lacchain.eosio.online/lacchain.png'
-          REACT_APP_FOOTER_LINKS: '[{"text":"LACChain Website","src":"https://www.lacchain.net"},{"text":"Block Explorer","src":"https://explorer.latamlink.io"},{"text":"Developer Guidelines","src":"https://guide.eoscostarica.io"},{"text":"Documentation","src":"https://latamlink.io/docs/eosio"},{"text":"GitHub","src":"https://github.com/eoscostarica/eosio-dashboard"}]'
+          REACT_APP_FOOTER_LINKS: '[{"text":"LACChain EOSIO Docs","src":"https://eosio.lacchain.net"},{"text":"LACChain Website","src":"https://www.lacchain.net"},{"text":"Block Explorer","src":"https://eosio-explorer.lacchain.net"},{"text":"EOSIO Developer Guidelines","src":"https://guide.eoscostarica.io"},{"text":"GitHub","src":"https://github.com/eoscostarica/eosio-dashboard"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
@@ -60,7 +60,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online"},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '[]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://explorer.latamlink.io/transaction/(transaction)'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://eosio-explorer.lacchain.net/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'true'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
 
