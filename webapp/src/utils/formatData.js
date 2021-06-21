@@ -42,6 +42,16 @@ export const formatData = (
     return 'Non-Paid Standby'
   }
 
+  const getEntitiesMissedBlocks = () => {
+    if (!nodes.length) return 0
+
+    const producerNode = nodes.find((node) => node?.node_type === 'producer')
+
+    if (producerNode) return 0
+
+    return missedBlocks[owner] || 0
+  }
+
   switch (type) {
     case 'entity':
       if (eosConfig.networkName === 'lacchain') {
@@ -71,10 +81,7 @@ export const formatData = (
           votes: 'N/A',
           rewards: 0,
           lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks: missedBlocks.reduce(
-            (result, current) => result + current.value,
-            0
-          )
+          missedBlocks: getEntitiesMissedBlocks()
         },
         nodes,
         healthStatus,
@@ -98,10 +105,8 @@ export const formatData = (
         },
         stats: {
           lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks: missedBlocks.reduce(
-            (result, current) => result + current.value,
-            0
-          )
+          missedBlocks:
+            node?.node_type === 'validator' ? missedBlocks[node?.name] : 0
         },
         nodes: [],
         healthStatus: node?.health_status,

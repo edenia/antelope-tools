@@ -93,8 +93,10 @@
       - average_daily_transactions_in_last_week
       - created_at
       - id
+      - missed_blocks
       - nodes_summary
       - tps_all_time_high
+      - transaction_history
       - transactions_in_last_day
       - transactions_in_last_hour
       - transactions_in_last_week

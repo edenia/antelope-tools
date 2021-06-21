@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useSubscription } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
@@ -10,7 +10,7 @@ import Pagination from '@material-ui/lab/Pagination'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-import { PRODUCERS_QUERY } from '../gql'
+import { PRODUCERS_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../gql'
 import ProducerSearch from '../components/ProducerSearch'
 import Tooltip from '../components/Tooltip'
 import NodeCard from '../components/NodeCard'
@@ -88,6 +88,9 @@ const Producers = () => {
   const classes = useStyles()
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(PRODUCERS_QUERY)
+  const { data: dataHistory, loading: loadingHistory } = useSubscription(
+    BLOCK_TRANSACTIONS_HISTORY
+  )
   const location = useLocation()
   const [pagination, setPagination] = useState({ page: 1, limit: 28 })
   const [totalPages, setTotalPages] = useState(1)
@@ -96,6 +99,7 @@ const Producers = () => {
   const [items, setItems] = useState([])
   const [filters, setFilters] = useState({})
   const [chipFilter, setChipFilter] = useState('all')
+  const [missedBlocks, setMissedBlocks] = useState({})
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
@@ -183,6 +187,12 @@ const Producers = () => {
     setItems(items)
   }, [chipFilter, producers])
 
+  useEffect(() => {
+    if (dataHistory?.stats.length) {
+      setMissedBlocks(dataHistory?.stats[0].missed_blocks)
+    }
+  }, [dataHistory, loadingHistory])
+
   return (
     <Box>
       <Tooltip
@@ -210,7 +220,7 @@ const Producers = () => {
             <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
               <InformationCard
                 type="entity"
-                producer={producer}
+                producer={{ ...producer, missedBlocks }}
                 rank={(pagination.page - 1) * pagination.limit + index + pibot}
                 onNodeClick={handlePopoverOpen}
               />

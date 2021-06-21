@@ -66,7 +66,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           rank,
           owner: producer.owner,
           updatedAt: producer.updated_at,
-          missedBlocks: producer.missed_blocks || [],
+          missedBlocks: producer.missedBlocks,
           nodes: producer.bp_json?.nodes || [],
           healthStatus: producer.health_status,
           dataType: producer.bp_json?.type,

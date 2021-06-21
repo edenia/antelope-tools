@@ -1,12 +1,12 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useSubscription } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-import { NODES_QUERY } from '../gql'
+import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../gql'
 
 const Box = lazy(() => import('@material-ui/core/Box'))
 const Grid = lazy(() => import('@material-ui/core/Grid'))
@@ -23,20 +23,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const NodesCards = ({ data }) => {
-  if (!data.bp_json?.nodes) {
+const NodesCards = ({ item }) => {
+  const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
+  const [missedBlocks, setMissedBlocks] = useState({})
+
+  useEffect(() => {
+    if (data?.stats.length) {
+      setMissedBlocks(data?.stats[0].missed_blocks)
+    }
+  }, [data, loading])
+
+  if (!item.bp_json?.nodes) {
     return (
       <Grid item xs={12} sm={6} lg={12}>
-        <InformationCard producer={data} type="node" />
+        <InformationCard producer={item} type="node" />
       </Grid>
     )
   }
 
   return (
     <>
-      {(data.bp_json?.nodes || []).map((node, index) => (
+      {(item.bp_json?.nodes || []).map((node, index) => (
         <Grid item xs={12} sm={6} lg={12} key={`${node.name}_${index}`}>
-          <InformationCard producer={{ ...data, node }} type="node" />
+          <InformationCard
+            producer={{ ...item, node, missedBlocks }}
+            type="node"
+          />
         </Grid>
       ))}
     </>
@@ -44,7 +56,7 @@ const NodesCards = ({ data }) => {
 }
 
 NodesCards.propTypes = {
-  data: PropTypes.object
+  item: PropTypes.object
 }
 
 const Nodes = () => {
@@ -143,7 +155,7 @@ const Nodes = () => {
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
         {items.map((producer) => (
-          <NodesCards data={producer} key={`producer_${producer.owner}`} />
+          <NodesCards item={producer} key={`producer_${producer.owner}`} />
         ))}
       </Grid>
       {!loading && pagination.pages > 1 && (

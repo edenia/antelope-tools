@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
-import { TRANSACTION_QUERY } from '../../gql'
+import { TRANSACTION_HISTORY_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { generalConfig } from '../../config'
@@ -41,8 +41,10 @@ const TransactionInfo = ({ t, classes }) => {
   ])
   const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
-  const [getTransactionHistory, { data: trxHistory, loading }] =
-    useLazyQuery(TRANSACTION_QUERY)
+  const [getTransactionHistory, { data, loading }] = useLazyQuery(
+    TRANSACTION_HISTORY_QUERY,
+    { fetchPolicy: 'network-only' }
+  )
 
   useEffect(() => {
     const trxPerSecond = []
@@ -90,42 +92,53 @@ const TransactionInfo = ({ t, classes }) => {
 
     setGraphicData([])
     getTransactionHistory({
-      variables: { range: option }
+      variables: {}
     })
   }, [option, getTransactionHistory])
 
   useEffect(() => {
-    const trxPerBlock = []
+    const trxHistory = data?.trxHistory?.length
+      ? data.trxHistory[0].transaction_history
+      : null
 
     if (option === option[0]) {
       return
     }
 
-    if (!trxHistory?.transactions?.length) {
+    if (!trxHistory) {
       setGraphicData([])
       return
     }
 
-    for (let i = 0; i < trxHistory.transactions.length; i++) {
-      trxPerBlock.push([
-        new Date(trxHistory.transactions[i].datetime).getTime(),
-        trxHistory.transactions[i].transactions_count || 0
-      ])
-    }
+    const intervalGraphicData = (trxHistory[option] || []).map(
+      (transactionHistory) => {
+        return [
+          new Date(transactionHistory.datetime).getTime(),
+          transactionHistory.transactions_count || 0
+        ]
+      }
+    )
 
     setGraphicData([
       {
         name: t('transactionsPerBlock'),
         color: '#00C853',
-        data: trxPerBlock
+        data: intervalGraphicData
       }
     ])
     // eslint-disable-next-line
-  }, [trxHistory, t])
+  }, [data, t])
 
   return (
     <Card>
-      <CardContent>
+      <CardContent
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}
+      >
         <Box className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {t('transactions')}

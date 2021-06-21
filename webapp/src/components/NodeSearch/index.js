@@ -12,6 +12,7 @@ import Chip from '@material-ui/core/Chip'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 import 'flag-icon-css/css/flag-icon.min.css'
 
@@ -57,6 +58,9 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
       <Grid item xs={12}>
         <Card>
           <CardContent className={classes.cardContent}>
+            <Typography className={classes.title}>{`${t(
+              'title'
+            )}:`}</Typography>
             <TextField
               label={t('producer')}
               variant="outlined"

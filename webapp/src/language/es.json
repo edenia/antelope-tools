@@ -293,6 +293,12 @@
     "allBPs": "Todos los Productores de Bloque",
     "top21": "Top 21",
     "paidStandby": "Reserva con pago",
-    "nonPaidStandby": "Reserva sin pago"
+    "nonPaidStandby": "Reserva sin pago",
+    "title": "Buscar Productor",
+    "producer": "Productor"
+  },
+  "nodeSearchComponent": {
+    "title": "Buscar Productor",
+    "producer": "Productor"
   }
 }

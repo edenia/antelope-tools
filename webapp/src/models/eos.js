@@ -88,6 +88,7 @@ export default {
       const handle = async () => {
         try {
           const info = await eos.getInfo({})
+
           dispatch.eos.updateInfo(info)
           dispatch.eos.getBlock(info.head_block_num)
         } catch (error) {
