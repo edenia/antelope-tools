@@ -4,7 +4,8 @@ const {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService
+  statsService,
+  formatTransactionHistory
 } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil, sleepFor } = require('../utils')
@@ -63,7 +64,8 @@ const start = async () => {
   )
   run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
   run('SYNC TPS', statsService.syncTPSAllTimeHigh)
-  run('SYNC TPS', statsService.getCurrentMissedBlock)
+  run('SYNC MISSED BLOCKS STATS', statsService.getCurrentMissedBlock)
+  run('SYNC TRX HISTORY STATS', statsService.formatTransactionHistory, 10800)
 }
 
 module.exports = {
