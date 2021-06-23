@@ -110,7 +110,7 @@ jobs:
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
 
       - name: Setup and deploy kubernetes environment
-        uses: steebchen/kubectl@master
+        uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           NAMESPACE: jungle-dashboard
