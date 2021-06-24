@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+  font-family: "Nunito";
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito";
+}
+
+.section-wrapper {
+  width: 100%;
+  padding-top: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.box-paragraph {
+  margin-bottom: 24px;
+}
+
+.box-paragraph h5 {
+  font-family: "Nunito";
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+  margin: 0;
+}
+
+.box-paragraph p {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.07875px;
+  text-align: justify;
+  color: #000000;
+}
+
+.box-network h5 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 38px;
+  letter-spacing: -0.219429px;
+  color: #000000;
+  margin: 0;
+}
+
+#network-desktop {
+  display: none;
+}
+
+.network-mobile {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 34px;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #ffffff;
+  padding-bottom: 47px;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-box-desktop {
+  display: none;
+}
+
+#middle-logo {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+#box-right {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  background-color: #f9f9fc;
+  padding-top: 36px;
+  padding-bottom: 40px;
+}
+
+.footer {
+  background-color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+.box-social-media {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 36px;
+}
+
+.eos-costa-rica > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact-us {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.0595px;
+  color: #000000;
+  margin: 0;
+  padding: 12px;
+  margin-bottom: 36px;
+}
+
+#project-by {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+}
+
+#copyright {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 31px;
+  text-align: right;
+  letter-spacing: 0.83px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 12px;
+  margin-top: 36px;
+}
+
+#bg-image {
+  display: none;
+}
+
+@media (min-device-width: 1024px) {
+  .image-box {
+    display: none;
+  }
+
+  .network-mobile {
+    display: none;
+  }
+
+  .image-box-desktop {
+    display: flex;
+  }
+
+  #network-desktop {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 80px;
+  }
+
+  #d-version {
+    width: 640px;
+    margin-top: 100px;
+  }
+
+  .box-paragraph h5 {
+    font-size: 48px;
+    letter-spacing: -0.219429px;
+    margin-bottom: 40px;
+  }
+
+  .box-paragraph p {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 46px;
+    letter-spacing: -0.233333px;
+  }
+
+  .box-network h5 {
+    margin-top: 100px;
+    font-size: 32px;
+  }
+
+  .content h5 {
+    margin-top: 70px;
+  }
+
+  .footer .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #contact-us {
+    width: 80%;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 22px;
+    line-height: 45px;
+    letter-spacing: -0.219429px;
+  }
+
+  #box-left {
+    align-items: flex-start;
+    width: 60%;
+  }
+
+  #box-right {
+    align-items: flex-end;
+    width: 30%;
+  }
+
+  .box-social-media {
+    width: 300px;
+    margin-bottom: 8px;
+  }
+
+  .eos-costa-rica > div {
+    justify-content: flex-end;
+  }
+
+  #project-by {
+    font-size: 22px;
+    line-height: 50px;
+    letter-spacing: -0.219429px;
+  }
+
+  #copyright {
+    margin-bottom: 8px;
+  }
+
+  #bg-image {
+    position: absolute;
+    z-index: 1;
+    width: 950px;
+    margin-left: 650px;
+    display: inline;
+  }
+}
+
+@media (min-device-width: 1200px) {
+  .section-wrapper {
+    width: 1200px;
+  }
+  .header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
