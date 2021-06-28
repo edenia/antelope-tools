@@ -25,15 +25,11 @@ body {
   text-decoration: none;
   color: black;
 }
-.box-paragraph a:hover {
-  text-decoration: underline;
-}  .box-paragraph a {
-  text-decoration: none;
-  color: black;
-}
+
 .box-paragraph a:hover {
   text-decoration: underline;
 }
+
 .box-paragraph h5 {
   font-family: 'Nunito';
   font-weight: 600;
