@@ -209,6 +209,14 @@ body {
     letter-spacing: 0.08px;
   }
 
+  .box-paragraph a {
+    text-decoration: none;
+    color: black;
+  }
+  .box-paragraph a:hover {
+    text-decoration: underline;
+  }
+
   .box-network h5 {
     margin-top: 23px;
     font-weight: 600;
@@ -380,5 +388,6 @@ body {
   #bg-image {
     width: 950px;
     margin-left: 670px;
+    margin-top:25px;
   }
 }
