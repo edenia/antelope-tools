@@ -21,6 +21,19 @@ body {
   margin-bottom: 24px;
 }
 
+.box-paragraph a {
+  text-decoration: none;
+  color: black;
+}
+.box-paragraph a:hover {
+  text-decoration: underline;
+}  .box-paragraph a {
+  text-decoration: none;
+  color: black;
+}
+.box-paragraph a:hover {
+  text-decoration: underline;
+}
 .box-paragraph h5 {
   font-family: 'Nunito';
   font-weight: 600;
@@ -194,7 +207,6 @@ body {
   }
 
   #d-version {
-    width: 334px;
     margin-top: 45px;
   }
 
@@ -207,14 +219,6 @@ body {
     font-weight: normal;
     line-height: 1.5;
     letter-spacing: 0.08px;
-  }
-
-  .box-paragraph a {
-    text-decoration: none;
-    color: black;
-  }
-  .box-paragraph a:hover {
-    text-decoration: underline;
   }
 
   .box-network h5 {
@@ -287,10 +291,10 @@ body {
   #bg-image {
     position: absolute;
     z-index: 1;
-    width: 650px;
-    margin-left: 360px;
+    width: 340px;
+    margin-left: 379px;
     display: inline;
-    margin-top: -100px;
+    margin-top: -80px;
   }
 }
 
@@ -306,13 +310,13 @@ body {
   }
 
   .box-paragraph h5 {
-    font-size: 48px;
+    font-size: 40px;
     line-height: 0.8;
     letter-spacing: -0.22px;
   }
 
   .box-paragraph p {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   #d-version {
@@ -326,7 +330,7 @@ body {
 
   .box-network h5 {
     margin-top: 60px;
-    font-size: 32px;
+    font-size: 28px;
   }
 
   #bg-image {
@@ -386,8 +390,8 @@ body {
   }
 
   #bg-image {
-    width: 950px;
-    margin-left: 670px;
+    width: 750px;
+    height: 650px;
     margin-top:25px;
   }
 }
