@@ -27,8 +27,6 @@ const ResourceUsage = ({ percent, title, label }) => {
     setCircleSize(250)
   }, [smallRadial, bigRadial])
 
-  console.log({ circleSize })
-
   return (
     <RadialBarChart
       width={circleSize}

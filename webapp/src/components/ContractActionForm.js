@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+import { useTranslation } from 'react-i18next'
 import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -26,13 +27,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ContractActionForm = ({
-  accountName,
-  action,
-  abi,
-  onSubmitAction,
-  t
-}) => {
+const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
+  const { t } = useTranslation('lacchainManagement')
   const classes = useStyles()
   const [fields, setFields] = useState([])
   const [payload, setPayload] = useState({})
@@ -70,7 +66,13 @@ const ContractActionForm = ({
     setFields(struct?.fields || [])
   }, [action, abi])
 
+  console.log({ action, fields })
+  console.log({ payload })
+
   const renderField = (field) => {
+    console.log(`${accountName}.${action}.${field.name}`)
+    console.log(field)
+
     switch (`${accountName}.${action}.${field.name}`) {
       case 'eosio.addentity.entity_type':
         return (
@@ -269,12 +271,7 @@ ContractActionForm.propTypes = {
   accountName: PropTypes.string,
   action: PropTypes.string,
   abi: PropTypes.any,
-  onSubmitAction: PropTypes.func,
-  t: PropTypes.func
-}
-
-ContractActionForm.defaultProps = {
-  t: () => {}
+  onSubmitAction: PropTypes.func
 }
 
 export default ContractActionForm
