@@ -122,7 +122,8 @@
     "cpuLimitPerBlock": "CPU Limit Per Block",
     "netLimitPerBlock": "Net Limit Per Block",
     "chainCpuLimit": "Chain CPU Limit",
-    "chainNetLimit": "Chain Net Limit"
+    "chainNetLimit": "Chain Net Limit",
+    "timeToFinality": "Time to Finality"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
