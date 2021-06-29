@@ -17,6 +17,10 @@ body {
   position: relative;
 }
 
+#bg-image-mobile {
+  width: 100%;
+}
+
 .box-paragraph {
   margin-bottom: 24px;
 }
@@ -141,7 +145,7 @@ body {
   margin-bottom: 36px;
 }
 
-#project-by {
+.project-by {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -266,7 +270,7 @@ body {
     justify-content: flex-end;
   }
 
-  #project-by {
+  .project-by {
     font-size: 17px;
     font-weight: 600;
     font-stretch: normal;
@@ -342,7 +346,7 @@ body {
     margin-top: 70px;
   }
 
-  #project-by {
+  .project-by {
     font-size: 22px;
     font-stretch: normal;
     font-style: normal;

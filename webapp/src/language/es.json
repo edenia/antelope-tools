@@ -130,7 +130,8 @@
     "cpuLimitPerBlock": "Límite de CPU por bloque",
     "netLimitPerBlock": "Límite Red por bloque",
     "chainCpuLimit": "Límite de CPU en cadena",
-    "chainNetLimit": "Límite de Net en cadena"
+    "chainNetLimit": "Límite de Net en cadena",
+    "timeToFinality": "Tiempo para finalidad"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
