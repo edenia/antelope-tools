@@ -6,9 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import { useQuery } from '@apollo/react-hooks'
 
-import { PRODUCERS_SUMMARY_QUERY } from '../gql'
 import { ENTITY_TYPE } from '../utils/lacchain'
 import { eosConfig } from '../config'
 
@@ -32,22 +30,16 @@ BodyGraphValue.defaultProps = {
   loading: false
 }
 
-const ProducersSummary = ({ t, classes }) => {
-  const { data, loading } = useQuery(PRODUCERS_SUMMARY_QUERY)
-  const [total, setTotal] = useState(0)
+const ProducersSummary = ({ t, classes, data, loading, total }) => {
   const [nodes, setNodes] = useState([])
 
   useEffect(() => {
-    if (!data?.producers_summary?.length) {
-      return
-    }
+    if (!data?.producers_summary?.length) return
 
     const producers = []
-    let total = 0
 
     for (let index = 0; index < data?.producers_summary?.length; index++) {
       const producer = data?.producers_summary[index]
-      total += producer.entities_count
 
       if (eosConfig.networkName !== 'lacchain') {
         continue
@@ -59,7 +51,6 @@ const ProducersSummary = ({ t, classes }) => {
       })
     }
 
-    setTotal(total)
     setNodes(producers)
   }, [data])
 
@@ -93,12 +84,18 @@ const ProducersSummary = ({ t, classes }) => {
 
 ProducersSummary.propTypes = {
   t: PropTypes.func,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  data: PropTypes.object,
+  loading: PropTypes.bool,
+  total: PropTypes.number
 }
 
 ProducersSummary.defaultProps = {
   t: (text) => text,
-  classes: {}
+  classes: {},
+  data: {},
+  loading: false,
+  total: 0
 }
 
 export default memo(ProducersSummary)

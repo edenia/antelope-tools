@@ -5,7 +5,8 @@ import { useQuery } from '@apollo/react-hooks'
 import PropTypes from 'prop-types'
 
 import { formatWithThousandSeparator } from '../../utils'
-import { NODES_QUERY } from '../../gql'
+import { NODES_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
+import { eosConfig } from '../../config'
 
 const Card = lazy(() => import('@material-ui/core/Card'))
 const CardContent = lazy(() => import('@material-ui/core/CardContent'))
@@ -22,8 +23,13 @@ const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
+  const { data: producersSummary, loading: producersLoading } = useQuery(
+    PRODUCERS_SUMMARY_QUERY
+  )
+
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const info = useSelector((state) => state.eos.info)
+  const [total, setTotal] = useState(0)
   const [schedule, setSchedule] = useState({ producers: [] })
 
   useEffect(() => {
@@ -55,6 +61,27 @@ const BlockProducerInfo = ({ t, classes }) => {
       producers: newProducers
     })
   }, [scheduleInfo, producers])
+
+  useEffect(() => {
+    if (!producersSummary?.producers_summary?.length) return
+
+    let total = 0
+
+    for (
+      let index = 0;
+      index < producersSummary?.producers_summary?.length;
+      index++
+    ) {
+      const producer = producersSummary?.producers_summary[index]
+      total += producer.entities_count
+
+      if (eosConfig.networkName !== 'lacchain') {
+        continue
+      }
+    }
+
+    setTotal(total)
+  }, [producersSummary])
 
   return (
     <Grid container spacing={4}>
@@ -126,7 +153,13 @@ const BlockProducerInfo = ({ t, classes }) => {
           classes={classes}
           nodesChildren={
             <>
-              <ProducersSummary t={t} classes={classes} />
+              <ProducersSummary
+                t={t}
+                classes={classes}
+                data={producersSummary}
+                loading={producersLoading}
+                total={total}
+              />
               <NodesSummary t={t} classes={classes} />
             </>
           }
@@ -182,6 +215,17 @@ const BlockProducerInfo = ({ t, classes }) => {
                   info.virtual_block_net_limit / 1024,
                   0
                 )} KB`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={4} lg={3}>
+          <Card>
+            <CardContent className={classes.cards}>
+              <Typography>{t('timeToFinality')}</Typography>
+              <Typography component="p" variant="h6">
+                {total ? `${(Math.ceil((total / 3) * 2) + 1) * 6} s` : '0 s'}
               </Typography>
             </CardContent>
           </Card>

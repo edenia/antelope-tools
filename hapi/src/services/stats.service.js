@@ -189,6 +189,10 @@ const formatTransactionHistory = async () => {
 
     txrHistory = { ...txrHistory, [interval]: data }
   }
+
+  await udpateStats({
+    transaction_history: txrHistory
+  })
 }
 
 const getCurrentMissedBlock = async () => {
