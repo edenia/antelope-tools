@@ -225,7 +225,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             <CardContent className={classes.cards}>
               <Typography>{t('timeToFinality')}</Typography>
               <Typography component="p" variant="h6">
-                {`${(total / 3 + 1) * 6} s`}
+                {total ? `${(Math.ceil(total / 3) + 1) * 6} s` : '0 s'}
               </Typography>
             </CardContent>
           </Card>
