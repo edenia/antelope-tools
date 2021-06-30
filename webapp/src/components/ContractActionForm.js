@@ -55,21 +55,13 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
     }))
   }
 
-  useEffect(() => {
-    if (!action) {
-      setFields([])
+  const _getFieldLabel = (label) => {
+    if (!label.includes('_')) return label
 
-      return
-    }
+    return (label.charAt(0).toUpperCase() + label.slice(1)).replace('_', ' ')
+  }
 
-    const struct = abi?.structs?.find((struct) => struct.name === action)
-    setFields(struct?.fields || [])
-  }, [action, abi])
-
-  console.log({ action, fields })
-  console.log({ payload })
-
-  const renderField = (field) => {
+  const renderField = (field, label) => {
     console.log(`${accountName}.${action}.${field.name}`)
     console.log(field)
 
@@ -78,7 +70,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainAddEntityActionEntityTypeField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name]}
@@ -89,7 +81,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainEntitySelectField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -100,7 +92,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetEntInfoField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -112,7 +104,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetNodeInfoActionNodeField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -123,7 +115,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetNodeInfoActionInfoField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -140,7 +132,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainEntityField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -151,7 +143,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <Authority
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || {}}
@@ -163,7 +155,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <BlockSigningAuthority
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || []}
@@ -175,7 +167,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <ArrayTextField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || []}
@@ -186,7 +178,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <LacchainSetScheduleActionValidatorsField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || []}
@@ -197,7 +189,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <EOSIONewAccountAuthority
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -215,7 +207,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <EOSIONewAccountAuthority
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -233,7 +225,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
         return (
           <TextField
             key={`action-field-${field.name}`}
-            label={t(field.name)}
+            label={label}
             variant="outlined"
             className={classes.formControl}
             value={payload[field.name] || ''}
@@ -250,9 +242,24 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
     }
   }
 
+  useEffect(() => {
+    if (!action) {
+      setFields([])
+
+      return
+    }
+
+    const struct = abi?.structs?.find((struct) => struct.name === action)
+    setFields(struct?.fields || [])
+  }, [action, abi])
+
   return (
     <>
-      {fields.map(renderField)}
+      {fields.map((field) => {
+        const label = _getFieldLabel(t(field.name))
+
+        return renderField(field, label)
+      })}
       {action && (
         <Button
           type="submit"
