@@ -62,9 +62,6 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
   }
 
   const renderField = (field, label) => {
-    console.log(`${accountName}.${action}.${field.name}`)
-    console.log(field)
-
     switch (`${accountName}.${action}.${field.name}`) {
       case 'eosio.addentity.entity_type':
         return (
