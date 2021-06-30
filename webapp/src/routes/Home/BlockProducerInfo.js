@@ -224,7 +224,11 @@ const BlockProducerInfo = ({ t, classes }) => {
           <Card>
             <CardContent className={classes.cards}>
               <Typography>{t('timeToFinality')}</Typography>
-              <Typography component="p" variant="h6">
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
                 {total ? `${(Math.ceil((total / 3) * 2) + 1) * 6} s` : '0 s'}
               </Typography>
             </CardContent>

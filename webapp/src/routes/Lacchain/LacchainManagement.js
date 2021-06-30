@@ -310,7 +310,6 @@ const LacchainManagement = ({ ual }) => {
                     action={action}
                     abi={abi}
                     onSubmitAction={handleOnSubmitAction}
-                    t={t}
                   />
                 </Box>
               )}
