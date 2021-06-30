@@ -10,7 +10,7 @@ export const formatData = (
     rank,
     owner,
     updatedAt,
-    missedBlocks,
+    missedBlocks = [],
     nodes,
     healthStatus,
     endpoints,

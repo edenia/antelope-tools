@@ -188,7 +188,6 @@ const AccountInfo = ({
     >
       {info && (
         <>
-          {/* <Grid item xs={12}></Grid> */}
           <Box className={classes.boxHeaderCard}>
             <Box className="identicon">
               <Box className={classes.iconBorder}>
