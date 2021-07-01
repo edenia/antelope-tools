@@ -8,7 +8,7 @@ on:
 jobs:
   create-wax-image:
     runs-on: ubuntu-latest
-    environment: wax
+    environment: wax-testnet
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
