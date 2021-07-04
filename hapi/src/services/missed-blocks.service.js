@@ -53,6 +53,33 @@ const setScheduleHistory = items => {
   return hasuraUtil.request(mutation, { items })
 }
 
+const setScheduleByDemux = async (state, payload) => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT
+      schedule_version as version,
+      min(timestamp) as first_block_at,
+      max(timestamp) as last_block_at,
+      min(block_num) as first_block,
+      max(block_num) as last_block
+    FROM
+      block_history
+    GROUP BY
+      schedule_version`)
+
+  const schedules = rows.map(row => {
+    return {
+      ...row,
+      producers: payload.data.validators, // payload.producers ?
+      version: parseInt(row.version),
+      current: 1, // how we handler this ?
+      round_interval: payload.data.validators.length * 6 // payload.producers ?
+    }
+  })
+
+  // set schedule action will be called when version cahnge ?
+  await setScheduleHistory(schedules)
+}
+
 const syncScheduleHistory = async () => {
   const { active: currentSchedule } = await eosUtil.getProducerSchedule()
   const currentScheduleInDatabase = await getCurrentSchedule()
@@ -291,5 +318,6 @@ const getMissedBlocks = async (range = '3 Hours') => {
 module.exports = {
   syncScheduleHistory,
   syncMissedBlocks,
-  getMissedBlocks
+  getMissedBlocks,
+  setScheduleByDemux
 }

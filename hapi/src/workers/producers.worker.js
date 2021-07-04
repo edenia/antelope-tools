@@ -4,8 +4,7 @@ const {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService,
-  formatTransactionHistory
+  statsService
 } = require('../services')
 const { workersConfig, hasuraConfig } = require('../config')
 const { axiosUtil, sleepFor } = require('../utils')

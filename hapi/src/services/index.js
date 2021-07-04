@@ -5,6 +5,7 @@ const settingService = require('./setting.service')
 const stateHistoryPluginService = require('./state-history-plugin.service')
 const statsService = require('./stats.service')
 const transactionsService = require('./transactions.service')
+const demuxService = require('./demux')
 
 module.exports = {
   cpuService,
@@ -13,5 +14,6 @@ module.exports = {
   settingService,
   stateHistoryPluginService,
   statsService,
-  transactionsService
+  transactionsService,
+  demuxService
 }
