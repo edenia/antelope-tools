@@ -229,7 +229,11 @@ const BlockProducerInfo = ({ t, classes }) => {
                 variant="h6"
                 className={classes.lowercase}
               >
-                {total ? `${(Math.ceil((total / 3) * 2) + 1) * 6} s` : '0 s'}
+                {schedule.producers
+                  ? `${
+                      (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
+                    } s`
+                  : '0 s'}
               </Typography>
             </CardContent>
           </Card>
