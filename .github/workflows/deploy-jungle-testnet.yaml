@@ -6,9 +6,9 @@ on:
       - dev
 
 jobs:
-  create-dev-image:
+  create-jungle-image:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: jungle-testnet
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
