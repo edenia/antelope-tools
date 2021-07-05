@@ -156,18 +156,21 @@
     "title": "Block Producer Agreement"
   },
   "aboutRoute": {
-    "title": "EOSIO Dashboard",
-    "subtitle1": "What is the EOSIO Dashboard",
+    "body": {
+      "paragraph1": "The EOSIO Dashboard gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the EOS public mainnet and a list of registered entities on the LACChain public-permissioned network. The EOSIO Dashboard is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
+    },
+    "subtitle1": "Why Use EOSIO Dashboard?",
     "body1": {
-      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
+      "paragraph1": "EOSIO Dashboard is a community-driven open-source tool built by blockchain developers who believe transparency is fundamental to operating blockchain networks. We intend to provide a useful and straightforward app to visualize the Block Producers' relevant information to promote transparency and reliability."
     },
-    "subtitle2": "Why is it important?",
+    "subtitle2": "Why It's Important?",
     "body2": {
-      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
+      "paragraph1": "On the EOS network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. EOSIO Dashboard's main objective is to help you visualize objective and reliable information about each node and its activity."
     },
-    "subtitle3": "Where does the data come from?",
+    "subtitle3": "Where Does the Data Come From?",
     "body3": {
-      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
+      "paragraph1": "EOSIO Dashboard provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files.",
+      "paragraph2": "For more information about EOSIO Dashboard, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
     }
   },
   "helpRoute": {

@@ -4,7 +4,7 @@ export default (theme) => ({
     marginBottom: theme.spacing(2),
     paddingBottom: 0,
     '& .MuiCardHeader-title': {
-      textTransform: 'capitalize'
+      textTransform: 'lowercase'
     },
     [theme.breakpoints.up('sm')]: {
       width: 300

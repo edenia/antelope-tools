@@ -198,9 +198,9 @@ const TransactionInfo = ({ t, classes }) => {
           }}
           xAxisProps={{
             type: 'datetime',
-            reversed: true,
+            reversed: option === options[0],
             title: {
-              enabled: true,
+              enabled: option === options[0],
               text: t('secondsAgo')
             },
             labels: {
