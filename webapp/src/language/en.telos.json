@@ -1,0 +1,18 @@
+{
+  "routes": {
+    "/>title": "Telos Network Dashboard and Infrastructure Monitor",
+    "/cpu-benchmark>title": "CPU Benchmarks  - Telos Network Dashboard",
+    "/block-producers>title": "Block Producers - Telos Network Dashboard",
+    "/rewards-distribution>title": "Rewards Distribution - Telos Network Dashboard",
+    "/nodes>title": "Telos Nodes Status Monitor",
+    "/nodes-distribution>title": "Geographic Distribution of Nodes - Telos Network Dashboard",
+    "/accounts>title": "Accounts and Contracts - Telos Network Dashboard",
+    "/bpjson>title": "BP JSON - Telos Network Dashboard",
+    "/ricardian-contract>title": "BP Agreement - Telos Network Dashboard",
+    "/block-distribution>title": "Block Production Distribution - Telos Network Dashboard",
+    "/missed-blocks>title": "Missed Blocks - Telos Network Dashboard",
+    "/endpoints>title": "API Endpoints - Telos Network Dashboard",
+    "/about>title": "About - Telos Network Dashboard",
+    "/help>title": "Help - Telos Network Dashboard"
+  }
+}
