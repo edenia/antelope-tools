@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Monitor de infraestructura y panel de control de red Telos",
+    "/>title": "Monitor de infraestructura y panel de control de red Proton",
     "/cpu-benchmark>title": "Benchmark de CPU - Panel",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/rewards-distribution>title": "Distribución de recompensas - Panel",
@@ -8,9 +8,9 @@
     "/nodes-distribution>title": "Distribución Geográfica de Nodos",
     "/accounts>title": "Cuentas y Contratos - Panel",
     "/bpjson>title": "BP JSON - Panel",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Telos",
-    "/block-distribution>title": "Distribución de bloques - Telos",
-    "/endpoints>title": "URL's - Telos",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Proton",
+    "/block-distribution>title": "Distribución de bloques - Proton",
+    "/endpoints>title": "URL's - Proton",
     "/about>title": "Acerca de - Panel",
     "/help>title": "Ayuda - Panel"
   }

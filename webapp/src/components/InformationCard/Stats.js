@@ -17,13 +17,12 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
         </Box>
 
         <Box className={classes.rowWrapper}>
-          <Typography variant="body1">{`${t(
-            'rewards'
-          )}: ${rewards} EOS`}</Typography>
+          <Typography variant="body1">{`${t('rewards')}: ${rewards} ${
+            eosConfig.tokenSymbol
+          }`}</Typography>
         </Box>
 
         <Box className={classes.rowWrapper}>
-          {' '}
           <Typography variant="body1">
             {`${t('missedBlocks')}: `}
             {missedBlocks.reduce(
