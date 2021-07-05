@@ -60,7 +60,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
-          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online"},{"label":"WAX Testnet","value":"https://wax-testnet.eosio.online"},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online"}]'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"},{"label":"Proton","value":"https://proton.eosio.online"},{"label":"WAX","value":"https://wax.eosio.online"},{"label":"Telos","value":"https://telos-testnet.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online"},{"label":"WAX Testnet","value":"https://wax-testnet.eosio.online"},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online"}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://telos-test.bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'
