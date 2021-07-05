@@ -1,0 +1,122 @@
+name: Build images for WAX testnet environment
+
+on:
+  push:
+    tags:
+      - wax-testnet-v*
+
+jobs:
+  create-wax-image:
+    runs-on: ubuntu-latest
+    environment: wax-testnet
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@0.0.1
+
+      - name: Log in to docker registry
+        run: |
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
+            --username ${{ secrets.DOCKER_HUB_USER }} \
+            --password-stdin
+
+      - name: 'step-log'
+        run: |
+          echo "github.ref: ${{github.ref}}"
+
+      - name: Build new images and push
+        run: |
+          make \
+            build-docker-images \
+            push-docker-images
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          # webapp
+          PORT: '80'
+          REACT_APP_TITLE: 'WAX Testnet Network Dashboard'
+          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://wax.bloks.io/img/chains/wax.png'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Website", "src": "https://on.wax.io/wax-io/" },{ "text": "Block Explorer", "src": "https://wax.bloks.io" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "GitHub","src": "https://github.com/eoscostarica/eosio-dashboard"}]'
+          REACT_APP_EOS_RATE_LINK: ''
+          REACT_APP_USE_REWARDS: 'false'
+          REACT_APP_USE_VOTES: 'true'
+          REACT_APP_USE_CPU_BENCHMARK: 'true'
+          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
+          REACT_APP_HASURA_URL: 'https://graphql-wax-testnet.eosio.online/v1/graphql'
+          REACT_APP_EOS_API_NETWORK_NAME: 'wax-testnet'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'WAX Testnet'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://wax.bloks.io/img/chains/wax.png'
+          REACT_APP_EOS_API_HOST: 'testnet.wax.pink.gg'
+          REACT_APP_EOS_API_PORT: '443'
+          REACT_APP_EOS_API_PROTOCOL: 'https'
+          REACT_APP_EOS_CHAIN_ID: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12'
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
+          REACT_APP_TOKEN_SYMBOL: 'WAX'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online"},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online"},{"label":"Proton","value":"https://proton.eosio.online"},{"label":"WAX","value":"https://wax.eosio.online"},{"label":"Telos","value":"https://telos-testnet.eosio.online"},{"label":"Jungle Testnet","value":"https://jungle.eosio.online"},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online"},{"label":"WAX Testnet","value":"https://wax-testnet.eosio.online"},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online"}]'
+          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://wax-test.bloks.io/transaction/(transaction)'
+          REACT_APP_STATE_HISTORY_ENABLED=: 'false'
+          REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
+
+      - name: Build and deploy kubernetes files
+        id: build_kubernetes_files
+        run: |
+          make \
+            build-kubernetes
+        env:
+          # general
+          NAMESPACE: wax-testnet-dashboard
+          INGRESS_HOST: wax-testnet.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-wax-testnet.eosio.online
+          # webapp
+          REACT_APP_EOS_API_NETWORK_NAME: wax-testnet
+          # postgres
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
+          # hapi
+          HAPI_EOS_API_ENDPOINT: https://testnet.wax.pink.gg
+          HAPI_EOS_API_CHAIN_ID: f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12
+          HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
+          HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
+          HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
+          HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
+          HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
+          HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
+          HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
+          HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
+          HAPI_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
+          HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          HAPI_SERVER_PORT: '9090'
+          HAPI_SERVER_ADDRESS: '0.0.0.0'
+          HAPI_DATABASE_URL: ${{ secrets.HAPI_DATABASE_URL }}
+          HAPI_SYNC_PRODUCERS_INTERVAL: '86400'
+          HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
+          HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
+          HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
+          # hasura
+          HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+          HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+          HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
+          HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
+          HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
+
+      - name: Setup and deploy kubernetes environment
+        uses: steebchen/kubectl@v1.1.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          NAMESPACE: wax-testnet-dashboard
+          K8S_BUILD_DIR: build_k8s
+        with:
+          args: version && make deploy-kubernetes

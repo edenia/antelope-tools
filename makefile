@@ -137,3 +137,20 @@ push-docker-images:
 	for dir in $(SUBDIRS); do \
 		$(MAKE) push-image -C $$dir; \
 	done
+
+release: ##@devops Create Release for Version "make version=v1.3.xx release"
+release:
+	ifndef version
+		$(error version is not set)
+	endif
+	@echo "Create release for version $(version)"
+	@git tag -a $(version) -m "Create release tag $(version)"
+	@git tag -a mainnet-$(version) -m "Create release tag mainnet-$(version)"
+	@git tag -a lacchain-$(version) -m "Create release tag lacchain-$(version)"
+	@git tag -a proton-$(version) -m "Create release tag proton-$(version)"
+	@git tag -a wax-$(version) -m "Create release tag wax-$(version)"
+	@git tag -a telos-$(version) -m "Create release tag telos-$(version)"
+	@git tag -a proton-testnet-$(version) -m "Create release tag proton-testnet-$(version)"
+	@git tag -a wax-testnet-$(version) -m "Create release tag wax-testnet-$(version)"
+	@git tag -a telos-testnet-$(version) -m "Create release tag telos-testnet-$(version)"
+	@git push --tags
