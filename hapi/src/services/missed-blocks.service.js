@@ -69,14 +69,14 @@ const setScheduleByDemux = async (state, payload) => {
   const schedules = rows.map(row => {
     return {
       ...row,
-      producers: payload.data.validators, // payload.producers ?
+      producers: payload.data.validators,
       version: parseInt(row.version),
-      current: 1, // how we handler this ?
-      round_interval: payload.data.validators.length * 6 // payload.producers ?
+      current: 1, // how we handle this ?
+      round_interval: payload.data.validators.length * 6
     }
   })
 
-  // set schedule action will be called when version cahnge ?
+  // set schedule action will be called when version change?
   await setScheduleHistory(schedules)
 }
 

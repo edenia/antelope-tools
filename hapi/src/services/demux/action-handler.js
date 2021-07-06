@@ -1,7 +1,5 @@
 const { AbstractActionHandler } = require('demux')
 
-// const missedBlockService = require('../missed-blocks.service')
-
 // @todo handle demux state with a database
 let state = {
   blockNumber: 0,
