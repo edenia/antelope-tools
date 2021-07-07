@@ -53,7 +53,18 @@ const setScheduleHistory = items => {
   return hasuraUtil.request(mutation, { items })
 }
 
+const getCurrentVersion = async () => {
+  const [rows] = await sequelizeUtil.query(`
+    SELECT
+      max(version) as version
+    FROM
+      schedule_history`)
+
+  return rows[0] ? rows[0].version : -1
+}
+
 const setScheduleByDemux = async (state, payload) => {
+  const currentVersion = await getCurrentVersion()
   const [rows] = await sequelizeUtil.query(`
     SELECT
       schedule_version as version,
@@ -63,18 +74,22 @@ const setScheduleByDemux = async (state, payload) => {
       max(block_num) as last_block
     FROM
       block_history
-    GROUP BY
-      schedule_version`)
+    WHERE schedule_version = ${currentVersion + 1}
+    GROUP BY schedule_version `)
+
+  console.log('TOMELA DESDE setScheduleByDemux', rows)
 
   const schedules = rows.map(row => {
     return {
       ...row,
       producers: payload.data.validators,
       version: parseInt(row.version),
-      current: 1, // how we handle this ?
+      current: false, // compare this with current schedule
       round_interval: payload.data.validators.length * 6
     }
   })
+
+  console.log({ schedules })
 
   // set schedule action will be called when version change?
   await setScheduleHistory(schedules)

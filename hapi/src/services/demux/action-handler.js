@@ -1,5 +1,7 @@
 const { AbstractActionHandler } = require('demux')
 
+const demuxStateService = require('../demux-state.service')
+
 // @todo handle demux state with a database
 let state = {
   blockNumber: 0,
@@ -26,6 +28,8 @@ class ActionHandler extends AbstractActionHandler {
         blockNumber: blockInfo.blockNumber,
         blockHash: blockInfo.blockHash
       }
+
+      await demuxStateService.saveOrUpdate(prevState.handlerVersionName, state)
     } catch (error) {
       console.error(error)
     }
@@ -33,6 +37,8 @@ class ActionHandler extends AbstractActionHandler {
 
   async loadIndexState() {
     try {
+      state = await demuxStateService.getByVersion(state.handlerVersionName)
+
       return state
     } catch (error) {
       console.error(error)
