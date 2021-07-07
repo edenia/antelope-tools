@@ -20,6 +20,8 @@
     "@hapi/hapi": "^19.1.1",
     "@hapi/joi": "^17.1.0",
     "axios": "^0.19.2",
+    "demux": "^4.0.0",
+    "demux-eos": "^4.0.1",
     "eosjs": "^20.0.3",
     "eosjs-api": "^7.0.4",
     "graphql-request": "^1.8.2",

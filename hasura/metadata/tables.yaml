@@ -23,6 +23,9 @@
     name: cpu
 - table:
     schema: public
+    name: demux_state
+- table:
+    schema: public
     name: producer
   select_permissions:
   - role: guest
