@@ -122,6 +122,7 @@ const handleBlocksResult = async data => {
       transactions_length: block.transactions.length,
       timestamp: block.timestamp
     })
+
     await statsService.udpateStats({ last_block_at: block.timestamp })
     send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
