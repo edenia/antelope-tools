@@ -77,21 +77,16 @@ const setScheduleByDemux = async (state, payload) => {
     WHERE schedule_version = ${currentVersion + 1}
     GROUP BY schedule_version `)
 
-  console.log('TOMELA DESDE setScheduleByDemux', rows)
-
   const schedules = rows.map(row => {
     return {
       ...row,
       producers: payload.data.validators,
       version: parseInt(row.version),
-      current: false, // compare this with current schedule
+      current: false,
       round_interval: payload.data.validators.length * 6
     }
   })
 
-  console.log({ schedules })
-
-  // set schedule action will be called when version change?
   await setScheduleHistory(schedules)
 }
 
