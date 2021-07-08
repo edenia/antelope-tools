@@ -37,7 +37,9 @@ class ActionHandler extends AbstractActionHandler {
 
   async loadIndexState() {
     try {
-      state = await demuxStateService.getByVersion(state.handlerVersionName)
+      state =
+        (await demuxStateService.getByVersion(state.handlerVersionName)) ||
+        state
 
       return state
     } catch (error) {

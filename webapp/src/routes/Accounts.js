@@ -108,6 +108,8 @@ const Accounts = ({ ual }) => {
   }
 
   const handleOnSearch = async () => {
+    if (!accountName) return
+
     setAccount(null)
     setAbi(null)
     setHash(null)
@@ -117,7 +119,7 @@ const Accounts = ({ ual }) => {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     try {
-      const account = await eosApi.getAccount(accountName || 'eosio')
+      const account = await eosApi.getAccount(accountName)
       setAccount(account)
     } catch (error) {
       showMessage({
@@ -127,11 +129,9 @@ const Accounts = ({ ual }) => {
     }
 
     try {
-      const { abi } = await eosApi.getAbi(accountName || 'eosio')
+      const { abi } = await eosApi.getAbi(accountName)
       setAbi(abi)
-      const { code_hash: hash = '' } = await eosApi.getCodeHash(
-        accountName || 'eosio'
-      )
+      const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
       setHash(hash)
     } catch (error) {
       console.log(error)
@@ -151,7 +151,9 @@ const Accounts = ({ ual }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.account) return
+    if (!params.account) {
+      return setAccountName('eosio')
+    }
 
     setAccountName(params.account)
   }, [location.search])
