@@ -8,7 +8,7 @@ export const getTransactionUrl = (trx) => {
   return {
     trxId: trx.substr(trx.length - 6, trx.length),
     // eslint-disable-next-line
-    explorerUrl: eosConfig.blockExplorerUrl.replace('${transaction}', trx)
+    explorerUrl: eosConfig.blockExplorerUrl.replace('(transaction)', trx)
   }
 }
 

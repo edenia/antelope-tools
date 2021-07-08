@@ -51,9 +51,7 @@ const getByVersion = async version => {
   `
   const data = await hasuraUtil.request(query, { version })
 
-  if (!data.demux_state.length) {
-    return
-  }
+  if (!data.demux_state.length) return
 
   const state = data.demux_state[0]
 
