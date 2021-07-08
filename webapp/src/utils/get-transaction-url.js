@@ -1,7 +1,6 @@
 import { eosConfig } from '../config'
 
 export const getTransactionUrl = (trx) => {
-  console.log({ trx })
   if (!trx || !eosConfig.blockExplorerUrl) {
     return
   }
