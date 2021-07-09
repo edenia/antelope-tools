@@ -107,9 +107,7 @@ const Accounts = ({ ual }) => {
     setLoading(false)
   }
 
-  const handleOnSearch = async () => {
-    if (!accountName) return
-
+  const handleOnSearch = async (valueAccount) => {
     setAccount(null)
     setAbi(null)
     setHash(null)
@@ -119,7 +117,7 @@ const Accounts = ({ ual }) => {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     try {
-      const account = await eosApi.getAccount(accountName)
+      const account = await eosApi.getAccount(valueAccount)
       setAccount(account)
     } catch (error) {
       showMessage({
@@ -129,9 +127,9 @@ const Accounts = ({ ual }) => {
     }
 
     try {
-      const { abi } = await eosApi.getAbi(accountName)
+      const { abi } = await eosApi.getAbi(valueAccount)
       setAbi(abi)
-      const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
+      const { code_hash: hash = '' } = await eosApi.getCodeHash(valueAccount)
       setHash(hash)
     } catch (error) {
       console.log(error)
@@ -141,27 +139,29 @@ const Accounts = ({ ual }) => {
   }
 
   const handleOnKeyDown = (event) => {
-    if (event.keyCode !== 13) {
-      return
-    }
+    if (event.keyCode !== 13) return
 
-    handleOnSearch()
+    handleOnSearch(accountName)
   }
 
   useEffect(() => {
     const params = queryString.parse(location.search)
 
     if (!params.account) {
-      return setAccountName('eosio')
+      setAccountName('eosio')
+      handleOnSearch('eosio')
+
+      return
     }
 
     setAccountName(params.account)
+    handleOnSearch(params.account)
   }, [location.search])
 
   useEffect(() => {
-    handleOnSearch()
+    handleOnSearch('eosio')
     // eslint-disable-next-line
-  }, [accountName])
+  }, [])
 
   return (
     <Grid item xs={12}>
@@ -181,7 +181,7 @@ const Accounts = ({ ual }) => {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
-                    onClick={handleOnSearch}
+                    onClick={() => handleOnSearch(accountName)}
                     edge="end"
                     aria-label="search"
                   >
