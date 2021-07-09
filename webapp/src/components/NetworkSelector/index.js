@@ -23,22 +23,24 @@ const LogoSvg = ({ name }) => {
 
   switch (name) {
     case 'jungle':
-      return <img src={jungleImg} className={classes.jungleImg} />
+      return <img src={jungleImg} alt="jungle" className={classes.jungleImg} />
 
     case 'telos':
-      return <img src={telosImg} className={classes.telosImg} />
+      return <img src={telosImg} alt="telos" className={classes.telosImg} />
 
     case 'wax':
-      return <img src={waxImg} className={classes.waxImg} />
+      return <img src={waxImg} alt="wax" className={classes.waxImg} />
 
     case 'lacchain':
-      return <img src={lacchainImg} className={classes.lacchainImg} />
+      return (
+        <img src={lacchainImg} alt="lacchain" className={classes.lacchainImg} />
+      )
 
     case 'proton':
-      return <img src={protonImg} className={classes.protonImg} />
+      return <img src={protonImg} alt="proton" className={classes.protonImg} />
 
     default:
-      return <img src={eosImg} className={classes.eosImg} />
+      return <img src={eosImg} alt="eos" className={classes.eosImg} />
   }
 }
 
@@ -64,7 +66,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
     setSelected(i)
     setOpen(!open)
 
-    window.open(url, '_blank').focus()
+    window.location.replace(url)
   }
 
   const sortItems = (item) => {

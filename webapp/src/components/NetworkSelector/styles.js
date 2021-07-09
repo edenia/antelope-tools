@@ -72,7 +72,7 @@ export default (theme) => ({
       }
     },
     [theme.breakpoints.up('sm')]: {
-      left: -170,
+      left: -133,
       width: 320
     }
   },
@@ -106,7 +106,8 @@ export default (theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 22,
       borderRadius: theme.spacing(2, 4, 4, 2),
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      marginRight: 65
     }
   },
   networkLogo: {
@@ -123,7 +124,7 @@ export default (theme) => ({
     top: -45,
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('sm')]: {
-      right: -10,
+      right: 0,
       top: -3
     }
   },
