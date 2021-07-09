@@ -20,18 +20,60 @@ export default (theme) => ({
   },
   list: {
     transition: 'max-height .6s ease-out',
+    backgroundColor: theme.palette.primary.contrastText,
     maxHeight: 0,
     overflow: 'hidden',
     margin: 0,
     position: 'absolute',
     zIndex: 2,
     padding: 0,
-    width: 180,
+    width: 300,
     top: 48,
-    left: 7,
-    border: `1px solid ${theme.palette.primary.main}`,
+    left: -50,
+    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+    '& .titles': {
+      display: 'flex',
+      '& .titlesBoxRight': {
+        paddingLeft: theme.spacing(2),
+        display: 'flex',
+        alignItems: 'center',
+        width: '50%',
+        height: 50,
+        borderLeft: '1px solid #EEEEEE',
+        borderBottom: '1px solid #EEEEEE'
+      },
+      '& .titlesBoxLeft': {
+        paddingLeft: theme.spacing(2),
+        display: 'flex',
+        alignItems: 'center',
+        height: 50,
+        width: '50%',
+        borderBottom: '1px solid #EEEEEE'
+      },
+      '& p': {
+        fontWeight: 'bold',
+        fontSize: 14,
+        lineHeight: '21px',
+        letterSpacing: '0.07875px'
+      }
+    },
+    '& .lists': {
+      display: 'flex',
+      '& ul': {
+        padding: 0,
+        margin: 0
+      },
+      '& .listsBoxRight': {
+        width: '50%',
+        borderLeft: '1px solid #EEEEEE'
+      },
+      '& .listsBoxLeft': {
+        width: '50%'
+      }
+    },
     [theme.breakpoints.up('sm')]: {
-      width: 160
+      left: -170,
+      width: 320
     }
   },
   listActive: {
@@ -39,10 +81,12 @@ export default (theme) => ({
     opacity: 1
   },
   listItem: {
-    borderTop: `1px solid ${theme.palette.primary.main}`,
+    height: 50,
+    display: 'flex',
+    alignItems: 'center',
     cursor: 'pointer',
     listStyle: 'none',
-    padding: 15,
+    paddingLeft: theme.spacing(2),
     background: theme.palette.primary.contrastText,
 
     '&:hover': {
@@ -57,9 +101,9 @@ export default (theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
     borderRadius: theme.spacing(2),
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.common.black,
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 22,
       borderRadius: theme.spacing(2, 4, 4, 2),
@@ -84,11 +128,39 @@ export default (theme) => ({
       top: -3
     }
   },
-  expandMoreIcon: {
+  expandIcon: {
     marginTop: theme.spacing(1),
     marginRight: 0,
-    [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(11)
-    }
+    color: theme.palette.text.hint
+  },
+  jungleImg: {
+    width: '15px !important',
+    height: '22px !important',
+    marginRight: theme.spacing(2)
+  },
+  telosImg: {
+    width: '15px !important',
+    height: '15px !important',
+    marginRight: theme.spacing(2)
+  },
+  waxImg: {
+    width: '21px !important',
+    height: '21px !important',
+    marginRight: theme.spacing(2)
+  },
+  lacchainImg: {
+    width: '24px !important',
+    height: '24px !important',
+    marginRight: theme.spacing(2)
+  },
+  protonImg: {
+    width: '16px !important',
+    height: '16px !important',
+    marginRight: theme.spacing(2)
+  },
+  eosImg: {
+    width: '24px !important',
+    height: '24px !important',
+    marginRight: theme.spacing(2)
   }
 })
