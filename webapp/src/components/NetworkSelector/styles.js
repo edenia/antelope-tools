@@ -101,7 +101,6 @@ export default (theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    // backgroundColor: theme.palette.primary.main,
     borderRadius: theme.spacing(2),
     color: theme.palette.common.black,
     [theme.breakpoints.up('sm')]: {
