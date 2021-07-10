@@ -156,6 +156,7 @@ const Accounts = ({ ual }) => {
 
     setAccountName(params.account)
     handleOnSearch(params.account)
+    // eslint-disable-next-line
   }, [location.search])
 
   useEffect(() => {
