@@ -145,7 +145,9 @@
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
     "accountNotFound": "Account not found",
-    "successMessage": "Success transaction"
+    "successMessage": "Success transaction",
+    "account": "Account or Contract Name",
+    "title": "Search for account information, view tables and execute actions for any contract."
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",

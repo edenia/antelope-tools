@@ -69,9 +69,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
     window.location.replace(url)
   }
 
-  const sortItems = (item) => {
-    return item.pair ? -1 : 1
-  }
+  const sortItems = (a, b) => a.order - b.order
 
   useEffect(() => {
     const networks = options.reduce(

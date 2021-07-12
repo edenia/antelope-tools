@@ -152,7 +152,9 @@
     "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
     "accountNotFound": "Cuenta no encontrada",
-    "successMessage": "Transacción exitosa"
+    "successMessage": "Transacción exitosa",
+    "account": "Cuenta o Nombre del Contrato",
+    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",

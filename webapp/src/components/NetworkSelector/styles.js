@@ -27,9 +27,9 @@ export default (theme) => ({
     position: 'absolute',
     zIndex: 2,
     padding: 0,
-    width: 300,
+    width: 310,
     top: 48,
-    left: -50,
+    left: -55,
     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
     '& .titles': {
       display: 'flex',
@@ -72,7 +72,7 @@ export default (theme) => ({
       }
     },
     [theme.breakpoints.up('sm')]: {
-      left: -133,
+      left: -189,
       width: 320
     }
   },
@@ -161,6 +161,7 @@ export default (theme) => ({
   eosImg: {
     width: '24px !important',
     height: '24px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(1),
+    marginLeft: -3
   }
 })
