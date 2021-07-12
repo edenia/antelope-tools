@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
+import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import queryString from 'query-string'
 import CardContent from '@material-ui/core/CardContent'
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   alert: {
+    marginBottom: theme.spacing(2)
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: '1.2',
+    letterSpacing: '0.06px',
+    textAlign: 'left',
     marginBottom: theme.spacing(2)
   }
 }))
@@ -168,6 +177,7 @@ const Accounts = ({ ual }) => {
     <Grid item xs={12}>
       <Card>
         <CardContent>
+          <Typography className={classes.title}>{t('title')}</Typography>
           <TextField
             id="accountTxt"
             label={t('account')}
