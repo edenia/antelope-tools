@@ -53,7 +53,7 @@ const ResourceUsage = ({ percent, title, label }) => {
       />
       <text
         x={circleSize / 2}
-        y={circleSize / 2 - 25}
+        y={circleSize / 2 - 30}
         textAnchor="middle"
         dominantBaseline="middle"
         className="progress-label"
@@ -62,7 +62,7 @@ const ResourceUsage = ({ percent, title, label }) => {
       </text>
       <text
         x={circleSize / 2}
-        y={circleSize / 2 - 5}
+        y={circleSize / 2 - 10}
         textAnchor="middle"
         dominantBaseline="middle"
         className="progress-label"

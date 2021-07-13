@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     borderRadius: 10,
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     width: '100%',
     height: 'auto',
     '&:focus': {
