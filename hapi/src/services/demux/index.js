@@ -2,7 +2,7 @@ const { BaseActionWatcher } = require('demux')
 const { NodeosActionReader } = require('demux-eos')
 
 const { eosConfig, hasuraConfig } = require('../../config')
-const { axiosUtil, sleepFor } = require('../utils')
+const { axiosUtil, sleepFor } = require('../../utils')
 
 const ActionHandler = require('./action-handler')
 const handlerVersion = require('./handler-version')
