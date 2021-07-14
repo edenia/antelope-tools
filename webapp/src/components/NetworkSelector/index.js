@@ -54,7 +54,7 @@ LogoSvg.defaultProps = {
 
 const NetworkSelector = ({ title, options, networkLogo }) => {
   const classes = useStyles()
-  const [selected, setSelected] = useState(-1)
+  const [selected] = useState(-1)
   const [open, setOpen] = useState(false)
   const [networks, setNetworks] = useState({ testnet: [], mainnet: [] })
 
