@@ -88,7 +88,14 @@ export default (theme) => ({
     listStyle: 'none',
     paddingLeft: theme.spacing(2),
     background: theme.palette.primary.contrastText,
-
+    '& a': {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      textDecoration: 'none',
+      color: theme.palette.common.black
+    },
     '&:hover': {
       background: '#f4f4f4'
     }

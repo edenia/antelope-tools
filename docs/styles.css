@@ -76,6 +76,64 @@ body {
   margin-top: 34px;
 }
 
+.more-networks {
+  margin-top: 65px !important;
+  text-align: center;
+}
+
+.wax-networks {
+  display: flex;
+  flex-direction: column;
+  width: 79px;
+  text-decoration: none;
+}
+
+.name-networks {
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.telos-networks {
+  display: flex;
+  flex-direction: column;
+  width: 79px;
+  text-decoration: none;
+}
+
+.eos-networks {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  justify-content: space-evenly;
+  text-decoration: none;
+}
+
+.jungle-networks {
+  display: flex;
+  flex-direction: column;
+  width: 79px;
+  text-decoration: none;
+}
+
+.lacchain-networks {
+  display: flex;
+  flex-direction: column;
+  width: 105px;
+  text-decoration: none;
+}
+
+.proton-networks {
+  display: flex;
+  flex-direction: column;
+  width: 95px;
+  justify-content: space-evenly;
+  text-decoration: none;
+}
+
 .header {
   overflow: hidden;
   background-color: #ffffff;
@@ -97,17 +155,6 @@ body {
   margin-left: 5px;
 }
 
-#box-right {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-#box-right a {
-  text-decoration: none;
-}
-
 .content {
   background-color: #f9f9fc;
   padding-top: 36px;
@@ -120,11 +167,71 @@ body {
   padding-bottom: 20px;
 }
 
+#box-right {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#box-right a {
+  text-decoration: none;
+}
+
 .box-social-media {
   width: 100%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 36px;
+}
+
+.box-testnet {
+  margin-bottom: 40px;
+}
+
+.box-testnet-desktop {
+  display: none;
+}
+
+.box-column {
+  display: flex;
+}
+
+.box-column div {
+  width: 49%;
+  display: flex;
+  justify-content: center;
+}
+
+.box-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.box-column ul li {
+  text-align: center;
+}
+
+.box-column ul a {
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #000000;
+}
+
+#testnet-title {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 31px;
+  text-align: center;
+  letter-spacing: 0.83px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
 }
 
 .eos-costa-rica > div {
@@ -157,6 +264,7 @@ body {
 }
 
 #copyright {
+  display: inline;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -168,6 +276,10 @@ body {
   margin: 0;
   margin-bottom: 12px;
   margin-top: 36px;
+}
+
+#copyright-desktop {
+  display: none;
 }
 
 #bg-image {
@@ -202,6 +314,29 @@ body {
     margin-top: 23px;
   }
 
+  #network-desktop > a {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wax-networks {
+    justify-content: space-between;
+  }
+
+  .wax-networks img {
+    margin-top: 10px;
+  }
+
+  .telos-networks {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .telos-networks img {
+    margin-top: 20px;
+    width: 60px;
+  }
+
   .content {
     padding-bottom: 28px;
   }
@@ -232,6 +367,9 @@ body {
 
   .footer {
     padding-bottom: 40px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .footer .footer-content {
@@ -240,8 +378,32 @@ body {
     justify-content: space-between;
   }
 
+  .box-testnet {
+    display: none;
+  }
+
+  .box-testnet-desktop {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 20px;
+  }
+
+  .box-column div {
+    justify-content: flex-start;
+  }
+
+  .box-column ul li {
+    text-align: start;
+  }
+
+  #testnet-title {
+    text-align: start;
+  }
+
   #contact-us {
-    width: 80%;
+    width: 100%;
     text-align: left;
     margin-bottom: 8px;
     font-size: 17px;
@@ -252,13 +414,7 @@ body {
   }
 
   #box-left {
-    align-items: flex-start;
     width: 60%;
-  }
-
-  #box-right {
-    align-items: flex-end;
-    width: 30%;
   }
 
   .box-social-media {
@@ -266,8 +422,13 @@ body {
     margin-bottom: 8px;
   }
 
-  .eos-costa-rica > div {
+  #box-right {
     justify-content: flex-end;
+    align-items: end;
+  }
+
+  .eos-costa-rica > div {
+    justify-content: flex-start;
   }
 
   .project-by {
@@ -276,16 +437,22 @@ body {
     font-stretch: normal;
     line-height: 1.2;
     letter-spacing: 0.06px;
+    margin: 0;
+  }
+
+  #copyright-desktop {
+    margin-bottom: 0;
+    margin-top: 30px;
+    display: inline;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: right;
+    letter-spacing: 0.3px;
+    color: #000000;
   }
 
   #copyright {
-    margin-bottom: 0;
-    font-size: 12px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2.58;
-    letter-spacing: 0.83px;
+    display: none;
   }
 
   #bg-image {
@@ -328,6 +495,11 @@ body {
     margin-top: 80px;
   }
 
+  #network-desktop > a {
+    display: flex;
+    flex-direction: column;
+  }
+
   .box-network h5 {
     margin-top: 60px;
     font-size: 28px;
@@ -360,11 +532,6 @@ body {
     line-height: 1.4;
     letter-spacing: -0.22px;
   }
-
-  #box-left {
-    align-items: flex-start;
-    width: 65%;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -392,6 +559,6 @@ body {
   #bg-image {
     width: 750px;
     height: 650px;
-    margin-top:25px;
+    margin-top: 25px;
   }
 }
