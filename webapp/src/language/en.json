@@ -86,7 +86,10 @@
     "community": "Community",
     "changelog": "Changelog",
     "github": "Github Repository",
-    "telegram": "Telegram Channel"
+    "telegram": "Telegram Channel",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "moreDescription": "This is a read more text component for users that either need a bit of help or are new to the system. A clear but not too extensive set of terms and instructions can help users get going without having to over write titles or labels like the one on the search card below. Take a look! A third line is also possible and probably more than enough."
   },
   "homeRoute": {
     "currentProducer": "Current Producer",

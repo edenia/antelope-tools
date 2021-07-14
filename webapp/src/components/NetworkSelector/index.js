@@ -54,19 +54,12 @@ LogoSvg.defaultProps = {
 
 const NetworkSelector = ({ title, options, networkLogo }) => {
   const classes = useStyles()
-  const [selected, setSelected] = useState(-1)
+  const [selected] = useState(-1)
   const [open, setOpen] = useState(false)
   const [networks, setNetworks] = useState({ testnet: [], mainnet: [] })
 
   const toggleDropdown = () => {
     setOpen(!open)
-  }
-
-  const handleClick = (i, url) => {
-    setSelected(i)
-    setOpen(!open)
-
-    window.location.replace(url)
   }
 
   const sortItems = (a, b) => a.order - b.order
@@ -115,14 +108,15 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
             <ul>
               {networks.mainnet.map((option, i) => (
                 <li
-                  onClick={() => handleClick(i, option.value)}
                   key={i}
                   className={clsx(classes.listItem, {
                     [classes.listItemActive]: i === selected
                   })}
                 >
-                  <LogoSvg name={option.icon} />
-                  {option.label}
+                  <a href={option.value} target="_self">
+                    <LogoSvg name={option.icon} />
+                    {option.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -131,14 +125,15 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
             <ul>
               {networks.testnet.map((option, i) => (
                 <li
-                  onClick={() => handleClick(i, option.value)}
                   key={i}
                   className={clsx(classes.listItem, {
                     [classes.listItemActive]: i === selected
                   })}
                 >
-                  <LogoSvg name={option.icon} />
-                  {option.label}
+                  <a href={option.value} target="_self">
+                    <LogoSvg name={option.icon} />
+                    {option.label}
+                  </a>
                 </li>
               ))}
             </ul>
