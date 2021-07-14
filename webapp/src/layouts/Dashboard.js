@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import Collapse from '@material-ui/core/Collapse'
+import Button from '@material-ui/core/Button'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -55,6 +57,7 @@ const Dashboard = ({ children, width, ual }) => {
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
+  const [checked, setChecked] = useState(false)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -101,11 +104,22 @@ const Dashboard = ({ children, width, ual }) => {
         <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
-            <Typography variant="h3">
-              {routeName.pathname
-                ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
-                : ''}
-            </Typography>
+            <Box className={classes.boxHeader}>
+              <Box className={classes.boxReadmore}>
+                <Typography variant="h3">
+                  {routeName.pathname
+                    ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
+                    : ''}
+                </Typography>
+                <span onClick={() => setChecked(!checked)}>
+                  {checked ? t('readLess') : t('readMore')}
+                </span>
+              </Box>
+              <Collapse in={checked}>
+                <Typography>{t('moreDescription')}</Typography>
+              </Collapse>
+            </Box>
+
             <NetworkSelector
               title={eosConfig.networkLabel}
               networkLogo={eosConfig.networkLogo}

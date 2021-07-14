@@ -41,10 +41,39 @@ export default (theme, drawerWidth) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       '& h3': {
         marginTop: 0
       }
+    }
+  },
+  boxReadmore: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(2),
+    '& span': {
+      fontSize: 14,
+      letterSpacing: '0.3px',
+      color: '#1565C0',
+      marginLeft: theme.spacing(1),
+      '&:hover': {
+        cursor: 'pointer'
+      }
+    },
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
+      '& span': {
+        marginLeft: theme.spacing(4)
+      }
+    }
+  },
+  boxHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& .MuiCollapse-container': {
+      marginTop: theme.spacing(2)
     }
   }
 })
