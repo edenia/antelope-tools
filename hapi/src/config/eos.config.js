@@ -27,5 +27,6 @@ module.exports = {
   },
   knownNetworks: {
     lacchain: 'lacchain'
-  }
+  },
+  rewardsToken: process.env.HAPI_REWARDS_TOKEN
 }

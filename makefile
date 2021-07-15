@@ -31,6 +31,16 @@ lacchain:
 	make stop
 	make start
 
+protontestnet:
+	@cat ".env.protontestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
+waxtestnet:
+	@cat ".env.waxtestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
 local:
 	@cat ".env.local" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
