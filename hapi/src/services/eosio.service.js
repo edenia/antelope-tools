@@ -25,6 +25,7 @@ const getProducers = async () => {
   }
 
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
+
   producers = await Promise.all(
     producers.map(async producer => {
       const bpJson = await getBPJson(producer)
@@ -53,15 +54,19 @@ const getProducers = async () => {
 
 const getExpectedRewards = async (producers, totalVotes) => {
   const systemData = await eosUtil.getCurrencyStats({
-    symbol: 'EOS',
+    symbol: eosConfig.rewardsToken,
     code: 'eosio.token'
   })
-  let inflation
+  let inflation = 0
 
-  if (!systemData.EOS || !systemData.EOS.supply) {
-    inflation = 0
-  } else {
-    inflation = parseInt(systemData.EOS.supply.split(' ')[0]) / 100 / 365
+  if (
+    systemData[eosConfig.rewardsToken] &&
+    systemData[eosConfig.rewardsToken].supply
+  ) {
+    inflation =
+      parseInt(systemData[eosConfig.rewardsToken].supply.split(' ')[0]) /
+      100 /
+      365
   }
 
   const blockReward = 0.25 // reward for each block produced
