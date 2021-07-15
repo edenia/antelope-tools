@@ -56,11 +56,6 @@ const start = async () => {
   run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
   run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
   run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
-  run(
-    'SYNC SCHEDULE HISTORY',
-    missedBlocksService.syncScheduleHistory,
-    workersConfig.syncScheduleHistoryInterval
-  )
   run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
   run('SYNC TPS', statsService.syncTPSAllTimeHigh)
   run('SYNC MISSED BLOCKS STATS', statsService.getCurrentMissedBlock)
