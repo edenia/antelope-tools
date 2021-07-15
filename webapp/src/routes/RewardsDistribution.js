@@ -387,7 +387,7 @@ const RewardsDistribution = () => {
                   <span className={classes.itemLabel}>
                     {t('exchangeRate')}:{' '}
                   </span>{' '}
-                  ${formatWithThousandSeparator(setting.token_price, 2)}
+                  ${formatWithThousandSeparator(setting.token_price, 4)}
                 </Typography>
               )}
             </CardContent>
