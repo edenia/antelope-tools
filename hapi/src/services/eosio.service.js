@@ -34,10 +34,10 @@ const getProducers = async () => {
       const endpoints = producerUtil.getEndpoints(bpJson.nodes)
 
       return {
-        ...producer,
-        ...(rewards[producer.owner] || {}),
         endpoints,
-        is_active: !!producer.is_active,
+        owner: producer.owner,
+        ...(rewards[producer.owner] || {}),
+        total_votes: producer.total_votes,
         total_votes_percent: producer.total_votes / totalVoteWeight,
         total_votes_eos: getVotesInEOS(producer.total_votes),
         health_status: healthStatus,

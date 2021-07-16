@@ -21,6 +21,11 @@ jungle:
 	make stop
 	make start
 
+telos:
+	@cat ".env.telos" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
 telostestnet:
 	@cat ".env.telostestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
