@@ -3,11 +3,11 @@ const http = require('http')
 const https = require('https')
 
 const instance = axios.create({
-  timeout: 5000,
-  httpAgent: new http.Agent({ timeout: 5000 }),
+  timeout: 10000,
+  httpAgent: new http.Agent({ timeout: 30000 }),
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
-    timeout: 5000
+    timeout: 30000
   })
 })
 
