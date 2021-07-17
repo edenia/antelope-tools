@@ -36,6 +36,7 @@ jobs:
           REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
           REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://bloks.io/img/eosio.png'
+          REACT_APP_FOOTER_LINKS: '[{"text":"EOS Website","src":"https://eoscommunity.org/"},{"text":"Block Explorer","src":"https://bloks.io"},{"text":"EOS Developer Docs","src":"https://guide.eoscostarica.io"},{"text": "EOS Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'

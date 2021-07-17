@@ -39,7 +39,7 @@ jobs:
           REACT_APP_TITLE: 'WAX Testnet Network Dashboard'
           REACT_APP_TAG: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://wax.bloks.io/img/chains/wax.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Website", "src": "https://on.wax.io/wax-io/" },{ "text": "Block Explorer", "src": "https://wax.bloks.io" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "GitHub","src": "https://github.com/eoscostarica/eosio-dashboard"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "WAX Website", "src": "https://on.wax.io/wax-io/" },{ "text": "WAX Block Explorer", "src": "https://wax-test.bloks.io/ },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "WAX Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'true'
