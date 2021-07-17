@@ -34,7 +34,7 @@ body {
   text-decoration: underline;
 }
 
-.box-paragraph h5 {
+.box-paragraph h4 {
   font-family: 'Nunito';
   font-weight: 600;
   font-size: 20px;
@@ -54,7 +54,7 @@ body {
   color: #000000;
 }
 
-.box-network h5 {
+.box-network h4 {
   font-family: 'Nunito';
   font-style: normal;
   font-weight: bold;
@@ -223,11 +223,11 @@ body {
   color: #000000;
 }
 
-#testnet-title {
+.testnet-title {
   font-weight: bold;
   font-size: 12px;
   line-height: 31px;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.83px;
   text-transform: uppercase;
   color: #000000;
@@ -345,7 +345,7 @@ body {
     margin-top: 45px;
   }
 
-  .box-paragraph h5 {
+  .box-paragraph h4 {
     letter-spacing: 0.04px;
     margin-bottom: 24px;
   }
@@ -356,7 +356,7 @@ body {
     letter-spacing: 0.08px;
   }
 
-  .box-network h5 {
+  .box-network h4 {
     margin-top: 23px;
     font-weight: 600;
     font-stretch: normal;
@@ -476,7 +476,7 @@ body {
     padding-right: 40px;
   }
 
-  .box-paragraph h5 {
+  .box-paragraph h4 {
     font-size: 40px;
     line-height: 0.8;
     letter-spacing: -0.22px;
@@ -500,7 +500,7 @@ body {
     flex-direction: column;
   }
 
-  .box-network h5 {
+  .box-network h4 {
     margin-top: 60px;
     font-size: 28px;
   }
@@ -514,7 +514,7 @@ body {
     padding-bottom: 90px;
   }
 
-  .content h5 {
+  .content h4 {
     margin-top: 70px;
   }
 
