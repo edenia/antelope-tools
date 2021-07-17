@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'wax-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'WAX Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://wax.bloks.io/img/chains/wax.png'
-          REACT_APP_EOS_API_HOST: 'testnet.wax.pink.gg'
+          REACT_APP_EOS_API_HOST: 'wax-testnet.eosio.cr'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12'
