@@ -58,6 +58,7 @@ jobs:
           REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/(transaction)'
+          REACT_APP_STATE_HISTORY_ENABLED: 'false'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
