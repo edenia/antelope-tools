@@ -319,6 +319,11 @@ body {
     flex-direction: column;
   }
 
+  #network-desktop > a:hover {
+    color: grey;
+    text-decoration: underline;
+  }
+
   .wax-networks {
     justify-content: space-between;
   }
@@ -333,8 +338,7 @@ body {
   }
 
   .telos-networks img {
-    margin-top: 20px;
-    width: 60px;
+    margin-top: 10px;
   }
 
   .content {
