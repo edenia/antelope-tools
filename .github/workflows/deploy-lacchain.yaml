@@ -36,7 +36,7 @@ jobs:
           REACT_APP_TITLE: 'LACChain EOSIO Network Dashboard'
           REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://lacchain.eosio.online/lacchain.png'
-          REACT_APP_FOOTER_LINKS: '[{"text":"LACChain EOSIO Docs","src":"https://eosio.lacchain.net"},{"text":"LACChain Website","src":"https://www.lacchain.net"},{"text":"Block Explorer","src":"https://eosio-explorer.lacchain.net"},{"text":"EOSIO Developer Guidelines","src":"https://guide.eoscostarica.io"},{"text":"GitHub","src":"https://github.com/eoscostarica/eosio-dashboard"}]'
+          REACT_APP_FOOTER_LINKS: '[{"text":"LACChain Website","src":"https://eosio.lacchain.net"},{"text":"Block Explorer","src":"https://eosio-explorer.lacchain.net"},{"text":"LACChain Developer Docs","src":"https://eosio.lacchain.net/en/docs/eosio/"},{"text": "LACChain Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'

@@ -39,7 +39,7 @@ jobs:
           REACT_APP_TITLE: 'Telos Mainnet Network Dashboard'
           REACT_APP_TAG: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://telos.bloks.io/img/chains/telos.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Website", "src": "" },{ "text": "Block Explorer", "src": "https://telos.bloks.io" },{"text": "Developer Guidelines","src": "https://guide.eoscostarica.io"},{"text": "GitHub","src": "https://github.com/eoscostarica/eosio-dashboard"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Telos Website", "src": "https://telos.net/" },{ "text": "Telos Block Explorer", "src": "https://telos-test.bloks.io/ },{"text": "Developer Docs","src": "https://docs.telos.net/"},{"text": "Telos Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'

@@ -36,6 +36,7 @@ jobs:
           REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
           REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://bloks.io/img/eosio.png'
+          REACT_APP_FOOTER_LINKS: '[{"text":"EOS Website","src":"https://eoscommunity.org/"},{"text":"Block Explorer","src":"https://bloks.io"},{"text":"EOS Developer Docs","src":"https://guide.eoscostarica.io"},{"text": "EOS Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
@@ -58,6 +59,7 @@ jobs:
           REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/(transaction)'
+          REACT_APP_STATE_HISTORY_ENABLED: 'false'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
