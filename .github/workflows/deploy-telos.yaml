@@ -106,7 +106,7 @@ jobs:
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
           HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=telos&vs_currencies=usd'
           HAPI_COINGECKO_API_TOKEN_ID: telos
-          HAPI_REWARDS_TOKEN: TELOS
+          HAPI_REWARDS_TOKEN: TLOS
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
