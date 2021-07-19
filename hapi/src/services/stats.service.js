@@ -69,7 +69,7 @@ const getNodesSummary = async () => {
       value->>'node_type'
   `)
 
-  rows.forEach((row) => {
+  rows.forEach(row => {
     payload[row.node_type || 'unknown'] = row.nodes_count
     total += row.nodes_count
   })
@@ -120,12 +120,12 @@ const getBlockDistribution = async (range = '1 day') => {
     `
     const data = await hasuraUtil.request(query, { startTime })
 
-    data.items.forEach((item) => {
+    data.items.forEach(item => {
       totalBloks += item.blocks
     })
 
     return data.items
-      .map((item) => ({
+      .map(item => ({
         account: item.producer || 'N/A',
         blocks: item.blocks,
         percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
@@ -166,18 +166,18 @@ const getStats = async () => {
 const formatTransactionHistory = async () => {
   let txrHistory = {}
   const intervals = [
-    "3 Hours",
-    "6 Hours",
-    "12 Hours",
-    "1 Day",
-    "4 Days",
-    "7 Days",
-    "14 Days",
-    "1 Month",
-    "2 Months",
-    "3 Months",
-    "6 Months",
-    "1 Year"
+    '3 Hours',
+    '6 Hours',
+    '12 Hours',
+    '1 Day',
+    '4 Days',
+    '7 Days',
+    '14 Days',
+    '1 Month',
+    '2 Months',
+    '3 Months',
+    '6 Months',
+    '1 Year'
   ]
 
   const stats = await getStats()
@@ -259,13 +259,12 @@ const getCurrentMissedBlock = async () => {
 
   let newData = data
 
-  rows.forEach((element) => {
+  rows.forEach(element => {
     if (newData[element.account]) {
       newData = {
         ...newData,
-        [element.account]: `${
-          parseInt(newData[element.account]) + parseInt(element.sum)
-        }`
+        [element.account]: `${parseInt(newData[element.account]) +
+          parseInt(element.sum)}`
       }
     } else {
       newData = { ...newData, [element.account]: element.sum }
@@ -282,7 +281,7 @@ const getCurrentMissedBlock = async () => {
   getCurrentMissedBlock()
 }
 
-const udpateStats = async (payload) => {
+const udpateStats = async payload => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -293,7 +292,7 @@ const udpateStats = async (payload) => {
   await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
-const insertStats = async (payload) => {
+const insertStats = async payload => {
   const mutation = `
     mutation ($payload: stat_insert_input!) {
       insert_stat_one(object: $payload) {
@@ -329,13 +328,13 @@ const getLastTPSAllTimeHigh = async () => {
   }
 }
 
-const getBlockUsage = async (blockNum) => {
+const getBlockUsage = async blockNum => {
   const block = await eosUtil.getBlock(blockNum)
   const info = await eosUtil.getInfo()
   let cpuUsage = 0
   let netUsage = 0
 
-  block.transactions.forEach((transaction) => {
+  block.transactions.forEach(transaction => {
     cpuUsage += transaction.cpu_usage_us
     netUsage += transaction.net_usage_words
   })
@@ -444,6 +443,20 @@ const syncTPSAllTimeHigh = async () => {
 }
 
 const sync = async () => {
+  const payload = {
+    nodes_summary: await getNodesSummary(),
+    unique_locations: await getUniqueLocations()
+  }
+  const stats = await getStats()
+
+  if (stats) {
+    await udpateStats(payload)
+    return
+  }
+  await insertStats(payload)
+}
+
+const syncTransactionsInfo = async () => {
   const transactionsInLastWeek = await getTransactionsInTimeRage(
     moment().subtract(1, 'week'),
     moment()
@@ -458,9 +471,7 @@ const sync = async () => {
       moment()
     ),
     transactions_in_last_week: transactionsInLastWeek,
-    average_daily_transactions_in_last_week: transactionsInLastWeek / 7,
-    nodes_summary: await getNodesSummary(),
-    unique_locations: await getUniqueLocations()
+    average_daily_transactions_in_last_week: transactionsInLastWeek / 7
   }
   const stats = await getStats()
 
@@ -473,6 +484,7 @@ const sync = async () => {
 
 module.exports = {
   sync,
+  syncTransactionsInfo,
   syncTPSAllTimeHigh,
   getBlockDistribution,
   getStats,
