@@ -188,7 +188,7 @@ const syncMissedBlocks = async () => {
   // if the first block comes from different schedule_version
   // then it's the end of the version in use
   if (blocks.length > 0 && blocks[0].schedule_version !== lastRound.schedule) {
-    const newSchedule = await getScheduleByVersion(lastRound.schedule)
+    const newSchedule = await getScheduleByVersion(lastRound.schedule + 1)
 
     // schedule version no yet in the history
     if (!newSchedule) {

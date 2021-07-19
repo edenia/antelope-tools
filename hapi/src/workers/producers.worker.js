@@ -4,9 +4,10 @@ const {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService
+  statsService,
+  demuxService
 } = require('../services')
-const { workersConfig, hasuraConfig } = require('../config')
+const { workersConfig, hasuraConfig, eosConfig } = require('../config')
 const { axiosUtil, sleepFor } = require('../utils')
 
 const run = async (name, action, sleep) => {
@@ -55,11 +56,20 @@ const start = async () => {
   )
   run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
   run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
-  run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
-  run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
-  run('SYNC TPS', statsService.syncTPSAllTimeHigh)
-  run('SYNC MISSED BLOCKS STATS', statsService.getCurrentMissedBlock)
-  run('SYNC TRX HISTORY STATS', statsService.formatTransactionHistory, 10800)
+
+  if (eosConfig.stateHistoryPluginEndpoint) {
+    run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
+    run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
+    run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)
+    run('SYNC SCHEDULE HISTORY', demuxService.init)
+    run('SYNC TPS', statsService.syncTPSAllTimeHigh)
+    run('SYNC TRX BY INTERVALS', statsService.formatTransactionHistory, 10800)
+    run(
+      'SYNC TRANSACTIONS INFO',
+      statsService.syncTransactionsInfo,
+      workersConfig.syncStatsInterval
+    )
+  }
 }
 
 module.exports = {
