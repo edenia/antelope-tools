@@ -116,7 +116,7 @@ const Dashboard = ({ children, width, ual }) => {
                 </span>
               </Box>
               <Collapse in={checked}>
-                <Typography>{t('moreDescription')}</Typography>
+                <Typography>{t(`${location.pathname}>moreDescription`)}</Typography>
               </Collapse>
             </Box>
 
