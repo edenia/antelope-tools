@@ -84,8 +84,9 @@ body {
 .wax-networks {
   display: flex;
   flex-direction: column;
-  width: 79px;
+  width: 105px;
   text-decoration: none;
+  align-items: center;
 }
 
 .name-networks {
@@ -100,23 +101,26 @@ body {
 .telos-networks {
   display: flex;
   flex-direction: column;
-  width: 79px;
+  width: 105px;
   text-decoration: none;
+  align-items: center;
 }
 
 .eos-networks {
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 105px;
   justify-content: space-evenly;
   text-decoration: none;
+  align-items: center;
 }
 
 .jungle-networks {
   display: flex;
   flex-direction: column;
-  width: 79px;
+  width: 105px;
   text-decoration: none;
+  align-items: center;
 }
 
 .lacchain-networks {
@@ -124,14 +128,16 @@ body {
   flex-direction: column;
   width: 105px;
   text-decoration: none;
+  align-items: center;
 }
 
 .proton-networks {
   display: flex;
   flex-direction: column;
-  width: 95px;
+  width: 105px;
   justify-content: space-evenly;
   text-decoration: none;
+  align-items: center;
 }
 
 .header {
@@ -502,6 +508,7 @@ body {
   #network-desktop > a {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end
   }
 
   .box-network h4 {
