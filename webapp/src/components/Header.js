@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { withTheme } from 'styled-components'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
 import {
   Grid,
   Hidden,
@@ -36,6 +38,7 @@ const IconButton = styled(MuiIconButton)`
 
 const UserBox = styled(Box)`
   display: flex;
+  float: right;
   justify-content: center;
   align-items: center;
   button {
@@ -137,33 +140,46 @@ UserMenu.propTypes = {
   ual: PropTypes.any
 }
 
-const Header = ({ ual, onDrawerToggle }) => (
-  <AppBar position="sticky" elevation={0}>
-    <Toolbar>
-      <Grid container alignItems="center">
-        <Hidden mdUp>
-          <Grid item>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={onDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
+const Header = ({ ual, onDrawerToggle }) => {
+  const theme = useTheme()
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
+
+  return (
+    <AppBar position="sticky" elevation={0}>
+      <Toolbar>
+        <Grid container alignItems="center">
+          {!isDesktop && (
+            <>
+              <Grid item md={0} xs={1}>
+                <Hidden mdUp>
+                  <IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={onDrawerToggle}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </Hidden>
+              </Grid>
+              <Grid item md={3} xs={4}>
+                <img
+                  style={{ width: '90px', marginLeft: '15px' }}
+                  src={'/eosio-dashboard.svg'}
+                />
+              </Grid>
+            </>
+          )}
+          <Grid item md={12} xs={7}>
+            <UserBox>
+              <LanguageMenu />
+              <UserMenu ual={ual} />
+            </UserBox>
           </Grid>
-        </Hidden>
-        <Grid item />
-        <Grid item xs />
-        <Grid item>
-          <UserBox>
-            <LanguageMenu />
-            <UserMenu ual={ual} />
-          </UserBox>
         </Grid>
-      </Grid>
-    </Toolbar>
-  </AppBar>
-)
+      </Toolbar>
+    </AppBar>
+  )
+}
 
 Header.propTypes = {
   ual: PropTypes.any,

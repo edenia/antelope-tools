@@ -75,5 +75,11 @@ export default (theme, drawerWidth) => ({
     '& .MuiCollapse-container': {
       marginTop: theme.spacing(2)
     }
+  },
+  textAlignReadMore: {
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'inherit !important'
+    }
   }
 })

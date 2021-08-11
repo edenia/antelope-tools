@@ -10,7 +10,9 @@ import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import Collapse from '@material-ui/core/Collapse'
-import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -51,6 +53,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Dashboard = ({ children, width, ual }) => {
+  const theme = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
   const { t } = useTranslation('routes')
@@ -58,10 +61,17 @@ const Dashboard = ({ children, width, ual }) => {
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
   const [checked, setChecked] = useState(false)
+  const isTablet = useMediaQuery('(min-width:767px)')
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
+  const [xsSize, setXsSize] = useState(12)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
+
+  useEffect(() => {
+    isTablet ? setXsSize(6) : setXsSize(12)
+  }, [isTablet])
 
   useEffect(() => {
     if (routes.some((route) => route.path === location.pathname)) {
@@ -105,21 +115,41 @@ const Dashboard = ({ children, width, ual }) => {
         <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
           <Box className={classes.subHeader}>
             <Box className={classes.boxHeader}>
-              <Box className={classes.boxReadmore}>
-                <Typography variant="h3">
-                  {routeName.pathname
-                    ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
-                    : ''}
-                </Typography>
-                <span onClick={() => setChecked(!checked)}>
-                  {checked ? t('readLess') : t('readMore')}
-                </span>
-              </Box>
-              <Collapse in={checked}>
-                <Typography>{t(`${location.pathname}>moreDescription`)}</Typography>
-              </Collapse>
+              <Grid container>
+                <Grid item md={6} lg={4} xs={xsSize}>
+                  <Typography
+                    variant="h3"
+                    className={classes.textAlignReadMore}
+                  >
+                    {routeName.pathname
+                      ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
+                      : ''}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  md={6}
+                  lg={8}
+                  xs={xsSize}
+                  className={classes.boxReadmore}
+                >
+                  <span
+                    style={{ marginLeft: isDesktop ? '-25px' : 0 }}
+                    className={classes.textAlignReadMore}
+                    onClick={() => setChecked(!checked)}
+                  >
+                    {checked ? t('readLess') : t('readMore')}
+                  </span>
+                </Grid>
+                <Grid item md={12} xs={12}>
+                  <Collapse in={checked}>
+                    <Typography className={classes.textAlignReadMore}>
+                      {t(`${location.pathname}>moreDescription`)}
+                    </Typography>
+                  </Collapse>
+                </Grid>
+              </Grid>
             </Box>
-
             <NetworkSelector
               title={eosConfig.networkLabel}
               networkLogo={eosConfig.networkLogo}
