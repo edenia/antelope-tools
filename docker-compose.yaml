@@ -24,7 +24,6 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - ./modules/hapi:/app/node_modules
       - type: bind
         source: ./hapi
         target: /app
