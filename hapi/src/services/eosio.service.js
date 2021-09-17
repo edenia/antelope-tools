@@ -24,6 +24,8 @@ const getProducers = async () => {
     producers.push(...rows)
   }
 
+  producers = producers.filter(producer => !!producer.is_active)
+
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
   producers = await Promise.all(
