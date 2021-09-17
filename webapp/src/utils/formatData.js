@@ -72,7 +72,7 @@ export const formatData = (
           country: data.location?.country || null,
           website: data?.website || '',
           email: data.email,
-          ownership: data?.chain_resources || null,
+          ownership: data?.ownership_disclosure || null,
           bussinesContact: data.bussines_contact || null,
           technicalContact: data.technical_contact || null,
           chain: data?.chain_resources || null
