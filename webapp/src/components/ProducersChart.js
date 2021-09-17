@@ -20,7 +20,7 @@ const polarToCartesian = (cx, cy, radius, angle) => ({
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: theme.palette.primary[50],
+    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
     boxShadow:
@@ -232,6 +232,7 @@ const ProducersChart = ({ producers, info }) => {
           {entries.map((entry, index) => {
             return (
               <Cell
+                style={{ cursor: 'pointer' }}
                 key={`cell-${index}`}
                 fill={
                   entry.owner === info.head_block_producer
