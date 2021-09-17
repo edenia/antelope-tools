@@ -52,6 +52,8 @@ export const NODES_QUERY = gql`
       id
       owner
       bp_json
+      total_rewards
+      total_votes_percent
       updated_at
     }
   }

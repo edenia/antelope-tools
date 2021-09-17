@@ -26,7 +26,6 @@ const BlockProducerInfo = ({ t, classes }) => {
   const { data: producersSummary, loading: producersLoading } = useQuery(
     PRODUCERS_SUMMARY_QUERY
   )
-
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const info = useSelector((state) => state.eos.info)
   const [total, setTotal] = useState(0)
@@ -51,8 +50,8 @@ const BlockProducerInfo = ({ t, classes }) => {
         logo: data?.bp_json?.org?.branding?.logo_256,
         url: data?.url,
         owner: item.producer_name || data.owner,
-        rewards: data.total_rewards,
-        total_votes_percent: data.total_votes_percent * 100,
+        rewards: data.total_rewards || 0,
+        total_votes_percent: data.total_votes_percent * 100 || 0,
         value: 20
       }
     })
