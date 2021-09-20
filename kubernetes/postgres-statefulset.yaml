@@ -23,6 +23,13 @@ spec:
       containers:
       - image: postgres:13.3-alpine
         imagePullPolicy: "Always"
+        resources:
+          requests:
+            memory: "2G"
+            cpu: "1"
+          limits:
+            memory: "8G"
+            cpu: "2"
         name: dashboard-postgres
         envFrom:
         - configMapRef:
