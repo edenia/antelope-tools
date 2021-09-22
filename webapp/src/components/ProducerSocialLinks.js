@@ -16,7 +16,7 @@ const prefix = {
   youtube: 'https://youtube.com/',
   facebook: 'https://facebook.com/',
   github: 'https://github.com/',
-  reddit: 'https://reddit.com/',
+  reddit: 'https://www.reddit.com/user/',
   keybase: 'https://keybase.io/',
   telegram: 'https://t.me/',
   wechat: 'https://wechat.com/'
