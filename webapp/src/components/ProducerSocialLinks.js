@@ -11,7 +11,7 @@ import TelegramIcon from '@material-ui/icons/Telegram'
 import Typography from '@material-ui/core/Typography'
 
 const prefix = {
-  hive: 'https://hive.com/',
+  hive: 'https://hive.blog/@',
   twitter: 'https://twitter.com/',
   youtube: 'https://youtube.com/',
   facebook: 'https://facebook.com/',
