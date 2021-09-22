@@ -126,6 +126,22 @@ const Information = ({ info, classes, type, t }) => {
           )}
         </Typography>
       </Box>
+      {!!info.otherResources?.length && (
+        <Box>
+          <dt className={classes.dt}>
+            <Typography variant="body1" className={classes.textEllipsis}>
+              {t('otherResources')}:
+            </Typography>
+          </dt>
+          {info.otherResources.map((url, i) => (
+            <dd className={classes.dd} key={i}>
+              <Link href={url} target="_blank" rel="noopener noreferrer">
+                {url}
+              </Link>
+            </dd>
+          ))}
+        </Box>
+      )}
     </Box>
   )
 }
