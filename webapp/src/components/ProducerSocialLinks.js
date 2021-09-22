@@ -18,7 +18,7 @@ const prefix = {
   github: 'https://github.com/',
   reddit: 'https://reddit.com/',
   keybase: 'https://keybase.io/',
-  telegram: 'https://telegram.org/',
+  telegram: 'https://t.me/',
   wechat: 'https://wechat.com/'
 }
 
