@@ -11,14 +11,14 @@ import TelegramIcon from '@material-ui/icons/Telegram'
 import Typography from '@material-ui/core/Typography'
 
 const prefix = {
-  hive: 'https://hive.com/',
+  hive: 'https://hive.blog/@',
   twitter: 'https://twitter.com/',
   youtube: 'https://youtube.com/',
   facebook: 'https://facebook.com/',
   github: 'https://github.com/',
-  reddit: 'https://reddit.com/',
+  reddit: 'https://www.reddit.com/user/',
   keybase: 'https://keybase.io/',
-  telegram: 'https://telegram.org/',
+  telegram: 'https://t.me/',
   wechat: 'https://wechat.com/'
 }
 

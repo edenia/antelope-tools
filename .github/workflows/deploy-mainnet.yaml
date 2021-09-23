@@ -35,7 +35,7 @@ jobs:
           PORT: '80'
           REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
           REACT_APP_TAG: ${{ github.ref }}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://bloks.io/img/eosio.png'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.eosio.cr/ipfs/QmQ48Sysmfhb9T8Cu3ECNzKCqxTbyuz6n2vWEpTLigmijQ'
           REACT_APP_FOOTER_LINKS: '[{"text":"EOS Community Website","src":"https://eoscommunity.org/"},{"text":"Block Explorer","src":"https://bloks.io"},{"text":"EOS Developer Docs","src":"https://guide.eoscostarica.io"},{"text": "EOS Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
           REACT_APP_USE_REWARDS: 'true'
@@ -54,7 +54,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: ${{ secrets.REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE }}
           REACT_APP_EOS_API_NETWORK_NAME: 'mainnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'EOS Mainnet'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://bloks.io/img/eosio.png'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.eosio.cr/ipfs/QmWY6WC6Gy193rKTnHNKzeGruXBGkTQzEVDfwn3j41W235'
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'

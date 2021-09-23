@@ -11,6 +11,7 @@ import Link from '@material-ui/core/Link'
 import Skeleton from '@material-ui/lab/Skeleton'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
 import {
   ComposableMap,
   Geographies,
@@ -79,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
   },
   itemLabel: {
     minWidth: 120
+  },
+  mapWrapper: {
+    marginTop: theme.spacing(3)
   }
 }))
 
@@ -395,40 +399,42 @@ const RewardsDistribution = () => {
         </Grid>
       </Grid>
       {!loading && (
-        <ComposableMap
-          projectionConfig={{
-            scale: 170
-          }}
-        >
-          <ZoomableGroup maxZoom={1}>
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo, i) => {
-                  const nodeData = nodes.find(
-                    (node) => node.code === geo.properties.ISO_A2
-                  )
+        <Paper className={classes.mapWrapper}>
+          <ComposableMap
+            projectionConfig={{
+              scale: 170
+            }}
+          >
+            <ZoomableGroup maxZoom={1}>
+              <Geographies geography={geoUrl}>
+                {({ geographies }) =>
+                  geographies.map((geo, i) => {
+                    const nodeData = nodes.find(
+                      (node) => node.code === geo.properties.ISO_A2
+                    )
 
-                  return (
-                    <Geography
-                      onClick={
-                        nodeData ? handlePopoverOpen(nodeData) : () => {}
-                      }
-                      className={classes.geography}
-                      key={geo.rsmKey}
-                      geography={geo}
-                      stroke="#8F9DA4"
-                      fill={
-                        nodeData && nodeData.rewards > 0
-                          ? colorScale(parseInt(nodeData.rewards))
-                          : '#EEEEEE'
-                      }
-                    />
-                  )
-                })
-              }
-            </Geographies>
-          </ZoomableGroup>
-        </ComposableMap>
+                    return (
+                      <Geography
+                        onClick={
+                          nodeData ? handlePopoverOpen(nodeData) : () => {}
+                        }
+                        className={classes.geography}
+                        key={geo.rsmKey}
+                        geography={geo}
+                        stroke="#8F9DA4"
+                        fill={
+                          nodeData && nodeData.rewards > 0
+                            ? colorScale(parseInt(nodeData.rewards))
+                            : '#EEEEEE'
+                        }
+                      />
+                    )
+                  })
+                }
+              </Geographies>
+            </ZoomableGroup>
+          </ComposableMap>
+        </Paper>
       )}
     </Box>
   )

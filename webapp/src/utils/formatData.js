@@ -75,7 +75,8 @@ export const formatData = (
           ownership: data?.ownership_disclosure || null,
           bussinesContact: data.bussines_contact || null,
           technicalContact: data.technical_contact || null,
-          chain: data?.chain_resources || null
+          chain: data?.chain_resources || null,
+          otherResources: data?.other_resources || []
         },
         stats: {
           votes: 'N/A',

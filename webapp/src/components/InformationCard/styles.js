@@ -234,5 +234,13 @@ export default (theme) => ({
     [theme.breakpoints.up('lg')]: {
       minWidth: 150
     }
+  },
+  dd: {
+    marginLeft: theme.spacing(6),
+    margin: theme.spacing(1, 0),
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: 220
   }
 })
