@@ -162,6 +162,13 @@ const getBPJsonUrl = async (producer = {}) => {
     producerUrl = 'https://infinitystones.io'
   }
 
+  if (producer.owner === 'eosauthority') {
+    producerUrl =
+      'https://ipfs.eosio.cr/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
+
+    return producerUrl
+  }
+
   const chainsUrl = `${producerUrl}/chains.json`.replace(
     /(?<=:\/\/.*)((\/\/))/,
     '/'
