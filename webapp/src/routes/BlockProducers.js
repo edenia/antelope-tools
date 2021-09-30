@@ -18,22 +18,15 @@ import InformationCard from '../components/InformationCard'
 import { eosConfig } from '../config'
 
 const CHIPS_FILTERS = [
-  { offset: 0, where: null, limit: 28, pibot: 1 },
+  { offset: 0, where: null, limit: 28 },
   {
-    offset: 0,
-    where: { total_rewards: { _neq: 0 } },
-    limit: 21,
-    pibot: 1
+    where: { total_rewards: { _neq: 0 }, rank: { _lte: 21 } }
   },
   {
-    offset: 21,
-    where: { total_rewards: { _gte: 100 } },
-    pibot: 22
+    where: { total_rewards: { _gte: 100 }, rank: { _gte: 22 } }
   },
   {
-    pibot: 65,
-    where: { total_rewards: { _eq: 0 } },
-    limit: 28
+    where: { total_rewards: { _eq: 0 } }
   }
 ]
 
@@ -60,8 +53,7 @@ const PaginationWrapper = ({
   loading,
   chipFilter
 }) => {
-  if (loading || !totalPages || chipFilter === 1 || chipFilter === 2)
-    return <></>
+  if (loading || !totalPages) return <></>
 
   return (
     <Pagination
@@ -212,21 +204,16 @@ const Producers = () => {
       </Box>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
-        {(items || []).map((producer, index) => {
-          const pibot =
-            CHIPS_FILTERS[chipFilter === 'all' ? 0 : chipFilter].pibot
-
-          return (
-            <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
-              <InformationCard
-                type="entity"
-                producer={{ ...producer, missedBlocks }}
-                rank={(pagination.page - 1) * pagination.limit + index + pibot}
-                onNodeClick={handlePopoverOpen}
-              />
-            </Grid>
-          )
-        })}
+        {(items || []).map((producer, index) => (
+          <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
+            <InformationCard
+              type="entity"
+              producer={{ ...producer, missedBlocks }}
+              rank={producer.rank}
+              onNodeClick={handlePopoverOpen}
+            />
+          </Grid>
+        ))}
       </Grid>
       <PaginationWrapper
         classes={classes.pagination}

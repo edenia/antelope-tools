@@ -24,12 +24,24 @@ const getProducers = async () => {
     producers.push(...rows)
   }
 
-  producers = producers.filter(producer => !!producer.is_active)
+  producers = producers
+    .filter(producer => !!producer.is_active)
+    .sort((a, b) => {
+      if (a.total_votes < b.total_votes) {
+        return -1
+      }
+
+      if (a.total_votes > b.total_votes) {
+        return 1
+      }
+
+      return 0
+    })
 
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
   producers = await Promise.all(
-    producers.map(async producer => {
+    producers.map(async (producer, index) => {
       const bpJson = await getBPJson(producer)
       const healthStatus = getProducerHealthStatus(bpJson)
       const nodes = await getNodes(bpJson)
@@ -43,6 +55,8 @@ const getProducers = async () => {
         total_votes_percent: producer.total_votes / totalVoteWeight,
         total_votes_eos: getVotesInEOS(producer.total_votes),
         health_status: healthStatus,
+        rank: index + 1,
+        is_active: !!producer.is_active,
         bp_json: {
           ...bpJson,
           nodes

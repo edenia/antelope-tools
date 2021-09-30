@@ -70,7 +70,8 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           nodes: producer.bp_json?.nodes || [],
           healthStatus: producer.health_status,
           dataType: producer.bp_json?.type,
-          node: producer.node
+          node: producer.node,
+          totalRewards: producer.total_rewards
         },
         type,
         t

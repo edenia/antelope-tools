@@ -7,7 +7,7 @@ const eosioService = require('./eosio.service')
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, total_votes, producer_key, is_active, url, unpaid_blocks, last_claim_time, location, producer_authority, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status, endpoints]}) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status, endpoints, rank]}) {
         affected_rows
       }
     }
