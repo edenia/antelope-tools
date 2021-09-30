@@ -216,7 +216,7 @@
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
     "cpuBenchmark": "Promedio del Benchmark de CPU",
-    "health": "Estado",
+    "health": "Cumplimiento",
     "collapse": "Colapsar",
     "moreInfo": "Más Info",
     "version": "Versión",
