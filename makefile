@@ -41,6 +41,11 @@ protontestnet:
 	make stop
 	make start
 
+proton:
+	@cat ".env.proton" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
 waxtestnet:
 	@cat ".env.waxtestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop

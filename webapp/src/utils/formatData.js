@@ -15,7 +15,8 @@ export const formatData = (
     healthStatus,
     endpoints,
     dataType,
-    node
+    node,
+    totalRewards
   },
   type,
   t
@@ -37,7 +38,7 @@ export const formatData = (
 
     if (rank <= 21) return 'Top 21'
 
-    if (rank > 21 && rank <= 64) return 'Paid Standby'
+    if (rank > 21 && totalRewards >= 100) return 'Paid Standby'
 
     return 'Non-Paid Standby'
   }

@@ -19,18 +19,14 @@ export const PRODUCERS_QUERY = gql`
     ) {
       id
       owner
-      url
-      ping
       total_votes
       bp_json
       total_votes_percent
       total_votes_eos
       total_rewards
-      server_version_string
-      head_block_producer
-      head_block_time
       health_status
       endpoints
+      rank
       updated_at
     }
   }

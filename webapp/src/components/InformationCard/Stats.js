@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
-import { eosConfig } from '../../config'
+import { eosConfig, generalConfig } from '../../config'
 
 const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
   if (eosConfig.networkName === 'lacchain' || type === 'node') return <></>
@@ -22,15 +22,17 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
           }`}</Typography>
         </Box>
 
-        <Box className={classes.rowWrapper}>
-          <Typography variant="body1">
-            {`${t('missedBlocks')}: `}
-            {missedBlocks.reduce(
-              (result, current) => result + current.value,
-              0
-            )}
-          </Typography>
-        </Box>
+        {generalConfig.historyEnabled && (
+          <Box className={classes.rowWrapper}>
+            <Typography variant="body1">
+              {`${t('missedBlocks')}: `}
+              {missedBlocks.reduce(
+                (result, current) => result + current.value,
+                0
+              )}
+            </Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   )
