@@ -21,36 +21,14 @@ const eosApi = EosApi({
 
 const getBpJSONOffChain = async (producer) => {
   try {
-    const { data: bpJson } = await axios.get(
-      producer?.owner === 'okcapitalbp1'
-        ? `${producer?.url}/bp.json`
-        : `https://cors-anywhere.herokuapp.com/${producer?.url}/bp.json`,
-      {
-        timeout: 5000
-      }
-    )
+    const { data: bpJson } = await axios.get(`${producer?.url}/bp.json`, {
+      timeout: 5000
+    })
 
     return bpJson
   } catch (error) {
     console.log(error)
   }
-}
-
-const getBpJSONOnChain = async (producer) => {
-  const { rows } = await eosApi.getTableRows({
-    code: eosConfig.bpJsonOnChainContract,
-    scope: eosConfig.bpJsonOnChainScope,
-    table: eosConfig.bpJsonOnChainTable,
-    lower_bound: producer?.owner,
-    json: true
-  })
-  const row =
-    rows.find(
-      (item) =>
-        item.entity_name === producer?.owner || item.owner === producer?.owner
-    ) || {}
-
-  return row.json ? JSON.parse(row.json) : null
 }
 
 const BPJson = ({ ual }) => {
@@ -148,9 +126,7 @@ const BPJson = ({ ual }) => {
       )
 
       if (producer) {
-        const bpJson = eosConfig.useBpJsonOnChain
-          ? await getBpJSONOnChain(producer)
-          : await getBpJSONOffChain(producer)
+        const bpJson = await getBpJSONOffChain(producer)
         setProducer({ ...producer, bpJson })
       }
 
