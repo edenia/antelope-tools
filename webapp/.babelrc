@@ -7,9 +7,10 @@
       "@babel/preset-env",
       {
         "targets": { "esmodules": true },
-        "useBuiltIns": "usage",
-        "corejs": 2,
-        "modules": false
+        "useBuiltIns": "entry",
+        "corejs": "3.1",
+        "modules": false,
+        "loose": true
       }
     ],
     "@babel/preset-react"
