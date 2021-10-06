@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
 
-import { eosConfig } from '../config'
+import { eosConfig, ualConfig } from '../config'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,
@@ -19,38 +19,47 @@ const eosApi = EosApi({
   fetchConfiguration: {}
 })
 
+const getBPJsonUrl = async (producer = {}) => {
+  let producerUrl = producer.url || ''
+
+  if (!producerUrl.startsWith('http')) {
+    producerUrl = `http://${producerUrl}`
+  }
+
+  if (producer.owner === 'eosauthority') {
+    producerUrl =
+      'https://ipfs.eosio.cr/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
+
+    return producerUrl
+  }
+
+  const chainsUrl = `${producerUrl}/chains.json`.replace(
+    /(?<=:\/\/.*)((\/\/))/,
+    '/'
+  )
+  let chainUrl = '/bp.json'
+
+  try {
+    const {
+      data: { chains }
+    } = await axios.get(chainsUrl)
+    chainUrl = chains[ualConfig.network.chainId] || chainUrl
+  } catch (error) {}
+
+  return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
+}
+
 const getBpJSONOffChain = async (producer) => {
   try {
-    const { data: bpJson } = await axios.get(
-      producer?.owner === 'okcapitalbp1'
-        ? `${producer?.url}/bp.json`
-        : `https://cors-anywhere.herokuapp.com/${producer?.url}/bp.json`,
-      {
-        timeout: 5000
-      }
-    )
+    const bpUrl = await getBPJsonUrl(producer)
+    const { data: bpJson } = await axios.get(bpUrl, {
+      timeout: 5000
+    })
 
     return bpJson
   } catch (error) {
     console.log(error)
   }
-}
-
-const getBpJSONOnChain = async (producer) => {
-  const { rows } = await eosApi.getTableRows({
-    code: eosConfig.bpJsonOnChainContract,
-    scope: eosConfig.bpJsonOnChainScope,
-    table: eosConfig.bpJsonOnChainTable,
-    lower_bound: producer?.owner,
-    json: true
-  })
-  const row =
-    rows.find(
-      (item) =>
-        item.entity_name === producer?.owner || item.owner === producer?.owner
-    ) || {}
-
-  return row.json ? JSON.parse(row.json) : null
 }
 
 const BPJson = ({ ual }) => {
@@ -141,16 +150,15 @@ const BPJson = ({ ual }) => {
       const { rows } = await eosApi.getProducers({
         json: true,
         limit: 1,
-        lower_bound: ual.activeUser.accountName
+        lower_bound: ual.activeUser.accountName,
+        upper_bound: ual.activeUser.accountName
       })
       const producer = rows.find(
         (item) => item.owner === ual.activeUser.accountName
       )
 
       if (producer) {
-        const bpJson = eosConfig.useBpJsonOnChain
-          ? await getBpJSONOnChain(producer)
-          : await getBpJSONOffChain(producer)
+        const bpJson = await getBpJSONOffChain(producer)
         setProducer({ ...producer, bpJson })
       }
 
