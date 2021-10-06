@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
 
-import { eosConfig } from '../config'
+import { eosConfig, ualConfig } from '../config'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,
@@ -19,9 +19,40 @@ const eosApi = EosApi({
   fetchConfiguration: {}
 })
 
+const getBPJsonUrl = async (producer = {}) => {
+  let producerUrl = producer.url || ''
+
+  if (!producerUrl.startsWith('http')) {
+    producerUrl = `http://${producerUrl}`
+  }
+
+  if (producer.owner === 'eosauthority') {
+    producerUrl =
+      'https://ipfs.eosio.cr/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
+
+    return producerUrl
+  }
+
+  const chainsUrl = `${producerUrl}/chains.json`.replace(
+    /(?<=:\/\/.*)((\/\/))/,
+    '/'
+  )
+  let chainUrl = '/bp.json'
+
+  try {
+    const {
+      data: { chains }
+    } = await axios.get(chainsUrl)
+    chainUrl = chains[ualConfig.network.chainId] || chainUrl
+  } catch (error) {}
+
+  return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
+}
+
 const getBpJSONOffChain = async (producer) => {
   try {
-    const { data: bpJson } = await axios.get(`${producer?.url}/bp.json`, {
+    const bpUrl = await getBPJsonUrl(producer)
+    const { data: bpJson } = await axios.get(bpUrl, {
       timeout: 5000
     })
 
@@ -119,7 +150,8 @@ const BPJson = ({ ual }) => {
       const { rows } = await eosApi.getProducers({
         json: true,
         limit: 1,
-        lower_bound: ual.activeUser.accountName
+        lower_bound: ual.activeUser.accountName,
+        upper_bound: ual.activeUser.accountName
       })
       const producer = rows.find(
         (item) => item.owner === ual.activeUser.accountName
