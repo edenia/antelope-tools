@@ -72,7 +72,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       table,
       code: accountName,
       json: true,
-      lower_bound: nextKey ? nextKey : lowerBound,
+      lower_bound: nextKey || lowerBound,
       upper_bound: upperBound,
       loadMore: !!nextKey
     })

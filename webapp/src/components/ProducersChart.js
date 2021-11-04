@@ -203,6 +203,8 @@ const CustomTooltip = memo(({ active, payload }) => {
   return null
 })
 
+CustomTooltip.displayName = 'CustomTooltip'
+
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array
