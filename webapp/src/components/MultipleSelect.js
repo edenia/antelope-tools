@@ -34,6 +34,17 @@ const MultipleSelect = ({
   const handleOnFieldChange = (event) => {
     onChange(event?.target?.value)
   }
+  const renderValue = (selected) => (
+    <div className={classes.chips}>
+      {selected.map((value, index) => (
+        <Chip
+          key={`chip-item-${index}`}
+          label={value}
+          className={classes.chip}
+        />
+      ))}
+    </div>
+  )
 
   return (
     <TextField
@@ -46,17 +57,7 @@ const MultipleSelect = ({
         classes: {
           root: value.length ? classes.selectChips : ''
         },
-        renderValue: (selected) => (
-          <div className={classes.chips}>
-            {selected.map((value, index) => (
-              <Chip
-                key={`chip-item-${index}`}
-                label={value}
-                className={classes.chip}
-              />
-            ))}
-          </div>
-        )
+        renderValue
       }}
       value={value || []}
       className={className}

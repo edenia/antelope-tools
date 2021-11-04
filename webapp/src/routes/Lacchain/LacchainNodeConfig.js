@@ -135,6 +135,7 @@ const LacchainNodeConfig = ({ ual }) => {
         const p2p = `p2p-peer-address = ${
           node?.info?.[`${node.type}_endpoints`]?.[`${node.type}_p2p`] || ''
         }`
+        // eslint-disable-next-line
         const keys = (node.info?.[`${node.type}_keys`]?.peer_keys || [''])
           .map((key) => `peer-key = ${key}`)
           .join('\r\n')
