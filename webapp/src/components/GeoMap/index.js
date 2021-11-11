@@ -1,0 +1,119 @@
+import React, { useEffect, useState } from 'react'
+import { makeStyles } from '@mui/styles'
+import axios from 'axios'
+import clsx from 'clsx'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+
+import MainMap from './MainMap'
+import worldGeoData from './worldGeoData'
+import CountryMap from './CountryMap'
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
+
+const GeoMap = ({ data }) => {
+  const classes = useStyles()
+  const [mapOptions, setMapOptions] = useState()
+  const [mapSelected, setMapSelected] = useState()
+  const [mapGeoData, setMapGeoData] = useState()
+
+  const getDataSeries = () => {
+    return data.reduce(
+      (acc, curr, index) => {
+        if (!acc.current) {
+          return { ...acc, current: { country: curr.country, value: 1 } }
+        }
+
+        if (acc.current.country === curr.country) {
+          if (index === data.length - 1) {
+            acc.nodesSeries.push({
+              ...acc.current,
+              value: acc.current.value + 1
+            })
+
+            return {
+              ...acc,
+              current: { country: curr.country, value: 1 }
+            }
+          }
+
+          return {
+            ...acc,
+            current: { ...acc.current, value: acc.current.value + 1 }
+          }
+        }
+
+        acc.nodesSeries.push(acc.current)
+
+        return {
+          ...acc,
+          current: { country: curr.country, value: 1 }
+        }
+      },
+      { current: null, nodesSeries: [] }
+    )
+  }
+
+  const handleGoBack = () => {
+    const dataSeries = getDataSeries()
+
+    setMapSelected(null)
+    setMapGeoData(null)
+    setMapOptions(dataSeries.nodesSeries)
+  }
+
+  useEffect(() => {
+    const dataSeries = getDataSeries()
+
+    setMapOptions(dataSeries.nodesSeries)
+  }, [data])
+
+  useEffect(() => {
+    if (!mapSelected) return
+
+    const getMap = async () => {
+      const mapDataSelected = data.filter(
+        ({ country }) => country === mapSelected.toUpperCase()
+      )
+      const { data: mapRes } = await axios.get(
+        `https://code.highcharts.com/mapdata/countries/${mapSelected}/${mapSelected}-all.geo.json`
+      )
+
+      setMapOptions(mapDataSelected)
+      setMapGeoData(mapRes)
+    }
+
+    mapSelected && getMap()
+  }, [mapSelected, data])
+
+  return (
+    <Box className={clsx({ [classes.mapWrapper]: mapSelected && mapGeoData })}>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={handleGoBack}
+        className={clsx(classes.goBackBtn, {
+          [classes.goBackBtnHidden]: !mapSelected
+        })}
+      >
+        Go Back
+      </Button>
+      {mapSelected && mapGeoData ? (
+        <CountryMap
+          map={mapGeoData}
+          data={mapOptions || []}
+          mapCode={(mapSelected || '').toUpperCase()}
+        />
+      ) : (
+        <MainMap
+          data={mapOptions || []}
+          map={worldGeoData}
+          setMap={setMapSelected}
+        />
+      )}
+    </Box>
+  )
+}
+
+export default GeoMap
