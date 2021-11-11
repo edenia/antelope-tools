@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import clsx from 'clsx'
 import Button from '@material-ui/core/Button'
@@ -116,6 +117,10 @@ const GeoMap = ({ data }) => {
       )}
     </Box>
   )
+}
+
+GeoMap.propTypes = {
+  data: PropTypes.array
 }
 
 export default GeoMap

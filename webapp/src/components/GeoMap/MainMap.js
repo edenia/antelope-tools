@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
 
 import HighMapsWrapper from './HighMapsWrapper'
 
-const TestMap = ({ data, map, setMap }) => {
+const MainMap = ({ data, map, setMap }) => {
   const myRef = useRef()
 
   const setupMapData = (data = [], map) => {
@@ -84,4 +85,10 @@ const TestMap = ({ data, map, setMap }) => {
   return <div ref={myRef} style={{ height: '100vh' }} />
 }
 
-export default TestMap
+MainMap.propTypes = {
+  data: PropTypes.array,
+  map: PropTypes.object,
+  setMap: PropTypes.func
+}
+
+export default MainMap
