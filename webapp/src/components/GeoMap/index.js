@@ -87,7 +87,7 @@ const GeoMap = ({ data }) => {
       setMapGeoData(mapRes)
     }
 
-    mapSelected && getMap()
+    getMap()
   }, [mapSelected, data])
 
   return (
@@ -105,7 +105,7 @@ const GeoMap = ({ data }) => {
         <CountryMap
           map={mapGeoData}
           data={mapOptions || []}
-          mapCode={(mapSelected || '').toUpperCase()}
+          mapCode={mapSelected.toUpperCase()}
         />
       ) : (
         <MainMap

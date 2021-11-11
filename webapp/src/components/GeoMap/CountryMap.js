@@ -33,7 +33,6 @@ const ClusterMap = ({ data, map, mapCode }) => {
         text: countries[mapCode].name
       },
       mapNavigation: {
-        enabled: true,
         enableButtons: false,
         enabled: false,
         enableDoubleClickZoom: false,
@@ -81,16 +80,15 @@ const ClusterMap = ({ data, map, mapCode }) => {
       ]
     }
 
-    // eslint-disable-next-line
     const highMap = new HighMapsWrapper['Map'](myRef.current, options)
+    highMap.redraw()
   }
 
   useEffect(() => {
     if (myRef.current) {
       setupMapData(data, map, mapCode)
     }
-    // eslint-disable-next-line
-  }, [data, map, mapCode])
+  }, [data, map, mapCode, setupMapData])
 
   return (
     <>
