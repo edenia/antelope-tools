@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@mui/styles'
+import { makeStyles } from '@material-ui/styles'
 import axios from 'axios'
 import clsx from 'clsx'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+
+import { generalConfig } from '../../config'
 
 import MainMap from './MainMap'
 import worldGeoData from './worldGeoData'
@@ -78,7 +80,7 @@ const GeoMap = ({ data }) => {
         ({ country }) => country === mapSelected.toUpperCase()
       )
       const { data: mapRes } = await axios.get(
-        `https://code.highcharts.com/mapdata/countries/${mapSelected}/${mapSelected}-all.geo.json`
+        `${generalConfig.highchartsMapURL}${mapSelected}/${mapSelected}-all.geo.json`
       )
 
       setMapOptions(mapDataSelected)

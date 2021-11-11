@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box'
 import { ALL_NODES_QUERY } from '../gql'
 
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
-const ClusterMap = lazy(() => import('../components/ClusterMap'))
+const GeoMap = lazy(() => import('../components/GeoMap'))
 
 const Nodes = () => {
   const [loadProducers, { loading = true, data: { producers } = {} }] =
@@ -114,7 +114,7 @@ const Nodes = () => {
         onChange={handleOnFiltersChange}
       />
       {loading && <LinearProgress />}
-      {!loading && <ClusterMap data={nodes || []} />}
+      {!loading && <GeoMap data={nodes || []} />}
     </Box>
   )
 }
