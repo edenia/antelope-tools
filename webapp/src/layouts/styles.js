@@ -81,5 +81,8 @@ export default (theme, drawerWidth) => ({
     [theme.breakpoints.up('sm')]: {
       textAlign: 'inherit !important'
     }
+  },
+  marginBottom: {
+    marginBottom: theme.spacing(2)
   }
 })
