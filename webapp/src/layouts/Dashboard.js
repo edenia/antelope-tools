@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import { createGlobalStyle } from 'styled-components'
 import { makeStyles } from '@material-ui/styles'
 import Hidden from '@material-ui/core/Hidden'
@@ -60,9 +61,7 @@ const Dashboard = ({ children, width, ual }) => {
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
-  const [checked, setChecked] = useState(false)
   const isTablet = useMediaQuery('(min-width:767px)')
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
   const [xsSize, setXsSize] = useState(12)
 
   const handleDrawerToggle = () => {
@@ -116,33 +115,21 @@ const Dashboard = ({ children, width, ual }) => {
           <Box className={classes.subHeader}>
             <Box className={classes.boxHeader}>
               <Grid container>
-                <Grid item md={6} lg={4} xs={xsSize}>
+                <Grid item md={6} xs={xsSize}>
                   <Typography
                     variant="h3"
-                    className={classes.textAlignReadMore}
+                    className={clsx(
+                      classes.textAlignReadMore,
+                      classes.marginBottom
+                    )}
                   >
                     {routeName.pathname
                       ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
                       : ''}
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  md={6}
-                  lg={8}
-                  xs={xsSize}
-                  className={classes.boxReadmore}
-                >
-                  <span
-                    style={{ marginLeft: isDesktop ? '-25px' : 0 }}
-                    className={classes.textAlignReadMore}
-                    onClick={() => setChecked(!checked)}
-                  >
-                    {checked ? t('readLess') : t('readMore')}
-                  </span>
-                </Grid>
                 <Grid item md={12} xs={12}>
-                  <Collapse in={checked}>
+                  <Collapse in={true}>
                     <Typography className={classes.textAlignReadMore}>
                       {t(`${location.pathname}>moreDescription`)}
                     </Typography>
