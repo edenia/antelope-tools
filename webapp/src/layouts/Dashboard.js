@@ -13,7 +13,6 @@ import { useLocation } from 'react-router-dom'
 import Collapse from '@material-ui/core/Collapse'
 import Grid from '@material-ui/core/Grid'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useTheme } from '@material-ui/core/styles'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -54,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Dashboard = ({ children, width, ual }) => {
-  const theme = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
   const { t } = useTranslation('routes')
