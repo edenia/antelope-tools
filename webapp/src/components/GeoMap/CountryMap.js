@@ -8,17 +8,20 @@ import NodeCard from '../NodeCard'
 import HighMapsWrapper from './HighMapsWrapper'
 
 const ClusterMap = ({ data, map, mapCode }) => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [pointData, setPointData] = useState({})
   const myRef = useRef()
+  const [openTooltip, setOpenTooltip] = useState(false)
+  const [pointData, setPointData] = useState({
+    vertical: 'center',
+    horizontal: 'center'
+  })
 
-  const handlePopoverOpen = (target, values) => {
+  const handlePopoverOpen = (values) => {
     setPointData(values)
-    setAnchorEl(target)
+    setOpenTooltip(true)
   }
 
   const handlePopoverClose = () => {
-    setAnchorEl(null)
+    setOpenTooltip(false)
   }
 
   const setupMapData = (data, map, mapCode = '') => {
@@ -54,9 +57,11 @@ const ClusterMap = ({ data, map, mapCode }) => {
         series: {
           events: {
             click: function (e) {
-              handlePopoverOpen(e.target, {
+              handlePopoverOpen({
                 node: e.point.node,
-                producer: e.point.producer
+                producer: e.point.producer,
+                horizontal: e.screenX,
+                vertical: e.screenY
               })
             }
           }
@@ -80,7 +85,6 @@ const ClusterMap = ({ data, map, mapCode }) => {
       ]
     }
 
-    // eslint-disable-next-line
     const highMap = new HighMapsWrapper['Map'](myRef.current, options)
     highMap.redraw()
   }
@@ -95,9 +99,13 @@ const ClusterMap = ({ data, map, mapCode }) => {
     <>
       <div ref={myRef} style={{ height: '100vh' }} />
       <Tooltip
-        anchorEl={anchorEl}
-        open={anchorEl !== null}
+        open={openTooltip}
         onClose={handlePopoverClose}
+        anchorEl={null}
+        anchorOrigin={{
+          vertical: pointData.vertical,
+          horizontal: pointData.horizontal
+        }}
       >
         <NodeCard node={pointData?.node} producer={pointData?.producer} />
       </Tooltip>

@@ -25,18 +25,22 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const NodeCard = ({ anchorEl, open, onClose, children }) => {
+const Tooltip = ({
+  anchorEl,
+  anchorOrigin,
+  open,
+  onClose,
+  children,
+  useAnchor
+}) => {
   const classes = useStyles()
+  // const restProps = useAnchor ? { anchorEl } : {}
 
   return (
     <Popover
       open={open}
       onClose={onClose}
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'center',
-        horizontal: 'center'
-      }}
+      anchorOrigin={anchorOrigin}
       transformOrigin={{
         vertical: 'center',
         horizontal: 'center'
@@ -44,6 +48,7 @@ const NodeCard = ({ anchorEl, open, onClose, children }) => {
       classes={{
         paper: classes.paper
       }}
+      anchorEl={anchorEl}
     >
       <Box className={classes.popover}>
         <Box className={classes.popoverClose}>
@@ -55,15 +60,22 @@ const NodeCard = ({ anchorEl, open, onClose, children }) => {
   )
 }
 
-NodeCard.propTypes = {
+Tooltip.propTypes = {
   anchorEl: PropTypes.any,
   open: PropTypes.bool,
   onClose: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  anchorOrigin: PropTypes.object
+  // useAnchor: PropTypes.bool
 }
 
-NodeCard.defaultProps = {
-  onClose: () => {}
+Tooltip.defaultProps = {
+  onClose: () => {},
+  anchorOrigin: {
+    vertical: 'center',
+    horizontal: 'center'
+  },
+  anchorEl: null
 }
 
-export default NodeCard
+export default Tooltip
