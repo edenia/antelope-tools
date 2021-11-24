@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-// import Collapse from '@material-ui/core/Collapse'
 import Grid from '@material-ui/core/Grid'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 

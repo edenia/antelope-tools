@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { makeStyles } from '@material-ui/styles'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
@@ -6,8 +7,12 @@ import Tooltip from '../Tooltip'
 import NodeCard from '../NodeCard'
 
 import HighMapsWrapper from './HighMapsWrapper'
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const ClusterMap = ({ data, map, mapCode }) => {
+  const classes = useStyles()
   const myRef = useRef()
   const [openTooltip, setOpenTooltip] = useState(false)
   const [pointData, setPointData] = useState({
@@ -98,7 +103,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
   return (
     <>
-      <div ref={myRef} style={{ height: '100vh' }} />
+      <div ref={myRef} className={classes.divRef} />
       <Tooltip
         open={openTooltip}
         onClose={handlePopoverClose}

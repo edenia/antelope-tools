@@ -14,7 +14,7 @@
     "/endpoints>title": "API Endpoints - EOS Mainnet Network Dashboard",
     "/about>title": "About - EOS Mainnet Network Dashboard",
     "/help>title": "Help - EOS Mainnet Network Dashboard",
-    "/rewards-distribution>moreDescription": "",
+    "/rewards-distribution>moreDescription": "BP daily rewards distribution by geographic location of paid block producers.",
     "/bpjson>moreDescription": "A visual representation of the network’s current nodes.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "Read more about the Validator Node Agreement of this network. Contact us if you have any inquiries.",
