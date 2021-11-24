@@ -85,6 +85,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
       ]
     }
 
+    // eslint-disable-next-line
     const highMap = new HighMapsWrapper['Map'](myRef.current, options)
     highMap.redraw()
   }
