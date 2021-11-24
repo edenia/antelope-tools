@@ -25,16 +25,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Tooltip = ({
-  anchorEl,
-  anchorOrigin,
-  open,
-  onClose,
-  children,
-  useAnchor
-}) => {
+const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
   const classes = useStyles()
-  // const restProps = useAnchor ? { anchorEl } : {}
 
   return (
     <Popover
@@ -66,7 +58,6 @@ Tooltip.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.node,
   anchorOrigin: PropTypes.object
-  // useAnchor: PropTypes.bool
 }
 
 Tooltip.defaultProps = {
