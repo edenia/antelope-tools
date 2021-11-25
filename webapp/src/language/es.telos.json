@@ -13,7 +13,7 @@
     "/endpoints>title": "URL's - Telos",
     "/about>title": "Acerca de - Panel",
     "/help>title": "Ayuda - Panel",
-    "/rewards-distribution>moreDescription": "Una lista de entidades que forman parte de la red. Pueden ser entidades asociadas o no asociadas.",
+    "/rewards-distribution>moreDescription": "Distribución diaria de recompensas de BP por ubicación geográfica de los productores de bloques pagados.",
     "/bpjson>moreDescription": "Una representación visual de los nodos actuales de la red.",
     "/node-config>moreDescription": "Utilice esta herramienta para obtener archivos de configuración de ejemplo para ayudar a configurar un nuevo nodo en la red.",
     "/ricardian-contract>moreDescription": "Lea más sobre el Acuerdo de nodo de validación de esta red. Contáctenos si tiene alguna consulta.",

@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 import { isWidthUp } from '@material-ui/core/withWidth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import Collapse from '@material-ui/core/Collapse'
 import Grid from '@material-ui/core/Grid'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
@@ -113,7 +112,7 @@ const Dashboard = ({ children, width, ual }) => {
           <Box className={classes.subHeader}>
             <Box className={classes.boxHeader}>
               <Grid container>
-                <Grid item md={6} xs={xsSize}>
+                <Grid item md={12} xs={xsSize}>
                   <Typography
                     variant="h3"
                     className={clsx(
@@ -127,11 +126,9 @@ const Dashboard = ({ children, width, ual }) => {
                   </Typography>
                 </Grid>
                 <Grid item md={12} xs={12}>
-                  <Collapse in={true}>
-                    <Typography className={classes.textAlignReadMore}>
-                      {t(`${location.pathname}>moreDescription`)}
-                    </Typography>
-                  </Collapse>
+                  <Typography className={classes.textAlignReadMore}>
+                    {t(`${location.pathname}>moreDescription`)}
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>

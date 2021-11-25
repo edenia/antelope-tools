@@ -9,5 +9,8 @@ export default (theme) => ({
   goBackBtn: {
     display: 'flex',
     marginLeft: theme.spacing(1)
+  },
+  divRef: {
+    height: '100vh'
   }
 })
