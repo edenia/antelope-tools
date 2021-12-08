@@ -106,7 +106,7 @@ const BPJson = ({ ual }) => {
   }
 
   const handleOnSubmit = async (payload) => {
-    if (!ual.activeUser || !payload.shouldUpdateChain) return
+    if (!ual.activeUser || !payload) return
 
     setLoading(true)
     try {
