@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery, useSubscription } from '@apollo/react-hooks'
+import { useLazyQuery, useSubscription } from '@apollo/client'
 import { makeStyles } from '@material-ui/styles'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'

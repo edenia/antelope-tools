@@ -24,7 +24,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@apollo/react-hooks": "^4.0.0",
+    "@apollo/client": "~3.4.0",
     "@date-io/core": "^2.10.6",
     "@dvsl/zoomcharts": "^1.19.0-1",
     "@eoscostarica/eoscr-components": "^3.5.9",

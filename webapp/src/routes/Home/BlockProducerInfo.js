@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { lazy, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 
 import { formatWithThousandSeparator } from '../../utils'

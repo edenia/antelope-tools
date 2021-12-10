@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'

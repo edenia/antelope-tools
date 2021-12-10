@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'

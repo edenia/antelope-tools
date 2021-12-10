@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import LaunchIcon from '@material-ui/icons/Launch'
-import { useSubscription } from '@apollo/react-hooks'
+import { useSubscription } from '@apollo/client'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../gql'
 import { formatWithThousandSeparator, getBlockNumUrl } from '../utils'

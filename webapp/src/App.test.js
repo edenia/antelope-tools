@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { StylesProvider } from '@material-ui/styles'
 import { ThemeProvider } from 'styled-components'
