@@ -1,4 +1,4 @@
-FROM node:12.16.2-alpine  as build-stage
+FROM node:12.20.0  as build-stage
 
 ARG port
 ARG react_app_title
