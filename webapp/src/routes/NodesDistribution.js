@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, lazy } from 'react'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
 

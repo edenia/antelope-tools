@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'

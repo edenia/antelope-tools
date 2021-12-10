@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
-import { useLazyQuery, useSubscription } from '@apollo/react-hooks'
+import { useLazyQuery, useSubscription } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid'
