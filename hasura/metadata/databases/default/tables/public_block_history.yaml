@@ -1,0 +1,17 @@
+table:
+  name: block_history
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - block_id
+    - block_num
+    - transactions_length
+    - timestamp
+    - created_at
+    - updated_at
+    - producer
+    - schedule_version
+    filter: {}
+  role: guest

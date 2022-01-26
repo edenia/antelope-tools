@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.8'
 services:
   wallet:
     container_name: '${STAGE}-${APP_NAME}-wallet'
@@ -9,7 +9,7 @@ services:
       - ${WALLET_DATA}:/opt/application/data
   postgres:
     container_name: '${STAGE}-${APP_NAME}-postgres'
-    image: postgres:13.3-alpine
+    image: postgres:13.5-alpine
     ports:
       - '5432:5432'
     volumes:
@@ -59,21 +59,29 @@ services:
       HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: '${HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL}'
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
-    image: hasura/graphql-engine:v2.0.0-alpha.11.cli-migrations-v2
+    image: hasura/graphql-engine:v2.1.1.cli-migrations-v3
     ports:
-      - '8585:8080'
+      - '8080:8080'
     volumes:
       - ./hasura/migrations:/hasura-migrations
       - ./hasura/metadata:/hasura-metadata
     environment:
       HASURA_GRAPHQL_DATABASE_URL: '${HASURA_GRAPHQL_DATABASE_URL}'
-      HASURA_GRAPHQL_ENABLE_CONSOLE: '${HASURA_GRAPHQL_ENABLE_CONSOLE}'
-      HASURA_GRAPHQL_ADMIN_SECRET: '${HASURA_GRAPHQL_ADMIN_SECRET}'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: '${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}'
+      HASURA_GRAPHQL_MIGRATIONS_DIR: /migrations
+      HASURA_GRAPHQL_METADATA_DIR: /metadata
+      HASURA_GRAPHQL_SEEDS_DIR: /seeds
       HASURA_GRAPHQL_ACTION_BASE_URL: '${HASURA_GRAPHQL_ACTION_BASE_URL}'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      # Local Development Configurations It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLE_LOGGING: 'true'
+      # disabled security for local development
+      # HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
+      # HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}"
   webapp:
     container_name: '${STAGE}-${APP_NAME}-webapp'
-    image: node:14.2.0
+    image: node:14.18.3
     stdin_open: true
     ports:
       - '3000:3000'
