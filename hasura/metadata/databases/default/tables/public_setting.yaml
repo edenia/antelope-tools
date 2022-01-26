@@ -1,0 +1,10 @@
+table:
+  name: setting
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - token_price
+    filter: {}
+  role: guest

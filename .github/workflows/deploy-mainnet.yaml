@@ -105,7 +105,6 @@ jobs:
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
-          HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
 
       - name: Setup and deploy kubernetes environment

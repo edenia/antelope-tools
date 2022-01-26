@@ -1,0 +1,47 @@
+table:
+  name: producer
+  schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - block_cpu_limit
+    - block_net_limit
+    - block_rewards
+    - bp_json
+    - chain_id
+    - created_at
+    - endpoints
+    - fork_db_head_block_id
+    - fork_db_head_block_num
+    - head_block_id
+    - head_block_num
+    - head_block_producer
+    - head_block_time
+    - health_status
+    - id
+    - is_active
+    - last_claim_time
+    - last_irreversible_block_id
+    - last_irreversible_block_num
+    - location
+    - owner
+    - ping
+    - producer_authority
+    - producer_key
+    - rank
+    - server_full_version_string
+    - server_version
+    - server_version_string
+    - total_rewards
+    - total_votes
+    - total_votes_eos
+    - total_votes_percent
+    - unpaid_blocks
+    - updated_at
+    - url
+    - virtual_block_cpu_limit
+    - virtual_block_net_limit
+    - vote_rewards
+    filter: {}
+  role: guest

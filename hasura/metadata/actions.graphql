@@ -1,67 +1,60 @@
 type Query {
-  block_distribution (
+  block_distribution(
     range: String!
   ): [block_distribution_output]
 }
 
-
 type Query {
-  cpu_benchmark (
+  cpu_benchmark(
     range: String!
   ): [CPUBenchmark]
 }
 
-
 type Query {
-  missed_blocks (
+  missed_blocks(
     range: String!
   ): [MissedBlocks]
 }
 
-
 type Query {
-  producers_summary : [ProducersSummary]
+  producers_summary: [ProducersSummary]
 }
 
-
 type Query {
-  transactions (
+  transactions(
     range: String!
   ): [Transaction]
 }
 
-
-
-
 type block_distribution_output {
-  account : String!
-  blocks : Int!
-  percent : Float
+  account: String!
+  blocks: Int!
+  percent: Float
 }
 
 type MissedBlocks {
-  datetime : String
-  account : String
-  missed : Int
-  produced : Int
-  scheduled : Int
+  datetime: String
+  account: String
+  missed: Int
+  produced: Int
+  scheduled: Int
 }
 
 type CPUBenchmark {
-  datetime : String
-  account : String
-  transactions : Int
-  usage : Float
+  datetime: String
+  account: String
+  transactions: Int
+  usage: Float
 }
 
 type Transaction {
-  datetime : String
-  transactions_count : Int
+  datetime: String
+  transactions_count: Int
 }
 
 type ProducersSummary {
-  type : String
-  entities_count : Int
-  entities : String
+  type: String
+  entities_count: Int
+  entities: String
 }
 

@@ -1,16 +1,15 @@
-FROM hasura/graphql-engine:v2.0.0-alpha.11.cli-migrations-v2
+FROM hasura/graphql-engine:v2.1.1.cli-migrations-v3
 
-ARG hasura_graphql_migrations_dir
-ARG hasura_graphql_metadata_dir
-
-ENV HASURA_GRAPHQL_MIGRATIONS_DIR $hasura_graphql_migrations_dir
-ENV HASURA_GRAPHQL_METADATA_DIR $hasura_graphql_metadata_dir
-ENV PORT_HASURA 8080
-
-EXPOSE $PORT_HASURA
+ENV HASURA_GRAPHQL_MIGRATIONS_DIR /hasura-migrations
+ENV HASURA_GRAPHQL_METADATA_DIR /hasura-metadata
+ENV HASURA_GRAPHQL_SEEDS_DIR  /hasura-seeds
+ENV HASURA_PORT 8080
 
 COPY migrations $HASURA_GRAPHQL_MIGRATIONS_DIR
 COPY metadata $HASURA_GRAPHQL_METADATA_DIR
+COPY seeds $HASURA_GRAPHQL_SEEDS_DIR
+
+EXPOSE $HASURA_PORT
 
 CMD graphql-engine \
   serve \

@@ -16,6 +16,13 @@ run:
 %:
 @:
 
+clean:
+	@docker-compose stop
+	@rm -rf tmp/postgres
+	@rm -rf tmp/hapi
+	@rm -rf tmp/webapp
+	@docker system prune
+
 jungle:
 	@cat ".env.jungle" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
@@ -97,16 +104,16 @@ start-hasura:
 start-hasura-cli:
 	$(eval -include .env)
 	@until \
-		curl http://localhost:8585/healthz; \
+		curl http://localhost:8080/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) ..."; \
 		sleep 5; done;
 	@echo "..."
-	@cd hasura && hasura console --endpoint http://localhost:8585 --skip-update-check --no-browser --admin-secret $(HASURA_GRAPHQL_ADMIN_SECRET);
+	@cd hasura && hasura console --endpoint http://localhost:8080 --skip-update-check --no-browser --admin-secret $(HASURA_GRAPHQL_ADMIN_SECRET);
 
 start-webapp:
 	$(eval -include .env)
 	@until \
-		curl -s -o /dev/null -w 'hasura status %{http_code}\n' http://localhost:8585/healthz; \
+		curl -s -o /dev/null -w 'hasura status %{http_code}\n' http://localhost:8080/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-webapp |$(RESET) waiting for hasura service"; \
 		sleep 5; done;
 	@cd webapp && yarn && yarn start:local | cat

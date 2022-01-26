@@ -1,0 +1,3 @@
+table:
+  name: demux_state
+  schema: public

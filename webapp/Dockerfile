@@ -1,4 +1,4 @@
-FROM node:12.20.0  as build-stage
+FROM node:14.18.3  as build-stage
 
 ARG port
 ARG react_app_title
