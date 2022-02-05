@@ -1,4 +1,4 @@
-# EOSIO Dashboard
+
 <p align="center">
 	<a href="https://eosio.online">
 		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
@@ -8,6 +8,7 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
 
+# EOSIO Dashboard
 Network and Infrastructure Dashboard for EOSIO networks.
 
 ## About the EOSIO Dashboard:
