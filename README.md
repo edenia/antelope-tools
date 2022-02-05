@@ -1,13 +1,18 @@
 # EOSIO Dashboard
+<p align="center">
+	<a href="https://eosio.online">
+		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
+	</a>
+</p>
+<br/>
 
-[![N|Solid](https://github.com/eoscostarica/eos-rate/raw/master/docs/eoscostarica-logo-black.png)](https://eoscostarica.io/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
 
 Network and Infrastructure Dashboard for EOSIO networks.
 
-## About EOSIO Dashboard:
+## About the EOSIO Dashboard:
 
-### What Is EOSIO Dashboard?
+### What is the EOSIO Dashboard?
 
 EOSIO Dashboard is an open-source tool that helps you visualize relevant data about Block Producer nodes and rewards distribution in the EOS network. The EOS network, launched in 2018, is a widely adopted public blockchain network that deploys a delegated proof of stake consensus mechanism. It operates autonomously and leverages a voting system to elect the twenty-one Block Producers that run the network. As a reward, these Block Producers receive EOS tokens.
 
@@ -26,10 +31,6 @@ EOSIO Dashboard enables clear and graphic visualization of relevant information 
 For more information about EOSIO Dashboard, contact us on our Telegram group: https://t.me/eoscr.
 
 ## Quick Guide:
-
-### Version
-
-- 1.0
 
 ### Features!
 
@@ -102,7 +103,7 @@ There are some important folders like
 
 Basic knowledge about Docker, Docker Compose and NodeJS is required.
 
-### Before to start
+### Before you start
 
 Somethings you need before getting started:
 
@@ -112,7 +113,7 @@ Somethings you need before getting started:
 
 ### First time
 
-1.  Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/backend-boilerplate.git <YOUR_PROJECT_NAME>`
+1.  Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`
 2.  Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
 3.  Copy the `.env.example` then update the environment variables according to your needs
 
@@ -186,91 +187,14 @@ At this point you can run `make run`, you can check the services runing on:
 
 - [Create a new release](docs/create-a-release.md)
 
-## License
-
-MIT © [EOS Costa Rica](https://eoscostarica.io)
 
 ## Contributing
 
 Please Read EOS Costa Rica's [Open Source Contributing Guidelines](https://developers.eoscostarica.io/docs/open-source-guidelines).
 
-Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/backend-boilerplate/issues)
+Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/eosio-dashboard/issues/new/choose)
 
-## Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/xavier506">
-        <img src="https://avatars0.githubusercontent.com/u/5632966?v=4" width="100px;" alt="Xavier Fernandez"/>
-        <br />
-        <sub>
-          <b>
-            Xavier Fernandez
-          </b>
-        </sub>
-      </a>
-      <br />
-      🤔📝📢🚇
-    </td>
-    <td align="center">
-      <a href="https://github.com/tetogomez">
-        <img src="https://avatars3.githubusercontent.com/u/10634375?s=460&v=4" width="100px;" alt="Teto Gomez"/>
-        <br />
-        <sub>
-          <b>
-            Teto Gomez
-          </b>
-        </sub>
-      </a>
-      <br />
-      🤔💻👀
-    </td>
-    <td align="center">
-      <a href="https://github.com/adriexnet">
-        <img src="https://avatars3.githubusercontent.com/u/13205620?s=400&u=9adad6d2e42165c184894b9175785d15a903f58b&v=4" width="100px;" alt="Rubén Abarca Navarro"/>
-        <br />
-        <sub>
-          <b>
-            Rubén Abarca Navarro
-          </b>
-        </sub>
-      </a>
-      <br />
-      📃💻😎
-    </td>
-    <td align="center">
-      <a href="https://github.com/adriexnet">
-        <img src="https://avatars3.githubusercontent.com/u/5375168?s=460&u=542a27a00b761d98851991c6a6d5f78d7b35a2b2&v=4" width="100px;" alt="Adriel Diaz"/>
-        <br />
-        <sub>
-          <b>
-            Adriel Diaz
-          </b>
-        </sub>
-      </a>
-      <br />
-      🏡💻❤️
-    </td>
-    <td align="center">
-      <a href="https://github.com/kuronosec">
-        <img src="https://avatars2.githubusercontent.com/u/6999429?s=460&u=adc2cbd3b7c2c8c26cad54ac9784c3f4e278b3cd&v=4" width="100px;" alt="Andres Gomez"/>
-        <br />
-        <sub>
-          <b>
-            Andres Gomez
-          </b>
-        </sub>
-      </a>
-      <br />
-      🚇💻❤️
-    </td>
-  </tr>
-</table>
-
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+Contributions of any kind welcome!
 
 ## About EOS Costa Rica
 
