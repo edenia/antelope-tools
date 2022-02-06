@@ -1,0 +1,31 @@
+{
+  "routes": {
+    "/>title": "Phoenix Testnet Network Dashboard and Infrastructure Monitor",
+    "/cpu-benchmark>title": "CPU Benchmarks  - Phoenix Testnet Network Dashboard",
+    "/block-producers>title": "Block Producers - Phoenix Testnet Network Dashboard",
+    "/rewards-distribution>title": "Rewards Distribution - Phoenix Testnet Network Dashboard",
+    "/nodes>title": "Phoenix Testnet Nodes Status Monitor",
+    "/nodes-distribution>title": "Geographic Distribution of Nodes - Phoenix Testnet Network Dashboard",
+    "/accounts>title": "Accounts and Contracts - Phoenix Testnet Network Dashboard",
+    "/bpjson>title": "BP JSON - Phoenix Testnet Network Dashboard",
+    "/ricardian-contract>title": "BP Agreement - Phoenix Testnet Network Dashboard",
+    "/block-distribution>title": "Block Production Distribution - Phoenix Testnet Network Dashboard",
+    "/missed-blocks>title": "Missed Blocks - Phoenix Testnet Network Dashboard",
+    "/endpoints>title": "API Endpoints - Phoenix Testnet Network Dashboard",
+    "/about>title": "About - Phoenix Testnet Network Dashboard",
+    "/help>title": "Help - Phoenix Testnet Network Dashboard",
+    "/rewards-distribution>moreDescription": "BP daily rewards distribution by geographic location of paid block producers.",
+    "/bpjson>moreDescription": "A visual representation of the network’s current nodes.",
+    "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
+    "/ricardian-contract>moreDescription": "Read more about the Validator Node Agreement of this network. Contact us if you have any inquiries.",
+    "/>moreDescription": "Find data of blockchain networks using EOSIO technology. See more networks here: https://eosio.online/.",
+    "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
+    "/block-producers>moreDescription": "A list of the block producers in the network – blockchain accounts registered to run nodes on the network. It includes information from chain tables and their bp.json files.",
+    "/nodes>moreDescription": "A list of all the nodes run by entities comprising the network with specific information such as endpoints and location.",
+    "/endpoints>moreDescription": "An updated list of public API endpoints provided by node operators in the network.",
+    "/nodes-distribution>moreDescription": "A visualization of the geographic distribution of the nodes in this network.",
+    "/accounts>moreDescription": "This tool helps you seek information about network accounts and contracts. Type the name of a contract or account in the space provided to start searching. You’ll obtain the data of the contract actions, contract tables, scope, lower and upper bounds, and limits.",
+    "/block-distribution>moreDescription": "A visualization of the distribution of blocks produced by the nodes in the network.",
+    "/missed-blocks>moreDescription": "A list of scheduled, produced, and missed blocks by each account in the network."
+  }
+}
