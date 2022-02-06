@@ -7,6 +7,8 @@ import enLacchain from './en.lacchain.json'
 import esLacchain from './es.lacchain.json'
 import enTelosTestnet from './en.telos-testnet.json'
 import esTelosTestnet from './es.telos-testnet.json'
+import enPhoenixTestnet from './en.phoenix-testnet.json'
+import esPhoenixTestnet from './es.phoenix-testnet.json'
 import enTelos from './en.telos.json'
 import esTelos from './es.telos.json'
 import enJungle from './en.jungle.json'
@@ -39,6 +41,8 @@ const languajes = {
   'en.mainnet': enMainnet,
   'es.telos-testnet': esTelosTestnet,
   'en.telos-testnet': enTelosTestnet,
+  'es.phoenix-testnet': esPhoenixTestnet,
+  'en.phoenix-testnet': enPhoenixTestnet,
   'es.proton-testnet': esProtonTestnet,
   'en.proton-testnet': enProtonTestnet,
   'es.wax-testnet': esWaxTestnet,
