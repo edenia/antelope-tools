@@ -73,7 +73,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: libre-testnet-dashboard
+          NAMESPACE: phoenix-testnet-dashboard
           INGRESS_HOST: phoenix-testnet.eosio.online
           INGRESS_GRAPHQL_HOST: graphql-phoenix-testnet.eosio.online
           # webapp
@@ -106,7 +106,7 @@ jobs:
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
           HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=btc&vs_currencies=usd'
           HAPI_COINGECKO_API_TOKEN_ID: BTC
-          HAPI_REWARDS_TOKEN: LIBRE
+          HAPI_REWARDS_TOKEN: phoenix
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
@@ -118,7 +118,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: libre-testnet-dashboard
+          NAMESPACE: phoenix-testnet-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
