@@ -157,7 +157,7 @@ HAPI_SYNC_PRODUCER_INFO_INTERVAL=1
 
 #webapp
 PORT=3000
-REACT_APP_TITLE="EOS Jungle Testnet Network Dashboard"
+REACT_APP_TITLE="EOS Jungle4 Testnet Network Dashboard"
 REACT_APP_DEFAULT_PRODUCER_LOGO=https://bloks.io/img/eosio.png
 REACT_APP_FOOTER_LINKS=[]
 REACT_APP_EOS_RATE_LINK=https://jungle.eosrate.io:8080
