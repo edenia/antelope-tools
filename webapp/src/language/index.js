@@ -23,6 +23,8 @@ import enWaxTestnet from './en.wax-testnet.json'
 import esWaxTestnet from './es.wax-testnet.json'
 import enWax from './en.wax.json'
 import esWax from './es.wax.json'
+import enAirwire from './en.airwire.json'
+import esAirwire from './es.airwire.json'
 
 const languajes = {
   es,
@@ -46,7 +48,9 @@ const languajes = {
   'es.proton-testnet': esProtonTestnet,
   'en.proton-testnet': enProtonTestnet,
   'es.wax-testnet': esWaxTestnet,
-  'en.wax-testnet': enWaxTestnet
+  'en.wax-testnet': enWaxTestnet,
+  'es.airwire': esAirwire,
+  'en.airwire': enAirwire
 }
 
 const getLanguaje = (languaje) => {
