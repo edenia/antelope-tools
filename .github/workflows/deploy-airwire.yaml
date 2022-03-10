@@ -38,14 +38,14 @@ jobs:
           PORT: '80'
           REACT_APP_TITLE: 'Airwire Network Dashboard'
           REACT_APP_TAG: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://airwire-explorer.eosio.cr" },{"text": "Airwire Network Monitor","src": "https://airwire.eosio.online"}]'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.airwire.io/ipfs/QmYcehEf8MEfdgVVrrJrkTy521w51Vpkhgd86gr5VTQv5y'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://explorer.airwire.io" },{"text": "Airwire Network Monitor","src": "https://dashboard.airwire.io"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-airwire.eosio.online/v1/graphql'
+          REACT_APP_HASURA_URL: 'https://graphql-dashboard.airwire.io/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
@@ -74,8 +74,8 @@ jobs:
         env:
           # general
           NAMESPACE: airwire-dashboard
-          INGRESS_HOST: airwire.eosio.online
-          INGRESS_GRAPHQL_HOST: graphql-airwire.eosio.online
+          INGRESS_HOST: dashboard.airwire.io
+          INGRESS_GRAPHQL_HOST: graphql-dashboard.airwire.io
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: airwire
           # postgres
