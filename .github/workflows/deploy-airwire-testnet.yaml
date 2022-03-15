@@ -1,14 +1,14 @@
-name: Build images for airwire mainnet environment
+name: Build images for airwire testnet environment
 
 on:
   push:
     tags:
-      - airwire-v*
+      - airwire-testnet-v*
 
 jobs:
   create-airwire-image:
     runs-on: ubuntu-latest
-    environment: airwire
+    environment: airwire-testnet
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2.4.0
@@ -36,23 +36,23 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: '80'
-          REACT_APP_TITLE: 'Airwire Network Dashboard'
+          REACT_APP_TITLE: 'Airwire Testnet Dashboard'
           REACT_APP_TAG: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://explorer.airwire.io" },{"text": "Airwire Testnet Dashboard","src": "https://testnet-dashboard.airwire.io"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://testnet-explorer.airwire.io" },{"text": "Airwire Mainnet Dashboard","src": "https://dashboard.airwire.io"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-dashboard.airwire.io/v1/graphql'
-          REACT_APP_EOS_API_NETWORK_NAME: 'airwire'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire'
+          REACT_APP_EOS_API_NETWORK_NAME: 'airwire-testnet'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
-          REACT_APP_EOS_API_HOST: 'airwire.eosio.cr'
+          REACT_APP_EOS_API_HOST: 'airwire-testnet.eosio.cr'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
-          REACT_APP_EOS_CHAIN_ID: 'de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0'
+          REACT_APP_EOS_CHAIN_ID: 'a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
@@ -62,7 +62,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ''
           REACT_APP_NETWORK_URL: '[{"label":"Airwire Mainnet","value":"https://dashboard.airwire.io","mainnet":true,"pair":"airwire","icon":"airwire","order":1},{"label":"Airwire Testnet","value":"https://testnet-dashbaord.airwire.io","mainnet":false,"pair":"airwire","icon":"airwire","order":1}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/cpu-benchmark"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://explorer.airwire.io/transaction/(transaction)'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://testnet-explorer.airwire.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
 
@@ -74,18 +74,18 @@ jobs:
         env:
           # general
           NAMESPACE: airwire-dashboard
-          INGRESS_HOST: dashboard.airwire.io
-          INGRESS_GRAPHQL_HOST: graphql-dashboard.airwire.io
+          INGRESS_HOST: testnet-dashboard.airwire.io
+          INGRESS_GRAPHQL_HOST: graphql-testnet-dashboard.airwire.io
           # webapp
-          REACT_APP_EOS_API_NETWORK_NAME: airwire
+          REACT_APP_EOS_API_NETWORK_NAME: airwire-testnet
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://airwire.eosio.cr
-          HAPI_EOS_API_CHAIN_ID: de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0
+          HAPI_EOS_API_ENDPOINT: https://airwire-testnet.eosio.cr
+          HAPI_EOS_API_CHAIN_ID: a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
@@ -118,7 +118,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: airwire-dashboard
+          NAMESPACE: airwire-testnet-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
