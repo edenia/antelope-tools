@@ -13,6 +13,7 @@ import lacchainImg from '../../assets/lacchain.png'
 import telosImg from '../../assets/telos.png'
 import protonImg from '../../assets/proton.png'
 import eosImg from '../../assets/eos.png'
+import airwireImg from '../../assets/airwire.png'
 
 import styles from './styles'
 
@@ -38,6 +39,9 @@ const LogoSvg = ({ name }) => {
 
     case 'proton':
       return <img src={protonImg} alt="proton" className={classes.protonImg} />
+
+    case 'airwire':
+      return <img src={airwireImg} alt="airwire" className={classes.airwireImg} />
 
     default:
       return <img src={eosImg} alt="eos" className={classes.eosImg} />
