@@ -60,7 +60,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_TOKEN_SYMBOL: ''
-          REACT_APP_NETWORK_URL: '[{"label":"Airwire Mainnet","value":"https://dashboard.airwire.io","mainnet":true,"pair":"airwire","icon":"airwire","order":1},{"label":"Airwire Testnet","value":"https://testnet-dashbaord.airwire.io","mainnet":false,"pair":"airwire","icon":"airwire","order":1}]'
+          REACT_APP_NETWORK_URL: '[{"label":"Airwire Mainnet","value":"https://dashboard.airwire.io","mainnet":true,"pair":"airwire","icon":"airwire","order":1},{"label":"Airwire Testnet","value":"https://testnet-dashboard.airwire.io","mainnet":false,"pair":"airwire","icon":"airwire","order":1}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/cpu-benchmark"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://testnet-explorer.airwire.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
