@@ -11,7 +11,6 @@ import {
 
 import { generalConfig } from '../../config'
 
-import EosLogo from './eosLogo'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -44,13 +43,17 @@ const Footer = () => {
                 An open source project by
               </Typography>
               <Box className={classes.footerBoxLink}>
-                <EosLogo />
+                <img
+                  alt="edenia"
+                  src="/edenia.png"
+                  className={classes.footerImg}
+                />
                 <a
-                  href="https://eoscostarica.io/"
+                  href="https://edenia.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  EOS Costa Rica
+                  Edenia
                 </a>
               </Box>
             </Grid>

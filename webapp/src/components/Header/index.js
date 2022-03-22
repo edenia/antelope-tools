@@ -160,6 +160,7 @@ UserMenu.propTypes = {
 
 const Header = ({ ual, onDrawerToggle }) => {
   const theme = useTheme()
+  const classes = useStyles()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
@@ -181,8 +182,9 @@ const Header = ({ ual, onDrawerToggle }) => {
               </Grid>
               <Grid item md={3} xs={4}>
                 <img
-                  style={{ width: '90px', marginLeft: '15px' }}
+                  className={classes.imgHeaderLogo}
                   src={'/eosio-dashboard.svg'}
+                  alt="eosio dashboard"
                 />
               </Grid>
             </>

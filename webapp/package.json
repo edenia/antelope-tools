@@ -4,7 +4,7 @@
   "description": "EOSIO Dashboard WebApp",
   "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "react-app-rewired --openssl-legacy-provider start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "lint": "lint-staged",

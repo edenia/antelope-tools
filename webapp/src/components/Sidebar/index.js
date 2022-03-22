@@ -21,6 +21,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import routes from '../../routes'
+import { eosConfig } from '../../config'
 
 import styles from './styles'
 
@@ -53,14 +54,25 @@ ExternalLink.propTypes = {
   className: PropTypes.string
 }
 
-const DashboardIcon = () => (
-  <img
-    alt="EOS Costa Rica - Open Source Projects"
-    src="/eosio-dashboard.svg"
-    width="200px"
-    height="100px"
-  />
-)
+const DashboardIcon = ({ className }) => {
+  if (eosConfig.networkName === 'airwire') {
+    return (
+      <img
+        alt="EOS Costa Rica - Open Source Projects"
+        src="/airware.webp"
+        className={className.airWareIcon}
+      />
+    )
+  }
+
+  return (
+    <img
+      alt="EOS Costa Rica - Open Source Projects"
+      src="/eosio-dashboard.svg"
+      className={className.brandIcon}
+    />
+  )
+}
 
 const Category = styled(MuiListItem)`
   padding-top: ${(props) => props.theme.spacing(3)}px;
@@ -220,7 +232,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   return (
     <MuiDrawer variant="permanent" className={classesStyle.drawer} {...rest}>
       <Box className={classesStyle.brand}>
-        <DashboardIcon className={classesStyle.brandIcon} />
+        <DashboardIcon className={classesStyle} />
       </Box>
       <PerfectScrollbar className={classesStyle.scrollbar}>
         <MuiList className={classesStyle.list} disablePadding>

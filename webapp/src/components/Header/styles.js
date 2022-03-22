@@ -5,5 +5,6 @@ export default () => ({
   },
   btnLanguage: {
     fontWeight: '600 !important'
-  }
+  },
+  imgHeaderLogo: { width: '90px', marginLeft: '15px' }
 })
