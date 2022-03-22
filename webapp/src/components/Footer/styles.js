@@ -52,13 +52,14 @@ export default (theme) => ({
       letterSpacing: '0.1px',
       textDecoration: 'none',
       marginTop: 3
-    },
-    '& svg': {
-      marginRight: theme.spacing(1)
     }
   },
   gridFooter: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  footerImg: {
+    width: 24,
+    marginRight: theme.spacing(1)
   }
 })

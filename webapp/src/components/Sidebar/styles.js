@@ -37,8 +37,13 @@ export default (theme, rgba) => ({
     }
   },
   brandIcon: {
-    marginRight: theme.spacing(2),
-    color: theme.sidebar.header.brand.color
+    width: 200,
+    height: 100
+  },
+  airWareIcon: {
+    width: 200,
+    height: 50,
+    margin: '25px 0'
   },
   categoryText: {
     margin: 0,
