@@ -45,7 +45,7 @@ jobs:
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'true'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-dashboard.airwire.io/v1/graphql'
+          REACT_APP_HASURA_URL: 'https://graphql-testnet-dashboard.airwire.io/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
