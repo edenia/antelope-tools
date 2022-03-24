@@ -43,7 +43,7 @@ jobs:
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
-          REACT_APP_USE_CPU_BENCHMARK: 'false'
+          REACT_APP_USE_CPU_BENCHMARK: 'true'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-dashboard.airwire.io/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire-testnet'
@@ -55,7 +55,7 @@ jobs:
           REACT_APP_EOS_CHAIN_ID: 'a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
-          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'true'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
@@ -84,14 +84,17 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://airwire-testnet.eosio.cr
+          HAPI_EOS_API_ENDPOINT: https://airwire-testnet.eosio.cr,
+          HAPI_EOS_API_NETWORK_NAME: "airwire-testnet",
           HAPI_EOS_API_CHAIN_ID: a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
-          HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
+          HAPI_EOS_MECHANICS_ACCOUNT: 'cpumechanics'
+          HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION: ''
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://api-node.airwire-testnet:8080'
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
-          HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
+          HAPI_EOS_BP_JSON_ON_CHAIN: 'true'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
@@ -104,6 +107,7 @@ jobs:
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
+          HAPI_SYNC_STATS_INTERVAL: ''
           HAPI_EOS_EXCHANGE_RATE_API: ''
           HAPI_COINGECKO_API_TOKEN_ID: ''
           HAPI_REWARDS_TOKEN: ''
