@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import PropTypes from 'prop-types'
 import axios from 'axios'
@@ -22,7 +22,7 @@ const GeoMap = ({ data }) => {
   const [mapSelected, setMapSelected] = useState()
   const [mapGeoData, setMapGeoData] = useState()
 
-  const getDataSeries = () => {
+  const getDataSeries = useCallback(() => {
     return data.reduce(
       (acc, curr, index) => {
         if (!acc.current) {
@@ -57,7 +57,7 @@ const GeoMap = ({ data }) => {
       },
       { current: null, nodesSeries: [] }
     )
-  }
+  }, [data])
 
   const handleGoBack = () => {
     const dataSeries = getDataSeries()
@@ -71,7 +71,7 @@ const GeoMap = ({ data }) => {
     const dataSeries = getDataSeries()
 
     setMapOptions(dataSeries.nodesSeries)
-  }, [data])
+  }, [data, getDataSeries])
 
   useEffect(() => {
     if (!mapSelected) return

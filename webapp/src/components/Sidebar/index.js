@@ -55,7 +55,7 @@ ExternalLink.propTypes = {
 }
 
 const DashboardIcon = ({ className }) => {
-  if (eosConfig.networkName === 'airwire') {
+  if (eosConfig.networkName.toLowerCase().includes('airwire')) {
     return (
       <img
         alt="EOS Costa Rica - Open Source Projects"

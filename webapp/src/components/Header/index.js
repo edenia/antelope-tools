@@ -182,9 +182,9 @@ const Header = ({ ual, onDrawerToggle }) => {
               </Grid>
               <Grid item md={3} xs={4}>
                 <img
+                  alt="eosio dashboard"
                   className={classes.imgHeaderLogo}
                   src={'/eosio-dashboard.svg'}
-                  alt="eosio dashboard"
                 />
               </Grid>
             </>
