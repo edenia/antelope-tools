@@ -55,15 +55,15 @@ jobs:
           REACT_APP_EOS_CHAIN_ID: 'de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
-          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'true'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_TOKEN_SYMBOL: ''
           REACT_APP_NETWORK_URL: '[{"label":"Airwire Mainnet","value":"https://dashboard.airwire.io","mainnet":true,"pair":"airwire","icon":"airwire","order":1},{"label":"Airwire Testnet","value":"https://testnet-dashboard.airwire.io","mainnet":false,"pair":"airwire","icon":"airwire","order":1}]'
-          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/cpu-benchmark"]'
+          REACT_APP_DISABLED_MENU_ITEMS: '["/rewards-distribution","/missed-blocks","/block-distribution","/cpu-benchmark"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://explorer.airwire.io/transaction/(transaction)'
-          REACT_APP_STATE_HISTORY_ENABLED: 'false'
+          REACT_APP_STATE_HISTORY_ENABLED: 'true'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
 
       - name: Build and deploy kubernetes files
@@ -88,10 +88,12 @@ jobs:
           HAPI_EOS_API_CHAIN_ID: de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
-          HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
+          HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION: ''
+          HAPI_EOS_MECHANICS_ACCOUNT: cpumechanics
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://api-node.airwire:8080'
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
-          HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
+          HAPI_EOS_BP_JSON_ON_CHAIN: 'true'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
           HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
           HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
@@ -104,6 +106,7 @@ jobs:
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
+          HAPI_SYNC_STATS_INTERVAL: ''
           HAPI_EOS_EXCHANGE_RATE_API: ''
           HAPI_COINGECKO_API_TOKEN_ID: ''
           HAPI_REWARDS_TOKEN: ''
