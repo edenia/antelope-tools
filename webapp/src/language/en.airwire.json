@@ -18,7 +18,7 @@
     "/bpjson>moreDescription": "A visual representation of the network’s current nodes.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "Read more about the Validator Node Agreement of this network. Contact us if you have any inquiries.",
-    "/>moreDescription": "Find data of blockchain networks using EOSIO technology. See more networks here: https://eosio.online/.",
+    "/>moreDescription": "Find information on the Airwire Mainnet and its current status.",
     "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
     "/block-producers>moreDescription": "A list of the block producers in the network – blockchain accounts registered to run nodes on the network. It includes information from chain tables and their bp.json files.",
     "/nodes>moreDescription": "A list of all the nodes run by entities comprising the network with specific information such as endpoints and location.",
