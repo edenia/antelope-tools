@@ -27,6 +27,8 @@ import enAirwire from './en.airwire.json'
 import esAirwire from './es.airwire.json'
 import enAirwireTestnet from './en.airwire-testnet.json'
 import esAirwireTestnet from './es.airwire-testnet.json'
+import enUltraTestnet from './en.ultra-testnet.json'
+import esUltraTestnet from './es.ultra-testnet.json'
 
 const languajes = {
   es,
@@ -54,7 +56,9 @@ const languajes = {
   'es.airwire': esAirwire,
   'en.airwire': enAirwire,
   'es.airwire-testnet': esAirwireTestnet,
-  'en.airwire-testnet': enAirwireTestnet
+  'en.airwire-testnet': enAirwireTestnet,
+  'es.ultra-testnet': esUltraTestnet,
+  'en.ultra-testnet': enUltraTestnet
 }
 
 const getLanguaje = (languaje) => {
