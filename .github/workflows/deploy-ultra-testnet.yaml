@@ -73,9 +73,9 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: ultra-dashboard
-          INGRESS_HOST: testnet-dashboard.ultra.io
-          INGRESS_GRAPHQL_HOST: graphql-testnet-dashboard.ultra.io
+          NAMESPACE: ultra-testnet-dashboard
+          INGRESS_HOST: ultra-testnet.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-ultra-testnet.eosio.online
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: ultra-testnet
           # postgres
