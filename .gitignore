@@ -2,6 +2,7 @@
 !.env.example
 !.env.local
 !.env.telostestnet
+!.env.ultratestnet
 db_data
 wallet_data
 certificates
