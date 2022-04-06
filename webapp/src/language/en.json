@@ -62,6 +62,9 @@
     "/bpjson>sidebar": "BP.json Generator",
     "/bpjson>title": "BP JSON Generator - EOSIO Network Dashboard",
     "/bpjson>heading": "BP.json Generator",
+    "/faucet>sidebar": "Faucet",
+    "/faucet>title": "Faucet - EOSIO Network Dashboard",
+    "/faucet>heading": "Faucet Account and Tokens Manager",
     "/ricardian-contract>sidebar": "BP Agreement",
     "/ricardian-contract>title": "BP Agreement - EOSIO Network Dashboard",
     "/ricardian-contract>heading": "",
@@ -158,6 +161,12 @@
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool."
+  },
+  "faucetRoute": {
+    "createAccount": "Create Faucet Account",
+    "createButton": "Create",
+    "issueTokens": "Issue Tokens",
+    "getUOS": "Get Tokens"
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"

@@ -36,6 +36,8 @@ services:
       HAPI_EOS_API_CHAIN_ID: '${HAPI_EOS_API_CHAIN_ID}'
       HAPI_EOS_BASE_ACCOUNT: '${HAPI_EOS_BASE_ACCOUNT}'
       HAPI_EOS_BASE_ACCOUNT_PASSWORD: '${HAPI_EOS_BASE_ACCOUNT_PASSWORD}'
+      HAPI_EOS_FAUCET_ACCOUNT: '${HAPI_EOS_FAUCET_ACCOUNT}'
+      HAPI_EOS_FAUCET_ACCOUNT_PASSWORD: '${HAPI_EOS_FAUCET_ACCOUNT_PASSWORD}'
       HAPI_EOS_MECHANICS_ACCOUNT: '${HAPI_EOS_MECHANICS_ACCOUNT}'
       HAPI_EOS_MECHANICS_PASSWORD: '${HAPI_EOS_MECHANICS_PASSWORD}'
       HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION: '${HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION}'
@@ -63,8 +65,8 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./hasura/migrations:/hasura-migrations
-      - ./hasura/metadata:/hasura-metadata
+      - ./hasura/migrations:/migrations
+      - ./hasura/metadata:/metadata
     environment:
       HASURA_GRAPHQL_DATABASE_URL: '${HASURA_GRAPHQL_DATABASE_URL}'
       HASURA_GRAPHQL_MIGRATIONS_DIR: /migrations

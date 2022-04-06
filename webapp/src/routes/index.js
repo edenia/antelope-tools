@@ -11,7 +11,8 @@ import {
   GitMerge as GitMergeIcon,
   GitHub as GitHubIcon,
   Send as TelegramIcon,
-  Inbox as InboxIcon
+  Inbox as InboxIcon,
+  Cpu as CpuIcon
 } from 'react-feather'
 
 import { eosConfig, generalConfig } from '../config'
@@ -34,6 +35,7 @@ const Nodes = lazy(() => import('./Nodes'))
 const NodesDistribution = lazy(() => import('./NodesDistribution'))
 const Accounts = lazy(() => import('./Accounts'))
 const BPJson = lazy(() => import('./BPJson'))
+const Faucet = lazy(() => import('./Faucet'))
 const RicardianContract = lazy(() => import('./RicardianContract'))
 const About = lazy(() => import('./About'))
 const Help = lazy(() => import('./Help'))
@@ -129,6 +131,13 @@ const defaultRoutes = [
     icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
+    exact: true
+  },
+  {
+    name: 'faucet',
+    icon: <CpuIcon />,
+    component: Faucet,
+    path: '/faucet',
     exact: true
   }
 ]
