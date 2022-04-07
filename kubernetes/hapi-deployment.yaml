@@ -27,3 +27,11 @@ spec:
             name: dashboard-hapi-config
         ports:
         - containerPort: 9090
+        volumeMounts:
+          - name: googlecreds
+            mountPath: /app/google-credentials.json
+            subPath: file-from-cfgmap
+      volumes:
+      - name: googlecreds
+        configMap:
+          name: hapi-googlecreds
