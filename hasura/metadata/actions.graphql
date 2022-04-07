@@ -10,6 +10,13 @@ type Query {
   ): [CPUBenchmark]
 }
 
+type Mutation {
+  createAccount(
+    token: String!
+    public_key: String!
+  ): CreateAccountOutput
+}
+
 type Query {
   missed_blocks(
     range: String!
@@ -24,6 +31,13 @@ type Query {
   transactions(
     range: String!
   ): [Transaction]
+}
+
+type Mutation {
+  transferFaucetTokens(
+    token: String!
+    to: String!
+  ): TransferFaucetTokensOutput
 }
 
 type block_distribution_output {
@@ -56,5 +70,13 @@ type ProducersSummary {
   type: String
   entities_count: Int
   entities: String
+}
+
+type CreateAccountOutput {
+  account: String!
+}
+
+type TransferFaucetTokensOutput {
+  tx: String!
 }
 

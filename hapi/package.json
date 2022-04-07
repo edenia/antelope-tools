@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^2.5.0",
     "@hapi/boom": "^9.0.0",
     "@hapi/hapi": "^19.1.1",
     "@hapi/joi": "^17.1.0",

@@ -65,6 +65,7 @@ jobs:
           REACT_APP_BLOCK_EXPLORER_URL: 'https://proton-test.bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
+          REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files

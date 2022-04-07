@@ -71,6 +71,7 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-ga": "^3.3.0",
+    "react-google-recaptcha-v3": "^1.9.7",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.7.0",
     "react-perfect-scrollbar": "^1.5.8",

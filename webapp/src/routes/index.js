@@ -11,7 +11,8 @@ import {
   GitMerge as GitMergeIcon,
   GitHub as GitHubIcon,
   Send as TelegramIcon,
-  Inbox as InboxIcon
+  Inbox as InboxIcon,
+  Cpu as CpuIcon
 } from 'react-feather'
 
 import { eosConfig, generalConfig } from '../config'
@@ -34,6 +35,7 @@ const Nodes = lazy(() => import('./Nodes'))
 const NodesDistribution = lazy(() => import('./NodesDistribution'))
 const Accounts = lazy(() => import('./Accounts'))
 const BPJson = lazy(() => import('./BPJson'))
+const Faucet = lazy(() => import('./Faucet'))
 const RicardianContract = lazy(() => import('./RicardianContract'))
 const About = lazy(() => import('./About'))
 const Help = lazy(() => import('./Help'))
@@ -227,6 +229,15 @@ const lacchainRoutes = [
     exact: true
   }
 ]
+const ultraRoutes = [
+  {
+    name: 'faucet',
+    icon: <CpuIcon />,
+    component: Faucet,
+    path: '/faucet',
+    exact: true
+  }
+]
 const helpRoutes = [
   {
     header: 'docs',
@@ -271,6 +282,9 @@ let routes = []
 switch (eosConfig.networkName) {
   case 'lacchain':
     routes = [...lacchainRoutes, ...helpRoutes]
+    break
+  case 'ultra-testnet':
+    routes = [...defaultRoutes, ...ultraRoutes, ...helpRoutes]
     break
   default:
     routes = [...defaultRoutes, ...helpRoutes]

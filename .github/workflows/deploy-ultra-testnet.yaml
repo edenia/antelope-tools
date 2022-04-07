@@ -65,6 +65,7 @@ jobs:
           REACT_APP_BLOCK_EXPLORER_URL: 'https://explorer.testnet.ultra.io/tx/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
+          REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
@@ -89,6 +90,8 @@ jobs:
           HAPI_EOS_API_CHAIN_ID: 7fc56be645bb76ab9d747b53089f132dcb7681db06f0852cfa03eaf6f7ac80e9
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
+          HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
+          HAPI_EOS_FAUCET_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: cpumechanics
           HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION: ''
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
@@ -107,6 +110,9 @@ jobs:
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          HAPI_RE_CAPTCHA_PROJECT_ID: 'eosio-dashboard'
+          HAPI_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.HAPI_PUBLIC_RE_CAPTCHA_KEY }}
           HAPI_SYNC_STATS_INTERVAL: ''
           HAPI_EOS_EXCHANGE_RATE_API: ''
           HAPI_COINGECKO_API_TOKEN_ID: ''

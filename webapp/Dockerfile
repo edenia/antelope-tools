@@ -28,6 +28,7 @@ ARG react_app_block_explorer_url
 ARG react_app_tag
 ARG react_app_state_history_enabled
 ARG react_app_google_analitic_page_id
+ARG react_app_public_re_captcha_key
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -61,6 +62,7 @@ ENV REACT_APP_BLOCK_EXPLORER_URL $react_app_block_explorer_url
 ENV REACT_APP_TAG $react_app_tag
 ENV REACT_APP_STATE_HISTORY_ENABLED $react_app_state_history_enabled
 ENV REACT_APP_GOOGLE_ANALITIC_PAGE_ID $react_app_google_analitic_page_id
+ENV REACT_APP_PUBLIC_RE_CAPTCHA_KEY $react_app_public_re_captcha_key
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR

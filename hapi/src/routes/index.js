@@ -4,6 +4,8 @@ const cpuBenchmarkRoute = require('./cpu-benchmark.route')
 const missedBlocksRoute = require('./missed-blocks.route')
 const producersSummaryRoute = require('./producers-summary.route')
 const transactionsRoute = require('./transactions.route')
+const createFaucetAccountRoute = require('./create-faucet-account.route')
+const transferFaucetTokensRoute = require('./transfer-faucet-tokens.route')
 
 module.exports = [
   healthzRoute,
@@ -11,5 +13,7 @@ module.exports = [
   cpuBenchmarkRoute,
   missedBlocksRoute,
   producersSummaryRoute,
-  transactionsRoute
+  transactionsRoute,
+  createFaucetAccountRoute,
+  transferFaucetTokensRoute
 ]

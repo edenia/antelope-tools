@@ -1,12 +1,15 @@
 import React, { Suspense } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { SharedStateProvider } from './context/state.context'
 import { SnackbarMessageProvider } from './context/snackbar-message.context'
 import routes from './routes'
 import Loader from './components/Loader'
 import DashboardLayout from './layouts/Dashboard'
+
+import { recaptchaConfig } from './config'
 
 const App = ({ ual = {} }) => {
   const renderRoutes = ({ children, component, ...props }, index) => {
@@ -39,15 +42,20 @@ const App = ({ ual = {} }) => {
     <SharedStateProvider>
       <SnackbarMessageProvider>
         <BrowserRouter>
-          <DashboardLayout ual={ual}>
-            <Suspense fallback={<Loader />}>
-              <Switch>
-                {routes
-                  .filter((route) => !route?.path?.includes('http'))
-                  .map(renderRoutes)}
-              </Switch>
-            </Suspense>
-          </DashboardLayout>
+          <GoogleReCaptchaProvider
+            reCaptchaKey={recaptchaConfig.key}
+            useEnterprise={true}
+          >
+            <DashboardLayout ual={ual}>
+              <Suspense fallback={<Loader />}>
+                <Switch>
+                  {routes
+                    .filter((route) => !route?.path?.includes('http'))
+                    .map(renderRoutes)}
+                </Switch>
+              </Suspense>
+            </DashboardLayout>
+          </GoogleReCaptchaProvider>
         </BrowserRouter>
       </SnackbarMessageProvider>
     </SharedStateProvider>
