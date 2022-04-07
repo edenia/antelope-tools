@@ -47,8 +47,7 @@ kind: ConfigMap
 metadata:
   name: hapi-googlecreds
 data:
-  file-from-cfgmap: |
-  '${GOOGLE_CREDENTIALS_JSON}'
+  file-from-cfgmap: '${GOOGLE_CREDENTIALS_JSON}'
 ---
 apiVersion: v1
 kind: ConfigMap
