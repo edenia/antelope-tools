@@ -36,7 +36,6 @@ type Query {
 type Mutation {
   transferFaucetTokens(
     token: String!
-    faucet: String!
     to: String!
   ): TransferFaucetTokensOutput
 }

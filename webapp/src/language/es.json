@@ -164,6 +164,14 @@
     "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta."
   },
+  "faucetRoute": {
+    "createAccount": "Crear Cuenta Faucet",
+    "newCreatedAccount": "Su nueva cuenta es",
+    "transferTokensTransaction": "Tokens transferidos correctamente. Puede revisar la transacción aquí",
+    "createButton": "Crear",
+    "issueTokens": "Emitir Tokens",
+    "getUOS": "Obtener Tokens"
+  },
   "ricardianContractRoute": {
     "title": "Acuerdo de Productor de Bloques"
   },

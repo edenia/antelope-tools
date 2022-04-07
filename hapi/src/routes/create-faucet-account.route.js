@@ -12,79 +12,80 @@ module.exports = {
   method: 'POST',
   path: '/create-faucet-account',
   handler: async ({ payload: { input } }) => {
-    // VALIDATE TOKEN
     try {
-      const tokenProbability = await googleRecaptchaEnterpriseUtil.isRecaptchaTokenValid(
+      const isValidToken = await googleRecaptchaEnterpriseUtil.isRecaptchaTokenValid(
         input.token
       )
-      console.log('TOKEN-PROBABILITY', tokenProbability)
-      // await eosUtil.transact(
-      //   [
-      //     {
-      //       authorization: [
-      //         {
-      //           actor: eosConfig.faucet.account,
-      //           permission: 'active'
-      //         }
-      //       ],
-      //       account: 'eosio',
-      //       name: 'newnonebact',
-      //       data: {
-      //         creator: eosConfig.faucet.account,
-      //         owner: {
-      //           threshold: 1,
-      //           keys: [
-      //             {
-      //               key: input.public_key,
-      //               weight: 1
-      //             }
-      //           ],
-      //           accounts: [],
-      //           waits: []
-      //         },
-      //         active: {
-      //           threshold: 1,
-      //           keys: [
-      //             {
-      //               key: input.public_key,
-      //               weight: 1
-      //             }
-      //           ],
-      //           accounts: [],
-      //           waits: []
-      //         },
-      //         max_payment: '500.00000000 UOS'
-      //       }
-      //     }
-      //   ],
-      //   eosConfig.faucet.account,
-      //   eosConfig.faucet.password
-      // )
 
-      // const {
-      //   data: { accounts }
-      // } = await axiosUtil.instance.post(
-      //   `${eosConfig.apiEndpoint}/v1/chain/get_accounts_by_authorizers`,
-      //   {
-      //     keys: [input.public_key]
-      //   }
-      // )
+      if (!isValidToken) {
+        throw Boom.badRequest('Are you a human?')
+      }
 
-      // const compare = ({ account_name: a }, { account_name: b }) => {
-      //   if (a < b) return -1
-      //   if (a > b) return 1
-      //   return 0
-      // }
+      await eosUtil.transact(
+        [
+          {
+            authorization: [
+              {
+                actor: eosConfig.faucet.account,
+                permission: 'active'
+              }
+            ],
+            account: 'eosio',
+            name: 'newnonebact',
+            data: {
+              creator: eosConfig.faucet.account,
+              owner: {
+                threshold: 1,
+                keys: [
+                  {
+                    key: input.public_key,
+                    weight: 1
+                  }
+                ],
+                accounts: [],
+                waits: []
+              },
+              active: {
+                threshold: 1,
+                keys: [
+                  {
+                    key: input.public_key,
+                    weight: 1
+                  }
+                ],
+                accounts: [],
+                waits: []
+              },
+              max_payment: '500.00000000 UOS'
+            }
+          }
+        ],
+        eosConfig.faucet.account,
+        eosConfig.faucet.password
+      )
 
-      // if (accounts.length) {
-      //   return {
-      //     account: accounts.sort(compare).pop().account_name
-      //   }
-      // }
+      const {
+        data: { accounts }
+      } = await axiosUtil.instance.post(
+        `${eosConfig.apiEndpoint}/v1/chain/get_accounts_by_authorizers`,
+        {
+          keys: [input.public_key]
+        }
+      )
 
-      return { account: '123' }
+      const compare = ({ account_name: a }, { account_name: b }) => {
+        if (a < b) return -1
+        if (a > b) return 1
+        return 0
+      }
 
-      // return Boom.badData('Wrong key format')
+      if (accounts.length) {
+        return {
+          account: accounts.sort(compare).pop().account_name
+        }
+      }
+
+      return Boom.badData('Wrong key format')
     } catch (err) {
       throw Boom.badRequest(err.message)
     }

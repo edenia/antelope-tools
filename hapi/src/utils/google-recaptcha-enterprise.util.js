@@ -15,7 +15,7 @@ const isRecaptchaTokenValid = async token => {
     }
   })
 
-  return assessment
+  return assessment.tokenProperties.valid
 }
 
 module.exports = {

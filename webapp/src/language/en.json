@@ -164,6 +164,8 @@
   },
   "faucetRoute": {
     "createAccount": "Create Faucet Account",
+    "newCreatedAccount": "Your new account is",
+    "transferTokensTransaction": "Tokens transfered correctly. Check it on explorer here",
     "createButton": "Create",
     "issueTokens": "Issue Tokens",
     "getUOS": "Get Tokens"

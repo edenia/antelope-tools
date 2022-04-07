@@ -9,9 +9,11 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
+import { eosConfig } from '../config'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,17 +26,24 @@ const Faucet = ({ ual }) => {
   const { t } = useTranslation('faucetRoute')
   const [account, setAccount] = useState('')
   const [publicKey, setPublicKey] = useState('')
-  const [createFaucetAccount, { data: dataCreateAccount }] = useMutation(
-    CREATE_ACCOUNT_MUTATION
-  )
-  const [transferFaucetTokens, { data: dataTransferFaucetTokens }] =
-    useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
+  const [newCreatedAccount, setNewCreatedAccount] = useState('')
+  const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
+  const [
+    createFaucetAccount,
+    { data: dataCreateAccount, loading: loadingCreateAccount }
+  ] = useMutation(CREATE_ACCOUNT_MUTATION)
+  const [
+    transferFaucetTokens,
+    { data: dataTransferFaucetTokens, loading: loadingTransferFaucetTokens }
+  ] = useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
   const { executeRecaptcha } = useGoogleReCaptcha()
 
   const createAccount = async () => {
+    setNewCreatedAccount('')
+
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    if (!reCaptchaToken) return
+    if (!reCaptchaToken || !publicKey) return
 
     try {
       await createFaucetAccount({
@@ -49,17 +58,16 @@ const Faucet = ({ ual }) => {
   }
 
   const transferTokens = async () => {
+    setTransferTokensTransaction('')
+
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    console.log('RE-CATPCHA-TOKEN', reCaptchaToken)
-
-    if (!reCaptchaToken) return
+    if (!reCaptchaToken || !account) return
 
     try {
       await transferFaucetTokens({
         variables: {
           token: reCaptchaToken,
-          faucet: '1aa2aa3aa4ai',
           to: account
         }
       })
@@ -73,21 +81,20 @@ const Faucet = ({ ual }) => {
 
     const { createAccount } = dataCreateAccount
 
-    console.log('NEW-ACCOUNT', createAccount.account)
+    setNewCreatedAccount(createAccount.account)
   }, [dataCreateAccount])
 
   useEffect(() => {
     if (!dataTransferFaucetTokens) return
-    console.log('DATA-TRANSFER-FAUCET-TOKENS', dataTransferFaucetTokens)
 
     const { transferFaucetTokens } = dataTransferFaucetTokens
 
-    console.log('NEW-ACCOUNT', transferFaucetTokens.tx)
+    setTransferTokensTransaction(transferFaucetTokens.tx)
   }, [dataTransferFaucetTokens])
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={8}>
+      <Grid item xs={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('createAccount')}</Typography>
@@ -104,15 +111,26 @@ const Faucet = ({ ual }) => {
                 type="submit"
                 variant="contained"
                 color="primary"
+                disabled={loadingCreateAccount}
+                endIcon={
+                  loadingCreateAccount ? <CircularProgress size={20} /> : <></>
+                }
                 onClick={createAccount}
               >
                 {t('createButton')}
               </Button>
+              {newCreatedAccount && (
+                <Grid item xs={12}>
+                  <Typography variant="h5">{`${t(
+                    'newCreatedAccount'
+                  )} ${newCreatedAccount}`}</Typography>
+                </Grid>
+              )}
             </Grid>
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('issueTokens')}</Typography>
@@ -129,10 +147,33 @@ const Faucet = ({ ual }) => {
                 type="submit"
                 variant="contained"
                 color="primary"
+                disabled={loadingTransferFaucetTokens}
+                endIcon={
+                  loadingTransferFaucetTokens ? (
+                    <CircularProgress size={20} />
+                  ) : (
+                    <></>
+                  )
+                }
                 onClick={transferTokens}
               >
                 {t('getUOS')}
               </Button>
+              {transferTokensTransaction && (
+                <Grid item xs={12}>
+                  <Typography variant="h5">
+                    {t('transferTokensTransaction')}
+                  </Typography>
+                  <a
+                    href={eosConfig.blockExplorerUrl.replace(
+                      '(transaction)',
+                      transferTokensTransaction
+                    )}
+                  >
+                    {transferTokensTransaction.slice(0, 7)}
+                  </a>
+                </Grid>
+              )}
             </Grid>
           </CardContent>
         </Card>

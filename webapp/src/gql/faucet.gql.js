@@ -9,8 +9,8 @@ export const CREATE_ACCOUNT_MUTATION = gql`
 `
 
 export const TRANFER_FAUCET_TOKENS_MUTATION = gql`
-  mutation ($token: String!, $faucet: String!, $to: String!) {
-    transferFaucetTokens(token: $token, faucet: $faucet, to: $to) {
+  mutation ($token: String!, $to: String!) {
+    transferFaucetTokens(token: $token, to: $to) {
       tx
     }
   }

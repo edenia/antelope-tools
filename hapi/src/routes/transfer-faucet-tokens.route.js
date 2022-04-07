@@ -2,15 +2,22 @@ const Boom = require('@hapi/boom')
 const Joi = require('joi')
 
 const { eosConfig } = require('../config')
-const { eosUtil, axiosUtil } = require('../utils')
+const { eosUtil, googleRecaptchaEnterpriseUtil } = require('../utils')
 
 module.exports = {
   method: 'POST',
   path: '/transfer-faucet-tokens',
   handler: async ({ payload: { input } }) => {
-    // VALIDATE TOKEN
     try {
-      const transaction = await eosUtil.transact(
+      const isValidToken = await googleRecaptchaEnterpriseUtil.isRecaptchaTokenValid(
+        input.token
+      )
+
+      if (!isValidToken) {
+        throw Boom.badRequest('Are you a human?')
+      }
+
+      const { transaction_id } = await eosUtil.transact(
         [
           {
             authorization: [
@@ -21,17 +28,15 @@ module.exports = {
             ],
             account: eosConfig.faucet.account,
             name: 'givetokens',
-            data: { faucet: input.faucet, to: input.to }
+            data: { faucet: eosConfig.faucet.account, to: input.to }
           }
         ],
         eosConfig.faucet.account,
         eosConfig.faucet.password
       )
 
-      console.log('TRANSACTION', transaction)
-
       return {
-        tx: ''
+        tx: transaction_id
       }
     } catch (err) {
       throw Boom.badRequest(err.message)
@@ -42,7 +47,6 @@ module.exports = {
       payload: Joi.object({
         input: Joi.object({
           token: Joi.string().required(),
-          faucet: Joi.string().required(),
           to: Joi.string().required()
         }).required()
       }).options({ stripUnknown: true })
