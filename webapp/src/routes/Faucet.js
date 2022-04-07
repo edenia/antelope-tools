@@ -12,8 +12,8 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
 import { eosConfig } from '../config'
+import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
