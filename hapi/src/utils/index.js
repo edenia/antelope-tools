@@ -7,5 +7,6 @@ module.exports = {
   hasuraUtil: require('./hasura.util'),
   producerUtil: require('./producer.util'),
   sequelizeUtil: require('./sequelize.util'),
-  walletUtil: require('./wallet.util')
+  walletUtil: require('./wallet.util'),
+  googleRecaptchaEnterpriseUtil: require('./google-recaptcha-enterprise.util')
 }

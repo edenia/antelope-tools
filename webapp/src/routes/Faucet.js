@@ -9,8 +9,9 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-import { CREATE_ACCOUNT_MUTATION } from '../gql'
+import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,11 +27,19 @@ const Faucet = ({ ual }) => {
   const [createFaucetAccount, { data: dataCreateAccount }] = useMutation(
     CREATE_ACCOUNT_MUTATION
   )
+  const [transferFaucetTokens, { data: dataTransferFaucetTokens }] =
+    useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const createAccount = async () => {
+    const reCaptchaToken = await executeRecaptcha?.('submit')
+
+    if (!reCaptchaToken) return
+
     try {
       await createFaucetAccount({
         variables: {
+          token: reCaptchaToken,
           public_key: publicKey
         }
       })
@@ -39,15 +48,42 @@ const Faucet = ({ ual }) => {
     }
   }
 
-  const issueTokens = async () => {}
+  const transferTokens = async () => {
+    const reCaptchaToken = await executeRecaptcha?.('submit')
+
+    console.log('RE-CATPCHA-TOKEN', reCaptchaToken)
+
+    if (!reCaptchaToken) return
+
+    try {
+      await transferFaucetTokens({
+        variables: {
+          token: reCaptchaToken,
+          faucet: '1aa2aa3aa4ai',
+          to: account
+        }
+      })
+    } catch (err) {
+      console.log('ERR-TRANSFER', err)
+    }
+  }
 
   useEffect(() => {
     if (!dataCreateAccount) return
 
     const { createAccount } = dataCreateAccount
 
-    console.log('NEW-ACCOUNT', createAccount.acocunt)
+    console.log('NEW-ACCOUNT', createAccount.account)
   }, [dataCreateAccount])
+
+  useEffect(() => {
+    if (!dataTransferFaucetTokens) return
+    console.log('DATA-TRANSFER-FAUCET-TOKENS', dataTransferFaucetTokens)
+
+    const { transferFaucetTokens } = dataTransferFaucetTokens
+
+    console.log('NEW-ACCOUNT', transferFaucetTokens.tx)
+  }, [dataTransferFaucetTokens])
 
   return (
     <Grid container spacing={2}>
@@ -93,7 +129,7 @@ const Faucet = ({ ual }) => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                onClick={issueTokens}
+                onClick={transferTokens}
               >
                 {t('getUOS')}
               </Button>

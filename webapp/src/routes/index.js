@@ -132,13 +132,6 @@ const defaultRoutes = [
     component: BPJson,
     path: '/bpjson',
     exact: true
-  },
-  {
-    name: 'faucet',
-    icon: <CpuIcon />,
-    component: Faucet,
-    path: '/faucet',
-    exact: true
   }
 ]
 const lacchainRoutes = [
@@ -236,6 +229,15 @@ const lacchainRoutes = [
     exact: true
   }
 ]
+const ultraRoutes = [
+  {
+    name: 'faucet',
+    icon: <CpuIcon />,
+    component: Faucet,
+    path: '/faucet',
+    exact: true
+  }
+]
 const helpRoutes = [
   {
     header: 'docs',
@@ -280,6 +282,9 @@ let routes = []
 switch (eosConfig.networkName) {
   case 'lacchain':
     routes = [...lacchainRoutes, ...helpRoutes]
+    break
+  case 'ultra-testnet':
+    routes = [...defaultRoutes, ...ultraRoutes, ...helpRoutes]
     break
   default:
     routes = [...defaultRoutes, ...helpRoutes]
