@@ -72,7 +72,7 @@ const Faucet = ({ ual }) => {
         }
       })
     } catch (err) {
-      console.log('ERR-TRANSFER', err)
+      console.log('ERR', err)
     }
   }
 

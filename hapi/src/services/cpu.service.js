@@ -34,7 +34,7 @@ const worker = async () => {
       usage: transaction.processed.receipt.cpu_usage_us
     })
   } catch (error) {
-    console.error('cpuService.sync', error)
+    // console.error('cpuService.sync', error)
   }
 }
 
