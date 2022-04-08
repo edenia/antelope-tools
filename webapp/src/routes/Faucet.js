@@ -109,33 +109,45 @@ const Faucet = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('createAccount')}</Typography>
-            <Grid container alignItems="flex-end">
-              <TextField
-                key="action-field-issue-tokens"
-                label="Public Key (Active/Owner)"
-                variant="outlined"
-                className={classes.formControl}
-                value={publicKey}
-                onChange={(e) => setPublicKey(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={loadingCreateAccount}
-                endIcon={
-                  loadingCreateAccount ? <CircularProgress size={20} /> : <></>
-                }
-                onClick={createAccount}
-              >
-                {t('createButton')}
-              </Button>
+            <Grid
+              container
+              alignItems="flex-end"
+              className={classes.formControl}
+              spacing={2}
+            >
+              <Grid item>
+                <TextField
+                  key="action-field-issue-tokens"
+                  label="Public Key (Active/Owner)"
+                  variant="outlined"
+                  value={publicKey}
+                  onChange={(e) => setPublicKey(e.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={loadingCreateAccount}
+                  endIcon={
+                    loadingCreateAccount ? (
+                      <CircularProgress size={20} />
+                    ) : (
+                      <></>
+                    )
+                  }
+                  onClick={createAccount}
+                >
+                  {t('createButton')}
+                </Button>
+              </Grid>
               {newCreatedAccount && (
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <Typography variant="h5">{`${t(
                     'newCreatedAccount'
                   )} ${newCreatedAccount}`}</Typography>
@@ -145,37 +157,45 @@ const Faucet = () => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('issueTokens')}</Typography>
-            <Grid container alignItems="flex-end">
-              <TextField
-                key="action-field-issue-tokens"
-                label="Account (500 UOS)"
-                variant="outlined"
-                className={classes.formControl}
-                value={account}
-                onChange={(e) => setAccount(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={loadingTransferFaucetTokens}
-                endIcon={
-                  loadingTransferFaucetTokens ? (
-                    <CircularProgress size={20} />
-                  ) : (
-                    <></>
-                  )
-                }
-                onClick={transferTokens}
-              >
-                {t('getUOS')}
-              </Button>
+            <Grid
+              container
+              alignItems="flex-end"
+              className={classes.formControl}
+              spacing={2}
+            >
+              <Grid item>
+                <TextField
+                  key="action-field-issue-tokens"
+                  label="Account (500 UOS)"
+                  variant="outlined"
+                  value={account}
+                  onChange={(e) => setAccount(e.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={loadingTransferFaucetTokens}
+                  endIcon={
+                    loadingTransferFaucetTokens ? (
+                      <CircularProgress size={20} />
+                    ) : (
+                      <></>
+                    )
+                  }
+                  onClick={transferTokens}
+                >
+                  {t('getUOS')}
+                </Button>
+              </Grid>
               {transferTokensTransaction && (
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <Typography variant="h5">
                     {t('transferTokensTransaction')}
                   </Typography>
