@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -14,6 +13,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { eosConfig } from '../config'
 import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
+import { useSnackbarMessageState } from '../context/snackbar-message.context'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Faucet = ({ ual }) => {
+const Faucet = () => {
   const classes = useStyles()
   const { t } = useTranslation('faucetRoute')
+  const [, { showMessage }] = useSnackbarMessageState()
   const [account, setAccount] = useState('')
   const [publicKey, setPublicKey] = useState('')
   const [newCreatedAccount, setNewCreatedAccount] = useState('')
@@ -53,7 +54,14 @@ const Faucet = ({ ual }) => {
         }
       })
     } catch (err) {
-      console.log('ERR', err)
+      const errorMessage = err.message.replace(
+        'GraphQL error: assertion failure with message: ',
+        ''
+      )
+      showMessage({
+        type: 'error',
+        content: errorMessage
+      })
     }
   }
 
@@ -72,7 +80,14 @@ const Faucet = ({ ual }) => {
         }
       })
     } catch (err) {
-      console.log('ERR', err)
+      const errorMessage = err.message.replace(
+        'GraphQL error: assertion failure with message: ',
+        ''
+      )
+      showMessage({
+        type: 'error',
+        content: errorMessage
+      })
     }
   }
 
@@ -94,33 +109,45 @@ const Faucet = ({ ual }) => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('createAccount')}</Typography>
-            <Grid container alignItems="flex-end">
-              <TextField
-                key="action-field-issue-tokens"
-                label="Public Key (Active/Owner)"
-                variant="outlined"
-                className={classes.formControl}
-                value={publicKey}
-                onChange={(e) => setPublicKey(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={loadingCreateAccount}
-                endIcon={
-                  loadingCreateAccount ? <CircularProgress size={20} /> : <></>
-                }
-                onClick={createAccount}
-              >
-                {t('createButton')}
-              </Button>
+            <Grid
+              container
+              alignItems="flex-end"
+              className={classes.formControl}
+              spacing={2}
+            >
+              <Grid item>
+                <TextField
+                  key="action-field-issue-tokens"
+                  label="Public Key (Active/Owner)"
+                  variant="outlined"
+                  value={publicKey}
+                  onChange={(e) => setPublicKey(e.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={loadingCreateAccount}
+                  endIcon={
+                    loadingCreateAccount ? (
+                      <CircularProgress size={20} />
+                    ) : (
+                      <></>
+                    )
+                  }
+                  onClick={createAccount}
+                >
+                  {t('createButton')}
+                </Button>
+              </Grid>
               {newCreatedAccount && (
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <Typography variant="h5">{`${t(
                     'newCreatedAccount'
                   )} ${newCreatedAccount}`}</Typography>
@@ -130,37 +157,45 @@ const Faucet = ({ ual }) => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('issueTokens')}</Typography>
-            <Grid container alignItems="flex-end">
-              <TextField
-                key="action-field-issue-tokens"
-                label="Account (500 UOS)"
-                variant="outlined"
-                className={classes.formControl}
-                value={account}
-                onChange={(e) => setAccount(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={loadingTransferFaucetTokens}
-                endIcon={
-                  loadingTransferFaucetTokens ? (
-                    <CircularProgress size={20} />
-                  ) : (
-                    <></>
-                  )
-                }
-                onClick={transferTokens}
-              >
-                {t('getUOS')}
-              </Button>
+            <Grid
+              container
+              alignItems="flex-end"
+              className={classes.formControl}
+              spacing={2}
+            >
+              <Grid item>
+                <TextField
+                  key="action-field-issue-tokens"
+                  label="Account (500 UOS)"
+                  variant="outlined"
+                  value={account}
+                  onChange={(e) => setAccount(e.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={loadingTransferFaucetTokens}
+                  endIcon={
+                    loadingTransferFaucetTokens ? (
+                      <CircularProgress size={20} />
+                    ) : (
+                      <></>
+                    )
+                  }
+                  onClick={transferTokens}
+                >
+                  {t('getUOS')}
+                </Button>
+              </Grid>
               {transferTokensTransaction && (
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <Typography variant="h5">
                     {t('transferTokensTransaction')}
                   </Typography>
@@ -180,10 +215,6 @@ const Faucet = ({ ual }) => {
       </Grid>
     </Grid>
   )
-}
-
-Faucet.propTypes = {
-  ual: PropTypes.object
 }
 
 export default Faucet
