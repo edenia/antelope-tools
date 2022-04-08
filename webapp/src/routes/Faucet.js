@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -14,6 +13,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { eosConfig } from '../config'
 import { CREATE_ACCOUNT_MUTATION, TRANFER_FAUCET_TOKENS_MUTATION } from '../gql'
+import { useSnackbarMessageState } from '../context/snackbar-message.context'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Faucet = ({ ual }) => {
+const Faucet = () => {
   const classes = useStyles()
   const { t } = useTranslation('faucetRoute')
+  const [, { showMessage }] = useSnackbarMessageState()
   const [account, setAccount] = useState('')
   const [publicKey, setPublicKey] = useState('')
   const [newCreatedAccount, setNewCreatedAccount] = useState('')
@@ -53,7 +54,14 @@ const Faucet = ({ ual }) => {
         }
       })
     } catch (err) {
-      console.log('ERR', err)
+      const errorMessage = err.message.replace(
+        'GraphQL error: assertion failure with message: ',
+        ''
+      )
+      showMessage({
+        type: 'error',
+        content: errorMessage
+      })
     }
   }
 
@@ -72,7 +80,14 @@ const Faucet = ({ ual }) => {
         }
       })
     } catch (err) {
-      console.log('ERR', err)
+      const errorMessage = err.message.replace(
+        'GraphQL error: assertion failure with message: ',
+        ''
+      )
+      showMessage({
+        type: 'error',
+        content: errorMessage
+      })
     }
   }
 
@@ -180,10 +195,6 @@ const Faucet = ({ ual }) => {
       </Grid>
     </Grid>
   )
-}
-
-Faucet.propTypes = {
-  ual: PropTypes.object
 }
 
 export default Faucet
