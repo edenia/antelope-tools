@@ -17,7 +17,7 @@
     "/help>title": "Help - Ultra Testnet Dashboard",
     "/rewards-distribution>moreDescription": "BP daily rewards distribution by geographic location of paid block producers.",
     "/bpjson>moreDescription": "A visual representation of the network’s current nodes.",
-    "/faucet>moreDescription": "This tool allow to create accounts and transfer tokens.",
+    "/faucet>moreDescription": "This tool allows you to create an account and get UOS testnet tokens.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "Read more about the Validator Node Agreement of this network. Contact us if you have any inquiries.",
     "/>moreDescription": "Find information on the Ultra Test Network and its current status.",
