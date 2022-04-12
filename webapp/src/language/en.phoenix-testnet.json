@@ -16,6 +16,7 @@
     "/help>title": "Help - Phoenix Testnet Network Dashboard",
     "/rewards-distribution>moreDescription": "BP daily rewards distribution by geographic location of paid block producers.",
     "/bpjson>moreDescription": "A visual representation of the network’s current nodes.",
+    "/faucet>moreDescription": "This tool allows you to create an account and get LIBRE testnet tokens.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "Read more about the Validator Node Agreement of this network. Contact us if you have any inquiries.",
     "/>moreDescription": "Find data of blockchain networks using EOSIO technology. See more networks here: https://eosio.online/.",

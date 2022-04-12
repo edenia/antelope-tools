@@ -168,7 +168,7 @@
     "transferTokensTransaction": "Tokens transfered correctly. Check it on explorer here",
     "createButton": "Create",
     "issueTokens": "Issue Tokens",
-    "getUOS": "Get Tokens"
+    "getTokens": "Get Tokens"
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"

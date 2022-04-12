@@ -229,7 +229,7 @@ const lacchainRoutes = [
     exact: true
   }
 ]
-const ultraRoutes = [
+const advanceRoutes = [
   {
     name: 'faucet',
     icon: <CpuIcon />,
@@ -284,7 +284,8 @@ switch (eosConfig.networkName) {
     routes = [...lacchainRoutes, ...helpRoutes]
     break
   case 'ultra-testnet':
-    routes = [...defaultRoutes, ...ultraRoutes, ...helpRoutes]
+  case 'phoenix-testnet':
+    routes = [...defaultRoutes, ...advanceRoutes, ...helpRoutes]
     break
   default:
     routes = [...defaultRoutes, ...helpRoutes]
