@@ -39,7 +39,7 @@ jobs:
           REACT_APP_TITLE: 'Phoenix Testnet Network Dashboard'
           REACT_APP_TAG: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://phoenix-testnet.eosio.online/phoenix.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Phoenix Website", "src": "https://phoenix.org/" },{ "text": "Phoenix Block Explorer", "src": "https://phoenix-explorer.eosio.cr/" },{"text": "Support","src": "#"},{"text": "Phoenix Network Monitor","src": "https://phoenix-testnet.eosio.online"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Phoenix Website", "src": "https://phoenix.org/" },{ "text": "Phoenix Block Explorer", "src": "https://phoenix-explorer.edenia.cloud/" },{"text": "Support","src": "#"},{"text": "Phoenix Network Monitor","src": "https://phoenix-testnet.eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'phoenix-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Phoenix Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://phoenix-testnet.eosio.online/phoenix.png'
-          REACT_APP_EOS_API_HOST: 'phoenix-testnet.eosio.cr'
+          REACT_APP_EOS_API_HOST: 'phoenix-testnet.edenia.cloud'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '85ff7610765e8d05ca14f8056eccac8893c15fce56bbd50b70a84e1c1782b956'
@@ -62,7 +62,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://phoenix-explorer.eosio.cr/transaction/(transaction)'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://phoenix-explorer.edenia.cloud/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
@@ -85,7 +85,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://phoenix-testnet.eosio.cr
+          HAPI_EOS_API_ENDPOINT: https://phoenix-testnet.edenia.cloud
           HAPI_EOS_API_CHAIN_ID: 85ff7610765e8d05ca14f8056eccac8893c15fce56bbd50b70a84e1c1782b956
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
