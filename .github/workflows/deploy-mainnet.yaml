@@ -80,7 +80,7 @@ jobs:
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
           HAPI_EOS_API_ENDPOINT: 'https://api.eosn.io'
-          HAPI_EOS_API_CHAIN_ID: 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473'
+          HAPI_EOS_API_CHAIN_ID: '73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d'
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888

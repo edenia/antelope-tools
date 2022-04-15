@@ -46,7 +46,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'lacchain'
           REACT_APP_EOS_API_NETWORK_LABEL: 'LACChain EOSIO'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.eosio.cr/ipfs/QmdfvY1gJk688Sxd7iTg6Dbd5VQTv9Mr1M21Fo7nvJapRv'
-          REACT_APP_EOS_API_HOST: 'lacchain.eosio.cr'
+          REACT_APP_EOS_API_HOST: 'lacchain.edenia.cloud'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61'
@@ -84,7 +84,7 @@ jobs:
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
           HAPI_EOS_API_CHAIN_ID: '5821525c6588037e2b066b992fcac34909a5b7f1ea8d5a393f6720fca3750d61'
-          HAPI_EOS_API_ENDPOINT: 'https://lacchain.eosio.cr'
+          HAPI_EOS_API_ENDPOINT: 'https://lacchain.edenia.cloud'
           HAPI_EOS_API_NETWORK_NAME: 'lacchain'
           HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: ''
@@ -97,7 +97,7 @@ jobs:
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
           HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
-          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://observer.eosio.cr:8888'
+          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://observer.edenia.cloud:8888'
           HAPI_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
           HAPI_SERVER_ADDRESS: '0.0.0.0'
           HAPI_SERVER_PORT: '9090'
