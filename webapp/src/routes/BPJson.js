@@ -62,6 +62,25 @@ const getBpJSONOffChain = async (producer) => {
   }
 }
 
+const getBpJSONChain = async (producer) => {
+  try {
+    const { rows: producerjsonRow } = await eosApi.getTableRows({
+      json: true,
+      code: eosConfig.bpJsonOnChainContract,
+      scope: eosConfig.bpJsonOnChainScope,
+      table: eosConfig.bpJsonOnChainTable,
+      reverse: false,
+      lower_bound: producer,
+      upper_bound: producer,
+      limit: 1
+    })
+
+    if (producerjsonRow) return JSON.parse(producerjsonRow[0].json)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const BPJson = ({ ual }) => {
   const [producer, setProducer] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -158,7 +177,10 @@ const BPJson = ({ ual }) => {
       )
 
       if (producer) {
-        const bpJson = await getBpJSONOffChain(producer)
+        let bpJson
+        bpJson = await getBpJSONOffChain(producer)
+        if (!bpJson) bpJson = await getBpJSONChain(producer.owner)
+
         setProducer({ ...producer, bpJson })
       }
 
