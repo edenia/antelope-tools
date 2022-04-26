@@ -63,6 +63,11 @@ airwire:
 	make stop
 	make start
 
+airwiretestnet:
+	@cat ".env.airwiretestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
 ultratestnet:
 	@cat ".env.ultratestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
