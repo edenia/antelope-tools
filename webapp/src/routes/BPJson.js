@@ -85,6 +85,7 @@ const BPJson = ({ ual }) => {
   const [producer, setProducer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [inconsistencyMessage, setInconsistencyMessage] = useState(null)
   const { t } = useTranslation('bpJsonRoute')
 
   const initData = {
@@ -177,11 +178,17 @@ const BPJson = ({ ual }) => {
       )
 
       if (producer) {
-        let bpJson
-        bpJson = await getBpJSONOffChain(producer)
-        if (!bpJson) bpJson = await getBpJSONChain(producer.owner)
+        const bpJsonOffChain = await getBpJSONOffChain(producer)
+        const bpJsonChain = await getBpJSONChain(producer.owner)
 
-        setProducer({ ...producer, bpJson })
+        setProducer({ ...producer, bpJson: bpJsonOffChain || bpJsonChain })
+
+        if (
+          bpJsonOffChain &&
+          bpJsonChain &&
+          JSON.stringify(bpJsonOffChain) !== JSON.stringify(bpJsonChain)
+        )
+          setInconsistencyMessage(t('bpjsonInconsistency'))
       }
 
       setLoading(false)
@@ -194,7 +201,7 @@ const BPJson = ({ ual }) => {
         setLoading(false)
       }, 5000)
     }
-  }, [ual.activeUser])
+  }, [ual.activeUser, t])
 
   return (
     <Grid item xs={12}>
@@ -209,6 +216,9 @@ const BPJson = ({ ual }) => {
             </>
           )}
           {error && <Alert severity="error">{error}</Alert>}
+          {inconsistencyMessage && (
+            <Alert severity="warning">{inconsistencyMessage}</Alert>
+          )}
           <BPJsonGenerator
             accountName={ual.activeUser?.accountName || initData.account_name}
             bpJson={producer?.bpJson || initData}
