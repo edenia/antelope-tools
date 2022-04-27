@@ -160,7 +160,8 @@
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
     "notLogin": "Please log in to use this tool.",
-    "notRegisterNode": "You must have an account registered as an active node to use this tool."
+    "notRegisterNode": "You must have an account registered as an active node to use this tool.",
+    "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
   },
   "faucetRoute": {
     "createAccount": "Create Faucet Account",
