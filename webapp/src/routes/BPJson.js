@@ -23,7 +23,7 @@ const getBPJsonUrl = async (producer = {}) => {
   let producerUrl = producer.url || ''
 
   if (!producerUrl.startsWith('http')) {
-    producerUrl = `http://${producerUrl}`
+    producerUrl = `https://${producerUrl}`
   }
 
   if (producer.owner === 'eosauthority') {
@@ -52,6 +52,8 @@ const getBPJsonUrl = async (producer = {}) => {
 const getBpJSONOffChain = async (producer) => {
   try {
     const bpUrl = await getBPJsonUrl(producer)
+
+    if (bpUrl === 'https:///bp.json') return undefined
     const { data: bpJson } = await axios.get(bpUrl, {
       timeout: 5000
     })
