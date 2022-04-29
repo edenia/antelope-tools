@@ -15,6 +15,7 @@
     "/help>title": "Ayuda - Panel",
     "/rewards-distribution>moreDescription": "Distribución diaria de recompensas de BP por ubicación geográfica de los productores de bloques pagados.",
     "/bpjson>moreDescription": "Una representación visual de los nodos actuales de la red.",
+    "/faucet>moreDescription": "Esta herramienta permite crear cuentas y transferir tokens.",
     "/node-config>moreDescription": "Utilice esta herramienta para obtener archivos de configuración de ejemplo para ayudar a configurar un nuevo nodo en la red.",
     "/ricardian-contract>moreDescription": "Lea más sobre el Acuerdo de nodo de validación de esta red. Contáctenos si tiene alguna consulta.",
     "/>moreDescription": "Encuentre datos de redes blockchain utilizando la tecnología EOSIO. Vea más redes aquí: https://eosio.online/.",

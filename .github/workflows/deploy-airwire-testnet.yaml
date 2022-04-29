@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
-          REACT_APP_EOS_API_HOST: 'airwire-testnet.eosio.cr'
+          REACT_APP_EOS_API_HOST: 'airwire-testnet.edenia.cloud'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f'
@@ -84,7 +84,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://airwire-testnet.eosio.cr
+          HAPI_EOS_API_ENDPOINT: https://airwire-testnet.edenia.cloud
           HAPI_EOS_API_NETWORK_NAME: airwire-testnet
           HAPI_EOS_API_CHAIN_ID: a3c9333f9c86df607ec7e63a52e031f4969cfd30dfab5e044b0752fd4b95d99f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}

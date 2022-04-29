@@ -170,7 +170,7 @@ const Faucet = () => {
               <Grid item>
                 <TextField
                   key="action-field-issue-tokens"
-                  label="Account (500 UOS)"
+                  label={`Account (500 ${eosConfig.tokenSymbol})`}
                   variant="outlined"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
@@ -191,7 +191,7 @@ const Faucet = () => {
                   }
                   onClick={transferTokens}
                 >
-                  {t('getUOS')}
+                  {t('getTokens')}
                 </Button>
               </Grid>
               {transferTokensTransaction && (
