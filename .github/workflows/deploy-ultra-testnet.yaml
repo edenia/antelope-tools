@@ -118,6 +118,7 @@ jobs:
           HAPI_EOS_EXCHANGE_RATE_API: ''
           HAPI_COINGECKO_API_TOKEN_ID: ''
           HAPI_REWARDS_TOKEN: ''
+          HAPI_CREATE_ACCOUNT_ACTION_NAME: newnonebact
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}

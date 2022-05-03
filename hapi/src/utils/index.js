@@ -8,5 +8,6 @@ module.exports = {
   producerUtil: require('./producer.util'),
   sequelizeUtil: require('./sequelize.util'),
   walletUtil: require('./wallet.util'),
-  googleRecaptchaEnterpriseUtil: require('./google-recaptcha-enterprise.util')
+  googleRecaptchaEnterpriseUtil: require('./google-recaptcha-enterprise.util'),
+  getCreateAccountDataUtil: require('./get-create-account-data.util')
 }

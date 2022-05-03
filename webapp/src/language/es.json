@@ -174,7 +174,9 @@
     "transferTokensTransaction": "Tokens transferidos correctamente. Puede revisar la transacción aquí",
     "createButton": "Crear",
     "issueTokens": "Emitir Tokens",
-    "getTokens": "Obtener Tokens"
+    "getTokens": "Obtener Tokens",
+    "publicKey": "Llave pública (Active/Owner)",
+    "accountName": "Nombre de la cuenta"
   },
   "ricardianContractRoute": {
     "title": "Acuerdo de Productor de Bloques"

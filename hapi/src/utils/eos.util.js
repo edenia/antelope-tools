@@ -26,7 +26,7 @@ const newAccount = async accountName => {
       eosConfig.baseAccount,
       eosConfig.baseAccountPassword
     )
-  } catch (error) {}
+  } catch (error) { }
 
   const keys = await walletUtil.listKeys(
     eosConfig.baseAccount,
@@ -170,7 +170,7 @@ const getProducerSchedule = () => eosApi.getProducerSchedule({})
 const transact = async (actions, account, password) => {
   try {
     await walletUtil.unlock(account, password)
-  } catch (error) {}
+  } catch (error) { }
 
   const keys = await walletUtil.listKeys(account, password)
   const api = new Api({
