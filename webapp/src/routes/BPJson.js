@@ -23,7 +23,7 @@ const getBPJsonUrl = async (producer = {}) => {
   let producerUrl = producer.url || ''
 
   if (!producerUrl.startsWith('http')) {
-    producerUrl = `https://${producerUrl}`
+    producerUrl = `http://${producerUrl}`
   }
 
   if (producer.owner === 'eosauthority') {
@@ -44,7 +44,7 @@ const getBPJsonUrl = async (producer = {}) => {
       data: { chains }
     } = await axios.get(chainsUrl)
     chainUrl = chains[ualConfig.network.chainId] || chainUrl
-  } catch (error) {}
+  } catch (error) { }
 
   return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
 }
@@ -53,7 +53,7 @@ const getBpJSONOffChain = async (producer) => {
   try {
     const bpUrl = await getBPJsonUrl(producer)
 
-    if (bpUrl === 'https:///bp.json') return undefined
+    if (bpUrl === 'http:///bp.json') return undefined
     const { data: bpJson } = await axios.get(bpUrl, {
       timeout: 5000
     })
