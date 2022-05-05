@@ -91,6 +91,7 @@ jobs:
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_FAUCET_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT_PASSWORD }}
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
           HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
@@ -108,6 +109,8 @@ jobs:
           HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=btc&vs_currencies=usd'
           HAPI_COINGECKO_API_TOKEN_ID: BTC
           HAPI_REWARDS_TOKEN: phoenix
+          HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
+          HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}

@@ -26,7 +26,7 @@ const Faucet = () => {
   const { t } = useTranslation('faucetRoute')
   const [, { showMessage }] = useSnackbarMessageState()
   const [account, setAccount] = useState('')
-  const [publicKey, setPublicKey] = useState('')
+  const [createAccountValues, setCreateAccountValues] = useState({})
   const [newCreatedAccount, setNewCreatedAccount] = useState('')
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
   const [
@@ -44,13 +44,22 @@ const Faucet = () => {
 
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    if (!reCaptchaToken || !publicKey) return
+    if (eosConfig.networkName === 'phoenix-testnet') {
+      if (
+        !reCaptchaToken ||
+        (!createAccountValues.publicKey && !createAccountValues.accountName)
+      )
+        return
+    } else {
+      if (!reCaptchaToken || createAccountValues.publicKey) return
+    }
 
     try {
       await createFaucetAccount({
         variables: {
           token: reCaptchaToken,
-          public_key: publicKey
+          public_key: createAccountValues.publicKey,
+          name: createAccountValues.accountName
         }
       })
     } catch (err) {
@@ -63,6 +72,7 @@ const Faucet = () => {
         content: errorMessage
       })
     }
+    setCreateAccountValues({})
   }
 
   const transferTokens = async () => {
@@ -97,6 +107,10 @@ const Faucet = () => {
     const { createAccount } = dataCreateAccount
 
     setNewCreatedAccount(createAccount.account)
+    showMessage({
+      type: 'success',
+      content: `${t('newCreatedAccount')} ${newCreatedAccount}`
+    })
   }, [dataCreateAccount])
 
   useEffect(() => {
@@ -122,12 +136,33 @@ const Faucet = () => {
               <Grid item>
                 <TextField
                   key="action-field-issue-tokens"
-                  label="Public Key (Active/Owner)"
+                  label={t('publicKey')}
                   variant="outlined"
-                  value={publicKey}
-                  onChange={(e) => setPublicKey(e.target.value)}
+                  value={createAccountValues.publicKey || ''}
+                  onChange={(e) =>
+                    setCreateAccountValues({
+                      ...createAccountValues,
+                      ...{ publicKey: e.target.value }
+                    })
+                  }
                 />
               </Grid>
+              {eosConfig.networkName === 'phoenix-testnet' && (
+                <Grid item>
+                  <TextField
+                    key="action-field-issue-tokens"
+                    label={t('accountName')}
+                    variant="outlined"
+                    value={createAccountValues.accountName || ''}
+                    onChange={(e) =>
+                      setCreateAccountValues({
+                        ...createAccountValues,
+                        ...{ accountName: e.target.value }
+                      })
+                    }
+                  />
+                </Grid>
+              )}
               <Grid item>
                 <Button
                   type="submit"
@@ -146,13 +181,6 @@ const Faucet = () => {
                   {t('createButton')}
                 </Button>
               </Grid>
-              {newCreatedAccount && (
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="h5">{`${t(
-                    'newCreatedAccount'
-                  )} ${newCreatedAccount}`}</Typography>
-                </Grid>
-              )}
             </Grid>
           </CardContent>
         </Card>

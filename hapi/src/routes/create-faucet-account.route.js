@@ -5,7 +5,8 @@ const { eosConfig } = require('../config')
 const {
   eosUtil,
   axiosUtil,
-  googleRecaptchaEnterpriseUtil
+  googleRecaptchaEnterpriseUtil,
+  getCreateAccountDataUtil
 } = require('../utils')
 
 module.exports = {
@@ -31,33 +32,12 @@ module.exports = {
               }
             ],
             account: 'eosio',
-            name: 'newnonebact',
-            data: {
+            name: eosConfig.faucet.createAccountActionName,
+            data: getCreateAccountDataUtil.getTransactionData({
               creator: eosConfig.faucet.account,
-              owner: {
-                threshold: 1,
-                keys: [
-                  {
-                    key: input.public_key,
-                    weight: 1
-                  }
-                ],
-                accounts: [],
-                waits: []
-              },
-              active: {
-                threshold: 1,
-                keys: [
-                  {
-                    key: input.public_key,
-                    weight: 1
-                  }
-                ],
-                accounts: [],
-                waits: []
-              },
-              max_payment: '500.00000000 UOS'
-            }
+              key: input.public_key,
+              name: input.name ? input.name : undefined
+            })
           }
         ],
         eosConfig.faucet.account,
@@ -95,7 +75,8 @@ module.exports = {
       payload: Joi.object({
         input: Joi.object({
           token: Joi.string().required(),
-          public_key: Joi.string().required()
+          public_key: Joi.string().required(),
+          name: Joi.string()
         }).required()
       }).options({ stripUnknown: true })
     },

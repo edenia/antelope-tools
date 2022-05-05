@@ -169,7 +169,9 @@
     "transferTokensTransaction": "Tokens transfered correctly. Check it on explorer here",
     "createButton": "Create",
     "issueTokens": "Issue Tokens",
-    "getTokens": "Get Tokens"
+    "getTokens": "Get Tokens",
+    "publicKey": "Public Key (Active/Owner)",
+    "accountName": "Account Name"
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"
