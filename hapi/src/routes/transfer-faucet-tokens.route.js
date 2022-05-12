@@ -17,7 +17,11 @@ module.exports = {
         throw Boom.badRequest('Are you a human?')
       }
 
-      const { transaction_id } = await eosUtil.transact(
+      const actor = eosConfig.faucet.getFaucetAccount
+        ? eosConfig.faucet.getFaucetAccount
+        : eosConfig.faucet.account
+
+      const { transaction_id: transactionId } = await eosUtil.transact(
         [
           {
             authorization: [
@@ -26,7 +30,7 @@ module.exports = {
                 permission: 'active'
               }
             ],
-            account: eosConfig.faucet.account,
+            account: actor,
             name: 'givetokens',
             data: { faucet: eosConfig.faucet.account, to: input.to }
           }
@@ -34,9 +38,8 @@ module.exports = {
         eosConfig.faucet.account,
         eosConfig.faucet.password
       )
-
       return {
-        tx: transaction_id
+        tx: transactionId
       }
     } catch (err) {
       throw Boom.badRequest(err.message)

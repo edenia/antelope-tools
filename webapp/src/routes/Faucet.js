@@ -111,7 +111,7 @@ const Faucet = () => {
       type: 'success',
       content: `${t('newCreatedAccount')} ${newCreatedAccount}`
     })
-  }, [dataCreateAccount])
+  }, [dataCreateAccount, newCreatedAccount, showMessage, t])
 
   useEffect(() => {
     if (!dataTransferFaucetTokens) return
