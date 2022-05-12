@@ -8,6 +8,7 @@ module.exports = {
   baseAccountPassword: process.env.HAPI_EOS_BASE_ACCOUNT_PASSWORD,
   faucet: {
     account: process.env.HAPI_EOS_FAUCET_ACCOUNT,
+    getFaucetAccount: process.env.HAPI_EOS_GET_FAUCET_ACCOUNT,
     password: process.env.HAPI_EOS_FAUCET_ACCOUNT_PASSWORD,
     createAccountActionName: process.env.HAPI_CREATE_ACCOUNT_ACTION_NAME
   },
