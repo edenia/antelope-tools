@@ -85,6 +85,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
+          HAPI_EOS_API_NETWORK_NAME: phoenix-testnet
           HAPI_EOS_API_ENDPOINT: https://phoenix-testnet.edenia.cloud
           HAPI_EOS_API_CHAIN_ID: d43bf79db9471e3652a4ca95fdb81bb7aa99000ad4b448fa9a3c491c63566f5f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
@@ -111,6 +112,10 @@ jobs:
           HAPI_REWARDS_TOKEN: phoenix
           HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
           HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          HAPI_EOS_GET_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_GET_FAUCET_ACCOUNT }}
+          HAPI_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.HAPI_PUBLIC_RE_CAPTCHA_KEY }}
+          HAPI_RE_CAPTCHA_PROJECT_ID: ${{ secrets.HAPI_RE_CAPTCHA_PROJECT_ID }}
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
