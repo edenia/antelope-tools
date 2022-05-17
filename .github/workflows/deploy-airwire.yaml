@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
-          REACT_APP_EOS_API_HOST: 'airwire.edenia.cloud'
+          REACT_APP_EOS_API_HOST: 'swamprod.airwire.io'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0'
@@ -85,7 +85,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://airwire.edenia.cloud
+          HAPI_EOS_API_ENDPOINT: https://swamprod.airwire.io
           HAPI_EOS_API_CHAIN_ID: de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
