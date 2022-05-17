@@ -3,6 +3,7 @@
 !.env.local
 !.env.telostestnet
 !.env.ultratestnet
+.vscode/
 db_data
 wallet_data
 certificates
