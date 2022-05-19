@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -27,21 +27,15 @@ const Faucet = () => {
   const [, { showMessage }] = useSnackbarMessageState()
   const [account, setAccount] = useState('')
   const [createAccountValues, setCreateAccountValues] = useState({})
-  const [newCreatedAccount, setNewCreatedAccount] = useState('')
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
-  const [
-    createFaucetAccount,
-    { data: dataCreateAccount, loading: loadingCreateAccount }
-  ] = useMutation(CREATE_ACCOUNT_MUTATION)
-  const [
-    transferFaucetTokens,
-    { data: dataTransferFaucetTokens, loading: loadingTransferFaucetTokens }
-  ] = useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
+  const [createFaucetAccount, { loading: loadingCreateAccount }] = useMutation(
+    CREATE_ACCOUNT_MUTATION
+  )
+  const [transferFaucetTokens, { loading: loadingTransferFaucetTokens }] =
+    useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
   const { executeRecaptcha } = useGoogleReCaptcha()
 
   const createAccount = async () => {
-    setNewCreatedAccount('')
-
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
     if (eosConfig.networkName === 'phoenix-testnet') {
@@ -55,18 +49,28 @@ const Faucet = () => {
     }
 
     try {
-      await createFaucetAccount({
+      const {
+        data: {
+          createAccount: { account = '' }
+        }
+      } = await createFaucetAccount({
         variables: {
           token: reCaptchaToken,
           public_key: createAccountValues.publicKey,
           name: createAccountValues.accountName
         }
       })
+
+      showMessage({
+        type: 'success',
+        content: `${t('newCreatedAccount')} ${account}`
+      })
     } catch (err) {
       const errorMessage = err.message.replace(
         'GraphQL error: assertion failure with message: ',
         ''
       )
+
       showMessage({
         type: 'error',
         content: errorMessage
@@ -83,43 +87,41 @@ const Faucet = () => {
     if (!reCaptchaToken || !account) return
 
     try {
-      await transferFaucetTokens({
+      const result = await transferFaucetTokens({
         variables: {
           token: reCaptchaToken,
           to: account
         }
+      })
+
+      const {
+        data: {
+          transferFaucetTokens: { tx = '' }
+        }
+      } = result
+
+      showMessage({
+        type: 'success',
+        content: (
+          <a href={eosConfig.blockExplorerUrl.replace('(transaction)', tx)}>
+            {`${t('transferTokensTransaction')} ${tx.slice(0, 7)}`}
+          </a>
+        )
       })
     } catch (err) {
       const errorMessage = err.message.replace(
         'GraphQL error: assertion failure with message: ',
         ''
       )
+
       showMessage({
         type: 'error',
         content: errorMessage
       })
     }
+
+    setAccount('')
   }
-
-  useEffect(() => {
-    if (!dataCreateAccount) return
-
-    const { createAccount } = dataCreateAccount
-
-    setNewCreatedAccount(createAccount.account)
-    showMessage({
-      type: 'success',
-      content: `${t('newCreatedAccount')} ${newCreatedAccount}`
-    })
-  }, [dataCreateAccount, newCreatedAccount, showMessage, t])
-
-  useEffect(() => {
-    if (!dataTransferFaucetTokens) return
-
-    const { transferFaucetTokens } = dataTransferFaucetTokens
-
-    setTransferTokensTransaction(transferFaucetTokens.tx)
-  }, [dataTransferFaucetTokens])
 
   return (
     <Grid container spacing={2}>
