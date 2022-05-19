@@ -61,7 +61,7 @@ module.exports = {
 
       if (accounts.length) {
         return {
-          account: accounts.sort(compare).pop().account_name
+          account: input.name || accounts.sort(compare).pop().account_name
         }
       }
 
