@@ -28,7 +28,7 @@ const getBPJsonUrl = async (producer = {}) => {
 
   if (producer.owner === 'eosauthority') {
     producerUrl =
-      'https://ipfs.eosio.cr/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
+      'https://ipfs.edenia.cloud/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
 
     return producerUrl
   }
@@ -44,7 +44,7 @@ const getBPJsonUrl = async (producer = {}) => {
       data: { chains }
     } = await axios.get(chainsUrl)
     chainUrl = chains[ualConfig.network.chainId] || chainUrl
-  } catch (error) { }
+  } catch (error) {}
 
   return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
 }

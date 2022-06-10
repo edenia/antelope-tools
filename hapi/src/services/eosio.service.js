@@ -178,7 +178,7 @@ const getBPJsonUrl = async (producer = {}) => {
 
   if (producer.owner === 'eosauthority') {
     producerUrl =
-      'https://ipfs.eosio.cr/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
+      'https://ipfs.edenia.cloud/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
 
     return producerUrl
   }
