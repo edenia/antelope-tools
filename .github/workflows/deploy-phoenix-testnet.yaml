@@ -110,7 +110,7 @@ jobs:
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
           HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=btc&vs_currencies=usd'
           HAPI_COINGECKO_API_TOKEN_ID: BTC
-          HAPI_REWARDS_TOKEN: phoenix
+          HAPI_REWARDS_TOKEN: LIBRE
           HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
           HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
