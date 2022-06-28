@@ -52,7 +52,7 @@ jobs:
           REACT_APP_EOS_API_HOST: 'phoenix-testnet.edenia.cloud'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
-          REACT_APP_EOS_CHAIN_ID: '7b5899e99b52d06a6a205ef656179b696f0e12583d8df273b629153e0d90f9bb'
+          REACT_APP_EOS_CHAIN_ID: '5a8d542cf84fa3125e9a40f66b6dcba803d20666f1aae1c593e0f608abefd087'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
           REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
@@ -87,7 +87,7 @@ jobs:
           # hapi
           HAPI_EOS_API_NETWORK_NAME: phoenix-testnet
           HAPI_EOS_API_ENDPOINT: https://phoenix-testnet.edenia.cloud
-          HAPI_EOS_API_CHAIN_ID: 7b5899e99b52d06a6a205ef656179b696f0e12583d8df273b629153e0d90f9bb
+          HAPI_EOS_API_CHAIN_ID: 5a8d542cf84fa3125e9a40f66b6dcba803d20666f1aae1c593e0f608abefd087
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
