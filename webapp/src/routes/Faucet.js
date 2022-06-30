@@ -38,7 +38,7 @@ const Faucet = () => {
   const createAccount = async () => {
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    if (eosConfig.networkName === 'phoenix-testnet') {
+    if (eosConfig.networkName === 'libre-testnet') {
       if (
         !reCaptchaToken ||
         (!createAccountValues.publicKey && !createAccountValues.accountName)
@@ -149,7 +149,7 @@ const Faucet = () => {
                   }
                 />
               </Grid>
-              {eosConfig.networkName === 'phoenix-testnet' && (
+              {eosConfig.networkName === 'libre-testnet' && (
                 <Grid item>
                   <TextField
                     key="action-field-issue-tokens"
