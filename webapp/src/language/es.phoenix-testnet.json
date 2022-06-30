@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Monitor de infraestructura y panel de control de red Phoenix Testnet",
+    "/>title": "Monitor de infraestructura y panel de control de red Libre Testnet",
     "/cpu-benchmark>title": "Benchmark de CPU - Panel",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/rewards-distribution>title": "Distribución de recompensas - Panel",
@@ -8,9 +8,9 @@
     "/nodes-distribution>title": "Distribución Geográfica de Nodos",
     "/accounts>title": "Cuentas y Contratos - Panel",
     "/bpjson>title": "BP JSON - Panel",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Phoenix Testnet",
-    "/block-distribution>title": "Distribución de bloques - Phoenix Testnet",
-    "/endpoints>title": "URL's - Phoenix Testnet",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Libre Testnet",
+    "/block-distribution>title": "Distribución de bloques - Libre Testnet",
+    "/endpoints>title": "URL's - Libre Testnet",
     "/about>title": "Acerca de - Panel",
     "/help>title": "Ayuda - Panel",
     "/rewards-distribution>moreDescription": "Distribución diaria de recompensas de BP por ubicación geográfica de los productores de bloques pagados.",

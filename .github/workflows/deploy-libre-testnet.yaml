@@ -1,14 +1,14 @@
-name: Build images for phoenix testnet environment
+name: Build images for libre testnet environment
 
 on:
   push:
     tags:
-      - phoenix-testnet-v*
+      - libre-testnet-v*
 
 jobs:
-  create-phoenix-testnet-image:
+  create-libre-testnet-image:
     runs-on: ubuntu-latest
-    environment: phoenix-testnet
+    environment: libre-testnet
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2.4.0
@@ -36,20 +36,20 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: '80'
-          REACT_APP_TITLE: 'Phoenix Testnet Network Dashboard'
+          REACT_APP_TITLE: 'Libre Testnet Network Dashboard'
           REACT_APP_TAG: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://phoenix-testnet.eosio.online/phoenix.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Phoenix Website", "src": "https://phoenix.org/" },{ "text": "Phoenix Block Explorer", "src": "https://phoenix-explorer.edenia.cloud/" },{"text": "Support","src": "#"},{"text": "Phoenix Network Monitor","src": "https://phoenix-testnet.eosio.online"}]'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/libre.png'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Bitcoin Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://libre-testnet-explorer.edenia.cloud/" },{"text": "Support","src": "#"},{"text": "Libre Network Monitor","src": "https://libre-testnet.eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-phoenix-testnet.eosio.online/v1/graphql'
-          REACT_APP_EOS_API_NETWORK_NAME: 'phoenix-testnet'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'Phoenix Testnet'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://phoenix-testnet.eosio.online/phoenix.png'
-          REACT_APP_EOS_API_HOST: 'phoenix-testnet.edenia.cloud'
+          REACT_APP_HASURA_URL: 'https://graphql-libre-testnet.eosio.online/v1/graphql'
+          REACT_APP_EOS_API_NETWORK_NAME: 'libre-testnet'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'Libre Testnet'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://eosio.online/images/libre.png'
+          REACT_APP_EOS_API_HOST: 'libre-testnet.edenia.cloud'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '5a8d542cf84fa3125e9a40f66b6dcba803d20666f1aae1c593e0f608abefd087'
@@ -62,7 +62,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
           REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://phoenix-explorer.edenia.cloud/transaction/(transaction)'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://libre-testnet-explorer.edenia.cloud/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
@@ -74,19 +74,19 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: phoenix-testnet-dashboard
-          INGRESS_HOST: phoenix-testnet.eosio.online
-          INGRESS_GRAPHQL_HOST: graphql-phoenix-testnet.eosio.online
+          NAMESPACE: libre-testnet-dashboard
+          INGRESS_HOST: libre-testnet.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-libre-testnet.eosio.online
           # webapp
-          REACT_APP_EOS_API_NETWORK_NAME: phoenix-testnet
+          REACT_APP_EOS_API_NETWORK_NAME: libre-testnet
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_NETWORK_NAME: phoenix-testnet
-          HAPI_EOS_API_ENDPOINT: https://phoenix-testnet.edenia.cloud
+          HAPI_EOS_API_NETWORK_NAME: libre-testnet
+          HAPI_EOS_API_ENDPOINT: https://libre-testnet.edenia.cloud
           HAPI_EOS_API_CHAIN_ID: 5a8d542cf84fa3125e9a40f66b6dcba803d20666f1aae1c593e0f608abefd087
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
@@ -128,7 +128,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: phoenix-testnet-dashboard
+          NAMESPACE: libre-testnet-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes

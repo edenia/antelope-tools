@@ -284,7 +284,7 @@ switch (eosConfig.networkName) {
     routes = [...lacchainRoutes, ...helpRoutes]
     break
   case 'ultra-testnet':
-  case 'phoenix-testnet':
+  case 'libre-testnet':
     routes = [...defaultRoutes, ...advanceRoutes, ...helpRoutes]
     break
   default:
