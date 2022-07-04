@@ -1,0 +1,134 @@
+name: Build images for libre mainnet environment
+
+on:
+  push:
+    tags:
+      - libre-v*
+
+jobs:
+  create-libre-image:
+    runs-on: ubuntu-latest
+    environment: libre
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@1.0.8
+
+      - name: Log in to docker registry
+        run: |
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
+            --username ${{ secrets.DOCKER_HUB_USER }} \
+            --password-stdin
+
+      - name: 'step-log'
+        run: |
+          echo "github.ref: ${{github.ref}}"
+
+      - name: Build new images and push
+        run: |
+          make \
+            build-docker-images \
+            push-docker-images
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          # webapp
+          PORT: '80'
+          REACT_APP_TITLE: 'Libre Network Dashboard'
+          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/libre.png'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Bitcoin Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://libre-explorer.edenia.cloud/" },{"text": "Support","src": "#"},{"text": "Libre Network Monitor","src": "https://libre.eosio.online"}]'
+          REACT_APP_EOS_RATE_LINK: ''
+          REACT_APP_USE_REWARDS: 'false'
+          REACT_APP_USE_VOTES: 'false'
+          REACT_APP_USE_CPU_BENCHMARK: 'false'
+          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
+          REACT_APP_HASURA_URL: 'https://graphql-libre.eosio.online/v1/graphql'
+          REACT_APP_EOS_API_NETWORK_NAME: 'libre'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'Libre Mainnet'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://eosio.online/images/libre.png'
+          REACT_APP_EOS_API_HOST: 'libre.edenia.cloud'
+          REACT_APP_EOS_API_PORT: '443'
+          REACT_APP_EOS_API_PROTOCOL: 'https'
+          REACT_APP_EOS_CHAIN_ID: '4755ece011316f4ce3d8d185fd4bf94a638c3f9090fda2a5bb3afebdf6de8070'
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
+          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
+          REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
+          REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
+          REACT_APP_TOKEN_SYMBOL: ${{ secrets.REACT_APP_TOKEN_SYMBOL }}
+          REACT_APP_NETWORK_URL: ${{ secrets.REACT_APP_NETWORK_URL }}
+          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://libre-explorer.edenia.cloud/transaction/(transaction)'
+          REACT_APP_STATE_HISTORY_ENABLED=: 'false'
+          REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
+          REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
+
+      - name: Build and deploy kubernetes files
+        id: build_kubernetes_files
+        run: |
+          make \
+            build-kubernetes
+        env:
+          # general
+          NAMESPACE: libre-dashboard
+          INGRESS_HOST: libre.eosio.online
+          INGRESS_GRAPHQL_HOST: graphql-libre.eosio.online
+          # webapp
+          REACT_APP_EOS_API_NETWORK_NAME: libre
+          # postgres
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
+          # hapi
+          HAPI_EOS_API_NETWORK_NAME: libre
+          HAPI_EOS_API_ENDPOINT: https://libre.edenia.cloud
+          HAPI_EOS_API_CHAIN_ID: 4755ece011316f4ce3d8d185fd4bf94a638c3f9090fda2a5bb3afebdf6de8070
+          HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
+          HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
+          HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
+          HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_FAUCET_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT_PASSWORD }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
+          HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
+          HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
+          HAPI_EOS_BP_JSON_ON_CHAIN_TABLE: producerjson
+          HAPI_EOS_BP_JSON_ON_CHAIN_SCOPE: producerjson
+          HAPI_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
+          HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          HAPI_SERVER_PORT: '9090'
+          HAPI_SERVER_ADDRESS: '0.0.0.0'
+          HAPI_DATABASE_URL: ${{ secrets.HAPI_DATABASE_URL }}
+          HAPI_SYNC_PRODUCERS_INTERVAL: '86400'
+          HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
+          HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
+          HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
+          HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=btc&vs_currencies=usd'
+          HAPI_COINGECKO_API_TOKEN_ID: BTC
+          HAPI_REWARDS_TOKEN: LIBRE
+          HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
+          HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          HAPI_EOS_GET_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_GET_FAUCET_ACCOUNT }}
+          HAPI_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.HAPI_PUBLIC_RE_CAPTCHA_KEY }}
+          HAPI_RE_CAPTCHA_PROJECT_ID: ${{ secrets.HAPI_RE_CAPTCHA_PROJECT_ID }}
+          # hasura
+          HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+          HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+          HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
+          HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
+
+      - name: Setup and deploy kubernetes environment
+        uses: steebchen/kubectl@v1.1.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          NAMESPACE: libre-dashboard
+          K8S_BUILD_DIR: build_k8s
+        with:
+          args: version && make deploy-kubernetes
