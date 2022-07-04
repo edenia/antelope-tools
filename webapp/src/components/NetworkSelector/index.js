@@ -15,6 +15,7 @@ import protonImg from '../../assets/proton.png'
 import eosImg from '../../assets/eos.png'
 import airwireImg from '../../assets/airwire.png'
 import ultraImg from '../../assets/ultra.jpg'
+import libreImg from '../../assets/libre.png'
 
 import styles from './styles'
 
@@ -48,6 +49,9 @@ const LogoSvg = ({ name }) => {
 
     case 'ultra':
       return <img src={ultraImg} alt="ultra" className={classes.ultraImg} />
+
+    case 'libre':
+      return <img src={libreImg} alt="libre" className={classes.libreImg} />
 
     default:
       return <img src={eosImg} alt="eos" className={classes.eosImg} />
