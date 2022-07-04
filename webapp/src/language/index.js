@@ -9,6 +9,8 @@ import enTelosTestnet from './en.telos-testnet.json'
 import esTelosTestnet from './es.telos-testnet.json'
 import enLibreTestnet from './en.libre-testnet.json'
 import esLibreTestnet from './es.libre-testnet.json'
+import enLibre from './en.libre.json'
+import esLibre from './es.libre.json'
 import enTelos from './en.telos.json'
 import esTelos from './es.telos.json'
 import enJungle from './en.jungle.json'
@@ -49,6 +51,8 @@ const languajes = {
   'en.telos-testnet': enTelosTestnet,
   'es.libre-testnet': esLibreTestnet,
   'en.libre-testnet': enLibreTestnet,
+  'es.libre': esLibre,
+  'en.libre': enLibre,
   'es.proton-testnet': esProtonTestnet,
   'en.proton-testnet': enProtonTestnet,
   'es.wax-testnet': esWaxTestnet,
