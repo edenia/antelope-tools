@@ -180,5 +180,10 @@ export default (theme) => ({
     width: '24px !important',
     height: '24px !important',
     marginRight: theme.spacing(2)
+  },
+  ultraImg: {
+    width: '24px !important',
+    height: '24px !important',
+    marginRight: theme.spacing(2)
   }
 })
