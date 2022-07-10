@@ -88,7 +88,7 @@ services:
       # HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}"
   webapp:
     container_name: '${STAGE}-${APP_NAME}-webapp'
-    image: node:14.18.3
+    image: node:18.4.0
     stdin_open: true
     ports:
       - '3000:3000'
