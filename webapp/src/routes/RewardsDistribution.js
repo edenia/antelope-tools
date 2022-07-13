@@ -32,7 +32,7 @@ import { eosConfig } from '../config'
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
 const geoUrl =
-  'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json'
+  'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/v2/topojson-maps/world-110m.json'
 
 const useStyles = makeStyles((theme) => ({
   action: {
