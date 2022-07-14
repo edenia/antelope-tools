@@ -8,11 +8,11 @@ import { formatWithThousandSeparator } from '../../utils'
 import { NODES_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
 
-const Card = lazy(() => import('@material-ui/core/Card'))
-const CardContent = lazy(() => import('@material-ui/core/CardContent'))
-const Grid = lazy(() => import('@material-ui/core/Grid'))
-const Typography = lazy(() => import('@material-ui/core/Typography'))
-const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
+const Card = lazy(() => import('@mui/material/Card'))
+const CardContent = lazy(() => import('@mui/material/CardContent'))
+const Grid = lazy(() => import('@mui/material/Grid'))
+const Typography = lazy(() => import('@mui/material/Typography'))
+const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
   import('../../components/TransactionsHistory')

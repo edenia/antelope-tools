@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import Divider from '@material-ui/core/Divider'
-import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import { makeStyles } from '@mui/material/styles'
 
 const defaultIcon =
   'https://icons.iconarchive.com/icons/custom-icon-design/mono-general-2/512/document-icon.png'

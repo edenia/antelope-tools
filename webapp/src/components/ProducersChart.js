@@ -1,11 +1,11 @@
 /* eslint camelcase: 0 */
 import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/styles'
-import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@mui/styles'
+import Typography from '@mui/material/Typography'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../utils'

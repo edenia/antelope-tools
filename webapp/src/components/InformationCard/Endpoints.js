@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@mui/material/Typography'
 import clsx from 'clsx'
-import Box from '@material-ui/core/Box'
-import Link from '@material-ui/core/Link'
+import Box from '@mui/material/Box'
+import Link from '@mui/material/Link'
 
 const Endpoints = ({ endpoints, classes, type, t }) => {
   if (type !== 'node') return <></>

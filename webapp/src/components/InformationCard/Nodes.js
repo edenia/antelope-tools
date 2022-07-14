@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
   if (type === 'node') return <></>

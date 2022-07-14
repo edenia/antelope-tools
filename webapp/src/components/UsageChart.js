@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@mui/material/styles'
 import { ResponsiveContainer, BarChart, Bar, Tooltip } from 'recharts'
 import styled from 'styled-components'
 

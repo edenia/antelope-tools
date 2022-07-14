@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { ExpandLess, ExpandMore } from '@material-ui/icons'
+import { ExpandLess, ExpandMore } from '@mui/icons-material'
 import {
   Box,
   Chip,
@@ -11,9 +11,9 @@ import {
   ListItem as MuiListItem,
   ListItemText,
   Typography
-} from '@material-ui/core'
+} from '@mui/material'
 import styled from 'styled-components'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import { rgba, darken } from 'polished'
 import { NavLink as RouterNavLink, withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

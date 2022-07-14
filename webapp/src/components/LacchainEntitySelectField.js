@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-import { TextField } from '@material-ui/core'
+import Autocomplete from '@mui/material/Autocomplete'
+import { TextField } from '@mui/material'
 
 import { useSharedState } from '../context/state.context'
 

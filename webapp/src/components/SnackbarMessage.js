@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/styles'
-import Snackbar from '@material-ui/core/Snackbar'
-import Alert from '@material-ui/lab/Alert'
-import CloseIcon from '@material-ui/icons/Close'
-import { Box, IconButton, Typography } from '@material-ui/core'
+import { makeStyles } from '@mui/styles'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
+import CloseIcon from '@mui/icons-material/Close'
+import { Box, IconButton, Typography } from '@mui/material'
 
 import { useSnackbarMessageState } from '../context/snackbar-message.context'
 

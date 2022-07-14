@@ -1,12 +1,12 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import LaunchIcon from '@material-ui/icons/Launch'
+import Card from '@mui/material/Card'
+import Grid from '@mui/material/Grid'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import LinearProgress from '@mui/material/LinearProgress'
+import LaunchIcon from '@mui/icons-material/Launch'
 import { useSubscription } from '@apollo/client'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../gql'

@@ -1,8 +1,8 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, lazy } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Box from '@material-ui/core/Box'
+import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
 
 import { ALL_NODES_QUERY } from '../gql'
 

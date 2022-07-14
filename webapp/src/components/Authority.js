@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { TextField } from '@material-ui/core'
-import Chip from '@material-ui/core/Chip'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import { TextField } from '@mui/material'
+import Chip from '@mui/material/Chip'
+import InputAdornment from '@mui/material/InputAdornment'
 
 const Authority = ({ value, onChange, label, variant, className, t }) => {
   const [key, setKey] = useState()

@@ -1,4 +1,4 @@
-import { blue, green, grey } from '@material-ui/core/colors'
+import { blue, green, grey } from '@mui/material/colors'
 
 const lightVariant = {
   name: 'Light',

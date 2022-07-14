@@ -2,7 +2,7 @@ import React from 'react'
 import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
-import Box from '@material-ui/core/Box'
+import Box from '@mui/material/Box'
 
 const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
   const options = {

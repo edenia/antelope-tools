@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react'
 import zc from '@dvsl/zoomcharts'
-import { makeStyles } from '@material-ui/styles'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 
 import lacchain from '../../utils/lacchain'
 

@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled, { withTheme } from 'styled-components'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme, makeStyles } from '@mui/styles'
-import {
-  Grid,
-  Hidden,
-  Menu,
-  MenuItem,
-  AppBar as MuiAppBar,
-  IconButton as MuiIconButton
-} from '@mui/material'
+import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
@@ -26,29 +18,6 @@ import 'moment/locale/es'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
-
-const AppBar = styled(MuiAppBar)`
-  background: ${(props) => props.theme.header.background};
-  color: ${(props) => props.theme.header.color};
-  box-shadow: ${(props) => props.theme.shadows[1]};
-`
-
-const IconButton = styled(MuiIconButton)`
-  svg {
-    width: 22px;
-    height: 22px;
-  }
-`
-
-const UserBox = styled(Box)`
-  display: flex;
-  float: right;
-  justify-content: center;
-  align-items: center;
-  button {
-    color: #757575;
-  }
-`
 
 const languages = [
   {
@@ -164,7 +133,7 @@ const Header = ({ ual, onDrawerToggle }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
-    <AppBar position="sticky" elevation={0} sx={{ backgroundColor: 'white' }}>
+    <AppBar className={classes.appBar} position="sticky" elevation={0}>
       <Toolbar>
         <Grid container alignItems="center">
           {!isDesktop && (
@@ -172,6 +141,7 @@ const Header = ({ ual, onDrawerToggle }) => {
               <Grid item md={0} xs={1}>
                 <Hidden mdUp>
                   <IconButton
+                    className={classes.iconButton}
                     color="inherit"
                     aria-label="Open drawer"
                     onClick={onDrawerToggle}
@@ -190,10 +160,10 @@ const Header = ({ ual, onDrawerToggle }) => {
             </>
           )}
           <Grid item md={12} xs={7}>
-            <UserBox>
+            <div className={classes.userBox}>
               <LanguageMenu />
               <UserMenu ual={ual} />
-            </UserBox>
+            </div>
           </Grid>
         </Grid>
       </Toolbar>
@@ -206,4 +176,4 @@ Header.propTypes = {
   onDrawerToggle: PropTypes.func
 }
 
-export default withTheme(Header)
+export default Header

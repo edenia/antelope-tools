@@ -1,12 +1,12 @@
 /* eslint camelcase: 0 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/styles'
-import Tooltip from '@material-ui/core/Tooltip'
+import { makeStyles } from '@mui/styles'
+import Tooltip from '@mui/material/Tooltip'
 import { useTranslation } from 'react-i18next'
-import DoneOutlinedIcon from '@material-ui/icons/DoneOutlined'
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined'
-import { Box, Typography } from '@material-ui/core'
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined'
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined'
+import { Box, Typography } from '@mui/material'
 
 const useStyles = makeStyles(() => ({
   wrapper: {

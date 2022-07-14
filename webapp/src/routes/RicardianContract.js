@@ -1,7 +1,7 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
+import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
 import { eosConfig } from '../config'

@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from '@material-ui/core/Link'
-import LanguageIcon from '@material-ui/icons/Language'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import YouTubeIcon from '@material-ui/icons/YouTube'
-import FacebookIcon from '@material-ui/icons/Facebook'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import RedditIcon from '@material-ui/icons/Reddit'
-import TelegramIcon from '@material-ui/icons/Telegram'
-import Typography from '@material-ui/core/Typography'
+import Link from '@mui/material/Link'
+import LanguageIcon from '@mui/icons-material/Language'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import YouTubeIcon from '@mui/icons-material/YouTube'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import RedditIcon from '@mui/icons-material/Reddit'
+import TelegramIcon from '@mui/icons-material/Telegram'
+import Typography from '@mui/material/Typography'
 
 const prefix = {
   hive: 'https://hive.blog/@',

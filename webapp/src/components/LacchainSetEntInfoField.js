@@ -1,9 +1,9 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { TextField } from '@material-ui/core'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-import { makeStyles } from '@material-ui/core/styles'
+import { TextField } from '@mui/material'
+import Autocomplete from '@mui/material/Autocomplete'
+import { makeStyles } from '@mui/material/styles'
 import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../context/state.context'

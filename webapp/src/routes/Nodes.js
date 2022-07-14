@@ -2,16 +2,16 @@
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLazyQuery, useSubscription } from '@apollo/client'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
 import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../gql'
 
-const Box = lazy(() => import('@material-ui/core/Box'))
-const Grid = lazy(() => import('@material-ui/core/Grid'))
-const LinearProgress = lazy(() => import('@material-ui/core/LinearProgress'))
-const Pagination = lazy(() => import('@material-ui/lab/Pagination'))
+const Box = lazy(() => import('@mui/material/Box'))
+const Grid = lazy(() => import('@mui/material/Grid'))
+const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
+const Pagination = lazy(() => import('@mui/material/Pagination'))
 const NodeSearch = lazy(() => import('../components/NodeSearch'))
 const InformationCard = lazy(() => import('../components/InformationCard'))
 

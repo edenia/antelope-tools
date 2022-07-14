@@ -1,11 +1,9 @@
 import React from 'react'
-import { Button as MuiButton, Typography } from '@material-ui/core'
-import { spacing } from '@material-ui/system'
+import { Button, Typography } from '@mui/material'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
-const Button = styled(MuiButton)(spacing)
 const Wrapper = styled.div`
   padding: ${(props) => props.theme.spacing(6)}px;
   text-align: center;

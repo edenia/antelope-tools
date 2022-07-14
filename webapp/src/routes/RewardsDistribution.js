@@ -1,17 +1,17 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, useCallback } from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
-import Skeleton from '@material-ui/lab/Skeleton'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Box from '@material-ui/core/Box'
-import Paper from '@material-ui/core/Paper'
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
+import Skeleton from '@mui/material/Skeleton'
+import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 import {
   ComposableMap,
   Geographies,
