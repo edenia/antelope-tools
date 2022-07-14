@@ -28,7 +28,7 @@ spec:
       name: dashboard-webapp
       port: 80
   tls:
-    secretName: dashboard-tls-secret
+    certResolver: myresolver
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -60,4 +60,4 @@ spec:
       name: dashboard-hasura
       port: 8080
   tls:
-    secretName: dashboard-tls-secret
+    certResolver: myresolver
