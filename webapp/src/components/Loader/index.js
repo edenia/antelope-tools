@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { CircularProgress } from '@mui/material'
 
 import styles from './styles'

@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Grid'

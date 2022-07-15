@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { ArrayTextField } from '@eoscostarica/eoscr-components'
 
 import { useSharedState } from '../../context/state.context'

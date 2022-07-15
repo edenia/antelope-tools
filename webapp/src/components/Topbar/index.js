@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import IconButton from '@mui/material/IconButton'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,4 @@
-export default () => ({
+export default (theme) => ({
   root: {
     '& svg': {
       fontSize: '35px !important'

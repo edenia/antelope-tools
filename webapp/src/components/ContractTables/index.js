@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import FormControl from '@mui/material/FormControl'

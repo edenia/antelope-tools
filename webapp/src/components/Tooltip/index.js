@@ -1,7 +1,7 @@
 /* eslint camelcase: 0 */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Popover from '@mui/material/Popover'
 import CloseIcon from '@mui/icons-material/Close'

@@ -11,14 +11,14 @@ import { useTranslation } from 'react-i18next'
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { generalConfig } from '../../config'
 
+import styles from './styles'
+
 const RADIAN = Math.PI / 180
 
 const polarToCartesian = (cx, cy, radius, angle) => ({
   x: cx + Math.cos(-RADIAN * angle) * radius,
   y: cy + Math.sin(-RADIAN * angle) * radius
 })
-
-import styles from './styles'
 
 const useStyles = makeStyles(styles)
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
 

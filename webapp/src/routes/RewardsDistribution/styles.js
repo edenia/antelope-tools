@@ -1,4 +1,4 @@
-export default (theme) => ({
+export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   action: {
     cursor: 'pointer'
   },

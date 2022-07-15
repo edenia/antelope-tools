@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import TextField from '@mui/material/TextField'
 import Chip from '@mui/material/Chip'
 import MenuItem from '@mui/material/MenuItem'

@@ -36,7 +36,9 @@ const highestRewardsColor = '#265F63'
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/v2/topojson-maps/world-110m.json'
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles((theme) =>
+  styles(theme, lowestRewardsColor, highestRewardsColor)
+)
 
 const RewardsDistribution = () => {
   const [anchorEl, setAnchorEl] = useState(null)

@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTheme } from '@mui/material/styles'
 import { ResponsiveContainer, BarChart, Bar, Tooltip } from 'recharts'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
 

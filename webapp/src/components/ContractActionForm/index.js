@@ -1,7 +1,7 @@
 /* eslint complexity: 0 */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import TextField from '@mui/material/TextField'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
