@@ -11,27 +11,9 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    marginBottom: theme.spacing(1),
-    fontWeight: 400
-  },
-  boxLinks: {
-    display: 'flex',
-    marginTop: theme.spacing(3),
-    '& a': {
-      '&:hover': {
-        textDecoration: 'none'
-      }
-    },
-    '& svg': {
-      marginRight: theme.spacing(3)
-    },
-    '& p': {
-      marginTop: 0
-    }
-  }
-}))
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const Help = () => {
   const classes = useStyles()

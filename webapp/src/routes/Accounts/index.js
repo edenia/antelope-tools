@@ -19,25 +19,11 @@ import eosApi from '../../utils/eosapi'
 import getTransactionUrl from '../../utils/get-transaction-url'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
+import styles from './styles'
+
 const AccountInfo = lazy(() => import('../../components/AccountInfo'))
 
-const useStyles = makeStyles((theme) => ({
-  field: {
-    marginBottom: theme.spacing(2),
-    width: '100%'
-  },
-  alert: {
-    marginBottom: theme.spacing(2)
-  },
-  title: {
-    fontSize: 17,
-    fontWeight: '600',
-    lineHeight: '1.2',
-    letterSpacing: '0.06px',
-    textAlign: 'left',
-    marginBottom: theme.spacing(2)
-  }
-}))
+const useStyles = makeStyles(styles)
 
 const Accounts = ({ ual }) => {
   const classes = useStyles()

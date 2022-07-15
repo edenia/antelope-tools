@@ -8,6 +8,8 @@ import queryString from 'query-string'
 
 import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 
+import styles from './styles'
+
 const Box = lazy(() => import('@mui/material/Box'))
 const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
@@ -15,13 +17,7 @@ const Pagination = lazy(() => import('@mui/material/Pagination'))
 const NodeSearch = lazy(() => import('../../components/NodeSearch'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
 
-const useStyles = makeStyles((theme) => ({
-  pagination: {
-    padding: theme.spacing(3),
-    display: 'flex',
-    justifyContent: 'center'
-  }
-}))
+const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)

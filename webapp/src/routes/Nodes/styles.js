@@ -1,8 +1,7 @@
-export default () => ({
-  loaderBox: {
-    justifyContent: 'center',
-    alignItems: 'center',
+export default (theme) => ({
+  pagination: {
+    padding: theme.spacing(3),
     display: 'flex',
-    minHeight: '100%'
+    justifyContent: 'center'
   }
 })

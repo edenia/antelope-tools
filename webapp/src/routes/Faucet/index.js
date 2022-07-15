@@ -18,11 +18,9 @@ import {
 } from '../../gql'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(4, 4, 0, 0)
-  }
-}))
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const Faucet = () => {
   const classes = useStyles()

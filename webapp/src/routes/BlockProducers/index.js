@@ -17,6 +17,9 @@ import NodeCard from '../../components/NodeCard'
 import InformationCard from '../../components/InformationCard'
 import { eosConfig } from '../../config'
 
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 const CHIPS_FILTERS = [
   { offset: 0, where: null, limit: 28 },
   {
@@ -29,21 +32,6 @@ const CHIPS_FILTERS = [
     where: { total_rewards: { _eq: 0 } }
   }
 ]
-
-const useStyles = makeStyles((theme) => ({
-  searchWrapper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3)
-  },
-  pagination: {
-    padding: theme.spacing(3),
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  formControl: {
-    width: '100%'
-  }
-}))
 
 const PaginationWrapper = ({
   classes,

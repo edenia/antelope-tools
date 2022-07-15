@@ -1,8 +1,5 @@
-export default () => ({
-  loaderBox: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
-    minHeight: '100%'
+export default (theme) => ({
+  formControl: {
+    margin: theme.spacing(4, 4, 0, 0)
   }
 })

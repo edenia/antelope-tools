@@ -1,8 +1,21 @@
-export default () => ({
-  loaderBox: {
-    justifyContent: 'center',
-    alignItems: 'center',
+export default (theme) => ({
+  title: {
+    marginBottom: theme.spacing(1),
+    fontWeight: 400
+  },
+  boxLinks: {
     display: 'flex',
-    minHeight: '100%'
+    marginTop: theme.spacing(3),
+    '& a': {
+      '&:hover': {
+        textDecoration: 'none'
+      }
+    },
+    '& svg': {
+      marginRight: theme.spacing(3)
+    },
+    '& p': {
+      marginTop: 0
+    }
   }
 })

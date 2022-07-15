@@ -5,31 +5,9 @@ import { makeStyles } from '@mui/styles'
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
 import { eosConfig } from '../../config'
+import styles from './styles'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& svg': {
-      fontSize: '35px !important'
-    },
-    '& h4': {
-      fontSize: '15px !important',
-      fontWeight: '600'
-    },
-    '& a': {
-      lineBreak: 'anywhere'
-    },
-    [theme.breakpoints.up('sm')]: {
-      '& svg': {
-        fontSize: '45px !important'
-      },
-
-      '& h4': {
-        fontSize: '34px !important',
-        fontWeight: 'normal'
-      }
-    }
-  }
-}))
+const useStyles = makeStyles(styles)
 
 const RicardianContract = () => {
   const classes = useStyles()
