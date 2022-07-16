@@ -1,3 +1,5 @@
+import { important } from 'polished'
+
 export default (theme, rgba) => ({
   drawer: {
     borderRight: 0,
@@ -12,11 +14,11 @@ export default (theme, rgba) => ({
     backgroundColor: theme.sidebar.background
   },
   listItem: {
-    padding: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start',
-    justifyContent: 'center'
+    padding: '0 !important',
+    display: 'flex !important',
+    flexDirection: 'column !important',
+    alignItems: 'start !important',
+    justifyContent: 'center !important'
   },
   brand: {
     fontSize: theme.typography.h5.fontSize,
@@ -69,13 +71,12 @@ export default (theme, rgba) => ({
     marginBottom: 0
   },
   linkBadge: {
-    fontSize: 11,
+    fontSize: '11px !important',
     fontWeight: theme.typography.fontWeightBold,
-    height: 20,
+    height: '20px !important',
     position: 'absolute',
     right: 12,
-    top: 8,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: `${theme.palette.secondary.main} !important`,
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',

@@ -14,28 +14,6 @@ import {
 import { scaleOrdinal } from 'd3-scale'
 import { makeStyles } from '@mui/styles'
 import moment from 'moment'
-// import styled from 'styled-components'
-
-// const ResponsiveContainerWrapper = styled(ResponsiveContainer)`
-//   .recharts-tooltip {
-//     font-family: Roboto;
-//     font-style: normal;
-//     font-weight: 500;
-//     color: #fff;
-//     background-color: #616161;
-//     border-radius: ${(props) => props.theme.spacing(1)}px;
-//     padding: ${(props) => props.theme.spacing(2)}px;
-//   }
-//   .recharts-tooltip-label {
-//     margin: 0px;
-//   }
-//   .recharts-tooltip-list {
-//     margin: 0;
-//     padding: 0;
-//   }
-//   .recharts-tooltip-list-item {
-//   }
-// `
 
 import styles from './styles'
 

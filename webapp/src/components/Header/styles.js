@@ -18,7 +18,8 @@ export default (theme) => ({
   iconButton: {
     '& svg': {
       width: 22,
-      height: 22
+      height: 22,
+      color: 'rgba(0, 0, 0, 0.54)'
     }
   },
   userBox: {

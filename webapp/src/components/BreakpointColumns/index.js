@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles, useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import ColumnCreator from './ColumnCreator'
 

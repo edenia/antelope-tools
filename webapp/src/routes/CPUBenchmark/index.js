@@ -133,7 +133,7 @@ const CPUBenchmark = () => {
                 <Typography component="p" variant="h6">
                   {t('title')}
                 </Typography>
-                <FormControl>
+                <FormControl variant="standard">
                   <InputLabel id="demo-simple-select-label">
                     {t('timeFrame')}
                   </InputLabel>

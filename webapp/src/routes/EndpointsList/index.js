@@ -122,7 +122,7 @@ const EndpointsList = () => {
                     </Typography>
                   )}
                 </Box>
-                <FormControl>
+                <FormControl variant="standard">
                   <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
                   <Select
                     style={{

@@ -7,11 +7,11 @@ export default (theme) => ({
     marginBottom: theme.spacing(2)
   },
   title: {
-    fontSize: 17,
-    fontWeight: '600',
-    lineHeight: '1.2',
+    fontSize: '17px !important',
+    fontWeight: '600 !important',
+    lineHeight: '1.2 !important !important',
     letterSpacing: '0.06px',
-    textAlign: 'left',
-    marginBottom: theme.spacing(2)
+    textAlign: 'left !important',
+    marginBottom: `${theme.spacing(2)} !important`
   }
 })

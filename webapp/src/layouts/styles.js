@@ -17,6 +17,7 @@ export default (theme, drawerWidth) => ({
     overflow: 'hidden'
   },
   mainContent: {
+    padding: theme.spacing(4),
     flex: 1,
     background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
@@ -36,7 +37,8 @@ export default (theme, drawerWidth) => ({
     width: '100%',
     '& h3': {
       marginTop: theme.spacing(4),
-      textAlign: 'center'
+      textAlign: 'center',
+      marginBottom: theme.spacing(2)
     },
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
