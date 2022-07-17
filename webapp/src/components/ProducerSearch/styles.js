@@ -14,7 +14,7 @@ export default (theme) => ({
     color: `${theme.palette.common.white} !important`
   },
   cardContent: {
-    padding: `${theme.spacing(2)}px !important`
+    padding: `${theme.spacing(2)} !important`
   },
   title: {
     fontSize: '17px !important',

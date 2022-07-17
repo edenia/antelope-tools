@@ -58,7 +58,7 @@ export default (theme, eosConfig) => ({
     paddingRight: 4
   },
   cardContent: {
-    padding: `${theme.spacing(2)}px !important`
+    padding: `${theme.spacing(2)} !important`
   },
   nodeSearchWrapper: {
     marginBottom: theme.spacing(2)
@@ -80,6 +80,6 @@ export default (theme, eosConfig) => ({
     lineHeight: '1.2 !important !important',
     letterSpacing: '0.06px',
     textAlign: 'left !important',
-    marginBottom: `${theme.spacing(2)} !important`
+    marginBottom: '2px !important'
   }
 })
