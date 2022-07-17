@@ -1,5 +1,3 @@
-import { important } from 'polished'
-
 export default (theme, rgba) => ({
   drawer: {
     borderRight: 0,
