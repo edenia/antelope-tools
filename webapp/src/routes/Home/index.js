@@ -1,5 +1,5 @@
 import React, { lazy, useEffect } from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
@@ -7,7 +7,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Box = lazy(() => import('@material-ui/core/Box'))
+const Box = lazy(() => import('@mui/material/Box'))
 const BlockProducerInfo = lazy(() => import('./BlockProducerInfo'))
 
 const Home = () => {

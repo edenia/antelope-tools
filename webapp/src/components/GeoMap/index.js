@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import clsx from 'clsx'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { generalConfig } from '../../config'
 

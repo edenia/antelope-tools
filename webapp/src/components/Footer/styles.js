@@ -1,14 +1,15 @@
 export default (theme) => ({
   wrapper: {
-    padding: `${theme.spacing(1) / 4}px ${theme.spacing(4)}px`,
+    display: 'flex',
+    padding: `1px ${theme.spacing(4)}`,
     background: theme.palette.common.white,
     position: 'relative'
   },
   listItem: {
     display: 'inline-block',
-    width: 'auto',
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    width: 'auto !important',
+    paddingLeft: `${theme.spacing(2)} !important`,
+    paddingRight: `${theme.spacing(2)} !important`,
     '&, &:hover, &:active': {
       color: theme.palette.common.black
     },
@@ -61,5 +62,9 @@ export default (theme) => ({
   footerImg: {
     width: 24,
     marginRight: theme.spacing(1)
+  },
+  footerMenuWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 })

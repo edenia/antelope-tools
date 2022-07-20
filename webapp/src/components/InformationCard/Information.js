@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import Link from '@material-ui/core/Link'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
+import Link from '@mui/material/Link'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 import CountryFlag from '../CountryFlag'
 

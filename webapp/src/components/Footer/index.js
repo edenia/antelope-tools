@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@mui/styles'
 import {
   Grid,
   List,
@@ -7,7 +7,7 @@ import {
   ListItem,
   Box,
   Typography
-} from '@material-ui/core'
+} from '@mui/material'
 
 import { generalConfig } from '../../config'
 
@@ -19,9 +19,9 @@ const Footer = () => {
   const classes = useStyles()
 
   return (
-    <Box className={classes.wrapper} display="flex">
+    <div className={classes.wrapper}>
       <Grid container item xs={12} sm={8}>
-        <List>
+        <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
               <ListItemText
@@ -60,7 +60,7 @@ const Footer = () => {
           </Grid>
         </Box>
       </Grid>
-    </Box>
+    </div>
   )
 }
 

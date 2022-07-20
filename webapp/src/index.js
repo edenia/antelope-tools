@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import { createRoot } from 'react-dom/client'
 import { UALProvider, withUAL } from '@eoscostarica/ual-reactjs-renderer'
 import { ApolloProvider } from '@apollo/client'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import { StylesProvider } from '@material-ui/styles'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+import { StylesProvider } from '@mui/styles'
 import { ThemeProvider } from 'styled-components'
 
 import App from './App'
@@ -16,8 +16,10 @@ import './i18n'
 import { ualConfig } from './config'
 
 const AppWithUAL = withUAL(App)
+const container = document.getElementById('root')
+const root = createRoot(container)
 
-render(
+root.render(
   <UALProvider
     chains={[ualConfig.network]}
     authenticators={ualConfig.authenticators}
@@ -34,8 +36,7 @@ render(
         </StylesProvider>
       </Provider>
     </ApolloProvider>
-  </UALProvider>,
-  document.getElementById('root')
+  </UALProvider>
 )
 
 // If you want your app to work offline and load faster, you can change

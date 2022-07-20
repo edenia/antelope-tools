@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { createGlobalStyle } from 'styled-components'
-import { makeStyles } from '@material-ui/styles'
-import Hidden from '@material-ui/core/Hidden'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import { isWidthUp } from '@material-ui/core/withWidth'
+import { makeStyles } from '@mui/styles'
+import Hidden from '@mui/material/Hidden'
+import CssBaseline from '@mui/material/CssBaseline'
+import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Grid from '@mui/material/Grid'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -89,11 +87,11 @@ const Dashboard = ({ children, width, ual }) => {
   }, [location.pathname, lacchain.dynamicTitle, t])
 
   return (
-    <Box className={classes.root}>
+    <div className={classes.root}>
       <CssBaseline />
       <GlobalStyle />
       <PageTitle title={t(routeName.pageTitle)} />
-      <Box className={classes.drawer}>
+      <div className={classes.drawer}>
         <Hidden mdUp implementation="js">
           <Sidebar
             PaperProps={{ style: { width: drawerWidth } }}
@@ -105,12 +103,12 @@ const Dashboard = ({ children, width, ual }) => {
         <Hidden smDown implementation="css">
           <Sidebar PaperProps={{ style: { width: drawerWidth } }} />
         </Hidden>
-      </Box>
-      <Box className={classes.appContent}>
+      </div>
+      <div className={classes.appContent}>
         <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
-        <Box className={classes.mainContent} p={isWidthUp('lg', width) ? 6 : 4}>
-          <Box className={classes.subHeader}>
-            <Box className={classes.boxHeader}>
+        <div className={classes.mainContent}>
+          <div className={classes.subHeader}>
+            <div className={classes.boxHeader}>
               <Grid container>
                 <Grid item md={12} xs={xsSize}>
                   <Typography
@@ -131,19 +129,19 @@ const Dashboard = ({ children, width, ual }) => {
                   </Typography>
                 </Grid>
               </Grid>
-            </Box>
+            </div>
             <NetworkSelector
               title={eosConfig.networkLabel}
               networkLogo={eosConfig.networkLogo}
               options={generalConfig.networkLinks}
             />
-          </Box>
+          </div>
           {children}
-        </Box>
+        </div>
         <Footer />
-      </Box>
+      </div>
       <SnackbarMessage />
-    </Box>
+    </div>
   )
 }
 
