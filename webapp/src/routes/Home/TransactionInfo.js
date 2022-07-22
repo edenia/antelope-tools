@@ -50,9 +50,7 @@ const TransactionInfo = ({ t, classes }) => {
     const trxPerSecond = []
     const trxPerBlock = []
 
-    if (pause || option !== options[0]) {
-      return
-    }
+    if (pause || option !== options[0]) return
 
     for (let index = 0; index < tpb.length; index++) {
       trxPerBlock.push({
@@ -86,9 +84,7 @@ const TransactionInfo = ({ t, classes }) => {
   }, [option, tps, tpb])
 
   useEffect(() => {
-    if (option === options[0]) {
-      return
-    }
+    if (option === options[0]) return
 
     setGraphicData([])
     getTransactionHistory({
@@ -101,9 +97,7 @@ const TransactionInfo = ({ t, classes }) => {
       ? data.trxHistory[0].transaction_history
       : null
 
-    if (option === option[0]) {
-      return
-    }
+    if (option === option[0]) return
 
     if (!trxHistory) {
       setGraphicData([])

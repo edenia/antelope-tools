@@ -7,7 +7,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
   if (type === 'node') return <></>
 
-  if (!nodes.length)
+  if (!nodes?.length)
     return (
       <Box className={classes.nodes}>
         <Typography variant="overline">{t('nodes')}</Typography>

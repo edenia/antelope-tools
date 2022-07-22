@@ -22,6 +22,7 @@ import styles from './styles'
 const useStyles = makeStyles(styles)
 
 const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+  const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
   const [table, setTable] = useState('')
@@ -30,7 +31,6 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [lowerBound, setLowerBound] = useState(null)
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
-  const { t } = useTranslation('contractTablesComponent')
 
   const handleTableChange = (value) => {
     setTable(value)
@@ -195,7 +195,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
               )}
             </TableBody>
           </Table>
-          {tableData.more && (
+          {tableData?.more && (
             <Box display="flex" justifyContent="center" p={2}>
               <Button
                 variant="contained"

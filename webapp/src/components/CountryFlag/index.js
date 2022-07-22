@@ -15,7 +15,7 @@ const CountryFlag = ({ code = '' }) => {
   return (
     <span className={classes.country}>
       {!code && <UnknowFlagIcon />}
-      {code && (
+      {!!code && (
         <span
           className={`flag-icon flag-icon-squared flag-icon-${code.toLocaleLowerCase()}`}
         />
