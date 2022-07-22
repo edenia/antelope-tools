@@ -124,7 +124,7 @@ const BlockDistribution = () => {
                 </FormControl>
               </Box>
               {loading && <LinearProgress />}
-              {!loading && data?.items.length > 0 && (
+              {!loading && data?.items?.length > 0 && (
                 <>
                   <HighchartsReact
                     highcharts={Highcharts}
@@ -169,7 +169,5 @@ const BlockDistribution = () => {
     </Grid>
   )
 }
-
-BlockDistribution.propTypes = {}
 
 export default BlockDistribution

@@ -20,7 +20,7 @@ const LacchainAddEntityActionEntityTypeField = ({
     { value: 2, label: t('entityType2') }
   ]
 
-  const handleOnFieldChange = (event, item) => {
+  const handleOnFieldChange = (_, item) => {
     onChange(item?.value)
   }
 

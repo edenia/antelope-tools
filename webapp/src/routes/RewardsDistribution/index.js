@@ -274,10 +274,10 @@ const RewardsDistribution = () => {
                 )}
               </Typography>
               <Typography variant="subtitle1">
-                {!nodes.length > 0 && (
+                {!nodes?.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes.length > 0 && setting?.token_price && (
+                {nodes?.length > 0 && setting?.token_price && (
                   <>
                     {formatWithThousandSeparator(
                       summary.topCountryByRewards.rewards,

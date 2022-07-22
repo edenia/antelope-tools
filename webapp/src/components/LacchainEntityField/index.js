@@ -15,7 +15,7 @@ const LacchainEntityField = ({
   const [lacchain] = useSharedState()
   const [options, setOptions] = useState([])
 
-  const handleOnFieldChange = (event, newValue) => {
+  const handleOnFieldChange = (_, newValue) => {
     onChange(newValue)
   }
 

@@ -24,7 +24,7 @@ const NodesCards = ({ item }) => {
   const [missedBlocks, setMissedBlocks] = useState({})
 
   useEffect(() => {
-    if (data?.stats.length) {
+    if (data?.stats?.length) {
       setMissedBlocks(data?.stats[0].missed_blocks)
     }
   }, [data, loading])

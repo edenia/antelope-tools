@@ -67,9 +67,7 @@ const CPUBenchmark = () => {
   }, [load, range])
 
   useEffect(() => {
-    if (!data?.items) {
-      return
-    }
+    if (!data?.items) return
 
     const info = {}
     const summary = {}
@@ -195,7 +193,5 @@ const CPUBenchmark = () => {
     </Grid>
   )
 }
-
-CPUBenchmark.propTypes = {}
 
 export default CPUBenchmark

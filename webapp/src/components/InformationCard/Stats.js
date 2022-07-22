@@ -22,7 +22,7 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
           }`}</Typography>
         </Box>
 
-        {generalConfig.historyEnabled && (
+        {!!generalConfig.historyEnabled && (
           <Box className={classes.rowWrapper}>
             <Typography variant="body1">
               {`${t('missedBlocks')}: `}

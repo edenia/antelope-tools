@@ -13,7 +13,7 @@ const Information = ({ info, classes, type, t }) => {
       <Box className={classes.borderLine}>
         <Box className={classes.rowWrapper}>
           <Typography variant="body1">
-            {`${t('version')}: ${info.version || '- -'}`}
+            {`${t('version')}: ${info?.version || '- -'}`}
           </Typography>
         </Box>
         <Box className={clsx(classes.rowWrapper, classes.boxLabel)}>
@@ -21,7 +21,7 @@ const Information = ({ info, classes, type, t }) => {
             <Typography variant="body1">{`${t('features')}:`}</Typography>
           </Box>
           <Box className="listBox">
-            {info.features.length ? (
+            {!!info?.features?.length ? (
               info.features.map((feature) => (
                 <Typography key={feature} variant="body1">
                   {feature}
@@ -32,7 +32,7 @@ const Information = ({ info, classes, type, t }) => {
             )}
           </Box>
         </Box>
-        {info.keys ? (
+        {!!info?.keys ? (
           <Box
             className={clsx(
               classes.rowWrapper,
@@ -66,26 +66,26 @@ const Information = ({ info, classes, type, t }) => {
     <Box className={classes.borderLine}>
       <Box className={classes.rowWrapper}>
         <Typography variant="body1">
-          {`${t('location')}: ${info.location || '- -'} `}
-          <CountryFlag code={info.country} />
+          {`${t('location')}: ${info?.location || '- -'} `}
+          <CountryFlag code={info?.country} />
         </Typography>
       </Box>
       <Box className={classes.rowWrapper}>
         <Typography variant="body1" className={classes.textEllipsis}>
           {`${t('website')}: `}
           <Link
-            href={info.website || ''}
+            href={info?.website || ''}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {info.website || 'N/A'}
+            {info?.website || 'N/A'}
           </Link>
         </Typography>
       </Box>
       <Box className={classes.rowWrapper}>
         <Typography variant="body1" className={classes.textEllipsis}>
           {`${t('email')}: `}
-          {info.email ? (
+          {!!info?.email ? (
             <Link
               href={`mailto:${info.email}`}
               target="_blank"
@@ -101,7 +101,7 @@ const Information = ({ info, classes, type, t }) => {
       <Box className={classes.rowWrapper}>
         <Typography variant="body1" className={classes.textEllipsis}>
           {`${t('ownershipDisclosure')}: `}
-          {info.ownership ? (
+          {!!info?.ownership ? (
             <Link
               href={info.ownership}
               target="_blank"
@@ -117,7 +117,7 @@ const Information = ({ info, classes, type, t }) => {
       <Box className={classes.rowWrapper}>
         <Typography variant="body1" className={classes.textEllipsis}>
           {`${t('chainResources')}: `}
-          {info.chain ? (
+          {info?.chain ? (
             <Link href={info.chain} target="_blank" rel="noopener noreferrer">
               {info.chain}
             </Link>
@@ -126,7 +126,7 @@ const Information = ({ info, classes, type, t }) => {
           )}
         </Typography>
       </Box>
-      {!!info.otherResources?.length && (
+      {!!info?.otherResources?.length && (
         <Box>
           <dt className={classes.dt}>
             <Typography variant="body1" className={classes.textEllipsis}>

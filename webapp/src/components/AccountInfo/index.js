@@ -91,7 +91,7 @@ const AccountInfo = ({
       justify="space-between"
       className={classes.paper}
     >
-      {info && (
+      {!!info && (
         <>
           <Box className={classes.boxHeaderCard}>
             <Box className="identicon">

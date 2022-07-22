@@ -112,7 +112,7 @@ const Masonry = ({
   useEffect(() => {
     let columnCount
 
-    if (breakpointCols && breakpointCols.default) {
+    if (!!breakpointCols && breakpointCols.default) {
       columnCount = breakpointCols.default
     } else {
       columnCount = parseInt(breakpointCols) || DEFAULT_COLUMNS
