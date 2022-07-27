@@ -49,6 +49,9 @@ This project use all the latest tools and practices in the industry
 - **[docker-compose](https://docs.docker.com/compose/)**
   Compose is a tool for defining and running multi-container Docker applications
 
+- **[demux](https://guide.eoscostarica.io/docs/eos-learn/demux-pattern)**
+  Demux is an architectural pattern for backend infrastructure for build applications on EOSIO blockchain to sourcing blockchain events to deterministically update queryable databases.
+
 ### File Structure
 
 Within the download you'll find the following directories and files:
@@ -87,7 +90,16 @@ eosio-dashboard/
 │ ├── Dockerfile
 │ ├── yarn-lock.json
 │ └── package.json
-├── .env.example
+├── .env.jungle
+├── .env.lacchain
+├── .env.local
+├── .env.mainnet
+├── .env.proton
+├── .env.protontestnet
+├── .env.telos
+├── .env.telostestnet
+├── .env.ultratestnet
+├── .env.waxtestnet
 ├── .gitignore
 ├── docker-compose.yaml
 ├── .LICENSE
@@ -110,13 +122,15 @@ Somethings you need before getting started:
 
 - [git](https://git-scm.com/)
 - [node.js](https://nodejs.org/es/)
+- [yarn](https://yarnpkg.com/)
 - [Hasura CLI](https://hasura.io/docs/1.0/graphql/manual/hasura-cli/install-hasura-cli.html#install-hasura-cli)
 
 ### First time
 
-1.  Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`
-2.  Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
-3.  Copy the `.env.example` then update the environment variables according to your needs
+1. Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`.
+1. Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
+1. As EOSIO dashboard can have different configurations copy the environment variables according to your needs in the `.env` file or use `make run <NETWORK>` to use a configuration for a specific network.
+
 
 ```
 # global
@@ -178,7 +192,7 @@ REACT_APP_STATE_HISTORY_ENABLED=false
 
 ### Quick start
 
-At this point you can run `make run`, you can check the services runing on:
+At this point you can run `make start` or `make run <NETWORK>`, you can check the services runing on:
 
 - hapi at http://localhost:9090
 - hasura at http://localhost:9695
