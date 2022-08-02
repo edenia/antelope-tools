@@ -73,6 +73,11 @@ ultratestnet:
 	make stop
 	make start
 
+libre:
+	@cat ".env.libre" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+	make stop
+	make start
+
 libretestnet:
 	@cat ".env.libretestnet" | sed -e 's/REACT_APP_TAG=dev/REACT_APP_TAG=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
