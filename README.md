@@ -222,7 +222,7 @@ Please Read EOS Costa Rica's [Open Source Contributing Guidelines](https://devel
 
 Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/eosio-dashboard/issues/new/choose)
 
-Contributions of any kind welcome!
+Contributions of any kind are welcome!
 
 ## About EOS Costa Rica
 
