@@ -125,6 +125,12 @@ Somethings you need before getting started:
 - [yarn](https://yarnpkg.com/)
 - [Hasura CLI](https://hasura.io/docs/1.0/graphql/manual/hasura-cli/install-hasura-cli.html#install-hasura-cli)
 
+#### Considerations for Windows
+
+If you are using Windows you need to install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) in version 2, to install a Linux distribution on Windows for run the project. In the Linux distribution is where you need to install git, node, yarn and Hasura CLI.
+
+Additionally, you need WSL to use Docker Desktop as an intermediate between Windows and the Linux distribution. Otherwise, if you have a computer with low hardware specifications, it's recommended to use Linux instead of Windows with WSL.
+
 ### First time
 
 1. Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`.
@@ -194,7 +200,7 @@ REACT_APP_STATE_HISTORY_ENABLED=false
 
 At this point you can run `make start` or `make run <NETWORK>`, you can check the services runing on:
 
-- hapi at http://localhost:9090
+- hapi at http://localhost:9090/healthz
 - hasura at http://localhost:9695
 - webapp at http://localhost:3000
 
