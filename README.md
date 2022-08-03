@@ -1,12 +1,16 @@
 
-<p align="center">
+<div align="center">
 	<a href="https://eosio.online">
 		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
 	</a>
-</p>
-<br/>
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
+![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) 
+![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social)](https://twitter.com/EOSCostaRica)
+![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
+
+</div>
 
 # EOSIO Dashboard
 Network and Infrastructure Dashboard for EOSIO networks.
@@ -118,10 +122,11 @@ There are some important folders like
 
 Basic knowledge about Docker, Docker Compose and NodeJS is required.
 
-### Before you start
+### Getting Started
 
-Somethings you need before getting started:
+Some things you need before getting started:
 
+- [docker](https://www.docker.com/)
 - [git](https://git-scm.com/)
 - [node.js](https://nodejs.org/es/)
 - [yarn](https://yarnpkg.com/)
@@ -129,7 +134,7 @@ Somethings you need before getting started:
 
 #### Considerations for Windows
 
-If you are using Windows you need to install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) in version 2, to install a Linux distribution on Windows for run the project. In the Linux distribution is where you need to install git, node, yarn and Hasura CLI.
+If you are using Windows you need to install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) in version 2 and install a Linux distribution on Windows to run the project. In the Linux distribution is where you need to install git, node, yarn and Hasura CLI.
 
 Additionally, you need WSL to use Docker Desktop as an intermediate between Windows and the Linux distribution. Otherwise, if you have a computer with low hardware specifications, it's recommended to use Linux instead of Windows with WSL.
 
@@ -221,13 +226,13 @@ Contributions of any kind welcome!
 
 ## About EOS Costa Rica
 
-<p align="center">
-	<a href="https://eoscostarica.io">
-		<img src="https://github.com/eoscostarica/eos-rate/raw/master/docs/eoscostarica-logo-black.png" width="300">
+<div align="center">
+	<a href="https://eoscostarica.io/">
+		<img src="https://raw.githubusercontent.com/eoscostarica/.github/master/.github/workflows/images/eos-costa-rica-logo.png"
+		width="300px" >
 	</a>
-</p>
-<br/>
 
-EOS Costa Rica is an independently-owned, self-funded, bare-metal Genesis block producer that provides stable and secure infrastructure for EOSIO blockchains. We support open source software for our community while offering enterprise solutions and custom smart contract development for our clients.
+</div>
+EOS Costa Rica is an independently-owned, self-funded, bare-metal Genesis block producer that provides stable and secure infrastructure for EOSIO blockchains. We support open source software for our community while offering enterprise blockchain development and custom smart contract development for our clients.
 
-[eoscostarica.io](https://eoscostarica.io) Support OpenSource!
+[eoscostarica.io](https://eoscostarica.io/)
