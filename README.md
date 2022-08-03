@@ -93,6 +93,8 @@ eosio-dashboard/
 ├── .env.jungle
 ├── .env.lacchain
 ├── .env.local
+├── .env.libre
+├── .env.libretestnet
 ├── .env.mainnet
 ├── .env.proton
 ├── .env.protontestnet
