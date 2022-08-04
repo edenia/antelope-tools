@@ -1,12 +1,16 @@
 
-<p align="center">
+<div align="center">
 	<a href="https://eosio.online">
 		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
 	</a>
-</p>
-<br/>
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) ![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) ![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social) ![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
+![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) 
+![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social)](https://twitter.com/EOSCostaRica)
+![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
+
+</div>
 
 # EOSIO Dashboard
 Network and Infrastructure Dashboard for EOSIO networks.
@@ -49,6 +53,9 @@ This project use all the latest tools and practices in the industry
 - **[docker-compose](https://docs.docker.com/compose/)**
   Compose is a tool for defining and running multi-container Docker applications
 
+- **[demux](https://guide.eoscostarica.io/docs/eos-learn/demux-pattern)**
+  Demux is an architectural pattern for backend infrastructure for build applications on EOSIO blockchain to sourcing blockchain events to deterministically update queryable databases.
+
 ### File Structure
 
 Within the download you'll find the following directories and files:
@@ -87,7 +94,18 @@ eosio-dashboard/
 │ ├── Dockerfile
 │ ├── yarn-lock.json
 │ └── package.json
-├── .env.example
+├── .env.jungle
+├── .env.lacchain
+├── .env.local
+├── .env.libre
+├── .env.libretestnet
+├── .env.mainnet
+├── .env.proton
+├── .env.protontestnet
+├── .env.telos
+├── .env.telostestnet
+├── .env.ultratestnet
+├── .env.waxtestnet
 ├── .gitignore
 ├── docker-compose.yaml
 ├── .LICENSE
@@ -104,19 +122,28 @@ There are some important folders like
 
 Basic knowledge about Docker, Docker Compose and NodeJS is required.
 
-### Before you start
+### Getting Started
 
-Somethings you need before getting started:
+Some things you need before getting started:
 
+- [docker](https://www.docker.com/)
 - [git](https://git-scm.com/)
 - [node.js](https://nodejs.org/es/)
+- [yarn](https://yarnpkg.com/)
 - [Hasura CLI](https://hasura.io/docs/1.0/graphql/manual/hasura-cli/install-hasura-cli.html#install-hasura-cli)
+
+#### Considerations for Windows
+
+If you are using Windows you need to install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) in version 2 and install a Linux distribution on Windows to run the project. In the Linux distribution is where you need to install git, node, yarn and Hasura CLI.
+
+Additionally, you need WSL to use Docker Desktop as an intermediate between Windows and the Linux distribution. Otherwise, if you have a computer with low hardware specifications, it's recommended to use Linux instead of Windows with WSL.
 
 ### First time
 
-1.  Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`
-2.  Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
-3.  Copy the `.env.example` then update the environment variables according to your needs
+1. Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`.
+1. Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
+1. As EOSIO dashboard can have different configurations copy the environment variables according to your needs in the `.env` file or use `make run <NETWORK>` to use a configuration for a specific network.
+
 
 ```
 # global
@@ -178,9 +205,9 @@ REACT_APP_STATE_HISTORY_ENABLED=false
 
 ### Quick start
 
-At this point you can run `make run`, you can check the services runing on:
+At this point you can run `make start` or `make run <NETWORK>`, you can check the services runing on:
 
-- hapi at http://localhost:9090
+- hapi at http://localhost:9090/healthz
 - hasura at http://localhost:9695
 - webapp at http://localhost:3000
 
@@ -195,17 +222,17 @@ Please Read EOS Costa Rica's [Open Source Contributing Guidelines](https://devel
 
 Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/eosio-dashboard/issues/new/choose)
 
-Contributions of any kind welcome!
+Contributions of any kind are welcome!
 
 ## About EOS Costa Rica
 
-<p align="center">
-	<a href="https://eoscostarica.io">
-		<img src="https://github.com/eoscostarica/eos-rate/raw/master/docs/eoscostarica-logo-black.png" width="300">
+<div align="center">
+	<a href="https://eoscostarica.io/">
+		<img src="https://raw.githubusercontent.com/eoscostarica/.github/master/.github/workflows/images/eos-costa-rica-logo.png"
+		width="300px" >
 	</a>
-</p>
-<br/>
 
-EOS Costa Rica is an independently-owned, self-funded, bare-metal Genesis block producer that provides stable and secure infrastructure for EOSIO blockchains. We support open source software for our community while offering enterprise solutions and custom smart contract development for our clients.
+</div>
+EOS Costa Rica is an independently-owned, self-funded, bare-metal Genesis block producer that provides stable and secure infrastructure for EOSIO blockchains. We support open source software for our community while offering enterprise blockchain development and custom smart contract development for our clients.
 
-[eoscostarica.io](https://eoscostarica.io) Support OpenSource!
+[eoscostarica.io](https://eoscostarica.io/)
