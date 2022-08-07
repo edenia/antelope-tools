@@ -48,9 +48,6 @@ build-docker: ./Dockerfile
 		--build-arg react_app_eos_bp_json_on_chain_table="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE)" \
 		--build-arg react_app_eos_bp_json_on_chain_scope="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE)" \
 		--build-arg react_app_token_symbol="$(REACT_APP_TOKEN_SYMBOL)" \
-		--build-arg react_app_eos_mainnet="$(REACT_APP_EOS_MAINNET)" \
-		--build-arg react_app_jungle_testnet="$(REACT_APP_JUNGLE_TESTNET)" \
-		--build-arg react_app_lacchain_testnet="$(REACT_APP_LACCHAIN_TESTNET)" \
 		--build-arg react_app_disabled_menu_items='$(REACT_APP_DISABLED_MENU_ITEMS)' \
 		--build-arg react_app_network_url='$(REACT_APP_NETWORK_URL)' \
 		--build-arg react_app_block_explorer_url='$(REACT_APP_BLOCK_EXPLORER_URL)' \
