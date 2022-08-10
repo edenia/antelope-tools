@@ -37,7 +37,7 @@ jobs:
           # webapp
           PORT: '80'
           REACT_APP_TITLE: 'WAX Testnet Network Dashboard'
-          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/wax.jpg'
           REACT_APP_FOOTER_LINKS: '[{ "text": "WAX Website", "src": "https://on.wax.io/wax-io/" },{ "text": "WAX Block Explorer", "src": "https://wax-test.bloks.io/" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "WAX Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
