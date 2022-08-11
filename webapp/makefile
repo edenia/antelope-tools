@@ -24,7 +24,7 @@ build-docker: ./Dockerfile
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) --target run-stage \
 		--build-arg port="$(PORT)" \
 		--build-arg react_app_title="$(REACT_APP_TITLE)" \
-		--build-arg react_app_tag="$(REACT_APP_TAG)" \
+		--build-arg react_app_tag="$(REACT_APP_VERSION)" \
 		--build-arg react_app_default_producer_logo="$(REACT_APP_DEFAULT_PRODUCER_LOGO)" \
 		--build-arg react_app_footer_links='$(REACT_APP_FOOTER_LINKS)' \
 		--build-arg react_app_eos_rate_link="$(REACT_APP_EOS_RATE_LINK)" \
