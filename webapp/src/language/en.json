@@ -315,7 +315,7 @@
     "producer": "Producer"
   },
   "nodeSearchComponent": {
-    "title": "Search Producer",
+    "title": "Search Node",
     "producer": "Producer"
   }
 }

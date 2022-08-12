@@ -10,11 +10,12 @@ import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 
 import styles from './styles'
 
-const Box = lazy(() => import('@mui/material/Box'))
+import { eosConfig } from '../../config'
+
 const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
-const NodeSearch = lazy(() => import('../../components/NodeSearch'))
+const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
 
 const useStyles = makeStyles(styles)
@@ -64,7 +65,24 @@ const Nodes = () => {
   const [items, setItems] = useState([])
   const classes = useStyles()
 
-  const handleOnFiltersChange = (newFilters) => {
+  const chips =
+    eosConfig.networkName === 'lacchain'
+      ? [
+          { name: 'all' },
+          { name: 'validator' },
+          { name: 'boot' },
+          { name: 'writer' },
+          { name: 'observer' }
+        ]
+      : [
+          { name: 'all' },
+          { name: 'producer' },
+          { name: 'full' },
+          { name: 'query' },
+          { name: 'seed' }
+        ]
+
+  const handleOnSearch = (newFilters) => {
     if (!newFilters.owner && filters.owner) {
       setPagination((prev) => ({ ...prev, page: 1, where: null }))
     }
@@ -146,8 +164,13 @@ const Nodes = () => {
   }, [filters, producers])
 
   return (
-    <Box>
-      <NodeSearch filters={filters} onChange={handleOnFiltersChange} />
+    <Grid>
+      <SearchBar
+        filters={filters}
+        onChange={handleOnSearch}
+        chips={chips}
+        search="node"
+      />
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
         {items.map((producer) => (
@@ -164,7 +187,7 @@ const Nodes = () => {
           shape="rounded"
         />
       )}
-    </Box>
+    </Grid>
   )
 }
 

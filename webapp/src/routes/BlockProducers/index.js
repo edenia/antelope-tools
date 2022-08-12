@@ -5,13 +5,12 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
 import Pagination from '@mui/material/Pagination'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
 import { PRODUCERS_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
-import ProducerSearch from '../../components/ProducerSearch'
+import SearchBar from '../../components/SearchBar'
 import Tooltip from '../../components/Tooltip'
 import NodeCard from '../../components/NodeCard'
 import InformationCard from '../../components/InformationCard'
@@ -65,6 +64,20 @@ PaginationWrapper.propTypes = {
 }
 
 const Producers = () => {
+  const chips =
+    eosConfig.networkName === 'lacchain'
+      ? [
+          { value: 'all', name: 'all' },
+          { value: 1, name: 'partners' },
+          { value: 2, name: 'nonPartners' }
+        ]
+      : [
+          { value: 'all', name: 'allBPs' },
+          { value: 1, name: 'top21' },
+          { value: 2, name: 'paidStandby' },
+          { value: 3, name: 'nonPaidStandby' }
+        ]
+
   const classes = useStyles()
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(PRODUCERS_QUERY)
@@ -174,7 +187,7 @@ const Producers = () => {
   }, [dataHistory, loadingHistory])
 
   return (
-    <Box>
+    <Grid>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -182,14 +195,15 @@ const Producers = () => {
       >
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
-      <Box className={classes.searchWrapper}>
-        <ProducerSearch
-          onSearch={handleOnSearch}
+      <Grid className={classes.searchWrapper}>
+        <SearchBar
           filters={filters}
-          onChange={setChipFilter}
-          networkName={eosConfig.networkName}
+          onChange={handleOnSearch}
+          onSearch={setChipFilter}
+          chips={chips}
+          search="producer"
         />
-      </Box>
+      </Grid>
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
         {(items || []).map((producer, index) => (
@@ -211,7 +225,7 @@ const Producers = () => {
         loading={loading}
         chipFilter={chipFilter}
       />
-    </Box>
+    </Grid>
   )
 }
 
