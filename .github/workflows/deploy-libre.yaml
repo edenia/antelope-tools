@@ -37,9 +37,9 @@ jobs:
           # webapp
           PORT: '80'
           REACT_APP_TITLE: 'Libre Network Dashboard'
-          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/libre.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Bitcoin Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://libre-explorer.edenia.cloud/" },{"text": "Documentation","src": "https://libre-chain.gitbook.io/"},{"text": "Libre Network Monitor","src": "https://libre.eosio.online"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://libre-explorer.edenia.cloud/" },{"text": "Documentation","src": "https://libre-chain.gitbook.io/"},{"text": "Libre Network Monitor","src": "https://libre.eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
