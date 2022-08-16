@@ -35,7 +35,7 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
 
   const handleOnClickChip = (value) => {
     setSelected(value)
-    onChange(value)
+    onChange({...filters,name: value})
   }
 
   const handleOnKeyDown = (event) => {
@@ -108,7 +108,7 @@ SearchBar.propTypes = {
 
 SearchBar.defaultProps = {
   onChange: () => {},
-  chips: [{ name: 'all' }]
+  chips: [{ name: 'all', owner: '' }]
 }
 
 export default memo(SearchBar)

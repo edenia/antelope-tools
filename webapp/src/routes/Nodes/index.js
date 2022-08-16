@@ -17,7 +17,6 @@ const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
-
 const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
@@ -60,7 +59,7 @@ const Nodes = () => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(NODES_QUERY)
   const location = useLocation()
-  const [filters, setFilters] = useState({ nodeType: 'all' })
+  const [filters, setFilters] = useState({ name: 'all', owner: '' })
   const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
   const [items, setItems] = useState([])
   const classes = useStyles()
@@ -144,10 +143,10 @@ const Nodes = () => {
 
     let items = producers || []
 
-    if (filters.nodeType !== 'all') {
+    if (filters.name !== 'all') {
       items = items.map((producer) => {
         const nodes = (producer.bp_json?.nodes || []).filter(
-          (node) => node.node_type === filters.nodeType
+          (node) => node.node_type === filters.name
         )
 
         return {
