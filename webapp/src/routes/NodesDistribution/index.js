@@ -2,19 +2,37 @@
 import React, { useEffect, useState, lazy } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
-
+import Grid from '@mui/material/Grid'
 import { ALL_NODES_QUERY } from '../../gql'
 
-const NodeSearch = lazy(() => import('../../components/NodeSearch'))
+import { eosConfig } from '../../config'
+
+const SearchBar = lazy(() => import('../../components/SearchBar'))
 const GeoMap = lazy(() => import('../../components/GeoMap'))
 
 const Nodes = () => {
   const [loadProducers, { loading = true, data: { producers } = {} }] =
     useLazyQuery(ALL_NODES_QUERY)
   const [nodes, setNodes] = useState([])
-  const [filters, setFilters] = useState({ nodeType: 'all' })
+  const [filters, setFilters] = useState({ name: 'all' })
   const [allNodes, setAllNodes] = useState([])
+
+  const chips =
+  eosConfig.networkName === 'lacchain'
+    ? [
+        { name: 'all' },
+        { name: 'validator' },
+        { name: 'boot' },
+        { name: 'writer' },
+        { name: 'observer' }
+      ]
+    : [
+        { name: 'all' },
+        { name: 'producer' },
+        { name: 'full' },
+        { name: 'query' },
+        { name: 'seed' }
+      ]
 
   const handleOnFiltersChange = (newFilters) => {
     setFilters(newFilters)
@@ -97,9 +115,9 @@ const Nodes = () => {
   useEffect(() => {
     let items = allNodes
 
-    if (filters.nodeType !== 'all') {
+    if (filters.name !== 'all') {
       items = items.filter(
-        (current) => current.node.node_type === filters.nodeType
+        (current) => current.node.node_type === filters.name
       )
     }
 
@@ -107,15 +125,16 @@ const Nodes = () => {
   }, [allNodes, filters])
 
   return (
-    <Box>
-      <NodeSearch
-        producers={producers}
+    <Grid>
+      <SearchBar
         filters={filters}
         onChange={handleOnFiltersChange}
+        chips={chips}
+        search="node"
       />
       {loading && <LinearProgress />}
       {!loading && <GeoMap data={nodes || []} />}
-    </Box>
+    </Grid>
   )
 }
 
