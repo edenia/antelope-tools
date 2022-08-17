@@ -37,8 +37,7 @@ const PaginationWrapper = ({
   totalPages,
   page,
   onPageChange,
-  loading,
-  chipFilter
+  loading
 }) => {
   if (loading || !totalPages) return <></>
 
@@ -59,24 +58,25 @@ PaginationWrapper.propTypes = {
   totalPages: PropTypes.number,
   page: PropTypes.number,
   onPageChange: PropTypes.func,
-  loading: PropTypes.bool,
-  chipFilter: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  loading: PropTypes.bool
 }
 
 const Producers = () => {
-  const chips =
-    eosConfig.networkName === 'lacchain'
-      ? [
-          { value: 'all', name: 'all' },
-          { value: 1, name: 'partners' },
-          { value: 2, name: 'nonPartners' }
-        ]
-      : [
-          { value: 'all', name: 'allBPs' },
-          { value: 1, name: 'top21' },
-          { value: 2, name: 'paidStandby' },
-          { value: 3, name: 'nonPaidStandby' }
-        ]
+
+  const chipsNames =
+  eosConfig.networkName === 'lacchain'
+    ? [
+        'all',
+        'partners',
+        'nonPartners'
+      ]
+    : [
+        'all',
+        'top21',
+        'paidStandby',
+        'nonPaidStandby'
+      ]
+  const chips = chipsNames.map((e)=> {return {name:e}}) 
 
   const classes = useStyles()
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
@@ -90,8 +90,7 @@ const Producers = () => {
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const [items, setItems] = useState([])
-  const [filters, setFilters] = useState({})
-  const [chipFilter, setChipFilter] = useState('all')
+  const [filters, setFilters] = useState({name: 'all', owner: ''})
   const [missedBlocks, setMissedBlocks] = useState({})
 
   const handlePopoverOpen = (node) => (event) => {
@@ -103,8 +102,8 @@ const Producers = () => {
     setAnchorEl(null)
   }
 
-  const handleOnSearch = (filters) => {
-    if (!filters.owner) {
+  const handleOnSearch = (newFilters) => {
+    if (!newFilters.owner && filters.owner) {
       setPagination((prev) => ({ ...prev, page: 1, where: null }))
 
       return
@@ -113,8 +112,10 @@ const Producers = () => {
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      where: { owner: { _like: `%${filters.owner}%` } }
+      where: { owner: { _like: `%${newFilters.owner}%` } }
     }))
+
+    setFilters(newFilters)
   }
 
   const handleOnPageChange = (_, page) => {
@@ -153,9 +154,7 @@ const Producers = () => {
       where: { owner: { _like: `%${params.name}%` } }
     }))
 
-    setFilters({
-      owner: params.name
-    })
+    setFilters((prev) => ({ ...prev, owner: params.owner }))
   }, [location.search])
 
   useEffect(() => {
@@ -164,21 +163,21 @@ const Producers = () => {
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      ...CHIPS_FILTERS[chipFilter === 'all' ? 0 : chipFilter]
+      ...CHIPS_FILTERS[chipsNames.indexOf(filters.name)]
     }))
-  }, [chipFilter])
+  }, [filters])
 
   useEffect(() => {
     if (!producers?.length) return
 
     let items = producers || []
 
-    if (eosConfig.networkName === 'lacchain' && chipFilter !== 'all') {
-      items = items.filter((producer) => producer.bp_json?.type === chipFilter)
+    if (eosConfig.networkName === 'lacchain' && filters.name !== 'all') {
+      items = items.filter((producer) => producer.bp_json?.type === filters)
     }
 
     setItems(items)
-  }, [chipFilter, producers])
+  }, [filters, producers])
 
   useEffect(() => {
     if (dataHistory?.stats.length) {
@@ -199,7 +198,6 @@ const Producers = () => {
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
-          onSearch={setChipFilter}
           chips={chips}
           search="producer"
         />
@@ -223,7 +221,6 @@ const Producers = () => {
         page={pagination.page}
         onPageChange={handleOnPageChange}
         loading={loading}
-        chipFilter={chipFilter}
       />
     </Grid>
   )

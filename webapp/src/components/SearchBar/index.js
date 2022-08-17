@@ -22,7 +22,7 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
   const classes = useStyles()
   const { t } = useTranslation(search + 'SearchComponent')
 
-  const [selected, setSelected] = useState(chips[0].name)
+  const [selected, setSelected] = useState(chips[0]?.name ?? 'all')
   const [filters, setFilters] = useState({})
 
   const handleOnChange = (key) => (event) => {
