@@ -32,6 +32,11 @@ const CHIPS_FILTERS = [
   }
 ]
 
+const CHIPS_NAMES =
+  eosConfig.networkName === 'lacchain'
+    ? ['all', 'partners', 'nonPartners']
+    : ['all', 'top21', 'paidStandby', 'nonPaidStandby']
+
 const PaginationWrapper = ({
   classes,
   totalPages,
@@ -62,21 +67,9 @@ PaginationWrapper.propTypes = {
 }
 
 const Producers = () => {
-
-  const chipsNames =
-  eosConfig.networkName === 'lacchain'
-    ? [
-        'all',
-        'partners',
-        'nonPartners'
-      ]
-    : [
-        'all',
-        'top21',
-        'paidStandby',
-        'nonPaidStandby'
-      ]
-  const chips = chipsNames.map((e)=> {return {name:e}}) 
+  const chips = CHIPS_NAMES.map((e) => {
+    return { name: e }
+  })
 
   const classes = useStyles()
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
@@ -90,7 +83,7 @@ const Producers = () => {
   const [current, setCurrent] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const [items, setItems] = useState([])
-  const [filters, setFilters] = useState({name: 'all', owner: ''})
+  const [filters, setFilters] = useState({ name: 'all', owner: '' })
   const [missedBlocks, setMissedBlocks] = useState({})
 
   const handlePopoverOpen = (node) => (event) => {
@@ -163,7 +156,7 @@ const Producers = () => {
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      ...CHIPS_FILTERS[chipsNames.indexOf(filters.name)]
+      ...CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
     }))
   }, [filters])
 

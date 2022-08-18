@@ -22,7 +22,7 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
   const classes = useStyles()
   const { t } = useTranslation(search + 'SearchComponent')
 
-  const [selected, setSelected] = useState(chips[0]?.name ?? 'all')
+  const [selected, setSelected] = useState(chips[0]?.name ?? '')
   const [filters, setFilters] = useState({})
 
   const handleOnChange = (key) => (event) => {
@@ -35,7 +35,7 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
 
   const handleOnClickChip = (value) => {
     setSelected(value)
-    onChange({...filters,name: value})
+    onChange({ ...filters, name: value })
   }
 
   const handleOnKeyDown = (event) => {
@@ -107,8 +107,7 @@ SearchBar.propTypes = {
 }
 
 SearchBar.defaultProps = {
-  onChange: () => {},
-  chips: [{ name: 'all', owner: '' }]
+  onChange: () => {}
 }
 
 export default memo(SearchBar)
