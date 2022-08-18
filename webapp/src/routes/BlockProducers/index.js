@@ -192,7 +192,7 @@ const Producers = () => {
           filters={filters}
           onChange={handleOnSearch}
           chips={chips}
-          search="producer"
+          translationScope="producerSearchComponent"
         />
       </Grid>
       {loading && <LinearProgress />}

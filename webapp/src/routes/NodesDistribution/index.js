@@ -18,21 +18,21 @@ const Nodes = () => {
   const [allNodes, setAllNodes] = useState([])
 
   const chips =
-  eosConfig.networkName === 'lacchain'
-    ? [
-        { name: 'all' },
-        { name: 'validator' },
-        { name: 'boot' },
-        { name: 'writer' },
-        { name: 'observer' }
-      ]
-    : [
-        { name: 'all' },
-        { name: 'producer' },
-        { name: 'full' },
-        { name: 'query' },
-        { name: 'seed' }
-      ]
+    eosConfig.networkName === 'lacchain'
+      ? [
+          { name: 'all' },
+          { name: 'validator' },
+          { name: 'boot' },
+          { name: 'writer' },
+          { name: 'observer' }
+        ]
+      : [
+          { name: 'all' },
+          { name: 'producer' },
+          { name: 'full' },
+          { name: 'query' },
+          { name: 'seed' }
+        ]
 
   const handleOnFiltersChange = (newFilters) => {
     setFilters(newFilters)
@@ -116,9 +116,7 @@ const Nodes = () => {
     let items = allNodes
 
     if (filters.name !== 'all') {
-      items = items.filter(
-        (current) => current.node.node_type === filters.name
-      )
+      items = items.filter((current) => current.node.node_type === filters.name)
     }
 
     setNodes(items)
@@ -130,7 +128,7 @@ const Nodes = () => {
         filters={filters}
         onChange={handleOnFiltersChange}
         chips={chips}
-        search="node"
+        translationScope="nodeSearchComponent"
       />
       {loading && <LinearProgress />}
       {!loading && <GeoMap data={nodes || []} />}

@@ -18,9 +18,14 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
+const SearchBar = ({
+  filters: rootFilters,
+  onChange,
+  chips,
+  translationScope
+}) => {
   const classes = useStyles()
-  const { t } = useTranslation(search + 'SearchComponent')
+  const { t } = useTranslation(translationScope)
 
   const [selected, setSelected] = useState(chips[0]?.name ?? '')
   const [filters, setFilters] = useState({})
@@ -59,7 +64,7 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
               {`${t('title')}:`}
             </Typography>
             <TextField
-              label={t(search + 'Name')}
+              label={t('placeholder')}
               variant="outlined"
               className={classes.formControl}
               value={filters.owner || ''}
@@ -102,12 +107,13 @@ const SearchBar = ({ filters: rootFilters, onChange, chips, search }) => {
 SearchBar.propTypes = {
   filters: PropTypes.any,
   onChange: PropTypes.func,
-  search: PropTypes.string,
+  translationScope: PropTypes.string,
   chips: PropTypes.array
 }
 
 SearchBar.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
+  chips: []
 }
 
 export default memo(SearchBar)

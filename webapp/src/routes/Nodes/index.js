@@ -168,7 +168,7 @@ const Nodes = () => {
         filters={filters}
         onChange={handleOnSearch}
         chips={chips}
-        search="node"
+        translationScope="nodeSearchComponent"
       />
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
