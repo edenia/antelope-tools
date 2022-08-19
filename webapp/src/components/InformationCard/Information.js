@@ -21,7 +21,7 @@ const Information = ({ info, classes, type, t }) => {
             <Typography variant="body1">{`${t('features')}:`}</Typography>
           </Box>
           <Box className="listBox">
-            {!!info?.features?.length ? (
+            {Array.isArray(info?.features) && info.features.length > 0  ? (
               info.features.map((feature) => (
                 <Typography key={feature} variant="body1">
                   {feature}
