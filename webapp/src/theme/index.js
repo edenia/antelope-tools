@@ -11,11 +11,11 @@ const theme = (variant) => {
   return createTheme(
     {
       spacing: 4,
-      breakpoints: breakpoints,
-      overrides: overrides,
-      props: props,
-      typography: typography,
-      shadows: shadows,
+      breakpoints,
+      overrides,
+      props,
+      typography,
+      shadows,
       palette: variant.palette
     },
     {
