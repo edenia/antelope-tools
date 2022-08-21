@@ -2,7 +2,6 @@
 import React, { useEffect, useState, lazy } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import LinearProgress from '@mui/material/LinearProgress'
-import Grid from '@mui/material/Grid'
 import { ALL_NODES_QUERY } from '../../gql'
 
 import { eosConfig } from '../../config'
@@ -123,7 +122,7 @@ const Nodes = () => {
   }, [allNodes, filters])
 
   return (
-    <Grid>
+    <div>
       <SearchBar
         filters={filters}
         onChange={handleOnFiltersChange}
@@ -132,7 +131,7 @@ const Nodes = () => {
       />
       {loading && <LinearProgress />}
       {!loading && <GeoMap data={nodes || []} />}
-    </Grid>
+    </div>
   )
 }
 

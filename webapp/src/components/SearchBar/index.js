@@ -26,7 +26,6 @@ const SearchBar = ({
 }) => {
   const classes = useStyles()
   const { t } = useTranslation(translationScope)
-
   const [selected, setSelected] = useState(chips[0]?.name ?? '')
   const [filters, setFilters] = useState({})
 

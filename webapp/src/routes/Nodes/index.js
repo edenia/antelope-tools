@@ -163,7 +163,7 @@ const Nodes = () => {
   }, [filters, producers])
 
   return (
-    <Grid>
+    <div>
       <SearchBar
         filters={filters}
         onChange={handleOnSearch}
@@ -186,7 +186,7 @@ const Nodes = () => {
           shape="rounded"
         />
       )}
-    </Grid>
+    </div>
   )
 }
 

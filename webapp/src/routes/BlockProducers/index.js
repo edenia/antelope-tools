@@ -179,7 +179,7 @@ const Producers = () => {
   }, [dataHistory, loadingHistory])
 
   return (
-    <Grid>
+    <div>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -215,7 +215,7 @@ const Producers = () => {
         onPageChange={handleOnPageChange}
         loading={loading}
       />
-    </Grid>
+    </div>
   )
 }
 
