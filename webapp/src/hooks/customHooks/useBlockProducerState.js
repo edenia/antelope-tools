@@ -19,10 +19,13 @@ const CHIPS_FILTERS = [
   }
 ]
 
-const CHIPS_NAMES = ['all',...eosConfig.producerTypes]
+const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 
 const useBlockProducerState = () => {
-  const [{ filters, pagination, loading, producers, info },{ handleOnSearch, handleOnPageChange, setPagination }] = useSearchState({query: PRODUCERS_QUERY})
+  const [
+    { filters, pagination, loading, producers, info },
+    { handleOnSearch, handleOnPageChange, setPagination }
+  ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
     BLOCK_TRANSACTIONS_HISTORY
   )
@@ -80,8 +83,8 @@ const useBlockProducerState = () => {
   }, [dataHistory, loadingHistory])
 
   return [
-    {anchorEl, current, filters, chips, items, loading, totalPages, missedBlocks, pagination},
-    {handlePopoverClose, handleOnSearch, handlePopoverOpen, handleOnPageChange}
+    { anchorEl, current, filters, chips, items, loading, totalPages, missedBlocks, pagination },
+    { handlePopoverClose, handleOnSearch, handlePopoverOpen, handleOnPageChange }
   ]
 }
 
