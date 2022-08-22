@@ -35,9 +35,7 @@ const useBlockProducerState = () => {
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
 
-  const chips = CHIPS_NAMES.map((e) => {
-    return { name: e }
-  })
+  const chips = CHIPS_NAMES.map((e) => { return { name: e } })
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
