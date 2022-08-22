@@ -1,16 +1,13 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery, useSubscription } from '@apollo/client'
+import { useSubscription } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
-import { useLocation } from 'react-router-dom'
-import queryString from 'query-string'
 
-import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 
 import styles from './styles'
-
-import { eosConfig } from '../../config'
+import useNodeState from '../../hooks/customHooks/useNodeState'
 
 const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
@@ -56,111 +53,8 @@ NodesCards.propTypes = {
 }
 
 const Nodes = () => {
-  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(NODES_QUERY)
-  const location = useLocation()
-  const [filters, setFilters] = useState({ name: 'all', owner: '' })
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
-  const [items, setItems] = useState([])
   const classes = useStyles()
-
-  const chips =
-    eosConfig.networkName === 'lacchain'
-      ? [
-          { name: 'all' },
-          { name: 'validator' },
-          { name: 'boot' },
-          { name: 'writer' },
-          { name: 'observer' }
-        ]
-      : [
-          { name: 'all' },
-          { name: 'producer' },
-          { name: 'full' },
-          { name: 'query' },
-          { name: 'seed' }
-        ]
-
-  const handleOnSearch = (newFilters) => {
-    if (!newFilters.owner && filters.owner) {
-      setPagination((prev) => ({ ...prev, page: 1, where: null }))
-    }
-
-    if (newFilters.owner) {
-      setPagination((prev) => ({
-        ...prev,
-        page: 1,
-        where: { owner: { _like: `%${newFilters.owner}%` } }
-      }))
-    }
-
-    setFilters(newFilters)
-  }
-
-  const handleOnPageChange = (_, page) => {
-    setPagination((prev) => ({
-      ...prev,
-      page
-    }))
-  }
-
-  useEffect(() => {
-    loadProducers({
-      variables: {
-        where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit
-      }
-    })
-    // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit])
-
-  useEffect(() => {
-    if (!info) return
-
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit)
-    }))
-  }, [info, pagination.limit])
-
-  useEffect(() => {
-    const params = queryString.parse(location.search)
-
-    if (!params.owner) return
-
-    setPagination((prev) => ({
-      ...prev,
-      page: 1,
-      where: { owner: { _like: `%${params.owner}%` } }
-    }))
-
-    setFilters((prev) => ({ ...prev, owner: params.owner }))
-  }, [location.search])
-
-  useEffect(() => {
-    if (!producers?.length) return
-
-    let items = producers || []
-
-    if (filters.name !== 'all') {
-      items = items.map((producer) => {
-        const nodes = (producer.bp_json?.nodes || []).filter(
-          (node) => node.node_type === filters.name
-        )
-
-        return {
-          ...producer,
-          bp_json: {
-            ...producer.bp_json,
-            nodes
-          }
-        }
-      })
-    }
-
-    setItems(items)
-  }, [filters, producers])
+  const [{filters, chips, loading, items, pagination},{handleOnSearch, handleOnPageChange}] = useNodeState()
 
   return (
     <div>

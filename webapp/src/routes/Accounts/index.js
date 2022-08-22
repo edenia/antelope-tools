@@ -111,6 +111,7 @@ const Accounts = ({ ual }) => {
 
     try {
       const account = await eosApi.getAccount(accountName)
+
       setAccount(account)
     } catch (error) {
       showMessage({
@@ -121,8 +122,10 @@ const Accounts = ({ ual }) => {
 
     try {
       const { abi } = await eosApi.getAbi(accountName)
+      
       setAbi(abi)
       const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
+
       setHash(hash)
     } catch (error) {
       console.log(error)
