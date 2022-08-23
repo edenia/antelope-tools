@@ -11,17 +11,12 @@ const useSearchState = ({ query }) => {
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = (newFilters) => {
-    
-    if (newFilters.owner) {
+    if(newFilters.owner){
       setPagination((prev) => ({
         ...prev,
         page: 1,
-        where: { owner: { _like: `%${newFilters.owner}%` } }
+        where: { owner: { _like: `%${newFilters.owner}%` }, ...pagination.where }
       }))
-    }else{
-      if (filters.owner) {
-        setPagination((prev) => ({ ...prev, page: 1, where: null }))
-      }
     }
 
     setFilters(newFilters)
@@ -42,7 +37,6 @@ const useSearchState = ({ query }) => {
         limit: pagination.limit
       }
     })
-
     // eslint-disable-next-line
   }, [pagination.where, pagination.page, pagination.limit])
 

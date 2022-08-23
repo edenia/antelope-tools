@@ -55,24 +55,24 @@ const useBlockProducerState = () => {
   useEffect(() => {
     if (eosConfig.networkName === 'lacchain') return
 
+    let filter = CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
+
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      ...CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
+      ...filter
     }))
   }, [filters, setPagination])
 
   useEffect(() => {
-    if (!producers?.length) return
-
-    let items = producers || []
+    let newItems = producers ?? []
 
     if (eosConfig.networkName === 'lacchain' && filters.name !== 'all') {
-      items = items.filter((producer) => producer.bp_json?.type === filters)
+      newItems = items.filter((producer) => producer.bp_json?.type === filters)
     }
 
-    setItems(items)
-  }, [filters, producers])
+    setItems(newItems)
+  }, [filters, producers, items])
 
   useEffect(() => {
     if (dataHistory?.stats.length) {
