@@ -7,7 +7,7 @@ const useSearchState = ({ query }) => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(query)
   const location = useLocation()
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
+  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28, where: null })
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = (newFilters) => {
@@ -15,10 +15,9 @@ const useSearchState = ({ query }) => {
       setPagination((prev) => ({
         ...prev,
         page: 1,
-        where: { owner: { _like: `%${newFilters.owner}%` }, ...pagination.where }
+        where: { ...pagination.where, owner: { _like: `%${newFilters.owner}%` } }
       }))
     }
-
     setFilters(newFilters)
   }
 

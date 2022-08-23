@@ -55,12 +55,13 @@ const useBlockProducerState = () => {
   useEffect(() => {
     if (eosConfig.networkName === 'lacchain') return
 
-    let filter = CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
+    const {where,...filter} = CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
 
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      ...filter
+      ...filter,
+      where: {...where,owner:prev.where?.owner}
     }))
   }, [filters, setPagination])
 
