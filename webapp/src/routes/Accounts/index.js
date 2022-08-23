@@ -5,6 +5,11 @@ import { makeStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import { useTranslation } from 'react-i18next'
+import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import queryString from 'query-string'
 import CardContent from '@mui/material/CardContent'
@@ -13,7 +18,6 @@ import { signTransaction } from '../../utils/eos'
 import eosApi from '../../utils/eosapi'
 import getTransactionUrl from '../../utils/get-transaction-url'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
-import SearchBar from '../../components/SearchBar'
 
 import styles from './styles'
 
@@ -24,7 +28,7 @@ const useStyles = makeStyles(styles)
 const Accounts = ({ ual }) => {
   const classes = useStyles()
   const location = useLocation()
-  const [filters, setFilters] = useState(null)
+  const [accountName, setAccountName] = useState(null)
   const [account, setAccount] = useState(null)
   const [abi, setAbi] = useState(null)
   const [hash, setHash] = useState(null)
@@ -99,8 +103,6 @@ const Accounts = ({ ual }) => {
   }
 
   const handleOnSearch = async (valueAccount) => {
-    const accountName = valueAccount?.owner ?? ''
-
     setAccount(null)
     setAbi(null)
     setHash(null)
@@ -110,7 +112,7 @@ const Accounts = ({ ual }) => {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     try {
-      const account = await eosApi.getAccount(accountName)
+      const account = await eosApi.getAccount(valueAccount)
       setAccount(account)
     } catch (error) {
       showMessage({
@@ -120,9 +122,9 @@ const Accounts = ({ ual }) => {
     }
 
     try {
-      const { abi } = await eosApi.getAbi(accountName)
+      const { abi } = await eosApi.getAbi(valueAccount)
       setAbi(abi)
-      const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
+      const { code_hash: hash = '' } = await eosApi.getCodeHash(valueAccount)
       setHash(hash)
     } catch (error) {
       console.log(error)
@@ -131,34 +133,60 @@ const Accounts = ({ ual }) => {
     setLoading(false)
   }
 
+  const handleOnKeyDown = (event) => {
+    if (event.keyCode !== 13) return
+
+    handleOnSearch(accountName)
+  }
+
   useEffect(() => {
     const params = queryString.parse(location.search)
 
     if (!params.account) {
-      setFilters({ owner: 'eosio' },{})
-      handleOnSearch({ owner: 'eosio' },{})
+      setAccountName('eosio')
+      handleOnSearch('eosio')
 
       return
     }
 
-    setFilters({ owner: params.account },{})
-    handleOnSearch({ owner: params.account },{})
+    setAccountName(params.account)
+    handleOnSearch(params.account)
     // eslint-disable-next-line
   }, [location.search])
 
   useEffect(() => {
-    handleOnSearch({ owner: 'eosio' },{})
+    handleOnSearch('eosio')
     // eslint-disable-next-line
   }, [])
 
   return (
     <Grid item xs={12}>
       <Card>
-        <CardContent className={classes.cardContent}>
-          <SearchBar
-            filters={filters}
-            onChange={handleOnSearch}
-            translationScope="accountsRoute"
+        <CardContent>
+          <Typography className={classes.title}>{t('title')}</Typography>
+          <TextField
+            id="accountTxt"
+            label={t('account')}
+            variant="outlined"
+            value={accountName || ''}
+            onChange={(event) => {
+              setAccountName(event.target.value)
+            }}
+            onKeyDown={handleOnKeyDown}
+            className={classes.field}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => handleOnSearch(accountName)}
+                    edge="end"
+                    aria-label="search"
+                  >
+                    <SearchOutlinedIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
         </CardContent>
       </Card>
