@@ -8,29 +8,43 @@ import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
+import Grid from '@mui/material/Grid'
 
 import styles from './styles'
+import TableData from './TableData'
 
 const useStyles = makeStyles(styles)
 
 const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+  const initData = { scope: '', lowerBound: null, upperBound: null, limit: 10 }
+  const formFields = [
+    { name: 'scope', type: 'text' },
+    { name: 'lowerBound', type: 'number' },
+    { name: 'upperBound', type: 'number' },
+    { name: 'limit', type: 'number' }
+  ]
+
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
   const [table, setTable] = useState('')
   const [fields, setFields] = useState([])
-  const [scope, setScope] = useState('')
-  const [lowerBound, setLowerBound] = useState(null)
-  const [upperBound, setUpperBound] = useState(null)
-  const [limit, setLimit] = useState(100)
+  const [filters, setFilters] = useState(initData)
+
+  const getValidValue = (value, type) => {
+    switch (type) {
+      case 'number':
+        return isNaN(value) ? 10 : parseInt(value)
+      default:
+        return value
+    }
+  }
+
+  const handleOnChange = (event) => {
+    const { name, value, type } = event.target
+
+    setFilters((prev) => ({ ...prev, [name]: getValidValue(value, type) }))
+  }
 
   const handleTableChange = (value) => {
     setTable(value)
@@ -38,8 +52,8 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     if (!onGetTableRows) return
 
     onGetTableRows({
-      scope,
-      limit,
+      scope: filters.scope,
+      limit: filters.limit,
       table: value,
       code: accountName,
       json: true
@@ -50,13 +64,13 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     if (!onGetTableRows) return
 
     onGetTableRows({
-      scope,
-      limit,
+      scope: filters.scope,
+      limit: filters.limit,
       table,
       code: accountName,
       json: true,
-      lower_bound: nextKey || lowerBound,
-      upper_bound: upperBound,
+      lower_bound: nextKey || filters.lowerBound,
+      upper_bound: filters.upperBound,
       loadMore: !!nextKey
     })
   }
@@ -84,15 +98,14 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   }, [table, abi])
 
   useEffect(() => {
-    setScope(accountName)
-    setTable('')
-    setLowerBound(null)
-    setUpperBound(null)
-    setLimit(10)
+    setFilters((prev) => ({
+      ...prev,
+      scope: accountName
+    }))
   }, [accountName])
 
   return (
-    <Box width="100%">
+    <Grid width="100%">
       <div className={classes.form}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel id="tableLabel">{t('table')}</InputLabel>
@@ -111,104 +124,36 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
           </Select>
         </FormControl>
 
-        <TextField
-          label={t('scope')}
-          variant="outlined"
-          className={classes.formControl}
-          value={scope || ''}
-          onChange={(event) => setScope(event.target.value)}
-        />
-
-        <TextField
-          label={t('lowerBound')}
-          variant="outlined"
-          className={classes.formControl}
-          value={lowerBound || ''}
-          onChange={(event) => setLowerBound(event.target.value)}
-        />
-
-        <TextField
-          label={t('upperBound')}
-          variant="outlined"
-          className={classes.formControl}
-          value={upperBound || ''}
-          onChange={(event) => setUpperBound(event.target.value)}
-        />
-
-        <TextField
-          label={t('limit')}
-          variant="outlined"
-          className={classes.formControl}
-          value={limit || 100}
-          onChange={(event) =>
-            setLimit(
-              isNaN(event.target.value)
-                ? 100
-                : parseInt(event.target.value || 0)
-            )
-          }
-        />
+        {formFields.map(({ name, type }, index) => (
+          <TextField
+            key={`field-${name}-${index}`}
+            label={t(name)}
+            name={name}
+            type={type}
+            variant="outlined"
+            className={classes.formControl}
+            value={filters[name] ?? ''}
+            onChange={(event) => handleOnChange(event)}
+          />
+        ))}
 
         {table && (
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            {t('getData')}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleSubmit(null)}
+          >
+            {t('refreshData')}
           </Button>
         )}
       </div>
 
-      {tableData && (
-        <TableContainer component={Paper}>
-          <Table className={classes.table} size="small">
-            <TableHead>
-              <TableRow>
-                {fields.map((field) => (
-                  <TableCell
-                    key={`table-field-${field.name}`}
-                    className={classes.tableCell}
-                  >
-                    {field.name}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(tableData?.rows || []).map((row, index) => (
-                <TableRow key={`table-row-${index}`}>
-                  {fields.map((field) => (
-                    <TableCell
-                      key={`table-row-${index}-${field.name}`}
-                      className={classes.tableCell}
-                    >
-                      {typeof row[field.name] === 'object'
-                        ? JSON.stringify(row[field.name])
-                        : row[field.name]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-              {tableData?.rows < 1 && (
-                <TableRow>
-                  <TableCell colSpan={fields.length}>
-                    {t('emptyTable')}
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          {tableData?.more && (
-            <Box display="flex" justifyContent="center" p={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleSubmit(tableData.next_key)}
-              >
-                {t('loadMore')}
-              </Button>
-            </Box>
-          )}
-        </TableContainer>
-      )}
-    </Box>
+      <TableData
+        tableData={tableData}
+        fields={fields}
+        handleSubmit={handleSubmit}
+      />
+    </Grid>
   )
 }
 
