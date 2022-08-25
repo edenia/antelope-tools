@@ -154,7 +154,7 @@
     "unknownError": "Unknown error processing action",
     "accountNotFound": "Account not found",
     "successMessage": "Success transaction",
-    "account": "Account or Contract Name",
+    "placeholder": "Account or Contract Name",
     "title": "Search for account information, view tables and execute actions for any contract."
   },
   "bpJsonRoute": {
@@ -312,10 +312,12 @@
     "paidStandby": "Paid Standby",
     "nonPaidStandby": "Non-Paid Standby",
     "title": "Search Producer",
-    "producer": "Producer"
+    "producer": "Producer",
+    "placeholder": "Producer Name"
   },
   "nodeSearchComponent": {
-    "title": "Search Producer",
-    "producer": "Producer"
+    "title": "Search Node",
+    "producer": "Producer",
+    "placeholder": "Node Name"
   }
 }

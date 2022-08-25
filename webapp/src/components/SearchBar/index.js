@@ -6,39 +6,40 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
+import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import 'flag-icon-css/css/flag-icon.min.css'
-
-import { eosConfig } from '../../config'
 
 import styles from './styles'
 
-const useStyles = makeStyles((theme) => styles(theme, eosConfig))
+const useStyles = makeStyles(styles)
 
-const NodeSearch = ({ filters: parentFilters, onChange }) => {
+const SearchBar = ({
+  filters: rootFilters,
+  onChange,
+  chips,
+  translationScope
+}) => {
   const classes = useStyles()
-  const { t } = useTranslation('nodeSearchComponent')
-  const [nodeSelected, setNodeSelected] = useState('all')
+  const { t } = useTranslation(translationScope)
+  const [selected, setSelected] = useState(chips[0]?.name ?? '')
   const [filters, setFilters] = useState({})
 
   const handleOnChange = (key) => (event) => {
     setFilters({ ...filters, [key]: event.target.value })
   }
 
-  const handleOnClickChip = (nodeName) => {
-    setNodeSelected(nodeName)
-    onChange({ ...filters, nodeType: nodeName })
-  }
-
   const handleOnClick = () => {
     onChange(filters)
+  }
+
+  const handleOnClickChip = (value) => {
+    setSelected(value)
+    onChange({ ...filters, name: value })
   }
 
   const handleOnKeyDown = (event) => {
@@ -50,19 +51,19 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
   }
 
   useEffect(() => {
-    setFilters(parentFilters || {})
-  }, [parentFilters])
+    setFilters(rootFilters || {})
+  }, [rootFilters])
 
   return (
-    <Grid container spacing={2} className={classes.nodeSearchWrapper}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Card>
           <CardContent className={classes.cardContent}>
-            <Typography className={classes.title}>{`${t(
-              'title'
-            )}:`}</Typography>
+            <Typography className={classes.title}>
+              {`${t('title')}:`}
+            </Typography>
             <TextField
-              label={t('producer')}
+              label={t('placeholder')}
               variant="outlined"
               className={classes.formControl}
               value={filters.owner || ''}
@@ -82,26 +83,19 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
               onKeyDown={handleOnKeyDown}
               onChange={handleOnChange('owner')}
             />
-            <Box className={classes.chipWrapper}>
-              <Chip
-                label="All Nodes"
-                clickable
-                onClick={() => handleOnClickChip('all')}
-                className={clsx({ [classes.selected]: nodeSelected === 'all' })}
-              />
-
-              {eosConfig.nodeTypes.map((nodeType, index) => (
+            <Grid className={classes.chipWrapper}>
+              {chips.map((chip, index) => (
                 <Chip
+                  key={`chip-${chip.name}-${index}`}
+                  label={t(chip.name)}
                   clickable
-                  key={`chip-${nodeType.name}-${index}`}
-                  label={nodeType.name}
-                  onClick={() => handleOnClickChip(nodeType.name)}
+                  onClick={() => handleOnClickChip(chip.name)}
                   className={clsx({
-                    [classes.selected]: nodeSelected === nodeType.name
+                    [classes.selected]: selected === chip.name
                   })}
                 />
               ))}
-            </Box>
+            </Grid>
           </CardContent>
         </Card>
       </Grid>
@@ -109,13 +103,16 @@ const NodeSearch = ({ filters: parentFilters, onChange }) => {
   )
 }
 
-NodeSearch.propTypes = {
+SearchBar.propTypes = {
   filters: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  translationScope: PropTypes.string,
+  chips: PropTypes.array
 }
 
-NodeSearch.defaultProps = {
-  onChange: () => {}
+SearchBar.defaultProps = {
+  onChange: () => {},
+  chips: []
 }
 
-export default memo(NodeSearch)
+export default memo(SearchBar)

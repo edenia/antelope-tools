@@ -1,22 +1,19 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery, useSubscription } from '@apollo/client'
+import { useSubscription } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
-import { useLocation } from 'react-router-dom'
-import queryString from 'query-string'
 
-import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 
 import styles from './styles'
+import useNodeState from '../../hooks/customHooks/useNodeState'
 
-const Box = lazy(() => import('@mui/material/Box'))
 const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
-const NodeSearch = lazy(() => import('../../components/NodeSearch'))
+const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
-
 const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
@@ -56,98 +53,17 @@ NodesCards.propTypes = {
 }
 
 const Nodes = () => {
-  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(NODES_QUERY)
-  const location = useLocation()
-  const [filters, setFilters] = useState({ nodeType: 'all' })
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
-  const [items, setItems] = useState([])
   const classes = useStyles()
-
-  const handleOnFiltersChange = (newFilters) => {
-    if (!newFilters.owner && filters.owner) {
-      setPagination((prev) => ({ ...prev, page: 1, where: null }))
-    }
-
-    if (newFilters.owner) {
-      setPagination((prev) => ({
-        ...prev,
-        page: 1,
-        where: { owner: { _like: `%${newFilters.owner}%` } }
-      }))
-    }
-
-    setFilters(newFilters)
-  }
-
-  const handleOnPageChange = (_, page) => {
-    setPagination((prev) => ({
-      ...prev,
-      page
-    }))
-  }
-
-  useEffect(() => {
-    loadProducers({
-      variables: {
-        where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit
-      }
-    })
-    // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit])
-
-  useEffect(() => {
-    if (!info) return
-
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit)
-    }))
-  }, [info, pagination.limit])
-
-  useEffect(() => {
-    const params = queryString.parse(location.search)
-
-    if (!params.owner) return
-
-    setPagination((prev) => ({
-      ...prev,
-      page: 1,
-      where: { owner: { _like: `%${params.owner}%` } }
-    }))
-
-    setFilters((prev) => ({ ...prev, owner: params.owner }))
-  }, [location.search])
-
-  useEffect(() => {
-    if (!producers?.length) return
-
-    let items = producers || []
-
-    if (filters.nodeType !== 'all') {
-      items = items.map((producer) => {
-        const nodes = (producer.bp_json?.nodes || []).filter(
-          (node) => node.node_type === filters.nodeType
-        )
-
-        return {
-          ...producer,
-          bp_json: {
-            ...producer.bp_json,
-            nodes
-          }
-        }
-      })
-    }
-
-    setItems(items)
-  }, [filters, producers])
+  const [{filters, chips, loading, items, pagination},{handleOnSearch, handleOnPageChange}] = useNodeState()
 
   return (
-    <Box>
-      <NodeSearch filters={filters} onChange={handleOnFiltersChange} />
+    <div>
+      <SearchBar
+        filters={filters}
+        onChange={handleOnSearch}
+        chips={chips}
+        translationScope="nodeSearchComponent"
+      />
       {loading && <LinearProgress />}
       <Grid container spacing={2}>
         {items.map((producer) => (
@@ -164,7 +80,7 @@ const Nodes = () => {
           shape="rounded"
         />
       )}
-    </Box>
+    </div>
   )
 }
 

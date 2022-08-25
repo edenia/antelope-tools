@@ -159,7 +159,7 @@
     "unknownError": "Error desconocido al procesar la acción",
     "accountNotFound": "Cuenta no encontrada",
     "successMessage": "Transacción exitosa",
-    "account": "Cuenta o Nombre del Contrato",
+    "placeholder": "Cuenta o Nombre del Contrato",
     "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
   },
   "bpJsonRoute": {
@@ -315,10 +315,12 @@
     "paidStandby": "Reserva con pago",
     "nonPaidStandby": "Reserva sin pago",
     "title": "Buscar Productor",
-    "producer": "Productor"
+    "producer": "Productor",
+    "placeholder": "Nombre del Productor"
   },
   "nodeSearchComponent": {
-    "title": "Buscar Productor",
-    "producer": "Productor"
+    "title": "Buscar Nodo",
+    "producer": "Productor",
+    "placeholder": "Nombre del Nodo"
   }
 }
