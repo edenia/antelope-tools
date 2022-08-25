@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
@@ -233,6 +233,7 @@ AccountInfo.propTypes = {
   hash: PropTypes.string,
   onSubmitAction: PropTypes.func,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func
 }
 

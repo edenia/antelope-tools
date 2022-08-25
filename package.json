@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@babel/helper-string-parser": "^7.18.10"
+  }
+}

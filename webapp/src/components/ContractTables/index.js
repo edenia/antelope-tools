@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -21,7 +21,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+const ContractTables = ({ accountName, abi, tableData, onGetTableRows,tableName }) => {
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
@@ -71,10 +71,13 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     setTables(abi.tables.map((table) => table.name))
   }, [abi])
 
+  useEffect(() =>{
+    
+  })
+
   useEffect(() => {
     if (!table) {
       setFields([])
-
       return
     }
 
@@ -216,6 +219,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
+  tableName: PropTypes.string.apply,
   onGetTableRows: PropTypes.func
 }
 
