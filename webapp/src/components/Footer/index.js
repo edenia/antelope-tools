@@ -20,7 +20,25 @@ const Footer = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Grid container item xs={12} sm={4} className={classes.GridFooter} justifyContent="center">
+
+
+      <Grid container item xs={12} sm={8} >
+        <List className={classes.footerMenuWrapper}>
+          {generalConfig.privacyTerms.map((link, index) => (
+            <ListItem className={classes.listItem} key={index}>
+              <ListItemText
+                primary={
+                  <a href={link.src} target="_blank" rel="noopener noreferrer">
+                    {link.text}
+                  </a>
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+
+      <Grid container item xs={12} sm={4} className={classes.GridFooter}>
         <Box className={classes.sidebarFooter}>
           <Grid container spacing={2}>
             <Grid item>
