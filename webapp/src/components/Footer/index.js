@@ -20,7 +20,18 @@ const Footer = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Grid container item xs={12} sm={8}>
+      <Grid container item xs={12} sm={4} className={classes.GridFooter} justifyContent="center">
+        <Box className={classes.sidebarFooter}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Typography className={classes.sidebarFooterText} variant="body2">An open source project </Typography>
+              <Typography className={classes.sidebarFooterText} variant="body2">made with X by Edenia </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+      </Grid>
+
+      <Grid container item xs={12} sm={8} justifyContent="flex-end">
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
@@ -34,31 +45,6 @@ const Footer = () => {
             </ListItem>
           ))}
         </List>
-      </Grid>
-      <Grid container item xs={12} sm={4} className={classes.gridFooter}>
-        <Box className={classes.sidebarFooter}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Typography className={classes.sidebarFooterText} variant="body2">
-                An open source project by
-              </Typography>
-              <Box className={classes.footerBoxLink}>
-                <img
-                  alt="edenia"
-                  src="/edenia.png"
-                  className={classes.footerImg}
-                />
-                <a
-                  href="https://edenia.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Edenia
-                </a>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
       </Grid>
     </div>
   )
