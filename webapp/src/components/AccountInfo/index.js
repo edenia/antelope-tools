@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Identicon from 'react-identicons'
 import Accordion from '@mui/material/Accordion'
-import Box from '@mui/material/Box'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -20,6 +19,35 @@ import ResourceUsage from '../ResourceUsage'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
+
+const AccordionWrapper = ({ children, title }) => {
+  const classes = useStyles()
+
+  return (
+    <Grid item xs={12}>
+      <Accordion classes={{ root: classes.accordion }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          classes={{
+            root: classes.accordionSummary
+          }}
+        >
+          <Typography variant="h6" color="primary">
+            {title}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>{children}</AccordionDetails>
+      </Accordion>
+    </Grid>
+  )
+}
+
+AccordionWrapper.propTypes = {
+  children: PropTypes.any,
+  title: PropTypes.string
+}
+
+AccordionWrapper.defaultProps = {}
 
 const AccountInfo = ({
   account,
@@ -93,15 +121,15 @@ const AccountInfo = ({
     >
       {!!info && (
         <>
-          <Box className={classes.boxHeaderCard}>
-            <Box className="identicon">
-              <Box className={classes.iconBorder}>
+          <Grid className={classes.boxHeaderCard}>
+            <Grid className="identicon">
+              <Grid className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
                   fg="#757575"
                 />
-              </Box>
+              </Grid>
               <Typography
                 variant="h4"
                 color="primary"
@@ -109,12 +137,12 @@ const AccountInfo = ({
               >
                 {info.account_name || 'N/A'}
               </Typography>
-            </Box>
-            <Box>
+            </Grid>
+            <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
-              <Box className="resourceUsage">
+              <Grid className="resourceUsage">
                 <ResourceUsage
                   title="RAM"
                   percent={info.ram.percent}
@@ -130,13 +158,13 @@ const AccountInfo = ({
                   percent={info.net.percent}
                   label={info.net.label}
                 />
-              </Box>
-            </Box>
-            <Box>
+              </Grid>
+            </div>
+            <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
-              <Box className="keys">
+              <Grid className="keys">
                 <dl>
                   {info.keys.map((key) => (
                     <span key={`account-key-${key.label}`}>
@@ -151,74 +179,30 @@ const AccountInfo = ({
                     </span>
                   ))}
                 </dl>
-              </Box>
-            </Box>
-          </Box>
+              </Grid>
+            </div>
+          </Grid>
 
           {abi && (
             <>
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractActions')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractActions
-                      accountName={account.account_name}
-                      abi={abi}
-                      onSubmitAction={onSubmitAction}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractTables')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractTables
-                      accountName={account.account_name}
-                      abi={abi}
-                      tableData={tableData}
-                      onGetTableRows={onGetTableRows}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('ricardianContract')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <RicardianContract abi={abi} hash={hash} />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
+              <AccordionWrapper title={t('contractActions')}>
+                <ContractActions
+                  accountName={account.account_name}
+                  abi={abi}
+                  onSubmitAction={onSubmitAction}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('contractTables')}>
+                <ContractTables
+                  accountName={account.account_name}
+                  abi={abi}
+                  tableData={tableData}
+                  onGetTableRows={onGetTableRows}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('ricardianContract')}>
+                <RicardianContract abi={abi} hash={hash} />
+              </AccordionWrapper>
             </>
           )}
         </>
