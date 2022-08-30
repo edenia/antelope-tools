@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import PropTypes from 'prop-types'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { SharedStateProvider } from './context/state.context'
@@ -48,11 +48,11 @@ const App = ({ ual = {} }) => {
           >
             <DashboardLayout ual={ual}>
               <Suspense fallback={<Loader />}>
-                <Switch>
+                <Routes>
                   {routes
                     .filter((route) => !route?.path?.includes('http'))
                     .map(renderRoutes)}
-                </Switch>
+                </Routes>
               </Suspense>
             </DashboardLayout>
           </GoogleReCaptchaProvider>

@@ -13,6 +13,7 @@ import { client } from './graphql'
 import './i18n'
 
 const mockStore = configureStore()
+const theme = createTheme()
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
@@ -21,6 +22,7 @@ it('renders without crashing', () => {
     loading: { effects: { user: { login: false } } }
   }
   const store = mockStore(initialState)
+  console.log(theme)
 
   ReactDOM.render(
     <ApolloProvider client={client}>

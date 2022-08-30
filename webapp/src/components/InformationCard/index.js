@@ -13,7 +13,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import 'flag-icon-css/css/flag-icon.min.css'
+import 'flag-icon-css/css/flag-icons.css'
 
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
