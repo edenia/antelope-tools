@@ -8,7 +8,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import { useQuery } from '@apollo/client'
-import 'flag-icon-css/css/flag-icon.min.css'
+import 'flag-icon-css/css/flag-icons.css'
 
 import { generalConfig } from '../../config'
 import { onImgError } from '../../utils'
