@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme, makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -128,37 +127,31 @@ UserMenu.propTypes = {
 }
 
 const Header = ({ ual, onDrawerToggle }) => {
-  const theme = useTheme()
   const classes = useStyles()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
     <AppBar className={classes.appBar} position="sticky" elevation={0}>
       <Toolbar>
         <Grid container alignItems="center">
-          {!isDesktop && (
-            <>
-              <Grid item md={0} xs={1}>
-                <Hidden mdUp>
-                  <IconButton
-                    className={classes.iconButton}
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={onDrawerToggle}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </Hidden>
-              </Grid>
-              <Grid item md={3} xs={4}>
-                <img
-                  alt="eosio dashboard"
-                  className={classes.imgHeaderLogo}
-                  src={'/eosio-dashboard.svg'}
-                />
-              </Grid>
-            </>
-          )}
+          <Grid item md={0} xs={1}>
+            <Hidden mdUp>
+              <IconButton
+                className={classes.iconButton}
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={onDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+          </Grid>
+          <Grid item md={3} xs={4}>
+            <img
+              alt="eosio dashboard"
+              className={classes.imgHeaderLogo}
+              src={'/eosio-dashboard.svg'}
+            />
+          </Grid>
           <Grid item md={12} xs={7}>
             <div className={classes.userBox}>
               <LanguageMenu />

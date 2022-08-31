@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
-import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -23,13 +22,14 @@ import routes from '../routes'
 
 import styles from './styles'
 
-const drawerWidth = 260
+const drawerWidth = 70
+const openDrawerWidth = drawerWidth*(26/7)
 const INIT_VALUES = {
   dynamicTitle: '',
   networkTitle: '',
   pathname: null
 }
-const useStyles = makeStyles((theme) => styles(theme, drawerWidth))
+const useStyles = makeStyles((theme) => styles(theme))
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -49,23 +49,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Dashboard = ({ children, width, ual }) => {
+const Dashboard = ({ children, ual }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
   const { t } = useTranslation('routes')
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
-  const isTablet = useMediaQuery('(min-width:767px)')
-  const [xsSize, setXsSize] = useState(12)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
-
-  useEffect(() => {
-    isTablet ? setXsSize(6) : setXsSize(12)
-  }, [isTablet])
 
   useEffect(() => {
     if (routes.some((route) => route.path === location.pathname)) {
@@ -91,17 +85,20 @@ const Dashboard = ({ children, width, ual }) => {
       <CssBaseline />
       <GlobalStyle />
       <PageTitle title={t(routeName.pageTitle)} />
-      <div className={classes.drawer}>
+      <div className={classes.drawer} style={{width: (mobileOpen ? openDrawerWidth : drawerWidth)}}>
         <Hidden mdUp implementation="js">
           <Sidebar
-            PaperProps={{ style: { width: drawerWidth } }}
+            PaperProps={{ style: { width: openDrawerWidth } }}
             variant="temporary"
             open={mobileOpen}
-            onClose={handleDrawerToggle}
+            onDrawerToggle={handleDrawerToggle}
           />
         </Hidden>
-        <Hidden smDown implementation="css">
-          <Sidebar PaperProps={{ style: { width: drawerWidth } }} />
+        <Hidden mdDown implementation="css">
+          <Sidebar
+            open={mobileOpen}
+            onDrawerToggle={handleDrawerToggle}
+          />
         </Hidden>
       </div>
       <div className={classes.appContent}>
@@ -110,7 +107,7 @@ const Dashboard = ({ children, width, ual }) => {
           <div className={classes.subHeader}>
             <div className={classes.boxHeader}>
               <Grid container>
-                <Grid item md={12} xs={xsSize}>
+                <Grid item md={12} xs={12}>
                   <Typography
                     variant="h3"
                     className={clsx(
@@ -147,7 +144,6 @@ const Dashboard = ({ children, width, ual }) => {
 
 Dashboard.propTypes = {
   children: PropTypes.node,
-  width: PropTypes.any,
   ual: PropTypes.any
 }
 
