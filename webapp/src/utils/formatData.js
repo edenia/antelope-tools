@@ -4,6 +4,8 @@ import moment from 'moment'
 
 import { eosConfig } from '../config'
 
+import isLogoValid from './validate-image'
+
 export const formatData = (
   {
     data,
@@ -13,7 +15,6 @@ export const formatData = (
     missedBlocks = [],
     nodes,
     healthStatus,
-    endpoints,
     dataType,
     node,
     totalRewards
@@ -64,11 +65,11 @@ export const formatData = (
       } else {
         newData.title = rank ? `#${rank} - ${owner}` : owner
       }
-
+      
       newData = {
         ...newData,
         media: {
-          logo: data.branding?.logo_256 || null,
+          logo: (isLogoValid(data.branding?.logo_256) ? data.branding?.logo_256 : null),
           name: data.candidate_name || data.organization_name || owner,
           account: getSubTitle()
         },

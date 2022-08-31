@@ -4,13 +4,14 @@ import Typography from '@mui/material/Typography'
 
 import { generalConfig } from '../../config'
 import { onImgError } from '../../utils'
+import isLogoValid from '../../utils/validate-image'
 
 const Media = ({ media }) => {
   return (
     <>
       <img
         loading="lazy"
-        src={media.logo || generalConfig.defaultProducerLogo}
+        src={isLogoValid(media.logo) ? media.logo : generalConfig.defaultProducerLogo}
         onError={onImgError(generalConfig.defaultProducerLogo)}
         alt="avatar"
       />

@@ -12,6 +12,7 @@ import 'flag-icon-css/css/flag-icons.css'
 
 import { generalConfig } from '../../config'
 import { onImgError } from '../../utils'
+import isLogoValid from '../../utils/validate-image'
 import { NODE_CPU_BENCHMARK } from '../../gql'
 
 import CountryFlag from '../CountryFlag'
@@ -29,27 +30,40 @@ const NodeCard = ({ producer, node }) => {
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
+  const Avatar = () => {
+    const logo = producerOrg.branding?.logo_256
+
+    return (
+      <img
+        width="30px"
+        height="30px"
+        className={classes.avatar}
+        src={
+          isLogoValid(logo) ? logo : generalConfig.defaultProducerLogo
+        }
+        onError={onImgError(generalConfig.defaultProducerLogo)}
+        alt="avatar"
+      />
+    )
+  }
+
   const Endpoints = () => {
+    const endpoints = [
+      { key: 'p2p_endpoint', value: 'P2P' },
+      { key: 'api_endpoint', value: 'API' },
+      { key: 'ssl_endpoint', value: 'SSL' }
+    ]
+
     return (
       <>
         {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
           <dt className={classes.bold}>{t('endpoints')}</dt>
         )}
-        {node?.p2p_endpoint && (
-          <dd>
-            <span className={classes.bold}>P2P</span>: {node.p2p_endpoint}
+        {endpoints.map(({ key, value }, index) => (node[key]?.length && (
+          <dd key={`endpoint-${node[key]}-${value}-${index}`}>
+            <span className={classes.bold}>{value}</span>: {node[key]}
           </dd>
-        )}
-        {node?.api_endpoint && (
-          <dd>
-            <span className={classes.bold}>API</span>: {node.api_endpoint}
-          </dd>
-        )}
-        {node?.ssl_endpoint && (
-          <dd>
-            <span className={classes.bold}>SSL</span>: {node.ssl_endpoint}
-          </dd>
-        )}
+        )))}
       </>
     )
   }
@@ -123,19 +137,7 @@ const NodeCard = ({ producer, node }) => {
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={
-          <img
-            width="30px"
-            height="30px"
-            className={classes.avatar}
-            src={
-              producerOrg.branding?.logo_256 ||
-              generalConfig.defaultProducerLogo
-            }
-            onError={onImgError(generalConfig.defaultProducerLogo)}
-            alt="avatar"
-          />
-        }
+        avatar={<Avatar />}
         title={
           producerOrg.candidate_name ||
           producerOrg.organization_name ||
