@@ -68,6 +68,12 @@ export default (theme) => ({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 0
+  },
+  test1: {
+    display: 'flex',
+    height: 20,
+    position: 'relative',
+    backgroundColor: '#1e88e5 '
   }
 
 })
