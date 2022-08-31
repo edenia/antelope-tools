@@ -248,7 +248,8 @@
     "endpoints": "Endpoints",
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
-    "cpuBenchmark": "Promedio del Benchmark de CPU"
+    "cpuBenchmark": "Promedio del Benchmark de CPU",
+    "isFull":"Es completo"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",

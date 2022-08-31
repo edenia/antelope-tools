@@ -9,6 +9,7 @@ const Media = ({ media }) => {
   return (
     <>
       <img
+        loading="lazy"
         src={media.logo || generalConfig.defaultProducerLogo}
         onError={onImgError(generalConfig.defaultProducerLogo)}
         alt="avatar"

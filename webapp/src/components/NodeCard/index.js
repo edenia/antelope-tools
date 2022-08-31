@@ -143,9 +143,9 @@ const NodeCard = ({ producer, node }) => {
         }
         subheader={
           <>
-            <CountryFlag code={producerOrg.location?.country} />
+            <CountryFlag code={node.location?.country} />
             <span className={classes.country}>
-              {producerOrg.location?.name || 'N/A'}
+              {node.location?.name || 'N/A'}
             </span>
           </>
         }
@@ -168,7 +168,13 @@ const NodeCard = ({ producer, node }) => {
           {node?.node_type && (
             <>
               <dt className={classes.bold}>{t('nodeType')}</dt>
-              <dd>{node?.node_type}</dd>
+              <dd>{node?.node_type.toString()}</dd>
+            </>
+          )}
+
+          {node?.full && (
+            <>
+              <dt className={classes.bold}>{t('isFull')}</dt>
             </>
           )}
 

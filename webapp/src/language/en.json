@@ -246,7 +246,8 @@
     "endpoints": "Endpoints",
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
-    "cpuBenchmark": "CPU Benchmark Average"
+    "cpuBenchmark": "CPU Benchmark Average",
+    "isFull":"Is full"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",

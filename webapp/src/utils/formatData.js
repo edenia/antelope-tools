@@ -53,6 +53,10 @@ export const formatData = (
     return missedBlocks[owner] || 0
   }
 
+  if(!data?.social?.github && (typeof data?.github_user === 'string')){
+    data.social.github = data.github_user
+  }
+
   switch (type) {
     case 'entity':
       if (eosConfig.networkName === 'lacchain') {
