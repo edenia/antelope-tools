@@ -2,19 +2,12 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 
-import { generalConfig } from '../../config'
-import { onImgError } from '../../utils'
-import isLogoValid from '../../utils/validate-image'
+import ProducerAvatar from '../ProducerAvatar'
 
 const Media = ({ media }) => {
   return (
     <>
-      <img
-        loading="lazy"
-        src={isLogoValid(media.logo) ? media.logo : generalConfig.defaultProducerLogo}
-        onError={onImgError(generalConfig.defaultProducerLogo)}
-        alt="avatar"
-      />
+      <ProducerAvatar logo={media.logo} name={media.name} />
       <Typography className="bpName">{media.name}</Typography>
       <Typography>{media.account}</Typography>
     </>
@@ -22,11 +15,11 @@ const Media = ({ media }) => {
 }
 
 Media.propTypes = {
-  media: PropTypes.object
+  media: PropTypes.object,
 }
 
 Media.defaultProps = {
-  media: {}
+  media: {},
 }
 
 export default memo(Media)

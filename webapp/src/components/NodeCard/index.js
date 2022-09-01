@@ -10,12 +10,10 @@ import CardActions from '@mui/material/CardActions'
 import { useQuery } from '@apollo/client'
 import 'flag-icon-css/css/flag-icons.css'
 
-import { generalConfig } from '../../config'
-import { onImgError } from '../../utils'
-import isLogoValid from '../../utils/validate-image'
 import { NODE_CPU_BENCHMARK } from '../../gql'
 
 import CountryFlag from '../CountryFlag'
+import ProducerAvatar from '../ProducerAvatar'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
 import styles from './styles'
@@ -25,45 +23,45 @@ const useStyles = makeStyles(styles)
 const NodeCard = ({ producer, node }) => {
   const classes = useStyles()
   const { data: { cpu } = {} } = useQuery(NODE_CPU_BENCHMARK, {
-    variables: { account: node?.name || producer.owner }
+    variables: { account: node?.name || producer.owner },
   })
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
-  const Avatar = () => {
-    const logo = producerOrg.branding?.logo_256
-
+  const ShowInfo = ({ cond, title, value }) => {
+    if (!cond && !value) {
+      return <></>
+    }
     return (
-      <img
-        width="30px"
-        height="30px"
-        className={classes.avatar}
-        src={
-          isLogoValid(logo) ? logo : generalConfig.defaultProducerLogo
-        }
-        onError={onImgError(generalConfig.defaultProducerLogo)}
-        alt="avatar"
-      />
+      <>
+        <dt className={classes.bold}>{title}</dt>
+        <dd>{value}</dd>
+      </>
     )
   }
 
   const Endpoints = () => {
+    if (!node?.p2p_endpoint && !node?.api_endpoint && !node?.ssl_endpoint) {
+      return <></>
+    }
+
     const endpoints = [
       { key: 'p2p_endpoint', value: 'P2P' },
       { key: 'api_endpoint', value: 'API' },
-      { key: 'ssl_endpoint', value: 'SSL' }
+      { key: 'ssl_endpoint', value: 'SSL' },
     ]
 
     return (
       <>
-        {(node?.p2p_endpoint || node?.api_endpoint || node?.ssl_endpoint) && (
-          <dt className={classes.bold}>{t('endpoints')}</dt>
+        <dt className={classes.bold}>{t('endpoints')}</dt>
+        {endpoints.map(
+          ({ key, value }, index) =>
+            node[key]?.length && (
+              <dd key={`endpoint-${node[key]}-${value}-${index}`}>
+                <span className={classes.bold}>{value}</span>: {node[key]}
+              </dd>
+            ),
         )}
-        {endpoints.map(({ key, value }, index) => (node[key]?.length && (
-          <dd key={`endpoint-${node[key]}-${value}-${index}`}>
-            <span className={classes.bold}>{value}</span>: {node[key]}
-          </dd>
-        )))}
       </>
     )
   }
@@ -134,64 +132,58 @@ const NodeCard = ({ producer, node }) => {
     setProducerOrg(producer.bp_json?.org || {})
   }, [producer])
 
+  const title =
+    producerOrg.candidate_name ||
+    producerOrg.organization_name ||
+    producer.owner
+
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={<Avatar />}
-        title={
-          producerOrg.candidate_name ||
-          producerOrg.organization_name ||
-          producer.owner
+        avatar={
+          <ProducerAvatar
+            classes={classes}
+            name={title}
+            logo={producerOrg.branding?.logo_256}
+          />
         }
+        title={title}
         subheader={
           <>
-            <CountryFlag code={node.location?.country} />
             <span className={classes.country}>
               {node.location?.name || 'N/A'}
             </span>
+            <CountryFlag code={node.location?.country} />
           </>
         }
       />
       <CardContent className={classes.content}>
         <dl className={classes.dl}>
-          {!node && (
+          {!node ? (
             <>
               <dt className={classes.bold}>{t('emptyNode')}</dt>
             </>
-          )}
-
-          {node?.name && (
+          ) : (
             <>
-              <dt className={classes.bold}>{t('nodeName')}</dt>
-              <dd>{node?.name}</dd>
+              <ShowInfo value={node?.name} title={t('nodeName')} />
+              <ShowInfo
+                cond={node?.node_type}
+                value={node?.node_type.toString()}
+                title={t('nodeType')}
+              />
+              <ShowInfo value={node?.full} title={t('isFull')} />
+              <ShowInfo
+                value={node?.server_version_string}
+                title={t('nodeVersion')}
+              />
+
+              <Features />
+              <Endpoints />
+              <Keys />
+              <CpuBenchmark />
+              <HealthStatus />
             </>
           )}
-
-          {node?.node_type && (
-            <>
-              <dt className={classes.bold}>{t('nodeType')}</dt>
-              <dd>{node?.node_type.toString()}</dd>
-            </>
-          )}
-
-          {node?.full && (
-            <>
-              <dt className={classes.bold}>{t('isFull')}</dt>
-            </>
-          )}
-
-          {node?.server_version_string && (
-            <>
-              <dt className={classes.bold}>{t('nodeVersion')}</dt>
-              <dd>{node?.server_version_string}</dd>
-            </>
-          )}
-
-          <Features />
-          <Endpoints />
-          <Keys />
-          <CpuBenchmark />
-          <HealthStatus />
         </dl>
       </CardContent>
       <CardActions disableSpacing />
@@ -201,6 +193,6 @@ const NodeCard = ({ producer, node }) => {
 
 NodeCard.propTypes = {
   producer: PropTypes.any,
-  node: PropTypes.any
+  node: PropTypes.any,
 }
 export default NodeCard

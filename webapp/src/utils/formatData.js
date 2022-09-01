@@ -17,10 +17,10 @@ export const formatData = (
     healthStatus,
     dataType,
     node,
-    totalRewards
+    totalRewards,
   },
   type,
-  t
+  t,
 ) => {
   let newData = {
     title: '',
@@ -30,7 +30,7 @@ export const formatData = (
     nodes: [],
     healthStatus: [],
     social: {},
-    endpoints: {}
+    endpoints: {},
   }
 
   const getSubTitle = () => {
@@ -54,7 +54,7 @@ export const formatData = (
     return missedBlocks[owner] || 0
   }
 
-  if(!data?.social?.github && (typeof data?.github_user === 'string')){
+  if (!data?.social?.github && typeof data?.github_user === 'string') {
     data.social.github = data.github_user
   }
 
@@ -65,13 +65,15 @@ export const formatData = (
       } else {
         newData.title = rank ? `#${rank} - ${owner}` : owner
       }
-      
+
       newData = {
         ...newData,
         media: {
-          logo: (isLogoValid(data.branding?.logo_256) ? data.branding?.logo_256 : null),
+          logo: isLogoValid(data.branding?.logo_256)
+            ? data.branding?.logo_256
+            : null,
           name: data.candidate_name || data.organization_name || owner,
-          account: getSubTitle()
+          account: getSubTitle(),
         },
         info: {
           location: data.location?.name || 'N/A',
@@ -82,17 +84,17 @@ export const formatData = (
           bussinesContact: data.bussines_contact || null,
           technicalContact: data.technical_contact || null,
           chain: data?.chain_resources || null,
-          otherResources: data?.other_resources || []
+          otherResources: data?.other_resources || [],
         },
         stats: {
           votes: 'N/A',
           rewards: 0,
           lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks: getEntitiesMissedBlocks()
+          missedBlocks: getEntitiesMissedBlocks(),
         },
         nodes,
         healthStatus,
-        social: data.social
+        social: data.social,
       }
 
       break
@@ -103,17 +105,17 @@ export const formatData = (
         media: {
           logo: data.branding?.logo_256 || null,
           name: node?.name,
-          account: node?.node_type || null
+          account: node?.node_type || null,
         },
         info: {
           version: node?.server_version_string || null,
           features: node?.features || [],
-          keys: node?.keys || null
+          keys: node?.keys || null,
         },
         stats: {
           lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
           missedBlocks:
-            node?.node_type === 'validator' ? missedBlocks[node?.name] : 0
+            node?.node_type === 'validator' ? missedBlocks[node?.name] : 0,
         },
         nodes: [],
         healthStatus: node?.health_status,
@@ -121,8 +123,8 @@ export const formatData = (
         endpoints: {
           p2p: node.p2p_endpoint,
           api: node.api_endpoint,
-          ssl: node.ssl_endpoint
-        }
+          ssl: node.ssl_endpoint,
+        },
       }
 
       break
