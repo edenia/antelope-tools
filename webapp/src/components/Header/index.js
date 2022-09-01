@@ -33,7 +33,7 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <Grid>
+    <Grid justifyContent='flex-start'>
       <Link href="https://mainnet.eosio.online/">
       <img alt="eosio dashboard" 
       src={'/eosio-dashboard.svg'}
@@ -114,7 +114,7 @@ const UserMenu = ({ ual }) => {
   }
 
   return (
-    <Box>
+    <Grid display='flex'>
       {ual.activeUser && (
         <>
           <Button startIcon={<AccountIcon />}>
@@ -138,7 +138,7 @@ const UserMenu = ({ ual }) => {
           {t('login')}
         </Button>
       )}
-    </Box>
+    </Grid>
   )
 }
 

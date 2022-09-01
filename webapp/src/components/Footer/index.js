@@ -7,7 +7,7 @@ import {
   ListItem,
   Box,
   Link,
-  Typography
+  Typography,
 } from '@mui/material'
 
 import { generalConfig } from '../../config'
@@ -15,7 +15,7 @@ import { generalConfig } from '../../config'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
-const preventDefault = event => event.preventDefault();
+const preventDefault = (event) => event.preventDefault()
 
 const Footer = () => {
   const classes = useStyles()
@@ -38,24 +38,43 @@ const Footer = () => {
         </List>
       </Grid>
 
-      <Grid container item xs={12} sm={4} className={classes.GridFooter} justifyContent="center">
+      <Grid
+        container
+        item
+        xs={12}
+        sm={4}
+        className={classes.GridFooter}
+        justifyContent="center"
+      >
         <Box className={classes.sidebarFooter}>
           <Grid container spacing={2}>
             <Grid item>
-              <Link href="https://github.com/eoscostarica/eosio-dashboard" onClick={preventDefault} style={{ textDecoration: 'none' }}>
-              <Typography className={classes.sidebarFooterText} variant="body2">This app is Open Source</Typography>
-              <Typography className={classes.sidebarFooterText} variant="body2">find out how to contribute</Typography>
+              <Link
+                href="https://github.com/eoscostarica/eosio-dashboard"
+                onClick={preventDefault}
+                style={{ textDecoration: 'none' }}
+              >
+                <Typography
+                  className={classes.sidebarFooterText}
+                  variant="body2"
+                >
+                  This app is Open Source
+                </Typography>
+                <Typography
+                  className={classes.sidebarFooterText}
+                  variant="body2"
+                >
+                  find out how to contribute
+                </Typography>
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Grid>
 
-      <Grid container item xs={12} sm={8} justifyContent="flex-end" >
+      <Grid container item xs={12} sm={8} justifyContent="flex-end">
         <List className={classes.footerMenuWrapper}>
-          <Box className={classes.footerMenuWrapper} variant="h2">
-            {generalConfig.appVersion}
-          </Box>
+          <Box className={classes.appVersion} justifyContent='center'>{generalConfig.appVersion}</Box>
           {generalConfig.privacyTerms.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
               <ListItemText

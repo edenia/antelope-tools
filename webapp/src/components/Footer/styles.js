@@ -72,11 +72,10 @@ export default (theme) => ({
     position: 'absolute',
     bottom: 0
   },
-  test1: {
+  appVersion: {
     display: 'flex',
-    height: 20,
-    position: 'relative',
-    backgroundColor: '#1e88e5 '
+    width: 100,
+    marginTop: 10,
+    marginBottom: 10
   }
-
 })
