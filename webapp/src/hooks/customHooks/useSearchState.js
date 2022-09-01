@@ -7,15 +7,23 @@ const useSearchState = ({ query }) => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(query)
   const location = useLocation()
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28, where: null })
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pages: 1,
+    limit: 28,
+    where: null,
+  })
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = (newFilters) => {
-    if(newFilters.owner){
+    if (newFilters.owner) {
       setPagination((prev) => ({
         ...prev,
         page: 1,
-        where: { ...pagination.where, owner: { _like: `%${newFilters.owner}%` } }
+        where: {
+          ...pagination.where,
+          owner: { _like: `%${newFilters.owner}%` },
+        },
       }))
     }
     setFilters(newFilters)
@@ -24,7 +32,7 @@ const useSearchState = ({ query }) => {
   const handleOnPageChange = (_, page) => {
     setPagination((prev) => ({
       ...prev,
-      page
+      page,
     }))
   }
 
@@ -33,8 +41,8 @@ const useSearchState = ({ query }) => {
       variables: {
         where: pagination.where,
         offset: pagination.offset || (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit
-      }
+        limit: pagination.limit,
+      },
     })
     // eslint-disable-next-line
   }, [pagination.where, pagination.page, pagination.limit])
@@ -47,7 +55,7 @@ const useSearchState = ({ query }) => {
     setPagination((prev) => ({
       ...prev,
       page: 1,
-      where: { owner: { _like: `%${params.owner}%` } }
+      where: { owner: { _like: `%${params.owner}%` } },
     }))
 
     setFilters((prev) => ({ ...prev, owner: params.owner }))
@@ -55,7 +63,13 @@ const useSearchState = ({ query }) => {
 
   return [
     { filters, pagination, loading, producers, info },
-    { handleOnSearch, handleOnPageChange, setFilters, setPagination, loadProducers }
+    {
+      handleOnSearch,
+      handleOnPageChange,
+      setFilters,
+      setPagination,
+      loadProducers,
+    },
   ]
 }
 
