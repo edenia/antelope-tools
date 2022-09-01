@@ -4,6 +4,7 @@ ARG port
 ARG react_app_title
 ARG react_app_default_producer_logo
 ARG react_app_footer_links
+ARG reac_app_privacy-terms
 ARG react_app_eos_rate_link
 ARG react_app_use_rewards
 ARG react_app_use_votes
@@ -38,6 +39,7 @@ ENV PORT $port
 ENV REACT_APP_TITLE $react_app_title
 ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
 ENV REACT_APP_FOOTER_LINKS $react_app_footer_links
+ENV REACT_APP_FEATURE_BUG $react_app_privacy_terms
 ENV REACT_APP_EOS_RATE_LINK $react_app_eos_rate_link
 ENV REACT_APP_USE_REWARDS $react_app_use_rewards
 ENV REACT_APP_USE_VOTES $react_app_use_votes

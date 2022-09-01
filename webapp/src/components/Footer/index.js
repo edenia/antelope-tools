@@ -6,6 +6,7 @@ import {
   ListItemText,
   ListItem,
   Box,
+  Link,
   Typography
 } from '@mui/material'
 
@@ -14,12 +15,14 @@ import { generalConfig } from '../../config'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
+const preventDefault = event => event.preventDefault();
 
 const Footer = () => {
   const classes = useStyles()
 
   return (
     <div className={classes.wrapper}>
+
       <Grid container item xs={12} sm={8}>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
@@ -35,31 +38,39 @@ const Footer = () => {
           ))}
         </List>
       </Grid>
-      <Grid container item xs={12} sm={4} className={classes.gridFooter}>
+
+      <Grid container item xs={12} sm={4} className={classes.GridFooter}>
         <Box className={classes.sidebarFooter}>
           <Grid container spacing={2}>
             <Grid item>
-              <Typography className={classes.sidebarFooterText} variant="body2">
-                An open source project by
-              </Typography>
-              <Box className={classes.footerBoxLink}>
-                <img
-                  alt="edenia"
-                  src="/edenia.png"
-                  className={classes.footerImg}
-                />
-                <a
-                  href="https://edenia.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Edenia
-                </a>
-              </Box>
+              <Link href="https://github.com/eoscostarica/eosio-dashboard" onClick={preventDefault} style={{ textDecoration: 'none' }}>
+              <Typography className={classes.sidebarFooterText} variant="body2">This app is Open Source</Typography>
+              <Typography className={classes.sidebarFooterText} variant="body2">find out how to contribute</Typography>
+              </Link>
             </Grid>
           </Grid>
         </Box>
       </Grid>
+
+      <Grid container item xs={12} sm={8} justifyContent="flex-end" >
+        <List className={classes.footerMenuWrapper}>
+          <Box className={classes.footerMenuWrapper} variant="h2">
+            {generalConfig.appVersion}
+          </Box>
+          {generalConfig.privacyTerms.map((link, index) => (
+            <ListItem className={classes.listItem} key={index}>
+              <ListItemText
+                primary={
+                  <a href={link.src} target="_blank" rel="noopener noreferrer">
+                    {link.text}
+                  </a>
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+
     </div>
   )
 }

@@ -3,7 +3,8 @@ export default (theme) => ({
     display: 'flex',
     padding: `1px ${theme.spacing(4)}`,
     background: theme.palette.common.white,
-    position: 'relative'
+    position: 'relative',
+    
   },
   listItem: {
     display: 'inline-block',
@@ -27,11 +28,10 @@ export default (theme) => ({
     minHeight: 61,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'right'
   },
   sidebarFooterText: {
     color: theme.sidebar.footer.color,
-    fontSize: 14,
     lineHeight: '20px',
     textAlign: 'center',
     letterSpacing: '0.1px'
@@ -65,6 +65,15 @@ export default (theme) => ({
   },
   footerMenuWrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0
+  },
+  test1: {
+    display: 'flex',
+    height: 20,
+    position: 'relative',
+    backgroundColor: '#1e88e5 '
   }
+
 })
