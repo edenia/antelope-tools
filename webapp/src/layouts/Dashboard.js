@@ -27,7 +27,7 @@ const drawerWidth = 260
 const INIT_VALUES = {
   dynamicTitle: '',
   networkTitle: '',
-  pathname: null
+  pathname: null,
 }
 const useStyles = makeStyles((theme) => styles(theme, drawerWidth))
 
@@ -78,7 +78,7 @@ const Dashboard = ({ children, width, ual }) => {
             : t(`${location.pathname}>heading`),
         networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
         pathname: location.pathname,
-        pageTitle: `${location.pathname}>title`
+        pageTitle: `${location.pathname}>title`,
       })
     } else {
       setRouteName(INIT_VALUES)
@@ -148,7 +148,7 @@ const Dashboard = ({ children, width, ual }) => {
 Dashboard.propTypes = {
   children: PropTypes.node,
   width: PropTypes.any,
-  ual: PropTypes.any
+  ual: PropTypes.any,
 }
 
 export default Dashboard

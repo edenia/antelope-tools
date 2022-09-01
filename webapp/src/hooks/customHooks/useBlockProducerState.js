@@ -9,14 +9,14 @@ import useSearchState from './useSearchState'
 const CHIPS_FILTERS = [
   { offset: 0, where: null, limit: 28 },
   {
-    where: { total_rewards: { _neq: 0 }, rank: { _lte: 21 } }
+    where: { total_rewards: { _neq: 0 }, rank: { _lte: 21 } },
   },
   {
-    where: { total_rewards: { _gte: 100 }, rank: { _gte: 22 } }
+    where: { total_rewards: { _gte: 100 }, rank: { _gte: 22 } },
   },
   {
-    where: { total_rewards: { _eq: 0 } }
-  }
+    where: { total_rewards: { _eq: 0 } },
+  },
 ]
 
 const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
@@ -24,7 +24,7 @@ const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 const useBlockProducerState = () => {
   const [
     { filters, pagination, loading, producers, info },
-    { handleOnSearch, handleOnPageChange, setPagination }
+    { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
     BLOCK_TRANSACTIONS_HISTORY
@@ -35,7 +35,9 @@ const useBlockProducerState = () => {
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
 
-  const chips = CHIPS_NAMES.map((e) => { return { name: e } })
+  const chips = CHIPS_NAMES.map((e) => {
+    return { name: e }
+  })
 
   const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
@@ -55,13 +57,14 @@ const useBlockProducerState = () => {
   useEffect(() => {
     if (eosConfig.networkName === 'lacchain') return
 
-    const {where,...filter} = CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
+    const { where, ...filter } =
+      CHIPS_FILTERS[CHIPS_NAMES.indexOf(filters.name)]
 
     setPagination((prev) => ({
       ...prev,
       page: 1,
       ...filter,
-      where: {...where,owner:prev.where?.owner}
+      where: { ...where, owner: prev.where?.owner },
     }))
   }, [filters, setPagination])
 
@@ -82,8 +85,23 @@ const useBlockProducerState = () => {
   }, [dataHistory, loadingHistory])
 
   return [
-    { anchorEl, current, filters, chips, items, loading, totalPages, missedBlocks, pagination },
-    { handlePopoverClose, handleOnSearch, handlePopoverOpen, handleOnPageChange }
+    {
+      anchorEl,
+      current,
+      filters,
+      chips,
+      items,
+      loading,
+      totalPages,
+      missedBlocks,
+      pagination,
+    },
+    {
+      handlePopoverClose,
+      handleOnSearch,
+      handlePopoverOpen,
+      handleOnPageChange,
+    },
   ]
 }
 
