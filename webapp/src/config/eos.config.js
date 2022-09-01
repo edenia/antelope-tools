@@ -18,6 +18,7 @@ export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
 export const tokenSymbol = process.env.REACT_APP_TOKEN_SYMBOL
 
 let _nodeTypes = null
+let _producerTypes = null
 
 switch (networkName) {
   case 'lacchain':
@@ -31,6 +32,7 @@ switch (networkName) {
       { name: 'writer', color: '#5484b3', description: 'Writer node' },
       { name: 'observer', color: '#000', description: 'Observer node' }
     ]
+    _producerTypes = ['partners', 'nonPartners']
     break
   default:
     _nodeTypes = [
@@ -55,10 +57,12 @@ switch (networkName) {
         description: 'Node that provides P2P and/or BNET to the public'
       }
     ]
+    _producerTypes = ['top21', 'paidStandby', 'nonPaidStandby']
     break
 }
 
 export const nodeTypes = _nodeTypes
+export const producerTypes = _producerTypes
 export const includeDefaultTransaction = process.env
   .REACT_APP_EOS_INCLUDE_TRANSACTION
   ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)

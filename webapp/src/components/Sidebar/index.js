@@ -15,7 +15,7 @@ import {
 import styled from 'styled-components'
 import { makeStyles } from '@mui/styles'
 import { rgba, darken } from 'polished'
-import { NavLink as RouterNavLink, withRouter } from 'react-router-dom'
+import { NavLink as RouterNavLink, useLocation  } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -28,7 +28,7 @@ import styles from './styles'
 const useStyles = makeStyles((theme) => styles(theme, rgba))
 
 const NavLink = forwardRef(function NavLink(props, ref) {
-  return <RouterNavLink innerRef={ref} {...props} />
+  return <RouterNavLink innerref={ref} {...props} />
 })
 
 const ExternalLink = forwardRef(function ExternalLink(
@@ -92,7 +92,7 @@ const Category = styled(MuiListItem)`
   }
 
   &:hover,
-  &.${(props) => props.activeClassName} {
+  &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
       darken(0.05, props.theme.sidebar.background)};
     svg {
@@ -114,7 +114,7 @@ const Link = styled(MuiListItem)`
     color: ${(props) => rgba(props.theme.sidebar.color, 0.9)};
   }
 
-  &.${(props) => props.activeClassName} {
+  &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
       darken(0.06, props.theme.sidebar.background)};
 
@@ -172,7 +172,7 @@ const SidebarLink = ({ name, icon, to, badge, classes }) => (
     component={NavLink}
     exact
     to={to}
-    activeClassName="active"
+    activeclassname="active"
     href={to}
   >
     {icon}
@@ -189,8 +189,14 @@ SidebarLink.propTypes = {
   classes: PropTypes.any
 }
 
-const Sidebar = ({ classes, staticContext, location, ...rest }) => {
+const Sidebar = ({
+  classes, 
+  staticContext, 
+  //location, 
+  ...rest }) => {
+
   const { t } = useTranslation('routes')
+  const location = useLocation()
   const classesStyle = useStyles()
   const initOpenRoutes = () => {
     /* Open collapse element that matches current url */
@@ -284,7 +290,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
                         : `${category.path}>sidebar`
                     )}
                     to={category.path}
-                    activeClassName="active"
+                    activeclassname="active"
                     component={
                       category.path.includes('http') ? ExternalLink : NavLink
                     }
@@ -308,4 +314,4 @@ Sidebar.propTypes = {
   location: PropTypes.any
 }
 
-export default withRouter(Sidebar)
+export default Sidebar
