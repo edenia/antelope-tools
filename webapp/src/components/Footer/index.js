@@ -22,7 +22,6 @@ const Footer = () => {
 
   return (
     <div className={classes.wrapper}>
-
       <Grid container item xs={12} sm={8}>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
@@ -39,7 +38,7 @@ const Footer = () => {
         </List>
       </Grid>
 
-      <Grid container item xs={12} sm={4} className={classes.GridFooter}>
+      <Grid container item xs={12} sm={4} className={classes.GridFooter} justifyContent="center">
         <Box className={classes.sidebarFooter}>
           <Grid container spacing={2}>
             <Grid item>
@@ -70,7 +69,6 @@ const Footer = () => {
           ))}
         </List>
       </Grid>
-
     </div>
   )
 }

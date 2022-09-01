@@ -1,4 +1,13 @@
 export default (theme) => ({
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: `1px ${theme.spacing(4)}`,
+    background: theme.palette.common.white,
+    position: 'relative',
+    alignItems: 'stretch'
+    
+  },  
   btnLogin: {
     textTransform: 'capitalize !important',
     fontWeight: '600 !important'
@@ -7,8 +16,8 @@ export default (theme) => ({
     fontWeight: '600 !important'
   },
   imgHeaderLogo: {
-    width: '90px',
-    marginLeft: '15px'
+    width: '120px',
+    marginLeft: '15px',
   },
   appBar: {
     backgroundColor: '#fff !important',

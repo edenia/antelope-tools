@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme, makeStyles } from '@mui/styles'
-import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
+import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
@@ -22,13 +22,27 @@ const useStyles = makeStyles(styles)
 const languages = [
   {
     value: 'en',
-    label: 'EN'
+    label: 'EN',
   },
   {
     value: 'es',
-    label: 'ES'
-  }
+    label: 'ES',
+  },
 ]
+
+const HeaderLogo = () => {
+  const classes = useStyles()
+  return (
+    <Grid>
+      <Link href="https://mainnet.eosio.online/">
+      <img alt="eosio dashboard" 
+      src={'/eosio-dashboard.svg'}
+      className={classes.imgHeaderLogo}
+      />
+      </Link>
+    </Grid>
+  )
+}
 
 const LanguageMenu = () => {
   const classes = useStyles()
@@ -49,13 +63,18 @@ const LanguageMenu = () => {
     }
   }
 
+  
   useEffect(() => {
     moment.locale(i18n.language.substring(0, 2))
     setCurrentLanguaje(i18n.language.substring(0, 2))
   }, [i18n.language])
 
   return (
-    <Box>
+    <Grid display="flex">
+      <Box justifyItems="flex-start">
+        <HeaderLogo />
+      </Box>
+
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -78,7 +97,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </Box>
+    </Grid>
   )
 }
 
@@ -124,7 +143,7 @@ const UserMenu = ({ ual }) => {
 }
 
 UserMenu.propTypes = {
-  ual: PropTypes.any
+  ual: PropTypes.any,
 }
 
 const Header = ({ ual, onDrawerToggle }) => {
@@ -173,7 +192,7 @@ const Header = ({ ual, onDrawerToggle }) => {
 
 Header.propTypes = {
   ual: PropTypes.any,
-  onDrawerToggle: PropTypes.func
+  onDrawerToggle: PropTypes.func,
 }
 
 export default Header
