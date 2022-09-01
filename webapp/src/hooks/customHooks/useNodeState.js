@@ -8,7 +8,7 @@ import useSearchState from './useSearchState'
 const useNodeState = () => {
   const [
     { filters, pagination, loading, producers, info },
-    { handleOnSearch, handleOnPageChange, setPagination }
+    { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
 
@@ -19,7 +19,7 @@ const useNodeState = () => {
 
     setPagination((prev) => ({
       ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit)
+      pages: Math.ceil(info.producers?.count / pagination.limit),
     }))
   }, [info, pagination.limit, setPagination])
 
@@ -38,8 +38,8 @@ const useNodeState = () => {
           ...producer,
           bp_json: {
             ...producer.bp_json,
-            nodes
-          }
+            nodes,
+          },
         }
       })
     }
@@ -49,7 +49,7 @@ const useNodeState = () => {
 
   return [
     { filters, chips, loading, items, pagination },
-    { handleOnSearch, handleOnPageChange }
+    { handleOnSearch, handleOnPageChange },
   ]
 }
 

@@ -20,8 +20,8 @@ const useNodeDistributionState = () => {
   useEffect(() => {
     loadProducers({
       variables: {
-        where: {}
-      }
+        where: {},
+      },
     })
     // eslint-disable-next-line
   }, [])
@@ -47,7 +47,7 @@ const useNodeDistributionState = () => {
           type: node.node_type,
           lat: parseFloat(node.location.latitude),
           lon: parseFloat(node.location.longitude),
-          name: producer.owner
+          name: producer.owner,
         })
       })
     })
@@ -62,7 +62,7 @@ const useNodeDistributionState = () => {
             return {
               ...prev,
               pibot: current,
-              result: [...prev.result, current]
+              result: [...prev.result, current],
             }
           }
 
@@ -75,14 +75,14 @@ const useNodeDistributionState = () => {
             return {
               ...prev,
               increase: prev.increase + 0.1,
-              result: [...prev.result, { ...current, lat: newLat }]
+              result: [...prev.result, { ...current, lat: newLat }],
             }
           }
 
           return {
             increase: 0.1,
             pibot: current,
-            result: [...prev.result, current]
+            result: [...prev.result, current],
           }
         },
         { pibot: {}, result: [], increase: 0.1 }
@@ -101,10 +101,7 @@ const useNodeDistributionState = () => {
     setNodes(items)
   }, [allNodes, filters])
 
-  return [
-    { filters, chips, nodes, loading },
-    { handleOnFiltersChange }
-  ]
+  return [{ filters, chips, nodes, loading }, { handleOnFiltersChange }]
 }
 
 export default useNodeDistributionState

@@ -7,16 +7,16 @@ export default (theme) => ({
       width: 45,
       height: 45,
       borderRadius: 15,
-      backgroundColor: theme.palette.primary.contrastText
+      backgroundColor: theme.palette.primary.contrastText,
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: 0,
       width: 'auto',
-      minWidth: 200
+      minWidth: 200,
     },
     '&:hover': {
-      cursor: 'pointer'
-    }
+      cursor: 'pointer',
+    },
   },
   list: {
     transition: 'max-height .6s ease-out',
@@ -40,7 +40,7 @@ export default (theme) => ({
         width: '50%',
         height: 50,
         borderLeft: '1px solid #EEEEEE',
-        borderBottom: '1px solid #EEEEEE'
+        borderBottom: '1px solid #EEEEEE',
       },
       '& .titlesBoxLeft': {
         paddingLeft: theme.spacing(2),
@@ -48,37 +48,37 @@ export default (theme) => ({
         alignItems: 'center',
         height: 50,
         width: '50%',
-        borderBottom: '1px solid #EEEEEE'
+        borderBottom: '1px solid #EEEEEE',
       },
       '& p': {
         fontWeight: 'bold',
         fontSize: 14,
         lineHeight: '21px',
-        letterSpacing: '0.07875px'
-      }
+        letterSpacing: '0.07875px',
+      },
     },
     '& .lists': {
       display: 'flex',
       '& ul': {
         padding: 0,
-        margin: 0
+        margin: 0,
       },
       '& .listsBoxRight': {
         width: '50%',
-        borderLeft: '1px solid #EEEEEE'
+        borderLeft: '1px solid #EEEEEE',
       },
       '& .listsBoxLeft': {
-        width: '50%'
-      }
+        width: '50%',
+      },
     },
     [theme.breakpoints.up('sm')]: {
       left: -189,
-      width: 320
-    }
+      width: 320,
+    },
   },
   listActive: {
     maxHeight: 1000,
-    opacity: 1
+    opacity: 1,
   },
   listItem: {
     height: 50,
@@ -94,14 +94,14 @@ export default (theme) => ({
       display: 'flex',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.common.black
+      color: theme.palette.common.black,
     },
     '&:hover': {
-      background: '#f4f4f4'
-    }
+      background: '#f4f4f4',
+    },
   },
   listItemActive: {
-    background: theme.palette.primary.contrastText
+    background: theme.palette.primary.contrastText,
   },
   toggle: {
     display: 'flex',
@@ -114,8 +114,8 @@ export default (theme) => ({
       paddingLeft: 22,
       borderRadius: theme.spacing(2, 4, 4, 2),
       justifyContent: 'flex-start',
-      marginRight: 65
-    }
+      marginRight: 65,
+    },
   },
   networkLogo: {
     border: `2px solid ${theme.palette.primary.main}`,
@@ -132,58 +132,58 @@ export default (theme) => ({
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('sm')]: {
       right: 0,
-      top: -3
-    }
+      top: -3,
+    },
   },
   expandIcon: {
     marginTop: theme.spacing(1),
     marginRight: 0,
-    color: theme.palette.text.hint
+    color: theme.palette.text.hint,
   },
   jungleImg: {
     width: '15px !important',
     height: '22px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   telosImg: {
     width: '15px !important',
     height: '15px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   waxImg: {
     width: '21px !important',
     height: '21px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   lacchainImg: {
     width: '24px !important',
     height: '24px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   protonImg: {
     width: '16px !important',
     height: '16px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   eosImg: {
     width: '24px !important',
     height: '24px !important',
     marginRight: theme.spacing(1),
-    marginLeft: -3
+    marginLeft: -3,
   },
   airwireImg: {
     width: '24px !important',
     height: '24px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   libreImg: {
     width: '24px !important',
     height: '24px !important',
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   ultraImg: {
     width: '24px !important',
     height: '24px !important',
-    marginRight: theme.spacing(2)
-  }
+    marginRight: theme.spacing(2),
+  },
 })
