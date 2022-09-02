@@ -8,7 +8,7 @@ export default (theme) => ({
     // position: 'relative',
     alignItems: 'stretch',
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
-     
+
   },
   listItem: {
     display: 'inline-block',

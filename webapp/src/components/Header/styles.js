@@ -5,8 +5,7 @@ export default (theme) => ({
     background: theme.palette.common.white,
     position: 'relative',
     alignItems: 'stretch',
-    
-     
+
   },
   btnLogin: {
     textTransform: 'capitalize !important',
