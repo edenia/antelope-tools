@@ -23,8 +23,8 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
   if (!tableData) return <></>
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} size="small">
+    <TableContainer className={classes.table} component={Paper}>
+      <Table size="small">
         <TableHead>
           <TableRow>
             {fields.map((field) => (
@@ -77,7 +77,7 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
 TableData.propTypes = {
   tableData: PropTypes.any,
   fields: PropTypes.array,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
 }
 
 TableData.defaultProps = {}

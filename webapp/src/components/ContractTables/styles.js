@@ -3,7 +3,7 @@ export default (theme) => ({
     marginBottom: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   formControl: {
     width: '100%',
@@ -11,10 +11,13 @@ export default (theme) => ({
     marginBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       width: 'initial',
-      marginRight: theme.spacing(2)
-    }
+      marginRight: theme.spacing(2),
+    },
+  },
+  table: {
+    width: '80% !important',
   },
   tableCell: {
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
-  }
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+  },
 })

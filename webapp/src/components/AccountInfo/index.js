@@ -29,7 +29,7 @@ const AccordionWrapper = ({ children, title }) => {
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           classes={{
-            root: classes.accordionSummary
+            root: classes.accordionSummary,
           }}
         >
           <Typography variant="h6" color="primary">
@@ -44,7 +44,7 @@ const AccordionWrapper = ({ children, title }) => {
 
 AccordionWrapper.propTypes = {
   children: PropTypes.any,
-  title: PropTypes.string
+  title: PropTypes.string,
 }
 
 AccordionWrapper.defaultProps = {}
@@ -55,7 +55,7 @@ const AccountInfo = ({
   hash,
   onSubmitAction,
   tableData,
-  onGetTableRows
+  onGetTableRows,
 }) => {
   const classes = useStyles()
   const [info, setInfo] = useState(null)
@@ -87,26 +87,26 @@ const AccountInfo = ({
       ram_quota: ramQuota,
       cpu_limit: cpuLimit,
       net_limit: netLimit,
-      permissions
+      permissions,
     } = account
 
     const ram = {
       percent: ramUsage / ramQuota || 0,
-      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`
+      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`,
     }
     const cpu = {
       percent: cpuLimit.used / cpuLimit.max || 0,
       label: `${getMicrosecondsLabel(cpuLimit.used)} / ${getMicrosecondsLabel(
-        cpuLimit.max
-      )}`
+        cpuLimit.max,
+      )}`,
     }
     const net = {
       percent: netLimit.used / netLimit.max || 0,
-      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`
+      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`,
     }
     const keys = permissions.map((item) => ({
       label: item.perm_name,
-      value: item.required_auth?.keys[0]?.key || '-'
+      value: item.required_auth?.keys[0]?.key || '-',
     }))
 
     setInfo({ ...account, ram, cpu, net, keys })
@@ -217,7 +217,7 @@ AccountInfo.propTypes = {
   hash: PropTypes.string,
   onSubmitAction: PropTypes.func,
   tableData: PropTypes.any,
-  onGetTableRows: PropTypes.func
+  onGetTableRows: PropTypes.func,
 }
 
 AccountInfo.defaultProps = {}

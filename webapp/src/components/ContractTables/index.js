@@ -21,7 +21,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     { name: 'scope', type: 'text' },
     { name: 'lowerBound', type: 'number' },
     { name: 'upperBound', type: 'number' },
-    { name: 'limit', type: 'number' }
+    { name: 'limit', type: 'number' },
   ]
 
   const { t } = useTranslation('contractTablesComponent')
@@ -56,7 +56,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       limit: filters.limit,
       table: value,
       code: accountName,
-      json: true
+      json: true,
     })
   }
 
@@ -71,7 +71,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       json: true,
       lower_bound: nextKey || filters.lowerBound,
       upper_bound: filters.upperBound,
-      loadMore: !!nextKey
+      loadMore: !!nextKey,
     })
   }
 
@@ -100,7 +100,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   useEffect(() => {
     setFilters((prev) => ({
       ...prev,
-      scope: accountName
+      scope: accountName,
     }))
   }, [accountName])
 
@@ -161,7 +161,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
-  onGetTableRows: PropTypes.func
+  onGetTableRows: PropTypes.func,
 }
 
 ContractTables.defaultProps = {}
