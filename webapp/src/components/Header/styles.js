@@ -41,7 +41,7 @@ export default (theme) => ({
       color: '#757575'
     }
   },
-  iconsHeader:{
+  iconsHeader: {
     display: 'flex',
     justifyContent: 'space-between'
   }
