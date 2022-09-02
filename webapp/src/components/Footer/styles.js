@@ -93,7 +93,7 @@ export default (theme) => ({
       paddingRight: theme.spacing(2)
 }
     },
-    footerAlign:{
+    footerAlign: {
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'row'
