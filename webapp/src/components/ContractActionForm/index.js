@@ -261,7 +261,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
           color="primary"
           onClick={handleSubmit}
         >
-          {t('executeTransaction')}
+          {t('Execute Transaction')}
         </Button>
       )}
     </>
