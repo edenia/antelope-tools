@@ -2,8 +2,15 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme, makeStyles } from '@mui/styles'
-import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
-import Box from '@mui/material/Box'
+import {
+  Grid,
+  Hidden,
+  Menu,
+  MenuItem,
+  AppBar,
+  IconButton,
+  Link,
+} from '@mui/material'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -33,12 +40,13 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <Grid justifyContent='flex-start'>
+    <Grid justifyContent="flex-start">
       <Link href="https://mainnet.eosio.online/">
-      <img alt="eosio dashboard" 
-      src={'/eosio-dashboard.svg'}
-      className={classes.imgHeaderLogo}
-      />
+        <img
+          alt="eosio dashboard"
+          src={'/eosio-dashboard.svg'}
+          className={classes.imgHeaderLogo}
+        />
       </Link>
     </Grid>
   )
@@ -63,7 +71,6 @@ const LanguageMenu = () => {
     }
   }
 
-  
   useEffect(() => {
     moment.locale(i18n.language.substring(0, 2))
     setCurrentLanguaje(i18n.language.substring(0, 2))
@@ -71,10 +78,6 @@ const LanguageMenu = () => {
 
   return (
     <Grid display="flex">
-      <Box justifyItems="flex-start">
-        <HeaderLogo />
-      </Box>
-
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -114,7 +117,7 @@ const UserMenu = ({ ual }) => {
   }
 
   return (
-    <Grid display='flex'>
+    <Grid display="flex">
       {ual.activeUser && (
         <>
           <Button startIcon={<AccountIcon />}>
@@ -152,8 +155,8 @@ const Header = ({ ual, onDrawerToggle }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
-    <AppBar className={classes.appBar} position="sticky" elevation={0}>
-      <Toolbar>
+    <AppBar className={classes.appBar} position="sticky" elevation={1}>
+      <Toolbar c>
         <Grid container alignItems="center">
           {!isDesktop && (
             <>
@@ -178,7 +181,11 @@ const Header = ({ ual, onDrawerToggle }) => {
               </Grid>
             </>
           )}
-          <Grid item md={12} xs={7}>
+          <Grid item md={12} xs={7} className={classes.test1}>
+            <div className={classes.HeaderLogo}>
+              <HeaderLogo />
+            </div>
+
             <div className={classes.userBox}>
               <LanguageMenu />
               <UserMenu ual={ual} />

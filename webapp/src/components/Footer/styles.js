@@ -1,3 +1,4 @@
+
 export default (theme) => ({
   wrapper: {
     display: 'flex',
@@ -5,8 +6,9 @@ export default (theme) => ({
     padding: `1px ${theme.spacing(4)}`,
     background: theme.palette.common.white,
     position: 'relative',
-    alignItems: 'stretch'
-    
+    alignItems: 'stretch',
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
+     
   },
   listItem: {
     display: 'inline-block',
@@ -73,9 +75,11 @@ export default (theme) => ({
     bottom: 0
   },
   appVersion: {
-    display: 'flex',
-    width: 100,
-    marginTop: 10,
-    marginBottom: 10
+
+    justifyContent: 'center', //Centered horizontally
+    alignItems: 'right', //Centered vertically
+    textAlignVertical: 'center',
+    marginTop: 13,
+    width: 30,
   }
 })

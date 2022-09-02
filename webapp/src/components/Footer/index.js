@@ -54,15 +54,12 @@ const Footer = () => {
                 onClick={preventDefault}
                 style={{ textDecoration: 'none' }}
               >
-                <Typography
-                  className={classes.sidebarFooterText}
-                  variant="body2"
-                >
+                <Typography className={classes.sidebarFooterText}>
                   This app is Open Source
                 </Typography>
                 <Typography
                   className={classes.sidebarFooterText}
-                  variant="body2"
+                  style={{ color: '#1E88E5', textDecoration: 'underline' }}
                 >
                   find out how to contribute
                 </Typography>
@@ -74,7 +71,9 @@ const Footer = () => {
 
       <Grid container item xs={12} sm={8} justifyContent="flex-end">
         <List className={classes.footerMenuWrapper}>
-          <Box className={classes.appVersion} justifyContent='center'>{generalConfig.appVersion}</Box>
+          <Box className={classes.appVersion}> 
+            {generalConfig.appVersion}
+          </Box>
           {generalConfig.privacyTerms.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
               <ListItemText

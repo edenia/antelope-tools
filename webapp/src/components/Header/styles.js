@@ -1,13 +1,13 @@
 export default (theme) => ({
   wrapper: {
-    display: 'flex',
     flexDirection: 'row',
     padding: `1px ${theme.spacing(4)}`,
     background: theme.palette.common.white,
     position: 'relative',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
     
-  },  
+     
+  },
   btnLogin: {
     textTransform: 'capitalize !important',
     fontWeight: '600 !important'
@@ -16,13 +16,15 @@ export default (theme) => ({
     fontWeight: '600 !important'
   },
   imgHeaderLogo: {
-    width: '120px',
-    marginLeft: '15px',
+    width: '104px',
+    height: '45px',
+
   },
   appBar: {
     backgroundColor: '#fff !important',
     color: theme.header.color,
-    boxShadow: theme.shadows[1]
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25) !important',
+
   },
   iconButton: {
     '& svg': {
@@ -34,10 +36,14 @@ export default (theme) => ({
   userBox: {
     display: 'flex',
     float: 'right',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     '& button': {
       color: '#757575'
     }
+  },
+  test1:{
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 })
