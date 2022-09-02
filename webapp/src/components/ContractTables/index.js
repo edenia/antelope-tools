@@ -42,7 +42,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       limit,
       table: value,
       code: accountName,
-      json: true
+      json: true,
     })
   }
 
@@ -57,7 +57,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       json: true,
       lower_bound: nextKey || lowerBound,
       upper_bound: upperBound,
-      loadMore: !!nextKey
+      loadMore: !!nextKey,
     })
   }
 
@@ -94,7 +94,10 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   return (
     <Box width="100%">
       <div className={classes.form}>
-        <FormControl variant="outlined" className={[classes.formControl,classes.tableEmpty]}>
+        <FormControl
+          variant="outlined"
+          className={[classes.formControl, classes.tableEmpty]}
+        >
           <InputLabel id="tableLabel">{t('table')}</InputLabel>
           <Select
             labelId="tableLabel"
@@ -144,11 +147,10 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
             setLimit(
               isNaN(event.target.value)
                 ? 100
-                : parseInt(event.target.value || 0)
+                : parseInt(event.target.value || 0),
             )
           }
         />
-
         {table && (
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             {t('getData')}
@@ -216,7 +218,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
-  onGetTableRows: PropTypes.func
+  onGetTableRows: PropTypes.func,
 }
 
 ContractTables.defaultProps = {}

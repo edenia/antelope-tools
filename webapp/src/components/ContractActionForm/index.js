@@ -254,17 +254,14 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
 
         return renderField(field, label)
       })}
+      
       {action && (
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-        >
-          {t('Execute Transaction')}
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          {t('executeTransaction')}
         </Button>
       )}
     </>
+    
   )
 }
 
