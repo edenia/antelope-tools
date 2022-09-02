@@ -96,5 +96,6 @@ export default (theme) => ({
     footerAlign:{
       display: 'flex',
       justifyContent: 'center',
-      flexDirection: 'row'    }
+      flexDirection: 'row'
+    }
 })
