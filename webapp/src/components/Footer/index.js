@@ -69,23 +69,31 @@ const Footer = () => {
         </Box>
       </Grid>
 
-      <Grid container item xs={12} sm={8} justifyContent="flex-end">
-        <List className={classes.footerMenuWrapper}>
-          <Box className={classes.appVersion}> 
-            {generalConfig.appVersion}
+      <Grid container item xs={12} sm={8} justifyContent="right">
+        <Box xs={12} sm={8} className={classes.GridFooter}>
+          <Box className={classes.sidebarFooter} alignItems="center">
+            <Box className={classes.linkBadge}>{generalConfig.appVersion}</Box>
           </Box>
-          {generalConfig.privacyTerms.map((link, index) => (
-            <ListItem className={classes.listItem} key={index}>
-              <ListItemText
-                primary={
-                  <a href={link.src} target="_blank" rel="noopener noreferrer">
-                    {link.text}
-                  </a>
-                }
-              />
-            </ListItem>
-          ))}
-        </List>
+        </Box>
+        <Box container item xs={12} sm={8}>
+          <List className={classes.footerMenuWrapper}>
+            {generalConfig.privacyTerms.map((link, index) => (
+              <ListItem className={classes.listItem} key={index}>
+                <ListItemText
+                  primary={
+                    <a
+                      href={link.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.text}
+                    </a>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Grid>
     </div>
   )

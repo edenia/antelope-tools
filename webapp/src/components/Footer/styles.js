@@ -5,7 +5,7 @@ export default (theme) => ({
     flexDirection: 'row',
     padding: `1px ${theme.spacing(4)}`,
     background: theme.palette.common.white,
-    position: 'relative',
+    // position: 'relative',
     alignItems: 'stretch',
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
      
@@ -73,13 +73,25 @@ export default (theme) => ({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 0
-  },
-  appVersion: {
+    },
 
-    justifyContent: 'center', //Centered horizontally
-    alignItems: 'right', //Centered vertically
-    textAlignVertical: 'center',
-    marginTop: 13,
-    width: 30,
-  }
+  linkBadge: {
+    fontSize: '11px !important',
+    fontWeight: theme.typography.fontWeightBold,
+    height: '20px !important',
+    alignItems: 'center',
+    padding: '2px 6px 0px 12px',
+    color: '#FFFF',
+    justifyContent: 'center',
+    borderRadius: '10px',
+    textAlign: 'center',
+    backgroundColor: `${theme.palette.secondary.main} !important`,
+
+    '& span.MuiChip-label, & span.MuiChip-label:hover': {
+      cursor: 'pointer',
+      color: theme.sidebar.badge.color,
+      paddingleft: theme.spacing(2),
+      paddingRight: theme.spacing(2)
+}
+    }
 })
