@@ -5,8 +5,7 @@ export default (theme) => ({
     background: theme.palette.common.white,
     position: 'relative',
     alignItems: 'stretch',
-    
-     
+
   },
   btnLogin: {
     textTransform: 'capitalize !important',
@@ -42,7 +41,7 @@ export default (theme) => ({
       color: '#757575'
     }
   },
-  test1:{
+  test1: {
     display: 'flex',
     justifyContent: 'space-between'
   }
