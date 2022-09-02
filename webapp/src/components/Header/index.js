@@ -181,7 +181,7 @@ const Header = ({ ual, onDrawerToggle }) => {
               </Grid>
             </>
           )}
-          <Grid item md={12} xs={7} className={classes.test1}>
+          <Grid item md={12} xs={7} className={classes.iconsHeader}>
             <div className={classes.HeaderLogo}>
               <HeaderLogo />
             </div>
