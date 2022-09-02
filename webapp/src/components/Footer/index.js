@@ -22,7 +22,7 @@ const Footer = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Grid container item xs={12} sm={8}>
+      <Grid container item xs={12} sm={8} justifyContent='flex-start'>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
@@ -42,12 +42,12 @@ const Footer = () => {
         container
         item
         xs={12}
-        sm={4}
+        sm={8}
         className={classes.GridFooter}
-        justifyContent="center"
+        justifyContent='center'
       >
         <Box className={classes.sidebarFooter}>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item>
               <Link
                 href="https://github.com/eoscostarica/eosio-dashboard"
@@ -69,10 +69,10 @@ const Footer = () => {
         </Box>
       </Grid>
 
-      <Grid container item xs={12} sm={8} justifyContent="right">
+      <Grid container item xs={12} sm={8} className={classes.footerAlign} justifyContent='flex-end'>
         <Box xs={12} sm={8} className={classes.GridFooter}>
           <Box className={classes.sidebarFooter} alignItems="center">
-            <Box className={classes.linkBadge}>{generalConfig.appVersion}</Box>
+            <Box className={classes.linkBadge}>{generalConfig.appVersion.split('-').pop()}</Box>
           </Box>
         </Box>
         <Box container item xs={12} sm={8}>

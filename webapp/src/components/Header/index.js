@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme, makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import {
   Grid,
   Hidden,
@@ -41,7 +40,7 @@ const HeaderLogo = () => {
   const classes = useStyles()
   return (
     <Grid justifyContent="flex-start">
-      <Link href="https://mainnet.eosio.online/">
+      <Link href="https://eosio.online/">
         <img
           alt="eosio dashboard"
           src={'/eosio-dashboard.svg'}
@@ -150,37 +149,24 @@ UserMenu.propTypes = {
 }
 
 const Header = ({ ual, onDrawerToggle }) => {
-  const theme = useTheme()
-  const classes = useStyles()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
+const classes = useStyles()
 
   return (
     <AppBar className={classes.appBar} position="sticky" elevation={1}>
       <Toolbar c>
         <Grid container alignItems="center">
-          {!isDesktop && (
-            <>
-              <Grid item md={0} xs={1}>
-                <Hidden mdUp>
-                  <IconButton
-                    className={classes.iconButton}
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={onDrawerToggle}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </Hidden>
-              </Grid>
-              <Grid item md={3} xs={4}>
-                <img
-                  alt="eosio dashboard"
-                  className={classes.imgHeaderLogo}
-                  src={'/eosio-dashboard.svg'}
-                />
-              </Grid>
-            </>
-          )}
+          <Grid item md={0} xs={1}>
+            <Hidden mdUp>
+              <IconButton
+                className={classes.iconButton}
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={onDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+          </Grid>
           <Grid item md={12} xs={7} className={classes.iconsHeader}>
             <div className={classes.HeaderLogo}>
               <HeaderLogo />

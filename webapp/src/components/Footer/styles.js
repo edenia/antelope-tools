@@ -1,4 +1,3 @@
-
 export default (theme) => ({
   wrapper: {
     display: 'flex',
@@ -7,7 +6,7 @@ export default (theme) => ({
     background: theme.palette.common.white,
     // position: 'relative',
     alignItems: 'stretch',
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)'
 
   },
   listItem: {
@@ -93,5 +92,9 @@ export default (theme) => ({
       paddingleft: theme.spacing(2),
       paddingRight: theme.spacing(2)
 }
-    }
+    },
+    footerAlign:{
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row'    }
 })

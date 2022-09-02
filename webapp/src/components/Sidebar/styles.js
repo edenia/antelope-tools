@@ -1,7 +1,9 @@
 export default (theme, rgba) => ({
   drawer: {
+    minWidth: '70px',
     borderRight: 0,
     '& > div': {
+      minWidth: '70px',
       borderRight: 0
     }
   },
@@ -12,7 +14,8 @@ export default (theme, rgba) => ({
     backgroundColor: theme.sidebar.background
   },
   listItem: {
-    padding: '0 !important',
+    margin: '4px 0px 0px 0px !important',
+    padding: '2px 6px 2px 6px !important',
     display: 'flex !important',
     flexDirection: 'column !important',
     alignItems: 'start !important',
@@ -86,11 +89,26 @@ export default (theme, rgba) => ({
   categoryBadge: {
     top: 12
   },
+  divider: {
+    width: "80%",
+    marginBottom: theme.spacing(4),
+    opacity: 0.1
+  },
   sidebarSection: {
     color: theme.sidebar.color,
-    padding: theme.spacing(4, 6, 1),
+    padding: theme.spacing(0, 4),
     opacity: 0.9,
     display: 'block',
-    fontWeight: '600'
+    fontWeight: `${theme.typography.fontWeightBold} !important`,
+  },
+  button: {
+    padding: theme.spacing(2, 0, 0, 2)
+  },
+  iconButton: {
+    '& svg': {
+      width: 30,
+      height: 30,
+      color: 'rgba(0, 0, 0, 0.54)',
+    }
   }
 })
