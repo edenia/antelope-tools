@@ -18,8 +18,8 @@ export default (theme) => ({
   tableCell: {
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
   },
-  tableEmpty:{
+  tableEmpty: {
     width: '150px !important',
-    display:'inline-block',
+    display: 'inline-block',
   }
   })
