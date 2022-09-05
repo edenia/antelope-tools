@@ -8,6 +8,7 @@ export default (theme) => ({
   formControl: {
     width: '100%',
     minWidth: '180px',
+    width: '15%',
     marginBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       width: 'initial',

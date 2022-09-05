@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
+import RefreshIcon from '@mui/icons-material/Refresh'
 
 import useDebounceState from '../../hooks/customHooks/useDebounceState'
 
@@ -153,6 +154,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
             color="primary"
             onClick={() => handleSubmit(null)}
           >
+            <RefreshIcon />
             {t('refreshData')}
           </Button>
         )}
