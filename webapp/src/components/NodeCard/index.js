@@ -29,9 +29,8 @@ const NodeCard = ({ producer, node }) => {
   const [producerOrg, setProducerOrg] = useState({})
 
   const ShowInfo = ({ cond, title, value }) => {
-    if (!cond && !value) {
-      return <></>
-    }
+    if (!cond && !value) return <></>
+
     return (
       <>
         <dt className={classes.bold}>{title}</dt>
