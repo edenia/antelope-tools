@@ -14,9 +14,6 @@ export default (theme) => ({
       marginRight: theme.spacing(2),
     },
   },
-  table: {
-    width: '80% !important',
-  },
   tableCell: {
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
   },

@@ -5,6 +5,8 @@ export default (theme) => ({
     borderRadius: 10,
     padding: theme.spacing(4),
     width: '100%',
+    direction: 'column',
+    justify: 'space-between',
     height: 'auto',
     '&:focus': {
       outline: 'none'

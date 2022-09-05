@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Identicon from 'react-identicons'
 import Accordion from '@mui/material/Accordion'
@@ -24,21 +23,19 @@ const AccordionWrapper = ({ children, title }) => {
   const classes = useStyles()
 
   return (
-    <Grid item xs={12}>
-      <Accordion classes={{ root: classes.accordion }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          classes={{
-            root: classes.accordionSummary,
-          }}
-        >
-          <Typography variant="h6" color="primary">
-            {title}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>{children}</AccordionDetails>
-      </Accordion>
-    </Grid>
+    <Accordion classes={{ root: classes.accordion }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        classes={{
+          root: classes.accordionSummary,
+        }}
+      >
+        <Typography variant="h6" color="primary">
+          {title}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>{children}</AccordionDetails>
+    </Accordion>
   )
 }
 
@@ -113,12 +110,7 @@ const AccountInfo = ({
   }, [account])
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="space-between"
-      className={classes.paper}
-    >
+    <div className={classes.paper}>
       {!!info && (
         <>
           <div className={classes.boxHeaderCard}>
@@ -207,7 +199,7 @@ const AccountInfo = ({
           )}
         </>
       )}
-    </Grid>
+    </div>
   )
 }
 

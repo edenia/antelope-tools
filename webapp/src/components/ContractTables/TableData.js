@@ -22,7 +22,7 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
   if (!tableData) return <></>
 
   return (
-    <TableContainer className={classes.table} component={Paper}>
+    <TableContainer component={Paper}>
       <Table size="small">
         <TableHead>
           <TableRow>
