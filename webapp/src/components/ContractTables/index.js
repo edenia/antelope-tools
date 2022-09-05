@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
+
+import useDebounceState from '../../hooks/customHooks/useDebounceState'
 
 import styles from './styles'
 import TableData from './TableData'
@@ -22,6 +24,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     { name: 'upperBound', type: 'number' },
     { name: 'limit', type: 'number' },
   ]
+  const DELAY = 300
 
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
@@ -29,11 +32,12 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [table, setTable] = useState('')
   const [fields, setFields] = useState([])
   const [filters, setFilters] = useState(initData)
+  const debouncedFilter = useDebounceState(filters, DELAY)
 
   const getValidValue = (value, type) => {
     switch (type) {
       case 'number':
-        return isNaN(value) ? 10 : parseInt(value)
+        return value < 0 ? 0 : parseInt(value)
       default:
         return value
     }
@@ -59,20 +63,23 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     })
   }
 
-  const handleSubmit = (nextKey) => {
-    if (!onGetTableRows) return
+  const handleSubmit = useCallback(
+    (nextKey) => {
+      if (!onGetTableRows || !table) return
 
-    onGetTableRows({
-      scope: filters.scope,
-      limit: filters.limit,
-      table,
-      code: accountName,
-      json: true,
-      lower_bound: nextKey || filters.lowerBound,
-      upper_bound: filters.upperBound,
-      loadMore: !!nextKey,
-    })
-  }
+      onGetTableRows({
+        scope: filters.scope,
+        limit: filters.limit,
+        table,
+        code: accountName,
+        json: true,
+        lower_bound: nextKey || filters.lowerBound,
+        upper_bound: filters.upperBound,
+        loadMore: !!nextKey,
+      })
+    },
+    [accountName, table, onGetTableRows, filters],
+  )
 
   useEffect(() => {
     if (!abi) {
@@ -102,6 +109,10 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       scope: accountName,
     }))
   }, [accountName])
+
+  useEffect(() => {
+    handleSubmit(null)
+  }, [debouncedFilter, handleSubmit])
 
   return (
     <div>
