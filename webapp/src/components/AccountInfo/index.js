@@ -121,15 +121,15 @@ const AccountInfo = ({
     >
       {!!info && (
         <>
-          <Grid className={classes.boxHeaderCard}>
-            <Grid className="identicon">
-              <Grid className={classes.iconBorder}>
+          <div className={classes.boxHeaderCard}>
+            <div className="identicon">
+              <div className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
                   fg="#757575"
                 />
-              </Grid>
+              </div>
               <Typography
                 variant="h4"
                 color="primary"
@@ -137,12 +137,12 @@ const AccountInfo = ({
               >
                 {info.account_name || 'N/A'}
               </Typography>
-            </Grid>
+            </div>
             <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
-              <Grid className="resourceUsage">
+              <div className="resourceUsage">
                 <ResourceUsage
                   title="RAM"
                   percent={info.ram.percent}
@@ -158,13 +158,13 @@ const AccountInfo = ({
                   percent={info.net.percent}
                   label={info.net.label}
                 />
-              </Grid>
+              </div>
             </div>
             <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
-              <Grid className="keys">
+              <div className="keys">
                 <dl>
                   {info.keys.map((key) => (
                     <span key={`account-key-${key.label}`}>
@@ -179,9 +179,9 @@ const AccountInfo = ({
                     </span>
                   ))}
                 </dl>
-              </Grid>
+              </div>
             </div>
-          </Grid>
+          </div>
 
           {abi && (
             <>

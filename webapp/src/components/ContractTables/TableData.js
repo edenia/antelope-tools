@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -60,7 +59,7 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
         </TableBody>
       </Table>
       {tableData?.more && (
-        <Grid display="flex" justifyContent="center" p={2}>
+        <div className={classes.loadMore}>
           <Button
             variant="contained"
             color="primary"
@@ -68,7 +67,7 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
           >
             {t('loadMore')}
           </Button>
-        </Grid>
+        </div>
       )}
     </TableContainer>
   )

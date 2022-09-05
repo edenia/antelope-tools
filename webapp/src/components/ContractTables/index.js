@@ -8,7 +8,6 @@ import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 
 import styles from './styles'
 import TableData from './TableData'
@@ -105,7 +104,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   }, [accountName])
 
   return (
-    <Grid width="100%">
+    <div width="100%">
       <div className={classes.form}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel id="tableLabel">{t('table')}</InputLabel>
@@ -153,7 +152,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
         fields={fields}
         handleSubmit={handleSubmit}
       />
-    </Grid>
+    </div>
   )
 }
 

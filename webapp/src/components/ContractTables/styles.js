@@ -20,4 +20,9 @@ export default (theme) => ({
   tableCell: {
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
   },
+  loadMore: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(2),
+  },
 })
