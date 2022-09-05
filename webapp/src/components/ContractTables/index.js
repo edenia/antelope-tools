@@ -38,7 +38,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const getValidValue = (value, type) => {
     switch (type) {
       case 'number':
-        return value < 0 ? 0 : parseInt(value)
+        return isNaN(value) || value < 0 ? 0 : parseInt(value)
       default:
         return value
     }
