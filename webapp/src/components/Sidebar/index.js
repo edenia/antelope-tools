@@ -94,7 +94,7 @@ const Sidebar = ({
                 <MuiListItem className={classesStyle.listItem} key={index}>
                   {category.header ? (
                     <>
-                      <hr className={classesStyle.divider} />
+                      <div className={classesStyle.divider} />
                       {rest.open && (
                         <Typography className={classesStyle.sidebarSection}>
                           {t(category.header)}
@@ -155,7 +155,7 @@ const Sidebar = ({
                   )}
                 </MuiListItem>
               ))}
-            <hr className={classesStyle.divider} />
+            <div className={classesStyle.divider} />
           </MuiList>
         </PerfectScrollbar>
       </MuiDrawer>

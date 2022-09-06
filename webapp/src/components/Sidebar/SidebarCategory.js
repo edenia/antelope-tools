@@ -17,6 +17,7 @@ const Category = styled(MuiListItem)`
   flex-direction: row;
   svg {
     opacity: 0.5;
+    object-fit: contain;
     font-size: 20px;
     width: 20px;
     height: 20px;

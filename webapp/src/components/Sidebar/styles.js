@@ -90,9 +90,10 @@ export default (theme, rgba) => ({
     top: 12
   },
   divider: {
-    width: "80%",
-    marginBottom: theme.spacing(4),
-    opacity: 0.1
+    width: '40px',
+    height: '1px',
+    margin: theme.spacing(4,2),
+    backgroundColor: '#e0e0e0',
   },
   sidebarSection: {
     color: theme.sidebar.color,
