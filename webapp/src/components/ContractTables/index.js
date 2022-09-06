@@ -21,7 +21,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName }) => {
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
@@ -70,6 +70,11 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
 
     setTables(abi.tables.map((table) => table.name))
   }, [abi])
+
+// Teto
+  useEffect(() =>{
+
+  })
 
   useEffect(() => {
     if (!table) {
@@ -216,6 +221,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func
 }
 

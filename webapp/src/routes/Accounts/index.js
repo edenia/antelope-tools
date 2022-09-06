@@ -1,4 +1,4 @@
-import React, { lazy, useState, useEffect } from 'react'
+import React, { lazy, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
@@ -76,7 +76,7 @@ const Accounts = ({ ual }) => {
     setLoading(false)
   }
 
-  const handleGetTableRows = async ({ loadMore, ...payload }) => {
+  const handleGetTableRows = useCallback(async ({ loadMore, ...payload }) => {
     setLoading(true)
     try {
       const tableData = await eosApi.getTableRows(payload)
@@ -96,7 +96,7 @@ const Accounts = ({ ual }) => {
       console.log(error)
     }
     setLoading(false)
-  }
+  },[])
 
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
@@ -137,15 +137,9 @@ const Accounts = ({ ual }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.account) {
-      setFilters({ owner: 'eosio' })
-      handleOnSearch({ owner: 'eosio' })
+    setFilters({ owner: params?.account || 'eosio',table: params?.table || null})
+    handleOnSearch({ owner: params?.account || 'eosio'})
 
-      return
-    }
-
-    setFilters({ owner: params.account })
-    handleOnSearch({ owner: params.account })
     // eslint-disable-next-line
   }, [location.search])
 
@@ -153,7 +147,7 @@ const Accounts = ({ ual }) => {
     handleOnSearch({ owner: 'eosio' })
     // eslint-disable-next-line
   }, [])
-
+  console.log(filters)
   return (
     <Grid item xs={12}>
       <Card>
@@ -171,6 +165,7 @@ const Accounts = ({ ual }) => {
           account={account}
           abi={abi}
           hash={hash}
+          tableName={filters.table}
           onSubmitAction={handleSubmitAction}
           tableData={tableData}
           onGetTableRows={handleGetTableRows}

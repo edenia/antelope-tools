@@ -233,6 +233,7 @@ AccountInfo.propTypes = {
   hash: PropTypes.string,
   onSubmitAction: PropTypes.func,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func
 }
 
