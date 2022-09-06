@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import clsx from 'clsx'
-import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
 const Endpoints = ({ endpoints, classes, type, t }) => {
@@ -12,18 +11,18 @@ const Endpoints = ({ endpoints, classes, type, t }) => {
 
   if (!items.length)
     return (
-      <Box className={clsx(classes.info, classes.entity)}>
+      <div className={clsx(classes.info, classes.entity)}>
         <Typography variant="overline">Endpoints</Typography>
-        <Box className={classes.borderLine}>
+        <div className={classes.borderLine}>
           <Typography>{t('noData')}</Typography>
-        </Box>
-      </Box>
+        </div>
+      </div>
     )
 
   return (
-    <Box className={clsx(classes.info, classes.entity)}>
+    <div className={clsx(classes.info, classes.entity)}>
       <Typography variant="overline">Endpoints</Typography>
-      <Box className={classes.borderLine}>
+      <div className={classes.borderLine}>
         {items.map((endpoint, i) => (
           <Typography variant="body1" key={i}>
             {`${endpoint.toUpperCase()}:`}
@@ -36,8 +35,8 @@ const Endpoints = ({ endpoints, classes, type, t }) => {
             </Link>
           </Typography>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 

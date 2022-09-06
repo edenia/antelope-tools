@@ -19,7 +19,14 @@ const prefix = {
   reddit: 'https://www.reddit.com/user/',
   keybase: 'https://keybase.io/',
   telegram: 'https://t.me/',
-  wechat: 'https://wechat.com/'
+  wechat: 'https://wechat.com/',
+  steemit: 'https://steemit.com/@',
+  discord: 'https://discord/',
+  medium: 'https://'
+}
+
+const sufix = {
+  medium: '.medium.com'
 }
 
 const icons = {
@@ -32,16 +39,15 @@ const icons = {
 }
 
 const ProducerSocialLinks = ({ items, message }) => {
-  const itemsArray = Object.keys(items)
+  const itemsArray = Object.keys(items).filter((key) => !!items[key])
 
-  if (!itemsArray.length) return <Typography>{message}</Typography>
+  if (!itemsArray?.length) return <Typography>{message}</Typography>
 
   return itemsArray
-    .filter((key) => !!items[key])
     .map((key, i) => (
       <Link
         key={`social-link${i}`}
-        href={`${prefix[key]}${items[key]}`}
+        href={`${prefix[key] ?? "https://"+key+"/"}${items[key]}${sufix[key] ?? ''}`}
         target="_blank"
         rel="noopener noreferrer"
       >
