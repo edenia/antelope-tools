@@ -89,7 +89,7 @@ export default (theme, rgba) => ({
     top: 12,
   },
   divider: {
-    width: '40px',
+    width: '80%',
     height: '1px',
     margin: theme.spacing(4, 2),
     backgroundColor: '#e0e0e0',
