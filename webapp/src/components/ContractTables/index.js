@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -32,7 +32,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
 
-  const handleTableChange = (value) => {
+  const handleTableChange = useCallback((value) => {
     setTable(value)
 
     if (!onGetTableRows) return
@@ -44,7 +44,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
       code: accountName,
       json: true
     })
-  }
+  },[limit,scope,accountName,onGetTableRows,setTable])
 
   const handleSubmit = (nextKey) => {
     if (!onGetTableRows) return
@@ -71,11 +71,6 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
     setTables(abi.tables.map((table) => table.name))
   }, [abi])
 
-// Teto
-  useEffect(() =>{
-
-  })
-
   useEffect(() => {
     if (!table) {
       setFields([])
@@ -89,12 +84,16 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
   }, [table, abi])
 
   useEffect(() => {
+
+    if (tableName){
+      handleTableChange(tableName)
+    }
+
     setScope(accountName)
-    setTable('')
     setLowerBound(null)
     setUpperBound(null)
     setLimit(10)
-  }, [accountName])
+  }, [accountName,tableName,handleTableChange])
 
   return (
     <Box width="100%">

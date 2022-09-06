@@ -37,7 +37,7 @@ const Accounts = ({ ual }) => {
     if (!ual.activeUser) {
       showMessage({
         type: 'error',
-        content: t('loginBeforeUseAction')
+        content: t('loginBeforeUseAction'),
       })
 
       return
@@ -51,10 +51,10 @@ const Accounts = ({ ual }) => {
         authorization: [
           {
             actor: ual.activeUser.accountName,
-            permission: 'active'
-          }
+            permission: 'active',
+          },
         ],
-        ...action
+        ...action,
       })
       const { trxId, explorerUrl } = getTransactionUrl(result.transactionId)
 
@@ -64,12 +64,12 @@ const Accounts = ({ ual }) => {
           <a href={explorerUrl} target="_blank" rel="noopener noreferrer">
             {t('successMessage')} {trxId}
           </a>
-        )
+        ),
       })
     } catch (error) {
       showMessage({
         type: 'error',
-        content: error?.cause?.message || error?.message || t('unknownError')
+        content: error?.cause?.message || error?.message || t('unknownError'),
       })
     }
 
@@ -85,7 +85,7 @@ const Accounts = ({ ual }) => {
         setTableData((prev) => ({
           ...prev,
           ...tableData,
-          rows: prev.rows.concat(...tableData.rows)
+          rows: prev.rows.concat(...tableData.rows),
         }))
 
         return
@@ -96,7 +96,7 @@ const Accounts = ({ ual }) => {
       console.log(error)
     }
     setLoading(false)
-  },[])
+  }, [])
 
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
@@ -116,13 +116,13 @@ const Accounts = ({ ual }) => {
     } catch (error) {
       showMessage({
         type: 'error',
-        content: t('accountNotFound')
+        content: t('accountNotFound'),
       })
     }
 
     try {
       const { abi } = await eosApi.getAbi(accountName)
-      
+
       setAbi(abi)
       const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
 
@@ -137,8 +137,11 @@ const Accounts = ({ ual }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    setFilters({ owner: params?.account || 'eosio',table: params?.table || null})
-    handleOnSearch({ owner: params?.account || 'eosio'})
+    setFilters({
+      owner: params?.account || 'eosio',
+      table: params?.table || 'producers',
+    })
+    handleOnSearch({ owner: params?.account || 'eosio' })
 
     // eslint-disable-next-line
   }, [location.search])
@@ -147,7 +150,7 @@ const Accounts = ({ ual }) => {
     handleOnSearch({ owner: 'eosio' })
     // eslint-disable-next-line
   }, [])
-  console.log(filters)
+  
   return (
     <Grid item xs={12}>
       <Card>
@@ -176,7 +179,7 @@ const Accounts = ({ ual }) => {
 }
 
 Accounts.propTypes = {
-  ual: PropTypes.object
+  ual: PropTypes.object,
 }
 
 export default Accounts

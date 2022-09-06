@@ -27,6 +27,7 @@ const AccountInfo = ({
   hash,
   onSubmitAction,
   tableData,
+  tableName,
   onGetTableRows
 }) => {
   const classes = useStyles()
@@ -196,6 +197,7 @@ const AccountInfo = ({
                       accountName={account.account_name}
                       abi={abi}
                       tableData={tableData}
+                      tableName={tableName}
                       onGetTableRows={onGetTableRows}
                     />
                   </AccordionDetails>
