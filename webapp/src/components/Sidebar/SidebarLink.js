@@ -12,9 +12,6 @@ import styled from 'styled-components'
 import NavLink from './NavLink'
 
 const Link = styled(MuiListItem)`
-  padding-left: ${(props) => props.theme.spacing(15)}px;
-  padding-top: ${(props) => props.theme.spacing(2)}px;
-  padding-bottom: ${(props) => props.theme.spacing(2)}px;
   span {
     color: ${(props) => rgba(props.theme.sidebar.color, 0.7)};
   }

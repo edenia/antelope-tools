@@ -14,7 +14,6 @@ export default (theme, rgba) => ({
     backgroundColor: theme.sidebar.background
   },
   listItem: {
-    margin: '4px 0px 0px 0px !important',
     padding: '2px 6px 2px 6px !important',
     display: 'flex !important',
     flexDirection: 'column !important',
@@ -103,7 +102,7 @@ export default (theme, rgba) => ({
     fontWeight: `${theme.typography.fontWeightBold} !important`,
   },
   button: {
-    padding: theme.spacing(2, 0, 0, 2)
+    padding: '4px 10px 0px'
   },
   iconButton: {
     '& svg': {
