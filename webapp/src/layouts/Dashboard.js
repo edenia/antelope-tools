@@ -22,7 +22,7 @@ import routes from '../routes'
 import styles from './styles'
 
 const drawerWidth = 70
-const openDrawerWidth = drawerWidth * (26 / 7)
+const openDrawerWidth = drawerWidth * (24 / 7)
 const INIT_VALUES = {
   dynamicTitle: '',
   networkTitle: '',
