@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Chip,
-  ListItem as MuiListItem,
-  ListItemText
-} from '@mui/material'
+import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
 import { rgba, darken } from 'polished'
 import styled from 'styled-components'
 
@@ -20,7 +16,7 @@ const Link = styled(MuiListItem)`
   }
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
-    darken(0.06, props.theme.sidebar.background)};
+      darken(0.06, props.theme.sidebar.background)};
     span {
       color: ${(props) => props.theme.sidebar.color};
     }
@@ -48,7 +44,7 @@ SidebarLink.propTypes = {
   name: PropTypes.string,
   to: PropTypes.string,
   badge: PropTypes.string,
-  classes: PropTypes.any
+  classes: PropTypes.any,
 }
 
 export default SidebarLink

@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
-import {
-  Chip,
-  ListItem as MuiListItem,
-  ListItemText
-} from '@mui/material'
+import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
 import styled from 'styled-components'
 import { darken } from 'polished'
 
@@ -25,7 +21,7 @@ const Category = styled(MuiListItem)`
   &:hover,
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
-    darken(0.05, props.theme.sidebar.background)};
+      darken(0.05, props.theme.sidebar.background)};
     svg {
       opacity: 1;
     }
@@ -42,13 +38,8 @@ const SidebarCategory = ({
   showOnlyIcons,
   ...rest
 }) => {
-
   if (showOnlyIcons) {
-    return (
-      <Category {...rest}>
-        {icon}
-      </Category>
-    )
+    return <Category {...rest}>{icon}</Category>
   }
 
   return (
@@ -80,7 +71,7 @@ SidebarCategory.propTypes = {
   classes: PropTypes.any,
   isOpen: PropTypes.bool,
   isCollapsable: PropTypes.bool,
-  badge: PropTypes.string
+  badge: PropTypes.string,
 }
 
 export default SidebarCategory

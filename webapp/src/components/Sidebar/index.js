@@ -6,7 +6,7 @@ import {
   List as MuiList,
   ListItem as MuiListItem,
   Typography,
-  IconButton
+  IconButton,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { makeStyles } from '@mui/styles'
@@ -26,13 +26,7 @@ import SidebarLink from './SidebarLink'
 
 const useStyles = makeStyles((theme) => styles(theme, rgba))
 
-const Sidebar = ({
-  classes,
-  staticContext,
-  onDrawerToggle,
-  ...rest
-}) => {
-
+const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
   const { t } = useTranslation('routes')
   const location = useLocation()
   const classesStyle = useStyles()
@@ -48,7 +42,7 @@ const Sidebar = ({
       const isHome = route.containsHome && pathName === '/'
 
       _routes = Object.assign({}, _routes, {
-        [index]: isActive || isOpen || isHome
+        [index]: isActive || isOpen || isHome,
       })
     })
 
@@ -63,19 +57,24 @@ const Sidebar = ({
       (item) =>
         openRoutes[index] ||
         setOpenRoutes((openRoutes) =>
-          Object.assign({}, openRoutes, { [item]: false })
-        )
+          Object.assign({}, openRoutes, { [item]: false }),
+        ),
     )
 
     // Toggle selected element
     setOpenRoutes((openRoutes) =>
-      Object.assign({}, openRoutes, { [index]: !openRoutes[index] })
+      Object.assign({}, openRoutes, { [index]: !openRoutes[index] }),
     )
   }
 
   return (
     <>
-      <MuiDrawer variant="permanent" className={classesStyle.drawer} onClose={onDrawerToggle} {...rest}>
+      <MuiDrawer
+        variant="permanent"
+        className={classesStyle.drawer}
+        onClose={onDrawerToggle}
+        {...rest}
+      >
         <PerfectScrollbar className={classesStyle.scrollbar}>
           <div className={classesStyle.button}>
             <IconButton
@@ -139,7 +138,7 @@ const Sidebar = ({
                       name={t(
                         category.path.includes('http')
                           ? category.name
-                          : `${category.path}>sidebar`
+                          : `${category.path}>sidebar`,
                       )}
                       to={category.path}
                       activeclassname="active"
@@ -166,7 +165,7 @@ const Sidebar = ({
 Sidebar.propTypes = {
   classes: PropTypes.any,
   staticContext: PropTypes.any,
-  location: PropTypes.any
+  location: PropTypes.any,
 }
 
 export default Sidebar

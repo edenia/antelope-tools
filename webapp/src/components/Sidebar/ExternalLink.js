@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const ExternalLink = forwardRef(function ExternalLink(
   { to, children, className },
-  ref
+  ref,
 ) {
   return (
     <a
@@ -21,7 +21,7 @@ const ExternalLink = forwardRef(function ExternalLink(
 ExternalLink.propTypes = {
   to: PropTypes.string,
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 export default ExternalLink
