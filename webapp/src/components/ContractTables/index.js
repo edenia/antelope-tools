@@ -21,7 +21,13 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName }) => {
+const ContractTables = ({
+  accountName,
+  abi,
+  tableData,
+  onGetTableRows,
+  tableName,
+}) => {
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
@@ -32,19 +38,22 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
 
-  const handleTableChange = useCallback((value) => {
-    setTable(value)
+  const handleTableChange = useCallback(
+    (value) => {
+      setTable(value)
 
-    if (!onGetTableRows) return
+      if (!onGetTableRows) return
 
-    onGetTableRows({
-      scope,
-      limit,
-      table: value,
-      code: accountName,
-      json: true
-    })
-  },[limit,scope,accountName,onGetTableRows,setTable])
+      onGetTableRows({
+        scope,
+        limit,
+        table: value,
+        code: accountName,
+        json: true,
+      })
+    },
+    [limit, scope, accountName, onGetTableRows, setTable],
+  )
 
   const handleSubmit = (nextKey) => {
     if (!onGetTableRows) return
@@ -57,7 +66,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
       json: true,
       lower_bound: nextKey || lowerBound,
       upper_bound: upperBound,
-      loadMore: !!nextKey
+      loadMore: !!nextKey,
     })
   }
 
@@ -84,8 +93,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
   }, [table, abi])
 
   useEffect(() => {
-
-    if (tableName){
+    if (tableName) {
       handleTableChange(tableName)
     }
 
@@ -93,7 +101,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
     setLowerBound(null)
     setUpperBound(null)
     setLimit(10)
-  }, [accountName,tableName,handleTableChange])
+  }, [accountName, tableName, handleTableChange])
 
   return (
     <Box width="100%">
@@ -148,7 +156,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
             setLimit(
               isNaN(event.target.value)
                 ? 100
-                : parseInt(event.target.value || 0)
+                : parseInt(event.target.value || 0),
             )
           }
         />
@@ -221,7 +229,7 @@ ContractTables.propTypes = {
   abi: PropTypes.any,
   tableData: PropTypes.any,
   tableName: PropTypes.string,
-  onGetTableRows: PropTypes.func
+  onGetTableRows: PropTypes.func,
 }
 
 ContractTables.defaultProps = {}

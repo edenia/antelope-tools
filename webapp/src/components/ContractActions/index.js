@@ -6,7 +6,6 @@ import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
-import Box from '@mui/material/Box'
 
 import ContractActionForm from '../ContractActionForm'
 
@@ -31,7 +30,7 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
   }, [abi])
 
   return (
-    <Box width="100%">
+    <div className={classes.formControl}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="actionNameLabel">{t('action')}</InputLabel>
         <Select
@@ -55,14 +54,14 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
         abi={abi}
         onSubmitAction={onSubmitAction}
       />
-    </Box>
+    </div>
   )
 }
 
 ContractActions.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
-  onSubmitAction: PropTypes.func
+  onSubmitAction: PropTypes.func,
 }
 
 ContractActions.defaultProps = {}

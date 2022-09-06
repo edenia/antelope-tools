@@ -2,7 +2,6 @@ import React, { lazy, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
-import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
@@ -152,7 +151,7 @@ const Accounts = ({ ual }) => {
   }, [])
   
   return (
-    <Grid item xs={12}>
+    <div>
       <Card>
         <CardContent className={classes.cardContent}>
           <SearchBar
@@ -174,7 +173,7 @@ const Accounts = ({ ual }) => {
           onGetTableRows={handleGetTableRows}
         />
       )}
-    </Grid>
+    </div>
   )
 }
 
