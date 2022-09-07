@@ -17,7 +17,13 @@ import TableData from './TableData'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName }) => {
+const ContractTables = ({
+  accountName,
+  abi,
+  tableData,
+  onGetTableRows,
+  tableName,
+}) => {
   const initData = { scope: '', lowerBound: null, upperBound: null, limit: 10 }
   const formFields = [
     { name: 'scope', type: 'text' },
@@ -53,18 +59,8 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
   const handleTableChange = useCallback(
     (value) => {
       setTable(value)
-
-      if (!onGetTableRows) return
-
-      onGetTableRows({
-        scope: filters.scope,
-        limit: filters.limit,
-        table: value,
-        code: accountName,
-        json: true,
-      })
     },
-    [filters, accountName, onGetTableRows, setTable]
+    [setTable],
   )
 
   const handleSubmit = useCallback(
@@ -111,7 +107,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName
     if (tableName) {
       handleTableChange(tableName)
     }
-    
+
     setFilters((prev) => ({
       ...prev,
       scope: accountName,
