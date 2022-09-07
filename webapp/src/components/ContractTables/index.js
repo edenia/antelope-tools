@@ -120,7 +120,7 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
       <div className={classes.form}>
         <FormControl
           variant="outlined"
-          className={[classes.formControl, classes.tableEmpty]}
+          className={`${classes.formControl} ${classes.tableEmpty}`}
         >
           <InputLabel id="tableLabel">{t('table')}</InputLabel>
           <Select
