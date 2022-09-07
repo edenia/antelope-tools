@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import { List, ListItemText, ListItem, Link, Typography } from '@mui/material'
+import { List, ListItemText, ListItem, Link } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import { generalConfig } from '../../config'
 
@@ -11,6 +12,7 @@ const preventDefault = (event) => event.preventDefault()
 
 const Footer = () => {
   const classes = useStyles()
+  const { t } = useTranslation('translations')
 
   return (
     <div className={classes.wrapper}>
@@ -37,15 +39,15 @@ const Footer = () => {
               onClick={preventDefault}
               style={{ textDecoration: 'none' }}
             >
-              <Typography className={classes.sidebarFooterText}>
-                This app is Open Source
-              </Typography>
-              <Typography
+              <div className={classes.sidebarFooterText}>
+              {t('footer1')}
+              </div>
+              <div
                 className={classes.sidebarFooterText}
                 style={{ color: '#1E88E5', textDecoration: 'underline' }}
               >
-                find out how to contribute
-              </Typography>
+                {t('footer2')}
+              </div>
             </Link>
           </div>
       </div>

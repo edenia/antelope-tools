@@ -35,7 +35,9 @@
     "missedBlocks": "Missed Blocks",
     "timeFrame": "Time frame",
     "net": "NET",
-    "cpu": "CPU"
+    "cpu": "CPU",
+    "footer1": "This app is Open Source",
+    "footer2": "Find out how to contribute"
   },
   "routes": {
     "/>sidebar": "Dashboard",

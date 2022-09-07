@@ -46,7 +46,9 @@
     "2 Months": "2 Meses",
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
-    "1 Year": "1 Año"
+    "1 Year": "1 Año",
+    "footer1": "Esta aplicación es de código abierto",
+    "footer2": "Averigua cómo contribuir"
   },
   "routes": {
     "/>sidebar": "Panel",
