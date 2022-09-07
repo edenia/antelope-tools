@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -21,7 +21,13 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+const ContractTables = ({
+  accountName,
+  abi,
+  tableData,
+  onGetTableRows,
+  tableName,
+}) => {
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
@@ -32,19 +38,22 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   const [upperBound, setUpperBound] = useState(null)
   const [limit, setLimit] = useState(100)
 
-  const handleTableChange = (value) => {
-    setTable(value)
+  const handleTableChange = useCallback(
+    (value) => {
+      setTable(value)
 
-    if (!onGetTableRows) return
+      if (!onGetTableRows) return
 
-    onGetTableRows({
-      scope,
-      limit,
-      table: value,
-      code: accountName,
-      json: true,
-    })
-  }
+      onGetTableRows({
+        scope,
+        limit,
+        table: value,
+        code: accountName,
+        json: true,
+      })
+    },
+    [limit, scope, accountName, onGetTableRows, setTable],
+  )
 
   const handleSubmit = (nextKey) => {
     if (!onGetTableRows) return
@@ -84,12 +93,15 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   }, [table, abi])
 
   useEffect(() => {
+    if (tableName) {
+      handleTableChange(tableName)
+    }
+
     setScope(accountName)
-    setTable('')
     setLowerBound(null)
     setUpperBound(null)
     setLimit(10)
-  }, [accountName])
+  }, [accountName, tableName, handleTableChange])
 
   return (
     <Box width="100%">
@@ -218,6 +230,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func,
 }
 
