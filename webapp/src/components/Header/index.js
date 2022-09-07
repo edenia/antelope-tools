@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import {
-  Grid,
   Hidden,
   Menu,
   MenuItem,
@@ -39,7 +38,7 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <Grid justifyContent="flex-start">
+    <div>
       <Link href="https://eosio.online/">
         <img
           alt="eosio dashboard"
@@ -47,7 +46,7 @@ const HeaderLogo = () => {
           className={classes.imgHeaderLogo}
         />
       </Link>
-    </Grid>
+    </div>
   )
 }
 
@@ -76,7 +75,7 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <Grid display="flex">
+    <div>
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -99,7 +98,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </Grid>
+    </div>
   )
 }
 
@@ -116,7 +115,7 @@ const UserMenu = ({ ual }) => {
   }
 
   return (
-    <Grid display="flex">
+    <div>
       {ual.activeUser && (
         <>
           <Button startIcon={<AccountIcon />}>
@@ -140,7 +139,7 @@ const UserMenu = ({ ual }) => {
           {t('login')}
         </Button>
       )}
-    </Grid>
+    </div>
   )
 }
 
@@ -154,8 +153,7 @@ const classes = useStyles()
   return (
     <AppBar className={classes.appBar} position="sticky" elevation={1}>
       <Toolbar c>
-        <Grid container alignItems="center">
-          <Grid item md={0} xs={1}>
+          <div item md={0} xs={1}>
             <Hidden mdUp>
               <IconButton
                 className={classes.iconButton}
@@ -166,18 +164,16 @@ const classes = useStyles()
                 <MenuIcon />
               </IconButton>
             </Hidden>
-          </Grid>
-          <Grid item md={12} xs={7} className={classes.iconsHeader}>
+          </div>
+          <div className={classes.iconsHeader}>
             <div className={classes.HeaderLogo}>
               <HeaderLogo />
             </div>
-
             <div className={classes.userBox}>
               <LanguageMenu />
               <UserMenu ual={ual} />
             </div>
-          </Grid>
-        </Grid>
+          </div>
       </Toolbar>
     </AppBar>
   )

@@ -34,8 +34,6 @@ export default (theme) => ({
   },
   userBox: {
     display: 'flex',
-    float: 'right',
-    justifyContent: 'space-between',
     alignItems: 'center',
     '& button': {
       color: '#757575'
@@ -43,6 +41,7 @@ export default (theme) => ({
   },
   iconsHeader: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '100%'
   }
 })

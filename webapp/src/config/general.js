@@ -11,7 +11,7 @@ export const defaultProducerLogo =
 export const footerLinks = process.env.REACT_APP_FOOTER_LINKS
   ? JSON.parse(process.env.REACT_APP_FOOTER_LINKS)
   : []
-export const privacyTerms = process.env.REACT_APP_FEATURE_BUG
+export const featBug = process.env.REACT_APP_FEATURE_BUG
   ? JSON.parse(process.env.REACT_APP_FEATURE_BUG)
   : []
 export const disabledMenuItems = JSON.parse(

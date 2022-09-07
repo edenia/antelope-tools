@@ -1,14 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import {
-  Grid,
-  List,
-  ListItemText,
-  ListItem,
-  Box,
-  Link,
-  Typography,
-} from '@mui/material'
+import { List, ListItemText, ListItem, Link, Typography } from '@mui/material'
 
 import { generalConfig } from '../../config'
 
@@ -22,7 +14,7 @@ const Footer = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Grid container item xs={12} sm={8} justifyContent='flex-start'>
+      <div className={classes.left}>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
@@ -36,48 +28,37 @@ const Footer = () => {
             </ListItem>
           ))}
         </List>
-      </Grid>
+      </div>
 
-      <Grid
-        container
-        item
-        xs={12}
-        sm={8}
-        className={classes.GridFooter}
-        justifyContent='center'
-      >
-        <Box className={classes.sidebarFooter}>
-          <Grid container>
-            <Grid item>
-              <Link
-                href="https://github.com/eoscostarica/eosio-dashboard"
-                onClick={preventDefault}
-                style={{ textDecoration: 'none' }}
+      <div className={classes.gridFooter}>
+          <div>
+            <Link
+              href="https://github.com/eoscostarica/eosio-dashboard"
+              onClick={preventDefault}
+              style={{ textDecoration: 'none' }}
+            >
+              <Typography className={classes.sidebarFooterText}>
+                This app is Open Source
+              </Typography>
+              <Typography
+                className={classes.sidebarFooterText}
+                style={{ color: '#1E88E5', textDecoration: 'underline' }}
               >
-                <Typography className={classes.sidebarFooterText}>
-                  This app is Open Source
-                </Typography>
-                <Typography
-                  className={classes.sidebarFooterText}
-                  style={{ color: '#1E88E5', textDecoration: 'underline' }}
-                >
-                  find out how to contribute
-                </Typography>
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Grid>
+                find out how to contribute
+              </Typography>
+            </Link>
+          </div>
+      </div>
 
-      <Grid container item xs={12} sm={8} className={classes.footerAlign} justifyContent='flex-end'>
-        <Box xs={12} sm={8} className={classes.GridFooter}>
-          <Box className={classes.sidebarFooter} alignItems="center">
-            <Box className={classes.linkBadge}>{generalConfig.appVersion.split('-').pop()}</Box>
-          </Box>
-        </Box>
-        <Box container item xs={12} sm={8}>
-          <List className={classes.footerMenuWrapper}>
-            {generalConfig.privacyTerms.map((link, index) => (
+      <div className={classes.footerAlign}>
+        <div className={classes.sidebarFooter}>
+          <div className={classes.linkBadge}>
+            {generalConfig.appVersion.split('-').pop()}
+          </div>
+        </div>
+        <div>
+          <List className={[classes.footerMenuWrapper, classes.sidebarFooter]}>
+            {generalConfig.featBug.map((link, index) => (
               <ListItem className={classes.listItem} key={index}>
                 <ListItemText
                   primary={
@@ -93,8 +74,8 @@ const Footer = () => {
               </ListItem>
             ))}
           </List>
-        </Box>
-      </Grid>
+        </div>
+      </div>
     </div>
   )
 }
