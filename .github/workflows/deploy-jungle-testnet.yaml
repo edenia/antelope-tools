@@ -36,6 +36,7 @@ jobs:
           REACT_APP_VERSION: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: https://eosio.online/images/jungle.jpg
           REACT_APP_FOOTER_LINKS: '[{"text":"Jungle Website","src":"https://jungletestnet.io/"},{"text":"Block Explorer","src":"https://jungle3.bloks.io"},{"text":"Developer Guidelines","src":"https://guide.eoscostarica.io"},{"text": "Jungle4 Testnet Monitor","src": "https://eosio.online"}]'
+          REACT_APP_FEATURE_BUG: '[{ "text": "Report a Bug or Request a Feature", "src": "https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"}]'
           REACT_APP_EOS_RATE_LINK: https://jungle.eosrate.io
           REACT_APP_USE_REWARDS: true
           REACT_APP_USE_VOTES: true

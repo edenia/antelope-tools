@@ -40,6 +40,7 @@ jobs:
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://testnet-explorer.airwire.io" },{"text": "Airwire Mainnet Dashboard","src": "https://dashboard.airwire.io"}]'
+          REACT_APP_FEATURE_BUG: '[{ "text": "Report a Bug or Request a Feature", "src": "https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'

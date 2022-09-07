@@ -8,9 +8,6 @@ import {
   User as UserIcon,
   Info as InfoIcon,
   HelpCircle as HelpIcon,
-  GitMerge as GitMergeIcon,
-  GitHub as GitHubIcon,
-  Send as TelegramIcon,
   Inbox as InboxIcon,
   Cpu as CpuIcon
 } from 'react-feather'
@@ -49,6 +46,7 @@ const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
 
 const defaultRoutes = [
   {
+    header: 'networkInformation',
     name: 'home',
     icon: <GridIcon />,
     component: Home,
@@ -253,24 +251,6 @@ const helpRoutes = [
     component: Help,
     path: '/help',
     exact: true
-  },
-  {
-    name: 'changelog',
-    badge: generalConfig.appVersion.split('-').pop(),
-    path: 'https://github.com/eoscostarica/eosio-dashboard/releases',
-    icon: <GitMergeIcon />,
-    exact: true
-  },
-  {
-    header: 'community',
-    name: 'github',
-    path: 'https://github.com/eoscostarica/eosio-dashboard',
-    icon: <GitHubIcon />
-  },
-  {
-    name: 'telegram',
-    path: 'https://t.me/eoscr',
-    icon: <TelegramIcon />
   },
   {
     component: Page404
