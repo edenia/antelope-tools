@@ -30,8 +30,10 @@
     "api": "HTTP",
     "ssl": "HTTPS",
     "p2p": "P2P",
+    "payer" : "Pagador",
     "nodes": "Nodos",
     "total": "Total",
+    "executeTransaction": "Ejecutar Transacción",
     "missedBlocks": "Bloques perdidos",
     "timeFrame": "Periodo de tiempo",
     "3 Hours": "3 Horas",
@@ -250,7 +252,8 @@
     "endpoints": "Endpoints",
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
-    "cpuBenchmark": "Promedio del Benchmark de CPU"
+    "cpuBenchmark": "Promedio del Benchmark de CPU",
+    "isFull":"Es completo"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",
@@ -283,9 +286,6 @@
   },
   "contractActionsComponent": {
     "action": "Acción"
-  },
-  "contractActionFormComponent": {
-    "executeTransaction": "Ejecutar Transacción"
   },
   "blockDistributionRoute": {
     "title": "Bloques generados por productor",
