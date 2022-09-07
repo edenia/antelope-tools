@@ -17,7 +17,7 @@ import TableData from './TableData'
 
 const useStyles = makeStyles(styles)
 
-const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
+const ContractTables = ({ accountName, abi, tableData, onGetTableRows, tableName }) => {
   const initData = { scope: '', lowerBound: null, upperBound: null, limit: 10 }
   const formFields = [
     { name: 'scope', type: 'text' },
@@ -50,19 +50,22 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
     setFilters((prev) => ({ ...prev, [name]: getValidValue(value, type) }))
   }
 
-  const handleTableChange = (value) => {
-    setTable(value)
+  const handleTableChange = useCallback(
+    (value) => {
+      setTable(value)
 
-    if (!onGetTableRows) return
+      if (!onGetTableRows) return
 
-    onGetTableRows({
-      scope: filters.scope,
-      limit: filters.limit,
-      table: value,
-      code: accountName,
-      json: true,
-    })
-  }
+      onGetTableRows({
+        scope: filters.scope,
+        limit: filters.limit,
+        table: value,
+        code: accountName,
+        json: true,
+      })
+    },
+    [filters, accountName, onGetTableRows, setTable]
+  )
 
   const handleSubmit = useCallback(
     (nextKey) => {
@@ -105,11 +108,15 @@ const ContractTables = ({ accountName, abi, tableData, onGetTableRows }) => {
   }, [table, abi])
 
   useEffect(() => {
+    if (tableName) {
+      handleTableChange(tableName)
+    }
+    
     setFilters((prev) => ({
       ...prev,
       scope: accountName,
     }))
-  }, [accountName])
+  }, [accountName, tableName, handleTableChange])
 
   useEffect(() => {
     handleSubmit(null)
@@ -176,6 +183,7 @@ ContractTables.propTypes = {
   accountName: PropTypes.string,
   abi: PropTypes.any,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func,
 }
 

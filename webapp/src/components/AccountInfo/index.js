@@ -52,6 +52,7 @@ const AccountInfo = ({
   hash,
   onSubmitAction,
   tableData,
+  tableName,
   onGetTableRows,
 }) => {
   const classes = useStyles()
@@ -189,6 +190,7 @@ const AccountInfo = ({
                   accountName={account.account_name}
                   abi={abi}
                   tableData={tableData}
+                  tableName={tableName}
                   onGetTableRows={onGetTableRows}
                 />
               </AccordionWrapper>
@@ -209,6 +211,7 @@ AccountInfo.propTypes = {
   hash: PropTypes.string,
   onSubmitAction: PropTypes.func,
   tableData: PropTypes.any,
+  tableName: PropTypes.string,
   onGetTableRows: PropTypes.func,
 }
 

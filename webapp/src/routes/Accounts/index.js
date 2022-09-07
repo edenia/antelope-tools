@@ -2,7 +2,6 @@ import React, { lazy, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
-import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
@@ -137,15 +136,12 @@ const Accounts = ({ ual }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.account) {
-      setFilters({ owner: 'eosio' })
-      handleOnSearch({ owner: 'eosio' })
+    setFilters({
+      owner: params?.account || 'eosio',
+      table: params?.table || 'producers',
+    })
+    handleOnSearch({ owner: params?.account || 'eosio' })
 
-      return
-    }
-
-    setFilters({ owner: params.account })
-    handleOnSearch({ owner: params.account })
     // eslint-disable-next-line
   }, [location.search])
 
@@ -153,9 +149,9 @@ const Accounts = ({ ual }) => {
     handleOnSearch({ owner: 'eosio' })
     // eslint-disable-next-line
   }, [])
-
+  
   return (
-    <Grid item xs={12}>
+    <div>
       <Card>
         <CardContent className={classes.cardContent}>
           <SearchBar
@@ -171,12 +167,13 @@ const Accounts = ({ ual }) => {
           account={account}
           abi={abi}
           hash={hash}
+          tableName={filters.table}
           onSubmitAction={handleSubmitAction}
           tableData={tableData}
           onGetTableRows={handleGetTableRows}
         />
       )}
-    </Grid>
+    </div>
   )
 }
 

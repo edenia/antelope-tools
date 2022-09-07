@@ -9,34 +9,36 @@ export default (theme) => ({
     justify: 'space-between',
     height: 'auto',
     '&:focus': {
-      outline: 'none'
+      outline: 'none',
     },
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
+    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
   accordion: {
     boxShadow: 'none',
     width: '100%',
     borderRadius: 0,
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
   },
   accordionSummary: {
-    padding: 0
+    padding: 0,
   },
   keyItem: {
     display: 'flex',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
   keyIcon: {
     marginRight: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.54)'
+    color: 'rgba(0, 0, 0, 0.54)',
   },
   keyLabel: {
-    wordBreak: 'break-all'
+    wordBreak: 'break-all',
   },
   resourceWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    display: 'flex'
+    display: 'flex',
   },
   boxHeaderCard: {
     display: 'flex',
@@ -46,47 +48,47 @@ export default (theme) => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .resourceUsage': {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       '& .recharts-wrapper': {
-        marginBottom: theme.spacing(2)
-      }
+        marginBottom: theme.spacing(2),
+      },
     },
     [theme.breakpoints.up('sm')]: {
       '& .resourceUsage': {
-        flexDirection: 'row'
-      }
+        flexDirection: 'row',
+      },
     },
     [theme.breakpoints.up('md')]: {
       '& .columTitle': {
-        marginLeft: theme.spacing(2)
+        marginLeft: theme.spacing(2),
       },
       '& .identicon': {
-        alignItems: 'end'
+        alignItems: 'end',
       },
       '& .resourceUsage': {
         justifyContent: 'space-between',
         borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
         paddingLeft: theme.spacing(2),
-        height: '100%'
+        height: '100%',
       },
       '& .keys': {
         borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
         paddingLeft: theme.spacing(2),
-        height: '100%'
-      }
+        height: '100%',
+      },
     },
     [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',
       '& .identicon': {
         alignItems: 'center',
-        width: 200
-      }
-    }
+        width: 200,
+      },
+    },
   },
   iconBorder: {
     backgroundColor: '#f0f0f0',
@@ -95,6 +97,6 @@ export default (theme) => ({
     height: 85,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 })

@@ -30,7 +30,7 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
   }, [abi])
 
   return (
-    <div>
+    <div className={classes.formControl}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="actionNameLabel">{t('action')}</InputLabel>
         <Select
