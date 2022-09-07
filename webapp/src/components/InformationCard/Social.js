@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 
 import ProducerSocialLinks from '../ProducerSocialLinks'
 
@@ -9,12 +8,12 @@ const Social = ({ social, type, t, classes }) => {
   if (type === 'node') return <></>
 
   return (
-    <Box className={classes.social}>
+    <div className={classes.social}>
       <Typography variant="overline">{t('social')}</Typography>
-      <Box className={classes.borderLine}>
+      <div className={classes.borderLine}>
         <ProducerSocialLinks items={social} message={t('noData')} />
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 
