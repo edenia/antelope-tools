@@ -60,6 +60,8 @@ jobs:
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
+          REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
+
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
@@ -100,6 +102,9 @@ jobs:
           HAPI_EOS_EXCHANGE_RATE_API: https://api.coingecko.com/api/v3/simple/price?ids=eos&vs_currencies=usd
           HAPI_COINGECKO_API_TOKEN_ID: eos
           HAPI_REWARDS_TOKEN: EOS
+          HAPI_RE_CAPTCHA_PROJECT_ID: ${{ secrets.HAPI_RE_CAPTCHA_PROJECT_ID }}
+          HAPI_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.HAPI_PUBLIC_RE_CAPTCHA_KEY }}
+
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
