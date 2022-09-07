@@ -277,7 +277,7 @@
     "lowerBound": "Lower Bound",
     "upperBound": "Upper Bound",
     "limit": "Limit",
-    "getData": "Get Data",
+    "refreshData": "Refresh Data",
     "loadMore": "Load More",
     "emptyTable": "Empty Table"
   },

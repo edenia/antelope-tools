@@ -280,7 +280,7 @@
     "lowerBound": "Límite inferior",
     "upperBound": "Límite superior",
     "limit": "Límite",
-    "getData": "Obtener Datos",
+    "refreshData": "Actualizar Datos",
     "loadMore": "Carga Más",
     "emptyTable": "Table vacía"
   },
