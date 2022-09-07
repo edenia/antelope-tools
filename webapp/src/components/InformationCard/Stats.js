@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 
 import { eosConfig, generalConfig } from '../../config'
 
@@ -9,21 +8,21 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
   if (eosConfig.networkName === 'lacchain' || type === 'node') return <></>
 
   return (
-    <Box className={classes.healthStatus}>
+    <div className={classes.healthStatus}>
       <Typography variant="overline">{t('stats')}</Typography>
-      <Box className={classes.borderLine}>
-        <Box className={classes.rowWrapper}>
+      <div className={classes.borderLine}>
+        <div className={classes.rowWrapper}>
           <Typography variant="body1">{`${t('votes')}: ${votes}`}</Typography>
-        </Box>
+        </div>
 
-        <Box className={classes.rowWrapper}>
+        <div className={classes.rowWrapper}>
           <Typography variant="body1">{`${t('rewards')}: ${rewards} ${
             eosConfig.tokenSymbol
           }`}</Typography>
-        </Box>
+        </div>
 
         {!!generalConfig.historyEnabled && (
-          <Box className={classes.rowWrapper}>
+          <div className={classes.rowWrapper}>
             <Typography variant="body1">
               {`${t('missedBlocks')}: `}
               {missedBlocks.reduce(
@@ -31,10 +30,10 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
                 0
               )}
             </Typography>
-          </Box>
+          </div>
         )}
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 

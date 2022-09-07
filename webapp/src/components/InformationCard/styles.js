@@ -95,13 +95,13 @@ export default (theme) => ({
   },
   entity: {
     [theme.breakpoints.up('lg')]: {
-      width: 350,
+      width: 260,
       marginBottom: 0
     }
   },
   node: {
     [theme.breakpoints.up('lg')]: {
-      width: 400,
+      width: 260,
       marginBottom: 0
     }
   },

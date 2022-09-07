@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
@@ -9,30 +8,30 @@ const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
 
   if (!nodes?.length)
     return (
-      <Box className={classes.nodes}>
+      <div className={classes.nodes}>
         <Typography variant="overline">{t('nodes')}</Typography>
-        <Box className={classes.borderLine}>
+        <div className={classes.borderLine}>
           <Typography>{t('noData')}</Typography>
-        </Box>
-      </Box>
+        </div>
+      </div>
     )
 
   return (
-    <Box className={classes.nodes}>
+    <div className={classes.nodes}>
       <Typography variant="overline">{t('nodes')}</Typography>
-      <Box className={classes.borderLine}>
-        <Box>
+      <div className={classes.borderLine}>
+        <div>
           {nodes.map((node, i) => (
-            <Box className={classes.rowWrapper} key={`node-${i}`}>
+            <div className={classes.rowWrapper} key={`node-${i}`}>
               <Typography variant="body1">
-                {node.name || node.node_type}{' '}
+                {node.name || node.node_type.toString()}{' '}
               </Typography>
               <InfoOutlinedIcon onClick={onNodeClick({ node, producer })} />
-            </Box>
+            </div>
           ))}
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   )
 }
 
