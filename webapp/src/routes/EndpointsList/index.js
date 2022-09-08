@@ -40,6 +40,7 @@ const EndpointsList = () => {
       variables: {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
+        where: { endpoints: { _neq: { api: [], ssl: [], p2p: [] } } },
       },
     })
     // eslint-disable-next-line
@@ -59,25 +60,13 @@ const EndpointsList = () => {
     if (!data?.producers) return
 
     setProducers(
-      data.producers
-        .filter((producer) => {
-          return (
-            producer.endpoints?.api.length ||
-            producer.endpoints?.ssl.length ||
-            producer.endpoints?.p2p.length
-          )
-        })
-        .map((producer) => ({
-          name:
-            producer.bp_json?.org?.candidate_name ||
-            producer?.bp_json?.org?.organization_name ||
-            producer?.owner,
-          endpoints: {
-            api: producer.endpoints?.api || [],
-            ssl: producer.endpoints?.ssl || [],
-            p2p: producer.endpoints?.p2p || [],
-          },
-        })),
+      data.producers.map((producer) => ({
+        name:
+          producer.bp_json?.org?.candidate_name ||
+          producer?.bp_json?.org?.organization_name ||
+          producer?.owner,
+        endpoints: producer.endpoints,
+      })),
     )
 
     if (!data.producers?.[0]?.updated_at) return
@@ -121,8 +110,8 @@ const EndpointsList = () => {
               }
               fullWidth
             >
-              {limitOptions.map((option) => (
-                <MenuItem key={option} value={option}>
+              {limitOptions.map((option, index) => (
+                <MenuItem key={`limit-${option}-${index}`} value={option}>
                   {option}
                 </MenuItem>
               ))}
