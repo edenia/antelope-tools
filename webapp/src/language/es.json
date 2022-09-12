@@ -324,5 +324,8 @@
     "title": "Buscar Nodo",
     "producer": "Productor",
     "placeholder": "Nombre del Nodo"
+  },
+  "noResultsComponent": {
+    "noResultsFound": "No se encontraron resultados"
   }
 }

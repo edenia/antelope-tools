@@ -325,5 +325,8 @@
     "title": "Search Node",
     "producer": "Producer",
     "placeholder": "Node Name"
+  },
+  "noResultsComponent": {
+    "noResultsFound": "No results found"
   }
 }

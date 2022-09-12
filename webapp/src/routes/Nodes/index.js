@@ -14,6 +14,8 @@ const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
+const NoResults = lazy(() => import('../../components/NoResults')) 
+
 const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
@@ -49,12 +51,15 @@ const NodesCards = ({ item }) => {
 }
 
 NodesCards.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 }
 
 const Nodes = () => {
   const classes = useStyles()
-  const [{filters, chips, loading, items, pagination},{handleOnSearch, handleOnPageChange}] = useNodeState()
+  const [
+    { filters, chips, loading, items, pagination },
+    { handleOnSearch, handleOnPageChange },
+  ] = useNodeState()
 
   return (
     <div>
@@ -64,21 +69,33 @@ const Nodes = () => {
         chips={chips}
         translationScope="nodeSearchComponent"
       />
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        {items.map((producer) => (
-          <NodesCards item={producer} key={`producer_${producer.owner}`} />
-        ))}
-      </Grid>
-      {!loading && pagination.pages > 1 && (
-        <Pagination
-          className={classes.pagination}
-          count={pagination.pages}
-          page={pagination.page}
-          onChange={handleOnPageChange}
-          variant="outlined"
-          shape="rounded"
-        />
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <Grid container spacing={2}>
+            {!!items?.length ? (
+              items.map((producer) => (
+                <NodesCards
+                  item={producer}
+                  key={`producer_${producer.owner}`}
+                />
+              ))
+            ) : (
+              <NoResults />
+            )}
+          </Grid>
+          {pagination.pages > 1 && (
+            <Pagination
+              className={classes.pagination}
+              count={pagination.pages}
+              page={pagination.page}
+              onChange={handleOnPageChange}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
+        </>
       )}
     </div>
   )

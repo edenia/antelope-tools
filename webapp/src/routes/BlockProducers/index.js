@@ -11,6 +11,7 @@ import Tooltip from '../../components/Tooltip'
 import NodeCard from '../../components/NodeCard'
 import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
+import NoResults from '../../components/NoResults'
 
 import styles from './styles'
 
@@ -21,7 +22,7 @@ const PaginationWrapper = ({
   totalPages,
   page,
   onPageChange,
-  loading
+  loading,
 }) => {
   if (loading || !totalPages) return <></>
 
@@ -42,14 +43,29 @@ PaginationWrapper.propTypes = {
   totalPages: PropTypes.number,
   page: PropTypes.number,
   onPageChange: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 }
 
 const Producers = () => {
   const classes = useStyles()
   const [
-    {anchorEl, current, filters, chips, items, loading, totalPages, missedBlocks, pagination},
-    {handlePopoverClose, handleOnSearch, handlePopoverOpen, handleOnPageChange}
+    {
+      anchorEl,
+      current,
+      filters,
+      chips,
+      items,
+      loading,
+      totalPages,
+      missedBlocks,
+      pagination,
+    },
+    {
+      handlePopoverClose,
+      handleOnSearch,
+      handlePopoverOpen,
+      handleOnPageChange,
+    },
   ] = useBlockProducerState()
 
   return (
@@ -69,19 +85,26 @@ const Producers = () => {
           translationScope="producerSearchComponent"
         />
       </Grid>
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        {(items || []).map((producer, index) => (
-          <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
-            <InformationCard
-              type="entity"
-              producer={{ ...producer, missedBlocks }}
-              rank={producer.rank}
-              onNodeClick={handlePopoverOpen}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <Grid container spacing={2}>
+          {!!items?.length ? (
+            items.map((producer, index) => (
+              <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
+                <InformationCard
+                  type="entity"
+                  producer={{ ...producer, missedBlocks }}
+                  rank={producer.rank}
+                  onNodeClick={handlePopoverOpen}
+                />
+              </Grid>
+            ))
+          ) : (
+            <NoResults />
+          )}
+        </Grid>
+      )}
       <PaginationWrapper
         classes={classes.pagination}
         totalPages={totalPages}
