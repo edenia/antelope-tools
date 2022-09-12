@@ -7,6 +7,7 @@ import {
   ListItem as MuiListItem,
   Typography,
   IconButton,
+  Tooltip,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { makeStyles } from '@mui/styles'
@@ -68,29 +69,33 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
   }
 
   return (
-    <>
-      <MuiDrawer
-        variant="permanent"
-        className={classesStyle.drawer}
-        onClose={onDrawerToggle}
-        {...rest}
-      >
-        <PerfectScrollbar className={classesStyle.scrollbar}>
-          <div className={classesStyle.button}>
-            <IconButton
-              className={classesStyle.iconButton}
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={onDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-          </div>
-          <MuiList className={classesStyle.list} disablePadding>
-            {routes
-              .filter(({ name }) => !!name)
-              .map((category, index) => (
-                <MuiListItem className={classesStyle.listItem} key={index}>
+    <MuiDrawer
+      variant="permanent"
+      className={classesStyle.drawer}
+      onClose={onDrawerToggle}
+      {...rest}
+    >
+      <PerfectScrollbar className={classesStyle.scrollbar}>
+        <div className={classesStyle.button}>
+          <IconButton
+            className={classesStyle.iconButton}
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={onDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+        </div>
+        <MuiList className={classesStyle.list} disablePadding>
+          {routes
+            .filter(({ name }) => !!name)
+            .map((category, index) => (
+              <Tooltip
+                title={!rest.open ? t(`${category.path}>sidebar`) : ''}
+                placement="right-end"
+                key={`category-${category.name}-${index}`}
+              >
+                <MuiListItem className={classesStyle.listItem}>
                   {category.header ? (
                     <>
                       <div className={classesStyle.divider} />
@@ -153,12 +158,12 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
                     />
                   )}
                 </MuiListItem>
-              ))}
-            <div className={classesStyle.divider} />
-          </MuiList>
-        </PerfectScrollbar>
-      </MuiDrawer>
-    </>
+              </Tooltip>
+            ))}
+          <div className={classesStyle.divider} />
+        </MuiList>
+      </PerfectScrollbar>
+    </MuiDrawer>
   )
 }
 
