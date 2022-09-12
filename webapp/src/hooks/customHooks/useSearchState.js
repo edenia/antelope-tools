@@ -16,16 +16,14 @@ const useSearchState = ({ query }) => {
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = (newFilters) => {
-    if (newFilters.owner) {
-      setPagination((prev) => ({
-        ...prev,
-        page: 1,
-        where: {
-          ...pagination.where,
-          owner: { _like: `%${newFilters.owner}%` },
-        },
-      }))
-    }
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      where: {
+        ...pagination.where,
+        owner: { _like: `%${newFilters?.owner ?? ''}%` },
+      },
+    }))
     setFilters(newFilters)
   }
 
