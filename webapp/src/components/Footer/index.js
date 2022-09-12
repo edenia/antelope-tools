@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <List className={[classes.footerMenuWrapper, classes.sidebarFooter]}>
+          <List className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}>
             {generalConfig.featBug.map((link, index) => (
               <ListItem className={classes.listItem} key={index}>
                 <ListItemText
