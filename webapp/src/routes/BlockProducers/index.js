@@ -2,7 +2,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
 
@@ -77,33 +76,33 @@ const Producers = () => {
       >
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
-      <Grid className={classes.searchWrapper}>
+      <div className={classes.searchWrapper}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
           chips={chips}
           translationScope="producerSearchComponent"
         />
-      </Grid>
+      </div>
       {loading ? (
         <LinearProgress />
       ) : (
-        <Grid container spacing={2}>
+        <div className={classes.container}>
           {!!items?.length ? (
             items.map((producer, index) => (
-              <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
+              <div className={classes.card} key={`producer-card-${index}`}>
                 <InformationCard
                   type="entity"
                   producer={{ ...producer, missedBlocks }}
                   rank={producer.rank}
                   onNodeClick={handlePopoverOpen}
                 />
-              </Grid>
+              </div>
             ))
           ) : (
             <NoResults />
           )}
-        </Grid>
+        </div>
       )}
       <PaginationWrapper
         classes={classes.pagination}

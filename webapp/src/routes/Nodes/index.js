@@ -9,7 +9,6 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import styles from './styles'
 import useNodeState from '../../hooks/customHooks/useNodeState'
 
-const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
@@ -19,6 +18,7 @@ const NoResults = lazy(() => import('../../components/NoResults'))
 const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
+  const classes = useStyles()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [missedBlocks, setMissedBlocks] = useState({})
 
@@ -30,23 +30,22 @@ const NodesCards = ({ item }) => {
 
   if (!item.bp_json?.nodes) {
     return (
-      <Grid item xs={12} sm={6} lg={12}>
+      <div className={classes.card}>
         <InformationCard producer={item} type="node" />
-      </Grid>
+      </div>
     )
   }
 
   return (
-    <>
+    <div className={classes.card}>
       {(item.bp_json?.nodes || []).map((node, index) => (
-        <Grid item xs={12} sm={6} lg={12} key={`${node.name}_${index}`}>
-          <InformationCard
-            producer={{ ...item, node, missedBlocks }}
-            type="node"
-          />
-        </Grid>
+        <InformationCard
+          producer={{ ...item, node, missedBlocks }}
+          type="node"
+          key={`${node.name}-${index}`}
+        />
       ))}
-    </>
+    </div>
   )
 }
 
@@ -73,7 +72,7 @@ const Nodes = () => {
         <LinearProgress />
       ) : (
         <>
-          <Grid container spacing={2}>
+          <div className={classes.container}>
             {!!items?.length ? (
               items.map((producer) => (
                 <NodesCards
@@ -84,7 +83,7 @@ const Nodes = () => {
             ) : (
               <NoResults />
             )}
-          </Grid>
+          </div>
           {pagination.pages > 1 && (
             <Pagination
               className={classes.pagination}
