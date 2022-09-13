@@ -13,7 +13,7 @@ const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
-const NoResults = lazy(() => import('../../components/NoResults')) 
+const NoResults = lazy(() => import('../../components/NoResults'))
 
 const useStyles = makeStyles(styles)
 
@@ -37,15 +37,17 @@ const NodesCards = ({ item }) => {
   }
 
   return (
-    <div className={classes.card}>
+    <>
       {(item.bp_json?.nodes || []).map((node, index) => (
-        <InformationCard
-          producer={{ ...item, node, missedBlocks }}
-          type="node"
-          key={`${node.name}-${index}`}
-        />
+        <div className={classes.card}>
+          <InformationCard
+            producer={{ ...item, node, missedBlocks }}
+            type="node"
+            key={`${node.name}-${index}`}
+          />
+        </div>
       ))}
-    </div>
+    </>
   )
 }
 
