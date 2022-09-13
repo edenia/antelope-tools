@@ -9,14 +9,16 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import styles from './styles'
 import useNodeState from '../../hooks/customHooks/useNodeState'
 
-const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
+const NoResults = lazy(() => import('../../components/NoResults'))
+
 const useStyles = makeStyles(styles)
 
 const NodesCards = ({ item }) => {
+  const classes = useStyles()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [missedBlocks, setMissedBlocks] = useState({})
 
@@ -28,33 +30,37 @@ const NodesCards = ({ item }) => {
 
   if (!item.bp_json?.nodes) {
     return (
-      <Grid item xs={12} sm={6} lg={12}>
+      <div className={classes.card}>
         <InformationCard producer={item} type="node" />
-      </Grid>
+      </div>
     )
   }
 
   return (
     <>
       {(item.bp_json?.nodes || []).map((node, index) => (
-        <Grid item xs={12} sm={6} lg={12} key={`${node.name}_${index}`}>
+        <div className={classes.card}>
           <InformationCard
             producer={{ ...item, node, missedBlocks }}
             type="node"
+            key={`${node.name}-${index}`}
           />
-        </Grid>
+        </div>
       ))}
     </>
   )
 }
 
 NodesCards.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 }
 
 const Nodes = () => {
   const classes = useStyles()
-  const [{filters, chips, loading, items, pagination},{handleOnSearch, handleOnPageChange}] = useNodeState()
+  const [
+    { filters, chips, loading, items, pagination },
+    { handleOnSearch, handleOnPageChange },
+  ] = useNodeState()
 
   return (
     <div>
@@ -64,21 +70,33 @@ const Nodes = () => {
         chips={chips}
         translationScope="nodeSearchComponent"
       />
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        {items.map((producer) => (
-          <NodesCards item={producer} key={`producer_${producer.owner}`} />
-        ))}
-      </Grid>
-      {!loading && pagination.pages > 1 && (
-        <Pagination
-          className={classes.pagination}
-          count={pagination.pages}
-          page={pagination.page}
-          onChange={handleOnPageChange}
-          variant="outlined"
-          shape="rounded"
-        />
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <div className={classes.container}>
+            {!!items?.length ? (
+              items.map((producer) => (
+                <NodesCards
+                  item={producer}
+                  key={`producer_${producer.owner}`}
+                />
+              ))
+            ) : (
+              <NoResults />
+            )}
+          </div>
+          {pagination.pages > 1 && (
+            <Pagination
+              className={classes.pagination}
+              count={pagination.pages}
+              page={pagination.page}
+              onChange={handleOnPageChange}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
+        </>
       )}
     </div>
   )
