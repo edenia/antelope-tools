@@ -5,6 +5,9 @@ export default (theme, rgba) => ({
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
+      [theme.breakpoints.up('md')]: {
+        maxWidth: '240px',
+      }
     },
   },
   scrollbar: {
