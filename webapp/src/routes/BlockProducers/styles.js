@@ -1,12 +1,20 @@
 export default (theme) => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
-    paddingTop: theme.spacing(2),
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between',
   },
   card: {
     width: '100%',
-    flex: 'content',
+    display: 'flex',
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+      flex: 'content',
+    },
+    [theme.breakpoints.down('sm')]: {
+      flex: 'auto',
+    },
   },
   searchWrapper: {
     marginTop: theme.spacing(3),

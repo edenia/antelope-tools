@@ -158,7 +158,7 @@ export default (theme) => ({
       fontSize: 15
     },
     [theme.breakpoints.up('lg')]: {
-      width: 150
+      width: 140
     }
   },
   rowWrapper: {
