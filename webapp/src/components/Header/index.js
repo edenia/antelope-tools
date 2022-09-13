@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import {
-  Hidden,
-  Menu,
-  MenuItem,
-  AppBar,
-  IconButton,
-  Link,
-} from '@mui/material'
+import { Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -148,32 +141,30 @@ UserMenu.propTypes = {
 }
 
 const Header = ({ ual, onDrawerToggle }) => {
-const classes = useStyles()
+  const classes = useStyles()
 
   return (
     <AppBar className={classes.appBar} position="sticky" elevation={1}>
-      <Toolbar c>
-          <div item md={0} xs={1}>
-            <Hidden mdUp>
-              <IconButton
-                className={classes.iconButton}
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={onDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
+      <Toolbar>
+        <Hidden mdUp>
+          <IconButton
+            className={classes.iconButton}
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={onDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <div className={classes.iconsHeader}>
+          <div className={classes.HeaderLogo}>
+            <HeaderLogo />
           </div>
-          <div className={classes.iconsHeader}>
-            <div className={classes.HeaderLogo}>
-              <HeaderLogo />
-            </div>
-            <div className={classes.userBox}>
-              <LanguageMenu />
-              <UserMenu ual={ual} />
-            </div>
+          <div className={classes.userBox}>
+            <LanguageMenu />
+            <UserMenu ual={ual} />
           </div>
+        </div>
       </Toolbar>
     </AppBar>
   )
