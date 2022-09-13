@@ -3,6 +3,7 @@ export default (theme) => ({
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'space-between',
+    paddingTop: theme.spacing(2),
   },
   card: {
     width: '100%',
