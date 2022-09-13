@@ -92,9 +92,8 @@ export default (theme, rgba) => ({
     top: 12,
   },
   divider: {
-    width: '80%',
     height: '1px',
-    margin: theme.spacing(4, 2),
+    margin: theme.spacing(4),
     backgroundColor: '#e0e0e0',
   },
   sidebarSection: {
@@ -114,4 +113,8 @@ export default (theme, rgba) => ({
       color: 'rgba(0, 0, 0, 0.54)',
     },
   },
+  tooltip: {
+    padding: theme.spacing(1, 2),
+    fontSize: '1.2em',
+  }
 })
