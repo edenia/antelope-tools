@@ -37,9 +37,10 @@
     "timeFrame": "Time frame",
     "net": "NET",
     "cpu": "CPU",
-    "footer1": "This app is Open Source",
+    "footer1": "This app is open source",
     "footer2": "Find out how to contribute",
-    "executeTransaction": "Execute Transaction"
+    "executeTransaction": "Execute Transaction",
+    "bugRequest": "Report a bug / Request a feature"
   },
   "routes": {
     "/>sidebar": "Dashboard",

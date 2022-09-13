@@ -95,11 +95,13 @@ export default (theme) => ({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     flexGrow: 1,
-    flexBasis: 0
+    flexBasis: 0,
+    marginRight: 5
 
   },
   left: {
     flexGrow: 1,
     flexBasis: 0
- }
+ },
+
 })

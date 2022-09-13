@@ -60,25 +60,17 @@ const Footer = () => {
         </div>
         <div>
           <List className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}>
-            {generalConfig.featBug.map((link, index) => (
-              <ListItem className={classes.listItem} key={index}>
-                <ListItemText
-                  primary={
-                    <a
-                      href={link.src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {link.text}
-                    </a>
-                  }
-                />
-              </ListItem>
-            ))}
+          <Link
+              href="https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"
+              onClick={preventDefault}
+              style={{ textDecoration: 'none' }}
+            >
+            {t('bugRequest')}
+            </Link>
           </List>
         </div>
       </div>
-    </div>
+      </div>
   )
 }
 
