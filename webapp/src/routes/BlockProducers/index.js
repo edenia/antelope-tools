@@ -2,7 +2,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import Grid from '@mui/material/Grid'
 import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
 
@@ -11,6 +10,7 @@ import Tooltip from '../../components/Tooltip'
 import NodeCard from '../../components/NodeCard'
 import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
+import NoResults from '../../components/NoResults'
 
 import styles from './styles'
 
@@ -21,7 +21,7 @@ const PaginationWrapper = ({
   totalPages,
   page,
   onPageChange,
-  loading
+  loading,
 }) => {
   if (loading || !totalPages) return <></>
 
@@ -42,14 +42,29 @@ PaginationWrapper.propTypes = {
   totalPages: PropTypes.number,
   page: PropTypes.number,
   onPageChange: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 }
 
 const Producers = () => {
   const classes = useStyles()
   const [
-    {anchorEl, current, filters, chips, items, loading, totalPages, missedBlocks, pagination},
-    {handlePopoverClose, handleOnSearch, handlePopoverOpen, handleOnPageChange}
+    {
+      anchorEl,
+      current,
+      filters,
+      chips,
+      items,
+      loading,
+      totalPages,
+      missedBlocks,
+      pagination,
+    },
+    {
+      handlePopoverClose,
+      handleOnSearch,
+      handlePopoverOpen,
+      handleOnPageChange,
+    },
   ] = useBlockProducerState()
 
   return (
@@ -61,27 +76,34 @@ const Producers = () => {
       >
         <NodeCard node={current?.node} producer={current?.producer} />
       </Tooltip>
-      <Grid className={classes.searchWrapper}>
+      <div className={classes.searchWrapper}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
           chips={chips}
           translationScope="producerSearchComponent"
         />
-      </Grid>
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        {(items || []).map((producer, index) => (
-          <Grid item xs={12} sm={6} lg={12} key={`producer-card-${index}`}>
-            <InformationCard
-              type="entity"
-              producer={{ ...producer, missedBlocks }}
-              rank={producer.rank}
-              onNodeClick={handlePopoverOpen}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      </div>
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <div className={classes.container}>
+          {!!items?.length ? (
+            items.map((producer, index) => (
+              <div className={classes.card} key={`producer-card-${index}`}>
+                <InformationCard
+                  type="entity"
+                  producer={{ ...producer, missedBlocks }}
+                  rank={producer.rank}
+                  onNodeClick={handlePopoverOpen}
+                />
+              </div>
+            ))
+          ) : (
+            <NoResults />
+          )}
+        </div>
+      )}
       <PaginationWrapper
         classes={classes.pagination}
         totalPages={totalPages}

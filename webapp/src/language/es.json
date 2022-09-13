@@ -48,7 +48,9 @@
     "2 Months": "2 Meses",
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
-    "1 Year": "1 Año"
+    "1 Year": "1 Año",
+    "footer1": "Esta aplicación es de código abierto",
+    "footer2": "Averigua cómo contribuir"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -93,7 +95,7 @@
     "/help>sidebar": "Ayuda",
     "/help>title": "Ayuda - Panel",
     "/help>heading": "Ayuda",
-    "networkInformation": "Información de a red",
+    "networkInformation": "Información de la red",
     "tools": "Herramientas",
     "docs": "Documentación",
     "community": "Comunidad",
@@ -278,7 +280,7 @@
     "lowerBound": "Límite inferior",
     "upperBound": "Límite superior",
     "limit": "Límite",
-    "getData": "Obtener Datos",
+    "refreshData": "Actualizar Datos",
     "loadMore": "Carga Más",
     "emptyTable": "Table vacía"
   },
@@ -322,5 +324,8 @@
     "title": "Buscar Nodo",
     "producer": "Productor",
     "placeholder": "Nombre del Nodo"
+  },
+  "noResultsComponent": {
+    "noResultsFound": "No se encontraron resultados"
   }
 }

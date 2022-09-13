@@ -1,26 +1,22 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import {
-  Grid,
-  List,
-  ListItemText,
-  ListItem,
-  Box,
-  Typography
-} from '@mui/material'
+import { List, ListItemText, ListItem, Link } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import { generalConfig } from '../../config'
 
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
+const preventDefault = (event) => event.preventDefault()
 
 const Footer = () => {
   const classes = useStyles()
+  const { t } = useTranslation('translations')
 
   return (
     <div className={classes.wrapper}>
-      <Grid container item xs={12} sm={8}>
+      <div className={classes.left}>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
             <ListItem className={classes.listItem} key={index}>
@@ -34,32 +30,54 @@ const Footer = () => {
             </ListItem>
           ))}
         </List>
-      </Grid>
-      <Grid container item xs={12} sm={4} className={classes.gridFooter}>
-        <Box className={classes.sidebarFooter}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Typography className={classes.sidebarFooterText} variant="body2">
-                An open source project by
-              </Typography>
-              <Box className={classes.footerBoxLink}>
-                <img
-                  alt="edenia"
-                  src="/edenia.png"
-                  className={classes.footerImg}
+      </div>
+
+      <div className={classes.gridFooter}>
+          <div>
+            <Link
+              href="https://github.com/eoscostarica/eosio-dashboard"
+              onClick={preventDefault}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className={classes.sidebarFooterText}>
+              {t('footer1')}
+              </div>
+              <div
+                className={classes.sidebarFooterText}
+                style={{ color: '#1E88E5', textDecoration: 'underline' }}
+              >
+                {t('footer2')}
+              </div>
+            </Link>
+          </div>
+      </div>
+
+      <div className={classes.footerAlign}>
+        <div className={classes.sidebarFooter}>
+          <div className={classes.linkBadge}>
+            {generalConfig.appVersion.split('-').pop()}
+          </div>
+        </div>
+        <div>
+          <List className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}>
+            {generalConfig.featBug.map((link, index) => (
+              <ListItem className={classes.listItem} key={index}>
+                <ListItemText
+                  primary={
+                    <a
+                      href={link.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.text}
+                    </a>
+                  }
                 />
-                <a
-                  href="https://edenia.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Edenia
-                </a>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Grid>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </div>
     </div>
   )
 }

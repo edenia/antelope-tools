@@ -37,8 +37,10 @@
     "timeFrame": "Time frame",
     "net": "NET",
     "cpu": "CPU",
+    "footer1": "This app is Open Source",
+    "footer2": "Find out how to contribute",
     "executeTransaction": "Execute Transaction"
-    },
+  },
   "routes": {
     "/>sidebar": "Dashboard",
     "/>title": "EOSIO Dashboard",
@@ -275,7 +277,7 @@
     "lowerBound": "Lower Bound",
     "upperBound": "Upper Bound",
     "limit": "Limit",
-    "getData": "Get Data",
+    "refreshData": "Refresh Data",
     "loadMore": "Load More",
     "emptyTable": "Empty Table"
   },
@@ -323,5 +325,8 @@
     "title": "Search Node",
     "producer": "Producer",
     "placeholder": "Node Name"
+  },
+  "noResultsComponent": {
+    "noResultsFound": "No results found"
   }
 }

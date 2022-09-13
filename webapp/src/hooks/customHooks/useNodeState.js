@@ -24,24 +24,24 @@ const useNodeState = () => {
   }, [info, pagination.limit, setPagination])
 
   useEffect(() => {
-    if (!producers?.length) return
-
     let items = producers || []
 
-    if (filters.name !== 'all') {
-      items = items.map((producer) => {
-        const nodes = (producer.bp_json?.nodes || []).filter(
-          (node) => node.node_type === filters.name
-        )
+    if (items?.length && filters.name !== 'all') {
+      items = items
+        .map((producer) => {
+          const nodes = (producer.bp_json?.nodes || []).filter(
+            (node) => node.node_type === filters.name,
+          )
 
-        return {
-          ...producer,
-          bp_json: {
-            ...producer.bp_json,
-            nodes,
-          },
-        }
-      })
+          return {
+            ...producer,
+            bp_json: {
+              ...producer.bp_json,
+              nodes,
+            },
+          }
+        })
+        .filter((producer) => producer?.bp_json?.nodes.length)
     }
 
     setItems(items)

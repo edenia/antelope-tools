@@ -19,6 +19,33 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
+const AccordionWrapper = ({ children, title }) => {
+  const classes = useStyles()
+
+  return (
+    <Accordion classes={{ root: classes.accordion }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        classes={{
+          root: classes.accordionSummary,
+        }}
+      >
+        <Typography variant="h6" color="primary">
+          {title}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>{children}</AccordionDetails>
+    </Accordion>
+  )
+}
+
+AccordionWrapper.propTypes = {
+  children: PropTypes.any,
+  title: PropTypes.string,
+}
+
+AccordionWrapper.defaultProps = {}
+
 const AccountInfo = ({
   account,
   abi,
@@ -151,69 +178,25 @@ const AccountInfo = ({
 
           {abi && (
             <>
-              <div>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary,
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractActions')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractActions
-                      accountName={account.account_name}
-                      abi={abi}
-                      onSubmitAction={onSubmitAction}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </div>
-
-              <div>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary,
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractTables')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractTables
-                      accountName={account.account_name}
-                      abi={abi}
-                      tableData={tableData}
-                      tableName={tableName}
-                      onGetTableRows={onGetTableRows}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </div>
-
-              <div>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary,
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('ricardianContract')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <RicardianContract abi={abi} hash={hash} />
-                  </AccordionDetails>
-                </Accordion>
-              </div>
+              <AccordionWrapper title={t('contractActions')}>
+                <ContractActions
+                  accountName={account.account_name}
+                  abi={abi}
+                  onSubmitAction={onSubmitAction}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('contractTables')}>
+                <ContractTables
+                  accountName={account.account_name}
+                  abi={abi}
+                  tableData={tableData}
+                  tableName={tableName}
+                  onGetTableRows={onGetTableRows}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('ricardianContract')}>
+                <RicardianContract abi={abi} hash={hash} />
+              </AccordionWrapper>
             </>
           )}
         </>

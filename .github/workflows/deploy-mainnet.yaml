@@ -37,6 +37,7 @@ jobs:
           REACT_APP_VERSION: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/eos.png'
           REACT_APP_FOOTER_LINKS: '[{"text":"EOS Community Website","src":"https://eoscommunity.org/"},{"text":"Block Explorer","src":"https://bloks.io"},{"text":"EOS Developer Docs","src":"https://guide.eoscostarica.io"},{"text": "EOS Network Monitor","src": "https://eosio.online"}]'
+          REACT_APP_FEATURE_BUG: '[{ "text": "Report a Bug or Request a Feature", "src": "https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"}]'
           REACT_APP_EOS_RATE_LINK: 'https://eosrate.io'
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
@@ -60,8 +61,8 @@ jobs:
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
+          REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
-
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
