@@ -7,6 +7,7 @@ import {
   ListItem as MuiListItem,
   Typography,
   IconButton,
+  Tooltip,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { makeStyles } from '@mui/styles'
@@ -68,97 +69,117 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
   }
 
   return (
-    <>
-      <MuiDrawer
-        variant="permanent"
-        className={classesStyle.drawer}
-        onClose={onDrawerToggle}
-        {...rest}
-      >
-        <PerfectScrollbar className={classesStyle.scrollbar}>
-          <div className={classesStyle.button}>
-            <IconButton
-              className={classesStyle.iconButton}
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={onDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-          </div>
-          <MuiList className={classesStyle.list} disablePadding>
-            {routes
-              .filter(({ name }) => !!name)
-              .map((category, index) => (
-                <MuiListItem className={classesStyle.listItem} key={index}>
+    <MuiDrawer
+      variant="permanent"
+      className={classesStyle.drawer}
+      onClose={onDrawerToggle}
+      {...rest}
+    >
+      <PerfectScrollbar className={classesStyle.scrollbar}>
+        <div className={classesStyle.button}>
+          <IconButton
+            className={classesStyle.iconButton}
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={onDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+        </div>
+        <MuiList className={classesStyle.list} disablePadding>
+          {routes
+            .filter(({ name }) => !!name)
+            .map((category, index) => (
+              <Tooltip
+                title={
+                  !rest.open ? (
+                    <div className={classesStyle.tooltip}>
+                      {t(`${category.path}>sidebar`)}
+                    </div>
+                  ) : (
+                    ''
+                  )
+                }
+                arrow
+                placement="left"
+                key={`category-${category.name}-${index}`}
+              >
+                <div>
                   {category.header ? (
-                    <>
-                      <div className={classesStyle.divider} />
-                      {rest.open && (
-                        <Typography className={classesStyle.sidebarSection}>
-                          {t(category.header)}
-                        </Typography>
-                      )}
-                    </>
+                    <div className={classesStyle.divider} />
                   ) : null}
 
-                  {category.children ? (
-                    <div width="100%">
+                  <MuiListItem className={classesStyle.listItem}>
+                    {category.header ? (
+                      <>
+                        {rest.open && (
+                          <Typography className={classesStyle.sidebarSection}>
+                            {t(category.header)}
+                          </Typography>
+                        )}
+                      </>
+                    ) : null}
+
+                    {category.children ? (
+                      <div width="100%">
+                        <SidebarCategory
+                          isOpen={!openRoutes[index]}
+                          name={t(`${category.path}>sidebar`)}
+                          icon={category.icon}
+                          onClick={() => toggle(index)}
+                          isCollapsable
+                          button
+                          showOnlyIcons={!rest.open}
+                          classes={classesStyle}
+                        />
+
+                        <Collapse
+                          in={openRoutes[index]}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          {category.children.map((route, index) => (
+                            <SidebarLink
+                              key={`sidebar-link${index}`}
+                              name={route.name}
+                              to={route.path}
+                              icon={route.icon}
+                              badge={route.badge}
+                              classes={classesStyle}
+                            />
+                          ))}
+                        </Collapse>
+                      </div>
+                    ) : (
                       <SidebarCategory
-                        isOpen={!openRoutes[index]}
-                        name={t(`${category.path}>sidebar`)}
+                        isCollapsable={false}
+                        name={t(
+                          category.path.includes('http')
+                            ? category.name
+                            : `${category.path}>sidebar`,
+                        )}
+                        to={category.path}
+                        activeclassname="active"
+                        component={
+                          category.path.includes('http')
+                            ? ExternalLink
+                            : NavLink
+                        }
                         icon={category.icon}
-                        onClick={() => toggle(index)}
-                        isCollapsable
-                        button
+                        exact
+                        badge={category.badge}
                         showOnlyIcons={!rest.open}
                         classes={classesStyle}
                       />
-
-                      <Collapse
-                        in={openRoutes[index]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        {category.children.map((route, index) => (
-                          <SidebarLink
-                            key={`sidebar-link${index}`}
-                            name={route.name}
-                            to={route.path}
-                            icon={route.icon}
-                            badge={route.badge}
-                            classes={classesStyle}
-                          />
-                        ))}
-                      </Collapse>
-                    </div>
-                  ) : (
-                    <SidebarCategory
-                      isCollapsable={false}
-                      name={t(
-                        category.path.includes('http')
-                          ? category.name
-                          : `${category.path}>sidebar`,
-                      )}
-                      to={category.path}
-                      activeclassname="active"
-                      component={
-                        category.path.includes('http') ? ExternalLink : NavLink
-                      }
-                      icon={category.icon}
-                      exact
-                      badge={category.badge}
-                      showOnlyIcons={!rest.open}
-                      classes={classesStyle}
-                    />
-                  )}
-                </MuiListItem>
-              ))}
-            <div className={classesStyle.divider} />
-          </MuiList>
-        </PerfectScrollbar>
-      </MuiDrawer>
-    </>
+                    )}
+                  </MuiListItem>
+                </div>
+              </Tooltip>
+            ))}
+          <div className={classesStyle.divider} />
+        </MuiList>
+      </PerfectScrollbar>
+    </MuiDrawer>
   )
 }
 

@@ -38,9 +38,7 @@ const SidebarCategory = ({
   showOnlyIcons,
   ...rest
 }) => {
-  if (showOnlyIcons) {
-    return <Category {...rest}>{icon}</Category>
-  }
+  if (showOnlyIcons) return <Category {...rest}>{icon}</Category>
 
   return (
     <Category {...rest}>
