@@ -1499,10 +1499,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.3.0.tgz#ea89004119dc42db2e1dba0f97d553f7372f6fcb"
   integrity sha512-AHPmaAx+RYfZz0eYu6Gviiagpmiyw98ySSlQvCUhVGDRtDFe4DBS0x1bSjdF3gqUDYOczB+yYvBTtEylYSdRhg==
 
-"@eoscostarica/eoscr-components@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-4.0.3.tgz#1dc2916f6ba64aac0f5303c1aaf9050a449f60f7"
-  integrity sha512-u5x/aKsgnXU6fJNqYPFyV2jDZh/HNblTVDdT0+wlh4v5mVQfSWFFZJ9XbsIIifl41HdObIbBeZO6QqlyREfiBg==
+"@eoscostarica/eoscr-components@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@eoscostarica/eoscr-components/-/eoscr-components-4.0.5.tgz#39d1a1b81382da0f8ab4b567a1c0e1299821ca44"
+  integrity sha512-gnHET5Lc5guvREzJEBnaxP+1l63bR/09G26kXu9TwBCihqmFulNaYMZ4PktyvecRtLs8MO34XZQBaOeiYIJmWw==
   dependencies:
     "@babel/polyfill" "^7.12.1"
     "@emotion/react" "^11.9.3"
