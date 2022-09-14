@@ -58,7 +58,7 @@ export default (theme) => ({
     },
   },
   gridFooter: {
-    display: 'flex'
+    display: 'flex',
   },
   footerImg: {
     width: 24,
@@ -76,7 +76,7 @@ export default (theme) => ({
     fontWeight: theme.typography.fontWeightBold,
     height: '20px !important',
     alignItems: 'center',
-    padding: '2px 6px 0px 12px',
+    padding: '2px 6px',
     color: '#FFFF',
     justifyContent: 'center',
     borderRadius: '10px',
@@ -96,12 +96,17 @@ export default (theme) => ({
     flexDirection: 'row',
     flexGrow: 1,
     flexBasis: 0,
-    marginRight: 5
-
+    marginRight: 5,
+    
   },
   left: {
     flexGrow: 1,
-    flexBasis: 0
- },
-
+    flexBasis: 0,
+  },
+  noUnderline: {
+    textDecoration: 'none !important' ,
+  },
+  lineFooter: {
+    textDecoration: 'underline !important',
+  },
 })

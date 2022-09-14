@@ -33,23 +33,17 @@ const Footer = () => {
       </div>
 
       <div className={classes.gridFooter}>
-          <div>
-            <Link
-              href="https://github.com/eoscostarica/eosio-dashboard"
-              onClick={preventDefault}
-              style={{ textDecoration: 'none' }}
-            >
-              <div className={classes.sidebarFooterText}>
-              {t('footer1')}
-              </div>
-              <div
-                className={classes.sidebarFooterText}
-                style={{ color: '#1E88E5', textDecoration: 'underline' }}
-              >
-                {t('footer2')}
-              </div>
-            </Link>
-          </div>
+        <div>
+          <div className={classes.sidebarFooterText}>{t('footer1')}</div>
+          <Link className={classes.noUnderline}
+            href="https://github.com/eoscostarica/eosio-dashboard"
+            onClick={preventDefault}
+          >
+            <div className={[classes.sidebarFooterText, classes.lineFooter]}>
+              {t('footer2')}
+            </div>
+          </Link>
+        </div>
       </div>
 
       <div className={classes.footerAlign}>
@@ -59,18 +53,20 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <List className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}>
-          <Link
+          <List
+            className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}
+          >
+            <Link
+              className={classes.noUnderline}
               href="https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"
               onClick={preventDefault}
-              style={{ textDecoration: 'none' }}
             >
-            {t('bugRequest')}
+              {t('bugRequest')}
             </Link>
           </List>
         </div>
       </div>
-      </div>
+    </div>
   )
 }
 
