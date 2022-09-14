@@ -29,7 +29,10 @@ const NodesCards = ({ node, producer }) => {
   }, [data, loading])
 
   return (
-    <div className={classes.card} key={`${node.node_type}-${producer.owner}-${node.index}`}>
+    <div
+      className={classes.card}
+      key={`${node.node_type}-${producer.owner}-${node.index}`}
+    >
       <InformationCard
         producer={{ ...producer, node, missedBlocks }}
         type="node"
@@ -63,9 +66,9 @@ const Nodes = () => {
         <>
           <div className={classes.container}>
             {!!items?.length ? (
-              items.map(({node,producer},index) => (
+              items.map(({ node, producer }, index) => (
                 <NodesCards
-                  node={{index,...node}}
+                  node={{ index, ...node }}
                   producer={producer}
                   key={`node-${producer.owner}-${index}`}
                 />

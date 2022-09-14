@@ -21,7 +21,7 @@ const useNodeState = () => {
     const index = (pagination.page - 1) * pagination.limit
 
     setItems(nodes.slice(index, index + pagination.limit))
-
+    
     setPagination((prev) => ({
       ...prev,
       pages: Math.ceil((nodes?.length ?? 0) / pagination.limit),
@@ -38,6 +38,7 @@ const useNodeState = () => {
         if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
           nodesList.push({ node, producer })
         }
+
       })
     })
 
