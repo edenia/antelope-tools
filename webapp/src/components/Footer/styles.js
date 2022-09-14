@@ -97,7 +97,7 @@ export default (theme) => ({
     flexGrow: 1,
     flexBasis: 0,
     marginRight: 5,
-    
+
   },
   left: {
     flexGrow: 1,
