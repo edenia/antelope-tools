@@ -17,7 +17,7 @@ const NoResults = lazy(() => import('../../components/NoResults'))
 
 const useStyles = makeStyles(styles)
 
-const NodesCards = ({ item }) => {
+const NodesCards = ({ node, producer }) => {
   const classes = useStyles()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [missedBlocks, setMissedBlocks] = useState({})
@@ -28,26 +28,13 @@ const NodesCards = ({ item }) => {
     }
   }, [data, loading])
 
-  if (!item.bp_json?.nodes) {
-    return (
-      <div className={classes.card}>
-        <InformationCard producer={item} type="node" />
-      </div>
-    )
-  }
-
   return (
-    <>
-      {(item.bp_json?.nodes || []).map((node, index) => (
-        <div className={classes.card}>
-          <InformationCard
-            producer={{ ...item, node, missedBlocks }}
-            type="node"
-            key={`${node.name}-${index}`}
-          />
-        </div>
-      ))}
-    </>
+    <div className={classes.card} key={`${node.node_type}-${producer.owner}-${node.index}`}>
+      <InformationCard
+        producer={{ ...producer, node, missedBlocks }}
+        type="node"
+      />
+    </div>
   )
 }
 
@@ -76,17 +63,18 @@ const Nodes = () => {
         <>
           <div className={classes.container}>
             {!!items?.length ? (
-              items.map((producer) => (
+              items.map(({node,producer},index) => (
                 <NodesCards
-                  item={producer}
-                  key={`producer_${producer.owner}`}
+                  node={{index,...node}}
+                  producer={producer}
+                  key={`node-${producer.owner}-${index}`}
                 />
               ))
             ) : (
               <NoResults />
             )}
           </div>
-          {pagination.pages > 1 && (
+          {pagination.pages > 0 && (
             <Pagination
               className={classes.pagination}
               count={pagination.pages}
