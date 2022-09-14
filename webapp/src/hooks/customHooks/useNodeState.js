@@ -21,7 +21,7 @@ const useNodeState = () => {
     const index = (pagination.page - 1) * pagination.limit
 
     setItems(nodes.slice(index, index + pagination.limit))
-    
+
     setPagination((prev) => ({
       ...prev,
       pages: Math.ceil((nodes?.length ?? 0) / pagination.limit),
@@ -31,14 +31,13 @@ const useNodeState = () => {
   useEffect(() => {
     if (!producers) return
 
-    let nodesList = []
+    const nodesList = []
 
     producers.forEach((producer) => {
       (producer?.bp_json?.nodes ?? []).forEach((node) => {
         if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
           nodesList.push({ node, producer })
         }
-
       })
     })
 
