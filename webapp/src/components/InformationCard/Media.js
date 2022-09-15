@@ -9,7 +9,7 @@ const Media = ({ media }) => {
     <>
       <ProducerAvatar logo={media.logo} name={media.name} />
       <Typography className="bpName">{media.name}</Typography>
-      <Typography>{media.account}</Typography>
+      <Typography>{media.account?.toString()}</Typography>
     </>
   )
 }

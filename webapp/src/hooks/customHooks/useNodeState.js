@@ -7,45 +7,42 @@ import useSearchState from './useSearchState'
 
 const useNodeState = () => {
   const [
-    { filters, pagination, loading, producers, info },
+    { filters, pagination, loading, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
+  const [nodes, setNodes] = useState([])
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
   useEffect(() => {
-    if (!info) return
+    if (!nodes) return
+
+    const index = (pagination.page - 1) * pagination.limit
+
+    setItems(nodes.slice(index, index + pagination.limit))
 
     setPagination((prev) => ({
       ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit),
+      pages: Math.ceil((nodes?.length ?? 0) / pagination.limit),
     }))
-  }, [info, pagination.limit, setPagination])
+  }, [nodes, pagination.page, pagination.limit, setPagination])
 
   useEffect(() => {
-    let items = producers || []
+    if (!producers) return
 
-    if (items?.length && filters.name !== 'all') {
-      items = items
-        .map((producer) => {
-          const nodes = (producer.bp_json?.nodes || []).filter(
-            (node) => node.node_type === filters.name,
-          )
+    const nodesList = []
 
-          return {
-            ...producer,
-            bp_json: {
-              ...producer.bp_json,
-              nodes,
-            },
-          }
-        })
-        .filter((producer) => producer?.bp_json?.nodes.length)
-    }
+    producers.forEach((producer) => {
+      (producer?.bp_json?.nodes ?? []).forEach((node) => {
+        if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
+          nodesList.push({ node, producer })
+        }
+      })
+    })
 
-    setItems(items)
-  }, [filters, producers])
+    setNodes(nodesList)
+  }, [filters.name, producers])
 
   return [
     { filters, chips, loading, items, pagination },
