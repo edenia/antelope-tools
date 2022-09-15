@@ -186,26 +186,31 @@
     "title": "Acuerdo de Productor de Bloques"
   },
   "aboutRoute": {
+    "body": {
+      "paragraph1": "EOSIO Dashboard recolecta datos y permite una visualización fácil del estado de los nodos y estadísticas de las blockchains de EOSIO. Esto también permite visualizar el método de consenso en tiempo real junto con información específica de la red, tales como la distribución de recompensas de los productores de bloques en la mainnet de EOS y una lista de entidades registradas en la red con permiso público LACChain. EOSIO Dashboard es una herramienta open-source para que la comunidad de EOSIO acceda a los datos, apoye las votaciones por los productores de bloques y afine su infraestructura."
+    },
     "title": "EOSIO Tablero",
-    "subtitle1": "What is the EOSIO Dashboard",
+    "subtitle1": "¿Por qué usar EOSIO Dashboard?",
     "body1": {
-      "paragraph1": "EOSIO dashboard is an open source project for visualizing data on the EOS network infrastructure Block Producer Nodes and Rewards Distribution."
+      "paragraph1": "EOSIO Dashboard es una herramienta de código abierto impulsada por la comunidad y construida por desarrolladores de blockchain que creen que la transparencia es fundamental para el funcionamiento de las redes de blockchain. Pretendemos ofrecer una aplicación útil y sencilla para visualizar la información relevante de los productores de bloques para promover la transparencia y fiabilidad."
     },
-    "subtitle2": "Why is it important?",
+    "subtitle2": "¿Por qué es importante?",
     "body2": {
-      "paragraph1": "Monitoring what is happening on the network is essential to improve it and measure node transparency the impact of solutions running on the network. The main objective of the monitoring tools is to produce decentralized and reliable information about each node and the activity of the network."
+      "paragraph1": "En la red EOS, los poseedores de tokens deben votar por los Productores de Bloques basándose en la información disponible. En las redes con permiso, como LACChain, los operadores de nodos son responsables de que la red funcione sin problemas. Creemos que la supervisión de la red es esencial para mejorar y medir la transparencia de los nodos. El objetivo principal de EOSIO Dashboard es ayudar a visualizar información objetiva y fiable sobre cada nodo y su actividad."
     },
-    "subtitle3": "Where does the data come from?",
+    "subtitle3": "¿De dónde se obtienen los datos?",
     "body3": {
-      "paragraph1": "The dashboard is meant to allow the community to obtain a transparent, graphical view of block producer information. We source data directly from the blockchain and from information provided in their bp.json file. The bp.json file is essentially an info/configuration file that is provided by each block producer.  You can see an example bp.json file here: https://eoscostarica.io/bp.json"
-    }
+      "paragraph1": "EOSIO Dashboard proporciona una visualización detallada y gráfica de la información relevante de las entidades que ejecutan los nodos y la infraestructura de la cadena de bloques. Obtenemos los datos on-chain directamente de las tablas públicas de blockchain y de la información proporcionada por los productores de bloques en sus archivos bp.json. ",
+      "paragraph2": "Para mayor información acerca EOSIO Dashboard, visite nuestro repositorio en GitHub o contáctenos en nuestro grupo de Telegram. Póngase en contacto con nosotros y únase a nuestro esfuerzo por hacer que las blockchains de EOSIO sean aún más transparentes y fáciles de usar."
+    },
+    "bpjsonexample": "Ejemplo de bp.json"
   },
   "helpRoute": {
-    "title": "Thank you for using EOS Network Dashboard!",
-    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
+    "title": "¡Gracias por usar EOS Network Dashboard!",
+    "paragraph": "El desarrollo de EOSIO Dashboard continúa en progreso. Por favor, siéntase libre de dejar sugerencias para actualizaciones, reporte de errores, o utilizar el código. También, puede encontrarnos en Telegram o visitar nuestro sitio web.",
     "githubEOSCR": "GitHub EOS Costa Rica",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Website EOS Costa Rica"
+    "websiteEOSCR": "Sitio web de EOS Costa Rica"
   },
   "producerCardComponent": {
     "rank": "Rango",
