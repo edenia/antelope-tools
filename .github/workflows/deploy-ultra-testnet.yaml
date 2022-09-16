@@ -40,7 +40,6 @@ jobs:
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/ultra.jpg'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Ultra Website", "src": "https://ultra.io/" },{ "text": "Block Explorer", "src": "https://explorer.testnet.ultra.io/" },{"text": "Ultra Mainnet Explorer","src": "https://explorer.mainnet.ultra.io/"}]'
-          REACT_APP_FEATURE_BUG: '[{ "text": "Report a Bug or Request a Feature", "src": "https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'

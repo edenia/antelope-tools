@@ -37,7 +37,6 @@ jobs:
           REACT_APP_VERSION: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/lacchain.jpg'
           REACT_APP_FOOTER_LINKS: '[{"text":"LACChain Website","src":"https://eosio.lacchain.net"},{"text":"Block Explorer","src":"https://eosio-explorer.lacchain.net"},{"text":"LACChain Developer Docs","src":"https://eosio.lacchain.net/en/docs/eosio/"},{"text": "LACChain Network Monitor","src": "https://eosio.online"}]'
-          REACT_APP_FEATURE_BUG: '[{ "text": "Report a Bug or Request a Feature", "src": "https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
