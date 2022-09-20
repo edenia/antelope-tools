@@ -39,7 +39,7 @@ const Footer = () => {
           <Link
             className={classes.noUnderline}
             href="https://github.com/eoscostarica/eosio-dashboard"
-            onClick={(event) => handleLinkClick(event)}
+            onClick={() => handleLinkClick()}
             target="_blank"
             rel="noreferrer"
           >
@@ -53,7 +53,7 @@ const Footer = () => {
           <Link
             className={classes.noUnderline}
             href="https://github.com/eoscostarica/eosio-dashboard/releases"
-            onClick={(event) => handleLinkClick(event)}
+            onClick={() => handleLinkClick()}
             target="_blank"
             rel="noreferrer"
           >
@@ -70,7 +70,7 @@ const Footer = () => {
             <Link
               className={classes.noUnderline}
               href="https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"
-              onClick={(event) => handleLinkClick(event)}
+              onClick={() => handleLinkClick()}
               target="_blank"
               rel="noreferrer"
             >
