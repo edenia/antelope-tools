@@ -1,7 +1,8 @@
 export default (theme) => ({
   wrapper: {
     display: 'flex',
-    flexDirection: 'row',
+    flexBasis: 'auto',
+    flexWrap: 'wrap',
     padding: `1px ${theme.spacing(1)}`,
     background: theme.palette.common.white,
     alignItems: 'center',
@@ -37,6 +38,8 @@ export default (theme) => ({
     lineHeight: '20px',
     textAlign: 'center',
     letterSpacing: '0.1px',
+    display: 'flex !important',
+    justifyContent: 'center !important'
   },
   sidebarFooterSubText: {
     color: theme.sidebar.footer.color,
@@ -95,9 +98,8 @@ export default (theme) => ({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     flexGrow: 1,
-    flexBasis: 0,
-    marginRight: 5,
-  },
+    flexBasis: 0
+    },
   left: {
     flexGrow: 1,
     flexBasis: 0,
@@ -106,6 +108,10 @@ export default (theme) => ({
     textDecoration: 'none !important',
   },
   lineFooter: {
-    textDecoration: 'underline !important',
+    textDecoration: 'underline !important'
   },
+  midText:{
+    display: 'flex !important',
+    justifyContent: 'center !important'
+  }
 })

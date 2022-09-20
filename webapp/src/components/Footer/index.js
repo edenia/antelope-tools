@@ -8,7 +8,8 @@ import { generalConfig } from '../../config'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
-const preventDefault = (event) => event.preventDefault()
+
+const handleLinkClick = () => {}
 
 const Footer = () => {
   const classes = useStyles()
@@ -34,24 +35,34 @@ const Footer = () => {
 
       <div className={classes.gridFooter}>
         <div>
-          <div className={classes.sidebarFooterText}>{t('footer1')}</div>
-          <Link className={classes.noUnderline}
+          <div className={classes.midText}>{t('footer1')}</div>
+          <Link
+            className={classes.noUnderline}
             href="https://github.com/eoscostarica/eosio-dashboard"
-            onClick={preventDefault}
+            onClick={(event) => handleLinkClick(event)}
+            target="_blank"
+            rel="noreferrer"
           >
-            <div className={[classes.sidebarFooterText, classes.lineFooter]}>
-              {t('footer2')}
-            </div>
+            <div className={classes.midText}>{t('footer2')}</div>
           </Link>
         </div>
       </div>
 
       <div className={classes.footerAlign}>
         <div className={classes.sidebarFooter}>
-          <div className={classes.linkBadge}>
-            {generalConfig.appVersion.split('-').pop()}
-          </div>
+          <Link
+            className={classes.noUnderline}
+            href="https://github.com/eoscostarica/eosio-dashboard/releases"
+            onClick={(event) => handleLinkClick(event)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className={classes.linkBadge}>
+              {generalConfig.appVersion.split('-').pop()}
+            </div>
+          </Link>
         </div>
+        
         <div>
           <List
             className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}
@@ -59,7 +70,9 @@ const Footer = () => {
             <Link
               className={classes.noUnderline}
               href="https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"
-              onClick={preventDefault}
+              onClick={(event) => handleLinkClick(event)}
+              target="_blank"
+              rel="noreferrer"
             >
               {t('bugRequest')}
             </Link>
