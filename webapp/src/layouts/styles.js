@@ -1,24 +1,30 @@
 export default (theme) => ({
   root: {
     display: 'flex',
-    minHeight: '100vh'
+    flexFlow: 'row wrap',
   },
   drawer: {
+    display: 'flex',
     [theme.breakpoints.down('md')]: {
       width: '0 !important',
       flexShrink: 0
     }
   },
   appContent: {
-    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    [theme.breakpoints.up('md')]: {
+      flex: 1,
+    },
+    [theme.breakpoints.down('md')]: {
+      flex: 'none',
+    }
   },
   mainContent: {
-    padding: theme.spacing(6),
-    flex: 1,
+    padding: theme.spacing(4),
+    minHeight: 1024, 
     background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
       flex: 'none'
@@ -26,6 +32,14 @@ export default (theme) => ({
     '& .MuiPaper-root .MuiPaper-root': {
       boxShadow: 'none'
     }
+  },
+  header: {
+    flex: '100%',
+    height: 64,
+    zIndex: 1250,
+  },
+  footer: {
+    flex: '100%',
   },
   subHeader: {
     display: 'flex',

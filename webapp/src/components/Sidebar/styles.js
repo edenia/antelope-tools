@@ -7,6 +7,8 @@ export default (theme, rgba) => ({
       borderRight: 0,
       [theme.breakpoints.up('md')]: {
         maxWidth: '240px',
+        top: '64px',
+        height: 'auto',
       }
     },
   },

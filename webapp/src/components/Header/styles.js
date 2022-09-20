@@ -23,7 +23,7 @@ export default (theme) => ({
     backgroundColor: '#fff !important',
     color: theme.header.color,
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25) !important',
-
+    height: 64
   },
   iconButton: {
     '& svg': {
