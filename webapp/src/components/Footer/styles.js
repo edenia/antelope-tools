@@ -110,7 +110,7 @@ export default (theme) => ({
   lineFooter: {
     textDecoration: 'underline !important'
   },
-  midText:{
+  midText: {
     display: 'flex !important',
     justifyContent: 'center !important'
   }
