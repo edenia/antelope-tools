@@ -9,7 +9,7 @@ export default (theme, rgba) => ({
         maxWidth: '240px',
         top: '64px',
         height: 'auto',
-      }
+      },
     },
   },
   scrollbar: {
@@ -118,5 +118,5 @@ export default (theme, rgba) => ({
   tooltip: {
     padding: theme.spacing(1, 2),
     fontSize: '1.2em',
-  }
+  },
 })
