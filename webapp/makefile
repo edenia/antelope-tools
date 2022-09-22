@@ -24,7 +24,7 @@ build-docker: ./Dockerfile
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_WEBAPP):$(LATEST_TAG) --target run-stage \
 		--build-arg port="$(PORT)" \
 		--build-arg react_app_title="$(REACT_APP_TITLE)" \
-		--build-arg react_app_tag="$(REACT_APP_TAG)" \
+		--build-arg react_app_tag="$(REACT_APP_VERSION)" \
 		--build-arg react_app_default_producer_logo="$(REACT_APP_DEFAULT_PRODUCER_LOGO)" \
 		--build-arg react_app_footer_links='$(REACT_APP_FOOTER_LINKS)' \
 		--build-arg react_app_eos_rate_link="$(REACT_APP_EOS_RATE_LINK)" \
@@ -48,9 +48,6 @@ build-docker: ./Dockerfile
 		--build-arg react_app_eos_bp_json_on_chain_table="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE)" \
 		--build-arg react_app_eos_bp_json_on_chain_scope="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE)" \
 		--build-arg react_app_token_symbol="$(REACT_APP_TOKEN_SYMBOL)" \
-		--build-arg react_app_eos_mainnet="$(REACT_APP_EOS_MAINNET)" \
-		--build-arg react_app_jungle_testnet="$(REACT_APP_JUNGLE_TESTNET)" \
-		--build-arg react_app_lacchain_testnet="$(REACT_APP_LACCHAIN_TESTNET)" \
 		--build-arg react_app_disabled_menu_items='$(REACT_APP_DISABLED_MENU_ITEMS)' \
 		--build-arg react_app_network_url='$(REACT_APP_NETWORK_URL)' \
 		--build-arg react_app_block_explorer_url='$(REACT_APP_BLOCK_EXPLORER_URL)' \

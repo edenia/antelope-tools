@@ -1,11 +1,11 @@
-export default (theme, drawerWidth) => ({
+export default (theme) => ({
   root: {
     display: 'flex',
     minHeight: '100vh'
   },
   drawer: {
-    [theme.breakpoints.up('md')]: {
-      width: drawerWidth,
+    [theme.breakpoints.down('md')]: {
+      width: '0 !important',
       flexShrink: 0
     }
   },
@@ -17,7 +17,7 @@ export default (theme, drawerWidth) => ({
     overflow: 'hidden'
   },
   mainContent: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(6),
     flex: 1,
     background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {

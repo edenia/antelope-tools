@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import 'flag-icon-css/css/flag-icon.min.css'
+import 'flag-icon-css/css/flag-icons.css'
 
 import UnknowFlagIcon from '../UnknowFlagIcon'
 

@@ -19,7 +19,10 @@ const prefix = {
   reddit: 'https://www.reddit.com/user/',
   keybase: 'https://keybase.io/',
   telegram: 'https://t.me/',
-  wechat: 'https://wechat.com/'
+  wechat: 'https://wechat.com/',
+  steemit: 'https://steemit.com/@',
+  discord: 'https://discord/',
+  medium: 'https://medium.com/@',
 }
 
 const icons = {
@@ -28,31 +31,29 @@ const icons = {
   facebook: <FacebookIcon />,
   github: <GitHubIcon />,
   reddit: <RedditIcon />,
-  telegram: <TelegramIcon />
+  telegram: <TelegramIcon />,
 }
 
 const ProducerSocialLinks = ({ items, message }) => {
-  const itemsArray = Object.keys(items)
+  const itemsArray = Object.keys(items).filter((key) => !!items[key])
 
-  if (!itemsArray.length) return <Typography>{message}</Typography>
+  if (!itemsArray?.length) return <Typography>{message}</Typography>
 
-  return itemsArray
-    .filter((key) => !!items[key])
-    .map((key, i) => (
-      <Link
-        key={`social-link${i}`}
-        href={`${prefix[key]}${items[key]}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {icons[key] || <LanguageIcon />} {key}
-      </Link>
-    ))
+  return itemsArray.map((key, i) => (
+    <Link
+      key={`social-link${i}`}
+      href={`${prefix[key] ?? 'https://' + key + '/'}${items[key]}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {icons[key] || <LanguageIcon />} {key}
+    </Link>
+  ))
 }
 
 ProducerSocialLinks.propTypes = {
   items: PropTypes.object,
-  message: PropTypes.string
+  message: PropTypes.string,
 }
 
 export default ProducerSocialLinks

@@ -1,0 +1,13 @@
+.grecaptcha-badge {
+    width: 70px !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    right: 0px !important;
+    bottom: 70px !important;
+    }
+    
+    .grecaptcha-badge:hover {
+    width: 256px !important;
+    }
+  
+  

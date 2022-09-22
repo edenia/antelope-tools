@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import { makeStyles } from '@mui/styles'
 
@@ -28,30 +27,30 @@ const RicardianContract = ({ abi, hash }) => {
       const [summary, _icon] = (content2 || '').split('\nicon: ')
 
       return (
-        <Box key={`ricardian-item-${name}`}>
-          <Box className={classes.boxTitle}>
+        <div key={`ricardian-item-${name}-${version}`}>
+          <div className={classes.boxTitle}>
             <img
               alt="icon"
               src={_icon || defaultIcon}
               onError={useDefaultLogo}
             />
-            <Box className={classes.boxText}>
+            <div className={classes.boxText}>
               <Typography color="primary" variant="h5">
                 {_title || name}
               </Typography>
               <Typography color="primary" variant="subtitle2">
                 {version}
               </Typography>
-            </Box>
-          </Box>
+            </div>
+          </div>
           <Divider className={classes.divider} />
           <Typography variant="body1">
             {summary || 'Empty Ricardian Clause'}
           </Typography>
-        </Box>
+        </div>
       )
     },
-    [classes]
+    [classes],
   )
 
   useEffect(() => {
@@ -59,11 +58,11 @@ const RicardianContract = ({ abi, hash }) => {
 
     const actions = abi.actions.map(
       ({ ricardian_contract: ricardianContract, name }) =>
-        formatRicardianClause(ricardianContract, name)
+        formatRicardianClause(ricardianContract, name),
     )
 
     const clauses = abi.ricardian_clauses.map(({ body }) =>
-      formatRicardianClause(body)
+      formatRicardianClause(body),
     )
 
     setActions(actions)
@@ -71,7 +70,7 @@ const RicardianContract = ({ abi, hash }) => {
   }, [abi, formatRicardianClause])
 
   return (
-    <Box className={classes.ricardianContractContainer}>
+    <div className={classes.ricardianContractContainer}>
       <Typography variant="body1" className={classes.hash}>
         <span>Hash:</span> {hash || 'N/A'}
       </Typography>
@@ -83,13 +82,13 @@ const RicardianContract = ({ abi, hash }) => {
       {actions.map((item) => item)}
 
       {clauses.map((clause) => clause)}
-    </Box>
+    </div>
   )
 }
 
 RicardianContract.propTypes = {
   abi: PropTypes.any,
-  hash: PropTypes.string
+  hash: PropTypes.string,
 }
 
 RicardianContract.defaultProps = {}

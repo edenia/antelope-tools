@@ -1,25 +1,24 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLazyQuery, useSubscription } from '@apollo/client'
+import { useSubscription } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
-import { useLocation } from 'react-router-dom'
-import queryString from 'query-string'
 
-import { NODES_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 
 import styles from './styles'
+import useNodeState from '../../hooks/customHooks/useNodeState'
 
-const Box = lazy(() => import('@mui/material/Box'))
-const Grid = lazy(() => import('@mui/material/Grid'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
-const NodeSearch = lazy(() => import('../../components/NodeSearch'))
+const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
+const NoResults = lazy(() => import('../../components/NoResults'))
 
 const useStyles = makeStyles(styles)
 
-const NodesCards = ({ item }) => {
+const NodesCards = ({ node, producer }) => {
+  const classes = useStyles()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [missedBlocks, setMissedBlocks] = useState({})
 
@@ -29,142 +28,68 @@ const NodesCards = ({ item }) => {
     }
   }, [data, loading])
 
-  if (!item.bp_json?.nodes) {
-    return (
-      <Grid item xs={12} sm={6} lg={12}>
-        <InformationCard producer={item} type="node" />
-      </Grid>
-    )
-  }
-
   return (
-    <>
-      {(item.bp_json?.nodes || []).map((node, index) => (
-        <Grid item xs={12} sm={6} lg={12} key={`${node.name}_${index}`}>
-          <InformationCard
-            producer={{ ...item, node, missedBlocks }}
-            type="node"
-          />
-        </Grid>
-      ))}
-    </>
+    <div
+      className={classes.card}
+      key={`${node.node_type}-${producer.owner}-${node.index}`}
+    >
+      <InformationCard
+        producer={{ ...producer, node, missedBlocks }}
+        type="node"
+      />
+    </div>
   )
 }
 
 NodesCards.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 }
 
 const Nodes = () => {
-  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(NODES_QUERY)
-  const location = useLocation()
-  const [filters, setFilters] = useState({ nodeType: 'all' })
-  const [pagination, setPagination] = useState({ page: 1, pages: 1, limit: 28 })
-  const [items, setItems] = useState([])
   const classes = useStyles()
-
-  const handleOnFiltersChange = (newFilters) => {
-    if (!newFilters.owner && filters.owner) {
-      setPagination((prev) => ({ ...prev, page: 1, where: null }))
-    }
-
-    if (newFilters.owner) {
-      setPagination((prev) => ({
-        ...prev,
-        page: 1,
-        where: { owner: { _like: `%${newFilters.owner}%` } }
-      }))
-    }
-
-    setFilters(newFilters)
-  }
-
-  const handleOnPageChange = (_, page) => {
-    setPagination((prev) => ({
-      ...prev,
-      page
-    }))
-  }
-
-  useEffect(() => {
-    loadProducers({
-      variables: {
-        where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit
-      }
-    })
-    // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit])
-
-  useEffect(() => {
-    if (!info) return
-
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / pagination.limit)
-    }))
-  }, [info, pagination.limit])
-
-  useEffect(() => {
-    const params = queryString.parse(location.search)
-
-    if (!params.owner) return
-
-    setPagination((prev) => ({
-      ...prev,
-      page: 1,
-      where: { owner: { _like: `%${params.owner}%` } }
-    }))
-
-    setFilters((prev) => ({ ...prev, owner: params.owner }))
-  }, [location.search])
-
-  useEffect(() => {
-    if (!producers?.length) return
-
-    let items = producers || []
-
-    if (filters.nodeType !== 'all') {
-      items = items.map((producer) => {
-        const nodes = (producer.bp_json?.nodes || []).filter(
-          (node) => node.node_type === filters.nodeType
-        )
-
-        return {
-          ...producer,
-          bp_json: {
-            ...producer.bp_json,
-            nodes
-          }
-        }
-      })
-    }
-
-    setItems(items)
-  }, [filters, producers])
+  const [
+    { filters, chips, loading, items, pagination },
+    { handleOnSearch, handleOnPageChange },
+  ] = useNodeState()
 
   return (
-    <Box>
-      <NodeSearch filters={filters} onChange={handleOnFiltersChange} />
-      {loading && <LinearProgress />}
-      <Grid container spacing={2}>
-        {items.map((producer) => (
-          <NodesCards item={producer} key={`producer_${producer.owner}`} />
-        ))}
-      </Grid>
-      {!loading && pagination.pages > 1 && (
-        <Pagination
-          className={classes.pagination}
-          count={pagination.pages}
-          page={pagination.page}
-          onChange={handleOnPageChange}
-          variant="outlined"
-          shape="rounded"
-        />
+    <div>
+      <SearchBar
+        filters={filters}
+        onChange={handleOnSearch}
+        chips={chips}
+        translationScope="nodeSearchComponent"
+      />
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <div className={classes.container}>
+            {!!items?.length ? (
+              items.map(({ node, producer }, index) => (
+                <NodesCards
+                  node={{ index, ...node }}
+                  producer={producer}
+                  key={`node-${producer.owner}-${index}`}
+                />
+              ))
+            ) : (
+              <NoResults />
+            )}
+          </div>
+          {pagination.pages > 0 && (
+            <Pagination
+              className={classes.pagination}
+              count={pagination.pages}
+              page={pagination.page}
+              onChange={handleOnPageChange}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
+        </>
       )}
-    </Box>
+    </div>
   )
 }
 

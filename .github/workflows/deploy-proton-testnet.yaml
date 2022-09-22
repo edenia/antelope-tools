@@ -37,7 +37,7 @@ jobs:
           # webapp
           PORT: '80'
           REACT_APP_TITLE: 'Proton Testnet Network Dashboard'
-          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/proton.png'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Proton Website", "src": "https://www.protonchain.com/" },{ "text": "Block Explorer", "src": "https://proton-test.bloks.io" },{"text": "Developer Docs","src": "https://docs.protonchain.com/sdk/"},{"text": "Proton Testnet Network Monitor","src": "https://eosio.online"}]'
           REACT_APP_EOS_RATE_LINK: ''

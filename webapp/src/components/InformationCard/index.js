@@ -9,11 +9,10 @@ import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions'
 import Collapse from '@mui/material/Collapse'
 import { useTranslation } from 'react-i18next'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import 'flag-icon-css/css/flag-icon.min.css'
+import 'flag-icon-css/css/flag-icons.css'
 
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
@@ -47,7 +46,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
     if (type !== 'node' || nodeType !== 'validator') return <></>
 
     return (
-      <Box className={classes.rowWrapper}>
+      <div className={classes.rowWrapper}>
         <Typography variant="body1">
           {`${t('missedBlocks')}: `}
           {(producer.missed_blocks || []).reduce(
@@ -55,7 +54,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             0
           )}
         </Typography>
-      </Box>
+      </div>
     )
   }
 
@@ -84,18 +83,18 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
   return (
     <Card className={classes.root}>
       <CardHeader title={producerOrg.title} />
-      <Box className={classes.wrapper}>
-        <Box className={classes.media}>
+      <div className={classes.wrapper}>
+        <div className={classes.media}>
           <Media classes={classes} media={producerOrg.media || {}} />
-        </Box>
+        </div>
         <Collapse
           in={matches ? true : expanded}
           timeout="auto"
           unmountOnExit
           className={classes.collapse}
         >
-          <Box className="bodyWrapper">
-            <Box className={clsx(classes.info, classes[type])}>
+          <div className="bodyWrapper">
+            <div className={clsx(classes.info, classes[type])}>
               <Typography variant="overline">{t('info')}</Typography>
               <Information
                 info={producerOrg.info}
@@ -103,7 +102,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
                 t={t}
                 type={type}
               />
-            </Box>
+            </div>
             <Stats
               t={t}
               type={type}
@@ -132,9 +131,9 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
               type={type}
               classes={classes}
             />
-            <Box className={classes.healthStatus}>
+            <div className={classes.healthStatus}>
               <Typography variant="overline">{t('health')}</Typography>
-              <Box className={classes.borderLine}>
+              <div className={classes.borderLine}>
                 {missedBlock(producer, producerOrg?.media?.account, type)}
                 <ProducerHealthIndicators
                   message={t('noData')}
@@ -144,24 +143,26 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
                       : { health_status: [] }
                   }
                 />
-              </Box>
-            </Box>
+              </div>
+            </div>
             <Social
               social={producerOrg?.social || {}}
               type={type}
               t={t}
               classes={classes}
             />
-          </Box>
+          </div>
         </Collapse>
-      </Box>
-      <CardActions disableSpacing className={classes.cardActions}>
-        <Box className={classes.expandMore}>
-          <Button color="primary" onClick={handleExpandClick}>
-            {expanded ? t('collapse') : t('moreInfo')}
-          </Button>
-        </Box>
-      </CardActions>
+      </div>
+      {!matches && (
+        <CardActions disableSpacing className={classes.cardActions}>
+          <div className={classes.expandMore}>
+            <Button color="primary" onClick={handleExpandClick}>
+              {expanded ? t('collapse') : t('moreInfo')}
+            </Button>
+          </div>
+        </CardActions>
+      )}
     </Card>
   )
 }
@@ -176,7 +177,7 @@ InformationCard.propTypes = {
 InformationCard.defaultProps = {
   producer: {},
   rank: 0,
-  onNodeClick: () => {},
+  onNodeClick: () => { },
   type: ''
 }
 

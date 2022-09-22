@@ -37,7 +37,7 @@ jobs:
           # webapp
           PORT: '80'
           REACT_APP_TITLE: 'Airwire Network Dashboard'
-          REACT_APP_TAG: ${{github.ref}}
+          REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://ipfs.airwire.io/ipfs/QmayDiE47WtUfHJEdh2kFfq6Hdx9i5oTUUeiy4UiQbAEst'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Airwire Website", "src": "https://airwire.app/" },{ "text": "Block Explorer", "src": "https://explorer.airwire.io" },{"text": "Airwire Testnet Dashboard","src": "https://testnet-dashboard.airwire.io"}]'
           REACT_APP_EOS_RATE_LINK: ''

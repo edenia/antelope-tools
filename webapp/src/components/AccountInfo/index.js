@@ -3,11 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Identicon from 'react-identicons'
 import Accordion from '@mui/material/Accordion'
-import Box from '@mui/material/Box'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -21,13 +19,41 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
+const AccordionWrapper = ({ children, title }) => {
+  const classes = useStyles()
+
+  return (
+    <Accordion classes={{ root: classes.accordion }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        classes={{
+          root: classes.accordionSummary,
+        }}
+      >
+        <Typography variant="h6" color="primary">
+          {title}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>{children}</AccordionDetails>
+    </Accordion>
+  )
+}
+
+AccordionWrapper.propTypes = {
+  children: PropTypes.any,
+  title: PropTypes.string,
+}
+
+AccordionWrapper.defaultProps = {}
+
 const AccountInfo = ({
   account,
   abi,
   hash,
   onSubmitAction,
   tableData,
-  onGetTableRows
+  tableName,
+  onGetTableRows,
 }) => {
   const classes = useStyles()
   const [info, setInfo] = useState(null)
@@ -59,49 +85,44 @@ const AccountInfo = ({
       ram_quota: ramQuota,
       cpu_limit: cpuLimit,
       net_limit: netLimit,
-      permissions
+      permissions,
     } = account
 
     const ram = {
       percent: ramUsage / ramQuota || 0,
-      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`
+      label: `${getBytesLabel(ramUsage)} / ${getBytesLabel(ramQuota)}`,
     }
     const cpu = {
       percent: cpuLimit.used / cpuLimit.max || 0,
       label: `${getMicrosecondsLabel(cpuLimit.used)} / ${getMicrosecondsLabel(
-        cpuLimit.max
-      )}`
+        cpuLimit.max,
+      )}`,
     }
     const net = {
       percent: netLimit.used / netLimit.max || 0,
-      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`
+      label: `${getBytesLabel(netLimit.used)} / ${getBytesLabel(netLimit.max)}`,
     }
     const keys = permissions.map((item) => ({
       label: item.perm_name,
-      value: item.required_auth?.keys[0]?.key || '-'
+      value: item.required_auth?.keys[0]?.key || '-',
     }))
 
     setInfo({ ...account, ram, cpu, net, keys })
   }, [account])
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="space-between"
-      className={classes.paper}
-    >
+    <div className={classes.paper}>
       {!!info && (
         <>
-          <Box className={classes.boxHeaderCard}>
-            <Box className="identicon">
-              <Box className={classes.iconBorder}>
+          <div className={classes.boxHeaderCard}>
+            <div className="identicon">
+              <div className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
                   fg="#757575"
                 />
-              </Box>
+              </div>
               <Typography
                 variant="h4"
                 color="primary"
@@ -109,12 +130,12 @@ const AccountInfo = ({
               >
                 {info.account_name || 'N/A'}
               </Typography>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
-              <Box className="resourceUsage">
+              <div className="resourceUsage">
                 <ResourceUsage
                   title="RAM"
                   percent={info.ram.percent}
@@ -130,13 +151,13 @@ const AccountInfo = ({
                   percent={info.net.percent}
                   label={info.net.label}
                 />
-              </Box>
-            </Box>
-            <Box>
+              </div>
+            </div>
+            <div>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
-              <Box className="keys">
+              <div className="keys">
                 <dl>
                   {info.keys.map((key) => (
                     <span key={`account-key-${key.label}`}>
@@ -151,79 +172,36 @@ const AccountInfo = ({
                     </span>
                   ))}
                 </dl>
-              </Box>
-            </Box>
-          </Box>
+              </div>
+            </div>
+          </div>
 
           {abi && (
             <>
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractActions')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractActions
-                      accountName={account.account_name}
-                      abi={abi}
-                      onSubmitAction={onSubmitAction}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('contractTables')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ContractTables
-                      accountName={account.account_name}
-                      abi={abi}
-                      tableData={tableData}
-                      onGetTableRows={onGetTableRows}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Accordion classes={{ root: classes.accordion }}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    classes={{
-                      root: classes.accordionSummary
-                    }}
-                  >
-                    <Typography variant="h6" color="primary">
-                      {t('ricardianContract')}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <RicardianContract abi={abi} hash={hash} />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
+              <AccordionWrapper title={t('contractActions')}>
+                <ContractActions
+                  accountName={account.account_name}
+                  abi={abi}
+                  onSubmitAction={onSubmitAction}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('contractTables')}>
+                <ContractTables
+                  accountName={account.account_name}
+                  abi={abi}
+                  tableData={tableData}
+                  tableName={tableName}
+                  onGetTableRows={onGetTableRows}
+                />
+              </AccordionWrapper>
+              <AccordionWrapper title={t('ricardianContract')}>
+                <RicardianContract abi={abi} hash={hash} />
+              </AccordionWrapper>
             </>
           )}
         </>
       )}
-    </Grid>
+    </div>
   )
 }
 
@@ -233,7 +211,8 @@ AccountInfo.propTypes = {
   hash: PropTypes.string,
   onSubmitAction: PropTypes.func,
   tableData: PropTypes.any,
-  onGetTableRows: PropTypes.func
+  tableName: PropTypes.string,
+  onGetTableRows: PropTypes.func,
 }
 
 AccountInfo.defaultProps = {}

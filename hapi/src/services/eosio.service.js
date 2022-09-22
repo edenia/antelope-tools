@@ -25,7 +25,7 @@ const getProducers = async () => {
   }
 
   producers = producers
-    .filter(producer => !!producer.is_active)
+    .filter((producer) => !!producer.is_active)
     .sort((a, b) => {
       if (a.total_votes < b.total_votes) {
         return -1
@@ -92,7 +92,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
 
-  producers.forEach(producer => {
+  producers.forEach((producer) => {
     const producerVotePercent = producer.total_votes / totalVotes
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
@@ -149,7 +149,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
     )
 }
 
-const getBPJson = async producer => {
+const getBPJson = async (producer) => {
   const bpJsonUrl = await getBPJsonUrl(producer)
   let bpJson = {}
 
@@ -199,9 +199,13 @@ const getBPJsonUrl = async (producer = {}) => {
   return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
 }
 
-const getProducerHealthStatus = bpJson => {
+const getProducerHealthStatus = (bpJson) => {
   const healthStatus = []
 
+  healthStatus.push({
+    name: 'bpJson',
+    valid: !!bpJson
+  })
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name
@@ -219,16 +223,16 @@ const getProducerHealthStatus = bpJson => {
     valid: !!bpJson?.org?.branding?.logo_256
   })
   healthStatus.push({
-    name: 'bpJson',
+    name: 'country',
     valid: !!bpJson?.org?.location?.country
   })
 
   return healthStatus
 }
 
-const getNodes = bpJson => {
+const getNodes = (bpJson) => {
   return Promise.all(
-    (bpJson?.nodes || []).map(async node => {
+    (bpJson?.nodes || []).map(async (node) => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
       const nodeInfo = await producerUtil.getNodeInfo(apiUrl)
 
@@ -240,7 +244,7 @@ const getNodes = bpJson => {
   )
 }
 
-const getVotesInEOS = votes => {
+const getVotesInEOS = (votes) => {
   const TIMESTAMP_EPOCH = 946684800
   const date = Date.now() / 1000 - TIMESTAMP_EPOCH
   const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600

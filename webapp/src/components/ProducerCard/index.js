@@ -35,11 +35,13 @@ const ProducerCard = ({ producer, onNodeClick, rank }) => {
   }, [producer])
 
   const Avatar = () => {
+    const logo = producerOrg.branding?.logo_256
+
     return (
       <img
         className={classes.avatar}
         src={
-          producerOrg.branding?.logo_256 || generalConfig.defaultProducerLogo
+          isValidLogo(logo) ? logo : generalConfig.defaultProducerLogo
         }
         onError={onImgError(generalConfig.defaultProducerLogo)}
         alt="avatar"
