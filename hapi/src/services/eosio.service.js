@@ -167,11 +167,8 @@ const getBPJson = async (producerUrl, chainUrl) => {
 
   try {
     const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
-    bpJson = _bpJson || bpJson
 
-    if (typeof bpJson !== 'object') {
-      bpJson = {}
-    }
+    bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : bpJson
   } catch (error) {}
 
   return bpJson
