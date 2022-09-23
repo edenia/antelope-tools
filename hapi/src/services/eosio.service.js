@@ -51,7 +51,7 @@ const getProducers = async () => {
       let nodes = []
       let endpoints = { api: [], ssl: [], p2p: [] }
 
-      if (!!chains[eosConfig.chainId]) {
+      if (chains[eosConfig.chainId]) {
         nodes = await getNodes(bpJson)
         endpoints = producerUtil.getEndpoints(bpJson.nodes)
       }
