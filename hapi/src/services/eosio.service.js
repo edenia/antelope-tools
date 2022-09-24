@@ -204,7 +204,7 @@ const getProducerHealthStatus = (bpJson) => {
 
   healthStatus.push({
     name: 'bpJson',
-    valid: !!bpJson
+    valid: !!bpJson && !!Object.keys(bpJson).length
   })
   healthStatus.push({
     name: 'organization_name',
