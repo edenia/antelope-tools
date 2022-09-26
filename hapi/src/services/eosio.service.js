@@ -181,15 +181,6 @@ const getProducerUrl = (producer) => {
     producerUrl = `http://${producerUrl}`
   }
 
-  if (producerUrl === 'http://infinitystones.io') {
-    producerUrl = 'https://infinitystones.io'
-  }
-
-  if (producer.owner === 'eosauthority') {
-    producerUrl =
-      'https://ipfs.edenia.cloud/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
-  }
-
   return producerUrl
 }
 
