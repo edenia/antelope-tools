@@ -7,6 +7,7 @@ export const eosRateLink = process.env.REACT_APP_EOS_RATE_LINK
 export const defaultProducerLogo =
   process.env.REACT_APP_DEFAULT_PRODUCER_LOGO ||
   'https://bloks.io/img/eosio.png'
+
 export const footerLinks = process.env.REACT_APP_FOOTER_LINKS
   ? JSON.parse(process.env.REACT_APP_FOOTER_LINKS)
   : []

@@ -16,16 +16,14 @@ const useSearchState = ({ query }) => {
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = (newFilters) => {
-    if (newFilters.owner) {
-      setPagination((prev) => ({
-        ...prev,
-        page: 1,
-        where: {
-          ...pagination.where,
-          owner: { _like: `%${newFilters.owner}%` },
-        },
-      }))
-    }
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      where: {
+        ...pagination.where,
+        owner: { _like: `%${newFilters?.owner ?? ''}%` },
+      },
+    }))
     setFilters(newFilters)
   }
 
@@ -40,12 +38,15 @@ const useSearchState = ({ query }) => {
     loadProducers({
       variables: {
         where: pagination.where,
-        offset: pagination.offset || (pagination.page - 1) * pagination.limit,
+        offset:
+          pagination.offset === undefined
+            ? 0
+            : (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
       },
     })
     // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit])
+  }, [pagination.where, pagination.page, pagination.limit, pagination.offset])
 
   useEffect(() => {
     const params = queryString.parse(location.search)

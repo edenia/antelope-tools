@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme, makeStyles } from '@mui/styles'
-import { Grid, Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
-import Box from '@mui/material/Box'
+import { makeStyles } from '@mui/styles'
+import { Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -22,13 +20,28 @@ const useStyles = makeStyles(styles)
 const languages = [
   {
     value: 'en',
-    label: 'EN'
+    label: 'EN',
   },
   {
     value: 'es',
-    label: 'ES'
-  }
+    label: 'ES',
+  },
 ]
+
+const HeaderLogo = () => {
+  const classes = useStyles()
+  return (
+    <div>
+      <Link href="https://eosio.online/">
+        <img
+          alt="eosio dashboard"
+          src={'/eosio-dashboard.svg'}
+          className={classes.imgHeaderLogo}
+        />
+      </Link>
+    </div>
+  )
+}
 
 const LanguageMenu = () => {
   const classes = useStyles()
@@ -55,7 +68,7 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <Box>
+    <div>
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -78,7 +91,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </Box>
+    </div>
   )
 }
 
@@ -95,7 +108,7 @@ const UserMenu = ({ ual }) => {
   }
 
   return (
-    <Box>
+    <div>
       {ual.activeUser && (
         <>
           <Button startIcon={<AccountIcon />}>
@@ -119,53 +132,39 @@ const UserMenu = ({ ual }) => {
           {t('login')}
         </Button>
       )}
-    </Box>
+    </div>
   )
 }
 
 UserMenu.propTypes = {
-  ual: PropTypes.any
+  ual: PropTypes.any,
 }
 
 const Header = ({ ual, onDrawerToggle }) => {
-  const theme = useTheme()
   const classes = useStyles()
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
-    <AppBar className={classes.appBar} position="sticky" elevation={0}>
+    <AppBar className={classes.appBar} position="sticky" elevation={1}>
       <Toolbar>
-        <Grid container alignItems="center">
-          {!isDesktop && (
-            <>
-              <Grid item md={0} xs={1}>
-                <Hidden mdUp>
-                  <IconButton
-                    className={classes.iconButton}
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={onDrawerToggle}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </Hidden>
-              </Grid>
-              <Grid item md={3} xs={4}>
-                <img
-                  alt="eosio dashboard"
-                  className={classes.imgHeaderLogo}
-                  src={'/eosio-dashboard.svg'}
-                />
-              </Grid>
-            </>
-          )}
-          <Grid item md={12} xs={7}>
-            <div className={classes.userBox}>
-              <LanguageMenu />
-              <UserMenu ual={ual} />
-            </div>
-          </Grid>
-        </Grid>
+        <Hidden mdUp>
+          <IconButton
+            className={classes.iconButton}
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={onDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <div className={classes.iconsHeader}>
+          <div className={classes.HeaderLogo}>
+            <HeaderLogo />
+          </div>
+          <div className={classes.userBox}>
+            <LanguageMenu />
+            <UserMenu ual={ual} />
+          </div>
+        </div>
       </Toolbar>
     </AppBar>
   )
@@ -173,7 +172,7 @@ const Header = ({ ual, onDrawerToggle }) => {
 
 Header.propTypes = {
   ual: PropTypes.any,
-  onDrawerToggle: PropTypes.func
+  onDrawerToggle: PropTypes.func,
 }
 
 export default Header
