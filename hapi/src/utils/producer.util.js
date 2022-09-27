@@ -1,6 +1,6 @@
 const axiosUtil = require('./axios.util')
 
-const getNodeInfo = async api => {
+const getNodeInfo = async (api) => {
   try {
     const response = await axiosUtil.instance.get(`${api}/v1/chain/get_info`)
 
@@ -10,7 +10,7 @@ const getNodeInfo = async api => {
   return {}
 }
 
-const getEndpoints = nodes => {
+const getEndpoints = (nodes) => {
   if (!nodes?.length) {
     return {
       api: [],
@@ -19,16 +19,15 @@ const getEndpoints = nodes => {
     }
   }
 
-  const endpoints = {'api':(new Set()),'ssl':(new Set()),'p2p':(new Set())}
-  
-  Object.getOwnPropertyNames(endpoints).forEach((type)=>{
-    const endpointType = type+'_endpoint'
-    
-    nodes.forEach(node => {
+  const endpoints = { api: new Set(), ssl: new Set(), p2p: new Set() }
+
+  Object.getOwnPropertyNames(endpoints).forEach((type) => {
+    const endpointType = type + '_endpoint'
+
+    nodes.forEach((node) => {
       const endpoint = node[endpointType]
 
-      if(!!endpoint) endpoints[type].add(endpoint)
-
+      if (endpoint) endpoints[type].add(endpoint)
     })
 
     endpoints[type] = [...endpoints[type]]
@@ -37,7 +36,7 @@ const getEndpoints = nodes => {
   return endpoints
 }
 
-const jsonParse = string => {
+const jsonParse = (string) => {
   try {
     const json = JSON.parse(string)
 
