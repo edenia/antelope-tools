@@ -53,6 +53,7 @@ const EndpointsList = () => {
               onChange={(e) =>
                 setPagination((prev) => ({
                   ...prev,
+                  page: 1,
                   limit: parseInt(e.target.value),
                 }))
               }
@@ -69,18 +70,20 @@ const EndpointsList = () => {
         {loading ? (
           <LinearProgress />
         ) : (
-          !!producers.length && <EndpointsTable producers={producers} />
-        )}
-        {!loading && pagination.totalPages > 1 && (
-          <div className={classes.pagination}>
-            <Pagination
-              count={pagination.totalPages}
-              page={pagination.page}
-              onChange={handleOnPageChange}
-              variant="outlined"
-              shape="rounded"
-            />
-          </div>
+          <>
+            {!!producers.length && <EndpointsTable producers={producers} />}
+            {pagination.totalPages > 1 && (
+              <div className={classes.pagination}>
+                <Pagination
+                  count={pagination.totalPages}
+                  page={pagination.page}
+                  onChange={handleOnPageChange}
+                  variant="outlined"
+                  shape="rounded"
+                />
+              </div>
+            )}
+          </>
         )}
       </CardContent>
     </Card>
