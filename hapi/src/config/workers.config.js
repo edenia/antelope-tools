@@ -1,6 +1,6 @@
 module.exports = {
   syncProducersInterval: parseInt(
-    process.env.HAPI_SYNC_PRODUCERS_INTERVAL || 86400
+    process.env.HAPI_SYNC_PRODUCERS_INTERVAL || 14400
   ),
   syncProducerInfoInterval: parseInt(
     process.env.HAPI_SYNC_PRODUCER_INFO_INTERVAL || 1
