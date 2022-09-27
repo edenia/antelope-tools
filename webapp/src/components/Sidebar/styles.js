@@ -2,12 +2,13 @@ export default (theme, rgba) => ({
   drawer: {
     minWidth: '70px',
     borderRight: 0,
+    height: '100%',
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
       [theme.breakpoints.up('md')]: {
         maxWidth: '240px',
-        top: '64px',
+        position: 'sticky !important',
         height: 'auto',
       },
     },
