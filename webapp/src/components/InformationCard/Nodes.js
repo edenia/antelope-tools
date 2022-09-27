@@ -24,7 +24,7 @@ const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
           {nodes.map((node, i) => (
             <div className={classes.rowWrapper} key={`node-${i}`}>
               <Typography variant="body1">
-                {node.name || node.node_type.toString()}{' '}
+                {node.name || node?.node_type?.toString()}{' '}
               </Typography>
               <InfoOutlinedIcon onClick={onNodeClick({ node, producer })} />
             </div>

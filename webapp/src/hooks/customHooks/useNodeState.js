@@ -12,21 +12,30 @@ const useNodeState = () => {
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
   const [nodes, setNodes] = useState([])
+  const PAGE_LIMIT = 28
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
   useEffect(() => {
+    setPagination((prev) => ({
+      ...prev,
+      where: { bp_json: { _gt: { nodes: [] } } },
+      limit: null,
+    }))
+  }, [setPagination])
+
+  useEffect(() => {
     if (!nodes) return
 
-    const index = (pagination.page - 1) * pagination.limit
+    const index = (pagination.page - 1) * PAGE_LIMIT
 
-    setItems(nodes.slice(index, index + pagination.limit))
+    setItems(nodes.slice(index, index + PAGE_LIMIT))
 
     setPagination((prev) => ({
       ...prev,
-      pages: Math.ceil((nodes?.length ?? 0) / pagination.limit),
+      pages: Math.ceil((nodes?.length ?? 0) / PAGE_LIMIT),
     }))
-  }, [nodes, pagination.page, pagination.limit, setPagination])
+  }, [nodes, pagination.page, setPagination])
 
   useEffect(() => {
     if (!producers) return
