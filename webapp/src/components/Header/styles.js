@@ -14,14 +14,15 @@ export default (theme) => ({
     fontWeight: '600 !important',
   },
   imgHeaderLogo: {
-    width: '104px',
-    height: '45px',
+    width: '150px',
+    height: '70px',
+    marginTop: '2px',
   },
   appBar: {
     backgroundColor: '#fff !important',
     color: theme.header.color,
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25) !important',
-    height: 64,
+    height: '100%',
   },
   iconButton: {
     '& svg': {

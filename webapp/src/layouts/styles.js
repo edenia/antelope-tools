@@ -38,7 +38,7 @@ export default (theme) => ({
   },
   header: {
     flex: '100%',
-    height: 64,
+    height: '80px',
     zIndex: 1250,
   },
   footer: {
