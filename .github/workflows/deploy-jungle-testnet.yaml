@@ -45,7 +45,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: jungle
           REACT_APP_EOS_API_NETWORK_LABEL: Jungle4
           REACT_APP_EOS_API_NETWORK_LOGO: https://eosio.online/images/jungle.jpg
-          REACT_APP_EOS_API_HOST: jungle4.api.eosnation.io
+          REACT_APP_EOS_API_HOST: jungle.edenia.cloud
           REACT_APP_EOS_API_PORT: 443
           REACT_APP_EOS_API_PROTOCOL: https
           REACT_APP_EOS_CHAIN_ID: 73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d
@@ -79,7 +79,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: http://jungle4.api.eosnation.io/
+          HAPI_EOS_API_ENDPOINT: https://jungle.edenia.cloud
           HAPI_EOS_API_CHAIN_ID: 73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
