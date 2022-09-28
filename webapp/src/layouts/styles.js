@@ -1,31 +1,49 @@
 export default (theme) => ({
   root: {
     display: 'flex',
-    minHeight: '100vh'
+    flexFlow: 'row wrap',
   },
   drawer: {
+    display: 'flex',
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25) !important',
+    zIndex: 2,
+    paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('md')]: {
       width: '0 !important',
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appContent: {
-    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    [theme.breakpoints.up('md')]: {
+      flex: 1,
+    },
+    [theme.breakpoints.down('md')]: {
+      flex: 'none',
+    },
   },
   mainContent: {
-    padding: theme.spacing(6),
-    flex: 1,
+    padding: theme.spacing(4),
+    minHeight: '90vh',
     background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
-      flex: 'none'
+      flex: 'none',
     },
     '& .MuiPaper-root .MuiPaper-root': {
-      boxShadow: 'none'
-    }
+      boxShadow: 'none',
+    },
+  },
+  header: {
+    flex: '100%',
+    height: '80px',
+    zIndex: 1250,
+  },
+  footer: {
+    flex: '100%',
+    zIndex: 2,
   },
   subHeader: {
     display: 'flex',
@@ -38,16 +56,16 @@ export default (theme) => ({
     '& h3': {
       marginTop: theme.spacing(4),
       textAlign: 'center',
-      marginBottom: theme.spacing(2)
+      marginBottom: theme.spacing(2),
     },
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'flex-start',
       '& h3': {
-        marginTop: 0
-      }
-    }
+        marginTop: 0,
+      },
+    },
   },
   boxReadmore: {
     display: 'flex',
@@ -61,30 +79,30 @@ export default (theme) => ({
       color: '#1565C0',
       marginLeft: theme.spacing(1),
       '&:hover': {
-        cursor: 'pointer'
-      }
+        cursor: 'pointer',
+      },
     },
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'flex-start',
       '& span': {
-        marginLeft: theme.spacing(4)
-      }
-    }
+        marginLeft: theme.spacing(4),
+      },
+    },
   },
   boxHeader: {
     display: 'flex',
     flexDirection: 'column',
     '& .MuiCollapse-container': {
-      marginTop: theme.spacing(2)
-    }
+      marginTop: theme.spacing(2),
+    },
   },
   textAlignReadMore: {
     textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
-      textAlign: 'inherit !important'
-    }
+      textAlign: 'inherit !important',
+    },
   },
   marginBottom: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 })

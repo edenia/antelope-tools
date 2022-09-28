@@ -2,12 +2,15 @@ export default (theme, rgba) => ({
   drawer: {
     minWidth: '70px',
     borderRight: 0,
+    height: '100%',
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
       [theme.breakpoints.up('md')]: {
         maxWidth: '240px',
-      }
+        position: 'sticky !important',
+        height: 'auto',
+      },
     },
   },
   scrollbar: {
@@ -116,5 +119,5 @@ export default (theme, rgba) => ({
   tooltip: {
     padding: theme.spacing(1, 2),
     fontSize: '1.2em',
-  }
+  },
 })
