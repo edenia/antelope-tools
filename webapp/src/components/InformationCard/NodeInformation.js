@@ -4,29 +4,39 @@ import clsx from 'clsx'
 import Typography from '@mui/material/Typography'
 
 const NodeInformation = ({ info, classes, t }) => {
+  if (!info?.version && !info?.features?.length && !info?.keys) {
+    return (
+      <div className={classes.borderLine}>
+        <Typography>{t('noData')}</Typography>
+      </div>
+    )
+  }
+
+  console.log(info)
+
   return (
     <div className={classes.borderLine}>
-      <div className={classes.rowWrapper}>
-        <Typography variant="body1">
-          {`${t('version')}: ${info?.version || '- -'}`}
-        </Typography>
-      </div>
-      <div className={clsx(classes.rowWrapper, classes.boxLabel)}>
-        <div className="listLabel">
-          <Typography variant="body1">{`${t('features')}:`}</Typography>
+      {info?.version && (
+        <div className={classes.rowWrapper}>
+          <Typography variant="body1">
+            {`${t('version')}: ${info?.version}`}
+          </Typography>
         </div>
-        <div className="listBox">
-          {Array.isArray(info?.features) && info.features.length > 0 ? (
-            info.features.map((feature) => (
+      )}
+      {Array.isArray(info?.features) && info.features.length > 0 && (
+        <div className={clsx(classes.rowWrapper, classes.boxLabel)}>
+          <div className="listLabel">
+            <Typography variant="body1">{`${t('features')}:`}</Typography>
+          </div>
+          <div className="listBox">
+            {info.features.map((feature) => (
               <Typography key={feature} variant="body1">
                 {feature}
               </Typography>
-            ))
-          ) : (
-            <Typography variant="body1">- -</Typography>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       {!!info?.keys && (
         <div
           className={clsx(
