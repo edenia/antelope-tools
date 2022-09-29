@@ -3,7 +3,9 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     cursor: 'pointer'
   },
   popoverItem: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    trigger : 'hover'
+
   },
   countryFlag: {
     marginRight: theme.spacing(1)

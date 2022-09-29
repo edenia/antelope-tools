@@ -12,6 +12,8 @@ import Skeleton from '@mui/material/Skeleton'
 import LinearProgress from '@mui/material/LinearProgress'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
+import Popper from '@mui/material/Popper'
+
 import {
   ComposableMap,
   Geographies,
@@ -44,6 +46,7 @@ const RewardsDistribution = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const [summary, setSummary] = useState(null)
+  const [show, setShow] = React.useState(false)
   const { loading = true, data: { producers } = {} } = useQuery(
     PRODUCERS_QUERY,
     { variables: { limit: 2100, where: { total_rewards: { _gte: 100 } } } },
@@ -57,14 +60,17 @@ const RewardsDistribution = () => {
     if (!nodes.length > 0) {
       return
     }
-
+    console.log(node)
     setCurrentNode(node)
     setAnchorEl(event.currentTarget)
   }
 
+  const open = Boolean(anchorEl);
+
   const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
+
 
   const colorScale = useCallback(
     scaleLinear()
@@ -157,69 +163,89 @@ const RewardsDistribution = () => {
   }, [producers, t])
 
   return (
-    <Box>
-      <Tooltip
+    <Box
+    onMouseEnter={handlePopoverOpen}
+    onMouseLeave={handlePopoverClose}
+    aria-owns={open ? 'mouse-over-popover' : undefined}
+    aria-haspopup="true">
+      <Popper 
         anchorEl={anchorEl}
-        open={anchorEl !== null}
+        anchorOrigin={{
+          vertical: 'left',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        open={open}
         onClose={handlePopoverClose}
+        disableRestoreFocus
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: 'none',
+        }}
       >
-        <Box>
-          <Typography>
-            <span className={classes.popoverItem}>{t('country')}: </span>
-            {!currentNode?.flag && (
-              <span className={classes.countryFlagUnknown}>
-                <UnknowFlagIcon />
-              </span>
-            )}
-            {currentNode?.flag && (
-              <span className={classes.countryFlag}>{currentNode?.flag}</span>
-            )}
-            <span>{currentNode?.name}</span>
-          </Typography>
-          {summary && (
+          <Box>
             <Typography>
-              <span className={classes.popoverItem}>
-                {t('rewardsPercentage')}:{' '}
-              </span>
+              <span className={classes.popoverItem}>{t('country')}: </span>
+              {!currentNode?.flag && (
+                <span className={classes.countryFlagUnknown}>
+                  <UnknowFlagIcon />
+                </span>
+              )}
+              {currentNode?.flag && (
+                <span className={classes.countryFlag}>{currentNode?.flag}</span>
+              )}
+              <span>{currentNode?.name}</span>
+            </Typography>
+            {summary && (
+              <Typography>
+                <span className={classes.popoverItem}>
+                  {t('rewardsPercentage')}:{' '}
+                </span>
+                <span>
+                  {formatWithThousandSeparator(
+                    (currentNode?.rewards / summary.daylyRewars) * 100,
+                    2,
+                  )}
+                  %
+                </span>
+              </Typography>
+            )}
+            <Typography>
+              <span className={classes.popoverItem}>{t('rewards')}: </span>
               <span>
-                {formatWithThousandSeparator(
-                  (currentNode?.rewards / summary.daylyRewars) * 100,
-                  2,
-                )}
-                %
+                {formatWithThousandSeparator(currentNode?.rewards, 2)}{' '}
+                {eosConfig.tokenSymbol}
               </span>
             </Typography>
-          )}
-          <Typography>
-            <span className={classes.popoverItem}>{t('rewards')}: </span>
-            <span>
-              {formatWithThousandSeparator(currentNode?.rewards, 2)}{' '}
-              {eosConfig.tokenSymbol}
-            </span>
-          </Typography>
-          <Typography className={classes.popoverItem}>
-            {t('producers')}:
-          </Typography>
-          <ul className={classes.producersList}>
-            {currentNode?.items?.map((producer, i) => (
-              <li key={`node-${i}`}>
-                <Link
-                  href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
-                    producer?.bp_json?.org?.website || producer.url
-                  }/bp.json`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {producer?.bp_json?.org?.candidate_name || producer.owner}
-                </Link>
-                <br />
-                {formatWithThousandSeparator(producer.total_rewards, 2)}{' '}
-                {eosConfig.tokenSymbol}
-              </li>
-            ))}
-          </ul>
-        </Box>
-      </Tooltip>
+            <Typography className={classes.popoverItem}>
+              {t('producers')}:
+            </Typography>
+            <ul className={classes.producersList}>
+              {currentNode?.items?.map((producer, i) => (
+                <li key={`node-${i}`}>
+                  <Link
+                    href={`${
+                      producer.owner === 'eosrainbowbp' ? 'http://' : ''
+                    }${
+                      producer?.bp_json?.org?.website || producer.url
+                    }/bp.json`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {producer?.bp_json?.org?.candidate_name || producer.owner}
+                  </Link>
+                  <br />
+                  {formatWithThousandSeparator(producer.total_rewards, 2)}{' '}
+                  {eosConfig.tokenSymbol}
+                </li>
+              ))}
+            </ul>
+          </Box>
+
+      </Popper >
       {loading && <LinearProgress className={classes.linearLoader} />}
       <Grid container spacing={2}>
         <Grid item xl={3} lg={3} sm={6} xs={12}>
@@ -259,6 +285,7 @@ const RewardsDistribution = () => {
           <Card
             className={classes.action}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
+            // onMouseLeave={handlePopoverClose}
           >
             <CardContent>
               <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
@@ -303,9 +330,10 @@ const RewardsDistribution = () => {
               <Typography
                 variant="subtitle1"
                 className={classes.action}
-                onClick={handlePopoverOpen(
+                onMouseOver={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
+                onMouseLeave={handlePopoverClose}
               >
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
@@ -316,9 +344,11 @@ const RewardsDistribution = () => {
               <Typography
                 variant="subtitle1"
                 className={classes.action}
-                onClick={handlePopoverOpen(
+                onMouseOver={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
+                onMouseLeave={handlePopoverClose}
+
               >
                 {t('clickToViewBPs')}
               </Typography>
@@ -369,7 +399,7 @@ const RewardsDistribution = () => {
 
                     return (
                       <Geography
-                        onClick={
+                        onMouseOver={
                           nodeData ? handlePopoverOpen(nodeData) : () => {}
                         }
                         className={classes.geography}

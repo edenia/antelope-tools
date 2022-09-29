@@ -10,13 +10,14 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
+const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children, onOpen }) => {
   const classes = useStyles()
 
   return (
     <Popover
       open={open}
       onClose={onClose}
+      onOpen={onOpen}
       anchorOrigin={anchorOrigin}
       transformOrigin={{
         vertical: 'center',
@@ -41,6 +42,7 @@ Tooltip.propTypes = {
   anchorEl: PropTypes.any,
   open: PropTypes.bool,
   onClose: PropTypes.func,
+  onOpen: PropTypes.func,
   children: PropTypes.node,
   anchorOrigin: PropTypes.object
 }
