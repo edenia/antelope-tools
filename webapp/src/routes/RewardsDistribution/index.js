@@ -161,12 +161,15 @@ const RewardsDistribution = () => {
 
   return (
     <Box
-      onMouseEnter={handlePopoverOpen}
-      onMouseLeave={handlePopoverClose}
+      // onMouseEnter={handlePopoverOpen}
+      // onMouseLeave={handlePopoverClose}
       aria-owns={open ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
     >
       <Popover
+        sx={{
+          pointerEvents: 'none',
+        }}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'left',
@@ -180,11 +183,11 @@ const RewardsDistribution = () => {
         onClose={handlePopoverClose}
         // disableRestoreFocus
         id="mouse-over-popover"
-        sx={{
-          pointerEvents: 'none',
-        }}
       >
-        <Box>
+        <Box
+              sx={{
+                pointerEvents: 'auto',
+              }}>
           <Typography>
             <span className={classes.popoverItem}>{t('country')}: </span>
             {!currentNode?.flag && (
@@ -279,8 +282,8 @@ const RewardsDistribution = () => {
         <Grid item xl={3} lg={3} sm={6} xs={12}>
           <Card
             className={classes.action}
-            onMouseEnter={handlePopoverOpen(summary?.topCountryByRewards)}
-            onMouseLeave={handlePopoverClose}
+            onClick={handlePopoverOpen(summary?.topCountryByRewards)}
+            // onMouseLeave={handlePopoverClose}
           >
             <CardContent>
               <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
@@ -325,10 +328,10 @@ const RewardsDistribution = () => {
               <Typography
                 variant="subtitle1"
                 className={classes.action}
-                onMouseEnter={handlePopoverOpen(
+                onClick={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
-                onMouseLeave={handlePopoverClose}
+                // onMouseLeave={handlePopoverClose}
               >
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
@@ -339,10 +342,10 @@ const RewardsDistribution = () => {
               <Typography
                 variant="subtitle1"
                 className={classes.action}
-                onMouseOver={handlePopoverOpen(
+                onClick={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
-                onMouseLeave={handlePopoverClose}
+                // onMouseLeave={handlePopoverClose}
               >
                 {t('clickToViewBPs')}
               </Typography>
