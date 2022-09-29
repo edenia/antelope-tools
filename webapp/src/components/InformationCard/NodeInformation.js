@@ -12,8 +12,6 @@ const NodeInformation = ({ info, classes, t }) => {
     )
   }
 
-  console.log(info)
-
   return (
     <div className={classes.borderLine}>
       {info?.version && (
