@@ -3,14 +3,12 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
-import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import Skeleton from '@mui/material/Skeleton'
 import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Popover from '@mui/material/Popover'
 
@@ -31,6 +29,7 @@ import CountryFlag from '../../components/CountryFlag'
 import { eosConfig } from '../../config'
 
 import styles from './styles'
+import { Box } from '@mui/system'
 
 const lowestRewardsColor = '#B6EBF3'
 const highestRewardsColor = '#265F63'
@@ -53,17 +52,15 @@ const RewardsDistribution = () => {
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
   const { t } = useTranslation('rewardsDistributionRoute')
+  const open = Boolean(anchorEl)
 
   const handlePopoverOpen = (node) => (event) => {
     if (!nodes.length > 0) {
       return
     }
-    console.log(node)
     setCurrentNode(node)
     setAnchorEl(event.currentTarget)
   }
-
-  const open = Boolean(anchorEl)
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
@@ -160,34 +157,34 @@ const RewardsDistribution = () => {
   }, [producers, t])
 
   return (
-    <Box
-      // onMouseEnter={handlePopoverOpen}
-      // onMouseLeave={handlePopoverClose}
+    <div
       aria-owns={open ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
     >
       <Popover
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
         sx={{
           pointerEvents: 'none',
         }}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'left',
+          vertical: 'center',
           horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: 'center',
+          horizontal: 'center',
         }}
         open={open}
         onClose={handlePopoverClose}
-        // disableRestoreFocus
         id="mouse-over-popover"
       >
         <Box
-              sx={{
-                pointerEvents: 'auto',
-              }}>
+          sx={{
+            pointerEvents: 'auto',
+          }}
+        >
           <Typography>
             <span className={classes.popoverItem}>{t('country')}: </span>
             {!currentNode?.flag && (
@@ -245,8 +242,8 @@ const RewardsDistribution = () => {
         </Box>
       </Popover>
       {loading && <LinearProgress className={classes.linearLoader} />}
-      <Grid container spacing={2}>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+      <div className={classes.flexdad}>
+        <div className={classes.mainReward}>
           <Card>
             <CardContent>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
@@ -278,12 +275,11 @@ const RewardsDistribution = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card
             className={classes.action}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
-            // onMouseLeave={handlePopoverClose}
           >
             <CardContent>
               <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
@@ -320,8 +316,8 @@ const RewardsDistribution = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card>
             <CardContent>
               <Typography variant="h6">{t('paidProducers')}</Typography>
@@ -331,7 +327,6 @@ const RewardsDistribution = () => {
                 onClick={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
-                // onMouseLeave={handlePopoverClose}
               >
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
@@ -345,14 +340,13 @@ const RewardsDistribution = () => {
                 onClick={handlePopoverOpen(
                   summary?.producersWithoutProperBpJson,
                 )}
-                // onMouseLeave={handlePopoverClose}
               >
                 {t('clickToViewBPs')}
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card>
             <CardContent>
               <Typography variant="h6" className={classes.rewardsColorSchema}>
@@ -377,8 +371,8 @@ const RewardsDistribution = () => {
               )}
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       {!loading && (
         <Paper className={classes.mapWrapper}>
           <ComposableMap
@@ -417,7 +411,7 @@ const RewardsDistribution = () => {
           </ComposableMap>
         </Paper>
       )}
-    </Box>
+    </div>
   )
 }
 

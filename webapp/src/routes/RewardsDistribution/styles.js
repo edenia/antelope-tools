@@ -48,4 +48,15 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   mapWrapper: {
     marginTop: theme.spacing(3),
   },
+  flexdad: {
+    flexDirection: 'row',
+    display: 'flex',
+  },
+  rewardsdiv: {
+    flexGrow: 1,
+    marginLeft: 10,
+  },
+  mainReward: {
+    flexGrow: 1,
+  },
 })
