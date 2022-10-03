@@ -1,6 +1,6 @@
 
 <div align="center">
-	<a href="https://eosio.online">
+	<a href="https://antelope.tools">
 		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
 	</a>
 

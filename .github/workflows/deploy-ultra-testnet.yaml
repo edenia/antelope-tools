@@ -38,14 +38,14 @@ jobs:
           PORT: '80'
           REACT_APP_TITLE: 'Ultra Testnet Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/ultra.jpg'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/ultra.jpg'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Ultra Website", "src": "https://ultra.io/" },{ "text": "Block Explorer", "src": "https://explorer.testnet.ultra.io/" },{"text": "Ultra Mainnet Explorer","src": "https://explorer.mainnet.ultra.io/"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-ultra-testnet.eosio.online/v1/graphql'
+          REACT_APP_HASURA_URL: 'https://graphql-ultra-testnet.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'ultra-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Ultra Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://icodrops.com/wp-content/uploads/2019/06/Ultra-150x150.jpg'
@@ -60,7 +60,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_TOKEN_SYMBOL: 'UOS'
-          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.eosio.online","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.eosio.online","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.eosio.online","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.eosio.online","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.eosio.online","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.eosio.online","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.eosio.online","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.eosio.online","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
+          REACT_APP_NETWORK_URL: '[{"label":"EOS Mainnet","value":"https://eos.antelope.tools","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.antelope.tools","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.antelope.tools","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/block-producers","/nodes","/missed-blocks","/endpoints","/bpjson","/ricardian-contract","/block-distribution","/nodes-distribution","/cpu-benchmark","/rewards-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://explorer.testnet.ultra.io/tx/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
@@ -75,8 +75,8 @@ jobs:
         env:
           # general
           NAMESPACE: ultra-testnet-dashboard
-          INGRESS_HOST: ultra-testnet.eosio.online
-          INGRESS_GRAPHQL_HOST: graphql-ultra-testnet.eosio.online
+          INGRESS_HOST: ultra-testnet.antelope.tools
+          INGRESS_GRAPHQL_HOST: graphql-ultra-testnet.antelope.tools
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: ultra-testnet
           # postgres
