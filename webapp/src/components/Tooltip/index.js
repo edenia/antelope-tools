@@ -10,7 +10,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children}) => {
+const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
   const classes = useStyles()
 
   return (
