@@ -3,20 +3,21 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import Skeleton from '@mui/material/Skeleton'
 import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
+import Popover from '@mui/material/Popover'
+
 import {
   ComposableMap,
   Geographies,
   Geography,
-  ZoomableGroup
+  ZoomableGroup,
 } from 'react-simple-maps'
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
@@ -26,7 +27,6 @@ import { formatWithThousandSeparator } from '../../utils'
 import { countries } from '../../utils/countries'
 import { PRODUCERS_QUERY, SETTING_QUERY } from '../../gql'
 import CountryFlag from '../../components/CountryFlag'
-import Tooltip from '../../components/Tooltip'
 import { eosConfig } from '../../config'
 
 import styles from './styles'
@@ -37,7 +37,7 @@ const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/v2/topojson-maps/world-110m.json'
 
 const useStyles = makeStyles((theme) =>
-  styles(theme, lowestRewardsColor, highestRewardsColor)
+  styles(theme, lowestRewardsColor, highestRewardsColor),
 )
 
 const RewardsDistribution = () => {
@@ -46,18 +46,18 @@ const RewardsDistribution = () => {
   const [summary, setSummary] = useState(null)
   const { loading = true, data: { producers } = {} } = useQuery(
     PRODUCERS_QUERY,
-    { variables: { limit: 2100, where: { total_rewards: { _gte: 100 } } } }
+    { variables: { limit: 2100, where: { total_rewards: { _gte: 100 } } } },
   )
   const { data: { setting } = {} } = useQuery(SETTING_QUERY)
   const [nodes, setNodes] = useState([])
   const classes = useStyles()
   const { t } = useTranslation('rewardsDistributionRoute')
+  const open = Boolean(anchorEl)
 
   const handlePopoverOpen = (node) => (event) => {
     if (!nodes.length > 0) {
       return
     }
-
     setCurrentNode(node)
     setAnchorEl(event.currentTarget)
   }
@@ -71,7 +71,7 @@ const RewardsDistribution = () => {
       .domain([0, summary?.topCountryByRewards?.rewards - 1])
       .range([lowestRewardsColor, highestRewardsColor])
       .interpolate(interpolateHcl),
-    [summary]
+    [summary],
   )
 
   useEffect(() => {
@@ -81,8 +81,8 @@ const RewardsDistribution = () => {
         name: t('notAvailable'),
         quantity: 0,
         items: [],
-        rewards: 0
-      }
+        rewards: 0,
+      },
     }
     let daylyRewars = 0
     const items = producers || []
@@ -102,11 +102,11 @@ const RewardsDistribution = () => {
             quantity: 1,
             coordinates: [
               producer.bp_json.org.location.longitude,
-              producer.bp_json.org.location.latitude
+              producer.bp_json.org.location.latitude,
             ],
             items: [producer],
-            rewards: producer.total_rewards
-          }
+            rewards: producer.total_rewards,
+          },
         }
       } else {
         stats[producer.bp_json.org.location.country].items.push(producer)
@@ -119,7 +119,7 @@ const RewardsDistribution = () => {
         ) {
           stats[producer.bp_json.org.location.country].coordinates = [
             producer.bp_json.org.location.longitude,
-            producer.bp_json.org.location.latitude
+            producer.bp_json.org.location.latitude,
           ]
         }
       }
@@ -145,25 +145,46 @@ const RewardsDistribution = () => {
           ? current
           : prev
       },
-      { rewards: 0 }
+      { rewards: 0 },
     )
 
     setSummary({
       daylyRewars,
       topCountryByRewards,
-      producersWithoutProperBpJson: stats['N/A']
+      producersWithoutProperBpJson: stats['N/A'],
     })
     setNodes(nodes)
   }, [producers, t])
 
   return (
-    <Box>
-      <Tooltip
+    <div
+      aria-owns={open ? 'mouse-over-popover' : undefined}
+      aria-haspopup="true"
+    >
+      <Popover
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+        sx={{
+          pointerEvents: 'none',
+        }}
         anchorEl={anchorEl}
-        open={anchorEl !== null}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+        open={open}
         onClose={handlePopoverClose}
+        id="mouse-over-popover"
       >
-        <Box>
+        <Box
+          sx={{
+            pointerEvents: 'auto',
+          }}
+        >
           <Typography>
             <span className={classes.popoverItem}>{t('country')}: </span>
             {!currentNode?.flag && (
@@ -184,7 +205,7 @@ const RewardsDistribution = () => {
               <span>
                 {formatWithThousandSeparator(
                   (currentNode?.rewards / summary.daylyRewars) * 100,
-                  2
+                  2,
                 )}
                 %
               </span>
@@ -219,10 +240,10 @@ const RewardsDistribution = () => {
             ))}
           </ul>
         </Box>
-      </Tooltip>
+      </Popover>
       {loading && <LinearProgress className={classes.linearLoader} />}
-      <Grid container spacing={2}>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+      <div className={classes.flexdad}>
+        <div className={classes.mainReward}>
           <Card>
             <CardContent>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
@@ -246,7 +267,7 @@ const RewardsDistribution = () => {
                     $
                     {formatWithThousandSeparator(
                       summary.daylyRewars * setting?.token_price,
-                      0
+                      0,
                     )}{' '}
                     USD
                   </span>
@@ -254,8 +275,8 @@ const RewardsDistribution = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card
             className={classes.action}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
@@ -281,13 +302,13 @@ const RewardsDistribution = () => {
                   <>
                     {formatWithThousandSeparator(
                       summary.topCountryByRewards.rewards,
-                      0
+                      0,
                     )}{' '}
                     {eosConfig.tokenSymbol} / $
                     {formatWithThousandSeparator(
                       summary.topCountryByRewards.rewards *
                         setting?.token_price,
-                      0
+                      0,
                     )}{' '}
                     USD
                   </>
@@ -295,8 +316,8 @@ const RewardsDistribution = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card>
             <CardContent>
               <Typography variant="h6">{t('paidProducers')}</Typography>
@@ -304,7 +325,7 @@ const RewardsDistribution = () => {
                 variant="subtitle1"
                 className={classes.action}
                 onClick={handlePopoverOpen(
-                  summary?.producersWithoutProperBpJson
+                  summary?.producersWithoutProperBpJson,
                 )}
               >
                 {!nodes.length > 0 && (
@@ -317,15 +338,15 @@ const RewardsDistribution = () => {
                 variant="subtitle1"
                 className={classes.action}
                 onClick={handlePopoverOpen(
-                  summary?.producersWithoutProperBpJson
+                  summary?.producersWithoutProperBpJson,
                 )}
               >
                 {t('clickToViewBPs')}
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xl={3} lg={3} sm={6} xs={12}>
+        </div>
+        <div className={classes.rewardsdiv}>
           <Card>
             <CardContent>
               <Typography variant="h6" className={classes.rewardsColorSchema}>
@@ -350,13 +371,13 @@ const RewardsDistribution = () => {
               )}
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       {!loading && (
         <Paper className={classes.mapWrapper}>
           <ComposableMap
             projectionConfig={{
-              scale: 170
+              scale: 170,
             }}
           >
             <ZoomableGroup maxZoom={1}>
@@ -364,12 +385,12 @@ const RewardsDistribution = () => {
                 {({ geographies }) =>
                   geographies.map((geo, i) => {
                     const nodeData = nodes.find(
-                      (node) => node.code === geo.properties.ISO_A2
+                      (node) => node.code === geo.properties.ISO_A2,
                     )
 
                     return (
                       <Geography
-                        onClick={
+                        onMouseOver={
                           nodeData ? handlePopoverOpen(nodeData) : () => {}
                         }
                         className={classes.geography}
@@ -390,7 +411,7 @@ const RewardsDistribution = () => {
           </ComposableMap>
         </Paper>
       )}
-    </Box>
+    </div>
   )
 }
 
