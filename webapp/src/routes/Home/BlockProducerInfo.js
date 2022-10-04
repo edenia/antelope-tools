@@ -15,7 +15,7 @@ const Typography = lazy(() => import('@mui/material/Typography'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
-  import('../../components/TransactionsHistory')
+  import('../../components/TransactionsHistory'),
 )
 const TransactionInfo = lazy(() => import('./TransactionInfo'))
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
@@ -24,7 +24,7 @@ const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
   const { data: producersSummary, loading: producersLoading } = useQuery(
-    PRODUCERS_SUMMARY_QUERY
+    PRODUCERS_SUMMARY_QUERY,
   )
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const info = useSelector((state) => state.eos.info)
@@ -38,8 +38,8 @@ const BlockProducerInfo = ({ t, classes }) => {
           let result = producer.owner === item.producer_name
 
           if (!result) {
-            result = producer.bp_json?.nodes.find(
-              (node) => node.name === item.producer_name
+            result = (producer.bp_json?.nodes || []).find(
+              (node) => node.name === item.producer_name,
             )
           }
 
@@ -52,12 +52,12 @@ const BlockProducerInfo = ({ t, classes }) => {
         owner: item.producer_name || data.owner,
         rewards: data.total_rewards || 0,
         total_votes_percent: data.total_votes_percent * 100 || 0,
-        value: 20
+        value: 20,
       }
     })
     setSchedule({
       ...scheduleInfo,
-      producers: newProducers
+      producers: newProducers,
     })
   }, [scheduleInfo, producers])
 
@@ -185,7 +185,7 @@ const BlockProducerInfo = ({ t, classes }) => {
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
                   info.block_net_limit / 1024,
-                  0
+                  0,
                 )} KB`}
               </Typography>
             </CardContent>
@@ -212,7 +212,7 @@ const BlockProducerInfo = ({ t, classes }) => {
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
                   info.virtual_block_net_limit / 1024,
-                  0
+                  0,
                 )} KB`}
               </Typography>
             </CardContent>
@@ -244,11 +244,11 @@ const BlockProducerInfo = ({ t, classes }) => {
 
 BlockProducerInfo.propTypes = {
   t: PropTypes.any,
-  classes: PropTypes.object
+  classes: PropTypes.object,
 }
 
 BlockProducerInfo.defaultProps = {
-  classes: {}
+  classes: {},
 }
 
 export default BlockProducerInfo
