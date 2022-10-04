@@ -13,8 +13,6 @@ const clearNodes = async () => {
 }
 
 const updateNodes = async (nodes = []) => {
-  await clearNodes()
-
   const upsertMutation = `
     mutation ($nodes: [node_insert_input!]!) {
       insert_node(objects: $nodes, on_conflict: {constraint: node_pkey,update_columns: [type,full,location,producer_id]}) {
@@ -22,7 +20,7 @@ const updateNodes = async (nodes = []) => {
       }
     }
   `
-
+  await clearNodes()
   await hasuraUtil.request(upsertMutation, { nodes })
 }
 
@@ -46,13 +44,15 @@ const updateEndpointInfo = async (endpoint) => {
 }
 
 const getNodeEnpoints = (node) => {
-  const types = ['api_endpoint', 'ssl_endpoint', 'p2p_endpoint']
+  const types = ['api', 'ssl', 'p2p']
 
   return types.flatMap((type) => {
-    return node[type]
+    const endpointType = type + '_endpoint'
+
+    return node[endpointType]
       ? {
           type: type,
-          value: node[type]
+          value: node[endpointType]
         }
       : []
   })
@@ -67,6 +67,7 @@ const getFormatNode = (node) => {
   }
 
   const endpoints = getNodeEnpoints(node)
+  
   if (endpoints.length) {
     formatNode.endpoints = {
       data: endpoints
