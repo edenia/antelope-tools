@@ -1,0 +1,2 @@
+CREATE TABLE "public"."endpoint" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "type" varchar NOT NULL, "value" varchar NOT NULL, "head_block_num" integer NOT NULL DEFAULT 0, "node_id" uuid NOT NULL, "created_at" time with time zone NOT NULL DEFAULT now(), "updated_at" time with time zone NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("node_id") REFERENCES "public"."node"("id") ON UPDATE restrict ON DELETE cascade, UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
