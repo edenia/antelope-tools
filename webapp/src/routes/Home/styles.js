@@ -2,8 +2,11 @@ export default (theme) => ({
   graphicBox: {
     '& .MuiCard-root': {
       height: '100%',
+        },
+    display: 'flex',
+    marginBottom: '10px',
+    gap: '10px',
     },
-  },
   bottomRow: {
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(1),
@@ -80,4 +83,23 @@ export default (theme) => ({
   cardShadow: {
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
   },
+  divMargin:{
+    display: 'flex',
+    marginBottom: '10px',
+    gap: '10px',
+  },
+  cardGrow:{
+    flexBasis: 'auto',
+    width: '100%'
+
+  },
+  divTrans:{
+    width: '100%'
+  },
+  wrapper:{
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    display: 'flex',
+    flexGrow: 1
+  }
 })

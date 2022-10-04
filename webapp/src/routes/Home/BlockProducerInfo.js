@@ -15,7 +15,7 @@ const Typography = lazy(() => import('@mui/material/Typography'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
 const TransactionsHistory = lazy(() =>
-  import('../../components/TransactionsHistory')
+  import('../../components/TransactionsHistory'),
 )
 const TransactionInfo = lazy(() => import('./TransactionInfo'))
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
@@ -24,7 +24,7 @@ const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
   const { data: producersSummary, loading: producersLoading } = useQuery(
-    PRODUCERS_SUMMARY_QUERY
+    PRODUCERS_SUMMARY_QUERY,
   )
   const scheduleInfo = useSelector((state) => state.eos.schedule)
   const info = useSelector((state) => state.eos.info)
@@ -39,7 +39,7 @@ const BlockProducerInfo = ({ t, classes }) => {
 
           if (!result) {
             result = producer.bp_json?.nodes.find(
-              (node) => node.name === item.producer_name
+              (node) => node.name === item.producer_name,
             )
           }
 
@@ -52,12 +52,12 @@ const BlockProducerInfo = ({ t, classes }) => {
         owner: item.producer_name || data.owner,
         rewards: data.total_rewards || 0,
         total_votes_percent: data.total_votes_percent * 100 || 0,
-        value: 20
+        value: 20,
       }
     })
     setSchedule({
       ...scheduleInfo,
-      producers: newProducers
+      producers: newProducers,
     })
   }, [scheduleInfo, producers])
 
@@ -83,9 +83,9 @@ const BlockProducerInfo = ({ t, classes }) => {
   }, [producersSummary])
 
   return (
-    <Grid container spacing={4}>
-      <Grid container item xs={12} spacing={4}>
-        <Grid item xs={12} sm={4} lg={3}>
+    <div>
+      <div className={classes.divMargin}>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('currentProducer')}</Typography>
@@ -98,8 +98,8 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('scheduleVersion')}</Typography>
@@ -108,8 +108,8 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('headBlock')}</Typography>
@@ -118,8 +118,8 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('lastBlock')}</Typography>
@@ -128,10 +128,10 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
-      <Grid container item xs={12} className={classes.graphicBox} spacing={4}>
-        <Grid item xs={12} md={6}>
+        </div>
+      </div>
+      <div className={classes.graphicBox}>
+        <div className={classes.divTrans}>
           <Card className={classes.cardShadow}>
             <CardContent>
               <Typography component="p" variant="h6">
@@ -140,31 +140,32 @@ const BlockProducerInfo = ({ t, classes }) => {
               <ProducersChart info={info} producers={schedule.producers} />
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} md={6}>
+        </div>
+        <div className={classes.divTrans}>
           <TransactionInfo t={t} classes={classes} />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       {loading && <LinearProgress />}
-      <Grid container item xs={12} spacing={4}>
-        <TransactionsHistory
-          t={t}
-          classes={classes}
-          nodesChildren={
-            <>
-              <ProducersSummary
-                t={t}
-                classes={classes}
-                data={producersSummary}
-                loading={producersLoading}
-                total={total}
-              />
-              <NodesSummary t={t} classes={classes} />
-            </>
-          }
-        />
+      <div>
+      <div className={classes.wrapper}>
+          <TransactionsHistory
+            t={t}
+            classes={classes}
+            nodesChildren={
+              <>
+                <ProducersSummary
+                  t={t}
+                  classes={classes}
+                  data={producersSummary}
+                  loading={producersLoading}
+                  total={total}
+                />
+                <NodesSummary t={t} classes={classes} />
+              </>
+            }
+          />
 
-        <Grid item xs={12} sm={4} lg={3}>
+        <div>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('cpuLimitPerBlock')}</Typography>
@@ -177,21 +178,21 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('netLimitPerBlock')}</Typography>
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
                   info.block_net_limit / 1024,
-                  0
+                  0,
                 )} KB`}
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainCpuLimit')}</Typography>
@@ -204,22 +205,22 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={4} lg={3}>
+        </div>
+        <div>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainNetLimit')}</Typography>
               <Typography component="p" variant="h6">
                 {`${formatWithThousandSeparator(
                   info.virtual_block_net_limit / 1024,
-                  0
+                  0,
                 )} KB`}
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </div>
 
-        <Grid item xs={12} sm={4} lg={3}>
+        <div>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('timeToFinality')}</Typography>
@@ -236,19 +237,20 @@ const BlockProducerInfo = ({ t, classes }) => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
-    </Grid>
+        </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
 BlockProducerInfo.propTypes = {
   t: PropTypes.any,
-  classes: PropTypes.object
+  classes: PropTypes.object,
 }
 
 BlockProducerInfo.defaultProps = {
-  classes: {}
+  classes: {},
 }
 
 export default BlockProducerInfo
