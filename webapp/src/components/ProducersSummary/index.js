@@ -57,7 +57,7 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
   return (
     <>
       <Grid item xs={12} sm={4} lg={3}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('total')} ${t('producers')}`}</Typography>
             <BodyGraphValue value={total} loading={loading} />

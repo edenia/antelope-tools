@@ -96,7 +96,7 @@ const NodesSummary = ({ t, classes }) => {
   return (
     <>
       <Grid item xs={12} sm={4} lg={3}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('total')} ${t('nodes')}`}</Typography>
             <BodyGraphValue value={total} loading={loading} />
@@ -107,7 +107,7 @@ const NodesSummary = ({ t, classes }) => {
       {nodes &&
         nodes.map((node) => (
           <Grid item xs={12} sm={4} lg={3} key={node.type}>
-            <Card>
+            <Card className={classes.cardShadow}>
               <CardContent className={classes.cards}>
                 <Typography>
                   {currentLanguaje === 'es' ? t('nodes') : ''} {t(node.type)}{' '}

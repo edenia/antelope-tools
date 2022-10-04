@@ -64,6 +64,7 @@ export default (theme) => ({
       justifyContent: 'center',
       textAlign: 'center',
       marginTop: theme.spacing(2)
+      
     }
   },
   cardLink: {
@@ -76,5 +77,8 @@ export default (theme) => ({
   },
   lowercase: {
     textTransform: 'lowercase !important'
-  }
+  },
+  cardShadow: {
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important'
+  },
 })

@@ -86,7 +86,7 @@ const BlockProducerInfo = ({ t, classes }) => {
     <Grid container spacing={4}>
       <Grid container item xs={12} spacing={4}>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('currentProducer')}</Typography>
               <Typography
@@ -100,7 +100,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('scheduleVersion')}</Typography>
               <Typography component="p" variant="h6">
@@ -110,7 +110,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('headBlock')}</Typography>
               <Typography component="p" variant="h6">
@@ -120,7 +120,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('lastBlock')}</Typography>
               <Typography component="p" variant="h6">
@@ -132,7 +132,7 @@ const BlockProducerInfo = ({ t, classes }) => {
       </Grid>
       <Grid container item xs={12} className={classes.graphicBox} spacing={4}>
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography component="p" variant="h6">
                 {t('bpSchedule')}
@@ -165,7 +165,7 @@ const BlockProducerInfo = ({ t, classes }) => {
         />
 
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('cpuLimitPerBlock')}</Typography>
               <Typography
@@ -179,7 +179,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('netLimitPerBlock')}</Typography>
               <Typography component="p" variant="h6">
@@ -192,7 +192,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainCpuLimit')}</Typography>
               <Typography
@@ -206,7 +206,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainNetLimit')}</Typography>
               <Typography component="p" variant="h6">
@@ -220,7 +220,7 @@ const BlockProducerInfo = ({ t, classes }) => {
         </Grid>
 
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('timeToFinality')}</Typography>
               <Typography

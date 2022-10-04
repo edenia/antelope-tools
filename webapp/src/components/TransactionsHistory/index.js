@@ -65,7 +65,7 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
       <>
         {nodesChildren && nodesChildren}
         <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{`${t('uniqueLocations')}`}</Typography>
               <BodyGraphValue
