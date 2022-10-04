@@ -1,29 +1,29 @@
 
 <div align="center">
-	<a href="https://eosio.online">
-		<img src="https://eoscostarica.io/img/logos/eosio.svg" width="400">
+	<a href="https://antelope.tools">
+		<img src="webapp/public/antelope-tools.png" width="400">
 	</a>
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
-![GitHub](https://img.shields.io/github/license/eoscostarica/eosio-dashboard) 
-![GitHub repo size](https://img.shields.io/github/repo-size/eoscostarica/eosio-dashboard) 
+![GitHub](https://img.shields.io/github/license/edenia/antelope-tools) 
+![GitHub repo size](https://img.shields.io/github/repo-size/edenia/antelope-tools) 
 [![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social)](https://twitter.com/EOSCostaRica)
-![GitHub forks](https://img.shields.io/github/forks/eoscostarica/eosio-dashboard?style=social)
+![GitHub forks](https://img.shields.io/github/forks/edenia/antelope-tools?style=social)
 
 </div>
 
-# EOSIO Dashboard
+# Antelope Tools
 Network and Infrastructure Dashboard for EOSIO networks.
 
-## About the EOSIO Dashboard:
+## About the Antelope Tools:
 
-### What is the EOSIO Dashboard?
+### What is the Antelope Tools?
 
-EOSIO Dashboard is an open-source tool that helps you visualize relevant data about Block Producer nodes and rewards distribution in the EOS network. The EOS network, launched in 2018, is a widely adopted public blockchain network that deploys a delegated proof of stake consensus mechanism. It operates autonomously and leverages a voting system to elect the twenty-one Block Producers that run the network. As a reward, these Block Producers receive EOS tokens.
+Antelope Tools is an open-source tool that helps you visualize relevant data about Block Producer nodes and rewards distribution in the EOS network. The EOS network, launched in 2018, is a widely adopted public blockchain network that deploys a delegated proof of stake consensus mechanism. It operates autonomously and leverages a voting system to elect the twenty-one Block Producers that run the network. As a reward, these Block Producers receive EOS tokens.
 
-### What Is the Intention of EOSIO Dashboard?
+### What Is the Intention of Antelope Tools?
 
-EOSIO Dashboard is a community-driven open-source tool built by a group of tech enthusiasts that believe in transparency to operate blockchain networks. We intend to provide a useful and straightforward app that will help visualize the Block Producers’ relevant information and rewards distribution in the EOS network to promote transparency and reliability.
+Antelope Tools is a community-driven open-source tool built by a group of tech enthusiasts that believe in transparency to operate blockchain networks. We intend to provide a useful and straightforward app that will help visualize the Block Producers’ relevant information and rewards distribution in the EOS network to promote transparency and reliability.
 
 ### Why It’s Important?
 
@@ -31,9 +31,9 @@ As mentioned previously, the EOS network run with twenty-one elected Block Produ
 
 ### Where Does the Data Come From?
 
-EOSIO Dashboard enables clear and graphic visualization of relevant information of Block Producers. We source data directly from the EOS public blockchain and information provided in their bp.json files. A bp.json file is essentially an info/configuration file that each Block Producer provides to verify their identity. Here is an example of a bp.json file: https://eoscostarica.io/bp.json.
+Antelope Tools enables clear and graphic visualization of relevant information of Block Producers. We source data directly from the EOS public blockchain and information provided in their bp.json files. A bp.json file is essentially an info/configuration file that each Block Producer provides to verify their identity. Here is an example of a bp.json file: https://eoscostarica.io/bp.json.
 
-For more information about EOSIO Dashboard, contact us on our Telegram group: https://t.me/eoscr.
+For more information about Antelope Tools, contact us on our Telegram group: https://t.me/eoscr.
 
 ## Quick Guide:
 
@@ -61,7 +61,7 @@ This project use all the latest tools and practices in the industry
 Within the download you'll find the following directories and files:
 
 ```bash
-eosio-dashboard/
+antelope-tools/
 ├── hapi
 │ ├── src
 │ | ├── config
@@ -140,15 +140,15 @@ Additionally, you need WSL to use Docker Desktop as an intermediate between Wind
 
 ### First time
 
-1. Clone this repo using `git clone --depth=1 https://github.com/eoscostarica/eosio-dashboard.git <YOUR_PROJECT_NAME>`.
+1. Clone this repo using `git clone --depth=1 https://github.com/edenia/antelope-tools <YOUR_PROJECT_NAME>`.
 1. Move to the appropriate directory: `cd <YOUR_PROJECT_NAME>`.
-1. As EOSIO dashboard can have different configurations copy the environment variables according to your needs in the `.env` file or use `make run <NETWORK>` to use a configuration for a specific network.
+1. As Antelope Tools can have different configurations copy the environment variables according to your needs in the `.env` file or use `make run <NETWORK>` to use a configuration for a specific network.
 
 
 ```
 # global
 STAGE=dev
-APP_NAME=eosio-dashboard
+APP_NAME=antelope-tools
 
 # wallet
 WALLET_DATA=./wallet_data
@@ -220,19 +220,21 @@ At this point you can run `make start` or `make run <NETWORK>`, you can check th
 
 Please Read EOS Costa Rica's [Open Source Contributing Guidelines](https://developers.eoscostarica.io/docs/open-source-guidelines).
 
-Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/eosio-dashboard/issues/new/choose)
+Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/antelope-tools/issues/new/choose)
 
 Contributions of any kind are welcome!
 
-## About EOS Costa Rica
+## About Edenia
 
-<div align="center">
-	<a href="https://eoscostarica.io/">
-		<img src="https://raw.githubusercontent.com/eoscostarica/.github/master/.github/workflows/images/eos-costa-rica-logo.png"
-		width="300px" >
-	</a>
+<span align="center">
 
-</div>
-EOS Costa Rica is an independently-owned, self-funded, bare-metal Genesis block producer that provides stable and secure infrastructure for EOSIO blockchains. We support open source software for our community while offering enterprise blockchain development and custom smart contract development for our clients.
+<a href="https://edenia.com"><img width="400" alt="image" src="webapp/public/edenia-logo.png"></img></a>
 
-[eoscostarica.io](https://eoscostarica.io/)
+[![Twitter](https://img.shields.io/twitter/follow/EdeniaWeb3?style=for-the-badge)](https://twitter.com/EdeniaWeb3)
+[![Discord](https://img.shields.io/discord/946500573677625344?color=black&label=discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/YeGcF6QwhP)
+
+</span>
+Edenia runs independent blockchain infrastructure and develops web3 solutions. Our team of technology-agnostic builders has been operating since 1987, leveraging the newest technologies to make the internet safer, more efficient, and more transparent.
+
+<!-- ![Metrics](/profile/metrics.svg) -->
+
