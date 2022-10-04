@@ -7,7 +7,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
 ![GitHub](https://img.shields.io/github/license/edenia/antelope-tools) 
 ![GitHub repo size](https://img.shields.io/github/repo-size/edenia/antelope-tools) 
-[![Twitter Follow](https://img.shields.io/twitter/follow/eoscostarica?style=social)](https://twitter.com/EOSCostaRica)
+[![Twitter Follow](https://img.shields.io/twitter/follow/edeniaWeb3.svg?style=social&logo=twitter)](https://twitter.com/edeniaWeb3)
 ![GitHub forks](https://img.shields.io/github/forks/edenia/antelope-tools?style=social)
 
 </div>
