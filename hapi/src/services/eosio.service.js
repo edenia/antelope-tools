@@ -54,6 +54,11 @@ const getProducers = async () => {
       if (chains[eosConfig.chainId]) {
         nodes = await getNodes(bpJson)
         endpoints = producerUtil.getEndpoints(bpJson.nodes)
+        bpJson.nodes = nodes
+      }
+
+      if (!bpJson.nodes?.length) {
+        delete bpJson.nodes
       }
 
       return {
@@ -66,10 +71,7 @@ const getProducers = async () => {
         health_status: healthStatus,
         rank: index + 1,
         is_active: !!producer.is_active,
-        bp_json: {
-          ...bpJson,
-          nodes
-        }
+        bp_json: bpJson
       }
     })
   )
