@@ -3,7 +3,7 @@ const { eosConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
-const NodeService = require('./node.service')
+const nodeService = require('./node.service')
 
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
@@ -36,7 +36,7 @@ const updateProducers = async (producers = []) => {
 const syncProducers = async () => {
   let producers = []
 
-  await NodeService.clearNodes()
+  await nodeService.clearNodes()
 
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.lacchain:
@@ -74,11 +74,11 @@ const syncNodes = async (producers) => {
     return (producer.bp_json?.nodes || []).map((node) => {
       node.producer_id = producer.id
 
-      return NodeService.getFormatNode(node)
+      return nodeService.getFormatNode(node)
     })
   })
 
-  await NodeService.updateNodes(nodes)
+  await nodeService.updateNodes(nodes)
 }
 
 const syncEndpoints = async () => {
@@ -94,7 +94,7 @@ const syncEndpoints = async () => {
   if (!endpoints?.length) return
 
   endpoints.forEach(async (endpoint) => {
-    await NodeService.updateEndpointInfo(endpoint)
+    await nodeService.updateEndpointInfo(endpoint)
   })
 }
 
