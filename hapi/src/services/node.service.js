@@ -51,7 +51,7 @@ const getNodeEnpoints = (node) => {
 
     return node[endpointType]
       ? {
-          type: type,
+          type,
           value: node[endpointType]
         }
       : []
@@ -59,7 +59,7 @@ const getNodeEnpoints = (node) => {
 }
 
 const getFormatNode = (node) => {
-  let formatNode = {
+  const formatNode = {
     type: Array.isArray(node.node_type) ? node.node_type : [node.node_type],
     full: node.full ?? false,
     location: node.location ?? {},
@@ -67,7 +67,7 @@ const getFormatNode = (node) => {
   }
 
   const endpoints = getNodeEnpoints(node)
-  
+
   if (endpoints.length) {
     formatNode.endpoints = {
       data: endpoints
