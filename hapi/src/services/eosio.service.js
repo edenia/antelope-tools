@@ -237,11 +237,11 @@ const getNodes = (bpJson) => {
   return Promise.all(
     (bpJson?.nodes || []).map(async (node) => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-      const nodeInfo = await producerUtil.getNodeInfo(apiUrl)
+      const {nodeInfo} = await producerUtil.getNodeInfo(apiUrl)
 
       return {
         ...node,
-        server_version_string: nodeInfo.server_version_string
+        server_version_string: nodeInfo?.server_version_string || ''
       }
     })
   )

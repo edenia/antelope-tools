@@ -97,10 +97,10 @@ const getNodes = async () => {
       const apiUrl = newInfo.ssl_endpoint || newInfo.api_endpoint
 
       if (apiUrl) {
-        const nodeInfo = await producerUtil.getNodeInfo(apiUrl)
+        const {nodeInfo} = await producerUtil.getNodeInfo(apiUrl)
         newInfo = {
           ...newInfo,
-          server_version_string: nodeInfo.server_version_string || ''
+          server_version_string: nodeInfo?.server_version_string || ''
         }
       }
 
