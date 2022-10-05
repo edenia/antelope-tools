@@ -2,7 +2,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -95,18 +94,18 @@ const NodesSummary = ({ t, classes }) => {
 
   return (
     <>
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('total')} ${t('nodes')}`}</Typography>
             <BodyGraphValue value={total} loading={loading} />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
       {nodes &&
         nodes.map((node) => (
-          <Grid item xs={12} sm={4} lg={3} key={node.type}>
+          <div className={classes.cardGrow} key={node.type}>
             <Card className={classes.cardShadow}>
               <CardContent className={classes.cards}>
                 <Typography>
@@ -116,7 +115,7 @@ const NodesSummary = ({ t, classes }) => {
                 <BodyGraphValue value={node.value || 0} loading={loading} />
               </CardContent>
             </Card>
-          </Grid>
+          </div>
         ))}
     </>
   )

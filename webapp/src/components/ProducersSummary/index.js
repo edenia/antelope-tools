@@ -2,7 +2,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -56,17 +55,17 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
 
   return (
     <>
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('total')} ${t('producers')}`}</Typography>
             <BodyGraphValue value={total} loading={loading} />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
       {nodes.map((node, index) => (
-        <Grid item xs={12} sm={4} lg={3} key={index}>
+        <div className={classes.cardGrow} key={index}>
           <Card>
             <CardContent className={classes.cards}>
               <Typography>{`${t(node.type)} ${t('producers')}`}</Typography>
@@ -76,7 +75,7 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
               />
             </CardContent>
           </Card>
-        </Grid>
+        </div>
       ))}
     </>
   )

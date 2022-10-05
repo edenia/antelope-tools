@@ -81,25 +81,24 @@ export default (theme) => ({
     textTransform: 'lowercase !important',
   },
   cardShadow: {
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
+    boxShadow: '10px 5px 5px red !important',
   },
   divMargin:{
     display: 'flex',
     marginBottom: '10px',
     gap: '10px',
+    flexWrap: 'nowrap'
   },
   cardGrow:{
-    flexBasis: 'auto',
-    width: '100%'
-
+    flexGrow: '1',
   },
   divTrans:{
     width: '100%'
   },
   wrapper:{
-    flexWrap: 'wrap',
-    flexDirection: 'row',
     display: 'flex',
-    flexGrow: 1
+    gap: '10px',
+    flexWrap: 'wrap',
+
   }
 })

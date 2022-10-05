@@ -10,7 +10,6 @@ import { eosConfig } from '../../config'
 
 const Card = lazy(() => import('@mui/material/Card'))
 const CardContent = lazy(() => import('@mui/material/CardContent'))
-const Grid = lazy(() => import('@mui/material/Grid'))
 const Typography = lazy(() => import('@mui/material/Typography'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
@@ -130,6 +129,9 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
       </div>
+
+      {/* aaaaaaaa */}
+
       <div className={classes.graphicBox}>
         <div className={classes.divTrans}>
           <Card className={classes.cardShadow}>
@@ -146,7 +148,9 @@ const BlockProducerInfo = ({ t, classes }) => {
         </div>
       </div>
       {loading && <LinearProgress />}
-      <div>
+
+{/* aaaaaa */}
+      
       <div className={classes.wrapper}>
           <TransactionsHistory
             t={t}
@@ -165,7 +169,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             }
           />
 
-        <div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('cpuLimitPerBlock')}</Typography>
@@ -179,7 +183,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('netLimitPerBlock')}</Typography>
@@ -192,7 +196,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainCpuLimit')}</Typography>
@@ -206,7 +210,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('chainNetLimit')}</Typography>
@@ -219,8 +223,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-
-        <div>
+        <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('timeToFinality')}</Typography>
@@ -239,7 +242,6 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
         </div>
-      </div>
     </div>
   )
 }
