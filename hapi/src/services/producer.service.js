@@ -36,8 +36,6 @@ const updateProducers = async (producers = []) => {
 const syncProducers = async () => {
   let producers = []
 
-  await nodeService.clearNodes()
-
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.lacchain:
       producers = await lacchainService.getProducers()
@@ -88,6 +86,7 @@ const syncEndpoints = async () => {
     	type,
       value
     FROM endpoint
+    WHERE type IN ('api','ssl')
     ;
   `)
 
