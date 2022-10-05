@@ -15,7 +15,11 @@ const getProducers = async () => {
   let key
 
   while (hasMore) {
-    const { rows, more, next_key: nextKey } = await eosUtil.getTableRows({
+    const {
+      rows,
+      more,
+      next_key: nextKey
+    } = await eosUtil.getTableRows({
       code: eosConfig.lacchain.account,
       scope: eosConfig.lacchain.account,
       table: eosConfig.lacchain.entityTable,
@@ -29,9 +33,9 @@ const getProducers = async () => {
   }
 
   entities = await Promise.all(
-    entities.map(async entity => {
+    entities.map(async (entity) => {
       const bpJson = producerUtil.jsonParse(entity.info)
-      const entityNodes = nodes.filter(node => node.entity === entity.name)
+      const entityNodes = nodes.filter((node) => node.entity === entity.name)
       const healthStatus = getEntityHealthStatus(bpJson)
       const endpoints = producerUtil.getEndpoints(entityNodes)
 
@@ -57,7 +61,11 @@ const getNodes = async () => {
   let key
 
   while (hasMore) {
-    const { rows, more, next_key: nextKey } = await eosUtil.getTableRows({
+    const {
+      rows,
+      more,
+      next_key: nextKey
+    } = await eosUtil.getTableRows({
       code: eosConfig.lacchain.account,
       scope: eosConfig.lacchain.account,
       table: eosConfig.lacchain.nodeTable,
@@ -71,7 +79,7 @@ const getNodes = async () => {
   }
 
   nodes = await Promise.all(
-    nodes.map(async node => {
+    nodes.map(async (node) => {
       const nodeType = nodeTypes[node.type] || 'N/A'
       const bpJson = producerUtil.jsonParse(node.info)
       let newInfo = {}
@@ -86,9 +94,8 @@ const getNodes = async () => {
       for (const key of Object.keys(newInfo.endpoints || {})) {
         newInfo = {
           ...newInfo,
-          [`${key.replace(`${nodeType}_`, '')}_endpoint`]: newInfo.endpoints[
-            key
-          ]
+          [`${key.replace(`${nodeType}_`, '')}_endpoint`]:
+            newInfo.endpoints[key]
         }
       }
 
@@ -97,7 +104,8 @@ const getNodes = async () => {
       const apiUrl = newInfo.ssl_endpoint || newInfo.api_endpoint
 
       if (apiUrl) {
-        const {nodeInfo} = await producerUtil.getNodeInfo(apiUrl)
+        const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
+
         newInfo = {
           ...newInfo,
           server_version_string: nodeInfo?.server_version_string || ''
@@ -117,7 +125,7 @@ const getNodes = async () => {
   return nodes
 }
 
-const getNodeHealthStatus = node => {
+const getNodeHealthStatus = (node) => {
   const healthStatus = []
 
   healthStatus.push({
@@ -132,8 +140,9 @@ const getNodeHealthStatus = node => {
   return healthStatus
 }
 
-const getEntityHealthStatus = bpJson => {
+const getEntityHealthStatus = (bpJson) => {
   const healthStatus = []
+
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.organization_name

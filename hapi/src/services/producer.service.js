@@ -26,6 +26,7 @@ const updateProducers = async (producers = []) => {
   `
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
+  
   await hasuraUtil.request(clearMutation, {
     owners: producers.map((producer) => producer.owner)
   })

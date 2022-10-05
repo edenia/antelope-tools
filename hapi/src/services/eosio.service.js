@@ -105,6 +105,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
 
   producers.forEach((producer) => {
     const producerVotePercent = producer.total_votes / totalVotes
+    
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
     } else {
@@ -196,6 +197,7 @@ const getChains = async (producerUrl) => {
     const {
       data: { chains }
     } = await axiosUtil.instance.get(chainsUrl)
+
     return chains ?? {}
   } catch (error) {
     return {}
@@ -237,7 +239,7 @@ const getNodes = (bpJson) => {
   return Promise.all(
     (bpJson?.nodes || []).map(async (node) => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-      const {nodeInfo} = await producerUtil.getNodeInfo(apiUrl)
+      const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
 
       return {
         ...node,

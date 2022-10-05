@@ -35,7 +35,9 @@ const updateEndpointInfo = async (endpoint) => {
     }
   `
 
-  const {nodeInfo, ...response} = await producerUtil.getNodeInfo(endpoint.value)
+  const { nodeInfo, ...response } = await producerUtil.getNodeInfo(
+    endpoint.value
+  )
 
   await hasuraUtil.request(updateMutation, {
     id: endpoint.id,
