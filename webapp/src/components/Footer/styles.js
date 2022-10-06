@@ -26,9 +26,14 @@ export default (theme) => ({
       textAlign: 'center',
       letterSpacing: '0.1px',
       textDecoration: 'none',
+      [theme.breakpoints.down('md')]:{
+        color: '#1565c0'
+      }
     },
     [theme.breakpoints.down('md')]:{
-      textAlign: 'center !important',     
+      textAlign: 'center !important',
+      paddingTop: '0px !important',
+      paddingBottom: '0px !important',
     }
   },
   sidebarFooter: {
@@ -84,8 +89,6 @@ export default (theme) => ({
     bottom: 0,
     [theme.breakpoints.down('md')]:{
       flexDirection: 'column',
-      paddingBottom: '1px',
-      paddingTop: '1px'
     }
   },
 

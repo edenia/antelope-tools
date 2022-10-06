@@ -20,7 +20,7 @@ const Footer = () => {
       <div className={classes.left}>
         <List className={classes.footerMenuWrapper}>
           {generalConfig.footerLinks.map((link, index) => (
-            <ListItem className={classes.listItem} key={index}>
+            <ListItem className={[classes.listItem]} key={index}>
               <ListItemText
                 primary={
                   <a href={link.src} target="_blank" rel="noopener noreferrer">
