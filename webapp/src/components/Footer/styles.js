@@ -8,6 +8,9 @@ export default (theme) => ({
     alignItems: 'center',
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('md')]:{
+      flexDirection: 'column'
+    }
   },
   listItem: {
     display: 'inline-block',
@@ -24,6 +27,9 @@ export default (theme) => ({
       letterSpacing: '0.1px',
       textDecoration: 'none',
     },
+    [theme.breakpoints.down('md')]:{
+      textAlign: 'center !important',     
+    }
   },
   sidebarFooter: {
     backgroundColor: `${theme.sidebar.footer.background} !important`,
@@ -62,6 +68,10 @@ export default (theme) => ({
   },
   gridFooter: {
     display: 'flex',
+    [theme.breakpoints.down('md')]:{
+      order: 3,
+      paddingBottom: '15px'
+    }
   },
   footerImg: {
     width: 24,
@@ -72,6 +82,11 @@ export default (theme) => ({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 0,
+    [theme.breakpoints.down('md')]:{
+      flexDirection: 'column',
+      paddingBottom: '1px',
+      paddingTop: '1px'
+    }
   },
 
   linkBadge: {
@@ -98,7 +113,10 @@ export default (theme) => ({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     flexGrow: 1,
-    flexBasis: 0
+    flexBasis: 0,
+    [theme.breakpoints.down('md')]:{
+    order: 2
+    }
     },
   left: {
     flexGrow: 1,
@@ -113,5 +131,5 @@ export default (theme) => ({
   midText: {
     display: 'flex !important',
     justifyContent: 'center !important'
-  }
+  },
 })
