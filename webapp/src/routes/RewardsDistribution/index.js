@@ -161,7 +161,8 @@ const RewardsDistribution = () => {
       aria-owns={open ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
     >
-      <Popover className={classes.boxShadow}
+      <Popover
+        className={classes.root}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         sx={{
@@ -180,7 +181,8 @@ const RewardsDistribution = () => {
         onClose={handlePopoverClose}
         id="mouse-over-popover"
       >
-        <Box className={classes.boxPadding}
+        <Box
+          className={classes.boxPadding}
           sx={{
             pointerEvents: 'auto',
           }}
@@ -374,7 +376,7 @@ const RewardsDistribution = () => {
         </div>
       </div>
       {!loading && (
-        <Paper className={classes.mapWrapper}>
+        <Paper className={[classes.mapWrapper,classes.cardShadow]}>
           <ComposableMap
             projectionConfig={{
               scale: 170,
