@@ -10,7 +10,7 @@ const useEndpointsState = () => {
   const [highestBlockNum, setHighestBlockNum] = useState(0)
   const [pagination, setPagination] = useState({
     page: 1,
-    limit: 80,
+    limit: 20,
     totalPages: 0,
   })
 
@@ -44,6 +44,7 @@ const useEndpointsState = () => {
     setProducers(
       data.producers.map((producer) => {
         const endpoints = { api: [], ssl: [], p2p: [] }
+        const inserted = []
 
         producer.nodes.forEach((node) => {
           if (node.endpoints?.length) {
@@ -52,7 +53,10 @@ const useEndpointsState = () => {
               node.endpoints[0]?.head_block_num,
             )
             node.endpoints.forEach(({ type, ...endpoint }) => {
-              endpoints[type].push(endpoint)
+              if (!inserted.includes(endpoint.value)) {
+                inserted.push(endpoint.value)
+                endpoints[type].push(endpoint)
+              }
             })
           }
         })
