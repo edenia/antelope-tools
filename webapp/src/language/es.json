@@ -306,7 +306,7 @@
     "availability": "Disponibilidad"
   },
   "endpointsListRoute": {
-    "title": "Endpoints available by",
+    "title": "Endpoints disponibles por",
     "updatedAt": "Actualizado por última vez",
     "endpointsResponding": "Solo puntos finales que responden"
   },
