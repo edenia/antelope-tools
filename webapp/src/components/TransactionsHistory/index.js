@@ -2,7 +2,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -64,8 +63,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
     return (
       <>
         {nodesChildren && nodesChildren}
-        <Grid item xs={12} sm={4} lg={3}>
-          <Card>
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{`${t('uniqueLocations')}`}</Typography>
               <BodyGraphValue
@@ -74,13 +73,13 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               />
             </CardContent>
           </Card>
-        </Grid>
+        </div>
       </>
     )
 
   return (
-    <>
-      <Grid item xs={12} sm={4} lg={3}>
+    <div>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{t('tpsAllTimeHigh')}</Typography>
@@ -92,9 +91,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
@@ -109,9 +108,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
@@ -123,9 +122,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
@@ -137,9 +136,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t(
@@ -154,9 +153,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardGrow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
@@ -168,9 +167,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
+      </div>
       {nodesChildren && nodesChildren}
-      <Grid item xs={12} sm={4} lg={3}>
+      <div className={classes.cardow}>
         <Card>
           <CardContent className={classes.cards}>
             <Typography>{`${t('uniqueLocations')}`}</Typography>
@@ -180,8 +179,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
             />
           </CardContent>
         </Card>
-      </Grid>
-    </>
+      </div>
+    </div>
   )
 }
 
