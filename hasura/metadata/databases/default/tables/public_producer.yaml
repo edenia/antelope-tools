@@ -1,6 +1,14 @@
 table:
   schema: public
   name: producer
+array_relationships:
+  - name: nodes
+    using:
+      foreign_key_constraint_on:
+        column: producer_id
+        table:
+          schema: public
+          name: node
 select_permissions:
   - role: guest
     permission:
