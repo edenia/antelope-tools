@@ -8,7 +8,7 @@ export default (theme) => ({
     alignItems: 'center',
     boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
     justifyContent: 'space-between',
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column'
     }
   },
@@ -26,11 +26,11 @@ export default (theme) => ({
       textAlign: 'center',
       letterSpacing: '0.1px',
       textDecoration: 'none',
-      [theme.breakpoints.down('md')]:{
+      [theme.breakpoints.down('md')]: {
         color: '#1565c0'
       }
     },
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
       textAlign: 'center !important',
       paddingTop: '0px !important',
       paddingBottom: '0px !important',
@@ -73,7 +73,7 @@ export default (theme) => ({
   },
   gridFooter: {
     display: 'flex',
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
       order: 3,
       paddingBottom: '15px'
     }
@@ -87,7 +87,7 @@ export default (theme) => ({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 0,
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     }
   },
@@ -117,7 +117,7 @@ export default (theme) => ({
     flexDirection: 'row',
     flexGrow: 1,
     flexBasis: 0,
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
     order: 2
     }
     },
