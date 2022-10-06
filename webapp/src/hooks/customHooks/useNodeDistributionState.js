@@ -33,9 +33,7 @@ const useNodeDistributionState = () => {
 
     const items = []
     producers.forEach((producer) => {
-      if (!producer?.bp_json?.nodes?.length) {
-        return
-      }
+      if (!producer?.bp_json?.nodes?.length) return
 
       producer.bp_json.nodes.forEach((node) => {
         if (!node?.location?.latitude || !node?.location?.longitude) return

@@ -20,6 +20,7 @@ const updateNodes = async (nodes = []) => {
       }
     }
   `
+  
   await clearNodes()
   await hasuraUtil.request(upsertMutation, { nodes })
 }
