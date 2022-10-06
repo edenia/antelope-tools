@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-
 import ReportIcon from '@mui/icons-material/Report'
 import VerifiedIcon from '@mui/icons-material/Verified'
 import TimerOffIcon from '@mui/icons-material/TimerOff'
@@ -10,19 +9,19 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const HealthCheck = ({children, status}) => {
+const HealthCheck = ({ children, status }) => {
   const classes = useStyles()
 
   const getIcon = (status) => {
     switch (status) {
       case 'updated':
-        return  <VerifiedIcon className={classes.success}/>
+        return <VerifiedIcon className={classes.success} />
       case 'outdated':
-        return  <TimerOffIcon className={classes.timerOff}/>
+        return <TimerOffIcon className={classes.timerOff} />
       case 'error':
-        return  <WarningIcon className={classes.warning}/>
+        return <WarningIcon className={classes.warning} />
       default:
-        return  <ReportIcon className={classes.fail}/>
+        return <ReportIcon className={classes.fail} />
     }
   }
 

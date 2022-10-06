@@ -20,6 +20,7 @@
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
+    "help": "Help",
     "node": "Node",
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
@@ -253,7 +254,7 @@
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
-    "isFull":"Is full"
+    "isFull": "Is full"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",
@@ -330,5 +331,11 @@
   },
   "noResultsComponent": {
     "noResultsFound": "No results found"
+  },
+  "healthCheckComponent": {
+    "updated": "The endpoint is working",
+    "outdated": "The endpoint works but is outdated with the last block",
+    "error": "Error in the endpoint request",
+    "not working": "The endpoint is not responding"
   }
 }

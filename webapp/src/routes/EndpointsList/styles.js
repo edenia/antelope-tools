@@ -6,6 +6,11 @@ export default (theme) => ({
   dateContainer: {
     flex: '70%',
   },
+  modalContainer: {
+    display: 'flex',
+    alignSelf: 'center',
+    margin: theme.spacing(4),
+  },
   select: {
     minWidth: 150,
   },

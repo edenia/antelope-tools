@@ -14,6 +14,7 @@ import Pagination from '@mui/material/Pagination'
 import moment from 'moment'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
+import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 
 import EndpointsTable from './EndpointsTable'
 import styles from './styles'
@@ -44,6 +45,9 @@ const EndpointsList = () => {
               </Typography>
             )}
           </div>
+          <div className={classes.modalContainer}>
+            <HealthInfoModal />
+          </div>
           <FormControl variant="standard">
             <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
             <Select
@@ -71,7 +75,12 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length && <EndpointsTable producers={producers} blockNum={highestBlockNum} />}
+            {!!producers.length && (
+              <EndpointsTable
+                producers={producers}
+                blockNum={highestBlockNum}
+              />
+            )}
             {pagination.totalPages > 1 && (
               <div className={classes.pagination}>
                 <Pagination
