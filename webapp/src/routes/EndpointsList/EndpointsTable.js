@@ -9,20 +9,42 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 
-const EndpointsTable = ({ producers }) => {
+import HealthCheck from '../../components/HealthCheck'
+
+const EndpointsTable = ({ producers, blockNum }) => {
   const { t } = useTranslation('endpointsListRoute')
 
-  const CellList = ({ producer, endpointType }) => {
+  const getStatus = (endpoint) => {
+    if(endpoint.response.status === undefined) return
 
+    if( endpoint.head_block_num === blockNum ){
+      return 'updated'
+    }else{
+      switch(Math.floor(endpoint.response.status / 100)){
+        case 2:
+          return 'outdated'
+        case 4:
+        case 5:
+          return 'error'
+        default:
+          return 'not working'
+      }
+    }
+  }
+
+  const CellList = ({ producer, endpointType }) => {
     return (
       <TableCell>
         {!producer?.endpoints[endpointType].length ? (
           <Typography>N/A</Typography>
         ) : (
           producer.endpoints[endpointType].map((endpoint, index) => (
-            <Typography key={`${producer?.name}-${endpointType}-${index}`}>
-              {endpoint}
-            </Typography>
+            <HealthCheck
+              status={getStatus(endpoint)}
+              key={`${producer?.name}-${endpointType}-${index}`}
+            >
+              {endpoint.value}
+            </HealthCheck>
           ))
         )}
       </TableCell>

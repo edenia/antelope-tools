@@ -26,7 +26,7 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, updatedAt },
+    { loading, pagination, producers, highestBlockNum, updatedAt },
     { handleOnPageChange, setPagination },
   ] = useEndpointsState()
 
@@ -71,7 +71,7 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length && <EndpointsTable producers={producers} />}
+            {!!producers.length && <EndpointsTable producers={producers} blockNum={highestBlockNum} />}
             {pagination.totalPages > 1 && (
               <div className={classes.pagination}>
                 <Pagination
