@@ -47,6 +47,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   mapWrapper: {
     marginTop: theme.spacing(3),
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important'
   },
   flexdad: {
     flexDirection: 'row',
@@ -58,5 +59,11 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   mainReward: {
     flexGrow: 1,
+  },
+  boxPadding:{
+    padding: '10px'
+  },
+  boxShadow:{
+    boxShadow: '10px 5px 5px red !important',
   },
 })

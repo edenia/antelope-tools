@@ -161,7 +161,7 @@ const RewardsDistribution = () => {
       aria-owns={open ? 'mouse-over-popover' : undefined}
       aria-haspopup="true"
     >
-      <Popover
+      <Popover className={classes.boxShadow}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         sx={{
@@ -180,7 +180,7 @@ const RewardsDistribution = () => {
         onClose={handlePopoverClose}
         id="mouse-over-popover"
       >
-        <Box
+        <Box className={classes.boxPadding}
           sx={{
             pointerEvents: 'auto',
           }}
@@ -244,7 +244,7 @@ const RewardsDistribution = () => {
       {loading && <LinearProgress className={classes.linearLoader} />}
       <div className={classes.flexdad}>
         <div className={classes.mainReward}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
               <Typography variant="subtitle1">
@@ -278,7 +278,7 @@ const RewardsDistribution = () => {
         </div>
         <div className={classes.rewardsdiv}>
           <Card
-            className={classes.action}
+            className={[classes.action, classes.cardShadow]}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
           >
             <CardContent>
@@ -318,7 +318,7 @@ const RewardsDistribution = () => {
           </Card>
         </div>
         <div className={classes.rewardsdiv}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6">{t('paidProducers')}</Typography>
               <Typography
@@ -347,7 +347,7 @@ const RewardsDistribution = () => {
           </Card>
         </div>
         <div className={classes.rewardsdiv}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6" className={classes.rewardsColorSchema}>
                 <span className={classes.itemLabel}>
