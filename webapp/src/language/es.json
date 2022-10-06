@@ -307,7 +307,8 @@
   },
   "endpointsListRoute": {
     "title": "Endpoints available by",
-    "updatedAt": "Actualizado por última vez"
+    "updatedAt": "Actualizado por última vez",
+    "endpointsResponding": "Solo puntos finales que responden"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Milisegundos",

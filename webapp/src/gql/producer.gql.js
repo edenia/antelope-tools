@@ -60,6 +60,7 @@ export const ENDPOINTS_QUERY = gql`
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
+    $endpointFilter: endpoint_bool_exp
   ) {
     info: producer_aggregate(where: $where) {
       producers: aggregate {
@@ -76,7 +77,7 @@ export const ENDPOINTS_QUERY = gql`
       owner
       updated_at
       nodes(where: {type: {_neq: ["producer"]}}){
-        endpoints(order_by: {head_block_num: desc}){
+        endpoints(order_by: {head_block_num: desc}, where: $endpointFilter){
           type
           value
           head_block_num

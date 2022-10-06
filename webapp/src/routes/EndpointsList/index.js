@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Switch from '@mui/material/Switch'
 import Pagination from '@mui/material/Pagination'
 import moment from 'moment'
 
@@ -28,7 +29,7 @@ const EndpointsList = () => {
   const { t } = useTranslation('endpointsListRoute')
   const [
     { loading, pagination, producers, highestBlockNum, updatedAt },
-    { handleOnPageChange, setPagination },
+    { handleFilter, handleOnPageChange, setPagination },
   ] = useEndpointsState()
 
   return (
@@ -44,6 +45,10 @@ const EndpointsList = () => {
                 {t('updatedAt')}: {moment(updatedAt).format('LL')}
               </Typography>
             )}
+          </div>
+          <div className={classes.switchContainer}>
+            <Typography component="p" variant="caption">{t('endpointsResponding')}</Typography>
+            <Switch onChange={(event)=>{handleFilter(event.target?.checked)}}/>
           </div>
           <div className={classes.modalContainer}>
             <HealthInfoModal />

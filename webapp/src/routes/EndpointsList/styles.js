@@ -2,9 +2,15 @@ export default (theme) => ({
   titleContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+    alignItems: 'center',
   },
   dateContainer: {
-    flex: '70%',
+    flex: '40%',
+  },
+  switchContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   modalContainer: {
     display: 'flex',

@@ -20,10 +20,11 @@ const useEndpointsState = () => {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
         where: { bp_json: { _has_key: 'nodes' } },
+        endpointFilter: pagination.endpointFilter,
       },
     })
     // eslint-disable-next-line
-  }, [pagination.page, pagination.limit])
+  }, [pagination.page, pagination.limit, pagination.endpointFilter])
 
   useEffect(() => {
     if (!data?.info) return
@@ -81,9 +82,24 @@ const useEndpointsState = () => {
     }))
   }
 
+  const handleFilter = (value) => {
+    setPagination((prev) => ({
+      ...prev,
+      page: 1,
+      endpointFilter: value
+        ? {
+            _or: [
+              { type: { _eq: 'p2p' } },
+              { response: { _contains: { status: 200 } } },
+            ],
+          }
+        : undefined,
+    }))
+  }
+
   return [
     { loading, pagination, producers, highestBlockNum, updatedAt },
-    { handleOnPageChange, setPagination },
+    { handleFilter, handleOnPageChange, setPagination },
   ]
 }
 
