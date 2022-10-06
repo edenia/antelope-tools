@@ -68,6 +68,6 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     padding: '10px',
   },
   cardShadow: {
-    boxShadow: '0px 0px 14px rgba(255, 0, 0, 0.35) !important',
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
   },
 })
