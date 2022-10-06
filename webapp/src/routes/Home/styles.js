@@ -2,11 +2,14 @@ export default (theme) => ({
   graphicBox: {
     '& .MuiCard-root': {
       height: '100%',
-        },
+    },
     display: 'flex',
     marginBottom: '10px',
     gap: '10px',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
     },
+  },
   bottomRow: {
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(1),
@@ -81,24 +84,46 @@ export default (theme) => ({
     textTransform: 'lowercase !important',
   },
   cardShadow: {
-    boxShadow: '10px 5px 5px red !important',
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
   },
-  divMargin:{
+  divMargin: {
     display: 'flex',
     marginBottom: '10px',
     gap: '10px',
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
   },
-  cardGrow:{
+  cardHeader: {
     flexGrow: '1',
+    flexBasis: 'calc(100%/5)',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '10px',
+    },
   },
-  divTrans:{
-    width: '100%'
+  cardGrow: {
+    flexGrow: '1',
+    flexBasis: 'calc(100%/5)',
+    [theme.breakpoints.down('md')]: {
+      flexBasis: 'calc(100%/3)',
+      marginBottom: '10px',
+    },
   },
-  wrapper:{
+  divTrans: {
+    width: '50%',
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      marginBottom: '10px',
+    },
+  },
+  wrapper: {
     display: 'flex',
     gap: '10px',
     flexWrap: 'wrap',
-
-  }
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      marginBottom: '10px',
+    },
+  },
 })

@@ -84,7 +84,7 @@ const BlockProducerInfo = ({ t, classes }) => {
   return (
     <div>
       <div className={classes.divMargin}>
-        <div className={classes.cardGrow}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('currentProducer')}</Typography>
@@ -98,7 +98,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.cardGrow}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('scheduleVersion')}</Typography>
@@ -108,7 +108,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.cardGrow}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('headBlock')}</Typography>
@@ -118,7 +118,7 @@ const BlockProducerInfo = ({ t, classes }) => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.cardGrow}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{t('lastBlock')}</Typography>
@@ -129,9 +129,6 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
       </div>
-
-      {/* aaaaaaaa */}
-
       <div className={classes.graphicBox}>
         <div className={classes.divTrans}>
           <Card className={classes.cardShadow}>
@@ -148,10 +145,8 @@ const BlockProducerInfo = ({ t, classes }) => {
         </div>
       </div>
       {loading && <LinearProgress />}
-
-{/* aaaaaa */}
-      
-      <div className={classes.wrapper}>
+      <div>
+        <div className={classes.wrapper}>
           <TransactionsHistory
             t={t}
             classes={classes}
@@ -168,80 +163,80 @@ const BlockProducerInfo = ({ t, classes }) => {
               </>
             }
           />
-
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('cpuLimitPerBlock')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
-              </Typography>
-            </CardContent>
-          </Card>
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('cpuLimitPerBlock')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('netLimitPerBlock')}</Typography>
+                <Typography component="p" variant="h6">
+                  {`${formatWithThousandSeparator(
+                    info.block_net_limit / 1024,
+                    0,
+                  )} KB`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('chainCpuLimit')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('chainNetLimit')}</Typography>
+                <Typography component="p" variant="h6">
+                  {`${formatWithThousandSeparator(
+                    info.virtual_block_net_limit / 1024,
+                    0,
+                  )} KB`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('timeToFinality')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {schedule.producers
+                    ? `${
+                        (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
+                      } s`
+                    : '0 s'}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('netLimitPerBlock')}</Typography>
-              <Typography component="p" variant="h6">
-                {`${formatWithThousandSeparator(
-                  info.block_net_limit / 1024,
-                  0,
-                )} KB`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('chainCpuLimit')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('chainNetLimit')}</Typography>
-              <Typography component="p" variant="h6">
-                {`${formatWithThousandSeparator(
-                  info.virtual_block_net_limit / 1024,
-                  0,
-                )} KB`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('timeToFinality')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {schedule.producers
-                  ? `${
-                      (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
-                    } s`
-                  : '0 s'}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        </div>
+      </div>
     </div>
   )
 }
