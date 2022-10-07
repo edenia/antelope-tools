@@ -6,7 +6,7 @@ export default (theme) => ({
     padding: `1px ${theme.spacing(1)}`,
     background: theme.palette.common.white,
     alignItems: 'center',
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
     justifyContent: 'space-between',
   },
   listItem: {
