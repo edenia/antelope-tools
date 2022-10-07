@@ -280,7 +280,7 @@ const RewardsDistribution = () => {
         </div>
         <div className={classes.rewardsdiv}>
           <Card
-            className={[classes.action, classes.cardShadow]}
+            className={`${classes.action} ${classes.cardShadow}`}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
           >
             <CardContent>
@@ -376,7 +376,7 @@ const RewardsDistribution = () => {
         </div>
       </div>
       {!loading && (
-        <Paper className={[classes.mapWrapper,classes.cardShadow]}>
+        <Paper className={`${classes.mapWrapper} ${classes.cardShadow}`}>
           <ComposableMap
             projectionConfig={{
               scale: 170,
