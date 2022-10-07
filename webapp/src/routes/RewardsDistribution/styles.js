@@ -46,8 +46,8 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     minWidth: 120,
   },
   mapWrapper: {
-    marginTop: theme.spacing(3),
-  },
+    marginTop: theme.spacing(3)
+    },
   flexdad: {
     flexDirection: 'row',
     display: 'flex',
@@ -58,5 +58,16 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   mainReward: {
     flexGrow: 1,
+  },
+  root: {
+    '& .MuiPaper-root': {
+      boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
+    },
+  },
+  boxPadding: {
+    padding: '10px',
+  },
+  cardShadow: {
+    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
   },
 })

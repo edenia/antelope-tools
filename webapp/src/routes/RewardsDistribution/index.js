@@ -162,6 +162,7 @@ const RewardsDistribution = () => {
       aria-haspopup="true"
     >
       <Popover
+        className={classes.root}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         sx={{
@@ -181,6 +182,7 @@ const RewardsDistribution = () => {
         id="mouse-over-popover"
       >
         <Box
+          className={classes.boxPadding}
           sx={{
             pointerEvents: 'auto',
           }}
@@ -244,7 +246,7 @@ const RewardsDistribution = () => {
       {loading && <LinearProgress className={classes.linearLoader} />}
       <div className={classes.flexdad}>
         <div className={classes.mainReward}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
               <Typography variant="subtitle1">
@@ -278,7 +280,7 @@ const RewardsDistribution = () => {
         </div>
         <div className={classes.rewardsdiv}>
           <Card
-            className={classes.action}
+            className={`${classes.action} ${classes.cardShadow}`}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
           >
             <CardContent>
@@ -318,7 +320,7 @@ const RewardsDistribution = () => {
           </Card>
         </div>
         <div className={classes.rewardsdiv}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6">{t('paidProducers')}</Typography>
               <Typography
@@ -347,7 +349,7 @@ const RewardsDistribution = () => {
           </Card>
         </div>
         <div className={classes.rewardsdiv}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6" className={classes.rewardsColorSchema}>
                 <span className={classes.itemLabel}>
@@ -374,7 +376,7 @@ const RewardsDistribution = () => {
         </div>
       </div>
       {!loading && (
-        <Paper className={classes.mapWrapper}>
+        <Paper className={`${classes.mapWrapper} ${classes.cardShadow}`}>
           <ComposableMap
             projectionConfig={{
               scale: 170,
