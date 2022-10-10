@@ -52,7 +52,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     flexDirection: 'row',
     display: 'flex',
     [theme.breakpoints.down('md')]: {
-      display:'block',
+      display: 'block',
       paddingTop: '5px'
     }
   },
