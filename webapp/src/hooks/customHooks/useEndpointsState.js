@@ -7,7 +7,6 @@ const useEndpointsState = () => {
   const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY)
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
-  const [highestBlockNum, setHighestBlockNum] = useState(0)
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
@@ -39,8 +38,6 @@ const useEndpointsState = () => {
   useEffect(() => {
     if (!data?.producers) return
 
-    let maxBlockNum = 0
-
     setProducers(
       data.producers.map((producer) => {
         const endpoints = { api: [], ssl: [], p2p: [] }
@@ -48,10 +45,6 @@ const useEndpointsState = () => {
 
         producer.nodes.forEach((node) => {
           if (node.endpoints?.length) {
-            maxBlockNum = Math.max(
-              maxBlockNum,
-              node.endpoints[0]?.head_block_num,
-            )
             node.endpoints.forEach(({ type, ...endpoint }) => {
               if (!inserted.includes(endpoint.value)) {
                 inserted.push(endpoint.value)
@@ -70,8 +63,6 @@ const useEndpointsState = () => {
         }
       }),
     )
-
-    setHighestBlockNum(maxBlockNum)
 
     if (!data.producers?.[0]?.updated_at) return
 
@@ -102,7 +93,7 @@ const useEndpointsState = () => {
   }
 
   return [
-    { loading, pagination, producers, highestBlockNum, updatedAt },
+    { loading, pagination, producers, updatedAt },
     { handleFilter, handleOnPageChange, setPagination },
   ]
 }

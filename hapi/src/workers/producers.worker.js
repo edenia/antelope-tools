@@ -54,7 +54,7 @@ const start = async () => {
   run(
     'SYNC ENDPOINTS',
     producerService.syncEndpoints,
-    workersConfig.syncProducersInterval / 48
+    workersConfig.syncProducersInterval / 120
   )
   run(
     'SYNC EXCHANGE RATE',

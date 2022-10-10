@@ -29,8 +29,8 @@ const updateEndpointInfo = async (endpoint) => {
   if (!endpoint.type || !['api', 'ssl'].includes(endpoint.type)) return
 
   const updateMutation = `
-    mutation ($id: uuid, $head_block_num: Int, $response: jsonb) {
-      update_endpoint(_set: {head_block_num: $head_block_num, response: $response}, where: {id: {_eq: $id}}) {
+    mutation ($id: uuid, $head_block_time: timestamptz, $response: jsonb, $updated_at: timestamptz,) {
+      update_endpoint(_set: {head_block_time: $head_block_time, response: $response, updated_at: $updated_at}, where: {id: {_eq: $id}}) {
         affected_rows
       }
     }
@@ -43,7 +43,8 @@ const updateEndpointInfo = async (endpoint) => {
   await hasuraUtil.request(updateMutation, {
     id: endpoint.id,
     response,
-    head_block_num: nodeInfo?.head_block_num || 0
+    head_block_time: nodeInfo?.head_block_time || null,
+    updated_at: new Date()
   })
 }
 

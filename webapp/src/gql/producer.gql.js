@@ -77,10 +77,10 @@ export const ENDPOINTS_QUERY = gql`
       owner
       updated_at
       nodes(where: {type: {_neq: ["producer"]}}){
-        endpoints(order_by: {head_block_num: desc}, where: $endpointFilter){
+        endpoints(order_by: {head_block_time: desc}, where: $endpointFilter){
           type
           value
-          head_block_num
+          head_block_time
           response
         }
       }

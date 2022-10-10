@@ -11,16 +11,16 @@ import Typography from '@mui/material/Typography'
 
 import HealthCheck from '../../components/HealthCheck'
 
-const EndpointsTable = ({ producers, blockNum }) => {
+const EndpointsTable = ({ producers }) => {
   const { t } = useTranslation('endpointsListRoute')
 
   const getStatus = (endpoint) => {
-    if(endpoint.response.status === undefined) return
+    if (endpoint.response.status === undefined) return
 
-    if( endpoint.head_block_num === blockNum ){
+    if ((new Date() - new Date(endpoint.head_block_time)) / 60000 <= 3) {
       return 'updated'
-    }else{
-      switch(Math.floor(endpoint.response.status / 100)){
+    } else {
+      switch (Math.floor(endpoint.response.status / 100)) {
         case 2:
           return 'outdated'
         case 4:

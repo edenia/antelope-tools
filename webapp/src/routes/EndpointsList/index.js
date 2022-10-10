@@ -28,7 +28,7 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, highestBlockNum, updatedAt },
+    { loading, pagination, producers, updatedAt },
     { handleFilter, handleOnPageChange, setPagination },
   ] = useEndpointsState()
 
@@ -83,7 +83,6 @@ const EndpointsList = () => {
             {!!producers.length && (
               <EndpointsTable
                 producers={producers}
-                blockNum={highestBlockNum}
               />
             )}
             {pagination.totalPages > 1 && (
