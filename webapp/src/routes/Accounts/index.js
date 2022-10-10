@@ -135,20 +135,20 @@ const Accounts = ({ ual }) => {
 
   useEffect(() => {
     const params = queryString.parse(location.search)
+    handleOnSearch({ owner: params?.account || 'eosio' })
+    // eslint-disable-next-line
+  }, [])
+  
+  useEffect(() => {
+    const params = queryString.parse(location.search)
 
     setFilters({
-      owner: params?.account || 'eosio',
+      owner: params?.account,
       table: params?.table || 'producers',
     })
-    handleOnSearch({ owner: params?.account || 'eosio' })
-
     // eslint-disable-next-line
   }, [location.search])
 
-  useEffect(() => {
-    handleOnSearch({ owner: 'eosio' })
-    // eslint-disable-next-line
-  }, [])
   
   return (
     <div>
