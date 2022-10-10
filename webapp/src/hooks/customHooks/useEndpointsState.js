@@ -4,7 +4,9 @@ import { useLazyQuery } from '@apollo/client'
 import { ENDPOINTS_QUERY } from '../../gql'
 
 const useEndpointsState = () => {
-  const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY)
+  const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY, {
+    pollInterval: 120000,
+  })
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
   const [pagination, setPagination] = useState({

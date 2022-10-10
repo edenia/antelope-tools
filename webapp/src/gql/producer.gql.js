@@ -78,6 +78,7 @@ export const ENDPOINTS_QUERY = gql`
       updated_at
       nodes(where: {type: {_neq: ["producer"]}}){
         endpoints(order_by: {head_block_time: desc}, where: $endpointFilter){
+          id
           type
           value
           head_block_time
