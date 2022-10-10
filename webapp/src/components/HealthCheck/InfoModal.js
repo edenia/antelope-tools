@@ -31,16 +31,16 @@ const InfoModal = () => {
       <div className={classes.modal}>
         <p>{t('help')}</p>
         <div className={classes.item}>
-          <VerifiedIcon className={classes.success} /> {t('updated')}
+          <VerifiedIcon className={classes.greenLight} /> {t('updated')}
         </div>
         <div className={classes.item}>
           <TimerOffIcon className={classes.timerOff} /> {t('outdated')}
         </div>
         <div className={classes.item}>
-          <WarningIcon className={classes.warning} /> {t('error')}
+          <WarningIcon className={classes.yellowLight} /> {t('error')}
         </div>
         <div className={classes.item}>
-          <ReportIcon className={classes.fail} /> {t('not working')}
+          <ReportIcon className={classes.redLight} /> {t('not working')}
         </div>
       </div>
     )

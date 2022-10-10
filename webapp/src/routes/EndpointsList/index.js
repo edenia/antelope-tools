@@ -42,7 +42,7 @@ const EndpointsList = () => {
             </Typography>
             {updatedAt && (
               <Typography component="p" variant="caption">
-                {t('updatedAt')}: {moment(updatedAt).format('LL')}
+                {t('updatedAt')}: {moment(updatedAt).format('LLL')}
               </Typography>
             )}
           </div>

@@ -1,5 +1,7 @@
 export default (theme) => ({
   icon: {
+    display: 'flex',
+    justifyContent: 'space-between',
     '& svg': {
       width: '16px !important',
       height: '16px !important',
@@ -27,16 +29,16 @@ export default (theme) => ({
     height: '15px !important',
     cursor: 'pointer',
   },
-  success: {
+  greenLight: {
     color: 'darkgreen',
   },
   timerOff: {
     color: 'orange',
   },
-  warning: {
+  yellowLight: {
     color: 'orangered',
   },
-  fail: {
+  redLight: {
     color: 'darkred',
   },
 })

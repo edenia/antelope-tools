@@ -15,13 +15,13 @@ const HealthCheck = ({ children, status }) => {
   const getIcon = (status) => {
     switch (status) {
       case 'updated':
-        return <VerifiedIcon className={classes.success} />
+        return <VerifiedIcon className={classes.greenLight} />
       case 'outdated':
         return <TimerOffIcon className={classes.timerOff} />
       case 'error':
-        return <WarningIcon className={classes.warning} />
+        return <WarningIcon className={classes.yellowLight} />
       default:
-        return <ReportIcon className={classes.fail} />
+        return <ReportIcon className={classes.redLight} />
     }
   }
 
