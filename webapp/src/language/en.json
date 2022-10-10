@@ -158,6 +158,7 @@
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
     "accountNotFound": "Account not found",
+    "tableNotFound": "Table not found",
     "successMessage": "Success transaction",
     "placeholder": "Account or Contract Name",
     "title": "Search for account information, view tables and execute actions for any contract."
