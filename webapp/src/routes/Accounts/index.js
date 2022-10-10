@@ -152,7 +152,7 @@ const Accounts = ({ ual }) => {
   
   return (
     <div>
-      <Card>
+      <Card className={classes.cardShadow}>
         <CardContent className={classes.cardContent}>
           <SearchBar
             filters={filters}
