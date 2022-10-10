@@ -27,7 +27,7 @@ const HealthCheck = ({ children, status }) => {
 
   return (
     <div className={classes.icon}>
-      {status !== undefined && getIcon(status)} {children}
+      {children} {status !== undefined && getIcon(status)}
     </div>
   )
 }

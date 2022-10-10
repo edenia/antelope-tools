@@ -50,7 +50,9 @@ const InfoModal = () => {
     <>
       <HelpOutlineIcon
         className={classes.helpIcon}
-        onClick={handlePopoverOpen}
+        onClick={(e) => {
+          handlePopoverOpen(e.target)
+        }}
       />
       <Tooltip
         anchorEl={anchorEl}
