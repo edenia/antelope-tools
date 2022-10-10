@@ -244,8 +244,8 @@ const RewardsDistribution = () => {
         </Box>
       </Popover>
       {loading && <LinearProgress className={classes.linearLoader} />}
-      <div className={classes.flexdad}>
-        <div className={classes.mainReward}>
+      <div className={classes.topCard}>
+        <div className={classes.mainCard}>
           <Card className={classes.cardShadow}>
             <CardContent>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
