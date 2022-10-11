@@ -23,8 +23,9 @@ const HealthCheck = ({ children, status }) => {
   if (status === undefined) return
 
   return (
-    <div className={classes.icon}>
+    <>
       <div
+        className={classes.icon}
         onClick={(e) => {
           handlePopoverOpen(e.target)
         }}
@@ -38,7 +39,7 @@ const HealthCheck = ({ children, status }) => {
       >
         {children}
       </Tooltip>
-    </div>
+    </>
   )
 }
 
