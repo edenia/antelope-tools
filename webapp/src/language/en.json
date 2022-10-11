@@ -325,6 +325,14 @@
     "producer": "Producer",
     "placeholder": "Producer Name"
   },
+  "endpointInfoComponent": {
+    "status": "Status",
+    "response": "Response",
+    "headBlockTime": "Head Block Time",
+    "updatedAt": "Updated at",
+    "error": "Error",
+    "noResponse": "No response"
+  },
   "nodeSearchComponent": {
     "title": "Search Node",
     "producer": "Producer",

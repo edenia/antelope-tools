@@ -328,6 +328,27 @@
     "producer": "Productor",
     "placeholder": "Nombre del Productor"
   },
+  "endpointInfoComponent": {
+    "status": "Estado",
+    "response": "Respuesta",
+    "headBlockTime": "Fecha del último bloque",
+    "updatedAt": "Actualizado por última vez",
+    "error": "Error",
+    "noResponse": "Sin respuesta",
+    "Bad Gateway": "Mal puerta de enlace",
+    "Bad request": "Solicitud incorrecta",
+    "Not Found": "No encontrado",
+    "No response": "No responde",
+    "Service Temporarily Unavailable": "Servicio temporalmente no disponible",
+    "Service Unavailable": "Servicio no disponible",
+    "Gateway Time-out": "Tiempo de espera superado",
+    "Internal Server Error": "Error interno en el servidor",
+    "Unauthorized": "Solicitud no autorizada",
+    "Payment Required": "La solicitud requiere un pago",
+    "Forbidden": "La solicitud está prohibida",
+    "Request Timeout": "Tiempo de la solicitud superado",
+    "Too Many Request": "Demasiadas solicitudes"
+  },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
     "producer": "Productor",

@@ -9,11 +9,11 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import moment from 'moment'
 
 import HealthCheck from '../HealthCheck'
 
 import styles from './styles'
+import EndpointInfo from './EndpointInfo'
 
 const useStyles = makeStyles(styles)
 
@@ -39,7 +39,7 @@ const EndpointsTable = ({ producers }) => {
     }
   }
 
-  const CellList = ({ producer, endpointType }) => {    
+  const CellList = ({ producer, endpointType }) => {
     return (
       <TableCell>
         {!producer?.endpoints[endpointType].length ? (
@@ -53,19 +53,7 @@ const EndpointsTable = ({ producers }) => {
               {endpoint.value}
               {endpointType !== 'p2p' && (
                 <HealthCheck status={getStatus(endpoint)}>
-                  <div>
-                    <Typography>Status: {endpoint.response?.status || 'Error'}</Typography>
-                    <Typography>Response: {endpoint.response?.statusText || 'No response'}</Typography>
-                    {endpoint.response?.status === 200 && (
-                      <>
-                        <Typography>Head Block Time</Typography>
-                        {moment(endpoint.head_block_time).format('lll') ||
-                          'N/A'}
-                      </>
-                    )}
-                    <Typography>Updated at</Typography>
-                    {moment(endpoint.updated_at).format('lll') || 'N/A'}
-                  </div>
+                  <EndpointInfo endpoint={endpoint}/>
                 </HealthCheck>
               )}
             </div>
