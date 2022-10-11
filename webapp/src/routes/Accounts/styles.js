@@ -13,5 +13,8 @@ export default (theme) => ({
     letterSpacing: '0.06px',
     textAlign: 'left !important',
     marginBottom: `${theme.spacing(2)} !important`
-  }
+  },
+  cardShadow: {
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
+  },
 })
