@@ -1,10 +1,9 @@
 export default (theme) => ({
   icon: {
-    display: 'flex',
-    justifyContent: 'space-between',
     '& svg': {
       width: '16px !important',
       height: '16px !important',
+      cursor: 'pointer',
     },
   },
   modal: {

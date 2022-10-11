@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import ReportIcon from '@mui/icons-material/Report'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import TimerOffIcon from '@mui/icons-material/TimerOff'
-import WarningIcon from '@mui/icons-material/Warning'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 
 import Tooltip from '../Tooltip'
 
 import styles from './styles'
+import LightIcon from './LightIcon'
 
 const useStyles = makeStyles(styles)
+const defaultLights = {
+  greenLight: 'updated',
+  timerOff: 'outdated',
+  yellowLight: 'error',
+  redLight: 'not working',
+}
 
-const InfoModal = () => {
+const InfoModal = ({ lights = defaultLights }) => {
   const classes = useStyles()
   const { t } = useTranslation('healthCheckComponent')
   const [anchorEl, setAnchorEl] = useState(null)
@@ -30,18 +33,12 @@ const InfoModal = () => {
     return (
       <div className={classes.modal}>
         <p>{t('help')}</p>
-        <div className={classes.item}>
-          <VerifiedIcon className={classes.greenLight} /> {t('updated')}
-        </div>
-        <div className={classes.item}>
-          <TimerOffIcon className={classes.timerOff} /> {t('outdated')}
-        </div>
-        <div className={classes.item}>
-          <WarningIcon className={classes.yellowLight} /> {t('error')}
-        </div>
-        <div className={classes.item}>
-          <ReportIcon className={classes.redLight} /> {t('not working')}
-        </div>
+        {lights &&
+          Object.keys(lights).map((light, index) => (
+            <div className={classes.item} key={`light-${light}-${index}`}>
+              <LightIcon status={light} /> {t(lights[light])}
+            </div>
+          ))}
       </div>
     )
   }

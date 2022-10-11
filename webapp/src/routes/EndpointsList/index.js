@@ -16,8 +16,8 @@ import moment from 'moment'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
+import EndpointsTable from '../../components/EndpointsTable'
 
-import EndpointsTable from './EndpointsTable'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)

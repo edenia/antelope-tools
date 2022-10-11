@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
+import { makeStyles } from '@mui/styles'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -8,43 +9,66 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import moment from 'moment'
 
-import HealthCheck from '../../components/HealthCheck'
+import HealthCheck from '../HealthCheck'
+
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const EndpointsTable = ({ producers }) => {
+  const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
 
   const getStatus = (endpoint) => {
     if (endpoint.response.status === undefined) return
 
     if ((new Date() - new Date(endpoint.head_block_time)) / 60000 <= 3) {
-      return 'updated'
+      return 'greenLight'
     } else {
-      switch (Math.floor(endpoint.response.status / 100)) {
+      switch (Math.floor(endpoint.response?.status / 100)) {
         case 2:
-          return 'outdated'
+          return 'timerOff'
         case 4:
         case 5:
-          return 'error'
+          return 'yellowLight'
         default:
-          return 'not working'
+          return 'redLight'
       }
     }
   }
 
-  const CellList = ({ producer, endpointType }) => {
+  const CellList = ({ producer, endpointType }) => {    
     return (
       <TableCell>
         {!producer?.endpoints[endpointType].length ? (
           <Typography>N/A</Typography>
         ) : (
           producer.endpoints[endpointType].map((endpoint, index) => (
-            <HealthCheck
-              status={getStatus(endpoint)}
+            <div
+              className={classes.healthContainer}
               key={`${producer?.name}-${endpointType}-${index}`}
             >
               {endpoint.value}
-            </HealthCheck>
+              {endpointType !== 'p2p' && (
+                <HealthCheck status={getStatus(endpoint)}>
+                  <div>
+                    <Typography>Status: {endpoint.response?.status || 'Error'}</Typography>
+                    <Typography>Response: {endpoint.response?.statusText || 'No response'}</Typography>
+                    {endpoint.response?.status === 200 && (
+                      <>
+                        <Typography>Head Block Time</Typography>
+                        {moment(endpoint.head_block_time).format('lll') ||
+                          'N/A'}
+                      </>
+                    )}
+                    <Typography>Updated at</Typography>
+                    {moment(endpoint.updated_at).format('lll') || 'N/A'}
+                  </div>
+                </HealthCheck>
+              )}
+            </div>
           ))
         )}
       </TableCell>

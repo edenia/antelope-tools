@@ -1,33 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
-import ReportIcon from '@mui/icons-material/Report'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import TimerOffIcon from '@mui/icons-material/TimerOff'
-import WarningIcon from '@mui/icons-material/Warning'
+
+import Tooltip from '../Tooltip'
 
 import styles from './styles'
+import LightIcon from './LightIcon'
 
 const useStyles = makeStyles(styles)
 
 const HealthCheck = ({ children, status }) => {
   const classes = useStyles()
+  const [anchorEl, setAnchorEl] = useState(null)
 
-  const getIcon = (status) => {
-    switch (status) {
-      case 'updated':
-        return <VerifiedIcon className={classes.greenLight} />
-      case 'outdated':
-        return <TimerOffIcon className={classes.timerOff} />
-      case 'error':
-        return <WarningIcon className={classes.yellowLight} />
-      default:
-        return <ReportIcon className={classes.redLight} />
-    }
+  const handlePopoverOpen = (target) => {
+    setAnchorEl(target)
   }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  if (status === undefined) return
 
   return (
     <div className={classes.icon}>
-      {children} {status !== undefined && getIcon(status)}
+      <div
+        onClick={(e) => {
+          handlePopoverOpen(e.target)
+        }}
+      >
+        <LightIcon status={status} />
+      </div>
+      <Tooltip
+        anchorEl={anchorEl}
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+      >
+        {children}
+      </Tooltip>
     </div>
   )
 }

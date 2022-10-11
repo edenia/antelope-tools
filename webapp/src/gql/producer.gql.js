@@ -83,6 +83,7 @@ export const ENDPOINTS_QUERY = gql`
           value
           head_block_time
           response
+          updated_at
         }
       }
     }
