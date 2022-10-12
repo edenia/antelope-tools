@@ -4,12 +4,8 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
 import CountryFlag from '../CountryFlag'
-import NodeInformation from './NodeInformation'
 
-const Information = ({ info, classes, type, t }) => {
-  if (type === 'node')
-    return <NodeInformation info={info} classes={classes} t={t} />
-
+const ProducerInformation = ({ info, classes, t }) => {
   const RowUrl = ({ title, value, href }) => {
     return (
       <div className={classes.rowWrapper}>
@@ -69,17 +65,15 @@ const Information = ({ info, classes, type, t }) => {
   )
 }
 
-Information.propTypes = {
-  type: PropTypes.string,
+ProducerInformation.propTypes = {
   info: PropTypes.object,
   classes: PropTypes.object,
   t: PropTypes.func,
 }
 
-Information.defaultProps = {
-  type: '',
+ProducerInformation.defaultProps = {
   info: {},
   classes: {},
 }
 
-export default memo(Information)
+export default memo(ProducerInformation)

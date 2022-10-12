@@ -19,12 +19,11 @@ import { eosConfig } from '../../config'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import NodesCard from '../NodeCard/NodesCard'
 
-import Information from './Information'
+import ProducerInformation from './ProducerInformation'
 import Nodes from './Nodes'
 import Social from './Social'
 import Media from './Media'
 import Stats from './Stats'
-import Endpoints from './Endpoints'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -64,7 +63,7 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
       <div className="bodyWrapper">
         <div className={clsx(classes.info, classes[type])}>
           <Typography variant="overline">{t('info')}</Typography>
-          <Information
+          <ProducerInformation
             info={producerOrg.info}
             classes={classes}
             t={t}
@@ -84,12 +83,6 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
             producer.total_rewards || '0',
             0,
           )}
-        />
-        <Endpoints
-          endpoints={producerOrg.endpoints}
-          classes={classes}
-          t={t}
-          type={type}
         />
         <Nodes
           nodes={producerOrg.nodes}
@@ -148,9 +141,11 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
   return (
     <Card className={classes.root}>
       <CardHeader title={producerOrg.title} />
-      <div className={`${classes.wrapper} ${
-            type === 'node' ? classes.hideScroll : ''
-          }`}>
+      <div
+        className={`${classes.wrapper} ${
+          type === 'node' ? classes.hideScroll : ''
+        }`}
+      >
         <div className={classes.media}>
           <Media classes={classes} media={producerOrg.media || {}} />
         </div>

@@ -50,7 +50,10 @@ const NodesCard = ({ nodes }) => {
           ({ key, value }, index) =>
             node[key]?.length && (
               <dd key={`endpoint-${node[key]}-${value}-${index}`}>
-                <span className={classes.bold}>{value}</span>: {node[key]}
+                <span>{value.toUpperCase()}</span>:{' '}
+                <a href={node[key]} target="_blank" rel="noopener noreferrer">
+                  {node[key] || 'N/A'}
+                </a>
               </dd>
             ),
         )}
@@ -110,6 +113,7 @@ const NodesCard = ({ nodes }) => {
         {(nodes || []).map((node, index) => (
           <Card key={`node-${index}`} className={classes.nodes} elevation={0}>
             <CardHeader
+              className={classes.cardHeader}
               title={node.node_type?.toString() || ''}
               subheader={
                 <>

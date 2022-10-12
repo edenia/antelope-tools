@@ -4,9 +4,7 @@ import Typography from '@mui/material/Typography'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
 const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
-  if (type === 'node') return <></>
-
-  if (!nodes?.length)
+  if (!nodes?.length) {
     return (
       <div className={classes.nodes}>
         <Typography variant="overline">{t('nodes')}</Typography>
@@ -15,6 +13,7 @@ const Nodes = ({ nodes, producer, onNodeClick, t, type, classes }) => {
         </div>
       </div>
     )
+  }
 
   return (
     <div className={classes.nodes}>
@@ -41,7 +40,7 @@ Nodes.propTypes = {
   onNodeClick: PropTypes.func,
   classes: PropTypes.object,
   t: PropTypes.func,
-  type: PropTypes.string
+  type: PropTypes.string,
 }
 
 Nodes.defaultProps = {
@@ -49,7 +48,7 @@ Nodes.defaultProps = {
   nodes: [],
   producer: {},
   onNodeClick: () => {},
-  classes: {}
+  classes: {},
 }
 
 export default memo(Nodes)

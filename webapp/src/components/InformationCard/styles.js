@@ -4,15 +4,15 @@ export default (theme) => ({
     marginBottom: theme.spacing(2),
     paddingBottom: 0,
     '& .MuiCardHeader-title': {
-      textTransform: 'lowercase'
+      textTransform: 'lowercase',
     },
     [theme.breakpoints.up('sm')]: {
-      width: 300
+      width: 300,
     },
     [theme.breakpoints.up('lg')]: {
       width: '100%',
-      paddingBottom: theme.spacing(2)
-    }
+      paddingBottom: theme.spacing(2),
+    },
   },
   wrapper: {
     display: 'flex',
@@ -21,11 +21,11 @@ export default (theme) => ({
     padding: theme.spacing(0, 4, 4, 4),
     '& .MuiTypography-overline': {
       marginLeft: 0,
-      fontWeight: '700'
+      fontWeight: '700',
     },
     '& .bodyWrapper': {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: 980,
@@ -34,13 +34,13 @@ export default (theme) => ({
       '& .bodyWrapper': {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        width: '100%'
+        width: '100%',
       },
       '& .MuiTypography-overline': {
         marginLeft: theme.spacing(3),
-        lineHeight: '0'
-      }
-    }
+        lineHeight: '0',
+      },
+    },
   },
   nodeCardsContainer: {
     width: '100%',
@@ -50,7 +50,7 @@ export default (theme) => ({
     borderColor: '#f3f3f3',
     borderRadius: '5px',
   },
-  hideScroll:{
+  hideScroll: {
     overflowX: 'hidden',
   },
   media: {
@@ -60,39 +60,39 @@ export default (theme) => ({
     padding: theme.spacing(0, 2),
     '& img': {
       width: 82,
-      height: 82
+      height: 82,
     },
     '& .bpName': {
       fontSize: 28,
       lineHeight: '34px',
       letterSpacing: '-0.233333px',
       marginBottom: theme.spacing(1),
-      textAlign: 'center'
+      textAlign: 'center',
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
       minWidth: 200,
       maxWidth: 300,
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+    },
   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    transform: 'rotate(180deg)',
   },
   expandMore: {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     '& .MuiButtonBase-root': {
-      textTransform: 'capitalize'
-    }
+      textTransform: 'capitalize',
+    },
   },
   info: {
     borderLeft: 'none',
@@ -101,20 +101,20 @@ export default (theme) => ({
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      overflow: 'hidden'
-    }
+      overflow: 'hidden',
+    },
   },
   entity: {
     [theme.breakpoints.up('lg')]: {
       width: 260,
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   node: {
     [theme.breakpoints.up('lg')]: {
       width: 260,
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   textEllipsis: {
     margin: theme.spacing(1, 0),
@@ -123,8 +123,8 @@ export default (theme) => ({
     overflow: 'hidden',
     width: 350,
     '& a': {
-      marginLeft: theme.spacing(1)
-    }
+      marginLeft: theme.spacing(1),
+    },
   },
   textWrap: {
     width: 210,
@@ -133,17 +133,17 @@ export default (theme) => ({
     overflow: 'visible !important',
     whiteSpace: 'normal !important',
     [theme.breakpoints.up('lg')]: {
-      width: 290
-    }
+      width: 290,
+    },
   },
   cardActions: {
     display: 'flex',
     [theme.breakpoints.up('lg')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   breakLine: {
-    wordBreak: 'break-word'
+    wordBreak: 'break-word',
   },
   borderLine: {
     marginTop: theme.spacing(2),
@@ -152,8 +152,8 @@ export default (theme) => ({
     marginBottom: theme.spacing(3),
     [theme.breakpoints.up('lg')]: {
       borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-      padding: theme.spacing(0, 3)
-    }
+      padding: theme.spacing(0, 3),
+    },
   },
   nodes: {
     borderLeft: 'none',
@@ -162,44 +162,44 @@ export default (theme) => ({
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15
+      fontSize: 15,
     },
     [theme.breakpoints.up('lg')]: {
-      width: 140
-    }
+      width: 140,
+    },
   },
   rowWrapper: {
     display: 'flex',
     alignItems: 'center',
     '& .listBox': {
-      marginLeft: theme.spacing(1)
+      marginLeft: theme.spacing(1),
     },
     '& .listLabel': {
       height: '100%',
       '& .MuiSvgIcon-root': {
         marginRight: theme.spacing(1),
-        fontSize: 15
+        fontSize: 15,
       },
       '& .MuiTypography-body1': {
-        whiteSpace: 'nowrap'
-      }
+        whiteSpace: 'nowrap',
+      },
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150
-    }
+      minWidth: 150,
+    },
   },
   boxLabel: {
-    alignItems: 'baseline !important'
+    alignItems: 'baseline !important',
   },
   flexColumn: {
-    flexDirection: 'column !important'
+    flexDirection: 'column !important',
   },
   collapse: {
-    width: '100%'
+    width: '100%',
   },
   healthStatus: {
     '& .MuiTypography-body1': {
@@ -207,24 +207,24 @@ export default (theme) => ({
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15
+      fontSize: 15,
     },
     '& .success': {
-      color: theme.palette.success.main
+      color: theme.palette.success.main,
     },
     '& .error': {
-      color: theme.palette.error.main
+      color: theme.palette.error.main,
     },
     '& .warning': {
-      color: theme.palette.warning.main
+      color: theme.palette.warning.main,
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150
-    }
+      minWidth: 150,
+    },
   },
   social: {
     borderLeft: 'none',
@@ -234,17 +234,17 @@ export default (theme) => ({
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     '& a': {
-      display: 'flex'
+      display: 'flex',
     },
     '& svg': {
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(1),
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150
-    }
+      minWidth: 150,
+    },
   },
   dd: {
     marginLeft: theme.spacing(6),
@@ -252,6 +252,6 @@ export default (theme) => ({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    width: 220
-  }
+    width: 220,
+  },
 })

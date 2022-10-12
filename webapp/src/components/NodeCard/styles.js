@@ -7,6 +7,9 @@ export default (theme) => ({
   content: {
     flex: 1,
   },
+  cardHeader: {
+    paddingBottom: `${theme.spacing(1)} !important`,
+  },
   avatar: {
     width: 30,
     height: 30,
