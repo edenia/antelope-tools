@@ -23,4 +23,20 @@ export default (theme) => ({
   breakLine: {
     wordBreak: 'break-word',
   },
+  nodes: {
+    minWidth: '150px',
+    padding: theme.spacing(3),
+    overflowX: 'auto',
+    marginLeft: '5px',
+    marginRight: '5px',
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
+  },
+  nodesContainer: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    padding: theme.spacing(2),
+  },
+  nodesWrapper: {
+    display: 'flex',
+  },
 })

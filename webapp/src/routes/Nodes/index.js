@@ -17,34 +17,6 @@ const NoResults = lazy(() => import('../../components/NoResults'))
 
 const useStyles = makeStyles(styles)
 
-const NodesCards = ({ node, producer }) => {
-  const classes = useStyles()
-  const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
-  const [missedBlocks, setMissedBlocks] = useState({})
-
-  useEffect(() => {
-    if (data?.stats?.length) {
-      setMissedBlocks(data?.stats[0].missed_blocks)
-    }
-  }, [data, loading])
-
-  return (
-    <div
-      className={classes.card}
-      key={`${node.node_type}-${producer.owner}-${node.index}`}
-    >
-      <InformationCard
-        producer={{ ...producer, node, missedBlocks }}
-        type="node"
-      />
-    </div>
-  )
-}
-
-NodesCards.propTypes = {
-  item: PropTypes.object,
-}
-
 const Nodes = () => {
   const classes = useStyles()
   const [
@@ -66,11 +38,12 @@ const Nodes = () => {
         <>
           <div className={classes.container}>
             {!!items?.length ? (
-              items.map(({ node, producer }, index) => (
-                <NodesCards
-                  node={{ index, ...node }}
-                  producer={producer}
+              items.map((producer, index) => (
+                <InformationCard
                   key={`node-${producer.owner}-${index}`}
+                  type="node"
+                  producer={{ ...producer, missedBlocks: undefined }}
+                  rank={producer.rank}
                 />
               ))
             ) : (

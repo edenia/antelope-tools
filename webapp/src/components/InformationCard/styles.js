@@ -42,6 +42,17 @@ export default (theme) => ({
       }
     }
   },
+  nodeCardsContainer: {
+    width: '100%',
+    overflowX: 'auto',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    borderColor: '#f3f3f3',
+    borderRadius: '5px',
+  },
+  hideScroll:{
+    overflowX: 'hidden',
+  },
   media: {
     display: 'flex',
     flexDirection: 'column',

@@ -60,6 +60,7 @@ export const formatData = (
 
   switch (type) {
     case 'entity':
+    case 'node':
       if (eosConfig.networkName === 'lacchain') {
         newData.title = owner
       } else {
@@ -97,40 +98,6 @@ export const formatData = (
         social: data.social,
       }
 
-      break
-
-    case 'node':
-      newData = {
-        title: owner || null,
-        media: {
-          logo: data.branding?.logo_256 || null,
-          name: node?.name,
-          account: node?.node_type || null,
-        },
-        info: {
-          version: node?.server_version_string || null,
-          features: node?.features || [],
-          keys: node?.keys || null,
-        },
-        stats: {
-          lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks:
-            node?.node_type === 'validator' ? missedBlocks[node?.name] : 0,
-        },
-        nodes: [],
-        healthStatus: node?.health_status,
-        social: null,
-        endpoints: {
-          p2p: node.p2p_endpoint,
-          api: node.api_endpoint,
-          ssl: node.ssl_endpoint,
-        },
-      }
-
-      break
-
-    case 'bp':
-      // TODO: Modeled Block Producer data
       break
 
     default:

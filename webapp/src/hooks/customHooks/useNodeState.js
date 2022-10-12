@@ -40,17 +40,25 @@ const useNodeState = () => {
   useEffect(() => {
     if (!producers) return
 
-    const nodesList = []
+    const list = producers.flatMap((producer)=>{
+      if(!producer.bp_json?.nodes?.length) return []
+      
+      const nodesList = []
 
-    producers.forEach((producer) => {
-      (producer?.bp_json?.nodes ?? []).forEach((node) => {
+      producer.bp_json.nodes.forEach((node) => {
         if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
-          nodesList.push({ node, producer })
+          nodesList.push(node)
         }
       })
+
+      nodesList.sort((a,b) => {
+        return a.node_type < b.node_type
+      })
+
+      return nodesList.length ? {...producer, bp_json: {...producer.bp_json, nodes: nodesList}} : [] 
     })
 
-    setNodes(nodesList)
+    setNodes(list)
   }, [filters.name, producers])
 
   return [
