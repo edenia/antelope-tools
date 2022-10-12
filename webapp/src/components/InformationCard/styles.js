@@ -3,6 +3,7 @@ export default (theme) => ({
     width: '100%',
     marginBottom: theme.spacing(2),
     paddingBottom: 0,
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     '& .MuiCardHeader-title': {
       textTransform: 'lowercase',
     },
@@ -43,7 +44,12 @@ export default (theme) => ({
     },
   },
   nodeCardsContainer: {
-    width: '100%',
+    [theme.breakpoints.up('lg')]: {
+      width: '84%',
+    },
+    [theme.breakpoints.down('lg')]: {
+      width: '100%',
+    },
     overflowX: 'auto',
     borderWidth: '2px',
     borderStyle: 'solid',
