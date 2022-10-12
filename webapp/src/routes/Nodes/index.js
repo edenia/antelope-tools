@@ -1,13 +1,10 @@
 /* eslint camelcase: 0 */
-import React, { lazy, memo, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { useSubscription } from '@apollo/client'
+import React, { lazy, memo } from 'react'
 import { makeStyles } from '@mui/styles'
 
-import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import useNodeState from '../../hooks/customHooks/useNodeState'
 
 import styles from './styles'
-import useNodeState from '../../hooks/customHooks/useNodeState'
 
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
@@ -65,7 +62,5 @@ const Nodes = () => {
     </div>
   )
 }
-
-Nodes.propTypes = {}
 
 export default memo(Nodes)
