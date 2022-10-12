@@ -51,9 +51,9 @@ const NodesCard = ({ nodes }) => {
         <dt className={classes.bold}>{t('endpoints')}</dt>
         {endpoints.map(
           ({ key, value }, index) =>
-            node[key]?.length && (
+            !!node[key]?.length && (
               <dd key={`endpoint-${node[key]}-${value}-${index}`}>
-                <span>{value.toUpperCase()}</span>:{' '}
+                <span>{value}</span>:{' '}
                 <a href={node[key]} target="_blank" rel="noopener noreferrer">
                   {node[key] || 'N/A'}
                 </a>
@@ -86,7 +86,7 @@ const NodesCard = ({ nodes }) => {
     )
   }
   const Keys = ({ node }) => {
-    if (!node?.keys) {
+    if (!Array.isArray(node?.keys) || !node?.keys?.length) {
       return <></>
     }
 
@@ -103,9 +103,7 @@ const NodesCard = ({ nodes }) => {
     )
   }
   const Features = ({ node }) => {
-    if (!node?.features) {
-      return <></>
-    }
+    if (!node?.features?.length) return <></>
 
     return (
       <>
