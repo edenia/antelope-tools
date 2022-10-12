@@ -10,6 +10,7 @@ import CardActions from '@mui/material/CardActions'
 import 'flag-icon-css/css/flag-icons.css'
 
 import CountryFlag from '../CountryFlag'
+import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
 import styles from './styles'
 
@@ -60,6 +61,20 @@ const NodesCard = ({ nodes }) => {
       </>
     )
   }
+  const HealthStatus = ({ node }) => {
+    if (!node?.health_status?.length) {
+      return <></>
+    }
+
+    return (
+      <>
+        <dt className={classes.bold}>{t('healthStatus')}</dt>
+        <dd>
+          <ProducerHealthIndicators producer={node} />
+        </dd>
+      </>
+    )
+  }
   const Keys = ({ node }) => {
     if (!node?.keys) {
       return <></>
@@ -70,8 +85,8 @@ const NodesCard = ({ nodes }) => {
         <dt className={classes.bold}>{t('keys')}</dt>
         {Object.keys(node.keys).map((key, i) => (
           <dd key={i}>
-            <span className={classes.bold}>{key}</span>:{' '}
-            <span className={classes.breakLine}>{node.keys[key]}</span>
+            <p className={classes.bold}>{key}:</p>
+            <p className={classes.breakLine}>{node.keys[key]}</p>
           </dd>
         ))}
       </>
@@ -103,6 +118,7 @@ const NodesCard = ({ nodes }) => {
         <Endpoints node={node} />
         <Features node={node} />
         <Keys node={node} />
+        <HealthStatus node={node} />
       </>
     )
   }

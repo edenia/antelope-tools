@@ -16,7 +16,6 @@ export const formatData = (
     nodes,
     healthStatus,
     dataType,
-    node,
     totalRewards,
   },
   type,

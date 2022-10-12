@@ -41,5 +41,6 @@ export default (theme) => ({
   },
   nodesWrapper: {
     display: 'flex',
+    width: 'max-content',
   },
 })

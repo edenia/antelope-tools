@@ -27,7 +27,7 @@ const useBlockProducerState = () => {
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
-    BLOCK_TRANSACTIONS_HISTORY
+    BLOCK_TRANSACTIONS_HISTORY,
   )
   const [totalPages, setTotalPages] = useState(1)
   const [current, setCurrent] = useState(null)
@@ -39,9 +39,9 @@ const useBlockProducerState = () => {
     return { name: e }
   })
 
-  const handlePopoverOpen = (node) => (event) => {
+  const handlePopoverOpen = (node, event) => {
     setCurrent(node)
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.target)
   }
 
   const handlePopoverClose = () => {
