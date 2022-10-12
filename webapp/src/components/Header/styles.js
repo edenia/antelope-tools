@@ -15,8 +15,7 @@ export default (theme) => ({
   },
   imgHeaderLogo: {
     width: '145px',
-    height: '65px',
-    marginTop: '7px',
+    marginTop: '5px',
   },
   appBar: {
     backgroundColor: '#fff !important',
