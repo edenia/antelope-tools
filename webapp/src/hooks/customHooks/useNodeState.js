@@ -16,6 +16,15 @@ const useNodeState = () => {
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
+  const getOrderNode = (node) => {
+    return (
+      !!node.p2p_endpoint +
+      !!node.api_endpoint +
+      !!node.ssl_endpoint +
+      !!node.features?.length
+    )
+  }
+
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
@@ -40,9 +49,9 @@ const useNodeState = () => {
   useEffect(() => {
     if (!producers) return
 
-    const list = producers.flatMap((producer)=>{
-      if(!producer.bp_json?.nodes?.length) return []
-      
+    const list = producers.flatMap((producer) => {
+      if (!producer.bp_json?.nodes?.length) return []
+
       const nodesList = []
 
       producer.bp_json.nodes.forEach((node) => {
@@ -51,11 +60,13 @@ const useNodeState = () => {
         }
       })
 
-      nodesList.sort((a,b) => {
-        return a.node_type < b.node_type
+      nodesList.sort((a, b) => {
+        return getOrderNode(a) < getOrderNode(b)
       })
 
-      return nodesList.length ? {...producer, bp_json: {...producer.bp_json, nodes: nodesList}} : [] 
+      return nodesList.length
+        ? { ...producer, bp_json: { ...producer.bp_json, nodes: nodesList } }
+        : []
     })
 
     setNodes(list)
