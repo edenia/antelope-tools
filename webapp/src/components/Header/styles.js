@@ -14,9 +14,9 @@ export default (theme) => ({
     fontWeight: '600 !important',
   },
   imgHeaderLogo: {
-    width: '150px',
-    height: '70px',
-    marginTop: '2px',
+    width: '145px',
+    height: '65px',
+    marginTop: '7px',
   },
   appBar: {
     backgroundColor: '#fff !important',
