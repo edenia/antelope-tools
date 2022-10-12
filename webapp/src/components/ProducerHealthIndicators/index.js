@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip'
 import { useTranslation } from 'react-i18next'
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined'
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined'
-import Typography  from '@mui/material/Typography'
+import Typography from '@mui/material/Typography'
 
 import styles from './styles'
 
@@ -41,7 +41,7 @@ const ProducerHealthIndicators = ({ producer, message }) => {
 
 ProducerHealthIndicators.propTypes = {
   producer: PropTypes.any,
-  message: PropTypes.string
+  message: PropTypes.string,
 }
 
 export default ProducerHealthIndicators

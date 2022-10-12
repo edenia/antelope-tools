@@ -50,6 +50,7 @@ export const NODES_QUERY = gql`
       bp_json
       total_rewards
       total_votes_percent
+      rank
       updated_at
     }
   }
