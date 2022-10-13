@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 
 import HealthCheck from '../HealthCheck'
+import { eosConfig } from '../../config'
 
 import styles from './styles'
 import EndpointInfo from './EndpointInfo'
@@ -20,11 +21,14 @@ const useStyles = makeStyles(styles)
 const EndpointsTable = ({ producers }) => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
+  const syncToleranceInterval = eosConfig.syncToleranceInterval
 
   const getStatus = (endpoint) => {
     if (endpoint.response.status === undefined) return
 
-    if ((new Date() - new Date(endpoint.head_block_time)) / 60000 <= 3) {
+    const diffBlockTimems = new Date() - new Date(endpoint.head_block_time)
+
+    if (diffBlockTimems <= syncToleranceInterval) {
       return 'greenLight'
     } else {
       switch (Math.floor(endpoint.response?.status / 100)) {
