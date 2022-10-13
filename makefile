@@ -162,8 +162,8 @@ deploy-kubernetes: $(K8S_BUILD_DIR)
 	@echo "Creating SSL certificates..."
 	@kubectl create secret tls \
 		dashboard-tls-secret \
-		--key ./ssl/eosio.online.priv.key \
-		--cert ./ssl/eosio.online.crt \
+		--key ./ssl/antelope.tools.priv.key \
+		--cert ./ssl/antelope.tools.crt \
 		-n $(NAMESPACE)  || echo "SSL cert already configured.";
 	@echo "Creating configmaps..."
 	@kubectl create configmap -n $(NAMESPACE) \

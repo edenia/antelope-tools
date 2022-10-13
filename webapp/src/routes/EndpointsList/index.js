@@ -10,12 +10,14 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Switch from '@mui/material/Switch'
 import Pagination from '@mui/material/Pagination'
 import moment from 'moment'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
+import HealthInfoModal from '../../components/HealthCheck/InfoModal'
+import EndpointsTable from '../../components/EndpointsTable'
 
-import EndpointsTable from './EndpointsTable'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -27,7 +29,7 @@ const EndpointsList = () => {
   const { t } = useTranslation('endpointsListRoute')
   const [
     { loading, pagination, producers, updatedAt },
-    { handleOnPageChange, setPagination },
+    { handleFilter, handleOnPageChange, setPagination },
   ] = useEndpointsState()
 
   return (
@@ -40,9 +42,16 @@ const EndpointsList = () => {
             </Typography>
             {updatedAt && (
               <Typography component="p" variant="caption">
-                {t('updatedAt')}: {moment(updatedAt).format('LL')}
+                {t('updatedAt')}: {moment(updatedAt).format('LLL')}
               </Typography>
             )}
+          </div>
+          <div className={classes.switchContainer}>
+            <Typography component="p" variant="caption">{t('endpointsResponding')}</Typography>
+            <Switch onChange={(event)=>{handleFilter(event.target?.checked)}}/>
+          </div>
+          <div className={classes.modalContainer}>
+            <HealthInfoModal />
           </div>
           <FormControl variant="standard">
             <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
@@ -71,7 +80,11 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length && <EndpointsTable producers={producers} />}
+            {!!producers.length && (
+              <EndpointsTable
+                producers={producers}
+              />
+            )}
             {pagination.totalPages > 1 && (
               <div className={classes.pagination}>
                 <Pagination

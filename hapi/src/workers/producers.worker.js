@@ -2,6 +2,7 @@ const {
   cpuService,
   missedBlocksService,
   producerService,
+  nodeService,
   settingService,
   stateHistoryPluginService,
   statsService,
@@ -44,10 +45,16 @@ const start = async () => {
     }
   }
 
+  await nodeService.clearNodes()
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,
     workersConfig.syncProducersInterval
+  )
+  run(
+    'SYNC ENDPOINTS',
+    producerService.syncEndpoints,
+    workersConfig.syncProducersInterval / 120
   )
   run(
     'SYNC EXCHANGE RATE',

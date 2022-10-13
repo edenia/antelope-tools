@@ -54,6 +54,7 @@ build-docker: ./Dockerfile
 		--build-arg react_app_state_history_enabled='$(REACT_APP_STATE_HISTORY_ENABLED)' \
 		--build-arg react_app_google_analitic_page_id='$(REACT_APP_GOOGLE_ANALITIC_PAGE_ID)' \
 		--build-arg react_app_public_re_captcha_key='$(REACT_APP_PUBLIC_RE_CAPTCHA_KEY)' \
+		--build-arg react_app_sync_tolerance_interval='$(REACT_APP_SYNC_TOLERANCE_INTERVAL)' \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
