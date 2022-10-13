@@ -32,10 +32,10 @@ const HeaderLogo = () => {
   const classes = useStyles()
   return (
     <div>
-      <Link href="https://eosio.online/">
+      <Link href="https://antelope.tools/">
         <img
-          alt="eosio dashboard"
-          src={'/antelope-tools.webp'}
+          alt="antelope tools dashboard"
+          src={'/antelope-tools.svg'}
           className={classes.imgHeaderLogo}
         />
       </Link>
