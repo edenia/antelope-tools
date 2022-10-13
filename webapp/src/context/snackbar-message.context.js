@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React, {useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 const SnackbarMessageContext = React.createContext()
@@ -54,7 +55,7 @@ export const useSnackbarMessageState = () => {
   }
 
   const [state, dispatch] = context
-  const showMessage = (payload) => dispatch({ type: 'showMessage', payload })
+  const showMessage = useCallback(( payload ) => dispatch({ type: 'showMessage', payload }),[dispatch])
   const hideMessage = () => dispatch({ type: 'hideMessage' })
 
   return [

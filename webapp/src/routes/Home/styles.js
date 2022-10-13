@@ -84,7 +84,7 @@ export default (theme) => ({
     textTransform: 'lowercase !important',
   },
   cardShadow: {
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.35) !important',
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
   divMargin: {
     display: 'flex',

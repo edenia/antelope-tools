@@ -164,6 +164,7 @@
     "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
     "accountNotFound": "Cuenta no encontrada",
+    "tableNotFound": "Tabla no encontrada",
     "successMessage": "Transacción exitosa",
     "placeholder": "Cuenta o Nombre del Contrato",
     "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
