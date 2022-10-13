@@ -124,7 +124,7 @@ const TransactionInfo = ({ t, classes }) => {
   }, [data, t])
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent
         style={{
           height: '100%',

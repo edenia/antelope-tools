@@ -34,8 +34,8 @@ const HeaderLogo = () => {
     <div>
       <Link href="https://antelope.tools/">
         <img
-          alt="eosio dashboard"
-          src={'/eosio-dashboard.svg'}
+          alt="antelope tools dashboard"
+          src={'/antelope-tools.svg'}
           className={classes.imgHeaderLogo}
         />
       </Link>
