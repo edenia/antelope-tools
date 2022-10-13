@@ -6,6 +6,7 @@ import { ENDPOINTS_QUERY } from '../../gql'
 const useEndpointsState = () => {
   const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY, {
     pollInterval: 120000,
+    fetchPolicy: 'cache-and-network',
   })
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
@@ -20,7 +21,7 @@ const useEndpointsState = () => {
       variables: {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        where: { bp_json: { _has_key: 'nodes' } },
+        where: { nodes: { endpoints: { value: { _gt: '' } } } },
         endpointFilter: pagination.endpointFilter,
       },
     })
@@ -38,7 +39,7 @@ const useEndpointsState = () => {
   }, [data?.info, pagination.limit])
 
   useEffect(() => {
-    if (!data?.producers) return
+    if (!data?.producers.length) return
 
     setProducers(
       data.producers.map((producer) => {
@@ -73,6 +74,8 @@ const useEndpointsState = () => {
   }, [data?.producers])
 
   const handleOnPageChange = (_, page) => {
+    if (pagination.page === page) return
+
     setPagination((prev) => ({
       ...prev,
       page,
