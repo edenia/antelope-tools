@@ -16,6 +16,10 @@ import CountryFlag from '../CountryFlag'
 import ProducerAvatar from '../ProducerAvatar'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
+import Endpoints from './Endpoints'
+import Features from './Features'
+import Keys from './Keys'
+import ShowInfo from './ShowInfo'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -28,73 +32,6 @@ const NodeCard = ({ producer, node }) => {
   const { t } = useTranslation('nodeCardComponent')
   const [producerOrg, setProducerOrg] = useState({})
 
-  const ShowInfo = ({ cond, title, value }) => {
-    if (!cond && !value) return <></>
-
-    return (
-      <>
-        <dt className={classes.bold}>{title}</dt>
-        <dd>{value}</dd>
-      </>
-    )
-  }
-
-  const Endpoints = () => {
-    if (!node?.p2p_endpoint && !node?.api_endpoint && !node?.ssl_endpoint) {
-      return <></>
-    }
-
-    const endpoints = [
-      { key: 'p2p_endpoint', value: 'P2P' },
-      { key: 'api_endpoint', value: 'API' },
-      { key: 'ssl_endpoint', value: 'SSL' },
-    ]
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('endpoints')}</dt>
-        {endpoints.map(
-          ({ key, value }, index) =>
-            node[key]?.length && (
-              <dd key={`endpoint-${node[key]}-${value}-${index}`}>
-                <span className={classes.bold}>{value}</span>: {node[key]}
-              </dd>
-            ),
-        )}
-      </>
-    )
-  }
-  const Keys = () => {
-    if (!node?.keys) {
-      return <></>
-    }
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('keys')}</dt>
-        {Object.keys(node.keys).map((key, i) => (
-          <dd key={i}>
-            <span className={classes.bold}>{key}</span>:{' '}
-            <span className={classes.breakLine}>{node.keys[key]}</span>
-          </dd>
-        ))}
-      </>
-    )
-  }
-  const Features = () => {
-    if (!node?.features) {
-      return <></>
-    }
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('features')}</dt>
-        {node.features.map((feature, i) => (
-          <dd key={i}>{feature}</dd>
-        ))}
-      </>
-    )
-  }
   const CpuBenchmark = () => {
     return (
       <>
@@ -112,6 +49,7 @@ const NodeCard = ({ producer, node }) => {
       </>
     )
   }
+  
   const HealthStatus = () => {
     if (!node?.health_status?.length) {
       return <></>
@@ -176,9 +114,9 @@ const NodeCard = ({ producer, node }) => {
                 title={t('nodeVersion')}
               />
 
-              <Features />
-              <Endpoints />
-              <Keys />
+              <Features node={node}/>
+              <Endpoints node={node}/>
+              <Keys node={node}/>
               <CpuBenchmark />
               <HealthStatus />
             </>

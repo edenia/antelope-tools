@@ -14,6 +14,10 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
+import Endpoints from './Endpoints'
+import Features from './Features'
+import Keys from './Keys'
+import ShowInfo from './ShowInfo'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -24,45 +28,6 @@ const NodesCard = ({ nodes }) => {
 
   if (!nodes?.length) return
 
-  const ShowInfo = ({ cond, title, value }) => {
-    if (!cond && !value) return <></>
-
-    return (
-      <>
-        <dt className={classes.bold}>{title}</dt>
-        <dd>{value}</dd>
-      </>
-    )
-  }
-
-  const Endpoints = ({ node }) => {
-    if (!node?.p2p_endpoint && !node?.api_endpoint && !node?.ssl_endpoint) {
-      return <></>
-    }
-
-    const endpoints = [
-      { key: 'p2p_endpoint', value: 'P2P' },
-      { key: 'api_endpoint', value: 'API' },
-      { key: 'ssl_endpoint', value: 'SSL' },
-    ]
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('endpoints')}</dt>
-        {endpoints.map(
-          ({ key, value }, index) =>
-            !!node[key]?.length && (
-              <dd key={`endpoint-${node[key]}-${value}-${index}`}>
-                <span>{value}</span>:{' '}
-                <a href={node[key]} target="_blank" rel="noopener noreferrer">
-                  {node[key] || 'N/A'}
-                </a>
-              </dd>
-            ),
-        )}
-      </>
-    )
-  }
   const HealthStatus = ({ node }) => {
     const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
     const [missedBlocks, setMissedBlocks] = useState({})
@@ -82,35 +47,6 @@ const NodesCard = ({ nodes }) => {
           {missedBlocks && `${t('missedBlocks')}: ${missedBlocks}`}
           <ProducerHealthIndicators producer={node} />
         </dd>
-      </>
-    )
-  }
-  const Keys = ({ node }) => {
-    if (!Array.isArray(node?.keys) || !node?.keys?.length) {
-      return <></>
-    }
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('keys')}</dt>
-        {Object.keys(node.keys).map((key, i) => (
-          <dd key={i}>
-            <p className={classes.bold}>{key}:</p>
-            <p className={classes.breakLine}>{node.keys[key]}</p>
-          </dd>
-        ))}
-      </>
-    )
-  }
-  const Features = ({ node }) => {
-    if (!node?.features?.length) return <></>
-
-    return (
-      <>
-        <dt className={classes.bold}>{t('features')}</dt>
-        {node.features.map((feature, i) => (
-          <dd key={i}>{feature}</dd>
-        ))}
       </>
     )
   }
