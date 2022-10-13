@@ -35,7 +35,7 @@ const HeaderLogo = () => {
       <Link href="https://eosio.online/">
         <img
           alt="eosio dashboard"
-          src={'/antelopetools.webp'}
+          src={'/antelope-tools.webp'}
           className={classes.imgHeaderLogo}
         />
       </Link>
