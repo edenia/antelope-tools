@@ -1,5 +1,6 @@
 const { axiosUtil, eosUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
+const { getNodeInfo } = require('../utils/producer.util')
 
 const getProducers = async () => {
   let producers = []
@@ -37,7 +38,7 @@ const getProducers = async () => {
 
       return 0
     })
-  // console.log(producers[0])
+  console.log(producers[0])
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
   producers = await Promise.all(
@@ -111,7 +112,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
 
   producers.forEach(producer => {
     const producerVotePercent = producer.total_votes / totalVotes
-    
+
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
     } else {
@@ -246,10 +247,32 @@ const getNodes = bpJson => {
     (bpJson?.nodes || []).map(async node => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
       const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
-
+      console.log(nodeInfo)
       return {
         ...node,
-        server_version_string: nodeInfo?.server_version_string || ''
+        server_version: nodeInfo?.server_version || '',
+        server_version_string: nodeInfo?.server_version_string || '',
+        head_block_num: nodeInfo?.head_block_num || '',
+        server_version: nodeInfo?.server_version || '',
+        chain_id: nodeInfo?.chain_id || '',
+        head_block_num: nodeInfo?.head_block_num || '',
+        last_irreversible_block_num: nodeInfo.last_irreversible_block_num || '',
+        last_irreversible_block_id: nodeInfo.last_irreversible_block_id || '',
+        head_block_id: nodeInfo.head_block_id || '',
+        head_block_time: nodeInfo.head_block_time || '',
+        head_block_producer: nodeInfo.head_block_producer || '',
+        virtual_block_cpu_limit: virtual_block_cpu_limit.nodeInfo || '', 
+        virtual_block_net_limit: virtual_block_net_limit.nodeInfo || '',
+        block_cpu_limit: block_cpu_limit.nodeInfo || '',
+        block_net_limit: block_net_limit.nodeInfo || '',
+        server_version_string: server_version_string.nodeInfo || '',
+        fork_db_head_block_num: fork_db_head_block_num.nodeInfo || '',
+        fork_db_head_block_id: fork_db_head_block_id.nodeInfo || '',
+        server_full_version_string: server_full_version_string.nodeInfo || '',
+        total_cpu_weight: total_cpu_weight.nodeInfo || '',
+        total_net_weight: total_net_weight.nodeInfo || '',
+        earliest_available_block_num: earliest_available_block_num.nodeInfo || '',
+        last_irreversible_block_time: last_irreversible_block_time.nodeInfo || ''
       }
     })
   )
