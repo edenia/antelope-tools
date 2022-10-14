@@ -55,6 +55,41 @@ export const NODES_QUERY = gql`
   }
 `
 
+export const ENDPOINTS_QUERY = gql`
+  query producer(
+    $offset: Int = 0
+    $limit: Int = 21
+    $where: producer_bool_exp
+    $endpointFilter: endpoint_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      id
+      owner
+      updated_at
+      nodes(where: {type: {_neq: ["producer"]}}){
+        endpoints(order_by: {head_block_time: desc}, where: $endpointFilter){
+          id
+          type
+          value
+          head_block_time
+          response
+          updated_at
+        }
+      }
+    }
+  }
+`
+
 export const NODE_CPU_BENCHMARK = gql`
   query ($account: String) {
     cpu(

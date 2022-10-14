@@ -3,12 +3,17 @@ const { eosConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
+const nodeService = require('./node.service')
 
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
       insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status, endpoints, rank]}) {
-        affected_rows
+        affected_rows,
+        returning {
+          id,
+          bp_json
+        }
       }
     }
   `
@@ -20,10 +25,13 @@ const updateProducers = async (producers = []) => {
     }
   `
 
-  await hasuraUtil.request(upsertMutation, { producers })
+  const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
+  
   await hasuraUtil.request(clearMutation, {
-    owners: producers.map(producer => producer.owner)
+    owners: producers.map((producer) => producer.owner)
   })
+
+  return insertedRows.insert_producer.returning
 }
 
 const syncProducers = async () => {
@@ -38,7 +46,9 @@ const syncProducers = async () => {
       break
   }
 
-  await updateProducers(producers)
+  producers = await updateProducers(producers)
+  await syncNodes(producers)
+  await syncEndpoints()
 }
 
 const getProducersSummary = async () => {
@@ -56,7 +66,40 @@ const getProducersSummary = async () => {
   return rows
 }
 
+const syncNodes = async (producers) => {
+  if (!producers?.length) return
+
+  const nodes = producers.flatMap((producer) => {
+    return (producer.bp_json?.nodes || []).map((node) => {
+      node.producer_id = producer.id
+
+      return nodeService.getFormatNode(node)
+    })
+  })
+
+  await nodeService.updateNodes(nodes)
+}
+
+const syncEndpoints = async () => {
+  const [endpoints] = await sequelizeUtil.query(`
+    SELECT 
+    	id,
+    	type,
+      value
+    FROM endpoint
+    WHERE type IN ('api','ssl')
+    ;
+  `)
+
+  if (!endpoints?.length) return
+
+  endpoints.forEach(async (endpoint) => {
+    await nodeService.updateEndpointInfo(endpoint)
+  })
+}
+
 module.exports = {
   syncProducers,
+  syncEndpoints,
   getProducersSummary
 }

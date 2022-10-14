@@ -75,27 +75,34 @@ const Accounts = ({ ual }) => {
     setLoading(false)
   }
 
-  const handleGetTableRows = useCallback(async ({ loadMore, ...payload }) => {
-    setLoading(true)
-    try {
-      const tableData = await eosApi.getTableRows(payload)
+  const handleGetTableRows = useCallback(
+    async ({ loadMore, ...payload }) => {
+      setLoading(true)
 
-      if (loadMore) {
-        setTableData((prev) => ({
-          ...prev,
-          ...tableData,
-          rows: prev.rows.concat(...tableData.rows),
-        }))
+      try {
+        const tableData = await eosApi.getTableRows(payload)
 
-        return
+        if (loadMore) {
+          setTableData((prev) => ({
+            ...prev,
+            ...tableData,
+            rows: prev.rows.concat(...tableData.rows),
+          }))
+
+          return
+        }
+
+        setTableData(tableData)
+      } catch (error) {
+        showMessage({
+          type: 'error',
+          content: t('tableNotFound'),
+        })
       }
-
-      setTableData(tableData)
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
-  }, [])
+      setLoading(false)
+    },
+    [showMessage, t],
+  )
 
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
@@ -136,23 +143,23 @@ const Accounts = ({ ual }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
+    handleOnSearch({ owner: params?.account || 'eosio' })
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    const params = queryString.parse(location.search)
+
     setFilters({
-      owner: params?.account || 'eosio',
+      owner: params?.account,
       table: params?.table || 'producers',
     })
-    handleOnSearch({ owner: params?.account || 'eosio' })
-
     // eslint-disable-next-line
   }, [location.search])
 
-  useEffect(() => {
-    handleOnSearch({ owner: 'eosio' })
-    // eslint-disable-next-line
-  }, [])
-  
   return (
     <div>
-      <Card>
+      <Card className={classes.cardShadow}>
         <CardContent className={classes.cardContent}>
           <SearchBar
             filters={filters}

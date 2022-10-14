@@ -82,6 +82,9 @@ const Dashboard = ({ children, ual }) => {
       <CssBaseline />
       <GlobalStyle />
       <PageTitle title={t(routeName.pageTitle)} />
+      <div className={classes.header}>
+        <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
+      </div>
       <div
         className={classes.drawer}
         style={{ width: mobileOpen ? openDrawerWidth : drawerWidth }}
@@ -99,7 +102,6 @@ const Dashboard = ({ children, ual }) => {
         </Hidden>
       </div>
       <div className={classes.appContent}>
-        <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
         <div className={classes.mainContent}>
           <div className={classes.subHeader}>
             <div className={classes.boxHeader}>
@@ -126,6 +128,8 @@ const Dashboard = ({ children, ual }) => {
           </div>
           {children}
         </div>
+      </div>
+      <div className={classes.footer}>
         <Footer />
       </div>
       <SnackbarMessage />

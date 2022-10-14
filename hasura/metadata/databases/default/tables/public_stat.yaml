@@ -1,20 +1,20 @@
 table:
-  name: stat
   schema: public
+  name: stat
 select_permissions:
-- permission:
-    columns:
-    - average_daily_transactions_in_last_week
-    - created_at
-    - id
-    - missed_blocks
-    - nodes_summary
-    - tps_all_time_high
-    - transaction_history
-    - transactions_in_last_day
-    - transactions_in_last_hour
-    - transactions_in_last_week
-    - unique_locations
-    - updated_at
-    filter: {}
-  role: guest
+  - role: guest
+    permission:
+      columns:
+        - average_daily_transactions_in_last_week
+        - created_at
+        - id
+        - missed_blocks
+        - nodes_summary
+        - tps_all_time_high
+        - transaction_history
+        - transactions_in_last_day
+        - transactions_in_last_hour
+        - transactions_in_last_week
+        - unique_locations
+        - updated_at
+      filter: {}

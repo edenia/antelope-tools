@@ -1,7 +1,7 @@
 export default (theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     borderRadius: 10,
     padding: theme.spacing(4),
     width: '100%',

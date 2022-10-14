@@ -33,9 +33,7 @@ const useNodeDistributionState = () => {
 
     const items = []
     producers.forEach((producer) => {
-      if (!producer?.bp_json?.nodes) {
-        return
-      }
+      if (!producer?.bp_json?.nodes?.length) return
 
       producer.bp_json.nodes.forEach((node) => {
         if (!node?.location?.latitude || !node?.location?.longitude) return
@@ -54,7 +52,7 @@ const useNodeDistributionState = () => {
 
     const sortedItems = items
       .sort((a, b) =>
-        a.country > b.country ? 1 : b.country > a.country ? -1 : 0
+        a.country > b.country ? 1 : b.country > a.country ? -1 : 0,
       )
       .reduce(
         (prev, current) => {
@@ -85,7 +83,7 @@ const useNodeDistributionState = () => {
             result: [...prev.result, current],
           }
         },
-        { pibot: {}, result: [], increase: 0.1 }
+        { pibot: {}, result: [], increase: 0.1 },
       )
 
     setAllNodes(sortedItems.result || [])

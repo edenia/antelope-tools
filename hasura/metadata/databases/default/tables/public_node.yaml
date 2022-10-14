@@ -1,0 +1,22 @@
+table:
+  schema: public
+  name: node
+object_relationships:
+  - name: producer
+    using:
+      foreign_key_constraint_on: producer_id
+array_relationships:
+  - name: endpoints
+    using:
+      foreign_key_constraint_on:
+        column: node_id
+        table:
+          schema: public
+          name: endpoint
+  - name: node_info
+    using:
+      foreign_key_constraint_on:
+        column: node_id
+        table:
+          schema: public
+          name: node_info

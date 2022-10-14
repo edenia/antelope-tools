@@ -42,10 +42,24 @@ const getProducers = async () => {
 
   producers = await Promise.all(
     producers.map(async (producer, index) => {
-      const bpJson = await getBPJson(producer)
+      const producerUrl = getProducerUrl(producer)
+      const chains = await getChains(producerUrl)
+      const chainUrl = chains[eosConfig.chainId] || '/bp.json'
+      const bpJson = await getBPJson(producerUrl, chainUrl)
       const healthStatus = getProducerHealthStatus(bpJson)
-      const nodes = await getNodes(bpJson)
-      const endpoints = producerUtil.getEndpoints(bpJson.nodes)
+
+      let nodes = []
+      let endpoints = { api: [], ssl: [], p2p: [] }
+
+      if (chains[eosConfig.chainId]) {
+        nodes = await getNodes(bpJson)
+        endpoints = producerUtil.getEndpoints(bpJson.nodes)
+        bpJson.nodes = nodes
+      }
+
+      if (!bpJson.nodes?.length) {
+        delete bpJson.nodes
+      }
 
       return {
         endpoints,
@@ -57,10 +71,7 @@ const getProducers = async () => {
         health_status: healthStatus,
         rank: index + 1,
         is_active: !!producer.is_active,
-        bp_json: {
-          ...bpJson,
-          nodes
-        }
+        bp_json: bpJson
       }
     })
   )
@@ -94,6 +105,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
 
   producers.forEach((producer) => {
     const producerVotePercent = producer.total_votes / totalVotes
+    
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
     } else {
@@ -149,54 +161,47 @@ const getExpectedRewards = async (producers, totalVotes) => {
     )
 }
 
-const getBPJson = async (producer) => {
-  const bpJsonUrl = await getBPJsonUrl(producer)
+const getBPJson = async (producerUrl, chainUrl) => {
+  const bpJsonUrl = `${producerUrl}/${chainUrl}`.replace(
+    /(?<=:\/\/.*)((\/\/))/,
+    '/'
+  )
   let bpJson = {}
 
   try {
     const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
-    bpJson = _bpJson || bpJson
 
-    if (typeof bpJson !== 'object') {
-      bpJson = {}
-    }
+    bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : bpJson
   } catch (error) {}
 
   return bpJson
 }
 
-const getBPJsonUrl = async (producer = {}) => {
+const getProducerUrl = (producer) => {
   let producerUrl = producer.url || ''
 
   if (!producerUrl.startsWith('http')) {
     producerUrl = `http://${producerUrl}`
   }
 
-  if (producerUrl === 'http://infinitystones.io') {
-    producerUrl = 'https://infinitystones.io'
-  }
+  return producerUrl
+}
 
-  if (producer.owner === 'eosauthority') {
-    producerUrl =
-      'https://ipfs.edenia.cloud/ipfs/QmVDRzUbnJLLM27nBw4FPWveaZ4ukHXAMZRzkbRiTZGdnH'
-
-    return producerUrl
-  }
-
+const getChains = async (producerUrl) => {
   const chainsUrl = `${producerUrl}/chains.json`.replace(
     /(?<=:\/\/.*)((\/\/))/,
     '/'
   )
-  let chainUrl = '/bp.json'
 
   try {
     const {
       data: { chains }
     } = await axiosUtil.instance.get(chainsUrl)
-    chainUrl = chains[eosConfig.chainId] || chainUrl
-  } catch (error) {}
 
-  return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
+    return chains ?? {}
+  } catch (error) {
+    return {}
+  }
 }
 
 const getProducerHealthStatus = (bpJson) => {
@@ -234,11 +239,11 @@ const getNodes = (bpJson) => {
   return Promise.all(
     (bpJson?.nodes || []).map(async (node) => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-      const nodeInfo = await producerUtil.getNodeInfo(apiUrl)
+      const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
 
       return {
         ...node,
-        server_version_string: nodeInfo.server_version_string
+        server_version_string: nodeInfo?.server_version_string || ''
       }
     })
   )

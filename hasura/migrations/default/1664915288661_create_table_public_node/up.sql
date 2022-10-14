@@ -1,0 +1,2 @@
+CREATE TABLE "public"."node" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "type" jsonb DEFAULT jsonb_build_array(), "full" boolean NOT NULL, "location" jsonb DEFAULT jsonb_build_object(), "created_at" time with time zone NOT NULL DEFAULT now(), "producer_id" integer NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("producer_id") REFERENCES "public"."producer"("id") ON UPDATE restrict ON DELETE restrict, UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
