@@ -20,3 +20,15 @@ array_relationships:
         table:
           schema: public
           name: node_info
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - id
+        - type
+        - full
+        - location
+        - created_at
+        - producer_id
+      filter: {}
+      allow_aggregations: true
