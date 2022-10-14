@@ -5,3 +5,13 @@ object_relationships:
   - name: node
     using:
       foreign_key_constraint_on: node_id
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - version
+        - features
+        - id
+        - node_id
+      filter: {}
+      allow_aggregations: true
