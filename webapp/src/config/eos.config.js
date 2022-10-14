@@ -68,3 +68,4 @@ export const includeDefaultTransaction = process.env
   ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)
   : null
 export const blockExplorerUrl = process.env.REACT_APP_BLOCK_EXPLORER_URL
+export const syncToleranceInterval = process.env.REACT_APP_SYNC_TOLERANCE_INTERVAL || 180000

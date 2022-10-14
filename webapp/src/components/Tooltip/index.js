@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import Box from '@mui/material/Box'
 import Popover from '@mui/material/Popover'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -27,12 +26,12 @@ const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
       }}
       anchorEl={anchorEl}
     >
-      <Box className={classes.popover}>
-        <Box className={classes.popoverClose}>
+      <div className={classes.popover}>
+        <div className={classes.popoverClose}>
           <CloseIcon className={classes.popoverCloseIcon} onClick={onClose} />
-        </Box>
-        <Box>{children}</Box>
-      </Box>
+        </div>
+        {children}
+      </div>
     </Popover>
   )
 }

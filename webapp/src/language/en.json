@@ -20,6 +20,7 @@
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
+    "help": "Help",
     "node": "Node",
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
@@ -254,7 +255,7 @@
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
-    "isFull":"Is full"
+    "isFull": "Is full"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",
@@ -304,7 +305,8 @@
   },
   "endpointsListRoute": {
     "title": "Endpoints available by",
-    "updatedAt": "Updated at"
+    "updatedAt": "Updated at",
+    "endpointsResponding": "Only endpoints responding"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Miliseconds",
@@ -324,6 +326,14 @@
     "producer": "Producer",
     "placeholder": "Producer Name"
   },
+  "endpointInfoComponent": {
+    "status": "Status",
+    "response": "Response",
+    "headBlockTime": "Head Block Time",
+    "updatedAt": "Updated at",
+    "error": "Error",
+    "noResponse": "No response"
+  },
   "nodeSearchComponent": {
     "title": "Search Node",
     "producer": "Producer",
@@ -331,5 +341,11 @@
   },
   "noResultsComponent": {
     "noResultsFound": "No results found"
+  },
+  "healthCheckComponent": {
+    "updated": "The endpoint is working",
+    "outdated": "The endpoint works but is outdated with the last block",
+    "error": "Error in the endpoint request",
+    "not working": "The endpoint is not responding"
   }
 }

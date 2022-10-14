@@ -19,7 +19,7 @@ const useNodeState = () => {
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
-      where: { bp_json: { _gt: { nodes: [] } } },
+      where: { bp_json: { _has_key: 'nodes' } },
       limit: null,
     }))
   }, [setPagination])

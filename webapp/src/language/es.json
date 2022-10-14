@@ -20,6 +20,7 @@
     "keys": "Llaves",
     "download": "Descargar",
     "healthStatus": "Salud del nodo",
+    "help": "Ayuda",
     "node": "Nodo",
     "lastHour": "Última hora",
     "lastDay": "Último día",
@@ -30,7 +31,7 @@
     "api": "HTTP",
     "ssl": "HTTPS",
     "p2p": "P2P",
-    "payer" : "Pagador",
+    "payer": "Pagador",
     "nodes": "Nodos",
     "total": "Total",
     "executeTransaction": "Ejecutar Transacción",
@@ -260,7 +261,7 @@
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
     "cpuBenchmark": "Promedio del Benchmark de CPU",
-    "isFull":"Es completo"
+    "isFull": "Es completo"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",
@@ -306,8 +307,9 @@
     "availability": "Disponibilidad"
   },
   "endpointsListRoute": {
-    "title": "Endpoints available by",
-    "updatedAt": "Actualizado por última vez"
+    "title": "Endpoints disponibles por",
+    "updatedAt": "Actualizado por última vez",
+    "endpointsResponding": "Solo puntos finales que responden"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Milisegundos",
@@ -327,6 +329,27 @@
     "producer": "Productor",
     "placeholder": "Nombre del Productor"
   },
+  "endpointInfoComponent": {
+    "status": "Estado",
+    "response": "Respuesta",
+    "headBlockTime": "Fecha del último bloque",
+    "updatedAt": "Actualizado por última vez",
+    "error": "Error",
+    "noResponse": "Sin respuesta",
+    "Bad Gateway": "Mal puerta de enlace",
+    "Bad request": "Solicitud incorrecta",
+    "Not Found": "No encontrado",
+    "No response": "No responde",
+    "Service Temporarily Unavailable": "Servicio temporalmente no disponible",
+    "Service Unavailable": "Servicio no disponible",
+    "Gateway Time-out": "Tiempo de espera superado",
+    "Internal Server Error": "Error interno en el servidor",
+    "Unauthorized": "Solicitud no autorizada",
+    "Payment Required": "La solicitud requiere un pago",
+    "Forbidden": "La solicitud está prohibida",
+    "Request Timeout": "Tiempo de la solicitud superado",
+    "Too Many Request": "Demasiadas solicitudes"
+  },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
     "producer": "Productor",
@@ -334,5 +357,11 @@
   },
   "noResultsComponent": {
     "noResultsFound": "No se encontraron resultados"
+  },
+  "healthCheckComponent": {
+    "updated": "El punto final funciona",
+    "outdated": "El punto final funciona, pero no está actualizado con el último bloque",
+    "error": "Error en la consulta del punto final",
+    "not working": "El punto final no responde"
   }
 }

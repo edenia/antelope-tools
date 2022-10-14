@@ -4,10 +4,17 @@ const getNodeInfo = async (api) => {
   try {
     const response = await axiosUtil.instance.get(`${api}/v1/chain/get_info`)
 
-    return response.data
-  } catch (error) {}
-
-  return {}
+    return {
+      nodeInfo: response.data,
+      status: response.status,
+      statusText: response.statusText
+    }
+  } catch (error) {
+    return {
+      status: error.response?.status || null,
+      statusText: error.response?.statusText || 'No response'
+    }
+  }
 }
 
 const getEndpoints = (nodes) => {
