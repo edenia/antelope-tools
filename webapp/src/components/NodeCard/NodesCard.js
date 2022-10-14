@@ -14,7 +14,6 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 
-import Endpoints from './Endpoints'
 import Features from './Features'
 import Keys from './Keys'
 import ShowInfo from './ShowInfo'
@@ -51,14 +50,38 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
+  const Endpoints = ({ node }) => {
+    if (!node?.endpoints?.length) {
+      return <></>
+    }
+
+    const total = node.endpoints.filter((e) => {
+      return e.type !== 'p2p'
+    })?.length
+
+    return (
+      <>
+        <dt className={classes.bold}>{t('endpoints')}</dt>
+        {total > 0 && (
+          <dd>{`Responding: ${node.info?.endpoints?.count}/${total}`}</dd>
+        )}
+        {node.endpoints.map(({ type, value }, index) => (
+          <dd key={`endpoint-${type}-${value}-${index}`}>
+            <span>{type.toUpperCase()}</span>:{' '}
+            <a href={value} target="_blank" rel="noopener noreferrer">
+              {value || 'N/A'}
+            </a>
+          </dd>
+        ))}
+      </>
+    )
+  }
+
   const NodeInfo = ({ node }) => {
     return (
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
-        <ShowInfo
-          value={node?.server_version_string}
-          title={t('nodeVersion')}
-        />
+        <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
         <Endpoints node={node} />
         <Features node={node} />
         <Keys node={node} />
@@ -74,7 +97,7 @@ const NodesCard = ({ nodes }) => {
           <Card key={`node-${index}`} className={classes.nodes} elevation={0}>
             <CardHeader
               className={classes.cardHeader}
-              title={node.node_type?.toString() || ''}
+              title={node.type?.toString() || ''}
               subheader={
                 <>
                   <span className={classes.country}>

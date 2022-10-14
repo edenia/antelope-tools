@@ -17,18 +17,13 @@ const useNodeState = () => {
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
   const getOrderNode = (node) => {
-    return (
-      !!node.p2p_endpoint +
-      !!node.api_endpoint +
-      !!node.ssl_endpoint +
-      !!node.features?.length
-    )
+    return !!node.endpoints?.length + !!node.node_info[0]?.features?.length
   }
 
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
-      where: { bp_json: { _has_key: 'nodes' } },
+      where: { nodes: { type: { _neq: [] } } },
       limit: null,
     }))
   }, [setPagination])
@@ -50,12 +45,12 @@ const useNodeState = () => {
     if (!producers) return
 
     const list = producers.flatMap((producer) => {
-      if (!producer.bp_json?.nodes?.length) return []
+      if (!producer?.nodes?.length) return []
 
       const nodesList = []
 
-      producer.bp_json.nodes.forEach((node) => {
-        if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
+      producer.nodes.forEach((node) => {
+        if (filters.name === 'all' || node.type?.includes(filters.name)) {
           nodesList.push(node)
         }
       })

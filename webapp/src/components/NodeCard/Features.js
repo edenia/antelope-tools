@@ -10,12 +10,12 @@ const Features = ({ node }) => {
   const classes = useStyles()
   const { t } = useTranslation('nodeCardComponent')
 
-  if (!node?.features?.length) return <></>
+  if (!node.node_info?.length) return <></>
 
   return (
     <>
       <dt className={classes.bold}>{t('features')}</dt>
-      {node.features.map((feature, i) => (
+      {node.node_info[0].features.map((feature, i) => (
         <dd key={i}>{feature}</dd>
       ))}
     </>
