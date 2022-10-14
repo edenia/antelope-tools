@@ -43,4 +43,18 @@ export default (theme) => ({
     display: 'flex',
     width: 'max-content',
   },
+  endpointsTitle:{
+    display: 'flex',
+  },
+  lightIcon: {
+    display: 'flex',
+    fontWeight: 'normal',
+    marginLeft: theme.spacing(3),
+    '& svg': {
+      width: '15px',
+      height: '15px',
+      alignSelf: 'center',
+      marginLeft: theme.spacing(2),
+    },
+  },
 })

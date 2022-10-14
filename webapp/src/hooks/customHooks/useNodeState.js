@@ -11,35 +11,23 @@ const useNodeState = () => {
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
-  const [nodes, setNodes] = useState([])
-  const PAGE_LIMIT = 28
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
   const getOrderNode = (node) => {
-    return !!node.endpoints?.length + !!node.node_info[0]?.features?.length
+    return (node.endpoints?.length || 0) + (node.node_info[0]?.features?.length || 0)
   }
 
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
       where: { nodes: { type: { _neq: [] } } },
-      limit: null,
+      nodeFilter:
+        filters.name === 'all'
+          ? undefined
+          : { type: { _contains: filters.name } },
     }))
-  }, [setPagination])
-
-  useEffect(() => {
-    if (!nodes) return
-
-    const index = (pagination.page - 1) * PAGE_LIMIT
-
-    setItems(nodes.slice(index, index + PAGE_LIMIT))
-
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil((nodes?.length ?? 0) / PAGE_LIMIT),
-    }))
-  }, [nodes, pagination.page, setPagination])
+  }, [filters.name, setPagination])
 
   useEffect(() => {
     if (!producers) return
@@ -47,24 +35,16 @@ const useNodeState = () => {
     const list = producers.flatMap((producer) => {
       if (!producer?.nodes?.length) return []
 
-      const nodesList = []
-
-      producer.nodes.forEach((node) => {
-        if (filters.name === 'all' || node.type?.includes(filters.name)) {
-          nodesList.push(node)
-        }
-      })
-
-      nodesList.sort((a, b) => {
+      producer.nodes.sort((a, b) => {
         return getOrderNode(a) < getOrderNode(b)
       })
 
-      return nodesList.length
-        ? { ...producer, bp_json: { ...producer.bp_json, nodes: nodesList } }
+      return producer.nodes.length
+        ? { ...producer, bp_json: { ...producer.bp_json, nodes: producer.nodes } }
         : []
     })
 
-    setNodes(list)
+    setItems(list)
   }, [filters.name, producers])
 
   return [

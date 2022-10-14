@@ -43,10 +43,11 @@ const useSearchState = ({ query }) => {
             ? 0
             : (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
+        nodeFilter: pagination.nodeFilter
       },
     })
     // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit, pagination.offset])
+  }, [pagination.where, pagination.page, pagination.limit, pagination.offset, pagination.nodeFilter])
 
   useEffect(() => {
     const params = queryString.parse(location.search)

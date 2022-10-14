@@ -13,6 +13,7 @@ import 'flag-icon-css/css/flag-icons.css'
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
+import LightIcon from '../HealthCheck/LightIcon'
 
 import Features from './Features'
 import Keys from './Keys'
@@ -50,21 +51,38 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const Endpoints = ({ node }) => {
-    if (!node?.endpoints?.length) {
-      return <></>
+  const getHealthStatus = (totalEndpoints, workingEndpoints) => {
+    switch (workingEndpoints) {
+      case totalEndpoints:
+        return 'greenLight'
+      case 0:
+        return 'redLight'
+      default:
+        return 'yellowLight'
     }
+  }
 
-    const total = node.endpoints.filter((e) => {
+  const Endpoints = ({ node }) => {
+    if (!node?.endpoints?.length) return <></>
+
+    const totalEndpoints = node.endpoints.filter((e) => {
       return e.type !== 'p2p'
     })?.length
+    const workingEndpoints = node.info?.endpoints?.count
 
     return (
       <>
-        <dt className={classes.bold}>{t('endpoints')}</dt>
-        {total > 0 && (
-          <dd>{`Responding: ${node.info?.endpoints?.count}/${total}`}</dd>
-        )}
+        <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
+          {t('endpoints')}
+          {!!totalEndpoints && (
+            <div className={classes.lightIcon}>
+              {`${workingEndpoints}/${totalEndpoints}`}
+              <LightIcon
+                status={getHealthStatus(totalEndpoints, workingEndpoints)}
+              />
+            </div>
+          )}
+        </dt>
         {node.endpoints.map(({ type, value }, index) => (
           <dd key={`endpoint-${type}-${value}-${index}`}>
             <span>{type.toUpperCase()}</span>:{' '}
