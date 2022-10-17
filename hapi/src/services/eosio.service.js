@@ -105,7 +105,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
 
   producers.forEach((producer) => {
     const producerVotePercent = producer.total_votes / totalVotes
-    
+
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
     } else {
