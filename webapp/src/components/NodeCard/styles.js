@@ -43,7 +43,7 @@ export default (theme) => ({
     display: 'flex',
     width: 'max-content',
   },
-  endpointsTitle:{
+  endpointsTitle: {
     display: 'flex',
   },
   lightIcon: {
