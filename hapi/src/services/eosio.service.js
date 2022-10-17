@@ -38,7 +38,7 @@ const getProducers = async () => {
 
       return 0
     })
-  console.log(producers[0])
+  // console.log(producers[0])
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
   producers = await Promise.all(
@@ -77,6 +77,7 @@ const getProducers = async () => {
         last_claim_time: producer.last_claim_time,
         location: producer.location,
         producer_authority: producer.producer_authority,
+        server_version_string: producer.server_version_string,
         is_active: !!producer.is_active,
         bp_json: bpJson
       }
@@ -256,23 +257,23 @@ const getNodes = bpJson => {
         server_version: nodeInfo?.server_version || '',
         chain_id: nodeInfo?.chain_id || '',
         head_block_num: nodeInfo?.head_block_num || '',
-        last_irreversible_block_num: nodeInfo.last_irreversible_block_num || '',
-        last_irreversible_block_id: nodeInfo.last_irreversible_block_id || '',
-        head_block_id: nodeInfo.head_block_id || '',
-        head_block_time: nodeInfo.head_block_time || '',
-        head_block_producer: nodeInfo.head_block_producer || '',
-        virtual_block_cpu_limit: virtual_block_cpu_limit.nodeInfo || '', 
-        virtual_block_net_limit: virtual_block_net_limit.nodeInfo || '',
-        block_cpu_limit: block_cpu_limit.nodeInfo || '',
-        block_net_limit: block_net_limit.nodeInfo || '',
-        server_version_string: server_version_string.nodeInfo || '',
-        fork_db_head_block_num: fork_db_head_block_num.nodeInfo || '',
-        fork_db_head_block_id: fork_db_head_block_id.nodeInfo || '',
-        server_full_version_string: server_full_version_string.nodeInfo || '',
-        total_cpu_weight: total_cpu_weight.nodeInfo || '',
-        total_net_weight: total_net_weight.nodeInfo || '',
-        earliest_available_block_num: earliest_available_block_num.nodeInfo || '',
-        last_irreversible_block_time: last_irreversible_block_time.nodeInfo || ''
+        last_irreversible_block_num: nodeInfo?.last_irreversible_block_num || '',
+        last_irreversible_block_id: nodeInfo?.last_irreversible_block_id || '',
+        head_block_id: nodeInfo?.head_block_id || '',
+        head_block_time: nodeInfo?.head_block_time || '',
+        head_block_producer: nodeInfo?.head_block_producer || '',
+        virtual_block_cpu_limit: nodeInfo?.virtual_block_cpu_limit || '', 
+        virtual_block_net_limit: nodeInfo?.virtual_block_net_limit || '',
+        block_cpu_limit: nodeInfo?.block_cpu_limit || '',
+        block_net_limit: nodeInfo?.block_net_limit || '',
+        server_version_string: nodeInfo?.server_version_string || '',
+        fork_db_head_block_num: nodeInfo?.fork_db_head_block_num || '',
+        fork_db_head_block_id: nodeInfo?.fork_db_head_block_id || '',
+        server_full_version_string: nodeInfo?.server_full_version_string || '',
+        total_cpu_weight: nodeInfo?.total_cpu_weight || '',
+        total_net_weight: nodeInfo?.total_net_weight || '',
+        earliest_available_block_num: nodeInfo?.earliest_available_block_num || '',
+        last_irreversible_block_time: nodeInfo?.last_irreversible_block_time || ''
       }
     })
   )
