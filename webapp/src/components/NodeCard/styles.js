@@ -9,6 +9,9 @@ export default (theme) => ({
   },
   cardHeader: {
     paddingBottom: `${theme.spacing(1)} !important`,
+    '& span':{
+      textTransform: 'unset !important',
+    },
   },
   avatar: {
     width: 30,

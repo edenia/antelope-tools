@@ -108,6 +108,18 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
+  const getType = (node) => {
+    if(!node?.type.length) return ''
+
+    let type = ''
+
+    type = node.type.map((e) => {
+      return e.substring(0,1).toUpperCase() + e.substring(1, e.length)
+    }).join(', ')
+
+    return type
+  }
+
   return (
     <div className={classes.nodesWrapper}>
       <div className={classes.nodesContainer}>
@@ -115,7 +127,7 @@ const NodesCard = ({ nodes }) => {
           <Card key={`node-${index}`} className={classes.nodes} elevation={0}>
             <CardHeader
               className={classes.cardHeader}
-              title={node.type?.toString() || ''}
+              title={getType(node) || ''}
               subheader={
                 <>
                   <span className={classes.country}>

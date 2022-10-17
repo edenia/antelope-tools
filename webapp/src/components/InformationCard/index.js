@@ -137,6 +137,8 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
     // eslint-disable-next-line
   }, [producer])
 
+  if(!producerOrg || !Object.keys(producerOrg)?.length) return <></>
+
   return (
     <Card className={classes.root}>
       <CardHeader title={producerOrg.title} />

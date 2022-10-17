@@ -51,10 +51,8 @@ export default (theme) => ({
       width: '100%',
     },
     overflowX: 'auto',
-    borderWidth: '2px',
-    borderStyle: 'solid',
-    borderColor: '#f3f3f3',
-    borderRadius: '5px',
+    border: '3px #f3f3f3',
+    borderLeftStyle: 'solid',
   },
   hideScroll: {
     overflowX: 'hidden',
