@@ -15,13 +15,16 @@ const useNodeState = () => {
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
   const getOrderNode = (node) => {
-    return (node.endpoints?.length || 0) + (node.node_info[0]?.features?.length || 0)
+    return (
+      (node.endpoints?.length || 0) +
+      (node.node_info[0]?.features?.list?.length || 0)
+    )
   }
 
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
-      where: { nodes: { type: { _neq: [] } } },
+      where: { ...prev.where, nodes: { type: { _neq: [] } } },
       nodeFilter:
         filters.name === 'all'
           ? undefined
@@ -40,7 +43,10 @@ const useNodeState = () => {
       })
 
       return producer.nodes.length
-        ? { ...producer, bp_json: { ...producer.bp_json, nodes: producer.nodes } }
+        ? {
+            ...producer,
+            bp_json: { ...producer.bp_json, nodes: producer.nodes },
+          }
         : []
     })
 

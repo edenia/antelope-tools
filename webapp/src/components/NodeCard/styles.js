@@ -9,7 +9,7 @@ export default (theme) => ({
   },
   cardHeader: {
     paddingBottom: `${theme.spacing(1)} !important`,
-    '& span':{
+    '& span': {
       textTransform: 'unset !important',
     },
   },
@@ -59,5 +59,10 @@ export default (theme) => ({
       alignSelf: 'center',
       marginLeft: theme.spacing(2),
     },
+  },
+  chip: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'fit-content',
   },
 })

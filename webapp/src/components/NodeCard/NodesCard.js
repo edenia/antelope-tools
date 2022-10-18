@@ -15,10 +15,10 @@ import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import LightIcon from '../HealthCheck/LightIcon'
 
-import Features from './Features'
 import Keys from './Keys'
 import ShowInfo from './ShowInfo'
 import styles from './styles'
+import ChipList from './ChipsList'
 
 const useStyles = makeStyles(styles)
 
@@ -83,14 +83,18 @@ const NodesCard = ({ nodes }) => {
             </div>
           )}
         </dt>
-        {node.endpoints.map(({ type, value }, index) => (
-          <dd key={`endpoint-${type}-${value}-${index}`}>
-            <span>{type.toUpperCase()}</span>:{' '}
-            <a href={value} target="_blank" rel="noopener noreferrer">
-              {value || 'N/A'}
-            </a>
-          </dd>
-        ))}
+        <ChipList
+          list={node.endpoints.map(({ type, value }) => {
+            return (
+              <>
+                <span>{type.toUpperCase()}</span>:{' '}
+                <a href={value} target="_blank" rel="noopener noreferrer">
+                  {value || 'N/A'}
+                </a>
+              </>
+            )
+          })}
+        />
       </>
     )
   }
@@ -101,21 +105,26 @@ const NodesCard = ({ nodes }) => {
         <ShowInfo value={node?.full} title={t('isFull')} />
         <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
         <Endpoints node={node} />
-        <Features node={node} />
         <Keys node={node} />
         <HealthStatus node={node} />
+        <ChipList
+          title={t('features')}
+          list={node.node_info[0]?.features?.list}
+        />
       </>
     )
   }
 
   const getType = (node) => {
-    if(!node?.type.length) return ''
+    if (!node?.type.length) return ''
 
     let type = ''
 
-    type = node.type.map((e) => {
-      return e.substring(0,1).toUpperCase() + e.substring(1, e.length)
-    }).join(', ')
+    type = node.type
+      .map((e) => {
+        return e.substring(0, 1).toUpperCase() + e.substring(1, e.length)
+      })
+      .join(', ')
 
     return type
   }
