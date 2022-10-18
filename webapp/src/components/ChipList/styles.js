@@ -2,7 +2,13 @@ export default (theme) => ({
   chipsContainer: {
     display: 'flex',
     flexFlow: 'row wrap',
-    maxWidth: '300px',
+  },
+  shortList: {
+    maxWidth: '250px',
+  },
+  longList: {
+    maxWidth: '600px',
+    paddingTop: theme.spacing(2),
   },
   chip: {
     margin: theme.spacing(0.5),

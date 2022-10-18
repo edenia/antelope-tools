@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Chip } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
@@ -13,8 +14,12 @@ const ChipList = ({ list = [], title = '' }) => {
 
   return (
     <>
-      <dt className={classes.bold}>{title}</dt>
-      <div className={classes.chipsContainer}>
+      <div className={classes.bold}>{title}</div>
+      <div
+        className={`${classes.chipsContainer} ${
+          list.length > 10 ? classes.longList : classes.shortList
+        }`}
+      >
         {list.map((element, index) => (
           <Chip
             key={`chip-${title}-${element}-${index}`}
@@ -27,6 +32,16 @@ const ChipList = ({ list = [], title = '' }) => {
       </div>
     </>
   )
+}
+
+ChipList.defaultProps = {
+  title: '',
+  list: [],
+}
+
+ChipList.propTypes = {
+  title: PropTypes.string,
+  list: PropTypes.array,
 }
 
 export default ChipList

@@ -18,6 +18,7 @@ import LightIcon from '../HealthCheck/LightIcon'
 
 import ShowInfo from './ShowInfo'
 import styles from './styles'
+import SupportedAPIs from './SupportedAPIs'
 
 const useStyles = makeStyles(styles)
 
@@ -129,9 +130,16 @@ const NodesCard = ({ nodes }) => {
           title={t('features')}
           list={node.node_info[0]?.features?.list}
         />
+        {node.type.includes('query') && <SupportedAPIs node={node} />}
         <Keys node={node} />
         <HealthStatus node={node} />
       </>
+    )
+  }
+
+  const capitalizeString = (string) => {
+    return (
+      string.substring(0, 1).toUpperCase() + string.substring(1, string.length)
     )
   }
 
@@ -141,8 +149,8 @@ const NodesCard = ({ nodes }) => {
     let type = ''
 
     type = node.type
-      .map((e) => {
-        return e.substring(0, 1).toUpperCase() + e.substring(1, e.length)
+      .map((nodeType) => {
+        return capitalizeString(nodeType)
       })
       .join(', ')
 

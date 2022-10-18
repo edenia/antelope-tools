@@ -255,7 +255,8 @@
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
-    "isFull": "Is full"
+    "isFull": "Is full",
+    "supportedApis": "Supported APIs"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",
