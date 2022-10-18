@@ -33,8 +33,8 @@ const useNodeState = () => {
   }, [filters.name, setPagination])
 
   useEffect(() => {
-    if(!info) return
-    
+    if (!info) return
+
     setPagination((prev) => ({
       ...prev,
       pages: Math.ceil(info.producers?.count / prev.limit),
