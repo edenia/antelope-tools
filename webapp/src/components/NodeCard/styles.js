@@ -30,7 +30,7 @@ export default (theme) => ({
     wordBreak: 'break-word',
   },
   nodes: {
-    minWidth: '150px',
+    minWidth: '100px',
     padding: theme.spacing(3),
     overflowX: 'auto',
     marginLeft: '5px',
@@ -59,10 +59,5 @@ export default (theme) => ({
       alignSelf: 'center',
       marginLeft: theme.spacing(2),
     },
-  },
-  chip: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 'fit-content',
   },
 })

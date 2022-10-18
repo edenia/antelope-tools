@@ -11,14 +11,13 @@ import CardActions from '@mui/material/CardActions'
 import 'flag-icon-css/css/flag-icons.css'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import LightIcon from '../HealthCheck/LightIcon'
 
-import Keys from './Keys'
 import ShowInfo from './ShowInfo'
 import styles from './styles'
-import ChipList from './ChipsList'
 
 const useStyles = makeStyles(styles)
 
@@ -99,18 +98,39 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
+  const Keys = ({ node }) => {
+    if (!node.node_info?.length || !node.node_info[0]?.features?.keys)
+      return <></>
+
+    const keys = node.node_info[0].features.keys
+
+    return (
+      <>
+        <ChipList
+          title={t('keys')}
+          list={Object.keys(keys).map((key, i) => (
+            <dd key={i}>
+              <p className={classes.bold}>{key}:</p>
+              <p className={classes.breakLine}>{keys[key]}</p>
+            </dd>
+          ))}
+        />
+      </>
+    )
+  }
+
   const NodeInfo = ({ node }) => {
     return (
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
         <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
         <Endpoints node={node} />
-        <Keys node={node} />
-        <HealthStatus node={node} />
         <ChipList
           title={t('features')}
           list={node.node_info[0]?.features?.list}
         />
+        <Keys node={node} />
+        <HealthStatus node={node} />
       </>
     )
   }

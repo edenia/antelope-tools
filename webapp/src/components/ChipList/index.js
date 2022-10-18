@@ -12,17 +12,19 @@ const ChipList = ({ list = [], title = '' }) => {
   if (!list.length) return <></>
 
   return (
-    <div className={classes.chip}>
+    <>
       <dt className={classes.bold}>{title}</dt>
-      {list.map((element, index) => (
-        <Chip
-          key={`chip-${title}-${element}-${index}`}
-          size="small"
-          variant="outlined"
-          label={element}
-        />
-      ))}
-    </div>
+      <div className={classes.chip}>
+        {list.map((element, index) => (
+          <Chip
+            key={`chip-${title}-${element}-${index}`}
+            size="small"
+            variant="outlined"
+            label={element}
+          />
+        ))}
+      </div>
+    </>
   )
 }
 

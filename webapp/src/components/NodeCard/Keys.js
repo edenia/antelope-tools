@@ -10,18 +10,15 @@ const Keys = ({ node }) => {
   const classes = useStyles()
   const { t } = useTranslation('nodeCardComponent')
 
-  if (!node.node_info?.length || !node.node_info[0]?.features?.keys)
-    return <></>
-
-  const keys = node.node_info[0].features.keys
+  if (!node.keys?.length) return <></>
 
   return (
     <>
       <dt className={classes.bold}>{t('keys')}</dt>
-      {Object.keys(keys).map((key, i) => (
+      {Object.keys(node.keys).map((key, i) => (
         <dd key={i}>
           <p className={classes.bold}>{key}:</p>
-          <p className={classes.breakLine}>{keys[key]}</p>
+          <p className={classes.breakLine}>{node.keys[key]}</p>
         </dd>
       ))}
     </>
