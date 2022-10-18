@@ -38,7 +38,7 @@ const Footer = () => {
           <div className={classes.midText}>{t('footer1')}</div>
           <Link
             className={classes.noUnderline}
-            href="https://github.com/eoscostarica/eosio-dashboard"
+            href="https://github.com/edenia/antelope-tools"
             onClick={() => handleLinkClick()}
             target="_blank"
             rel="noreferrer"
@@ -52,7 +52,7 @@ const Footer = () => {
         <div className={classes.sidebarFooter}>
           <Link
             className={classes.noUnderline}
-            href="https://github.com/eoscostarica/eosio-dashboard/releases"
+            href="https://github.com/edenia/antelope-tools/releases"
             onClick={() => handleLinkClick()}
             target="_blank"
             rel="noreferrer"
@@ -69,7 +69,7 @@ const Footer = () => {
           >
             <Link
               className={classes.noUnderline}
-              href="https://github.com/eoscostarica/eosio-dashboard/issues/new/choose"
+              href="https://github.com/edenia/antelope-tools/issues/new/choose"
               onClick={() => handleLinkClick()}
               target="_blank"
               rel="noreferrer"

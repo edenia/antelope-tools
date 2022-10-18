@@ -27,7 +27,7 @@ Antelope Tools is a community-driven open-source tool built by a group of tech e
 
 ### Why It’s Important?
 
-As mentioned previously, the EOS network run with twenty-one elected Block Producers that receive EOS tokens in return. Token holders vote for the Block Producers they believe are the best candidates for this public blockchain. So, we believe that monitoring what’s happening on the network is essential to improve and measure node transparency. EOSIO Dashboard’s main objective is to help you visualize decentralized and reliable information about each node and its activity.
+As mentioned previously, the EOS network run with twenty-one elected Block Producers that receive EOS tokens in return. Token holders vote for the Block Producers they believe are the best candidates for this public blockchain. So, we believe that monitoring what’s happening on the network is essential to improve and measure node transparency. Antelope Tools’s main objective is to help you visualize decentralized and reliable information about each node and its activity.
 
 ### Where Does the Data Come From?
 
