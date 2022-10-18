@@ -107,15 +107,13 @@ const NodesCard = ({ nodes }) => {
 
     return (
       <>
-        <ChipList
-          title={t('keys')}
-          list={Object.keys(keys).map((key, i) => (
-            <dd key={i}>
-              <p className={classes.bold}>{key}:</p>
-              <p className={classes.breakLine}>{keys[key]}</p>
-            </dd>
-          ))}
-        />
+        <dt className={classes.bold}>{t('keys')}</dt>
+        {Object.keys(keys).map((key, i) => (
+          <dd key={i}>
+            <p className={classes.bold}>{key}:</p>
+            <p className={classes.breakLine}>{keys[key]}</p>
+          </dd>
+        ))}
       </>
     )
   }
@@ -137,20 +135,20 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const capitalizeString = (string) => {
+  const capitalizeText = (text) => {
+    if(!text) return 
+
     return (
-      string.substring(0, 1).toUpperCase() + string.substring(1, string.length)
+      text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
     )
   }
 
   const getType = (node) => {
     if (!node?.type.length) return ''
 
-    let type = ''
-
-    type = node.type
+    const type = node.type
       .map((nodeType) => {
-        return capitalizeString(nodeType)
+        return capitalizeText(nodeType)
       })
       .join(', ')
 

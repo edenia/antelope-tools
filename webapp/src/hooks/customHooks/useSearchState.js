@@ -38,10 +38,7 @@ const useSearchState = ({ query }) => {
     loadProducers({
       variables: {
         where: pagination.where,
-        offset:
-          pagination.offset === undefined
-            ? 0
-            : (pagination.page - 1) * pagination.limit,
+        offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
         nodeFilter: pagination.nodeFilter
       },
