@@ -14,10 +14,11 @@ const ChipList = ({ list = [], title = '' }) => {
   return (
     <>
       <dt className={classes.bold}>{title}</dt>
-      <div className={classes.chip}>
+      <div className={classes.chipsContainer}>
         {list.map((element, index) => (
           <Chip
             key={`chip-${title}-${element}-${index}`}
+            className={classes.chip}
             size="small"
             variant="outlined"
             label={element}
