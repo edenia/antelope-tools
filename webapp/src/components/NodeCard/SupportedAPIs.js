@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import { Button } from '@mui/material'
 import axios from 'axios'
-import https from 'https'
 
 import ChipList from '../ChipList'
 import Tooltip from '../Tooltip'
@@ -42,10 +41,6 @@ const SupportedAPIs = ({ node }) => {
       try {
         const { data } = await axios.get(`${api}/v1/node/get_supported_apis`, {
           mode: 'cors',
-          httpsAgent: new https.Agent({
-            rejectUnauthorized: false,
-            timeout: 300000,
-          }),
         })
 
         if (data.apis && Array.isArray(data.apis)) {
