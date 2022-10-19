@@ -59,11 +59,11 @@ const LogoSvg = ({ name }) => {
 }
 
 LogoSvg.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
 }
 
 LogoSvg.defaultProps = {
-  name: ''
+  name: '',
 }
 
 const NetworkSelector = ({ title, options, networkLogo }) => {
@@ -93,7 +93,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
 
         return { ...acc, mainnet: sorted }
       },
-      { testnet: [], mainnet: [] }
+      { testnet: [], mainnet: [] },
     )
 
     setNetworks(networks)
@@ -124,7 +124,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                 <li
                   key={i}
                   className={clsx(classes.listItem, {
-                    [classes.listItemActive]: i === selected
+                    [classes.listItemActive]: i === selected,
                   })}
                 >
                   <a href={option.value} target="_self">
@@ -141,7 +141,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                 <li
                   key={i}
                   className={clsx(classes.listItem, {
-                    [classes.listItemActive]: i === selected
+                    [classes.listItemActive]: i === selected,
                   })}
                 >
                   <a href={option.value} target="_self">
@@ -164,13 +164,13 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
 NetworkSelector.propTypes = {
   title: PropTypes.string,
   options: PropTypes.array,
-  networkLogo: PropTypes.string
+  networkLogo: PropTypes.string,
 }
 
 NetworkSelector.defaultProps = {
   title: '',
   options: [],
-  networkLogo: ''
+  networkLogo: '',
 }
 
 export default NetworkSelector
