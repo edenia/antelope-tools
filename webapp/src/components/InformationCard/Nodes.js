@@ -26,9 +26,8 @@ const Nodes = ({ nodes, producer, onNodeClick, t, classes }) => {
                 {node.name || node?.node_type?.toString()}{' '}
               </Typography>
               <InfoOutlinedIcon
-                onClick={(e) => {
-                  onNodeClick({ node, producer }, e)
-                }}
+                className={classes.infoIcon}
+                onClick={onNodeClick({ node, producer })}
               />
             </div>
           ))}

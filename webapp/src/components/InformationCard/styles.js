@@ -258,4 +258,7 @@ export default (theme) => ({
     overflow: 'hidden',
     width: 220,
   },
+  infoIcon: {
+    cursor: 'pointer',
+  },
 })

@@ -39,9 +39,9 @@ const useBlockProducerState = () => {
     return { name: e }
   })
 
-  const handlePopoverOpen = (node, event) => {
+  const handlePopoverOpen = (node) => (event) => {
     setCurrent(node)
-    setAnchorEl(event.target)
+    setAnchorEl(event.currentTarget)
   }
 
   const handlePopoverClose = () => {

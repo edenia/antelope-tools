@@ -65,7 +65,7 @@ const SupportedAPIs = ({ node }) => {
         <div className={classes.buttonApis}>
           <Button
             size="small"
-            variant="contained"
+            variant="outlined"
             color="primary"
             onClick={(event) => {
               handlePopoverOpen(event.target)
