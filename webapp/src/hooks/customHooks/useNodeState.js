@@ -22,13 +22,21 @@ const useNodeState = () => {
   }
 
   useEffect(() => {
+    let nodesFilter = { type: { _neq: [] } }
+
+    if (filters.name !== 'all') {
+      nodesFilter = {
+        _and: [nodesFilter, { type: { _contains: filters.name } }],
+      }
+    }
+
     setPagination((prev) => ({
       ...prev,
-      where: { ...prev.where, nodes: { type: { _neq: [] } } },
-      nodeFilter:
-        filters.name === 'all'
-          ? undefined
-          : { type: { _contains: filters.name } },
+      where: {
+        ...prev.where,
+        nodes: nodesFilter,
+      },
+      nodeFilter: nodesFilter,
     }))
   }, [filters.name, setPagination])
 
