@@ -28,7 +28,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const InformationCard = ({ producer, rank, onNodeClick, type }) => {
+const InformationCard = ({ producer, rank, type }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { t } = useTranslation('producerCardComponent')
@@ -88,7 +88,6 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           nodes={producerOrg.nodes}
           producer={producer}
           t={t}
-          onNodeClick={onNodeClick}
           type={type}
           classes={classes}
         />
@@ -181,14 +180,12 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
 InformationCard.propTypes = {
   producer: PropTypes.any,
   rank: PropTypes.number,
-  onNodeClick: PropTypes.func,
   type: PropTypes.string,
 }
 
 InformationCard.defaultProps = {
   producer: {},
   rank: 0,
-  onNodeClick: () => {},
   type: '',
 }
 

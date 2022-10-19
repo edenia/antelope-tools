@@ -1,9 +1,25 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-const Nodes = ({ nodes, producer, onNodeClick, t, classes }) => {
+import Tooltip from '../../components/Tooltip'
+import NodeCard from '../../components/NodeCard'
+
+const Nodes = ({ nodes, producer, t, classes }) => {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [selected, setSelected] = useState(null)
+
+  const handlePopoverOpen = (target, node) => {
+    setAnchorEl(target)
+    setSelected(node)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+    setSelected(null)
+  }
+
   if (!nodes?.length) {
     return (
       <div className={classes.nodes}>
@@ -19,19 +35,32 @@ const Nodes = ({ nodes, producer, onNodeClick, t, classes }) => {
     <div className={classes.nodes}>
       <Typography variant="overline">{t('nodes')}</Typography>
       <div className={classes.borderLine}>
-        <div>
-          {nodes.map((node, i) => (
-            <div className={classes.rowWrapper} key={`node-${i}`}>
-              <Typography variant="body1">
-                {node.name || node?.node_type?.toString()}{' '}
-              </Typography>
-              <InfoOutlinedIcon
-                className={classes.infoIcon}
-                onClick={onNodeClick({ node, producer })}
-              />
+        <>
+          {nodes.map((node, index) => (
+            <div
+              key={`node-${producer?.owner}-${node?.node_type?.toString()}-${index}`}
+            >
+              <Tooltip
+                anchorEl={anchorEl}
+                open={anchorEl !== null && node === selected}
+                onClose={handlePopoverClose}
+              >
+                <NodeCard node={node} producer={producer} />
+              </Tooltip>
+              <div className={classes.rowWrapper}>
+                <Typography variant="body1">
+                  {node.name || node?.node_type?.toString()}{' '}
+                </Typography>
+                <InfoOutlinedIcon
+                  className={classes.infoIcon}
+                  onClick={(event) => {
+                    handlePopoverOpen(event.target, node)
+                  }}
+                />
+              </div>
             </div>
           ))}
-        </div>
+        </>
       </div>
     </div>
   )
