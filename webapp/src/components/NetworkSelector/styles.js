@@ -30,7 +30,7 @@ export default (theme) => ({
     width: 310,
     top: 48,
     left: -55,
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)' ,
+    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)',
     '& .titles': {
       display: 'flex',
       '& .titlesBoxRight': {
@@ -102,7 +102,6 @@ export default (theme) => ({
   },
   listItemActive: {
     background: theme.palette.primary.contrastText,
-
   },
   toggle: {
     display: 'flex',
