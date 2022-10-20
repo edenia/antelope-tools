@@ -19,7 +19,7 @@
     "/faucet>moreDescription": "This tool allows you to create an account and get LIBRE testnet tokens.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "The on-chain ricardian contract that describes the validator node agreement of this network.",
-    "/>moreDescription": "Monitor the infrastructure of blockchain networks using Antelope + EOSIO blockchain technology. ",
+    "/>moreDescription": "Monitor the infrastructure of blockchain networks using Antelope + EOSIO blockchain technology.",
     "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
     "/block-producers>moreDescription": "A list of the block producers in the network – blockchain accounts registered to run nodes on the network. It includes information from chain tables and their bp.json files.",
     "/nodes>moreDescription": "A list of all the nodes run by block producers comprising the network with specific information such as endpoints and location.",

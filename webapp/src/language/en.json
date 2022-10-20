@@ -197,7 +197,7 @@
     },
     "subtitle3": "Where Does the Data Come From?",
     "body3": {
-      "paragraph1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files. ",
+      "paragraph1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files.",
       "paragraph2": "For more information about Antelope Tools, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
     },
     "bpjsonexample": "Bp.json example"
