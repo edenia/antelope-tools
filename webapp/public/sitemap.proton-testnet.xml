@@ -2,46 +2,46 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://proton-testnet.antelope.tools/</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/block-producers</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/nodes</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/endpoints</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/rewards-distribution</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/nodes-distribution</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/ricardian-contract</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/accounts</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/bpjson</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/about</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://proton-testnet.antelope.tools/help</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
 </urlset>
