@@ -98,7 +98,7 @@ body {
   color: #000000;
 }
 
-.telos-networks {
+.networks {
   display: flex;
   flex-direction: column;
   width: 105px;
@@ -106,39 +106,6 @@ body {
   align-items: center;
 }
 
-.eos-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
-
-.jungle-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.lacchain-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.proton-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
 
 .header {
   overflow: hidden;
@@ -231,9 +198,8 @@ body {
 
 .testnet-title {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 31px;
-  text-align: left;
   letter-spacing: 0.83px;
   text-transform: uppercase;
   color: #000000;
@@ -261,7 +227,7 @@ body {
 .project-by {
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 24px;
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
@@ -274,11 +240,15 @@ body {
   padding: 10px;
 }
 
+.testnet-title{
+  text-align: center;
+}
+
 #copyright {
   display: inline;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 31px;
   text-align: right;
   letter-spacing: 0.83px;
@@ -406,11 +376,11 @@ body {
   }
 
   .box-column div {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .box-column ul li {
-    text-align: start;
+    text-align: center;
   }
 
   #testnet-title {
