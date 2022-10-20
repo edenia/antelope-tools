@@ -17,6 +17,7 @@ import moment from 'moment'
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 import EndpointsTable from '../../components/EndpointsTable'
+import NoResults from '../../components/NoResults'
 
 import styles from './styles'
 
@@ -47,8 +48,14 @@ const EndpointsList = () => {
             )}
           </div>
           <div className={classes.switchContainer}>
-            <Typography component="p" variant="caption">{t('endpointsResponding')}</Typography>
-            <Switch onChange={(event)=>{handleFilter(event.target?.checked)}}/>
+            <Typography component="p" variant="caption">
+              {t('endpointsResponding')}
+            </Typography>
+            <Switch
+              onChange={(event) => {
+                handleFilter(event.target?.checked)
+              }}
+            />
           </div>
           <div className={classes.modalContainer}>
             <HealthInfoModal />
@@ -80,10 +87,10 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length && (
-              <EndpointsTable
-                producers={producers}
-              />
+            {!!producers.length ? (
+              <EndpointsTable producers={producers} />
+            ) : (
+              <NoResults />
             )}
             {pagination.totalPages > 1 && (
               <div className={classes.pagination}>
