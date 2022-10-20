@@ -22,19 +22,23 @@ const HealthCheck = ({ children, status }) => {
 
   if (status === undefined) return
 
+  const openPopOver = (event) => {
+    handlePopoverOpen(event.target)
+  }
+
   return (
     <>
       <div
         className={classes.icon}
-        onClick={(e) => {
-          handlePopoverOpen(e.target)
-        }}
+        onClick={openPopOver}
+        onMouseEnter={openPopOver}
       >
         <LightIcon status={status} />
       </div>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
+        closeOnMouseLeave
         onClose={handlePopoverClose}
       >
         {children}

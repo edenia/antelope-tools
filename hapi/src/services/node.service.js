@@ -79,11 +79,11 @@ const getFormatNode = (node) => {
     }
   }
 
-  if (node.features?.length) {
+  if (node.features?.length || !!node.keys) {
     formatNode.node_info = {
       data: {
         version: node.server_version_string ?? '',
-        features: node.features
+        features: {list: node.features, keys: node.keys}
       }
     }
   }
