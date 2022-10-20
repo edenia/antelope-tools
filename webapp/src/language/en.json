@@ -203,7 +203,7 @@
     "bpjsonexample": "Bp.json example"
   },
   "helpRoute": {
-    "title": "Thank you for using EOS Network Monitor!",
+    "title": "Thank you for using Antelope Tools Blockchain Network Monitor !",
     "paragraph": "Antelope Tools is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
     "githubEOSCR": "Edenia GitHub Repo",
     "telegramChannel": "Telegram Channel",
@@ -255,7 +255,8 @@
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
-    "isFull": "Is full"
+    "isFull": "Is full",
+    "supportedApis": "Supported APIs"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",

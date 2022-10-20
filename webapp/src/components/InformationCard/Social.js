@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography'
 import ProducerSocialLinks from '../ProducerSocialLinks'
 
 const Social = ({ social, type, t, classes }) => {
-  if (type === 'node') return <></>
-
   return (
     <div className={classes.social}>
       <Typography variant="overline">{t('social')}</Typography>
@@ -21,13 +19,13 @@ Social.propTypes = {
   social: PropTypes.object,
   t: PropTypes.func,
   classes: PropTypes.object,
-  type: PropTypes.string
+  type: PropTypes.string,
 }
 
 Social.defaultProps = {
   type: '',
   social: {},
-  classes: {}
+  classes: {},
 }
 
 export default memo(Social)

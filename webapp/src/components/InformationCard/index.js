@@ -17,18 +17,18 @@ import 'flag-icon-css/css/flag-icons.css'
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
+import NodesCard from '../NodeCard/NodesCard'
 
-import Information from './Information'
+import ProducerInformation from './ProducerInformation'
 import Nodes from './Nodes'
 import Social from './Social'
 import Media from './Media'
 import Stats from './Stats'
-import Endpoints from './Endpoints'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const InformationCard = ({ producer, rank, onNodeClick, type }) => {
+const InformationCard = ({ producer, rank, type }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { t } = useTranslation('producerCardComponent')
@@ -51,9 +51,66 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           {`${t('missedBlocks')}: `}
           {(producer.missed_blocks || []).reduce(
             (result, current) => result + current.value,
-            0
+            0,
           )}
         </Typography>
+      </div>
+    )
+  }
+
+  const BlockProducerInfo = () => {
+    return (
+      <div className="bodyWrapper">
+        <div className={clsx(classes.info, classes[type])}>
+          <Typography variant="overline">{t('info')}</Typography>
+          <ProducerInformation
+            info={producerOrg.info}
+            classes={classes}
+            t={t}
+            type={type}
+          />
+        </div>
+        <Stats
+          t={t}
+          type={type}
+          classes={classes}
+          missedBlocks={producer.missed_blocks || []}
+          votes={formatWithThousandSeparator(
+            producer.total_votes_eos || '0',
+            0,
+          )}
+          rewards={formatWithThousandSeparator(
+            producer.total_rewards || '0',
+            0,
+          )}
+        />
+        <Nodes
+          nodes={producerOrg.nodes}
+          producer={producer}
+          t={t}
+          type={type}
+          classes={classes}
+        />
+        <div className={classes.healthStatus}>
+          <Typography variant="overline">{t('health')}</Typography>
+          <div className={classes.borderLine}>
+            {missedBlock(producer, producerOrg?.media?.account, type)}
+            <ProducerHealthIndicators
+              message={t('noData')}
+              producer={
+                producerOrg?.healthStatus
+                  ? { health_status: producerOrg.healthStatus }
+                  : { health_status: [] }
+              }
+            />
+          </div>
+        </div>
+        <Social
+          social={producerOrg?.social || {}}
+          type={type}
+          t={t}
+          classes={classes}
+        />
       </div>
     )
   }
@@ -70,20 +127,25 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           nodes: producer.bp_json?.nodes || [],
           healthStatus: producer.health_status,
           dataType: producer.bp_json?.type,
-          node: producer.node,
-          totalRewards: producer.total_rewards
+          totalRewards: producer.total_rewards,
         },
         type,
-        t
-      )
+        t,
+      ),
     )
     // eslint-disable-next-line
   }, [producer])
 
+  if(!producerOrg || !Object.keys(producerOrg)?.length) return <></>
+
   return (
     <Card className={classes.root}>
       <CardHeader title={producerOrg.title} />
-      <div className={classes.wrapper}>
+      <div
+        className={`${classes.wrapper} ${
+          type === 'node' ? classes.hideScroll : ''
+        }`}
+      >
         <div className={classes.media}>
           <Media classes={classes} media={producerOrg.media || {}} />
         </div>
@@ -93,65 +155,13 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
           unmountOnExit
           className={classes.collapse}
         >
-          <div className="bodyWrapper">
-            <div className={clsx(classes.info, classes[type])}>
-              <Typography variant="overline">{t('info')}</Typography>
-              <Information
-                info={producerOrg.info}
-                classes={classes}
-                t={t}
-                type={type}
-              />
+          {type === 'node' ? (
+            <div className={classes.nodeCardsContainer}>
+              <NodesCard nodes={producerOrg.nodes} />{' '}
             </div>
-            <Stats
-              t={t}
-              type={type}
-              classes={classes}
-              missedBlocks={producer.missed_blocks || []}
-              votes={formatWithThousandSeparator(
-                producer.total_votes_eos || '0',
-                0
-              )}
-              rewards={formatWithThousandSeparator(
-                producer.total_rewards || '0',
-                0
-              )}
-            />
-            <Endpoints
-              endpoints={producerOrg.endpoints}
-              classes={classes}
-              t={t}
-              type={type}
-            />
-            <Nodes
-              nodes={producerOrg.nodes}
-              producer={producer}
-              t={t}
-              onNodeClick={onNodeClick}
-              type={type}
-              classes={classes}
-            />
-            <div className={classes.healthStatus}>
-              <Typography variant="overline">{t('health')}</Typography>
-              <div className={classes.borderLine}>
-                {missedBlock(producer, producerOrg?.media?.account, type)}
-                <ProducerHealthIndicators
-                  message={t('noData')}
-                  producer={
-                    producerOrg?.healthStatus
-                      ? { health_status: producerOrg.healthStatus }
-                      : { health_status: [] }
-                  }
-                />
-              </div>
-            </div>
-            <Social
-              social={producerOrg?.social || {}}
-              type={type}
-              t={t}
-              classes={classes}
-            />
-          </div>
+          ) : (
+            <BlockProducerInfo />
+          )}
         </Collapse>
       </div>
       {!matches && (
@@ -170,15 +180,13 @@ const InformationCard = ({ producer, rank, onNodeClick, type }) => {
 InformationCard.propTypes = {
   producer: PropTypes.any,
   rank: PropTypes.number,
-  onNodeClick: PropTypes.func,
-  type: PropTypes.string
+  type: PropTypes.string,
 }
 
 InformationCard.defaultProps = {
   producer: {},
   rank: 0,
-  onNodeClick: () => { },
-  type: ''
+  type: '',
 }
 
 export default memo(InformationCard)
