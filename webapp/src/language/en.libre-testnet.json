@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Libre Testnet Network Dashboard and Infrastructure Monitor",
+    "/>title": "Libre Testnet Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - Libre Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Libre Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Libre Testnet Network Dashboard",

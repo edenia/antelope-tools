@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Airwire Network Dashboard and Infrastructure Monitor",
+    "/>title": "Airwire Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - Airwire Network Dashboard",
     "/block-producers>title": "Block Producers - Airwire Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Airwire Network Dashboard",

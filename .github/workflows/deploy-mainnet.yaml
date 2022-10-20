@@ -33,7 +33,7 @@ jobs:
           # webapp
 
           PORT: '80'
-          REACT_APP_TITLE: 'EOS Mainnet Network Dashboard'
+          REACT_APP_TITLE: 'EOS Network Monitor'
           REACT_APP_VERSION: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/eos.png'
           REACT_APP_FOOTER_LINKS: '[{"text":"EOS Community Website","src":"https://eoscommunity.org/"},{"text":"Block Explorer","src":"https://bloks.io"},{"text":"EOS Developer Docs","src":"https://guide.eoscostarica.io"},{"text": "EOS Network Monitor","src": "https://antelope.tools"}]'

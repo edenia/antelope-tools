@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Telos Testnet Network Dashboard and Infrastructure Monitor",
+    "/>title": "Telos Testnet Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - Telos Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Telos Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Telos Testnet Network Dashboard",

@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Proton Testnet Network Dashboard and Infrastructure Monitor",
+    "/>title": "Proton Testnet Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - Proton Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Proton Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Proton Testnet Network Dashboard",

@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "WAX Testnet Network Dashboard and Infrastructure Monitor",
+    "/>title": "WAX Testnet Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - WAX Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - WAX Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - WAX Testnet Network Dashboard",

@@ -19,7 +19,7 @@
     "/ricardian-contract>sidebar": "Validator Agreement",
     "/ricardian-contract>heading": "",
     "/ricardian-contract>moreDescription": "The on-chain ricardian contract that describes the validator node agreement of this network.",
-    "/>title": "LACChain EOSIO Network Dashboard and Infrastructure Monitor",
+    "/>title": "LACChain EOSIO Network Monitor and Infrastructure Dashboard",
     "/>moreDescription": "Monitor the infrastructure of blockchain networks using Antelope + EOSIO blockchain technology. ",
     "/cpu-benchmark>title": "CPU Benchmarks  - LACChain EOSIO Network Dashboard",
     "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",

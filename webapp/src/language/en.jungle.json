@@ -1,6 +1,6 @@
 {
   "routes": {
-    "/>title": "Jungle4 Testnet Network Dashboard and Infrastructure Monitor",
+    "/>title": "Jungle4 Testnet Network Monitor and Infrastructure Dashboard",
     "/cpu-benchmark>title": "CPU Benchmarks  - Jungle4 Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Jungle4 Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Jungle4 Testnet Network Dashboard",
