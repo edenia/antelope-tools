@@ -205,9 +205,9 @@
   "helpRoute": {
     "title": "Thank you for using EOS Network Monitor!",
     "paragraph": "Antelope Tools is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "GitHub - EOS Costa Rica",
+    "githubEOSCR": "Edenia GitHub Repo",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "EOS Costa Rica Website "
+    "websiteEOSCR": "Edenia Website "
   },
   "producerCardComponent": {
     "rank": "Rank",

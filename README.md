@@ -220,7 +220,7 @@ At this point you can run `make start` or `make run <NETWORK>`, you can check th
 
 Please Read EOS Costa Rica's [Open Source Contributing Guidelines](https://developers.eoscostarica.io/docs/open-source-guidelines).
 
-Please report bugs big and small by [opening an issue](https://github.com/eoscostarica/antelope-tools/issues/new/choose)
+Please report bugs big and small by [opening an issue](https://github.com/edenia/antelope-tools/issues/new/choose)
 
 Contributions of any kind are welcome!
 

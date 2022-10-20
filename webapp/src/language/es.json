@@ -211,9 +211,9 @@
   "helpRoute": {
     "title": "¡Gracias por usar EOS Network Dashboard!",
     "paragraph": "El desarrollo de Antelope Tools continúa en progreso. Por favor, siéntase libre de dejar sugerencias para actualizaciones, reporte de errores, o utilizar el código. También, puede encontrarnos en Telegram o visitar nuestro sitio web.",
-    "githubEOSCR": "GitHub EOS Costa Rica",
+    "githubEOSCR": "Repositorio GitHub de Edenia",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Sitio web de EOS Costa Rica"
+    "websiteEOSCR": "Sitio web de  Edenia"
   },
   "producerCardComponent": {
     "rank": "Rango",
