@@ -14,6 +14,7 @@ const useEndpointsState = () => {
     page: 1,
     limit: 20,
     totalPages: 0,
+    where: { nodes: { endpoints: { value: { _gt: '' } } } },
   })
 
   useEffect(() => {
@@ -21,12 +22,17 @@ const useEndpointsState = () => {
       variables: {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        where: { nodes: { endpoints: { value: { _gt: '' } } } },
+        where: pagination.where,
         endpointFilter: pagination.endpointFilter,
       },
     })
     // eslint-disable-next-line
-  }, [pagination.page, pagination.limit, pagination.endpointFilter])
+  }, [
+    pagination.page,
+    pagination.where,
+    pagination.limit,
+    pagination.endpointFilter,
+  ])
 
   useEffect(() => {
     if (!data?.info) return
@@ -39,7 +45,7 @@ const useEndpointsState = () => {
   }, [data?.info, pagination.limit])
 
   useEffect(() => {
-    if (!data?.producers.length) return
+    if (!data?.producers) return
 
     setProducers(
       data.producers.map((producer) => {
@@ -83,16 +89,16 @@ const useEndpointsState = () => {
   }
 
   const handleFilter = (value) => {
+    const filter = value
+      ? { response: { _contains: { status: 200 } } }
+      : { value: { _gt: '' } }
+
     setPagination((prev) => ({
       ...prev,
       page: 1,
+      where: { nodes: { endpoints: filter } },
       endpointFilter: value
-        ? {
-            _or: [
-              { type: { _eq: 'p2p' } },
-              { response: { _contains: { status: 200 } } },
-            ],
-          }
+        ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
         : undefined,
     }))
   }
