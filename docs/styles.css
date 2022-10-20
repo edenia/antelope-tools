@@ -240,7 +240,7 @@ body {
   margin: 0;
 }
 
-.eos-costa-rica > div {
+.eos-costa-rica {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -267,6 +267,11 @@ body {
   color: rgba(0, 0, 0, 0.87);
   margin: 0;
   margin-left: 10px;
+}
+
+.logo-text {
+  display: flex;
+  padding: 10px;
 }
 
 #copyright {
@@ -437,8 +442,10 @@ body {
     align-items: end;
   }
 
-  .eos-costa-rica > div {
+  .eos-costa-rica {
+    display: flex;
     justify-content: flex-start;
+    padding: 10px;
   }
 
   .project-by {
@@ -508,7 +515,7 @@ body {
   #network-desktop > a {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end
+    justify-content: flex-end;
   }
 
   .box-network h4 {
@@ -535,6 +542,11 @@ body {
     font-style: normal;
     line-height: 1.4;
     letter-spacing: -0.22px;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
   }
 
   #contact-us {
@@ -565,6 +577,11 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
   }
 
   #bg-image {

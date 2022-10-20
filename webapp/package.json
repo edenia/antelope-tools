@@ -1,8 +1,8 @@
 {
   "name": "eosiodashboard",
   "version": "v0.1.11",
-  "description": "EOSIO Dashboard WebApp",
-  "repository": "https://github.com/eoscostarica/eosio-dashboard.git",
+  "description": "Antelope Tools WebApp",
+  "repository": "https://github.com/edenia/antelope-tools.git",
   "scripts": {
     "start": "react-app-rewired --openssl-legacy-provider start",
     "build": "react-app-rewired build",
