@@ -246,14 +246,12 @@ const getNodes = bpJson => {
     (bpJson?.nodes || []).map(async node => {
       const apiUrl = node?.ssl_endpoint || node?.api_endpoint
       const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
-      console.log(nodeInfo)
       return {
         ...node,
         server_version: nodeInfo?.server_version || '',
         server_version_string: nodeInfo?.server_version_string || '',
         head_block_num: nodeInfo?.head_block_num || '',
         chain_id: nodeInfo?.chain_id || '',
-        head_block_num: nodeInfo?.head_block_num || '',
         last_irreversible_block_num: nodeInfo?.last_irreversible_block_num || '',
         last_irreversible_block_id: nodeInfo?.last_irreversible_block_id || '',
         head_block_id: nodeInfo?.head_block_id || '',
