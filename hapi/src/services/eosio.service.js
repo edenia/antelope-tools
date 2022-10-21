@@ -1,6 +1,5 @@
 const { axiosUtil, eosUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
-const { getNodeInfo } = require('../utils/producer.util')
 
 const getProducers = async () => {
   let producers = []
@@ -38,7 +37,6 @@ const getProducers = async () => {
 
       return 0
     })
-  // console.log(producers[0])
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
   producers = await Promise.all(
@@ -254,7 +252,6 @@ const getNodes = bpJson => {
         server_version: nodeInfo?.server_version || '',
         server_version_string: nodeInfo?.server_version_string || '',
         head_block_num: nodeInfo?.head_block_num || '',
-        server_version: nodeInfo?.server_version || '',
         chain_id: nodeInfo?.chain_id || '',
         head_block_num: nodeInfo?.head_block_num || '',
         last_irreversible_block_num: nodeInfo?.last_irreversible_block_num || '',
@@ -266,7 +263,6 @@ const getNodes = bpJson => {
         virtual_block_net_limit: nodeInfo?.virtual_block_net_limit || '',
         block_cpu_limit: nodeInfo?.block_cpu_limit || '',
         block_net_limit: nodeInfo?.block_net_limit || '',
-        server_version_string: nodeInfo?.server_version_string || '',
         fork_db_head_block_num: nodeInfo?.fork_db_head_block_num || '',
         fork_db_head_block_id: nodeInfo?.fork_db_head_block_id || '',
         server_full_version_string: nodeInfo?.server_full_version_string || '',
