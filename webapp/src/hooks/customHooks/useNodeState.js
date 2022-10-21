@@ -7,50 +7,67 @@ import useSearchState from './useSearchState'
 
 const useNodeState = () => {
   const [
-    { filters, pagination, loading, producers },
+    { filters, pagination, loading, producers, info },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
-  const [nodes, setNodes] = useState([])
-  const PAGE_LIMIT = 28
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
 
-  useEffect(() => {
-    setPagination((prev) => ({
-      ...prev,
-      where: { bp_json: { _has_key: 'nodes' } },
-      limit: null,
-    }))
-  }, [setPagination])
+  const getOrderNode = (node) => {
+    return (
+      (node.endpoints?.length || 0) +
+      (node.node_info[0]?.features?.list?.length || 0)
+    )
+  }
 
   useEffect(() => {
-    if (!nodes) return
+    let nodesFilter = { type: { _neq: [] } }
 
-    const index = (pagination.page - 1) * PAGE_LIMIT
-
-    setItems(nodes.slice(index, index + PAGE_LIMIT))
+    if (filters.name !== 'all') {
+      nodesFilter = {
+        _and: [nodesFilter, { type: { _contains: filters.name } }],
+      }
+    }
 
     setPagination((prev) => ({
       ...prev,
-      pages: Math.ceil((nodes?.length ?? 0) / PAGE_LIMIT),
+      where: {
+        ...prev.where,
+        nodes: nodesFilter,
+      },
+      nodeFilter: nodesFilter,
     }))
-  }, [nodes, pagination.page, setPagination])
+  }, [filters.name, setPagination])
+
+  useEffect(() => {
+    if (!info) return
+
+    setPagination((prev) => ({
+      ...prev,
+      pages: Math.ceil(info.producers?.count / prev.limit),
+    }))
+  }, [info, setPagination])
 
   useEffect(() => {
     if (!producers) return
 
-    const nodesList = []
+    const list = producers.flatMap((producer) => {
+      if (!producer?.nodes?.length) return []
 
-    producers.forEach((producer) => {
-      (producer?.bp_json?.nodes ?? []).forEach((node) => {
-        if (filters.name === 'all' || node.node_type?.includes(filters.name)) {
-          nodesList.push({ node, producer })
-        }
+      producer.nodes.sort((a, b) => {
+        return getOrderNode(a) < getOrderNode(b)
       })
+
+      return producer.nodes.length
+        ? {
+            ...producer,
+            bp_json: { ...producer.bp_json, nodes: producer.nodes },
+          }
+        : []
     })
 
-    setNodes(nodesList)
+    setItems(list)
   }, [filters.name, producers])
 
   return [

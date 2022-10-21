@@ -38,7 +38,7 @@ jobs:
           PORT: '80'
           REACT_APP_TITLE: 'Telos Mainnet Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/telos.jpg'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/telos.png'
           REACT_APP_FOOTER_LINKS: '[{ "text": "Telos Website", "src": "https://telos.net/" },{ "text": "Telos Block Explorer", "src": "https://telos-test.bloks.io/" },{"text": "Developer Docs","src": "https://docs.telos.net/"},{"text": "Telos Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
@@ -48,7 +48,7 @@ jobs:
           REACT_APP_HASURA_URL: 'https://graphql-telos.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'telos'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Telos Mainnet'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/telos.jpg'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/telos.png'
           REACT_APP_EOS_API_HOST: 'telos.greymass.com'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
@@ -61,7 +61,7 @@ jobs:
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_SYNC_TOLERANCE_INTERVAL: 180000
           REACT_APP_TOKEN_SYMBOL: 'TLOS'
-          REACT_APP_NETWORK_URL:  '[{"label":"EOS Mainnet","value":"https://eos.antelope.tools","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.antelope.tools","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.antelope.tools","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
+          REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.antelope.tools","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.antelope.tools","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://telos.bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'

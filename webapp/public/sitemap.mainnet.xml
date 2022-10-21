@@ -1,46 +1,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://eos.antelope.tools/</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/endpoints</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes-distribution</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/rewards-distribution</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/ricardian-contract</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/accounts</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/bpjson</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/about</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/help</loc>
-      <lastmod>2021-06-09T01:31:34+00:00</lastmod>
+      <lastmod>2022-10-20</lastmod>
    </url>
 </urlset>

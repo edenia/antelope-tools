@@ -23,7 +23,7 @@ RUN mkdir -p /root/.ssh && \
 RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
     chmod 600 /root/.ssh/id_rsa
 
-RUN git clone --branch "$branch" https://github.com/eoscostarica/eosio-dashboard.git /opt/eosio-dashboard
+RUN git clone --branch "$branch" https://github.com/edenia/antelope-tools.git /opt/eosio-dashboard
 
 WORKDIR /opt/eosio-dashboard
 

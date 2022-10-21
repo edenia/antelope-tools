@@ -1,566 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="csrf_token" />
-    <meta content="website" property="type" />
-    <meta content="https://antelope.tools/" property="url" />
-    <meta content="#ffffff" name="theme-color" />
-    <meta
-      content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard"
-      name="title"
-    />
-    <meta
-      content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
-      name="description"
-    />
-    <meta
-      content="https://antelope.tools/images/maskable_icon.svg"
-      property="image"
-    />
-    <meta content="website" property="og:type" />
-    <meta content="summary_large_image" property="twitter:card" />
-    <meta content="https://antelope.tools/" property="twitter:url" />
-    <meta
-      content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard"
-      property="og:title"
-    />
-    <meta
-      content="https://antelope.tools/images/maskable_icon.svg"
-      property="og:image"
-    />
-    <meta content="image/*" property="og:image:type" />
-    <meta content="https://antelope.tools/" property="og:url" />
-    <meta content="Antelope Tools Dashboard" property="og:site_name" />
-    <meta
-      content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
-      property="og:description"
-    />
-    <link href="https://antelope.tools/images/favicon.ico" rel="shortcut icon" />
-    <link
-      href="https://antelope.tools/images/favicon-16x16.png"
-      rel="icon"
-      sizes="16x16"
-      type="image/png"
-    />
-    <link
-      href="https://antelope.tools/images/favicon-32x32.png"
-      rel="icon"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link
-      href="https://antelope.tools/images/apple-touch-icon.png"
-      rel="apple-touch-icon"
-      sizes="180x180"
-    />
-    <link
-      href="https://antelope.tools/images/safari-pinned-tab.svg"
-      rel="mask-icon"
-    />
-    <link href="styles.css" rel="stylesheet" />
-    <title>Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard</title>
-    <style>
-      /* Google Font loaded inline for faster performance */
-      @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOOaBTMnFcQIG.woff2)
-          format('woff2');
-        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
-          U+A640-A69F, U+FE2E-FE2F;
-      }
-      /* cyrillic */
-      @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIMeaBTMnFcQIG.woff2)
-          format('woff2');
-        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-      }
-      /* vietnamese */
-      @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOuaBTMnFcQIG.woff2)
-          format('woff2');
-        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-          U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-      }
-      /* latin-ext */
-      @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIO-aBTMnFcQIG.woff2)
-          format('woff2');
-        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-      }
-      /* latin */
-      @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofINeaBTMnFcQ.woff2)
-          format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-          U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <div class="section-wrapper">
-        <img alt="logo" id="bg-image" src="./images/bg.svg" />
-        <div class="image-box">
-          <img
-            alt="name"
-            height="115"
-            id="middle-logo"
-            src="./images/antelope-tools.svg"
-          />
-          <img alt="bg" id="bg-image-mobile" src="./images/bg.svg" />
-        </div>
-        <div class="image-box-desktop">
-          <img alt="logo" src="./images/antelope-tools.svg" />
-        </div>
-        <div class="box-paragraph" id="d-version">
-          <h1>Antelope Tools Blockchain Network Monitor</h1>
-          <p>
-            The Antelope Tools Dashboard gathers important data for blockchain users such
-            as node status and stats for <b>Antelope + EOSIO blockchains</b>. You can
-            visualize the
-            <a
-              href="https://eos.antelope.tools/"
-              title="EOS Mainnet Block Producers"
-              >blockchain <b>consensus mechanism</b></a
-            >
-            in real time along with other network specific information such as
-            how
-            <a
-              href="https://eos.antelope.tools/rewards-distribution"
-              title="EOS Mainnet BP Rewards"
-              ><b>block producer rewards</b> are distributed</a
-            >
-            on the EOS public mainnet or
-            <a
-              href="https://lacchain.antelope.tools/entities"
-              title="LACChain EOSIO Network"
-              >list registered entities on <b>LACChain</b></a
-            >
-            public-permissioned network.
-          </p>
-          <p>
-            The Antelope Tools Dashboard is an
-            <a
-              href="https://github.com/edenia/antelope-tools"
-              target="_blank"
-              ><b>open-source</b> tool</a
-            >
-            meant to help the EOSIO community access data to support voting for
-            BPs and fine tune their infrastructure.
-          </p>
-        </div>
-        <div class="box-network">
-          <h2>Visit our network dashboards:</h2>
-          <div id="network-desktop">
-            <a class="eos-networks" href="https://eos.antelope.tools/"
-              ><img
-                alt="EOSIO"
-                height="100"
-                src="./images/eos.jpg"
-                width="100"
-              /><span class="name-networks">EOS Mainnet</span></a
-            >
-            <a class="lacchain-networks" href="https://lacchain.antelope.tools/"
-              ><img
-                alt="LACChain Pro Testnet"
-                height="100"
-                src="./images/lacchain.jpg"
-                width="100"
-              />
-              <span class="name-networks">LACChain Pro Testnet</span></a
-            >
-            <a class="proton-networks" href="https://proton.antelope.tools/"
-              ><img
-                alt="Proton Mainnet"
-                height="100"
-                src="./images/proton.png"
-                width="100"
-              /><span class="name-networks">Proton Mainnet</span></a
-            >
-            <a class="telos-networks" href="https://telos.antelope.tools/"
-              ><img
-                alt="Telos Mainnet"
-                height="100"
-                src="./images/telos.jpg"
-                width="100"
-              /><span class="name-networks">Telos Mainnet</span></a
-            >
-            <a class="wax-networks" href="https://wax.antelope.tools/"
-              ><img
-                alt="Wax Mainnet"
-                height="100"
-                src="./images/wax.jpg"
-                width="100"
-              /><span class="name-networks">Wax Mainnet</span></a
-            >
-            <a class="jungle-networks" href="https://jungle.antelope.tools/"
-              ><img
-                alt="Jungle4 Testnet"
-                height="100"
-                src="./images/jungle.jpg"
-                width="100"
-              /><span class="name-networks">Jungle4 Testnet</span></a
-            >
-          </div>
-          <div class="network-mobile">
-            <a class="eos-networks" href="https://eos.antelope.tools/"
-              ><img
-                alt="EOS Mainnet"
-                height="77"
-                src="./images/eos.jpg"
-                width="77"
-              /><span class="name-networks">EOS Mainnet</span></a
-            >
-            <a class="lacchain-networks" href="https://lacchain.antelope.tools/"
-              ><img
-                alt="LACChain Pro Testnet"
-                height="77"
-                src="./images/lacchain.jpg"
-                width="77"
-              /><span class="name-networks">LACChain Pro Testnet</span></a
-            >
-          </div>
-          <div class="network-mobile">
-            <a class="jungle-networks" href="https://jungle.antelope.tools/"
-              ><img
-                alt="Jungle4 Testnet"
-                height="77"
-                src="./images/jungle.jpg"
-                width="77"
-              /><span class="name-networks">Jungle4 Testnet</span></a
-            >
-            <a class="proton-networks" href="https://proton.antelope.tools/"
-              ><img
-                alt="Proton Testnet"
-                height="77"
-                src="./images/proton.png"
-                width="77"
-              /><span class="name-networks">Proton Mainnet</span></a
-            >
-          </div>
-          <div class="network-mobile">
-            <a class="telos-networks" href="https://telos.antelope.tools/"
-              ><img
-                alt="Telos Testnet"
-                height="77"
-                src="./images/telos.jpg"
-                width="77"
-              /><span class="name-networks">Telos Mainnet</span></a
-            >
-            <a class="wax-networks" href="https://wax.antelope.tools/"
-              ><img
-                alt="Wax Testnet"
-                height="77"
-                src="./images/wax.jpg"
-                width="77"
-              />
-              <span class="name-networks">Wax Mainnet</span></a
-            >
-          </div>
-          <h3 class="more-networks">And many testnets too!</h3>
-        </div>
-      </div>
-    </div>
-    <div class="content">
-      <div class="section-wrapper">
-        <div class="box-paragraph">
-          <h4>Why use our dashboard?</h4>
-          <p>
-            Antelope Tools Dashboard is a community-driven open-source tool built by a
-            group of blockchain developers that believe transparency is
-            fundamental to operate blockchain networks. We intend to provide a
-            useful and straightforward app that will help visualize the Block
-            Producers’ relevant information to promote
-            <b>transparency and reliability</b>.
-          </p>
-        </div>
-        <div class="box-paragraph">
-          <h4>Why It’s Important?</h4>
-          <p>
-            On the EOS network token holders must
-            <b>vote for Block Producers</b> based on information they have , and
-            on permissioned networks such as LACChain node operators are
-            responsible for the network running smoothly. So, we believe that
-            monitoring what’s happening on the network is essential to improve
-            and measure node transparency. Antelope Tools Dashboard’s main objective is
-            to help you visualize objective and reliable information about each
-            node and its activity.
-          </p>
-        </div>
-        <div class="box-paragraph">
-          <h4>Where Does the Data Come From?</h4>
-          <p>
-            Antelope Tools Dashboard provides clear and graphic visualization of relevant
-            information of entities running
-            <b>nodes and blockchain infrastructure</b>. We source data on-chain
-            directly from the public blockchain tables and information provided
-            by Block Producers in their
-            <a href="https://github.com/eosrio/bp-info-standard" target="_blank"
-              >bp.json files</a
-            >. For more information about Antelope Tools Dashboard, visit our
-            <a
-              href="https://github.com/edenia/antelope-tools"
-              target="_blank"
-              >GitHub</a
-            >
-            repo or contact us on our
-            <a href="https://t.me/eoscr" target="_blank">Telegram group</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <div class="section-wrapper footer-content">
-        <div class="box-testnet">
-          <h5 class="testnet-title">Antelope Tools Network Dashboards</h5>
-          <div class="box-column">
-            <div>
-              <ul>
-                <li>
-                  <a
-                    href="https://lacchain.antelope.tools/"
-                    title="LACChain Network Monitor"
-                    >LACChain EOSIO</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://eos.antelope.tools/"
-                    title="EOS Network Monitor"
-                    >EOS Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://jungle.antelope.tools/"
-                    title="Jungle4 Testnet Network Monitor"
-                    >Jungle4 Testnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://proton.antelope.tools/"
-                    title="Proton Network Monitor"
-                    >Proton Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://proton-testnet.antelope.tools/"
-                    title="Proton Testnet Network Monitor"
-                    >Proton Testnet</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>
-                  <a
-                    href="https://telos.antelope.tools/"
-                    title="Telos Mainnet Network Monitor"
-                    >Telos Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://telos-testnet.antelope.tools/"
-                    title="Telos Testnet Network Monitor"
-                    >Telos Testnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://wax.antelope.tools/"
-                    title="WAX Mainnet Network Monitor"
-                    >Wax Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://wax-testnet.antelope.tools/"
-                    title="WAX Testnet Network Monitor"
-                    >Wax Testnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://ultra-testnet.antelope.tools/"
-                    title="Ultra Testnet Network Monitor"
-                    >Ultra Testnet</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div id="box-left">
-          <h6 id="contact-us">
-            Contact us and join our effort to make Antelope chains even more
-            transparent and easy to use.
-          </h6>
-          <div class="box-social-media">
-            <a href="https://twitter.com/EdeniaWeb3" target="_blank"
-              ><img
-                alt="twitter"
-                height="37"
-                src="./images/twitter.svg"
-                width="37"
-            /></a>
-            <a href="https://t.me/eoscr" target="_blank"
-              ><img
-                alt="telegram"
-                height="37"
-                src="./images/telegram.svg"
-                width="37"
-            /></a>
-            <a
-              href="https://github.com/edenia/antelope-tools"
-              target="_blank"
-              ><img
-                alt="github"
-                height="37"
-                src="./images/github.svg"
-                width="37"
-            /></a>
-            <a
-              href="https://www.linkedin.com/company/eoscostarica/"
-              target="_blank"
-              ><img
-                alt="linkedin"
-                height="37"
-                src="./images/linkedin.svg"
-                width="37"
-            /></a>
-          </div>
-          <div id="box-right">
-            <div class="eos-costa-rica">
-              <h4 class="project-by">An open source project by</h4>
-              <div>
-                <img
-                alt="EOS Costa Rica"
-                height="25"
-                src="./images/edenia-logo.svg"
-                width="25"
-              />
-                <a href="https://edenia.com/" target="_blank">
-                  <h4 class="project-by">Edenia</h4></a
-                >  
-              </div>
-            </div>
-            <p id="copyright">Copyright 2021 - Sistemas Edenia Internacional S.A.</p>
-          </div>
-        </div>
-        <div class="box-testnet-desktop">
-          <h5 class="testnet-title">Antelope Tools Network Dashboards</h5>
-          <div class="box-column">
-            <div>
-              <ul>
-                <li>
-                  <a
-                    href="https://lacchain.antelope.tools/"
-                    title="LACChain Network Monitor"
-                    >LACChain EOSIO</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://eos.antelope.tools/"
-                    title="EOS Network Monitor"
-                    >EOS Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://jungle.antelope.tools/"
-                    title="Jungle4 Testnet Network Monitor"
-                    >Jungle4 Testnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://proton.antelope.tools/"
-                    title="Proton Network Monitor"
-                    >Proton Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://proton-testnet.antelope.tools/"
-                    title="Proton Testnet Network Monitor"
-                    >Proton Testnet</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>
-                  <a
-                    href="https://telos.antelope.tools/"
-                    title="Telos Mainnet Network Monitor"
-                    >Telos Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://telos-testnet.antelope.tools/"
-                    title="Telos Testnet Network Monitor"
-                    >Telos Testnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://wax.antelope.tools/"
-                    title="WAX Mainnet Network Monitor"
-                    >Wax Mainnet</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://wax-testnet.antelope.tools/"
-                    title="WAX Testnet Network Monitor"
-                    >Wax Testnet</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p id="copyright-desktop">Copyright 2021 - Sistemas Edenia Internacional S.A.</p>
-    </div>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-E6Y0EC9FT8"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
 
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', 'G-E6Y0EC9FT8')
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="csrf_token" />
+  <meta content="website" property="type" />
+  <meta content="https://antelope.tools/" property="url" />
+  <meta content="#ffffff" name="theme-color" />
+  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" name="title" />
+  <meta
+    content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
+    name="description" />
+  <meta content="https://antelope.tools/images/maskable_icon.png" property="image" />
+  <meta content="website" property="og:type" />
+  <meta content="summary_large_image" property="twitter:card" />
+  <meta content="https://antelope.tools/" property="twitter:url" />
+  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" property="og:title" />
+  <meta content="https://antelope.tools/images/maskable_icon.png" property="og:image" />
+  <meta content="image/*" property="og:image:type" />
+  <meta content="https://antelope.tools/" property="og:url" />
+  <meta content="Antelope Tools Dashboard" property="og:site_name" />
+  <meta
+    content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
+    property="og:description" />
+  <link href="https://antelope.tools/images/favicon.ico" rel="shortcut icon" />
+  <link href="https://antelope.tools/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+  <link href="https://antelope.tools/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+  <link href="https://antelope.tools/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+  <link href="https://antelope.tools/images/safari-pinned-tab.svg" rel="mask-icon" />
+  <link href="styles.css" rel="stylesheet" />
+  <title>Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard</title>
+  <style>
+    /* Google Font loaded inline for faster performance */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOOaBTMnFcQIG.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
+        U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIMeaBTMnFcQIG.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* vietnamese */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOuaBTMnFcQIG.woff2) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
+        U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIO-aBTMnFcQIG.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+        U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofINeaBTMnFcQ.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="section-wrapper">
+      <img alt="logo" id="bg-image" src="./images/bg.svg" />
+      <div class="image-box">
+        <img alt="name" height="115" id="middle-logo" src="./images/antelope-tools.svg" />
+        <img alt="bg" id="bg-image-mobile" src="./images/bg.svg" />
+      </div>
+      <div class="image-box-desktop">
+        <img alt="logo" src="./images/antelope-tools.svg" />
+      </div>
+      <div class="box-paragraph" id="d-version">
+        <h1>Antelope Tools Blockchain Network Monitor</h1>
+        <p>
+          The Antelope Tools Dashboard gathers important data for blockchain users such
+          as node status and stats for <b>Antelope + EOSIO blockchains</b>. You can
+          visualize the
+          <a href="https://eos.antelope.tools/" title="EOS Mainnet Block Producers">blockchain <b>consensus
+              mechanism</b></a>
+          in real time along with other network specific information such as
+          how
+          <a href="https://eos.antelope.tools/rewards-distribution" title="EOS Mainnet BP Rewards"><b>block producer
+              rewards</b> are distributed</a>
+          on the EOS public mainnet or
+          <a href="https://lacchain.antelope.tools/entities" title="LACChain EOSIO Network">list registered entities on
+            <b>LACChain</b></a>
+          public-permissioned network.
+        </p>
+        <p>
+          The Antelope Tools Dashboard is an
+          <a href="https://github.com/edenia/antelope-tools" target="_blank"><b>open-source</b> tool</a>
+          meant to help the EOSIO community access data to support voting for
+          BPs and fine tune their infrastructure.
+        </p>
+      </div>
+      <div class="box-network">
+        <h2>Visit our network dashboards:</h2>
+        <div id="network-desktop">
+          <a class="networks" href="https://eos.antelope.tools/"><img alt="EOSIO" height="100"
+              src="./images/eos.jpg" width="100" /><span class="name-networks">EOS Mainnet</span></a>
+          <a class="networks" href="https://lacchain.antelope.tools/"><img alt="LACChain Pro Testnet"
+              height="100" src="./images/lacchain.jpg" width="100" />
+            <span class="name-networks">LACChain Pro Testnet</span></a>
+          <a class="networks" href="https://libre.antelope.tools/"><img alt="Libre Mainnet" height="100"
+              src="./images/libre.png" width="100" /><span class="name-networks">Libre Mainnet</span></a>
+          <a class="networks" href="https://proton.antelope.tools/"><img alt="Proton Mainnet" height="100"
+              src="./images/proton.png" width="100" /><span class="name-networks">Proton Mainnet</span></a>
+          <a class="networks" href="https://telos.antelope.tools/"><img alt="Telos Mainnet" height="88"
+              src="./images/telos.png" width="88" /><span class="name-networks">Telos Mainnet</span></a>
+          <a class="wax-networks" href="https://wax.antelope.tools/"><img alt="Wax Mainnet" height="100"
+              src="./images/wax.jpg" width="100" /><span class="name-networks">Wax Mainnet</span></a>
+          <a class="networks" href="https://jungle.antelope.tools/"><img alt="Jungle4 Testnet" height="100"
+              src="./images/jungle.jpg" width="100" /><span class="name-networks">Jungle4 Testnet</span></a>
+          <a class="networks" href="https://ultra-testnet.antelope.tools/"><img alt="Jungle4 Testnet" height="100"
+              src="./images/ultra.jpg" width="100" /><span class="name-networks">Ultra Testnet</span></a>
+        </div>
+        <div class="network-mobile">
+          <a class="networks" href="https://eos.antelope.tools/"><img alt="EOS Mainnet" height="77"
+              src="./images/eos.jpg" width="77" /><span class="name-networks">EOS Mainnet</span></a>
+          <a class="networks" href="https://lacchain.antelope.tools/"><img alt="LACChain Pro Testnet"
+              height="77" src="./images/lacchain.jpg" width="77" /><span class="name-networks">LACChain Pro
+              Testnet</span></a>
+        </div>
+        <div class="network-mobile">
+          <a class="networks" href="https://jungle.antelope.tools/"><img alt="Jungle4 Testnet" height="77"
+              src="./images/jungle.jpg" width="77" /><span class="name-networks">Jungle4 Testnet</span></a>
+          <a class="networks" href="https://proton.antelope.tools/"><img alt="Proton Testnet" height="77"
+              src="./images/proton.png" width="77" /><span class="name-networks">Proton Mainnet</span></a>
+        </div>
+        <div class="network-mobile">
+          <a class="networks" href="https://libre.antelope.tools/"><img alt="Libre Mainnet" height="77"
+              src="./images/libre.png" width="77" /><span class="name-networks">Libre Mainnet</span></a>
+          <a class="networks" href="https://ultra-testnet.antelope.tools/"><img alt="Ultra Testnet" height="77"
+              src="./images/ultra.jpg" width="77" /><span class="name-networks">Ultra Testnet</span></a>
+        </div>
+        <div class="network-mobile">
+          <a class="networks" href="https://telos.antelope.tools/"><img alt="Telos Testnet" height="77"
+              src="./images/telos.png" width="77" /><span class="name-networks">Telos Mainnet</span></a>
+          <a class="networks" href="https://wax.antelope.tools/"><img alt="Wax Testnet" height="77"
+              src="./images/wax.jpg" width="77" />
+            <span class="name-networks">Wax Mainnet</span></a>
+        </div>
+        <h3 class="more-networks">And many testnets too!</h3>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-wrapper">
+      <div class="box-paragraph">
+        <h4>Why use our dashboard?</h4>
+        <p>
+          Antelope Tools Dashboard is a community-driven open-source tool built by a
+          group of blockchain developers that believe transparency is
+          fundamental to operate blockchain networks. We intend to provide a
+          useful and straightforward app that will help visualize the Block
+          Producers’ relevant information to promote
+          <b>transparency and reliability</b>.
+        </p>
+      </div>
+      <div class="box-paragraph">
+        <h4>Why It’s Important?</h4>
+        <p>
+          On the EOS network token holders must
+          <b>vote for Block Producers</b> based on information they have , and
+          on permissioned networks such as LACChain node operators are
+          responsible for the network running smoothly. So, we believe that
+          monitoring what’s happening on the network is essential to improve
+          and measure node transparency. Antelope Tools Dashboard’s main objective is
+          to help you visualize objective and reliable information about each
+          node and its activity.
+        </p>
+      </div>
+      <div class="box-paragraph">
+        <h4>Where Does the Data Come From?</h4>
+        <p>
+          Antelope Tools Dashboard provides clear and graphic visualization of relevant
+          information of entities running
+          <b>nodes and blockchain infrastructure</b>. We source data on-chain
+          directly from the public blockchain tables and information provided
+          by Block Producers in their
+          <a href="https://github.com/eosrio/bp-info-standard" target="_blank">bp.json files</a>. For more information
+          about Antelope Tools Dashboard, visit our
+          <a href="https://github.com/edenia/antelope-tools" target="_blank">GitHub</a>
+          repo or contact us on our
+          <a href="https://t.me/eoscr" target="_blank">Telegram group</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="section-wrapper footer-content">
+      <div class="box-testnet">
+        <h5 class="testnet-title">Antelope Tools Network Dashboards</h5>
+        <div class="box-column">
+          <div>
+            <ul>
+              <li>
+                <a href="https://eos.antelope.tools/" title="EOS Network Monitor">EOS Mainnet</a>
+              </li>
+              <li>
+                <a href="https://proton.antelope.tools/" title="Proton Network Monitor">Proton Mainnet</a>
+              </li>
+              <li>
+                <a href="https://wax.antelope.tools/" title="WAX Mainnet Network Monitor">Wax Mainnet</a>
+              </li>
+              <li>
+                <a href="https://telos.antelope.tools/" title="Telos Mainnet Network Monitor">Telos Mainnet</a>
+              </li>
+              <li>
+                <a href="https://libre.antelope.tools/" title="Libre Mainnet Network Monitor">Libre Mainnet</a>
+              </li>
+              <li>
+                <a href="https://lacchain.antelope.tools/" title="LACChain Network Monitor">LACChain EOSIO</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <a href="https://jungle.antelope.tools/" title="Jungle4 Testnet Network Monitor">Jungle4 Testnet</a>
+              </li>
+              <li>
+                <a href="https://proton-testnet.antelope.tools/" title="Proton Testnet Network Monitor">Proton Testnet</a>
+              </li>
+              <li>
+                <a href="https://wax-testnet.antelope.tools/" title="WAX Testnet Network Monitor">Wax Testnet</a>
+              </li>
+              <li>
+                <a href="https://telos-testnet.antelope.tools/" title="Telos Testnet Network Monitor">Telos Testnet</a>
+              </li>
+              <li>
+                <a href="https://libre-testnet.antelope.tools/" title="Libre Testnet Network Monitor">Libre Testnet</a>
+              </li>
+              <li>
+                <a href="https://ultra-testnet.antelope.tools/" title="Ultra Testnet Network Monitor">Ultra Testnet</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="box-left">
+        <h6 id="contact-us">
+          Contact us and join our effort to make Antelope chains even more
+          transparent and easy to use.
+        </h6>
+        <div class="box-social-media">
+          <a href="https://twitter.com/EdeniaWeb3" target="_blank"><img alt="twitter" height="37"
+              src="./images/twitter.svg" width="37" /></a>
+          <a href="https://t.me/eoscr" target="_blank"><img alt="telegram" height="37" src="./images/telegram.svg"
+              width="37" /></a>
+          <a href="https://github.com/edenia/antelope-tools" target="_blank"><img alt="github" height="37"
+              src="./images/github.svg" width="37" /></a>
+          <a href="https://www.linkedin.com/company/eoscostarica/" target="_blank"><img alt="linkedin" height="37"
+              src="./images/linkedin.svg" width="37" /></a>
+        </div>
+        <div id="box-right">
+          <div class="eos-costa-rica">
+            <h4 class="project-by">Community Public Good App by</h4>
+            <div class="logo-text">
+              <img alt="EOS Costa Rica" height="25" src="./images/edenia-logo.svg" width="25" />
+              <a href="https://edenia.com/" target="_blank">
+                <h4 class="project-by">Edenia</h4>
+              </a>
+            </div>
+          </div>
+          <p id="copyright">Copyright 2021 - Sistemas Edenia Internacional S.A.</p>
+        </div>
+      </div>
+      <div class="box-testnet-desktop">
+        <h5 class="testnet-title">Antelope Tools Network Dashboards</h5>
+        <div class="box-column">
+          <div>
+            <ul>
+              <li>
+                <a href="https://eos.antelope.tools/" title="EOS Network Monitor">EOS Mainnet</a>
+              </li>
+              <li>
+                <a href="https://proton.antelope.tools/" title="Proton Network Monitor">Proton Mainnet</a>
+              </li>
+              <li>
+                <a href="https://wax.antelope.tools/" title="WAX Mainnet Network Monitor">Wax Mainnet</a>
+              </li>
+              <li>
+                <a href="https://telos.antelope.tools/" title="Telos Mainnet Network Monitor">Telos Mainnet</a>
+              </li>
+              <li>
+                <a href="https://libre.antelope.tools/" title="Libre Mainnet Network Monitor">Libre Mainnet</a>
+              </li>
+              <li>
+                <a href="https://lacchain.antelope.tools/" title="LACChain Network Monitor">LACChain EOSIO</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <a href="https://jungle.antelope.tools/" title="Jungle4 Testnet Network Monitor">Jungle4 Testnet</a>
+              </li>
+              <li>
+                <a href="https://proton-testnet.antelope.tools/" title="Proton Testnet Network Monitor">Proton Testnet</a>
+              </li>
+              <li>
+                <a href="https://wax-testnet.antelope.tools/" title="WAX Testnet Network Monitor">Wax Testnet</a>
+              </li>
+              <li>
+                <a href="https://telos-testnet.antelope.tools/" title="Telos Testnet Network Monitor">Telos Testnet</a>
+              </li>
+              <li>
+                <a href="https://libre-testnet.antelope.tools/" title="Libre Testnet Network Monitor">Libre Testnet</a>
+              </li>
+              <li>
+                <a href="https://ultra-testnet.antelope.tools/" title="Ultra Testnet Network Monitor">Ultra Testnet</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="copyright-desktop">Copyright 2021 - Sistemas Edenia Internacional S.A.</p>
+  </div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6Y0EC9FT8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', 'G-E6Y0EC9FT8')
+  </script>
+</body>
+
 </html>

@@ -98,7 +98,7 @@ body {
   color: #000000;
 }
 
-.telos-networks {
+.networks {
   display: flex;
   flex-direction: column;
   width: 105px;
@@ -106,39 +106,6 @@ body {
   align-items: center;
 }
 
-.eos-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
-
-.jungle-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.lacchain-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.proton-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
 
 .header {
   overflow: hidden;
@@ -231,16 +198,15 @@ body {
 
 .testnet-title {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 31px;
-  text-align: left;
   letter-spacing: 0.83px;
   text-transform: uppercase;
   color: #000000;
   margin: 0;
 }
 
-.eos-costa-rica > div {
+.eos-costa-rica {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,7 +227,7 @@ body {
 .project-by {
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 24px;
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
@@ -269,11 +235,20 @@ body {
   margin-left: 10px;
 }
 
+.logo-text {
+  display: flex;
+  padding: 10px;
+}
+
+.testnet-title{
+  text-align: center;
+}
+
 #copyright {
   display: inline;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 31px;
   text-align: right;
   letter-spacing: 0.83px;
@@ -401,11 +376,11 @@ body {
   }
 
   .box-column div {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .box-column ul li {
-    text-align: start;
+    text-align: center;
   }
 
   #testnet-title {
@@ -437,8 +412,10 @@ body {
     align-items: end;
   }
 
-  .eos-costa-rica > div {
+  .eos-costa-rica {
+    display: flex;
     justify-content: flex-start;
+    padding: 10px;
   }
 
   .project-by {
@@ -508,7 +485,7 @@ body {
   #network-desktop > a {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end
+    justify-content: flex-end;
   }
 
   .box-network h4 {
@@ -535,6 +512,11 @@ body {
     font-style: normal;
     line-height: 1.4;
     letter-spacing: -0.22px;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
   }
 
   #contact-us {
@@ -565,6 +547,11 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
   }
 
   #bg-image {
