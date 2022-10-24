@@ -46,19 +46,8 @@ PaginationWrapper.propTypes = {
 const Producers = () => {
   const classes = useStyles()
   const [
-    {
-      filters,
-      chips,
-      items,
-      loading,
-      totalPages,
-      missedBlocks,
-      pagination,
-    },
-    {
-      handleOnSearch,
-      handleOnPageChange,
-    },
+    { filters, chips, items, loading, totalPages, missedBlocks, pagination },
+    { handleOnSearch, handleOnPageChange },
   ] = useBlockProducerState()
 
   return (
