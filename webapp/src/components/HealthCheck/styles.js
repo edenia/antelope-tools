@@ -40,7 +40,7 @@ export default (theme) => ({
   redLight: {
     color: 'darkred',
   },
-  test:{
+  test: {
     boxShadow: '10px 5px 5px red !important'
   }
 })
