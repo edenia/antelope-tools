@@ -75,13 +75,14 @@ const getProducers = async () => {
         last_claim_time: producer.last_claim_time,
         location: producer.location,
         producer_authority: producer.producer_authority,
-        server_version_string: producer.server_version_string,
         is_active: !!producer.is_active,
-        bp_json: bpJson
+        bp_json: {
+          ...bpJson,
+          nodes
+        }
       }
     })
   )
-
   return producers
 }
 
