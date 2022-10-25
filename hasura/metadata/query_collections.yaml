@@ -1,1 +1,42 @@
-[]
+- name: allowed-queries
+  definition:
+    queries:
+      - name: Producers
+        query: |
+          query producers ($type: String = "api|ssl|p2p", $owners: [String!] = []) {
+          	info: producer_aggregate(where: {_and:[{endpoints_list:{}},{endpoints_list:{type:{_iregex:$type}}},{owner:{_in:$owners}}]}) {
+          		producers: aggregate {
+          			count
+          		}
+          	}
+          	producers: producer(order_by: {total_votes_percent:desc}, where: {_and:[{endpoints_list:{}},{endpoints_list:{type:{_iregex:$type}}},{owner:{_in:$owners}}]}) {
+          		owner
+          		rank
+          		total_votes
+          		bp_json
+          		producer_key
+          		unpaid_blocks
+          		last_claim_time
+          		producer_authority
+          		server_version_string
+          		total_votes
+          		total_votes_eos
+          		total_votes_percent
+          		total_rewards
+          		vote_rewards
+          		block_rewards
+          		endpoints: endpoints_list {
+          			type
+          			address: value
+          			updated_at
+          			response
+          		}
+          	}
+          }
+      - name: get-producers-info
+        query: |
+          mutation getProducersInfo ($bpParams: GetProducersInfoInput!) {
+          	get_producers_info(bpParams: $bpParams) {
+          		producersInfo
+          	}
+          }

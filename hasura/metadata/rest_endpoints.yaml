@@ -1,1 +1,18 @@
-[]
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: get-producers-info
+  url: get-producers-info
+  methods:
+    - POST
+  name: get-producers-info
+  comment: Return a list of block producers data with their corresponding endpoints
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Producers
+  url: producers
+  methods:
+    - GET
+  name: Producers
+  comment: This method allows obtain all the block producers from a string array with owners names, also allow filter the type in the endpoints list

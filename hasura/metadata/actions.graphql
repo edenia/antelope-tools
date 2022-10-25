@@ -18,6 +18,12 @@ type Mutation {
   ): CreateAccountOutput
 }
 
+type Mutation {
+  get_producers_info(
+    bpParams: GetProducersInfoInput!
+  ): GetProducersInfoOutput
+}
+
 type Query {
   missed_blocks(
     range: String!
@@ -39,6 +45,11 @@ type Mutation {
     token: String!
     to: String!
   ): TransferFaucetTokensOutput
+}
+
+input GetProducersInfoInput {
+  owners: [String]
+  type: String
 }
 
 type block_distribution_output {
@@ -79,5 +90,9 @@ type CreateAccountOutput {
 
 type TransferFaucetTokensOutput {
   tx: String!
+}
+
+type GetProducersInfoOutput {
+  producersInfo: [jsonb]
 }
 
