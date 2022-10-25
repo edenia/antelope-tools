@@ -8,13 +8,12 @@ const nodeService = require('./node.service')
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status, endpoints, rank]}) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time,url, location, producer_authority,bp_json, server_version_string, head_block_num, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, health_status, endpoints, rank]}) {
         affected_rows,
         returning {
           id,
           bp_json
         }
-      }
     }
   `
   const clearMutation = `
@@ -26,7 +25,7 @@ const updateProducers = async (producers = []) => {
   `
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
-  
+
   await hasuraUtil.request(clearMutation, {
     owners: producers.map((producer) => producer.owner)
   })
