@@ -46,9 +46,12 @@ const syncProducers = async () => {
       break
   }
 
-  producers = await updateProducers(producers)
-  await syncNodes(producers)
-  await syncEndpoints()
+  if (producers.length) {
+    await nodeService.clearNodes()
+    producers = await updateProducers(producers)
+    await syncNodes(producers)
+    await syncEndpoints()
+  }
 }
 
 const getProducersSummary = async () => {
@@ -98,8 +101,53 @@ const syncEndpoints = async () => {
   })
 }
 
+const requestProducers = async ({ where, whereEndpointList }) => {
+  const query = `
+    query ($where: producer_bool_exp, $whereEndpointList: endpoints_by_producer_id_bool_exp) {
+      producer_aggregate {
+        aggregate {
+          count
+        }
+      }
+      producer(where: $where, order_by: {total_votes_percent: desc}) {
+        owner
+        rank
+        bp_json
+        total_votes
+        endpoints_list (where: $whereEndpointList) {
+          type
+          value
+          updated_at
+          response
+        }
+      }
+    }
+  `
+
+  const {
+    producer_aggregate: { aggregate },
+    producer
+  } = await hasuraUtil.request(query, { where, whereEndpointList })
+
+  return !producer ? [{}] : [{ ...producer, aggregate }]
+}
+
+const getProducersInfo = async (bpParams) => {
+  return await requestProducers({
+    where: {
+      _and: [
+        { bp_json: { _neq: {} } },
+        { endpoints_list: { type: { _eq: bpParams?.type } } },
+        { owner: { _in: bpParams?.owners } }
+      ]
+    },
+    whereEndpointList: { type: { _eq: bpParams?.type } }
+  })
+}
+
 module.exports = {
   syncProducers,
   syncEndpoints,
-  getProducersSummary
+  getProducersSummary,
+  getProducersInfo
 }

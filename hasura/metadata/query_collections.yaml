@@ -1,1 +1,10 @@
-[]
+- name: allowed-queries
+  definition:
+    queries:
+      - name: get-producers-info
+        query: |
+          mutation getProducersInfo ($bpParams: GetProducersInfoInput!) {
+            getProducersInfo(bpParams: $bpParams) {
+              producersInfo
+            }
+          }
