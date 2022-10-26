@@ -3,6 +3,7 @@
 - "!include public_cpu.yaml"
 - "!include public_demux_state.yaml"
 - "!include public_endpoint.yaml"
+- "!include public_endpoints_by_producer_id.yaml"
 - "!include public_node.yaml"
 - "!include public_node_info.yaml"
 - "!include public_producer.yaml"

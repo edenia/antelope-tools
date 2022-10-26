@@ -20,6 +20,12 @@ actions:
       handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/create-faucet-account'
     permissions:
       - role: guest
+  - name: getProducersInfo
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/get-producers-info'
+    permissions:
+      - role: guest
   - name: missed_blocks
     definition:
       kind: ""
@@ -48,7 +54,8 @@ actions:
       - role: guest
 custom_types:
   enums: []
-  input_objects: []
+  input_objects:
+    - name: GetProducersInfoInput
   objects:
     - name: block_distribution_output
     - name: MissedBlocks
@@ -57,4 +64,5 @@ custom_types:
     - name: ProducersSummary
     - name: CreateAccountOutput
     - name: TransferFaucetTokensOutput
+    - name: GetProducersInfoOutput
   scalars: []
