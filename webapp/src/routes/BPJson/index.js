@@ -9,14 +9,19 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
+import { makeStyles } from '@mui/styles'
 
 import { eosConfig, ualConfig } from '../../config'
+
+import styles from './styles'
 
 const eosApi = EosApi({
   httpEndpoint: eosConfig.endpoint,
   verbose: false,
   fetchConfiguration: {},
 })
+
+const useStyles = makeStyles(styles)
 
 const getBPJsonUrl = async (producer = {}) => {
   let producerUrl = producer.url || ''
@@ -88,6 +93,7 @@ const BPJson = ({ ual }) => {
   const [error, setError] = useState(null)
   const [inconsistencyMessage, setInconsistencyMessage] = useState(null)
   const { t } = useTranslation('bpJsonRoute')
+  const classes = useStyles()
 
   const initData = {
     account_name: '',
@@ -207,7 +213,7 @@ const BPJson = ({ ual }) => {
   }, [ual.activeUser, t])
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent>
         {loading && (
           <>

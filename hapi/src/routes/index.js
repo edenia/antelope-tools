@@ -6,6 +6,7 @@ const producersSummaryRoute = require('./producers-summary.route')
 const transactionsRoute = require('./transactions.route')
 const createFaucetAccountRoute = require('./create-faucet-account.route')
 const transferFaucetTokensRoute = require('./transfer-faucet-tokens.route')
+const getProducersInfoRoute = require('./get-producers-info.route')
 
 module.exports = [
   healthzRoute,
@@ -15,5 +16,6 @@ module.exports = [
   producersSummaryRoute,
   transactionsRoute,
   createFaucetAccountRoute,
-  transferFaucetTokensRoute
+  transferFaucetTokensRoute,
+  getProducersInfoRoute
 ]

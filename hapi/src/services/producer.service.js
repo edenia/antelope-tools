@@ -8,7 +8,7 @@ const nodeService = require('./node.service')
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards, block_rewards, total_rewards, health_status, endpoints, rank]}) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time, url, location, producer_authority,bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, health_status, endpoints, rank]}) {
         affected_rows,
         returning {
           id,
@@ -26,7 +26,7 @@ const updateProducers = async (producers = []) => {
   `
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
-  
+
   await hasuraUtil.request(clearMutation, {
     owners: producers.map((producer) => producer.owner)
   })
@@ -46,9 +46,12 @@ const syncProducers = async () => {
       break
   }
 
-  producers = await updateProducers(producers)
-  await syncNodes(producers)
-  await syncEndpoints()
+  if (producers.length) {
+    await nodeService.clearNodes()
+    producers = await updateProducers(producers)
+    await syncNodes(producers)
+    await syncEndpoints()
+  }
 }
 
 const getProducersSummary = async () => {
@@ -98,8 +101,53 @@ const syncEndpoints = async () => {
   })
 }
 
+const requestProducers = async ({ where, whereEndpointList }) => {
+  const query = `
+    query ($where: producer_bool_exp, $whereEndpointList: endpoints_by_producer_id_bool_exp) {
+      producer_aggregate {
+        aggregate {
+          count
+        }
+      }
+      producer(where: $where, order_by: {total_votes_percent: desc}) {
+        owner
+        rank
+        bp_json
+        total_votes
+        endpoints_list (where: $whereEndpointList) {
+          type
+          value
+          updated_at
+          response
+        }
+      }
+    }
+  `
+
+  const {
+    producer_aggregate: { aggregate },
+    producer
+  } = await hasuraUtil.request(query, { where, whereEndpointList })
+
+  return !producer ? [{}] : [{ ...producer, aggregate }]
+}
+
+const getProducersInfo = async (bpParams) => {
+  return await requestProducers({
+    where: {
+      _and: [
+        { bp_json: { _neq: {} } },
+        { endpoints_list: { type: { _eq: bpParams?.type } } },
+        { owner: { _in: bpParams?.owners } }
+      ]
+    },
+    whereEndpointList: { type: { _eq: bpParams?.type } }
+  })
+}
+
 module.exports = {
   syncProducers,
   syncEndpoints,
-  getProducersSummary
+  getProducersSummary,
+  getProducersInfo
 }

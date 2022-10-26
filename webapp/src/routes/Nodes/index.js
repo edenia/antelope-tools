@@ -22,13 +22,15 @@ const Nodes = () => {
   ] = useNodeState()
 
   return (
-    <div>
-      <SearchBar
-        filters={filters}
-        onChange={handleOnSearch}
-        chips={chips}
-        translationScope="nodeSearchComponent"
-      />
+    <>
+      <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
+        <SearchBar
+          filters={filters}
+          onChange={handleOnSearch}
+          chips={chips}
+          translationScope="nodeSearchComponent"
+        />
+      </div>
       {loading ? (
         <LinearProgress />
       ) : (
@@ -59,7 +61,7 @@ const Nodes = () => {
           )}
         </>
       )}
-    </div>
+    </>
   )
 }
 

@@ -2,7 +2,6 @@ const {
   cpuService,
   missedBlocksService,
   producerService,
-  nodeService,
   settingService,
   stateHistoryPluginService,
   statsService,
@@ -45,7 +44,6 @@ const start = async () => {
     }
   }
 
-  await nodeService.clearNodes()
   run(
     'SYNC PRODUCERS',
     producerService.syncProducers,

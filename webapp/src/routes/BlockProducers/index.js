@@ -46,24 +46,13 @@ PaginationWrapper.propTypes = {
 const Producers = () => {
   const classes = useStyles()
   const [
-    {
-      filters,
-      chips,
-      items,
-      loading,
-      totalPages,
-      missedBlocks,
-      pagination,
-    },
-    {
-      handleOnSearch,
-      handleOnPageChange,
-    },
+    { filters, chips, items, loading, totalPages, missedBlocks, pagination },
+    { handleOnSearch, handleOnPageChange },
   ] = useBlockProducerState()
 
   return (
     <>
-      <div className={classes.searchWrapper}>
+      <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}

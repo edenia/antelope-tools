@@ -34,7 +34,7 @@ const EndpointsList = () => {
   ] = useEndpointsState()
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.titleContainer}>
           <div className={classes.dateContainer}>

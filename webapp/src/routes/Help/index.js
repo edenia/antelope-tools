@@ -18,7 +18,7 @@ const Help = () => {
   const { t } = useTranslation('helpRoute')
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent>
         <Typography variant="h4" className={classes.title}>
           {t('title')}
