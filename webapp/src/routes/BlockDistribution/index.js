@@ -64,7 +64,7 @@ const BlockDistribution = () => {
   const { t } = useTranslation('blockDistributionRoute')
   const [range, setRange] = useState(rangeOptions[0])
   const [series, setSeries] = useState([])
-  const [load, { loading, data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
+  const [load, { loading , data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
 
   useEffect(() => {
     load({
