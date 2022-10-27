@@ -133,16 +133,23 @@ const requestProducers = async ({ where, whereEndpointList }) => {
 }
 
 const getProducersInfo = async (bpParams) => {
-  return await requestProducers({
+  const whereCondition = {
     where: {
       _and: [
-        { bp_json: { _neq: {} } },
-        { endpoints_list: { type: { _eq: bpParams?.type } } },
+        { bp_json: { _neq: { nodes: [] } } },
         { owner: { _in: bpParams?.owners } }
       ]
-    },
-    whereEndpointList: { type: { _eq: bpParams?.type } }
-  })
+    }
+  }
+
+  if (bpParams.type) {
+    whereCondition.where._and.push({
+      endpoints_list: { type: { _eq: bpParams?.type } }
+    })
+    whereCondition.whereEndpointList = { type: { _eq: bpParams?.type } }
+  }
+
+  return await requestProducers(whereCondition)
 }
 
 module.exports = {
