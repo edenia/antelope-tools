@@ -7,7 +7,6 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Box = lazy(() => import('@mui/material/Box'))
 const BlockProducerInfo = lazy(() => import('./BlockProducerInfo'))
 
 const Home = () => {
@@ -26,9 +25,9 @@ const Home = () => {
   }, [dispatch])
 
   return (
-    <Box>
+    <div>
       <BlockProducerInfo t={t} classes={classes} />
-    </Box>
+    </div>
   )
 }
 
