@@ -145,7 +145,6 @@ const BlockProducerInfo = ({ t, classes }) => {
         </div>
       </div>
       {loading && <LinearProgress />}
-      <div>
         <div className={classes.wrapper}>
           <TransactionsHistory
             t={t}
@@ -236,7 +235,6 @@ const BlockProducerInfo = ({ t, classes }) => {
             </Card>
           </div>
         </div>
-      </div>
     </div>
   )
 }
