@@ -5,7 +5,7 @@ export default (theme) => ({
       lineBreak: 'anywhere',
     }
   },
-  errMsg:{
+  errMsg: {
     width: '50%',
     display: 'flex',
     justifyContent: 'space-between',
