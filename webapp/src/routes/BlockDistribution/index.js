@@ -105,11 +105,8 @@ const BlockDistribution = () => {
                   {t('title')}
                 </Typography>
                 <div className={classes.formControl}>
-                  <FormControl>
-                    <InputLabel
-                      id="demo-simple-select-label"
-                      className={classes.test}
-                    >
+                  <FormControl variant="standard">
+                    <InputLabel id="demo-simple-select-label">
                       {t('timeFrame')}
                     </InputLabel>
                     <Select
