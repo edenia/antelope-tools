@@ -20,7 +20,7 @@ const updateNodes = async (nodes = []) => {
       }
     }
   `
-  
+
   await clearNodes()
   await hasuraUtil.request(upsertMutation, { nodes })
 }
@@ -63,7 +63,7 @@ const getNodeEnpoints = (node) => {
   })
 }
 
-const getFormatNode = (node) => {
+const getFormatNode = async (node) => {
   const formatNode = {
     type: Array.isArray(node.node_type) ? node.node_type : [node.node_type],
     full: node.full ?? false,
@@ -71,19 +71,24 @@ const getFormatNode = (node) => {
     producer_id: node.producer_id
   }
 
+  let response
   const endpoints = getNodeEnpoints(node)
 
   if (endpoints.length) {
+    const apiUrl = node?.ssl_endpoint || node?.api_endpoint
+
+    response = await producerUtil.getNodeInfo(apiUrl)
+
     formatNode.endpoints = {
       data: endpoints
     }
   }
 
-  if (node.features?.length || !!node.keys) {
+  if (node.features?.length || !!node.keys || !!response?.nodeInfo) {
     formatNode.node_info = {
       data: {
-        version: node.server_version_string ?? '',
-        features: {list: node.features, keys: node.keys}
+        version: response.nodeInfo?.server_version_string || '',
+        features: { list: node.features, keys: node.keys }
       }
     }
   }

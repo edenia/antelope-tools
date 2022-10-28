@@ -25,7 +25,7 @@ const getProducers = async () => {
   }
 
   producers = producers
-    .filter(producer => !!producer.is_active)
+    .filter((producer) => !!producer.is_active)
     .sort((a, b) => {
       if (a.total_votes < b.total_votes) {
         return -1
@@ -47,16 +47,9 @@ const getProducers = async () => {
       const bpJson = await getBPJson(producerUrl, chainUrl)
       const healthStatus = getProducerHealthStatus(bpJson)
 
-      let nodes = []
       let endpoints = { api: [], ssl: [], p2p: [] }
 
-      if (chains[eosConfig.chainId]) {
-        nodes = await getNodes(bpJson)
-        endpoints = producerUtil.getEndpoints(bpJson.nodes)
-        bpJson.nodes = nodes
-      }
-
-      if (!bpJson.nodes?.length) {
+      if (!chains[eosConfig.chainId]) {
         delete bpJson.nodes
       }
 
@@ -76,13 +69,11 @@ const getProducers = async () => {
         location: producer.location,
         producer_authority: producer.producer_authority,
         is_active: !!producer.is_active,
-        bp_json: {
-          ...bpJson,
-          nodes
-        }
+        bp_json: bpJson
       }
     })
   )
+
   return producers
 }
 
@@ -110,7 +101,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
 
-  producers.forEach(producer => {
+  producers.forEach((producer) => {
     const producerVotePercent = producer.total_votes / totalVotes
 
     if (producerVotePercent > minimumPercenToGetVoteReward) {
@@ -184,7 +175,7 @@ const getBPJson = async (producerUrl, chainUrl) => {
   return bpJson
 }
 
-const getProducerUrl = producer => {
+const getProducerUrl = (producer) => {
   let producerUrl = producer.url || ''
 
   if (!producerUrl.startsWith('http')) {
@@ -194,7 +185,7 @@ const getProducerUrl = producer => {
   return producerUrl
 }
 
-const getChains = async producerUrl => {
+const getChains = async (producerUrl) => {
   const chainsUrl = `${producerUrl}/chains.json`.replace(
     /(?<=:\/\/.*)((\/\/))/,
     '/'
@@ -211,7 +202,7 @@ const getChains = async producerUrl => {
   }
 }
 
-const getProducerHealthStatus = bpJson => {
+const getProducerHealthStatus = (bpJson) => {
   const healthStatus = []
 
   healthStatus.push({
@@ -242,20 +233,7 @@ const getProducerHealthStatus = bpJson => {
   return healthStatus
 }
 
-const getNodes = bpJson => {
-  return Promise.all(
-    (bpJson?.nodes || []).map(async node => {
-      const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-      const { nodeInfo } = await producerUtil.getNodeInfo(apiUrl)
-      return {
-        ...node,
-        server_version: nodeInfo?.server_version || ''
-      }
-    })
-  )
-}
-
-const getVotesInEOS = votes => {
+const getVotesInEOS = (votes) => {
   const TIMESTAMP_EPOCH = 946684800
   const date = Date.now() / 1000 - TIMESTAMP_EPOCH
   const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600

@@ -72,13 +72,15 @@ const getProducersSummary = async () => {
 const syncNodes = async (producers) => {
   if (!producers?.length) return
 
-  const nodes = producers.flatMap((producer) => {
-    return (producer.bp_json?.nodes || []).map((node) => {
-      node.producer_id = producer.id
+  const nodes = await Promise.all(
+    producers.flatMap((producer) => {
+      return (producer.bp_json?.nodes || []).map((node) => {
+        node.producer_id = producer.id
 
-      return nodeService.getFormatNode(node)
+        return nodeService.getFormatNode(node)
+      })
     })
-  })
+  )
 
   await nodeService.updateNodes(nodes)
 }
@@ -135,10 +137,7 @@ const requestProducers = async ({ where, whereEndpointList }) => {
 const getProducersInfo = async (bpParams) => {
   const whereCondition = {
     where: {
-      _and: [
-        { bp_json: { _neq: { nodes: [] } } },
-        { owner: { _in: bpParams?.owners } }
-      ]
+      _and: [{ bp_json: { _neq: {} } }, { owner: { _in: bpParams?.owners } }]
     }
   }
 
