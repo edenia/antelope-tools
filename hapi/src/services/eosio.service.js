@@ -1,4 +1,4 @@
-const { axiosUtil, eosUtil, producerUtil } = require('../utils')
+const { axiosUtil, eosUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const getProducers = async () => {
@@ -41,16 +41,20 @@ const getProducers = async () => {
 
   producers = await Promise.all(
     producers.map(async (producer, index) => {
-      const producerUrl = getProducerUrl(producer)
-      const chains = await getChains(producerUrl)
-      const chainUrl = chains[eosConfig.chainId] || '/bp.json'
-      const bpJson = await getBPJson(producerUrl, chainUrl)
-      const healthStatus = getProducerHealthStatus(bpJson)
-
+      let bpJson = {}
+      let healthStatus = []
       let endpoints = { api: [], ssl: [], p2p: [] }
 
-      if (!chains[eosConfig.chainId]) {
-        delete bpJson.nodes
+      if (producer.url) {
+        const producerUrl = getProducerUrl(producer)
+        const chains = await getChains(producerUrl)
+        const chainUrl = chains[eosConfig.chainId] || '/bp.json'
+        bpJson = await getBPJson(producerUrl, chainUrl)
+        healthStatus = getProducerHealthStatus(bpJson)
+
+        if (!chains[eosConfig.chainId]) {
+          delete bpJson.nodes
+        }
       }
 
       return {
