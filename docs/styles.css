@@ -3,11 +3,42 @@
   font-family: 'Nunito';
 }
 
+a {
+  text-decoration: none;
+}
+
+summary {
+  font-size: 40px;
+}
+
 body {
   margin: 0;
   font-family: 'Nunito';
 }
 
+section,h1 {
+  padding: 0 1em;
+}
+
+.grid
+ {
+  display: grid;
+  grid-template-columns: repeat(3,250px);  /* 3 columns */
+  grid-template-rows: repeat(2,150px); /* 3 rows  */
+  grid-gap:100px 10px; /* 50 pixels of space added between rows and 30 pixels added between columns  */
+  justify-items: center;
+}
+
+.grid-item{
+  /* border:thin gray solid; */
+  padding:10px;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  height: 150px;
+  width: 170px;
+}
+img {
+  width: 80%;
+}
 .section-wrapper {
   width: 100%;
   padding-top: 16px;
@@ -69,11 +100,18 @@ body {
   display: none;
 }
 
-.network-mobile {
+
+.network-container{
   display: flex;
+}
+.network-mobile {
+  display: grid;
   width: 100%;
   justify-content: space-around;
   margin-top: 34px;
+  padding:10px;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  justify-items: center;
 }
 
 .more-networks {
@@ -81,16 +119,9 @@ body {
   text-align: center;
 }
 
-.wax-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
 .name-networks {
   text-align: center;
+  align-items: center;
   margin-top: 5px;
   font-weight: 600;
   font-size: 20px;
@@ -129,13 +160,13 @@ body {
 }
 
 .content {
-  background-color: #f9f9fc;
+  background-color: #ffffff;
   padding-top: 36px;
   padding-bottom: 40px;
 }
 
 .footer {
-  background-color: #ffffff;
+  background-color: #f9f9fc;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -292,17 +323,17 @@ body {
   #network-desktop {
     display: flex;
     justify-content: space-around;
-    margin-top: 23px;
+    /* margin-top: 23px; */
   }
 
-  #network-desktop > a {
+  #network-mobile > a {
     display: flex;
     flex-direction: column;
   }
 
   #network-desktop > a:hover {
     color: grey;
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   .wax-networks {
@@ -320,6 +351,7 @@ body {
 
   .telos-networks img {
     margin-top: 10px;
+    min-height: 10px;
   }
 
   .content {
@@ -476,10 +508,6 @@ body {
   #d-version {
     width: 642px;
     margin-top: 60px;
-  }
-
-  #network-desktop {
-    margin-top: 80px;
   }
 
   #network-desktop > a {
