@@ -11,7 +11,6 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import CardContent from '@mui/material/CardContent'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -133,11 +132,11 @@ const TransactionInfo = ({ t, classes }) => {
           justifyContent: 'space-between'
         }}
       >
-        <Box className={classes.headerTransactionLine}>
+        <div className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {t('transactions')}
           </Typography>
-          <Box className={classes.formControl}>
+          <div className={classes.formControl}>
             <FormControl>
               {generalConfig.historyEnabled && (
                 <>
@@ -157,7 +156,7 @@ const TransactionInfo = ({ t, classes }) => {
                 </>
               )}
             </FormControl>
-            <Box
+            <div
               onClick={() => option === options[0] && setPause(!pause)}
               className={clsx(classes.pauseButton, {
                 [classes.disableButton]: option !== options[0]
@@ -177,9 +176,9 @@ const TransactionInfo = ({ t, classes }) => {
                 />
               )}
               <Typography>{pause ? t('play') : t('pause')}</Typography>
-            </Box>
-          </Box>
-        </Box>
+            </div>
+          </div>
+        </div>
         {loading && <LinearProgress color="primary" />}
         <TransactionsLineChart
           yAxisProps={{

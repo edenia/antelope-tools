@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
 import CloseIcon from '@mui/icons-material/Close'
-import { Box, IconButton, Typography } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
 
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
@@ -68,11 +68,7 @@ const SnackbarMessage = () => {
             onClose={handleClose}
             className={classes.alert}
             action={
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="end"
-              >
+              <div className={classes.errMsg}>
                 {message.content && countdown > 0 && (
                   <Typography>{countdown / 1000}s</Typography>
                 )}
@@ -84,7 +80,7 @@ const SnackbarMessage = () => {
                 >
                   <CloseIcon fontSize="inherit" />
                 </IconButton>
-              </Box>
+              </div>
             }
           >
             {message.content}

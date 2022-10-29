@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Box from '@mui/material/Box'
 
 const EqualIcon = ({ width, height, color }) => {
   return (
-    <Box width={24} height={24}>
+    <div>
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
         <path
           fillRule="evenodd"
@@ -25,7 +24,7 @@ const EqualIcon = ({ width, height, color }) => {
           strokeLinejoin="round"
         />
       </svg>
-    </Box>
+    </div>
   )
 }
 
