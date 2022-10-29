@@ -46,15 +46,15 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     minWidth: 120,
   },
   mapWrapper: {
-    marginTop: theme.spacing(3)
-    },
+    marginTop: theme.spacing(3),
+  },
   topCard: {
     flexDirection: 'row',
     display: 'flex',
     [theme.breakpoints.down('md')]: {
       display: 'block',
-      paddingTop: '5px'
-    }
+      paddingTop: '5px',
+    },
   },
   rewardsdiv: {
     flexGrow: 1,
@@ -62,16 +62,16 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     [theme.breakpoints.down('md')]: {
       marginLeft: 0,
       padding: '5px',
-      margin: '5px'
-    }
+      margin: '5px',
+    },
   },
   mainCard: {
     flexGrow: 1,
     [theme.breakpoints.down('md')]: {
       marginLeft: 0,
       padding: '5px',
-      margin: '5px'
-    }
+      margin: '5px',
+    },
   },
   root: {
     '& .MuiPaper-root': {
@@ -83,5 +83,6 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
+    minHeight: '116px',
   },
 })

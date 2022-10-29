@@ -65,6 +65,8 @@ export default (theme) => ({
   },
   cards: {
     textTransform: 'capitalize',
+    minHeight: '90px',
+    maxHeight: '90px',
     '& .MuiTypography-h6': {
       display: 'flex',
       justifyContent: 'center',
@@ -110,6 +112,9 @@ export default (theme) => ({
       marginBottom: '10px',
     },
   },
+  uniquelocations: {
+    flexGrow: '1 !important',
+  },
   divTrans: {
     width: '50%',
     [theme.breakpoints.down('md')]: {
@@ -123,7 +128,6 @@ export default (theme) => ({
     flexWrap: 'wrap',
     [theme.breakpoints.down('md')]: {
       width: '100%',
-      marginBottom: '10px',
     },
   },
 })
