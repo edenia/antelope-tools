@@ -66,7 +66,6 @@ export default (theme) => ({
   cards: {
     textTransform: 'capitalize',
     minHeight: '90px',
-    maxHeight: '90px',
     '& .MuiTypography-h6': {
       display: 'flex',
       justifyContent: 'center',
