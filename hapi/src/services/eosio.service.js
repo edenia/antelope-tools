@@ -45,7 +45,7 @@ const getProducers = async () => {
       let healthStatus = []
       let endpoints = { api: [], ssl: [], p2p: [] }
 
-      if (producer.url) {
+      if (producer.url && producer.url !== 'Free Place') {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
         const chainUrl = chains[eosConfig.chainId] || '/bp.json'
