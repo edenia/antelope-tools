@@ -244,10 +244,10 @@ const RewardsDistribution = () => {
         </Box>
       </Popover>
       {loading && <LinearProgress className={classes.linearLoader} />}
-      <div className={classes.topCard}>
-        <div className={classes.mainCard}>
+      <div className={classes.divMargin}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
-            <CardContent>
+            <CardContent className={classes.cards}>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
               <Typography variant="subtitle1">
                 {!nodes.length > 0 && (
@@ -278,12 +278,12 @@ const RewardsDistribution = () => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.rewardsdiv}>
+        <div className={classes.cardHeader}>
           <Card
             className={`${classes.action} ${classes.cardShadow}`}
             onClick={handlePopoverOpen(summary?.topCountryByRewards)}
           >
-            <CardContent>
+            <CardContent className={classes.cards}>
               <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
               <Typography variant="subtitle1">
                 {!nodes.length > 0 && (
@@ -319,9 +319,9 @@ const RewardsDistribution = () => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.rewardsdiv}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
-            <CardContent>
+            <CardContent className={classes.cards}>
               <Typography variant="h6">{t('paidProducers')}</Typography>
               <Typography
                 variant="subtitle1"
@@ -348,9 +348,9 @@ const RewardsDistribution = () => {
             </CardContent>
           </Card>
         </div>
-        <div className={classes.rewardsdiv}>
+        <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
-            <CardContent>
+            <CardContent className={classes.cards}>
               <Typography variant="h6" className={classes.rewardsColorSchema}>
                 <span className={classes.itemLabel}>
                   {t('lowestRewards')}:{' '}
