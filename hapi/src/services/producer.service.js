@@ -58,7 +58,7 @@ const syncProducers = async () => {
       break
   }
 
-  if (producers.length) {
+  if (producers?.length) {
     await nodeService.clearNodes()
     producers = await updateProducers(producers)
     await syncNodes(producers)

@@ -1,4 +1,4 @@
-const { axiosUtil, eosUtil } = require('../utils')
+const { axiosUtil, eosUtil, sequelizeUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const getProducers = async () => {
@@ -7,23 +7,28 @@ const getProducers = async () => {
   let hasMore = true
   let nextKey
 
-  while (hasMore) {
-    const {
-      rows,
-      more,
-      total_producer_vote_weight: _totalVoteWeight
-    } = await eosUtil.getProducers({
-      limit: 100,
-      json: true,
-      lower_bound: nextKey
-    })
-
-    hasMore = !!more
-    nextKey = more
-    totalVoteWeight = parseFloat(_totalVoteWeight)
-    producers.push(...rows)
+  try {
+    while (hasMore) {
+      const {
+        rows,
+        more,
+        total_producer_vote_weight: _totalVoteWeight
+      } = await eosUtil.getProducers({
+        limit: 100,
+        json: true,
+        lower_bound: nextKey
+      })
+  
+      hasMore = !!more
+      nextKey = more
+      totalVoteWeight = parseFloat(_totalVoteWeight)
+      producers.push(...rows)
+    }
+  } catch (error) {
+    producers = await getProducersFromDB()
+    return await getBPJsons(producers)
   }
-
+  
   producers = producers
     .filter((producer) => !!producer.is_active)
     .sort((a, b) => {
@@ -255,6 +260,16 @@ const getVotesInEOS = (votes) => {
   const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600
 
   return parseFloat(votes) / 2 ** weight / 10000
+}
+
+const getProducersFromDB = async () => {
+  const [producers] = await sequelizeUtil.query(`
+    SELECT *
+    FROM producer
+    ;
+  `)
+
+  return producers
 }
 
 module.exports = {
