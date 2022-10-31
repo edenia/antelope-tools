@@ -37,10 +37,35 @@ const getProducers = async () => {
 
       return 0
     })
+
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
-  producers = await Promise.all(
-    producers.map(async (producer, index) => {
+  producers = producers.map((producer, index) => {
+    return {
+      owner: producer.owner,
+      ...(rewards[producer.owner] || {}),
+      total_votes: producer.total_votes,
+      total_votes_percent: producer.total_votes / totalVoteWeight,
+      total_votes_eos: getVotesInEOS(producer.total_votes),
+      rank: index + 1,
+      producer_key: producer.producer_key,
+      url: producer.url,
+      unpaid_blocks: producer.unpaid_blocks,
+      last_claim_time: producer.last_claim_time,
+      location: producer.location,
+      producer_authority: producer.producer_authority,
+      is_active: !!producer.is_active
+    }
+  })
+
+  producers = await getBPJsons(producers)
+
+  return producers
+}
+
+const getBPJsons = async (producers = []) => {
+  return await Promise.all(
+    producers.map(async (producer) => {
       let bpJson = {}
       let healthStatus = []
       let endpoints = { api: [], ssl: [], p2p: [] }
@@ -49,6 +74,7 @@ const getProducers = async () => {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
         const chainUrl = chains[eosConfig.chainId] || '/bp.json'
+
         bpJson = await getBPJson(producerUrl, chainUrl)
         healthStatus = getProducerHealthStatus(bpJson)
 
@@ -58,27 +84,13 @@ const getProducers = async () => {
       }
 
       return {
+        ...producer,
         endpoints,
-        owner: producer.owner,
-        ...(rewards[producer.owner] || {}),
-        total_votes: producer.total_votes,
-        total_votes_percent: producer.total_votes / totalVoteWeight,
-        total_votes_eos: getVotesInEOS(producer.total_votes),
         health_status: healthStatus,
-        rank: index + 1,
-        producer_key: producer.producer_key,
-        url: producer.url,
-        unpaid_blocks: producer.unpaid_blocks,
-        last_claim_time: producer.last_claim_time,
-        location: producer.location,
-        producer_authority: producer.producer_authority,
-        is_active: !!producer.is_active,
         bp_json: bpJson
       }
     })
   )
-
-  return producers
 }
 
 const getExpectedRewards = async (producers, totalVotes) => {
