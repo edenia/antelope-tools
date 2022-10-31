@@ -18,7 +18,7 @@ const getProducers = async () => {
         json: true,
         lower_bound: nextKey
       })
-  
+
       hasMore = !!more
       nextKey = more
       totalVoteWeight = parseFloat(_totalVoteWeight)
@@ -28,7 +28,7 @@ const getProducers = async () => {
     producers = await getProducersFromDB()
     return await getBPJsons(producers)
   }
-  
+
   producers = producers
     .filter((producer) => !!producer.is_active)
     .sort((a, b) => {
@@ -72,7 +72,6 @@ const getBPJsons = async (producers = []) => {
   return await Promise.all(
     producers.map(async (producer) => {
       let bpJson = {}
-      let healthStatus = []
       let endpoints = { api: [], ssl: [], p2p: [] }
 
       if (producer.url && producer.url !== 'Free Place') {
@@ -81,7 +80,6 @@ const getBPJsons = async (producers = []) => {
         const chainUrl = chains[eosConfig.chainId] || '/bp.json'
 
         bpJson = await getBPJson(producerUrl, chainUrl)
-        healthStatus = getProducerHealthStatus(bpJson)
 
         if (!chains[eosConfig.chainId]) {
           delete bpJson.nodes
@@ -91,7 +89,7 @@ const getBPJsons = async (producers = []) => {
       return {
         ...producer,
         endpoints,
-        health_status: healthStatus,
+        health_status: getProducerHealthStatus(bpJson),
         bp_json: bpJson
       }
     })
@@ -266,6 +264,7 @@ const getProducersFromDB = async () => {
   const [producers] = await sequelizeUtil.query(`
     SELECT *
     FROM producer
+    WHERE url <> ''
     ;
   `)
 
