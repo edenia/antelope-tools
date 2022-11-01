@@ -70,26 +70,27 @@ const getProducers = async () => {
 }
 
 const getBPJsons = async (producers = []) => {
+  const isEosNetwork = eosConfig.chainId === eosConfig.eosChainId
+
   return await Promise.all(
     producers.map(async (producer) => {
       let bpJson = {}
-      let endpoints = { api: [], ssl: [], p2p: [] }
 
-      if (producer.url && producer.url !== 'Free Place') {
+      if (producer.url && producer.url.length > 3) {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
-        const chainUrl = chains[eosConfig.chainId] || '/bp.json'
+        const chainUrl = chains[eosConfig.chainId]
 
-        bpJson = await getBPJson(producerUrl, chainUrl)
+        bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
 
-        if (!chains[eosConfig.chainId]) {
+        if (!chainUrl && !isEosNetwork) {
           delete bpJson.nodes
         }
       }
 
       return {
         ...producer,
-        endpoints,
+        endpoints: { api: [], ssl: [], p2p: [] },
         health_status: getProducerHealthStatus(bpJson),
         bp_json: bpJson
       }
