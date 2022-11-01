@@ -1,5 +1,4 @@
 import React from 'react'
-import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
@@ -14,15 +13,17 @@ const RicardianContract = () => {
   const { t } = useTranslation('ricardianContractRoute')
 
   return (
-    <Box className={classes.root}>
-      <RicardianContractComponent
-        contractName="eosio"
-        actionName=""
-        httpEndpoint={eosConfig.endpoint}
-        LinearProgressColor="primary"
-        title={t('title')}
-      />
-    </Box>
+    <div>
+      <div className={classes.root}>
+        <RicardianContractComponent
+          contractName="eosio"
+          actionName=""
+          httpEndpoint={eosConfig.endpoint}
+          LinearProgressColor="primary"
+          title={t('title')}
+        />
+      </div>
+    </div>
   )
 }
 

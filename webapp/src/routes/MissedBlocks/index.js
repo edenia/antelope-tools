@@ -4,7 +4,6 @@ import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
@@ -13,44 +12,47 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import { makeStyles } from '@mui/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { MISSED_BLOCKS } from '../../gql'
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const options = {
   time: {
-    timezoneOffset: new Date().getTimezoneOffset()
+    timezoneOffset: new Date().getTimezoneOffset(),
   },
   title: {
-    text: ' '
+    text: ' ',
   },
   xAxis: {
-    type: 'datetime'
+    type: 'datetime',
   },
   yAxis: {
     title: {
-      text: ' '
-    }
+      text: ' ',
+    },
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
   plotOptions: {
     series: {
       label: {
-        connectorAllowed: false
-      }
-    }
+        connectorAllowed: false,
+      },
+    },
   },
 
-  series: []
+  series: [],
 }
 
 const BlockDistribution = () => {
@@ -59,10 +61,11 @@ const BlockDistribution = () => {
   const [series, setSeries] = useState([])
   const [producers, setProducers] = useState([])
   const [load, { loading, data }] = useLazyQuery(MISSED_BLOCKS)
+  const classes = useStyles()
 
   useEffect(() => {
     load({
-      variables: { range }
+      variables: { range },
     })
   }, [load, range])
 
@@ -82,11 +85,11 @@ const BlockDistribution = () => {
           name: item.account,
           missed: 0,
           produced: 0,
-          scheduled: 0
+          scheduled: 0,
         }
         info[item.account] = {
           name: item.account,
-          data: []
+          data: [],
         }
       }
       summary[item.account].missed += parseInt(item.missed)
@@ -96,34 +99,29 @@ const BlockDistribution = () => {
         (summary[item.account].produced / summary[item.account].scheduled) * 100
       info[item.account].data.push([
         new Date(item.datetime).getTime(),
-        parseInt(item.missed)
+        parseInt(item.missed),
       ])
     }
     setProducers(
       Object.values(summary).sort((a, b) =>
-        a.availability > b.availability ? -1 : 1
-      )
+        a.availability > b.availability ? -1 : 1,
+      ),
     )
 
     setSeries(Object.values(info))
   }, [data])
 
   return (
-    <Grid item xs={12}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Card>
+    <div>
+      <div>
+        <div>
+          <Card className={classes.cardShadow}>
             <CardContent>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                p={1}
-              >
+              <div className={classes.textDiv}>
                 <Typography component="p" variant="h6">
                   {t('title')}
                 </Typography>
-                <FormControl>
+                <FormControl variant="standard">
                   <InputLabel id="demo-simple-select-label">
                     {t('timeFrame')}
                   </InputLabel>
@@ -140,7 +138,7 @@ const BlockDistribution = () => {
                     ))}
                   </Select>
                 </FormControl>
-              </Box>
+              </div>
               {loading && <LinearProgress />}
               {!loading && data?.items.length > 0 && (
                 <>
@@ -183,7 +181,7 @@ const BlockDistribution = () => {
                             <TableCell align="right">
                               {formatWithThousandSeparator(
                                 item.availability,
-                                2
+                                2,
                               )}
                               %
                             </TableCell>
@@ -196,9 +194,9 @@ const BlockDistribution = () => {
               )}
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
-    </Grid>
+        </div>
+      </div>
+    </div>
   )
 }
 

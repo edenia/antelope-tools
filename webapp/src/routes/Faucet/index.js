@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
@@ -14,7 +13,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { eosConfig } from '../../config'
 import {
   CREATE_ACCOUNT_MUTATION,
-  TRANFER_FAUCET_TOKENS_MUTATION
+  TRANFER_FAUCET_TOKENS_MUTATION,
 } from '../../gql'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 
@@ -30,7 +29,7 @@ const Faucet = () => {
   const [createAccountValues, setCreateAccountValues] = useState({})
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
   const [createFaucetAccount, { loading: loadingCreateAccount }] = useMutation(
-    CREATE_ACCOUNT_MUTATION
+    CREATE_ACCOUNT_MUTATION,
   )
   const [transferFaucetTokens, { loading: loadingTransferFaucetTokens }] =
     useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
@@ -52,29 +51,29 @@ const Faucet = () => {
     try {
       const {
         data: {
-          createAccount: { account = '' }
-        }
+          createAccount: { account = '' },
+        },
       } = await createFaucetAccount({
         variables: {
           token: reCaptchaToken,
           public_key: createAccountValues.publicKey,
-          name: createAccountValues.accountName
-        }
+          name: createAccountValues.accountName,
+        },
       })
 
       showMessage({
         type: 'success',
-        content: `${t('newCreatedAccount')} ${account}`
+        content: `${t('newCreatedAccount')} ${account}`,
       })
     } catch (err) {
       const errorMessage = err.message.replace(
         'GraphQL error: assertion failure with message: ',
-        ''
+        '',
       )
 
       showMessage({
         type: 'error',
-        content: errorMessage
+        content: errorMessage,
       })
     }
     setCreateAccountValues({})
@@ -91,14 +90,14 @@ const Faucet = () => {
       const result = await transferFaucetTokens({
         variables: {
           token: reCaptchaToken,
-          to: account
-        }
+          to: account,
+        },
       })
 
       const {
         data: {
-          transferFaucetTokens: { tx = '' }
-        }
+          transferFaucetTokens: { tx = '' },
+        },
       } = result
 
       showMessage({
@@ -107,17 +106,17 @@ const Faucet = () => {
           <a href={eosConfig.blockExplorerUrl.replace('(transaction)', tx)}>
             {`${t('transferTokensTransaction')} ${tx.slice(0, 7)}`}
           </a>
-        )
+        ),
       })
     } catch (err) {
       const errorMessage = err.message.replace(
         'GraphQL error: assertion failure with message: ',
-        ''
+        '',
       )
 
       showMessage({
         type: 'error',
-        content: errorMessage
+        content: errorMessage,
       })
     }
 
@@ -125,18 +124,13 @@ const Faucet = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={6}>
+    <div className={classes.test}>
+      <div className={classes.card}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('createAccount')}</Typography>
-            <Grid
-              container
-              alignItems="flex-end"
-              className={classes.formControl}
-              spacing={2}
-            >
-              <Grid item>
+            <div className={classes.formControl}>
+              <div>
                 <TextField
                   key="action-field-issue-tokens"
                   label={t('publicKey')}
@@ -145,13 +139,13 @@ const Faucet = () => {
                   onChange={(e) =>
                     setCreateAccountValues({
                       ...createAccountValues,
-                      ...{ publicKey: e.target.value }
+                      ...{ publicKey: e.target.value },
                     })
                   }
                 />
-              </Grid>
+              </div>
               {eosConfig.networkName === 'libre-testnet' && (
-                <Grid item>
+                <div>
                   <TextField
                     key="action-field-issue-tokens"
                     label={t('accountName')}
@@ -160,13 +154,13 @@ const Faucet = () => {
                     onChange={(e) =>
                       setCreateAccountValues({
                         ...createAccountValues,
-                        ...{ accountName: e.target.value }
+                        ...{ accountName: e.target.value },
                       })
                     }
                   />
-                </Grid>
+                </div>
               )}
-              <Grid item>
+              <div className={classes.button}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -183,22 +177,17 @@ const Faucet = () => {
                 >
                   {t('createButton')}
                 </Button>
-              </Grid>
-            </Grid>
+              </div>
+            </div>
           </CardContent>
         </Card>
-      </Grid>
-      <Grid item xs={12} sm={6}>
+      </div>
+      <div className={classes.card}>
         <Card>
           <CardContent>
             <Typography variant="h5">{t('issueTokens')}</Typography>
-            <Grid
-              container
-              alignItems="flex-end"
-              className={classes.formControl}
-              spacing={2}
-            >
-              <Grid item>
+            <div className={classes.formControl}>
+              <div>
                 <TextField
                   key="action-field-issue-tokens"
                   label={`Account (500 ${eosConfig.tokenSymbol})`}
@@ -206,8 +195,8 @@ const Faucet = () => {
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
                 />
-              </Grid>
-              <Grid item>
+              </div>
+              <div className={classes.button}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -224,27 +213,27 @@ const Faucet = () => {
                 >
                   {t('getTokens')}
                 </Button>
-              </Grid>
+              </div>
               {transferTokensTransaction && (
-                <Grid item xs={12} sm={6}>
+                <div>
                   <Typography variant="h5">
                     {t('transferTokensTransaction')}
                   </Typography>
                   <a
                     href={eosConfig.blockExplorerUrl.replace(
                       '(transaction)',
-                      transferTokensTransaction
+                      transferTokensTransaction,
                     )}
                   >
                     {transferTokensTransaction.slice(0, 7)}
                   </a>
-                </Grid>
+                </div>
               )}
-            </Grid>
+            </div>
           </CardContent>
         </Card>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   )
 }
 

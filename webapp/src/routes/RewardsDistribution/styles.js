@@ -35,7 +35,8 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   rewardsColorSchema: {
     display: 'flex',
     alignItems: 'center',
-    marginBottom: 4,
+    marginBottom: 24,
+    padding: '2px',
   },
   linearLoader: {
     width: 'calc(100% - 32px)',
@@ -43,45 +44,36 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     marginLeft: 16,
   },
   itemLabel: {
-    minWidth: 120,
+    minWidth: '120',
   },
   mapWrapper: {
-    marginTop: theme.spacing(3)
-    },
-  topCard: {
-    flexDirection: 'row',
-    display: 'flex',
-    [theme.breakpoints.down('md')]: {
-      display: 'block',
-      paddingTop: '5px'
-    }
-  },
-  rewardsdiv: {
-    flexGrow: 1,
-    marginLeft: 10,
-    [theme.breakpoints.down('md')]: {
-      marginLeft: 0,
-      padding: '5px',
-      margin: '5px'
-    }
-  },
-  mainCard: {
-    flexGrow: 1,
-    [theme.breakpoints.down('md')]: {
-      marginLeft: 0,
-      padding: '5px',
-      margin: '5px'
-    }
-  },
-  root: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-    },
+    marginTop: theme.spacing(3),
   },
   boxPadding: {
     padding: '10px',
   },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
+  },
+  divMargin: {
+    display: 'flex',
+    marginBottom: '10px',
+    gap: '10px',
+    flexWrap: 'nowrap',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
+  },
+  cardHeader: {
+    flexGrow: '1',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '10px',
+    },
+  },
+  cards: {
+    minHeight: '116px',
+    '& .MuiTypography-h6': {
+      display: 'flex',
+    },
   },
 })
