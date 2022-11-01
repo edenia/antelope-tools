@@ -1,5 +1,5 @@
 const Boom = require('@hapi/boom')
-const { BAD_REQUEST } = require('http-status-codes')
+const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
 const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
@@ -134,7 +134,7 @@ const getBlockDistribution = async (range = '1 day') => {
   } catch (error) {
     console.log(error)
     throw new Boom.Boom(error.message, {
-      statusCode: BAD_REQUEST
+      statusCode: StatusCodes.BAD_REQUEST
     })
   }
 }
