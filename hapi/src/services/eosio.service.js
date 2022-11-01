@@ -25,6 +25,7 @@ const getProducers = async () => {
       producers.push(...rows)
     }
   } catch (error) {
+    console.error('PRODUCER SYNC ERROR', error)
     producers = await getProducersFromDB()
     return await getBPJsons(producers)
   }
@@ -195,7 +196,7 @@ const getBPJson = async (producerUrl, chainUrl) => {
 }
 
 const getProducerUrl = (producer) => {
-  let producerUrl = producer.url || ''
+  let producerUrl = producer?.url?.replace(/(“|'|”|")/g, '') || ''
 
   if (!producerUrl.startsWith('http')) {
     producerUrl = `http://${producerUrl}`

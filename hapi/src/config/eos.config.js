@@ -1,9 +1,11 @@
 module.exports = {
   networkName: process.env.HAPI_EOS_API_NETWORK_NAME,
-  apiEndpoint: process.env.HAPI_EOS_API_ENDPOINT,
   apiEndpoints: process.env.HAPI_EOS_API_ENDPOINTS
   ? JSON.parse(process.env.HAPI_EOS_API_ENDPOINTS)
   : [],
+  apiEndpoint: process.env.HAPI_EOS_API_ENDPOINTS
+  ? JSON.parse(process.env.HAPI_EOS_API_ENDPOINTS)[0]
+  : '',
   stateHistoryPluginEndpoint:
     process.env.HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT,
   chainId: process.env.HAPI_EOS_API_CHAIN_ID,

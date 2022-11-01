@@ -30,10 +30,10 @@ const callEosApi = async (method) => {
       const response = await method(eosApis[i])
 
       return response
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
+
+  throw new Error('Each endpoint failed when trying to execute the function')
 }
 const newAccount = async (accountName) => {
   const password = await walletUtil.create(accountName)
@@ -215,7 +215,8 @@ const transact = async (actions, account, password) => {
   return transaction
 }
 
-const getCurrencyStats = (options) => eosApi.getCurrencyStats(options)
+const getCurrencyStats = async (options) =>
+  callEosApi(async (eosApi) => eosApi.getCurrencyStats(options))
 
 const getProducers = async (options) =>
   callEosApi(async (eosApi) => eosApi.getProducers(options))
