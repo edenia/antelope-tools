@@ -7,18 +7,18 @@ export default {
   state: {
     schedule: {
       version: '',
-      producers: []
+      producers: [],
     },
     info: {},
     tps: new Array(30).fill({ blocks: [], transactions: 0 }),
     tpb: new Array(60).fill({ blocks: [], transactions: 0 }),
-    tpsWaitingBlock: null
+    tpsWaitingBlock: null,
   },
   reducers: {
     updateInfo(state, info) {
       return {
         ...state,
-        info
+        info,
       }
     },
     updateTransactionsStats(state, item) {
@@ -31,16 +31,16 @@ export default {
       tpb = [
         {
           blocks: [item.block],
-          transactions: item.transactions
+          transactions: item.transactions,
         },
-        ...tpb
+        ...tpb,
       ]
 
       if (!state.tpsWaitingBlock) {
         return {
           ...state,
           tpb,
-          tpsWaitingBlock: item
+          tpsWaitingBlock: item,
         }
       }
 
@@ -53,30 +53,28 @@ export default {
       tps = [
         {
           blocks: [state.tpsWaitingBlock.block, item.block],
-          transactions: state.tpsWaitingBlock.transactions + item.transactions
+          transactions: state.tpsWaitingBlock.transactions + item.transactions,
         },
-        ...tps
+        ...tps,
       ]
 
       return {
         ...state,
         tps,
         tpb,
-        tpsWaitingBlock: null
+        tpsWaitingBlock: null,
       }
     },
     updateSchedule(state, schedule) {
       return {
         ...state,
-        schedule
+        schedule,
       }
-    }
+    },
   },
   effects: (dispatch) => ({
     async startTrackingInfo({ interval = 1 } = {}) {
-      if (infoInterval) {
-        return
-      }
+      if (infoInterval) return
 
       const handle = async () => {
         try {
@@ -108,9 +106,10 @@ export default {
     async getBlock(block) {
       try {
         const data = await eosApi.getBlock(block)
+
         dispatch.eos.updateTransactionsStats({
           block,
-          transactions: data.transactions.length
+          transactions: data.transactions.length,
         })
       } catch (error) {
         console.log(error)
@@ -124,6 +123,7 @@ export default {
       const handle = async () => {
         try {
           const result = await eosApi.getProducerSchedule(true)
+
           dispatch.eos.updateSchedule(result.active)
         } catch (error) {
           console.error(error)
@@ -140,6 +140,6 @@ export default {
 
       clearInterval(scheduleInterval)
       scheduleInterval = null
-    }
-  })
+    },
+  }),
 }

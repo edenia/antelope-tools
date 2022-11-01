@@ -2,21 +2,31 @@ import EosApi from 'eosjs-api'
 
 import { eosConfig } from '../config'
 
+const waitRequestInterval = 300000
 const eosApis = eosConfig.endpoints.map((endpoint) => {
-  return EosApi({
-    httpEndpoint: endpoint,
-    verbose: false,
-    fetchConfiguration: {},
-  })
+  return {
+    api: EosApi({
+      httpEndpoint: endpoint,
+      verbose: false,
+      fetchConfiguration: {},
+    }),
+    lastFailureTime: 0,
+  }
 })
 
 const callEosApi = async (method) => {
   for (let i = 0; i < eosApis.length; i++) {
+    const diffTime = new Date() - eosApis[i].lastFailureTime
+
+    if (diffTime < waitRequestInterval) continue
+
     try {
-      const response = await method(eosApis[i])
+      const response = await method(eosApis[i].api)
 
       return response
-    } catch (error) {}
+    } catch (error) {
+      eosApis[i].lastFailureTime = new Date()
+    }
   }
 
   throw new Error('Each endpoint failed when trying to execute the function')
