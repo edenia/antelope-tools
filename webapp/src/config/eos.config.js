@@ -1,8 +1,3 @@
-export const endpoint = `${process.env.REACT_APP_EOS_API_PROTOCOL}://${
-  process.env.REACT_APP_EOS_API_HOST
-}${process.env.REACT_APP_EOS_API_PORT ? ':' : ''}${
-  process.env.REACT_APP_EOS_API_PORT
-}`
 export const useBpJsonOnChain =
   process.env.REACT_APP_EOS_USE_BP_JSON_ON_CHAIN === 'true'
 export const bpJsonOnChainContract =
@@ -26,11 +21,11 @@ switch (networkName) {
       {
         name: 'validator',
         color: '#4f4363',
-        description: 'Node with signing key'
+        description: 'Node with signing key',
       },
       { name: 'boot', color: '#6ec4e0', description: 'Boot node' },
       { name: 'writer', color: '#5484b3', description: 'Writer node' },
-      { name: 'observer', color: '#000', description: 'Observer node' }
+      { name: 'observer', color: '#000', description: 'Observer node' },
     ]
     _producerTypes = ['partners', 'nonPartners']
     break
@@ -39,27 +34,46 @@ switch (networkName) {
       {
         name: 'producer',
         color: '#4f4363',
-        description: 'Node with signing key'
+        description: 'Node with signing key',
       },
       {
         name: 'full',
         color: '#6ec4e0',
-        description: 'Node in front of producer'
+        description: 'Node in front of producer',
       },
       {
         name: 'query',
         color: '#5484b3',
-        description: 'Node that provides HTTP(S) API to the public'
+        description: 'Node that provides HTTP(S) API to the public',
       },
       {
         name: 'seed',
         color: '#000',
-        description: 'Node that provides P2P and/or BNET to the public'
-      }
+        description: 'Node that provides P2P and/or BNET to the public',
+      },
     ]
     _producerTypes = ['top21', 'paidStandby', 'nonPaidStandby']
     break
 }
+
+const getEndpoint = (protocol, host, port) => {
+  return `${protocol}://${host}${port ? ':' : ''}${port}`
+}
+
+export const endpoint = getEndpoint(
+  process.env.REACT_APP_EOS_API_PROTOCOL,
+  JSON.parse(process.env.REACT_APP_EOS_API_HOSTS)[0] || '',
+  process.env.REACT_APP_EOS_API_PORT,
+)
+export const endpoints = (JSON.parse(
+  process.env.REACT_APP_EOS_API_HOSTS,
+) || []).map((endpoint) =>
+  getEndpoint(
+    process.env.REACT_APP_EOS_API_PROTOCOL,
+    endpoint || '',
+    process.env.REACT_APP_EOS_API_PORT,
+  ),
+)
 
 export const nodeTypes = _nodeTypes
 export const producerTypes = _producerTypes
@@ -68,4 +82,5 @@ export const includeDefaultTransaction = process.env
   ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)
   : null
 export const blockExplorerUrl = process.env.REACT_APP_BLOCK_EXPLORER_URL
-export const syncToleranceInterval = process.env.REACT_APP_SYNC_TOLERANCE_INTERVAL || 180000
+export const syncToleranceInterval =
+  process.env.REACT_APP_SYNC_TOLERANCE_INTERVAL || 180000

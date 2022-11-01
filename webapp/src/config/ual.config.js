@@ -10,7 +10,7 @@ const network = {
     {
       blockchain: 'eos',
       protocol: process.env.REACT_APP_EOS_API_PROTOCOL || 'https',
-      host: process.env.REACT_APP_EOS_API_HOST || 'jungle.edenia.cloud',
+      host: JSON.parse(process.env.REACT_APP_EOS_API_HOSTS)[0] || 'jungle.edenia.cloud',
       port: parseInt(process.env.REACT_APP_EOS_API_PORT || '443')
     }
   ]
