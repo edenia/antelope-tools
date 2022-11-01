@@ -6,20 +6,9 @@ const eosioService = require('./eosio.service')
 const nodeService = require('./node.service')
 
 const updateProducers = async (producers = []) => {
-  const upsertMutationBPJSONs = `
-    mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ bp_json ], where: { bp_json: {_eq: {} }}}) {
-        affected_rows,
-        returning {
-          id,
-          bp_json
-        }
-      }
-    }
-  `
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time, url, location, producer_authority, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, health_status, endpoints, rank]}) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time, url, location, producer_authority,bp_json, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, health_status, endpoints, rank]}) {
         affected_rows,
         returning {
           id,
@@ -35,7 +24,6 @@ const updateProducers = async (producers = []) => {
       }
     }
   `
-  await hasuraUtil.request(upsertMutationBPJSONs, { producers })
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
 
