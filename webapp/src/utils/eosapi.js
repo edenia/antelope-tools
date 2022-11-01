@@ -30,8 +30,16 @@ const getAccount = async (account) => {
   return await callEosApi(async (eosApi) => eosApi.getAccount(account))
 }
 
+const getBlock = async (block) => {
+  return await callEosApi(async (eosApi) => eosApi.getBlock(block))
+}
+
 const getCodeHash = async (account) => {
   return await callEosApi(async (eosApi) => eosApi.getCodeHash(account))
+}
+
+const getInfo = async (payload) => {
+  return await callEosApi(async (eosApi) => eosApi.getInfo(payload))
 }
 
 const getProducerSchedule = async (payload) => {
@@ -45,7 +53,9 @@ const getTableRows = async (payload) => {
 export default {
   getAbi,
   getAccount,
+  getBlock,
   getCodeHash,
+  getInfo,
   getProducerSchedule,
   getTableRows,
 }

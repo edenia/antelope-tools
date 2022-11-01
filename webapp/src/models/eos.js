@@ -1,12 +1,5 @@
-import EosApi from 'eosjs-api'
+import eosApi from '../utils/eosapi'
 
-import { eosConfig } from '../config'
-
-const eos = EosApi({
-  httpEndpoint: eosConfig.endpoint,
-  verbose: false,
-  fetchConfiguration: {}
-})
 let infoInterval
 let scheduleInterval
 
@@ -87,7 +80,7 @@ export default {
 
       const handle = async () => {
         try {
-          const info = await eos.getInfo({})
+          const info = await eosApi.getInfo({})
 
           dispatch.eos.updateInfo(info)
           dispatch.eos.getBlock(info.head_block_num)
@@ -114,7 +107,7 @@ export default {
     },
     async getBlock(block) {
       try {
-        const data = await eos.getBlock(block)
+        const data = await eosApi.getBlock(block)
         dispatch.eos.updateTransactionsStats({
           block,
           transactions: data.transactions.length
@@ -130,7 +123,7 @@ export default {
 
       const handle = async () => {
         try {
-          const result = await eos.getProducerSchedule(true)
+          const result = await eosApi.getProducerSchedule(true)
           dispatch.eos.updateSchedule(result.active)
         } catch (error) {
           console.error(error)
