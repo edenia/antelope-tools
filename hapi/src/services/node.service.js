@@ -92,7 +92,7 @@ const getNodeEnpoints = (node) => {
 }
 
 const getFormatNode = (node) => {
-  const type = node.node_type
+  const type = node.node_type || null
 
   const formatNode = {
     type: type && !Array.isArray(type) ? [type] : type,
