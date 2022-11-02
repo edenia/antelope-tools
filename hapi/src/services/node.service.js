@@ -92,16 +92,10 @@ const getNodeEnpoints = (node) => {
 }
 
 const getFormatNode = (node) => {
-  let type = node.node_type
-
-  if (!type) {
-    type = null
-  } else if (!Array.isArray(type)) {
-    type = [type]
-  }
+  const type = node.node_type
 
   const formatNode = {
-    type: type,
+    type: type && !Array.isArray(type) ? [type] : type,
     full: node.full ?? false,
     location: node.location ?? {},
     producer_id: node.producer_id
