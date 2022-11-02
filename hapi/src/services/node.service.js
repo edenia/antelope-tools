@@ -16,13 +16,29 @@ const updateNodes = async (nodes = []) => {
   const upsertMutation = `
     mutation ($nodes: [node_insert_input!]!) {
       insert_node(objects: $nodes, on_conflict: {constraint: node_pkey,update_columns: [type,full,location,producer_id]}) {
-        affected_rows
+        affected_rows,
+        returning {
+          id
+          type
+          node_info{
+            id
+            node_id
+            version
+            features
+          }
+          endpoints{
+            type
+            value
+          }
+        }
       }
     }
   `
 
   await clearNodes()
-  await hasuraUtil.request(upsertMutation, { nodes })
+  const insertedRows = await hasuraUtil.request(upsertMutation, { nodes })
+
+  return insertedRows.insert_node.returning
 }
 
 const updateEndpointInfo = async (endpoint) => {
@@ -48,6 +64,18 @@ const updateEndpointInfo = async (endpoint) => {
   })
 }
 
+const updateNodeInfo = async (nodes) => {
+  const upsertMutation = `
+    mutation ($nodes: [node_info_insert_input!]!) {
+      insert_node_info(objects: $nodes, on_conflict: {constraint: node_info_node_id_key,update_columns: [features,version]}) {
+        affected_rows
+      }
+    }
+  `
+
+  await hasuraUtil.request(upsertMutation, { nodes })
+}
+
 const getNodeEnpoints = (node) => {
   const types = ['api', 'ssl', 'p2p']
 
@@ -63,31 +91,34 @@ const getNodeEnpoints = (node) => {
   })
 }
 
-const getFormatNode = async (node) => {
+const getFormatNode = (node) => {
+  let type = node.node_type
+
+  if (!type) {
+    type = null
+  } else if (!Array.isArray(type)) {
+    type = [type]
+  }
+
   const formatNode = {
-    type: Array.isArray(node.node_type) ? node.node_type : [node.node_type],
+    type: type,
     full: node.full ?? false,
     location: node.location ?? {},
     producer_id: node.producer_id
   }
 
-  let response
   const endpoints = getNodeEnpoints(node)
 
   if (endpoints.length) {
-    const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-
-    response = await producerUtil.getNodeInfo(apiUrl)
-
     formatNode.endpoints = {
       data: endpoints
     }
   }
 
-  if (node.features?.length || !!node.keys || !!response?.nodeInfo) {
+  if (node.features?.length || !!node.keys) {
     formatNode.node_info = {
       data: {
-        version: response.nodeInfo?.server_version_string || '',
+        version: '',
         features: { list: node.features, keys: node.keys }
       }
     }
@@ -96,9 +127,32 @@ const getFormatNode = async (node) => {
   return formatNode
 }
 
+const updateNodesInfo = async (nodes) => {
+  nodes = await Promise.all(
+    nodes.map(async (node) => {
+      if (
+        node?.type?.includes('query') &&
+        node?.endpoints?.length &&
+        !!node.node_info[0]
+      ) {
+        const { nodeInfo } = await producerUtil.getNodeInfo(
+          node.endpoints[0].value
+        )
+
+        node.node_info[0].version = nodeInfo?.server_version_string || ''
+
+        return node.node_info[0]
+      }
+    })
+  )
+
+  await updateNodeInfo(nodes.filter((node) => node))
+}
+
 module.exports = {
   clearNodes,
   updateNodes,
+  updateNodesInfo,
   updateEndpointInfo,
   getFormatNode
 }

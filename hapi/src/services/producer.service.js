@@ -72,17 +72,16 @@ const getProducersSummary = async () => {
 const syncNodes = async (producers) => {
   if (!producers?.length) return
 
-  const nodes = await Promise.all(
-    producers.flatMap((producer) => {
-      return (producer.bp_json?.nodes || []).map((node) => {
-        node.producer_id = producer.id
+  let nodes = producers.flatMap((producer) => {
+    return (producer.bp_json?.nodes || []).map((node) => {
+      node.producer_id = producer.id
 
-        return nodeService.getFormatNode(node)
-      })
+      return nodeService.getFormatNode(node)
     })
-  )
+  })
 
-  await nodeService.updateNodes(nodes)
+  nodes = await nodeService.updateNodes(nodes)
+  await nodeService.updateNodesInfo(nodes)
 }
 
 const syncEndpoints = async () => {
