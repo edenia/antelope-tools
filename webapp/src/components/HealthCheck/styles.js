@@ -1,8 +1,8 @@
 export default (theme) => ({
   icon: {
     '& svg': {
-      width: '16px !important',
-      height: '16px !important',
+      width: '20px !important',
+      height: '20px !important',
       cursor: 'pointer',
     },
   },
@@ -29,18 +29,18 @@ export default (theme) => ({
     cursor: 'pointer',
   },
   greenLight: {
-    color: 'darkgreen',
+    color: theme.palette.success.main,
   },
   timerOff: {
     color: 'orange',
   },
   yellowLight: {
-    color: 'orangered',
+    color: theme.palette.warning.main,
   },
   redLight: {
-    color: 'darkred',
+    color: theme.palette.error.main,
   },
   test: {
-    boxShadow: '10px 5px 5px red !important'
-  }
+    boxShadow: '10px 5px 5px red !important',
+  },
 })
