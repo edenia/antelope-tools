@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'ultra-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Ultra Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://icodrops.com/wp-content/uploads/2019/06/Ultra-150x150.jpg'
-          REACT_APP_EOS_API_HOSTS: '["ultratest.api.eosnation.io"]'
+          REACT_APP_EOS_API_HOSTS: '[\"ultratest.api.eosnation.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '7fc56be645bb76ab9d747b53089f132dcb7681db06f0852cfa03eaf6f7ac80e9'
@@ -86,7 +86,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '["https://ultratest.api.eosnation.io"]'
+          HAPI_EOS_API_ENDPOINTS: '[\"https://ultratest.api.eosnation.io\"]'
           HAPI_EOS_API_NETWORK_NAME: ultra-testnet
           HAPI_EOS_API_CHAIN_ID: 7fc56be645bb76ab9d747b53089f132dcb7681db06f0852cfa03eaf6f7ac80e9
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
