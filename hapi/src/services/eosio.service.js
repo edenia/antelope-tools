@@ -83,8 +83,9 @@ const getBPJsons = async (producers = []) => {
 
         bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
 
-        if (!chainUrl && !isEosNetwork) {
-          delete bpJson.nodes
+        bpJson = {
+          ...bpJson,
+          nodes: chainUrl || isEosNetwork ? bpJson.nodes : undefined
         }
       }
 

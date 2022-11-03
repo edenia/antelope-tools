@@ -25,9 +25,9 @@ const eosApis = eosConfig.apiEndpoints.map((endpoint) => {
 })
 
 const callEosApi = async method => {
-  for (let i = 0; i < eosApis.length; i++) {
+  for (const eosApi of eosApis){
     try {
-      const response = await method(eosApis[i])
+      const response = await method(eosApi)
 
       return response
     } catch (error) {}
