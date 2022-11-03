@@ -46,7 +46,7 @@ const syncProducers = async () => {
       break
   }
 
-  if (producers.length) {
+  if (producers?.length) {
     await nodeService.clearNodes()
     producers = await updateProducers(producers)
     await syncNodes(producers)
@@ -69,10 +69,10 @@ const getProducersSummary = async () => {
   return rows
 }
 
-const syncNodes = async (producers) => {
+const syncNodes = async producers => {
   if (!producers?.length) return
 
-  const nodes = producers.flatMap((producer) => {
+  let nodes = producers.flatMap((producer) => {
     return (producer.bp_json?.nodes || []).map((node) => {
       node.producer_id = producer.id
 
@@ -80,7 +80,8 @@ const syncNodes = async (producers) => {
     })
   })
 
-  await nodeService.updateNodes(nodes)
+  nodes = await nodeService.updateNodes(nodes)
+  await nodeService.updateNodesInfo(nodes)
 }
 
 const syncEndpoints = async () => {
@@ -96,7 +97,7 @@ const syncEndpoints = async () => {
 
   if (!endpoints?.length) return
 
-  endpoints.forEach(async (endpoint) => {
+  endpoints.forEach(async endpoint => {
     await nodeService.updateEndpointInfo(endpoint)
   })
 }
@@ -132,13 +133,10 @@ const requestProducers = async ({ where, whereEndpointList }) => {
   return !producer ? [{}] : [{ ...producer, aggregate }]
 }
 
-const getProducersInfo = async (bpParams) => {
+const getProducersInfo = async bpParams => {
   const whereCondition = {
     where: {
-      _and: [
-        { bp_json: { _neq: { nodes: [] } } },
-        { owner: { _in: bpParams?.owners } }
-      ]
+      _and: [{ bp_json: { _neq: {} } }, { owner: { _in: bpParams?.owners } }]
     }
   }
 
