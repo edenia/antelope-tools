@@ -15,17 +15,17 @@ const eosApis = eosConfig.endpoints.map((endpoint) => {
 })
 
 const callEosApi = async method => {
-  for (let i = 0; i < eosApis.length; i++) {
-    const diffTime = new Date() - eosApis[i].lastFailureTime
+  for (const eosApi of eosApis){
+    const diffTime = new Date() - eosApi.lastFailureTime
 
     if (diffTime < waitRequestInterval) continue
 
     try {
-      const response = await method(eosApis[i].api)
+      const response = await method(eosApi.api)
 
       return response
     } catch (error) {
-      eosApis[i].lastFailureTime = new Date()
+      eosApi.lastFailureTime = new Date()
     }
   }
 
