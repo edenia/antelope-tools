@@ -69,7 +69,7 @@ const getProducersSummary = async () => {
   return rows
 }
 
-const syncNodes = async (producers) => {
+const syncNodes = async producers => {
   if (!producers?.length) return
 
   let nodes = producers.flatMap((producer) => {
@@ -97,7 +97,7 @@ const syncEndpoints = async () => {
 
   if (!endpoints?.length) return
 
-  endpoints.forEach(async (endpoint) => {
+  endpoints.forEach(async endpoint => {
     await nodeService.updateEndpointInfo(endpoint)
   })
 }
@@ -133,7 +133,7 @@ const requestProducers = async ({ where, whereEndpointList }) => {
   return !producer ? [{}] : [{ ...producer, aggregate }]
 }
 
-const getProducersInfo = async (bpParams) => {
+const getProducersInfo = async bpParams => {
   const whereCondition = {
     where: {
       _and: [{ bp_json: { _neq: {} } }, { owner: { _in: bpParams?.owners } }]

@@ -68,7 +68,7 @@ const getNodesSummary = async () => {
       type
   `)
 
-  rows.forEach((row) => {
+  rows.forEach(row => {
     payload[row.node_type || 'unknown'] = row.nodes_count
     total += row.nodes_count
   })
@@ -120,12 +120,12 @@ const getBlockDistribution = async (range = '1 day') => {
     `
     const data = await hasuraUtil.request(query, { startTime })
 
-    data.items.forEach((item) => {
+    data.items.forEach(item => {
       totalBloks += item.blocks
     })
 
     return data.items
-      .map((item) => ({
+      .map(item => ({
         account: item.producer || 'N/A',
         blocks: item.blocks,
         percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
@@ -259,7 +259,7 @@ const getCurrentMissedBlock = async () => {
 
   let newData = data
 
-  rows.forEach((element) => {
+  rows.forEach(element => {
     if (newData[element.account]) {
       newData = {
         ...newData,
@@ -282,7 +282,7 @@ const getCurrentMissedBlock = async () => {
   getCurrentMissedBlock()
 }
 
-const udpateStats = async (payload) => {
+const udpateStats = async payload => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -293,7 +293,7 @@ const udpateStats = async (payload) => {
   await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
-const insertStats = async (payload) => {
+const insertStats = async payload => {
   const mutation = `
     mutation ($payload: stat_insert_input!) {
       insert_stat_one(object: $payload) {
@@ -329,13 +329,13 @@ const getLastTPSAllTimeHigh = async () => {
   }
 }
 
-const getBlockUsage = async (blockNum) => {
+const getBlockUsage = async blockNum => {
   const block = await eosUtil.getBlock(blockNum)
   const info = await eosUtil.getInfo()
   let cpuUsage = 0
   let netUsage = 0
 
-  block.transactions.forEach((transaction) => {
+  block.transactions.forEach(transaction => {
     cpuUsage += transaction.cpu_usage_us
     netUsage += transaction.net_usage_words
   })

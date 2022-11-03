@@ -41,7 +41,7 @@ const updateNodes = async (nodes = []) => {
   return insertedRows.insert_node.returning
 }
 
-const updateEndpointInfo = async (endpoint) => {
+const updateEndpointInfo = async endpoint => {
   if (!endpoint.type || !['api', 'ssl'].includes(endpoint.type)) return
 
   const updateMutation = `
@@ -64,7 +64,7 @@ const updateEndpointInfo = async (endpoint) => {
   })
 }
 
-const updateNodeInfo = async (nodes) => {
+const updateNodeInfo = async nodes => {
   const upsertMutation = `
     mutation ($nodes: [node_info_insert_input!]!) {
       insert_node_info(objects: $nodes, on_conflict: {constraint: node_info_node_id_key,update_columns: [features,version]}) {
@@ -76,7 +76,7 @@ const updateNodeInfo = async (nodes) => {
   await hasuraUtil.request(upsertMutation, { nodes })
 }
 
-const getNodeEnpoints = (node) => {
+const getNodeEnpoints = node => {
   const types = ['api', 'ssl', 'p2p']
 
   return types.flatMap((type) => {
@@ -91,7 +91,7 @@ const getNodeEnpoints = (node) => {
   })
 }
 
-const getFormatNode = (node) => {
+const getFormatNode = node => {
   const type = node.node_type || null
 
   const formatNode = {
@@ -121,7 +121,7 @@ const getFormatNode = (node) => {
   return formatNode
 }
 
-const updateNodesInfo = async (nodes) => {
+const updateNodesInfo = async nodes => {
   nodes = await Promise.all(
     nodes.map(async (node) => {
       if (

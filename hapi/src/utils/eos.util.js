@@ -24,7 +24,7 @@ const eosApis = eosConfig.apiEndpoints.map((endpoint) => {
   })
 })
 
-const callEosApi = async (method) => {
+const callEosApi = async method => {
   for (let i = 0; i < eosApis.length; i++) {
     try {
       const response = await method(eosApis[i])
@@ -35,7 +35,7 @@ const callEosApi = async (method) => {
 
   throw new Error('Each endpoint failed when trying to execute the function')
 }
-const newAccount = async (accountName) => {
+const newAccount = async accountName => {
   const password = await walletUtil.create(accountName)
   const key = await walletUtil.createKey(accountName)
 
@@ -158,9 +158,9 @@ const generateRandomAccountName = async (prefix = '') => {
   }
 }
 
-const getAbi = (account) => eosApi.getAbi(account)
+const getAbi = account => eosApi.getAbi(account)
 
-const getAccount = async (account) => {
+const getAccount = async account => {
   try {
     const accountInfo = await eosApi.getAccount(account)
 
@@ -170,18 +170,18 @@ const getAccount = async (account) => {
   }
 }
 
-const getBlock = async (blockNumber) => {
+const getBlock = async blockNumber => {
   const block = await eosApi.getBlock(blockNumber)
 
   return block
 }
 
-const getCodeHash = (account) => eosApi.getCodeHash(account)
+const getCodeHash = account => eosApi.getCodeHash(account)
 
 const getCurrencyBalance = (code, account, symbol) =>
   eosApi.getCurrencyBalance(code, account, symbol)
 
-const getTableRows = (options) =>
+const getTableRows = options =>
   eosApi.getTableRows({ json: true, ...options })
 
 const getProducerSchedule = () => eosApi.getProducerSchedule({})
@@ -215,13 +215,13 @@ const transact = async (actions, account, password) => {
   return transaction
 }
 
-const getCurrencyStats = async (options) =>
+const getCurrencyStats = async options =>
   callEosApi(async (eosApi) => eosApi.getCurrencyStats(options))
 
-const getProducers = async (options) =>
+const getProducers = async options =>
   callEosApi(async (eosApi) => eosApi.getProducers(options))
 
-const getInfo = (options) => eosApi.getInfo(options || {})
+const getInfo = options => eosApi.getInfo(options || {})
 
 module.exports = {
   newAccount,

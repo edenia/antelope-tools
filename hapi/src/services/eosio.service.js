@@ -31,7 +31,7 @@ const getProducers = async () => {
   }
 
   producers = producers
-    .filter((producer) => !!producer.is_active)
+    .filter(producer => !!producer.is_active)
     .sort((a, b) => {
       if (a.total_votes < b.total_votes) {
         return -1
@@ -73,7 +73,7 @@ const getBPJsons = async (producers = []) => {
   const isEosNetwork = eosConfig.chainId === eosConfig.eosChainId
 
   return await Promise.all(
-    producers.map(async (producer) => {
+    producers.map(async producer => {
       let bpJson = {}
 
       if (producer.url && producer.url.length > 3) {
@@ -122,7 +122,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
 
-  producers.forEach((producer) => {
+  producers.forEach(producer => {
     const producerVotePercent = producer.total_votes / totalVotes
 
     if (producerVotePercent > minimumPercenToGetVoteReward) {
@@ -196,7 +196,7 @@ const getBPJson = async (producerUrl, chainUrl) => {
   return bpJson
 }
 
-const getProducerUrl = (producer) => {
+const getProducerUrl = producer => {
   let producerUrl = producer?.url?.replace(/(“|'|”|")/g, '') || ''
 
   if (!producerUrl.startsWith('http')) {
@@ -206,7 +206,7 @@ const getProducerUrl = (producer) => {
   return producerUrl
 }
 
-const getChains = async (producerUrl) => {
+const getChains = async producerUrl => {
   const chainsUrl = `${producerUrl}/chains.json`.replace(
     /(?<=:\/\/.*)((\/\/))/,
     '/'
@@ -223,7 +223,7 @@ const getChains = async (producerUrl) => {
   }
 }
 
-const getProducerHealthStatus = (bpJson) => {
+const getProducerHealthStatus = bpJson => {
   const healthStatus = []
 
   healthStatus.push({
@@ -254,7 +254,7 @@ const getProducerHealthStatus = (bpJson) => {
   return healthStatus
 }
 
-const getVotesInEOS = (votes) => {
+const getVotesInEOS = votes => {
   const TIMESTAMP_EPOCH = 946684800
   const date = Date.now() / 1000 - TIMESTAMP_EPOCH
   const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600
