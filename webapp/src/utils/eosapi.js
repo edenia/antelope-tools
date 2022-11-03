@@ -33,31 +33,31 @@ const callEosApi = async method => {
 }
 
 const getAbi = async account => {
-  return await callEosApi(async (eosApi) => eosApi.getAbi(account))
+  return await callEosApi(async eosApi => eosApi.getAbi(account))
 }
 
 const getAccount = async account => {
-  return await callEosApi(async (eosApi) => eosApi.getAccount(account))
+  return await callEosApi(async eosApi => eosApi.getAccount(account))
 }
 
 const getBlock = async block => {
-  return await callEosApi(async (eosApi) => eosApi.getBlock(block))
+  return await callEosApi(async eosApi => eosApi.getBlock(block))
 }
 
 const getCodeHash = async account => {
-  return await callEosApi(async (eosApi) => eosApi.getCodeHash(account))
+  return await callEosApi(async eosApi => eosApi.getCodeHash(account))
 }
 
 const getInfo = async payload => {
-  return await callEosApi(async (eosApi) => eosApi.getInfo(payload))
+  return await callEosApi(async eosApi => eosApi.getInfo(payload))
 }
 
 const getProducerSchedule = async payload => {
-  return await callEosApi(async (eosApi) => eosApi.getProducerSchedule(payload))
+  return await callEosApi(async eosApi => eosApi.getProducerSchedule(payload))
 }
 
 const getTableRows = async payload => {
-  return await callEosApi(async (eosApi) => eosApi.getTableRows(payload))
+  return await callEosApi(async eosApi => eosApi.getTableRows(payload))
 }
 
 export default {

@@ -216,10 +216,10 @@ const transact = async (actions, account, password) => {
 }
 
 const getCurrencyStats = async options =>
-  callEosApi(async (eosApi) => eosApi.getCurrencyStats(options))
+  callEosApi(async eosApi => eosApi.getCurrencyStats(options))
 
 const getProducers = async options =>
-  callEosApi(async (eosApi) => eosApi.getProducers(options))
+  callEosApi(async eosApi => eosApi.getProducers(options))
 
 const getInfo = options => eosApi.getInfo(options || {})
 
