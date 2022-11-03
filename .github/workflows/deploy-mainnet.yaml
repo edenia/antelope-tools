@@ -42,7 +42,7 @@ jobs:
           REACT_APP_USE_VOTES: 'true'
           REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-eos.antelope.tools/v1/graphql'
-          REACT_APP_EOS_API_HOSTS: '["api.main.alohaeos.com","eos.edenia.cloud","eos.api.eosnation.io","eos.greymass.com","eos.eosphere.io","api.eosrio.io"]'
+          REACT_APP_EOS_API_HOSTS: '[\"api.main.alohaeos.com\",\"eos.edenia.cloud\",\"eos.api.eosnation.io\",\"eos.greymass.com\",\"eos.eosphere.io\",\"api.eosrio.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
@@ -82,7 +82,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '["https://eos.edenia.cloud","https://api.main.alohaeos.com","https://eos.api.eosnation.io","https://eos.greymass.com","https://eos.eosphere.io","https://api.eosrio.io"]'
+          HAPI_EOS_API_ENDPOINTS: '[\"https://eos.edenia.cloud\",\"https://api.main.alohaeos.com\",\"https://eos.api.eosnation.io\",\"https://eos.greymass.com\",\"https://eos.eosphere.io\",\"https://api.eosrio.io\"]'
           HAPI_EOS_API_CHAIN_ID: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}

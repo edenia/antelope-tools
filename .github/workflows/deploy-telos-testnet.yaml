@@ -49,7 +49,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'telos-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Telos Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/telos.png'
-          REACT_APP_EOS_API_HOSTS: '["testnet.telos.caleos.io","telos-testnet.eosphere.io","testnet.telosusa.io"]'
+          REACT_APP_EOS_API_HOSTS: '[\"testnet.telos.caleos.io\",\"telos-testnet.eosphere.io\",\"testnet.telosusa.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f'
@@ -86,7 +86,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '["https://testnet.telos.caleos.io","https://telos-testnet.eosphere.io","https://testnet.telosusa.io"]'
+          HAPI_EOS_API_ENDPOINTS: '[\"https://testnet.telos.caleos.io\",\"https://telos-testnet.eosphere.io\",\"https://testnet.telosusa.io\"]'
           HAPI_EOS_API_CHAIN_ID: 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
