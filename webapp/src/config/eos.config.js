@@ -67,7 +67,7 @@ export const endpoint = getEndpoint(
 )
 export const endpoints = (JSON.parse(
   process.env.REACT_APP_EOS_API_HOSTS,
-) || []).map((endpoint) =>
+) || []).map(endpoint =>
   getEndpoint(
     process.env.REACT_APP_EOS_API_PROTOCOL,
     endpoint || '',

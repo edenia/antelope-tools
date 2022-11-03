@@ -14,7 +14,7 @@ const eosApis = eosConfig.endpoints.map((endpoint) => {
   }
 })
 
-const callEosApi = async (method) => {
+const callEosApi = async method => {
   for (let i = 0; i < eosApis.length; i++) {
     const diffTime = new Date() - eosApis[i].lastFailureTime
 
@@ -32,31 +32,31 @@ const callEosApi = async (method) => {
   throw new Error('Each endpoint failed when trying to execute the function')
 }
 
-const getAbi = async (account) => {
+const getAbi = async account => {
   return await callEosApi(async (eosApi) => eosApi.getAbi(account))
 }
 
-const getAccount = async (account) => {
+const getAccount = async account => {
   return await callEosApi(async (eosApi) => eosApi.getAccount(account))
 }
 
-const getBlock = async (block) => {
+const getBlock = async block => {
   return await callEosApi(async (eosApi) => eosApi.getBlock(block))
 }
 
-const getCodeHash = async (account) => {
+const getCodeHash = async account => {
   return await callEosApi(async (eosApi) => eosApi.getCodeHash(account))
 }
 
-const getInfo = async (payload) => {
+const getInfo = async payload => {
   return await callEosApi(async (eosApi) => eosApi.getInfo(payload))
 }
 
-const getProducerSchedule = async (payload) => {
+const getProducerSchedule = async payload => {
   return await callEosApi(async (eosApi) => eosApi.getProducerSchedule(payload))
 }
 
-const getTableRows = async (payload) => {
+const getTableRows = async payload => {
   return await callEosApi(async (eosApi) => eosApi.getTableRows(payload))
 }
 
