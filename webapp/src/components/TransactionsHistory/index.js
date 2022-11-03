@@ -31,20 +31,20 @@ BodyGraphValue.propTypes = {
   loading: PropTypes.bool,
   value: PropTypes.any,
   classes: PropTypes.object,
-  href: PropTypes.string
+  href: PropTypes.string,
 }
 
 BodyGraphValue.defaultProps = {
   value: 0,
   loading: false,
-  classes: {}
+  classes: {},
 }
 
 const TransactionsHistory = ({ t, classes, nodesChildren }) => {
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [
     blockWithHighestTransactionsCount,
-    setBlockWithHighestTransactionsCount
+    setBlockWithHighestTransactionsCount,
   ] = useState({})
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
 
     const blockWithHighestTransactionsCount =
       data.stats[0].tps_all_time_high.blocks.sort((first, second) =>
-        first.transactions_count > second.transactions_count ? -1 : 1
+        first.transactions_count > second.transactions_count ? -1 : 1,
       )[0]
     setBlockWithHighestTransactionsCount(blockWithHighestTransactionsCount)
   }, [data])
@@ -78,9 +78,9 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
     )
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{t('tpsAllTimeHigh')}</Typography>
             <BodyGraphValue
@@ -92,15 +92,14 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
           </CardContent>
         </Card>
       </div>
-
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
               value={`${formatWithThousandSeparator(
                 blockWithHighestTransactionsCount.cpu_usage_percent * 100 || 0,
-                2
+                2,
               )}%`}
               classes={classes}
               href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
@@ -109,59 +108,55 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
           </CardContent>
         </Card>
       </div>
-
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_hour || 0
+                data?.stats?.[0]?.transactions_in_last_hour || 0,
               )}
               loading={loading}
             />
           </CardContent>
         </Card>
       </div>
-
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_day || 0
+                data?.stats?.[0]?.transactions_in_last_day || 0,
               )}
               loading={loading}
             />
           </CardContent>
         </Card>
       </div>
-
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t(
-              'dailyAverage'
+              'dailyAverage',
             )}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
                 data?.stats?.[0]?.average_daily_transactions_in_last_week || 0,
-                0
+                0,
               )}
               loading={loading}
             />
           </CardContent>
         </Card>
       </div>
-
       <div className={classes.cardGrow}>
-        <Card>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_week || 0
+                data?.stats?.[0]?.transactions_in_last_week || 0,
               )}
               loading={loading}
             />
@@ -169,8 +164,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
         </Card>
       </div>
       {nodesChildren && nodesChildren}
-      <div className={classes.cardow}>
-        <Card>
+      <div className={classes.cardGrow}>
+        <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
             <Typography>{`${t('uniqueLocations')}`}</Typography>
             <BodyGraphValue
@@ -187,12 +182,12 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
 TransactionsHistory.propTypes = {
   t: PropTypes.func,
   classes: PropTypes.object,
-  nodesChildren: PropTypes.node
+  nodesChildren: PropTypes.node,
 }
 
 TransactionsHistory.defaultProps = {
   t: (text) => text,
-  classes: {}
+  classes: {},
 }
 
 export default memo(TransactionsHistory)

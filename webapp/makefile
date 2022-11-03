@@ -36,7 +36,7 @@ build-docker: ./Dockerfile
 		--build-arg react_app_eos_api_network_name="$(REACT_APP_EOS_API_NETWORK_NAME)" \
 		--build-arg react_app_eos_api_network_label="$(REACT_APP_EOS_API_NETWORK_LABEL)" \
 		--build-arg react_app_eos_api_network_logo="$(REACT_APP_EOS_API_NETWORK_LOGO)" \
-		--build-arg react_app_eos_api_host="$(REACT_APP_EOS_API_HOST)" \
+		--build-arg react_app_eos_api_hosts="$(REACT_APP_EOS_API_HOSTS)" \
 		--build-arg react_app_eos_api_port="$(REACT_APP_EOS_API_PORT)" \
 		--build-arg react_app_eos_api_protocol="$(REACT_APP_EOS_API_PROTOCOL)" \
 		--build-arg react_app_eos_chain_id="$(REACT_APP_EOS_CHAIN_ID)" \

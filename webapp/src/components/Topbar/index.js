@@ -19,7 +19,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
   const { t } = useTranslation('topbarComponent')
 
   return (
-    <Box className={classes.box}>
+    <div className={classes.box}>
       <LanguageSelector />
       {user && (
         <>
@@ -42,7 +42,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
           </Typography>
         </IconButton>
       )}
-    </Box>
+    </div>
   )
 }
 

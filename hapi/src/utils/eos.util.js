@@ -16,7 +16,25 @@ const eosApi = EosApi({
   verbose: false,
   fetchConfiguration: {}
 })
+const eosApis = eosConfig.apiEndpoints.map((endpoint) => {
+  return EosApi({
+    httpEndpoint: endpoint,
+    verbose: false,
+    fetchConfiguration: {}
+  })
+})
 
+const callEosApi = async method => {
+  for (const eosApi of eosApis){
+    try {
+      const response = await method(eosApi)
+
+      return response
+    } catch (error) {}
+  }
+
+  throw new Error('Each endpoint failed when trying to execute the function')
+}
 const newAccount = async accountName => {
   const password = await walletUtil.create(accountName)
   const key = await walletUtil.createKey(accountName)
@@ -163,7 +181,8 @@ const getCodeHash = account => eosApi.getCodeHash(account)
 const getCurrencyBalance = (code, account, symbol) =>
   eosApi.getCurrencyBalance(code, account, symbol)
 
-const getTableRows = options => eosApi.getTableRows({ json: true, ...options })
+const getTableRows = options =>
+  eosApi.getTableRows({ json: true, ...options })
 
 const getProducerSchedule = () => eosApi.getProducerSchedule({})
 
@@ -196,9 +215,11 @@ const transact = async (actions, account, password) => {
   return transaction
 }
 
-const getCurrencyStats = options => eosApi.getCurrencyStats(options)
+const getCurrencyStats = async options =>
+  callEosApi(async eosApi => eosApi.getCurrencyStats(options))
 
-const getProducers = options => eosApi.getProducers(options)
+const getProducers = async options =>
+  callEosApi(async eosApi => eosApi.getProducers(options))
 
 const getInfo = options => eosApi.getInfo(options || {})
 
