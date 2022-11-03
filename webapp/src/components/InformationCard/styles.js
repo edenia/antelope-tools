@@ -227,7 +227,7 @@ export default (theme) => ({
       color: theme.palette.warning.main,
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
+      minWidth: 130,
     },
   },
   social: {

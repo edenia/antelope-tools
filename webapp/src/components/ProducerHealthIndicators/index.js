@@ -18,20 +18,18 @@ const ProducerHealthIndicators = ({ producer, message }) => {
   if (!producer.health_status.length) return <Typography>{message}</Typography>
 
   return (
-    <div>
+    <>
       {producer.health_status.map((item, index) => (
         <div
           className={classes.wrapper}
           key={`health-indicator-${producer?.owner || ''}-${index}`}
         >
-          <Typography>{`${t(`hs_${item.name}`)}: ${
-            item.valid ? t('found') : t('missing')
-          }`}</Typography>
+          <Typography>{`${t(`hs_${item.name}`)}`}</Typography>
           {item.valid && <LightIcon status="greenLight" />}
           {!item.valid && <LightIcon status="yellowLight" />}
         </div>
       ))}
-    </div>
+    </>
   )
 }
 

@@ -218,6 +218,9 @@ const getProducerHealthStatus = bpJson => {
     name: 'bpJson',
     valid: !!bpJson && !!Object.keys(bpJson).length
   })
+
+  if (!healthStatus[0].valid) return healthStatus
+
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name
