@@ -9,6 +9,7 @@ a {
 
 summary {
   font-size: 40px;
+  
 }
 
 html,
@@ -20,9 +21,18 @@ body {
   font-family: 'Nunito';
 }
 
+details summary:hover {
+  background-color: #F1F1F1;
+}
+
+details[open] summary{
+  background-color: rgba(28, 203, 255, 0.2);
+}
 details[open] summary ~ * {
   animation: open 0.3s ease-in-out;
+  
 }
+
 @keyframes open {
   0% {
     opacity: 0;
@@ -32,12 +42,17 @@ details[open] summary ~ * {
   }
 }
 summary::marker {
-  content: url(./images/feather-icon\ _\ info.png);
+  content: url(./images/feathsser-icon.png);
   position: relative;
+  align-self: center;
+  
 }
 
 summary {
   list-style: inside;
+  display: flex;
+  text-align: center;
+  
 }
 details summary {
   width: 100%;
@@ -45,20 +60,28 @@ details summary {
   background-color: #f9f9fc;
   position: relative;
   cursor: pointer;
+  margin-right: 10px;
 }
 
-details summary:hover {
-  background-color: rgba(28, 203, 255, 0.2);
+.info-icon{
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.info-icon span{
+  padding-left: 10px;
 }
 
 details summary:after {
   content: url(./images/chevron-down.png);
   position: absolute;
-  right: 0;
+  right: 20px;
   transform: rotate(180deg);
 }
 details[open] summary::after {
   transform: rotate(0);
+  
 }
 
 h1 {
@@ -101,14 +124,6 @@ p {
   letter-spacing: 0.73px;
   text-align: left;
   color: #000;
-}
-
-.section-wrapper {
-  width: 100%;
-  padding-top: 1px;
-  padding-left: 20px;
-  z-index: 2;
-  position: relative;
 }
 
 .wrapper {
@@ -171,15 +186,6 @@ p {
 .network-container {
   display: flex;
 }
-.network-mobile {
-  display: grid;
-  width: 100%;
-  justify-content: space-around;
-  margin-top: 34px;
-  padding: 10px;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  justify-items: center;
-}
 
 .more-networks {
   margin-top: 65px !important;
@@ -198,6 +204,7 @@ p {
   overflow: hidden;
   background-color: #ffffff;
   padding-bottom: 47px;
+  margin-left: 40px;
 }
 
 .image-box {
@@ -206,9 +213,6 @@ p {
   align-items: center;
 }
 
-.image-box-desktop {
-  display: none;
-}
 
 #middle-logo {
   margin-top: 10px;
@@ -249,10 +253,6 @@ p {
   margin-bottom: 40px;
 }
 
-.box-testnet-desktop {
-  display: none;
-}
-
 .box-column {
   display: flex;
 }
@@ -283,16 +283,9 @@ p {
   color: #000000;
 }
 
-.testnet-title {
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 31px;
-  letter-spacing: 0.83px;
-  text-transform: uppercase;
-  color: #000000;
-  margin: 0;
+.image-box-desktop {
+  display: none;
 }
-
 .eos-costa-rica {
   display: flex;
   justify-content: center;
@@ -332,13 +325,16 @@ p {
   text-align: center;
 }
 
-#bg-image {
-  display: none;
-}
 
 /* MOBILE */
 
-@media (max-width: 600px) {
+
+@media (max-width: 649px) {
+
+
+  .header {
+    margin-left: 0px;
+  } 
 
   #copyright {
     width: 199.2px;
@@ -365,7 +361,11 @@ p {
     padding: 16px 0 16px;
     background-color: #f9f9fc;
   }
+  
 
+  #bg-image {
+    display: none;
+  }
   #middle-logo {
     content: url('./images/Antelope Tools Vertical 1@3x.png');
     height: 110px;
@@ -378,11 +378,15 @@ p {
     padding-left: 0px;
   }
 
+  details summary:after {
+    height: 45px;
+  }
+
+  .info-icon{
+    width: 80%;
+  }
   .box-paragraph-text > p {
-    width: 288px;
     height: 58px;
-    margin-left: 40px;
-    margin-top: 16px;
     font-family: Nunito;
     font-size: 24px;
     font-weight: 600;
@@ -393,6 +397,8 @@ p {
     text-align: center;
     color: #000;
     justify-content: center;
+    width: 288px;
+    margin: 16px auto auto auto;
   }
 
   .flex p {
@@ -420,6 +426,7 @@ p {
     justify-content: space-around;
   }
 
+
   .visit-text {
     width: 288px;
     height: 58px;
@@ -433,9 +440,16 @@ p {
     letter-spacing: normal;
     text-align: center;
     color: #000;
+    margin: auto auto 16px auto;
   }
 
+  .text-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
+  
   .Line-5 {
     width: 108px;
     height: 2px;
@@ -472,6 +486,7 @@ p {
     justify-items: center;
     margin-top: 16px;
     justify-content: center;
+    text-align: center;
   }
 
   .grid img {
@@ -484,16 +499,14 @@ p {
   }
 
   .grid-item {
-    display: flex;
-    flex-direction: column;
-    padding: 21px 0px 25px 0px;
-    border-radius: 4px;
-    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
-      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
-    justify-content: center;
-    height: 156px;
     width: 140px;
-    align-items: center;
+    height: 156px;
+    flex-grow: 0;
+    margin: 0 8px 0 0;
+    padding: 8px 29.4px 11.8px 30.4px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    background-color:white;
   }
 
   .name-networks {
@@ -511,6 +524,7 @@ p {
     text-align: center;
     color: #000;
   }
+  
 
   .box-paragraph summary {
     flex-grow: 0;
@@ -523,6 +537,7 @@ p {
     letter-spacing: -0.54px;
     text-align: left;
     color: #000;
+    padding: 10px;
   }
 
   .box-paragraph p {
@@ -539,14 +554,10 @@ p {
     letter-spacing: 0.08px;
     text-align: left;
     color: #000;
+    padding: 10px;
+
   }
 
-  summary::marker {
-    content: url(./images/feather-icon.png);
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
 
   .footer {
     padding-bottom: 24px;
@@ -638,7 +649,14 @@ p {
   }
 }
 /* IPAD */
-@media (min-width: 768px) {
+@media (min-width: 650px) {
+
+  .section-wrapper {
+    width: 100%;
+    padding-top: 40px;
+    z-index: 2;
+    position: relative;
+  }
   .header {
     padding-top: 0px;
   }
@@ -713,10 +731,6 @@ p {
     display: none;
   }
 
-  /* .network-mobile {
-    display: none;
-  } */
-
   .image-box-desktop {
     display: flex;
   }
@@ -726,7 +740,6 @@ p {
     height: 113px;
     margin-left: 20px;
     margin-right: 474px;
-    margin-top: 36px;
     margin-bottom: -22px;
   }
 
@@ -746,7 +759,6 @@ p {
     background-color: #d6f5ff;
   }
   .myButton:hover {
-    background-color: #476e9e;
     text-decoration: none;
   }
   .myButton:active {
@@ -766,6 +778,7 @@ p {
     letter-spacing: 0.08px;
     text-align: center;
     color: #000;
+    margin: auto;
   }
 
   .flex {
@@ -779,12 +792,18 @@ p {
     margin-left: 20px;
   }
 
+  .text-container{
+    display: flex;
+    flex-direction: column;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
+    
   }
 
   .grid img {
@@ -803,6 +822,7 @@ p {
     border-radius: 4px;
     box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
       0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
+    background-color: white;
     height: 169px;
     width: 192px;
     justify-content: center;
@@ -901,9 +921,6 @@ p {
     justify-content: space-between;
   }
 
-  .box-testnet {
-    display: none;
-  }
 
   .box-testnet-desktop {
     display: flex;
@@ -919,10 +936,6 @@ p {
 
   .box-column ul li {
     text-align: center;
-  }
-
-  #testnet-title {
-    text-align: start;
   }
 
   #contact-us {
@@ -1016,16 +1029,87 @@ p {
     width: 673px;
     right: 0;
     display: inline;
-    margin: 0 0 32px 95px;
+    margin: -40px 0 32px 95px;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
+    align-self: center;
+    flex-direction: column;
+  }
+
+  .box-social-media {
+    width: 55%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+  .footerTw{
+    height: 29px;
+    width: 34px;
+  }
+  .footerTl{
+    height: 30px;
+    width: 37px;
+  }
+  .footerGit{
+    height: 38px;
+    width: 41px;
+  }
+  .footerLi{
+    height: 37px;
+    width: 40px;
+  }
+
+  .edeniaLogo{
+    height: 26px;
+    width: 156px;
+  }
+
+  #copyright{
+    width: 199.2px;
+    height: 21px;
+    margin: 9.5px 154.1px 0 154px;
+    font-family: Nunito;
+    font-size: 10.6px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.95;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #000;
   }
 }
 
 /* DESKTOP */
 @media (min-width: 1200px) {
   .section-wrapper {
-    margin-top: -40px;
+    width: 100%;
+    z-index: 2;
+    position: relative;
   }
 
+  .flex-text p {
+    width: 642px;
+    height: 39px;
+    flex-grow: 0;
+    margin: 5px 0 6px 6px;
+    font-family: Nunito;
+    font-size: 48px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.8;
+    letter-spacing: -0.22px;
+    text-align: left;
+    color: #000;
+  }
+
+  .text-container{
+    display: flex;
+    flex-direction: column;
+  }
   .box-paragraph-text > p {
     width: 628px;
     height: 164px;
@@ -1045,6 +1129,9 @@ p {
     width: 100%;
   }
 
+  .flex{
+    margin-bottom: 41px;
+  }
   .flex p {
     width: 605.5px;
     height: 62.9px;
@@ -1082,9 +1169,15 @@ p {
     border-radius: 4px;
     box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
       0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
-    /* background-color: var(--colors-white); */
+    background-color: var(--colors-white);
+    height: 318px;
+    width: 361px;
   }
 
+  .grid-item:hover{
+    border: 2px solid #1ccbff;
+    box-sizing:border-box;
+  }
   .Line-4 {
     width: 10px;
     height: 63.3px;
@@ -1095,9 +1188,18 @@ p {
     border-radius: 5px;
     margin-left: 54px;
   }
+
+  .Line-5 {
+    width: 10px;
+    height: 50px;
+    flex-grow: 0;
+    margin: 0 6px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+  }
+
   .box-paragraph summary {
     flex-grow: 0;
-    margin: 0 0 0 18.4px;
     font-family: Nunito;
     font-size: 48px;
     font-weight: 600;
@@ -1109,6 +1211,11 @@ p {
     color: #000;
   }
 
+  .flex-text{
+    display: flex;
+    margin-bottom: 28px;
+    margin-left: 35px;
+  }
   .box-paragraph p {
     width: 1658px;
     height: 131px;
@@ -1133,7 +1240,7 @@ p {
     justify-content: center;
     align-items: center;
     gap: 24.4px;
-    margin: 56.2px 1115.2px 312.5px 0px;
+    margin: 56.2px 1115.2px 312.5px 40px;
     padding: 19.5px 0;
     border-radius: 63px;
     box-shadow: 4.9px -29.2px 34.1px 0 rgba(53, 64, 82, 0.05);
@@ -1141,7 +1248,6 @@ p {
     background-color: #d6f5ff;
   }
   .myButton:hover {
-    background-color: #476e9e;
     text-decoration: none;
   }
   .myButton:active {
@@ -1193,6 +1299,7 @@ p {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 174px;
   }
 
   .logo-text {
@@ -1204,8 +1311,81 @@ p {
   #bg-image {
     width: 1672px;
     height: 1062px;
-    margin: -34px 0px 128px 192px;
+    margin: -40px 0px 128px 192px;
     object-fit: contain;
     z-index: -1;
+  }
+
+  .box-social-media {
+    width: 35%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+  .footerTw{
+    height: 48px;
+    width: 58px;
+  }
+  .footerTl{
+    height: 48px;
+    width: 61px;
+  }
+  .footerGit{
+    height: 62px;
+    width: 67px;
+  }
+  .footerLi{
+    height: 60px;
+    width: 63px;
+  }
+
+  .edeniaLogo{
+    height: 46px;
+    width: 262px;
+  }
+
+  .contact-us p {
+    width: 860px;
+    height: 108px;
+    flex-grow: 0;
+    margin: 0 0 16px;
+    font-family: Nunito;
+    font-size: 39.1px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.14px;
+    text-align: center;
+    color: #000;
+  }
+
+  .eos-costa-rica h4{
+    width: auto;
+    flex-grow: 0;
+    margin: 0 0 3.2px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  #copyright{
+    width: 337.8px;
+    height: 36px;
+    margin: 16.1px 261.2px 0 261px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.95;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: #000;
   }
 }
