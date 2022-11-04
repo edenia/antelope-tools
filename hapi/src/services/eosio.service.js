@@ -83,9 +83,11 @@ const getBPJsons = async (producers = []) => {
 
         bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
 
-        bpJson = {
-          ...bpJson,
-          nodes: chainUrl || isEosNetwork ? bpJson.nodes : undefined
+        if (!chainUrl && !isEosNetwork) {
+          bpJson = {
+            org: bpJson.org,
+            producer_account_name: bpJson.producer_account_name
+          }
         }
       }
 
