@@ -80,7 +80,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '[\"https://jungle.edenia.cloud\",\"https://jungle4.eosphere.io\",\"https://jungle4.api.eosnation.io\",\"https://jungle4.eossweden.org\"]'
+          HAPI_EOS_API_ENDPOINTS: '["https://jungle.edenia.cloud","https://jungle4.eosphere.io","https://jungle4.api.eosnation.io","https://jungle4.eossweden.org"]'
           HAPI_EOS_API_CHAIN_ID: 73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}

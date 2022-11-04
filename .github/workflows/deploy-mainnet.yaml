@@ -82,7 +82,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '[\"https://eos.edenia.cloud\",\"https://api.main.alohaeos.com\",\"https://eos.api.eosnation.io\",\"https://eos.greymass.com\",\"https://eos.eosphere.io\",\"https://api.eosrio.io\"]'
+          HAPI_EOS_API_ENDPOINTS: '["https://eos.edenia.cloud","https://api.main.alohaeos.com","https://eos.api.eosnation.io","https://eos.greymass.com","https://eos.eosphere.io","https://api.eosrio.io"]'
           HAPI_EOS_API_CHAIN_ID: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
