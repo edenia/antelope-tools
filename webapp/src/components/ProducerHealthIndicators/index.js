@@ -26,7 +26,7 @@ const ProducerHealthIndicators = ({ producer, message }) => {
         >
           <Typography>{`${t(`hs_${item.name}`)}`}</Typography>
           {item.valid && <LightIcon status="greenLight" />}
-          {!item.valid && <LightIcon status="yellowLight" />}
+          {!item.valid && <LightIcon status="redLight" />}
         </div>
       ))}
     </>
