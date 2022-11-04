@@ -11,13 +11,13 @@ summary {
   font-size: 40px;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   font-family: 'Nunito';
-}
-
-section {
-  padding: 0 1em;
 }
 
 details[open] summary ~ * {
@@ -120,6 +120,10 @@ p {
   width: 100%;
 }
 
+#bg-logo-mobile {
+  width: 100%;
+}
+
 .box-paragraph {
   margin-bottom: 24px;
 }
@@ -164,10 +168,6 @@ p {
   margin: 0;
 }
 
-#network-desktop {
-  display: none;
-}
-
 .network-container {
   display: flex;
 }
@@ -186,7 +186,6 @@ p {
   text-align: center;
 }
 
-
 .networks {
   display: flex;
   flex-direction: column;
@@ -195,9 +194,6 @@ p {
   align-items: center;
 }
 
-.homepage {
-  flex-direction: row;
-}
 .header {
   overflow: hidden;
   background-color: #ffffff;
@@ -336,32 +332,313 @@ p {
   text-align: center;
 }
 
-#copyright {
-  display: inline;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 10px;
-  line-height: 31px;
-  text-align: right;
-  letter-spacing: 0.83px;
-  text-transform: uppercase;
-  color: #000000;
-  margin: 0;
-  margin-bottom: 12px;
-  margin-top: 36px;
-}
-
-#copyright-desktop {
-  display: none;
-}
-
 #bg-image {
   display: none;
 }
 
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  #copyright {
+    width: 199.2px;
+    height: 21px;
+    margin: 0 53.4px 0 53.3px;
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.72;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #000;
+  }
+  .content {
+    background-color: #ffffff;
+    padding-top: 0px;
+    padding-bottom: 40px;
+  }
+
+  .box-network {
+    flex-grow: 0;
+    padding: 16px 0 16px;
+    background-color: #f9f9fc;
+  }
+
+  #middle-logo {
+    content: url('./images/Antelope Tools Vertical 1@3x.png');
+    height: 110px;
+    width: 110px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .section-wrapper {
+    padding-left: 0px;
+  }
+
+  .box-paragraph-text > p {
+    width: 288px;
+    height: 58px;
+    margin-left: 40px;
+    margin-top: 16px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+    justify-content: center;
+  }
+
+  .flex p {
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    width: 148px;
+    height: 81px;
+    margin: 16px 8px 16px 0px;
+    padding: 8px 0px 8px 0px;
+    border-radius: 4px;
+    background-color: rgba(186, 239, 255, 0.6);
+    text-align: center;
+    color: black;
+  }
+  .flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .flex2 {
+    margin-top: -16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .visit-text {
+    width: 288px;
+    height: 58px;
+    margin: 23px 43px 16px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+
+  .Line-5 {
+    width: 108px;
+    height: 2px;
+    flex-grow: 0;
+    margin: 5px 0px 0px 0px;
+    background-color: #1ccbff;
+  }
+
+  .flex-text p {
+    width: 104px;
+    height: 18px;
+    flex-grow: 0;
+    margin: 0 2px 2px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+  .flex-text {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 5px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 8px;
+    justify-items: center;
+    margin-top: 16px;
+    justify-content: center;
+  }
+
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    padding: 21px 0px 25px 0px;
+    border-radius: 4px;
+    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
+      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    height: 156px;
+    width: 140px;
+    align-items: center;
+  }
+
+  .name-networks {
+    width: 73px;
+    height: 48px;
+    flex-grow: 0;
+    margin: 8px 4.2px 0 3px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+  .box-paragraph summary {
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.61;
+    letter-spacing: -0.54px;
+    text-align: left;
+    color: #000;
+  }
+
+  .box-paragraph p {
+    width: 100%;
+    height: 100%;
+    flex-grow: 0;
+    margin: 3px 0 0;
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.08px;
+    text-align: left;
+    color: #000;
+  }
+
+  summary::marker {
+    content: url(./images/feather-icon.png);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .footer {
+    padding-bottom: 24px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .test{
+    display: flex;
+  }
+  .eos-costa-rica {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .eos-costa-rica h4 {
+    flex-grow: 0;
+    margin: -26px 0 -5.1px;
+    font-family: Nunito;
+    font-size: 11.8px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  .contact-us p {
+    width: 306px;
+    height: 71px;
+    flex-grow: 0;
+    margin: 0 0 8px;
+    font-family: Nunito;
+    font-size: 17px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.06px;
+    text-align: center;
+    color: #000;
+  }
+
+  .project-by {
+    font-size: 17px;
+    font-weight: 600;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: 0.06px;
+    margin: 0;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
+    align-self: center;
+    flex-direction: column;
+  }
+
+  .box-social-media {
+    width: 100%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+  .footerTw{
+    height: 22x;
+    width: 26px;
+  }
+  .footerTl{
+    height: 22px;
+    width: 28;
+  }
+  .footerGit{
+    height: 28px;
+    width: 30px;
+  }
+  .footerLi{
+    height: 27px;
+    width: 28px;
+  }
+
+  .edeniaLogo{
+    height: 26px;
+    width: 155;
+  }
+}
 /* IPAD */
 @media (min-width: 768px) {
-
   .header {
     padding-top: 0px;
   }
@@ -416,7 +693,7 @@ p {
     border-radius: 5px;
   }
 
-  .flex-text  p {
+  .flex-text p {
     width: 169px;
     height: 18px;
     flex-grow: 0;
@@ -431,21 +708,20 @@ p {
     text-align: left;
     color: #000;
   }
-  
 
   .image-box {
     display: none;
   }
 
-  .network-mobile {
+  /* .network-mobile {
     display: none;
-  }
+  } */
 
   .image-box-desktop {
     display: flex;
   }
 
-  .image-box-desktop  {
+  .image-box-desktop {
     width: 254px;
     height: 113px;
     margin-left: 20px;
@@ -492,12 +768,12 @@ p {
     color: #000;
   }
 
-  .flex{
+  .flex {
     display: flex;
     margin-bottom: 16px;
     margin-left: -20px;
   }
-  .flex-text{
+  .flex-text {
     display: flex;
     margin-bottom: 28px;
     margin-left: 20px;
@@ -509,8 +785,8 @@ p {
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
-    }
-  
+  }
+
   .grid img {
     margin-left: auto;
     margin-right: auto;
@@ -519,7 +795,7 @@ p {
     height: 70%;
     object-fit: contain;
   }
-  
+
   .grid-item {
     display: flex;
     flex-direction: column;
@@ -562,19 +838,17 @@ p {
     margin: 16px 0px 22px 0px;
   }
 
-  .box-paragraph summary
-    {
-      font-family: Nunito;
-      font-size: 28px;
-      font-weight: 600;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.2;
-      letter-spacing: -0.23px;
-      text-align: left;
-      color: #000;
-    }
-  
+  .box-paragraph summary {
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
+    color: #000;
+  }
 
   #network-desktop {
     display: flex;
@@ -592,10 +866,6 @@ p {
     text-decoration: none;
   }
 
-  .wax-networks {
-    justify-content: space-between;
-  }
-
   .content {
     padding-bottom: 28px;
   }
@@ -608,7 +878,6 @@ p {
     letter-spacing: 0.04px;
     margin-bottom: 24px;
   }
- 
 
   .box-network h4 {
     margin-top: 23px;
@@ -690,7 +959,7 @@ p {
     padding: 10px;
   }
 
-  .eos-costa-rica h4{
+  .eos-costa-rica h4 {
     flex-grow: 0;
     margin: -26px 0 -5.1px;
     font-family: Nunito;
@@ -729,7 +998,7 @@ p {
     margin: 0;
   }
 
-  #copyright-desktop {
+  .copyright{
     display: flex;
     justify-content: center;
     font-size: 18px;
@@ -739,9 +1008,6 @@ p {
     color: #000000;
   }
 
-  #copyright {
-    display: none;
-  }
 
   #bg-image {
     position: absolute;
@@ -751,12 +1017,10 @@ p {
     right: 0;
     display: inline;
     margin: 0 0 32px 95px;
-
   }
-
 }
 
-
+/* DESKTOP */
 @media (min-width: 1200px) {
   .section-wrapper {
     margin-top: -40px;
@@ -804,13 +1068,13 @@ p {
     grid-column-gap: 45px;
     grid-row-gap: 45px;
   }
-  
+
   .grid img {
     margin-left: auto;
     margin-right: auto;
     display: block;
   }
-  
+
   .grid-item {
     display: flex;
     flex-direction: column;
@@ -821,7 +1085,7 @@ p {
     /* background-color: var(--colors-white); */
   }
 
-  .Line-4{
+  .Line-4 {
     width: 10px;
     height: 63.3px;
     flex-grow: 0;
