@@ -9,7 +9,6 @@ a {
 
 summary {
   font-size: 40px;
-  
 }
 
 html,
@@ -22,15 +21,14 @@ body {
 }
 
 details summary:hover {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
-details[open] summary{
+details[open] summary {
   background-color: rgba(28, 203, 255, 0.2);
 }
 details[open] summary ~ * {
   animation: open 0.3s ease-in-out;
-  
 }
 
 @keyframes open {
@@ -41,18 +39,11 @@ details[open] summary ~ * {
     opacity: 1;
   }
 }
-summary::marker {
-  content: url(./images/feathsser-icon.png);
-  position: relative;
-  align-self: center;
-  
-}
 
 summary {
   list-style: inside;
   display: flex;
   text-align: center;
-  
 }
 details summary {
   width: 100%;
@@ -63,13 +54,13 @@ details summary {
   margin-right: 10px;
 }
 
-.info-icon{
+.info-icon {
   display: flex;
   align-items: center;
   padding-left: 16px;
 }
 
-.info-icon span{
+.info-icon span {
   padding-left: 10px;
 }
 
@@ -81,33 +72,6 @@ details summary:after {
 }
 details[open] summary::after {
   transform: rotate(0);
-  
-}
-
-h1 {
-  font-family: 'Nunito';
-  font-size: 68px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: -0.57px;
-  text-align: left;
-  color: #000;
-}
-
-h2 {
-  flex-grow: 0;
-  margin: 5px 0 6px 6px;
-  font-family: Nunito;
-  font-size: 48px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.8;
-  letter-spacing: -0.22px;
-  text-align: left;
-  color: #000;
 }
 
 p {
@@ -126,18 +90,11 @@ p {
   color: #000;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-}
 
 #bg-image-mobile {
   width: 100%;
 }
 
-#bg-logo-mobile {
-  width: 100%;
-}
 
 .box-paragraph {
   margin-bottom: 24px;
@@ -183,22 +140,6 @@ p {
   margin: 0;
 }
 
-.network-container {
-  display: flex;
-}
-
-.more-networks {
-  margin-top: 65px !important;
-  text-align: center;
-}
-
-.networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
 
 .header {
   overflow: hidden;
@@ -212,7 +153,6 @@ p {
   flex-direction: column;
   align-items: center;
 }
-
 
 #middle-logo {
   margin-top: 10px;
@@ -231,12 +171,6 @@ p {
   padding-bottom: 20px;
 }
 
-#box-right {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
 
 #box-right a {
   text-decoration: none;
@@ -249,13 +183,7 @@ p {
   margin-bottom: 36px;
 }
 
-.box-testnet {
-  margin-bottom: 40px;
-}
 
-.box-column {
-  display: flex;
-}
 
 .box-column div {
   width: 49%;
@@ -263,15 +191,8 @@ p {
   justify-content: center;
 }
 
-.box-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-.box-column ul li {
-  text-align: center;
-}
+
 
 .box-column ul a {
   text-decoration: none;
@@ -321,20 +242,11 @@ p {
   align-items: center;
 }
 
-.testnet-title {
-  text-align: center;
-}
-
-
-/* MOBILE */
-
 
 @media (max-width: 649px) {
-
-
   .header {
     margin-left: 0px;
-  } 
+  }
 
   #copyright {
     width: 199.2px;
@@ -361,7 +273,6 @@ p {
     padding: 16px 0 16px;
     background-color: #f9f9fc;
   }
-  
 
   #bg-image {
     display: none;
@@ -382,7 +293,7 @@ p {
     height: 45px;
   }
 
-  .info-icon{
+  .info-icon {
     width: 80%;
   }
   .box-paragraph-text > p {
@@ -426,7 +337,6 @@ p {
     justify-content: space-around;
   }
 
-
   .visit-text {
     width: 288px;
     height: 58px;
@@ -443,13 +353,12 @@ p {
     margin: auto auto 16px auto;
   }
 
-  .text-container{
+  .text-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
 
-  
   .Line-5 {
     width: 108px;
     height: 2px;
@@ -505,8 +414,9 @@ p {
     margin: 0 8px 0 0;
     padding: 8px 29.4px 11.8px 30.4px;
     border-radius: 4px;
-    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    background-color:white;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
+      0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    background-color: white;
   }
 
   .name-networks {
@@ -524,7 +434,6 @@ p {
     text-align: center;
     color: #000;
   }
-  
 
   .box-paragraph summary {
     flex-grow: 0;
@@ -555,9 +464,7 @@ p {
     text-align: left;
     color: #000;
     padding: 10px;
-
   }
-
 
   .footer {
     padding-bottom: 24px;
@@ -565,7 +472,7 @@ p {
     display: flex;
     flex-direction: column;
   }
-  .test{
+  .test {
     display: flex;
   }
   .eos-costa-rica {
@@ -626,31 +533,29 @@ p {
     margin-bottom: 0px;
     align-items: center;
   }
-  .footerTw{
+  .footerTw {
     height: 22x;
     width: 26px;
   }
-  .footerTl{
+  .footerTl {
     height: 22px;
     width: 28;
   }
-  .footerGit{
+  .footerGit {
     height: 28px;
     width: 30px;
   }
-  .footerLi{
+  .footerLi {
     height: 27px;
     width: 28px;
   }
 
-  .edeniaLogo{
+  .edeniaLogo {
     height: 26px;
     width: 155;
   }
 }
-/* IPAD */
 @media (min-width: 650px) {
-
   .section-wrapper {
     width: 100%;
     padding-top: 40px;
@@ -792,7 +697,7 @@ p {
     margin-left: 20px;
   }
 
-  .text-container{
+  .text-container {
     display: flex;
     flex-direction: column;
   }
@@ -803,7 +708,6 @@ p {
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
-    
   }
 
   .grid img {
@@ -921,7 +825,6 @@ p {
     justify-content: space-between;
   }
 
-
   .box-testnet-desktop {
     display: flex;
     flex-direction: column;
@@ -1011,7 +914,7 @@ p {
     margin: 0;
   }
 
-  .copyright{
+  .copyright {
     display: flex;
     justify-content: center;
     font-size: 18px;
@@ -1020,7 +923,6 @@ p {
     letter-spacing: 0.3px;
     color: #000000;
   }
-
 
   #bg-image {
     position: absolute;
@@ -1044,29 +946,29 @@ p {
     margin-bottom: 0px;
     align-items: center;
   }
-  .footerTw{
+  .footerTw {
     height: 29px;
     width: 34px;
   }
-  .footerTl{
+  .footerTl {
     height: 30px;
     width: 37px;
   }
-  .footerGit{
+  .footerGit {
     height: 38px;
     width: 41px;
   }
-  .footerLi{
+  .footerLi {
     height: 37px;
     width: 40px;
   }
 
-  .edeniaLogo{
+  .edeniaLogo {
     height: 26px;
     width: 156px;
   }
 
-  #copyright{
+  #copyright {
     width: 199.2px;
     height: 21px;
     margin: 9.5px 154.1px 0 154px;
@@ -1081,8 +983,6 @@ p {
     color: #000;
   }
 }
-
-/* DESKTOP */
 @media (min-width: 1200px) {
   .section-wrapper {
     width: 100%;
@@ -1106,7 +1006,7 @@ p {
     color: #000;
   }
 
-  .text-container{
+  .text-container {
     display: flex;
     flex-direction: column;
   }
@@ -1129,7 +1029,7 @@ p {
     width: 100%;
   }
 
-  .flex{
+  .flex {
     margin-bottom: 41px;
   }
   .flex p {
@@ -1174,9 +1074,9 @@ p {
     width: 361px;
   }
 
-  .grid-item:hover{
+  .grid-item:hover {
     border: 2px solid #1ccbff;
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
   .Line-4 {
     width: 10px;
@@ -1211,7 +1111,7 @@ p {
     color: #000;
   }
 
-  .flex-text{
+  .flex-text {
     display: flex;
     margin-bottom: 28px;
     margin-left: 35px;
@@ -1321,24 +1221,24 @@ p {
     margin-bottom: 0px;
     align-items: center;
   }
-  .footerTw{
+  .footerTw {
     height: 48px;
     width: 58px;
   }
-  .footerTl{
+  .footerTl {
     height: 48px;
     width: 61px;
   }
-  .footerGit{
+  .footerGit {
     height: 62px;
     width: 67px;
   }
-  .footerLi{
+  .footerLi {
     height: 60px;
     width: 63px;
   }
 
-  .edeniaLogo{
+  .edeniaLogo {
     height: 46px;
     width: 262px;
   }
@@ -1359,7 +1259,7 @@ p {
     color: #000;
   }
 
-  .eos-costa-rica h4{
+  .eos-costa-rica h4 {
     width: auto;
     flex-grow: 0;
     margin: 0 0 3.2px;
@@ -1374,7 +1274,7 @@ p {
     color: var(--colors-3-text-primary);
   }
 
-  #copyright{
+  #copyright {
     width: 337.8px;
     height: 36px;
     margin: 16.1px 261.2px 0 261px;
