@@ -16,21 +16,38 @@ const eosApi = EosApi({
   verbose: false,
   fetchConfiguration: {}
 })
-const eosApis = eosConfig.apiEndpoints.map((endpoint) => {
-  return EosApi({
-    httpEndpoint: endpoint,
-    verbose: false,
-    fetchConfiguration: {}
-  })
+const eosApis = eosConfig.apiEndpoints.map(endpoint => {
+  return {
+    api: EosApi({
+      httpEndpoint: endpoint,
+      verbose: false,
+      fetchConfiguration: {}
+    }),
+    lastFailureTime: 0,
+    url: endpoint
+  }
 })
 
-const callEosApi = async method => {
-  for (const eosApi of eosApis){
+const waitRequestInterval = 300000
+
+const callEosApi = async (funcName, method) => {
+  for (const eosApi of eosApis) {
+    const diffTime = new Date() - eosApi.lastFailureTime
+
+    if (diffTime < waitRequestInterval) continue
+
     try {
-      const response = await method(eosApi)
+      const response = await method(eosApi.api)
 
       return response
-    } catch (error) {}
+    } catch (error) {
+      eosApi.lastFailureTime = new Date()
+
+      console.error(
+        `WARNING ${funcName} => ${eosApi.url} has failed: \n`,
+        error.message
+      )
+    }
   }
 
   throw new Error('Each endpoint failed when trying to execute the function')
@@ -216,10 +233,12 @@ const transact = async (actions, account, password) => {
 }
 
 const getCurrencyStats = async options =>
-  callEosApi(async eosApi => eosApi.getCurrencyStats(options))
+  callEosApi('getCurrencyStats', async eosApi =>
+    eosApi.getCurrencyStats(options)
+  )
 
 const getProducers = async options =>
-  callEosApi(async eosApi => eosApi.getProducers(options))
+  callEosApi('getProducers', async eosApi => eosApi.getProducers(options))
 
 const getInfo = options => eosApi.getInfo(options || {})
 
