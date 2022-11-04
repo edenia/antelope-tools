@@ -215,7 +215,8 @@ export default (theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 24,
+      height: '22px',
+      widht: '22px',
     },
     '& .success': {
       color: theme.palette.success.main,

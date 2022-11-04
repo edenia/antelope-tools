@@ -1,8 +1,8 @@
 export default (theme) => ({
   icon: {
     '& svg': {
-      width: '20px !important',
-      height: '20px !important',
+      width: '22px !important',
+      height: '22px !important',
       cursor: 'pointer',
     },
   },
