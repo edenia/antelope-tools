@@ -759,7 +759,8 @@ p {
     letter-spacing: 0.08px;
     text-align: left;
     color: #000;
-    margin: 16px 0px 22px 0px;
+    margin: 16px 0px 31px 0px;
+    padding-left: 40px;
   }
 
   .box-paragraph summary {
