@@ -270,7 +270,7 @@ p {
 
   .box-network {
     flex-grow: 0;
-    padding: 16px 0 16px;
+    padding: 16px 0;
     background-color: #f9f9fc;
   }
 
@@ -309,7 +309,7 @@ p {
     color: #000;
     justify-content: center;
     width: 288px;
-    margin: 16px auto auto auto;
+    margin: 16px auto auto;
   }
 
   .flex p {
@@ -319,7 +319,7 @@ p {
     width: 148px;
     height: 81px;
     margin: 16px 8px 16px 0px;
-    padding: 8px 0px 8px 0px;
+    padding: 8px 0px;
     border-radius: 4px;
     background-color: rgba(186, 239, 255, 0.6);
     text-align: center;
@@ -340,7 +340,6 @@ p {
   .visit-text {
     width: 288px;
     height: 58px;
-    margin: 23px 43px 16px;
     font-family: Nunito;
     font-size: 24px;
     font-weight: 600;
@@ -350,7 +349,7 @@ p {
     letter-spacing: normal;
     text-align: center;
     color: #000;
-    margin: auto auto 16px auto;
+    margin: auto auto 16px;
   }
 
   .text-container {
@@ -363,7 +362,7 @@ p {
     width: 108px;
     height: 2px;
     flex-grow: 0;
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0px 0px;
     background-color: #1ccbff;
   }
 
@@ -610,7 +609,7 @@ p {
     width: 4px;
     height: 26px;
     flex-grow: 0;
-    margin: 6px 0 0 0;
+    margin: 6px 0 0;
     transform: rotate(-180deg);
     background-color: #1ccbff;
     border-radius: 5px;
@@ -759,7 +758,7 @@ p {
     letter-spacing: 0.08px;
     text-align: left;
     color: #000;
-    margin: 16px 0px 31px 0px;
+    margin: 16px 0px 31px;
     padding-left: 40px;
   }
 
