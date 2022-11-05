@@ -1,9 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import ReportIcon from '@mui/icons-material/Report'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import TimerOffIcon from '@mui/icons-material/TimerOff'
-import WarningIcon from '@mui/icons-material/Warning'
+import CloseIcon from '@mui/icons-material/Close'
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined'
+import TimerOffOutlinedIcon from '@mui/icons-material/TimerOffOutlined'
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined'
 
 import styles from './styles'
 
@@ -14,13 +14,13 @@ const LightIcon = ({ status }) => {
 
   switch (status) {
     case 'greenLight':
-      return <VerifiedIcon className={classes.greenLight} />
+      return <DoneOutlinedIcon className={classes.greenLight} />
     case 'timerOff':
-      return <TimerOffIcon className={classes.timerOff} />
+      return <TimerOffOutlinedIcon className={classes.timerOff} />
     case 'yellowLight':
-      return <WarningIcon className={classes.yellowLight} />
+      return <ReportProblemOutlinedIcon className={classes.yellowLight} />
     default:
-      return <ReportIcon className={classes.redLight} />
+      return <CloseIcon className={classes.redLight} />
   }
 }
 

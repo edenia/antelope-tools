@@ -215,7 +215,8 @@ export default (theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15,
+      height: '22px',
+      widht: '22px',
     },
     '& .success': {
       color: theme.palette.success.main,
@@ -227,7 +228,7 @@ export default (theme) => ({
       color: theme.palette.warning.main,
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
+      minWidth: 130,
     },
   },
   social: {
