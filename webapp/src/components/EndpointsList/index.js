@@ -9,7 +9,7 @@ const useStyles = makeStyles(styles)
 
 const EndpointsList = ({ type }) => {
   const classes = useStyles()
-  const [{ loading, producers, updatedAt }, { handleFilter, setPagination }] =
+  const [{ loading, producers }, { handleFilter, setPagination }] =
     useEndpointsState({useCache: true})
 
   useEffect(() => {
@@ -23,8 +23,6 @@ const EndpointsList = ({ type }) => {
       {!loading && producers?.length && (
         <div className={classes.container}>
           {`# List of available ${type} endpoints`}
-          <br />
-          {updatedAt && `# Updated at ${updatedAt}`}
           <br />
           {producers.map(
             (producer, index) =>

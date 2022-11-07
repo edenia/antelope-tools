@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import ListAltIcon from '@mui/icons-material/ListAlt'
 
 import HealthCheck from '../HealthCheck'
 import { eosConfig } from '../../config'
@@ -99,22 +99,22 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>{t('api')}</TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
-                {t('ssl')}
-                <ListAltIcon
-                  onClick={(e) => {
-                    handlePopoverOpen(e.target, 'ssl')
-                  }}
-                />
+                  {t('ssl')}
+                  <ListAltIcon
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'ssl')
+                    }}
+                  />
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
-                {t('p2p')}{' '}
-                <ListAltIcon
-                  onClick={(e) => {
-                    handlePopoverOpen(e.target, 'p2p')
-                  }}
-                />
+                  {t('p2p')}
+                  <ListAltIcon
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'p2p')
+                    }}
+                  />
                 </div>
               </TableCell>
             </TableRow>
