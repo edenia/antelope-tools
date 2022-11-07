@@ -49,7 +49,7 @@ const Nodes = ({ nodes, producer, t, classes }) => {
               </Tooltip>
               <div className={classes.rowWrapper}>
                 <Typography variant="body1">
-                  {node.name || node?.node_type?.toString()}{' '}
+                  {node.name || node?.node_type?.toString() || 'node'}{' '}
                 </Typography>
                 <InfoOutlinedIcon
                   className={classes.infoIcon}

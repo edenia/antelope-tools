@@ -2,11 +2,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import Tooltip from '@mui/material/Tooltip'
 import { useTranslation } from 'react-i18next'
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined'
-import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined'
 import Typography from '@mui/material/Typography'
+
+import LightIcon from '../HealthCheck/LightIcon'
 
 import styles from './styles'
 
@@ -19,23 +18,18 @@ const ProducerHealthIndicators = ({ producer, message }) => {
   if (!producer.health_status.length) return <Typography>{message}</Typography>
 
   return (
-    <div>
+    <>
       {producer.health_status.map((item, index) => (
-        <Tooltip
-          key={`health-indicator-${index}`}
-          title={t(`hs_${item.name}`)}
-          aria-label="add"
+        <div
+          className={classes.wrapper}
+          key={`health-indicator-${producer?.owner || ''}-${index}`}
         >
-          <div className={classes.wrapper}>
-            <Typography>{`${t(`hs_${item.name}`)}: ${
-              item.valid ? t('found') : t('missing')
-            }`}</Typography>
-            {item.valid && <DoneOutlinedIcon className="success" />}
-            {!item.valid && <ReportProblemOutlinedIcon className="warning" />}
-          </div>
-        </Tooltip>
+          <Typography>{`${t(`hs_${item.name}`)}`}</Typography>
+          {item.valid && <LightIcon status="greenLight" />}
+          {!item.valid && <LightIcon status="redLight" />}
+        </div>
       ))}
-    </div>
+    </>
   )
 }
 

@@ -83,9 +83,13 @@ const getBPJsons = async (producers = []) => {
 
         bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
 
-        bpJson = {
-          ...bpJson,
-          nodes: chainUrl || isEosNetwork ? bpJson.nodes : undefined
+        if (bpJson && !chainUrl && !isEosNetwork) {
+          const { org, producer_account_name: name } = bpJson
+
+          bpJson = {
+            ...(org && { org }),
+            ...(name && { producer_account_name: name })
+          }
         }
       }
 
@@ -231,6 +235,9 @@ const getProducerHealthStatus = bpJson => {
     name: 'bpJson',
     valid: !!bpJson && !!Object.keys(bpJson).length
   })
+
+  if (!healthStatus[0].valid) return healthStatus
+
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name

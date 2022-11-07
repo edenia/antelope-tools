@@ -105,7 +105,7 @@ const NodeCard = ({ producer, node }) => {
               <ShowInfo value={node?.name} title={t('nodeName')} />
               <ShowInfo
                 cond={node?.node_type}
-                value={node?.node_type.toString()}
+                value={node?.node_type?.toString()}
                 title={t('nodeType')}
               />
               <ShowInfo value={node?.full} title={t('isFull')} />
