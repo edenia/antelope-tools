@@ -1,6 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
+
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
 import { eosConfig } from '../../config'
@@ -13,7 +15,7 @@ const RicardianContract = () => {
   const { t } = useTranslation('ricardianContractRoute')
 
   return (
-    <div>
+    <Card className={classes.cardShadow}>
       <div className={classes.root}>
         <RicardianContractComponent
           contractName="eosio"
@@ -23,7 +25,7 @@ const RicardianContract = () => {
           title={t('title')}
         />
       </div>
-    </div>
+    </Card>
   )
 }
 
