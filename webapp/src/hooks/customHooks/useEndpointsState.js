@@ -3,10 +3,10 @@ import { useLazyQuery } from '@apollo/client'
 
 import { ENDPOINTS_QUERY } from '../../gql'
 
-const useEndpointsState = () => {
+const useEndpointsState = ({ useCache }) => {
   const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY, {
-    pollInterval: 120000,
-    fetchPolicy: 'cache-and-network',
+    pollInterval: useCache ? 0 : 120000,
+    fetchPolicy: useCache ? 'cache-first' : 'cache-and-network',
   })
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
