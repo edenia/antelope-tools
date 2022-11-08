@@ -66,7 +66,7 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
 
       {nodes.map((node, index) => (
         <div className={classes.cardGrow} key={index}>
-          <Card>
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography>{`${t(node.type)} ${t('producers')}`}</Typography>
               <BodyGraphValue

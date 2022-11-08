@@ -7,7 +7,6 @@ import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
-import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField from '@mui/material/TextField'
@@ -55,8 +54,8 @@ const SearchBar = ({
   }, [rootFilters])
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
+    <div>
+      <div>
         <Card>
           <CardContent className={classes.cardContent}>
             <Typography className={classes.title}>
@@ -83,7 +82,7 @@ const SearchBar = ({
               onKeyDown={handleOnKeyDown}
               onChange={handleOnChange('owner')}
             />
-            <Grid className={classes.chipWrapper}>
+            <div className={classes.chipWrapper}>
               {chips.map((chip, index) => (
                 <Chip
                   key={`chip-${chip.name}-${index}`}
@@ -95,11 +94,11 @@ const SearchBar = ({
                   })}
                 />
               ))}
-            </Grid>
+            </div>
           </CardContent>
         </Card>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   )
 }
 

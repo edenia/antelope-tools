@@ -27,26 +27,15 @@ const useBlockProducerState = () => {
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
-    BLOCK_TRANSACTIONS_HISTORY
+    BLOCK_TRANSACTIONS_HISTORY,
   )
   const [totalPages, setTotalPages] = useState(1)
-  const [current, setCurrent] = useState(null)
-  const [anchorEl, setAnchorEl] = useState(null)
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
 
   const chips = CHIPS_NAMES.map((e) => {
     return { name: e }
   })
-
-  const handlePopoverOpen = (node) => (event) => {
-    setCurrent(node)
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
 
   useEffect(() => {
     if (!info) return
@@ -86,8 +75,6 @@ const useBlockProducerState = () => {
 
   return [
     {
-      anchorEl,
-      current,
       filters,
       chips,
       items,
@@ -97,9 +84,7 @@ const useBlockProducerState = () => {
       pagination,
     },
     {
-      handlePopoverClose,
       handleOnSearch,
-      handlePopoverOpen,
       handleOnPageChange,
     },
   ]

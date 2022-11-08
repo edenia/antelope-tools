@@ -1,5 +1,5 @@
 const Boom = require('@hapi/boom')
-const { BAD_REQUEST } = require('http-status-codes')
+const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
 const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
@@ -60,13 +60,12 @@ const getNodesSummary = async () => {
   const payload = {}
   const [rows] = await sequelizeUtil.query(`
     SELECT
-      value->>'node_type' as node_type,
+      type as node_type,
       count(*)::integer as nodes_count
     FROM 
-      producer,
-      json_array_elements(to_json(bp_json->'nodes'))
+      node
     GROUP BY 
-      value->>'node_type'
+      type
   `)
 
   rows.forEach(row => {
@@ -106,6 +105,7 @@ const getBlockDistribution = async (range = '1 day') => {
       startTime = moment().subtract(20, 'years')
     } else {
       const [amount, unit] = range.split(' ')
+
       startTime = moment().subtract(parseInt(amount || 1), unit || 'day')
     }
 
@@ -134,7 +134,7 @@ const getBlockDistribution = async (range = '1 day') => {
   } catch (error) {
     console.log(error)
     throw new Boom.Boom(error.message, {
-      statusCode: BAD_REQUEST
+      statusCode: StatusCodes.BAD_REQUEST
     })
   }
 }
@@ -263,8 +263,9 @@ const getCurrentMissedBlock = async () => {
     if (newData[element.account]) {
       newData = {
         ...newData,
-        [element.account]: `${parseInt(newData[element.account]) +
-          parseInt(element.sum)}`
+        [element.account]: `${
+          parseInt(newData[element.account]) + parseInt(element.sum)
+        }`
       }
     } else {
       newData = { ...newData, [element.account]: element.sum }
@@ -428,6 +429,7 @@ const syncTPSAllTimeHigh = async () => {
 
   for (let index = 0; index < blocks.length; index++) {
     const block = await getBlockUsage(blocks[index])
+
     blocks[index] = block
   }
 

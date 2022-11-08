@@ -1,6 +1,7 @@
 export default () => ({
   wrapper: {
     display: 'flex',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 })

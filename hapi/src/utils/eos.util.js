@@ -16,7 +16,42 @@ const eosApi = EosApi({
   verbose: false,
   fetchConfiguration: {}
 })
+const eosApis = eosConfig.apiEndpoints.map(endpoint => {
+  return {
+    api: EosApi({
+      httpEndpoint: endpoint,
+      verbose: false,
+      fetchConfiguration: {}
+    }),
+    lastFailureTime: 0,
+    url: endpoint
+  }
+})
 
+const waitRequestInterval = 300000
+
+const callEosApi = async (funcName, method) => {
+  for (const eosApi of eosApis) {
+    const diffTime = new Date() - eosApi.lastFailureTime
+
+    if (diffTime < waitRequestInterval) continue
+
+    try {
+      const response = await method(eosApi.api)
+
+      return response
+    } catch (error) {
+      eosApi.lastFailureTime = new Date()
+
+      console.error(
+        `WARNING ${funcName} => ${eosApi.url} has failed: \n`,
+        error.message
+      )
+    }
+  }
+
+  throw new Error('Each endpoint failed when trying to execute the function')
+}
 const newAccount = async accountName => {
   const password = await walletUtil.create(accountName)
   const key = await walletUtil.createKey(accountName)
@@ -163,7 +198,8 @@ const getCodeHash = account => eosApi.getCodeHash(account)
 const getCurrencyBalance = (code, account, symbol) =>
   eosApi.getCurrencyBalance(code, account, symbol)
 
-const getTableRows = options => eosApi.getTableRows({ json: true, ...options })
+const getTableRows = options =>
+  eosApi.getTableRows({ json: true, ...options })
 
 const getProducerSchedule = () => eosApi.getProducerSchedule({})
 
@@ -196,9 +232,13 @@ const transact = async (actions, account, password) => {
   return transaction
 }
 
-const getCurrencyStats = options => eosApi.getCurrencyStats(options)
+const getCurrencyStats = async options =>
+  callEosApi('getCurrencyStats', async eosApi =>
+    eosApi.getCurrencyStats(options)
+  )
 
-const getProducers = options => eosApi.getProducers(options)
+const getProducers = async options =>
+  callEosApi('getProducers', async eosApi => eosApi.getProducers(options))
 
 const getInfo = options => eosApi.getInfo(options || {})
 
