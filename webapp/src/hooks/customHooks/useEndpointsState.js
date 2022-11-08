@@ -93,7 +93,7 @@ const useEndpointsState = ({ useCache }) => {
       ? { response: { _contains: { status: 200 } } }
       : { value: { _gt: '' } }
 
-    setPagination( prev => ({
+    setPagination(prev => ({
       ...prev,
       page: 1,
       where: { nodes: { endpoints: filter } },

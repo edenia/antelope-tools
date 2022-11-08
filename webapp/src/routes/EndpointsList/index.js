@@ -31,7 +31,7 @@ const EndpointsList = () => {
   const [
     { loading, pagination, producers, updatedAt },
     { handleFilter, handleOnPageChange, setPagination },
-  ] = useEndpointsState({useCache: false})
+  ] = useEndpointsState({ useCache: false })
 
   return (
     <Card className={classes.cardShadow}>
