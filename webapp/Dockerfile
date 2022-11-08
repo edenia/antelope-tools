@@ -34,7 +34,6 @@ ARG react_app_sync_tolerance_interval
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
 ENV NODE_ENV production
-ENV NODE_PATH ./src
 ENV PORT $port
 ENV REACT_APP_TITLE $react_app_title
 ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
