@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import { Tooltip as MUITooltip } from '@mui/material'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 
 import HealthCheck from '../HealthCheck'
@@ -37,6 +38,7 @@ const EndpointsTable = ({ producers }) => {
   }
 
   const syncToleranceInterval = eosConfig.syncToleranceInterval
+  const endpointsTypes = ['api', 'ssl', 'p2p']
 
   const getStatus = (endpoint) => {
     if (endpoint.response.status === undefined) return
@@ -56,6 +58,21 @@ const EndpointsTable = ({ producers }) => {
           return 'redLight'
       }
     }
+  }
+
+  const CellTitle = ({ type }) => {
+    return (
+      <div className={classes.titleCell}>
+        {t(type)}
+        <MUITooltip title={'Show list'} arrow>
+          <ListAltIcon
+            onClick={(e) => {
+              handlePopoverOpen(e.target, type)
+            }}
+          />
+        </MUITooltip>
+      </div>
+    )
   }
 
   const CellList = ({ producer, endpointType }) => {
@@ -96,27 +113,11 @@ const EndpointsTable = ({ producers }) => {
           <TableHead>
             <TableRow>
               <TableCell>{t('producer')}</TableCell>
-              <TableCell>{t('api')}</TableCell>
-              <TableCell>
-                <div className={classes.titleCell}>
-                  {t('ssl')}
-                  <ListAltIcon
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'ssl')
-                    }}
-                  />
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className={classes.titleCell}>
-                  {t('p2p')}
-                  <ListAltIcon
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'p2p')
-                    }}
-                  />
-                </div>
-              </TableCell>
+              {endpointsTypes.map((type) => (
+                <TableCell key={`table-row-${type}`}>
+                  <CellTitle type={type} />
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
