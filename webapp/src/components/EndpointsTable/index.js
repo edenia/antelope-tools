@@ -100,7 +100,7 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('api')}
-                  <MUITooltip title={'Show list'} arrow>
+                  <MUITooltip title={t('showList')} arrow>
                     <ListAltIcon
                       onClick={(e) => {
                         handlePopoverOpen(e.target, 'api')
@@ -112,7 +112,7 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('ssl')}
-                  <MUITooltip title={'Show list'} arrow>
+                  <MUITooltip title={t('showList')} arrow>
                     <ListAltIcon
                       onClick={(e) => {
                         handlePopoverOpen(e.target, 'ssl')
@@ -124,7 +124,7 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                   <div className={classes.titleCell}>
                     {t('p2p')}
-                    <MUITooltip title={'Show list'} arrow>
+                    <MUITooltip title={t('showList')} arrow>
                       <ListAltIcon
                         onClick={(e) => {
                           handlePopoverOpen(e.target, 'p2p')
