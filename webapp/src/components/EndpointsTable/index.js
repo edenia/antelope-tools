@@ -18,7 +18,7 @@ import { eosConfig } from '../../config'
 import styles from './styles'
 import EndpointInfo from './EndpointInfo'
 import Tooltip from '../Tooltip'
-import EndpointsList from '../EndpointsList'
+import EndpointsTextList from '../EndpointsTextList'
 
 const useStyles = makeStyles(styles)
 
@@ -90,7 +90,7 @@ const EndpointsTable = ({ producers }) => {
         open={anchorEl !== null}
         onClose={handlePopoverClose}
       >
-        <EndpointsList producers={producers} type={type} />
+        <EndpointsTextList type={type} />
       </Tooltip>
       <TableContainer>
         <Table>
