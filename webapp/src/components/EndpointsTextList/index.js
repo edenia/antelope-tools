@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@mui/styles'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
+import CopyToClipboard from '../CopyToClipboard'
 
 import styles from './styles'
 
@@ -23,6 +24,7 @@ const EndpointsTextList = ({ type }) => {
     if (!producers?.length) return
 
     let endpointsList = `# List of available ${type} endpoints \n`
+
     producers.forEach(producer => {
       if (!!producer?.endpoints[type]?.length) {
         endpointsList += `# ${producer.name} \n`
@@ -41,7 +43,12 @@ const EndpointsTextList = ({ type }) => {
   return (
     <>
       {!loading && textList?.length && (
-        <div className={classes.container}>{textList}</div>
+        <div className={classes.container}>
+          <div>
+            <CopyToClipboard text={textList} />
+          </div>
+          {textList}
+        </div>
       )}
     </>
   )
