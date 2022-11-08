@@ -10,13 +10,12 @@ const useStyles = makeStyles(styles)
 const EndpointsList = ({ type }) => {
   const classes = useStyles()
   const [{ loading, producers }, { handleFilter, setPagination }] =
-    useEndpointsState({useCache: true})
+    useEndpointsState({ useCache: true })
 
   useEffect(() => {
-    setPagination((prev) => ({ ...prev, limit: null }))
+    setPagination(prev => ({ ...prev, limit: null }))
     handleFilter(type !== 'p2p')
-    // eslint-disable-next-line
-  }, [type])
+  }, [type, handleFilter, setPagination])
 
   return (
     <>
@@ -25,14 +24,14 @@ const EndpointsList = ({ type }) => {
           {`# List of available ${type} endpoints`}
           <br />
           {producers.map(
-            (producer, index) =>
+            (producer, pIndex) =>
               !!producer?.endpoints[type]?.length && (
                 <div
-                  key={`producer-${producer.name}-endpoints-${type}-${index}`}
+                  key={`producer-${producer.name}-endpoints-${type}-${pIndex}`}
                 >
                   {`# ${producer.name}`}
-                  {producer.endpoints[type].map((endpoint, index) => (
-                    <div key={`${producer.name}-endpoint-${type}-${index}`}>
+                  {producer.endpoints[type].map((endpoint, endIndex) => (
+                    <div key={`${producer.name}-endpoint-${type}-${endIndex}`}>
                       {`${type === 'p2p' ? 'p2p-peer-address = ' : ''} ${
                         endpoint.value
                       }`}

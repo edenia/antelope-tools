@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useLazyQuery } from '@apollo/client'
 
 import { ENDPOINTS_QUERY } from '../../gql'
@@ -37,7 +37,7 @@ const useEndpointsState = ({ useCache }) => {
   useEffect(() => {
     if (!data?.info) return
 
-    setPagination((prev) => ({
+    setPagination(prev => ({
       ...prev,
       totalPages: Math.ceil(data?.info.producers?.count / pagination.limit),
     }))
@@ -48,11 +48,11 @@ const useEndpointsState = ({ useCache }) => {
     if (!data?.producers) return
 
     setProducers(
-      data.producers.map((producer) => {
+      data.producers.map(producer => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
-        producer.nodes.forEach((node) => {
+        producer.nodes.forEach(node => {
           if (node.endpoints?.length) {
             node.endpoints.forEach(({ type, ...endpoint }) => {
               if (!inserted.includes(endpoint.value)) {
@@ -82,18 +82,18 @@ const useEndpointsState = ({ useCache }) => {
   const handleOnPageChange = (_, page) => {
     if (pagination.page === page) return
 
-    setPagination((prev) => ({
+    setPagination(prev => ({
       ...prev,
       page,
     }))
   }
 
-  const handleFilter = (value) => {
+  const handleFilter = useCallback( value => {
     const filter = value
       ? { response: { _contains: { status: 200 } } }
       : { value: { _gt: '' } }
 
-    setPagination((prev) => ({
+    setPagination( prev => ({
       ...prev,
       page: 1,
       where: { nodes: { endpoints: filter } },
@@ -101,7 +101,7 @@ const useEndpointsState = ({ useCache }) => {
         ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
         : undefined,
     }))
-  }
+  }, [])
 
   return [
     { loading, pagination, producers, updatedAt },
