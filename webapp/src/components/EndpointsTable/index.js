@@ -38,7 +38,6 @@ const EndpointsTable = ({ producers }) => {
   }
 
   const syncToleranceInterval = eosConfig.syncToleranceInterval
-  const endpointsTypes = ['api', 'ssl', 'p2p']
 
   const getStatus = (endpoint) => {
     if (endpoint.response.status === undefined) return
@@ -58,21 +57,6 @@ const EndpointsTable = ({ producers }) => {
           return 'redLight'
       }
     }
-  }
-
-  const CellTitle = ({ type }) => {
-    return (
-      <div className={classes.titleCell}>
-        {t(type)}
-        <MUITooltip title={'Show list'} arrow>
-          <ListAltIcon
-            onClick={(e) => {
-              handlePopoverOpen(e.target, type)
-            }}
-          />
-        </MUITooltip>
-      </div>
-    )
   }
 
   const CellList = ({ producer, endpointType }) => {
@@ -113,11 +97,42 @@ const EndpointsTable = ({ producers }) => {
           <TableHead>
             <TableRow>
               <TableCell>{t('producer')}</TableCell>
-              {endpointsTypes.map((type) => (
-                <TableCell key={`table-row-${type}`}>
-                  <CellTitle type={type} />
+              <TableCell>
+                <div className={classes.titleCell}>
+                  {t('api')}
+                  <MUITooltip title={'Show list'} arrow>
+                    <ListAltIcon
+                      onClick={(e) => {
+                        handlePopoverOpen(e.target, 'api')
+                      }}
+                    />
+                  </MUITooltip>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className={classes.titleCell}>
+                  {t('ssl')}
+                  <MUITooltip title={'Show list'} arrow>
+                    <ListAltIcon
+                      onClick={(e) => {
+                        handlePopoverOpen(e.target, 'ssl')
+                      }}
+                    />
+                  </MUITooltip>
+                </div>
+              </TableCell>
+              <TableCell>
+                  <div className={classes.titleCell}>
+                    {t('p2p')}
+                    <MUITooltip title={'Show list'} arrow>
+                      <ListAltIcon
+                        onClick={(e) => {
+                          handlePopoverOpen(e.target, 'p2p')
+                        }}
+                      />
+                    </MUITooltip>
+                  </div>
                 </TableCell>
-              ))}
             </TableRow>
           </TableHead>
           <TableBody>
