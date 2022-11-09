@@ -44,9 +44,7 @@ const EndpointsTextList = ({ type }) => {
     <>
       {!loading && textList?.length && (
         <div className={classes.container}>
-          <div>
-            <CopyToClipboard text={textList} />
-          </div>
+          <CopyToClipboard text={textList} />
           {textList}
         </div>
       )}
