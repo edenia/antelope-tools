@@ -38,12 +38,23 @@ const Footer = () => {
           <div className={classes.midText}>{t('footer1')}</div>
           <Link
             className={classes.noUnderline}
-            href="https://github.com/edenia/antelope-tools"
+            href="https://edenia.com/"
             onClick={() => handleLinkClick()}
             target="_blank"
             rel="noreferrer"
           >
-            <div className={classes.midText}>{t('footer2')}</div>
+            <div className={classes.midFooter}>
+              <div>
+                {t('footer2')}
+              </div>
+              <div>
+                  <img
+                    alt="antelope tools dashboard"
+                    src={'/edenia.png'}
+                    className={classes.imgHeaderLogo}
+                  />
+                </div>
+            </div>
           </Link>
         </div>
       </div>
@@ -62,7 +73,7 @@ const Footer = () => {
             </div>
           </Link>
         </div>
-        
+
         <div>
           <List
             className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}
