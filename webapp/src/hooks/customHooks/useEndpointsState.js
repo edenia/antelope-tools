@@ -88,7 +88,7 @@ const useEndpointsState = ({ useCache }) => {
     }))
   }
 
-  const handleFilter = useCallback( value => {
+  const handleFilter = useCallback(value => {
     const filter = value
       ? { response: { _contains: { status: 200 } } }
       : { value: { _gt: '' } }
