@@ -76,6 +76,7 @@ export const formatData = (
           country: data.location?.country || null,
           website: data?.website || '',
           email: data.email,
+          code_of_conduct: data?.code_of_conduct || null,
           ownership: data?.ownership_disclosure || null,
           bussinesContact: data.bussines_contact || null,
           technicalContact: data.technical_contact || null,

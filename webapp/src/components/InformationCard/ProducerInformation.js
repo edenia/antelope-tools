@@ -37,13 +37,14 @@ const ProducerInformation = ({ info, classes, t }) => {
           </Typography>
         )}
       </div>
-      <RowUrl title={t('website')} value={info?.website} />
+      <RowUrl title={t('website')} value={info?.website} /> 
       <RowUrl
         title={t('email')}
         value={info?.email}
         href={`mailto:${info.email}`}
       />
       <RowUrl title={t('ownershipDisclosure')} value={info?.ownership} />
+      <RowUrl title={t('codeofconduct')} value={info?.code_of_conduct} />
       <RowUrl title={t('chainResources')} value={info?.chain} />
       {!!info?.otherResources?.length && (
         <div>
