@@ -9,7 +9,7 @@ import queryString from 'query-string'
 import CardContent from '@mui/material/CardContent'
 
 import { signTransaction } from '../../utils/eos'
-import eosApi from '../../utils/eosapi'
+import eosApi, { ENDPOINTS_ERROR } from '../../utils/eosapi'
 import getTransactionUrl from '../../utils/get-transaction-url'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 import SearchBar from '../../components/SearchBar'
@@ -96,7 +96,10 @@ const Accounts = ({ ual }) => {
       } catch (error) {
         showMessage({
           type: 'error',
-          content: t('tableNotFound'),
+          content:
+            error?.message === ENDPOINTS_ERROR
+              ? 'Endpoint Failure'
+              : t('tableNotFound'),
         })
       }
       setLoading(false)
@@ -122,7 +125,10 @@ const Accounts = ({ ual }) => {
     } catch (error) {
       showMessage({
         type: 'error',
-        content: t('accountNotFound'),
+        content:
+          error?.message === ENDPOINTS_ERROR
+            ? 'Endpoint Failure'
+            : t('accountNotFound'),
       })
     }
 
