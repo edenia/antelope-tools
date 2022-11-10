@@ -9,8 +9,8 @@ export default (theme) => ({
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
     justifyContent: 'space-between',
     [theme.breakpoints.down('md')]: {
-      flexDirection: 'column'
-    }
+      flexDirection: 'column',
+    },
   },
   listItem: {
     display: 'inline-block',
@@ -27,14 +27,14 @@ export default (theme) => ({
       letterSpacing: '0.1px',
       textDecoration: 'none',
       [theme.breakpoints.down('md')]: {
-        color: '#1565c0'
-      }
+        color: '#1565c0',
+      },
     },
     [theme.breakpoints.down('md')]: {
       textAlign: 'center !important',
       paddingTop: '0px !important',
       paddingBottom: '0px !important',
-    }
+    },
   },
   sidebarFooter: {
     backgroundColor: `${theme.sidebar.footer.background} !important`,
@@ -50,7 +50,7 @@ export default (theme) => ({
     textAlign: 'center',
     letterSpacing: '0.1px',
     display: 'flex !important',
-    justifyContent: 'center !important'
+    justifyContent: 'center !important',
   },
   sidebarFooterSubText: {
     color: theme.sidebar.footer.color,
@@ -75,8 +75,8 @@ export default (theme) => ({
     display: 'flex',
     [theme.breakpoints.down('md')]: {
       order: 3,
-      paddingBottom: '15px'
-    }
+      paddingBottom: '15px',
+    },
   },
   footerImg: {
     width: 24,
@@ -89,7 +89,7 @@ export default (theme) => ({
     bottom: 0,
     [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
-    }
+    },
   },
 
   linkBadge: {
@@ -117,10 +117,11 @@ export default (theme) => ({
     flexDirection: 'row',
     flexGrow: 1,
     flexBasis: 0,
+    marginRight: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
-    order: 2
-    }
+      order: 2,
     },
+  },
   left: {
     flexGrow: 1,
     flexBasis: 0,
@@ -129,10 +130,16 @@ export default (theme) => ({
     textDecoration: 'none !important',
   },
   lineFooter: {
-    textDecoration: 'underline !important'
+    textDecoration: 'underline !important',
   },
-  midText: {
-    display: 'flex !important',
-    justifyContent: 'center !important'
+  midFooter: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  imgHeaderLogo: {
+    width: '18px',
+    height: '18px',
+    marginLeft: theme.spacing(1),
+    marginTop: '2px',
   },
 })
