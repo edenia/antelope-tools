@@ -2,9 +2,11 @@ import EosApi from 'eosjs-api'
 
 import { eosConfig } from '../config'
 
-export const ENDPOINTS_ERROR = 'Each endpoint failed when trying to execute the function'
+export const ENDPOINTS_ERROR =
+  'Each endpoint failed when trying to execute the function'
+
 const waitRequestInterval = 300000
-const eosApis = eosConfig.endpoints.map((endpoint) => {
+const eosApis = eosConfig.endpoints.map(endpoint => {
   return {
     api: EosApi({
       httpEndpoint: endpoint,
@@ -32,7 +34,7 @@ const callEosApi = async method => {
         apiError = JSON.parse(error?.message)
       } catch (error) {}
 
-      if(apiError?.error) throw error
+      if (apiError?.error) throw error
 
       eosApi.lastFailureTime = new Date()
     }

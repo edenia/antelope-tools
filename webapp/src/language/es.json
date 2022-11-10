@@ -167,7 +167,8 @@
     "tableNotFound": "Tabla no encontrada",
     "successMessage": "Transacción exitosa",
     "placeholder": "Cuenta o Nombre del Contrato",
-    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
+    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato.",
+    "endpointFailure": "Fallo en el endpoint"
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",

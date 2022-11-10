@@ -98,7 +98,7 @@ const Accounts = ({ ual }) => {
           type: 'error',
           content:
             error?.message === ENDPOINTS_ERROR
-              ? 'Endpoint Failure'
+              ? t('endpointFailure')
               : t('tableNotFound'),
         })
       }
@@ -127,7 +127,7 @@ const Accounts = ({ ual }) => {
         type: 'error',
         content:
           error?.message === ENDPOINTS_ERROR
-            ? 'Endpoint Failure'
+            ? t('endpointFailure')
             : t('accountNotFound'),
       })
     }
