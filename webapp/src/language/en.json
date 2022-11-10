@@ -307,7 +307,8 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "updatedAt": "Updated at",
-    "endpointsResponding": "Only endpoints responding"
+    "endpointsResponding": "Only endpoints responding",
+    "showList": "Show List"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Miliseconds",
@@ -348,5 +349,9 @@
     "outdated": "The endpoint works but is outdated with the last block",
     "error": "Error in the endpoint request",
     "not working": "The endpoint is not responding"
+  },
+  "copyToClipboardComponent": {
+    "copyToClipboard": "Copy to clipboard",
+    "copied": "Copied!"
   }
 }

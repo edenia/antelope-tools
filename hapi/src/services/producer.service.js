@@ -85,15 +85,16 @@ const syncNodes = async producers => {
 }
 
 const syncEndpoints = async () => {
-  const [endpoints] = await sequelizeUtil.query(`
-    SELECT 
-    	id,
-    	type,
-      value
-    FROM endpoint
-    WHERE type IN ('api','ssl')
-    ;
-  `)
+  const query = `
+    query {
+      endpoints: endpoint (where: {type: {_in: ["api","ssl"]}}) {
+        id,
+        type,
+        value
+      }
+    }
+  `
+  const { endpoints } = await hasuraUtil.request(query)
 
   if (!endpoints?.length) return
 
