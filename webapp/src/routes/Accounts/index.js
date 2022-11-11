@@ -9,7 +9,7 @@ import queryString from 'query-string'
 import CardContent from '@mui/material/CardContent'
 
 import { signTransaction } from '../../utils/eos'
-import eosApi from '../../utils/eosapi'
+import eosApi, { ENDPOINTS_ERROR } from '../../utils/eosapi'
 import getTransactionUrl from '../../utils/get-transaction-url'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 import SearchBar from '../../components/SearchBar'
@@ -31,6 +31,7 @@ const Accounts = ({ ual }) => {
   const [loading, setLoading] = useState(false)
   const [, { showMessage, hideMessage }] = useSnackbarMessageState()
   const { t } = useTranslation('accountsRoute')
+  const DEFAULT_TABLE = { eosio: 'producers', 'stake.libre': 'stake' }
 
   const handleSubmitAction = async (action) => {
     if (!ual.activeUser) {
@@ -96,7 +97,10 @@ const Accounts = ({ ual }) => {
       } catch (error) {
         showMessage({
           type: 'error',
-          content: t('tableNotFound'),
+          content:
+            error?.message === ENDPOINTS_ERROR
+              ? t('endpointFailure')
+              : t('tableNotFound'),
         })
       }
       setLoading(false)
@@ -104,7 +108,7 @@ const Accounts = ({ ual }) => {
     [showMessage, t],
   )
 
-  const handleOnSearch = async (valueAccount) => {
+  const handleOnSearch = async (valueAccount, table = '') => {
     const accountName = valueAccount?.owner ?? ''
 
     setAccount(null)
@@ -122,14 +126,31 @@ const Accounts = ({ ual }) => {
     } catch (error) {
       showMessage({
         type: 'error',
-        content: t('accountNotFound'),
+        content:
+          error?.message === ENDPOINTS_ERROR
+            ? t('endpointFailure')
+            : t('accountNotFound'),
       })
     }
 
     try {
       const { abi } = await eosApi.getAbi(accountName)
 
+      setFilters(prev => {
+        let tableName = table ?? ''
+
+        if (!tableName) {
+          tableName = DEFAULT_TABLE[accountName] ?? abi?.tables[0]?.name
+        }
+
+        return {
+          ...prev,
+          owner: accountName,
+          table: tableName,
+        }
+      })
       setAbi(abi)
+
       const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
 
       setHash(hash)
@@ -142,23 +163,16 @@ const Accounts = ({ ual }) => {
 
   useEffect(() => {
     const params = queryString.parse(location.search)
+    const owner = params?.account || 'eosio'
 
-    handleOnSearch({ owner: params?.account || 'eosio' })
-    // eslint-disable-next-line
-  }, [])
+    setFilters({ owner })
+    handleOnSearch({ owner }, params?.table)
 
-  useEffect(() => {
-    const params = queryString.parse(location.search)
-
-    setFilters({
-      owner: params?.account,
-      table: params?.table || 'producers',
-    })
     // eslint-disable-next-line
   }, [location.search])
 
   return (
-    <div>
+    <>
       <Card className={classes.cardShadow}>
         <CardContent className={classes.cardContent}>
           <SearchBar
@@ -180,7 +194,7 @@ const Accounts = ({ ual }) => {
           onGetTableRows={handleGetTableRows}
         />
       )}
-    </div>
+    </>
   )
 }
 
