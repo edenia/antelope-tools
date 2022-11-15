@@ -27,6 +27,7 @@ const getProducers = async () => {
   } catch (error) {
     console.error('PRODUCER SYNC ERROR', error)
     producers = await getProducersFromDB()
+
     return await getBPJsons(producers)
   }
 
@@ -71,9 +72,10 @@ const getProducers = async () => {
 
 const getBPJsons = async (producers = []) => {
   const isEosNetwork = eosConfig.chainId === eosConfig.eosChainId
+  let topProducers = producers.slice(0,eosConfig.eosTopLimit)
 
-  return await Promise.all(
-    producers.map(async producer => {
+  topProducers = await Promise.all(
+    topProducers.map(async producer => {
       let bpJson = {}
 
       if (producer.url && producer.url.length > 3) {
@@ -101,6 +103,8 @@ const getBPJsons = async (producers = []) => {
       }
     })
   )
+
+  return topProducers.concat(producers.slice(eosConfig.eosTopLimit))
 }
 
 const getExpectedRewards = async (producers, totalVotes) => {
@@ -274,7 +278,7 @@ const getProducersFromDB = async () => {
   const [producers] = await sequelizeUtil.query(`
     SELECT *
     FROM producer
-    WHERE url <> ''
+    ORDER BY rank ASC
     ;
   `)
 

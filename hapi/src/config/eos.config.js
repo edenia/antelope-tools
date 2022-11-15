@@ -10,6 +10,7 @@ module.exports = {
     process.env.HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT,
   chainId: process.env.HAPI_EOS_API_CHAIN_ID,
   eosChainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+  eosTopLimit: 150,
   baseAccount: process.env.HAPI_EOS_BASE_ACCOUNT,
   baseAccountPassword: process.env.HAPI_EOS_BASE_ACCOUNT_PASSWORD,
   faucet: {
