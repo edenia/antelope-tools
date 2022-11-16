@@ -6,10 +6,10 @@ The API allows getting the data from block producers of different EOSIO + Antelo
 
 ## How is the data obtained?
 
-Through the eosjs API, the system requests the table of `producers` from the eosio account, with this table, we get the URLs of the top producers to obtain their `bp.json`. That information is updated every 4 hours.
-You can check the producer's table of EOS Network in producers in the section of Contract Tables. **Note:** if the BP JSON is not from the current network, the nodes are removed. 
+Through the eosjs API, the system requests the table of `producers` from the eosio account, with this table, we get the URLs of the Top 100 producers to obtain their `bp.json`. That information is updated every 4 hours.
+**Note:** if the BP JSON is not from the current network, the nodes are removed. 
 
-You can check the producer's table of EOS Network in [producers](https://eos.antelope.tools/accounts?account=eosio&table=producers) in the section of Contract Tables.
+You can check the [producer's table](https://eos.antelope.tools/accounts?account=eosio&table=producers) of eosio account of the EOS Network in the section of Contract Tables. **Note:** if the BP JSON is not from the current network, the nodes are removed.
 
 ## API Endpoint
 
@@ -20,13 +20,11 @@ You can check the producer's table of EOS Network in [producers](https://eos.ant
 
 ### Methods
 
-- **POST** `get-producer-info`
+- **POST** `get-producers-info`
 
-> #### Get producer info
-
+> #### Get producers info
 
 This request receives an object named `bpParams` with two optional keys, owners and type. 
-
 
 ```json
 {
