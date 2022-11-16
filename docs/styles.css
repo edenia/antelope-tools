@@ -285,6 +285,7 @@ p {
 
   .section-wrapper {
     padding-left: 0px;
+    padding-top: 31px;
   }
 
   details summary:after {
