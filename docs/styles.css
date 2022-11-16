@@ -57,7 +57,7 @@ details summary {
 .info-icon {
   display: flex;
   align-items: center;
-  padding-left: 16px;
+  padding-left: 104px;
 }
 
 .info-icon span {
@@ -67,7 +67,7 @@ details summary {
 details summary:after {
   content: url(./images/chevron-down.png);
   position: absolute;
-  right: 20px;
+  right: 92px;
   transform: rotate(180deg);
 }
 details[open] summary::after {
@@ -144,8 +144,10 @@ p {
 .header {
   overflow: hidden;
   background-color: #ffffff;
-  padding-bottom: 47px;
   margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./images/test);
 }
 
 .image-box {
@@ -210,7 +212,6 @@ p {
 .eos-costa-rica {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
 }
 
 #contact-us {
@@ -602,7 +603,6 @@ p {
     transform: rotate(-180deg);
     background-color: #1ccbff;
     border-radius: 5px;
-    margin-left: 40px;
   }
 
   .Line-5 {
@@ -790,6 +790,10 @@ p {
     text-decoration: none;
   }
 
+  .box-network{
+    margin-top: 50px;
+  }
+
   .content {
     padding-bottom: 28px;
   }
@@ -825,21 +829,11 @@ p {
     justify-content: space-between;
   }
 
-  .box-testnet-desktop {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    border-left: 1px solid #e0e0e0;
-    padding-left: 20px;
-  }
 
   .box-column div {
     justify-content: center;
   }
 
-  .box-column ul li {
-    text-align: center;
-  }
 
   #contact-us {
     width: 100%;
@@ -852,9 +846,6 @@ p {
     letter-spacing: 0.06px;
   }
 
-  #box-left {
-    width: 100%;
-  }
 
   .box-social-media {
     width: 50%;
@@ -863,10 +854,6 @@ p {
     margin-top: 28.6px;
   }
 
-  #box-right {
-    justify-content: flex-end;
-    align-items: end;
-  }
 
   .eos-costa-rica {
     flex-direction: column;
@@ -924,15 +911,6 @@ p {
     color: #000000;
   }
 
-  #bg-image {
-    position: absolute;
-    z-index: -1;
-    height: 425px;
-    width: 673px;
-    right: 0;
-    display: inline;
-    margin: -40px 0 32px 95px;
-  }
 
   .logo-text {
     display: flex;
@@ -984,10 +962,33 @@ p {
   }
 }
 @media (min-width: 1200px) {
-  .section-wrapper {
+
+  .header {
+    display: flex;
     width: 100%;
-    z-index: 2;
-    position: relative;
+    height: 1002px;
+    background-image: url(./images/bgimage.png);
+    background-size: 1654px 1002px;
+    background-position: right;
+    background-repeat: no-repeat;
+    align-items: flex-start;
+
+  }
+
+  .box-paragraph-text > p {
+    width: 550px;
+    height: 96px;
+    font-family: Nunito;
+    font-size: 45px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.11;
+    letter-spacing: -0.57px;
+    text-align: left;
+    color: #000;
+    margin-bottom: 40px;
+    margin-left: -15px;
   }
 
   .flex-text p {
@@ -996,7 +997,7 @@ p {
     flex-grow: 0;
     margin: 5px 0 6px 6px;
     font-family: Nunito;
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1010,50 +1011,30 @@ p {
     display: flex;
     flex-direction: column;
   }
-  .box-paragraph-text > p {
-    width: 628px;
-    height: 164px;
-    margin: 24px 1084px 56.1px 54px;
-    font-family: Nunito;
-    font-size: 68px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.57px;
-    text-align: left;
-    color: #000;
-  }
-  .header {
-    display: flex;
-    width: 100%;
-  }
-
+  
   .flex {
     margin-bottom: 41px;
   }
   .flex p {
-    width: 605.5px;
+    width: 533.7px;
     height: 62.9px;
     flex-grow: 0;
-    margin: 0 0 0.4px 8.5px;
+    margin: 0 0 0 8.3px;
     font-family: Nunito;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.39;
+    line-height: 1;
     letter-spacing: 0.73px;
     text-align: left;
     color: #000;
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 45px;
-    grid-row-gap: 45px;
+    display: flex;
+    grid-template-columns: repeat(6, 1fr);
+    grid-row-gap: 29px;
   }
 
   .grid img {
@@ -1063,15 +1044,13 @@ p {
   }
 
   .grid-item {
-    display: flex;
-    flex-direction: column;
-    padding: 30.1px 16.9px 31.3px 30.1px;
-    border-radius: 4px;
-    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
-      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
+    width: 237.7px;
+    height: 209.2px;
+    flex-grow: 0;
+    padding: 20px 19.8px 18.6px;
+    border-radius: 5px;
+    box-shadow: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15), 0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
     background-color: var(--colors-white);
-    height: 318px;
-    width: 361px;
   }
 
   .grid-item:hover {
@@ -1079,21 +1058,18 @@ p {
     box-sizing: border-box;
   }
   .Line-4 {
-    width: 10px;
-    height: 63.3px;
+    width: 8px;
+    height: 46px;
     flex-grow: 0;
-    margin: 0 8.5px 0 0;
     transform: rotate(-180deg);
     background-color: #1ccbff;
-    border-radius: 5px;
-    margin-left: 54px;
   }
 
   .Line-5 {
-    width: 10px;
-    height: 50px;
+    width: 7.1px;
+    height: 35px;
     flex-grow: 0;
-    margin: 0 6px 0 0;
+    margin: 0 8.9px 0 0;
     transform: rotate(-180deg);
     background-color: #1ccbff;
   }
@@ -1101,7 +1077,7 @@ p {
   .box-paragraph summary {
     flex-grow: 0;
     font-family: Nunito;
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1114,15 +1090,15 @@ p {
   .flex-text {
     display: flex;
     margin-bottom: 28px;
-    margin-left: 35px;
+    margin-left: 180px;
   }
   .box-paragraph p {
     width: 1658px;
     height: 131px;
     flex-grow: 0;
-    margin: 36.8px 54px 87.7px;
+    margin: 36.8px 54px 36.8px;
     font-family: Nunito;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -1131,21 +1107,27 @@ p {
     text-align: left;
     color: #000;
   }
-
-  .myButton {
-    width: 596.9px;
-    height: 98px;
+  #divider-line{
+    width: 100%;
+    height: 6px;
+    margin-bottom: 72px;
+    transform: rotate(-360deg);
+    background-color: #8de5ff;
+  }
+    .myButton {
+    width: 439px;
+    height: 91px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 24.4px;
-    margin: 56.2px 1115.2px 312.5px 40px;
-    padding: 19.5px 0;
+    padding: 16px 0;
     border-radius: 63px;
     box-shadow: 4.9px -29.2px 34.1px 0 rgba(53, 64, 82, 0.05);
     border: solid 4.9px #1ccbff;
     background-color: #d6f5ff;
+    margin-left: -15px;
   }
   .myButton:hover {
     text-decoration: none;
@@ -1155,39 +1137,46 @@ p {
     top: 1px;
   }
   .visit-text {
-    width: 475px;
+    width: 391px;
     height: 59px;
     flex-grow: 0;
     font-family: Nunito;
-    font-size: 34px;
+    font-size: 28px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.72;
+    line-height: 2.09;
     letter-spacing: 0.19px;
     text-align: center;
     color: #000;
   }
 
   .name-networks {
-    width: 301.3px;
-    height: 45.9px;
+    width: 198.1px;
+    height: 30.2px;
     flex-grow: 0;
-    margin: 22.6px 0 0;
+    margin: 16.9px 0 0;
     font-family: Nunito;
-    font-size: 37.7px;
+    font-size: 24px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.2;
+    line-height: 1.24;
     letter-spacing: normal;
     text-align: center;
     color: #000;
   }
 
+  #networks{
+    display: flex;
+    flex-direction: column;
+  }
   .image-box-desktop {
-    width: 605px;
-    height: 264px;
+    width: 546px;
+    height: 240px;
+    margin-left: 100px;
+    margin-top: 104px;
+    margin-bottom: 80px;
   }
   .content {
     display: flex;
@@ -1199,7 +1188,7 @@ p {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 174px;
+    margin-top: 93px;
   }
 
   .logo-text {
@@ -1208,12 +1197,9 @@ p {
     align-self: center;
   }
 
-  #bg-image {
-    width: 1672px;
-    height: 1062px;
-    margin: -40px 0px 128px 192px;
-    object-fit: contain;
-    z-index: -1;
+  #d-version{
+    margin-left: 100px;
+    margin-top: 0px;
   }
 
   .box-social-media {
@@ -1239,8 +1225,8 @@ p {
   }
 
   .edeniaLogo {
-    height: 46px;
-    width: 262px;
+    height: 42px;
+    width: 250px;
   }
 
   .contact-us p {
@@ -1249,7 +1235,7 @@ p {
     flex-grow: 0;
     margin: 0 0 16px;
     font-family: Nunito;
-    font-size: 39.1px;
+    font-size: 36px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1275,15 +1261,14 @@ p {
   }
 
   #copyright {
-    width: 337.8px;
-    height: 36px;
-    margin: 16.1px 261.2px 0 261px;
+    width: 338px;
+    height: 18px;
     font-family: Nunito;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.95;
+    line-height: 1.59;
     letter-spacing: 0.53px;
     text-align: center;
     color: #000;
