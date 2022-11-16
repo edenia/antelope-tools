@@ -784,9 +784,7 @@ p {
     display: flex;
     flex-direction: column;
   }
-  .test {
-    display: flex;
-  }
+
   .eos-costa-rica {
     flex-direction: column;
     display: flex;
@@ -842,7 +840,7 @@ p {
 
   .box-social-media {
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     align-items: center;
   }
   .footerTw {
