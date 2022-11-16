@@ -55,16 +55,21 @@ const callEosApi = async (funcName, method) => {
 }
 
 const callWithTimeout = async (promise, ms) => {
-  const timeoutPromise = new Promise((_resolve, reject) =>
-    setTimeout(() =>
+  let timeoutID
+  const timeoutPromise = new Promise((_resolve, reject) => {
+    timeoutID = setTimeout(() =>
         reject({
           message: `timeout error: the endpoint took more than ${ms} ms to respond`
         }),
       ms
-    )
+    )}
   )
 
-  return Promise.race([promise, timeoutPromise])
+  return Promise.race([promise, timeoutPromise]).then((response) => {
+    clearTimeout(timeoutID)
+
+    return response
+  })
 }
 
 const newAccount = async accountName => {
