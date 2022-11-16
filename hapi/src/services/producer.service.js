@@ -106,19 +106,19 @@ const syncEndpoints = async () => {
 const requestProducers = async ({ where, whereEndpointList }) => {
   const query = `
     query ($where: producer_bool_exp, $whereEndpointList: endpoints_by_producer_id_bool_exp) {
-      producer_aggregate {
+      producer_aggregate (where: {bp_json: {_neq: {} }}){
         aggregate {
           count
         }
       }
-      producer(where: $where, order_by: {total_votes_percent: desc}) {
+      producers: producer (where: $where, order_by: {total_votes_percent: desc}) {
         owner
         rank
         bp_json
         total_votes
-        endpoints_list (where: $whereEndpointList) {
+        endpoints: endpoints_list (where: $whereEndpointList) {
           type
-          value
+          link: value
           updated_at
           response
         }
@@ -128,10 +128,10 @@ const requestProducers = async ({ where, whereEndpointList }) => {
 
   const {
     producer_aggregate: { aggregate },
-    producer
+    producers
   } = await hasuraUtil.request(query, { where, whereEndpointList })
 
-  return !producer ? [{}] : [{ ...producer, aggregate }]
+  return !producers ? {} : { producers, total: aggregate.count }
 }
 
 const getProducersInfo = async bpParams => {
