@@ -72,7 +72,7 @@ const getProducers = async () => {
 
 const getBPJsons = async (producers = []) => {
   const isEosNetwork = eosConfig.chainId === eosConfig.eosChainId
-  let topProducers = producers.slice(0,eosConfig.eosTopLimit)
+  let topProducers = producers.slice(0, eosConfig.eosTopLimit)
 
   topProducers = await Promise.all(
     topProducers.map(async producer => {
