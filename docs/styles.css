@@ -243,7 +243,7 @@ p {
   align-items: center;
 }
 
-@media (min-width: 320px) {
+@media screen and (max-width: 767px) {
   .header {
     margin-left: 0px;
   }
@@ -558,405 +558,117 @@ p {
     width: 155;
   }
 }
-@media (min-width: 480px) {
+@media only screen and (min-width:768px) and (max-width: 1023px) {
+  .section-wrapper {
+    width: 100%;
+    padding-top: 40px;
+    z-index: 2;
+    position: relative;
+  }
   .header {
-    margin-left: 0px;
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-image: url(./images/bgimage.png);
+    background-size: 673px 425px;
+    background-position: top right;
+    background-repeat: no-repeat;
+    align-items: flex-start;
+
   }
 
-  #copyright {
-    width: 199.2px;
-    height: 21px;
-    margin: 0 53.4px 0 53.3px;
+  .box-paragraph-text > p {
+    width: 265px;
+    height: 68px;
+    margin: 0px 450px 24px 0px;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
+    color: #000;
+  }
+
+  .flex p {
+    width: 231.8px;
+    height: 25.8px;
+    flex-grow: 0;
     font-family: Nunito;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.72;
-    letter-spacing: 0.31px;
-    text-align: center;
+    line-height: 1.33;
+    letter-spacing: 0.3px;
+    text-align: left;
+    color: #000;
+    border-color: white !important;
+  }
+
+  .Line-4 {
+    width: 4px;
+    height: 26px;
+    flex-grow: 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .Line-5 {
+    width: 4px;
+    height: 26px;
+    flex-grow: 0;
+    margin: 6px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .flex-text p {
+    width: 169px;
+    height: 18px;
+    flex-grow: 0;
+    margin: 4px 0 4px 4px;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
     color: #000;
   }
-  .content {
-    background-color: #ffffff;
-    padding-top: 0px;
-    padding-bottom: 40px;
+
+  .image-box {
+    display: none;
   }
 
-  .box-network {
-    flex-grow: 0;
-    padding: 16px 0;
-    background-color: #f9f9fc;
+  .image-box-desktop {
+    display: flex;
   }
 
-
-  #middle-logo {
-    content: url('./images/Antelope Tools Vertical 1@3x.png');
-    height: 110px;
-    width: 110px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-
-  .section-wrapper {
-    padding-left: 0px;
+  .info-icon{
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
   }
 
   details summary:after {
-    height: 45px;
-  }
-
-  .info-icon {
-    width: 80%;
-  }
-  .box-paragraph-text > p {
-    height: 58px;
-    font-family: Nunito;
-    font-size: 24px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000;
-    justify-content: center;
-    width: 288px;
-    margin: 16px auto auto;
-  }
-
-  .flex p {
-    font-family: Nunito;
-    font-size: 12px;
-    font-weight: normal;
-    width: 148px;
-    height: 81px;
-    margin: 16px 8px 16px 0px;
-    padding: 8px 0px;
-    border-radius: 4px;
-    background-color: rgba(186, 239, 255, 0.6);
-    text-align: center;
-    color: black;
-  }
-  .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .flex2 {
-    margin-top: -16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .visit-text {
-    width: 288px;
-    height: 58px;
-    font-family: Nunito;
-    font-size: 24px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000;
-    margin: auto auto 16px;
-  }
-
-  .text-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .Line-5 {
-    width: 108px;
-    height: 2px;
-    flex-grow: 0;
-    margin: 5px 0px 0px;
-    background-color: #1ccbff;
-  }
-
-  .flex-text p {
-    width: 104px;
-    height: 18px;
-    flex-grow: 0;
-    margin: 0 2px 2px;
-    font-family: Nunito;
-    font-size: 24px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000;
-  }
-  .flex-text {
-    display: flex;
-    flex-direction: column-reverse;
-    padding: 5px;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 150px);
-    grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 8px;
-    justify-items: center;
-    margin-top: 16px;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .grid img {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-  }
-
-  .grid-item {
-    width: 140px;
-    height: 156px;
-    flex-grow: 0;
-    margin: 0 8px 0 0;
-    padding: 8px 29.4px 11.8px 30.4px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
-      0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    background-color: white;
-  }
-
-  .name-networks {
-    width: 73px;
-    height: 48px;
-    flex-grow: 0;
-    margin: 8px 4.2px 0 3px;
-    font-family: Nunito;
-    font-size: 20px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000;
-  }
-
-  .box-paragraph summary {
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 20px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.61;
-    letter-spacing: -0.54px;
-    text-align: left;
-    color: #000;
-    padding: 10px;
-  }
-
-  .box-paragraph p {
-    width: 100%;
-    height: 100%;
-    flex-grow: 0;
-    margin: 3px 0 0;
-    font-family: Nunito;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: 0.08px;
-    text-align: left;
-    color: #000;
-    padding: 10px;
-  }
-
-  .footer {
-    padding-bottom: 24px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .eos-costa-rica {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .eos-costa-rica h4 {
-    flex-grow: 0;
-    margin: -26px 0 -5.1px;
-    font-family: Nunito;
-    font-size: 11.8px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: 0.31px;
-    text-align: center;
-    color: var(--colors-3-text-primary);
-  }
-
-  .contact-us p {
-    width: 306px;
-    height: 71px;
-    flex-grow: 0;
-    margin: 0 0 8px;
-    font-family: Nunito;
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.38;
-    letter-spacing: 0.06px;
-    text-align: center;
-    color: #000;
-  }
-
-  .project-by {
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.06px;
-    margin: 0;
-  }
-
-  .logo-text {
-    display: flex;
-    padding: 10px;
-    align-self: center;
-    flex-direction: column;
-  }
-
-  .box-social-media {
-    width: 100%;
-    margin-bottom: 15px;
-    align-items: center;
-  }
-  .footerTw {
-    height: 22x;
-    width: 26px;
-  }
-  .footerTl {
-    height: 22px;
-    width: 28;
-  }
-  .footerGit {
-    height: 28px;
-    width: 30px;
-  }
-  .footerLi {
-    height: 27px;
-    width: 28px;
-  }
-
-  .edeniaLogo {
-    height: 26px;
-    width: 155;
-  }
+    content: url(./images/chevron-down.png);
+    position: absolute;
+    right: 24px;
+    transform: rotate(180deg);
 }
-@media (min-width: 768px) {
-  .section-wrapper {
-    width: 100%;
-    padding-top: 40px;
-    z-index: 2;
-    position: relative;
-  }
-  .header {
-    padding-top: 0px;
-    background-image: url(./images/bgimage.png);
-
-  }
-
-  .box-paragraph-text > p {
-    width: 265px;
-    height: 68px;
-    margin: 0px 450px 24px 20px;
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  .flex p {
-    width: 231.8px;
-    height: 25.8px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.33;
-    letter-spacing: 0.3px;
-    text-align: left;
-    color: #000;
-  }
-
-  .Line-4 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
-  }
-
-  .Line-5 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    margin: 6px 0 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
-  }
-
-  .flex-text p {
-    width: 169px;
-    height: 18px;
-    flex-grow: 0;
-    margin: 4px 0 4px 4px;
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  .image-box {
-    display: none;
-  }
-
-  .image-box-desktop {
-    display: flex;
-  }
-
   .image-box-desktop {
     width: 254px;
     height: 113px;
-    margin-left: 20px;
     margin-right: 474px;
     margin-bottom: -22px;
+    margin-top: 36px;
   }
 
   .myButton {
@@ -967,7 +679,7 @@ p {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin: 23.9px 483px 59px 20px;
+    margin: 23.9px 483px 59px 0px;
     padding: 8px 0;
     border-radius: 58px;
     box-shadow: 2px -12px 14px 0 rgba(53, 64, 82, 0.05);
@@ -1000,12 +712,16 @@ p {
   .flex {
     display: flex;
     margin-bottom: 16px;
-    margin-left: -20px;
+    justify-content: start;
+  }
+
+  .flex2{
+    justify-content: start;
   }
   .flex-text {
     display: flex;
     margin-bottom: 28px;
-    margin-left: 20px;
+    margin-left: 40px;
   }
 
   .text-container {
@@ -1176,7 +892,6 @@ p {
 
   .eos-costa-rica h4 {
     flex-grow: 0;
-    margin: -26px 0 -5.1px;
     font-family: Nunito;
     font-size: 11.8px;
     font-weight: normal;
@@ -1273,415 +988,7 @@ p {
     color: #000;
   }
 }
-@media (min-width: 992px) {
-  .section-wrapper {
-    width: 100%;
-    padding-top: 40px;
-    z-index: 2;
-    position: relative;
-  }
-  .header {
-    padding-top: 0px;
-    background-image: url(./images/bgimage.png);
-
-  }
-
-  .box-paragraph-text > p {
-    width: 265px;
-    height: 68px;
-    margin: 0px 450px 24px 20px;
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  .flex p {
-    width: 231.8px;
-    height: 25.8px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.33;
-    letter-spacing: 0.3px;
-    text-align: left;
-    color: #000;
-  }
-
-  .Line-4 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
-  }
-
-  .Line-5 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    margin: 6px 0 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
-  }
-
-  .flex-text p {
-    width: 169px;
-    height: 18px;
-    flex-grow: 0;
-    margin: 4px 0 4px 4px;
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  .image-box {
-    display: none;
-  }
-
-  .image-box-desktop {
-    display: flex;
-  }
-
-  .image-box-desktop {
-    width: 254px;
-    height: 113px;
-    margin-left: 20px;
-    margin-right: 474px;
-    margin-bottom: -22px;
-  }
-
-  .myButton {
-    width: 245px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 23.9px 483px 59px 20px;
-    padding: 8px 0;
-    border-radius: 58px;
-    box-shadow: 2px -12px 14px 0 rgba(53, 64, 82, 0.05);
-    border: solid 2px #1ccbff;
-    background-color: #d6f5ff;
-  }
-  .myButton:hover {
-    text-decoration: none;
-  }
-  .myButton:active {
-    position: relative;
-    top: 1px;
-  }
-  .visit-text {
-    width: 195px;
-    height: 24px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.71;
-    letter-spacing: 0.08px;
-    text-align: center;
-    color: #000;
-    margin: auto;
-  }
-
-  .flex {
-    display: flex;
-    margin-bottom: 16px;
-    margin-left: -20px;
-  }
-  .flex-text {
-    display: flex;
-    margin-bottom: 28px;
-    margin-left: 20px;
-  }
-
-  .text-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 24px;
-  }
-
-  .grid img {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-  }
-
-  .grid-item {
-    display: flex;
-    flex-direction: column;
-    padding: 30.1px 16.9px 31.3px 30.1px;
-    border-radius: 4px;
-    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
-      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
-    background-color: white;
-    height: 169px;
-    width: 192px;
-    justify-content: center;
-  }
-
-  .name-networks {
-    flex-grow: 0;
-    margin: 12px -5px 0px;
-    font-family: Nunito;
-    font-size: 20px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000;
-  }
-
-  .box-paragraph p {
-    width: 688px;
-    height: 79px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: 0.08px;
-    text-align: left;
-    color: #000;
-    margin: 16px 0px 31px;
-    padding-left: 40px;
-  }
-
-  .box-paragraph summary {
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  #network-desktop {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 36px;
-  }
-
-  #network-mobile > a {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #network-desktop > a:hover {
-    color: grey;
-    text-decoration: none;
-  }
-
-  .box-network{
-    margin-top: 50px;
-  }
-
-  .content {
-    padding-bottom: 28px;
-  }
-
-  #d-version {
-    margin-top: 45px;
-  }
-
-  .box-paragraph h4 {
-    letter-spacing: 0.04px;
-    margin-bottom: 24px;
-  }
-
-  .box-network h4 {
-    margin-top: 23px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: 0.04px;
-  }
-
-  .footer {
-    padding-bottom: 24px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .footer .footer-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-
-  .box-column div {
-    justify-content: center;
-  }
-
-
-  #contact-us {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 8px;
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.06px;
-  }
-
-
-  .box-social-media {
-    width: 50%;
-    margin-bottom: 8px;
-    align-items: center;
-    margin-top: 28.6px;
-  }
-
-
-  .eos-costa-rica {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .eos-costa-rica h4 {
-    flex-grow: 0;
-    margin: -26px 0 -5.1px;
-    font-family: Nunito;
-    font-size: 11.8px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.75;
-    letter-spacing: 0.31px;
-    text-align: center;
-    color: var(--colors-3-text-primary);
-  }
-
-  .contact-us p {
-    width: 507.3px;
-    height: 64px;
-    flex-grow: 0;
-    margin: 0 0 9.1px;
-    font-family: Nunito;
-    font-size: 23.1px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.38;
-    letter-spacing: 0.08px;
-    text-align: center;
-    color: #000;
-  }
-
-  .project-by {
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.06px;
-    margin: 0;
-  }
-
-  .copyright {
-    display: flex;
-    justify-content: center;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: right;
-    letter-spacing: 0.3px;
-    color: #000000;
-  }
-
-
-  .logo-text {
-    display: flex;
-    padding: 10px;
-    align-self: center;
-    flex-direction: column;
-  }
-
-  .box-social-media {
-    width: 55%;
-    margin-bottom: 0px;
-    align-items: center;
-  }
-  .footerTw {
-    height: 29px;
-    width: 34px;
-  }
-  .footerTl {
-    height: 30px;
-    width: 37px;
-  }
-  .footerGit {
-    height: 38px;
-    width: 41px;
-  }
-  .footerLi {
-    height: 37px;
-    width: 40px;
-  }
-
-  .edeniaLogo {
-    height: 26px;
-    width: 156px;
-  }
-
-  #copyright {
-    width: 199.2px;
-    height: 21px;
-    margin: 9.5px 154.1px 0 154px;
-    font-family: Nunito;
-    font-size: 10.6px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.95;
-    letter-spacing: 0.31px;
-    text-align: center;
-    color: #000;
-  }
-}
-@media (min-width: 1200px) {
+@media screen and (min-width: 1024px) {
 
   .header {
     display: flex;
