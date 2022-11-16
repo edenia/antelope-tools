@@ -892,6 +892,7 @@ p {
 
   .eos-costa-rica h4 {
     flex-grow: 0;
+    margin: -26px 0 -5.1px;
     font-family: Nunito;
     font-size: 11.8px;
     font-weight: normal;
@@ -989,17 +990,22 @@ p {
   }
 }
 @media screen and (min-width: 1024px) {
-
   .header {
     display: flex;
     width: 100%;
-    height: 1002px;
+    z-index: 2;
+    position: relative;
+    height: auto;
     background-image: url(./images/bgimage.png);
-    background-size: 1654px 1002px;
-    background-position: right;
+    background-size: contain;
+    background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
 
+  }
+    
+  .hugeimage{
+    display: none;
   }
 
   .box-paragraph-text > p {
@@ -1040,6 +1046,7 @@ p {
   }
   
   .flex {
+    display: flex;
     margin-bottom: 41px;
   }
   .flex p {
@@ -1090,6 +1097,7 @@ p {
     flex-grow: 0;
     transform: rotate(-180deg);
     background-color: #1ccbff;
+    border-radius: 5px;
   }
 
   .Line-5 {
@@ -1099,6 +1107,8 @@ p {
     margin: 0 8.9px 0 0;
     transform: rotate(-180deg);
     background-color: #1ccbff;
+    border-radius: 5px;
+
   }
 
   .box-paragraph summary {
