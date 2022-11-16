@@ -58,7 +58,7 @@ const callWithTimeout = async (promise, ms) => {
   let timeoutID
   const timeoutMessage = `timeout error: the endpoint took more than ${ms} ms to respond`
   const timeoutPromise = new Promise((_resolve, reject) => {
-    timeoutID = setTimeout(() => reject({ message: timeoutMessage }), ms)
+    timeoutID = setTimeout(() => reject(new Error(timeoutMessage)), ms)
   })
 
   return Promise.race([promise, timeoutPromise]).then((response) => {
