@@ -4,6 +4,7 @@ const { eosConfig } = require('../config')
 const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
 const nodeService = require('./node.service')
+const statsService = require('./stats.service')
 
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
@@ -51,6 +52,11 @@ const syncProducers = async () => {
     producers = await updateProducers(producers)
     await syncNodes(producers)
     await syncEndpoints()
+
+    if (!eosConfig.stateHistoryPluginEndpoint) {
+      await statsService.sync()
+    }
+      
   }
 }
 
