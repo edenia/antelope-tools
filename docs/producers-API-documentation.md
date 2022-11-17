@@ -282,3 +282,44 @@ curl -X 'POST' \
     }
 }
 ```
+
+---
+
+- *Errors*
+
+The `type` is none of the expected values.  
+**Output:**
+
+```json
+{
+    "path": "$",
+    "error": "\"input.bpParams.type\" must be one of [api, ssl, p2p]",
+    "code": "unexpected"
+}
+```
+
+---
+
+The `owners` is an empty array.  
+**Output:**
+
+```json
+{
+    "path": "$",
+    "error": "\"input.bpParams.owners\" does not contain 1 required value(s)",
+    "code": "unexpected"
+}
+```
+
+---
+
+The `owners` array is too long.  
+**Output:**
+
+```json
+{
+    "path": "$",
+    "error": "\"input.bpParams.owners\" must contain less than or equal to 100 items",
+    "code": "unexpected"
+}
+```
