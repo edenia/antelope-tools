@@ -7,7 +7,7 @@ Also, in the Antelope Tools backend, each API endpoint is requested through HTTP
 
 ## How is the data obtained?
 
-Through the eosjs API, the system queries the `producers` table of the eosio account, with this table, we get the URLs of the Top 100 producers to obtain their `bp.json`. That information is updated every 4 hours.  
+Through the eosjs API, the system queries the `producers` table of the eosio account, with this table, we get the URLs of the Top 100 producers to obtain their `bp.json`. When the BP JSON is not obtained the producer is not consider in the results.That information is updated every 4 hours.  
 **Note:** if the BP JSON is not from the current network, the nodes are removed. 
 
 You can check the [producer's table](https://eos.antelope.tools/accounts?account=eosio&table=producers) of eosio account of the EOS Network in the section of Contract Tables.
