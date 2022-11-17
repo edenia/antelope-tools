@@ -2,14 +2,15 @@
 
 ## Overview
 
-The API allows getting the data from block producers of different EOSIO + Antelope blockchain networks, available on [Antelope Tools](https://antelope.tools/) such as eos and jungle4 testnet. Among the data that can be obtained is the [BP JSON](https://github.com/eosrio/bp-info-standard) of each BP. This is useful because the logic to get all these objects is not needed to implement from scratch. Also, in the Antelope Tools backend, each API endpoint is requested through HTTP, and the obtained status is saved, which allows to obtain the status code of the request.
+The API allows getting important data on block producers on the different EOSIO + Antelope blockchain networks available on [Antelope Tools](https://antelope.tools/) such as EOS and jungle4 testnet. Among the data that can be obtained is the [BP JSON](https://github.com/eosrio/bp-info-standard) of each BP. This is useful because the logic to get all these objects is not needed to implement from scratch.  
+Also, in the Antelope Tools backend, each API endpoint is requested through HTTP, and the obtained status is saved, which allows to obtain the status code of the request.
 
 ## How is the data obtained?
 
-Through the eosjs API, the system requests the table of `producers` from the eosio account, with this table, we get the URLs of the Top 100 producers to obtain their `bp.json`. That information is updated every 4 hours.
+Through the eosjs API, the system queries the `producers` table of the eosio account, with this table, we get the URLs of the Top 100 producers to obtain their `bp.json`. That information is updated every 4 hours.  
 **Note:** if the BP JSON is not from the current network, the nodes are removed. 
 
-You can check the [producer's table](https://eos.antelope.tools/accounts?account=eosio&table=producers) of eosio account of the EOS Network in the section of Contract Tables. **Note:** if the BP JSON is not from the current network, the nodes are removed.
+You can check the [producer's table](https://eos.antelope.tools/accounts?account=eosio&table=producers) of eosio account of the EOS Network in the section of Contract Tables.
 
 ## API Endpoint
 
