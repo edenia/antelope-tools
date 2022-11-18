@@ -736,7 +736,7 @@ p {
   .grid-item {
     display: flex;
     flex-direction: column;
-    padding: 10px 45px 10px 45px;
+    padding: 10px 45px;
     border-radius: 4px;
     box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
       0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
@@ -1075,7 +1075,7 @@ p {
     width: 134px;
     height: 134px;
     flex-grow: 0;
-    padding: 12px 12px;
+    padding: 12px;
     border-radius: 3.7px;
     box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
       0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
@@ -1128,7 +1128,7 @@ p {
   .box-paragraph p {
     width: 83%;
     flex-grow: 0;
-    margin: 40.8px 57px 115px 57px;
+    margin: 40.8px 57px 115px;
     font-family: Nunito;
     font-size: 19px;
     font-weight: normal;
@@ -1525,7 +1525,7 @@ p {
     width: 237.7px;
     height: 209.2px;
     flex-grow: 0;
-    padding: 19.8px 19.8px 18.6px 19.8px;
+    padding: 19.8px 19.8px 18.6px;
     border-radius: 5px;
     box-shadow: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15),
       0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
