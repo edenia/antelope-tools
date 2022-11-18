@@ -11,7 +11,7 @@ import useAuthBottonState from './useAuthBottonState'
 
 const AuthButton = ({ classes }) => {
   const { t } = useTranslation()
-  const [{ state }, { handleOpenMenu, handleCloseMenu, handleSignOut, login }] =
+  const [{ state }, { handleCloseMenu, handleSignOut, login }] =
     useAuthBottonState()
 
   return (
@@ -32,7 +32,7 @@ const AuthButton = ({ classes }) => {
           </>
         ) : (
           <Button
-            onClick={handleOpenMenu}
+            onClick={() => login('anchor')}
             className={classes.loginBtn}
             startIcon={<FingerprintIcon />}
           >

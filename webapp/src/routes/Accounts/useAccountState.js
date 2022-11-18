@@ -129,7 +129,7 @@ const useAccountState = () => {
       }
       dispatch({ payload: false, type: 'SET_LOADING' })
     },
-    [showMessage, t],
+    [showMessage, t, state.tableData],
   )
 
   const handleOnSearch = async (valueAccount) => {
