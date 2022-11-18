@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Dashboard = ({ children, ual }) => {
+const Dashboard = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
   const { t } = useTranslation('routes')
@@ -83,7 +83,7 @@ const Dashboard = ({ children, ual }) => {
       <GlobalStyle />
       <PageTitle title={t(routeName.pageTitle)} />
       <div className={classes.header}>
-        <Header onDrawerToggle={handleDrawerToggle} ual={ual} />
+        <Header onDrawerToggle={handleDrawerToggle} />
       </div>
       <div
         className={classes.drawer}
@@ -139,7 +139,6 @@ const Dashboard = ({ children, ual }) => {
 
 Dashboard.propTypes = {
   children: PropTypes.node,
-  ual: PropTypes.any,
 }
 
 export default Dashboard
