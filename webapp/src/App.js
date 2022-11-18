@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
-import PropTypes from 'prop-types'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { SharedStateProvider } from './context/state.context'
@@ -11,7 +10,7 @@ import DashboardLayout from './layouts/Dashboard'
 
 import { recaptchaConfig } from './config'
 
-const App = ({ ual = {} }) => {
+const App = () => {
   const renderRoutes = ({ children, component, ...props }, index) => {
     if (Array.isArray(children) && children.length > 0) {
       return children.map(renderRoute)
@@ -26,16 +25,15 @@ const App = ({ ual = {} }) => {
 
   const renderRoute = (
     { name, header, icon, path, component: Component, ...props },
-    index
+    index,
   ) => (
     <Route
       key={`path-${name}-${index}`}
       path={path}
       {...props}
       state={{ a: true }}
-    >
-      <Component ual={ual} {...props} />
-    </Route>
+      element={<Component {...props} />}
+    />
   )
 
   return (
@@ -46,13 +44,13 @@ const App = ({ ual = {} }) => {
             reCaptchaKey={recaptchaConfig.key}
             useEnterprise={true}
           >
-            <DashboardLayout ual={ual}>
+            <DashboardLayout>
               <Suspense fallback={<Loader />}>
-                <Switch>
+                <Routes>
                   {routes
                     .filter((route) => !route?.path?.includes('http'))
                     .map(renderRoutes)}
-                </Switch>
+                </Routes>
               </Suspense>
             </DashboardLayout>
           </GoogleReCaptchaProvider>
@@ -60,10 +58,6 @@ const App = ({ ual = {} }) => {
       </SnackbarMessageProvider>
     </SharedStateProvider>
   )
-}
-
-App.propTypes = {
-  ual: PropTypes.object
 }
 
 export default App
