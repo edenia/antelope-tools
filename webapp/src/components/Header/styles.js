@@ -85,4 +85,5 @@ export default (theme) => ({
       marginRight: theme.spacing(1),
     },
   },
+  authBox: { display: 'flex', alignItems: 'center', textAlign: 'center' },
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Menu, Button } from '@mui/material'
+import { Menu, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import AccountIcon from '@mui/icons-material/AccountCircle'
@@ -16,7 +16,7 @@ const AuthButton = ({ classes }) => {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <div className={classes.authBox}>
         {state?.ual?.activeUser ? (
           <>
             <Button className={classes.userBtn} startIcon={<AccountIcon />}>
@@ -39,7 +39,7 @@ const AuthButton = ({ classes }) => {
             {t('login')}
           </Button>
         )}
-      </Box>
+      </div>
       <Menu
         className={classes.menuBox}
         anchorEl={state.elemRef}
