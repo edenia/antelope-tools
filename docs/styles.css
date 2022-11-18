@@ -736,7 +736,7 @@ p {
   .grid-item {
     display: flex;
     flex-direction: column;
-    padding: 30.1px 16.9px 31.3px 30.1px;
+    padding: 10px 45px 10px 45px;
     border-radius: 4px;
     box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
       0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
@@ -1065,8 +1065,8 @@ p {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width: 60%;
-    height: 65%;
+    width: 55%;
+    height: 70%;
   }
 
   .grid-item {
@@ -1075,7 +1075,7 @@ p {
     width: 134px;
     height: 134px;
     flex-grow: 0;
-    padding: 10px 7px 10px 7px;
+    padding: 12px 12px;
     border-radius: 3.7px;
     box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
       0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
@@ -1126,7 +1126,7 @@ p {
     margin-top: 35px;
   }
   .box-paragraph p {
-    width: 90%;
+    width: 83%;
     flex-grow: 0;
     margin: 40.8px 57px 115px 57px;
     font-family: Nunito;
@@ -1212,6 +1212,7 @@ p {
   .content {
     display: flex;
     width: 100%;
+    padding-top: 110px;
   }
 
   .footer {
@@ -1331,7 +1332,7 @@ p {
     margin-left: 4%;
   }
 
-  .box-network{
+  .box-network {
     margin-left: 4%;
   }
   #middle-logo {
@@ -1514,7 +1515,7 @@ p {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width: 65%;
+    width: 60%;
     height: 70%;
   }
 
@@ -1552,10 +1553,10 @@ p {
     color: #000;
   }
 
-  .info-icon{
+  .info-icon {
     padding-left: 8%;
   }
-  
+
   details summary:after {
     content: url(./images/chevron-down.png);
     position: absolute;
@@ -1576,7 +1577,7 @@ p {
     text-align: left;
     color: #000;
   }
- 
+
   .box-paragraph p {
     width: 1556px;
     height: 181px;
