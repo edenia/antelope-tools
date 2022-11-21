@@ -44,7 +44,6 @@ jobs:
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
-          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-libre-testnet.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'libre-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Libre Testnet'
@@ -53,8 +52,6 @@ jobs:
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'b64646740308df2ee06c6b72f34c0f7fa066d940e831f752db2006fcc2b78dee'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'true'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
@@ -87,7 +84,7 @@ jobs:
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
           HAPI_EOS_API_NETWORK_NAME: libre-testnet
-          HAPI_EOS_API_ENDPOINTS: '[\"https://libre-testnet.edenia.cloud\",\"https://api.testnet.libre.cryptobloks.io\",\"https://libre-testnet.eosphere.io\"]'
+          HAPI_EOS_API_ENDPOINTS: '["https://libre-testnet.edenia.cloud","https://api.testnet.libre.cryptobloks.io","https://libre-testnet.eosphere.io"]'
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://api-node.libre-testnet:8080'
           HAPI_EOS_API_CHAIN_ID: b64646740308df2ee06c6b72f34c0f7fa066d940e831f752db2006fcc2b78dee
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}

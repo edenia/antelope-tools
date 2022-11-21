@@ -40,7 +40,6 @@ jobs:
           REACT_APP_USE_REWARDS: true
           REACT_APP_USE_VOTES: true
           REACT_APP_USE_CPU_BENCHMARK: true
-          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: true
           REACT_APP_HASURA_URL: https://graphql-jungle.antelope.tools/v1/graphql
           REACT_APP_EOS_API_NETWORK_NAME: jungle
           REACT_APP_EOS_API_NETWORK_LABEL: Jungle4 Testnet
