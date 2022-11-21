@@ -262,4 +262,7 @@ export default (theme) => ({
   infoIcon: {
     cursor: 'pointer',
   },
+  test: {
+    backgroundColor: 'red !important'
+  }
 })
