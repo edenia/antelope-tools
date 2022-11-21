@@ -31,7 +31,6 @@ build-docker: ./Dockerfile
 		--build-arg react_app_use_rewards="$(REACT_APP_USE_REWARDS)" \
 		--build-arg react_app_use_votes="$(REACT_APP_USE_VOTES)" \
 		--build-arg react_app_use_cpu_benchmark="$(REACT_APP_USE_CPU_BENCHMARK)" \
-		--build-arg react_app_use_block_producer_agreement_contract="$(REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT)" \
 		--build-arg react_app_hasura_url="$(REACT_APP_HASURA_URL)" \
 		--build-arg react_app_eos_api_network_name="$(REACT_APP_EOS_API_NETWORK_NAME)" \
 		--build-arg react_app_eos_api_network_label="$(REACT_APP_EOS_API_NETWORK_LABEL)" \
@@ -41,8 +40,6 @@ build-docker: ./Dockerfile
 		--build-arg react_app_eos_api_protocol="$(REACT_APP_EOS_API_PROTOCOL)" \
 		--build-arg react_app_eos_chain_id="$(REACT_APP_EOS_CHAIN_ID)" \
 		--build-arg react_app_eos_include_transaction='$(REACT_APP_EOS_INCLUDE_TRANSACTION)' \
-		--build-arg react_app_eos_default_exchange_rate="$(REACT_APP_EOS_DEFAULT_EXCHANGE_RATE)" \
-		--build-arg react_app_eos_default_exchange_rate_api="$(REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API)" \
 		--build-arg react_app_eos_use_bp_json_on_chain="$(REACT_APP_EOS_USE_BP_JSON_ON_CHAIN)" \
 		--build-arg react_app_eos_bp_json_on_chain_contract="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT)" \
 		--build-arg react_app_eos_bp_json_on_chain_table="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE)" \
