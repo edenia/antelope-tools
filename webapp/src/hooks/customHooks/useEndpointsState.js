@@ -10,6 +10,7 @@ const useEndpointsState = ({ useCache }) => {
   })
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
+  const [filters, setFilters] = useState({ owner: '' })
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
@@ -22,7 +23,10 @@ const useEndpointsState = ({ useCache }) => {
       variables: {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        where: pagination.where,
+        where: {
+          ...pagination.where,
+          owner: { _like: `%${filters?.owner ?? ''}%` },
+        },
         endpointFilter: pagination.endpointFilter,
       },
     })
@@ -32,6 +36,7 @@ const useEndpointsState = ({ useCache }) => {
     pagination.where,
     pagination.limit,
     pagination.endpointFilter,
+    filters,
   ])
 
   useEffect(() => {
@@ -103,9 +108,13 @@ const useEndpointsState = ({ useCache }) => {
     }))
   }, [])
 
+  const handleOnSearch = async (valueAccount) => {
+    setFilters(valueAccount)
+  }
+
   return [
     { loading, pagination, producers, updatedAt },
-    { handleFilter, handleOnPageChange, setPagination },
+    { handleFilter, handleOnPageChange, handleOnSearch, setPagination, setFilters },
   ]
 }
 

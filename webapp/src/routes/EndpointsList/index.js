@@ -18,6 +18,7 @@ import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 import EndpointsTable from '../../components/EndpointsTable'
 import NoResults from '../../components/NoResults'
+import SearchBar from '../../components/SearchBar'
 
 import styles from './styles'
 
@@ -30,13 +31,17 @@ const EndpointsList = () => {
   const { t } = useTranslation('endpointsListRoute')
   const [
     { loading, pagination, producers, updatedAt },
-    { handleFilter, handleOnPageChange, setPagination },
+    { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
   ] = useEndpointsState({ useCache: false })
 
   return (
     <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.titleContainer}>
+          <SearchBar
+            onChange={handleOnSearch}
+            translationScope="producerSearchComponent"
+          />
           <div className={classes.dateContainer}>
             <Typography component="p" variant="h6">
               {t('title')} {t('producer')}
