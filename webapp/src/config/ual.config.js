@@ -1,4 +1,3 @@
-import { TokenPocket } from 'ual-token-pocket'
 import { Anchor } from 'ual-anchor'
 
 const appName = process.env.REACT_APP_EOS_APP_NAME || 'eosiodashboard'
@@ -10,18 +9,17 @@ const network = {
     {
       blockchain: 'eos',
       protocol: process.env.REACT_APP_EOS_API_PROTOCOL || 'https',
-      host: JSON.parse(process.env.REACT_APP_EOS_API_HOSTS)[0] || 'jungle.edenia.cloud',
-      port: parseInt(process.env.REACT_APP_EOS_API_PORT || '443')
-    }
-  ]
+      host:
+        JSON.parse(process.env.REACT_APP_EOS_API_HOSTS)[0] ||
+        'jungle.edenia.cloud',
+      port: parseInt(process.env.REACT_APP_EOS_API_PORT || '443'),
+    },
+  ],
 }
-const authenticators = [
-  new TokenPocket([network]),
-  new Anchor([network], { appName })
-]
+const authenticators = [new Anchor([network], { appName })]
 
 export const ualConfig = {
   appName,
   network,
-  authenticators
+  authenticators,
 }

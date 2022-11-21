@@ -60,9 +60,9 @@ const start = async () => {
     workersConfig.syncExchangeRate
   )
   run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
-  run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
 
   if (eosConfig.stateHistoryPluginEndpoint) {
+    run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
     run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
     run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
     run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)

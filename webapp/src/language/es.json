@@ -51,7 +51,7 @@
     "6 Months": "6 Meses",
     "1 Year": "1 Año",
     "footer1": "Esta aplicación es un bien Público Comunitario",
-    "footer2": "Averigua cómo contribuir",
+    "footer2": "Desarrollado por Edenia",
     "bugRequest": "Reportar un problema / Solicitar una característica "
   },
   "routes": {
@@ -167,7 +167,8 @@
     "tableNotFound": "Tabla no encontrada",
     "successMessage": "Transacción exitosa",
     "placeholder": "Cuenta o Nombre del Contrato",
-    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
+    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato.",
+    "endpointFailure": "Fallo en el endpoint"
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",
@@ -311,7 +312,8 @@
   "endpointsListRoute": {
     "title": "Endpoints disponibles por",
     "updatedAt": "Actualizado por última vez",
-    "endpointsResponding": "Solo puntos finales que responden"
+    "endpointsResponding": "Solo puntos finales que responden",
+    "showList": "Ver la lista"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Milisegundos",
@@ -365,5 +367,9 @@
     "outdated": "El punto final funciona, pero no está actualizado con el último bloque",
     "error": "Error en la consulta del punto final",
     "not working": "El punto final no responde"
+  },
+  "copyToClipboardComponent": {
+    "copyToClipboard": "Copiar al portapapeles",
+    "copied": "¡Copiado!"
   }
 }

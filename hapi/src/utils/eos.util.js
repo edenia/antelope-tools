@@ -27,7 +27,6 @@ const eosApis = eosConfig.apiEndpoints.map(endpoint => {
     url: endpoint
   }
 })
-
 const waitRequestInterval = 300000
 
 const callEosApi = async (funcName, method) => {
@@ -37,7 +36,7 @@ const callEosApi = async (funcName, method) => {
     if (diffTime < waitRequestInterval) continue
 
     try {
-      const response = await method(eosApi.api)
+      const response = await callWithTimeout(method(eosApi.api), 30000)
 
       return response
     } catch (error) {
@@ -50,8 +49,25 @@ const callEosApi = async (funcName, method) => {
     }
   }
 
-  throw new Error('Each endpoint failed when trying to execute the function')
+  throw new Error(
+    `Each endpoint failed when trying to execute the function ${funcName}`
+  )
 }
+
+const callWithTimeout = async (promise, ms) => {
+  let timeoutID
+  const timeoutMessage = `timeout error: the endpoint took more than ${ms} ms to respond`
+  const timeoutPromise = new Promise((_resolve, reject) => {
+    timeoutID = setTimeout(() => reject(new Error(timeoutMessage)), ms)
+  })
+
+  return Promise.race([promise, timeoutPromise]).then((response) => {
+    clearTimeout(timeoutID)
+
+    return response
+  })
+}
+
 const newAccount = async accountName => {
   const password = await walletUtil.create(accountName)
   const key = await walletUtil.createKey(accountName)

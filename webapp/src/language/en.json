@@ -39,7 +39,7 @@
     "net": "NET",
     "cpu": "CPU",
     "footer1": "This App is a Community Public Good",
-    "footer2": "Find out how to contribute",
+    "footer2": "Developed by Edenia",
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature"
   },
@@ -162,7 +162,8 @@
     "tableNotFound": "Table not found",
     "successMessage": "Success transaction",
     "placeholder": "Account or Contract Name",
-    "title": "Search for account information, view tables and execute actions for any contract."
+    "title": "Search for account information, view tables and execute actions for any contract.",
+    "endpointFailure": "Endpoint failure"
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
@@ -308,7 +309,8 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "updatedAt": "Updated at",
-    "endpointsResponding": "Only endpoints responding"
+    "endpointsResponding": "Only endpoints responding",
+    "showList": "Show List"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Miliseconds",
@@ -349,5 +351,9 @@
     "outdated": "The endpoint works but is outdated with the last block",
     "error": "Error in the endpoint request",
     "not working": "The endpoint is not responding"
+  },
+  "copyToClipboardComponent": {
+    "copyToClipboard": "Copy to clipboard",
+    "copied": "Copied!"
   }
 }

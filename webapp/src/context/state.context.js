@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import useLightUAL from '../hooks/useUAL'
+import { ualConfig } from '../config'
 
 const SharedStateContext = React.createContext()
 
@@ -7,7 +10,27 @@ const sharedStateReducer = (state, action) => {
     case 'update': {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+      }
+    }
+
+    case 'logout':
+      localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
+
+      return { ...state, user: null }
+
+    case 'ual':
+      return {
+        ...state,
+        ual: action.ual,
+      }
+
+    case 'setOpenMenuWallets': {
+      return {
+        ...state,
+        elemRef: action.payload,
+        openMenuWallets: Boolean(action.payload),
       }
     }
 
@@ -18,17 +41,36 @@ const sharedStateReducer = (state, action) => {
 }
 
 const initialValue = {
+  openMenuWallets: false,
+  elemRef: null,
   lacchain: {
     nodes: [],
     entities: [],
     currentEntity: null,
-    dynamicTitle: ''
-  }
+    dynamicTitle: '',
+  },
 }
 
 export const SharedStateProvider = ({ ...props }) => {
+  const ualState = useLightUAL({
+    appName: ualConfig.appName,
+    chains: ualConfig.network,
+    authenticators: ualConfig.authenticators,
+  })
   const [state, dispatch] = React.useReducer(sharedStateReducer, initialValue)
   const value = React.useMemo(() => [state, dispatch], [state])
+
+  useEffect(() => {
+    const load = async () => {
+      dispatch({ type: 'ual', ual: ualState })
+
+      if (!ualState?.activeUser) return
+    }
+
+    load()
+
+    // eslint-disable-next-line
+  }, [ualState?.activeUser])
 
   return <SharedStateContext.Provider value={value} {...props} />
 }
@@ -42,11 +84,34 @@ export const useSharedState = () => {
 
   const [state, dispatch] = context
   const update = (payload) => dispatch({ type: 'update', payload })
+  const login = (type) => {
+    state.ual.login(type)
+  }
+  const logout = () => {
+    dispatch({ type: 'logout' })
+    state.ual.logout()
+  }
+  const handleOpenMenu = (event) => {
+    dispatch({
+      type: 'setOpenMenuWallets',
+      payload: event.currentTarget,
+    })
+  }
+  const handleCloseMenu = () => {
+    dispatch({
+      type: 'setOpenMenuWallets',
+      payload: null,
+    })
+  }
 
   return [
     state,
     {
-      update
-    }
+      update,
+      login,
+      logout,
+      handleOpenMenu,
+      handleCloseMenu,
+    },
   ]
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -9,18 +9,34 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import { Tooltip as MUITooltip } from '@mui/material'
+import ListAltIcon from '@mui/icons-material/ListAlt'
 
 import HealthCheck from '../HealthCheck'
 import { eosConfig } from '../../config'
 
 import styles from './styles'
 import EndpointInfo from './EndpointInfo'
+import Tooltip from '../Tooltip'
+import EndpointsTextList from '../EndpointsTextList'
 
 const useStyles = makeStyles(styles)
 
 const EndpointsTable = ({ producers }) => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [type, setType] = useState('')
+
+  const handlePopoverOpen = (target, type) => {
+    setAnchorEl(target)
+    setType(type)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
   const syncToleranceInterval = eosConfig.syncToleranceInterval
 
   const getStatus = (endpoint) => {
@@ -57,7 +73,7 @@ const EndpointsTable = ({ producers }) => {
               {endpoint.value}
               {endpointType !== 'p2p' && (
                 <HealthCheck status={getStatus(endpoint)}>
-                  <EndpointInfo endpoint={endpoint}/>
+                  <EndpointInfo endpoint={endpoint} />
                 </HealthCheck>
               )}
             </div>
@@ -68,28 +84,70 @@ const EndpointsTable = ({ producers }) => {
   }
 
   return (
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>{t('producer')}</TableCell>
-            <TableCell>{t('api')}</TableCell>
-            <TableCell>{t('ssl')}</TableCell>
-            <TableCell>{t('p2p')}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {producers.map((producer, index) => (
-            <TableRow key={`${producer.name}-${index}`}>
-              <TableCell>{producer.name}</TableCell>
-              <CellList producer={producer} endpointType={'api'} />
-              <CellList producer={producer} endpointType={'ssl'} />
-              <CellList producer={producer} endpointType={'p2p'} />
+    <>
+      <Tooltip
+        anchorEl={anchorEl}
+        open={anchorEl !== null}
+        onClose={handlePopoverClose}
+      >
+        <EndpointsTextList type={type} />
+      </Tooltip>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>{t('producer')}</TableCell>
+              <TableCell>
+                <div className={classes.titleCell}>
+                  {t('api')}
+                  <MUITooltip title={t('showList')} arrow>
+                    <ListAltIcon
+                      onClick={(e) => {
+                        handlePopoverOpen(e.target, 'api')
+                      }}
+                    />
+                  </MUITooltip>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className={classes.titleCell}>
+                  {t('ssl')}
+                  <MUITooltip title={t('showList')} arrow>
+                    <ListAltIcon
+                      onClick={(e) => {
+                        handlePopoverOpen(e.target, 'ssl')
+                      }}
+                    />
+                  </MUITooltip>
+                </div>
+              </TableCell>
+              <TableCell>
+                  <div className={classes.titleCell}>
+                    {t('p2p')}
+                    <MUITooltip title={t('showList')} arrow>
+                      <ListAltIcon
+                        onClick={(e) => {
+                          handlePopoverOpen(e.target, 'p2p')
+                        }}
+                      />
+                    </MUITooltip>
+                  </div>
+                </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {producers.map((producer, index) => (
+              <TableRow key={`${producer.name}-${index}`}>
+                <TableCell>{producer.name}</TableCell>
+                <CellList producer={producer} endpointType={'api'} />
+                <CellList producer={producer} endpointType={'ssl'} />
+                <CellList producer={producer} endpointType={'p2p'} />
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   )
 }
 
