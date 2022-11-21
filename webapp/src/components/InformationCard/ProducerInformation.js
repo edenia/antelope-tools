@@ -55,17 +55,17 @@ const ProducerInformation = ({ info, classes, t }) => {
         <RowUrl title={t('codeofconduct')} value={info?.code_of_conduct} />
         <RowUrl title={t('chainResources')} value={info?.chain} />
         {!!info?.otherResources?.length && (
-          <div>
+          <div className={classes.rowWrapper}>
             <dt className={classes.dt}>
               <Typography variant="body1" className={classes.textEllipsis}>
                 {t('otherResources')}
               </Typography>
             </dt>
             <ListAltIcon
-              className={classes.test}
               onClick={openPopover}
             ></ListAltIcon>
             <Popover
+              className={classes.shadow}
               open={Boolean(anchor)}
               onClose={() => setAnchor(null)}
               anchorEl={anchor}
