@@ -8,6 +8,7 @@ import { Popover } from '@mui/material'
 import CountryFlag from '../CountryFlag'
 
 const ProducerInformation = ({ info, classes, t }) => {
+  console.log(info)
   const [anchor, setAnchor] = useState(null)
   const openPopover = (event) => {
     setAnchor(event.currentTarget)
@@ -51,9 +52,27 @@ const ProducerInformation = ({ info, classes, t }) => {
           value={info?.email}
           href={`mailto:${info.email}`}
         />
-        <RowUrl title={t('ownershipDisclosure')} value={info?.ownership} />
-        <RowUrl title={t('codeofconduct')} value={info?.code_of_conduct} />
-        <RowUrl title={t('chainResources')} value={info?.chain} />
+        <div className={classes.infoItems}>
+          {!!info?.ownership ? (
+            <Link href={info?.ownership} target="_blank" rel="noreferrer">
+              <Typography variant="body1">
+                {t('ownershipDisclosure')}
+              </Typography>
+            </Link>
+          ) : null}
+
+          {!!info?.code_of_conduct ? (
+            <Link href={info?.code_of_conduct} target="_blank" rel="noreferrer">
+              <Typography variant="body1">{t('codeofconduct')}</Typography>
+            </Link>
+          ) : null}
+
+          {!!info?.chain ? (
+            <Link href={info?.chain} target="_blank" rel="noreferrer">
+              <Typography variant="body1">{t('chainResources')}</Typography>
+            </Link>
+          ) : null}
+        </div>
         {!!info?.otherResources?.length && (
           <div className={classes.rowWrapper}>
             <dt className={classes.dt}>
@@ -61,9 +80,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('otherResources')}
               </Typography>
             </dt>
-            <ListAltIcon
-              onClick={openPopover}
-            ></ListAltIcon>
+            <ListAltIcon onClick={openPopover}></ListAltIcon>
             <Popover
               className={classes.shadow}
               open={Boolean(anchor)}

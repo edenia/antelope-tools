@@ -75,7 +75,7 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      minWidth: 200,
+      width: 300,
       maxWidth: 300,
       justifyContent: 'center',
     },
@@ -252,23 +252,43 @@ export default (theme) => ({
     },
   },
   dd: {
-    marginLeft: theme.spacing(6),
+    marginLeft: theme.spacing(1),
     margin: theme.spacing(1, 0),
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    width: 220,
+    width: '100%',
   },
   infoIcon: {
     cursor: 'pointer',
   },
   dt:{
-    maxWidth: 90
+    maxWidth: 100
   },
   shadow:{
     '& .MuiPaper-root': {
       boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
       padding: theme.spacing(1),
     },
-  }
+  },
+  infoItems: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& .listBox': {
+      marginLeft: theme.spacing(1),
+    },
+    '& .listLabel': {
+      height: '100%',
+      '& .MuiSvgIcon-root': {
+        marginRight: theme.spacing(1),
+        fontSize: 15,
+      },
+      '& .MuiTypography-body1': {
+        whiteSpace: 'nowrap',
+      },
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150,
+    },
+  },
 })
