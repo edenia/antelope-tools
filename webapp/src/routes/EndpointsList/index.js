@@ -38,10 +38,6 @@ const EndpointsList = () => {
     <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.titleContainer}>
-          <SearchBar
-            onChange={handleOnSearch}
-            translationScope="producerSearchComponent"
-          />
           <div className={classes.dateContainer}>
             <Typography component="p" variant="h6">
               {t('title')} {t('producer')}
@@ -87,6 +83,12 @@ const EndpointsList = () => {
               ))}
             </Select>
           </FormControl>
+        </div>
+        <div className={classes.searchWrapper}>
+          <SearchBar
+            onChange={handleOnSearch}
+            translationScope="producerSearchComponent"
+          />
         </div>
         {loading ? (
           <LinearProgress />

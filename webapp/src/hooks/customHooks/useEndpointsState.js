@@ -10,7 +10,6 @@ const useEndpointsState = ({ useCache }) => {
   })
   const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
-  const [filters, setFilters] = useState({ owner: '' })
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 20,
@@ -23,10 +22,7 @@ const useEndpointsState = ({ useCache }) => {
       variables: {
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        where: {
-          ...pagination.where,
-          owner: { _like: `%${filters?.owner ?? ''}%` },
-        },
+        where: pagination.where,
         endpointFilter: pagination.endpointFilter,
       },
     })
@@ -36,7 +32,6 @@ const useEndpointsState = ({ useCache }) => {
     pagination.where,
     pagination.limit,
     pagination.endpointFilter,
-    filters,
   ])
 
   useEffect(() => {
@@ -101,20 +96,24 @@ const useEndpointsState = ({ useCache }) => {
     setPagination(prev => ({
       ...prev,
       page: 1,
-      where: { nodes: { endpoints: filter } },
+      where: { ...prev.where, nodes: { endpoints: filter } },
       endpointFilter: value
         ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
         : undefined,
     }))
   }, [])
 
-  const handleOnSearch = async (valueAccount) => {
-    setFilters(valueAccount)
-  }
+  const handleOnSearch = useCallback( async (filters) => {
+    setPagination(prev => ({
+      ...prev,
+      page: 1,
+      where: {...prev.where, owner: { _like: `%${filters?.owner ?? ''}%` } }
+    }))
+  }, [])
 
   return [
     { loading, pagination, producers, updatedAt },
-    { handleFilter, handleOnPageChange, handleOnSearch, setPagination, setFilters },
+    { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }
 
