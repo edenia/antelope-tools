@@ -6,9 +6,10 @@ import useSearchState from './useSearchState'
 
 const useEndpointsState = ({ useCache }) => {
   const [
-    { pagination, loading, producers, info },
+    { pagination, loading, producers, info, filters },
     { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({ query: ENDPOINTS_QUERY, 
+  ] = useSearchState({
+    query: ENDPOINTS_QUERY,
     pollInterval: useCache ? 0 : 120000,
     fetchPolicy: useCache ? 'cache-first' : 'cache-and-network',
   })
@@ -18,8 +19,8 @@ const useEndpointsState = ({ useCache }) => {
   useEffect(() => {
     setPagination(prev => ({
       ...prev,
-      limit: 20, 
-      where: { nodes: { endpoints: { value: { _gt: '' } } } },
+      limit: 20,
+      where: { ...prev.where, nodes: { endpoints: { value: { _gt: '' } } } },
     }))
   }, [setPagination])
 
@@ -33,14 +34,14 @@ const useEndpointsState = ({ useCache }) => {
   }, [info, setPagination])
 
   useEffect(() => {
-    if(!producers?.length) return
+    if (!producers?.length) return
 
     setItems(
       producers.map(producer => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
-        producer.nodes.forEach(node => {
+        producer.nodes.forEach((node) => {
           if (node.endpoints?.length) {
             node.endpoints.forEach(({ type, ...endpoint }) => {
               if (!inserted.includes(endpoint.value)) {
@@ -67,22 +68,22 @@ const useEndpointsState = ({ useCache }) => {
   }, [producers])
 
   const handleFilter = useCallback(value => {
-    const filter = value
-      ? { response: { _contains: { status: 200 } } }
-      : { value: { _gt: '' } }
+      const filter = value
+        ? { response: { _contains: { status: 200 } } }
+        : { value: { _gt: '' } }
 
-    setPagination(prev => ({
-      ...prev,
-      page: 1,
-      where: { ...prev.where, nodes: { endpoints: filter } },
-      endpointFilter: value
-        ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
-        : undefined,
-    }))
-  }, [setPagination])
+      setPagination(prev => ({
+        ...prev,
+        page: 1,
+        where: { ...prev.where, nodes: { endpoints: filter } },
+        endpointFilter: value
+          ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
+          : undefined,
+      }))
+    }, [setPagination])
 
   return [
-    { loading, pagination, producers: items, updatedAt },
+    { loading, pagination, producers: items, updatedAt, filters },
     { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }
