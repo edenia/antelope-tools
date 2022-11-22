@@ -30,7 +30,7 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, updatedAt },
+    { loading, pagination, producers, updatedAt, filters },
     { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
   ] = useEndpointsState({ useCache: false })
 
@@ -86,6 +86,7 @@ const EndpointsList = () => {
         </div>
         <div className={classes.searchWrapper}>
           <SearchBar
+            filters={filters}
             onChange={handleOnSearch}
             translationScope="producerSearchComponent"
           />
