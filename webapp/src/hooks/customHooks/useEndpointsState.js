@@ -25,7 +25,7 @@ const useEndpointsState = ({ useCache }) => {
   }, [setPagination])
 
   useEffect(() => {
-    if (!producers?.length) return
+    if (!producers) return
 
     setItems(
       producers.map(producer => {
