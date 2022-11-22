@@ -32,7 +32,7 @@ const useEndpointsState = ({ useCache }) => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
-        producer.nodes.forEach((node) => {
+        producer.nodes.forEach(node => {
           if (node.endpoints?.length) {
             node.endpoints.forEach(({ type, ...endpoint }) => {
               if (!inserted.includes(endpoint.value)) {
@@ -59,19 +59,19 @@ const useEndpointsState = ({ useCache }) => {
   }, [producers])
 
   const handleFilter = useCallback(value => {
-      const filter = value
-        ? { response: { _contains: { status: 200 } } }
-        : { value: { _gt: '' } }
+    const filter = value
+      ? { response: { _contains: { status: 200 } } }
+      : { value: { _gt: '' } }
 
-      setPagination(prev => ({
-        ...prev,
-        page: 1,
-        where: { ...prev.where, nodes: { endpoints: filter } },
-        endpointFilter: value
-          ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
-          : undefined,
-      }))
-    }, [setPagination])
+    setPagination(prev => ({
+      ...prev,
+      page: 1,
+      where: { ...prev.where, nodes: { endpoints: filter } },
+      endpointFilter: value
+        ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
+        : undefined,
+    }))
+  }, [setPagination])
 
   return [
     { loading, pagination, producers: items, updatedAt, filters },
