@@ -23,25 +23,18 @@ const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 
 const useBlockProducerState = () => {
   const [
-    { filters, pagination, loading, producers, info },
+    { filters, pagination, loading, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
     BLOCK_TRANSACTIONS_HISTORY,
   )
-  const [totalPages, setTotalPages] = useState(1)
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
 
   const chips = CHIPS_NAMES.map((e) => {
     return { name: e }
   })
-
-  useEffect(() => {
-    if (!info) return
-
-    setTotalPages(Math.ceil(info.producers?.count / pagination.limit))
-  }, [info, pagination.limit])
 
   useEffect(() => {
     if (eosConfig.networkName === 'lacchain') return
@@ -79,7 +72,6 @@ const useBlockProducerState = () => {
       chips,
       items,
       loading,
-      totalPages,
       missedBlocks,
       pagination,
     },

@@ -70,6 +70,15 @@ const useSearchState = ({ query, ...options }) => {
     setFilters(prev => ({ ...prev, owner: params.owner }))
   }, [location.search])
 
+  useEffect(() => {
+    if (!info) return
+
+    setPagination(prev => ({
+      ...prev,
+      pages: Math.ceil(info.producers?.count / prev.limit),
+    }))
+  }, [info])
+
   return [
     { filters, pagination, loading, producers, info },
     {

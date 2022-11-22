@@ -7,7 +7,7 @@ import useSearchState from './useSearchState'
 
 const useNodeState = () => {
   const [
-    { filters, pagination, loading, producers, info },
+    { filters, pagination, loading, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: NODES_QUERY })
   const [items, setItems] = useState([])
@@ -39,15 +39,6 @@ const useNodeState = () => {
       nodeFilter: nodesFilter,
     }))
   }, [filters.name, setPagination])
-
-  useEffect(() => {
-    if (!info) return
-
-    setPagination((prev) => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / prev.limit),
-    }))
-  }, [info, setPagination])
 
   useEffect(() => {
     if (!producers) return

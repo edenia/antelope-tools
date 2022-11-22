@@ -6,7 +6,7 @@ import useSearchState from './useSearchState'
 
 const useEndpointsState = ({ useCache }) => {
   const [
-    { pagination, loading, producers, info, filters },
+    { pagination, loading, producers, filters },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
     query: ENDPOINTS_QUERY,
@@ -23,15 +23,6 @@ const useEndpointsState = ({ useCache }) => {
       where: { ...prev.where, nodes: { endpoints: { value: { _gt: '' } } } },
     }))
   }, [setPagination])
-
-  useEffect(() => {
-    if (!info) return
-
-    setPagination(prev => ({
-      ...prev,
-      pages: Math.ceil(info.producers?.count / prev.limit),
-    }))
-  }, [info, setPagination])
 
   useEffect(() => {
     if (!producers?.length) return
