@@ -94,15 +94,15 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length ? (
+            {!!producers?.length ? ( 
               <EndpointsTable producers={producers} />
             ) : (
               <NoResults />
             )}
-            {pagination.totalPages > 1 && (
+            {pagination.pages > 1 && (
               <div className={classes.pagination}>
                 <Pagination
-                  count={pagination.totalPages}
+                  count={pagination.pages}
                   page={pagination.page}
                   onChange={handleOnPageChange}
                   variant="outlined"
