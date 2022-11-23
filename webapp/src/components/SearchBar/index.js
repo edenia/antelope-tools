@@ -13,6 +13,8 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 
+import useDebounceState from '../../hooks/customHooks/useDebounceState'
+
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -21,15 +23,17 @@ const SearchBar = ({
   filters: rootFilters,
   onChange,
   chips,
-  translationScope
+  translationScope,
+  delay,
 }) => {
   const classes = useStyles()
   const { t } = useTranslation(translationScope)
   const [selected, setSelected] = useState(chips[0]?.name ?? '')
-  const [filters, setFilters] = useState({})
+  const [filters, setFilters] = useState(rootFilters || {})
+  const debouncedFilter = useDebounceState(filters, delay)
 
   const handleOnChange = (key) => (event) => {
-    setFilters({ ...filters, [key]: event.target.value })
+    setFilters(prev => ({ ...prev, [key]: event.target.value }))
   }
 
   const handleOnClick = () => {
@@ -53,52 +57,53 @@ const SearchBar = ({
     setFilters(rootFilters || {})
   }, [rootFilters])
 
+  useEffect(() => {
+    onChange(filters)
+    // eslint-disable-next-line
+  }, [debouncedFilter, onChange])
+
   return (
-    <div>
-      <div>
-        <Card>
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.title}>
-              {`${t('title')}:`}
-            </Typography>
-            <TextField
-              label={t('placeholder')}
-              variant="outlined"
-              className={classes.formControl}
-              value={filters.owner || ''}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleOnClick}
-                      edge="end"
-                      aria-label="search"
-                    >
-                      <SearchOutlinedIcon />
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-              onKeyDown={handleOnKeyDown}
-              onChange={handleOnChange('owner')}
-            />
-            <div className={classes.chipWrapper}>
-              {chips.map((chip, index) => (
-                <Chip
-                  key={`chip-${chip.name}-${index}`}
-                  label={t(chip.name)}
-                  clickable
-                  onClick={() => handleOnClickChip(chip.name)}
-                  className={clsx({
-                    [classes.selected]: selected === chip.name
-                  })}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+    <>
+      <Card>
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.title}>{`${t('title')}:`}</Typography>
+          <TextField
+            label={t('placeholder')}
+            variant="outlined"
+            className={classes.formControl}
+            value={filters.owner || ''}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleOnClick}
+                    edge="end"
+                    aria-label="search"
+                  >
+                    <SearchOutlinedIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onKeyDown={handleOnKeyDown}
+            onChange={handleOnChange('owner')}
+          />
+          <div className={classes.chipWrapper}>
+            {chips.map((chip, index) => (
+              <Chip
+                key={`chip-${chip.name}-${index}`}
+                label={t(chip.name)}
+                clickable
+                onClick={() => handleOnClickChip(chip.name)}
+                className={clsx({
+                  [classes.selected]: selected === chip.name,
+                })}
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
@@ -106,12 +111,14 @@ SearchBar.propTypes = {
   filters: PropTypes.any,
   onChange: PropTypes.func,
   translationScope: PropTypes.string,
-  chips: PropTypes.array
+  chips: PropTypes.array,
+  delay: PropTypes.number,
 }
 
 SearchBar.defaultProps = {
   onChange: () => {},
-  chips: []
+  chips: [],
+  delay: 500,
 }
 
 export default memo(SearchBar)
