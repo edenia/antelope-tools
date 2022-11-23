@@ -63,51 +63,47 @@ const SearchBar = ({
   }, [debouncedFilter, onChange])
 
   return (
-    <div>
-      <div>
-        <Card>
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.title}>
-              {`${t('title')}:`}
-            </Typography>
-            <TextField
-              label={t('placeholder')}
-              variant="outlined"
-              className={classes.formControl}
-              value={filters.owner || ''}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleOnClick}
-                      edge="end"
-                      aria-label="search"
-                    >
-                      <SearchOutlinedIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              onKeyDown={handleOnKeyDown}
-              onChange={handleOnChange('owner')}
-            />
-            <div className={classes.chipWrapper}>
-              {chips.map((chip, index) => (
-                <Chip
-                  key={`chip-${chip.name}-${index}`}
-                  label={t(chip.name)}
-                  clickable
-                  onClick={() => handleOnClickChip(chip.name)}
-                  className={clsx({
-                    [classes.selected]: selected === chip.name,
-                  })}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+    <>
+      <Card>
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.title}>{`${t('title')}:`}</Typography>
+          <TextField
+            label={t('placeholder')}
+            variant="outlined"
+            className={classes.formControl}
+            value={filters.owner || ''}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleOnClick}
+                    edge="end"
+                    aria-label="search"
+                  >
+                    <SearchOutlinedIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onKeyDown={handleOnKeyDown}
+            onChange={handleOnChange('owner')}
+          />
+          <div className={classes.chipWrapper}>
+            {chips.map((chip, index) => (
+              <Chip
+                key={`chip-${chip.name}-${index}`}
+                label={t(chip.name)}
+                clickable
+                onClick={() => handleOnClickChip(chip.name)}
+                className={clsx({
+                  [classes.selected]: selected === chip.name,
+                })}
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </>
   )
 }
 
