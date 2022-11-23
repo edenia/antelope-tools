@@ -24,13 +24,13 @@ const SearchBar = ({
   onChange,
   chips,
   translationScope,
+  delay,
 }) => {
-  const DELAY = 500
   const classes = useStyles()
   const { t } = useTranslation(translationScope)
   const [selected, setSelected] = useState(chips[0]?.name ?? '')
   const [filters, setFilters] = useState(rootFilters || {})
-  const debouncedFilter = useDebounceState(filters, DELAY)
+  const debouncedFilter = useDebounceState(filters, delay)
 
   const handleOnChange = (key) => (event) => {
     setFilters(prev => ({ ...prev, [key]: event.target.value }))
@@ -112,11 +112,13 @@ SearchBar.propTypes = {
   onChange: PropTypes.func,
   translationScope: PropTypes.string,
   chips: PropTypes.array,
+  delay: PropTypes.number,
 }
 
 SearchBar.defaultProps = {
   onChange: () => {},
   chips: [],
+  delay: 500,
 }
 
 export default memo(SearchBar)

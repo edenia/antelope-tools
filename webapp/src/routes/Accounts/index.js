@@ -27,6 +27,7 @@ const Accounts = () => {
           <SearchBar
             filters={filters}
             onChange={handleOnSearch}
+            delay={1500}
             translationScope="accountsRoute"
           />
         </CardContent>
