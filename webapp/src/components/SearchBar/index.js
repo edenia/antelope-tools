@@ -13,6 +13,8 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 
+import useDebounceState from '../../hooks/customHooks/useDebounceState'
+
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -21,15 +23,17 @@ const SearchBar = ({
   filters: rootFilters,
   onChange,
   chips,
-  translationScope
+  translationScope,
 }) => {
+  const DELAY = 500
   const classes = useStyles()
   const { t } = useTranslation(translationScope)
   const [selected, setSelected] = useState(chips[0]?.name ?? '')
-  const [filters, setFilters] = useState({})
+  const [filters, setFilters] = useState(rootFilters || {})
+  const debouncedFilter = useDebounceState(filters, DELAY)
 
   const handleOnChange = (key) => (event) => {
-    setFilters({ ...filters, [key]: event.target.value })
+    setFilters(prev => ({ ...prev, [key]: event.target.value }))
   }
 
   const handleOnClick = () => {
@@ -52,6 +56,11 @@ const SearchBar = ({
   useEffect(() => {
     setFilters(rootFilters || {})
   }, [rootFilters])
+
+  useEffect(() => {
+    onChange(filters)
+    // eslint-disable-next-line
+  }, [debouncedFilter, onChange])
 
   return (
     <div>
@@ -77,7 +86,7 @@ const SearchBar = ({
                       <SearchOutlinedIcon />
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
               onKeyDown={handleOnKeyDown}
               onChange={handleOnChange('owner')}
@@ -90,7 +99,7 @@ const SearchBar = ({
                   clickable
                   onClick={() => handleOnClickChip(chip.name)}
                   className={clsx({
-                    [classes.selected]: selected === chip.name
+                    [classes.selected]: selected === chip.name,
                   })}
                 />
               ))}
@@ -106,12 +115,12 @@ SearchBar.propTypes = {
   filters: PropTypes.any,
   onChange: PropTypes.func,
   translationScope: PropTypes.string,
-  chips: PropTypes.array
+  chips: PropTypes.array,
 }
 
 SearchBar.defaultProps = {
   onChange: () => {},
-  chips: []
+  chips: [],
 }
 
 export default memo(SearchBar)

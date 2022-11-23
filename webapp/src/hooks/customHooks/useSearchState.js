@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
@@ -15,17 +15,17 @@ const useSearchState = ({ query, ...options }) => {
   })
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
-  const handleOnSearch = newFilters => {
+  const handleOnSearch = useCallback(newFilters => {
     setPagination(prev => ({
       ...prev,
       page: 1,
       where: {
-        ...pagination.where,
+        ...prev.where,
         owner: { _like: `%${newFilters?.owner ?? ''}%` },
       },
     }))
     setFilters(newFilters)
-  }
+  }, [])
 
   const handleOnPageChange = (_, page) => {
     if (pagination.page === page) return
