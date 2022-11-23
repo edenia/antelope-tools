@@ -48,11 +48,11 @@ const useSearchState = ({ query, ...options }) => {
     })
     // eslint-disable-next-line
   }, [
-    pagination.where, 
-    pagination.page, 
-    pagination.limit, 
-    pagination.offset, 
-    pagination.nodeFilter, 
+    pagination.where,
+    pagination.page,
+    pagination.limit,
+    pagination.offset,
+    pagination.nodeFilter,
     pagination.endpointFilter
   ])
 
