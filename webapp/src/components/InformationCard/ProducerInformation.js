@@ -2,10 +2,10 @@ import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
-import ListAltIcon from '@mui/icons-material/ListAlt'
 import { Popover } from '@mui/material'
-
 import CountryFlag from '../CountryFlag'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const ProducerInformation = ({ info, classes, t }) => {
   console.log(info)
@@ -52,35 +52,44 @@ const ProducerInformation = ({ info, classes, t }) => {
           value={info?.email}
           href={`mailto:${info.email}`}
         />
-        <div className={classes.infoItems}>
-          {!!info?.ownership ? (
-            <Link href={info?.ownership} target="_blank" rel="noreferrer">
-              <Typography variant="body1">
-                {t('ownershipDisclosure')}
-              </Typography>
-            </Link>
-          ) : null}
 
-          {!!info?.code_of_conduct ? (
-            <Link href={info?.code_of_conduct} target="_blank" rel="noreferrer">
-              <Typography variant="body1">{t('codeofconduct')}</Typography>
-            </Link>
-          ) : null}
+        {!!info?.ownership ? (
+          <RowUrl title={t('ownershipDisclosure')} value={info?.ownership} />
 
-          {!!info?.chain ? (
-            <Link href={info?.chain} target="_blank" rel="noreferrer">
-              <Typography variant="body1">{t('chainResources')}</Typography>
-            </Link>
-          ) : null}
-        </div>
-        {!!info?.otherResources?.length && (
+        ) : null}
+
+        {!!info?.code_of_conduct ? (
+          <RowUrl title={t('codeofconduct')} value={info?.code_of_conduct} />
+
+
+        ) : null}
+
+        {!!info?.chain ? (
+          <><><Typography variant="body1" className={classes.textEllipsis}>
+            {t('chainResources')}
+          </Typography>
+            <LaunchIcon>onClick={info.chain}</LaunchIcon>
+            <InfoOutlinedIcon onClick={openPopover}></InfoOutlinedIcon></><Popover
+              className={classes.shadow}
+              open={Boolean(anchor)}
+              onClose={() => setAnchor(null)}
+              anchorEl={anchor}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            ><Link target="_blank" rel="noopener noreferrer">{info.chain}</Link>
+            </Popover></>
+
+        ) : null}
+
+
+        {!!info?.otherResources.length && (
           <div className={classes.rowWrapper}>
             <dt className={classes.dt}>
               <Typography variant="body1" className={classes.textEllipsis}>
                 {t('otherResources')}
               </Typography>
             </dt>
-            <ListAltIcon onClick={openPopover}></ListAltIcon>
+            <InfoOutlinedIcon onClick={openPopover}></InfoOutlinedIcon>
             <Popover
               className={classes.shadow}
               open={Boolean(anchor)}
@@ -92,13 +101,15 @@ const ProducerInformation = ({ info, classes, t }) => {
               {info.otherResources.map((url, i) => (
                 <div className={classes.dd} key={i}>
                   <Link href={url} target="_blank" rel="noopener noreferrer">
-                    {url}
+                    {info?.otherResources}
                   </Link>
                 </div>
               ))}
             </Popover>
           </div>
         )}
+
+
       </div>
     </>
   )
