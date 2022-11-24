@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
+import eosApi from '../utils/eosapi'
 
 const SharedStateContext = React.createContext()
 
@@ -34,6 +35,27 @@ const sharedStateReducer = (state, action) => {
       }
     }
 
+    case 'updateInfo': {
+      return {
+        ...state,
+        info: action.payload,
+      }
+    }
+
+    case 'updateTransactionsStats': {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    }
+
+    case 'updateSchedule': {
+      return {
+        ...state,
+        schedule: action.payload,
+      }
+    }
+
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
     }
@@ -49,6 +71,14 @@ const initialValue = {
     currentEntity: null,
     dynamicTitle: '',
   },
+  schedule: {
+    version: '',
+    producers: [],
+  },
+  info: {},
+  tps: new Array(30).fill({ blocks: [], transactions: 0 }),
+  tpb: new Array(60).fill({ blocks: [], transactions: 0 }),
+  tpsWaitingBlock: null,
 }
 
 export const SharedStateProvider = ({ ...props }) => {
@@ -83,6 +113,9 @@ export const useSharedState = () => {
   }
 
   const [state, dispatch] = context
+  let infoInterval
+  let scheduleInterval
+
   const update = (payload) => dispatch({ type: 'update', payload })
   const login = (type) => {
     state.ual.login(type)
@@ -104,6 +137,125 @@ export const useSharedState = () => {
     })
   }
 
+  const getBlock = async (block) => {
+    try {
+      const data = await eosApi.getBlock(block)
+      let tpb = state.tpb
+
+      if (state.tpb.length >= 60) {
+        tpb.pop()
+      }
+
+      tpb = [
+        {
+          blocks: [block],
+          transactions: data.transactions.length,
+        },
+        ...tpb,
+      ]
+
+      if (!state.tpsWaitingBlock) {
+        dispatch({
+          type: 'updateTransactionsStats',
+          payload: {
+            tpb,
+            tpsWaitingBlock: {
+              block,
+              transactions: data.transactions.length,
+            },
+          },
+        })
+
+        return
+      }
+
+      let tps = state.tps
+
+      if (state.tps.length >= 30) {
+        tps.pop()
+      }
+
+      tps = [
+        {
+          blocks: [state.tpsWaitingBlock.block, block],
+          transactions:
+            state.tpsWaitingBlock.transactions + data.transactions.length,
+        },
+        ...tps,
+      ]
+
+      dispatch({
+        type: 'updateTransactionsStats',
+        payload: {
+          tps,
+          tpb,
+          tpsWaitingBlock: null,
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const startTrackingProducerSchedule = async ({ interval = 120 } = {}) => {
+    if (scheduleInterval) {
+      return
+    }
+
+    const handle = async () => {
+      try {
+        const result = await eosApi.getProducerSchedule(true)
+
+        dispatch({ type: 'updateSchedule', payload: result.active })
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    await handle()
+    scheduleInterval = setInterval(handle, interval * 1000)
+  }
+
+  const startTrackingInfo = async ({ interval = 1 } = {}) => {
+    if (infoInterval) return
+
+    const handle = async () => {
+      try {
+        const info = await eosApi.getInfo({})
+
+        dispatch({
+          type: 'updateInfo',
+          payload: info,
+        })
+        getBlock(info.head_block_num)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    if (interval === 0) {
+      await handle()
+      return
+    }
+
+    await handle()
+    infoInterval = setInterval(handle, interval * 1000)
+  }
+
+  const stopTrackingInfo = async () => {
+    if (!infoInterval) return
+
+    clearInterval(infoInterval)
+    infoInterval = null
+  }
+
+  const stopTrackingProducerSchedule = () => {
+    if (!scheduleInterval) return
+
+    clearInterval(scheduleInterval)
+    scheduleInterval = null
+  }
+
   return [
     state,
     {
@@ -112,6 +264,10 @@ export const useSharedState = () => {
       logout,
       handleOpenMenu,
       handleCloseMenu,
+      stopTrackingProducerSchedule,
+      stopTrackingInfo,
+      startTrackingInfo,
+      startTrackingProducerSchedule,
     },
   ]
 }

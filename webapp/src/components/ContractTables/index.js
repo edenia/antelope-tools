@@ -116,7 +116,8 @@ const ContractTables = ({
 
   useEffect(() => {
     handleSubmit(null)
-  }, [debouncedFilter, handleSubmit])
+    // eslint-disable-next-line
+  }, [debouncedFilter])
 
   return (
     <div>

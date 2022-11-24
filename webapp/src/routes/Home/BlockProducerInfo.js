@@ -1,11 +1,11 @@
 /* eslint camelcase: 0 */
 import React, { lazy, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 
 import { formatWithThousandSeparator } from '../../utils'
 import { NODES_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
+import { useSharedState } from '../../context/state.context'
 import { eosConfig } from '../../config'
 
 const Card = lazy(() => import('@mui/material/Card'))
@@ -25,8 +25,7 @@ const BlockProducerInfo = ({ t, classes }) => {
   const { data: producersSummary, loading: producersLoading } = useQuery(
     PRODUCERS_SUMMARY_QUERY,
   )
-  const scheduleInfo = useSelector((state) => state.eos.schedule)
-  const info = useSelector((state) => state.eos.info)
+  const [{ schedule: scheduleInfo, info }] = useSharedState()
   const [total, setTotal] = useState(0)
   const [schedule, setSchedule] = useState({ producers: [] })
 
@@ -145,96 +144,96 @@ const BlockProducerInfo = ({ t, classes }) => {
         </div>
       </div>
       {loading && <LinearProgress />}
-        <div className={classes.wrapper}>
-          <TransactionsHistory
-            t={t}
-            classes={classes}
-            nodesChildren={
-              <>
-                <ProducersSummary
-                  t={t}
-                  classes={classes}
-                  data={producersSummary}
-                  loading={producersLoading}
-                  total={total}
-                />
-                <NodesSummary t={t} classes={classes} />
-              </>
-            }
-          />
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('cpuLimitPerBlock')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('netLimitPerBlock')}</Typography>
-                <Typography component="p" variant="h6">
-                  {`${formatWithThousandSeparator(
-                    info.block_net_limit / 1024,
-                    0,
-                  )} KB`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('chainCpuLimit')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('chainNetLimit')}</Typography>
-                <Typography component="p" variant="h6">
-                  {`${formatWithThousandSeparator(
-                    info.virtual_block_net_limit / 1024,
-                    0,
-                  )} KB`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('timeToFinality')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {schedule.producers
-                    ? `${
-                        (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
-                      } s`
-                    : '0 s'}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
+      <div className={classes.wrapper}>
+        <TransactionsHistory
+          t={t}
+          classes={classes}
+          nodesChildren={
+            <>
+              <ProducersSummary
+                t={t}
+                classes={classes}
+                data={producersSummary}
+                loading={producersLoading}
+                total={total}
+              />
+              <NodesSummary t={t} classes={classes} />
+            </>
+          }
+        />
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('cpuLimitPerBlock')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
+              </Typography>
+            </CardContent>
+          </Card>
         </div>
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('netLimitPerBlock')}</Typography>
+              <Typography component="p" variant="h6">
+                {`${formatWithThousandSeparator(
+                  info.block_net_limit / 1024,
+                  0,
+                )} KB`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('chainCpuLimit')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('chainNetLimit')}</Typography>
+              <Typography component="p" variant="h6">
+                {`${formatWithThousandSeparator(
+                  info.virtual_block_net_limit / 1024,
+                  0,
+                )} KB`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('timeToFinality')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {schedule.producers
+                  ? `${
+                      (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
+                    } s`
+                  : '0 s'}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }
