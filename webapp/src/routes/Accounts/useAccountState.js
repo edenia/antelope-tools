@@ -99,6 +99,8 @@ const useAccountState = () => {
 
   const handleGetTableRows = useCallback(
     async ({ loadMore, ...payload }) => {
+      if (state.loading) return
+
       dispatch({ payload: true, type: 'SET_LOADING' })
 
       try {
@@ -129,7 +131,7 @@ const useAccountState = () => {
       }
       dispatch({ payload: false, type: 'SET_LOADING' })
     },
-    [showMessage, t, state.tableData],
+    [showMessage, t, state.tableData, state.loading],
   )
 
   const handleOnSearch = async (valueAccount) => {

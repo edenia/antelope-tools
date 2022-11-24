@@ -42,6 +42,7 @@ const Accounts = () => {
           onSubmitAction={handleSubmitAction}
           tableData={tableData}
           onGetTableRows={handleGetTableRows}
+          // onGetTableRows={() => console.log('callback render', account)}
         />
       )}
     </>

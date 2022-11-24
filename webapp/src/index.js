@@ -1,5 +1,4 @@
 import React from 'react'
-import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
@@ -7,7 +6,6 @@ import { StylesProvider } from '@mui/styles'
 import { ThemeProvider } from 'styled-components'
 
 import App from './App'
-import store from './store'
 import theme from './theme'
 import { client } from './graphql'
 import * as serviceWorker from './serviceWorker'
@@ -18,15 +16,13 @@ const root = createRoot(container)
 
 root.render(
   <ApolloProvider client={client}>
-    <Provider store={store}>
-      <StylesProvider injectFirst>
-        <MuiThemeProvider theme={theme[0]}>
-          <ThemeProvider theme={theme[0]}>
-            <App />
-          </ThemeProvider>
-        </MuiThemeProvider>
-      </StylesProvider>
-    </Provider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme[0]}>
+        <ThemeProvider theme={theme[0]}>
+          <App />
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
   </ApolloProvider>,
 )
 
