@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
@@ -181,12 +180,7 @@ const RewardsDistribution = () => {
         onClose={handlePopoverClose}
         id="mouse-over-popover"
       >
-        <Box
-          className={classes.boxPadding}
-          sx={{
-            pointerEvents: 'auto',
-          }}
-        >
+        <div className={classes.boxPadding}>
           <Typography>
             <span className={classes.popoverItem}>{t('country')}: </span>
             {!currentNode?.flag && (
@@ -241,7 +235,7 @@ const RewardsDistribution = () => {
               </li>
             ))}
           </ul>
-        </Box>
+        </div>
       </Popover>
       {loading && <LinearProgress className={classes.linearLoader} />}
       <div className={classes.divMargin}>
