@@ -73,6 +73,7 @@ export default (theme) => ({
   },
   gridFooter: {
     display: 'flex',
+    flexDirection: 'column',
     [theme.breakpoints.down('md')]: {
       order: 3,
       paddingBottom: '15px',

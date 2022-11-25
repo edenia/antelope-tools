@@ -129,6 +129,7 @@ export default (theme) => ({
     position: 'absolute',
     right: 70,
     top: -45,
+    cursor: 'default',
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('sm')]: {
       right: 0,
