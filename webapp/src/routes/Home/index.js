@@ -1,7 +1,8 @@
 import React, { lazy, useEffect } from 'react'
 import { makeStyles } from '@mui/styles'
-import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+
+import { useSharedState } from '../../context/state.context'
 
 import styles from './styles'
 
@@ -10,19 +11,29 @@ const useStyles = makeStyles(styles)
 const BlockProducerInfo = lazy(() => import('./BlockProducerInfo'))
 
 const Home = () => {
-  const dispatch = useDispatch()
+  const [
+    ,
+    {
+      startTrackingInfo,
+      startTrackingProducerSchedule,
+      stopTrackingInfo,
+      stopTrackingProducerSchedule,
+    },
+  ] = useSharedState()
+
   const { t } = useTranslation('homeRoute')
   const classes = useStyles()
 
   useEffect(() => {
-    dispatch.eos.startTrackingInfo({ interval: 0.5 })
-    dispatch.eos.startTrackingProducerSchedule({ interval: 60 })
+    startTrackingInfo({ interval: 0.5 })
+    startTrackingProducerSchedule({ interval: 60 })
 
     return () => {
-      dispatch.eos.stopTrackingInfo()
-      dispatch.eos.stopTrackingProducerSchedule()
+      stopTrackingInfo()
+      stopTrackingProducerSchedule()
     }
-  }, [dispatch])
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div>

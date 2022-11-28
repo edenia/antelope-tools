@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
+import isLogoValid from '../../utils/validate-image'
 import { generalConfig } from '../../config'
 
 import styles from './styles'
@@ -17,7 +18,7 @@ const RADIAN = Math.PI / 180
 
 const polarToCartesian = (cx, cy, radius, angle) => ({
   x: cx + Math.cos(-RADIAN * angle) * radius,
-  y: cy + Math.sin(-RADIAN * angle) * radius
+  y: cy + Math.sin(-RADIAN * angle) * radius,
 })
 
 const useStyles = makeStyles(styles)
@@ -26,16 +27,16 @@ const CustomBarLabel = memo(
   ({ x, cx, cy, payload, outerRadius, midAngle, fill }) => {
     const theme = useTheme()
     const sm = useMediaQuery(theme.breakpoints.up('sm'), {
-      defaultMatches: true
+      defaultMatches: true,
     })
     const md = useMediaQuery(theme.breakpoints.up('md'), {
-      defaultMatches: true
+      defaultMatches: true,
     })
     const lg = useMediaQuery(theme.breakpoints.up('lg'), {
-      defaultMatches: true
+      defaultMatches: true,
     })
     const xl = useMediaQuery(theme.breakpoints.up('xl'), {
-      defaultMatches: true
+      defaultMatches: true,
     })
 
     let gap = 16
@@ -56,7 +57,7 @@ const CustomBarLabel = memo(
       cx,
       cy,
       outerRadius - gap,
-      midAngle
+      midAngle,
     )
     const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
     const link = generalConfig.eosRateLink
@@ -129,7 +130,11 @@ const CustomBarLabel = memo(
                 y="0"
                 width="100"
                 height="100"
-                href={payload.logo || generalConfig.defaultProducerLogo}
+                href={
+                  isLogoValid(payload.logo)
+                    ? payload.logo
+                    : generalConfig.defaultProducerLogo
+                }
                 onError={onImgError(generalConfig.defaultProducerLogo)}
               />
             </pattern>
@@ -138,7 +143,7 @@ const CustomBarLabel = memo(
         </g>
       </>
     )
-  }
+  },
 )
 
 CustomBarLabel.propTypes = {
@@ -148,7 +153,7 @@ CustomBarLabel.propTypes = {
   cy: PropTypes.number,
   payload: PropTypes.object,
   outerRadius: PropTypes.number,
-  midAngle: PropTypes.number
+  midAngle: PropTypes.number,
 }
 
 const CustomTooltip = memo(({ active, payload }) => {
@@ -181,7 +186,7 @@ const CustomTooltip = memo(({ active, payload }) => {
               {' '}
               {formatWithThousandSeparator(
                 payload[0].payload.total_votes_percent,
-                3
+                3,
               )}
               %
             </span>
@@ -198,7 +203,7 @@ CustomTooltip.displayName = 'CustomTooltip'
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.array
+  payload: PropTypes.array,
 }
 
 const ProducersChart = ({ producers, info }) => {
@@ -243,7 +248,7 @@ const ProducersChart = ({ producers, info }) => {
 
 ProducersChart.propTypes = {
   producers: PropTypes.array,
-  info: PropTypes.object
+  info: PropTypes.object,
 }
 
 export default memo(ProducersChart)

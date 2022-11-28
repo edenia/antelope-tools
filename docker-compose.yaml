@@ -66,7 +66,7 @@ services:
       HAPI_CREATE_ACCOUNT_ACTION_NAME: '${HAPI_CREATE_ACCOUNT_ACTION_NAME}'
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
-    image: hasura/graphql-engine:v2.2.1.cli-migrations-v3
+    image: hasura/graphql-engine:v2.15.1.cli-migrations-v3
     ports:
       - '8080:8080'
     volumes:

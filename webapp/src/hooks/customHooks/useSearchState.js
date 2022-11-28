@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-const useSearchState = ({ query }) => {
+const useSearchState = ({ query, ...options }) => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(query)
+    useLazyQuery(query, options)
   const location = useLocation()
   const [pagination, setPagination] = useState({
     page: 1,
@@ -15,20 +15,22 @@ const useSearchState = ({ query }) => {
   })
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
-  const handleOnSearch = (newFilters) => {
-    setPagination((prev) => ({
+  const handleOnSearch = useCallback(newFilters => {
+    setPagination(prev => ({
       ...prev,
       page: 1,
       where: {
-        ...pagination.where,
+        ...prev.where,
         owner: { _like: `%${newFilters?.owner ?? ''}%` },
       },
     }))
     setFilters(newFilters)
-  }
+  }, [])
 
   const handleOnPageChange = (_, page) => {
-    setPagination((prev) => ({
+    if (pagination.page === page) return
+
+    setPagination(prev => ({
       ...prev,
       page,
     }))
@@ -40,25 +42,42 @@ const useSearchState = ({ query }) => {
         where: pagination.where,
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        nodeFilter: pagination.nodeFilter
+        nodeFilter: pagination.nodeFilter,
+        endpointFilter: pagination.endpointFilter,
       },
     })
     // eslint-disable-next-line
-  }, [pagination.where, pagination.page, pagination.limit, pagination.offset, pagination.nodeFilter])
+  }, [
+    pagination.where,
+    pagination.page,
+    pagination.limit,
+    pagination.offset,
+    pagination.nodeFilter,
+    pagination.endpointFilter
+  ])
 
   useEffect(() => {
     const params = queryString.parse(location.search)
 
     if (!params.owner) return
 
-    setPagination((prev) => ({
+    setPagination(prev => ({
       ...prev,
       page: 1,
       where: { owner: { _like: `%${params.owner}%` } },
     }))
 
-    setFilters((prev) => ({ ...prev, owner: params.owner }))
+    setFilters(prev => ({ ...prev, owner: params.owner }))
   }, [location.search])
+
+  useEffect(() => {
+    if (!info) return
+
+    setPagination(prev => ({
+      ...prev,
+      pages: Math.ceil(info.producers?.count / prev.limit),
+    }))
+  }, [info])
 
   return [
     { filters, pagination, loading, producers, info },

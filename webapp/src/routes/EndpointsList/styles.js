@@ -17,6 +17,14 @@ export default (theme) => ({
     alignSelf: 'center',
     margin: theme.spacing(4),
   },
+  searchWrapper: {
+    flex: '100%',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    '& .MuiGrid-root': {
+      paddingTop: '0px !important',
+    },
+  },
   select: {
     minWidth: 150,
   },
