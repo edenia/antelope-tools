@@ -291,7 +291,7 @@ export default (theme) => ({
       minWidth: 150,
     },
   },
-  flex:{
+  flex: {
     display: 'flex',
     alignItems: 'center'
   },
