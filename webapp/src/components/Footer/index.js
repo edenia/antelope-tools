@@ -46,7 +46,7 @@ const Footer = () => {
             {t('footer2')}
             <img
               alt="antelope tools dashboard"
-              src={'/edenia.png'}
+              src={'/edenia.webp'}
               className={classes.imgHeaderLogo}
               loading="lazy"
             />
