@@ -33,7 +33,7 @@ const SearchBar = ({
   const debouncedFilter = useDebounceState(filters, delay)
 
   const handleOnChange = (key) => (event) => {
-    setFilters(prev => ({ ...prev, [key]: event.target.value }))
+    setFilters((prev) => ({ ...prev, [key]: event.target.value }))
   }
 
   const handleOnClick = () => {
@@ -60,7 +60,7 @@ const SearchBar = ({
   useEffect(() => {
     onChange(filters)
     // eslint-disable-next-line
-  }, [debouncedFilter, onChange])
+  }, [debouncedFilter])
 
   return (
     <>
