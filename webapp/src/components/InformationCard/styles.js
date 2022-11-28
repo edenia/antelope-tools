@@ -101,7 +101,7 @@ export default (theme) => ({
   info: {
     borderLeft: 'none',
     '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
+      margin: theme.spacing(1),
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -289,6 +289,15 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: 150,
+    },
+  },
+  flex:{
+    display: 'flex',
+    alignItems: 'center'
+  },
+  clickableIcon: {
+    '&:hover': {
+    color: '#1565c0',
     },
   },
 })

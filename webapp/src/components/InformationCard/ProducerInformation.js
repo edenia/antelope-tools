@@ -7,7 +7,10 @@ import CountryFlag from '../CountryFlag'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LaunchIcon from '@mui/icons-material/Launch';
 
+
+
 const ProducerInformation = ({ info, classes, t }) => {
+
   console.log(info)
   const [anchor, setAnchor] = useState(null)
   const openPopover = (event) => {
@@ -53,33 +56,67 @@ const ProducerInformation = ({ info, classes, t }) => {
           href={`mailto:${info.email}`}
         />
 
-        {!!info?.ownership ? (
-          <RowUrl title={t('ownershipDisclosure')} value={info?.ownership} />
+        <div className={classes.flex}>
+          {!!info?.ownership ? (
+            <><><Typography variant="body1" className={classes.textEllipsis}>
+              {t('codeofconduct')}
+            </Typography>
+              <LaunchIcon onClick={() => window.open(info.ownership, '_blank')} className={classes.clickableIcon}>
 
-        ) : null}
+              </LaunchIcon>
+              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
+                className={classes.shadow}
+                open={Boolean(anchor)}
+                onClose={() => setAnchor(null)}
+                anchorEl={anchor}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              ><Link target="_blank" rel="noopener noreferrer">{info.ownership}</Link>
+              </Popover></>
 
-        {!!info?.code_of_conduct ? (
-          <RowUrl title={t('codeofconduct')} value={info?.code_of_conduct} />
+          ) : null}
+        </div>
 
+        <div className={classes.flex}>
+          {!!info?.code_of_conduct ? (
+            <><><Typography variant="body1" className={classes.textEllipsis}>
+              {t('codeofconduct')}
+            </Typography>
+              <LaunchIcon onClick={() => window.open(info.code_of_conduct, '_blank')} className={classes.clickableIcon}>
 
-        ) : null}
+              </LaunchIcon>
+              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
+                className={classes.shadow}
+                open={Boolean(anchor)}
+                onClose={() => setAnchor(null)}
+                anchorEl={anchor}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              ><Link target="_blank" rel="noopener noreferrer">{info.code_of_conduct}</Link>
+              </Popover></>
 
-        {!!info?.chain ? (
-          <><><Typography variant="body1" className={classes.textEllipsis}>
-            {t('chainResources')}
-          </Typography>
-            <LaunchIcon>onClick={info.chain}</LaunchIcon>
-            <InfoOutlinedIcon onClick={openPopover}></InfoOutlinedIcon></><Popover
-              className={classes.shadow}
-              open={Boolean(anchor)}
-              onClose={() => setAnchor(null)}
-              anchorEl={anchor}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            ><Link target="_blank" rel="noopener noreferrer">{info.chain}</Link>
-            </Popover></>
+          ) : null}
+        </div>
+        <div className={classes.flex}>
+          {!!info?.chain ? (
+            <><><Typography variant="body1" className={classes.textEllipsis}>
+              {t('chainResources')}
+            </Typography>
+              <LaunchIcon onClick={() => window.open(info.chain, '_blank')} className={classes.clickableIcon}>
 
-        ) : null}
+              </LaunchIcon>
+              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
+                className={classes.shadow}
+                open={Boolean(anchor)}
+                onClose={() => setAnchor(null)}
+                anchorEl={anchor}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              ><Link target="_blank" rel="noopener noreferrer">{info.chain}</Link>
+              </Popover></>
+
+          ) : null}
+        </div>
 
 
         {!!info?.otherResources.length && (
