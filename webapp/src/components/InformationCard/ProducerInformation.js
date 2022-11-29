@@ -83,7 +83,11 @@ const ProducerInformation = ({ info, classes, t }) => {
                 </div>
               </Popover>
             </>
-          ) : null}
+          ) : (
+            <Typography variant="body1" className={classes.textEllipsis}>
+              {t('website')}: N/A
+            </Typography>
+          )}
         </div>
 
         <div className={classes.flex}>
