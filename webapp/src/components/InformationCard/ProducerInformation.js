@@ -9,7 +9,6 @@ import LaunchIcon from '@mui/icons-material/Launch'
 import CopyToClipboard from '../CopyToClipboard'
 
 const ProducerInformation = ({ info, classes, t }) => {
-
   const [anchorEl, setAnchorEl] = useState(null)
   const [OtherRes, SetOtherRes] = useState(null)
   const [data, setData] = useState([])
@@ -27,40 +26,43 @@ const ProducerInformation = ({ info, classes, t }) => {
   const handleOther = (target) => {
     SetOtherRes(target)
   }
+
   const open = Boolean(anchorEl)
   const openRes = Boolean(OtherRes)
-
   const id = open ? 'simple-popover' : undefined
 
   return (
     <>
       <div className={classes.borderLine}>
-        <div className={classes.rowWrapper}>
+        <div className={classes.flex}>
           {info?.location && info?.location !== 'N/A' && (
             <Typography variant="body1">
-              {`${t('location')}: `}
+              {`${t('location')}: ${info?.location} `}
               <CountryFlag code={info?.country} />
             </Typography>
           )}
         </div>
-
         <div className={classes.flex}>
           {!!info?.website ? (
             <>
               <>
                 <Typography variant="body1" className={classes.textEllipsis}>
-                  {t('website')}
+                  {t('website')}:
                 </Typography>
-                <LaunchIcon
-                  onClick={() => window.open(info?.website, '_blank')}
-                  className={classes.clickableIcon}
-                />
-                <InfoOutlinedIcon
-                  className={classes.clickableIcon}
-                  onClick={(e) => {
-                    handleClick(e.target, info?.website)
-                  }}
-                />
+                <Tooltip title={t('openLink')} arrow placement="left">
+                  <LaunchIcon
+                    onClick={() => window.open(info?.website, '_blank')}
+                    className={classes.clickableIcon}
+                  />
+                </Tooltip>
+                <Tooltip title={t('moreInfo')} arrow placement="right">
+                  <InfoOutlinedIcon
+                    className={classes.clickableIcon}
+                    onClick={(e) => {
+                      handleClick(e.target, info?.website)
+                    }}
+                  />
+                </Tooltip>
               </>
               <Popover
                 className={classes.shadow}
@@ -75,7 +77,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               >
                 <div className={classes.flex}>
                   <div className={classes.popoverStyle}>
-                    <Link target="_blank" rel="noopener noreferrer">
+                    <Link href={data} target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
                   </div>
@@ -89,24 +91,28 @@ const ProducerInformation = ({ info, classes, t }) => {
             </Typography>
           )}
         </div>
-
         <div className={classes.flex}>
           {!!info?.email ? (
             <>
               <>
                 <Typography variant="body1" className={classes.textEllipsis}>
-                  {t('email')}
+                  {t('email')}:
                 </Typography>
-                <LaunchIcon
-                  onClick={() => (window.location = `mailto:${info.email}`)}
-                  className={classes.clickableIcon}
-                />
-                <InfoOutlinedIcon
-                  className={classes.clickableIcon}
-                  onClick={(e) => {
-                    handleClick(e.target, info?.email)
-                  }}
-                />
+                <Tooltip title={t('openLink')} arrow placement="left">
+                  <LaunchIcon
+                    onClick={() => (window.location = `mailto:${info.email}`)}
+                    className={classes.clickableIcon}
+                  />
+                </Tooltip>
+
+                <Tooltip title={t('moreInfo')} arrow placement="right">
+                  <InfoOutlinedIcon
+                    className={classes.clickableIcon}
+                    onClick={(e) => {
+                      handleClick(e.target, info?.email)
+                    }}
+                  />
+                </Tooltip>
               </>
               <Popover
                 className={classes.shadow}
@@ -121,7 +127,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               >
                 <div className={classes.flex}>
                   <div className={classes.popoverStyle}>
-                    <Link target="_blank" rel="noopener noreferrer">
+                    <Link href={data} target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
                   </div>
@@ -135,24 +141,27 @@ const ProducerInformation = ({ info, classes, t }) => {
             </Typography>
           )}
         </div>
-
         <div className={classes.flex}>
           {!!info?.ownership ? (
             <>
               <>
                 <Typography variant="body1" className={classes.textEllipsis}>
-                  {t('ownershipDisclosure')}
+                  {t('ownershipDisclosure')}:
                 </Typography>
-                <LaunchIcon
-                  onClick={() => window.open(info?.ownership, '_blank')}
-                  className={classes.clickableIcon}
-                />
-                <InfoOutlinedIcon
-                  className={classes.clickableIcon}
-                  onClick={(e) => {
-                    handleClick(e.target, info?.ownership)
-                  }}
-                />
+                <Tooltip title={t('openLink')} arrow placement="left">
+                  <LaunchIcon
+                    onClick={() => window.open(info?.ownership, '_blank')}
+                    className={classes.clickableIcon}
+                  />
+                </Tooltip>
+                <Tooltip title={t('moreInfo')} arrow placement="right">
+                  <InfoOutlinedIcon
+                    className={classes.clickableIcon}
+                    onClick={(e) => {
+                      handleClick(e.target, info?.ownership)
+                    }}
+                  />
+                </Tooltip>
               </>
               <Popover
                 className={classes.shadow}
@@ -167,7 +176,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               >
                 <div className={classes.flex}>
                   <div className={classes.popoverStyle}>
-                    <Link target="_blank" rel="noopener noreferrer">
+                    <Link href={data} target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
                   </div>
@@ -177,24 +186,27 @@ const ProducerInformation = ({ info, classes, t }) => {
             </>
           ) : null}
         </div>
-
         <div className={classes.flex}>
           {!!info?.code_of_conduct ? (
             <>
               <>
                 <Typography variant="body1" className={classes.textEllipsis}>
-                  {t('codeofconduct')}
+                  {t('codeofconduct')}:
                 </Typography>
-                <LaunchIcon
-                  onClick={() => window.open(info?.code_of_conduct, '_blank')}
-                  className={classes.clickableIcon}
-                />
-                <InfoOutlinedIcon
-                  className={classes.clickableIcon}
-                  onClick={(e) => {
-                    handleClick(e.target, info?.code_of_conduct)
-                  }}
-                />
+                <Tooltip title={t('openLink')} arrow placement="left">
+                  <LaunchIcon
+                    onClick={() => window.open(info?.code_of_conduct, '_blank')}
+                    className={classes.clickableIcon}
+                  />
+                </Tooltip>
+                <Tooltip title={t('moreInfo')} arrow placement="right">
+                  <InfoOutlinedIcon
+                    className={classes.clickableIcon}
+                    onClick={(e) => {
+                      handleClick(e.target, info?.code_of_conduct)
+                    }}
+                  />
+                </Tooltip>
               </>
               <Popover
                 className={classes.shadow}
@@ -209,7 +221,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               >
                 <div className={classes.flex}>
                   <div className={classes.popoverStyle}>
-                    <Link target="_blank" rel="noopener noreferrer">
+                    <Link href={data} target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
                   </div>
@@ -219,19 +231,21 @@ const ProducerInformation = ({ info, classes, t }) => {
             </>
           ) : null}
         </div>
-
         <div className={classes.flex}>
           {!!info?.chain ? (
             <>
               <>
                 <Typography variant="body1" className={classes.textEllipsis}>
-                  {t('chainResources')}
+                  {t('chainResources')}:
                 </Typography>
-                <LaunchIcon
-                  onClick={() => window.open(info?.chain, '_blank')}
-                  className={classes.clickableIcon}
-                />
-                <Tooltip title="test" arrow placement='right'>
+                <Tooltip title={t('openLink')} arrow placement="left">
+                  <LaunchIcon
+                    onClick={() => window.open(info?.chain, '_blank')}
+                    className={classes.clickableIcon}
+                  />
+                </Tooltip>
+
+                <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
                     onClick={(e) => {
@@ -253,7 +267,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               >
                 <div className={classes.flex}>
                   <div className={classes.popoverStyle}>
-                    <Link target="_blank" rel="noopener noreferrer">
+                    <Link href={data} target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
                   </div>
@@ -263,18 +277,21 @@ const ProducerInformation = ({ info, classes, t }) => {
             </>
           ) : null}
         </div>
-        <div className={classes.flex}>
+        <div className={classes.rowWrapper}>
           {!!info?.otherResources.length && (
             <>
               <Typography variant="body1" className={classes.textEllipsis}>
-                {t('otherResources')}
+                {t('otherResources')}:
               </Typography>
-              <InfoOutlinedIcon
-                className={classes.clickableIcon}
-                onClick={(e) => {
-                  handleOther(e.target)
-                }}
-              />
+              <Tooltip title={t('moreInfo')} arrow placement="right">
+                <InfoOutlinedIcon
+                  className={classes.clickableIcon}
+                  onClick={(e) => {
+                    handleOther(e.target)
+                  }}
+                />
+              </Tooltip>
+
               <Popover
                 className={classes.shadow}
                 id={id}

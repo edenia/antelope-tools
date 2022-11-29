@@ -170,7 +170,6 @@ export default (theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15,
     },
     [theme.breakpoints.up('lg')]: {
       width: 140,
@@ -261,9 +260,10 @@ export default (theme) => ({
   },
   infoIcon: {
     cursor: 'pointer',
+    flexDirection: 'flex-end',
   },
   dt: {
-    maxWidth: 100
+    maxWidth: 100,
   },
   shadow: {
     '& .MuiPaper-root': {
@@ -273,7 +273,7 @@ export default (theme) => ({
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-      borderRadius: '5px'
+      borderRadius: '5px',
     },
   },
   infoItems: {
@@ -298,11 +298,13 @@ export default (theme) => ({
   },
   flex: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   clickableIcon: {
+    cursor: 'pointer',
     '&:hover': {
-    color: '#1565c0',
+      color: '#1565c0',
     },
   },
   popoverStyle: {
@@ -310,6 +312,15 @@ export default (theme) => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-  }
-
+  },
+  textEllipsisNodes: {
+    margin: theme.spacing(1, 0),
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: '100%',
+    '& a': {
+      marginLeft: theme.spacing(1),
+    },
+  },
 })
