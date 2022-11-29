@@ -9,10 +9,9 @@ import LaunchIcon from '@mui/icons-material/Launch'
 import CopyToClipboard from '../CopyToClipboard'
 
 const ProducerInformation = ({ info, classes, t }) => {
-  console.log(info)
+
   const [anchorEl, setAnchorEl] = useState(null)
   const [OtherRes, SetOtherRes] = useState(null)
-
   const [data, setData] = useState([])
 
   const handleClick = (target, data) => {
@@ -25,7 +24,7 @@ const ProducerInformation = ({ info, classes, t }) => {
     SetOtherRes(null)
   }
 
-  const diego = (target) => {
+  const handleOther = (target) => {
     SetOtherRes(target)
   }
   const open = Boolean(anchorEl)
@@ -75,7 +74,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 }}
               >
                 <div className={classes.flex}>
-                  <div className={classes.diego}>
+                  <div className={classes.popoverStyle}>
                     <Link target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
@@ -117,7 +116,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 }}
               >
                 <div className={classes.flex}>
-                  <div className={classes.diego}>
+                  <div className={classes.popoverStyle}>
                     <Link target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
@@ -143,7 +142,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <LaunchIcon
                   onClick={() => window.open(info?.ownership, '_blank')}
                   className={classes.clickableIcon}
-                ></LaunchIcon>
+                />
                 <InfoOutlinedIcon
                   className={classes.clickableIcon}
                   onClick={(e) => {
@@ -163,7 +162,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 }}
               >
                 <div className={classes.flex}>
-                  <div className={classes.diego}>
+                  <div className={classes.popoverStyle}>
                     <Link target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
@@ -185,7 +184,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <LaunchIcon
                   onClick={() => window.open(info?.code_of_conduct, '_blank')}
                   className={classes.clickableIcon}
-                ></LaunchIcon>
+                />
                 <InfoOutlinedIcon
                   className={classes.clickableIcon}
                   onClick={(e) => {
@@ -205,7 +204,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 }}
               >
                 <div className={classes.flex}>
-                  <div className={classes.diego}>
+                  <div className={classes.popoverStyle}>
                     <Link target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
@@ -227,7 +226,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <LaunchIcon
                   onClick={() => window.open(info?.chain, '_blank')}
                   className={classes.clickableIcon}
-                ></LaunchIcon>
+                />
                 <Tooltip title="test" arrow placement='right'>
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
@@ -249,7 +248,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 }}
               >
                 <div className={classes.flex}>
-                  <div className={classes.diego}>
+                  <div className={classes.popoverStyle}>
                     <Link target="_blank" rel="noopener noreferrer">
                       {data}
                     </Link>
@@ -269,7 +268,7 @@ const ProducerInformation = ({ info, classes, t }) => {
               <InfoOutlinedIcon
                 className={classes.clickableIcon}
                 onClick={(e) => {
-                  diego(e.target)
+                  handleOther(e.target)
                 }}
               />
               <Popover

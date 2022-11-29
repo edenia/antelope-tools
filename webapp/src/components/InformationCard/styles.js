@@ -305,12 +305,7 @@ export default (theme) => ({
     color: '#1565c0',
     },
   },
-  bandera: {
-    '& flag-icon': {
-      borderRadius: '5px',
-    },
-  },
-  diego: {
+  popoverStyle: {
     paddingRight: theme.spacing(2),
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
