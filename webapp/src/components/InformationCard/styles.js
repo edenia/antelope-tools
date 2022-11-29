@@ -316,5 +316,5 @@ export default (theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   }
-  
+
 })
