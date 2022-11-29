@@ -268,7 +268,12 @@ export default (theme) => ({
   shadow: {
     '& .MuiPaper-root': {
       boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      padding: theme.spacing(1),
+      padding: theme.spacing(3),
+      maxWidth: '250px',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      borderRadius: '5px'
     },
   },
   infoItems: {
@@ -300,4 +305,16 @@ export default (theme) => ({
     color: '#1565c0',
     },
   },
+  bandera: {
+    '& flag-icon': {
+      borderRadius: '5px',
+    },
+  },
+  diego: {
+    paddingRight: theme.spacing(2),
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  }
+  
 })

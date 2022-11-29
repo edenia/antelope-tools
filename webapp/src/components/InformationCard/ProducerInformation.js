@@ -2,41 +2,36 @@ import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
-import { Popover } from '@mui/material'
+import { Popover, Tooltip } from '@mui/material'
 import CountryFlag from '../CountryFlag'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import LaunchIcon from '@mui/icons-material/Launch';
-
-
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import LaunchIcon from '@mui/icons-material/Launch'
+import CopyToClipboard from '../CopyToClipboard'
 
 const ProducerInformation = ({ info, classes, t }) => {
-
   console.log(info)
-  const [anchor, setAnchor] = useState(null)
-  const openPopover = (event) => {
-    setAnchor(event.currentTarget)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [OtherRes, SetOtherRes] = useState(null)
+
+  const [data, setData] = useState([])
+
+  const handleClick = (target, data) => {
+    setAnchorEl(target)
+    setData(data)
   }
 
-  const RowUrl = ({ title, value, href }) => {
-    return (
-      <div className={classes.rowWrapper}>
-        <Typography variant="body1" className={classes.textEllipsis}>
-          {`${title}: `}
-          {!!value ? (
-            <Link
-              href={href ?? value}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {value}
-            </Link>
-          ) : (
-            'N/A'
-          )}
-        </Typography>
-      </div>
-    )
+  const handleClose = () => {
+    setAnchorEl(null)
+    SetOtherRes(null)
   }
+
+  const diego = (target) => {
+    SetOtherRes(target)
+  }
+  const open = Boolean(anchorEl)
+  const openRes = Boolean(OtherRes)
+
+  const id = open ? 'simple-popover' : undefined
 
   return (
     <>
@@ -44,109 +39,261 @@ const ProducerInformation = ({ info, classes, t }) => {
         <div className={classes.rowWrapper}>
           {info?.location && info?.location !== 'N/A' && (
             <Typography variant="body1">
-              {`${t('location')}: ${info?.location} `}
+              {`${t('location')}: `}
               <CountryFlag code={info?.country} />
             </Typography>
           )}
         </div>
-        <RowUrl title={t('website')} value={info?.website} />
-        <RowUrl
-          title={t('email')}
-          value={info?.email}
-          href={`mailto:${info.email}`}
-        />
+
+        <div className={classes.flex}>
+          {!!info?.website ? (
+            <>
+              <>
+                <Typography variant="body1" className={classes.textEllipsis}>
+                  {t('website')}
+                </Typography>
+                <LaunchIcon
+                  onClick={() => window.open(info?.website, '_blank')}
+                  className={classes.clickableIcon}
+                />
+                <InfoOutlinedIcon
+                  className={classes.clickableIcon}
+                  onClick={(e) => {
+                    handleClick(e.target, info?.website)
+                  }}
+                />
+              </>
+              <Popover
+                className={classes.shadow}
+                id={id}
+                open={anchorEl !== null}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className={classes.flex}>
+                  <div className={classes.diego}>
+                    <Link target="_blank" rel="noopener noreferrer">
+                      {data}
+                    </Link>
+                  </div>
+                  <CopyToClipboard text={data} />
+                </div>
+              </Popover>
+            </>
+          ) : null}
+        </div>
+
+        <div className={classes.flex}>
+          {!!info?.email ? (
+            <>
+              <>
+                <Typography variant="body1" className={classes.textEllipsis}>
+                  {t('email')}
+                </Typography>
+                <LaunchIcon
+                  onClick={() => (window.location = `mailto:${info.email}`)}
+                  className={classes.clickableIcon}
+                />
+                <InfoOutlinedIcon
+                  className={classes.clickableIcon}
+                  onClick={(e) => {
+                    handleClick(e.target, info?.email)
+                  }}
+                />
+              </>
+              <Popover
+                className={classes.shadow}
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className={classes.flex}>
+                  <div className={classes.diego}>
+                    <Link target="_blank" rel="noopener noreferrer">
+                      {data}
+                    </Link>
+                  </div>
+                  <CopyToClipboard text={data} />
+                </div>
+              </Popover>
+            </>
+          ) : (
+            <Typography variant="body1" className={classes.textEllipsis}>
+              {t('email')}: N/A
+            </Typography>
+          )}
+        </div>
 
         <div className={classes.flex}>
           {!!info?.ownership ? (
-            <><><Typography variant="body1" className={classes.textEllipsis}>
-              {t('codeofconduct')}
-            </Typography>
-              <LaunchIcon onClick={() => window.open(info.ownership, '_blank')} className={classes.clickableIcon}>
-
-              </LaunchIcon>
-              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
+            <>
+              <>
+                <Typography variant="body1" className={classes.textEllipsis}>
+                  {t('ownershipDisclosure')}
+                </Typography>
+                <LaunchIcon
+                  onClick={() => window.open(info?.ownership, '_blank')}
+                  className={classes.clickableIcon}
+                ></LaunchIcon>
+                <InfoOutlinedIcon
+                  className={classes.clickableIcon}
+                  onClick={(e) => {
+                    handleClick(e.target, info?.ownership)
+                  }}
+                />
+              </>
+              <Popover
                 className={classes.shadow}
-                open={Boolean(anchor)}
-                onClose={() => setAnchor(null)}
-                anchorEl={anchor}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              ><Link target="_blank" rel="noopener noreferrer">{info.ownership}</Link>
-              </Popover></>
-
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className={classes.flex}>
+                  <div className={classes.diego}>
+                    <Link target="_blank" rel="noopener noreferrer">
+                      {data}
+                    </Link>
+                  </div>
+                  <CopyToClipboard text={data} />
+                </div>
+              </Popover>
+            </>
           ) : null}
         </div>
 
         <div className={classes.flex}>
           {!!info?.code_of_conduct ? (
-            <><><Typography variant="body1" className={classes.textEllipsis}>
-              {t('codeofconduct')}
-            </Typography>
-              <LaunchIcon onClick={() => window.open(info.code_of_conduct, '_blank')} className={classes.clickableIcon}>
-
-              </LaunchIcon>
-              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
+            <>
+              <>
+                <Typography variant="body1" className={classes.textEllipsis}>
+                  {t('codeofconduct')}
+                </Typography>
+                <LaunchIcon
+                  onClick={() => window.open(info?.code_of_conduct, '_blank')}
+                  className={classes.clickableIcon}
+                ></LaunchIcon>
+                <InfoOutlinedIcon
+                  className={classes.clickableIcon}
+                  onClick={(e) => {
+                    handleClick(e.target, info?.code_of_conduct)
+                  }}
+                />
+              </>
+              <Popover
                 className={classes.shadow}
-                open={Boolean(anchor)}
-                onClose={() => setAnchor(null)}
-                anchorEl={anchor}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              ><Link target="_blank" rel="noopener noreferrer">{info.code_of_conduct}</Link>
-              </Popover></>
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className={classes.flex}>
+                  <div className={classes.diego}>
+                    <Link target="_blank" rel="noopener noreferrer">
+                      {data}
+                    </Link>
+                  </div>
+                  <CopyToClipboard text={data} />
+                </div>
+              </Popover>
+            </>
+          ) : null}
+        </div>
 
+        <div className={classes.flex}>
+          {!!info?.chain ? (
+            <>
+              <>
+                <Typography variant="body1" className={classes.textEllipsis}>
+                  {t('chainResources')}
+                </Typography>
+                <LaunchIcon
+                  onClick={() => window.open(info?.chain, '_blank')}
+                  className={classes.clickableIcon}
+                ></LaunchIcon>
+                <Tooltip title="test" arrow placement='right'>
+                  <InfoOutlinedIcon
+                    className={classes.clickableIcon}
+                    onClick={(e) => {
+                      handleClick(e.target, info?.chain)
+                    }}
+                  />
+                </Tooltip>
+              </>
+              <Popover
+                className={classes.shadow}
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className={classes.flex}>
+                  <div className={classes.diego}>
+                    <Link target="_blank" rel="noopener noreferrer">
+                      {data}
+                    </Link>
+                  </div>
+                  <CopyToClipboard text={data} />
+                </div>
+              </Popover>
+            </>
           ) : null}
         </div>
         <div className={classes.flex}>
-          {!!info?.chain ? (
-            <><><Typography variant="body1" className={classes.textEllipsis}>
-              {t('chainResources')}
-            </Typography>
-              <LaunchIcon onClick={() => window.open(info.chain, '_blank')} className={classes.clickableIcon}>
-
-              </LaunchIcon>
-              <InfoOutlinedIcon className={classes.clickableIcon} onClick={openPopover}></InfoOutlinedIcon></><Popover
-                className={classes.shadow}
-                open={Boolean(anchor)}
-                onClose={() => setAnchor(null)}
-                anchorEl={anchor}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              ><Link target="_blank" rel="noopener noreferrer">{info.chain}</Link>
-              </Popover></>
-
-          ) : null}
-        </div>
-
-
-        {!!info?.otherResources.length && (
-          <div className={classes.rowWrapper}>
-            <dt className={classes.dt}>
+          {!!info?.otherResources.length && (
+            <>
               <Typography variant="body1" className={classes.textEllipsis}>
                 {t('otherResources')}
               </Typography>
-            </dt>
-            <InfoOutlinedIcon onClick={openPopover}></InfoOutlinedIcon>
-            <Popover
-              className={classes.shadow}
-              open={Boolean(anchor)}
-              onClose={() => setAnchor(null)}
-              anchorEl={anchor}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            >
-              {info.otherResources.map((url, i) => (
-                <div className={classes.dd} key={i}>
-                  <Link href={url} target="_blank" rel="noopener noreferrer">
-                    {info?.otherResources}
-                  </Link>
-                </div>
-              ))}
-            </Popover>
-          </div>
-        )}
-
-
+              <InfoOutlinedIcon
+                className={classes.clickableIcon}
+                onClick={(e) => {
+                  diego(e.target)
+                }}
+              />
+              <Popover
+                className={classes.shadow}
+                id={id}
+                open={openRes}
+                anchorEl={OtherRes}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                {info.otherResources.map((url, i) => (
+                  <div className={classes.dd} key={i}>
+                    <Link href={url} target="_blank" rel="noopener noreferrer">
+                      {url}
+                    </Link>
+                  </div>
+                ))}
+              </Popover>
+            </>
+          )}
+        </div>
       </div>
     </>
   )
