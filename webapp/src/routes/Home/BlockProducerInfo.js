@@ -81,7 +81,7 @@ const BlockProducerInfo = ({ t, classes }) => {
   }, [producersSummary])
 
   return (
-    <div>
+    <>
       <div className={classes.divMargin}>
         <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
@@ -234,7 +234,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

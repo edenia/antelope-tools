@@ -112,91 +112,73 @@ const BlockDistribution = () => {
   }, [data])
 
   return (
-    <div>
-      <div>
-        <div>
-          <Card className={classes.cardShadow}>
-            <CardContent>
-              <div className={classes.textDiv}>
-                <Typography component="p" variant="h6">
-                  {t('title')}
-                </Typography>
-                <FormControl variant="standard">
-                  <InputLabel id="demo-simple-select-label">
-                    {t('timeFrame')}
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    value={range}
-                    onChange={(e) => setRange(e.target.value)}
-                    fullWidth
-                  >
-                    {rangeOptions.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {t(option)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </div>
-              {loading && <LinearProgress />}
-              {!loading && data?.items.length > 0 && (
-                <>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={{ ...options, series }}
-                  />
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{t('account')}</TableCell>
-                          <TableCell align="right">
-                            {t('scheduledBlocks')}
-                          </TableCell>
-                          <TableCell align="right">
-                            {t('producedBlocks')}
-                          </TableCell>
-                          <TableCell align="right">
-                            {t('missedBlocks')}
-                          </TableCell>
-                          <TableCell align="right">
-                            {t('availability')}
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {producers.map((item, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{item.name}</TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.scheduled)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.produced)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.missed)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(
-                                item.availability,
-                                2,
-                              )}
-                              %
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </>
-              )}
-            </CardContent>
-          </Card>
+    <Card className={classes.cardShadow}>
+      <CardContent>
+        <div className={classes.textDiv}>
+          <Typography component="p" variant="h6">
+            {t('title')}
+          </Typography>
+          <FormControl variant="standard">
+            <InputLabel id="demo-simple-select-label">
+              {t('timeFrame')}
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              value={range}
+              onChange={(e) => setRange(e.target.value)}
+              fullWidth
+            >
+              {rangeOptions.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {t(option)}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
-      </div>
-    </div>
+        {loading && <LinearProgress />}
+        {!loading && data?.items.length > 0 && (
+          <>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{ ...options, series }}
+            />
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t('account')}</TableCell>
+                    <TableCell align="right">{t('scheduledBlocks')}</TableCell>
+                    <TableCell align="right">{t('producedBlocks')}</TableCell>
+                    <TableCell align="right">{t('missedBlocks')}</TableCell>
+                    <TableCell align="right">{t('availability')}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {producers.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.scheduled)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.produced)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.missed)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.availability, 2)}%
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

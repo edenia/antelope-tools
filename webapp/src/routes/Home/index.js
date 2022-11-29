@@ -36,9 +36,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div>
-      <BlockProducerInfo t={t} classes={classes} />
-    </div>
+    <BlockProducerInfo t={t} classes={classes} />
   )
 }
 
