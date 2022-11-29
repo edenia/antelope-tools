@@ -46,7 +46,7 @@ const useBlockProducerState = () => {
       ...prev,
       page: 1,
       ...filter,
-      where: { ...where, owner: prev.where?.owner },
+      where: { ...where, owner: prev.where?.owner, bp_json: {_is_null: false} },
     }))
   }, [filters, setPagination])
 
