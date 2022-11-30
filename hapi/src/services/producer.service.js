@@ -43,6 +43,7 @@ const updateProducers = async (producers = []) => {
   topProducers = topProducers.filter(
     producer => producer?.bp_json && Object.keys(producer.bp_json).length > 0
   )
+  await nodeService.clearNodes()
   await updateBPJSONs(topProducers)
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
@@ -67,7 +68,6 @@ const syncProducers = async () => {
   }
 
   if (producers?.length) {
-    await nodeService.clearNodes()
     producers = await updateProducers(producers)
     await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
     await syncEndpoints()
