@@ -25,7 +25,7 @@ module.exports = {
         input: Joi.object({
           bpParams: Joi.object({
             type: Joi.string().valid('api', 'ssl', 'p2p').optional(),
-            owners: Joi.array().items(Joi.string().required()).max(100).optional()
+            owners: Joi.array().items(Joi.string().required()).max(150).optional()
           }).required()
         }).required()
       }).options({ stripUnknown: true })
