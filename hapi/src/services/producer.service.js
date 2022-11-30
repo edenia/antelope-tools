@@ -39,13 +39,16 @@ const updateProducers = async (producers = []) => {
   `
 
   let topProducers = producers.slice(0, eosConfig.eosTopLimit)
-  topProducers = topProducers.filter(prod => prod?.bp_json && Object.keys(prod.bp_json).length > 0)
+
+  topProducers = topProducers.filter(
+    producer => producer?.bp_json && Object.keys(producer.bp_json).length > 0
+  )
   await updateBPJSONs(topProducers)
 
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
 
   await hasuraUtil.request(clearMutation, {
-    owners: producers.map((producer) => producer.owner)
+    owners: producers.map(producer => producer.owner)
   })
 
   return insertedRows.insert_producer.returning
@@ -72,7 +75,6 @@ const syncProducers = async () => {
     if (!eosConfig.stateHistoryPluginEndpoint) {
       await statsService.sync()
     }
-      
   }
 }
 
@@ -94,8 +96,8 @@ const getProducersSummary = async () => {
 const syncNodes = async producers => {
   if (!producers?.length) return
 
-  let nodes = producers.flatMap((producer) => {
-    return (producer.bp_json?.nodes || []).map((node) => {
+  let nodes = producers.flatMap(producer => {
+    return (producer.bp_json?.nodes || []).map(node => {
       node.producer_id = producer.id
 
       return nodeService.getFormatNode(node)
