@@ -11,10 +11,7 @@ jobs:
     environment: jungle-testnet
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2.4.0
-
-      - name: Setup Docker
-        uses: docker-practice/actions-setup-docker@1.0.8
+        uses: actions/checkout@v3
 
       - name: Log in to docker registry
         run: |

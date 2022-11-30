@@ -38,7 +38,9 @@ const Nodes = ({ nodes, producer, t, classes }) => {
         <>
           {nodes.map((node, index) => (
             <div
-              key={`node-${producer?.owner}-${node?.node_type?.toString()}-${index}`}
+              key={`node-${
+                producer?.owner
+              }-${node?.node_type?.toString()}-${index}`}
             >
               <Tooltip
                 anchorEl={anchorEl}
@@ -47,12 +49,15 @@ const Nodes = ({ nodes, producer, t, classes }) => {
               >
                 <NodeCard node={node} producer={producer} />
               </Tooltip>
-              <div className={classes.rowWrapper}>
-                <Typography variant="body1">
+              <div className={classes.flex}>
+                <Typography
+                  variant="body1"
+                  className={classes.textEllipsisNodes}
+                >
                   {node.name || node?.node_type?.toString() || 'node'}{' '}
                 </Typography>
                 <InfoOutlinedIcon
-                  className={classes.infoIcon}
+                  className={classes.clickableIcon}
                   onClick={(event) => {
                     handlePopoverOpen(event.target, node)
                   }}
