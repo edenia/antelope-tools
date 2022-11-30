@@ -75,7 +75,7 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      minWidth: 200,
+      width: 300,
       maxWidth: 300,
       justifyContent: 'center',
     },
@@ -101,7 +101,7 @@ export default (theme) => ({
   info: {
     borderLeft: 'none',
     '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
+      margin: theme.spacing(1),
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -170,7 +170,6 @@ export default (theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15,
     },
     [theme.breakpoints.up('lg')]: {
       width: 140,
@@ -252,14 +251,76 @@ export default (theme) => ({
     },
   },
   dd: {
-    marginLeft: theme.spacing(6),
+    marginLeft: theme.spacing(1),
     margin: theme.spacing(1, 0),
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    width: 220,
+    width: '100%',
   },
   infoIcon: {
     cursor: 'pointer',
+    flexDirection: 'flex-end',
+  },
+  dt: {
+    maxWidth: 100,
+  },
+  shadow: {
+    '& .MuiPaper-root': {
+      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      padding: theme.spacing(3),
+      maxWidth: '250px',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      borderRadius: '5px',
+    },
+  },
+  infoItems: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& .listBox': {
+      marginLeft: theme.spacing(1),
+    },
+    '& .listLabel': {
+      height: '100%',
+      '& .MuiSvgIcon-root': {
+        marginRight: theme.spacing(1),
+        fontSize: 15,
+      },
+      '& .MuiTypography-body1': {
+        whiteSpace: 'nowrap',
+      },
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150,
+    },
+  },
+  flex: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  clickableIcon: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#1565c0',
+    },
+  },
+  popoverStyle: {
+    paddingRight: theme.spacing(2),
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+  textEllipsisNodes: {
+    margin: theme.spacing(1, 0),
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: '100%',
+    '& a': {
+      marginLeft: theme.spacing(1),
+    },
   },
 })
