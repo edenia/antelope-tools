@@ -103,7 +103,7 @@ export default (theme) => ({
     justifyContent: 'center',
     borderRadius: '10px',
     textAlign: 'center',
-    backgroundColor: `${theme.palette.secondary.main} !important`,
+    backgroundColor: `#1675CA !important`,
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',

@@ -142,7 +142,7 @@ export default (theme) => ({
     color: theme.palette.text.hint,
   },
   jungleImg: {
-    width: '15px !important',
+    width: '22px !important',
     height: '22px !important',
     marginRight: theme.spacing(2),
   },
