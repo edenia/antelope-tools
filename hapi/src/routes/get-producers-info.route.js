@@ -1,6 +1,7 @@
 const Boom = require('@hapi/boom')
 const Joi = require('joi')
 
+const { eosConfig } = require('../config')
 const { producerService } = require('../services')
 
 module.exports = {
@@ -25,7 +26,7 @@ module.exports = {
         input: Joi.object({
           bpParams: Joi.object({
             type: Joi.string().valid('api', 'ssl', 'p2p').optional(),
-            owners: Joi.array().items(Joi.string().required()).max(150).optional()
+            owners: Joi.array().items(Joi.string().required()).max(eosConfig.eosTopLimit).optional()
           }).required()
         }).required()
       }).options({ stripUnknown: true })
