@@ -9,8 +9,6 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const handleLinkClick = () => {}
-
 const Footer = () => {
   const classes = useStyles()
   const { t } = useTranslation('translations')
@@ -38,7 +36,6 @@ const Footer = () => {
         <a
           className={classes.noUnderline}
           href="https://edenia.com/"
-          onClick={() => handleLinkClick()}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -59,7 +56,6 @@ const Footer = () => {
           <a
             className={classes.noUnderline}
             href="https://github.com/edenia/antelope-tools/releases"
-            onClick={() => handleLinkClick()}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -75,7 +71,6 @@ const Footer = () => {
           <a
             className={classes.noUnderline}
             href="https://github.com/edenia/antelope-tools/issues/new/choose"
-            onClick={() => handleLinkClick()}
             target="_blank"
             rel="noopener noreferrer"
           >
