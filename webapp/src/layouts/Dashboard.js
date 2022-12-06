@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
 const Dashboard = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles()
-  const { t } = useTranslation('routes')
+  const { t, i18n } = useTranslation('routes')
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
@@ -117,7 +117,9 @@ const Dashboard = ({ children }) => {
                   : ''}
               </Typography>
               <Typography className={classes.textAlignReadMore}>
-                {t(`${location.pathname}>moreDescription`)}
+                {i18n.exists(`routes:${location.pathname}>moreDescription`)
+                  ? t(`${location.pathname}>moreDescription`)
+                  : ''}
               </Typography>
             </div>
             <NetworkSelector

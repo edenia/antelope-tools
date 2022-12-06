@@ -254,6 +254,7 @@ const helpRoutes = [
   },
   {
     component: Page404,
+    path: '*',
   },
 ]
 
