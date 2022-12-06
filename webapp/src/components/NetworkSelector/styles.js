@@ -129,6 +129,7 @@ export default (theme) => ({
     position: 'absolute',
     right: 70,
     top: -45,
+    cursor: 'default',
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('sm')]: {
       right: 0,
@@ -141,7 +142,7 @@ export default (theme) => ({
     color: theme.palette.text.hint,
   },
   jungleImg: {
-    width: '15px !important',
+    width: '22px !important',
     height: '22px !important',
     marginRight: theme.spacing(2),
   },

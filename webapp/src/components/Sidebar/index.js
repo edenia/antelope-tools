@@ -104,7 +104,7 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
                 placement="left"
                 key={`category-${category.name}-${index}`}
               >
-                <div>
+                <>
                   {category.header ? (
                     <div className={classesStyle.divider} />
                   ) : null}
@@ -173,7 +173,7 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
                       />
                     )}
                   </MuiListItem>
-                </div>
+                </>
               </Tooltip>
             ))}
           <div className={classesStyle.divider} />

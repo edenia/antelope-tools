@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import { Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
+import { Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -29,15 +29,15 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <div>
-      <Link href="https://antelope.tools/">
-        <img
-          alt="antelope tools dashboard"
-          src={'/antelope-tools.svg'}
-          className={classes.imgHeaderLogo}
-        />
-      </Link>
-    </div>
+    <a href="https://antelope.tools/" rel="external">
+      <img
+        alt="antelope tools dashboard"
+        src={'/antelope-tools.svg'}
+        width={145}
+        height={64}
+        className={classes.imgHeaderLogo}
+      />
+    </a>
   )
 }
 
@@ -66,7 +66,7 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <div>
+    <>
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -89,7 +89,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </>
   )
 }
 

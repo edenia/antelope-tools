@@ -5,7 +5,9 @@ export default (theme) => ({
   chipWrapper: {
     marginTop: theme.spacing(2),
     '& .MuiChip-root': {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(3),
+      marginBottom: theme.spacing(2),
+      minWidth: '48px',
     },
     textTransform: 'capitalize'
   },

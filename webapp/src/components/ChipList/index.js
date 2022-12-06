@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Chip } from '@mui/material'
+import Chip from '@mui/material/Chip'
 import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
