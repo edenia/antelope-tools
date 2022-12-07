@@ -373,5 +373,10 @@
   "copyToClipboardComponent": {
     "copyToClipboard": "Copiar al portapapeles",
     "copied": "¡Copiado!"
+  },
+  "noFound": {
+    "subTitle": "Página no encontrada.",
+    "message": "Es posible que la página que busca haya sido eliminada.",
+    "return": "Volver al sitio web"
   }
 }
