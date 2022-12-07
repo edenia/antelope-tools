@@ -36,7 +36,6 @@ const useNodeState = () => {
         ...prev.where,
         nodes: nodesFilter,
       },
-      nodeFilter: nodesFilter,
     }))
   }, [filters.name, setPagination])
 
@@ -47,7 +46,7 @@ const useNodeState = () => {
       if (!producer?.nodes?.length) return []
 
       producer.nodes.sort((a, b) => {
-        return getOrderNode(a) < getOrderNode(b)
+        return getOrderNode(b) - getOrderNode(a)
       })
 
       return producer.nodes.length

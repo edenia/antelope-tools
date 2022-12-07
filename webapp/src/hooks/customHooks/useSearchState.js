@@ -42,7 +42,6 @@ const useSearchState = ({ query, ...options }) => {
         where: pagination.where,
         offset: (pagination.page - 1) * pagination.limit,
         limit: pagination.limit,
-        nodeFilter: pagination.nodeFilter,
         endpointFilter: pagination.endpointFilter,
       },
     })
@@ -52,7 +51,6 @@ const useSearchState = ({ query, ...options }) => {
     pagination.page,
     pagination.limit,
     pagination.offset,
-    pagination.nodeFilter,
     pagination.endpointFilter
   ])
 
