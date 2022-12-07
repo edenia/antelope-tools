@@ -4,10 +4,8 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import { useSubscription } from '@apollo/client'
-import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import 'flag-icon-css/css/flag-icons.css'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
@@ -159,7 +157,7 @@ const NodesCard = ({ nodes }) => {
     <div className={classes.nodesWrapper}>
       <div className={classes.nodesContainer}>
         {(nodes || []).map((node, index) => (
-          <Card key={`node-${index}`} className={classes.nodes} elevation={0}>
+          <div key={`node-${index}`} className={classes.nodes}>
             <CardHeader
               className={classes.cardHeader}
               title={getType(node) || ''}
@@ -175,8 +173,7 @@ const NodesCard = ({ nodes }) => {
             <CardContent className={classes.content}>
               <NodeInfo node={node} />
             </CardContent>
-            <CardActions disableSpacing />
-          </Card>
+          </div>
         ))}
       </div>
     </div>

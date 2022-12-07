@@ -44,15 +44,8 @@ export default (theme) => ({
     },
   },
   nodeCardsContainer: {
-    [theme.breakpoints.up('lg')]: {
-      width: '84%',
-    },
-    [theme.breakpoints.down('lg')]: {
-      width: '100%',
-    },
+    width: '100%',
     overflowX: 'auto',
-    border: '3px #f3f3f3',
-    borderLeftStyle: 'solid',
   },
   hideScroll: {
     overflowX: 'hidden',
