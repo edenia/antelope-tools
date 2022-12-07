@@ -34,7 +34,7 @@ export default (theme) => ({
       flexDirection: 'row',
       '& .bodyWrapper': {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         width: '100%',
       },
       '& .MuiTypography-overline': {
@@ -75,8 +75,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      width: 300,
-      maxWidth: 300,
+      width: 250,
+      minWidth: 250,
       justifyContent: 'center',
     },
   },
@@ -322,6 +322,11 @@ export default (theme) => ({
     '& a': {
       marginLeft: theme.spacing(1),
     },
+  },
+  centerWrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   emptyState: {
     display: 'flex',

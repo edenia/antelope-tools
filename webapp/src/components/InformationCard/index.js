@@ -19,6 +19,7 @@ import { eosConfig } from '../../config'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import NodesCard from '../NodeCard/NodesCard'
 
+import EmptyState from './EmptyState'
 import ProducerInformation from './ProducerInformation'
 import Nodes from './Nodes'
 import Social from './Social'
@@ -59,20 +60,8 @@ const InformationCard = ({ producer, rank, type }) => {
   }
 
   const BlockProducerInfo = () => {
-    if (producerOrg.healthStatus?.length <= 1) {
-      return (
-        <div className={`bodyWrapper ${classes.borderLine}`}>
-          <div className={classes.emptyState}>
-            <img
-              className={classes.imgError}
-              src="/empty-states/Error.webp"
-              alt=""
-            />
-            <span>{t('emptyState')}</span>
-          </div>
-        </div>
-      )
-    }
+    if (producerOrg.healthStatus?.length <= 1)
+      return <EmptyState classes={classes} t={t}/>
 
     return (
       <div className="bodyWrapper">
