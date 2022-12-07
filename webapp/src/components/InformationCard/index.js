@@ -59,6 +59,21 @@ const InformationCard = ({ producer, rank, type }) => {
   }
 
   const BlockProducerInfo = () => {
+    if (producerOrg.healthStatus?.length <= 1) {
+      return (
+        <div className={`bodyWrapper ${classes.borderLine}`}>
+          <div className={classes.emptyState}>
+            <img
+              className={classes.imgError}
+              src="/empty-states/Error.webp"
+              alt=""
+            />
+            <span>{t('emptyState')}</span>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="bodyWrapper">
         <div className={clsx(classes.info, classes[type])}>
@@ -136,7 +151,7 @@ const InformationCard = ({ producer, rank, type }) => {
     // eslint-disable-next-line
   }, [producer])
 
-  if(!producerOrg || !Object.keys(producerOrg)?.length) return <></>
+  if (!producerOrg || !Object.keys(producerOrg)?.length) return <></>
 
   return (
     <Card className={classes.root}>

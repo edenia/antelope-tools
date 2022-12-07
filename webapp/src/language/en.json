@@ -251,7 +251,8 @@
     "noData": "No Data",
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
-    "hs_bpJson": "BP Json"
+    "hs_bpJson": "BP Json",
+    "emptyState": "This block producer does not provide any information."
   },
   "nodeCardComponent": {
     "features": "Features",

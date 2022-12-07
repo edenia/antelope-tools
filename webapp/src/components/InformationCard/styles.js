@@ -323,4 +323,25 @@ export default (theme) => ({
       marginLeft: theme.spacing(1),
     },
   },
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& span': {
+      width: '298px',
+      height: '45px',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      lineHeight: '1.12',
+      letterSpacing: '-0.22px',
+      textAlign: 'center',
+      color: '#3d3d3dde'
+    }
+  },
+  imgError: {
+    width: '257.5px',
+    height: '160px',
+    objectFit: 'contain',
+  },
 })
