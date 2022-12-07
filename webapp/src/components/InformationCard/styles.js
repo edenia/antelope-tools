@@ -326,10 +326,11 @@ export default (theme) => ({
   emptyState: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     '& span': {
-      width: '298px',
+      width: '16em',
       height: '45px',
-      fontSize: '20px',
+      fontSize: '1.2em',
       fontWeight: 'bold',
       fontStretch: 'normal',
       fontStyle: 'normal',
@@ -340,7 +341,7 @@ export default (theme) => ({
     }
   },
   imgError: {
-    width: '257.5px',
+    width: '260px',
     height: '160px',
     objectFit: 'contain',
   },
