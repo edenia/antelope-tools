@@ -43,7 +43,7 @@ export default (theme) => ({
       },
     },
   },
-  nodeCardsContainer: {
+  nodesContainer: {
     width: '100%',
     overflowX: 'auto',
   },

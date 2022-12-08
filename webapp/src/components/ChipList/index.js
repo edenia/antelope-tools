@@ -14,7 +14,7 @@ const ChipList = ({ list = [], title = '' }) => {
 
   return (
     <>
-      <div className={classes.bold}>{title}</div>
+      {title && <span className={classes.bold}>{title}</span>}
       <div
         className={`${classes.chipsContainer} ${
           list.length > 10 ? classes.longList : classes.shortList

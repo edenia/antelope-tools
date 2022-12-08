@@ -156,7 +156,7 @@ const InformationCard = ({ producer, rank, type }) => {
           className={classes.collapse}
         >
           {type === 'node' ? (
-            <div className={classes.nodeCardsContainer}>
+            <div className={classes.nodesContainer}>
               <NodesCard nodes={producerOrg.nodes} />{' '}
             </div>
           ) : (

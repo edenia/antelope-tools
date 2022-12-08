@@ -37,17 +37,14 @@ export default (theme) => ({
     marginRight: '5px',
     borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
   },
-  nodesContainer: {
+  nodesWrapper: {
     display: 'flex',
+    width: 'max-content',
     flexFlow: 'row nowrap',
     padding: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
       paddingRight: '250px',
     },
-  },
-  nodesWrapper: {
-    display: 'flex',
-    width: 'max-content',
   },
   endpointsTitle: {
     display: 'flex',

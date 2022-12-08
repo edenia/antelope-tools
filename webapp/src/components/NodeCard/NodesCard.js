@@ -180,20 +180,18 @@ const NodesCard = ({ nodes }) => {
 
   return (
     <div className={classes.nodesWrapper}>
-      <div className={classes.nodesContainer}>
-        {(nodes || []).map((node, index) => (
-          <div key={`node-${index}`} className={classes.nodes}>
-            <CardHeader
-              className={classes.cardHeader}
-              title={getType(node) || ''}
-              subheader={showLocations(node)}
-            />
-            <CardContent className={classes.content}>
-              <NodeInfo node={node} />
-            </CardContent>
-          </div>
-        ))}
-      </div>
+      {(nodes || []).map((node, index) => (
+        <div key={`node-${index}`} className={classes.nodes}>
+          <CardHeader
+            className={classes.cardHeader}
+            title={getType(node) || ''}
+            subheader={showLocations(node)}
+          />
+          <CardContent className={classes.content}>
+            <NodeInfo node={node} />
+          </CardContent>
+        </div>
+      ))}
     </div>
   )
 }
