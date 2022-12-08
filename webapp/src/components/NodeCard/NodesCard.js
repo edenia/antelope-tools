@@ -98,7 +98,7 @@ const NodesCard = ({ nodes }) => {
   }
 
   const Keys = ({ node }) => {
-    if (!node.node_info?.length || !node.node_info[0]?.features?.keys)
+    if (!node?.node_info?.length || !node?.node_info[0]?.features?.keys)
       return <></>
 
     const keys = node.node_info[0].features.keys
@@ -124,7 +124,7 @@ const NodesCard = ({ nodes }) => {
         <Endpoints node={node} />
         <ChipList
           title={t('features')}
-          list={node.node_info[0]?.features?.list}
+          list={node?.node_info[0]?.features?.list}
         />
         {node.type.includes('query') && <SupportedAPIs node={node} />}
         <Keys node={node} />
@@ -153,6 +153,23 @@ const NodesCard = ({ nodes }) => {
     return type
   }
 
+  const showLocations = (node) => {
+    if(!node) return <></>
+
+    return (
+      <>
+        {(node.locations || [node.location]).map((location, index) => (
+          <div key={`location-${location?.name}-${node?.type?.join()}-${index}`}>
+            <span className={classes.country} >
+              {location?.name || 'N/A'}
+            </span>
+            <CountryFlag code={location?.country} />
+          </div>
+        ))}
+      </>
+    )
+  }
+
   return (
     <div className={classes.nodesWrapper}>
       <div className={classes.nodesContainer}>
@@ -161,14 +178,7 @@ const NodesCard = ({ nodes }) => {
             <CardHeader
               className={classes.cardHeader}
               title={getType(node) || ''}
-              subheader={
-                <>
-                  <span className={classes.country}>
-                    {node.location?.name || 'N/A'}
-                  </span>
-                  <CountryFlag code={node.location?.country} />
-                </>
-              }
+              subheader={showLocations(node)}
             />
             <CardContent className={classes.content}>
               <NodeInfo node={node} />

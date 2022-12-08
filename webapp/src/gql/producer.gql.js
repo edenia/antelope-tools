@@ -56,6 +56,7 @@ export const NODES_QUERY = gql`
       total_votes_percent
       rank
       updated_at
+      producer_key
       nodes {
         info: endpoints_aggregate(
           where: { response: { _contains: { status: 200 } } }
