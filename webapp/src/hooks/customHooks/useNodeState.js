@@ -50,6 +50,7 @@ const useNodeState = () => {
         return getOrderNode(a) - getOrderNode(b)
       })
 
+      let nodes = []
       let producerNode
 
       for (const node in producer.nodes) {
@@ -68,21 +69,19 @@ const useNodeState = () => {
 
           producerNode.locations.push(current.location)
         } else {
-          producer.nodes = producer.nodes.splice(node)
-          producer.nodes.reverse()
+          nodes = JSON.parse(JSON.stringify(producer.nodes.slice(node)))
+          nodes.reverse()
 
-          if (producerNode) {
-            producer.nodes.push(producerNode)
-          }
+          if (producerNode) nodes.push(producerNode)
 
           break
         }
       }
 
-      return producer.nodes.length
+      return nodes.length
         ? {
             ...producer,
-            bp_json: { ...producer.bp_json, nodes: producer.nodes },
+            bp_json: { ...producer.bp_json, nodes },
           }
         : []
     })
