@@ -134,11 +134,9 @@ const NodesCard = ({ nodes }) => {
   }
 
   const capitalizeText = (text) => {
-    if(!text) return 
+    if (!text) return
 
-    return (
-      text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
-    )
+    return text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
   }
 
   const getType = (node) => {
@@ -153,21 +151,31 @@ const NodesCard = ({ nodes }) => {
     return type
   }
 
-  const showLocations = (node) => {
-    if(!node) return <></>
-
+  const Location = ({ location }) => {
     return (
       <>
-        {(node.locations || [node.location]).map((location, index) => (
-          <div key={`location-${location?.name}-${node?.type?.join()}-${index}`}>
-            <span className={classes.country} >
-              {location?.name || 'N/A'}
-            </span>
-            <CountryFlag code={location?.country} />
-          </div>
-        ))}
+        <span className={classes.country}>{location?.name || 'N/A'}</span>
+        <CountryFlag code={location?.country} />
       </>
     )
+  }
+
+  const showLocations = (node) => {
+    if (node?.locations?.length) {
+      return (
+        <>
+          {node.locations.map((location, index) => (
+            <div
+              key={`location-${location?.name}-${node?.type?.join()}-${index}`}
+            >
+              <Location location={location} />
+            </div>
+          ))}
+        </>
+      )
+    }
+
+    return <Location location={node.location} />
   }
 
   return (

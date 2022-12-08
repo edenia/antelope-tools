@@ -71,7 +71,7 @@ const useNodeState = () => {
           producer.nodes = producer.nodes.splice(node)
           producer.nodes.reverse()
 
-          if(producerNode){
+          if (producerNode) {
             producer.nodes.push(producerNode)
           }
 
