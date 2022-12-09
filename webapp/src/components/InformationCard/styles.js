@@ -34,7 +34,7 @@ export default (theme) => ({
       flexDirection: 'row',
       '& .bodyWrapper': {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         width: '100%',
       },
       '& .MuiTypography-overline': {
@@ -75,8 +75,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      width: 300,
-      maxWidth: 300,
+      width: 250,
+      minWidth: 250,
       justifyContent: 'center',
     },
   },
@@ -322,5 +322,46 @@ export default (theme) => ({
     '& a': {
       marginLeft: theme.spacing(1),
     },
+  },
+  centerWrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& span': {
+      width: '16em',
+      height: '45px',
+      fontSize: '1.2em',
+      fontWeight: 'bold',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      lineHeight: '1.12',
+      letterSpacing: '-0.22px',
+      textAlign: 'center',
+      color: '#3d3d3dde',
+    },
+  },
+  horizontalLine: {
+    [theme.breakpoints.down('lg')]: {
+      width: '270px',
+      height: '1px',
+      margin: '15.2px 32px 40px 33px',
+      backgroundColor: '#e0e0e0',
+    },
+  },
+  imgError: {
+    [theme.breakpoints.down('lg')]: {
+      width: '200px',
+      height: '120px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '260px',
+      height: '160px',
+    },
+    objectFit: 'contain',
   },
 })

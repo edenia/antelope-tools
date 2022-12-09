@@ -19,6 +19,7 @@ import { eosConfig } from '../../config'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import NodesCard from '../NodeCard/NodesCard'
 
+import EmptyState from './EmptyState'
 import ProducerInformation from './ProducerInformation'
 import Nodes from './Nodes'
 import Social from './Social'
@@ -59,6 +60,9 @@ const InformationCard = ({ producer, rank, type }) => {
   }
 
   const BlockProducerInfo = () => {
+    if (producerOrg.healthStatus?.length <= 1)
+      return <EmptyState classes={classes} t={t}/>
+
     return (
       <div className="bodyWrapper">
         <div className={clsx(classes.info, classes[type])}>
@@ -136,7 +140,7 @@ const InformationCard = ({ producer, rank, type }) => {
     // eslint-disable-next-line
   }, [producer])
 
-  if(!producerOrg || !Object.keys(producerOrg)?.length) return <></>
+  if (!producerOrg || !Object.keys(producerOrg)?.length) return <></>
 
   return (
     <Card className={classes.root}>
