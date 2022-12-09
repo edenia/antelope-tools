@@ -54,11 +54,11 @@ const useNodeState = () => {
       let producerNode
 
       for (const node in producer.nodes) {
-        let current = producer.nodes[node]
+        const current = producer.nodes[node]
 
         if (current?.type[0] === 'producer') {
           if (!producerNode) {
-            let features = { keys: { producer_key: producer.producer_key } }
+            const features = { keys: { producer_key: producer.producer_key } }
 
             producerNode = {
               ...current,
