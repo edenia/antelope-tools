@@ -345,11 +345,18 @@ export default (theme) => ({
       color: '#3d3d3dde',
     },
   },
+  horizontalLine: {
+    [theme.breakpoints.down('lg')]: {
+      width: '270px',
+      height: '1px',
+      margin: '15.2px 32px 40px 33px',
+      backgroundColor: '#e0e0e0',
+    },
+  },
   imgError: {
     [theme.breakpoints.down('lg')]: {
       width: '200px',
       height: '120px',
-      marginTop: theme.spacing(8),
     },
     [theme.breakpoints.up('lg')]: {
       width: '260px',

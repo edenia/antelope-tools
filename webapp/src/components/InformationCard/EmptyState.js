@@ -5,6 +5,7 @@ const EmptyState = ({ classes, t }) => {
   return (
     <div className={`${classes.centerWrapper} ${classes.borderLine}`}>
       <div className={classes.emptyState}>
+        <div class={classes.horizontalLine}></div>
         <img
           className={classes.imgError}
           src="/empty-states/Error.webp"
