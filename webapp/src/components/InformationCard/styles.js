@@ -342,12 +342,19 @@ export default (theme) => ({
       lineHeight: '1.12',
       letterSpacing: '-0.22px',
       textAlign: 'center',
-      color: '#3d3d3dde'
-    }
+      color: '#3d3d3dde',
+    },
   },
   imgError: {
-    width: '260px',
-    height: '160px',
+    [theme.breakpoints.down('lg')]: {
+      width: '200px',
+      height: '120px',
+      marginTop: theme.spacing(8),
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '260px',
+      height: '160px',
+    },
     objectFit: 'contain',
   },
 })

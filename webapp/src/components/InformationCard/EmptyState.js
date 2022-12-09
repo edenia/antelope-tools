@@ -8,6 +8,7 @@ const EmptyState = ({ classes, t }) => {
         <img
           className={classes.imgError}
           src="/empty-states/Error.webp"
+          loading="lazy"
           alt=""
         />
         <span>{t('emptyState')}</span>
