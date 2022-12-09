@@ -37,7 +37,6 @@ export const NODES_QUERY = gql`
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
-    $nodeFilter: node_bool_exp
   ) {
     info: producer_aggregate(where: $where) {
       producers: aggregate {
@@ -57,7 +56,8 @@ export const NODES_QUERY = gql`
       total_votes_percent
       rank
       updated_at
-      nodes(where: $nodeFilter) {
+      producer_key
+      nodes {
         info: endpoints_aggregate(
           where: { response: { _contains: { status: 200 } } }
         ) {

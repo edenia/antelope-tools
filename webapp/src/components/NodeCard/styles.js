@@ -30,21 +30,21 @@ export default (theme) => ({
     wordBreak: 'break-word',
   },
   nodes: {
-    minWidth: '100px',
+    width: '280px',
     padding: theme.spacing(3),
     overflowX: 'auto',
     marginLeft: '5px',
     marginRight: '5px',
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-  },
-  nodesContainer: {
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    padding: theme.spacing(2),
+    borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
   },
   nodesWrapper: {
     display: 'flex',
     width: 'max-content',
+    flexFlow: 'row nowrap',
+    padding: theme.spacing(2),
+    [theme.breakpoints.up('lg')]: {
+      paddingRight: '250px',
+    },
   },
   endpointsTitle: {
     display: 'flex',

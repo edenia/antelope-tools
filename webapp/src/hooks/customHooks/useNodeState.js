@@ -16,6 +16,7 @@ const useNodeState = () => {
 
   const getOrderNode = (node) => {
     return (
+      (node.type?.includes('full') ? 0.5 : 0) +
       (node.endpoints?.length || 0) +
       (node.node_info[0]?.features?.list?.length || 0)
     )
@@ -36,7 +37,6 @@ const useNodeState = () => {
         ...prev.where,
         nodes: nodesFilter,
       },
-      nodeFilter: nodesFilter,
     }))
   }, [filters.name, setPagination])
 
@@ -47,13 +47,41 @@ const useNodeState = () => {
       if (!producer?.nodes?.length) return []
 
       producer.nodes.sort((a, b) => {
-        return getOrderNode(a) < getOrderNode(b)
+        return getOrderNode(a) - getOrderNode(b)
       })
 
-      return producer.nodes.length
+      let nodes = []
+      let producerNode
+
+      for (const node in producer.nodes) {
+        const current = producer.nodes[node]
+
+        if (current?.type[0] === 'producer') {
+          if (!producerNode) {
+            const features = { keys: { producer_key: producer.producer_key } }
+
+            producerNode = {
+              ...current,
+              locations: [],
+              node_info: [{ features }],
+            }
+          }
+
+          producerNode.locations.push(current.location)
+        } else {
+          nodes = JSON.parse(JSON.stringify(producer.nodes.slice(node)))
+          nodes.reverse()
+
+          if (producerNode) nodes.push(producerNode)
+
+          break
+        }
+      }
+
+      return nodes.length
         ? {
             ...producer,
-            bp_json: { ...producer.bp_json, nodes: producer.nodes },
+            bp_json: { ...producer.bp_json, nodes },
           }
         : []
     })
