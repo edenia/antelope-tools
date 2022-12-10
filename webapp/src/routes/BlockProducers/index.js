@@ -6,8 +6,6 @@ import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
 
 import SearchBar from '../../components/SearchBar'
-import Tooltip from '../../components/Tooltip'
-import NodeCard from '../../components/NodeCard'
 import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
@@ -48,35 +46,13 @@ PaginationWrapper.propTypes = {
 const Producers = () => {
   const classes = useStyles()
   const [
-    {
-      anchorEl,
-      current,
-      filters,
-      chips,
-      items,
-      loading,
-      totalPages,
-      missedBlocks,
-      pagination,
-    },
-    {
-      handlePopoverClose,
-      handleOnSearch,
-      handlePopoverOpen,
-      handleOnPageChange,
-    },
+    { filters, chips, items, loading, missedBlocks, pagination },
+    { handleOnSearch, handleOnPageChange },
   ] = useBlockProducerState()
 
   return (
-    <div>
-      <Tooltip
-        anchorEl={anchorEl}
-        open={anchorEl !== null}
-        onClose={handlePopoverClose}
-      >
-        <NodeCard node={current?.node} producer={current?.producer} />
-      </Tooltip>
-      <div className={classes.searchWrapper}>
+    <>
+      <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
@@ -95,7 +71,6 @@ const Producers = () => {
                   type="entity"
                   producer={{ ...producer, missedBlocks }}
                   rank={producer.rank}
-                  onNodeClick={handlePopoverOpen}
                 />
               </div>
             ))
@@ -106,12 +81,12 @@ const Producers = () => {
       )}
       <PaginationWrapper
         classes={classes.pagination}
-        totalPages={totalPages}
+        totalPages={pagination.pages}
         page={pagination.page}
         onPageChange={handleOnPageChange}
         loading={loading}
       />
-    </div>
+    </>
   )
 }
 

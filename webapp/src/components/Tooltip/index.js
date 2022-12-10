@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import Box from '@mui/material/Box'
 import Popover from '@mui/material/Popover'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -10,7 +9,14 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
+const Tooltip = ({
+  anchorEl,
+  anchorOrigin,
+  open,
+  onClose,
+  closeOnMouseLeave,
+  children,
+}) => {
   const classes = useStyles()
 
   return (
@@ -20,19 +26,20 @@ const Tooltip = ({ anchorEl, anchorOrigin, open, onClose, children }) => {
       anchorOrigin={anchorOrigin}
       transformOrigin={{
         vertical: 'center',
-        horizontal: 'center'
+        horizontal: 'center',
       }}
+      PaperProps={{ onMouseLeave: closeOnMouseLeave ? onClose : () => {} }}
       classes={{
-        paper: classes.paper
+        paper: classes.paper,
       }}
       anchorEl={anchorEl}
     >
-      <Box className={classes.popover}>
-        <Box className={classes.popoverClose}>
+      <div className={classes.popover}>
+        <div className={classes.popoverClose}>
           <CloseIcon className={classes.popoverCloseIcon} onClick={onClose} />
-        </Box>
-        <Box>{children}</Box>
-      </Box>
+        </div>
+        {children}
+      </div>
     </Popover>
   )
 }
@@ -42,16 +49,17 @@ Tooltip.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.node,
-  anchorOrigin: PropTypes.object
+  anchorOrigin: PropTypes.object,
 }
 
 Tooltip.defaultProps = {
   onClose: () => {},
+  closeOnMouseLeave: false,
   anchorOrigin: {
     vertical: 'center',
-    horizontal: 'center'
+    horizontal: 'center',
   },
-  anchorEl: null
+  anchorEl: null,
 }
 
 export default Tooltip

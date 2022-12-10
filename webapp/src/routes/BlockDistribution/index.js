@@ -4,7 +4,6 @@ import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
@@ -13,39 +12,43 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import { makeStyles } from '@mui/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { BLOCK_DISTRIBUTION_QUERY } from '../../gql'
 
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
+
 const options = {
   time: {
-    timezoneOffset: new Date().getTimezoneOffset()
+    timezoneOffset: new Date().getTimezoneOffset(),
   },
   title: {
-    text: ' '
+    text: ' ',
   },
   chart: {
     plotBackgroundColor: null,
     plotBorderWidth: null,
     plotShadow: false,
-    type: 'pie'
+    type: 'pie',
   },
   tooltip: {
     pointFormat: '<b>{point.percentage:.1f}%</b>',
     backgroundColor: '#fff',
     borderColor: '#fff',
     borderRadius: 10,
-    borderWidth: 1
+    borderWidth: 1,
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
   plotOptions: {
     pie: {
@@ -53,11 +56,11 @@ const options = {
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-      }
-    }
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+      },
+    },
   },
-  series: []
+  series: [],
 }
 
 const BlockDistribution = () => {
@@ -65,12 +68,13 @@ const BlockDistribution = () => {
   const [range, setRange] = useState(rangeOptions[0])
   const [series, setSeries] = useState([])
   const [load, { loading, data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
+  const classes = useStyles()
 
   useEffect(() => {
     load({
       variables: {
-        range
-      }
+        range,
+      },
     })
   }, [load, range])
 
@@ -84,89 +88,78 @@ const BlockDistribution = () => {
         innerSize: '80%',
         data: data.items.map((item) => ({
           name: item.account,
-          y: item.percent * 100
-        }))
-      }
+          y: item.percent * 100,
+        })),
+      },
     ])
   }, [data])
 
   return (
-    <Grid item xs={12}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                p={1}
+    <Card className={classes.cardShadow}>
+      <CardContent>
+        <div className={classes.textDiv}>
+          <Typography component="p" variant="h6">
+            {t('title')}
+          </Typography>
+          <div className={classes.formControl}>
+            <FormControl variant="standard">
+              <InputLabel id="demo-simple-select-label">
+                {t('timeFrame')}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                value={range}
+                onChange={(e) => setRange(e.target.value)}
+                fullWidth
               >
-                <Typography component="p" variant="h6">
-                  {t('title')}
-                </Typography>
-                <FormControl>
-                  <InputLabel id="demo-simple-select-label">
-                    {t('timeFrame')}
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    value={range}
-                    onChange={(e) => setRange(e.target.value)}
-                    fullWidth
-                  >
-                    {rangeOptions.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {t(option)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              {loading && <LinearProgress />}
-              {!loading && data?.items?.length > 0 && (
-                <>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={{ ...options, series }}
-                  />
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{t('account')}</TableCell>
-                          <TableCell align="right">
-                            {t('blocksProduced')}
-                          </TableCell>
-                          <TableCell align="right">{t('percent')}</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {data?.items.map((item, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{item.account}</TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.blocks)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(
-                                Math.ceil(item.percent * 100),
-                                1
-                              )}
-                              %
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Grid>
+                {rangeOptions.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {t(option)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        {loading && <LinearProgress />}
+        {!loading && data?.items?.length > 0 && (
+          <>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{ ...options, series }}
+            />
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t('account')}</TableCell>
+                    <TableCell align="right">{t('blocksProduced')}</TableCell>
+                    <TableCell align="right">{t('percent')}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.items.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.account}</TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.blocks)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(
+                          Math.ceil(item.percent * 100),
+                          1,
+                        )}
+                        %
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

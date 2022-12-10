@@ -1,0 +1,3 @@
+table:
+  schema: public
+  name: endpoints_by_producer_id

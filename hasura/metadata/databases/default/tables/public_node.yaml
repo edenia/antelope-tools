@@ -1,0 +1,34 @@
+table:
+  schema: public
+  name: node
+object_relationships:
+  - name: producer
+    using:
+      foreign_key_constraint_on: producer_id
+array_relationships:
+  - name: endpoints
+    using:
+      foreign_key_constraint_on:
+        column: node_id
+        table:
+          schema: public
+          name: endpoint
+  - name: node_info
+    using:
+      foreign_key_constraint_on:
+        column: node_id
+        table:
+          schema: public
+          name: node_info
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - id
+        - type
+        - full
+        - location
+        - created_at
+        - producer_id
+      filter: {}
+      allow_aggregations: true

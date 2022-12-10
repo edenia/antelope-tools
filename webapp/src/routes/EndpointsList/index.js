@@ -10,12 +10,16 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Switch from '@mui/material/Switch'
 import Pagination from '@mui/material/Pagination'
 import moment from 'moment'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
+import HealthInfoModal from '../../components/HealthCheck/InfoModal'
+import EndpointsTable from '../../components/EndpointsTable'
+import NoResults from '../../components/NoResults'
+import SearchBar from '../../components/SearchBar'
 
-import EndpointsTable from './EndpointsTable'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -26,12 +30,12 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, updatedAt },
-    { handleOnPageChange, setPagination },
-  ] = useEndpointsState()
+    { loading, pagination, producers, updatedAt, filters },
+    { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
+  ] = useEndpointsState({ useCache: false })
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.titleContainer}>
           <div className={classes.dateContainer}>
@@ -40,9 +44,22 @@ const EndpointsList = () => {
             </Typography>
             {updatedAt && (
               <Typography component="p" variant="caption">
-                {t('updatedAt')}: {moment(updatedAt).format('LL')}
+                {t('updatedAt')}: {moment(updatedAt).format('LLL')}
               </Typography>
             )}
+          </div>
+          <div className={classes.switchContainer}>
+            <Typography component="p" variant="caption">
+              {t('endpointsResponding')}
+            </Typography>
+            <Switch
+              onChange={(event) => {
+                handleFilter(event.target?.checked)
+              }}
+            />
+          </div>
+          <div className={classes.modalContainer}>
+            <HealthInfoModal />
           </div>
           <FormControl variant="standard">
             <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
@@ -67,15 +84,26 @@ const EndpointsList = () => {
             </Select>
           </FormControl>
         </div>
+        <div className={classes.searchWrapper}>
+          <SearchBar
+            filters={filters}
+            onChange={handleOnSearch}
+            translationScope="producerSearchComponent"
+          />
+        </div>
         {loading ? (
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length && <EndpointsTable producers={producers} />}
-            {pagination.totalPages > 1 && (
+            {!!producers?.length ? ( 
+              <EndpointsTable producers={producers} />
+            ) : (
+              <NoResults />
+            )}
+            {pagination.pages > 1 && (
               <div className={classes.pagination}>
                 <Pagination
-                  count={pagination.totalPages}
+                  count={pagination.pages}
                   page={pagination.page}
                   onChange={handleOnPageChange}
                   variant="outlined"

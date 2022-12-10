@@ -6,22 +6,17 @@ export default (theme) => ({
     position: 'relative',
     alignItems: 'stretch',
   },
-  btnLogin: {
-    textTransform: 'capitalize !important',
-    fontWeight: '600 !important',
-  },
   btnLanguage: {
     fontWeight: '600 !important',
   },
   imgHeaderLogo: {
-    width: '150px',
-    height: '70px',
-    marginTop: '2px',
+    width: '145px',
+    marginTop: '8px',
   },
   appBar: {
     backgroundColor: '#fff !important',
     color: theme.header.color,
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25) !important',
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     height: '100%',
   },
   iconButton: {
@@ -43,4 +38,52 @@ export default (theme) => ({
     justifyContent: 'space-between',
     width: '100%',
   },
+  menuBox: {
+    '& .MuiPaper-root': {
+      padding: theme.spacing(1),
+    },
+  },
+  menuItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 50,
+    borderRadius: '6px',
+    width: '100%',
+    transition: 'all 0.3s ease 0s',
+    padding: theme.spacing(0, 1),
+    margin: theme.spacing(1, 0),
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'scale(1)',
+    },
+  },
+  iconText: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '& img': {
+      marginRight: theme.spacing(1),
+    },
+  },
+  loginBtn: {
+    fontStyle: 'normal',
+    lineHeight: '16px !important',
+    alignItems: 'center',
+    textAlign: 'center',
+    letterSpacing: '1px !important',
+    textTransform: 'capitalize !important',
+    fontWeight: '600 !important',
+  },
+  userBtn: {
+    textTransform: 'lowercase !important',
+  },
+  accountName: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      marginRight: theme.spacing(1),
+    },
+  },
+  authBox: { display: 'flex', alignItems: 'center', textAlign: 'center' },
 })

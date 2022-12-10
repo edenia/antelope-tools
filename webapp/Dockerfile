@@ -13,7 +13,7 @@ ARG react_app_eos_api_network_name
 ARG react_app_eos_api_network_label
 ARG react_app_eos_api_network_logo
 ARG react_app_eos_include_transaction
-ARG react_app_eos_api_host
+ARG react_app_eos_api_hosts
 ARG react_app_eos_api_port
 ARG react_app_eos_api_protocol
 ARG react_app_eos_chain_id
@@ -29,11 +29,11 @@ ARG react_app_tag
 ARG react_app_state_history_enabled
 ARG react_app_google_analitic_page_id
 ARG react_app_public_re_captcha_key
+ARG react_app_sync_tolerance_interval
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
 ENV NODE_ENV production
-ENV NODE_PATH ./src
 ENV PORT $port
 ENV REACT_APP_TITLE $react_app_title
 ENV REACT_APP_DEFAULT_PRODUCER_LOGO $react_app_default_producer_logo
@@ -47,7 +47,7 @@ ENV REACT_APP_EOS_API_NETWORK_NAME $react_app_eos_api_network_name
 ENV REACT_APP_EOS_API_NETWORK_LABEL $react_app_eos_api_network_label
 ENV REACT_APP_EOS_API_NETWORK_LOGO $react_app_eos_api_network_logo
 ENV REACT_APP_EOS_INCLUDE_TRANSACTION $react_app_eos_include_transaction
-ENV REACT_APP_EOS_API_HOST $react_app_eos_api_host
+ENV REACT_APP_EOS_API_HOSTS $react_app_eos_api_hosts
 ENV REACT_APP_EOS_API_PORT $react_app_eos_api_port
 ENV REACT_APP_EOS_API_PROTOCOL $react_app_eos_api_protocol
 ENV REACT_APP_EOS_CHAIN_ID $react_app_eos_chain_id
@@ -63,6 +63,7 @@ ENV REACT_APP_VERSION $react_app_tag
 ENV REACT_APP_STATE_HISTORY_ENABLED $react_app_state_history_enabled
 ENV REACT_APP_GOOGLE_ANALITIC_PAGE_ID $react_app_google_analitic_page_id
 ENV REACT_APP_PUBLIC_RE_CAPTCHA_KEY $react_app_public_re_captcha_key
+ENV REACT_APP_SYNC_TOLERANCE_INTERVAL $react_app_sync_tolerance_interval
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR

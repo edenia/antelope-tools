@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import Box from '@mui/material/Box'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 
-import jungleImg from '../../assets/jungle.png'
-import waxImg from '../../assets/wax.png'
-import lacchainImg from '../../assets/lacchain.png'
-import telosImg from '../../assets/telos.png'
-import protonImg from '../../assets/proton.png'
-import eosImg from '../../assets/eos.png'
+import jungleImg from '../../assets/jungle.webp'
+import waxImg from '../../assets/wax.webp'
+import lacchainImg from '../../assets/lacchain.webp'
+import telosImg from '../../assets/telos.webp'
+import protonImg from '../../assets/proton.webp'
+import eosImg from '../../assets/eos.webp'
 import airwireImg from '../../assets/airwire.png'
-import ultraImg from '../../assets/ultra.jpg'
-import libreImg from '../../assets/libre.png'
+import ultraImg from '../../assets/ultra.webp'
+import libreImg from '../../assets/libre.webp'
 
 import styles from './styles'
 
@@ -59,11 +58,11 @@ const LogoSvg = ({ name }) => {
 }
 
 LogoSvg.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
 }
 
 LogoSvg.defaultProps = {
-  name: ''
+  name: '',
 }
 
 const NetworkSelector = ({ title, options, networkLogo }) => {
@@ -93,38 +92,38 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
 
         return { ...acc, mainnet: sorted }
       },
-      { testnet: [], mainnet: [] }
+      { testnet: [], mainnet: [] },
     )
 
     setNetworks(networks)
   }, [options])
 
   return (
-    <Box className={classes.dropdown}>
-      <Box onClick={toggleDropdown} className={clsx(classes.toggle)}>
+    <div className={classes.dropdown}>
+      <div onClick={toggleDropdown} className={clsx(classes.toggle)}>
         {!open && <ExpandMoreIcon className={classes.expandIcon} />}
         {open && <ExpandLessIcon className={classes.expandIcon} />}
         <Typography component="p" variant="h5">
           {title}
         </Typography>
-      </Box>
-      <Box className={clsx(classes.list, { [classes.listActive]: open })}>
-        <Box className="titles">
-          <Box className="titlesBoxLeft">
+      </div>
+      <div className={clsx(classes.list, { [classes.listActive]: open })}>
+        <div className="titles">
+          <div className="titlesBoxLeft">
             <Typography>Mainnets</Typography>
-          </Box>
-          <Box className="titlesBoxRight">
+          </div>
+          <div className="titlesBoxRight">
             <Typography>Testnets</Typography>
-          </Box>
-        </Box>
-        <Box className="lists">
-          <Box className="listsBoxLeft">
+          </div>
+        </div>
+        <div className="lists">
+          <div className="listsBoxLeft">
             <ul>
               {networks.mainnet.map((option, i) => (
                 <li
                   key={i}
                   className={clsx(classes.listItem, {
-                    [classes.listItemActive]: i === selected
+                    [classes.listItemActive]: i === selected,
                   })}
                 >
                   <a href={option.value} target="_self">
@@ -134,14 +133,14 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                 </li>
               ))}
             </ul>
-          </Box>
-          <Box className="listsBoxRight">
+          </div>
+          <div className="listsBoxRight">
             <ul>
               {networks.testnet.map((option, i) => (
                 <li
                   key={i}
                   className={clsx(classes.listItem, {
-                    [classes.listItemActive]: i === selected
+                    [classes.listItemActive]: i === selected,
                   })}
                 >
                   <a href={option.value} target="_self">
@@ -151,26 +150,26 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                 </li>
               ))}
             </ul>
-          </Box>
-        </Box>
-      </Box>
-      <Box className={classes.networkLogo}>
+          </div>
+        </div>
+      </div>
+      <div className={classes.networkLogo}>
         <img src={networkLogo} alt="network logo" />
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 
 NetworkSelector.propTypes = {
   title: PropTypes.string,
   options: PropTypes.array,
-  networkLogo: PropTypes.string
+  networkLogo: PropTypes.string,
 }
 
 NetworkSelector.defaultProps = {
   title: '',
   options: [],
-  networkLogo: ''
+  networkLogo: '',
 }
 
 export default NetworkSelector

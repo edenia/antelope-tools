@@ -7,10 +7,8 @@ export default (theme) => ({
   card: {
     width: '100%',
     display: 'flex',
-    marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
-      flex: 'content',
     },
     [theme.breakpoints.down('sm')]: {
       flex: 'auto',
@@ -19,6 +17,9 @@ export default (theme) => ({
   searchWrapper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
+    '& .MuiGrid-root': {
+      paddingTop: '0px !important',
+    },
   },
   pagination: {
     padding: theme.spacing(3),
@@ -27,5 +28,8 @@ export default (theme) => ({
   },
   formControl: {
     width: '100%',
+  },
+  cardShadow: {
+    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)',
   },
 })

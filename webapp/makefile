@@ -31,18 +31,15 @@ build-docker: ./Dockerfile
 		--build-arg react_app_use_rewards="$(REACT_APP_USE_REWARDS)" \
 		--build-arg react_app_use_votes="$(REACT_APP_USE_VOTES)" \
 		--build-arg react_app_use_cpu_benchmark="$(REACT_APP_USE_CPU_BENCHMARK)" \
-		--build-arg react_app_use_block_producer_agreement_contract="$(REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT)" \
 		--build-arg react_app_hasura_url="$(REACT_APP_HASURA_URL)" \
 		--build-arg react_app_eos_api_network_name="$(REACT_APP_EOS_API_NETWORK_NAME)" \
 		--build-arg react_app_eos_api_network_label="$(REACT_APP_EOS_API_NETWORK_LABEL)" \
 		--build-arg react_app_eos_api_network_logo="$(REACT_APP_EOS_API_NETWORK_LOGO)" \
-		--build-arg react_app_eos_api_host="$(REACT_APP_EOS_API_HOST)" \
+		--build-arg react_app_eos_api_hosts="$(REACT_APP_EOS_API_HOSTS)" \
 		--build-arg react_app_eos_api_port="$(REACT_APP_EOS_API_PORT)" \
 		--build-arg react_app_eos_api_protocol="$(REACT_APP_EOS_API_PROTOCOL)" \
 		--build-arg react_app_eos_chain_id="$(REACT_APP_EOS_CHAIN_ID)" \
 		--build-arg react_app_eos_include_transaction='$(REACT_APP_EOS_INCLUDE_TRANSACTION)' \
-		--build-arg react_app_eos_default_exchange_rate="$(REACT_APP_EOS_DEFAULT_EXCHANGE_RATE)" \
-		--build-arg react_app_eos_default_exchange_rate_api="$(REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API)" \
 		--build-arg react_app_eos_use_bp_json_on_chain="$(REACT_APP_EOS_USE_BP_JSON_ON_CHAIN)" \
 		--build-arg react_app_eos_bp_json_on_chain_contract="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT)" \
 		--build-arg react_app_eos_bp_json_on_chain_table="$(REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE)" \
@@ -54,6 +51,7 @@ build-docker: ./Dockerfile
 		--build-arg react_app_state_history_enabled='$(REACT_APP_STATE_HISTORY_ENABLED)' \
 		--build-arg react_app_google_analitic_page_id='$(REACT_APP_GOOGLE_ANALITIC_PAGE_ID)' \
 		--build-arg react_app_public_re_captcha_key='$(REACT_APP_PUBLIC_RE_CAPTCHA_KEY)' \
+		--build-arg react_app_sync_tolerance_interval='$(REACT_APP_SYNC_TOLERANCE_INTERVAL)' \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching

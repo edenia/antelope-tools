@@ -3,18 +3,91 @@
   font-family: 'Nunito';
 }
 
+a {
+  text-decoration: none;
+}
+
+summary {
+  font-size: 40px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   font-family: 'Nunito';
 }
 
-.section-wrapper {
+details summary:hover {
+  background-color: #f1f1f1;
+}
+
+details[open] summary {
+  background-color: rgba(28, 203, 255, 0.2);
+}
+details[open] summary ~ * {
+  animation: open 0.3s ease-in-out;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+summary {
+  list-style: inside;
+  display: flex;
+  text-align: center;
+}
+details summary {
   width: 100%;
-  padding-top: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
-  z-index: 2;
+  padding: 0.5rem 0;
+  background-color: #f9f9fc;
   position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  padding-left: 104px;
+}
+
+.info-icon span {
+  padding-left: 10px;
+}
+
+details summary:after {
+  content: url(./images/chevron-down.png);
+  position: absolute;
+  right: 92px;
+  transform: rotate(180deg);
+}
+details[open] summary::after {
+  transform: rotate(0);
+}
+
+p {
+  width: 605.5px;
+  height: 62.9px;
+  flex-grow: 0;
+  margin: 0 0 0.4px 8.5px;
+  font-family: 'Nunito';
+  font-size: 28px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.39;
+  letter-spacing: 0.73px;
+  text-align: left;
+  color: #000;
 }
 
 #bg-image-mobile {
@@ -65,85 +138,13 @@ body {
   margin: 0;
 }
 
-#network-desktop {
-  display: none;
-}
-
-.network-mobile {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  margin-top: 34px;
-}
-
-.more-networks {
-  margin-top: 65px !important;
-  text-align: center;
-}
-
-.wax-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.name-networks {
-  text-align: center;
-  margin-top: 5px;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #000000;
-}
-
-.telos-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.eos-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
-
-.jungle-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.lacchain-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  text-decoration: none;
-  align-items: center;
-}
-
-.proton-networks {
-  display: flex;
-  flex-direction: column;
-  width: 105px;
-  justify-content: space-evenly;
-  text-decoration: none;
-  align-items: center;
-}
-
 .header {
   overflow: hidden;
   background-color: #ffffff;
-  padding-bottom: 47px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./images/test);
 }
 
 .image-box {
@@ -152,32 +153,21 @@ body {
   align-items: center;
 }
 
-.image-box-desktop {
-  display: none;
-}
-
 #middle-logo {
   margin-top: 10px;
   margin-left: 5px;
 }
 
 .content {
-  background-color: #f9f9fc;
+  background-color: #ffffff;
   padding-top: 36px;
   padding-bottom: 40px;
 }
 
 .footer {
-  background-color: #ffffff;
+  background-color: #f9f9fc;
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-#box-right {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }
 
 #box-right a {
@@ -185,38 +175,16 @@ body {
 }
 
 .box-social-media {
-  width: 100%;
+  width: 35%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 36px;
-}
-
-.box-testnet {
-  margin-bottom: 40px;
-}
-
-.box-testnet-desktop {
-  display: none;
-}
-
-.box-column {
-  display: flex;
 }
 
 .box-column div {
   width: 49%;
   display: flex;
   justify-content: center;
-}
-
-.box-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.box-column ul li {
-  text-align: center;
 }
 
 .box-column ul a {
@@ -229,21 +197,12 @@ body {
   color: #000000;
 }
 
-.testnet-title {
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 31px;
-  text-align: left;
-  letter-spacing: 0.83px;
-  text-transform: uppercase;
-  color: #000000;
-  margin: 0;
+.image-box-desktop {
+  display: none;
 }
-
-.eos-costa-rica > div {
+.eos-costa-rica {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 #contact-us {
@@ -261,7 +220,7 @@ body {
 .project-by {
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 24px;
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
@@ -269,39 +228,411 @@ body {
   margin-left: 10px;
 }
 
-#copyright {
-  display: inline;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 31px;
-  text-align: right;
-  letter-spacing: 0.83px;
-  text-transform: uppercase;
-  color: #000000;
-  margin: 0;
-  margin-bottom: 12px;
-  margin-top: 36px;
+.logo-text {
+  display: flex;
+  padding: 10px;
+  align-items: center;
 }
 
-#copyright-desktop {
-  display: none;
-}
-
-#bg-image {
-  display: none;
-}
-
-@media (min-width: 768px) {
+@media screen and (max-width: 767px) {
   .header {
-    padding-top: 67px;
+    margin-left: 0px;
+  }
+
+  #copyright {
+    width: 199.2px;
+    height: 21px;
+    margin: 0 53.4px 0 53.3px;
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.72;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #000;
+  }
+  .content {
+    background-color: #ffffff;
+    padding-top: 0px;
+    padding-bottom: 40px;
+  }
+
+  .box-network {
+    flex-grow: 0;
+    padding: 16px 0;
+    background-color: #f9f9fc;
+  }
+
+  #middle-logo {
+    content: url('./images/Antelope Tools Vertical 1@3x.png');
+    height: 110px;
+    width: 110px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .section-wrapper {
+    padding-left: 0px;
+    padding-top: 31px;
+  }
+
+  details summary:after {
+    height: 45px;
+  }
+
+  .info-icon {
+    width: 80%;
+    padding-left: 0px;
+  }
+
+  details summary:after {
+    content: url(./images/chevron-down.png);
+    position: absolute;
+    right: 10px;
+    transform: rotate(180deg);
+  }
+  .box-paragraph-text > p {
+    height: 58px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+    justify-content: center;
+    width: 288px;
+    margin: 16px auto auto;
+  }
+
+  .flex p {
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    width: 148px;
+    height: 81px;
+    margin: 16px 8px 16px 0px;
+    padding: 8px 0px;
+    border-radius: 4px;
+    background-color: rgba(186, 239, 255, 0.6);
+    text-align: center;
+    color: black;
+  }
+  .flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .flex2 {
+    margin-top: -16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .visit-text {
+    width: 288px;
+    height: 58px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+    margin: auto auto 16px;
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .Line-5 {
+    width: 108px;
+    height: 2px;
+    flex-grow: 0;
+    margin: 5px 0px 0px;
+    background-color: #1ccbff;
+  }
+
+  .flex-text p {
+    width: 104px;
+    height: 18px;
+    flex-grow: 0;
+    margin: 0 2px 2px;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+  .flex-text {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 5px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 8px;
+    justify-items: center;
+    margin-top: 16px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+  }
+
+  .grid-item {
+    width: 140px;
+    height: 156px;
+    flex-grow: 0;
+    margin: 0 8px 0 0;
+    padding: 8px 29.4px 11.8px 30.4px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
+      0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    background-color: white;
+  }
+
+  .name-networks {
+    width: 73px;
+    height: 48px;
+    flex-grow: 0;
+    margin: 8px 4.2px 0 3px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+  .box-paragraph summary {
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.61;
+    letter-spacing: -0.54px;
+    text-align: left;
+    color: #000;
+    padding: 10px;
+  }
+
+  .box-paragraph p {
+    width: 100%;
+    height: 100%;
+    flex-grow: 0;
+    margin: 3px 0 0;
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.08px;
+    text-align: left;
+    color: #000;
+    padding: 10px;
+  }
+
+  .footer {
+    padding-bottom: 24px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eos-costa-rica {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+  }
+
+  .eos-costa-rica h4 {
+    flex-grow: 0;
+    margin: -15px 0 -5.1px;
+    font-family: Nunito;
+    font-size: 11.8px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  .contact-us p {
+    width: 306px;
+    height: 71px;
+    flex-grow: 0;
+    margin: 0 0 8px;
+    font-family: Nunito;
+    font-size: 17px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.06px;
+    text-align: center;
+    color: #000;
+  }
+
+  .project-by {
+    font-size: 17px;
+    font-weight: 600;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: 0.06px;
+    margin: 0;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
+    align-self: center;
+    flex-direction: column;
+  }
+
+  .box-social-media {
+    width: 110%;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .footerTw {
+    height: 22x;
+    width: 26px;
+  }
+  .footerTl {
+    height: 22px;
+    width: 28;
+  }
+  .footerGit {
+    height: 28px;
+    width: 30px;
+  }
+  .footerLi {
+    height: 27px;
+    width: 28px;
+  }
+
+  .edeniaLogo {
+    height: 26px;
+    width: 155;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .section-wrapper {
+    width: 100%;
+    padding-top: 40px;
+    z-index: 2;
+    position: relative;
+  }
+  .header {
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-image: url(./images/bgimage.png);
+    background-size: 673px 425px;
+    background-position: top right;
+    background-repeat: no-repeat;
+    align-items: flex-start;
+  }
+
+  .box-paragraph-text > p {
+    width: 265px;
+    height: 68px;
+    margin: 0px 450px 24px 0px;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
+    color: #000;
+  }
+
+  .flex p {
+    width: 231.8px;
+    height: 25.8px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 0.3px;
+    text-align: left;
+    color: #000;
+    border-color: white !important;
+  }
+
+  .Line-4 {
+    width: 4px;
+    height: 26px;
+    flex-grow: 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .Line-5 {
+    width: 4px;
+    height: 26px;
+    flex-grow: 0;
+    margin: 6px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .flex-text p {
+    width: 169px;
+    height: 18px;
+    flex-grow: 0;
+    margin: 4px 0 4px 4px;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
+    color: #000;
   }
 
   .image-box {
-    display: none;
-  }
-
-  .network-mobile {
     display: none;
   }
 
@@ -309,42 +640,173 @@ body {
     display: flex;
   }
 
-  .image-box-desktop img {
+  .info-icon {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+  }
+
+  details summary:after {
+    content: url(./images/chevron-down.png);
+    position: absolute;
+    right: 24px;
+    transform: rotate(180deg);
+  }
+  .image-box-desktop {
     width: 254px;
-    height: 107px;
+    height: 113px;
+    margin-top: 36px;
+  }
+
+  .myButton {
+    width: 245px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 23.9px 483px 59px 0px;
+    padding: 8px 0;
+    border-radius: 58px;
+    box-shadow: 2px -12px 14px 0 rgba(53, 64, 82, 0.05);
+    border: solid 2px #1ccbff;
+    background-color: #d6f5ff;
+  }
+  .myButton:hover {
+    text-decoration: none;
+  }
+  .myButton:active {
+    position: relative;
+    top: 1px;
+  }
+  .visit-text {
+    width: 195px;
+    height: 24px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: 0.08px;
+    text-align: center;
+    color: #000;
+    margin: auto;
+  }
+
+  .flex {
+    display: flex;
+    margin-bottom: 16px;
+    justify-content: start;
+  }
+
+  .flex2 {
+    justify-content: start;
+  }
+  .flex-text {
+    display: flex;
+    margin-bottom: 28px;
+    margin-left: 40px;
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+  }
+
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 45px;
+    border-radius: 4px;
+    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
+      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
+    background-color: white;
+    height: 169px;
+    width: 192px;
+    justify-content: center;
+  }
+
+  .name-networks {
+    flex-grow: 0;
+    margin: 12px -5px 0px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+  .box-paragraph p {
+    width: 688px;
+    height: 79px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.08px;
+    text-align: left;
+    color: #000;
+    margin: 16px 0px 31px;
+    padding-left: 40px;
+  }
+
+  .box-paragraph summary {
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.23px;
+    text-align: left;
+    color: #000;
   }
 
   #network-desktop {
     display: flex;
     justify-content: space-around;
-    margin-top: 23px;
+    margin-bottom: 36px;
   }
 
-  #network-desktop > a {
+  #network-mobile > a {
     display: flex;
     flex-direction: column;
   }
 
   #network-desktop > a:hover {
     color: grey;
-    text-decoration: underline;
+    text-decoration: none;
   }
 
-  .wax-networks {
-    justify-content: space-between;
-  }
-
-  .wax-networks img {
-    margin-top: 10px;
-  }
-
-  .telos-networks {
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .telos-networks img {
-    margin-top: 10px;
+  .box-network {
+    margin-top: 50px;
   }
 
   .content {
@@ -360,12 +822,6 @@ body {
     margin-bottom: 24px;
   }
 
-  .box-paragraph p {
-    font-weight: normal;
-    line-height: 1.5;
-    letter-spacing: 0.08px;
-  }
-
   .box-network h4 {
     margin-top: 23px;
     font-weight: 600;
@@ -376,7 +832,7 @@ body {
   }
 
   .footer {
-    padding-bottom: 40px;
+    padding-bottom: 24px;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -388,28 +844,8 @@ body {
     justify-content: space-between;
   }
 
-  .box-testnet {
-    display: none;
-  }
-
-  .box-testnet-desktop {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    border-left: 1px solid #e0e0e0;
-    padding-left: 20px;
-  }
-
   .box-column div {
-    justify-content: flex-start;
-  }
-
-  .box-column ul li {
-    text-align: start;
-  }
-
-  #testnet-title {
-    text-align: start;
+    justify-content: center;
   }
 
   #contact-us {
@@ -423,22 +859,48 @@ body {
     letter-spacing: 0.06px;
   }
 
-  #box-left {
-    width: 60%;
-  }
-
   .box-social-media {
-    width: 300px;
+    width: 50%;
     margin-bottom: 8px;
+    align-items: center;
+    margin-top: 28.6px;
   }
 
-  #box-right {
-    justify-content: flex-end;
-    align-items: end;
+  .eos-costa-rica {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
   }
 
-  .eos-costa-rica > div {
-    justify-content: flex-start;
+  .eos-costa-rica h4 {
+    flex-grow: 0;
+    margin: -26px 0 -5.1px;
+    font-family: Nunito;
+    font-size: 11.8px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  .contact-us p {
+    width: 507.3px;
+    height: 64px;
+    flex-grow: 0;
+    margin: 0 0 9.1px;
+    font-family: Nunito;
+    font-size: 23.1px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.08px;
+    text-align: center;
+    color: #000;
   }
 
   .project-by {
@@ -450,126 +912,776 @@ body {
     margin: 0;
   }
 
-  #copyright-desktop {
-    margin-bottom: 0;
-    margin-top: 30px;
-    display: inline;
-    font-size: 12px;
+  .copyright {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
     line-height: 20px;
     text-align: right;
     letter-spacing: 0.3px;
     color: #000000;
   }
 
-  #copyright {
-    display: none;
-  }
-
-  #bg-image {
-    position: absolute;
-    z-index: 1;
-    width: 340px;
-    margin-left: 379px;
-    display: inline;
-    margin-top: -80px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .header {
-    padding-top: 58px;
-    padding-bottom: 90px;
-  }
-
-  .section-wrapper {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .box-paragraph h4 {
-    font-size: 40px;
-    line-height: 0.8;
-    letter-spacing: -0.22px;
-  }
-
-  .box-paragraph p {
-    font-size: 20px;
-  }
-
-  #d-version {
-    width: 642px;
-    margin-top: 60px;
-  }
-
-  #network-desktop {
-    margin-top: 80px;
-  }
-
-  #network-desktop > a {
+  .logo-text {
     display: flex;
+    padding: 10px;
+    align-self: center;
     flex-direction: column;
-    justify-content: flex-end
   }
 
-  .box-network h4 {
-    margin-top: 60px;
-    font-size: 28px;
+  .box-social-media {
+    width: 55%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+  .footerTw {
+    height: 29px;
+    width: 34px;
+  }
+  .footerTl {
+    height: 30px;
+    width: 37px;
+  }
+  .footerGit {
+    height: 38px;
+    width: 41px;
+  }
+  .footerLi {
+    height: 37px;
+    width: 40px;
   }
 
-  #bg-image {
-    width: 850px;
-    margin-left: 660px;
+  .edeniaLogo {
+    height: 26px;
+    width: 156px;
   }
 
-  .content {
-    padding-bottom: 90px;
-  }
-
-  .content h4 {
-    margin-top: 70px;
-  }
-
-  .project-by {
-    font-size: 22px;
+  #copyright {
+    width: 199.2px;
+    height: 21px;
+    margin: 9.5px 154.1px 0 154px;
+    font-family: Nunito;
+    font-size: 10.6px;
+    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.4;
-    letter-spacing: -0.22px;
-  }
-
-  #contact-us {
-    width: 80%;
-    font-size: 22px;
-    line-height: 1.4;
-    letter-spacing: -0.22px;
+    line-height: 1.95;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #000;
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1024px) and (max-width: 1765px) {
   .section-wrapper {
-    width: 1200px;
+    width: 100%;
   }
   .header {
     display: flex;
-    justify-content: center;
     width: 100%;
+    z-index: 2;
+    position: relative;
+    height: 680px;
+    background-image: url(./images/bgimage.png);
+    background-size: 965px 680px;
+    background-position: top right;
+    background-repeat: no-repeat;
+    align-items: flex-start;
   }
 
+  #middle-logo {
+    width: 364px;
+    height: 160px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  #bg-image-mobile {
+    display: none;
+  }
+  .box-paragraph-text > p {
+    width: 375px;
+    height: 114.2px;
+    font-family: Nunito;
+    font-size: 42px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.27;
+    letter-spacing: -0.68px;
+    text-align: left;
+    color: #000;
+    margin-bottom: 40px;
+  }
+
+  .flex-text p {
+    width: 149px;
+    height: 28px;
+    flex-grow: 0;
+    margin: 6px 0 6px 8.9px;
+    font-family: Nunito;
+    font-size: 32px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.85;
+    letter-spacing: -0.16px;
+    text-align: left;
+    color: #000;
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex {
+    display: flex;
+    margin-bottom: 41px;
+  }
+  .flex p {
+    width: 350.5px;
+    height: 46.4px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.49;
+    letter-spacing: 0.87px;
+    text-align: left;
+    color: #000;
+  }
+
+  .grid {
+    display: flex;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 14px;
+    justify-content: center;
+  }
+
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 55%;
+    height: 70%;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    width: 134px;
+    height: 134px;
+    flex-grow: 0;
+    padding: 12px;
+    border-radius: 3.7px;
+    box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
+      0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
+    border: solid 1.5px #1ccbff;
+    background-color: var(--colors-white);
+  }
+
+  .grid-item:hover {
+    border: 2px solid #1ccbff;
+    box-sizing: border-box;
+  }
+  .Line-4 {
+    width: 8px;
+    height: 46px;
+    flex-grow: 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .Line-5 {
+    width: 7.1px;
+    height: 35px;
+    flex-grow: 0;
+    margin: 0 8.9px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .box-paragraph summary {
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.61;
+    letter-spacing: -0.54px;
+    text-align: left;
+    color: #000;
+  }
+
+  .flex-text {
+    display: flex;
+    margin-bottom: 28px;
+    margin-left: 55px;
+    margin-top: 35px;
+  }
+  .box-paragraph p {
+    width: 83%;
+    flex-grow: 0;
+    margin: 40.8px 57px 115px;
+    font-family: Nunito;
+    font-size: 19px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.72;
+    letter-spacing: 0.18px;
+    text-align: left;
+    color: #000;
+  }
+  #divider-line {
+    width: 100%;
+    height: 6px;
+    transform: rotate(-360deg);
+    background-color: #8de5ff;
+  }
+  .myButton {
+    width: 340px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 29px;
+    padding: 19px 0;
+    border-radius: 75px;
+    box-shadow: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
+    border: solid 5.8px #1ccbff;
+    background-color: #d6f5ff;
+    margin-top: 20px;
+    margin-bottom: 80px;
+  }
+  .myButton:hover {
+    text-decoration: none;
+  }
+  .myButton:active {
+    position: relative;
+    top: 1px;
+  }
+  .visit-text {
+    width: 381.9px;
+    height: 70px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 3.16;
+    letter-spacing: 0.23px;
+    text-align: center;
+    color: #000;
+  }
+
+  .name-networks {
+    flex-grow: 0;
+    margin: 5px 0 0;
+    width: 100%;
+    font-family: Nunito;
+    font-size: 19px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.09;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+  #networks {
+    display: flex;
+    flex-direction: column;
+  }
+  .image-box-desktop {
+    width: 546px;
+    height: 240px;
+    margin-left: 100px;
+    margin-top: 104px;
+    margin-bottom: 80px;
+  }
   .content {
     display: flex;
-    justify-content: center;
     width: 100%;
+    padding-top: 110px;
   }
 
   .footer {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
   }
 
-  #bg-image {
-    width: 750px;
-    height: 650px;
-    margin-top: 25px;
+  .logo-text {
+    display: flex;
+    padding: 10px;
+    align-self: center;
+  }
+
+  #d-version {
+    margin-left: 15px;
+    margin-top: 0px;
+  }
+
+  .info-icon {
+    padding-left: 55px;
+  }
+  .box-social-media {
+    width: 55%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+  .footerTw {
+    height: 38px;
+    width: 48px;
+  }
+  .footerTl {
+    height: 38px;
+    width: 51px;
+  }
+  .footerGit {
+    height: 52px;
+    width: 57px;
+  }
+  .footerLi {
+    height: 50px;
+    width: 53px;
+  }
+
+  .edeniaLogo {
+    height: 42px;
+    width: 250px;
+  }
+
+  .contact-us p {
+    width: 860px;
+    height: 108px;
+    flex-grow: 0;
+    margin: 0 0 16px;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.14px;
+    text-align: center;
+    color: #000;
+  }
+
+  .eos-costa-rica h4 {
+    width: auto;
+    flex-grow: 0;
+    margin: 0 0 3.2px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  .eos-costa-rica {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #copyright {
+    width: 338px;
+    height: 18px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.59;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: #000;
+  }
+}
+
+@media screen and (min-width: 1766px) {
+  .section-wrapper {
+    width: 100%;
+  }
+  .header {
+    display: flex;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+    height: 1002px;
+    background-image: url(./images/bgimage.png);
+    background-size: 1654px 1002px;
+    background-position: top right;
+    background-repeat: no-repeat;
+    align-items: flex-start;
+    margin-left: 4%;
+  }
+
+  .box-network {
+    margin-left: 4%;
+  }
+  #middle-logo {
+    width: 546px;
+    height: 240px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  #bg-image-mobile {
+    display: none;
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .box-paragraph-text > p {
+    width: 550px;
+    height: 96px;
+    margin-bottom: 40px;
+    font-family: Nunito;
+    font-size: 45px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.11;
+    letter-spacing: -0.57px;
+    text-align: left;
+    color: #000;
+  }
+
+  .flex p {
+    width: 534.5px;
+    height: 71.3px;
+    flex-grow: 0;
+    margin: 0 0 0 6.5px;
+    font-family: Nunito;
+    font-size: 22px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.73px;
+    text-align: left;
+    color: #000;
+  }
+
+  .Line-4 {
+    width: 8px;
+    height: 44px;
+    flex-grow: 0;
+    transform: rotate(-180deg);
+    margin-right: 8.3px;
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .Line-5 {
+    width: 7.1px;
+    height: 40px;
+    flex-grow: 0;
+    margin: 0 8.9px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .flex-text p {
+    width: 149px;
+    height: 28px;
+    flex-grow: 0;
+    margin: 6px 0 6px 8.9px;
+    font-family: Nunito;
+    font-size: 36px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.76;
+    letter-spacing: -0.16px;
+    text-align: left;
+    color: #000;
+  }
+
+  .image-box {
+    display: none;
+  }
+
+  .image-box-desktop {
+    display: flex;
+  }
+
+  .info-icon {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+  }
+
+  details summary:after {
+    content: url(./images/chevron-down.png);
+    position: absolute;
+    right: 24px;
+    transform: rotate(180deg);
+  }
+
+  .image-box-desktop {
+    width: 546px;
+    height: 240px;
+    margin-top: 36px;
+    margin-bottom: 80px;
+  }
+
+  .myButton {
+    width: 439px;
+    height: 91px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24.4px;
+    padding: 16px 0;
+    border-radius: 63px;
+    box-shadow: 4.9px -29.2px 34.1px 0 rgba(53, 64, 82, 0.05);
+    border: solid 4.9px #1ccbff;
+    background-color: #d6f5ff;
+    margin-bottom: 100px;
+  }
+  .myButton:hover {
+    text-decoration: none;
+  }
+  .myButton:active {
+    position: relative;
+    top: 1px;
+  }
+  .visit-text {
+    width: 391px;
+    height: 59px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.09;
+    letter-spacing: 0.19px;
+    text-align: center;
+    color: #000;
+  }
+
+  .flex {
+    display: flex;
+    margin-bottom: 16px;
+    justify-content: start;
+  }
+
+  .flex2 {
+    justify-content: start;
+  }
+  .flex-text {
+    display: flex;
+    margin-bottom: 28px;
+    margin-top: 78px;
+  }
+
+  #divider-line {
+    width: 100%;
+    height: 6px;
+    transform: rotate(-360deg);
+    background-color: #8de5ff;
+  }
+
+  .grid {
+    display: flex;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 34px;
+    justify-content: center;
+  }
+
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 60%;
+    height: 70%;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    width: 237.7px;
+    height: 209.2px;
+    flex-grow: 0;
+    padding: 19.8px 19.8px 18.6px;
+    border-radius: 5px;
+    box-shadow: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15),
+      0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--colors-white);
+  }
+
+  .grid-item:hover {
+    border: 2px solid #1ccbff;
+    box-sizing: border-box;
+  }
+
+  .name-networks {
+    width: 198.1px;
+    height: 30.2px;
+    flex-grow: 0;
+    margin: 16.9px 0 0;
+    font-family: Nunito;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.24;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+  }
+
+  .info-icon {
+    padding-left: 8%;
+  }
+
+  details summary:after {
+    content: url(./images/chevron-down.png);
+    position: absolute;
+    right: 8%;
+    transform: rotate(180deg);
+  }
+
+  .box-paragraph summary {
+    width: 100%;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 36px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.15;
+    letter-spacing: -0.54px;
+    text-align: left;
+    color: #000;
+  }
+
+  .box-paragraph p {
+    width: 1556px;
+    height: 181px;
+    flex-grow: 0;
+    margin: 36.8px 106px 90px 155px;
+    font-family: Nunito;
+    font-size: 22px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.19;
+    letter-spacing: 0.18px;
+    text-align: left;
+    color: #000;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 10px;
+    align-self: center;
+  }
+
+  .box-social-media {
+    width: 55%;
+    margin-bottom: 0px;
+    align-items: center;
+  }
+
+  .footerTw {
+    height: 51px;
+    width: 58px;
+  }
+  .footerTl {
+    height: 51px;
+    width: 61px;
+  }
+  .footerGit {
+    height: 65px;
+    width: 67px;
+  }
+  .footerLi {
+    height: 64px;
+    width: 63px;
+  }
+
+  .edeniaLogo {
+    height: 42px;
+    width: 250px;
+  }
+
+  .contact-us p {
+    width: 860px;
+    height: 108px;
+    flex-grow: 0;
+    margin: 0 0 16px;
+    font-family: Nunito;
+    font-size: 36px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.14px;
+    text-align: center;
+    color: #000;
+  }
+
+  .eos-costa-rica h4 {
+    width: auto;
+    flex-grow: 0;
+    margin: 0 0 3.2px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: var(--colors-3-text-primary);
+  }
+
+  .eos-costa-rica {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #copyright {
+    width: 338px;
+    height: 18px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.59;
+    letter-spacing: 0.53px;
+    text-align: center;
+    color: #000;
   }
 }

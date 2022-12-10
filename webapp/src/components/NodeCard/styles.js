@@ -7,6 +7,12 @@ export default (theme) => ({
   content: {
     flex: 1,
   },
+  cardHeader: {
+    paddingBottom: `${theme.spacing(1)} !important`,
+    '& span': {
+      textTransform: 'unset !important',
+    },
+  },
   avatar: {
     width: 30,
     height: 30,
@@ -23,4 +29,40 @@ export default (theme) => ({
   breakLine: {
     wordBreak: 'break-word',
   },
+  nodes: {
+    width: '280px',
+    padding: theme.spacing(3),
+    overflowX: 'auto',
+    marginLeft: '5px',
+    marginRight: '5px',
+    borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+  },
+  nodesWrapper: {
+    display: 'flex',
+    width: 'max-content',
+    flexFlow: 'row nowrap',
+    padding: theme.spacing(2),
+    [theme.breakpoints.up('lg')]: {
+      paddingRight: '250px',
+    },
+  },
+  endpointsTitle: {
+    display: 'flex',
+  },
+  lightIcon: {
+    display: 'flex',
+    fontWeight: 'normal',
+    marginLeft: theme.spacing(3),
+    '& svg': {
+      width: '20px',
+      height: '20px',
+      alignSelf: 'center',
+      marginLeft: theme.spacing(2),
+    },
+  },
+  buttonApis: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(2),
+  }
 })

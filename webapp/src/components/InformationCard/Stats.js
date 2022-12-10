@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import { eosConfig, generalConfig } from '../../config'
 
 const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
-  if (eosConfig.networkName === 'lacchain' || type === 'node') return <></>
+  if (eosConfig.networkName === 'lacchain') return <></>
 
   return (
     <div className={classes.healthStatus}>
@@ -27,7 +27,7 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
               {`${t('missedBlocks')}: `}
               {missedBlocks.reduce(
                 (result, current) => result + current.value,
-                0
+                0,
               )}
             </Typography>
           </div>
@@ -43,14 +43,14 @@ Stats.propTypes = {
   classes: PropTypes.object,
   votes: PropTypes.string,
   rewards: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 }
 
 Stats.defaultProps = {
   updatedAt: '',
   classes: {},
   votes: '0',
-  rewards: '0'
+  rewards: '0',
 }
 
 export default memo(Stats)

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import { Hidden, Menu, MenuItem, AppBar, IconButton, Link } from '@mui/material'
+import { Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
 import LanguageIcon from '@mui/icons-material/Language'
-import FingerprintIcon from '@mui/icons-material/Fingerprint'
-import AccountIcon from '@mui/icons-material/AccountCircle'
-import ExitIcon from '@mui/icons-material/ExitToApp'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import 'moment/locale/es'
 
+import AuthButton from './AuthButton'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -31,15 +29,15 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <div>
-      <Link href="https://eosio.online/">
-        <img
-          alt="eosio dashboard"
-          src={'/eosio-dashboard.svg'}
-          className={classes.imgHeaderLogo}
-        />
-      </Link>
-    </div>
+    <a href="https://antelope.tools/" rel="external">
+      <img
+        alt="antelope tools dashboard"
+        src={'/antelope-tools.svg'}
+        width={145}
+        height={64}
+        className={classes.imgHeaderLogo}
+      />
+    </a>
   )
 }
 
@@ -68,7 +66,7 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <div>
+    <>
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -91,56 +89,11 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </>
   )
 }
 
-const UserMenu = ({ ual }) => {
-  const classes = useStyles()
-  const { t } = useTranslation()
-
-  const handleOnLogin = () => {
-    ual.showModal()
-  }
-
-  const handleSignOut = () => {
-    ual.logout()
-  }
-
-  return (
-    <div>
-      {ual.activeUser && (
-        <>
-          <Button startIcon={<AccountIcon />}>
-            {ual.activeUser.accountName}
-          </Button>
-          <Button
-            startIcon={<ExitIcon />}
-            onClick={handleSignOut}
-            className={classes.btnLogin}
-          >
-            {t('logout')}
-          </Button>
-        </>
-      )}
-      {!ual.activeUser && (
-        <Button
-          startIcon={<FingerprintIcon />}
-          onClick={handleOnLogin}
-          className={classes.btnLogin}
-        >
-          {t('login')}
-        </Button>
-      )}
-    </div>
-  )
-}
-
-UserMenu.propTypes = {
-  ual: PropTypes.any,
-}
-
-const Header = ({ ual, onDrawerToggle }) => {
+const Header = ({ onDrawerToggle }) => {
   const classes = useStyles()
 
   return (
@@ -162,7 +115,7 @@ const Header = ({ ual, onDrawerToggle }) => {
           </div>
           <div className={classes.userBox}>
             <LanguageMenu />
-            <UserMenu ual={ual} />
+            <AuthButton classes={classes} />
           </div>
         </div>
       </Toolbar>
@@ -171,7 +124,6 @@ const Header = ({ ual, onDrawerToggle }) => {
 }
 
 Header.propTypes = {
-  ual: PropTypes.any,
   onDrawerToggle: PropTypes.func,
 }
 

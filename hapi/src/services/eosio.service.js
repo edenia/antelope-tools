@@ -1,4 +1,4 @@
-const { axiosUtil, eosUtil, producerUtil } = require('../utils')
+const { axiosUtil, eosUtil, sequelizeUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const getProducers = async () => {
@@ -7,25 +7,32 @@ const getProducers = async () => {
   let hasMore = true
   let nextKey
 
-  while (hasMore) {
-    const {
-      rows,
-      more,
-      total_producer_vote_weight: _totalVoteWeight
-    } = await eosUtil.getProducers({
-      limit: 100,
-      json: true,
-      lower_bound: nextKey
-    })
+  try {
+    while (hasMore) {
+      const {
+        rows,
+        more,
+        total_producer_vote_weight: _totalVoteWeight
+      } = await eosUtil.getProducers({
+        limit: 100,
+        json: true,
+        lower_bound: nextKey
+      })
 
-    hasMore = !!more
-    nextKey = more
-    totalVoteWeight = parseFloat(_totalVoteWeight)
-    producers.push(...rows)
+      hasMore = !!more
+      nextKey = more
+      totalVoteWeight = parseFloat(_totalVoteWeight)
+      producers.push(...rows)
+    }
+  } catch (error) {
+    console.error('PRODUCER SYNC ERROR', error)
+    producers = await getProducersFromDB()
+
+    return await getBPJsons(producers)
   }
 
   producers = producers
-    .filter((producer) => !!producer.is_active)
+    .filter(producer => !!producer.is_active)
     .sort((a, b) => {
       if (a.total_votes < b.total_votes) {
         return -1
@@ -40,41 +47,64 @@ const getProducers = async () => {
 
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
 
-  producers = await Promise.all(
-    producers.map(async (producer, index) => {
-      const producerUrl = getProducerUrl(producer)
-      const chains = await getChains(producerUrl)
-      const chainUrl = chains[eosConfig.chainId] || '/bp.json'
-      const bpJson = await getBPJson(producerUrl, chainUrl)
-      const healthStatus = getProducerHealthStatus(bpJson)
+  producers = producers.map((producer, index) => {
+    return {
+      owner: producer.owner,
+      ...(rewards[producer.owner] || {}),
+      total_votes: producer.total_votes,
+      total_votes_percent: producer.total_votes / totalVoteWeight,
+      total_votes_eos: getVotesInEOS(producer.total_votes),
+      rank: index + 1,
+      producer_key: producer.producer_key,
+      url: producer.url,
+      unpaid_blocks: producer.unpaid_blocks,
+      last_claim_time: producer.last_claim_time,
+      location: producer.location,
+      producer_authority: producer.producer_authority,
+      is_active: !!producer.is_active
+    }
+  })
 
-      let nodes = []
-      let endpoints = { api: [], ssl: [], p2p: [] }
+  producers = await getBPJsons(producers)
 
-      if (chains[eosConfig.chainId]) {
-        nodes = await getNodes(bpJson)
-        endpoints = producerUtil.getEndpoints(bpJson.nodes)
+  return producers
+}
+
+const getBPJsons = async (producers = []) => {
+  const isEosNetwork = eosConfig.chainId === eosConfig.eosChainId
+  let topProducers = producers.slice(0, eosConfig.eosTopLimit)
+
+  topProducers = await Promise.all(
+    topProducers.map(async producer => {
+      let bpJson = {}
+
+      if (producer.url && producer.url.length > 3) {
+        const producerUrl = getProducerUrl(producer)
+        const chains = await getChains(producerUrl)
+        const chainUrl = chains[eosConfig.chainId]
+
+        bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
+
+        if (bpJson && !chainUrl && !isEosNetwork) {
+          const { org, producer_account_name: name } = bpJson
+
+          bpJson = {
+            ...(org && { org }),
+            ...(name && { producer_account_name: name })
+          }
+        }
       }
 
       return {
-        endpoints,
-        owner: producer.owner,
-        ...(rewards[producer.owner] || {}),
-        total_votes: producer.total_votes,
-        total_votes_percent: producer.total_votes / totalVoteWeight,
-        total_votes_eos: getVotesInEOS(producer.total_votes),
-        health_status: healthStatus,
-        rank: index + 1,
-        is_active: !!producer.is_active,
-        bp_json: {
-          ...bpJson,
-          nodes
-        }
+        ...producer,
+        endpoints: { api: [], ssl: [], p2p: [] },
+        health_status: getProducerHealthStatus(bpJson),
+        bp_json: bpJson
       }
     })
   )
 
-  return producers
+  return topProducers.concat(producers.slice(eosConfig.eosTopLimit))
 }
 
 const getExpectedRewards = async (producers, totalVotes) => {
@@ -101,8 +131,9 @@ const getExpectedRewards = async (producers, totalVotes) => {
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
 
-  producers.forEach((producer) => {
+  producers.forEach(producer => {
     const producerVotePercent = producer.total_votes / totalVotes
+
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
     } else {
@@ -174,8 +205,8 @@ const getBPJson = async (producerUrl, chainUrl) => {
   return bpJson
 }
 
-const getProducerUrl = (producer) => {
-  let producerUrl = producer.url || ''
+const getProducerUrl = producer => {
+  let producerUrl = producer?.url?.replace(/(“|'|”|")/g, '') || ''
 
   if (!producerUrl.startsWith('http')) {
     producerUrl = `http://${producerUrl}`
@@ -184,7 +215,7 @@ const getProducerUrl = (producer) => {
   return producerUrl
 }
 
-const getChains = async (producerUrl) => {
+const getChains = async producerUrl => {
   const chainsUrl = `${producerUrl}/chains.json`.replace(
     /(?<=:\/\/.*)((\/\/))/,
     '/'
@@ -194,19 +225,23 @@ const getChains = async (producerUrl) => {
     const {
       data: { chains }
     } = await axiosUtil.instance.get(chainsUrl)
+
     return chains ?? {}
   } catch (error) {
     return {}
   }
 }
 
-const getProducerHealthStatus = (bpJson) => {
+const getProducerHealthStatus = bpJson => {
+  if (!bpJson || !Object.keys(bpJson).length) return []
+  
   const healthStatus = []
 
   healthStatus.push({
     name: 'bpJson',
-    valid: !!bpJson && !!Object.keys(bpJson).length
+    valid: true
   })
+
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name
@@ -231,26 +266,23 @@ const getProducerHealthStatus = (bpJson) => {
   return healthStatus
 }
 
-const getNodes = (bpJson) => {
-  return Promise.all(
-    (bpJson?.nodes || []).map(async (node) => {
-      const apiUrl = node?.ssl_endpoint || node?.api_endpoint
-      const nodeInfo = await producerUtil.getNodeInfo(apiUrl)
-
-      return {
-        ...node,
-        server_version_string: nodeInfo.server_version_string
-      }
-    })
-  )
-}
-
-const getVotesInEOS = (votes) => {
+const getVotesInEOS = votes => {
   const TIMESTAMP_EPOCH = 946684800
   const date = Date.now() / 1000 - TIMESTAMP_EPOCH
   const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600
 
   return parseFloat(votes) / 2 ** weight / 10000
+}
+
+const getProducersFromDB = async () => {
+  const [producers] = await sequelizeUtil.query(`
+    SELECT *
+    FROM producer
+    ORDER BY rank ASC
+    ;
+  `)
+
+  return producers
 }
 
 module.exports = {

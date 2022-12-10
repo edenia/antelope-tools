@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/client'
 import { useTheme } from '@mui/material/styles'
 import clsx from 'clsx'
@@ -11,7 +10,6 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import CardContent from '@mui/material/CardContent'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
@@ -19,6 +17,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 import { TRANSACTION_HISTORY_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
+import { useSharedState } from '../../context/state.context'
 import { generalConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
@@ -27,23 +26,22 @@ const options = ['Live (30s)', ...rangeOptions]
 
 const TransactionInfo = ({ t, classes }) => {
   const theme = useTheme()
-  const tps = useSelector((state) => state.eos.tps)
-  const tpb = useSelector((state) => state.eos.tpb)
+  const [{ tps, tpb }] = useSharedState()
   const [graphicData, setGraphicData] = useState([
     {
       name: t('transactionsPerSecond'),
-      color: theme.palette.secondary.main
+      color: theme.palette.secondary.main,
     },
     {
       name: t('transactionsPerBlock'),
-      color: '#00C853'
-    }
+      color: '#00C853',
+    },
   ])
   const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
   const [getTransactionHistory, { data, loading }] = useLazyQuery(
     TRANSACTION_HISTORY_QUERY,
-    { fetchPolicy: 'network-only' }
+    { fetchPolicy: 'network-only' },
   )
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const TransactionInfo = ({ t, classes }) => {
       trxPerBlock.push({
         name: `Block: ${tpb[index].blocks.join()}`,
         y: tpb[index].transactions,
-        x: index > 0 ? index / 2 : index
+        x: index > 0 ? index / 2 : index,
       })
     }
 
@@ -64,7 +62,7 @@ const TransactionInfo = ({ t, classes }) => {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
         y: tps[index].transactions,
-        x: index
+        x: index,
       })
     }
 
@@ -72,13 +70,13 @@ const TransactionInfo = ({ t, classes }) => {
       {
         name: t('transactionsPerSecond'),
         color: theme.palette.secondary.main,
-        data: trxPerSecond
+        data: trxPerSecond,
       },
       {
         name: t('transactionsPerBlock'),
         color: '#00C853',
-        data: trxPerBlock
-      }
+        data: trxPerBlock,
+      },
     ])
     // eslint-disable-next-line
   }, [option, tps, tpb])
@@ -88,7 +86,7 @@ const TransactionInfo = ({ t, classes }) => {
 
     setGraphicData([])
     getTransactionHistory({
-      variables: {}
+      variables: {},
     })
   }, [option, getTransactionHistory])
 
@@ -108,36 +106,36 @@ const TransactionInfo = ({ t, classes }) => {
       (transactionHistory) => {
         return [
           new Date(transactionHistory.datetime).getTime(),
-          transactionHistory.transactions_count || 0
+          transactionHistory.transactions_count || 0,
         ]
-      }
+      },
     )
 
     setGraphicData([
       {
         name: t('transactionsPerBlock'),
         color: '#00C853',
-        data: intervalGraphicData
-      }
+        data: intervalGraphicData,
+      },
     ])
     // eslint-disable-next-line
   }, [data, t])
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent
         style={{
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
       >
-        <Box className={classes.headerTransactionLine}>
+        <div className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {t('transactions')}
           </Typography>
-          <Box className={classes.formControl}>
+          <div className={classes.formControl}>
             <FormControl>
               {generalConfig.historyEnabled && (
                 <>
@@ -157,10 +155,10 @@ const TransactionInfo = ({ t, classes }) => {
                 </>
               )}
             </FormControl>
-            <Box
+            <div
               onClick={() => option === options[0] && setPause(!pause)}
               className={clsx(classes.pauseButton, {
-                [classes.disableButton]: option !== options[0]
+                [classes.disableButton]: option !== options[0],
               })}
             >
               {pause ? (
@@ -177,30 +175,30 @@ const TransactionInfo = ({ t, classes }) => {
                 />
               )}
               <Typography>{pause ? t('play') : t('pause')}</Typography>
-            </Box>
-          </Box>
-        </Box>
+            </div>
+          </div>
+        </div>
         {loading && <LinearProgress color="primary" />}
         <TransactionsLineChart
           yAxisProps={{
             reversed: false,
             title: {
               enabled: true,
-              text: t('transactions')
+              text: t('transactions'),
             },
-            maxPadding: 0.05
+            maxPadding: 0.05,
           }}
           xAxisProps={{
             type: 'datetime',
             reversed: option === options[0],
             title: {
               enabled: option === options[0],
-              text: t('secondsAgo')
+              text: t('secondsAgo'),
             },
             labels: {
-              format: option === options[0] ? '{value}s' : null
+              format: option === options[0] ? '{value}s' : null,
             },
-            maxPadding: 0.05
+            maxPadding: 0.05,
           }}
           data={graphicData}
         />
@@ -211,11 +209,11 @@ const TransactionInfo = ({ t, classes }) => {
 
 TransactionInfo.propTypes = {
   t: PropTypes.any,
-  classes: PropTypes.object
+  classes: PropTypes.object,
 }
 
 TransactionInfo.defaultProps = {
-  classes: {}
+  classes: {},
 }
 
 export default TransactionInfo

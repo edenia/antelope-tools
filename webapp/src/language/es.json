@@ -20,6 +20,7 @@
     "keys": "Llaves",
     "download": "Descargar",
     "healthStatus": "Salud del nodo",
+    "help": "Ayuda",
     "node": "Nodo",
     "lastHour": "Última hora",
     "lastDay": "Último día",
@@ -30,7 +31,7 @@
     "api": "HTTP",
     "ssl": "HTTPS",
     "p2p": "P2P",
-    "payer" : "Pagador",
+    "payer": "Pagador",
     "nodes": "Nodos",
     "total": "Total",
     "executeTransaction": "Ejecutar Transacción",
@@ -49,8 +50,8 @@
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
     "1 Year": "1 Año",
-    "footer1": "Esta aplicación es de código abierto",
-    "footer2": "Averigua cómo contribuir",
+    "footer1": "Esta aplicación es un bien Público Comunitario",
+    "footer2": "Desarrollado por Edenia",
     "bugRequest": "Reportar un problema / Solicitar una característica "
   },
   "routes": {
@@ -82,13 +83,13 @@
     "/faucet>title": "Crear una Cuenta y Grifo de Tokens - EOSIO Network Dashboard",
     "/faucet>heading": "Crear una Cuenta y Obtener Tokens",
     "/ricardian-contract>sidebar": "Acuerdo de Productor de Bloques",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - EOSIO Dashboard",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Antelope Tools",
     "/ricardian-contract>heading": "",
     "/block-distribution>sidebar": "Distribución de bloques",
-    "/block-distribution>title": "Distribución de bloques - EOSIO Dashboard",
+    "/block-distribution>title": "Distribución de bloques - Antelope Tools",
     "/block-distribution>heading": "Distribución de bloques",
     "/endpoints>sidebar": "URL's",
-    "/endpoints>title": "URL's - EOSIO Dashboard",
+    "/endpoints>title": "URL's - Antelope Tools",
     "/endpoints>heading": "URL's",
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Panel",
@@ -163,9 +164,11 @@
     "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
     "accountNotFound": "Cuenta no encontrada",
+    "tableNotFound": "Tabla no encontrada",
     "successMessage": "Transacción exitosa",
     "placeholder": "Cuenta o Nombre del Contrato",
-    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato."
+    "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato.",
+    "endpointFailure": "Fallo en el endpoint"
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",
@@ -188,36 +191,37 @@
   },
   "aboutRoute": {
     "body": {
-      "paragraph1": "EOSIO Dashboard recolecta datos y permite una visualización fácil del estado de los nodos y estadísticas de las blockchains de EOSIO. Esto también permite visualizar el método de consenso en tiempo real junto con información específica de la red, tales como la distribución de recompensas de los productores de bloques en la mainnet de EOS y una lista de entidades registradas en la red con permiso público LACChain. EOSIO Dashboard es una herramienta open-source para que la comunidad de EOSIO acceda a los datos, apoye las votaciones por los productores de bloques y afine su infraestructura."
+      "paragraph1": "Antelope Tools recolecta datos y permite una visualización fácil del estado de los nodos y estadísticas de las blockchains de EOSIO. Esto también permite visualizar el método de consenso en tiempo real junto con información específica de la red, tales como la distribución de recompensas de los productores de bloques en la mainnet de EOS y una lista de entidades registradas en la red con permiso público LACChain. Antelope Tools es una herramienta open-source para que la comunidad de EOSIO acceda a los datos, apoye las votaciones por los productores de bloques y afine su infraestructura."
     },
     "title": "EOSIO Tablero",
-    "subtitle1": "¿Por qué usar EOSIO Dashboard?",
+    "subtitle1": "¿Por qué usar Antelope Tools?",
     "body1": {
-      "paragraph1": "EOSIO Dashboard es una herramienta de código abierto impulsada por la comunidad y construida por desarrolladores de blockchain que creen que la transparencia es fundamental para el funcionamiento de las redes de blockchain. Pretendemos ofrecer una aplicación útil y sencilla para visualizar la información relevante de los productores de bloques para promover la transparencia y fiabilidad."
+      "paragraph1": "Antelope Tools es una herramienta de código abierto impulsada por la comunidad y construida por desarrolladores de blockchain que creen que la transparencia es fundamental para el funcionamiento de las redes de blockchain. Pretendemos ofrecer una aplicación útil y sencilla para visualizar la información relevante de los productores de bloques para promover la transparencia y fiabilidad."
     },
     "subtitle2": "¿Por qué es importante?",
     "body2": {
-      "paragraph1": "En la red EOS, los poseedores de tokens deben votar por los Productores de Bloques basándose en la información disponible. En las redes con permiso, como LACChain, los operadores de nodos son responsables de que la red funcione sin problemas. Creemos que la supervisión de la red es esencial para mejorar y medir la transparencia de los nodos. El objetivo principal de EOSIO Dashboard es ayudar a visualizar información objetiva y fiable sobre cada nodo y su actividad."
+      "paragraph1": "En la red EOS, los poseedores de tokens deben votar por los Productores de Bloques basándose en la información disponible. En las redes con permiso, como LACChain, los operadores de nodos son responsables de que la red funcione sin problemas. Creemos que la supervisión de la red es esencial para mejorar y medir la transparencia de los nodos. El objetivo principal de Antelope Tools es ayudar a visualizar información objetiva y fiable sobre cada nodo y su actividad."
     },
     "subtitle3": "¿De dónde se obtienen los datos?",
     "body3": {
-      "paragraph1": "EOSIO Dashboard proporciona una visualización detallada y gráfica de la información relevante de las entidades que ejecutan los nodos y la infraestructura de la cadena de bloques. Obtenemos los datos on-chain directamente de las tablas públicas de blockchain y de la información proporcionada por los productores de bloques en sus archivos bp.json. ",
-      "paragraph2": "Para mayor información acerca EOSIO Dashboard, visite nuestro repositorio en GitHub o contáctenos en nuestro grupo de Telegram. Póngase en contacto con nosotros y únase a nuestro esfuerzo por hacer que las blockchains de EOSIO sean aún más transparentes y fáciles de usar."
+      "paragraph1": "Antelope Tools proporciona una visualización detallada y gráfica de la información relevante de las entidades que ejecutan los nodos y la infraestructura de la cadena de bloques. Obtenemos los datos on-chain directamente de las tablas públicas de blockchain y de la información proporcionada por los productores de bloques en sus archivos bp.json.",
+      "paragraph2": "Para mayor información acerca Antelope Tools, visite nuestro repositorio en GitHub o contáctenos en nuestro grupo de Telegram. Póngase en contacto con nosotros y únase a nuestro esfuerzo por hacer que las blockchains de EOSIO sean aún más transparentes y fáciles de usar."
     },
     "bpjsonexample": "Ejemplo de bp.json"
   },
   "helpRoute": {
-    "title": "¡Gracias por usar EOS Network Dashboard!",
-    "paragraph": "El desarrollo de EOSIO Dashboard continúa en progreso. Por favor, siéntase libre de dejar sugerencias para actualizaciones, reporte de errores, o utilizar el código. También, puede encontrarnos en Telegram o visitar nuestro sitio web.",
-    "githubEOSCR": "GitHub EOS Costa Rica",
+    "title": "¡Gracias por usar el monitor de red Blockchain de Antelope Tools!",
+    "paragraph": "El desarrollo de Antelope Tools continúa en progreso. Por favor, siéntase libre de dejar sugerencias para actualizaciones, reporte de errores, o utilizar el código. También, puede encontrarnos en Telegram o visitar nuestro sitio web.",
+    "githubEOSCR": "Repositorio GitHub de Edenia",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Sitio web de EOS Costa Rica"
+    "websiteEOSCR": "Sitio web de Edenia"
   },
   "producerCardComponent": {
     "rank": "Rango",
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
+    "moreinfo": "More info",
     "rewards": "Recompensas",
     "country": "País",
     "eosRate": "EOS RATE",
@@ -232,6 +236,7 @@
     "technicalContact": "Contacto técnico",
     "social": "Social",
     "ownershipDisclosure": "Divulgación de propiedad",
+    "codeofconduct": "Código de conducta",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
     "email": "Correo electrónico",
@@ -242,7 +247,8 @@
     "cpuBenchmark": "Promedio del Benchmark de CPU",
     "health": "Cumplimiento",
     "collapse": "Colapsar",
-    "moreInfo": "Más Info",
+    "moreInfo": "Más Información",
+    "openLink": "Visitar Sitio",
     "version": "Versión",
     "info": "Info",
     "keys": "Llaves",
@@ -251,7 +257,8 @@
     "noData": "No hay Datos",
     "peer_keys": "Peer",
     "account_key": "Cuenta",
-    "hs_bpJson": "BP Json"
+    "hs_bpJson": "BP Json",
+    "emptyState": "Este productor de bloques no proporciona ninguna información."
   },
   "nodeCardComponent": {
     "features": "Características",
@@ -259,7 +266,8 @@
     "nodeVersion": "Versión",
     "emptyNode": "Sin información para nodos",
     "cpuBenchmark": "Promedio del Benchmark de CPU",
-    "isFull":"Es completo"
+    "isFull": "Es completo",
+    "supportedApis": "APIs Soportadas"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",
@@ -305,8 +313,10 @@
     "availability": "Disponibilidad"
   },
   "endpointsListRoute": {
-    "title": "Endpoints available by",
-    "updatedAt": "Actualizado por última vez"
+    "title": "Endpoints disponibles por",
+    "updatedAt": "Actualizado por última vez",
+    "endpointsResponding": "Solo puntos finales que responden",
+    "showList": "Ver la lista"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Milisegundos",
@@ -326,6 +336,27 @@
     "producer": "Productor",
     "placeholder": "Nombre del Productor"
   },
+  "endpointInfoComponent": {
+    "status": "Estado",
+    "response": "Respuesta",
+    "headBlockTime": "Fecha del último bloque",
+    "updatedAt": "Actualizado por última vez",
+    "error": "Error",
+    "noResponse": "Sin respuesta",
+    "Bad Gateway": "Mal puerta de enlace",
+    "Bad request": "Solicitud incorrecta",
+    "Not Found": "No encontrado",
+    "No response": "No responde",
+    "Service Temporarily Unavailable": "Servicio temporalmente no disponible",
+    "Service Unavailable": "Servicio no disponible",
+    "Gateway Time-out": "Tiempo de espera superado",
+    "Internal Server Error": "Error interno en el servidor",
+    "Unauthorized": "Solicitud no autorizada",
+    "Payment Required": "La solicitud requiere un pago",
+    "Forbidden": "La solicitud está prohibida",
+    "Request Timeout": "Tiempo de la solicitud superado",
+    "Too Many Request": "Demasiadas solicitudes"
+  },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
     "producer": "Productor",
@@ -333,5 +364,20 @@
   },
   "noResultsComponent": {
     "noResultsFound": "No se encontraron resultados"
+  },
+  "healthCheckComponent": {
+    "updated": "El punto final funciona",
+    "outdated": "El punto final funciona, pero no está actualizado con el último bloque",
+    "error": "Error en la consulta del punto final",
+    "not working": "El punto final no responde"
+  },
+  "copyToClipboardComponent": {
+    "copyToClipboard": "Copiar al portapapeles",
+    "copied": "¡Copiado!"
+  },
+  "noFound": {
+    "subTitle": "Página no encontrada.",
+    "message": "Es posible que la página que busca haya sido eliminada.",
+    "return": "Volver al sitio web"
   }
 }

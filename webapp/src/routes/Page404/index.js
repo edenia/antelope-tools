@@ -3,6 +3,7 @@ import { Button, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
+import { useTranslation } from 'react-i18next'
 
 import styles from './styles'
 
@@ -10,6 +11,7 @@ const useStyles = makeStyles(styles)
 
 const Page404 = () => {
   const classes = useStyles()
+  const { t } = useTranslation('noFound')
 
   return (
     <div className={classes.wrapper}>
@@ -18,10 +20,10 @@ const Page404 = () => {
         404
       </Typography>
       <Typography component="h2" variant="h5" align="center" gutterBottom>
-        Page not found.
+        {t('subTitle')}
       </Typography>
       <Typography component="h2" variant="body1" align="center" gutterBottom>
-        The page you are looking for might have been removed.
+        {t('message')}
       </Typography>
 
       <Button
@@ -31,7 +33,7 @@ const Page404 = () => {
         color="secondary"
         mt={2}
       >
-        Return to website
+        {t('return')}
       </Button>
     </div>
   )

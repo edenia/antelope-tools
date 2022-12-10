@@ -1,60 +1,68 @@
 actions:
-- name: block_distribution
-  definition:
-    kind: ""
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/block-distribution'
-    forward_client_headers: true
-    timeout: 180
-  permissions:
-  - role: guest
-- name: cpu_benchmark
-  definition:
-    kind: ""
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/cpu-benchmark'
-    forward_client_headers: true
-  permissions:
-  - role: guest
-- name: createAccount
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/create-faucet-account'
-  permissions:
-  - role: guest
-- name: missed_blocks
-  definition:
-    kind: ""
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/missed-blocks'
-    forward_client_headers: true
-    timeout: 180
-  permissions:
-  - role: guest
-- name: producers_summary
-  definition:
-    kind: ""
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/producers-summary'
-  permissions:
-  - role: guest
-- name: transactions
-  definition:
-    kind: ""
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/transactions'
-  permissions:
-  - role: guest
-- name: transferFaucetTokens
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/transfer-faucet-tokens'
-  permissions:
-  - role: guest
+  - name: block_distribution
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/block-distribution'
+      forward_client_headers: true
+      timeout: 180
+    permissions:
+      - role: guest
+  - name: cpu_benchmark
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/cpu-benchmark'
+      forward_client_headers: true
+    permissions:
+      - role: guest
+  - name: createAccount
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/create-faucet-account'
+    permissions:
+      - role: guest
+  - name: getProducersInfo
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/get-producers-info'
+    permissions:
+      - role: guest
+  - name: missed_blocks
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/missed-blocks'
+      forward_client_headers: true
+      timeout: 180
+    permissions:
+      - role: guest
+  - name: producers_summary
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/producers-summary'
+    permissions:
+      - role: guest
+  - name: transactions
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/transactions'
+    permissions:
+      - role: guest
+  - name: transferFaucetTokens
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/transfer-faucet-tokens'
+    permissions:
+      - role: guest
 custom_types:
   enums: []
-  input_objects: []
+  input_objects:
+    - name: GetProducersInfoInput
   objects:
-  - name: block_distribution_output
-  - name: MissedBlocks
-  - name: CPUBenchmark
-  - name: Transaction
-  - name: ProducersSummary
-  - name: CreateAccountOutput
-  - name: TransferFaucetTokensOutput
+    - name: block_distribution_output
+    - name: MissedBlocks
+    - name: CPUBenchmark
+    - name: Transaction
+    - name: ProducersSummary
+    - name: CreateAccountOutput
+    - name: TransferFaucetTokensOutput
+    - name: GetProducersInfoOutput
   scalars: []

@@ -9,7 +9,7 @@ import {
   Info as InfoIcon,
   HelpCircle as HelpIcon,
   Inbox as InboxIcon,
-  Cpu as CpuIcon
+  Cpu as CpuIcon,
 } from 'react-feather'
 
 import { eosConfig, generalConfig } from '../config'
@@ -21,7 +21,7 @@ import {
   EndpointSvg,
   MissingBlocksSvg,
   TopologySvg,
-  RewardsSvg
+  RewardsSvg,
 } from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
@@ -51,70 +51,70 @@ const defaultRoutes = [
     icon: <GridIcon />,
     component: Home,
     path: '/',
-    exact: true
+    exact: true,
   },
   {
     name: 'blockProducers',
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
-    exact: true
+    exact: true,
   },
   {
     name: 'nodes',
     icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
-    exact: true
+    exact: true,
   },
   {
     name: 'endpointsList',
     icon: <EndpointSvg />,
     component: EndpointsList,
     path: '/endpoints',
-    exact: true
+    exact: true,
   },
   {
     name: 'nodesDistribution',
     icon: <RewardsDistributionSvg />,
     component: NodesDistribution,
     path: '/nodes-distribution',
-    exact: true
+    exact: true,
   },
   {
     name: 'rewardsDistribution',
     icon: <RewardsSvg />,
     component: RewardsDistribution,
     path: '/rewards-distribution',
-    exact: true
+    exact: true,
   },
   {
     name: 'blockDistribution',
     icon: <BlockDistributionSvg />,
     component: BlockDistribution,
     path: '/block-distribution',
-    exact: true
+    exact: true,
   },
   {
     name: 'missedBlocks',
     icon: <InboxIcon />,
     component: MissedBlocks,
     path: '/missed-blocks',
-    exact: true
+    exact: true,
   },
   {
     name: 'cpuBenchmark',
     icon: <ActivityIcon />,
     component: CPUBenchmark,
     path: '/cpu-benchmark',
-    exact: true
+    exact: true,
   },
   {
     name: 'ricardianContract',
     icon: <InfoIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
-    exact: true
+    exact: true,
   },
   {
     header: 'tools',
@@ -122,15 +122,15 @@ const defaultRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
-    exact: true
+    exact: true,
   },
   {
     name: 'bpJson',
     icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
-    exact: true
-  }
+    exact: true,
+  },
 ]
 const lacchainRoutes = [
   {
@@ -139,70 +139,70 @@ const lacchainRoutes = [
     icon: <GridIcon />,
     component: Home,
     path: '/',
-    exact: true
+    exact: true,
   },
   {
     name: 'entities',
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/entities',
-    exact: true
+    exact: true,
   },
   {
     name: 'nodes',
     icon: <ServerIcon />,
     component: Nodes,
     path: '/nodes',
-    exact: true
+    exact: true,
   },
   {
     name: 'endpointsList',
     icon: <EndpointSvg />,
     component: EndpointsList,
     path: '/endpoints',
-    exact: true
+    exact: true,
   },
   {
     name: 'lacchainNetwork',
     icon: <TopologySvg />,
     component: LacchainNetwork,
     path: '/lacchain/network',
-    exact: true
+    exact: true,
   },
   {
     name: 'nodesDistribution',
     icon: <RewardsDistributionSvg />,
     component: NodesDistribution,
     path: '/nodes-distribution',
-    exact: true
+    exact: true,
   },
   {
     name: 'blockDistribution',
     icon: <BlockDistributionSvg />,
     component: BlockDistribution,
     path: '/block-distribution',
-    exact: true
+    exact: true,
   },
   {
     name: 'missedBlocks',
     icon: <MissingBlocksSvg />,
     component: MissedBlocks,
     path: '/missed-blocks',
-    exact: true
+    exact: true,
   },
   {
     name: 'cpuBenchmark',
     icon: <ActivityIcon />,
     component: CPUBenchmark,
     path: '/cpu-benchmark',
-    exact: true
+    exact: true,
   },
   {
     name: 'ricardianContract',
     icon: <InfoIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
-    exact: true
+    exact: true,
   },
   {
     header: 'tools',
@@ -210,22 +210,22 @@ const lacchainRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
-    exact: true
+    exact: true,
   },
   {
     name: 'lacchainManagement',
     icon: <SlidersIcon />,
     component: LacchainManagement,
     path: '/management',
-    exact: true
+    exact: true,
   },
   {
     name: 'lacchainNodeConfig',
     icon: <ConfigSvg />,
     component: LacchainNodeConfig,
     path: '/node-config',
-    exact: true
-  }
+    exact: true,
+  },
 ]
 const advanceRoutes = [
   {
@@ -233,8 +233,8 @@ const advanceRoutes = [
     icon: <CpuIcon />,
     component: Faucet,
     path: '/faucet',
-    exact: true
-  }
+    exact: true,
+  },
 ]
 const helpRoutes = [
   {
@@ -243,18 +243,19 @@ const helpRoutes = [
     icon: <InfoIcon />,
     component: About,
     path: '/about',
-    exact: true
+    exact: true,
   },
   {
     name: 'Help',
     icon: <HelpIcon />,
     component: Help,
     path: '/help',
-    exact: true
+    exact: true,
   },
   {
-    component: Page404
-  }
+    component: Page404,
+    path: '*',
+  },
 ]
 
 let routes = []
@@ -272,7 +273,7 @@ switch (eosConfig.networkName) {
     break
 }
 routes = routes.filter(
-  (route) => !generalConfig.disabledMenuItems.includes(route.path)
+  (route) => !generalConfig.disabledMenuItems.includes(route.path),
 )
 
 export default routes

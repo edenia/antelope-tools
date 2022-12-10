@@ -20,6 +20,7 @@
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
+    "help": "Help",
     "node": "Node",
     "lastHour": "Last Hour",
     "lastDay": "Last Day",
@@ -37,14 +38,14 @@
     "timeFrame": "Time frame",
     "net": "NET",
     "cpu": "CPU",
-    "footer1": "This app is open source",
-    "footer2": "Find out how to contribute",
+    "footer1": "This App is a Community Public Good",
+    "footer2": "Developed by Edenia",
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature"
   },
   "routes": {
     "/>sidebar": "Dashboard",
-    "/>title": "EOSIO Dashboard",
+    "/>title": "Antelope Tools",
     "/>heading": "Welcome to",
     "/cpu-benchmark>sidebar": "CPU Benchmarks",
     "/cpu-benchmark>title": "CPU Benchmarks  - EOSIO Network Dashboard",
@@ -158,9 +159,11 @@
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
     "accountNotFound": "Account not found",
+    "tableNotFound": "Table not found",
     "successMessage": "Success transaction",
     "placeholder": "Account or Contract Name",
-    "title": "Search for account information, view tables and execute actions for any contract."
+    "title": "Search for account information, view tables and execute actions for any contract.",
+    "endpointFailure": "Endpoint failure"
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
@@ -183,35 +186,36 @@
   },
   "aboutRoute": {
     "body": {
-      "paragraph1": "The EOSIO Dashboard gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the EOS public mainnet and a list of registered entities on the LACChain public-permissioned network. The EOSIO Dashboard is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
+      "paragraph1": "The Antelope Tools gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the EOS public mainnet and a list of registered entities on the LACChain public-permissioned network. The Antelope Tools is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
     },
-    "subtitle1": "Why Use EOSIO Dashboard?",
+    "subtitle1": "Why Use Antelope Tools?",
     "body1": {
-      "paragraph1": "EOSIO Dashboard is a community-driven open-source tool built by blockchain developers who believe transparency is fundamental to operating blockchain networks. We intend to provide a useful and straightforward app to visualize the Block Producers' relevant information to promote transparency and reliability."
+      "paragraph1": "Antelope Tools is a community-driven open-source tool built by blockchain developers who believe transparency is fundamental to operating blockchain networks. We intend to provide a useful and straightforward app to visualize the Block Producers' relevant information to promote transparency and reliability."
     },
     "subtitle2": "Why It's Important?",
     "body2": {
-      "paragraph1": "On the EOS network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. EOSIO Dashboard's main objective is to help you visualize objective and reliable information about each node and its activity."
+      "paragraph1": "On the EOS network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. Antelope Tools's main objective is to help you visualize objective and reliable information about each node and its activity."
     },
     "subtitle3": "Where Does the Data Come From?",
     "body3": {
-      "paragraph1": "EOSIO Dashboard provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files. ",
-      "paragraph2": "For more information about EOSIO Dashboard, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
+      "paragraph1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files.",
+      "paragraph2": "For more information about Antelope Tools, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
     },
     "bpjsonexample": "Bp.json example"
   },
   "helpRoute": {
-    "title": "Thank you for using EOS Network Monitor!",
-    "paragraph": "EOSIO Dashboard is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "GitHub - EOS Costa Rica",
+    "title": "Thank you for using Antelope Tools Blockchain Network Monitor !",
+    "paragraph": "Antelope Tools is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
+    "githubEOSCR": "Edenia GitHub Repo",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "EOS Costa Rica Website "
+    "websiteEOSCR": "Edenia Website "
   },
   "producerCardComponent": {
     "rank": "Rank",
     "account": "Account",
     "website": "Website",
     "votes": "Votes",
+    "moreinfo": "More info",
     "rewards": "Rewards",
     "country": "Country",
     "eosRate": "EOS RATE",
@@ -226,6 +230,7 @@
     "technicalContact": "Technical Contact",
     "social": "Social",
     "ownershipDisclosure": "Ownership Disclosure",
+    "codeofconduct": "Code of Conduct",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
     "email": "Email",
@@ -237,6 +242,7 @@
     "health": "Compliance",
     "collapse": "Collapse",
     "moreInfo": "More Info",
+    "openLink": "Visit Site",
     "version": "Version",
     "info": "Info",
     "keys": "Keys",
@@ -245,7 +251,8 @@
     "noData": "No Data",
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
-    "hs_bpJson": "BP Json"
+    "hs_bpJson": "BP Json",
+    "emptyState": "This block producer does not provide any information."
   },
   "nodeCardComponent": {
     "features": "Features",
@@ -253,7 +260,8 @@
     "nodeVersion": "Version",
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
-    "isFull":"Is full"
+    "isFull": "Is full",
+    "supportedApis": "Supported APIs"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",
@@ -303,7 +311,9 @@
   },
   "endpointsListRoute": {
     "title": "Endpoints available by",
-    "updatedAt": "Updated at"
+    "updatedAt": "Updated at",
+    "endpointsResponding": "Only endpoints responding",
+    "showList": "Show List"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Miliseconds",
@@ -323,6 +333,14 @@
     "producer": "Producer",
     "placeholder": "Producer Name"
   },
+  "endpointInfoComponent": {
+    "status": "Status",
+    "response": "Response",
+    "headBlockTime": "Head Block Time",
+    "updatedAt": "Updated at",
+    "error": "Error",
+    "noResponse": "No response"
+  },
   "nodeSearchComponent": {
     "title": "Search Node",
     "producer": "Producer",
@@ -330,5 +348,20 @@
   },
   "noResultsComponent": {
     "noResultsFound": "No results found"
+  },
+  "healthCheckComponent": {
+    "updated": "The endpoint is working",
+    "outdated": "The endpoint works but is outdated with the last block",
+    "error": "Error in the endpoint request",
+    "not working": "The endpoint is not responding"
+  },
+  "copyToClipboardComponent": {
+    "copyToClipboard": "Copy to clipboard",
+    "copied": "Copied!"
+  },
+  "noFound": {
+    "subTitle": "Page not found.",
+    "message": "The page you are looking for might have been removed.",
+    "return": "Return to website"
   }
 }

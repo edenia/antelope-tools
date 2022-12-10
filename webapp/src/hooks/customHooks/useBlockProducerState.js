@@ -23,36 +23,18 @@ const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 
 const useBlockProducerState = () => {
   const [
-    { filters, pagination, loading, producers, info },
+    { filters, pagination, loading, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
-    BLOCK_TRANSACTIONS_HISTORY
+    BLOCK_TRANSACTIONS_HISTORY,
   )
-  const [totalPages, setTotalPages] = useState(1)
-  const [current, setCurrent] = useState(null)
-  const [anchorEl, setAnchorEl] = useState(null)
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
 
   const chips = CHIPS_NAMES.map((e) => {
     return { name: e }
   })
-
-  const handlePopoverOpen = (node) => (event) => {
-    setCurrent(node)
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
-
-  useEffect(() => {
-    if (!info) return
-
-    setTotalPages(Math.ceil(info.producers?.count / pagination.limit))
-  }, [info, pagination.limit])
 
   useEffect(() => {
     if (eosConfig.networkName === 'lacchain') return
@@ -64,7 +46,7 @@ const useBlockProducerState = () => {
       ...prev,
       page: 1,
       ...filter,
-      where: { ...where, owner: prev.where?.owner },
+      where: { ...where, owner: prev.where?.owner, bp_json: { _is_null: false } },
     }))
   }, [filters, setPagination])
 
@@ -86,20 +68,15 @@ const useBlockProducerState = () => {
 
   return [
     {
-      anchorEl,
-      current,
       filters,
       chips,
       items,
       loading,
-      totalPages,
       missedBlocks,
       pagination,
     },
     {
-      handlePopoverClose,
       handleOnSearch,
-      handlePopoverOpen,
       handleOnPageChange,
     },
   ]

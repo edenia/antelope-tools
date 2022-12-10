@@ -4,7 +4,6 @@ import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
@@ -13,44 +12,48 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import { makeStyles } from '@mui/styles'
+
+import styles from './styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { CPU_BENCHMARK } from '../../gql'
 
+const useStyles = makeStyles(styles)
+
 const options = {
   time: {
-    timezoneOffset: new Date().getTimezoneOffset()
+    timezoneOffset: new Date().getTimezoneOffset(),
   },
   title: {
-    text: ' '
+    text: ' ',
   },
   xAxis: {
-    type: 'datetime'
+    type: 'datetime',
   },
   yAxis: {
     title: {
-      text: ' '
-    }
+      text: ' ',
+    },
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
   plotOptions: {
     series: {
       label: {
-        connectorAllowed: false
-      }
-    }
+        connectorAllowed: false,
+      },
+    },
   },
 
-  series: []
+  series: [],
 }
 
 const CPUBenchmark = () => {
@@ -59,10 +62,11 @@ const CPUBenchmark = () => {
   const [series, setSeries] = useState([])
   const [producers, setProducers] = useState([])
   const [load, { loading, data }] = useLazyQuery(CPU_BENCHMARK)
+  const classes = useStyles()
 
   useEffect(() => {
     load({
-      variables: { range }
+      variables: { range },
     })
   }, [load, range])
 
@@ -83,11 +87,11 @@ const CPUBenchmark = () => {
           total: 0,
           average: 0,
           lowest: parseInt(item.usage),
-          highest: 0
+          highest: 0,
         }
         info[item.account] = {
           name: item.account,
-          data: []
+          data: [],
         }
       }
 
@@ -106,91 +110,80 @@ const CPUBenchmark = () => {
 
       info[item.account].data.push([
         new Date(item.datetime).getTime(),
-        parseFloat(item.usage)
+        parseFloat(item.usage),
       ])
     }
     setProducers(
-      Object.values(summary).sort((a, b) => (a.average > b.average ? 1 : -1))
+      Object.values(summary).sort((a, b) => (a.average > b.average ? 1 : -1)),
     )
 
     setSeries(Object.values(info))
   }, [data])
 
   return (
-    <Grid item xs={12}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                p={1}
-              >
-                <Typography component="p" variant="h6">
-                  {t('title')}
-                </Typography>
-                <FormControl variant="standard">
-                  <InputLabel id="demo-simple-select-label">
-                    {t('timeFrame')}
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    value={range}
-                    onChange={(e) => setRange(e.target.value)}
-                    fullWidth
-                  >
-                    {rangeOptions.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {t(option)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              {loading && <LinearProgress />}
-              {!loading && data?.items.length > 0 && (
-                <>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={{ ...options, series }}
-                  />
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{t('account')}</TableCell>
-                          <TableCell align="right">{t('lowest')}</TableCell>
-                          <TableCell align="right">{t('highest')}</TableCell>
-                          <TableCell align="right">{t('average')}</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {producers.map((item, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{item.name}</TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.lowest, 2)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.highest, 2)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.average, 2)}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Grid>
+    <Card className={classes.cardShadow}>
+      <CardContent>
+        <div className={classes.textDiv}>
+          <Typography component="p" variant="h6">
+            {t('title')}
+          </Typography>
+          <FormControl variant="standard">
+            <InputLabel id="demo-simple-select-label">
+              {t('timeFrame')}
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              value={range}
+              onChange={(e) => setRange(e.target.value)}
+              fullWidth
+            >
+              {rangeOptions.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {t(option)}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        {loading && <LinearProgress />}
+        {!loading && data?.items.length > 0 && (
+          <>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{ ...options, series }}
+            />
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t('account')}</TableCell>
+                    <TableCell align="right">{t('lowest')}</TableCell>
+                    <TableCell align="right">{t('highest')}</TableCell>
+                    <TableCell align="right">{t('average')}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {producers.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.lowest, 2)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.highest, 2)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.average, 2)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

@@ -4,8 +4,6 @@ import moment from 'moment'
 
 import { eosConfig } from '../config'
 
-import isLogoValid from './validate-image'
-
 export const formatData = (
   {
     data,
@@ -16,7 +14,6 @@ export const formatData = (
     nodes,
     healthStatus,
     dataType,
-    node,
     totalRewards,
   },
   type,
@@ -60,6 +57,7 @@ export const formatData = (
 
   switch (type) {
     case 'entity':
+    case 'node':
       if (eosConfig.networkName === 'lacchain') {
         newData.title = owner
       } else {
@@ -69,9 +67,7 @@ export const formatData = (
       newData = {
         ...newData,
         media: {
-          logo: isLogoValid(data.branding?.logo_256)
-            ? data.branding?.logo_256
-            : null,
+          logo: data.branding?.logo_256,
           name: data.candidate_name || data.organization_name || owner,
           account: getSubTitle(),
         },
@@ -80,6 +76,7 @@ export const formatData = (
           country: data.location?.country || null,
           website: data?.website || '',
           email: data.email,
+          code_of_conduct: data?.code_of_conduct || null,
           ownership: data?.ownership_disclosure || null,
           bussinesContact: data.bussines_contact || null,
           technicalContact: data.technical_contact || null,
@@ -97,40 +94,6 @@ export const formatData = (
         social: data.social,
       }
 
-      break
-
-    case 'node':
-      newData = {
-        title: owner || null,
-        media: {
-          logo: data.branding?.logo_256 || null,
-          name: node?.name,
-          account: node?.node_type || null,
-        },
-        info: {
-          version: node?.server_version_string || null,
-          features: node?.features || [],
-          keys: node?.keys || null,
-        },
-        stats: {
-          lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks:
-            node?.node_type === 'validator' ? missedBlocks[node?.name] : 0,
-        },
-        nodes: [],
-        healthStatus: node?.health_status,
-        social: null,
-        endpoints: {
-          p2p: node.p2p_endpoint,
-          api: node.api_endpoint,
-          ssl: node.ssl_endpoint,
-        },
-      }
-
-      break
-
-    case 'bp':
-      // TODO: Modeled Block Producer data
       break
 
     default:

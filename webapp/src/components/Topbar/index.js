@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import { useTranslation } from 'react-i18next'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import LanguageSelector from '../LanguageSelector'
@@ -19,7 +18,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
   const { t } = useTranslation('topbarComponent')
 
   return (
-    <Box className={classes.box}>
+    <div className={classes.box}>
       <LanguageSelector />
       {user && (
         <>
@@ -42,7 +41,7 @@ const Topbar = ({ user, onLogout, onLogin }) => {
           </Typography>
         </IconButton>
       )}
-    </Box>
+    </div>
   )
 }
 

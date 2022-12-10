@@ -33,7 +33,11 @@ export const PRODUCERS_QUERY = gql`
 `
 
 export const NODES_QUERY = gql`
-  query ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
+  query (
+    $offset: Int = 0
+    $limit: Int = 21
+    $where: producer_bool_exp
+  ) {
     info: producer_aggregate(where: $where) {
       producers: aggregate {
         count
@@ -50,7 +54,66 @@ export const NODES_QUERY = gql`
       bp_json
       total_rewards
       total_votes_percent
+      rank
       updated_at
+      producer_key
+      nodes {
+        info: endpoints_aggregate(
+          where: { response: { _contains: { status: 200 } } }
+        ) {
+          endpoints: aggregate {
+            count
+          }
+        }
+        type
+        full
+        location
+        node_info {
+          features
+          version
+        }
+        endpoints {
+          value
+          type
+          response
+          updated_at
+        }
+      }
+    }
+  }
+`
+
+export const ENDPOINTS_QUERY = gql`
+  query producer(
+    $offset: Int = 0
+    $limit: Int = 21
+    $where: producer_bool_exp
+    $endpointFilter: endpoint_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      id
+      owner
+      updated_at
+      nodes {
+        endpoints(order_by: { head_block_time: desc }, where: $endpointFilter) {
+          id
+          type
+          value
+          head_block_time
+          response
+          updated_at
+        }
+      }
     }
   }
 `

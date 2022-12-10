@@ -6,8 +6,11 @@ export default (theme) => ({
     padding: `1px ${theme.spacing(1)}`,
     background: theme.palette.common.white,
     alignItems: 'center',
-    boxShadow: '0px 0px 14px rgba(53, 64, 82, 0.25)',
+    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
   },
   listItem: {
     display: 'inline-block',
@@ -23,6 +26,14 @@ export default (theme) => ({
       textAlign: 'center',
       letterSpacing: '0.1px',
       textDecoration: 'none',
+      [theme.breakpoints.down('md')]: {
+        color: '#1565c0',
+      },
+    },
+    [theme.breakpoints.down('md')]: {
+      textAlign: 'center !important',
+      paddingTop: '0px !important',
+      paddingBottom: '0px !important',
     },
   },
   sidebarFooter: {
@@ -39,7 +50,7 @@ export default (theme) => ({
     textAlign: 'center',
     letterSpacing: '0.1px',
     display: 'flex !important',
-    justifyContent: 'center !important'
+    justifyContent: 'center !important',
   },
   sidebarFooterSubText: {
     color: theme.sidebar.footer.color,
@@ -62,6 +73,11 @@ export default (theme) => ({
   },
   gridFooter: {
     display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.down('md')]: {
+      order: 3,
+      paddingBottom: '15px',
+    },
   },
   footerImg: {
     width: 24,
@@ -72,6 +88,9 @@ export default (theme) => ({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 0,
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
   },
 
   linkBadge: {
@@ -84,7 +103,7 @@ export default (theme) => ({
     justifyContent: 'center',
     borderRadius: '10px',
     textAlign: 'center',
-    backgroundColor: `${theme.palette.secondary.main} !important`,
+    backgroundColor: `#1675CA !important`,
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',
@@ -98,8 +117,12 @@ export default (theme) => ({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     flexGrow: 1,
-    flexBasis: 0
+    flexBasis: 0,
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      order: 2,
     },
+  },
   left: {
     flexGrow: 1,
     flexBasis: 0,
@@ -108,10 +131,16 @@ export default (theme) => ({
     textDecoration: 'none !important',
   },
   lineFooter: {
-    textDecoration: 'underline !important'
+    textDecoration: 'underline !important',
   },
-  midText: {
-    display: 'flex !important',
-    justifyContent: 'center !important'
-  }
+  midFooter: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  imgHeaderLogo: {
+    width: '18px',
+    height: '18px',
+    marginLeft: theme.spacing(1),
+    marginTop: '2px',
+  },
 })

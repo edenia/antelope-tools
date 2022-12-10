@@ -30,7 +30,7 @@ export default (theme) => ({
     width: 310,
     top: 48,
     left: -55,
-    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)',
     '& .titles': {
       display: 'flex',
       '& .titlesBoxRight': {
@@ -129,6 +129,7 @@ export default (theme) => ({
     position: 'absolute',
     right: 70,
     top: -45,
+    cursor: 'default',
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('sm')]: {
       right: 0,
@@ -141,13 +142,13 @@ export default (theme) => ({
     color: theme.palette.text.hint,
   },
   jungleImg: {
-    width: '15px !important',
+    width: '22px !important',
     height: '22px !important',
     marginRight: theme.spacing(2),
   },
   telosImg: {
-    width: '15px !important',
-    height: '15px !important',
+    width: '21px !important',
+    height: '21px !important',
     marginRight: theme.spacing(2),
   },
   waxImg: {
@@ -161,8 +162,8 @@ export default (theme) => ({
     marginRight: theme.spacing(2),
   },
   protonImg: {
-    width: '16px !important',
-    height: '16px !important',
+    width: '21px !important',
+    height: '21px !important',
     marginRight: theme.spacing(2),
   },
   eosImg: {

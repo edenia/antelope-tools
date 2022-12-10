@@ -11,10 +11,7 @@ jobs:
     environment: wax
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2.4.0
-
-      - name: Setup Docker
-        uses: docker-practice/actions-setup-docker@1.0.8
+        uses: actions/checkout@v3
 
       - name: Log in to docker registry
         run: |
@@ -38,29 +35,27 @@ jobs:
           PORT: '80'
           REACT_APP_TITLE: 'WAX Mainnet Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://eosio.online/images/wax.jpg'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "WAX Website", "src": "https://on.wax.io/wax-io/" },{ "text": "WAX Block Explorer", "src": "https://wax.bloks.io" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "WAX Network Monitor","src": "https://eosio.online"}]'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/wax.jpg'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "WAX Website", "src": "https://on.wax.io/wax-io/" },{ "text": "WAX Block Explorer", "src": "https://wax.bloks.io" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "WAX Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'true'
           REACT_APP_USE_CPU_BENCHMARK: 'true'
-          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-wax.eosio.online/v1/graphql'
+          REACT_APP_HASURA_URL: 'https://graphql-wax.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'wax'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'WAX'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://eosio.online/images/wax.jpg'
-          REACT_APP_EOS_API_HOST: 'wax.eosn.io'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'WAX Mainnet'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/wax.jpg'
+          REACT_APP_EOS_API_HOSTS: '[\"wax.eosn.io\",\"wax.edenia.cloud\",\"wax.api.eosnation.io\",\"wax.greymass.com\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
+          REACT_APP_SYNC_TOLERANCE_INTERVAL: 180000
           REACT_APP_TOKEN_SYMBOL: 'WAX'
-          REACT_APP_NETWORK_URL:  '[{"label":"EOS Mainnet","value":"https://mainnet.eosio.online","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.eosio.online","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.eosio.online","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.eosio.online","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.eosio.online","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.eosio.online","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.eosio.online","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.eosio.online","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.eosio.online","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.eosio.online","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.eosio.online","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.eosio.online","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
+          REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"pair":"eos","icon":"eos","order":1},{"label":"Proton","value":"https://proton.antelope.tools","mainnet":true,"pair":"proton","icon":"proton","order":2},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"pair":"wax","icon":"wax","order":3},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"pair":"telos","icon":"telos","order":4},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"pair":"libre","icon":"libre","order":5},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"pair":"eos","icon":"jungle","order":1},{"label":"Proton Testnet","value":"https://proton-testnet.antelope.tools","mainnet":false,"pair":"proton","icon":"proton","order":2},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"pair":"wax","icon":"wax","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"pair":"telos","icon":"telos","order":4},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"pair":"libre","icon":"libre","order":5},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution"]'
           REACT_APP_BLOCK_EXPLORER_URL: 'https://wax-test.bloks.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'
@@ -75,8 +70,8 @@ jobs:
         env:
           # general
           NAMESPACE: wax-dashboard
-          INGRESS_HOST: wax.eosio.online
-          INGRESS_GRAPHQL_HOST: graphql-wax.eosio.online
+          INGRESS_HOST: wax.antelope.tools
+          INGRESS_GRAPHQL_HOST: graphql-wax.antelope.tools
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: wax
           # postgres
@@ -85,7 +80,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINT: https://wax.eosn.io
+          HAPI_EOS_API_ENDPOINTS: '["https://wax.eosn.io","https://wax.edenia.cloud","https://wax.api.eosnation.io","https://wax.greymass.com"]'
           HAPI_EOS_API_CHAIN_ID: 1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}

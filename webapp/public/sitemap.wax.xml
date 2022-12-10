@@ -1,47 +1,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
-      <loc>https://wax.eosio.online/</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/block-producers</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/block-producers</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/nodes</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/nodes</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/endpoints</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/endpoints</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/nodes-distribution</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/nodes-distribution</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/rewards-distribution</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/rewards-distribution</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/ricardian-contract</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/ricardian-contract</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/accounts</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/accounts</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/bpjson</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/bpjson</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/about</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/about</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
    <url>
-      <loc>https://wax.eosio.online/help</loc>
-      <lastmod>2021-07-01T04:54:49+00:00</lastmod>
+      <loc>https://wax.antelope.tools/help</loc>
+      <lastmod>2022-10-20</lastmod>
    </url>
 </urlset>

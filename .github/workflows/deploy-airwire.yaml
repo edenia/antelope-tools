@@ -11,10 +11,7 @@ jobs:
     environment: airwire
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2.4.0
-
-      - name: Setup Docker
-        uses: docker-practice/actions-setup-docker@1.0.8
+        uses: actions/checkout@v3
 
       - name: Log in to docker registry
         run: |
@@ -44,7 +41,6 @@ jobs:
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
           REACT_APP_USE_CPU_BENCHMARK: 'false'
-          REACT_APP_USE_BLOCK_PRODUCER_AGREEMENT_CONTRACT: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-dashboard.airwire.io/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'airwire'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Airwire'
@@ -53,8 +49,6 @@ jobs:
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'de9943091e811bfb246ca243144b4d274886b959bbb17dd33d0bc97c745dbbe0'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE: '1'
-          REACT_APP_EOS_DEFAULT_EXCHANGE_RATE_API: ''
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'true'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'

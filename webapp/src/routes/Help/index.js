@@ -18,7 +18,7 @@ const Help = () => {
   const { t } = useTranslation('helpRoute')
 
   return (
-    <Card>
+    <Card className={classes.cardShadow}>
       <CardContent>
         <Typography variant="h4" className={classes.title}>
           {t('title')}
@@ -30,7 +30,7 @@ const Help = () => {
         <div className={classes.boxLinks}>
           <GitHubIcon />
           <Link
-            href="https://github.com/eoscostarica"
+            href="https://github.com/edenia"
             target="_blank"
             rel="noreferrer"
           >
@@ -40,7 +40,7 @@ const Help = () => {
         <div className={classes.boxLinks}>
           <TelegramIcon />
           <Link
-            href="https://web.telegram.org/#/eoscr"
+            href="https://t.me/eoscr"
             target="_blank"
             rel="noreferrer"
           >
@@ -50,7 +50,7 @@ const Help = () => {
         <div className={classes.boxLinks}>
           <HttpIcon />
           <Link
-            href="https://eoscostarica.io/"
+            href="https://edenia.com"
             target="_blank"
             rel="noreferrer"
           >
