@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
@@ -137,19 +137,7 @@ export const useSharedState = () => {
     })
   }
 
-  useEffect(() => {
-    let block = state.info.head_block_num
-
-    if (!block) return
-
-    const updateTransactions = async () => {
-      await getBlock(block)
-    }
-
-    updateTransactions()
-  }, [state.info, getBlock])
-
-  const getBlock = async (block) => {
+  const getBlock = useCallback( async (block) => {
     try {
       const data = await eosApi.getBlock(block)
       let tpb = state.tpb
@@ -207,7 +195,19 @@ export const useSharedState = () => {
     } catch (error) {
       console.log(error)
     }
-  }
+  }, [dispatch, state.tpb, state.tps, state.tpsWaitingBlock])
+
+  useEffect(() => {
+    let block = state.info.head_block_num
+
+    if (!block) return
+
+    const updateTransactions = async () => {
+      await getBlock(block)
+    }
+
+    updateTransactions()
+  }, [state.info, getBlock])
 
   const startTrackingProducerSchedule = async ({ interval = 120 } = {}) => {
     if (scheduleInterval) {
