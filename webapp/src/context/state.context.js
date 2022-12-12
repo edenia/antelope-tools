@@ -137,6 +137,18 @@ export const useSharedState = () => {
     })
   }
 
+  useEffect(() => {
+    let block = state.info.head_block_num
+
+    if (!block) return
+
+    const updateTransactions = async () => {
+      await getBlock(block)
+    }
+
+    updateTransactions()
+  }, [state.info, getBlock])
+
   const getBlock = async (block) => {
     try {
       const data = await eosApi.getBlock(block)
@@ -227,7 +239,6 @@ export const useSharedState = () => {
           type: 'updateInfo',
           payload: info,
         })
-        getBlock(info.head_block_num)
       } catch (error) {
         console.error(error)
       }
