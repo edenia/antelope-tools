@@ -137,6 +137,8 @@ const useAccountState = () => {
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
 
+    if (!accountName) return
+
     hideMessage(null)
     dispatch({ payload: true, type: 'SET_LOADING' })
 
