@@ -13,6 +13,7 @@ const eosApis = eosConfig.endpoints.map(endpoint => {
       verbose: false,
       fetchConfiguration: {},
     }),
+    endpoint,
     lastFailureTime: 0,
   }
 })
@@ -25,6 +26,19 @@ const callEosApi = async method => {
 
     try {
       const response = await method(eosApi.api)
+      let headBlockTime = response.head_block_time
+
+      if (!headBlockTime) {
+        const info = await eosApi.api.getInfo({})
+
+        headBlockTime = info.head_block_time
+      }
+
+      const diffBlockTimems = new Date() - new Date(headBlockTime)
+
+      if (diffBlockTimems > eosConfig.syncToleranceInterval) {
+        throw new Error(`The endpoint ${eosApi.endpoint} is outdated`)
+      }
 
       return response
     } catch (error) {
