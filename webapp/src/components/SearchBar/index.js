@@ -54,10 +54,6 @@ const SearchBar = ({
   }
 
   useEffect(() => {
-    setFilters(rootFilters || {})
-  }, [rootFilters])
-
-  useEffect(() => {
     onChange(filters)
     // eslint-disable-next-line
   }, [debouncedFilter])
