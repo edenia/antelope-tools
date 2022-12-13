@@ -522,17 +522,15 @@ p {
   }
 
   .box-social-media {
-    width: 110%;
     align-items: center;
-    margin-bottom: 15px;
   }
   .footerTw {
-    height: 22x;
+    height: 22px;
     width: 26px;
   }
   .footerTl {
     height: 22px;
-    width: 28;
+    width: 28px;
   }
   .footerGit {
     height: 28px;
@@ -545,7 +543,7 @@ p {
 
   .edeniaLogo {
     height: 26px;
-    width: 155;
+    width: 155px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -931,7 +929,7 @@ p {
 
   .box-social-media {
     width: 55%;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     align-items: center;
   }
   .footerTw {
@@ -1079,7 +1077,6 @@ p {
     border-radius: 3.7px;
     box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
       0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
-    border: solid 1.5px #1ccbff;
     background-color: var(--colors-white);
   }
 
