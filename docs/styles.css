@@ -1520,8 +1520,9 @@ p {
   .grid-item {
     display: flex;
     flex-direction: column;
-    width: 237.7px;
-    height: 209.2px;
+    justify-content: center;
+    width: 240px;
+    height: 240px;
     flex-grow: 0;
     padding: 19.8px 19.8px 18.6px;
     border-radius: 5px;
@@ -1574,7 +1575,7 @@ p {
   }
 
   .box-paragraph p {
-    width: 1750px;
+    width: 80%;
     height: 181px;
     flex-grow: 0;
     margin: 36.8px 106px 90px 250px;
