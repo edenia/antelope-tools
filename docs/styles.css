@@ -998,7 +998,7 @@ p {
     display: none;
   }
   .box-paragraph-text > p {
-    width: 375px;
+    width: 550px;
     height: 114.2px;
     font-family: Nunito;
     font-size: 42px;
@@ -1235,8 +1235,7 @@ p {
     padding-left: 55px;
   }
   .box-social-media {
-    width: 55%;
-    margin-bottom: 0px;
+    width: 50%;
     align-items: center;
   }
   .footerTw {
@@ -1605,8 +1604,7 @@ p {
   }
 
   .box-social-media {
-    width: 55%;
-    margin-bottom: 0px;
+    width: 50%;
     align-items: center;
   }
 
