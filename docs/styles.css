@@ -1070,6 +1070,7 @@ p {
   .grid-item {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 134px;
     height: 134px;
     flex-grow: 0;
@@ -1317,20 +1318,21 @@ p {
   }
   .header {
     display: flex;
-    width: 100%;
     z-index: 2;
     position: relative;
-    height: 1002px;
+    height: 780px;
     background-image: url(./images/bgimage.png);
-    background-size: 1654px 1002px;
+    background-size: 1200px 780px;
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
-    margin-left: 4%;
+    margin-left: 15%;
+    margin-right: 15%;
   }
 
   .box-network {
-    margin-left: 4%;
+    margin-left: 15%;
+    margin-right: 15%;
   }
   #middle-logo {
     width: 546px;
@@ -1465,7 +1467,6 @@ p {
     top: 1px;
   }
   .visit-text {
-    width: 391px;
     height: 59px;
     flex-grow: 0;
     font-family: Nunito;
@@ -1550,10 +1551,6 @@ p {
     color: #000;
   }
 
-  .info-icon {
-    padding-left: 8%;
-  }
-
   details summary:after {
     content: url(./images/chevron-down.png);
     position: absolute;
@@ -1573,15 +1570,16 @@ p {
     letter-spacing: -0.54px;
     text-align: left;
     color: #000;
+    padding-left: 10%;
   }
 
   .box-paragraph p {
-    width: 1556px;
+    width: 1750px;
     height: 181px;
     flex-grow: 0;
-    margin: 36.8px 106px 90px 155px;
+    margin: 36.8px 106px 90px 250px;
     font-family: Nunito;
-    font-size: 22px;
+    font-size: 32px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -1595,7 +1593,8 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    padding-left: 20%;
+    padding-right: 20%;
   }
 
   .logo-text {
