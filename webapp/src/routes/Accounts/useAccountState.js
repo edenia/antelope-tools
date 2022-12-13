@@ -115,14 +115,12 @@ const useAccountState = () => {
               rows: state.tableData.rows.concat(...tableData.rows),
             },
           })
-
-          return
+        } else {
+          dispatch({
+            type: 'SET_TABLE_DATA',
+            payload: tableData,
+          })
         }
-
-        dispatch({
-          type: 'SET_TABLE_DATA',
-          payload: tableData,
-        })
       } catch (error) {
         showMessage({
           type: 'error',
