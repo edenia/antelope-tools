@@ -115,14 +115,12 @@ const useAccountState = () => {
               rows: state.tableData.rows.concat(...tableData.rows),
             },
           })
-
-          return
+        } else {
+          dispatch({
+            type: 'SET_TABLE_DATA',
+            payload: tableData,
+          })
         }
-
-        dispatch({
-          type: 'SET_TABLE_DATA',
-          payload: tableData,
-        })
       } catch (error) {
         showMessage({
           type: 'error',
@@ -136,6 +134,9 @@ const useAccountState = () => {
 
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
+    const tableName = valueAccount?.table ?? ''
+
+    if (!accountName) return
 
     hideMessage(null)
     dispatch({ payload: true, type: 'SET_LOADING' })
@@ -158,6 +159,19 @@ const useAccountState = () => {
 
       dispatch({ payload: abi, type: 'SET_ABI' })
 
+      if (abi?.tables?.length) {
+        const defaultTable =
+          accountName === 'eosio' ? 'producers' : abi?.tables[0]?.name
+
+        dispatch({
+          type: 'SET_FILTERS',
+          payload: {
+            owner: accountName,
+            table: tableName || defaultTable,
+          },
+        })
+      }
+
       const { code_hash: hash = '' } = await eosApi.getCodeHash(accountName)
 
       dispatch({ payload: hash, type: 'SET_HASH' })
@@ -171,7 +185,10 @@ const useAccountState = () => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    handleOnSearch({ owner: params?.account || 'eosio' })
+    handleOnSearch({
+      owner: params?.account || 'eosio',
+      table: params?.table,
+    })
     // eslint-disable-next-line
   }, [])
 
@@ -182,7 +199,7 @@ const useAccountState = () => {
       type: 'SET_FILTERS',
       payload: {
         owner: params?.account,
-        table: params?.table || 'producers',
+        table: params?.table,
       },
     })
     // eslint-disable-next-line
