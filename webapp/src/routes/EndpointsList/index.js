@@ -18,6 +18,7 @@ import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 import EndpointsTable from '../../components/EndpointsTable'
 import NoResults from '../../components/NoResults'
+import SearchBar from '../../components/SearchBar'
 
 import styles from './styles'
 
@@ -29,8 +30,8 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, updatedAt },
-    { handleFilter, handleOnPageChange, setPagination },
+    { loading, pagination, producers, updatedAt, filters },
+    { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
   ] = useEndpointsState({ useCache: false })
 
   return (
@@ -83,19 +84,26 @@ const EndpointsList = () => {
             </Select>
           </FormControl>
         </div>
+        <div className={classes.searchWrapper}>
+          <SearchBar
+            filters={filters}
+            onChange={handleOnSearch}
+            translationScope="producerSearchComponent"
+          />
+        </div>
         {loading ? (
           <LinearProgress />
         ) : (
           <>
-            {!!producers.length ? (
+            {!!producers?.length ? ( 
               <EndpointsTable producers={producers} />
             ) : (
               <NoResults />
             )}
-            {pagination.totalPages > 1 && (
+            {pagination.pages > 1 && (
               <div className={classes.pagination}>
                 <Pagination
-                  count={pagination.totalPages}
+                  count={pagination.pages}
                   page={pagination.page}
                   onChange={handleOnPageChange}
                   variant="outlined"

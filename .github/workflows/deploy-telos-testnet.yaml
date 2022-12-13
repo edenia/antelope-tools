@@ -13,9 +13,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Setup Docker
-        uses: docker-practice/actions-setup-docker@1.0.11
-
       - name: Log in to docker registry
         run: |
           echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login \
@@ -99,7 +96,7 @@ jobs:
           HAPI_SERVER_PORT: '9090'
           HAPI_SERVER_ADDRESS: '0.0.0.0'
           HAPI_DATABASE_URL: ${{ secrets.HAPI_DATABASE_URL }}
-          HAPI_SYNC_PRODUCERS_INTERVAL: '86400'
+          HAPI_SYNC_PRODUCERS_INTERVAL: '14400'
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400

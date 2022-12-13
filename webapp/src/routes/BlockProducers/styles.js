@@ -9,7 +9,6 @@ export default (theme) => ({
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
-      flex: 'content',
     },
     [theme.breakpoints.down('sm')]: {
       flex: 'auto',

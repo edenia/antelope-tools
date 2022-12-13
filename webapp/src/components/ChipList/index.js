@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Chip } from '@mui/material'
+import Chip from '@mui/material/Chip'
 import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
@@ -14,7 +14,7 @@ const ChipList = ({ list = [], title = '' }) => {
 
   return (
     <>
-      <div className={classes.bold}>{title}</div>
+      {title && <span className={classes.bold}>{title}</span>}
       <div
         className={`${classes.chipsContainer} ${
           list.length > 10 ? classes.longList : classes.shortList

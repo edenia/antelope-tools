@@ -109,6 +109,10 @@ const getFormatNode = node => {
     }
   }
 
+  if (typeof node?.features === 'string') {
+    node.features = [node.features]
+  }
+
   if (node.features?.length || !!node.keys) {
     formatNode.node_info = {
       data: {

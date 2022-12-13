@@ -215,6 +215,7 @@
     "account": "Account",
     "website": "Website",
     "votes": "Votes",
+    "moreinfo": "More info",
     "rewards": "Rewards",
     "country": "Country",
     "eosRate": "EOS RATE",
@@ -229,6 +230,7 @@
     "technicalContact": "Technical Contact",
     "social": "Social",
     "ownershipDisclosure": "Ownership Disclosure",
+    "codeofconduct": "Code of Conduct",
     "chainResources": "Chain Resources",
     "otherResources": "Other Resources",
     "email": "Email",
@@ -240,6 +242,7 @@
     "health": "Compliance",
     "collapse": "Collapse",
     "moreInfo": "More Info",
+    "openLink": "Visit Site",
     "version": "Version",
     "info": "Info",
     "keys": "Keys",
@@ -248,7 +251,8 @@
     "noData": "No Data",
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
-    "hs_bpJson": "BP Json"
+    "hs_bpJson": "BP Json",
+    "emptyState": "This block producer does not provide any information."
   },
   "nodeCardComponent": {
     "features": "Features",
@@ -354,5 +358,10 @@
   "copyToClipboardComponent": {
     "copyToClipboard": "Copy to clipboard",
     "copied": "Copied!"
+  },
+  "noFound": {
+    "subTitle": "Page not found.",
+    "message": "The page you are looking for might have been removed.",
+    "return": "Return to website"
   }
 }

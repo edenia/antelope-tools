@@ -34,7 +34,7 @@ export default (theme) => ({
       flexDirection: 'row',
       '& .bodyWrapper': {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         width: '100%',
       },
       '& .MuiTypography-overline': {
@@ -43,16 +43,9 @@ export default (theme) => ({
       },
     },
   },
-  nodeCardsContainer: {
-    [theme.breakpoints.up('lg')]: {
-      width: '84%',
-    },
-    [theme.breakpoints.down('lg')]: {
-      width: '100%',
-    },
+  nodesContainer: {
+    width: '100%',
     overflowX: 'auto',
-    border: '3px #f3f3f3',
-    borderLeftStyle: 'solid',
   },
   hideScroll: {
     overflowX: 'hidden',
@@ -75,8 +68,8 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(0, 6),
-      minWidth: 200,
-      maxWidth: 300,
+      width: 250,
+      minWidth: 250,
       justifyContent: 'center',
     },
   },
@@ -101,7 +94,7 @@ export default (theme) => ({
   info: {
     borderLeft: 'none',
     '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
+      margin: theme.spacing(1),
       display: 'flex',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -170,7 +163,6 @@ export default (theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(1),
-      fontSize: 15,
     },
     [theme.breakpoints.up('lg')]: {
       width: 140,
@@ -252,14 +244,117 @@ export default (theme) => ({
     },
   },
   dd: {
-    marginLeft: theme.spacing(6),
+    marginLeft: theme.spacing(1),
     margin: theme.spacing(1, 0),
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    width: 220,
+    width: '100%',
   },
   infoIcon: {
     cursor: 'pointer',
+    flexDirection: 'flex-end',
+  },
+  dt: {
+    maxWidth: 100,
+  },
+  shadow: {
+    '& .MuiPaper-root': {
+      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      padding: theme.spacing(3),
+      maxWidth: '250px',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      borderRadius: '5px',
+    },
+  },
+  infoItems: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& .listBox': {
+      marginLeft: theme.spacing(1),
+    },
+    '& .listLabel': {
+      height: '100%',
+      '& .MuiSvgIcon-root': {
+        marginRight: theme.spacing(1),
+        fontSize: 15,
+      },
+      '& .MuiTypography-body1': {
+        whiteSpace: 'nowrap',
+      },
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: 150,
+    },
+  },
+  flex: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  clickableIcon: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#1565c0',
+    },
+  },
+  popoverStyle: {
+    paddingRight: theme.spacing(2),
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+  textEllipsisNodes: {
+    margin: theme.spacing(1, 0),
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: '100%',
+    '& a': {
+      marginLeft: theme.spacing(1),
+    },
+  },
+  centerWrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& span': {
+      width: '16em',
+      height: '45px',
+      fontSize: '1.2em',
+      fontWeight: 'bold',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      lineHeight: '1.12',
+      letterSpacing: '-0.22px',
+      textAlign: 'center',
+      color: '#3d3d3dde',
+    },
+  },
+  horizontalLine: {
+    [theme.breakpoints.down('lg')]: {
+      width: '270px',
+      height: '1px',
+      margin: '15.2px 32px 40px 33px',
+      backgroundColor: '#e0e0e0',
+    },
+  },
+  imgError: {
+    [theme.breakpoints.down('lg')]: {
+      width: '200px',
+      height: '120px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '260px',
+      height: '160px',
+    },
+    objectFit: 'contain',
   },
 })

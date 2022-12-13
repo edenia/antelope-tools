@@ -19,11 +19,11 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const AccordionWrapper = ({ children, title }) => {
+const AccordionWrapper = ({ children, title, ...props }) => {
   const classes = useStyles()
 
   return (
-    <Accordion classes={{ root: classes.accordion }}>
+    <Accordion classes={{ root: classes.accordion }} {...props}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         classes={{
@@ -185,7 +185,7 @@ const AccountInfo = ({
                   onSubmitAction={onSubmitAction}
                 />
               </AccordionWrapper>
-              <AccordionWrapper title={t('contractTables')}>
+              <AccordionWrapper title={t('contractTables')} defaultExpanded>
                 <ContractTables
                   accountName={account.account_name}
                   abi={abi}

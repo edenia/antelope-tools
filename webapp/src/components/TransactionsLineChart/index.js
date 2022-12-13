@@ -6,20 +6,20 @@ import Highcharts from 'highcharts'
 const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
   const options = {
     time: {
-      timezoneOffset: new Date().getTimezoneOffset()
+      timezoneOffset: new Date().getTimezoneOffset(),
     },
     title: {
-      text: title
+      text: title,
     },
     chart: {
       animation: false,
-      type: 'spline'
+      type: 'spline',
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     xAxis: xAxisProps,
-    yAxis: yAxisProps
+    yAxis: yAxisProps,
   }
 
   return (
@@ -28,7 +28,7 @@ const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
         highcharts={Highcharts}
         options={{
           ...options,
-          series: data
+          series: data,
         }}
       />
     </div>
@@ -39,14 +39,14 @@ TransactionsLineChart.propTypes = {
   data: PropTypes.array,
   xAxisProps: PropTypes.object,
   yAxisProps: PropTypes.object,
-  title: PropTypes.string
+  title: PropTypes.string,
 }
 
 TransactionsLineChart.defaultProps = {
   data: [],
   xAxisProps: { xAxisVisible: false },
   yAxisProps: {},
-  title: ''
+  title: '',
 }
 
 export default TransactionsLineChart

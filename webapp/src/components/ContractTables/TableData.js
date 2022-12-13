@@ -19,6 +19,10 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
   const classes = useStyles()
   const { t } = useTranslation('contractTablesComponent')
 
+  const handleOnSubmit = () => {
+    handleSubmit(tableData.next_key)
+  }
+
   if (!tableData) return <></>
 
   return (
@@ -60,11 +64,7 @@ const TableData = ({ tableData, fields, handleSubmit }) => {
       </Table>
       {tableData?.more && (
         <div className={classes.loadMore}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleSubmit(tableData.next_key)}
-          >
+          <Button variant="contained" color="primary" onClick={handleOnSubmit}>
             {t('loadMore')}
           </Button>
         </div>

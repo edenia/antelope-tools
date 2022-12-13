@@ -4,10 +4,8 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import { useSubscription } from '@apollo/client'
-import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import 'flag-icon-css/css/flag-icons.css'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
@@ -100,7 +98,7 @@ const NodesCard = ({ nodes }) => {
   }
 
   const Keys = ({ node }) => {
-    if (!node.node_info?.length || !node.node_info[0]?.features?.keys)
+    if (!node?.node_info?.length || !node?.node_info[0]?.features?.keys)
       return <></>
 
     const keys = node.node_info[0].features.keys
@@ -126,7 +124,7 @@ const NodesCard = ({ nodes }) => {
         <Endpoints node={node} />
         <ChipList
           title={t('features')}
-          list={node.node_info[0]?.features?.list}
+          list={node?.node_info[0]?.features?.list}
         />
         {node.type.includes('query') && <SupportedAPIs node={node} />}
         <Keys node={node} />
@@ -136,11 +134,9 @@ const NodesCard = ({ nodes }) => {
   }
 
   const capitalizeText = (text) => {
-    if(!text) return 
+    if (!text) return
 
-    return (
-      text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
-    )
+    return text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
   }
 
   const getType = (node) => {
@@ -155,30 +151,47 @@ const NodesCard = ({ nodes }) => {
     return type
   }
 
+  const Location = ({ location }) => {
+    return (
+      <>
+        <span className={classes.country}>{location?.name || 'N/A'}</span>
+        <CountryFlag code={location?.country} />
+      </>
+    )
+  }
+
+  const showLocations = (node) => {
+    if (node?.locations?.length) {
+      return (
+        <>
+          {node.locations.map((location, index) => (
+            <div
+              key={`location-${location?.name}-${node?.type?.join()}-${index}`}
+            >
+              <Location location={location} />
+            </div>
+          ))}
+        </>
+      )
+    }
+
+    return <Location location={node.location} />
+  }
+
   return (
     <div className={classes.nodesWrapper}>
-      <div className={classes.nodesContainer}>
-        {(nodes || []).map((node, index) => (
-          <Card key={`node-${index}`} className={classes.nodes} elevation={0}>
-            <CardHeader
-              className={classes.cardHeader}
-              title={getType(node) || ''}
-              subheader={
-                <>
-                  <span className={classes.country}>
-                    {node.location?.name || 'N/A'}
-                  </span>
-                  <CountryFlag code={node.location?.country} />
-                </>
-              }
-            />
-            <CardContent className={classes.content}>
-              <NodeInfo node={node} />
-            </CardContent>
-            <CardActions disableSpacing />
-          </Card>
-        ))}
-      </div>
+      {(nodes || []).map((node, index) => (
+        <div key={`node-${index}`} className={classes.nodes}>
+          <CardHeader
+            className={classes.cardHeader}
+            title={getType(node) || ''}
+            subheader={showLocations(node)}
+          />
+          <CardContent className={classes.content}>
+            <NodeInfo node={node} />
+          </CardContent>
+        </div>
+      ))}
     </div>
   )
 }

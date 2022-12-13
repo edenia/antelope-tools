@@ -24,7 +24,13 @@ const ContractTables = ({
   onGetTableRows,
   tableName,
 }) => {
-  const initData = { scope: '', lowerBound: null, upperBound: null, limit: 10 }
+  const initData = {
+    table: '',
+    scope: '',
+    lowerBound: null,
+    upperBound: null,
+    limit: 10,
+  }
   const formFields = [
     { name: 'scope', type: 'text' },
     { name: 'lowerBound', type: 'number' },
@@ -36,7 +42,6 @@ const ContractTables = ({
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
-  const [table, setTable] = useState('')
   const [fields, setFields] = useState([])
   const [filters, setFilters] = useState(initData)
   const debouncedFilter = useDebounceState(filters, DELAY)
@@ -58,19 +63,19 @@ const ContractTables = ({
 
   const handleTableChange = useCallback(
     (value) => {
-      setTable(value)
+      setFilters((prev) => ({ ...prev, table: value }))
     },
-    [setTable],
+    [setFilters],
   )
 
   const handleSubmit = useCallback(
     (nextKey) => {
-      if (!onGetTableRows || !table) return
+      if (!onGetTableRows || !filters.table) return
 
       onGetTableRows({
         scope: filters.scope,
         limit: filters.limit,
-        table,
+        table: filters.table,
         code: accountName,
         json: true,
         lower_bound: nextKey || filters.lowerBound,
@@ -78,7 +83,7 @@ const ContractTables = ({
         loadMore: !!nextKey,
       })
     },
-    [accountName, table, onGetTableRows, filters],
+    [accountName, onGetTableRows, filters],
   )
 
   useEffect(() => {
@@ -92,16 +97,18 @@ const ContractTables = ({
   }, [abi])
 
   useEffect(() => {
-    if (!table) {
+    if (!filters.table) {
       setFields([])
 
       return
     }
 
-    const tableType = abi.tables.find((item) => item.name === table)?.type
+    const tableType = abi.tables.find(
+      (item) => item.name === filters.table,
+    )?.type
     const struct = abi.structs.find((struct) => struct.name === tableType)
     setFields(struct?.fields || [])
-  }, [table, abi])
+  }, [filters.table, abi])
 
   useEffect(() => {
     if (tableName) {
@@ -116,7 +123,8 @@ const ContractTables = ({
 
   useEffect(() => {
     handleSubmit(null)
-  }, [debouncedFilter, handleSubmit])
+    // eslint-disable-next-line
+  }, [debouncedFilter])
 
   return (
     <div>
@@ -129,7 +137,7 @@ const ContractTables = ({
           <Select
             labelId="tableLabel"
             id="table"
-            value={table}
+            value={filters.table}
             onChange={(event) => handleTableChange(event.target.value)}
             label={t('table')}
           >
@@ -154,7 +162,7 @@ const ContractTables = ({
           />
         ))}
 
-        {table && (
+        {filters.table && (
           <Button
             variant="contained"
             color="primary"

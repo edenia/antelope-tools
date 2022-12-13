@@ -221,6 +221,7 @@
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
+    "moreinfo": "More info",
     "rewards": "Recompensas",
     "country": "País",
     "eosRate": "EOS RATE",
@@ -235,6 +236,7 @@
     "technicalContact": "Contacto técnico",
     "social": "Social",
     "ownershipDisclosure": "Divulgación de propiedad",
+    "codeofconduct": "Código de conducta",
     "chainResources": "Recursos de la cadena",
     "otherResources": "Otros recursos",
     "email": "Correo electrónico",
@@ -245,7 +247,8 @@
     "cpuBenchmark": "Promedio del Benchmark de CPU",
     "health": "Cumplimiento",
     "collapse": "Colapsar",
-    "moreInfo": "Más Info",
+    "moreInfo": "Más Información",
+    "openLink": "Visitar Sitio",
     "version": "Versión",
     "info": "Info",
     "keys": "Llaves",
@@ -254,7 +257,8 @@
     "noData": "No hay Datos",
     "peer_keys": "Peer",
     "account_key": "Cuenta",
-    "hs_bpJson": "BP Json"
+    "hs_bpJson": "BP Json",
+    "emptyState": "Este productor de bloques no proporciona ninguna información."
   },
   "nodeCardComponent": {
     "features": "Características",
@@ -370,5 +374,10 @@
   "copyToClipboardComponent": {
     "copyToClipboard": "Copiar al portapapeles",
     "copied": "¡Copiado!"
+  },
+  "noFound": {
+    "subTitle": "Página no encontrada.",
+    "message": "Es posible que la página que busca haya sido eliminada.",
+    "return": "Volver al sitio web"
   }
 }

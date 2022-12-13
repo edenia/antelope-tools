@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import { useTranslation } from 'react-i18next'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import LanguageSelector from '../LanguageSelector'

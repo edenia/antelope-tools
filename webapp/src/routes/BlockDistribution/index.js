@@ -95,79 +95,71 @@ const BlockDistribution = () => {
   }, [data])
 
   return (
-    <div>
-      <div>
-        <div>
-          <Card className={classes.cardShadow}>
-            <CardContent>
-              <div className={classes.textDiv}>
-                <Typography component="p" variant="h6">
-                  {t('title')}
-                </Typography>
-                <div className={classes.formControl}>
-                  <FormControl variant="standard">
-                    <InputLabel id="demo-simple-select-label">
-                      {t('timeFrame')}
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      value={range}
-                      onChange={(e) => setRange(e.target.value)}
-                      fullWidth
-                    >
-                      {rangeOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {t(option)}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              {loading && <LinearProgress />}
-              {!loading && data?.items?.length > 0 && (
-                <>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={{ ...options, series }}
-                  />
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{t('account')}</TableCell>
-                          <TableCell align="right">
-                            {t('blocksProduced')}
-                          </TableCell>
-                          <TableCell align="right">{t('percent')}</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {data?.items.map((item, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{item.account}</TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(item.blocks)}
-                            </TableCell>
-                            <TableCell align="right">
-                              {formatWithThousandSeparator(
-                                Math.ceil(item.percent * 100),
-                                1,
-                              )}
-                              %
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </>
-              )}
-            </CardContent>
-          </Card>
+    <Card className={classes.cardShadow}>
+      <CardContent>
+        <div className={classes.textDiv}>
+          <Typography component="p" variant="h6">
+            {t('title')}
+          </Typography>
+          <div className={classes.formControl}>
+            <FormControl variant="standard">
+              <InputLabel id="demo-simple-select-label">
+                {t('timeFrame')}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                value={range}
+                onChange={(e) => setRange(e.target.value)}
+                fullWidth
+              >
+                {rangeOptions.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {t(option)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
         </div>
-      </div>
-    </div>
+        {loading && <LinearProgress />}
+        {!loading && data?.items?.length > 0 && (
+          <>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{ ...options, series }}
+            />
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t('account')}</TableCell>
+                    <TableCell align="right">{t('blocksProduced')}</TableCell>
+                    <TableCell align="right">{t('percent')}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.items.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{item.account}</TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(item.blocks)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatWithThousandSeparator(
+                          Math.ceil(item.percent * 100),
+                          1,
+                        )}
+                        %
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

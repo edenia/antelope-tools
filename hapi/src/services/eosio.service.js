@@ -233,14 +233,14 @@ const getChains = async producerUrl => {
 }
 
 const getProducerHealthStatus = bpJson => {
+  if (!bpJson || !Object.keys(bpJson).length) return []
+  
   const healthStatus = []
 
   healthStatus.push({
     name: 'bpJson',
-    valid: !!bpJson && !!Object.keys(bpJson).length
+    valid: true
   })
-
-  if (!healthStatus[0].valid) return healthStatus
 
   healthStatus.push({
     name: 'organization_name',

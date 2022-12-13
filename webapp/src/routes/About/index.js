@@ -18,44 +18,45 @@ const About = () => {
     <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.mainText}>
-            <div>
-              <div className={classes.boxInfo}>
-                <Typography variant="body2" align="justify" paragraph>
-                  {t('body.paragraph1')}
-                </Typography>
-              </div>
+          <div>
+            <div className={classes.boxInfo}>
+              <Typography variant="body2" align="justify" paragraph>
+                {t('body.paragraph1')}
+              </Typography>
+            </div>
 
-              <div className={classes.boxInfo}>
-                <Typography variant="h4">{t('subtitle1')}</Typography>
-                <Typography variant="body2" align="justify" paragraph>
-                  {t('body1.paragraph1')}
-                </Typography>
-              </div>
+            <div className={classes.boxInfo}>
+              <Typography variant="h4">{t('subtitle1')}</Typography>
+              <Typography variant="body2" align="justify" paragraph>
+                {t('body1.paragraph1')}
+              </Typography>
+            </div>
 
-              <div className={classes.boxInfo}>
-                <Typography variant="h4">{t('subtitle2')}</Typography>
-                <Typography variant="body2" align="justify" paragraph>
-                  {t('body2.paragraph1')}
-                </Typography>
-              </div>
+            <div className={classes.boxInfo}>
+              <Typography variant="h4">{t('subtitle2')}</Typography>
+              <Typography variant="body2" align="justify" paragraph>
+                {t('body2.paragraph1')}
+              </Typography>
+            </div>
 
-              <div className={classes.boxInfo}>
-                <Typography variant="h4">{t('subtitle3')}</Typography>
-                <Typography variant="body2" align="justify" paragraph>
-                  {t('body3.paragraph1')}
-                  <a
-                    href="https://eoscostarica.io/bp.json"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t('bpjsonexample')}
-                  </a>
-                </Typography>
-                <Typography variant="body2" align="justify" paragraph>
-                  {t('body3.paragraph2')}
-                </Typography>
-              </div>
+            <div className={classes.boxInfo}>
+              <Typography variant="h4">{t('subtitle3')}</Typography>
+              <Typography variant="body2" align="justify" paragraph>
+                {t('body3.paragraph1')}
+                <a
+                  href="https://eoscostarica.io/bp.json"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('bpjsonexample')}
+                </a>
+              </Typography>
+              <Typography variant="body2" align="justify" paragraph>
+                {t('body3.paragraph2')}
+              </Typography>
+            </div>
           </div>
+
           <div>
             <Logo className={classes.logo} />
           </div>

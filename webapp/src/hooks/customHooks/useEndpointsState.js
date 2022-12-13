@@ -1,54 +1,34 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useLazyQuery } from '@apollo/client'
 
 import { ENDPOINTS_QUERY } from '../../gql'
 
+import useSearchState from './useSearchState'
+
 const useEndpointsState = ({ useCache }) => {
-  const [load, { loading, data }] = useLazyQuery(ENDPOINTS_QUERY, {
+  const [
+    { pagination, loading, producers, filters },
+    { handleOnSearch, handleOnPageChange, setPagination },
+  ] = useSearchState({
+    query: ENDPOINTS_QUERY,
     pollInterval: useCache ? 0 : 120000,
     fetchPolicy: useCache ? 'cache-first' : 'cache-and-network',
   })
-  const [producers, setProducers] = useState([])
   const [updatedAt, setUpdatedAt] = useState()
-  const [pagination, setPagination] = useState({
-    page: 1,
-    limit: 20,
-    totalPages: 0,
-    where: { nodes: { endpoints: { value: { _gt: '' } } } },
-  })
+  const [items, setItems] = useState()
 
   useEffect(() => {
-    load({
-      variables: {
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit,
-        where: pagination.where,
-        endpointFilter: pagination.endpointFilter,
-      },
-    })
-    // eslint-disable-next-line
-  }, [
-    pagination.page,
-    pagination.where,
-    pagination.limit,
-    pagination.endpointFilter,
-  ])
-
-  useEffect(() => {
-    if (!data?.info) return
-
     setPagination(prev => ({
       ...prev,
-      totalPages: Math.ceil(data?.info.producers?.count / pagination.limit),
+      limit: 20,
+      where: { ...prev.where, nodes: { endpoints: { value: { _gt: '' } } } },
     }))
-    // eslint-disable-next-line
-  }, [data?.info, pagination.limit])
+  }, [setPagination])
 
   useEffect(() => {
-    if (!data?.producers) return
+    if (!producers) return
 
-    setProducers(
-      data.producers.map(producer => {
+    setItems(
+      producers.map(producer => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
@@ -73,20 +53,10 @@ const useEndpointsState = ({ useCache }) => {
       }),
     )
 
-    if (!data.producers?.[0]?.updated_at) return
+    if (!producers?.[0]?.updated_at) return
 
-    setUpdatedAt(data.producers[0].updated_at)
-    // eslint-disable-next-line
-  }, [data?.producers])
-
-  const handleOnPageChange = (_, page) => {
-    if (pagination.page === page) return
-
-    setPagination(prev => ({
-      ...prev,
-      page,
-    }))
-  }
+    setUpdatedAt(producers[0].updated_at)
+  }, [producers])
 
   const handleFilter = useCallback(value => {
     const filter = value
@@ -96,16 +66,16 @@ const useEndpointsState = ({ useCache }) => {
     setPagination(prev => ({
       ...prev,
       page: 1,
-      where: { nodes: { endpoints: filter } },
+      where: { ...prev.where, nodes: { endpoints: filter } },
       endpointFilter: value
         ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
         : undefined,
     }))
-  }, [])
+  }, [setPagination])
 
   return [
-    { loading, pagination, producers, updatedAt },
-    { handleFilter, handleOnPageChange, setPagination },
+    { loading, pagination, producers: items, updatedAt, filters },
+    { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }
 

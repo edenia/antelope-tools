@@ -73,6 +73,7 @@ export default (theme) => ({
   },
   gridFooter: {
     display: 'flex',
+    flexDirection: 'column',
     [theme.breakpoints.down('md')]: {
       order: 3,
       paddingBottom: '15px',
@@ -102,7 +103,7 @@ export default (theme) => ({
     justifyContent: 'center',
     borderRadius: '10px',
     textAlign: 'center',
-    backgroundColor: `${theme.palette.secondary.main} !important`,
+    backgroundColor: `#1675CA !important`,
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',
