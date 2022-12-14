@@ -12,7 +12,7 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
-import LightIcon from '../HealthCheck/LightIcon'
+import HealthCheck from '../HealthCheck'
 
 import ShowInfo from './ShowInfo'
 import styles from './styles'
@@ -60,13 +60,39 @@ const NodesCard = ({ nodes }) => {
     }
   }
 
+  const getHealthMessage = (total, listFailing) => {
+    switch (total - listFailing.length) {
+      case total:
+        return t('allWorking')
+      case 0:
+        return t('noneWorking')
+      default:
+        const message = `The ${listFailing.join(', ').toUpperCase()}`
+
+        return listFailing.length > 1
+          ? `${message} endpoints are not responding`
+          : `${message} endpoint is not responding`
+    }
+  }
+
   const Endpoints = ({ node }) => {
     if (!node?.endpoints?.length) return <></>
 
-    const totalEndpoints = node.endpoints.filter((e) => {
-      return e.type !== 'p2p'
-    })?.length
-    const workingEndpoints = node.info?.endpoints?.count
+    const { totalEndpoints, failingEndpoints } = node.endpoints.reduce(
+      (status, endpoint) => {
+        if (endpoint?.type !== 'p2p') {
+          if (endpoint?.response?.status !== 200) {
+            status.failingEndpoints.push(endpoint.type)
+          }
+
+          status.totalEndpoints += 1
+        }
+        return status
+      },
+      { failingEndpoints: [], totalEndpoints: 0 },
+    )
+
+    const workingEndpoints = totalEndpoints - failingEndpoints.length
 
     return (
       <>
@@ -75,9 +101,11 @@ const NodesCard = ({ nodes }) => {
           {!!totalEndpoints && (
             <div className={classes.lightIcon}>
               {`${workingEndpoints}/${totalEndpoints}`}
-              <LightIcon
+              <HealthCheck
                 status={getHealthStatus(totalEndpoints, workingEndpoints)}
-              />
+              >
+                <p>{getHealthMessage(totalEndpoints, failingEndpoints)}</p>
+              </HealthCheck>
             </div>
           )}
         </dt>

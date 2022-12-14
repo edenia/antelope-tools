@@ -58,13 +58,6 @@ export const NODES_QUERY = gql`
       updated_at
       producer_key
       nodes {
-        info: endpoints_aggregate(
-          where: { response: { _contains: { status: 200 } } }
-        ) {
-          endpoints: aggregate {
-            count
-          }
-        }
         type
         full
         location

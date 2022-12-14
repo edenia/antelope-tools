@@ -261,7 +261,9 @@
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
     "isFull": "Is full",
-    "supportedApis": "Supported APIs"
+    "supportedApis": "Supported APIs",
+    "allWorking": "All API and SSL endpoints are responding",
+    "noneWorking": "No API or SSL endpoints are responding"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",

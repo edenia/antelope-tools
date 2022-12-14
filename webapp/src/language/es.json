@@ -267,7 +267,10 @@
     "emptyNode": "Sin información para nodos",
     "cpuBenchmark": "Promedio del Benchmark de CPU",
     "isFull": "Es completo",
-    "supportedApis": "APIs Soportadas"
+    "supportedApis": "APIs Soportadas",
+    "allWorking": "Todos los endpoints API y SSL están respondiendo",
+    "noneWorking": "Ningún endpoint API o SSL está respondiendo"
+    
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",
