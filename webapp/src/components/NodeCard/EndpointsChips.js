@@ -56,20 +56,22 @@ const EndpointsChips = ({ node }) => {
       <div className={classes.lightIcon}>
         {`${workingEndpoints}/${totalEndpoints}`}
         <HealthCheck status={healthStatus}>
-          <>
-            <Typography>{t('status')}</Typography>
-            <Typography>
-              {getStatusMessage(healthStatus, failingEndpoints)}
-            </Typography>
-            <Typography>{t('updatedAt')}</Typography>
-            {moment(updatedAt).format('lll') || 'N/A'}
-          </>
+          <Typography>{t('status')}</Typography>
+          <Typography>
+            {getStatusMessage(healthStatus, failingEndpoints)}
+          </Typography>
+          <Typography>{t('updatedAt')}</Typography>
+          {moment(updatedAt).format('lll') || 'N/A'}
         </HealthCheck>
       </div>
     )
   }
 
-  const defaultStatus = { totalEndpoints: 0, failingEndpoints: [], updatedAt: 'NA' }
+  const defaultStatus = {
+    totalEndpoints: 0,
+    failingEndpoints: [],
+    updatedAt: 'NA',
+  }
   const status = node.endpoints.reduce((status, endpoint) => {
     if (endpoint?.type !== 'p2p') {
       if (endpoint?.response?.status !== 200) {
