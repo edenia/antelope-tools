@@ -12,11 +12,11 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
-import HealthCheck from '../HealthCheck'
 
 import ShowInfo from './ShowInfo'
 import styles from './styles'
 import SupportedAPIs from './SupportedAPIs'
+import EndpointsChips from './EndpointsChips'
 
 const useStyles = makeStyles(styles)
 
@@ -49,83 +49,6 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const getHealthStatus = (totalEndpoints, workingEndpoints) => {
-    switch (workingEndpoints) {
-      case totalEndpoints:
-        return 'greenLight'
-      case 0:
-        return 'redLight'
-      default:
-        return 'yellowLight'
-    }
-  }
-
-  const getHealthMessage = (total, listFailing) => {
-    switch (total - listFailing.length) {
-      case total:
-        return t('allWorking')
-      case 0:
-        return t('noneWorking')
-      default:
-        const beginning = t('noResponding')
-        const middle =
-          listFailing.length > 1 ? t('endpointPlural') : t('endpointSingular')
-        const end = listFailing.join(', ').toUpperCase()
-
-        return `${beginning} ${middle} ${end}`
-    }
-  }
-
-  const Endpoints = ({ node }) => {
-    if (!node?.endpoints?.length) return <></>
-
-    const { totalEndpoints, failingEndpoints } = node.endpoints.reduce(
-      (status, endpoint) => {
-        if (endpoint?.type !== 'p2p') {
-          if (endpoint?.response?.status !== 200) {
-            status.failingEndpoints.push(endpoint.type)
-          }
-
-          status.totalEndpoints += 1
-        }
-        return status
-      },
-      { failingEndpoints: [], totalEndpoints: 0 },
-    )
-
-    const workingEndpoints = totalEndpoints - failingEndpoints.length
-
-    return (
-      <>
-        <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
-          {t('endpoints')}
-          {!!totalEndpoints && (
-            <div className={classes.lightIcon}>
-              {`${workingEndpoints}/${totalEndpoints}`}
-              <HealthCheck
-                status={getHealthStatus(totalEndpoints, workingEndpoints)}
-              >
-                <p>{getHealthMessage(totalEndpoints, failingEndpoints)}</p>
-              </HealthCheck>
-            </div>
-          )}
-        </dt>
-        <ChipList
-          list={node.endpoints.map(({ type, value }) => {
-            return (
-              <>
-                <span>{type.toUpperCase()}</span>:{' '}
-                <a href={value} target="_blank" rel="noopener noreferrer">
-                  {value || 'N/A'}
-                </a>
-              </>
-            )
-          })}
-        />
-      </>
-    )
-  }
-
   const Keys = ({ node }) => {
     if (!node?.node_info?.length || !node?.node_info[0]?.features?.keys)
       return <></>
@@ -150,7 +73,7 @@ const NodesCard = ({ nodes }) => {
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
         <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
-        <Endpoints node={node} />
+        <EndpointsChips node={node} />
         <ChipList
           title={t('features')}
           list={node?.node_info[0]?.features?.list}
