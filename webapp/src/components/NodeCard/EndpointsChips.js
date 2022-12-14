@@ -28,17 +28,19 @@ const EndpointsChips = ({ node }) => {
     }
   }
 
-  const getHealthMessage = (total, listFailing) => {
-    switch (total - listFailing.length) {
-      case total:
+  const getStatusMessage = (healthStatus, failingEndpoints) => {
+    switch (healthStatus) {
+      case 'greenLight':
         return t('allWorking')
-      case 0:
+      case 'redLight':
         return t('noneWorking')
       default:
         const beginning = t('noResponding')
         const middle =
-          listFailing.length > 1 ? t('endpointPlural') : t('endpointSingular')
-        const end = listFailing.join(', ').toUpperCase()
+          failingEndpoints.length > 1
+            ? t('endpointPlural')
+            : t('endpointSingular')
+        const end = failingEndpoints.join(', ').toUpperCase()
 
         return `${beginning} ${middle} ${end}`
     }
@@ -48,15 +50,16 @@ const EndpointsChips = ({ node }) => {
     const { t } = useTranslation('endpointInfoComponent')
     const { totalEndpoints, failingEndpoints, updatedAt } = status
     const workingEndpoints = totalEndpoints - failingEndpoints.length
+    const healthStatus = getHealthStatus(totalEndpoints, workingEndpoints)
 
     return (
       <div className={classes.lightIcon}>
         {`${workingEndpoints}/${totalEndpoints}`}
-        <HealthCheck status={getHealthStatus(totalEndpoints, workingEndpoints)}>
+        <HealthCheck status={healthStatus}>
           <>
             <Typography>{t('status')}</Typography>
             <Typography>
-              {getHealthMessage(totalEndpoints, failingEndpoints)}
+              {getStatusMessage(healthStatus, failingEndpoints)}
             </Typography>
             <Typography>{t('updatedAt')}</Typography>
             {moment(updatedAt).format('lll') || 'N/A'}
@@ -66,20 +69,19 @@ const EndpointsChips = ({ node }) => {
     )
   }
 
-  const status = node.endpoints.reduce(
-    (status, endpoint) => {
-      if (endpoint?.type !== 'p2p') {
-        if (endpoint?.response?.status !== 200) {
-          status.failingEndpoints.push(endpoint.type)
-        }
-
-        status.totalEndpoints += 1
-        status.updatedAt = endpoint.updated_at
+  const defaultStatus = { totalEndpoints: 0, failingEndpoints: [], updatedAt: 'NA' }
+  const status = node.endpoints.reduce((status, endpoint) => {
+    if (endpoint?.type !== 'p2p') {
+      if (endpoint?.response?.status !== 200) {
+        status.failingEndpoints.push(endpoint.type)
       }
-      return status
-    },
-    { failingEndpoints: [], totalEndpoints: 0 },
-  )
+
+      status.totalEndpoints += 1
+      status.updatedAt = endpoint.updated_at
+    }
+
+    return status
+  }, defaultStatus)
 
   return (
     <>
