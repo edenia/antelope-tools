@@ -558,14 +558,14 @@ p {
     width: 100%;
     height: auto;
     background-image: url(./images/bgimage.png);
-    background-size: 673px 425px;
+    background-size: 450px 425px;
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
   }
 
   .box-paragraph-text > p {
-    width: 265px;
+    width: 270px;
     height: 68px;
     margin: 0px 450px 24px 0px;
     font-family: Nunito;
@@ -679,7 +679,6 @@ p {
     top: 1px;
   }
   .visit-text {
-    width: 195px;
     height: 24px;
     flex-grow: 0;
     font-family: Nunito;
@@ -858,10 +857,9 @@ p {
   }
 
   .box-social-media {
-    width: 50%;
-    margin-bottom: 8px;
-    align-items: center;
+    width: 55%;
     margin-top: 28.6px;
+    align-items: center;
   }
 
   .eos-costa-rica {
@@ -927,11 +925,6 @@ p {
     flex-direction: column;
   }
 
-  .box-social-media {
-    width: 55%;
-    margin-bottom: 15px;
-    align-items: center;
-  }
   .footerTw {
     height: 29px;
     width: 34px;
@@ -957,7 +950,6 @@ p {
   #copyright {
     width: 199.2px;
     height: 21px;
-    margin: 9.5px 154.1px 0 154px;
     font-family: Nunito;
     font-size: 10.6px;
     font-weight: normal;
