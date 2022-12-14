@@ -263,7 +263,10 @@
     "isFull": "Is full",
     "supportedApis": "Supported APIs",
     "allWorking": "All API and SSL endpoints are responding",
-    "noneWorking": "No API or SSL endpoints are responding"
+    "noneWorking": "No API or SSL endpoints are responding",
+    "noResponding": "The no responding",
+    "endpointPlural": "endpoints are the",
+    "endpointSingular": "endpoint is the"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",

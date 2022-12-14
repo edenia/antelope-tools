@@ -67,11 +67,12 @@ const NodesCard = ({ nodes }) => {
       case 0:
         return t('noneWorking')
       default:
-        const message = `The ${listFailing.join(', ').toUpperCase()}`
+        const beginning = t('noResponding')
+        const middle =
+          listFailing.length > 1 ? t('endpointPlural') : t('endpointSingular')
+        const end = listFailing.join(', ').toUpperCase()
 
-        return listFailing.length > 1
-          ? `${message} endpoints are not responding`
-          : `${message} endpoint is not responding`
+        return `${beginning} ${middle} ${end}`
     }
   }
 
