@@ -54,9 +54,6 @@ export default (theme) => ({
     fontWeight: 'normal',
     marginLeft: theme.spacing(3),
     '& svg': {
-      width: '20px',
-      height: '20px',
-      alignSelf: 'center',
       marginLeft: theme.spacing(2),
     },
   },
