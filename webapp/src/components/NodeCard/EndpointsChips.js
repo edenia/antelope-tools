@@ -35,14 +35,13 @@ const EndpointsChips = ({ node }) => {
       case 'redLight':
         return t('noneWorking')
       default:
-        const beginning = t('noResponding')
-        const middle =
+        const beginning =
           failingEndpoints.length > 1
             ? t('endpointPlural')
             : t('endpointSingular')
         const end = failingEndpoints.join(', ').toUpperCase()
 
-        return `${beginning} ${middle} ${end}`
+        return `${beginning} ${end}`
     }
   }
 

@@ -270,9 +270,8 @@
     "supportedApis": "APIs Soportadas",
     "allWorking": "Todos los endpoints API y SSL están respondiendo",
     "noneWorking": "Ningún endpoint API o SSL está respondiendo",
-    "noResponding": "No responde",
-    "endpointPlural": "los endpoints de tipo",
-    "endpointSingular": "el endpoint de tipo"
+    "endpointPlural": "Los endpoints que no responden son los",
+    "endpointSingular": "El endpoint que no responde es el"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Nombre",
