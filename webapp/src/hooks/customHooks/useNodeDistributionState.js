@@ -8,7 +8,7 @@ const useNodeDistributionState = () => {
   const [loadProducers, { loading = true, data: { producers } = {} }] =
     useLazyQuery(ALL_NODES_QUERY)
   const [nodes, setNodes] = useState([])
-  const [filters, setFilters] = useState({ name: 'all' })
+  const [filters, setFilters] = useState({ name: 'all', owner: '' })
   const [allNodes, setAllNodes] = useState([])
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
@@ -20,16 +20,17 @@ const useNodeDistributionState = () => {
   useEffect(() => {
     loadProducers({
       variables: {
-        where: {},
+        where: {
+          bp_json: { _is_null: false },
+          owner: { _like: `%${filters?.owner ?? ''}%` },
+        },
       },
     })
     // eslint-disable-next-line
-  }, [])
+  }, [filters.owner])
 
   useEffect(() => {
-    if (!producers?.length) {
-      return
-    }
+    if (!producers) return
 
     const items = []
     producers.forEach((producer) => {
