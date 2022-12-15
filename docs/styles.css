@@ -1305,7 +1305,7 @@ p {
     height: 780px;
     max-width: 1800px;
     background-image: url(./images/bgimage.png);
-    background-size: 800px 780px;;
+    background-size: 800px 780px;
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
