@@ -17,23 +17,23 @@ const MainMap = ({ data, map, setMap }) => {
     (data = [], map) => {
       const options = {
         title: {
-          text: ''
+          text: '',
         },
         colorAxis: {
           min: 0,
-          max: 19170
+          max: 19170,
         },
         legend: {
-          enabled: false
+          enabled: false,
         },
         exporting: {
-          enabled: false
+          enabled: false,
         },
         credits: {
-          enabled: false
+          enabled: false,
         },
         mapNavigation: {
-          enabled: false
+          enabled: false,
         },
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
@@ -54,19 +54,19 @@ const MainMap = ({ data, map, setMap }) => {
               events: {
                 click: function (e) {
                   setMap((e.point.country || '').toLowerCase())
-                }
-              }
+                },
+              },
             },
             states: {
               hover: {
-                color: '#1565C0'
-              }
+                color: '#1565C0',
+              },
             },
             dataLabels: {
               enabled: true,
               formatter: function () {
                 const node = data.find(
-                  ({ country }) => country === this.point.country
+                  ({ country }) => country === this.point.country,
                 )
 
                 return this.point.country
@@ -74,17 +74,15 @@ const MainMap = ({ data, map, setMap }) => {
                       countries[this.point.country]?.flag || this.point.country
                     } ${node.value}`
                   : null
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
       }
 
-      // eslint-disable-next-line
-      const highMap = new HighMapsWrapper['Map'](myRef.current, options)
-      highMap.redraw()
+      new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [setMap]
+    [setMap],
   )
 
   useEffect(() => {
@@ -99,7 +97,7 @@ const MainMap = ({ data, map, setMap }) => {
 MainMap.propTypes = {
   data: PropTypes.array,
   map: PropTypes.object,
-  setMap: PropTypes.func
+  setMap: PropTypes.func,
 }
 
 export default MainMap

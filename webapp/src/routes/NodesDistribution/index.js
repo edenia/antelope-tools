@@ -23,7 +23,7 @@ const Nodes = () => {
         filters={filters}
         onChange={handleOnFiltersChange}
         chips={chips}
-        translationScope="nodeSearchComponent"
+        translationScope="producerSearchComponent"
       />
       </div>
       {loading && <LinearProgress />}
