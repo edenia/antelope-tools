@@ -94,11 +94,11 @@ const useNodeDistributionState = () => {
     let items = allNodes
 
     if (filters.name !== 'all') {
-      items = items.filter((current) => current.node.node_type === filters.name)
+      items = items.filter((current) => current?.node?.node_type?.includes(filters.name))
     }
 
     setNodes(items)
-  }, [allNodes, filters])
+  }, [allNodes, filters.name])
 
   return [{ filters, chips, nodes, loading }, { handleOnFiltersChange }]
 }

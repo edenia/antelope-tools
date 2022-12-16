@@ -25,6 +25,10 @@ const GeoMap = ({ data }) => {
     return data.reduce(
       (acc, curr, index) => {
         if (!acc.current) {
+          if (index === data.length - 1) {
+            acc.nodesSeries.push({ country: curr.country, value: 1 })
+          }
+
           return { ...acc, current: { country: curr.country, value: 1 } }
         }
 
@@ -32,29 +36,33 @@ const GeoMap = ({ data }) => {
           if (index === data.length - 1) {
             acc.nodesSeries.push({
               ...acc.current,
-              value: acc.current.value + 1
+              value: acc.current.value + 1,
             })
 
             return {
               ...acc,
-              current: { country: curr.country, value: 1 }
+              current: { country: curr.country, value: 1 },
             }
           }
 
           return {
             ...acc,
-            current: { ...acc.current, value: acc.current.value + 1 }
+            current: { ...acc.current, value: acc.current.value + 1 },
           }
         }
 
         acc.nodesSeries.push(acc.current)
 
+        if (index === data.length - 1) {
+          acc.nodesSeries.push({ country: curr.country, value: 1 })
+        }
+
         return {
           ...acc,
-          current: { country: curr.country, value: 1 }
+          current: { country: curr.country, value: 1 },
         }
       },
-      { current: null, nodesSeries: [] }
+      { current: null, nodesSeries: [] },
     )
   }, [data])
 
@@ -77,10 +85,10 @@ const GeoMap = ({ data }) => {
 
     const getMap = async () => {
       const mapDataSelected = data.filter(
-        ({ country }) => country === mapSelected.toUpperCase()
+        ({ country }) => country === mapSelected.toUpperCase(),
       )
       const { data: mapRes } = await axios.get(
-        `${generalConfig.highchartsMapURL}${mapSelected}/${mapSelected}-all.geo.json`
+        `${generalConfig.highchartsMapURL}${mapSelected}/${mapSelected}-all.geo.json`,
       )
 
       setMapOptions(mapDataSelected)
@@ -96,7 +104,7 @@ const GeoMap = ({ data }) => {
         startIcon={<ArrowBackIcon />}
         onClick={handleGoBack}
         className={clsx(classes.goBackBtn, {
-          [classes.goBackBtnHidden]: !mapSelected
+          [classes.goBackBtnHidden]: !mapSelected,
         })}
       >
         Go Back
@@ -119,7 +127,7 @@ const GeoMap = ({ data }) => {
 }
 
 GeoMap.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 }
 
 export default GeoMap
