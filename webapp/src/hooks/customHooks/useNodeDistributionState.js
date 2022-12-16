@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
+import { useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 import { ALL_NODES_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
@@ -7,6 +9,7 @@ import { eosConfig } from '../../config'
 const useNodeDistributionState = () => {
   const [loadProducers, { loading = true, data: { producers } = {} }] =
     useLazyQuery(ALL_NODES_QUERY)
+  const location = useLocation()
   const [nodes, setNodes] = useState([])
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
   const [allNodes, setAllNodes] = useState([])
@@ -22,12 +25,19 @@ const useNodeDistributionState = () => {
       variables: {
         where: {
           bp_json: { _is_null: false },
-          owner: { _like: `%${filters?.owner ?? ''}%` },
         },
       },
     })
     // eslint-disable-next-line
-  }, [filters.owner])
+  }, [])
+
+  useEffect(() => {
+    const params = queryString.parse(location.search)
+
+    if (!params.owner) return
+
+    setFilters(prev => ({ ...prev, owner: params.owner }))
+  }, [location.search])
 
   useEffect(() => {
     if (!producers) return
@@ -93,12 +103,16 @@ const useNodeDistributionState = () => {
   useEffect(() => {
     let items = allNodes
 
+    if (filters.owner !== '') {
+      items = items.filter((current) => current?.name?.includes(filters.owner))
+    }
+
     if (filters.name !== 'all') {
       items = items.filter((current) => current?.node?.node_type?.includes(filters.name))
     }
 
     setNodes(items)
-  }, [allNodes, filters.name])
+  }, [allNodes, filters])
 
   return [{ filters, chips, nodes, loading }, { handleOnFiltersChange }]
 }
