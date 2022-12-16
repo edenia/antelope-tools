@@ -36,7 +36,10 @@ const MainMap = ({ data, map, setMap }) => {
           enabled: false
         },
         tooltip: {
-          headerFormat: '<b>{series.name}</b><br>'
+          headerFormat: '<b>{series.name}</b><br>',
+          backgroundColor: '#FFFFFF',
+          border: '1px solid rgba(0, 0, 0, 0.12)',
+          boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
         },
         series: [
           {
@@ -61,7 +64,6 @@ const MainMap = ({ data, map, setMap }) => {
             },
             dataLabels: {
               enabled: true,
-              useHTML: true,
               formatter: function () {
                 const node = data.find(
                   ({ country }) => country === this.point.country
