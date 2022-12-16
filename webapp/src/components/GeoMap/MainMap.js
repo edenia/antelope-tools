@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
@@ -11,6 +12,7 @@ const useStyles = makeStyles(styles)
 
 const MainMap = ({ data, map, setMap }) => {
   const classes = useStyles()
+  const { t } = useTranslation('mainMapComponent')
   const myRef = useRef()
 
   const setupMapData = useCallback(
@@ -46,7 +48,7 @@ const MainMap = ({ data, map, setMap }) => {
             data,
             mapData: map,
             joinBy: ['iso-a2', 'country'],
-            name: 'Number of Nodes',
+            name: t('numberOfNodes'),
             cursor: 'pointer',
             borderColor: '#8F9DA4',
             nullColor: '#EEEEEE',
@@ -82,7 +84,7 @@ const MainMap = ({ data, map, setMap }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [setMap],
+    [setMap, t],
   )
 
   useEffect(() => {
