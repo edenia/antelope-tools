@@ -9,7 +9,11 @@ const useNodeState = () => {
   const [
     { filters, pagination, loading, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({ query: NODES_QUERY })
+  ] = useSearchState({
+    query: NODES_QUERY,
+    pollInterval: 300000,
+    fetchPolicy: 'cache-and-network',
+  })
   const [items, setItems] = useState([])
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]

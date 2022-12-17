@@ -261,7 +261,11 @@
     "emptyNode": "Empty info for nodes",
     "cpuBenchmark": "CPU Benchmark Average",
     "isFull": "Is full",
-    "supportedApis": "Supported APIs"
+    "supportedApis": "Supported APIs",
+    "allWorking": "All API and SSL endpoints are responding",
+    "noneWorking": "No API or SSL endpoints are responding",
+    "endpointPlural": "Endpoints not responding are the",
+    "endpointSingular": "Endpoint not responding is the"
   },
   "producerHealthIndicatorsComponent": {
     "hs_organization_name": "Name",
@@ -363,5 +367,8 @@
     "subTitle": "Page not found.",
     "message": "The page you are looking for might have been removed.",
     "return": "Return to website"
+  },
+  "mainMapComponent": {
+    "numberOfNodes": "Number of Nodes"
   }
 }

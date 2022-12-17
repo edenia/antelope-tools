@@ -12,11 +12,11 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
-import LightIcon from '../HealthCheck/LightIcon'
 
 import ShowInfo from './ShowInfo'
 import styles from './styles'
 import SupportedAPIs from './SupportedAPIs'
+import EndpointsChips from './EndpointsChips'
 
 const useStyles = makeStyles(styles)
 
@@ -49,54 +49,6 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const getHealthStatus = (totalEndpoints, workingEndpoints) => {
-    switch (workingEndpoints) {
-      case totalEndpoints:
-        return 'greenLight'
-      case 0:
-        return 'redLight'
-      default:
-        return 'yellowLight'
-    }
-  }
-
-  const Endpoints = ({ node }) => {
-    if (!node?.endpoints?.length) return <></>
-
-    const totalEndpoints = node.endpoints.filter((e) => {
-      return e.type !== 'p2p'
-    })?.length
-    const workingEndpoints = node.info?.endpoints?.count
-
-    return (
-      <>
-        <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
-          {t('endpoints')}
-          {!!totalEndpoints && (
-            <div className={classes.lightIcon}>
-              {`${workingEndpoints}/${totalEndpoints}`}
-              <LightIcon
-                status={getHealthStatus(totalEndpoints, workingEndpoints)}
-              />
-            </div>
-          )}
-        </dt>
-        <ChipList
-          list={node.endpoints.map(({ type, value }) => {
-            return (
-              <>
-                <span>{type.toUpperCase()}</span>:{' '}
-                <a href={value} target="_blank" rel="noopener noreferrer">
-                  {value || 'N/A'}
-                </a>
-              </>
-            )
-          })}
-        />
-      </>
-    )
-  }
-
   const Keys = ({ node }) => {
     if (!node?.node_info?.length || !node?.node_info[0]?.features?.keys)
       return <></>
@@ -121,7 +73,7 @@ const NodesCard = ({ nodes }) => {
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
         <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
-        <Endpoints node={node} />
+        <EndpointsChips node={node} />
         <ChipList
           title={t('features')}
           list={node?.node_info[0]?.features?.list}
