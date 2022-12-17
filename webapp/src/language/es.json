@@ -383,5 +383,8 @@
     "subTitle": "Página no encontrada.",
     "message": "Es posible que la página que busca haya sido eliminada.",
     "return": "Volver al sitio web"
+  },
+  "mainMapComponent": {
+    "numberOfNodes": "Cantidad de Nodos"
   }
 }

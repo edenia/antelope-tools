@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
@@ -11,39 +12,43 @@ const useStyles = makeStyles(styles)
 
 const MainMap = ({ data, map, setMap }) => {
   const classes = useStyles()
+  const { t } = useTranslation('mainMapComponent')
   const myRef = useRef()
 
   const setupMapData = useCallback(
     (data = [], map) => {
       const options = {
         title: {
-          text: ''
+          text: '',
         },
         colorAxis: {
           min: 0,
-          max: 19170
+          max: 19170,
         },
         legend: {
-          enabled: false
+          enabled: false,
         },
         exporting: {
-          enabled: false
+          enabled: false,
         },
         credits: {
-          enabled: false
+          enabled: false,
         },
         mapNavigation: {
-          enabled: false
+          enabled: false,
         },
         tooltip: {
-          headerFormat: '<b>{series.name}</b><br>'
+          headerFormat: '<b>{series.name}</b><br>',
+          backgroundColor: '#FFFFFF',
+          border: '1px solid rgba(0, 0, 0, 0.12)',
+          boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
         },
         series: [
           {
             data,
             mapData: map,
             joinBy: ['iso-a2', 'country'],
-            name: 'Number of Nodes',
+            name: t('numberOfNodes'),
             cursor: 'pointer',
             borderColor: '#8F9DA4',
             nullColor: '#EEEEEE',
@@ -51,20 +56,19 @@ const MainMap = ({ data, map, setMap }) => {
               events: {
                 click: function (e) {
                   setMap((e.point.country || '').toLowerCase())
-                }
-              }
+                },
+              },
             },
             states: {
               hover: {
-                color: '#1565C0'
-              }
+                color: '#1565C0',
+              },
             },
             dataLabels: {
               enabled: true,
-              useHTML: true,
               formatter: function () {
                 const node = data.find(
-                  ({ country }) => country === this.point.country
+                  ({ country }) => country === this.point.country,
                 )
 
                 return this.point.country
@@ -72,17 +76,15 @@ const MainMap = ({ data, map, setMap }) => {
                       countries[this.point.country]?.flag || this.point.country
                     } ${node.value}`
                   : null
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
       }
 
-      // eslint-disable-next-line
-      const highMap = new HighMapsWrapper['Map'](myRef.current, options)
-      highMap.redraw()
+      new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [setMap]
+    [setMap, t],
   )
 
   useEffect(() => {
@@ -97,7 +99,7 @@ const MainMap = ({ data, map, setMap }) => {
 MainMap.propTypes = {
   data: PropTypes.array,
   map: PropTypes.object,
-  setMap: PropTypes.func
+  setMap: PropTypes.func,
 }
 
 export default MainMap

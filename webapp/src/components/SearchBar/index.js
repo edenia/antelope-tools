@@ -41,8 +41,11 @@ const SearchBar = ({
   }
 
   const handleOnClickChip = (value) => {
+    const newFilters = { ...filters, name: value }
+
     setSelected(value)
-    onChange({ ...filters, name: value })
+    onChange(newFilters)
+    setFilters(newFilters)
   }
 
   const handleOnKeyDown = (event) => {

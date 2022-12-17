@@ -367,5 +367,8 @@
     "subTitle": "Page not found.",
     "message": "The page you are looking for might have been removed.",
     "return": "Return to website"
+  },
+  "mainMapComponent": {
+    "numberOfNodes": "Number of Nodes"
   }
 }

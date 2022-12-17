@@ -17,7 +17,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
   const [openTooltip, setOpenTooltip] = useState(false)
   const [pointData, setPointData] = useState({
     vertical: 'center',
-    horizontal: 'center'
+    horizontal: 'center',
   })
 
   const handlePopoverOpen = useCallback((values) => {
@@ -33,13 +33,13 @@ const ClusterMap = ({ data, map, mapCode }) => {
     (data, map, mapCode = '') => {
       const options = {
         chart: {
-          map
+          map,
         },
         legend: {
-          enabled: false
+          enabled: false,
         },
         title: {
-          text: countries[mapCode].name
+          text: countries[mapCode].name,
         },
         mapNavigation: {
           enableButtons: false,
@@ -47,17 +47,17 @@ const ClusterMap = ({ data, map, mapCode }) => {
           enableDoubleClickZoom: false,
           enableDoubleClickZoomTo: false,
           enableMouseWheelZoom: false,
-          enableTouchZoom: false
+          enableTouchZoom: false,
         },
         tooltip: {
-          enabled: false
+          enabled: false,
         },
         colorAxis: {
           min: 0,
-          max: 20
+          max: 20,
         },
         credits: {
-          enabled: false
+          enabled: false,
         },
         plotOptions: {
           series: {
@@ -67,18 +67,18 @@ const ClusterMap = ({ data, map, mapCode }) => {
                   node: e.point.node,
                   producer: e.point.producer,
                   horizontal: e.screenX,
-                  vertical: e.screenY
+                  vertical: e.screenY,
                 })
-              }
-            }
-          }
+              },
+            },
+          },
         },
         series: [
           {
             name: 'NodeDistribution',
             borderColor: '#8F9DA4',
             nullColor: '#EEEEEE',
-            showInLegend: false
+            showInLegend: false,
           },
           {
             cursor: 'pointer',
@@ -86,16 +86,14 @@ const ClusterMap = ({ data, map, mapCode }) => {
             enableMouseTracking: true,
             colorKey: 'clusterPointsAmount',
             name: 'Countries',
-            data: data || []
-          }
-        ]
+            data: data || [],
+          },
+        ],
       }
 
-      // eslint-disable-next-line
-      const highMap = new HighMapsWrapper['Map'](myRef.current, options)
-      highMap.redraw()
+      new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [handlePopoverOpen]
+    [handlePopoverOpen],
   )
 
   useEffect(() => {
@@ -113,7 +111,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
         anchorEl={null}
         anchorOrigin={{
           vertical: pointData.vertical,
-          horizontal: pointData.horizontal
+          horizontal: pointData.horizontal,
         }}
       >
         <NodeCard node={pointData?.node} producer={pointData?.producer} />
@@ -125,7 +123,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 ClusterMap.propTypes = {
   data: PropTypes.array,
   map: PropTypes.object,
-  mapCode: PropTypes.string
+  mapCode: PropTypes.string,
 }
 
 export default ClusterMap
