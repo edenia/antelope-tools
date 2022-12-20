@@ -1,16 +1,15 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
-import LaunchIcon from '@mui/icons-material/Launch'
 
 import { eosConfig, generalConfig } from '../../config'
+import VisitSite from '../VisitSite'
 
 const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
   if (eosConfig.networkName === 'lacchain') return <></>
 
   return (
-    <div className={classes.healthStatus}>
+    <div className={classes.stats}>
       <Typography variant="overline">{t('stats')}</Typography>
       <div className={classes.borderLine}>
         <div className={classes.rowWrapper}>
@@ -25,20 +24,15 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
 
         {!!eosRate && (
           <div className={classes.rowWrapper}>
-            <Typography variant="body1">{`${t('EOSRate')}: 
-              ${eosRate.average.toFixed(2)} (${eosRate.ratings_cntr} ${t('ratings')})`}
+            <Typography variant="body1" className={classes.ratings}>
+              {`${t('EOSRate')}: 
+              ${eosRate.average.toFixed(2)} ${t('average')} 
+              (${eosRate.ratings_cntr} ${t('ratings')})`}
             </Typography>
-            <Tooltip title={t('openLink')} arrow placement="left">
-              <LaunchIcon
-                onClick={() =>
-                  window.open(
-                    `${generalConfig.eosRateLink}/block-producers/${eosRate.bp}`,
-                    '_blank',
-                  )
-                }
-                className={classes.clickableIcon}
-              />
-            </Tooltip>
+            <VisitSite
+              title={t('openLink')}
+              url={`${generalConfig.eosRateLink}/block-producers/${eosRate.bp}`}
+            />
           </div>
         )}
 

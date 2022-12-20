@@ -188,6 +188,11 @@ export default (theme) => ({
       minWidth: 150,
     },
   },
+  ratings: {
+    [theme.breakpoints.up('lg')]: {
+      whiteSpace: 'pre-line !important',
+    },
+  },
   boxLabel: {
     alignItems: 'baseline !important',
   },
@@ -221,6 +226,15 @@ export default (theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: 130,
+    },
+  },
+  stats: {
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
     },
   },
   social: {
