@@ -1,10 +1,12 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
+import LaunchIcon from '@mui/icons-material/Launch'
 
 import { eosConfig, generalConfig } from '../../config'
 
-const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
+const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
   if (eosConfig.networkName === 'lacchain') return <></>
 
   return (
@@ -20,6 +22,25 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
             eosConfig.tokenSymbol
           }`}</Typography>
         </div>
+
+        {!!eosRate && (
+          <div className={classes.rowWrapper}>
+            <Typography variant="body1">{`${t('EOSRate')}: 
+              ${eosRate.average.toFixed(2)} (${eosRate.ratings_cntr} ${t('ratings')})`}
+            </Typography>
+            <Tooltip title={t('openLink')} arrow placement="left">
+              <LaunchIcon
+                onClick={() =>
+                  window.open(
+                    `${generalConfig.eosRateLink}/block-producers/${eosRate.bp}`,
+                    '_blank',
+                  )
+                }
+                className={classes.clickableIcon}
+              />
+            </Tooltip>
+          </div>
+        )}
 
         {!!generalConfig.historyEnabled && (
           <div className={classes.rowWrapper}>

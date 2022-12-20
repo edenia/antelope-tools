@@ -87,6 +87,7 @@ const InformationCard = ({ producer, rank, type }) => {
             producer.total_rewards || '0',
             0,
           )}
+          eosRate={producer?.eosRate}
         />
         <Nodes
           nodes={producerOrg.nodes}

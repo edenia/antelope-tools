@@ -240,7 +240,7 @@ export default (theme) => ({
       marginRight: theme.spacing(1),
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
+      minWidth: 120,
     },
   },
   dd: {
