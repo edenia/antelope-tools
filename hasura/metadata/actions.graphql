@@ -18,6 +18,10 @@ type Mutation {
   ): CreateAccountOutput
 }
 
+type Query {
+  eosrate_stats: [EOSRateStats]
+}
+
 type Mutation {
   getProducersInfo(
     bpParams: GetProducersInfoInput!
@@ -94,5 +98,16 @@ type TransferFaucetTokensOutput {
 
 type GetProducersInfoOutput {
   producersInfo: [jsonb]
+}
+
+type EOSRateStats {
+  ratings_cntr: Int
+  transparency: Float
+  average: Float
+  infrastructure: Float
+  bp: String
+  development: Float
+  community: Float
+  trustiness: Float
 }
 
