@@ -20,6 +20,10 @@ actions:
       handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/create-faucet-account'
     permissions:
       - role: guest
+  - name: eosrate_stats
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/get-eos-rate'
   - name: getProducersInfo
     definition:
       kind: synchronous
@@ -65,4 +69,5 @@ custom_types:
     - name: CreateAccountOutput
     - name: TransferFaucetTokensOutput
     - name: GetProducersInfoOutput
+    - name: EOSRateStats
   scalars: []

@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography'
 import { Popover, Tooltip } from '@mui/material'
 import CountryFlag from '../CountryFlag'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import LaunchIcon from '@mui/icons-material/Launch'
+
 import CopyToClipboard from '../CopyToClipboard'
+import VisitSite from '../VisitSite'
 
 const ProducerInformation = ({ info, classes, t }) => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -49,12 +50,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <Typography variant="body1" className={classes.textEllipsis}>
                   {t('website')}:
                 </Typography>
-                <Tooltip title={t('openLink')} arrow placement="left">
-                  <LaunchIcon
-                    onClick={() => window.open(info?.website, '_blank')}
-                    className={classes.clickableIcon}
-                  />
-                </Tooltip>
+                <VisitSite title={t('openLink')} url={info?.website} />
                 <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
@@ -98,13 +94,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <Typography variant="body1" className={classes.textEllipsis}>
                   {t('email')}:
                 </Typography>
-                <Tooltip title={t('openLink')} arrow placement="left">
-                  <LaunchIcon
-                    onClick={() => (window.location = `mailto:${info.email}`)}
-                    className={classes.clickableIcon}
-                  />
-                </Tooltip>
-
+                <VisitSite title={t('openLink')} url={`mailto:${info.email}`} />
                 <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
@@ -148,12 +138,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <Typography variant="body1" className={classes.textEllipsis}>
                   {t('ownershipDisclosure')}:
                 </Typography>
-                <Tooltip title={t('openLink')} arrow placement="left">
-                  <LaunchIcon
-                    onClick={() => window.open(info?.ownership, '_blank')}
-                    className={classes.clickableIcon}
-                  />
-                </Tooltip>
+                <VisitSite title={t('openLink')} url={info?.ownership} />
                 <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
@@ -193,12 +178,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <Typography variant="body1" className={classes.textEllipsis}>
                   {t('codeofconduct')}:
                 </Typography>
-                <Tooltip title={t('openLink')} arrow placement="left">
-                  <LaunchIcon
-                    onClick={() => window.open(info?.code_of_conduct, '_blank')}
-                    className={classes.clickableIcon}
-                  />
-                </Tooltip>
+                <VisitSite title={t('openLink')} url={info?.code_of_conduct} />
                 <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}
@@ -238,13 +218,7 @@ const ProducerInformation = ({ info, classes, t }) => {
                 <Typography variant="body1" className={classes.textEllipsis}>
                   {t('chainResources')}:
                 </Typography>
-                <Tooltip title={t('openLink')} arrow placement="left">
-                  <LaunchIcon
-                    onClick={() => window.open(info?.chain, '_blank')}
-                    className={classes.clickableIcon}
-                  />
-                </Tooltip>
-
+                <VisitSite title={t('openLink')} url={info?.chain} />
                 <Tooltip title={t('moreInfo')} arrow placement="right">
                   <InfoOutlinedIcon
                     className={classes.clickableIcon}

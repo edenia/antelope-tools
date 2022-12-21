@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useSubscription } from '@apollo/client'
+import { useLazyQuery, useSubscription } from '@apollo/client'
 
-import { PRODUCERS_QUERY, BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import {
+  PRODUCERS_QUERY,
+  BLOCK_TRANSACTIONS_HISTORY,
+  EOSRATE_STATS_QUERY,
+} from '../../gql'
 import { eosConfig } from '../../config'
 
 import useSearchState from './useSearchState'
@@ -23,14 +27,20 @@ const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 
 const useBlockProducerState = () => {
   const [
-    { filters, pagination, loading, producers },
+    { filters, pagination, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
   const { data: dataHistory, loading: loadingHistory } = useSubscription(
     BLOCK_TRANSACTIONS_HISTORY,
   )
+  const [loadStats, { loading = true, data: { eosrate_stats: stats } = {} }] =
+    useLazyQuery(EOSRATE_STATS_QUERY)
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
+
+  useEffect(() => {
+    loadStats({})
+  }, [loadStats])
 
   const chips = CHIPS_NAMES.map((e) => {
     return { name: e }
@@ -46,7 +56,11 @@ const useBlockProducerState = () => {
       ...prev,
       page: 1,
       ...filter,
-      where: { ...where, owner: prev.where?.owner, bp_json: { _is_null: false } },
+      where: {
+        ...where,
+        owner: prev.where?.owner,
+        bp_json: { _is_null: false },
+      },
     }))
   }, [filters, setPagination])
 
@@ -54,11 +68,24 @@ const useBlockProducerState = () => {
     let newItems = producers ?? []
 
     if (eosConfig.networkName === 'lacchain' && filters.name !== 'all') {
-      newItems = items.filter((producer) => producer.bp_json?.type === filters)
+      newItems = newItems.filter(
+        (producer) => producer.bp_json?.type === filters.name,
+      )
+    }
+
+    if (newItems?.length && stats?.length) {
+      newItems = newItems.map((producer) => {
+        return {
+          ...producer,
+          eosRate: Object.keys(producer.bp_json).length
+            ? stats.find((rate) => rate.bp === producer.owner)
+            : undefined,
+        }
+      })
     }
 
     setItems(newItems)
-  }, [filters, producers, items])
+  }, [filters.name, stats, producers])
 
   useEffect(() => {
     if (dataHistory?.stats.length) {

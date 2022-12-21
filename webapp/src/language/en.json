@@ -252,7 +252,9 @@
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
     "hs_bpJson": "BP Json",
-    "emptyState": "This block producer does not provide any information."
+    "emptyState": "This block producer does not provide any information.",
+    "average": "average rating",
+    "ratings": "ratings"
   },
   "nodeCardComponent": {
     "features": "Features",
