@@ -544,8 +544,13 @@ p {
     height: 26px;
     width: 155px;
   }
+
+  .info-icon > img {
+    width: 30px;
+  }
 }
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
   .section-wrapper {
     width: 100%;
     padding-top: 40px;
@@ -554,19 +559,35 @@ p {
   }
   .header {
     display: flex;
-    width: 100%;
+    width: 668px;
     height: auto;
     background-image: url(./images/bgimage.png);
-    background-size: 450px 425px;
-    background-position: 90%;
+    background-size: 350px 400px;
+    background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
+    margin: 36px 0px 0px;
+    margin-left: calc(100% / 2 - 344px);
   }
 
+  #middle-logo {
+    width: 254px;
+    height: 113px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  details summary:after {
+    margin-right: calc(100% / 2 - 400px);
+    top: 0px;
+  }
+
+  #bg-image-mobile {
+    display: none;
+  }
   .box-paragraph-text > p {
     width: 270px;
-    height: 68px;
-    margin: 0px 450px 24px 0px;
+    height: 68px;  
     font-family: Nunito;
     font-size: 28px;
     font-weight: 600;
@@ -576,47 +597,12 @@ p {
     letter-spacing: -0.23px;
     text-align: left;
     color: #000;
-  }
-
-  .flex p {
-    width: 231.8px;
-    height: 25.8px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.33;
-    letter-spacing: 0.3px;
-    text-align: left;
-    color: #000;
-    border-color: white !important;
-  }
-
-  .Line-4 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
-  }
-
-  .Line-5 {
-    width: 4px;
-    height: 26px;
-    flex-grow: 0;
-    margin: 6px 0 0;
-    transform: rotate(-180deg);
-    background-color: #1ccbff;
-    border-radius: 5px;
+    margin: 0px 0px 16px 0px;
   }
 
   .flex-text p {
     width: 169px;
     height: 18px;
-    flex-grow: 0;
     margin: 4px 0 4px 4px;
     font-family: Nunito;
     font-size: 28px;
@@ -629,32 +615,116 @@ p {
     color: #000;
   }
 
-  .image-box {
-    display: none;
-  }
-
-  .image-box-desktop {
+  .text-container {
     display: flex;
+    flex-direction: column;
   }
 
-  .info-icon {
+  .flex {
     display: flex;
-    align-items: center;
-    padding-left: 16px;
+    margin-bottom: 41px;
+  }
+  .flex p {
+    width: 260px;
+    height: 32px;
+    flex-grow: 0;
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.49;
+    letter-spacing: 0.87px;
+    text-align: left;
+    color: #000;
   }
 
-  details summary:after {
-    content: url(./images/chevron-down.png);
-    position: absolute;
-    right: 24px;
-    transform: rotate(180deg);
-  }
-  .image-box-desktop {
-    width: 254px;
-    height: 113px;
-    margin-top: 36px;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    justify-items: center;
+    text-align: center;
+    margin-bottom: 16px;
+    margin-left: calc(72px - 36px);
+    grid-gap: 24px;
   }
 
+  .grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 90.7px;
+    height: 90.7px;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 192px;
+    height: 169px;
+    flex-grow: 0;
+    padding: 12px;
+    border-radius: 3.7px;
+    box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
+      0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--colors-white);
+  }
+
+  .grid-item:hover {
+    border: 2px solid #1ccbff;
+    box-sizing: border-box;
+  }
+  .Line-4 {
+    width: 4px;
+    height: 26px;
+    flex-grow: 0;
+    margin: 0 4px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+  }
+
+  .Line-5 {
+    width: 7.1px;
+    height: 35px;
+    flex-grow: 0;
+    margin: 0 8.9px 0 0;
+    transform: rotate(-180deg);
+    background-color: #1ccbff;
+    border-radius: 5px;
+  }
+
+  .box-paragraph summary {
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.61;
+    letter-spacing: -0.54px;
+    text-align: left;
+    color: #000;
+    padding-left: calc(100% / 2 - 400px);
+  }
+
+  .flex-text {
+    display: flex;
+    margin-bottom: 28px;
+  }
+  .box-paragraph p {
+    margin: 40.8px 0px 80px;
+    margin-left: calc(100% / 2 - 344px);
+    width: 700px;
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.72;
+    letter-spacing: 0.18px;
+    text-align: left;
+    color: #000;
+  }
   .myButton {
     width: 245px;
     height: 40px;
@@ -662,13 +732,13 @@ p {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin: 23.9px 483px 59px 0px;
-    padding: 8px 0;
+    gap: 29px;
+    padding: 19px 0;
     border-radius: 58px;
-    box-shadow: 2px -12px 14px 0 rgba(53, 64, 82, 0.05);
+    box-shadow: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
     border: solid 2px #1ccbff;
     background-color: #d6f5ff;
+    margin-bottom: 70px;
   }
   .myButton:hover {
     text-decoration: none;
@@ -678,199 +748,121 @@ p {
     top: 1px;
   }
   .visit-text {
-    height: 24px;
+    width: 245px;
     flex-grow: 0;
     font-family: Nunito;
     font-size: 14px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.71;
-    letter-spacing: 0.08px;
+    line-height: 3.16;
+    letter-spacing: 0.23px;
     text-align: center;
     color: #000;
-    margin: auto;
-  }
-
-  .flex {
-    display: flex;
-    margin-bottom: 16px;
-    justify-content: start;
-  }
-
-  .flex2 {
-    justify-content: start;
-  }
-  .flex-text {
-    display: flex;
-    margin-bottom: 28px;
-    margin-left: 40px;
-  }
-
-  .text-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 24px;
-  }
-
-  .grid img {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-  }
-
-  .grid-item {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 45px;
-    border-radius: 4px;
-    box-shadow: 0 1.9px 5.6px 1.9px rgba(0, 0, 0, 0.15),
-      0 1.9px 3.8px 0 rgba(0, 0, 0, 0.3);
-    background-color: white;
-    height: 169px;
-    width: 192px;
-    justify-content: center;
   }
 
   .name-networks {
     flex-grow: 0;
-    margin: 12px -5px 0px;
+    margin: 5px 0 0;
+    width: 100%;
     font-family: Nunito;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.2;
+    line-height: 1.09;
     letter-spacing: normal;
     text-align: center;
     color: #000;
   }
 
-  .box-paragraph p {
-    width: 688px;
-    height: 79px;
-    flex-grow: 0;
-    font-family: Nunito;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: 0.08px;
-    text-align: left;
-    color: #000;
-    margin: 16px 0px 31px;
-    padding-left: 40px;
-  }
-
-  .box-paragraph summary {
-    font-family: Nunito;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: -0.23px;
-    text-align: left;
-    color: #000;
-  }
-
-  #network-desktop {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 36px;
-  }
-
-  #network-mobile > a {
+  #networks {
     display: flex;
     flex-direction: column;
+    margin-left: calc(100% / 2 - 344px);
   }
-
-  #network-desktop > a:hover {
-    color: grey;
-    text-decoration: none;
+  .image-box-desktop {
+    width: 546px;
+    height: 240px;
+    margin-left: 100px;
+    margin-top: 104px;
+    margin-bottom: 80px;
   }
-
-  .box-network {
-    margin-top: 50px;
-  }
-
   .content {
-    padding-bottom: 28px;
-  }
-
-  #d-version {
-    margin-top: 45px;
-  }
-
-  .box-paragraph h4 {
-    letter-spacing: 0.04px;
-    margin-bottom: 24px;
-  }
-
-  .box-network h4 {
-    margin-top: 23px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: 0.04px;
+    display: flex;
+    width: 100%;
+    padding-bottom: 20px;
+    padding-top: 0px;
   }
 
   .footer {
-    padding-bottom: 24px;
+    display: flex;
     align-items: center;
-    display: flex;
     flex-direction: column;
-  }
-
-  .footer .footer-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .box-column div {
-    justify-content: center;
-  }
-
-  #contact-us {
     width: 100%;
-    text-align: left;
-    margin-bottom: 8px;
-    font-size: 17px;
+    padding-top: 32px;
+  }
+
+  .logo-text {
+    display: flex;
+    padding: 0px;
+    align-self: center;
+  }
+
+  #d-version {
+    margin-top: 0px;
+  }
+
+  .info-icon {
+    padding-left: 55px;
+  }
+  .box-social-media {
+    width: 50%;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  .footerTw {
+    width: 37.1px;
+    height: 35.1px;
+  }
+  .footerTl {
+    width: 35.1px;
+    height: 35.1px;
+  }
+  .footerGit {
+    width: 53.1px;
+    height: 46.1px;
+  }
+  .footerLi {
+    width: 47.6px;
+    height: 45.9px;
+  }
+
+  .edeniaLogo {
+    width: 154.6px;
+    height: 25.6px;
+  }
+
+  .contact-us p {
+    width: 550px;
+    height: 64px;
+    margin: 0 0 16px;
+    font-family: Nunito;
+    font-size: 23.1px;
     font-weight: 600;
     font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.06px;
-  }
-
-  .box-social-media {
-    width: 55%;
-    margin-top: 28.6px;
-    align-items: center;
-  }
-
-  .eos-costa-rica {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: 0.14px;
+    text-align: center;
+    color: #000;
   }
 
   .eos-costa-rica h4 {
+    width: 230px;
+    height: 21.2px;
     flex-grow: 0;
-    margin: -26px 0 -5.1px;
+    margin: 0 0 1.9px;
     font-family: Nunito;
     font-size: 11.8px;
     font-weight: normal;
@@ -882,68 +874,9 @@ p {
     color: var(--colors-3-text-primary);
   }
 
-  .contact-us p {
-    width: 507.3px;
-    height: 64px;
-    flex-grow: 0;
-    margin: 0 0 9.1px;
-    font-family: Nunito;
-    font-size: 23.1px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.38;
-    letter-spacing: 0.08px;
-    text-align: center;
-    color: #000;
-  }
-
-  .project-by {
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.06px;
-    margin: 0;
-  }
-
-  .copyright {
+  .eos-costa-rica {
     display: flex;
-    justify-content: center;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: right;
-    letter-spacing: 0.3px;
-    color: #000000;
-  }
-
-  .logo-text {
-    display: flex;
-    padding: 10px;
-    align-self: center;
     flex-direction: column;
-  }
-
-  .footerTw {
-    height: 29px;
-    width: 34px;
-  }
-  .footerTl {
-    height: 30px;
-    width: 37px;
-  }
-  .footerGit {
-    height: 38px;
-    width: 41px;
-  }
-  .footerLi {
-    height: 37px;
-    width: 40px;
-  }
-
-  .edeniaLogo {
-    height: 26px;
-    width: 156px;
   }
 
   #copyright {
@@ -959,31 +892,41 @@ p {
     text-align: center;
     color: #000;
   }
+
+  .info-icon > img {
+    width: 30px;
+  }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1919px) {
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
   .section-wrapper {
     width: 100%;
   }
   .header {
     display: flex;
-    width: 100%;
-    max-width: 1800px;
     z-index: 2;
     position: relative;
     height: 680px;
+    width: 1140px;
     background-image: url(./images/bgimage.png);
-    background-size: 600px 680px;
-    background-position: 90%;
+    background-size: 664px 663px;
+    background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
+    margin-top: 70px;
+    margin-left: calc(100% / 2 - 570px);
   }
 
   #middle-logo {
     width: 364px;
     height: 160px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  details summary:after {
+    margin-right: calc(100% / 2 - 670px);
+    top: 0px;
   }
 
   #bg-image-mobile {
@@ -1031,7 +974,7 @@ p {
   }
   .flex p {
     width: 350.5px;
-    height: 46.4px;
+    height: 32px;
     flex-grow: 0;
     font-family: Nunito;
     font-size: 16px;
@@ -1046,24 +989,24 @@ p {
 
   .grid {
     display: flex;
-    grid-column-gap: 14px;
-    justify-content: center;
+    grid-column-gap: 18px;
+    padding-bottom: 30px;
   }
 
   .grid img {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width: 55%;
-    height: 70%;
+    width: 90.7px;
+    height: 90.7px;
   }
 
   .grid-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 134px;
-    height: 134px;
+    width: 173.9px;
+    height: 153.1px;
     flex-grow: 0;
     padding: 12px;
     border-radius: 3.7px;
@@ -1097,7 +1040,7 @@ p {
 
   .box-paragraph summary {
     font-family: Nunito;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1105,17 +1048,17 @@ p {
     letter-spacing: -0.54px;
     text-align: left;
     color: #000;
+    padding-left: calc(100% / 2 - 630px);
   }
 
   .flex-text {
     display: flex;
     margin-bottom: 28px;
-    margin-left: 55px;
-    margin-top: 35px;
   }
   .box-paragraph p {
-    width: 83%;
-    margin: 40.8px 57px 115px;
+    margin: 40.8px 0px 115px;
+    margin-left: calc(100% / 2 - 570px);
+    width: 1140px;
     font-family: Nunito;
     font-size: 19px;
     font-weight: normal;
@@ -1169,7 +1112,7 @@ p {
     margin: 5px 0 0;
     width: 100%;
     font-family: Nunito;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1182,6 +1125,7 @@ p {
   #networks {
     display: flex;
     flex-direction: column;
+    margin-left: calc(100% / 2 - 570px);
   }
   .image-box-desktop {
     width: 546px;
@@ -1194,6 +1138,7 @@ p {
     display: flex;
     width: 100%;
     padding-bottom: 20px;
+    padding-top: 20px;
   }
 
   .footer {
@@ -1201,7 +1146,7 @@ p {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    padding-top: 0px;
+    padding-top: 32px;
   }
 
   .logo-text {
@@ -1211,7 +1156,6 @@ p {
   }
 
   #d-version {
-    margin-left: 15px;
     margin-top: 0px;
   }
 
@@ -1232,11 +1176,11 @@ p {
   }
   .footerGit {
     height: 52px;
-    width: 57px;
+    width: 52px;
   }
   .footerLi {
     height: 50px;
-    width: 53px;
+    width: 50px;
   }
 
   .edeniaLogo {
@@ -1303,25 +1247,29 @@ p {
     display: flex;
     z-index: 2;
     position: relative;
-    height: 780px;
-    max-width: 1800px;
+    height: 850px;
     background-image: url(./images/bgimage.png);
-    background-size: 800px 780px;
+    background-size: 846px 850px;
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
-    margin-left: calc(100% / 2 - 900px);
+    width: 1542px;
+    margin-left: calc(100% / 2 - 771px);
+    margin-top: 104px;
   }
 
   .box-network {
-    max-width: 1800px;
-    margin-left: calc(100% / 2 - 900px);
+    width: 1542px;
   }
   #middle-logo {
     width: 546px;
     height: 240px;
     margin-top: 30px;
     margin-bottom: 30px;
+  }
+
+  #networks {
+    margin-left: calc(100% / 2 - 771px);
   }
 
   #bg-image-mobile {
@@ -1331,14 +1279,13 @@ p {
   .text-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
   }
   .box-paragraph-text > p {
-    width: 500px;
+    width: 550px;
     height: 96px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     font-family: Nunito;
-    font-size: 45px;
+    font-size: 57px;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
@@ -1349,12 +1296,12 @@ p {
   }
 
   .flex p {
-    width: 700px;
+    width: 500px;
     height: 71.3px;
     flex-grow: 0;
     margin: 0 0 0 6.5px;
     font-family: Nunito;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1390,7 +1337,7 @@ p {
     flex-grow: 0;
     margin: 6px 0 6px 8.9px;
     font-family: Nunito;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1406,19 +1353,13 @@ p {
 
   .image-box-desktop {
     display: flex;
+    margin-bottom: 60px;
   }
 
   .info-icon {
     display: flex;
     align-items: center;
     padding-left: 16px;
-  }
-
-  details summary:after {
-    content: url(./images/chevron-down.png);
-    position: absolute;
-    right: 24px;
-    transform: rotate(180deg);
   }
 
   .image-box-desktop {
@@ -1429,7 +1370,7 @@ p {
   }
 
   .myButton {
-    width: 439px;
+    width: 506px;
     height: 91px;
     display: flex;
     flex-direction: row;
@@ -1451,10 +1392,9 @@ p {
     top: 1px;
   }
   .visit-text {
-    height: 59px;
     flex-grow: 0;
     font-family: Nunito;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -1482,7 +1422,6 @@ p {
   .grid {
     display: flex;
     grid-column-gap: 34px;
-    justify-content: center;
   }
 
   .grid img {
@@ -1497,8 +1436,8 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 240px;
-    height: 240px;
+    width: 237.7px;
+    height: 209.2px;
     flex-grow: 0;
     padding: 19.8px 19.8px 18.6px;
     border-radius: 5px;
@@ -1532,13 +1471,13 @@ p {
     content: url(./images/chevron-down.png);
     position: absolute;
     transform: rotate(180deg);
-    margin-right: calc(100% / 2 - 1000px);
+    margin-right: calc(100% / 2 - 900px);
   }
 
   .box-paragraph summary {
     width: 100%;
     font-family: Nunito;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -1546,15 +1485,15 @@ p {
     letter-spacing: -0.54px;
     text-align: left;
     color: #000;
-    padding-left: calc(100% / 2 - 1000px);
+    padding-left: calc(100% / 2 - 800px);
   }
 
   .box-paragraph p {
-    width: 80%;
+    width: 1542px;
     height: 250px;
-    margin: 36.8px 106px 90px 250px;
+    margin: 36.8px 106px 0px 250px;
     font-family: Nunito;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -1562,6 +1501,7 @@ p {
     letter-spacing: 0.18px;
     text-align: left;
     color: #000;
+    margin-left: calc(100% / 2 - 771px);
   }
 
   .content {
@@ -1575,7 +1515,7 @@ p {
     flex-direction: column;
     padding-left: calc(100% / 2 - 900px);
     padding-right: calc(100% / 2 - 900px);
-    padding-top: 0px;
+    padding-top: 32px;
   }
 
   .logo-text {

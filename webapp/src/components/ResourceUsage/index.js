@@ -1,31 +1,12 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { RadialBarChart, RadialBar, PolarAngleAxis } from 'recharts'
 
 const ResourceUsage = ({ percent, title, label }) => {
   const theme = useTheme()
-  const [circleSize, setCircleSize] = useState(250)
-  const smallRadial = useMediaQuery(theme.breakpoints.up('lg'))
-  const bigRadial = useMediaQuery(theme.breakpoints.up('xl'))
-
-  useEffect(() => {
-    if (bigRadial) {
-      setCircleSize(250)
-
-      return
-    }
-
-    if (smallRadial) {
-      setCircleSize(180)
-
-      return
-    }
-
-    setCircleSize(250)
-  }, [smallRadial, bigRadial])
+  const circleSize = 225
 
   return (
     <RadialBarChart

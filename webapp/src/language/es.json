@@ -52,7 +52,8 @@
     "1 Year": "1 Año",
     "footer1": "Esta aplicación es un bien Público Comunitario",
     "footer2": "Desarrollado por Edenia",
-    "bugRequest": "Reportar un problema / Solicitar una característica "
+    "bugRequest": "Reportar un problema / Solicitar una característica ",
+    "moreInfo": "Más Información"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -221,7 +222,6 @@
     "account": "Cuenta",
     "website": "Sitio Web",
     "votes": "Votos",
-    "moreinfo": "More info",
     "rewards": "Recompensas",
     "country": "País",
     "eosRate": "EOS RATE",

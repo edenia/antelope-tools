@@ -1,25 +1,11 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
-import Tooltip from '../../components/Tooltip'
 import NodeCard from '../../components/NodeCard'
+import MoreInfoModal from '../../components/MoreInfoModal'
 
 const Nodes = ({ nodes, producer, t, classes }) => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [selected, setSelected] = useState(null)
-
-  const handlePopoverOpen = (target, node) => {
-    setAnchorEl(target)
-    setSelected(node)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-    setSelected(null)
-  }
-
   if (!nodes?.length) {
     return (
       <div className={classes.nodes}>
@@ -42,13 +28,6 @@ const Nodes = ({ nodes, producer, t, classes }) => {
                 producer?.owner
               }-${node?.node_type?.toString()}-${index}`}
             >
-              <Tooltip
-                anchorEl={anchorEl}
-                open={anchorEl !== null && node === selected}
-                onClose={handlePopoverClose}
-              >
-                <NodeCard node={node} producer={producer} />
-              </Tooltip>
               <div className={classes.flex}>
                 <Typography
                   variant="body1"
@@ -56,12 +35,9 @@ const Nodes = ({ nodes, producer, t, classes }) => {
                 >
                   {node.name || node?.node_type?.toString() || 'node'}{' '}
                 </Typography>
-                <InfoOutlinedIcon
-                  className={classes.clickableIcon}
-                  onClick={(event) => {
-                    handlePopoverOpen(event.target, node)
-                  }}
-                />
+                <MoreInfoModal>
+                  <NodeCard node={node} producer={producer} />
+                </MoreInfoModal>
               </div>
             </div>
           ))}

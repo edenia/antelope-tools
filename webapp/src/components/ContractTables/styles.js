@@ -1,6 +1,6 @@
 export default (theme) => ({
   form: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(4),
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
@@ -9,10 +9,14 @@ export default (theme) => ({
     display: 'block',
     width: '100%',
     minWidth: '180px',
-    marginBottom: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: '15%',
       marginRight: theme.spacing(2),
+    },
+  },
+  refreshButton: {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: `${theme.spacing(4)} !important`,
     },
   },
   tableCell: {
@@ -21,10 +25,12 @@ export default (theme) => ({
   loadMore: {
     display: 'flex',
     justifyContent: 'center',
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
   },
   tableEmpty: {
-    width: '150px !important',
+    [theme.breakpoints.up('md')]: {
+      width: '150px !important',
+    },
     display: 'inline-block',
   },
 })

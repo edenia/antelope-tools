@@ -256,7 +256,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
       })}
       
       {action && (
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <Button variant="contained" color="primary" onClick={handleSubmit} >
           {t('executeTransaction')}
         </Button>
       )}

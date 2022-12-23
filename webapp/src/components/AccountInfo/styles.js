@@ -27,6 +27,8 @@ export default (theme) => ({
   keyItem: {
     display: 'flex',
     textTransform: 'capitalize',
+    justifyContent: 'space-between',
+    minWidth: '100px',
   },
   keyIcon: {
     marginRight: theme.spacing(1),
@@ -61,34 +63,38 @@ export default (theme) => ({
     [theme.breakpoints.up('sm')]: {
       '& .resourceUsage': {
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
       },
     },
     [theme.breakpoints.up('md')]: {
       '& .columTitle': {
         marginLeft: theme.spacing(2),
       },
-      '& .identicon': {
-        alignItems: 'end',
-      },
       '& .resourceUsage': {
-        justifyContent: 'space-between',
-        borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-        paddingLeft: theme.spacing(2),
+        justifyContent: 'center',
+        paddingLeft: theme.spacing(2),     
+        paddingRight: theme.spacing(2),
         height: '100%',
       },
       '& .keys': {
-        borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
         paddingLeft: theme.spacing(2),
         height: '100%',
       },
     },
     [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',
+      paddingBottom: theme.spacing(4),
       '& .identicon': {
         alignItems: 'center',
         width: 200,
       },
     },
+  },
+  border: {
+    [theme.breakpoints.up('lg')]: {
+      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+    }
   },
   iconBorder: {
     backgroundColor: '#f0f0f0',
