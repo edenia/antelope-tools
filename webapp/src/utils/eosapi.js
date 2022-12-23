@@ -5,8 +5,8 @@ import { eosConfig } from '../config'
 export const ENDPOINTS_ERROR =
   'Each endpoint failed when trying to execute the function'
 
-const waitRequestInterval = 300000
-const timeout = 5000
+const waitRequestInterval = 120000
+const timeout = 15000
 const eosApis = eosConfig.endpoints.map(endpoint => {
   return {
     api: EosApi({
