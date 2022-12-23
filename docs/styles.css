@@ -1001,7 +1001,7 @@ p {
     letter-spacing: -0.68px;
     text-align: left;
     color: #000;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
   }
 
   .flex-text p {
@@ -1193,7 +1193,7 @@ p {
   .content {
     display: flex;
     width: 100%;
-    padding-top: 110px;
+    padding-bottom: 20px;
   }
 
   .footer {
@@ -1201,6 +1201,7 @@ p {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    padding-top: 0px;
   }
 
   .logo-text {
@@ -1330,6 +1331,7 @@ p {
   .text-container {
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
   }
   .box-paragraph-text > p {
     width: 500px;
@@ -1562,12 +1564,18 @@ p {
     color: #000;
   }
 
+  .content {
+    padding-top: 40px;
+    padding-bottom: 16px;
+  }
+
   .footer {
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-left: calc(100% / 2 - 900px);
     padding-right: calc(100% / 2 - 900px);
+    padding-top: 0px;
   }
 
   .logo-text {
