@@ -34,11 +34,11 @@ const getProducers = async () => {
   producers = producers
     .filter(producer => !!producer.is_active)
     .sort((a, b) => {
-      if (a.total_votes < b.total_votes) {
+      if (parseInt(a.total_votes) > parseInt(b.total_votes)) {
         return -1
       }
 
-      if (a.total_votes > b.total_votes) {
+      if (parseInt(a.total_votes) < parseInt(b.total_votes)) {
         return 1
       }
 
@@ -46,11 +46,12 @@ const getProducers = async () => {
     })
 
   const rewards = await getExpectedRewards(producers, totalVoteWeight)
+  const nonPaidStandby = { vote_rewards: 0, block_rewards: 0, total_rewards: 0 }
 
   producers = producers.map((producer, index) => {
     return {
       owner: producer.owner,
-      ...(rewards[producer.owner] || {}),
+      ...(rewards[producer.owner] || nonPaidStandby),
       total_votes: producer.total_votes,
       total_votes_percent: producer.total_votes / totalVoteWeight,
       total_votes_eos: getVotesInEOS(producer.total_votes),
@@ -132,7 +133,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
   let undistributedVoteRewardPercent = 0
 
   producers.forEach(producer => {
-    const producerVotePercent = producer.total_votes / totalVotes
+    const producerVotePercent = parseFloat(producer.total_votes) / totalVotes
 
     if (producerVotePercent > minimumPercenToGetVoteReward) {
       distributedVoteRewardPercent += producerVotePercent
@@ -141,52 +142,46 @@ const getExpectedRewards = async (producers, totalVotes) => {
     }
   })
 
-  return producers
-    .sort((a, b) => {
-      if (parseInt(a.total_votes) > parseInt(b.total_votes)) {
-        return -1
-      }
+  let producersRewards = []
+  for (const i in producers) {
+    const producer = producers[i]
+    const isBlockProducer = i < 21
+    const producerVotePercent = parseFloat(producer.total_votes) / totalVotes
 
-      if (parseInt(a.total_votes) < parseInt(b.total_votes)) {
-        return 1
-      }
+    let expectedVoteReward = 0
+    let expectedBlockReward = 0
 
-      return 0
-    })
-    .map((producer, i) => {
-      const isBlockProducer = i < 21
-      const producerVotePercent = producer.total_votes / totalVotes
-      let expectedVoteReward = 0
-      let expectedBlockReward = 0
+    if (producerVotePercent > minimumPercenToGetVoteReward) {
+      const producerDistributionPercent =
+        producerVotePercent / distributedVoteRewardPercent // calculates the percentage that the producer represents of the distributed vote reward percent
 
-      if (producerVotePercent > minimumPercenToGetVoteReward) {
-        const producerDistributionPercent =
-          producerVotePercent / distributedVoteRewardPercent // calculates the percentage that the producer represents of the distributed vote reward percent
+      const producerUndistributedRewardPercent =
+        producerDistributionPercent * undistributedVoteRewardPercent //  calculate the percentage that corresponds to the producer of the undistributed vote reward percent
 
-        const producerUndistributedRewardPercent =
-          producerDistributionPercent * undistributedVoteRewardPercent //  calculate the percentage that corresponds to the producer of the undistributed vote reward percent
-
-        expectedVoteReward =
-          inflation *
-          voteReward *
-          (producerUndistributedRewardPercent + producerVotePercent)
-      }
+      expectedVoteReward =
+        inflation *
+        voteReward *
+        (producerUndistributedRewardPercent + producerVotePercent)
 
       if (isBlockProducer) {
         expectedBlockReward = inflation * blockReward * (1 / 21)
       }
 
-      return {
+      producersRewards.push({
         producer: producer.owner,
         vote_rewards: expectedVoteReward,
         block_rewards: expectedBlockReward,
         total_rewards: expectedVoteReward + expectedBlockReward
-      }
-    })
-    .reduce(
-      (rewards, { producer, ...args }) => ({ ...rewards, [producer]: args }),
-      {}
-    )
+      })
+    } else {
+      break
+    }
+  }
+
+  return producersRewards.reduce(
+    (rewards, { producer, ...args }) => ({ ...rewards, [producer]: args }),
+    {}
+  )
 }
 
 const getBPJson = async (producerUrl, chainUrl) => {
@@ -234,14 +229,13 @@ const getChains = async producerUrl => {
 
 const getProducerHealthStatus = bpJson => {
   if (!bpJson || !Object.keys(bpJson).length) return []
-  
+
   const healthStatus = []
 
   healthStatus.push({
     name: 'bpJson',
     valid: true
   })
-
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name
