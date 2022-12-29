@@ -41,6 +41,7 @@ module.exports = {
   },
   knownNetworks: {
     lacchain: 'lacchain',
+    libre: 'libre',
     telos: 'telos',
     wax: 'wax'
   },

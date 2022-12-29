@@ -47,15 +47,24 @@ const getEndpoints = (nodes) => {
 }
 
 const getExpectedRewards = async (producers, totalVotes) => {
-  let rewards
+  let rewards = []
 
   switch (eosConfig.networkName) {
+    case eosConfig.knownNetworks.libre:
+      rewards = await getLibreRewards(producers)
+      break
     case eosConfig.knownNetworks.telos:
       rewards = await getTelosRewards(producers)
-    default:
-      const blockReward = eosConfig.networkName === eosConfig.knownNetworks.wax ? 1 : 0.25 // reward for each block produced
+      break
+    default: // reward for each block produced
+      let blockReward = 0.25
+
+      if (eosConfig.networkName === eosConfig.knownNetworks.wax) {
+        blockReward = 1 // in wax all rewards are from the blocks produced
+      }
 
       rewards = await getEOSIORewards(producers, totalVotes, blockReward)
+      break
   }
 
   return rewards.reduce(
@@ -64,31 +73,55 @@ const getExpectedRewards = async (producers, totalVotes) => {
   )
 }
 
-const getTelosRewards = async producers => {
-  const eosPrice = (await getEOSPrice()) || 0
-  const validatorRewards = Math.max(8.34 * eosPrice ** -0.516 * 48, 28000)
+const getLibrePerBlock = () => {
+  const secondsPerYear = 86400 * 365
+  const activatedTime = new Date('2022-07-04T18:58:09.000')
+  const timePassed = (new Date() - activatedTime) / 1000
 
-  let producersRewards = []
-  for (const i in producers) {
-    const producer = producers[i]
-    let totalRewards = 0
-    if (i < 21) {
-      totalRewards = validatorRewards
-    } else if (i < 42) {
-      totalRewards = validatorRewards / 2
-    } else {
-      break
+  // two halvings at six months
+  return (
+    4 >>
+    (Boolean(timePassed > secondsPerYear) +
+      Boolean(timePassed > secondsPerYear / 2))
+  )
+}
+
+const getLibreRewards = async producers => {
+  const secondsPerDay = 86400
+  const round = 12
+  const estimatedBlocks = (secondsPerDay / round / 21) * 24
+  const rewardPerBlock = getLibrePerBlock()
+  let blockProducers = producers.slice(0, 21)
+
+  return blockProducers.map(producer => {
+    const totalRewards = estimatedBlocks * rewardPerBlock
+
+    return {
+      producer: producer.owner,
+      vote_rewards: 0,
+      block_rewards: totalRewards,
+      total_rewards: totalRewards
     }
+  })
+}
 
-    producersRewards.push({
+const getTelosRewards = async producers => {
+  const telosPrice = (await getEOSPrice()) || 0
+  const estimatedRewards = 8.34 * telosPrice ** -0.516 // approximate rewards per half hour
+  const producerRewards = Math.min(estimatedRewards * 48, 28000)
+
+  let topProducers = producers.slice(0, 42)
+
+  return topProducers.map((producer, i) => {
+    let totalRewards = i < 21 ? producerRewards : producerRewards / 2
+
+    return {
       producer: producer.owner,
       vote_rewards: totalRewards * 0.75,
       block_rewards: totalRewards * 0.25,
       total_rewards: totalRewards
-    })
-  }
-
-  return producersRewards
+    }
+  })
 }
 
 const getEOSIORewards = async (producers, totalVotes, blockReward) => {
@@ -109,7 +142,8 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
   }
 
   const voteReward = 1 - blockReward // reward according to producer total_votes
-  const minimumPercenToGetVoteReward = 100 / (inflation * (voteReward || blockReward)) // calculate the minimum percent to get vote reward
+  const minimumPercenToGetVoteReward =
+    100 / (inflation * (voteReward || blockReward)) // calculate the minimum percent to get vote reward
 
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
@@ -125,6 +159,7 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
   })
 
   let producersRewards = []
+
   for (const i in producers) {
     const producer = producers[i]
     const isBlockProducer = i < 21
@@ -167,6 +202,8 @@ const getVotes = votes => {
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.telos:
       return parseFloat(votes)
+    case eosConfig.knownNetworks.libre:
+      return parseFloat(votes) / 10000
     case eosConfig.knownNetworks.wax:
       return getEOSIOVotes(votes, 13) / 10 ** 8
     default:
@@ -192,7 +229,7 @@ const getEOSPrice = async () => {
   `
   const data = await hasuraUtil.request(query)
 
-  return data?.setting?.token_price 
+  return data?.setting?.token_price
 }
 
 const jsonParse = (string) => {
