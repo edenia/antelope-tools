@@ -57,12 +57,6 @@ const getExpectedRewards = async (producers, totalVotes) => {
       rewards = await getTelosRewards(producers)
       break
     default: // reward for each block produced
-      let blockReward = 0.25
-
-      if (eosConfig.networkName === eosConfig.knownNetworks.wax) {
-        blockReward = 1 // in wax all rewards are from the blocks produced
-      }
-
       rewards = await getEOSIORewards(producers, totalVotes, blockReward)
       break
   }
@@ -139,6 +133,12 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
       parseInt(systemData[eosConfig.rewardsToken].supply.split(' ')[0]) /
       100 /
       365
+  }
+
+  let blockReward = 0.25 // reward for each block produced
+
+  if (eosConfig.networkName === eosConfig.knownNetworks.wax) {
+    blockReward = 1 // in wax all rewards are from the blocks produced
   }
 
   const voteReward = 1 - blockReward // reward according to producer total_votes
