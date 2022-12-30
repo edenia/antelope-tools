@@ -86,14 +86,14 @@ const getLibrePerBlock = () => {
   )
 }
 
-const getLibreRewards = async producers => {
+const getLibreRewards = async (producers) => {
   const secondsPerDay = 86400
   const round = 12
   const estimatedBlocks = (secondsPerDay / round / 21) * 24
   const rewardPerBlock = getLibrePerBlock()
-  let blockProducers = producers.slice(0, 21)
+  const blockProducers = producers.slice(0, 21)
 
-  return blockProducers.map(producer => {
+  return blockProducers.map((producer) => {
     const totalRewards = estimatedBlocks * rewardPerBlock
 
     return {
@@ -105,15 +105,15 @@ const getLibreRewards = async producers => {
   })
 }
 
-const getTelosRewards = async producers => {
+const getTelosRewards = async (producers) => {
   const telosPrice = (await getEOSPrice()) || 0
   const estimatedRewards = 8.34 * telosPrice ** -0.516 // approximate rewards per half hour
   const producerRewards = Math.min(estimatedRewards * 48, 28000)
 
-  let topProducers = producers.slice(0, 42)
+  const topProducers = producers.slice(0, 42)
 
   return topProducers.map((producer, i) => {
-    let totalRewards = i < 21 ? producerRewards : producerRewards / 2
+    const totalRewards = i < 21 ? producerRewards : producerRewards / 2
 
     return {
       producer: producer.owner,
@@ -148,7 +148,7 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
   let distributedVoteRewardPercent = 0
   let undistributedVoteRewardPercent = 0
 
-  producers.forEach(producer => {
+  producers.forEach((producer) => {
     const producerVotePercent = parseFloat(producer.total_votes) / totalVotes
 
     if (producerVotePercent > minimumPercenToGetVoteReward) {
@@ -158,7 +158,7 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
     }
   })
 
-  let producersRewards = []
+  const producersRewards = []
 
   for (const i in producers) {
     const producer = producers[i]
@@ -198,7 +198,7 @@ const getEOSIORewards = async (producers, totalVotes, blockReward) => {
   return producersRewards
 }
 
-const getVotes = votes => {
+const getVotes = (votes) => {
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.telos:
       return parseFloat(votes)
