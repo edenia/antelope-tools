@@ -57,7 +57,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
       rewards = await getTelosRewards(producers)
       break
     default: // reward for each block produced
-      rewards = await getEOSIORewards(producers, totalVotes, blockReward)
+      rewards = await getEOSIORewards(producers, totalVotes)
       break
   }
 
@@ -118,7 +118,7 @@ const getTelosRewards = async (producers) => {
   })
 }
 
-const getEOSIORewards = async (producers, totalVotes, blockReward) => {
+const getEOSIORewards = async (producers, totalVotes) => {
   const systemData = await eosUtil.getCurrencyStats({
     symbol: eosConfig.rewardsToken,
     code: 'eosio.token'
