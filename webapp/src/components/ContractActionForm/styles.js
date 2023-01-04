@@ -1,6 +1,6 @@
 export default (theme) => ({
   formControl: {
     width: '100%',
-    marginBottom: theme.spacing(4)
-  }
+    marginBottom: `${theme.spacing(4)} !important`,
+  },
 })

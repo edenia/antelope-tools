@@ -12,6 +12,7 @@ export default (theme) => ({
   },
   chip: {
     margin: theme.spacing(0.5),
+    marginLeft: `-${theme.spacing(0.5)}`,
   },
   bold: {
     fontWeight: 'bold',

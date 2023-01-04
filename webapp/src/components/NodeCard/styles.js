@@ -57,9 +57,17 @@ export default (theme) => ({
       marginLeft: theme.spacing(2),
     },
   },
-  buttonApis: {
+  keysContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '130px',
+    height: '32px',
+  },
+  keys: {
+    wordBreak: 'break-word',
+  },
+  buttonApis: {
     paddingTop: theme.spacing(2),
   }
 })

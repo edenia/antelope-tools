@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RicardianContract from '../RicardianContract'
 import ContractActions from '../ContractActions'
 import ContractTables from '../ContractTables'
+import MoreInfoModal from '../MoreInfoModal'
 import ResourceUsage from '../ResourceUsage'
 
 import styles from './styles'
@@ -104,7 +105,7 @@ const AccountInfo = ({
     }
     const keys = permissions.map((item) => ({
       label: item.perm_name,
-      value: item.required_auth?.keys[0]?.key || '-',
+      value: item.required_auth?.keys[0]?.key,
     }))
 
     setInfo({ ...account, ram, cpu, net, keys })
@@ -131,7 +132,7 @@ const AccountInfo = ({
                 {info.account_name || 'N/A'}
               </Typography>
             </div>
-            <div>
+            <div className={classes.border}>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
@@ -153,7 +154,7 @@ const AccountInfo = ({
                 />
               </div>
             </div>
-            <div>
+            <div className={classes.border}>
               <Typography variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
@@ -163,12 +164,16 @@ const AccountInfo = ({
                     <span key={`account-key-${key.label}`}>
                       <dt className={classes.keyItem}>
                         <Typography>{key.label}</Typography>
+                        {key.value ? (
+                          <MoreInfoModal>
+                            <Typography className={classes.keyLabel}>
+                              {key.value}
+                            </Typography>
+                          </MoreInfoModal>
+                        ) : (
+                          <p>-</p>
+                        )}
                       </dt>
-                      <dd>
-                        <Typography className={classes.keyLabel}>
-                          {key.value}
-                        </Typography>
-                      </dd>
                     </span>
                   ))}
                 </dl>
