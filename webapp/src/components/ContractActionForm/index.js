@@ -36,7 +36,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
     onSubmitAction({
       account: accountName,
       name: action,
-      data: payload
+      data: payload,
     })
   }
 
@@ -48,7 +48,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
 
     setPayload((prevValue) => ({
       ...prevValue,
-      [name]: value
+      [name]: value,
     }))
   }
 
@@ -193,7 +193,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
                 <InputAdornment position="end">
                   <Chip label={t('public_key')} />
                 </InputAdornment>
-              )
+              ),
             }}
           />
         )
@@ -211,7 +211,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
                 <InputAdornment position="end">
                   <Chip label={t('public_key')} />
                 </InputAdornment>
-              )
+              ),
             }}
           />
         )
@@ -229,7 +229,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
                 <InputAdornment position="end">
                   <Chip label={t(field.type)} />
                 </InputAdornment>
-              )
+              ),
             }}
           />
         )
@@ -254,14 +254,13 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
 
         return renderField(field, label)
       })}
-      
+
       {action && (
-        <Button variant="contained" color="primary" onClick={handleSubmit} >
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           {t('executeTransaction')}
         </Button>
       )}
     </>
-    
   )
 }
 
@@ -269,7 +268,7 @@ ContractActionForm.propTypes = {
   accountName: PropTypes.string,
   action: PropTypes.string,
   abi: PropTypes.any,
-  onSubmitAction: PropTypes.func
+  onSubmitAction: PropTypes.func,
 }
 
 export default ContractActionForm

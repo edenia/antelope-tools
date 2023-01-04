@@ -54,7 +54,7 @@ Tooltip.propTypes = {
   children: PropTypes.node,
   anchorOrigin: PropTypes.object,
   closeOnMouseLeave: PropTypes.bool,
-  hideCloseButton: PropTypes.bool
+  hideCloseButton: PropTypes.bool,
 }
 
 Tooltip.defaultProps = {

@@ -73,7 +73,7 @@ export default (theme) => ({
       },
       '& .resourceUsage': {
         justifyContent: 'center',
-        paddingLeft: theme.spacing(2),     
+        paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(2),
         height: '100%',
       },
@@ -94,7 +94,7 @@ export default (theme) => ({
   border: {
     [theme.breakpoints.up('lg')]: {
       borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-    }
+    },
   },
   iconBorder: {
     backgroundColor: '#f0f0f0',

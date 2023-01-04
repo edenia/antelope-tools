@@ -25,7 +25,7 @@ const MoreInfoModal = ({ hideCloseButton, children }) => {
 
   return (
     <>
-      <MUITooltip title={t('moreInfo')} arrow placement="right" >
+      <MUITooltip title={t('moreInfo')} arrow placement="right">
         <InfoOutlinedIcon
           className={classes.clickableIcon}
           onClick={(e) => {

@@ -57,7 +57,7 @@ const ResourceUsage = ({ percent, title, label }) => {
 ResourceUsage.propTypes = {
   percent: PropTypes.number,
   title: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
 }
 
 export default memo(ResourceUsage)
