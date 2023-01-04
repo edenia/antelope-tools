@@ -24,6 +24,8 @@ actions:
     definition:
       kind: ""
       handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/get-eos-rate'
+    permissions:
+      - role: guest
   - name: getProducersInfo
     definition:
       kind: synchronous
