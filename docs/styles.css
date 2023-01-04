@@ -605,7 +605,7 @@ p {
     letter-spacing: -0.23px;
     text-align: left;
     color: #000;
-    margin: 22px 0px 16px 0px;
+    margin: 22px 0px 16px;
   }
 
   .flex-text p {
@@ -747,7 +747,7 @@ p {
     box-shadow: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
     border: solid 2px #1ccbff;
     background-color: #d6f5ff;
-    margin: 22px 0 64px 0;
+    margin: 22px 0 64px;
   }
   .myButton:hover {
     text-decoration: none;
