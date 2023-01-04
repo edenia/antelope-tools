@@ -1,4 +1,4 @@
-const { axiosUtil, eosUtil, sequelizeUtil } = require('../utils')
+const { axiosUtil, eosUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const getProducers = async () => {
@@ -34,26 +34,27 @@ const getProducers = async () => {
   producers = producers
     .filter(producer => !!producer.is_active)
     .sort((a, b) => {
-      if (a.total_votes < b.total_votes) {
+      if (parseInt(a.total_votes) > parseInt(b.total_votes)) {
         return -1
       }
 
-      if (a.total_votes > b.total_votes) {
+      if (parseInt(a.total_votes) < parseInt(b.total_votes)) {
         return 1
       }
 
       return 0
     })
 
-  const rewards = await getExpectedRewards(producers, totalVoteWeight)
+  const rewards = await producerUtil.getExpectedRewards(producers, totalVoteWeight)
+  const nonPaidStandby = { vote_rewards: 0, block_rewards: 0, total_rewards: 0 }
 
   producers = producers.map((producer, index) => {
     return {
       owner: producer.owner,
-      ...(rewards[producer.owner] || {}),
+      ...(rewards[producer.owner] || nonPaidStandby),
       total_votes: producer.total_votes,
       total_votes_percent: producer.total_votes / totalVoteWeight,
-      total_votes_eos: getVotesInEOS(producer.total_votes),
+      total_votes_eos: producerUtil.getVotes(producer.total_votes),
       rank: index + 1,
       producer_key: producer.producer_key,
       url: producer.url,
@@ -107,88 +108,6 @@ const getBPJsons = async (producers = []) => {
   return topProducers.concat(producers.slice(eosConfig.eosTopLimit))
 }
 
-const getExpectedRewards = async (producers, totalVotes) => {
-  const systemData = await eosUtil.getCurrencyStats({
-    symbol: eosConfig.rewardsToken,
-    code: 'eosio.token'
-  })
-  let inflation = 0
-
-  if (
-    systemData[eosConfig.rewardsToken] &&
-    systemData[eosConfig.rewardsToken].supply
-  ) {
-    inflation =
-      parseInt(systemData[eosConfig.rewardsToken].supply.split(' ')[0]) /
-      100 /
-      365
-  }
-
-  const blockReward = 0.25 // reward for each block produced
-  const voteReward = 0.75 // reward according to producer total_votes
-  const minimumPercenToGetVoteReward = 100 / (inflation * voteReward) // calculate the minimum percent to get vote reward
-
-  let distributedVoteRewardPercent = 0
-  let undistributedVoteRewardPercent = 0
-
-  producers.forEach(producer => {
-    const producerVotePercent = producer.total_votes / totalVotes
-
-    if (producerVotePercent > minimumPercenToGetVoteReward) {
-      distributedVoteRewardPercent += producerVotePercent
-    } else {
-      undistributedVoteRewardPercent += producerVotePercent
-    }
-  })
-
-  return producers
-    .sort((a, b) => {
-      if (parseInt(a.total_votes) > parseInt(b.total_votes)) {
-        return -1
-      }
-
-      if (parseInt(a.total_votes) < parseInt(b.total_votes)) {
-        return 1
-      }
-
-      return 0
-    })
-    .map((producer, i) => {
-      const isBlockProducer = i < 21
-      const producerVotePercent = producer.total_votes / totalVotes
-      let expectedVoteReward = 0
-      let expectedBlockReward = 0
-
-      if (producerVotePercent > minimumPercenToGetVoteReward) {
-        const producerDistributionPercent =
-          producerVotePercent / distributedVoteRewardPercent // calculates the percentage that the producer represents of the distributed vote reward percent
-
-        const producerUndistributedRewardPercent =
-          producerDistributionPercent * undistributedVoteRewardPercent //  calculate the percentage that corresponds to the producer of the undistributed vote reward percent
-
-        expectedVoteReward =
-          inflation *
-          voteReward *
-          (producerUndistributedRewardPercent + producerVotePercent)
-      }
-
-      if (isBlockProducer) {
-        expectedBlockReward = inflation * blockReward * (1 / 21)
-      }
-
-      return {
-        producer: producer.owner,
-        vote_rewards: expectedVoteReward,
-        block_rewards: expectedBlockReward,
-        total_rewards: expectedVoteReward + expectedBlockReward
-      }
-    })
-    .reduce(
-      (rewards, { producer, ...args }) => ({ ...rewards, [producer]: args }),
-      {}
-    )
-}
-
 const getBPJson = async (producerUrl, chainUrl) => {
   const bpJsonUrl = `${producerUrl}/${chainUrl}`.replace(
     /(?<=:\/\/.*)((\/\/))/,
@@ -234,14 +153,13 @@ const getChains = async producerUrl => {
 
 const getProducerHealthStatus = bpJson => {
   if (!bpJson || !Object.keys(bpJson).length) return []
-  
+
   const healthStatus = []
 
   healthStatus.push({
     name: 'bpJson',
     valid: true
   })
-
   healthStatus.push({
     name: 'organization_name',
     valid: !!bpJson.org?.candidate_name
@@ -264,14 +182,6 @@ const getProducerHealthStatus = bpJson => {
   })
 
   return healthStatus
-}
-
-const getVotesInEOS = votes => {
-  const TIMESTAMP_EPOCH = 946684800
-  const date = Date.now() / 1000 - TIMESTAMP_EPOCH
-  const weight = date / (86400 * 7) / 52 // 86400 = seconds per day 24*3600
-
-  return parseFloat(votes) / 2 ** weight / 10000
 }
 
 const getProducersFromDB = async () => {

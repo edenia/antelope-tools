@@ -164,9 +164,7 @@ const RewardsDistribution = () => {
         className={classes.shadow}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        sx={{
-          pointerEvents: 'none',
-        }}
+        PaperProps={{ onMouseLeave: handlePopoverClose }}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'center',

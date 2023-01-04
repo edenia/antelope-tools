@@ -41,7 +41,8 @@
     "footer1": "This App is a Community Public Good",
     "footer2": "Developed by Edenia",
     "executeTransaction": "Execute Transaction",
-    "bugRequest": "Report a bug / Request a feature"
+    "bugRequest": "Report a bug / Request a feature",
+    "moreInfo": "More Info"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -215,7 +216,6 @@
     "account": "Account",
     "website": "Website",
     "votes": "Votes",
-    "moreinfo": "More info",
     "rewards": "Rewards",
     "country": "Country",
     "eosRate": "EOS RATE",

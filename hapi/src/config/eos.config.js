@@ -40,7 +40,10 @@ module.exports = {
     nodeTable: process.env.HAPI_EOS_BP_JSON_ON_CHAIN_TABLE2 || 'node'
   },
   knownNetworks: {
-    lacchain: 'lacchain'
+    lacchain: 'lacchain',
+    libre: 'libre',
+    telos: 'telos',
+    wax: 'wax'
   },
   rewardsToken: process.env.HAPI_REWARDS_TOKEN,
   eosRateUrl: process.env.HAPI_EOSRATE_GET_STATS_URL,

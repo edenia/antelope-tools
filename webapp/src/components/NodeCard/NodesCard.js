@@ -12,6 +12,7 @@ import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
+import MoreInfoModal from '../MoreInfoModal'
 
 import ShowInfo from './ShowInfo'
 import styles from './styles'
@@ -59,10 +60,12 @@ const NodesCard = ({ nodes }) => {
       <>
         <dt className={classes.bold}>{t('keys')}</dt>
         {Object.keys(keys).map((key, i) => (
-          <dd key={i}>
+          <div key={i} className={classes.keysContainer}>
             <p className={classes.bold}>{key}:</p>
-            <p className={classes.breakLine}>{keys[key]}</p>
-          </dd>
+            <MoreInfoModal>
+              <p className={classes.keys}>{keys[key]}</p>
+            </MoreInfoModal>
+          </div>
         ))}
       </>
     )
