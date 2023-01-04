@@ -81,6 +81,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
+          HAPI_EOS_API_NETWORK_NAME: telos
           HAPI_EOS_API_ENDPOINTS: '["https://telos.edenia.cloud","https://telos.api.eosnation.io","https://telos.greymass.com","https://telos.eosphere.io"]'
           HAPI_EOS_API_CHAIN_ID: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
