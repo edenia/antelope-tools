@@ -27,7 +27,7 @@ const callEosApi = async method => {
 
     try {
       const response = await callWithTimeout(method(eosApi.api), timeout)
-      let headBlockTime = response.head_block_time
+      const headBlockTime = response.head_block_time
 
       if (headBlockTime) {
         const diffBlockTimems = new Date() - new Date(headBlockTime)
