@@ -5,7 +5,8 @@ import { eosConfig } from '../config'
 export const ENDPOINTS_ERROR =
   'Each endpoint failed when trying to execute the function'
 
-const waitRequestInterval = 300000
+const waitRequestInterval = 120000
+const timeout = 15000
 const eosApis = eosConfig.endpoints.map(endpoint => {
   return {
     api: EosApi({
@@ -25,19 +26,15 @@ const callEosApi = async method => {
     if (diffTime < waitRequestInterval) continue
 
     try {
-      const response = await method(eosApi.api)
-      let headBlockTime = response.head_block_time
+      const response = await callWithTimeout(method(eosApi.api), timeout)
+      const headBlockTime = response.head_block_time
 
-      if (!headBlockTime) {
-        const info = await eosApi.api.getInfo({})
+      if (headBlockTime) {
+        const diffBlockTimems = new Date() - new Date(headBlockTime)
 
-        headBlockTime = info.head_block_time
-      }
-
-      const diffBlockTimems = new Date() - new Date(headBlockTime)
-
-      if (diffBlockTimems > eosConfig.syncToleranceInterval) {
-        throw new Error(`The endpoint ${eosApi.endpoint} is outdated`)
+        if (diffBlockTimems > eosConfig.syncToleranceInterval) {
+          throw new Error(`The endpoint ${eosApi.endpoint} is outdated`)
+        }
       }
 
       return response
@@ -55,6 +52,20 @@ const callEosApi = async method => {
   }
 
   throw new Error(ENDPOINTS_ERROR)
+}
+
+const callWithTimeout = async (promise, ms) => {
+  let timeoutID
+  const timeoutMessage = `timeout error: the endpoint took more than ${ms} ms to respond`
+  const timeoutPromise = new Promise((_resolve, reject) => {
+    timeoutID = setTimeout(() => reject(new Error(timeoutMessage)), ms)
+  })
+
+  return Promise.race([promise, timeoutPromise]).then((response) => {
+    clearTimeout(timeoutID)
+
+    return response
+  })
 }
 
 const getAbi = async account => {
