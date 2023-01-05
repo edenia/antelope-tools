@@ -46,7 +46,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'telos'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Telos Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/telos.png'
-          REACT_APP_EOS_API_HOSTS: '[\"telos.edenia.cloud\",\"telos.api.eosnation.io\",\"telos.greymass.com\",\"telos.eosphere.io\"]'
+          REACT_APP_EOS_API_HOSTS: '[\"telos.greymass.com\",\"telos.api.eosnation.io\",\"telos.eosphere.io\",\"telos.caleos.io\",\"api.telosmadrid.io\",\"api.telos.telosgreen.com\",\"telos.eosrio.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11'
@@ -81,7 +81,8 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '["https://telos.edenia.cloud","https://telos.api.eosnation.io","https://telos.greymass.com","https://telos.eosphere.io"]'
+          HAPI_EOS_API_NETWORK_NAME: telos
+          HAPI_EOS_API_ENDPOINTS: '["https://telos.greymass.com","https://telos.eosphere.io","https://telos.api.eosnation.io"]'
           HAPI_EOS_API_CHAIN_ID: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}

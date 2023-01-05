@@ -215,3 +215,13 @@ export const ALL_NODES_QUERY = gql`
     }
   }
 `
+
+export const EOSRATE_STATS_QUERY = gql`
+  query {
+    eosrate_stats {
+      bp
+      average
+      ratings_cntr
+    }
+  }
+`

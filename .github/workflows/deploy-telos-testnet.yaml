@@ -81,6 +81,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
+          HAPI_EOS_API_NETWORK_NAME: telos
           HAPI_EOS_API_ENDPOINTS: '["https://testnet.telos.caleos.io","https://telos-testnet.eosphere.io","https://testnet.telosusa.io"]'
           HAPI_EOS_API_CHAIN_ID: 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}

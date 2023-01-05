@@ -81,7 +81,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_NETWORK_NAME: libre-testnet
+          HAPI_EOS_API_NETWORK_NAME: libre
           HAPI_EOS_API_ENDPOINTS: '["https://libre-testnet.edenia.cloud","https://api.testnet.libre.cryptobloks.io","https://libre-testnet.eosphere.io"]'
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://api-node.libre-testnet:8080'
           HAPI_EOS_API_CHAIN_ID: b64646740308df2ee06c6b72f34c0f7fa066d940e831f752db2006fcc2b78dee

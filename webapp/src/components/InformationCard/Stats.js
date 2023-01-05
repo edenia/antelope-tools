@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 
 import { eosConfig, generalConfig } from '../../config'
+import VisitSite from '../VisitSite'
 
-const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
+const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
   if (eosConfig.networkName === 'lacchain') return <></>
 
   return (
-    <div className={classes.healthStatus}>
+    <div className={classes.stats}>
       <Typography variant="overline">{t('stats')}</Typography>
       <div className={classes.borderLine}>
         <div className={classes.rowWrapper}>
@@ -20,6 +21,20 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, type }) => {
             eosConfig.tokenSymbol
           }`}</Typography>
         </div>
+
+        {!!eosRate && (
+          <div className={classes.rowWrapper}>
+            <Typography variant="body1" className={classes.ratings}>
+              {`${t('EOSRate')}: 
+              ${eosRate.average.toFixed(2)} ${t('average')} 
+              (${eosRate.ratings_cntr} ${t('ratings')})`}
+            </Typography>
+            <VisitSite
+              title={t('openLink')}
+              url={`${generalConfig.eosRateLink}/block-producers/${eosRate.bp}`}
+            />
+          </div>
+        )}
 
         {!!generalConfig.historyEnabled && (
           <div className={classes.rowWrapper}>

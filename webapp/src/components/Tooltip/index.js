@@ -15,6 +15,7 @@ const Tooltip = ({
   open,
   onClose,
   closeOnMouseLeave,
+  hideCloseButton,
   children,
 }) => {
   const classes = useStyles()
@@ -36,7 +37,9 @@ const Tooltip = ({
     >
       <div className={classes.popover}>
         <div className={classes.popoverClose}>
-          <CloseIcon className={classes.popoverCloseIcon} onClick={onClose} />
+          {!hideCloseButton && (
+            <CloseIcon className={classes.popoverCloseIcon} onClick={onClose} />
+          )}
         </div>
         {children}
       </div>
@@ -50,6 +53,8 @@ Tooltip.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.node,
   anchorOrigin: PropTypes.object,
+  closeOnMouseLeave: PropTypes.bool,
+  hideCloseButton: PropTypes.bool,
 }
 
 Tooltip.defaultProps = {
@@ -60,6 +65,7 @@ Tooltip.defaultProps = {
     horizontal: 'center',
   },
   anchorEl: null,
+  hideCloseButton: false,
 }
 
 export default Tooltip

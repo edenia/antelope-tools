@@ -7,6 +7,7 @@ const transactionsRoute = require('./transactions.route')
 const createFaucetAccountRoute = require('./create-faucet-account.route')
 const transferFaucetTokensRoute = require('./transfer-faucet-tokens.route')
 const getProducersInfoRoute = require('./get-producers-info.route')
+const getEOSRateStats = require('./get-eos-rate-stats.route')
 
 module.exports = [
   healthzRoute,
@@ -17,5 +18,6 @@ module.exports = [
   transactionsRoute,
   createFaucetAccountRoute,
   transferFaucetTokensRoute,
-  getProducersInfoRoute
+  getProducersInfoRoute,
+  getEOSRateStats
 ]

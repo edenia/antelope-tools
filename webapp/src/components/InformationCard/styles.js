@@ -188,6 +188,11 @@ export default (theme) => ({
       minWidth: 150,
     },
   },
+  ratings: {
+    [theme.breakpoints.up('lg')]: {
+      whiteSpace: 'pre-line !important',
+    },
+  },
   boxLabel: {
     alignItems: 'baseline !important',
   },
@@ -223,6 +228,15 @@ export default (theme) => ({
       minWidth: 130,
     },
   },
+  stats: {
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1, 0),
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+    },
+  },
   social: {
     borderLeft: 'none',
     width: 100,
@@ -240,7 +254,7 @@ export default (theme) => ({
       marginRight: theme.spacing(1),
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
+      minWidth: 120,
     },
   },
   dd: {

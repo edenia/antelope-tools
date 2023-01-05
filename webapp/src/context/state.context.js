@@ -200,7 +200,7 @@ export const useSharedState = () => {
   useEffect(() => {
     let block = state.info.head_block_num
 
-    if (!block) return
+    if (!block || !state.info.infoInterval) return
 
     const updateTransactions = async () => {
       await getBlock(block)
@@ -237,7 +237,7 @@ export const useSharedState = () => {
 
         dispatch({
           type: 'updateInfo',
-          payload: info,
+          payload: { ...info, infoInterval },
         })
       } catch (error) {
         console.error(error)
