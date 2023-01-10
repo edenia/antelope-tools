@@ -73,7 +73,16 @@ const updateNodeInfo = async nodes => {
     }
   `
 
+  const clearMutation = `
+    mutation {
+      delete_node_info(where: {_and: [{version: {_eq: ""}},{features: {_eq: {}}}]}) {
+        affected_rows
+      }
+    }
+  `
+
   await hasuraUtil.request(upsertMutation, { nodes })
+  await hasuraUtil.request(clearMutation)
 }
 
 const getNodeEnpoints = node => {
@@ -113,11 +122,11 @@ const getFormatNode = node => {
     node.features = [node.features]
   }
 
-  if (node.features?.length || !!node.keys) {
+  if (endpoints.length || node.features?.length || !!node.keys) {
     formatNode.node_info = {
       data: {
         version: '',
-        features: { list: node.features, keys: node.keys }
+        features: { list: node?.features, keys: node.keys }
       }
     }
   }
@@ -128,16 +137,23 @@ const getFormatNode = node => {
 const updateNodesInfo = async nodes => {
   nodes = await Promise.all(
     nodes.map(async (node) => {
-      if (
-        node?.type?.includes('query') &&
-        node?.endpoints?.length &&
-        !!node.node_info[0]
-      ) {
-        const { nodeInfo } = await producerUtil.getNodeInfo(
-          node.endpoints[0].value
-        )
+      if (node?.endpoints?.length && !!node.node_info[0]) {
+        const sslEndpoint = node.endpoints.find(
+          (endpoint) => endpoint.type === 'ssl'
+        )?.value
 
-        node.node_info[0].version = nodeInfo?.server_version_string || ''
+        if (sslEndpoint) {
+          const { nodeInfo } = await producerUtil.getNodeInfo(sslEndpoint)
+          const { supportedAPIs } = await producerUtil.getSupportedAPIs(
+            sslEndpoint
+          )
+          
+          node.node_info[0].version = nodeInfo?.server_version_string || ''
+          node.node_info[0].features = {
+            ...node.node_info[0]?.features,
+            ...(supportedAPIs && { supportedAPIs })
+          }
+        }
 
         return node.node_info[0]
       }

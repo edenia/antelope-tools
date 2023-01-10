@@ -20,6 +20,20 @@ const getNodeInfo = async (api) => {
   }
 }
 
+const getSupportedAPIs = async (api) => {
+  let supportedAPIs
+
+  try {
+    const response = await axiosUtil.instance.get(
+      `${api}/v1/node/get_supported_apis`
+    )
+
+    supportedAPIs = response.data?.apis
+  } catch (error) {}
+
+  return { supportedAPIs }
+}
+
 const getEndpoints = (nodes) => {
   if (!nodes?.length) {
     return {
@@ -246,6 +260,7 @@ module.exports = {
   getNodeInfo,
   getEndpoints,
   getExpectedRewards,
+  getSupportedAPIs,
   getVotes,
   jsonParse
 }
