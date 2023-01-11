@@ -3,16 +3,21 @@ import { useLazyQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-const useSearchState = ({ query, ...options }) => {
+const useSearchState = ({ query, where, limit }) => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(query, options)
+    useLazyQuery(query)
   const location = useLocation()
   const [pagination, setPagination] = useState({
     page: 1,
     pages: 1,
-    limit: 28,
-    where: null,
+    limit: limit ?? 28,
+    offset: 0,
+    where: {
+      owner: { _like: '%%' },
+      ...(where ?? { bp_json: { _is_null: false } }),
+    },
   })
+  const [variables, setVariables] = useState(pagination)
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = useCallback(newFilters => {
@@ -37,21 +42,24 @@ const useSearchState = ({ query, ...options }) => {
   }
 
   useEffect(() => {
-    loadProducers({
-      variables: {
-        where: pagination.where,
-        offset: (pagination.page - 1) * pagination.limit,
-        limit: pagination.limit,
-        endpointFilter: pagination.endpointFilter,
-      },
-    })
+    const variables = {
+      where: pagination.where,
+      offset: (pagination.page - 1) * pagination.limit,
+      limit: pagination.limit,
+      endpointFilter: pagination.endpointFilter,
+    }
+
+    loadProducers({ variables })
+
+    setVariables(variables)
     // eslint-disable-next-line
   }, [
     pagination.where,
     pagination.page,
     pagination.limit,
     pagination.offset,
-    pagination.endpointFilter
+    pagination.endpointFilter,
+    setVariables,
   ])
 
   useEffect(() => {
@@ -78,7 +86,7 @@ const useSearchState = ({ query, ...options }) => {
   }, [info])
 
   return [
-    { filters, pagination, loading, producers, info },
+    { filters, pagination, loading, producers, info, variables },
     {
       handleOnSearch,
       handleOnPageChange,
