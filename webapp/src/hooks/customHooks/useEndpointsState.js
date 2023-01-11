@@ -11,7 +11,7 @@ const useEndpointsState = () => {
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
     query: PRODUCERS_QUERY,
-    where: {nodes: { endpoints: { value: { _gt: '' } } }},
+    where: { nodes: { endpoints: { value: { _gt: '' } } } },
     limit: 20
   })
   const { data, loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, { variables })
@@ -19,7 +19,7 @@ const useEndpointsState = () => {
   const [items, setItems] = useState()
 
   useEffect(() => {
-    if(!data) return
+    if (!data) return
 
     setItems(
       data.producers.map((producer) => {
@@ -64,7 +64,7 @@ const useEndpointsState = () => {
   }, [setPagination])
 
   return [
-    { loading: loading, pagination, producers: items, updatedAt, filters },
+    { loading, pagination, producers: items, updatedAt, filters },
     { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }
