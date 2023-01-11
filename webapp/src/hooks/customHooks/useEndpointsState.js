@@ -46,7 +46,7 @@ const useEndpointsState = () => {
     if (!data.producers?.[0]?.updated_at) return
 
     setUpdatedAt(data.producers[0].updated_at)
-  },[data])
+  }, [data])
 
   const handleFilter = useCallback(value => {
     const filter = value

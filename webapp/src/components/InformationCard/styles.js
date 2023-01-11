@@ -8,7 +8,7 @@ export default (theme) => ({
       textTransform: 'lowercase',
     },
     '& .MuiCardHeader-root': {
-      padding: theme.spacing(2,4,0),
+      padding: theme.spacing(2, 4, 0),
     },
     [theme.breakpoints.up('sm')]: {
       width: 300,
