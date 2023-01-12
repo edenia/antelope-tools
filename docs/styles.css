@@ -896,7 +896,7 @@ p {
   .grid {
     display: flex;
     grid-column-gap: 18px;
-    padding-bottom: 30px;
+    padding-bottom: 25px;
   }
 
   .grid img {
