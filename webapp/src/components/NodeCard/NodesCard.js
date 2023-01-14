@@ -6,6 +6,7 @@ import { makeStyles } from '@mui/styles'
 import { useSubscription } from '@apollo/client'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
+import Chip from '@mui/material/Chip'
 import 'flag-icon-css/css/flag-icons.css'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
@@ -75,13 +76,23 @@ const NodesCard = ({ nodes }) => {
     return (
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
-        <ShowInfo value={node?.node_info?.version} title={t('nodeVersion')} />
+        {node?.node_info[0]?.version && (
+          <div className={classes.version}>
+            <div className={classes.bold}>{t('nodeVersion')}</div>
+            <Chip
+              className={classes.chip}
+              size="small"
+              variant="outlined"
+              label={node?.node_info[0]?.version}
+            />
+          </div>
+        )}
         <EndpointsChips node={node} />
         <ChipList
           title={t('features')}
           list={node?.node_info[0]?.features?.list}
         />
-        {node.type.includes('query') && <SupportedAPIs node={node} />}
+        <SupportedAPIs list={node?.node_info[0]?.features?.supportedAPIs} />
         <Keys node={node} />
         <HealthStatus node={node} />
       </>

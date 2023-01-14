@@ -31,17 +31,18 @@ export default (theme) => ({
   },
   nodes: {
     width: '280px',
-    padding: theme.spacing(3),
+    padding: theme.spacing(0, 3, 0),
     overflowX: 'auto',
-    marginLeft: '5px',
-    marginRight: '5px',
     borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+    '& .MuiCardContent-root:last-child': {
+      paddingBottom: theme.spacing(4),
+    },
   },
   nodesWrapper: {
     display: 'flex',
     width: 'max-content',
     flexFlow: 'row nowrap',
-    padding: theme.spacing(2),
+    padding: theme.spacing(0, 2, 0),
     [theme.breakpoints.up('lg')]: {
       paddingRight: '250px',
     },
@@ -69,5 +70,11 @@ export default (theme) => ({
   },
   buttonApis: {
     paddingTop: theme.spacing(2),
-  }
+  },
+  version: {
+    display: 'flex',
+  },
+  chip: {
+    marginLeft: theme.spacing(5),
+  },
 })
