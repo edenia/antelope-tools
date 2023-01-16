@@ -20,6 +20,7 @@ export const PRODUCERS_QUERY = gql`
     ) {
       id
       owner
+      url
       total_votes
       bp_json
       total_votes_percent
@@ -29,7 +30,7 @@ export const PRODUCERS_QUERY = gql`
       last_claim_time
       rank
       updated_at
-      endpoints_list (where: $endpointFilter){
+      endpoints: endpoints_list(where: $endpointFilter) {
         type
         value
       }
@@ -37,15 +38,11 @@ export const PRODUCERS_QUERY = gql`
   }
 `
 export const NODES_SUBSCRIPTION = gql`
-  subscription (
-    $offset: Int = 0
-    $limit: Int = 21
-    $where: producer_bool_exp
-  ){
+  subscription ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
     producers: producer(
-      where: $where 
+      where: $where
       limit: $limit
-      offset:$offset
+      offset: $offset
       order_by: { total_votes_percent: desc }
     ) {
       id
@@ -60,7 +57,7 @@ export const NODES_SUBSCRIPTION = gql`
           features
           version
         }
-        endpoints (order_by: {type: asc}){
+        endpoints(order_by: { type: asc }) {
           value
           type
           response
@@ -77,17 +74,17 @@ export const ENDPOINTS_SUBSCRIPTION = gql`
     $limit: Int = 21
     $where: producer_bool_exp
     $endpointFilter: endpoints_by_producer_id_bool_exp
-  ){
+  ) {
     producers: producer(
       where: $where
       limit: $limit
-      offset:$offset
+      offset: $offset
       order_by: { total_votes_percent: desc }
     ) {
       id
       owner
       updated_at
-      endpoints_list(where: $endpointFilter, order_by: {value: asc}){
+      endpoints: endpoints_list(where: $endpointFilter, order_by: { value: asc }) {
         type
         value
         head_block_time
