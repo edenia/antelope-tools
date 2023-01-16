@@ -5,6 +5,7 @@ export const PRODUCERS_QUERY = gql`
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
+    $endpointFilter: endpoints_by_producer_id_bool_exp
   ) {
     info: producer_aggregate(where: $where) {
       producers: aggregate {
@@ -25,37 +26,31 @@ export const PRODUCERS_QUERY = gql`
       total_votes_eos
       total_rewards
       health_status
-      endpoints
+      last_claim_time
       rank
       updated_at
+      endpoints_list (where: $endpointFilter){
+        type
+        value
+      }
     }
   }
 `
-
-export const NODES_QUERY = gql`
-  query (
+export const NODES_SUBSCRIPTION = gql`
+  subscription (
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
-  ) {
-    info: producer_aggregate(where: $where) {
-      producers: aggregate {
-        count
-      }
-    }
+  ){
     producers: producer(
-      where: $where
-      order_by: { total_votes_percent: desc }
-      offset: $offset
+      where: $where 
       limit: $limit
+      offset:$offset
+      order_by: { total_votes_percent: desc }
     ) {
       id
       owner
-      bp_json
-      total_rewards
-      total_votes_percent
       rank
-      updated_at
       producer_key
       nodes {
         type
@@ -65,7 +60,7 @@ export const NODES_QUERY = gql`
           features
           version
         }
-        endpoints {
+        endpoints (order_by: {type: asc}){
           value
           type
           response
@@ -76,36 +71,28 @@ export const NODES_QUERY = gql`
   }
 `
 
-export const ENDPOINTS_QUERY = gql`
-  query producer(
+export const ENDPOINTS_SUBSCRIPTION = gql`
+  subscription (
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
-    $endpointFilter: endpoint_bool_exp
-  ) {
-    info: producer_aggregate(where: $where) {
-      producers: aggregate {
-        count
-      }
-    }
+    $endpointFilter: endpoints_by_producer_id_bool_exp
+  ){
     producers: producer(
       where: $where
-      order_by: { total_votes_percent: desc }
-      offset: $offset
       limit: $limit
+      offset:$offset
+      order_by: { total_votes_percent: desc }
     ) {
       id
       owner
       updated_at
-      nodes {
-        endpoints(order_by: { head_block_time: desc }, where: $endpointFilter) {
-          id
-          type
-          value
-          head_block_time
-          response
-          updated_at
-        }
+      endpoints_list(where: $endpointFilter, order_by: {value: asc}){
+        type
+        value
+        head_block_time
+        response
+        updated_at
       }
     }
   }

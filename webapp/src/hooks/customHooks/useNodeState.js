@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useSubscription } from '@apollo/client'
 
-import { NODES_QUERY } from '../../gql'
+import { PRODUCERS_QUERY, NODES_SUBSCRIPTION } from '../../gql'
 import { eosConfig } from '../../config'
 
 import useSearchState from './useSearchState'
 
 const useNodeState = () => {
   const [
-    { filters, pagination, loading, producers },
+    { filters, pagination, variables },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
-    query: NODES_QUERY,
-    pollInterval: 300000,
-    fetchPolicy: 'cache-and-network',
+    query: PRODUCERS_QUERY
   })
+  const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
   const [items, setItems] = useState([])
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
@@ -22,6 +22,7 @@ const useNodeState = () => {
     return (
       (node.type?.includes('full') ? 0.5 : 0) +
       (node.endpoints?.length || 0) +
+      Boolean(node?.node_info[0]?.version?.length) +
       (node.node_info[0]?.features?.list?.length || 0)
     )
   }
@@ -45,7 +46,9 @@ const useNodeState = () => {
   }, [filters.name, setPagination])
 
   useEffect(() => {
-    if (!producers) return
+    if (!data) return
+
+    const { producers } = data
 
     const list = producers.flatMap((producer) => {
       if (!producer?.nodes?.length) return []
@@ -91,7 +94,7 @@ const useNodeState = () => {
     })
 
     setItems(list)
-  }, [filters.name, producers])
+  }, [filters.name, data])
 
   return [
     { filters, chips, loading, items, pagination },

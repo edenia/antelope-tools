@@ -1,45 +1,35 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useSubscription } from '@apollo/client'
 
-import { ENDPOINTS_QUERY } from '../../gql'
+import { PRODUCERS_QUERY, ENDPOINTS_SUBSCRIPTION } from '../../gql'
 
 import useSearchState from './useSearchState'
 
-const useEndpointsState = ({ useCache }) => {
+const useEndpointsState = () => {
   const [
-    { pagination, loading, producers, filters },
+    { filters, pagination, variables },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
-    query: ENDPOINTS_QUERY,
-    pollInterval: useCache ? 0 : 120000,
-    fetchPolicy: useCache ? 'cache-first' : 'cache-and-network',
+    query: PRODUCERS_QUERY,
+    where: { nodes: { endpoints: { value: { _gt: '' } } } },
+    limit: 20
   })
+  const { data, loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, { variables })
   const [updatedAt, setUpdatedAt] = useState()
   const [items, setItems] = useState()
 
   useEffect(() => {
-    setPagination(prev => ({
-      ...prev,
-      limit: 20,
-      where: { ...prev.where, nodes: { endpoints: { value: { _gt: '' } } } },
-    }))
-  }, [setPagination])
-
-  useEffect(() => {
-    if (!producers) return
+    if (!data) return
 
     setItems(
-      producers.map(producer => {
+      data.producers.map((producer) => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
-        producer.nodes.forEach(node => {
-          if (node.endpoints?.length) {
-            node.endpoints.forEach(({ type, ...endpoint }) => {
-              if (!inserted.includes(endpoint.value)) {
-                inserted.push(endpoint.value)
-                endpoints[type].push(endpoint)
-              }
-            })
+        producer.endpoints_list.forEach(({ type, ...endpoint }) => {
+          if (!inserted.includes(endpoint.value)) {
+            inserted.push(endpoint.value)
+            endpoints[type].push(endpoint)
           }
         })
 
@@ -53,10 +43,10 @@ const useEndpointsState = ({ useCache }) => {
       }),
     )
 
-    if (!producers?.[0]?.updated_at) return
+    if (!data.producers?.[0]?.updated_at) return
 
-    setUpdatedAt(producers[0].updated_at)
-  }, [producers])
+    setUpdatedAt(data.producers[0].updated_at)
+  }, [data])
 
   const handleFilter = useCallback(value => {
     const filter = value

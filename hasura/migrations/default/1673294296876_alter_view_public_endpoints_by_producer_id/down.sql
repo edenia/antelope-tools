@@ -1,0 +1,11 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE OR REPLACE VIEW "public"."endpoints_by_producer_id" AS
+--  SELECT node.producer_id,
+--     endpoint.type,
+--     endpoint.value,
+--     endpoint.response,
+--     endpoint.updated_at,
+--     endpoint.head_block_time
+--    FROM (endpoint
+--      JOIN node ON ((endpoint.node_id = node.id)));

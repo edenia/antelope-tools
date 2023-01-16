@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 
 import { formatWithThousandSeparator } from '../../utils'
-import { NODES_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
+import { PRODUCERS_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
 import { useSharedState } from '../../context/state.context'
 import { eosConfig } from '../../config'
 
@@ -21,7 +21,7 @@ const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 
 const BlockProducerInfo = ({ t, classes }) => {
-  const { data: { loading, producers } = {} } = useQuery(NODES_QUERY)
+  const { data: { loading, producers } = {} } = useQuery(PRODUCERS_QUERY)
   const { data: producersSummary, loading: producersLoading } = useQuery(
     PRODUCERS_SUMMARY_QUERY,
   )

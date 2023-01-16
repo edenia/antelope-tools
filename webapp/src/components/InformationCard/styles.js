@@ -7,19 +7,22 @@ export default (theme) => ({
     '& .MuiCardHeader-title': {
       textTransform: 'lowercase',
     },
+    '& .MuiCardHeader-root': {
+      padding: theme.spacing(2, 4, 0),
+    },
     [theme.breakpoints.up('sm')]: {
       width: 300,
     },
     [theme.breakpoints.up('lg')]: {
       width: '100%',
-      paddingBottom: theme.spacing(2),
+      paddingBottom: theme.spacing(4),
     },
   },
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    padding: theme.spacing(0, 4, 4, 4),
+    padding: theme.spacing(0, 4, 0),
     '& .MuiTypography-overline': {
       marginLeft: 0,
       fontWeight: '700',
