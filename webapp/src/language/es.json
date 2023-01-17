@@ -53,7 +53,8 @@
     "footer1": "Esta aplicación es un bien Público Comunitario",
     "footer2": "Desarrollado por Edenia",
     "bugRequest": "Reportar un problema / Solicitar una característica ",
-    "moreInfo": "Más Información"
+    "moreInfo": "Más Información",
+    "openLink": "Visitar Sitio"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -65,6 +66,9 @@
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/block-producers>heading": "Productores de Bloques",
+    "/non-compliant-bps>sidebar": "BPs incumplidores",
+    "/non-compliant-bps>title": "Productores de Bloques incumplidores - Panel",
+    "/non-compliant-bps>heading": "Productores de Bloques incumplidores",
     "/rewards-distribution>sidebar": "Distribución de recompensas",
     "/rewards-distribution>title": "Distribución de recompensas - Panel",
     "/rewards-distribution>heading": "Distribución de recompensas",
@@ -248,7 +252,6 @@
     "health": "Cumplimiento",
     "collapse": "Colapsar",
     "moreInfo": "Más Información",
-    "openLink": "Visitar Sitio",
     "version": "Versión",
     "info": "Info",
     "keys": "Llaves",
@@ -260,7 +263,9 @@
     "hs_bpJson": "BP Json",
     "emptyState": "Este productor de bloques no proporciona ninguna información.",
     "average": "calificación promedio",
-    "ratings": "calificaciones"
+    "ratings": "calificaciones",
+    "lastClaimTime": "Último reclamo",
+    "noInfo": "No provee información"
   },
   "nodeCardComponent": {
     "features": "Características",

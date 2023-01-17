@@ -42,7 +42,8 @@
     "footer2": "Developed by Edenia",
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature",
-    "moreInfo": "More Info"
+    "moreInfo": "More Info",
+    "openLink": "Visit Site"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -54,6 +55,9 @@
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - EOSIO Network Dashboard",
     "/block-producers>heading": "Block Producers",
+    "/non-compliant-bps>sidebar": "Non-compliant BPs",
+    "/non-compliant-bps>title": "Non-compliant Blocks Producers - EOSIO Network Dashboard",
+    "/non-compliant-bps>heading": "Non-compliant Blocks Producers",
     "/rewards-distribution>sidebar": "Rewards Distribution",
     "/rewards-distribution>title": "Rewards Distribution - EOSIO Network Dashboard",
     "/rewards-distribution>heading": "Rewards Distribution",
@@ -242,7 +246,6 @@
     "health": "Compliance",
     "collapse": "Collapse",
     "moreInfo": "More Info",
-    "openLink": "Visit Site",
     "version": "Version",
     "info": "Info",
     "keys": "Keys",
@@ -254,7 +257,9 @@
     "hs_bpJson": "BP Json",
     "emptyState": "This block producer does not provide any information.",
     "average": "average rating",
-    "ratings": "ratings"
+    "ratings": "ratings",
+    "lastClaimTime": "Last time claimed",
+    "noInfo": "No info provided"
   },
   "nodeCardComponent": {
     "features": "Features",

@@ -1,12 +1,14 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
+import { Link as MuiLink } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
 import LinearProgress from '@mui/material/LinearProgress'
 import Paper from '@mui/material/Paper'
@@ -27,6 +29,7 @@ import { countries } from '../../utils/countries'
 import { PRODUCERS_QUERY, SETTING_QUERY } from '../../gql'
 import CountryFlag from '../../components/CountryFlag'
 import { eosConfig } from '../../config'
+import LightIcon from 'components/HealthCheck/LightIcon'
 
 import styles from './styles'
 
@@ -83,7 +86,7 @@ const RewardsDistribution = () => {
         rewards: 0,
       },
     }
-    let daylyRewars = 0
+    let dailyRewards = 0
     const items = producers || []
     const handleInvalidCountry = (producer) => {
       stats['N/A'].items.push(producer)
@@ -127,7 +130,7 @@ const RewardsDistribution = () => {
     items
       .filter((a) => a.total_rewards >= 100)
       .forEach((producer) => {
-        daylyRewars += producer.total_rewards || 0
+        dailyRewards += producer.total_rewards || 0
 
         if (!producer?.bp_json?.org?.location?.country) {
           handleInvalidCountry(producer)
@@ -148,7 +151,7 @@ const RewardsDistribution = () => {
     )
 
     setSummary({
-      daylyRewars,
+      dailyRewards,
       topCountryByRewards,
       producersWithoutProperBpJson: stats['N/A'],
     })
@@ -198,7 +201,7 @@ const RewardsDistribution = () => {
               </span>
               <span>
                 {formatWithThousandSeparator(
-                  (currentNode?.rewards / summary.daylyRewars) * 100,
+                  (currentNode?.rewards / summary.dailyRewards) * 100,
                   2,
                 )}
                 %
@@ -218,7 +221,7 @@ const RewardsDistribution = () => {
           <ul className={classes.producersList}>
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
-                <Link
+                <MuiLink
                   href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
                     producer?.bp_json?.org?.website || producer.url
                   }/bp.json`}
@@ -226,7 +229,7 @@ const RewardsDistribution = () => {
                   rel="noopener noreferrer"
                 >
                   {producer?.bp_json?.org?.candidate_name || producer.owner}
-                </Link>
+                </MuiLink>
                 <br />
                 {formatWithThousandSeparator(producer.total_rewards, 2)}{' '}
                 {eosConfig.tokenSymbol}
@@ -247,7 +250,7 @@ const RewardsDistribution = () => {
                 )}
                 {nodes.length > 0 && (
                   <span>
-                    {formatWithThousandSeparator(summary.daylyRewars, 2)}{' '}
+                    {formatWithThousandSeparator(summary.dailyRewards, 2)}{' '}
                     {eosConfig.tokenSymbol}
                   </span>
                 )}
@@ -260,7 +263,7 @@ const RewardsDistribution = () => {
                   <span>
                     $
                     {formatWithThousandSeparator(
-                      summary.daylyRewars * setting?.token_price,
+                      summary.dailyRewards * setting?.token_price,
                       0,
                     )}{' '}
                     USD
@@ -315,27 +318,42 @@ const RewardsDistribution = () => {
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography variant="h6">{t('paidProducers')}</Typography>
-              <Typography
-                variant="subtitle1"
-                className={classes.action}
-                onClick={handlePopoverOpen(
-                  summary?.producersWithoutProperBpJson,
-                )}
-              >
+              <Typography variant="subtitle1" className={classes.action}>
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
                 {nodes.length > 0 &&
-                  summary.producersWithoutProperBpJson.quantity}
+                  summary?.producersWithoutProperBpJson.quantity && (
+                    <span className={classes.nonCompliant}>
+                      {summary?.producersWithoutProperBpJson.quantity}
+                      <LightIcon status="yellowLight" />
+                      <Button
+                        className={classes.nonCompliantButton}
+                        component={Link}
+                        to="/non-compliant-bps"
+                        variant="contained"
+                        color="secondary"
+                        mt={2}
+                      >
+                        {t('See BPs')}
+                      </Button>
+                    </span>
+                  )}
               </Typography>
-              <Typography
-                variant="subtitle1"
-                className={classes.action}
-                onClick={handlePopoverOpen(
-                  summary?.producersWithoutProperBpJson,
-                )}
-              >
-                {t('clickToViewBPs')}
+              <Typography variant="subtitle1" className={classes.action}>
+                <span>
+                  {formatWithThousandSeparator(
+                    summary?.producersWithoutProperBpJson.rewards,
+                    0,
+                  )}
+                  {eosConfig.tokenSymbol} / $
+                  {formatWithThousandSeparator(
+                    summary?.producersWithoutProperBpJson.rewards *
+                      setting?.token_price,
+                    0,
+                  )}
+                  USD
+                </span>
               </Typography>
             </CardContent>
           </Card>

@@ -20,6 +20,7 @@ export const PRODUCERS_QUERY = gql`
     ) {
       id
       owner
+      url
       total_votes
       bp_json
       total_votes_percent

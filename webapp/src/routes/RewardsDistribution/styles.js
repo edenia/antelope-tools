@@ -81,5 +81,12 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
       boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
       padding: theme.spacing(1),
     },
-  }
+  },
+  nonCompliant: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nonCompliantButton: {
+    height: theme.spacing(6),
+  },
 })
