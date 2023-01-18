@@ -35,7 +35,7 @@ const RewardsDistributionStats = ({
   return (
     <div className={classes.divMargin}>
       <div className={classes.cardHeader}>
-        <Card className={classes.cardShadow}>
+        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <Typography variant="h6">{t('dailyRewards')}</Typography>
             <Typography variant="h3">
@@ -68,7 +68,7 @@ const RewardsDistributionStats = ({
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={classes.cardShadow}>
+        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
             <Typography variant="h3">
@@ -103,7 +103,7 @@ const RewardsDistributionStats = ({
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={classes.cardShadow}>
+        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <Typography variant="h6">{t('paidProducers')}</Typography>
             <Typography variant="h3">
@@ -140,7 +140,7 @@ const RewardsDistributionStats = ({
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={classes.cardShadow}>
+        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <div className={classes.center}>
               <Typography

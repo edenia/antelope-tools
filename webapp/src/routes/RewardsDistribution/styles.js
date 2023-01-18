@@ -67,22 +67,28 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
   divMargin: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     margin: theme.spacing(8, 0),
     gap: theme.spacing(6),
-    flexWrap: 'wrap',
+    [theme.breakpoints.down('lg')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
     [theme.breakpoints.down('md')]: {
-      display: 'block',
+      display: 'flex',
+      flexDirection: 'column',
     },
   },
   cardHeader: {
-    flexGrow: '1',
-    [theme.breakpoints.down('md')]: {
-      marginBottom: '10px',
+    width: '100%',
+  },
+  cardContent: {
+    height: '100%',
+    '& .MuiCardContent-root:last-child': {
+      paddingBottom: theme.spacing(4),
     },
   },
   cards: {
-    height: '156px',
     '& .MuiTypography-h6': {
       display: 'flex',
       paddingBottom: theme.spacing(4),
@@ -105,7 +111,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     height: '24px',
   },
   textMargin: {
-    margin: `${theme.spacing(4, 0)} !important`,
-    wordBreak: 'break-word'
+    margin: `${theme.spacing(4, 0, 0)} !important`,
+    wordBreak: 'break-word',
   },
 })
