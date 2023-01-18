@@ -156,14 +156,14 @@
     "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
-    "clickToViewBPs": "Haga clic para ver los PB no conformes",
     "lowestRewards": "Recompensas Más Bajas",
     "highestRewards": "Recompensas Más Altas",
     "exchangeRate": "Tipo De Cambio",
     "country": "País",
     "rewards": "Recompensas",
     "rewardsPercentage": "Porcentaje de recompensas",
-    "viewList": "Ver lista completa"
+    "viewList": "Ver lista completa",
+    "paidProducersText": "en recompensas diarias"
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},

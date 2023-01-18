@@ -82,7 +82,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     },
   },
   cards: {
-    height: '142px',
+    height: '156px',
     '& .MuiTypography-h6': {
       display: 'flex',
       paddingBottom: theme.spacing(4),
@@ -106,5 +106,6 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   textMargin: {
     margin: `${theme.spacing(4, 0)} !important`,
+    wordBreak: 'break-word'
   },
 })

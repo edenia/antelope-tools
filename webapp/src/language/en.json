@@ -150,14 +150,14 @@
     "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid Producers Not Located",
-    "clickToViewBPs": "Click to view non-compliant BPs",
     "lowestRewards": "Lowest Rewards",
     "highestRewards": "Highest Rewards",
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
     "rewardsPercentage": "Percentage of rewards",
-    "viewList": "View full list"
+    "viewList": "View full list",
+    "paidProducersText": "in daily rewards"
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},
