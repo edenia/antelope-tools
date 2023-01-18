@@ -45,6 +45,7 @@ const useNonCompliantState = () => {
       percentageRewards,
       dailyRewards: nonCompliantRewards,
       tokenPrice: setting?.token_price,
+      quantity: nonCompliantBPs.length,
     })
     setItems(nonCompliantBPs)
   }, [producers, setting])

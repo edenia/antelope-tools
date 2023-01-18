@@ -1,15 +1,21 @@
 export default (theme, lowestRewardsColor, highestRewardsColor) => ({
-  action: {
-    cursor: 'pointer',
+  spaceBetween: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  center: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   popoverItem: {
     fontWeight: 'bold',
   },
   countryFlag: {
-    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
   countryFlagUnknown: {
-    marginRight: theme.spacing(0.5),
+    marginLeft: theme.spacing(0.5),
   },
   producersList: {
     margin: 0,
@@ -18,22 +24,22 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     outline: 'none',
     cursor: 'pointer',
   },
+  squareRewards: {
+    width: '38px',
+    height: '38px',
+    borderRadius: 4,
+    marginBottom: theme.spacing(1),
+    display: 'inline-block',
+  },
   lowestRewards: {
     backgroundColor: lowestRewardsColor,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    display: 'inline-block',
   },
   highestRewards: {
     backgroundColor: highestRewardsColor,
-    width: 16,
-    height: 16,
-    borderRadius: 4,
-    display: 'inline-block',
   },
   rewardsColorSchema: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 24,
     padding: '2px',
@@ -44,7 +50,12 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     marginLeft: 16,
   },
   itemLabel: {
-    minWidth: '120',
+    width: '50%',
+    textAlign: 'center',
+    lineHeight: '1',
+  },
+  exchangeRateLabel: {
+    fontWeight: 'bold',
   },
   mapWrapper: {
     marginTop: theme.spacing(3),
@@ -57,9 +68,9 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   divMargin: {
     display: 'flex',
-    marginBottom: '10px',
-    gap: '10px',
-    flexWrap: 'nowrap',
+    margin: theme.spacing(8, 0),
+    gap: theme.spacing(6),
+    flexWrap: 'wrap',
     [theme.breakpoints.down('md')]: {
       display: 'block',
     },
@@ -71,9 +82,10 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     },
   },
   cards: {
-    minHeight: '116px',
+    height: '142px',
     '& .MuiTypography-h6': {
       display: 'flex',
+      paddingBottom: theme.spacing(4),
     },
   },
   shadow: {
@@ -82,11 +94,17 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
       padding: theme.spacing(1),
     },
   },
-  nonCompliant: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   nonCompliantButton: {
-    height: theme.spacing(6),
+    height: '30px',
+    borderRadius: '90px !important',
+    backgroundColor: '#1565c0 !important',
+  },
+  expandIcon: {
+    cursor: 'pointer',
+    width: '24px',
+    height: '24px',
+  },
+  textMargin: {
+    margin: `${theme.spacing(4, 0)} !important`,
   },
 })

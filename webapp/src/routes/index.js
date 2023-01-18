@@ -6,7 +6,6 @@ import {
   Server as ServerIcon,
   Sliders as SlidersIcon,
   User as UserIcon,
-  UserX as UsersXIcon,
   Info as InfoIcon,
   HelpCircle as HelpIcon,
   Inbox as InboxIcon,
@@ -23,6 +22,7 @@ import {
   MissingBlocksSvg,
   TopologySvg,
   RewardsSvg,
+  NonCompliantSvg
 } from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
@@ -64,7 +64,7 @@ const defaultRoutes = [
   },
   {
     name: 'nonCompliantBPs',
-    icon: <UsersXIcon />,
+    icon: <NonCompliantSvg />,
     component: NonCompliantBPs,
     path: '/non-compliant-bps',
     exact: true,

@@ -55,7 +55,7 @@
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - EOSIO Network Dashboard",
     "/block-producers>heading": "Block Producers",
-    "/non-compliant-bps>sidebar": "Non-compliant BPs",
+    "/non-compliant-bps>sidebar": "Non-compliant Producers",
     "/non-compliant-bps>title": "Non-compliant Blocks Producers - EOSIO Network Dashboard",
     "/non-compliant-bps>heading": "Non-compliant Blocks Producers",
     "/rewards-distribution>sidebar": "Rewards Distribution",
@@ -156,7 +156,8 @@
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "rewardsPercentage": "Percentage of rewards"
+    "rewardsPercentage": "Percentage of rewards",
+    "viewList": "View full list"
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},
@@ -259,7 +260,8 @@
     "average": "average rating",
     "ratings": "ratings",
     "lastClaimTime": "Last time claimed",
-    "noInfo": "No info provided"
+    "noInfo": "No info provided",
+    "dailyRewards": "Daily Rewards"
   },
   "nodeCardComponent": {
     "features": "Features",

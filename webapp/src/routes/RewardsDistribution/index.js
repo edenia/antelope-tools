@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Typography from '@mui/material/Typography'
 import { Link as MuiLink } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
@@ -29,7 +30,6 @@ import { countries } from '../../utils/countries'
 import { PRODUCERS_QUERY, SETTING_QUERY } from '../../gql'
 import CountryFlag from '../../components/CountryFlag'
 import { eosConfig } from '../../config'
-import LightIcon from 'components/HealthCheck/LightIcon'
 
 import styles from './styles'
 
@@ -158,6 +158,19 @@ const RewardsDistribution = () => {
     setNodes(nodes)
   }, [producers, t])
 
+  const TokenToUSD = ({ amount }) => {
+    return (
+      <span>
+        {`${formatWithThousandSeparator(amount, 2)} ${
+          eosConfig.tokenSymbol
+        } / $${formatWithThousandSeparator(
+          amount * setting?.token_price,
+          2,
+        )} USD`}
+      </span>
+    )
+  }
+
   return (
     <div
       aria-owns={open ? 'mouse-over-popover' : undefined}
@@ -189,10 +202,10 @@ const RewardsDistribution = () => {
                 <UnknowFlagIcon />
               </span>
             )}
+            <span>{currentNode?.name}</span>
             {currentNode?.flag && (
               <span className={classes.countryFlag}>{currentNode?.flag}</span>
             )}
-            <span>{currentNode?.name}</span>
           </Typography>
           {summary && (
             <Typography>
@@ -210,14 +223,9 @@ const RewardsDistribution = () => {
           )}
           <Typography>
             <span className={classes.popoverItem}>{t('rewards')}: </span>
-            <span>
-              {formatWithThousandSeparator(currentNode?.rewards, 2)}{' '}
-              {eosConfig.tokenSymbol}
-            </span>
+            <TokenToUSD amount={currentNode?.rewards} />
           </Typography>
-          <Typography className={classes.popoverItem}>
-            {t('producers')}:
-          </Typography>
+          <span className={classes.popoverItem}>{t('producers')}:</span>
           <ul className={classes.producersList}>
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
@@ -231,8 +239,7 @@ const RewardsDistribution = () => {
                   {producer?.bp_json?.org?.candidate_name || producer.owner}
                 </MuiLink>
                 <br />
-                {formatWithThousandSeparator(producer.total_rewards, 2)}{' '}
-                {eosConfig.tokenSymbol}
+                <TokenToUSD amount={producer?.total_rewards} />
               </li>
             ))}
           </ul>
@@ -244,7 +251,7 @@ const RewardsDistribution = () => {
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography variant="h6">{t('dailyRewards')}</Typography>
-              <Typography variant="subtitle1">
+              <Typography variant="h3">
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
@@ -255,7 +262,7 @@ const RewardsDistribution = () => {
                   </span>
                 )}
               </Typography>
-              <Typography variant="subtitle1">
+              <Typography variant="h3">
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
@@ -274,43 +281,34 @@ const RewardsDistribution = () => {
           </Card>
         </div>
         <div className={classes.cardHeader}>
-          <Card
-            className={`${classes.action} ${classes.cardShadow}`}
-            onClick={handlePopoverOpen(summary?.topCountryByRewards)}
-          >
+          <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
-              <Typography variant="subtitle1">
+              <Typography variant="h3">
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
                 {nodes.length > 0 && (
                   <>
-                    <CountryFlag code={summary.topCountryByRewards.code} />
                     {summary.topCountryByRewards.name}
+                    <CountryFlag code={summary.topCountryByRewards.code} />
                   </>
                 )}
               </Typography>
-              <Typography variant="subtitle1">
-                {!nodes?.length > 0 && (
-                  <Skeleton variant="text" width="100%" animation="wave" />
-                )}
-                {nodes?.length > 0 && setting?.token_price && (
-                  <>
-                    {formatWithThousandSeparator(
-                      summary.topCountryByRewards.rewards,
-                      0,
-                    )}{' '}
-                    {eosConfig.tokenSymbol} / $
-                    {formatWithThousandSeparator(
-                      summary.topCountryByRewards.rewards *
-                        setting?.token_price,
-                      0,
-                    )}{' '}
-                    USD
-                  </>
-                )}
-              </Typography>
+              <div className={`${classes.textMargin} ${classes.spaceBetween}`}>
+                <Typography variant="subtitle1">
+                  {!nodes?.length > 0 && (
+                    <Skeleton variant="text" width="100%" animation="wave" />
+                  )}
+                  {nodes?.length > 0 && setting?.token_price && (
+                    <TokenToUSD amount={summary.topCountryByRewards.rewards} />
+                  )}
+                </Typography>
+                <ExpandMoreIcon
+                  className={classes.expandIcon}
+                  onClick={handlePopoverOpen(summary?.topCountryByRewards)}
+                />
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -318,15 +316,14 @@ const RewardsDistribution = () => {
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
               <Typography variant="h6">{t('paidProducers')}</Typography>
-              <Typography variant="subtitle1" className={classes.action}>
+              <Typography variant="h3">
                 {!nodes.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
                 {nodes.length > 0 &&
                   summary?.producersWithoutProperBpJson.quantity && (
-                    <span className={classes.nonCompliant}>
+                    <span className={classes.spaceBetween}>
                       {summary?.producersWithoutProperBpJson.quantity}
-                      <LightIcon status="yellowLight" />
                       <Button
                         className={classes.nonCompliantButton}
                         component={Link}
@@ -335,50 +332,64 @@ const RewardsDistribution = () => {
                         color="secondary"
                         mt={2}
                       >
-                        {t('See BPs')}
+                        {t('viewList')}
                       </Button>
                     </span>
                   )}
               </Typography>
-              <Typography variant="subtitle1" className={classes.action}>
-                <span>
-                  {formatWithThousandSeparator(
-                    summary?.producersWithoutProperBpJson.rewards,
-                    0,
-                  )}
-                  {eosConfig.tokenSymbol} / $
-                  {formatWithThousandSeparator(
-                    summary?.producersWithoutProperBpJson.rewards *
-                      setting?.token_price,
-                    0,
-                  )}
-                  USD
-                </span>
-              </Typography>
+              {!!summary?.producersWithoutProperBpJson.quantity && (
+                <Typography variant="subtitle1" className={classes.textMargin}>
+                  <TokenToUSD
+                    amount={summary?.producersWithoutProperBpJson.rewards}
+                  />
+                </Typography>
+              )}
             </CardContent>
           </Card>
         </div>
         <div className={classes.cardHeader}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>
-              <Typography variant="h6" className={classes.rewardsColorSchema}>
-                <span className={classes.itemLabel}>
-                  {t('lowestRewards')}:{' '}
-                </span>
-                <span className={classes.lowestRewards} />
-              </Typography>
-              <Typography variant="h6" className={classes.rewardsColorSchema}>
-                <span className={classes.itemLabel}>
-                  {t('highestRewards')}:{' '}
-                </span>
-                <span className={classes.highestRewards} />
-              </Typography>
-              {setting?.token_price && (
-                <Typography variant="h6" className={classes.rewardsColorSchema}>
+              <div className={classes.center}>
+                <Typography
+                  variant="subtitle1"
+                  className={classes.rewardsColorSchema}
+                >
+                  <span
+                    className={`${classes.squareRewards} ${classes.lowestRewards}`}
+                  />
                   <span className={classes.itemLabel}>
-                    {t('exchangeRate')}:{' '}
-                  </span>{' '}
-                  ${formatWithThousandSeparator(setting.token_price, 4)}
+                    {t('lowestRewards')}
+                  </span>
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  className={classes.rewardsColorSchema}
+                >
+                  <span
+                    className={`${classes.squareRewards} ${classes.highestRewards}`}
+                  />
+                  <span className={classes.itemLabel}>
+                    {t('highestRewards')}
+                  </span>
+                </Typography>
+              </div>
+              {setting?.token_price && (
+                <Typography
+                  variant="subtitle1"
+                  className={`${classes.textMargin} ${classes.center}`}
+                >
+                  <span className={classes.exchangeRateLabel}>
+                    {`${t('exchangeRate')}: `}
+                  </span>
+                  <span>
+                    {`1 ${
+                      eosConfig.tokenSymbol
+                    } = $${formatWithThousandSeparator(
+                      setting.token_price,
+                      4,
+                    )}`}
+                  </span>
                 </Typography>
               )}
             </CardContent>
