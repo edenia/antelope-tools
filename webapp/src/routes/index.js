@@ -22,6 +22,7 @@ import {
   MissingBlocksSvg,
   TopologySvg,
   RewardsSvg,
+  NonCompliantSvg
 } from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
@@ -40,6 +41,7 @@ const Page404 = lazy(() => import('./Page404'))
 const BlockDistribution = lazy(() => import('./BlockDistribution'))
 const MissedBlocks = lazy(() => import('./MissedBlocks'))
 const EndpointsList = lazy(() => import('./EndpointsList'))
+const NonCompliantBPs = lazy(() => import('./NonCompliantBPs'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -58,6 +60,13 @@ const defaultRoutes = [
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
+    exact: true,
+  },
+  {
+    name: 'nonCompliantBPs',
+    icon: <NonCompliantSvg />,
+    component: NonCompliantBPs,
+    path: '/non-compliant-bps',
     exact: true,
   },
   {

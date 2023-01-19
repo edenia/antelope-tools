@@ -53,7 +53,8 @@
     "footer1": "Esta aplicación es un bien Público Comunitario",
     "footer2": "Desarrollado por Edenia",
     "bugRequest": "Reportar un problema / Solicitar una característica ",
-    "moreInfo": "Más Información"
+    "moreInfo": "Más Información",
+    "openLink": "Visitar Sitio"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -65,6 +66,9 @@
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel",
     "/block-producers>heading": "Productores de Bloques",
+    "/non-compliant-bps>sidebar": "Productores incumplidores",
+    "/non-compliant-bps>title": "Productores de Bloques incumplidores - Panel",
+    "/non-compliant-bps>heading": "Productores de Bloques incumplidores",
     "/rewards-distribution>sidebar": "Distribución de recompensas",
     "/rewards-distribution>title": "Distribución de recompensas - Panel",
     "/rewards-distribution>heading": "Distribución de recompensas",
@@ -152,12 +156,14 @@
     "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
-    "clickToViewBPs": "Haga clic para ver los PB no conformes",
     "lowestRewards": "Recompensas Más Bajas",
     "highestRewards": "Recompensas Más Altas",
     "exchangeRate": "Tipo De Cambio",
     "country": "País",
-    "rewardsPercentage": "Porcentaje de recompensas"
+    "rewards": "Recompensas",
+    "rewardsPercentage": "Porcentaje de recompensas",
+    "viewList": "Ver lista completa",
+    "paidProducersText": "en recompensas diarias"
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},
@@ -248,7 +254,6 @@
     "health": "Cumplimiento",
     "collapse": "Colapsar",
     "moreInfo": "Más Información",
-    "openLink": "Visitar Sitio",
     "version": "Versión",
     "info": "Info",
     "keys": "Llaves",
@@ -260,7 +265,10 @@
     "hs_bpJson": "BP Json",
     "emptyState": "Este productor de bloques no proporciona ninguna información.",
     "average": "calificación promedio",
-    "ratings": "calificaciones"
+    "ratings": "calificaciones",
+    "lastClaimTime": "Último reclamo",
+    "noInfo": "No provee información",
+    "dailyRewards": "Recompensas diarias"
   },
   "nodeCardComponent": {
     "features": "Características",

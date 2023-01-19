@@ -5,13 +5,16 @@ export default (theme) => ({
     justifyContent: 'space-between',
   },
   card: {
-    width: '100%',
     display: 'flex',
+    [theme.breakpoints.up('lg')]: {
+      width: '100%',
+    },
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
     },
     [theme.breakpoints.down('sm')]: {
       flex: 'auto',
+      width: '100%',
     },
   },
   searchWrapper: {

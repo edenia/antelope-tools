@@ -4,34 +4,21 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
 import CountryFlag from '../CountryFlag'
-import CopyToClipboard from '../CopyToClipboard'
 import MoreInfoModal from '../MoreInfoModal'
 import VisitSite from '../VisitSite'
 
 const ProducerInformation = ({ info, classes, t }) => {
   const URLModal = ({ data }) => {
+    if (!Array.isArray(data)) return <></>
     return (
-      <MoreInfoModal hideCloseButton>
-        {Array.isArray(data) ? (
-          <>
-            {data.map((url, i) => (
-              <div className={classes.dd} key={i}>
-                <Link href={url} target="_blank" rel="noopener noreferrer">
-                  {url}
-                </Link>
-              </div>
-            ))}
-          </>
-        ) : (
-          <div className={classes.flex}>
-            <div className={classes.popoverStyle}>
-              <Link href={data} target="_blank" rel="noopener noreferrer">
-                {data}
-              </Link>
-            </div>
-            <CopyToClipboard text={data} />
+      <MoreInfoModal>
+        {data.map((url, index) => (
+          <div className={classes.dd} key={`more-info-${url}-${index}`}>
+            <Link href={url} target="_blank" rel="noopener noreferrer">
+              {url}
+            </Link>
           </div>
-        )}
+        ))}
       </MoreInfoModal>
     )
   }
@@ -54,7 +41,6 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('website')}:
               </Typography>
               <VisitSite title={t('openLink')} url={info?.website} />
-              <URLModal data={info?.website} />
             </>
           ) : (
             <Typography variant="body1" className={classes.textEllipsis}>
@@ -69,7 +55,6 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('email')}:
               </Typography>
               <VisitSite title={t('openLink')} url={`mailto:${info.email}`} />
-              <URLModal data={info?.email} />
             </>
           ) : (
             <Typography variant="body1" className={classes.textEllipsis}>
@@ -84,7 +69,6 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('ownershipDisclosure')}:
               </Typography>
               <VisitSite title={t('openLink')} url={info?.ownership} />
-              <URLModal data={info?.ownership} />
             </>
           ) : null}
         </div>
@@ -95,7 +79,6 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('codeofconduct')}:
               </Typography>
               <VisitSite title={t('openLink')} url={info?.code_of_conduct} />
-              <URLModal data={info?.code_of_conduct} />
             </>
           ) : null}
         </div>
@@ -106,7 +89,6 @@ const ProducerInformation = ({ info, classes, t }) => {
                 {t('chainResources')}:
               </Typography>
               <VisitSite title={t('openLink')} url={info?.chain} />
-              <URLModal data={info?.chain} />
             </>
           ) : null}
         </div>
