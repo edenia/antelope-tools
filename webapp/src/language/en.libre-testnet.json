@@ -4,7 +4,7 @@
     "/cpu-benchmark>title": "CPU Benchmarks  - Libre Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Libre Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Libre Testnet Network Dashboard",
-    "/non-compliant-bps>title": "Non-compliant Blocks Producers - Libre Testnet Dashboard",
+    "/non-compliant-bps>title": "Non-compliant Blocks Producers - Libre Testnet Network Dashboard",
     "/nodes>title": "Libre Testnet Nodes Status Monitor",
     "/nodes-distribution>title": "Geographic Distribution of Nodes - Libre Testnet Network Dashboard",
     "/accounts>title": "Accounts and Contracts - Libre Testnet Network Dashboard",

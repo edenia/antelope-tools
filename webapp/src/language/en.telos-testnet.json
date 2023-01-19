@@ -4,7 +4,7 @@
     "/cpu-benchmark>title": "CPU Benchmarks  - Telos Testnet Network Dashboard",
     "/block-producers>title": "Block Producers - Telos Testnet Network Dashboard",
     "/rewards-distribution>title": "Rewards Distribution - Telos Testnet Network Dashboard",
-    "/non-compliant-bps>title": "Non-compliant Blocks Producers - Telos Testnet Dashboard",
+    "/non-compliant-bps>title": "Non-compliant Blocks Producers - Telos Testnet Network Dashboard",
     "/nodes>title": "Telos Testnet Nodes Status Monitor",
     "/nodes-distribution>title": "Geographic Distribution of Nodes - Telos Testnet Network Dashboard",
     "/accounts>title": "Accounts and Contracts - Telos Testnet Network Dashboard",
