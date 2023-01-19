@@ -7,6 +7,7 @@ import moment from 'moment'
 
 import { eosConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
+import isUrlValid from '../../utils/validate-url'
 import VisitSite from 'components/VisitSite'
 
 import styles from './styles'
@@ -31,17 +32,19 @@ const NonCompliantCard = ({ producer, stats }) => {
   return (
     <>
       <div className={`${classes.content} ${classes.account}`}>
-        <Typography variant="h3">{producer.owner}</Typography>
+        <Typography variant="h3" component="span">{producer.owner}</Typography>
         <Typography variant="body1">{t('noInfo')}</Typography>
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
         <Typography variant="overline">{t('info')}</Typography>
-        <div className={classes.flex}>
-          <Typography variant="body1" className={classes.bold}>
-            {t('website')}:
-          </Typography>
-          <VisitSite title={t('openLink')} url={producer.url} />
-        </div>
+        {isUrlValid(producer.url) && (
+          <div className={classes.flex}>
+            <Typography variant="body1" className={classes.bold}>
+              {t('website')}:
+            </Typography>
+            <VisitSite title={t('openLink')} url={producer.url} />
+          </div>
+        )}
         <RowInfo
           title={`${t('votes')}`}
           value={`${formatWithThousandSeparator(producer.total_votes_eos, 0)}`}

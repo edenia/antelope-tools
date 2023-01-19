@@ -19,16 +19,20 @@ const RewardsStats = ({ stats }) => {
     <>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6">{t('paidProducers')}</Typography>
-          <Typography variant="h3" className={classes.statsText}>
+          <Typography variant="h6" component="h4">
+            {t('paidProducers')}
+          </Typography>
+          <Typography variant="h3" component="p" className={classes.statsText}>
             {stats.quantity || 0}
           </Typography>
         </div>
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6">{`${t('dailyRewards')} (USD)`}</Typography>
-          <Typography variant="h3" className={classes.statsText}>
+          <Typography variant="h6" component="h4">{`${t(
+            'dailyRewards',
+          )} (USD)`}</Typography>
+          <Typography variant="h3" component="p" className={classes.statsText}>
             {`${formatWithThousandSeparator(
               stats.dailyRewards * stats.tokenPrice,
               0,
@@ -38,10 +42,10 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6">
+          <Typography variant="h6" component="h4">
             {`${t('dailyRewards')} (${eosConfig.tokenSymbol})`}
           </Typography>
-          <Typography variant="h3" className={classes.statsText}>
+          <Typography variant="h3" component="p" className={classes.statsText}>
             {`${formatWithThousandSeparator(stats.dailyRewards, 0)} ${
               eosConfig.tokenSymbol
             }`}
@@ -50,8 +54,10 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6">{t('rewardsPercentage')}</Typography>
-          <Typography variant="h3" className={classes.statsText}>
+          <Typography variant="h6" component="h4">
+            {t('rewardsPercentage')}
+          </Typography>
+          <Typography variant="h3" component="p" className={classes.statsText}>
             {`${stats.percentageRewards?.toFixed(2)}%`}
           </Typography>
         </div>

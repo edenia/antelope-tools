@@ -102,6 +102,9 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   nonCompliantButton: {
     height: '30px',
+    width: '100px',
+    fontSize: '12px !important',
+    textAlign: 'center',
     borderRadius: '90px !important',
     backgroundColor: '#1565c0 !important',
   },
@@ -113,5 +116,14 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   textMargin: {
     margin: `${theme.spacing(4, 0, 0)} !important`,
     wordBreak: 'break-word',
+  },
+  notLocated: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingBottom: theme.spacing(2),
+    '& .MuiTypography-h6': {
+      paddingBottom: 0,
+    },
   },
 })

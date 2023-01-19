@@ -29,6 +29,7 @@ export default (theme) => ({
     height: 'auto',
     margin: '0px',
     flexGrow: '1',
+    background: theme.palette.common.white,
     [theme.breakpoints.down('sm')]: {
       width: '200px',
     },
@@ -52,6 +53,7 @@ export default (theme) => ({
     flexFlow: 'row nowrap',
     minHeight: '125px',
     padding: theme.spacing(2),
+    background: theme.palette.common.white,
     '& .MuiTypography-h6': {
       display: 'flex',
     },
