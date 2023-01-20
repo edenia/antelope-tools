@@ -32,19 +32,23 @@ const NonCompliantCard = ({ producer, stats }) => {
   return (
     <>
       <div className={`${classes.content} ${classes.account}`}>
-        <Typography variant="h3" component="span">{producer.owner}</Typography>
+        <Typography variant="h3" component="span">
+          {producer.owner}
+        </Typography>
         <Typography variant="body1">{t('noInfo')}</Typography>
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
         <Typography variant="overline">{t('info')}</Typography>
-        {isUrlValid(producer.url) && (
-          <div className={classes.flex}>
-            <Typography variant="body1" className={classes.bold}>
-              {t('website')}:
-            </Typography>
+        <div className={classes.flex}>
+          <Typography variant="body1" className={classes.bold}>
+            {t('website')}:
+          </Typography>
+          {isUrlValid(producer.url) ? (
             <VisitSite title={t('openLink')} url={producer.url} />
-          </div>
-        )}
+          ) : (
+            <Typography variant="body1">{t('invalidUrl')}</Typography>
+          )}
+        </div>
         <RowInfo
           title={`${t('votes')}`}
           value={`${formatWithThousandSeparator(producer.total_votes_eos, 0)}`}

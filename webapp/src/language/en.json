@@ -261,7 +261,8 @@
     "ratings": "ratings",
     "lastClaimTime": "Last Claimed Time",
     "noInfo": "No info provided",
-    "dailyRewards": "Daily Rewards"
+    "dailyRewards": "Daily Rewards",
+    "invalidUrl": "Invalid URL"
   },
   "nodeCardComponent": {
     "features": "Features",

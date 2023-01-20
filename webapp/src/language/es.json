@@ -268,7 +268,8 @@
     "ratings": "calificaciones",
     "lastClaimTime": "Último reclamo",
     "noInfo": "No provee información",
-    "dailyRewards": "Recompensas diarias"
+    "dailyRewards": "Recompensas diarias",
+    "invalidUrl": "URL inválida"
   },
   "nodeCardComponent": {
     "features": "Características",
