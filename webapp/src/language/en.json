@@ -42,7 +42,8 @@
     "footer2": "Developed by Edenia",
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature",
-    "moreInfo": "More Info"
+    "moreInfo": "More Info",
+    "openLink": "Visit Site"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -54,6 +55,9 @@
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - EOSIO Network Dashboard",
     "/block-producers>heading": "Block Producers",
+    "/non-compliant-bps>sidebar": "Non-compliant Producers",
+    "/non-compliant-bps>title": "Non-compliant Blocks Producers - EOSIO Network Dashboard",
+    "/non-compliant-bps>heading": "Non-compliant Blocks Producers",
     "/rewards-distribution>sidebar": "Rewards Distribution",
     "/rewards-distribution>title": "Rewards Distribution - EOSIO Network Dashboard",
     "/rewards-distribution>heading": "Rewards Distribution",
@@ -146,13 +150,14 @@
     "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid Producers Not Located",
-    "clickToViewBPs": "Click to view non-compliant BPs",
     "lowestRewards": "Lowest Rewards",
     "highestRewards": "Highest Rewards",
     "exchangeRate": "Exchange Rate",
     "country": "Country",
     "rewards": "Rewards",
-    "rewardsPercentage": "Percentage of rewards"
+    "rewardsPercentage": "Percentage of rewards",
+    "viewList": "View full list",
+    "paidProducersText": "in daily rewards"
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},
@@ -242,7 +247,6 @@
     "health": "Compliance",
     "collapse": "Collapse",
     "moreInfo": "More Info",
-    "openLink": "Visit Site",
     "version": "Version",
     "info": "Info",
     "keys": "Keys",
@@ -254,7 +258,11 @@
     "hs_bpJson": "BP Json",
     "emptyState": "This block producer does not provide any information.",
     "average": "average rating",
-    "ratings": "ratings"
+    "ratings": "ratings",
+    "lastClaimTime": "Last Claimed Time",
+    "noInfo": "No info provided",
+    "dailyRewards": "Daily Rewards",
+    "invalidUrl": "Invalid URL"
   },
   "nodeCardComponent": {
     "features": "Features",

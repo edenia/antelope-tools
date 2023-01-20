@@ -15,5 +15,5 @@ export {
   EndpointSvg,
   MissingBlocksSvg,
   TopologySvg,
-  RewardsSvg
+  RewardsSvg,
 }
