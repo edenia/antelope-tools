@@ -6,12 +6,9 @@ import { eosConfig } from '../../config'
 const TokenToUSD = ({ amount, tokenPrice }) => {
   return (
     <span>
-      {`${formatWithThousandSeparator(amount, 2)} ${
-        eosConfig.tokenSymbol
-      } / $${formatWithThousandSeparator(
-        amount * tokenPrice,
-        2,
-      )} USD`}
+      {`${formatWithThousandSeparator(amount, 2)} ${eosConfig.tokenSymbol}`}
+      {tokenPrice &&
+        `/ $${formatWithThousandSeparator(amount * tokenPrice, 2)} USD`}
     </span>
   )
 }

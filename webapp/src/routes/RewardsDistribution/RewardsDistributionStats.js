@@ -36,9 +36,11 @@ const RewardsDistributionStats = ({
     <div className={classes.divMargin}>
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={classes.cards}>
-            <Typography variant="h6">{t('dailyRewards')}</Typography>
-            <Typography variant="h3">
+          <CardContent className={`${classes.cards} ${classes.totalDailyCard}`}>
+            <Typography variant="h6" component="h4">
+              {t('dailyRewards')}
+            </Typography>
+            <Typography variant="h3" component="p">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -49,7 +51,7 @@ const RewardsDistributionStats = ({
                 </span>
               )}
             </Typography>
-            <Typography variant="h3">
+            <Typography variant="h3" component="p">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -70,8 +72,10 @@ const RewardsDistributionStats = ({
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
-            <Typography variant="h6">{t('topCountryDailyRwards')}</Typography>
-            <Typography variant="h3">
+            <Typography variant="h6" component="h4">
+              {t('topCountryDailyRwards')}
+            </Typography>
+            <Typography variant="h3" component="p">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -83,11 +87,11 @@ const RewardsDistributionStats = ({
               )}
             </Typography>
             <div className={`${classes.textMargin} ${classes.spaceBetween}`}>
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" component="p">
                 {!nodes?.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes?.length > 0 && setting?.token_price && (
+                {nodes?.length > 0 && (
                   <TokenToUSD
                     amount={summary.topCountryByRewards.rewards}
                     tokenPrice={setting?.token_price}
@@ -105,37 +109,43 @@ const RewardsDistributionStats = ({
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
-            <Typography variant="h6">{t('paidProducers')}</Typography>
-            <Typography variant="h3">
+            <div className={classes.notLocated}>
+              <Typography variant="h6" component="h4">
+                {t('paidProducers')}
+              </Typography>
+              {!!summary?.producersWithoutProperBpJson.quantity && (
+                <Button
+                  className={classes.nonCompliantButton}
+                  component={Link}
+                  to="/non-compliant-bps"
+                  variant="contained"
+                  color="secondary"
+                  mt={2}
+                >
+                  {t('viewList')}
+                </Button>
+              )}
+            </div>
+            <Typography variant="h3" component="p">
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {nodes.length > 0 &&
                 summary?.producersWithoutProperBpJson.quantity && (
-                  <span className={classes.spaceBetween}>
-                    {summary?.producersWithoutProperBpJson.quantity}
-                    <Button
-                      className={classes.nonCompliantButton}
-                      component={Link}
-                      to="/non-compliant-bps"
-                      variant="contained"
-                      color="secondary"
-                      mt={2}
-                    >
-                      {t('viewList')}
-                    </Button>
-                  </span>
+                  <span>{summary?.producersWithoutProperBpJson.quantity}</span>
                 )}
             </Typography>
-            {!!summary?.producersWithoutProperBpJson.quantity && (
-              <Typography variant="subtitle1" className={classes.textMargin}>
-                <TokenToUSD
-                  amount={summary?.producersWithoutProperBpJson.rewards}
-                  tokenPrice={setting?.token_price}
-                />{' '}
-                {t('paidProducersText')}
-              </Typography>
-            )}
+            <Typography
+              variant="subtitle1"
+              component="p"
+              className={classes.textMargin}
+            >
+              <TokenToUSD
+                amount={summary?.producersWithoutProperBpJson.rewards}
+                tokenPrice={setting?.token_price}
+              />{' '}
+              {t('paidProducersText')}
+            </Typography>
           </CardContent>
         </Card>
       </div>
@@ -145,6 +155,7 @@ const RewardsDistributionStats = ({
             <div className={classes.center}>
               <Typography
                 variant="subtitle1"
+                component="p"
                 className={classes.rewardsColorSchema}
               >
                 <span
@@ -154,6 +165,7 @@ const RewardsDistributionStats = ({
               </Typography>
               <Typography
                 variant="subtitle1"
+                component="p"
                 className={classes.rewardsColorSchema}
               >
                 <span
@@ -162,22 +174,25 @@ const RewardsDistributionStats = ({
                 <span className={classes.itemLabel}>{t('highestRewards')}</span>
               </Typography>
             </div>
-            {setting?.token_price && (
-              <Typography
-                variant="subtitle1"
-                className={`${classes.textMargin} ${classes.center}`}
-              >
-                <span className={classes.exchangeRateLabel}>
-                  {`${t('exchangeRate')}: `}{' '}
-                </span>
+            <Typography
+              variant="subtitle1"
+              component="p"
+              className={`${classes.textMargin} ${classes.center}`}
+            >
+              <span className={classes.exchangeRateLabel}>
+                {`${t('exchangeRate')}: `}{' '}
+              </span>
+              {setting?.token_price ? (
                 <span>
                   {`1 ${eosConfig.tokenSymbol} = $${formatWithThousandSeparator(
                     setting.token_price,
                     4,
                   )}`}
                 </span>
-              </Typography>
-            )}
+              ) : (
+                <span>N/A</span>
+              )}
+            </Typography>
           </CardContent>
         </Card>
       </div>

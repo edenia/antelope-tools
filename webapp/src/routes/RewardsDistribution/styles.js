@@ -56,6 +56,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   exchangeRateLabel: {
     fontWeight: 'bold',
+    marginRight: theme.spacing(1),
   },
   mapWrapper: {
     marginTop: theme.spacing(3),
@@ -89,10 +90,17 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     },
   },
   cards: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     '& .MuiTypography-h6': {
       display: 'flex',
       paddingBottom: theme.spacing(4),
     },
+  },
+  totalDailyCard: {
+    justifyContent: 'flex-start',
   },
   shadow: {
     '& .MuiPaper-root': {
@@ -102,6 +110,8 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   nonCompliantButton: {
     height: '30px',
+    fontSize: '12px !important',
+    textAlign: 'center',
     borderRadius: '90px !important',
     backgroundColor: '#1565c0 !important',
   },
@@ -113,5 +123,14 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   textMargin: {
     margin: `${theme.spacing(4, 0, 0)} !important`,
     wordBreak: 'break-word',
+  },
+  notLocated: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingBottom: theme.spacing(1),
+    '& .MuiTypography-h6': {
+      width: 'calc(100% - 130px)',
+    },
   },
 })

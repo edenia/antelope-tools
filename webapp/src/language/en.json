@@ -259,9 +259,10 @@
     "emptyState": "This block producer does not provide any information.",
     "average": "average rating",
     "ratings": "ratings",
-    "lastClaimTime": "Last time claimed",
+    "lastClaimTime": "Last Claimed Time",
     "noInfo": "No info provided",
-    "dailyRewards": "Daily Rewards"
+    "dailyRewards": "Daily Rewards",
+    "invalidUrl": "Invalid URL"
   },
   "nodeCardComponent": {
     "features": "Features",
