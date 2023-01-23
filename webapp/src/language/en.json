@@ -43,7 +43,8 @@
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature",
     "moreInfo": "More Info",
-    "openLink": "Visit Site"
+    "openLink": "Visit Site",
+    "table": "Table"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -164,12 +165,11 @@
   "accountsRoute": {
     "loginBeforeUseAction": "Please login before execute an action",
     "unknownError": "Unknown error processing action",
-    "accountNotFound": "Account not found",
-    "tableNotFound": "Table not found",
+    "notFound": "not found",
     "successMessage": "Success transaction",
     "placeholder": "Account or Contract Name",
     "title": "Search for account information, view tables and execute actions for any contract.",
-    "endpointFailure": "Endpoint failure"
+    "endpointFailure": "Endpoint failure. Try again later"
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",

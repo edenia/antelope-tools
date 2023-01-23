@@ -54,7 +54,8 @@
     "footer2": "Desarrollado por Edenia",
     "bugRequest": "Reportar un problema / Solicitar una característica ",
     "moreInfo": "Más Información",
-    "openLink": "Visitar Sitio"
+    "openLink": "Visitar Sitio",
+    "table": "Tabla"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -170,12 +171,11 @@
   "accountsRoute": {
     "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
-    "accountNotFound": "Cuenta no encontrada",
-    "tableNotFound": "Tabla no encontrada",
+    "notFound": "no encontrada",
     "successMessage": "Transacción exitosa",
     "placeholder": "Cuenta o Nombre del Contrato",
     "title": "Busque información de cuenta, vea tablas y ejecute acciones para cualquier contrato.",
-    "endpointFailure": "Fallo en el endpoint"
+    "endpointFailure": "Fallo en el endpoint. Vuelva a intentarlo más tarde"
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",
