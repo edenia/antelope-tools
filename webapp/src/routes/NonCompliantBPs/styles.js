@@ -37,15 +37,15 @@ export default (theme) => ({
   bpsContainer: {
     display: 'grid',
     gap: theme.spacing(4, 6),
-    gridTemplateColumns: 'repeat(auto-fit, minmax(800px, auto))',
+    gridTemplateColumns:
+      'repeat(auto-fit, minmax( min( calc( 50% - 100px ), 600px ), auto))',
     margin: '0 40px',
     [theme.breakpoints.down('lg')]: {
       margin: '0',
       gridTemplateColumns: 'repeat(auto-fit, minmax(500px, auto))',
     },
     [theme.breakpoints.down('sm')]: {
-      display: 'flex',
-      flexWrap: 'wrap',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, auto))',
     },
   },
   card: {

@@ -99,8 +99,14 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
       paddingBottom: theme.spacing(4),
     },
   },
+  exchangeCard: {
+    justifyContent: 'space-around',
+  },
   totalDailyCard: {
     justifyContent: 'flex-start',
+    '& .MuiTypography-h3': {
+      paddingBottom: theme.spacing(2),
+    },
   },
   shadow: {
     '& .MuiPaper-root': {
@@ -121,8 +127,13 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     height: '24px',
   },
   textMargin: {
-    margin: `${theme.spacing(4, 0, 0)} !important`,
+    margin: `${theme.spacing(3, 0, 0)} !important`,
+    lineHeight: '1 !important',
+    fontWeight: 'normal !important',
     wordBreak: 'break-word',
+  },
+  noMargin: {
+    margin: '0 !important',
   },
   notLocated: {
     display: 'flex',
@@ -130,7 +141,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     justifyContent: 'space-between',
     paddingBottom: theme.spacing(1),
     '& .MuiTypography-h6': {
-      width: 'calc(100% - 130px)',
+      width: 'calc(100% - 125px)',
     },
   },
 })
