@@ -86,8 +86,12 @@ const RewardsDistributionStats = ({
                 </>
               )}
             </Typography>
-            <div className={`${classes.textMargin} ${classes.spaceBetween}`}>
-              <Typography variant="subtitle1" component="p">
+            <div className={`${classes.spaceBetween} ${classes.textBlock}`}>
+              <Typography
+                className={classes.textMargin}
+                variant="subtitle1"
+                component="p"
+              >
                 {!nodes?.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
@@ -138,14 +142,14 @@ const RewardsDistributionStats = ({
             <Typography
               variant="subtitle2"
               component="p"
-              className={classes.textMargin}
+              className={`${classes.textMargin} ${classes.marginPaidText}`}
             >
               {t('paidProducersText')}
             </Typography>
             <Typography
               variant="subtitle1"
               component="p"
-              className={`${classes.textMargin} ${classes.noMargin}`}
+              className={classes.textMargin}
             >
               {!nodes.length > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
@@ -185,25 +189,29 @@ const RewardsDistributionStats = ({
                 <span className={classes.itemLabel}>{t('highestRewards')}</span>
               </Typography>
             </div>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              className={`${classes.textMargin} ${classes.center}`}
-            >
-              <span className={classes.exchangeRateLabel}>
-                {`${t('exchangeRate')}: `}{' '}
-              </span>
-              {setting?.token_price ? (
-                <span>
-                  {`1 ${eosConfig.tokenSymbol} = $${formatWithThousandSeparator(
-                    setting.token_price,
-                    4,
-                  )}`}
+            <div className={classes.textBlock}>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                className={`${classes.textMargin} ${classes.center}`}
+              >
+                <span className={classes.exchangeRateLabel}>
+                  {`${t('exchangeRate')}: `}{' '}
                 </span>
-              ) : (
-                <span>N/A</span>
-              )}
-            </Typography>
+                {setting?.token_price ? (
+                  <span>
+                    {`1 ${
+                      eosConfig.tokenSymbol
+                    } = $${formatWithThousandSeparator(
+                      setting.token_price,
+                      4,
+                    )}`}
+                  </span>
+                ) : (
+                  <span>N/A</span>
+                )}
+              </Typography>
+            </div>
           </CardContent>
         </Card>
       </div>

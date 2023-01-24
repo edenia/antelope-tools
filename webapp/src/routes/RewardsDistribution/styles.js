@@ -8,6 +8,9 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  textBlock: {
+    marginTop: `${theme.spacing(4)} !important`,
+  },
   popoverItem: {
     fontWeight: 'bold',
   },
@@ -75,7 +78,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     [theme.breakpoints.down('lg')]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'flex',
       flexDirection: 'column',
     },
@@ -127,21 +130,27 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     height: '24px',
   },
   textMargin: {
-    margin: `${theme.spacing(3, 0, 0)} !important`,
     lineHeight: '1 !important',
     fontWeight: 'normal !important',
     wordBreak: 'break-word',
+    flexWrap: 'wrap',
+    [theme.breakpoints.down('xl')]: {
+      fontSize: '14px !important',
+    },
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '16px !important',
+    },
   },
-  noMargin: {
-    margin: '0 !important',
+  marginPaidText: {
+    padding: theme.spacing(2, 0),
   },
   notLocated: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    paddingBottom: theme.spacing(1),
     '& .MuiTypography-h6': {
       width: 'calc(100% - 125px)',
+      paddingBottom: theme.spacing(2),
     },
   },
 })
