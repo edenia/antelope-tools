@@ -86,8 +86,12 @@ const RewardsDistributionStats = ({
                 </>
               )}
             </Typography>
-            <div className={`${classes.textMargin} ${classes.spaceBetween}`}>
-              <Typography variant="subtitle1" component="p">
+            <div className={`${classes.spaceBetween} ${classes.textBlock}`}>
+              <Typography
+                className={classes.textMargin}
+                variant="subtitle1"
+                component="p"
+              >
                 {!nodes?.length > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
@@ -136,22 +140,33 @@ const RewardsDistributionStats = ({
                 )}
             </Typography>
             <Typography
+              variant="subtitle2"
+              component="p"
+              className={`${classes.textMargin} ${classes.marginPaidText}`}
+            >
+              {t('paidProducersText')}
+            </Typography>
+            <Typography
               variant="subtitle1"
               component="p"
               className={classes.textMargin}
             >
-              <TokenToUSD
-                amount={summary?.producersWithoutProperBpJson.rewards}
-                tokenPrice={setting?.token_price}
-              />{' '}
-              {t('paidProducersText')}
+              {!nodes.length > 0 && (
+                <Skeleton variant="text" width="100%" animation="wave" />
+              )}
+              {nodes.length > 0 && (
+                <TokenToUSD
+                  amount={summary?.producersWithoutProperBpJson.rewards}
+                  tokenPrice={setting?.token_price}
+                />
+              )}
             </Typography>
           </CardContent>
         </Card>
       </div>
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={classes.cards}>
+          <CardContent className={`${classes.cards} ${classes.exchangeCard}`}>
             <div className={classes.center}>
               <Typography
                 variant="subtitle1"
@@ -174,25 +189,29 @@ const RewardsDistributionStats = ({
                 <span className={classes.itemLabel}>{t('highestRewards')}</span>
               </Typography>
             </div>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              className={`${classes.textMargin} ${classes.center}`}
-            >
-              <span className={classes.exchangeRateLabel}>
-                {`${t('exchangeRate')}: `}{' '}
-              </span>
-              {setting?.token_price ? (
-                <span>
-                  {`1 ${eosConfig.tokenSymbol} = $${formatWithThousandSeparator(
-                    setting.token_price,
-                    4,
-                  )}`}
+            <div className={classes.textBlock}>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                className={`${classes.textMargin} ${classes.center}`}
+              >
+                <span className={classes.exchangeRateLabel}>
+                  {`${t('exchangeRate')}: `}{' '}
                 </span>
-              ) : (
-                <span>N/A</span>
-              )}
-            </Typography>
+                {setting?.token_price ? (
+                  <span>
+                    {`1 ${
+                      eosConfig.tokenSymbol
+                    } = $${formatWithThousandSeparator(
+                      setting.token_price,
+                      4,
+                    )}`}
+                  </span>
+                ) : (
+                  <span>N/A</span>
+                )}
+              </Typography>
+            </div>
           </CardContent>
         </Card>
       </div>
