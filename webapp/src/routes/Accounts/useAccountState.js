@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import queryString from 'query-string'
 
 import { signTransaction } from '../../utils/eos'
-import eosApi from '../../utils/eosapi'
+import eosApi, { ENDPOINTS_ERROR } from '../../utils/eosapi'
 import getTransactionUrl from '../../utils/get-transaction-url'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
 import { useSharedState } from '../../context/state.context'
@@ -53,6 +53,20 @@ const useAccountState = () => {
     accountStateReducer,
     INITIAL_ACCOUNT_STATE,
   )
+
+  const getErrorMessage = useCallback((error, resultRequested = '') => {
+    if (error?.message === ENDPOINTS_ERROR) {
+      return t('endpointFailure')
+    } else {
+      try {
+        const actionError = JSON.parse(error?.message).error.details[0].message
+
+        return actionError ? `${resultRequested} ${t('notFound')}` : ''
+      } catch (error) {
+        return t('unknownError')
+      }
+    }
+  }, [t])
 
   const handleSubmitAction = async (action) => {
     if (!ual.activeUser) {
@@ -124,17 +138,18 @@ const useAccountState = () => {
       } catch (error) {
         showMessage({
           type: 'error',
-          content: t('tableNotFound'),
+          content: getErrorMessage(error, `${t('table')} ${payload?.table}`),
         })
+
+        console.log(error)
       }
       dispatch({ payload: false, type: 'SET_LOADING' })
     },
-    [showMessage, t, state.tableData, state.loading],
+    [showMessage, getErrorMessage, t, state.tableData, state.loading],
   )
 
   const handleOnSearch = async (valueAccount) => {
     const accountName = valueAccount?.owner ?? ''
-    const tableName = valueAccount?.table ?? ''
 
     if (!accountName) return
 
@@ -147,27 +162,39 @@ const useAccountState = () => {
       const account = await eosApi.getAccount(accountName)
 
       dispatch({ payload: account, type: 'SET_ACCOUNT' })
-    } catch (error) {
-      showMessage({
-        type: 'error',
-        content: t('accountNotFound'),
-      })
-    }
 
-    try {
       const { abi } = await eosApi.getAbi(accountName)
 
       dispatch({ payload: abi, type: 'SET_ABI' })
 
       if (abi?.tables?.length) {
-        const defaultTable =
-          accountName === 'eosio' ? 'producers' : abi?.tables[0]?.name
+        let tableName = valueAccount?.table ?? ''
+
+        if (tableName) {
+          tableName =
+            abi?.tables.find((table) => table.name === tableName)?.name ?? ''
+
+          if (!tableName) {
+            showMessage({
+              type: 'error',
+              content: t(
+                `${t('table')} ${valueAccount?.table} ${t('notFound')}`,
+              ),
+            })
+          }
+        } else {
+          tableName =
+            accountName === 'eosio' &&
+            abi?.tables.find((table) => table.name === 'producers')
+              ? 'producers'
+              : abi?.tables[0]?.name
+        }
 
         dispatch({
           type: 'SET_FILTERS',
           payload: {
             owner: accountName,
-            table: tableName || defaultTable,
+            table: tableName,
           },
         })
       }
@@ -176,6 +203,11 @@ const useAccountState = () => {
 
       dispatch({ payload: hash, type: 'SET_HASH' })
     } catch (error) {
+      showMessage({
+        type: 'error',
+        content: getErrorMessage(error, `${t('account')} ${accountName}`),
+      })
+
       console.log(error)
     }
 
