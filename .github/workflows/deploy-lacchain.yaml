@@ -31,7 +31,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: '80'
-          REACT_APP_TITLE: 'LACChain EOSIO + Antelope Network Dashboard'
+          REACT_APP_TITLE: 'LACChain EOSIO Network Dashboard'
           REACT_APP_VERSION: ${{ github.ref }}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/lacchain.jpg'
           REACT_APP_FOOTER_LINKS: '[{"text":"LACChain Website","src":"https://eosio.lacchain.net"},{"text":"Block Explorer","src":"https://eosio-explorer.lacchain.net"},{"text":"LACChain Developer Docs","src":"https://eosio.lacchain.net/en/docs/eosio/"},{"text": "LACChain Network Monitor","src": "https://antelope.tools"}]'

@@ -14,7 +14,7 @@
     "/endpoints>title": "API Endpoints - Airwire Network Dashboard",
     "/about>title": "About - Airwire Network Dashboard",
     "/help>title": "Help - Airwire Network Dashboard",
-    "/rewards-distribution>moreDescription": "A geographic visualization of daily block producer rewards and a list of non-discoverable paid block producers.",
+    "/rewards-distribution>moreDescription": "A geographic visualization of daily block producer rewards and a list of undiscoverable paid block producers.",
     "/bpjson>moreDescription": "A tool for block producers to provide details of their organizations and nodes to comply with the BP information standard.",
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "The on-chain ricardian contract that describes the validator node agreement of this network.",
