@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import EosApi from 'eosjs-api'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next'
@@ -77,14 +78,7 @@ const getBpJSONChain = async (producer) => {
 }
 
 const useBPJsonState = () => {
-  const [{ ual }] = useSharedState()
-  const { t } = useTranslation('bpJsonRoute')
-  const [producer, setProducer] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [inconsistencyMessage, setInconsistencyMessage] = useState(null)
-
-  const initData = {
+  const emptyBPJson = {
     account_name: '',
     org: {
       candidate_name: '',
@@ -122,6 +116,27 @@ const useBPJsonState = () => {
     },
     nodes: [],
   }
+
+  const [{ ual }] = useSharedState()
+  const { t } = useTranslation('bpJsonRoute')
+  const location = useLocation()
+  const [producer, setProducer] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [inconsistencyMessage, setInconsistencyMessage] = useState(null)
+  const [initData, setInitData] = useState(emptyBPJson)
+
+  useEffect(() => {
+    setInitData((prev) => ({
+      ...prev,
+      org: {
+        ...prev.org,
+        candidate_name: location.state?.owner || '',
+        website: location.state?.url,
+      },
+    }))
+    window.history.replaceState({}, document.title)
+  }, [location, setInitData])
 
   const handleOnSubmit = async (payload) => {
     if (!ual.activeUser || !payload) return

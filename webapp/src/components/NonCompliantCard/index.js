@@ -2,12 +2,16 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
 import { eosConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
+import HealthCheck from '../HealthCheck'
 import isUrlValid from '../../utils/validate-url'
+import EndpointInfo from 'components/EndpointsTable/EndpointInfo'
 import VisitSite from 'components/VisitSite'
 
 import styles from './styles'
@@ -17,6 +21,10 @@ const useStyles = makeStyles(styles)
 const NonCompliantCard = ({ producer, stats }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
+
+  const getHealthStatus = (healthCheck) => {
+    return healthCheck.valid ? 'greenLight' : 'redLight'
+  }
 
   const RowInfo = ({ title, value }) => {
     return (
@@ -36,6 +44,16 @@ const NonCompliantCard = ({ producer, stats }) => {
           {producer.owner}
         </Typography>
         <Typography variant="body1">{t('noInfo')}</Typography>
+        <Button
+          component={Link}
+          state={{ owner: producer.owner, url: producer.url }}
+          to="/bpjson"
+          variant="contained"
+          color="secondary"
+          mt={2}
+        >
+          BP JSON generator
+        </Button>
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
         <Typography variant="overline">{t('info')}</Typography>
@@ -44,11 +62,27 @@ const NonCompliantCard = ({ producer, stats }) => {
             {t('website')}:
           </Typography>
           {isUrlValid(producer.url) ? (
-            <VisitSite title={t('openLink')} url={producer.url} />
+            <>
+              <VisitSite title={t('openLink')} url={producer.url} />
+              <HealthCheck status={getHealthStatus(producer.healthCheck)}>
+                <EndpointInfo endpoint={producer.healthCheck} />
+              </HealthCheck>
+            </>
           ) : (
             <Typography variant="body1">{t('invalidUrl')}</Typography>
           )}
         </div>
+        {isUrlValid(producer.url) && (
+          <div className={classes.flex}>
+            <Typography variant="body1" className={classes.bold}>
+              {t('bpJson')}:
+            </Typography>
+            <VisitSite
+              title={t('openLink')}
+              url={producer.healthCheck.bpJsonUrl}
+            />
+          </div>
+        )}
         <RowInfo
           title={`${t('votes')}`}
           value={`${formatWithThousandSeparator(producer.total_votes_eos, 0)}`}

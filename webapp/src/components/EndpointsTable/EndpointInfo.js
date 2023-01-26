@@ -12,10 +12,9 @@ const EndpointInfo = ({ endpoint }) => {
         {t('status')}: {endpoint.response?.status || t('error')}
       </Typography>
       <Typography>
-        {t('response')}:{' '}
-        {t(endpoint.response?.statusText || 'noResponse')}
+        {t('response')}: {t(endpoint.response?.statusText || 'noResponse')}
       </Typography>
-      {endpoint.response?.status === 200 && (
+      {endpoint.head_block_time && endpoint.response?.status === 200 && (
         <>
           <Typography>{t('headBlockTime')}</Typography>
           {moment(endpoint.head_block_time).format('lll') || 'N/A'}

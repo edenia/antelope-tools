@@ -28,7 +28,15 @@ const useNonCompliantState = () => {
       producers.reduce(
         (stats, producer) => {
           if (!Object.keys(producer.bp_json).length) {
-            stats.nonCompliantBPs.push(producer)
+            stats.nonCompliantBPs.push({
+              ...producer,
+              healthCheck: {
+                updated_at: producer.updated_at,
+                ...producer.health_status.find(
+                  (status) => status.name === 'website',
+                ),
+              },
+            })
             stats.nonCompliantRewards += producer.total_rewards
           }
 

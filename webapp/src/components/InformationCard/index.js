@@ -60,8 +60,12 @@ const InformationCard = ({ producer, rank, type }) => {
   }
 
   const BlockProducerInfo = () => {
-    if (producerOrg.healthStatus?.length <= 1)
-      return <EmptyState classes={classes} t={t}/>
+    const bpJsonHealthStatus = producerOrg.healthStatus.find(
+      (status) => status.name === 'bpJson',
+    )
+
+    if (!bpJsonHealthStatus?.valid)
+      return <EmptyState classes={classes} t={t} />
 
     return (
       <div className="bodyWrapper">
