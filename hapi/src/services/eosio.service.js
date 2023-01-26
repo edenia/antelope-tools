@@ -45,7 +45,10 @@ const getProducers = async () => {
       return 0
     })
 
-  const rewards = await producerUtil.getExpectedRewards(producers, totalVoteWeight)
+  const rewards = await producerUtil.getExpectedRewards(
+    producers,
+    totalVoteWeight
+  )
   const nonPaidStandby = { vote_rewards: 0, block_rewards: 0, total_rewards: 0 }
 
   producers = producers.map((producer, index) => {
@@ -78,13 +81,15 @@ const getBPJsons = async (producers = []) => {
   topProducers = await Promise.all(
     topProducers.map(async producer => {
       let bpJson = {}
+      let healthStatus = []
 
       if (producer.url && producer.url.length > 3) {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
         const chainUrl = chains[eosConfig.chainId]
+        const bpJsonUrl = getBPJsonUrl(producerUrl, chainUrl || '/bp.json')
 
-        bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
+        bpJson = await getBPJson(bpJsonUrl)
 
         if (bpJson && !chainUrl && !isEosNetwork) {
           const { org, producer_account_name: name } = bpJson
@@ -93,13 +98,43 @@ const getBPJsons = async (producers = []) => {
             ...(org && { org }),
             ...(name && { producer_account_name: name })
           }
+
+        }
+
+        if (!Object.keys(bpJson).length && producer.total_rewards >= 100) {
+          healthStatus.push({ name: 'bpJson', valid: false })
+
+          try {
+            const { status, statusText } = await axiosUtil.instance.get(
+              producerUrl
+            )
+
+            healthStatus.push({
+              name: 'website',
+              valid: status === 200,
+              bpJsonUrl,
+              response: { status, statusText }
+            })
+          } catch (error) {
+            healthStatus.push({
+              name: 'website',
+              valid: false,
+              bpJsonUrl,
+              response: {
+                status: error.response?.status,
+                statusText: error.response?.statusText || 'No response'
+              }
+            })
+          }
+        } else {
+          healthStatus = getProducerHealthStatus(bpJson)
         }
       }
 
       return {
         ...producer,
         endpoints: { api: [], ssl: [], p2p: [] },
-        health_status: getProducerHealthStatus(bpJson),
+        health_status: healthStatus,
         bp_json: bpJson
       }
     })
@@ -108,11 +143,11 @@ const getBPJsons = async (producers = []) => {
   return topProducers.concat(producers.slice(eosConfig.eosTopLimit))
 }
 
-const getBPJson = async (producerUrl, chainUrl) => {
-  const bpJsonUrl = `${producerUrl}/${chainUrl}`.replace(
-    /(?<=:\/\/.*)((\/\/))/,
-    '/'
-  )
+const getBPJsonUrl = (producerUrl, chainUrl) => {
+  return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
+}
+
+const getBPJson = async bpJsonUrl => {
   let bpJson = {}
 
   try {
