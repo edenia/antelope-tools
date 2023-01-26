@@ -66,7 +66,7 @@ const defaultRoutes = [
     name: 'nonCompliantBPs',
     icon: <UserXIcon />,
     component: NonCompliantBPs,
-    path: '/non-compliant-bps',
+    path: '/undiscoverable-bps',
     exact: true,
   },
   {

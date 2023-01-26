@@ -117,7 +117,7 @@ const RewardsDistributionStats = ({
                 <Button
                   className={classes.nonCompliantButton}
                   component={Link}
-                  to="/non-compliant-bps"
+                  to="/undiscoverable-bps"
                   variant="contained"
                   color="secondary"
                   mt={2}
