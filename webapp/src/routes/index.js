@@ -6,6 +6,7 @@ import {
   Server as ServerIcon,
   Sliders as SlidersIcon,
   User as UserIcon,
+  UserX as UserXIcon,
   Info as InfoIcon,
   HelpCircle as HelpIcon,
   Inbox as InboxIcon,
@@ -40,6 +41,7 @@ const Page404 = lazy(() => import('./Page404'))
 const BlockDistribution = lazy(() => import('./BlockDistribution'))
 const MissedBlocks = lazy(() => import('./MissedBlocks'))
 const EndpointsList = lazy(() => import('./EndpointsList'))
+const NonCompliantBPs = lazy(() => import('./NonCompliantBPs'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -58,6 +60,13 @@ const defaultRoutes = [
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
+    exact: true,
+  },
+  {
+    name: 'nonCompliantBPs',
+    icon: <UserXIcon />,
+    component: NonCompliantBPs,
+    path: '/undiscoverable-bps',
     exact: true,
   },
   {

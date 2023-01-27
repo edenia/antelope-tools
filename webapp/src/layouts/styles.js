@@ -16,7 +16,7 @@ export default (theme) => ({
   appContent: {
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '100%',
+    width: '100%',
     overflow: 'hidden',
     [theme.breakpoints.up('md')]: {
       flex: 1,

@@ -26,7 +26,7 @@ const useEndpointsState = () => {
         const endpoints = { api: [], ssl: [], p2p: [] }
         const inserted = []
 
-        producer.endpoints_list.forEach(({ type, ...endpoint }) => {
+        producer.endpoints.forEach(({ type, ...endpoint }) => {
           if (!inserted.includes(endpoint.value)) {
             inserted.push(endpoint.value)
             endpoints[type].push(endpoint)

@@ -15,6 +15,7 @@
     "/about>title": "Acerca de - Panel",
     "/help>title": "Ayuda - Panel",
     "/rewards-distribution>moreDescription": "Distribución diaria de recompensas de BP por ubicación geográfica de los productores de bloques pagados.",
+    "/undiscoverable-bps>moreDescription": "Una lista de los productores de bloques en la red que son pagados y no proveen información en sus archivos bp.json.",
     "/bpjson>moreDescription": "Una representación visual de los nodos actuales de la red.",
     "/faucet>moreDescription": "Esta herramienta permite crear cuentas y transferir tokens.",
     "/node-config>moreDescription": "Utilice esta herramienta para obtener archivos de configuración de ejemplo para ayudar a configurar un nuevo nodo en la red.",

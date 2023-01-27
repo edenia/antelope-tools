@@ -1,3 +1,15 @@
 table:
-  schema: public
   name: endpoints_by_producer_id
+  schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - type
+        - value
+        - producer_id
+        - response
+        - head_block_time
+        - updated_at
+      filter: {}
+      allow_aggregations: true
