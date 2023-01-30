@@ -6,6 +6,9 @@ export default (theme) => ({
   bold: {
     fontWeight: 'bold !important',
   },
+  text: {
+    width: '60px',
+  },
   account: {
     display: 'flex',
     flexDirection: 'column',
@@ -14,6 +17,7 @@ export default (theme) => ({
     alignSelf: 'center',
     [theme.breakpoints.down('sm')]: {
       borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+      paddingBottom: theme.spacing(4),
     },
   },
   content: {
@@ -46,4 +50,9 @@ export default (theme) => ({
       },
     },
   },
+  lightIcon: {
+    '& svg': {
+      marginLeft: theme.spacing(2),
+    },
+  }
 })

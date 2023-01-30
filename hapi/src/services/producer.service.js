@@ -21,7 +21,7 @@ const updateBPJSONs = async (producers = []) => {
 const updateProducers = async (producers = []) => {
   const upsertMutation = `
     mutation ($producers: [producer_insert_input!]!) {
-      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time, url, location, producer_authority, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, endpoints, rank]}) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ producer_key, unpaid_blocks,last_claim_time, url, location, producer_authority, is_active, total_votes, total_votes_percent, total_votes_eos, vote_rewards,block_rewards, total_rewards, endpoints, rank, bp_json_url]}) {
         affected_rows,
         returning {
           id,
@@ -41,7 +41,8 @@ const updateProducers = async (producers = []) => {
   let topProducers = producers.slice(0, eosConfig.eosTopLimit)
 
   topProducers = topProducers.filter(
-    producer => producer?.bp_json && Object.keys(producer.bp_json).length > 0
+    producer =>
+      producer?.health_status && Object.keys(producer.health_status).length > 0
   )
   await nodeService.clearNodes()
   await updateBPJSONs(topProducers)

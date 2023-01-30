@@ -23,6 +23,7 @@ export const PRODUCERS_QUERY = gql`
       url
       total_votes
       bp_json
+      bp_json_url
       total_votes_percent
       total_votes_eos
       total_rewards

@@ -12,7 +12,6 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  ZoomableGroup,
 } from 'react-simple-maps'
 import { scaleLinear } from 'd3-scale'
 import { interpolateHcl } from 'd3-interpolate'
@@ -124,9 +123,7 @@ const RewardsDistribution = () => {
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
                 <Link
-                  href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
-                    producer?.bp_json?.org?.website || producer.url
-                  }/bp.json`}
+                  href={producer?.bp_json_url ?? ''}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -156,34 +153,32 @@ const RewardsDistribution = () => {
               scale: 170,
             }}
           >
-            <ZoomableGroup maxZoom={1}>
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo, i) => {
-                    const nodeData = nodes.find(
-                      (node) => node.code === geo.properties.ISO_A2,
-                    )
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo, i) => {
+                  const nodeData = nodes.find(
+                    (node) => node.code === geo.properties.ISO_A2,
+                  )
 
-                    return (
-                      <Geography
-                        onMouseOver={
-                          nodeData ? handlePopoverOpen(nodeData) : () => {}
-                        }
-                        className={classes.geography}
-                        key={geo.rsmKey}
-                        geography={geo}
-                        stroke="#8F9DA4"
-                        fill={
-                          nodeData && nodeData.rewards > 0
-                            ? colorScale(parseInt(nodeData.rewards))
-                            : '#EEEEEE'
-                        }
-                      />
-                    )
-                  })
-                }
-              </Geographies>
-            </ZoomableGroup>
+                  return (
+                    <Geography
+                      onMouseOver={
+                        nodeData ? handlePopoverOpen(nodeData) : () => {}
+                      }
+                      className={classes.geography}
+                      key={geo.rsmKey}
+                      geography={geo}
+                      stroke="#8F9DA4"
+                      fill={
+                        nodeData && nodeData.rewards > 0
+                          ? colorScale(parseInt(nodeData.rewards))
+                          : '#EEEEEE'
+                      }
+                    />
+                  )
+                })
+              }
+            </Geographies>
           </ComposableMap>
         </Paper>
       )}
