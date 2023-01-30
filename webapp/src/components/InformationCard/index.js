@@ -64,7 +64,7 @@ const InformationCard = ({ producer, rank, type }) => {
       (status) => status.name === 'bpJson',
     )
 
-    if (!bpJsonHealthStatus?.valid)
+    if (!bpJsonHealthStatus?.valid && eosConfig.networkName !== 'lacchain')
       return <EmptyState classes={classes} t={t} />
 
     return (
