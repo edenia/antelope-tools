@@ -115,7 +115,7 @@ const getBPJsons = async (producers = []) => {
         }
 
         healthStatus = await getProducerHealthStatus({
-          producer,
+          ...producer,
           producerUrl,
           bpJson,
         })

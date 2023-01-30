@@ -73,7 +73,7 @@ const getExpectedRewards = async (producers, totalVotes) => {
     case eosConfig.knownNetworks.telos:
       rewards = await getTelosRewards(producers)
       break
-    default: // reward for each block produced
+    default:
       rewards = await getEOSIORewards(producers, totalVotes)
       break
   }
