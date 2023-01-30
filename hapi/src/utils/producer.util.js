@@ -3,20 +3,23 @@ const eosUtil = require('./eos.util')
 const hasuraUtil = require('./hasura.util')
 const { eosConfig } = require('../config')
 
-const getNodeInfo = async (api) => {
+const getUrlStatus = async (url, api = '') => {
   try {
-    const response = await axiosUtil.instance.get(`${api}/v1/chain/get_info`)
+    const response = await axiosUtil.instance.get(`${url}${api}`)
 
-    return {
-      nodeInfo: response.data,
-      status: response.status,
-      statusText: response.statusText
-    }
+    return response
   } catch (error) {
-    return {
-      status: error.response?.status || null,
-      statusText: error.response?.statusText || 'No response'
-    }
+    return error.response
+  }
+}
+
+const getNodeInfo = async url => {
+  const response = await getUrlStatus(url, '/v1/chain/get_info')
+
+  return {
+    ...(response?.data && { nodeInfo: response.data }),
+    status: response?.status || null,
+    statusText: response?.statusText || 'No response'
   }
 }
 
@@ -261,6 +264,7 @@ module.exports = {
   getEndpoints,
   getExpectedRewards,
   getSupportedAPIs,
+  getUrlStatus,
   getVotes,
   jsonParse
 }

@@ -1,3 +1,5 @@
+const { StatusCodes } = require('http-status-codes')
+
 const { axiosUtil, eosUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
@@ -81,15 +83,27 @@ const getBPJsons = async (producers = []) => {
   topProducers = await Promise.all(
     topProducers.map(async producer => {
       let bpJson = {}
+      let bpJsonUrl = ''
       let healthStatus = []
 
       if (producer.url && producer.url.length > 3) {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
         const chainUrl = chains[eosConfig.chainId]
-        const bpJsonUrl = getBPJsonUrl(producerUrl, chainUrl || '/bp.json')
+        bpJsonUrl = getBPJsonUrl(producerUrl, chainUrl || '/bp.json')
 
-        bpJson = await getBPJson(bpJsonUrl)
+        try {
+          bpJson = await getBPJson(bpJsonUrl)
+        } catch (error) {
+          if (error.code === 'ECONNABORTED') {          
+            return {
+              ...producer,
+              bp_json_url: bpJsonUrl,
+              health_status: healthStatus,
+              bp_json: bpJson
+            }
+          }
+        }
 
         if (bpJson && !chainUrl && !isEosNetwork) {
           const { org, producer_account_name: name } = bpJson
@@ -98,42 +112,18 @@ const getBPJsons = async (producers = []) => {
             ...(org && { org }),
             ...(name && { producer_account_name: name })
           }
-
         }
 
-        if (!Object.keys(bpJson).length && producer.total_rewards >= 100) {
-          healthStatus.push({ name: 'bpJson', valid: false })
-
-          try {
-            const { status, statusText } = await axiosUtil.instance.get(
-              producerUrl
-            )
-
-            healthStatus.push({
-              name: 'website',
-              valid: status === 200,
-              bpJsonUrl,
-              response: { status, statusText }
-            })
-          } catch (error) {
-            healthStatus.push({
-              name: 'website',
-              valid: false,
-              bpJsonUrl,
-              response: {
-                status: error.response?.status,
-                statusText: error.response?.statusText || 'No response'
-              }
-            })
-          }
-        } else {
-          healthStatus = getProducerHealthStatus(bpJson)
-        }
+        healthStatus = await getProducerHealthStatus({
+          producer,
+          producerUrl,
+          bpJson,
+        })
       }
 
       return {
         ...producer,
-        endpoints: { api: [], ssl: [], p2p: [] },
+        bp_json_url: bpJsonUrl,
         health_status: healthStatus,
         bp_json: bpJson
       }
@@ -148,13 +138,8 @@ const getBPJsonUrl = (producerUrl, chainUrl) => {
 }
 
 const getBPJson = async bpJsonUrl => {
-  let bpJson = {}
-
-  try {
-    const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
-
-    bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : bpJson
-  } catch (error) {}
+  const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
+  const bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : bpJson
 
   return bpJson
 }
@@ -186,10 +171,31 @@ const getChains = async producerUrl => {
   }
 }
 
-const getProducerHealthStatus = bpJson => {
-  if (!bpJson || !Object.keys(bpJson).length) return []
+const isNonCompliant = producer => {
+  return !Object.keys(producer.bpJson).length && producer.total_rewards >= 100
+}
 
+const getProducerHealthStatus = async producer => {
   const healthStatus = []
+  const {bpJson, producerUrl} = producer
+
+  if (isNonCompliant(producer)) {
+    const response = await producerUtil.getUrlStatus(producerUrl)
+
+    healthStatus.push({ name: 'bpJson', valid: false })
+    healthStatus.push({
+      name: 'website',
+      valid: response?.status === StatusCodes.OK,
+      response: {
+        status: response?.status,
+        statusText: response?.statusText || 'No response'
+      }
+    })
+
+    return healthStatus
+  }
+
+  if (!bpJson || !Object.keys(bpJson).length) return []
 
   healthStatus.push({
     name: 'bpJson',
