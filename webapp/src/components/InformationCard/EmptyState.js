@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@mui/material/Link'
 import PropTypes from 'prop-types'
 
 const EmptyState = ({ classes, t }) => {
@@ -15,6 +16,7 @@ const EmptyState = ({ classes, t }) => {
         />
         <span>{t('emptyState')}</span>
         <Link
+          component={RouterLink}
           to="/undiscoverable-bps"
           variant="contained"
           color="secondary"

@@ -2,7 +2,8 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
@@ -44,6 +45,7 @@ const NonCompliantCard = ({ producer, stats }) => {
         </Typography>
         <Typography variant="body1">{t('noInfo')}</Typography>
         <Link
+          component={RouterLink}
           state={{ owner: producer.owner, url: producer.url }}
           to="/bpjson"
           variant="contained"

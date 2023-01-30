@@ -17,6 +17,7 @@ export default (theme) => ({
     alignSelf: 'center',
     [theme.breakpoints.down('sm')]: {
       borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+      paddingBottom: theme.spacing(4),
     },
   },
   content: {

@@ -123,9 +123,7 @@ const RewardsDistribution = () => {
             {currentNode?.items?.map((producer, i) => (
               <li key={`node-${i}`}>
                 <Link
-                  href={`${producer.owner === 'eosrainbowbp' ? 'http://' : ''}${
-                    producer?.bp_json?.org?.website || producer.url
-                  }/bp.json`}
+                  href={producer?.bp_json_url ?? ''}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
