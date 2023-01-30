@@ -1,23 +1,23 @@
 table:
-  schema: public
   name: producer
+  schema: public
 array_relationships:
   - name: endpoints_list
     using:
       manual_configuration:
-        remote_table:
-          schema: public
-          name: endpoints_by_producer_id
-        insertion_order: null
         column_mapping:
           id: producer_id
+        insertion_order: null
+        remote_table:
+          name: endpoints_by_producer_id
+          schema: public
   - name: nodes
     using:
       foreign_key_constraint_on:
         column: producer_id
         table:
-          schema: public
           name: node
+          schema: public
 select_permissions:
   - role: guest
     permission:
@@ -26,6 +26,7 @@ select_permissions:
         - block_net_limit
         - block_rewards
         - bp_json
+        - bp_json_url
         - chain_id
         - created_at
         - endpoints
