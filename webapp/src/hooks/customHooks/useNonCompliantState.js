@@ -32,6 +32,7 @@ const useNonCompliantState = () => {
               ...producer,
               healthCheck: {
                 updated_at: producer.updated_at,
+                bp_json_url: producer.bp_json_url,
                 ...producer.health_status.find(
                   (status) => status.name === 'website',
                 ),

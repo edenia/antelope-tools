@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) =>
 
 const RewardsDistributionStats = ({
   summary,
-  nodes,
   setting,
   handlePopoverOpen,
 }) => {
@@ -41,10 +40,10 @@ const RewardsDistributionStats = ({
               {t('dailyRewards')}
             </Typography>
             <Typography variant="h3" component="p">
-              {!nodes.length > 0 && (
+              {!summary?.dailyRewards > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {nodes.length > 0 && (
+              {summary?.dailyRewards > 0 && (
                 <span>
                   {formatWithThousandSeparator(summary.dailyRewards, 2)}{' '}
                   {eosConfig.tokenSymbol}
@@ -52,10 +51,10 @@ const RewardsDistributionStats = ({
               )}
             </Typography>
             <Typography variant="h3" component="p">
-              {!nodes.length > 0 && (
+              {!setting?.token_price > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {nodes.length > 0 && setting?.token_price && (
+              {setting?.token_price && !!summary?.dailyRewards && (
                 <span>
                   $
                   {formatWithThousandSeparator(
@@ -76,10 +75,10 @@ const RewardsDistributionStats = ({
               {t('topCountryDailyRwards')}
             </Typography>
             <Typography variant="h3" component="p">
-              {!nodes.length > 0 && (
+              {!summary?.topCountryByRewards > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {nodes.length > 0 && (
+              {summary?.topCountryByRewards && (
                 <>
                   {summary.topCountryByRewards.name}
                   <CountryFlag code={summary.topCountryByRewards.code} />
@@ -92,10 +91,10 @@ const RewardsDistributionStats = ({
                 variant="subtitle1"
                 component="p"
               >
-                {!nodes?.length > 0 && (
+                {!summary?.topCountryByRewards?.rewards > 0 && (
                   <Skeleton variant="text" width="100%" animation="wave" />
                 )}
-                {nodes?.length > 0 && (
+                {summary?.topCountryByRewards?.rewards > 0 && (
                   <TokenToUSD
                     amount={summary.topCountryByRewards.rewards}
                     tokenPrice={setting?.token_price}
@@ -131,10 +130,10 @@ const RewardsDistributionStats = ({
               )}
             </div>
             <Typography variant="h3" component="p">
-              {!nodes.length > 0 && (
+              {!summary?.producersWithoutProperBpJson.quantity > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {nodes.length > 0 &&
+              {summary?.producersWithoutProperBpJson.quantity > 0 &&
                 summary?.producersWithoutProperBpJson.quantity && (
                   <span>{summary?.producersWithoutProperBpJson.quantity}</span>
                 )}
@@ -151,10 +150,10 @@ const RewardsDistributionStats = ({
               component="p"
               className={classes.textMargin}
             >
-              {!nodes.length > 0 && (
+              {!summary?.producersWithoutProperBpJson.rewards > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {nodes.length > 0 && (
+              {summary?.producersWithoutProperBpJson.rewards > 0 && (
                 <TokenToUSD
                   amount={summary?.producersWithoutProperBpJson.rewards}
                   tokenPrice={setting?.token_price}

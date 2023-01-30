@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Button from '@mui/material/Button'
 
 const EmptyState = ({ classes, t }) => {
   return (
@@ -15,15 +14,14 @@ const EmptyState = ({ classes, t }) => {
           alt=""
         />
         <span>{t('emptyState')}</span>
-        <Button
-          component={Link}
-          to="/non-compliant-bps"
+        <Link
+          to="/undiscoverable-bps"
           variant="contained"
           color="secondary"
           mt={2}
         >
           {t('viewList')}
-        </Button>
+        </Link>
       </div>
     </div>
   )

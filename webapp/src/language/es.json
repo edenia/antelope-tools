@@ -269,7 +269,8 @@
     "lastClaimTime": "Último reclamo",
     "noInfo": "No provee información",
     "dailyRewards": "Recompensas diarias",
-    "invalidUrl": "URL inválida"
+    "invalidUrl": "URL inválida",
+    "bpJsonGenerator": "Generar BP JSON"
   },
   "nodeCardComponent": {
     "features": "Características",

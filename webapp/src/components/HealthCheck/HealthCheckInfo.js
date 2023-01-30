@@ -3,27 +3,27 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
-const EndpointInfo = ({ endpoint }) => {
+const HealthCheckInfo = ({ healthCheck }) => {
   const { t } = useTranslation('endpointInfoComponent')
 
   return (
     <>
       <Typography>
-        {t('status')}: {endpoint.response?.status || t('error')}
+        {t('status')}: {healthCheck.response?.status || t('error')}
       </Typography>
       <Typography>
-        {t('response')}: {t(endpoint.response?.statusText || 'noResponse')}
+        {t('response')}: {t(healthCheck.response?.statusText || 'noResponse')}
       </Typography>
-      {endpoint.head_block_time && endpoint.response?.status === 200 && (
+      {healthCheck.head_block_time && healthCheck.response?.status === 200 && (
         <>
           <Typography>{t('headBlockTime')}</Typography>
-          {moment(endpoint.head_block_time).format('lll') || 'N/A'}
+          {moment(healthCheck.head_block_time).format('lll') || 'N/A'}
         </>
       )}
       <Typography>{t('updatedAt')}</Typography>
-      {moment(endpoint.updated_at).format('lll') || 'N/A'}
+      {moment(healthCheck.updated_at).format('lll') || 'N/A'}
     </>
   )
 }
 
-export default EndpointInfo
+export default HealthCheckInfo

@@ -3,15 +3,14 @@ import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
 import { eosConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
 import HealthCheck from '../HealthCheck'
+import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
 import isUrlValid from '../../utils/validate-url'
-import EndpointInfo from 'components/EndpointsTable/EndpointInfo'
 import VisitSite from 'components/VisitSite'
 
 import styles from './styles'
@@ -44,29 +43,33 @@ const NonCompliantCard = ({ producer, stats }) => {
           {producer.owner}
         </Typography>
         <Typography variant="body1">{t('noInfo')}</Typography>
-        <Button
-          component={Link}
+        <Link
           state={{ owner: producer.owner, url: producer.url }}
           to="/bpjson"
           variant="contained"
           color="secondary"
           mt={2}
         >
-          BP JSON generator
-        </Button>
+          {t('bpJsonGenerator')}
+        </Link>
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
         <Typography variant="overline">{t('info')}</Typography>
         <div className={classes.flex}>
-          <Typography variant="body1" className={classes.bold}>
+          <Typography
+            variant="body1"
+            className={`${classes.bold} ${classes.text}`}
+          >
             {t('website')}:
           </Typography>
           {isUrlValid(producer.url) ? (
             <>
               <VisitSite title={t('openLink')} url={producer.url} />
-              <HealthCheck status={getHealthStatus(producer.healthCheck)}>
-                <EndpointInfo endpoint={producer.healthCheck} />
-              </HealthCheck>
+              <div className={classes.lightIcon}>
+                <HealthCheck status={getHealthStatus(producer.healthCheck)}>
+                  <HealthCheckInfo healthCheck={producer.healthCheck} />
+                </HealthCheck>
+              </div>
             </>
           ) : (
             <Typography variant="body1">{t('invalidUrl')}</Typography>
@@ -74,12 +77,15 @@ const NonCompliantCard = ({ producer, stats }) => {
         </div>
         {isUrlValid(producer.url) && (
           <div className={classes.flex}>
-            <Typography variant="body1" className={classes.bold}>
+            <Typography
+              variant="body1"
+              className={`${classes.bold} ${classes.text}`}
+            >
               {t('bpJson')}:
             </Typography>
             <VisitSite
               title={t('openLink')}
-              url={producer.healthCheck.bpJsonUrl}
+              url={producer.bp_json_url}
             />
           </div>
         )}

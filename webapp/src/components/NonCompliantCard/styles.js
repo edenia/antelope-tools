@@ -6,6 +6,9 @@ export default (theme) => ({
   bold: {
     fontWeight: 'bold !important',
   },
+  text: {
+    width: '60px',
+  },
   account: {
     display: 'flex',
     flexDirection: 'column',
@@ -46,4 +49,9 @@ export default (theme) => ({
       },
     },
   },
+  lightIcon: {
+    '& svg': {
+      marginLeft: theme.spacing(2),
+    },
+  }
 })
