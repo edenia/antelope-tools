@@ -41,7 +41,6 @@ jobs:
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'true'
-          REACT_APP_USE_CPU_BENCHMARK: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-wax.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'wax'
           REACT_APP_EOS_API_NETWORK_LABEL: 'WAX Mainnet'
