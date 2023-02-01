@@ -38,7 +38,6 @@ jobs:
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'false'
           REACT_APP_USE_VOTES: 'false'
-          REACT_APP_USE_CPU_BENCHMARK: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-lacchain.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'lacchain'
           REACT_APP_EOS_API_NETWORK_LABEL: 'LACChain EOSIO'

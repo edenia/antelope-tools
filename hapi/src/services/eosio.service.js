@@ -1,3 +1,5 @@
+const { StatusCodes } = require('http-status-codes')
+
 const { axiosUtil, eosUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
@@ -45,7 +47,10 @@ const getProducers = async () => {
       return 0
     })
 
-  const rewards = await producerUtil.getExpectedRewards(producers, totalVoteWeight)
+  const rewards = await producerUtil.getExpectedRewards(
+    producers,
+    totalVoteWeight
+  )
   const nonPaidStandby = { vote_rewards: 0, block_rewards: 0, total_rewards: 0 }
 
   producers = producers.map((producer, index) => {
@@ -78,13 +83,27 @@ const getBPJsons = async (producers = []) => {
   topProducers = await Promise.all(
     topProducers.map(async producer => {
       let bpJson = {}
+      let bpJsonUrl = ''
+      let healthStatus = []
 
       if (producer.url && producer.url.length > 3) {
         const producerUrl = getProducerUrl(producer)
         const chains = await getChains(producerUrl)
         const chainUrl = chains[eosConfig.chainId]
+        bpJsonUrl = getBPJsonUrl(producerUrl, chainUrl || '/bp.json')
 
-        bpJson = await getBPJson(producerUrl, chainUrl || '/bp.json')
+        try {
+          bpJson = await getBPJson(bpJsonUrl)
+        } catch (error) {
+          if (error.code === 'ECONNABORTED') {          
+            return {
+              ...producer,
+              bp_json_url: bpJsonUrl,
+              health_status: healthStatus,
+              bp_json: bpJson
+            }
+          }
+        }
 
         if (bpJson && !chainUrl && !isEosNetwork) {
           const { org, producer_account_name: name } = bpJson
@@ -94,12 +113,18 @@ const getBPJsons = async (producers = []) => {
             ...(name && { producer_account_name: name })
           }
         }
+
+        healthStatus = await getProducerHealthStatus({
+          ...producer,
+          producerUrl,
+          bpJson,
+        })
       }
 
       return {
         ...producer,
-        endpoints: { api: [], ssl: [], p2p: [] },
-        health_status: getProducerHealthStatus(bpJson),
+        bp_json_url: bpJsonUrl,
+        health_status: healthStatus,
         bp_json: bpJson
       }
     })
@@ -108,18 +133,13 @@ const getBPJsons = async (producers = []) => {
   return topProducers.concat(producers.slice(eosConfig.eosTopLimit))
 }
 
-const getBPJson = async (producerUrl, chainUrl) => {
-  const bpJsonUrl = `${producerUrl}/${chainUrl}`.replace(
-    /(?<=:\/\/.*)((\/\/))/,
-    '/'
-  )
-  let bpJson = {}
+const getBPJsonUrl = (producerUrl, chainUrl) => {
+  return `${producerUrl}/${chainUrl}`.replace(/(?<=:\/\/.*)((\/\/))/, '/')
+}
 
-  try {
-    const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
-
-    bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : bpJson
-  } catch (error) {}
+const getBPJson = async bpJsonUrl => {
+  const { data: _bpJson } = await axiosUtil.instance.get(bpJsonUrl)
+  const bpJson = !!_bpJson && typeof _bpJson === 'object' ? _bpJson : {}
 
   return bpJson
 }
@@ -151,10 +171,31 @@ const getChains = async producerUrl => {
   }
 }
 
-const getProducerHealthStatus = bpJson => {
-  if (!bpJson || !Object.keys(bpJson).length) return []
+const isNonCompliant = producer => {
+  return !Object.keys(producer.bpJson).length && producer.total_rewards >= 100
+}
 
+const getProducerHealthStatus = async producer => {
   const healthStatus = []
+  const {bpJson, producerUrl} = producer
+
+  if (isNonCompliant(producer)) {
+    const response = await producerUtil.getUrlStatus(producerUrl)
+
+    healthStatus.push({ name: 'bpJson', valid: false })
+    healthStatus.push({
+      name: 'website',
+      valid: response?.status === StatusCodes.OK,
+      response: {
+        status: response?.status,
+        statusText: response?.statusText || 'No response'
+      }
+    })
+
+    return healthStatus
+  }
+
+  if (!bpJson || !Object.keys(bpJson).length) return []
 
   healthStatus.push({
     name: 'bpJson',

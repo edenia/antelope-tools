@@ -262,7 +262,10 @@
     "lastClaimTime": "Last Claimed Time",
     "noInfo": "No info provided",
     "dailyRewards": "Daily Rewards",
-    "invalidUrl": "Invalid URL"
+    "invalidUrl": "Invalid URL",
+    "viewList": "View undiscoverable BPs list",
+    "bpJson": "BP.json",
+    "bpJsonGenerator": "BP JSON Generator"
   },
   "nodeCardComponent": {
     "features": "Features",

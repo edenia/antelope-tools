@@ -13,10 +13,10 @@ import { Tooltip as MUITooltip } from '@mui/material'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 
 import HealthCheck from '../HealthCheck'
+import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
 import { eosConfig } from '../../config'
 
 import styles from './styles'
-import EndpointInfo from './EndpointInfo'
 import Tooltip from '../Tooltip'
 import EndpointsTextList from '../EndpointsTextList'
 
@@ -73,7 +73,7 @@ const EndpointsTable = ({ producers }) => {
               {endpoint.value}
               {endpointType !== 'p2p' && (
                 <HealthCheck status={getStatus(endpoint)}>
-                  <EndpointInfo endpoint={endpoint} />
+                  <HealthCheckInfo healthCheck={endpoint} />
                 </HealthCheck>
               )}
             </div>

@@ -41,7 +41,6 @@ jobs:
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
-          REACT_APP_USE_CPU_BENCHMARK: 'false'
           REACT_APP_HASURA_URL: 'https://graphql-libre-testnet.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'libre-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'Libre Testnet'
@@ -105,8 +104,8 @@ jobs:
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
-          HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=btc&vs_currencies=usd'
-          HAPI_COINGECKO_API_TOKEN_ID: BTC
+          HAPI_EOS_EXCHANGE_RATE_API: 'https://dashboard-api.libre.org/exchange-rates'
+          HAPI_COINGECKO_API_TOKEN_ID: LIBRE
           HAPI_REWARDS_TOKEN: LIBRE
           HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
           HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
