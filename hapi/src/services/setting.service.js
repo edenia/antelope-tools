@@ -22,8 +22,11 @@ const syncEOSPrice = async () => {
       return
     }
 
+    const response = data[eosConfig.coingeckoApiTokenId]
+    const tokenPrice = !isNaN(response?.usd) ? response.usd : response
+
     await hasuraUtil.request(UPSERT, {
-      setting: { id: 1, token_price: data[eosConfig.coingeckoApiTokenId].usd }
+      setting: { id: 1, token_price: tokenPrice }
     })
   } catch (error) {
     console.error(error)
