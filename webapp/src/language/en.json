@@ -68,7 +68,7 @@
     "/nodes-distribution>sidebar": "Geo Distribution",
     "/nodes-distribution>title": "Geographic Distribution of Nodes - EOSIO + Antelope Network Dashboard",
     "/nodes-distribution>heading": "Geographic Distribution of Nodes",
-    "/accounts>sidebar": "Accounts and Contracts",
+    "/accounts>sidebar": "Accounts & Contracts",
     "/accounts>title": "Accounts and Contracts - EOSIO + Antelope Network Dashboard",
     "/accounts>heading": "Accounts and Contracts",
     "/bpjson>sidebar": "BP.json Generator",
