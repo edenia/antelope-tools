@@ -29,27 +29,42 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6" component="h4">{`${t(
-            'dailyRewards',
-          )} (USD)`}</Typography>
-          <Typography variant="h3" component="p" className={classes.statsText}>
-            {`${formatWithThousandSeparator(
-              stats.dailyRewards * stats.tokenPrice,
-              0,
-            )} USD`}
+          <Typography variant="h6" component="h4">
+            {t('dailyRewards')}
           </Typography>
+          <div className={classes.statsText}>
+            <Typography variant="h3" component="p" className={classes.price}>
+              {`${formatWithThousandSeparator(stats.dailyRewards, 0)} ${
+                eosConfig.tokenSymbol
+              }`}
+            </Typography>
+            <Typography variant="h3" component="p" className={classes.price}>
+              {`$ ${formatWithThousandSeparator(
+                stats.dailyRewards * stats.tokenPrice,
+                0,
+              )} USD`}
+            </Typography>
+          </div>
         </div>
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
           <Typography variant="h6" component="h4">
-            {`${t('dailyRewards')} (${eosConfig.tokenSymbol})`}
+            {t('dailyRewards')}
           </Typography>
-          <Typography variant="h3" component="p" className={classes.statsText}>
-            {`${formatWithThousandSeparator(stats.dailyRewards, 0)} ${
-              eosConfig.tokenSymbol
-            }`}
-          </Typography>
+          <div className={classes.statsText}>
+            <Typography variant="h3" component="p" className={classes.price}>
+              {`${formatWithThousandSeparator(stats.yearlyRewards, 0)} ${
+                eosConfig.tokenSymbol
+              }`}
+            </Typography>
+            <Typography variant="h3" component="p" className={classes.price}>
+              {`$ ${formatWithThousandSeparator(
+                stats.yearlyRewards * stats.tokenPrice,
+                0,
+              )} USD`}
+            </Typography>
+          </div>
         </div>
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>

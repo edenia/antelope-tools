@@ -4,7 +4,10 @@ export default (theme) => ({
   },
   statsText: {
     textAlign: 'center',
-    marginTop: `${theme.spacing(6)} !important`,
+    marginTop: `${theme.spacing(4)} !important`,
+  },
+  price: {
+    paddingBottom: theme.spacing(2),
   },
   statsContainer: {
     display: 'flex',
