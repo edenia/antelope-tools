@@ -50,7 +50,7 @@ const RewardsStats = ({ stats }) => {
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
           <Typography variant="h6" component="h4">
-            {t('dailyRewards')}
+            {t('yearlyRewards')}
           </Typography>
           <div className={classes.statsText}>
             <Typography variant="h3" component="p" className={classes.price}>

@@ -103,7 +103,7 @@ const NonCompliantCard = ({ producer, stats }) => {
         <Typography variant="overline">{t('dailyRewards')}</Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
-          value={`$${formatWithThousandSeparator(
+          value={`$ ${formatWithThousandSeparator(
             producer.total_rewards * stats.tokenPrice,
             0,
           )}`}
@@ -115,7 +115,7 @@ const NonCompliantCard = ({ producer, stats }) => {
         <Typography variant="overline">{t('yearlyRewards')}</Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
-          value={`$${formatWithThousandSeparator(
+          value={`$ ${formatWithThousandSeparator(
             producer.total_rewards * 365 * stats.tokenPrice,
             0,
           )}`}
