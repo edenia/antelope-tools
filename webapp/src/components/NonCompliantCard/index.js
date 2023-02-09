@@ -85,10 +85,7 @@ const NonCompliantCard = ({ producer, stats }) => {
             >
               {t('bpJson')}:
             </Typography>
-            <VisitSite
-              title={t('openLink')}
-              url={producer.bp_json_url}
-            />
+            <VisitSite title={t('openLink')} url={producer.bp_json_url} />
           </div>
         )}
         <RowInfo
@@ -106,7 +103,7 @@ const NonCompliantCard = ({ producer, stats }) => {
         <Typography variant="overline">{t('dailyRewards')}</Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
-          value={`$${formatWithThousandSeparator(
+          value={`$ ${formatWithThousandSeparator(
             producer.total_rewards * stats.tokenPrice,
             0,
           )}`}
@@ -114,6 +111,21 @@ const NonCompliantCard = ({ producer, stats }) => {
         <RowInfo
           title={`${t('rewards')} (${eosConfig.tokenSymbol})`}
           value={`${formatWithThousandSeparator(producer.total_rewards, 0)}`}
+        />
+        <Typography variant="overline">{t('yearlyRewards')}</Typography>
+        <RowInfo
+          title={`${t('rewards')} (USD)`}
+          value={`$ ${formatWithThousandSeparator(
+            producer.total_rewards * 365 * stats.tokenPrice,
+            0,
+          )}`}
+        />
+        <RowInfo
+          title={`${t('rewards')} (${eosConfig.tokenSymbol})`}
+          value={`${formatWithThousandSeparator(
+            producer.total_rewards * 365,
+            0,
+          )}`}
         />
       </div>
     </>

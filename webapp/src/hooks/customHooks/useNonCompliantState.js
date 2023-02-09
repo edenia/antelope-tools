@@ -53,6 +53,7 @@ const useNonCompliantState = () => {
     setStats({
       percentageRewards,
       dailyRewards: nonCompliantRewards,
+      yearlyRewards: nonCompliantRewards * 365,
       tokenPrice: setting?.token_price,
       quantity: nonCompliantBPs.length,
     })
