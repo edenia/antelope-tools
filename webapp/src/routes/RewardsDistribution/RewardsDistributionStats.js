@@ -23,11 +23,7 @@ const useStyles = makeStyles((theme) =>
   styles(theme, lowestRewardsColor, highestRewardsColor),
 )
 
-const RewardsDistributionStats = ({
-  summary,
-  setting,
-  handlePopoverOpen,
-}) => {
+const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
   const classes = useStyles()
   const { t } = useTranslation('rewardsDistributionRoute')
 
@@ -130,27 +126,29 @@ const RewardsDistributionStats = ({
               )}
             </div>
             <Typography variant="h3" component="p">
-              {!summary?.producersWithoutProperBpJson.quantity > 0 && (
+              {!summary?.producersWithoutProperBpJson.quantity > 0 ?? (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
-              {summary?.producersWithoutProperBpJson.quantity > 0 &&
+              {summary?.producersWithoutProperBpJson.quantity >= 0 &&
                 summary?.producersWithoutProperBpJson.quantity && (
                   <span>{summary?.producersWithoutProperBpJson.quantity}</span>
                 )}
             </Typography>
-            <Typography
-              variant="subtitle2"
-              component="p"
-              className={`${classes.textMargin} ${classes.marginPaidText}`}
-            >
-              {t('paidProducersText')}
-            </Typography>
+            {summary?.producersWithoutProperBpJson.rewards > 0 && (
+              <Typography
+                variant="subtitle2"
+                component="p"
+                className={`${classes.textMargin} ${classes.marginPaidText}`}
+              >
+                {t('paidProducersText')}
+              </Typography>
+            )}
             <Typography
               variant="subtitle1"
               component="p"
               className={classes.textMargin}
             >
-              {!summary?.producersWithoutProperBpJson.rewards > 0 && (
+              {!summary?.producersWithoutProperBpJson.rewards > 0 ?? (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
               {summary?.producersWithoutProperBpJson.rewards > 0 && (

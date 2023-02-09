@@ -154,6 +154,7 @@
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
     "dailyRewards": "Recompensas Diarias Totales",
+    "yearlyRewards": "Recompensas Anuales Totales",
     "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
@@ -269,6 +270,7 @@
     "lastClaimTime": "Último reclamo",
     "noInfo": "No provee información",
     "dailyRewards": "Recompensas diarias",
+    "yearlyRewards": "Recompensas anuales",
     "invalidUrl": "URL inválida",
     "viewList": "Ver lista de BPs indetectables",
     "bpJson": "BP.json",

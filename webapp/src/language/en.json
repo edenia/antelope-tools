@@ -148,6 +148,7 @@
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
     "dailyRewards": "Total Daily Rewards",
+    "yearlyRewards": "Total Yearly Rewards",
     "topCountryDailyRwards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid BPs Not Located",
@@ -262,6 +263,7 @@
     "lastClaimTime": "Last Claimed Time",
     "noInfo": "No info provided",
     "dailyRewards": "Daily Rewards",
+    "yearlyRewards": "Yearly Rewards",
     "invalidUrl": "Invalid URL",
     "viewList": "View undiscoverable BPs list",
     "bpJson": "BP.json",
