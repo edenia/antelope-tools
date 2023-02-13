@@ -97,9 +97,7 @@ const NonCompliantCard = ({ producer, stats }) => {
           value={`${moment(producer.last_claim_time).format('ll')}`}
         />
       </div>
-      <div
-        className={`${classes.content} ${classes.borderLine} ${classes.hideRewards}`}
-      >
+      <div className={`${classes.content} ${classes.borderLine}`}>
         <Typography variant="overline">{t('dailyRewards')}</Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
