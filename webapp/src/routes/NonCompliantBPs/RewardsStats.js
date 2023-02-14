@@ -39,7 +39,7 @@ const RewardsStats = ({ stats }) => {
               }`}
             </Typography>
             <Typography variant="h3" component="p" className={classes.price}>
-              {`$ ${formatWithThousandSeparator(
+              {`$${formatWithThousandSeparator(
                 stats.dailyRewards * stats.tokenPrice,
                 0,
               )} USD`}
@@ -59,7 +59,7 @@ const RewardsStats = ({ stats }) => {
               }`}
             </Typography>
             <Typography variant="h3" component="p" className={classes.price}>
-              {`$ ${formatWithThousandSeparator(
+              {`$${formatWithThousandSeparator(
                 stats.yearlyRewards * stats.tokenPrice,
                 0,
               )} USD`}
