@@ -19,26 +19,24 @@ const RewardsStats = ({ stats }) => {
     <>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6" component="h4">
-            {t('paidProducers')}
-          </Typography>
-          <Typography variant="h3" component="p" className={classes.statsText}>
-            {stats.quantity || 0}
-          </Typography>
+          <Typography component="h4">{t('paidProducers')}</Typography>
+          <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+            <Typography variant="h6" component="p">
+              {stats.quantity || 0}
+            </Typography>
+          </div>
         </div>
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6" component="h4">
-            {t('dailyRewards')}
-          </Typography>
-          <div className={classes.statsText}>
-            <Typography variant="h3" component="p" className={classes.price}>
+          <Typography component="h4">{t('dailyRewards')}</Typography>
+          <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+            <Typography variant="h6" component="p" className={classes.price}>
               {`${formatWithThousandSeparator(stats.dailyRewards, 0)} ${
                 eosConfig.tokenSymbol
               }`}
             </Typography>
-            <Typography variant="h3" component="p" className={classes.price}>
+            <Typography variant="h6" component="p" className={classes.price}>
               {`$${formatWithThousandSeparator(
                 stats.dailyRewards * stats.tokenPrice,
                 0,
@@ -49,16 +47,14 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6" component="h4">
-            {t('yearlyRewards')}
-          </Typography>
-          <div className={classes.statsText}>
-            <Typography variant="h3" component="p" className={classes.price}>
+          <Typography component="h4">{t('yearlyRewards')}</Typography>
+          <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+            <Typography variant="h6" component="p" className={classes.price}>
               {`${formatWithThousandSeparator(stats.yearlyRewards, 0)} ${
                 eosConfig.tokenSymbol
               }`}
             </Typography>
-            <Typography variant="h3" component="p" className={classes.price}>
+            <Typography variant="h6" component="p" className={classes.price}>
               {`$${formatWithThousandSeparator(
                 stats.yearlyRewards * stats.tokenPrice,
                 0,
@@ -69,12 +65,12 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography variant="h6" component="h4">
-            {t('rewardsPercentage')}
-          </Typography>
-          <Typography variant="h3" component="p" className={classes.statsText}>
-            {`${stats.percentageRewards?.toFixed(2)}%`}
-          </Typography>
+          <Typography component="h4">{t('rewardsPercentage')}</Typography>
+          <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+            <Typography variant="h6" component="p">
+              {`${stats.percentageRewards?.toFixed(2)}%`}
+            </Typography>
+          </div>
         </div>
       </div>
     </>

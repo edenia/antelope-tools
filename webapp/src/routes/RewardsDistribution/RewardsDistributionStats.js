@@ -32,45 +32,45 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={`${classes.cards} ${classes.totalDailyCard}`}>
-            <Typography variant="h6" component="h4">
-              {t('dailyRewards')}
-            </Typography>
-            <Typography variant="h3" component="p">
-              {!summary?.dailyRewards > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {summary?.dailyRewards > 0 && (
-                <span>
-                  {formatWithThousandSeparator(summary.dailyRewards, 2)}{' '}
-                  {eosConfig.tokenSymbol}
-                </span>
-              )}
-            </Typography>
-            <Typography variant="h3" component="p">
-              {!setting?.token_price > 0 && (
-                <Skeleton variant="text" width="100%" animation="wave" />
-              )}
-              {setting?.token_price && !!summary?.dailyRewards && (
-                <span>
-                  $
-                  {formatWithThousandSeparator(
-                    summary.dailyRewards * setting?.token_price,
-                    0,
-                  )}{' '}
-                  USD
-                </span>
-              )}
-            </Typography>
+            <Typography component="h4">{t('dailyRewards')}</Typography>
+            <div className={classes.verticallyCenter}>
+              <Typography variant="h6" component="p">
+                {!summary?.dailyRewards > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {summary?.dailyRewards > 0 && (
+                  <span>
+                    {formatWithThousandSeparator(summary.dailyRewards, 2)}{' '}
+                    {eosConfig.tokenSymbol}
+                  </span>
+                )}
+              </Typography>
+              <Typography variant="h6" component="p">
+                {!setting?.token_price > 0 && (
+                  <Skeleton variant="text" width="100%" animation="wave" />
+                )}
+                {setting?.token_price && !!summary?.dailyRewards && (
+                  <span>
+                    $
+                    {formatWithThousandSeparator(
+                      summary.dailyRewards * setting?.token_price,
+                      0,
+                    )}{' '}
+                    USD
+                  </span>
+                )}
+              </Typography>
+            </div>
           </CardContent>
         </Card>
       </div>
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
-            <Typography variant="h6" component="h4">
-              {t('topCountryDailyRwards')}
+            <Typography component="h4">
+              {t('topCountryDailyRewards')}
             </Typography>
-            <Typography variant="h3" component="p">
+            <Typography variant="h6" component="p">
               {!summary?.topCountryByRewards > 0 && (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
@@ -109,9 +109,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <div className={classes.notLocated}>
-              <Typography variant="h6" component="h4">
-                {t('paidProducers')}
-              </Typography>
+              <Typography component="h4">{t('paidProducers')}</Typography>
               {!!summary?.producersWithoutProperBpJson.quantity && (
                 <Button
                   className={classes.nonCompliantButton}
@@ -125,7 +123,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                 </Button>
               )}
             </div>
-            <Typography variant="h3" component="p">
+            <Typography variant="h6" component="p">
               {!summary?.producersWithoutProperBpJson.quantity > 0 ?? (
                 <Skeleton variant="text" width="100%" animation="wave" />
               )}
