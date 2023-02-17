@@ -26,6 +26,9 @@ export default (theme) => ({
     height: '100%',
     minHeight: '125px',
     padding: theme.spacing(4),
+    '& h4': {
+      fontWeight: 'bold',
+    },
   },
   verticallyCenter: {
     height: '80%',

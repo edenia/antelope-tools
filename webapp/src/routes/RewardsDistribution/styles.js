@@ -103,9 +103,8 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    '& .MuiTypography-h4': {
-      display: 'flex',
-      paddingBottom: theme.spacing(4),
+    '& h4': {
+      fontWeight: 'bold'
     },
   },
   exchangeCard: {
@@ -154,7 +153,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    '& .MuiTypography-h4': {
+    '& h4': {
       width: 'calc(100% - 125px)',
       paddingBottom: theme.spacing(2),
     },
