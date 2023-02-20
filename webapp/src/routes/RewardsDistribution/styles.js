@@ -8,6 +8,12 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  verticallyCenter: {
+    height: '80%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   textBlock: {
     marginTop: `${theme.spacing(4)} !important`,
   },
@@ -97,9 +103,8 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    '& .MuiTypography-h6': {
-      display: 'flex',
-      paddingBottom: theme.spacing(4),
+    '& h4': {
+      fontWeight: 'bold'
     },
   },
   exchangeCard: {
@@ -107,7 +112,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   totalDailyCard: {
     justifyContent: 'flex-start',
-    '& .MuiTypography-h3': {
+    '& .MuiTypography-h6': {
       paddingBottom: theme.spacing(2),
     },
   },
@@ -148,7 +153,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    '& .MuiTypography-h6': {
+    '& h4': {
       width: 'calc(100% - 125px)',
       paddingBottom: theme.spacing(2),
     },

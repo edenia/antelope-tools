@@ -155,7 +155,7 @@
   "rewardsDistributionRoute": {
     "dailyRewards": "Recompensas Diarias Totales",
     "yearlyRewards": "Recompensas Anuales Totales",
-    "topCountryDailyRwards": "País Superior Por Recompensas Diarias",
+    "topCountryDailyRewards": "País Superior Por Recompensas Diarias",
     "notAvailable": "No Disponible",
     "paidProducers": "Productores Pagados No Ubicados",
     "lowestRewards": "Recompensas Más Bajas",
