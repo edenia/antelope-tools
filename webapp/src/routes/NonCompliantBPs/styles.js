@@ -4,7 +4,6 @@ export default (theme) => ({
   },
   statsText: {
     textAlign: 'center',
-    marginTop: `${theme.spacing(4)} !important`,
   },
   price: {
     paddingBottom: theme.spacing(2),
@@ -13,7 +12,7 @@ export default (theme) => ({
     display: 'flex',
     flexFlow: 'row nowrap',
     gap: theme.spacing(6),
-    margin: `${theme.spacing(6)} 40px ${theme.spacing(4)}`,
+    margin: `${theme.spacing(6)} 24px ${theme.spacing(4)}`,
     paddingBottom: theme.spacing(4),
     borderBottom: '1px solid #e0e0e0',
     [theme.breakpoints.down('lg')]: {
@@ -24,8 +23,18 @@ export default (theme) => ({
     },
   },
   rewardsCards: {
+    height: '100%',
     minHeight: '125px',
     padding: theme.spacing(4),
+    '& h4': {
+      fontWeight: 'bold',
+    },
+  },
+  verticallyCenter: {
+    height: '80%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   cardHeader: {
     width: '100px',
@@ -42,7 +51,7 @@ export default (theme) => ({
     gap: theme.spacing(4, 6),
     gridTemplateColumns:
       'repeat(auto-fit, minmax( min( calc( 50% - 100px ), 600px ), auto))',
-    margin: '0 40px',
+    margin: '0 24px',
     [theme.breakpoints.down('lg')]: {
       margin: '0',
       gridTemplateColumns: 'repeat(auto-fit, minmax(500px, auto))',

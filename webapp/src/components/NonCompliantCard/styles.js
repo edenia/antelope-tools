@@ -43,16 +43,9 @@ export default (theme) => ({
       marginLeft: theme.spacing(3),
     },
   },
-  hideRewards: {
-    [theme.breakpoints.down('sm')]: {
-      '& .MuiTypography-overline': {
-        display: 'none',
-      },
-    },
-  },
   lightIcon: {
     '& svg': {
       marginLeft: theme.spacing(2),
     },
-  }
+  },
 })

@@ -149,7 +149,7 @@
   "rewardsDistributionRoute": {
     "dailyRewards": "Total Daily Rewards",
     "yearlyRewards": "Total Yearly Rewards",
-    "topCountryDailyRwards": "Top Country By Daily Rewards",
+    "topCountryDailyRewards": "Top Country By Daily Rewards",
     "notAvailable": "Not available",
     "paidProducers": "Paid BPs Not Located",
     "lowestRewards": "Lowest Rewards",
