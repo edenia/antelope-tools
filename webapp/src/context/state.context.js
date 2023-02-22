@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
@@ -107,6 +107,7 @@ export const SharedStateProvider = ({ ...props }) => {
 
 export const useSharedState = () => {
   const context = React.useContext(SharedStateContext)
+  const [lastBlock, setLastBlock] = useState()
 
   if (!context) {
     throw new Error(`useSharedState must be used within a SharedStateContext`)
@@ -197,17 +198,15 @@ export const useSharedState = () => {
     }
   }, [dispatch, state.tpb, state.tps, state.tpsWaitingBlock])
 
-  useEffect(() => {
-    let block = state.info.head_block_num
-
-    if (!block || !state.info.infoInterval) return
+  useEffect(()=>{
+    if(!lastBlock) return
 
     const updateTransactions = async () => {
-      await getBlock(block)
+      await getBlock(lastBlock)
     }
-
+    
     updateTransactions()
-  }, [state.info, getBlock])
+  },[lastBlock, getBlock])
 
   const startTrackingProducerSchedule = async ({ interval = 120 } = {}) => {
     if (scheduleInterval) {
@@ -237,9 +236,11 @@ export const useSharedState = () => {
 
         dispatch({
           type: 'updateInfo',
-          payload: { ...info, infoInterval },
+          payload: { ...info },
         })
-      } catch (error) {
+
+        setLastBlock(info.head_block_num)
+      } catch (error) { 
         console.error(error)
       }
     }
