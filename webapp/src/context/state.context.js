@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
-import eosApi from '../utils/eosapi'
+import eosApi, { ENDPOINTS_ERROR } from '../utils/eosapi'
 
 const SharedStateContext = React.createContext()
 
@@ -114,6 +114,7 @@ export const useSharedState = () => {
   }
 
   const [state, dispatch] = context
+  const waitTrackingInterval = 30000
   let infoInterval
   let scheduleInterval
 
@@ -194,24 +195,22 @@ export const useSharedState = () => {
         },
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }, [dispatch, state.tpb, state.tps, state.tpsWaitingBlock])
 
-  useEffect(()=>{
-    if(!lastBlock) return
+  useEffect(() => {
+    if (!lastBlock) return
 
     const updateTransactions = async () => {
       await getBlock(lastBlock)
     }
-    
+
     updateTransactions()
-  },[lastBlock, getBlock])
+  }, [lastBlock, getBlock])
 
   const startTrackingProducerSchedule = async ({ interval = 120 } = {}) => {
-    if (scheduleInterval) {
-      return
-    }
+    if (scheduleInterval) return
 
     const handle = async () => {
       try {
@@ -220,10 +219,20 @@ export const useSharedState = () => {
         dispatch({ type: 'updateSchedule', payload: result.active })
       } catch (error) {
         console.error(error)
+
+        if (error?.message === ENDPOINTS_ERROR) {
+          await stopTrackingProducerSchedule()
+          setTimeout(() => {
+            startTrackingProducerSchedule({ interval })
+          }, waitTrackingInterval)
+        }
       }
     }
 
     await handle()
+
+    if (scheduleInterval) return
+
     scheduleInterval = setInterval(handle, interval * 1000)
   }
 
@@ -240,8 +249,15 @@ export const useSharedState = () => {
         })
 
         setLastBlock(info.head_block_num)
-      } catch (error) { 
+      } catch (error) {
         console.error(error)
+
+        if (error?.message === ENDPOINTS_ERROR) {
+          await stopTrackingInfo()
+          setTimeout(() => {
+            startTrackingInfo({ interval })
+          }, waitTrackingInterval)
+        }
       }
     }
 
@@ -251,6 +267,9 @@ export const useSharedState = () => {
     }
 
     await handle()
+
+    if (infoInterval) return
+
     infoInterval = setInterval(handle, interval * 1000)
   }
 
