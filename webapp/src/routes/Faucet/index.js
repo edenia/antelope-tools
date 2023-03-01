@@ -160,7 +160,7 @@ const Faucet = () => {
                   />
                 </div>
               )}
-              <div className={classes.button}>
+              <div>
                 <Button
                   type="submit"
                   variant="contained"
@@ -196,7 +196,7 @@ const Faucet = () => {
                   onChange={(e) => setAccount(e.target.value)}
                 />
               </div>
-              <div className={classes.button}>
+              <div>
                 <Button
                   type="submit"
                   variant="contained"
