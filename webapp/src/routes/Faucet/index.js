@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
@@ -63,7 +64,11 @@ const Faucet = () => {
 
       showMessage({
         type: 'success',
-        content: `${t('newCreatedAccount')} ${account}`,
+        content: (
+          <Link to={`/accounts?account=${account}`}>{`${t(
+            'newCreatedAccount',
+          )} ${account}`}</Link>
+        ),
       })
     } catch (err) {
       const errorMessage = err.message.replace(
