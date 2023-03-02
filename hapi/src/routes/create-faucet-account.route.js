@@ -44,7 +44,7 @@ module.exports = {
       )
 
       const {
-        data: { account_name, permissions }
+        data: { account_name: account, permissions }
       } = await axiosUtil.instance.post(
         `${eosConfig.apiEndpoint}/v1/chain/get_account`,
         {
@@ -55,8 +55,8 @@ module.exports = {
       const keys = permissions[0]?.required_auth?.keys || []
       const key = keys[0]?.key
 
-      if (account_name === input.name && key === input.public_key) {
-        return { account: account_name }
+      if (account === input.name && key === input.public_key) {
+        return { account }
       }
 
       return Boom.badData('Wrong key format')
