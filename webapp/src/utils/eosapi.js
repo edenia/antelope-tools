@@ -62,9 +62,7 @@ const callWithTimeout = async (promise, ms) => {
   })
 
   return Promise.race([promise, timeoutPromise])
-    .then(response => {
-      return response
-    })
+    .then(response => response)
     .catch(error => {
       throw error
     })
