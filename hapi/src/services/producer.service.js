@@ -1,4 +1,4 @@
-const { hasuraUtil, sequelizeUtil } = require('../utils')
+const { hasuraUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
@@ -71,7 +71,6 @@ const syncProducers = async () => {
   if (producers?.length) {
     producers = await updateProducers(producers)
     await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
-    await syncEndpoints()
 
     if (!eosConfig.stateHistoryPluginEndpoint) {
       await statsService.sync()
@@ -112,7 +111,7 @@ const syncNodes = async producers => {
 const syncEndpoints = async () => {
   const query = `
     query {
-      endpoints: endpoint (where: {type: {_in: ["api","ssl"]}}) {
+      endpoints: endpoint (where: {type: {_in: ["api","ssl"]}}, order_by: {value: asc}) {
         id,
         type,
         value
@@ -123,9 +122,38 @@ const syncEndpoints = async () => {
 
   if (!endpoints?.length) return
 
-  endpoints.forEach(async endpoint => {
+  const checkedList = []
+  const today = new Date()
+
+  today.setHours(0,0,0,0)
+
+  for(index in endpoints){
+    const endpoint = {...endpoints[index]}
+    const previous = checkedList[checkedList.length - 1]
+    let startTime
+
+    if(previous?.value === endpoint.value){
+      endpoint.response = previous.response
+      endpoint.head_block_time = previous.head_block_time
+      endpoint.updated_at = previous.updated_at
+    }else{
+      startTime = new Date()
+      const {nodeInfo, ...reponse} = await producerUtil.getNodeInfo(
+        endpoint.value
+      )
+      endpoint.time = (new Date() - startTime) / 1000
+
+      endpoint.response  = reponse
+      endpoint.head_block_time = nodeInfo?.head_block_time || null
+      endpoint.updated_at = new Date()
+    }
+
     await nodeService.updateEndpointInfo(endpoint)
-  })
+
+    if(previous?.value !== endpoint.value){
+      checkedList.push(endpoint)
+    }
+  }
 }
 
 const requestProducers = async ({ where, whereEndpointList }) => {
