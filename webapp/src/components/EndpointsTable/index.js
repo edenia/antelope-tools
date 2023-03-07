@@ -42,7 +42,7 @@ const EndpointsTable = ({ producers }) => {
   const getStatus = (endpoint) => {
     if (endpoint.response.status === undefined) return
 
-    const diffBlockTimems = new Date() - new Date(endpoint.head_block_time)
+    const diffBlockTimems = new Date(endpoint.updated_at) - new Date(endpoint.head_block_time)
 
     if (diffBlockTimems <= syncToleranceInterval) {
       return 'greenLight'
