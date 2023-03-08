@@ -1,0 +1,3 @@
+table:
+  name: health_check_history
+  schema: public
