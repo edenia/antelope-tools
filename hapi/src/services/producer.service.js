@@ -110,50 +110,82 @@ const syncNodes = async producers => {
 
 const syncEndpoints = async () => {
   const query = `
-    query {
-      endpoints: endpoint (where: {type: {_in: ["api","ssl"]}}, order_by: {value: asc}) {
-        id,
-        type,
-        value
+    {
+      endpoint_aggregate(where: {type: {_in: ["api", "ssl"]}}) {
+        aggregate {
+          count
+        }
+      }
+      producers : producer(where: {nodes: {endpoints: {_and: [{value: {_gt: ""}}]}}}, order_by: {rank: asc}) {
+        id
+        nodes {
+          endpoints(where: {type: {_in: ["api", "ssl"]}}, order_by: {value: asc}) {
+            id
+            value
+            type
+          }
+        }
       }
     }
   `
-  const { endpoints } = await hasuraUtil.request(query)
+  const {
+    producers,
+    endpoint_aggregate: {
+      aggregate: { count }
+    }
+  } = await hasuraUtil.request(query)
 
-  if (!endpoints?.length) return
+  if (!count) return 
 
-  const checkedList = []
   const today = new Date()
 
   today.setHours(0,0,0,0)
 
+  let endpoints = await Promise.all(
+    producers.map(async producer => {
+      const endpoints = producer.nodes.flatMap(node => node?.endpoints || [])
+
+      return await endpointsHealth(endpoints)
+  }))
+
+  endpoints = endpoints.flat()  
+}
+
+const endpointsHealth = async endpoints => {
+  const checkedList = []
+
   for(index in endpoints){
     const endpoint = {...endpoints[index]}
-    const previous = checkedList[checkedList.length - 1]
-    let startTime
+    const repeatedIndex = checkedList.findIndex(info => info.value === endpoint.value)
+    const isRepeated = repeatedIndex >= 0
 
-    if(previous?.value === endpoint.value){
+    if(isRepeated){
+      const previous = checkedList[repeatedIndex]
+            
       endpoint.response = previous.response
       endpoint.head_block_time = previous.head_block_time
       endpoint.updated_at = previous.updated_at
     }else{
-      startTime = new Date()
-      const {nodeInfo, ...reponse} = await producerUtil.getNodeInfo(
+
+      const startTime = new Date()
+      const {nodeInfo, ...response} = await producerUtil.getNodeInfo(
         endpoint.value
       )
-      endpoint.time = (new Date() - startTime) / 1000
 
-      endpoint.response  = reponse
+      endpoint.time = (new Date() - startTime) / 1000
+      endpoint.response  = response
       endpoint.head_block_time = nodeInfo?.head_block_time || null
       endpoint.updated_at = new Date()
     }
 
     await nodeService.updateEndpointInfo(endpoint)
 
-    if(previous?.value !== endpoint.value){
+    if(!isRepeated){
       checkedList.push(endpoint)
     }
   }
+
+  return checkedList
 }
 
 const requestProducers = async ({ where, whereEndpointList }) => {
