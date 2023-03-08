@@ -14,9 +14,8 @@ module.exports = {
   path: '/create-faucet-account',
   handler: async ({ payload: { input } }) => {
     try {
-      const isValidToken = await googleRecaptchaEnterpriseUtil.isRecaptchaTokenValid(
-        input.token
-      )
+      const isValidToken =
+        await googleRecaptchaEnterpriseUtil.isRecaptchaTokenValid(input.token)
 
       if (!isValidToken) {
         throw Boom.badRequest('Are you a human?')
@@ -45,24 +44,19 @@ module.exports = {
       )
 
       const {
-        data: { accounts }
+        data: { account_name: account, permissions }
       } = await axiosUtil.instance.post(
-        `${eosConfig.apiEndpoint}/v1/chain/get_accounts_by_authorizers`,
+        `${eosConfig.apiEndpoint}/v1/chain/get_account`,
         {
-          keys: [input.public_key]
+          account_name: input.name
         }
       )
 
-      const compare = ({ account_name: a }, { account_name: b }) => {
-        if (a < b) return -1
-        if (a > b) return 1
-        return 0
-      }
+      const keys = permissions[0]?.required_auth?.keys || []
+      const key = keys[0]?.key
 
-      if (accounts.length) {
-        return {
-          account: input.name || accounts.sort(compare).pop().account_name
-        }
+      if (account === input.name && key === input.public_key) {
+        return { account }
       }
 
       return Boom.badData('Wrong key format')
