@@ -9,7 +9,7 @@ services:
       - ${WALLET_DATA}:/opt/application/data
   postgres:
     container_name: '${STAGE}-${APP_NAME}-postgres'
-    image: postgres:13.5-alpine
+    image: postgres:13.10-alpine
     ports:
       - '5432:5432'
     volumes:
