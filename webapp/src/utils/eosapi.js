@@ -6,7 +6,7 @@ export const ENDPOINTS_ERROR =
   'Each endpoint failed when trying to execute the function'
 
 const waitRequestInterval = 120000
-const timeout = 15000
+const timeout = 60000
 const eosApis = eosConfig.endpoints.map(endpoint => {
   return {
     api: EosApi({
@@ -61,11 +61,14 @@ const callWithTimeout = async (promise, ms) => {
     timeoutID = setTimeout(() => reject(new Error(timeoutMessage)), ms)
   })
 
-  return Promise.race([promise, timeoutPromise]).then((response) => {
-    clearTimeout(timeoutID)
-
-    return response
-  })
+  return Promise.race([promise, timeoutPromise])
+    .then(response => response)
+    .catch(error => {
+      throw error
+    })
+    .finally(() => {
+      clearTimeout(timeoutID)
+    })
 }
 
 const getAbi = async account => {
