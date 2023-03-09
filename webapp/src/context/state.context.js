@@ -195,7 +195,7 @@ export const useSharedState = () => {
         },
       })
     } catch (error) {
-      console.error(error)
+      console.error(error?.message || error)
     }
   }, [dispatch, state.tpb, state.tps, state.tpsWaitingBlock])
 
@@ -218,7 +218,7 @@ export const useSharedState = () => {
 
         dispatch({ type: 'updateSchedule', payload: result.active })
       } catch (error) {
-        console.error(error)
+        console.error(error?.message || error)
 
         if (error?.message === ENDPOINTS_ERROR) {
           await stopTrackingProducerSchedule()
@@ -250,7 +250,7 @@ export const useSharedState = () => {
 
         setLastBlock(info.head_block_num)
       } catch (error) {
-        console.error(error)
+        console.error(error?.message || error)
 
         if (error?.message === ENDPOINTS_ERROR) {
           await stopTrackingInfo()
