@@ -4,6 +4,7 @@
 - "!include public_demux_state.yaml"
 - "!include public_endpoint.yaml"
 - "!include public_endpoints_by_producer_id.yaml"
+- "!include public_endpoints_check_history.yaml"
 - "!include public_health_check_history.yaml"
 - "!include public_node.yaml"
 - "!include public_node_info.yaml"
