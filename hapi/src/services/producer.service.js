@@ -1,3 +1,5 @@
+const { StatusCodes } = require('http-status-codes')
+
 const { hasuraUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
@@ -5,6 +7,7 @@ const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
 const nodeService = require('./node.service')
 const statsService = require('./stats.service')
+const healthCheckHistoryService = require('./health-check-history.service')
 
 const updateBPJSONs = async (producers = []) => {
   const upsertMutation = `
@@ -137,18 +140,17 @@ const syncEndpoints = async () => {
 
   if (!count) return 
 
-  const today = new Date()
-
-  today.setHours(0,0,0,0)
-
   let endpoints = await Promise.all(
     producers.map(async producer => {
       const endpoints = producer.nodes.flatMap(node => node?.endpoints || [])
+      const list = await endpointsHealth(endpoints)
 
-      return await endpointsHealth(endpoints)
+      return (list.map(endpoint => ({...endpoint,producer_id:producer.id}))) 
   }))
 
-  endpoints = endpoints.flat()  
+  endpoints = endpoints.flat() 
+
+  await healthCheckHistoryService.saveHealthRegister(endpoints)
 }
 
 const endpointsHealth = async endpoints => {
@@ -166,7 +168,6 @@ const endpointsHealth = async endpoints => {
       endpoint.head_block_time = previous.head_block_time
       endpoint.updated_at = previous.updated_at
     }else{
-
       const startTime = new Date()
       const {nodeInfo, ...response} = await producerUtil.getNodeInfo(
         endpoint.value
@@ -181,7 +182,7 @@ const endpointsHealth = async endpoints => {
     await nodeService.updateEndpointInfo(endpoint)
 
     if(!isRepeated){
-      checkedList.push(endpoint)
+      checkedList.push({...endpoint,isWorking: Number(endpoint?.response?.status === StatusCodes.OK)})
     }
   }
 
