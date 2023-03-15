@@ -1,0 +1,3 @@
+table:
+  name: check_history_by_endpoint
+  schema: public
