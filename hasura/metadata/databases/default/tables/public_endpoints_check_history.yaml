@@ -1,3 +1,14 @@
 table:
   name: endpoints_check_history
   schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - value
+        - date
+        - producer_id
+        - successful_checks
+        - sum_total_time
+        - id
+      filter: {}
