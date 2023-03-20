@@ -9,15 +9,8 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
-import { makeStyles } from '@mui/styles'
-
-import styles from './styles'
-
-const useStyles = makeStyles(styles)
-
 const EndpointsTable = ({endpoints, title}) => {
   const { t } = useTranslation('EndpointsStatsRoute')
-  const classes = useStyles()
 
   return (
     <>
@@ -29,8 +22,8 @@ const EndpointsTable = ({endpoints, title}) => {
           <TableHead>
             <TableRow>
               <TableCell>{t('Endpoint')}</TableCell>
-              <TableCell align="right">{t('Average Availability')}</TableCell>
-              <TableCell align="right">{t('Average Response Time')}</TableCell>
+              <TableCell align="right">{t('avgAvailability')}</TableCell>
+              <TableCell align="right">{t('avgTime')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

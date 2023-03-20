@@ -19,39 +19,33 @@ import EndpointsTable from './EndpointStatsTable'
 
 const useStyles = makeStyles(styles)
 
-const dates = []
-for (let i = 29; i >= 0; i--) {
-  const d = moment().subtract(i, 'days').format('ll')
-  dates.push(d)
-}
-
-const options = {
-  xAxis: {
-    categories: dates,
-  },
-  credits: {
-    enabled: false,
-  },
-  title: {
-    text: 'Average Response Time',
-  },
-  yAxis: {
-    title: {
-      text: 'Time in seconds',
-    },
-    labels: {
-      format: '{text} s',
-    },
-  },
-  tooltip: {
-    pointFormat: '{series.name}: <b>{point.y} s<b>',
-  },
-}
-
 const EndpointsStats = () => {
   const { t } = useTranslation('EndpointsStatsRoute')
   const classes = useStyles()
-  const [{fastestEndpoints,producersNames,historyData,statsAverage,selected,loading},{setSelected}] = useHealthCheckState()
+  const [{fastestEndpoints,producersNames,historyData,dates,statsAverage,selected,loading},{setSelected}] = useHealthCheckState()
+
+  const options = {
+    xAxis: {
+      categories: dates,
+    },
+    credits: {
+      enabled: false,
+    },
+    title: {
+      text: t('avgTime'),
+    },
+    yAxis: {
+      title: {
+        text: t('timeInSecs'),
+      },
+      labels: {
+        format: '{text} s',
+      },
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.y} s<b>',
+    },
+  }
 
   return (
     <>
@@ -60,7 +54,7 @@ const EndpointsStats = () => {
           {loading && <LinearProgress />}
           {!loading && (
           <EndpointsTable
-            title="Top 5 fastest endpoints by querying from Costa Rica"
+            title={t('fastest')}
             endpoints={fastestEndpoints || []}
           />
           )}
@@ -69,7 +63,7 @@ const EndpointsStats = () => {
       <Card className={`${classes.cardByProducer} ${classes.cardShadow}`}>
         <CardContent>
           <Typography component="p" variant="h6">
-            Endpoints stats by producer
+            {t('byProducer')}
           </Typography>
           <br />
           {producersNames?.length && (
@@ -83,13 +77,13 @@ const EndpointsStats = () => {
           <HighchartsReact
             highcharts={Highcharts}
             options={{ ...options,xAxis: {
-              categories: dates.slice(dates.length-(historyData[0].data.length+1)),
+              categories: dates.map(x => moment(x).format('ll')),
             }, series: historyData }}
           />
           )}
           {statsAverage && (
           <EndpointsTable
-            title="List of endpoints"
+            title={t('list')}
             endpoints={statsAverage}
           />
           )}
