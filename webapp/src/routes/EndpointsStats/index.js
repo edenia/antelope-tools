@@ -9,7 +9,6 @@ import MenuItem from '@mui/material/MenuItem'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import FormControl from '@mui/material/FormControl'
-import moment from 'moment'
 import Select from '@mui/material/Select'
 import { makeStyles } from '@mui/styles'
 
@@ -86,7 +85,7 @@ const EndpointsStats = () => {
           <HighchartsReact
             highcharts={Highcharts}
             options={{ ...options,xAxis: {
-              categories: dates.map(x => moment(x).format('ll')),
+              categories: dates,
             }, series: historyData }}
           />
           )}

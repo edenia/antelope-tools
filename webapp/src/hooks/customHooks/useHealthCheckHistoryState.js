@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
+import moment from 'moment'
 
 import {
   FASTEST_ENDPOINTS_QUERY,
@@ -19,13 +20,16 @@ const useHealthCheckState = () => {
   ] = useLazyQuery(PRODUCERS_QUERY)
   const [
     loadHistory,
-    { loading: loadingHistory = true, data: { endpoints: history } = {} },
+    {
+      loading: loadingHistory = true,
+      data: { endpoints: history, dates } = {},
+    },
   ] = useLazyQuery(HISTORY_ENDPOINTS_BY_PRODUCER_QUERY)
   const [producersNames, setProducersNames] = useState()
   const [selected, setSelected] = useState()
   const [historyData, setHistoryData] = useState()
   const [statsAverage, setStatsAverage] = useState()
-  const [dates, setDates] = useState()
+  const [formattedDates, setFormattedDates] = useState()
   const location = useLocation()
 
   useEffect(() => {
@@ -47,7 +51,7 @@ const useHealthCheckState = () => {
     if (!producers?.length) return
 
     setProducersNames(
-      producers.map((producer) => ({
+      producers.map(producer => ({
         id: producer.id,
         name: producer?.bp_json?.org?.candidate_name,
       })),
@@ -65,37 +69,41 @@ const useHealthCheckState = () => {
   useEffect(() => {
     if (!history) return
 
-    const data = history.reduce((aux, curr) => {
-      const index = aux.findIndex((x) => x.name === curr.value)
+    let previous = ''
 
-      if (index < 0) {
-        aux.push({
-          name: curr.value,
-          data: [curr.avg_time],
-          dates: [curr.date],
-          avg_time: curr.avg_time,
-          availability: curr.availability,
-        })
-      } else {
-        aux[index].data.push(curr.avg_time)
-        aux[index].availability = aux[index].availability + curr.availability
-        aux[index].avg_time = aux[index].avg_time + curr.avg_time
-        aux[index].dates.push(curr.date)
-      }
+    const { data, stats } = history.reduce(
+      (aux, curr) => {
+        if (previous !== curr.value) {
+          aux.data.push({
+            name: curr.value,
+            data: [curr.avg_time],
+          })
+          aux.stats.push({
+            value: curr.value,
+            avg_time: curr.avg_time,
+            availability: curr.availability,
+            total: 1,
+          })
 
-      return aux
-    }, [])
+          previous = curr.value
+        } else {
+          const index = aux.data.length  - 1
 
-    setDates(data[0]?.dates || [])
-    setHistoryData(data)
-    setStatsAverage(
-      data.map((x) => ({
-        value: x.name,
-        avg_time: x.avg_time / x.data.length,
-        availability: x.availability / x.data.length,
-      })),
+          aux.data[index].data.push(curr.avg_time)
+          aux.stats[index].availability += curr.availability
+          aux.stats[index].avg_time += curr.avg_time
+          aux.stats[index].total++
+        }
+
+        return aux
+      },
+      { data: [], stats: [] },
     )
-  }, [history])
+
+    setHistoryData(data)
+    setStatsAverage(stats)
+    setFormattedDates(dates.map(item => moment(item.date).format('ll')))
+  }, [history, dates])
 
   return [
     {
@@ -104,7 +112,7 @@ const useHealthCheckState = () => {
       historyData,
       statsAverage,
       selected,
-      dates,
+      dates: formattedDates,
       loading,
       loadingHistory,
       loadingProducers,
