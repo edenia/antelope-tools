@@ -122,7 +122,7 @@ const syncEndpoints = async () => {
       producers : producer(where: {nodes: {endpoints: {_and: [{value: {_gt: ""}}]}}}, order_by: {rank: asc}) {
         id
         nodes {
-          endpoints(where: {type: {_in: ["api", "ssl"]}}, order_by: {value: asc}) {
+          endpoints(where: {type: {_in: ["api", "ssl"]}}) {
             id
             value
             type
@@ -138,51 +138,55 @@ const syncEndpoints = async () => {
     }
   } = await hasuraUtil.request(query)
 
-  if (!count) return 
+  if (!count) return
 
   let endpoints = await Promise.all(
-    producers.map(async producer => {
+    producers.flatMap(async producer => {
       const endpoints = producer.nodes.flatMap(node => node?.endpoints || [])
-      const list = await endpointsHealth(endpoints)
 
-      return (list.map(endpoint => ({...endpoint,producer_id:producer.id}))) 
-  }))
-
-  endpoints = endpoints.flat() 
+      return await endpointsHealth(endpoints, producer.id)
+    })
+  )
 
   await healthCheckHistoryService.saveHealthRegister(endpoints)
 }
 
-const endpointsHealth = async endpoints => {
+const endpointsHealth = async (endpoints, producer_id) => {
   const checkedList = []
 
-  for(index in endpoints){
-    const endpoint = {...endpoints[index]}
-    const repeatedIndex = checkedList.findIndex(info => info.value === endpoint.value)
+  for (index in endpoints) {
+    const endpoint = { ...endpoints[index] }
+    const repeatedIndex = checkedList.findIndex(
+      info => info.value === endpoint.value
+    )
     const isRepeated = repeatedIndex >= 0
 
-    if(isRepeated){
+    if (isRepeated) {
       const previous = checkedList[repeatedIndex]
-            
+
       endpoint.response = previous.response
       endpoint.head_block_time = previous.head_block_time
       endpoint.updated_at = previous.updated_at
-    }else{
+    } else {
       const startTime = new Date()
-      const {nodeInfo, ...response} = await producerUtil.getNodeInfo(
+      const { nodeInfo, ...response } = await producerUtil.getNodeInfo(
         endpoint.value
       )
 
       endpoint.time = (new Date() - startTime) / 1000
-      endpoint.response  = response
+      endpoint.response = response
       endpoint.head_block_time = nodeInfo?.head_block_time || null
       endpoint.updated_at = new Date()
     }
 
     await nodeService.updateEndpointInfo(endpoint)
 
-    if(!isRepeated){
-      checkedList.push({...endpoint,isWorking: Number(endpoint?.response?.status === StatusCodes.OK)})
+    if (!isRepeated) {
+      checkedList.push({
+        ...endpoint,
+        producer_id,
+        isWorking: Number(endpoint?.response?.status === StatusCodes.OK)
+      })
     }
   }
 
