@@ -1,6 +1,5 @@
 - "!include public_block_history.yaml"
 - "!include public_block_history_by_producer_type.yaml"
-- "!include public_check_history_by_endpoint.yaml"
 - "!include public_cpu.yaml"
 - "!include public_demux_state.yaml"
 - "!include public_endpoint.yaml"
