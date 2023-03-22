@@ -12,6 +12,10 @@ import TableRow from '@mui/material/TableRow'
 const EndpointsTable = ({endpoints, title}) => {
   const { t } = useTranslation('EndpointsStatsRoute')
 
+  const formatPercentage = value => {
+    return Number.isInteger(value) ? value : value.toFixed(2)
+  }
+
   return (
     <>
       <Typography component="p" variant="h6">
@@ -30,7 +34,7 @@ const EndpointsTable = ({endpoints, title}) => {
             {endpoints.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>{item.value}</TableCell>
-                <TableCell align="right">{`${item.availability}%`}</TableCell>
+                <TableCell align="right">{`${formatPercentage(item.availability)}%`}</TableCell>
                 <TableCell align="right">{`${item.avg_time.toFixed(3)} s`}</TableCell>
               </TableRow>
             ))}

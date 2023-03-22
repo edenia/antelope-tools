@@ -8,6 +8,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 import MenuItem from '@mui/material/MenuItem'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import FormControl from '@mui/material/FormControl'
 import moment from 'moment'
 import Select from '@mui/material/Select'
 import { makeStyles } from '@mui/styles'
@@ -67,11 +68,19 @@ const EndpointsStats = () => {
           </Typography>
           <br />
           {producersNames?.length && (
-            <Select value={selected} onChange={(event) => setSelected(event.target.value)}>
-              {producersNames.map(producer => (
-                <MenuItem key={producer.id} value={producer.id}>{producer.name}</MenuItem>
-              ))}
-            </Select>
+            <FormControl variant="standard">
+              <Select
+                value={selected}
+                onChange={(event) => setSelected(event.target.value)}
+                fullWidth
+              >
+                {producersNames.map((producer) => (
+                  <MenuItem key={producer.id} value={producer.id}>
+                    {producer.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           )}
           {historyData && (
           <HighchartsReact
@@ -82,10 +91,10 @@ const EndpointsStats = () => {
           />
           )}
           {statsAverage && (
-          <EndpointsTable
-            title={t('list')}
-            endpoints={statsAverage}
-          />
+            <EndpointsTable
+              title={t('list')}
+              endpoints={statsAverage}
+            />
           )}
         </CardContent>
       </Card>

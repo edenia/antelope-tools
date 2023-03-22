@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
+import { useLocation } from 'react-router-dom'
 
 import {
   FASTEST_ENDPOINTS_QUERY,
@@ -25,11 +26,13 @@ const useHealthCheckState = () => {
   const [historyData, setHistoryData] = useState()
   const [statsAverage, setStatsAverage] = useState()
   const [dates, setDates] = useState()
+  const location = useLocation()
 
   useEffect(() => {
     const endpointFilter = {
       _and: [{ type: { _in: ['ssl', 'api'] } }, { value: { _gt: '' } }],
     }
+
     loadProducers({
       variables: {
         where: { nodes: { endpoints: endpointFilter } },
@@ -49,8 +52,9 @@ const useHealthCheckState = () => {
         name: producer?.bp_json?.org?.candidate_name,
       })),
     )
-    setSelected(producers[0]?.id)
-  }, [producers])
+    setSelected(location?.state?.producerId || producers[0]?.id)
+    window.history.replaceState({}, document.title)
+  }, [producers, location])
 
   useEffect(() => {
     if (!selected) return
@@ -62,7 +66,8 @@ const useHealthCheckState = () => {
     if (!history) return
 
     const data = history.reduce((aux, curr) => {
-      const index = aux.findIndex(x => x.name === curr.value)
+      const index = aux.findIndex((x) => x.name === curr.value)
+
       if (index < 0) {
         aux.push({
           name: curr.value,
@@ -80,10 +85,11 @@ const useHealthCheckState = () => {
 
       return aux
     }, [])
+
     setDates(data[0]?.dates || [])
     setHistoryData(data)
     setStatsAverage(
-      data.map(x => ({
+      data.map((x) => ({
         value: x.name,
         avg_time: x.avg_time / x.data.length,
         availability: x.availability / x.data.length,
@@ -101,7 +107,7 @@ const useHealthCheckState = () => {
       dates,
       loading,
       loadingHistory,
-      loadingProducers
+      loadingProducers,
     },
     { setSelected },
   ]
