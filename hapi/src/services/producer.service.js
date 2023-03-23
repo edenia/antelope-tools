@@ -141,14 +141,14 @@ const syncEndpoints = async () => {
   if (!count) return
 
   let endpoints = await Promise.all(
-    producers.flatMap(async producer => {
+    producers.map(async producer => {
       const endpoints = producer.nodes.flatMap(node => node?.endpoints || [])
 
       return await endpointsHealth(endpoints, producer.id)
     })
   )
 
-  await healthCheckHistoryService.saveHealthRegister(endpoints)
+  await healthCheckHistoryService.saveHealthRegister(endpoints.flat())
 }
 
 const endpointsHealth = async (endpoints, producer_id) => {
