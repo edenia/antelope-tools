@@ -154,7 +154,7 @@ const syncEndpoints = async () => {
 const endpointsHealth = async (endpoints, producer_id) => {
   const checkedList = []
 
-  for (index in endpoints) {
+  for (let index in endpoints) {
     const endpoint = { ...endpoints[index] }
     const repeatedIndex = checkedList.findIndex(
       (info) => info.value === endpoint.value
