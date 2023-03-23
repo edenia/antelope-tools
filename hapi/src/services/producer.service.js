@@ -44,7 +44,7 @@ const updateProducers = async (producers = []) => {
   let topProducers = producers.slice(0, eosConfig.eosTopLimit)
 
   topProducers = topProducers.filter(
-    producer =>
+    (producer) =>
       producer?.health_status && Object.keys(producer.health_status).length > 0
   )
   await nodeService.clearNodes()
@@ -53,7 +53,7 @@ const updateProducers = async (producers = []) => {
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
 
   await hasuraUtil.request(clearMutation, {
-    owners: producers.map(producer => producer.owner)
+    owners: producers.map((producer) => producer.owner)
   })
 
   return insertedRows.insert_producer.returning
@@ -96,11 +96,11 @@ const getProducersSummary = async () => {
   return rows
 }
 
-const syncNodes = async producers => {
+const syncNodes = async (producers) => {
   if (!producers?.length) return
 
-  let nodes = producers.flatMap(producer => {
-    return (producer.bp_json?.nodes || []).map(node => {
+  let nodes = producers.flatMap((producer) => {
+    return (producer.bp_json?.nodes || []).map((node) => {
       node.producer_id = producer.id
 
       return nodeService.getFormatNode(node)
@@ -140,9 +140,9 @@ const syncEndpoints = async () => {
 
   if (!count) return
 
-  let endpoints = await Promise.all(
-    producers.map(async producer => {
-      const endpoints = producer.nodes.flatMap(node => node?.endpoints || [])
+  const endpoints = await Promise.all(
+    producers.map(async (producer) => {
+      const endpoints = producer.nodes.flatMap((node) => node?.endpoints || [])
 
       return await endpointsHealth(endpoints, producer.id)
     })
@@ -157,7 +157,7 @@ const endpointsHealth = async (endpoints, producer_id) => {
   for (index in endpoints) {
     const endpoint = { ...endpoints[index] }
     const repeatedIndex = checkedList.findIndex(
-      info => info.value === endpoint.value
+      (info) => info.value === endpoint.value
     )
     const isRepeated = repeatedIndex >= 0
 
@@ -224,7 +224,7 @@ const requestProducers = async ({ where, whereEndpointList }) => {
   return !producers ? {} : { producers, total: aggregate.count }
 }
 
-const getProducersInfo = async bpParams => {
+const getProducersInfo = async (bpParams) => {
   const whereCondition = {
     where: {
       _and: [{ bp_json: { _neq: {} } }, { owner: { _in: bpParams?.owners } }]

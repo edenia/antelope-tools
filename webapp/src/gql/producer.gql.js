@@ -230,5 +230,3 @@ export const HISTORY_ENDPOINTS_BY_PRODUCER_QUERY = gql`query($id: Int){
     date
   }
 }`
-
-
