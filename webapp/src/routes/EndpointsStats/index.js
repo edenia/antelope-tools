@@ -1,16 +1,15 @@
 /* eslint camelcase: 0 */
 import React from 'react'
+import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Autocomplete from '@mui/material/Autocomplete'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
-import MenuItem from '@mui/material/MenuItem'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import { makeStyles } from '@mui/styles'
+import LinearProgress from '@mui/material/LinearProgress'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import useHealthCheckState from '../../hooks/customHooks/useHealthCheckHistoryState'
 
@@ -22,7 +21,18 @@ const useStyles = makeStyles(styles)
 const EndpointsStats = () => {
   const { t } = useTranslation('EndpointsStatsRoute')
   const classes = useStyles()
-  const [{fastestEndpoints,producersNames,historyData,dates,statsAverage,selected,loading},{setSelected}] = useHealthCheckState()
+  const [
+    {
+      fastestEndpoints,
+      producersNames,
+      historyData,
+      dates,
+      statsAverage,
+      selectedName,
+      loading,
+    },
+    { setSelected, setSelectedName },
+  ] = useHealthCheckState()
 
   const options = {
     xAxis: {
@@ -32,7 +42,7 @@ const EndpointsStats = () => {
       enabled: false,
     },
     title: {
-      text: t('avgTime'),
+      text: t('charTitle'),
     },
     yAxis: {
       title: {
@@ -53,10 +63,10 @@ const EndpointsStats = () => {
         <CardContent>
           {loading && <LinearProgress />}
           {!loading && (
-          <EndpointsTable
-            title={t('fastest')}
-            endpoints={fastestEndpoints || []}
-          />
+            <EndpointsTable
+              title={t('fastest')}
+              endpoints={fastestEndpoints || []}
+            />
           )}
         </CardContent>
       </Card>
@@ -65,35 +75,43 @@ const EndpointsStats = () => {
           <Typography component="p" variant="h6">
             {t('byProducer')}
           </Typography>
-          <br />
           {producersNames?.length && (
-            <FormControl variant="standard">
-              <Select
-                value={selected}
-                onChange={(event) => setSelected(event.target.value)}
-                fullWidth
-              >
-                {producersNames.map((producer) => (
-                  <MenuItem key={producer.id} value={producer.id}>
-                    {producer.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Autocomplete
+              className={classes.select}
+              options={producersNames.map(producer => producer.name)}
+              value={selectedName}
+              onChange={(_event, newValue) => {
+                const producer = producersNames.find(
+                  producer => producer.name === newValue,
+                )
+
+                if (!producer) return
+
+                setSelected(producer.id)
+              }}
+              inputValue={selectedName}
+              onInputChange={(_event, newInputValue) => {
+                setSelectedName(newInputValue)
+              }}
+              renderInput={params => (
+                <TextField {...params} label={t('producerName')} />
+              )}
+            />
           )}
           {historyData && (
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={{ ...options,xAxis: {
-              categories: dates,
-            }, series: historyData }}
-          />
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{
+                ...options,
+                xAxis: {
+                  categories: dates,
+                },
+                series: historyData,
+              }}
+            />
           )}
           {statsAverage && (
-            <EndpointsTable
-              title={t('list')}
-              endpoints={statsAverage}
-            />
+            <EndpointsTable title={t('list')} endpoints={statsAverage} />
           )}
         </CardContent>
       </Card>

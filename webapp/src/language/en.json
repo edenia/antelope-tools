@@ -394,6 +394,7 @@
     "byProducer": "Endpoints stats by producer",
     "avgAvailability": "Average Availability",
     "avgTime": "Average Response Time",
+    "charTitle": "Average Response Time from Costa Rica",
     "list": "List of endpoints",
     "timeInSecs": "Time in seconds"
   }

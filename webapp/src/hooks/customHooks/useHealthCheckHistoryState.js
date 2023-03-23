@@ -27,6 +27,7 @@ const useHealthCheckState = () => {
   ] = useLazyQuery(HISTORY_ENDPOINTS_BY_PRODUCER_QUERY)
   const [producersNames, setProducersNames] = useState()
   const [selected, setSelected] = useState()
+  const [selectedName, setSelectedName] = useState()
   const [historyData, setHistoryData] = useState()
   const [statsAverage, setStatsAverage] = useState()
   const [formattedDates, setFormattedDates] = useState()
@@ -56,7 +57,13 @@ const useHealthCheckState = () => {
         name: producer?.bp_json?.org?.candidate_name,
       })),
     )
-    setSelected(location?.state?.producerId || producers[0]?.id)
+
+    const id = location?.state?.producerId
+    const producer =
+      producers.find(producer => producer.id === id) || producers[0]
+
+    setSelected(id || producers[0]?.id)
+    setSelectedName(producer?.bp_json?.org?.candidate_name)
     window.history.replaceState({}, document.title)
   }, [producers, location])
 
@@ -87,7 +94,7 @@ const useHealthCheckState = () => {
 
           previous = curr.value
         } else {
-          const index = aux.data.length  - 1
+          const index = aux.data.length - 1
 
           aux.data[index].data.push(curr.avg_time)
           aux.stats[index].availability += curr.availability
@@ -112,12 +119,13 @@ const useHealthCheckState = () => {
       historyData,
       statsAverage,
       selected,
+      selectedName,
       dates: formattedDates,
       loading,
       loadingHistory,
       loadingProducers,
     },
-    { setSelected },
+    { setSelected, setSelectedName },
   ]
 }
 

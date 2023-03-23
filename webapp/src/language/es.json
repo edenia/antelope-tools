@@ -411,6 +411,7 @@
     "byProducer": "Estadísticas de puntos finales por productor",
     "avgAvailability": "Disponibilidad promedio",
     "avgTime": "Tiempo de respuesta promedio",
+    "charTitle": "Tiempo de respuesta promedio desde Costa Rica",
     "list": "Lista de puntos finales",
     "timeInSecs": "Tiempo en segundos"
   }
