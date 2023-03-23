@@ -151,10 +151,10 @@ const syncEndpoints = async () => {
   await healthCheckHistoryService.saveHealthRegister(endpoints.flat())
 }
 
-const endpointsHealth = async (endpoints, producer_id) => {
+const endpointsHealth = async (endpoints, producerId) => {
   const checkedList = []
 
-  for (let index in endpoints) {
+  for (const index in endpoints) {
     const endpoint = { ...endpoints[index] }
     const repeatedIndex = checkedList.findIndex(
       (info) => info.value === endpoint.value
@@ -184,7 +184,7 @@ const endpointsHealth = async (endpoints, producer_id) => {
     if (!isRepeated) {
       checkedList.push({
         ...endpoint,
-        producer_id,
+        producer_id: producerId,
         isWorking: Number(endpoint?.response?.status === StatusCodes.OK)
       })
     }
