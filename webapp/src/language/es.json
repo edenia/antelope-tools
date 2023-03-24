@@ -97,6 +97,9 @@
     "/endpoints>sidebar": "URL's",
     "/endpoints>title": "URL's - Antelope Tools",
     "/endpoints>heading": "URL's",
+    "/endpoints-stats>sidebar": "Estadísticas de URL's",
+    "/endpoints-stats>title": "Estadísticas de URL's - Antelope Tools",
+    "/endpoints-stats>heading": "Estadísticas de puntos finales",
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Panel",
     "/about>heading": "Acerca de",
@@ -402,5 +405,14 @@
   },
   "mainMapComponent": {
     "numberOfNodes": "Cantidad de Nodos"
+  },
+  "EndpointsStatsRoute": {
+    "fastest": "Top 5 puntos finales más rápidos desde Costa Rica",
+    "byProducer": "Estadísticas de puntos finales por productor",
+    "avgAvailability": "Disponibilidad promedio",
+    "avgTime": "Tiempo de respuesta promedio",
+    "charTitle": "Tiempo de respuesta promedio desde Costa Rica",
+    "list": "Lista de puntos finales",
+    "timeInSecs": "Tiempo en segundos"
   }
 }

@@ -52,15 +52,11 @@ const updateEndpointInfo = async endpoint => {
     }
   `
 
-  const { nodeInfo, ...response } = await producerUtil.getNodeInfo(
-    endpoint.value
-  )
-
   await hasuraUtil.request(updateMutation, {
     id: endpoint.id,
-    response,
-    head_block_time: nodeInfo?.head_block_time || null,
-    updated_at: new Date()
+    response: endpoint?.response || {},
+    head_block_time: endpoint?.head_block_time || null,
+    updated_at: endpoint.updated_at
   })
 }
 

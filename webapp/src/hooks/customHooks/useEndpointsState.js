@@ -34,6 +34,7 @@ const useEndpointsState = () => {
         })
 
         return {
+          id: producer.id,
           name:
             producer.bp_json?.org?.candidate_name ||
             producer?.bp_json?.org?.organization_name ||

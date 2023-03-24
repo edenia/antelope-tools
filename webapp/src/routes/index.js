@@ -27,6 +27,7 @@ import {
 
 const Home = lazy(() => import('./Home'))
 const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
+const EndpointsStats = lazy(() => import('./EndpointsStats'))
 const BlockProducers = lazy(() => import('./BlockProducers'))
 const RewardsDistribution = lazy(() => import('./RewardsDistribution'))
 const Nodes = lazy(() => import('./Nodes'))
@@ -116,6 +117,13 @@ const defaultRoutes = [
     icon: <ActivityIcon />,
     component: CPUBenchmark,
     path: '/cpu-benchmark',
+    exact: true,
+  },
+  {
+    name: 'endpointsStats',
+    icon: <ActivityIcon />,
+    component: EndpointsStats,
+    path: '/endpoints-stats',
     exact: true,
   },
   {
