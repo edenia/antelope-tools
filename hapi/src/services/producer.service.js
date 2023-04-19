@@ -127,6 +127,9 @@ const syncEndpoints = async () => {
             value
             type
           }
+          node_info {
+            features 
+          }
         }
       }
     }
@@ -141,8 +144,14 @@ const syncEndpoints = async () => {
   if (!count) return
 
   const endpoints = await Promise.all(
-    producers.map(async (producer) => {
-      const endpoints = producer.nodes.flatMap((node) => node?.endpoints || [])
+    producers.map(async producer => {
+      const endpoints = producer.nodes.flatMap(
+        node =>
+          node?.endpoints.map(endpoint => ({
+            ...endpoint,
+            features: node?.node_info.at(0)?.features?.list
+          })) || []
+      )
 
       return await endpointsHealth(endpoints, producer.id)
     })
@@ -168,14 +177,39 @@ const endpointsHealth = async (endpoints, producerId) => {
       endpoint.head_block_time = previous.head_block_time
       endpoint.updated_at = previous.updated_at
     } else {
-      const startTime = new Date()
-      const { nodeInfo, ...response } = await producerUtil.getNodeInfo(
-        endpoint.value
-      )
+      let startTime = new Date()
+      let endpointResponse
+
+      const APIs = [
+        { name: 'chain-api', api: '/v1/chain/get_info' },
+        { name: 'atomic-assets-api', api: '/atomicassets/v1/config' },
+        { name: 'hyperion-v2', api: '/v2/health' }
+      ]
+
+      for (const featureAPI of APIs) {
+        if (endpoint.features?.some(feature => feature === featureAPI.name)) {
+          startTime = new Date()
+          endpointResponse = await producerUtil.getNodeInfo(
+            endpoint.value,
+            featureAPI.api
+          )
+
+          break
+        }
+
+        if (!endpoint.features || featureAPI === APIs[APIs.length - 1]) {
+          startTime = new Date()
+          endpointResponse = await producerUtil.getNodeInfo(endpoint.value)
+        }
+      }
 
       endpoint.time = (new Date() - startTime) / 1000
-      endpoint.response = response
-      endpoint.head_block_time = nodeInfo?.head_block_time || null
+      endpoint.response = {
+        status: endpointResponse?.status,
+        statusText: endpointResponse?.statusText
+      }
+      endpoint.head_block_time =
+        endpointResponse?.nodeInfo?.head_block_time || null
       endpoint.updated_at = new Date()
     }
 
