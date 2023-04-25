@@ -8,7 +8,7 @@ const getUrlStatus = async (url, api = '') => {
   url = url.replace(urlRegex, '')
 
   try {
-    const response = await axiosUtil.instance.get(`${url}${api}`)
+    const response = await axiosUtil.instance.get(`${url}${api}`, { timeout: 30000 })
 
     return response
   } catch (error) {
