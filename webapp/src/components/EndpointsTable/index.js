@@ -46,7 +46,7 @@ const EndpointsTable = ({ producers }) => {
     const diffBlockTimems =
       new Date(endpoint.updated_at) - new Date(endpoint.head_block_time)
 
-    return diffBlockTimems <= syncToleranceInterval
+    return diffBlockTimems <= syncToleranceInterval || !endpoint.head_block_time
   }
 
   const getStatus = endpoint => {
