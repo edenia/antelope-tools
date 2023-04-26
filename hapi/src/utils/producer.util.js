@@ -31,7 +31,7 @@ const getSupportedAPIs = async (api) => {
 
   try {
     const response = await axiosUtil.instance.get(
-      `${api}/v1/node/get_supported_apis`
+      `${api}/v1/node/get_supported_apis`, { timeout: 30000 }
     )
 
     supportedAPIs = response.data?.apis
