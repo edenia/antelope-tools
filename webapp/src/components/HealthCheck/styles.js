@@ -43,4 +43,8 @@ export default (theme) => ({
   test: {
     boxShadow: '10px 5px 5px red !important',
   },
+  loading: {
+    width: '18px !important',
+    height: '18px !important',
+  }
 })

@@ -46,7 +46,7 @@ const EndpointsTable = ({ producers }) => {
     const diffBlockTimems =
       new Date(endpoint.updated_at) - new Date(endpoint.head_block_time)
 
-    return diffBlockTimems <= syncToleranceInterval || !endpoint.head_block_time
+    return diffBlockTimems <= syncToleranceInterval
   }
 
   const getStatus = endpoint => {
@@ -54,7 +54,9 @@ const EndpointsTable = ({ producers }) => {
 
     switch (Math.floor(endpoint.response?.status / 100)) {
       case 2:
-        return isSynchronized(endpoint) ? 'greenLight' : 'timerOff'
+        return !endpoint.head_block_time || isSynchronized(endpoint)
+          ? 'greenLight'
+          : 'timerOff'
       case 4:
       case 5:
         return 'yellowLight'
