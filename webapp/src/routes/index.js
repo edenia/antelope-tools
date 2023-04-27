@@ -180,6 +180,13 @@ const lacchainRoutes = [
     exact: true,
   },
   {
+    name: 'endpointsStats',
+    icon: <ActivityIcon />,
+    component: EndpointsStats,
+    path: '/endpoints-stats',
+    exact: true,
+  },
+  {
     name: 'lacchainNetwork',
     icon: <TopologySvg />,
     component: LacchainNetwork,
