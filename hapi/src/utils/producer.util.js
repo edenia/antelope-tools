@@ -4,8 +4,11 @@ const hasuraUtil = require('./hasura.util')
 const { eosConfig } = require('../config')
 
 const getUrlStatus = async (url, api = '') => {
+  const urlRegex = /\/$/
+  url = url.replace(urlRegex, '')
+
   try {
-    const response = await axiosUtil.instance.get(`${url}${api}`)
+    const response = await axiosUtil.instance.get(`${url}${api}`, { timeout: 30000 })
 
     return response
   } catch (error) {
@@ -13,8 +16,8 @@ const getUrlStatus = async (url, api = '') => {
   }
 }
 
-const getNodeInfo = async url => {
-  const response = await getUrlStatus(url, '/v1/chain/get_info')
+const getNodeInfo = async (url, api = '/v1/chain/get_info') => {
+  const response = await getUrlStatus(url, api)
 
   return {
     ...(response?.data && { nodeInfo: response.data }),
@@ -28,7 +31,7 @@ const getSupportedAPIs = async (api) => {
 
   try {
     const response = await axiosUtil.instance.get(
-      `${api}/v1/node/get_supported_apis`
+      `${api}/v1/node/get_supported_apis`, { timeout: 30000 }
     )
 
     supportedAPIs = response.data?.apis

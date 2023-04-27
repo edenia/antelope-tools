@@ -54,8 +54,8 @@ export default (theme) => ({
     display: 'flex',
     fontWeight: 'normal',
     marginLeft: theme.spacing(3),
-    '& svg': {
-      marginLeft: theme.spacing(2),
+    '& span': {
+      marginRight: theme.spacing(2),
     },
   },
   keysContainer: {

@@ -74,6 +74,7 @@ const syncProducers = async () => {
   if (producers?.length) {
     producers = await updateProducers(producers)
     await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
+    await syncEndpoints()
 
     if (!eosConfig.stateHistoryPluginEndpoint) {
       await statsService.sync()
@@ -96,11 +97,11 @@ const getProducersSummary = async () => {
   return rows
 }
 
-const syncNodes = async (producers) => {
+const syncNodes = async producers => {
   if (!producers?.length) return
 
-  let nodes = producers.flatMap((producer) => {
-    return (producer.bp_json?.nodes || []).map((node) => {
+  let nodes = producers.flatMap(producer => {
+    return (producer.bp_json?.nodes || []).map(node => {
       node.producer_id = producer.id
 
       return nodeService.getFormatNode(node)
@@ -127,6 +128,9 @@ const syncEndpoints = async () => {
             value
             type
           }
+          node_info {
+            features 
+          }
         }
       }
     }
@@ -141,8 +145,14 @@ const syncEndpoints = async () => {
   if (!count) return
 
   const endpoints = await Promise.all(
-    producers.map(async (producer) => {
-      const endpoints = producer.nodes.flatMap((node) => node?.endpoints || [])
+    producers.map(async producer => {
+      const endpoints = producer.nodes.flatMap(
+        node =>
+          node?.endpoints.map(endpoint => ({
+            ...endpoint,
+            features: node?.node_info.at(0)?.features?.list
+          })) || []
+      )
 
       return await endpointsHealth(endpoints, producer.id)
     })
@@ -157,7 +167,7 @@ const endpointsHealth = async (endpoints, producerId) => {
   for (const index in endpoints) {
     const endpoint = { ...endpoints[index] }
     const repeatedIndex = checkedList.findIndex(
-      (info) => info.value === endpoint.value
+      info => info.value === endpoint.value
     )
     const isRepeated = repeatedIndex >= 0
 
@@ -168,13 +178,15 @@ const endpointsHealth = async (endpoints, producerId) => {
       endpoint.head_block_time = previous.head_block_time
       endpoint.updated_at = previous.updated_at
     } else {
-      const startTime = new Date()
-      const { nodeInfo, ...response } = await producerUtil.getNodeInfo(
-        endpoint.value
+      const { startTime, nodeInfo, ...response } = await getHealthCheckResponse(
+        endpoint
       )
 
       endpoint.time = (new Date() - startTime) / 1000
-      endpoint.response = response
+      endpoint.response = {
+        status: response?.status,
+        statusText: response?.statusText
+      }
       endpoint.head_block_time = nodeInfo?.head_block_time || null
       endpoint.updated_at = new Date()
     }
@@ -191,6 +203,32 @@ const endpointsHealth = async (endpoints, producerId) => {
   }
 
   return checkedList
+}
+
+const getHealthCheckResponse = async endpoint => {
+  let startTime
+  let response
+
+  if (endpoint?.features?.length) {
+    for (const API of eosConfig.healthCheckAPIs) {
+      if (endpoint.features?.some(feature => feature === API.name)) {
+        startTime = new Date()
+        response = await producerUtil.getNodeInfo(endpoint.value, API.api)
+
+        break
+      }
+    }
+  }
+
+  if (!endpoint.features || !response) {
+    startTime = new Date()
+    response = await producerUtil.getNodeInfo(endpoint.value)
+  }
+
+  return {
+    startTime,
+    ...response
+  }
 }
 
 const requestProducers = async ({ where, whereEndpointList }) => {
@@ -224,7 +262,7 @@ const requestProducers = async ({ where, whereEndpointList }) => {
   return !producers ? {} : { producers, total: aggregate.count }
 }
 
-const getProducersInfo = async (bpParams) => {
+const getProducersInfo = async bpParams => {
   const whereCondition = {
     where: {
       _and: [{ bp_json: { _neq: {} } }, { owner: { _in: bpParams?.owners } }]

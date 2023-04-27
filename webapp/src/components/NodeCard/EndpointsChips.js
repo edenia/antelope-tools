@@ -49,11 +49,17 @@ const EndpointsChips = ({ node }) => {
     const { t } = useTranslation('endpointInfoComponent')
     const { totalEndpoints, failingEndpoints, updatedAt } = status
     const workingEndpoints = totalEndpoints - failingEndpoints.length
-    const healthStatus = getHealthStatus(totalEndpoints, workingEndpoints)
+    let healthStatus
+    
+    if(!status.isLoading) {
+      healthStatus = getHealthStatus(totalEndpoints, workingEndpoints)
+    }
 
     return (
       <div className={classes.lightIcon}>
-        {`${workingEndpoints}/${totalEndpoints}`}
+        {healthStatus && (
+          <span>{`${workingEndpoints}/${totalEndpoints}`}</span>
+        )}
         <HealthCheck status={healthStatus}>
           <Typography>{t('status')}</Typography>
           <Typography>
@@ -66,29 +72,34 @@ const EndpointsChips = ({ node }) => {
     )
   }
 
-  const defaultStatus = {
+  const checkedEndpoints = node.endpoints.filter(endpoint => endpoint.type !== 'p2p')
+  const status = {
     totalEndpoints: 0,
     failingEndpoints: [],
-    updatedAt: 'NA',
+    updatedAt: 'N/A',
+    isLoading: false
   }
-  const status = node.endpoints.reduce((status, endpoint) => {
-    if (endpoint?.type !== 'p2p') {
-      if (endpoint?.response?.status !== 200) {
-        status.failingEndpoints.push(endpoint.type)
-      }
 
-      status.totalEndpoints += 1
-      status.updatedAt = endpoint.updated_at
+  for (const endpoint of checkedEndpoints){
+    if (endpoint?.response?.status === undefined) {
+      status.isLoading = true
+
+      break
     }
 
-    return status
-  }, defaultStatus)
+    if (endpoint?.response?.status !== 200) {
+      status.failingEndpoints.push(endpoint.type)
+    }
+
+    status.totalEndpoints += 1
+    status.updatedAt = endpoint.updated_at
+  }
 
   return (
     <>
       <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
         {t('endpoints')}
-        {!!status.totalEndpoints && <EndpointsInfo status={status} />}
+        {!!checkedEndpoints.length && <EndpointsInfo status={status} />}
       </dt>
       <ChipList
         list={node.endpoints.map(({ type, value }) => {
