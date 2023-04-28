@@ -1,10 +1,13 @@
-const { hasuraUtil, sequelizeUtil } = require('../utils')
+const { StatusCodes } = require('http-status-codes')
+
+const { hasuraUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
 const nodeService = require('./node.service')
 const statsService = require('./stats.service')
+const healthCheckHistoryService = require('./health-check-history.service')
 
 const updateBPJSONs = async (producers = []) => {
   const upsertMutation = `
@@ -41,7 +44,7 @@ const updateProducers = async (producers = []) => {
   let topProducers = producers.slice(0, eosConfig.eosTopLimit)
 
   topProducers = topProducers.filter(
-    producer =>
+    (producer) =>
       producer?.health_status && Object.keys(producer.health_status).length > 0
   )
   await nodeService.clearNodes()
@@ -50,7 +53,7 @@ const updateProducers = async (producers = []) => {
   const insertedRows = await hasuraUtil.request(upsertMutation, { producers })
 
   await hasuraUtil.request(clearMutation, {
-    owners: producers.map(producer => producer.owner)
+    owners: producers.map((producer) => producer.owner)
   })
 
   return insertedRows.insert_producer.returning
@@ -111,21 +114,121 @@ const syncNodes = async producers => {
 
 const syncEndpoints = async () => {
   const query = `
-    query {
-      endpoints: endpoint (where: {type: {_in: ["api","ssl"]}}) {
-        id,
-        type,
-        value
+    {
+      endpoint_aggregate(where: {type: {_in: ["api", "ssl"]}}) {
+        aggregate {
+          count
+        }
+      }
+      producers : producer(where: {nodes: {endpoints: {_and: [{value: {_gt: ""}}]}}}, order_by: {rank: asc}) {
+        id
+        nodes {
+          endpoints(where: {type: {_in: ["api", "ssl"]}}) {
+            id
+            value
+            type
+          }
+          node_info {
+            features 
+          }
+        }
       }
     }
   `
-  const { endpoints } = await hasuraUtil.request(query)
+  const {
+    producers,
+    endpoint_aggregate: {
+      aggregate: { count }
+    }
+  } = await hasuraUtil.request(query)
 
-  if (!endpoints?.length) return
+  if (!count) return
 
-  endpoints.forEach(async endpoint => {
+  const endpoints = await Promise.all(
+    producers.map(async producer => {
+      const endpoints = producer.nodes.flatMap(
+        node =>
+          node?.endpoints.map(endpoint => ({
+            ...endpoint,
+            features: node?.node_info.at(0)?.features?.list
+          })) || []
+      )
+
+      return await endpointsHealth(endpoints, producer.id)
+    })
+  )
+
+  await healthCheckHistoryService.saveHealthRegister(endpoints.flat())
+}
+
+const endpointsHealth = async (endpoints, producerId) => {
+  const checkedList = []
+
+  for (const index in endpoints) {
+    const endpoint = { ...endpoints[index] }
+    const repeatedIndex = checkedList.findIndex(
+      info => info.value === endpoint.value
+    )
+    const isRepeated = repeatedIndex >= 0
+
+    if (isRepeated) {
+      const previous = checkedList[repeatedIndex]
+
+      endpoint.response = previous.response
+      endpoint.head_block_time = previous.head_block_time
+      endpoint.updated_at = previous.updated_at
+    } else {
+      const { startTime, nodeInfo, ...response } = await getHealthCheckResponse(
+        endpoint
+      )
+
+      endpoint.time = (new Date() - startTime) / 1000
+      endpoint.response = {
+        status: response?.status,
+        statusText: response?.statusText
+      }
+      endpoint.head_block_time = nodeInfo?.head_block_time || null
+      endpoint.updated_at = new Date()
+    }
+
     await nodeService.updateEndpointInfo(endpoint)
-  })
+
+    if (!isRepeated) {
+      checkedList.push({
+        ...endpoint,
+        producer_id: producerId,
+        isWorking: Number(endpoint?.response?.status === StatusCodes.OK)
+      })
+    }
+  }
+
+  return checkedList
+}
+
+const getHealthCheckResponse = async endpoint => {
+  let startTime
+  let response
+
+  if (endpoint?.features?.length) {
+    for (const API of eosConfig.healthCheckAPIs) {
+      if (endpoint.features?.some(feature => feature === API.name)) {
+        startTime = new Date()
+        response = await producerUtil.getNodeInfo(endpoint.value, API.api)
+
+        break
+      }
+    }
+  }
+
+  if (!endpoint.features || !response) {
+    startTime = new Date()
+    response = await producerUtil.getNodeInfo(endpoint.value)
+  }
+
+  return {
+    startTime,
+    ...response
+  }
 }
 
 const requestProducers = async ({ where, whereEndpointList }) => {

@@ -11,6 +11,9 @@ import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import { Tooltip as MUITooltip } from '@mui/material'
 import ListAltIcon from '@mui/icons-material/ListAlt'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@mui/material/Link'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
@@ -39,23 +42,26 @@ const EndpointsTable = ({ producers }) => {
 
   const syncToleranceInterval = eosConfig.syncToleranceInterval
 
-  const getStatus = (endpoint) => {
+  const isSynchronized = endpoint => {
+    const diffBlockTimems =
+      new Date(endpoint.updated_at) - new Date(endpoint.head_block_time)
+
+    return diffBlockTimems <= syncToleranceInterval
+  }
+
+  const getStatus = endpoint => {
     if (endpoint.response.status === undefined) return
 
-    const diffBlockTimems = new Date() - new Date(endpoint.head_block_time)
-
-    if (diffBlockTimems <= syncToleranceInterval) {
-      return 'greenLight'
-    } else {
-      switch (Math.floor(endpoint.response?.status / 100)) {
-        case 2:
-          return 'timerOff'
-        case 4:
-        case 5:
-          return 'yellowLight'
-        default:
-          return 'redLight'
-      }
+    switch (Math.floor(endpoint.response?.status / 100)) {
+      case 2:
+        return !endpoint.head_block_time || isSynchronized(endpoint)
+          ? 'greenLight'
+          : 'timerOff'
+      case 4:
+      case 5:
+        return 'yellowLight'
+      default:
+        return 'redLight'
     }
   }
 
@@ -122,23 +128,38 @@ const EndpointsTable = ({ producers }) => {
                 </div>
               </TableCell>
               <TableCell>
-                  <div className={classes.titleCell}>
-                    {t('p2p')}
-                    <MUITooltip title={t('showList')} arrow>
-                      <ListAltIcon
-                        onClick={(e) => {
-                          handlePopoverOpen(e.target, 'p2p')
-                        }}
-                      />
-                    </MUITooltip>
-                  </div>
-                </TableCell>
+                <div className={classes.titleCell}>
+                  {t('p2p')}
+                  <MUITooltip title={t('showList')} arrow>
+                    <ListAltIcon
+                      onClick={(e) => {
+                        handlePopoverOpen(e.target, 'p2p')
+                      }}
+                    />
+                  </MUITooltip>
+                </div>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {producers.map((producer, index) => (
               <TableRow key={`${producer.name}-${index}`}>
-                <TableCell>{producer.name}</TableCell>
+                <TableCell>
+                  <div className={classes.healthContainer}>
+                    {producer.name}
+                    {!!producer.endpoints.api.length +
+                      producer.endpoints.ssl.length && (
+                      <Link
+                        component={RouterLink}
+                        state={{ producerId: producer.id }}
+                        to="/endpoints-stats"
+                        color="secondary"
+                      >
+                        <QueryStatsIcon />
+                      </Link>
+                    )}
+                  </div>
+                </TableCell>
                 <CellList producer={producer} endpointType={'api'} />
                 <CellList producer={producer} endpointType={'ssl'} />
                 <CellList producer={producer} endpointType={'p2p'} />

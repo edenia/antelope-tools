@@ -1,0 +1,14 @@
+table:
+  name: check_history_by_endpoint
+  schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - value
+        - date
+        - avg_time
+        - availability
+        - producer_id
+        - total_checks
+      filter: {}

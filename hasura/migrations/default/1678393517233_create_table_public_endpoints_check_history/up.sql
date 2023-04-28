@@ -1,0 +1,2 @@
+CREATE TABLE "public"."endpoints_check_history" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "successful_checks" integer NOT NULL, "sum_total_time" integer NOT NULL, "value" varchar NOT NULL, "date" date NOT NULL, "producer_id" integer NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("producer_id") REFERENCES "public"."producer"("id") ON UPDATE restrict ON DELETE cascade, UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

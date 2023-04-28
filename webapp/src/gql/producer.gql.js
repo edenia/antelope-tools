@@ -210,3 +210,23 @@ export const EOSRATE_STATS_QUERY = gql`
     }
   }
 `
+
+export const FASTEST_ENDPOINTS_QUERY = gql`query($today: date){
+  endpoints: check_history_by_endpoint(limit: 5, order_by: [{availability: desc, avg_time: asc}], where: {date: {_eq: $today}}) {
+    value
+    avg_time
+    availability
+  }
+}`
+
+export const HISTORY_ENDPOINTS_BY_PRODUCER_QUERY = gql`query($id: Int){
+  endpoints: check_history_by_endpoint(order_by: [{value: asc},{date: asc}], where: {producer_id: {_eq: $id}}) {
+    value
+    date
+    avg_time
+    availability
+  }
+  dates: check_history_by_endpoint(order_by: {date: asc}, where: {producer_id: {_eq: $id}}, distinct_on: [date]) {
+    date
+  }
+}`

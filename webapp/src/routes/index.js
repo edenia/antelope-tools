@@ -27,6 +27,7 @@ import {
 
 const Home = lazy(() => import('./Home'))
 const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
+const EndpointsStats = lazy(() => import('./EndpointsStats'))
 const BlockProducers = lazy(() => import('./BlockProducers'))
 const RewardsDistribution = lazy(() => import('./RewardsDistribution'))
 const Nodes = lazy(() => import('./Nodes'))
@@ -119,6 +120,13 @@ const defaultRoutes = [
     exact: true,
   },
   {
+    name: 'endpointsStats',
+    icon: <ActivityIcon />,
+    component: EndpointsStats,
+    path: '/endpoints-stats',
+    exact: true,
+  },
+  {
     name: 'ricardianContract',
     icon: <InfoIcon />,
     component: RicardianContract,
@@ -169,6 +177,13 @@ const lacchainRoutes = [
     icon: <EndpointSvg />,
     component: EndpointsList,
     path: '/endpoints',
+    exact: true,
+  },
+  {
+    name: 'endpointsStats',
+    icon: <ActivityIcon />,
+    component: EndpointsStats,
+    path: '/endpoints-stats',
     exact: true,
   },
   {

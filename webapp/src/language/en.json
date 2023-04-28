@@ -89,6 +89,9 @@
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
+    "/endpoints-stats>sidebar": "API Endpoints Stats",
+    "/endpoints-stats>title": "API Endpoints Stats- EOSIO + Antelope Network Dashboard",
+    "/endpoints-stats>heading": "API Endpoints Stats",
     "/about>sidebar": "About",
     "/about>title": "About - EOSIO + Antelope Network Dashboard",
     "/about>heading": "About",
@@ -385,5 +388,14 @@
   },
   "mainMapComponent": {
     "numberOfNodes": "Number of Nodes"
+  },
+  "EndpointsStatsRoute": {
+    "fastest": "Top 5 fastest endpoints by querying from Costa Rica",
+    "byProducer": "Endpoints stats by producer",
+    "avgAvailability": "Average Availability",
+    "avgTime": "Average Response Time",
+    "charTitle": "Average Response Time from Costa Rica",
+    "list": "List of endpoints",
+    "timeInSecs": "Time in seconds"
   }
 }

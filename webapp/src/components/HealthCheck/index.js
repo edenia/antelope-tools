@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
+import { CircularProgress } from '@mui/material'
 
 import Tooltip from '../Tooltip'
 
@@ -12,6 +13,9 @@ const HealthCheck = ({ children, status }) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
+  if (status === undefined)
+    return <CircularProgress className={classes.loading} />
+
   const handlePopoverOpen = (target) => {
     setAnchorEl(target)
   }
@@ -19,8 +23,6 @@ const HealthCheck = ({ children, status }) => {
   const handlePopoverClose = () => {
     setAnchorEl(null)
   }
-
-  if (status === undefined) return
 
   const openPopOver = (event) => {
     handlePopoverOpen(event.target)

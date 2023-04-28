@@ -42,7 +42,7 @@ const EndpointsTextList = ({ type }) => {
 
   return (
     <>
-      {!loading && textList?.length && (
+      {!loading && !!textList?.length && (
         <div className={classes.container}>
           <CopyToClipboard text={textList} />
           {textList}

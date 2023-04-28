@@ -1,0 +1,13 @@
+table:
+  name: health_check_history
+  schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - date
+        - total_checks
+        - created_at
+        - updated_at
+        - id
+      filter: {}

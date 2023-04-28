@@ -45,6 +45,12 @@ module.exports = {
     telos: 'telos',
     wax: 'wax'
   },
+  healthCheckAPIs: [
+    { name: 'chain-api', api: '/v1/chain/get_info' },
+    { name: 'atomic-assets-api', api: '/atomicassets/v1/config' },
+    { name: 'hyperion-v2', api: '/v2/health' },
+    { name: 'light-api', api: '/api/status' }
+  ],
   rewardsToken: process.env.HAPI_REWARDS_TOKEN,
   eosRateUrl: process.env.HAPI_EOSRATE_GET_STATS_URL,
   eosRateUser: process.env.HAPI_EOSRATE_GET_STATS_USER,
