@@ -55,7 +55,8 @@
     "bugRequest": "Reportar un problema / Solicitar una característica ",
     "moreInfo": "Más Información",
     "openLink": "Visitar Sitio",
-    "table": "Tabla"
+    "table": "Tabla",
+    "noOptions": "Sin coincidencias"
   },
   "routes": {
     "/>sidebar": "Panel",

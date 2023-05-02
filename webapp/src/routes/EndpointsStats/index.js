@@ -96,6 +96,7 @@ const EndpointsStats = () => {
               renderInput={params => (
                 <TextField {...params} label={t('producerName')} />
               )}
+              noOptionsText={t('noOptions')}
             />
           )}
           {historyData && (

@@ -44,7 +44,8 @@
     "bugRequest": "Report a bug / Request a feature",
     "moreInfo": "More Info",
     "openLink": "Visit Site",
-    "table": "Table"
+    "table": "Table",
+    "noOptions": "No matches"
   },
   "routes": {
     "/>sidebar": "Dashboard",
