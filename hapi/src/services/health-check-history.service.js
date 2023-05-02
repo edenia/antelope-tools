@@ -36,7 +36,11 @@ const updateEndpointsHealthHistory = async (endpoints, date) => {
   `
   const updates = endpoints.map(endpoint => ({
     where: {
-      _and: [{ value: { _eq: endpoint.value } }, { date: { _eq: date } }]
+      _and: [
+        { producer_id: { _eq: endpoint.producer_id } },
+        { value: { _eq: endpoint.value } },
+        { date: { _eq: date } }
+      ]
     },
     _inc: {
       successful_checks: endpoint.isWorking,
