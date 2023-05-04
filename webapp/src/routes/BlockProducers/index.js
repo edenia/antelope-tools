@@ -9,6 +9,7 @@ import SearchBar from '../../components/SearchBar'
 import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
+import ProducersUpdateLog from 'components/ProducersUpdateLog'
 
 import styles from './styles'
 
@@ -52,6 +53,7 @@ const Producers = () => {
 
   return (
     <>
+      <ProducersUpdateLog />
       <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
         <SearchBar
           filters={filters}

@@ -230,3 +230,10 @@ export const HISTORY_ENDPOINTS_BY_PRODUCER_QUERY = gql`query($id: Int){
     date
   }
 }`
+
+export const PRODUCERS_UPDATE_LOG_QUERY = gql`query{
+  updateLogs: producers_list_update_log (limit: 1){
+    last_update
+    next_estimated_update
+  }
+}`

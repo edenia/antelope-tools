@@ -12,10 +12,9 @@ const useEndpointsState = () => {
   ] = useSearchState({
     query: PRODUCERS_QUERY,
     where: { nodes: { endpoints: { value: { _gt: '' } } } },
-    limit: 20
+    limit: 20,
   })
   const { data, loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, { variables })
-  const [updatedAt, setUpdatedAt] = useState()
   const [items, setItems] = useState()
 
   useEffect(() => {
@@ -43,10 +42,6 @@ const useEndpointsState = () => {
         }
       }),
     )
-
-    if (!data.producers?.[0]?.updated_at) return
-
-    setUpdatedAt(data.producers[0].updated_at)
   }, [data])
 
   const handleFilter = useCallback(value => {
@@ -65,7 +60,7 @@ const useEndpointsState = () => {
   }, [setPagination])
 
   return [
-    { loading, pagination, producers: items, updatedAt, filters },
+    { loading, pagination, producers: items, filters },
     { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }

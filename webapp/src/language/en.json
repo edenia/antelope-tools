@@ -45,7 +45,9 @@
     "moreInfo": "More Info",
     "openLink": "Visit Site",
     "table": "Table",
-    "noOptions": "No matches"
+    "noOptions": "No matches",
+    "updatedAt": "Updated at",
+    "nextUpdateAt": "Next updated at"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -334,7 +336,6 @@
   },
   "endpointsListRoute": {
     "title": "Endpoints available by",
-    "updatedAt": "Updated at",
     "endpointsResponding": "Only endpoints responding",
     "showList": "Show List"
   },
