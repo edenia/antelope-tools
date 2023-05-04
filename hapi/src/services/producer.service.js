@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 
 const { hasuraUtil, sequelizeUtil, producerUtil } = require('../utils')
-const { eosConfig } = require('../config')
+const { eosConfig, workersConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
 const eosioService = require('./eosio.service')
@@ -59,6 +59,24 @@ const updateProducers = async (producers = []) => {
   return insertedRows.insert_producer.returning
 }
 
+const updateProducersLog = async ({ lastUpdateAt, nextUpdateAt }) => {
+  const upsertMutation = `
+    mutation ($payload: [producers_list_update_log_insert_input!]!) {
+      insert_producers_list_update_log(objects: $payload, on_conflict: {constraint: producers_list_update_log_pkey, update_columns: [ last_update, next_estimated_update ]}) {
+        affected_rows
+      }
+    }
+  `
+
+  await hasuraUtil.request(upsertMutation, {
+    payload: {
+      id: 1,
+      last_update: lastUpdateAt,
+      next_estimated_update: nextUpdateAt
+    }
+  })
+}
+
 const syncProducers = async () => {
   let producers = []
 
@@ -74,12 +92,27 @@ const syncProducers = async () => {
   if (producers?.length) {
     producers = await updateProducers(producers)
     await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
+    await saveEstimateNextUpdate(new Date())
     await syncEndpoints()
 
     if (!eosConfig.stateHistoryPluginEndpoint) {
       await statsService.sync()
     }
   }
+}
+
+const saveEstimateNextUpdate = async lastUpdateAt => {
+  const timeoutNodeInfo = 60
+  const timeoutGetBPJSONs = 750
+  const timeoutGetProducers = eosConfig.apiEndpoints.length * 30
+  const timeoutSum = timeoutNodeInfo + timeoutGetBPJSONs + timeoutGetProducers
+  const nextUpdateAt = new Date(lastUpdateAt)
+
+  nextUpdateAt.setSeconds(
+    nextUpdateAt.getSeconds() + workersConfig.syncProducersInterval + timeoutSum
+  )
+
+  await updateProducersLog({ lastUpdateAt, nextUpdateAt })
 }
 
 const getProducersSummary = async () => {
