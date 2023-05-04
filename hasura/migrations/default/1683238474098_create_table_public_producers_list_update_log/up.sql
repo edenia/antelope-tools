@@ -1,0 +1,1 @@
+CREATE TABLE "public"."producers_list_update_log" ("id" integer NOT NULL DEFAULT 1, "last_update" timestamp with time zone NOT NULL, "next_estimated_update" timestamp with time zone NOT NULL, PRIMARY KEY ("id") , UNIQUE ("id"));

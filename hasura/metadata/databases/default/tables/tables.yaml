@@ -10,6 +10,7 @@
 - "!include public_node.yaml"
 - "!include public_node_info.yaml"
 - "!include public_producer.yaml"
+- "!include public_producers_list_update_log.yaml"
 - "!include public_round_history.yaml"
 - "!include public_schedule_history.yaml"
 - "!include public_setting.yaml"
