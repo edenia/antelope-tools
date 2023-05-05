@@ -91,8 +91,8 @@ const syncProducers = async () => {
 
   if (producers?.length) {
     producers = await updateProducers(producers)
-    await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
     await saveEstimateNextUpdate(new Date())
+    await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
     await syncEndpoints()
 
     if (!eosConfig.stateHistoryPluginEndpoint) {
@@ -102,10 +102,9 @@ const syncProducers = async () => {
 }
 
 const saveEstimateNextUpdate = async lastUpdateAt => {
-  const timeoutNodeInfo = 60
   const timeoutGetBPJSONs = 750
   const timeoutGetProducers = eosConfig.apiEndpoints.length * 30
-  const timeoutSum = timeoutNodeInfo + timeoutGetBPJSONs + timeoutGetProducers
+  const timeoutSum = timeoutGetBPJSONs + timeoutGetProducers
   const nextUpdateAt = new Date(lastUpdateAt)
 
   nextUpdateAt.setSeconds(
