@@ -5,7 +5,17 @@ export default (theme) => ({
     alignItems: 'center',
   },
   dateContainer: {
-    flex: '40%',
+    flex: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    '& div': {
+      gap: theme.spacing(2),
+      margin: theme.spacing(2, 0, 2),
+    },
+  },
+  controlFormContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   switchContainer: {
     display: 'flex',

@@ -56,7 +56,9 @@
     "moreInfo": "Más Información",
     "openLink": "Visitar Sitio",
     "table": "Tabla",
-    "noOptions": "Sin coincidencias"
+    "noOptions": "Sin coincidencias",
+    "updatedAt": "Última actualización",
+    "nextUpdateAt": "Próxima actualización"
   },
   "routes": {
     "/>sidebar": "Panel",

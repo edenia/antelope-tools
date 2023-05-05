@@ -1,0 +1,11 @@
+table:
+  name: producers_list_update_log
+  schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - id
+        - last_update
+        - next_estimated_update
+      filter: {}

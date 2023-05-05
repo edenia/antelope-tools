@@ -12,12 +12,12 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Switch from '@mui/material/Switch'
 import Pagination from '@mui/material/Pagination'
-import moment from 'moment'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 import EndpointsTable from '../../components/EndpointsTable'
 import NoResults from '../../components/NoResults'
+import ProducersUpdateLog from '../../components/ProducersUpdateLog'
 import SearchBar from '../../components/SearchBar'
 
 import styles from './styles'
@@ -30,7 +30,7 @@ const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, updatedAt, filters },
+    { loading, pagination, producers, filters },
     { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
   ] = useEndpointsState({ useCache: false })
 
@@ -42,47 +42,45 @@ const EndpointsList = () => {
             <Typography component="p" variant="h6">
               {t('title')} {t('producer')}
             </Typography>
-            {updatedAt && (
+            <ProducersUpdateLog />
+          </div>
+          <div className={classes.controlFormContainer}>
+            <div className={classes.switchContainer}>
               <Typography component="p" variant="caption">
-                {t('updatedAt')}: {moment(updatedAt).format('LLL')}
+                {t('endpointsResponding')}
               </Typography>
-            )}
+              <Switch
+                onChange={(event) => {
+                  handleFilter(event.target?.checked)
+                }}
+              />
+            </div>
+            <div className={classes.modalContainer}>
+              <HealthInfoModal />
+            </div>
+            <FormControl variant="standard">
+              <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
+              <Select
+                className={classes.select}
+                labelId="selectLabel"
+                value={pagination.limit || ''}
+                onChange={(e) =>
+                  setPagination((prev) => ({
+                    ...prev,
+                    page: 1,
+                    limit: parseInt(e.target.value),
+                  }))
+                }
+                fullWidth
+              >
+                {limitOptions.map((option, index) => (
+                  <MenuItem key={`limit-${option}-${index}`} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
-          <div className={classes.switchContainer}>
-            <Typography component="p" variant="caption">
-              {t('endpointsResponding')}
-            </Typography>
-            <Switch
-              onChange={(event) => {
-                handleFilter(event.target?.checked)
-              }}
-            />
-          </div>
-          <div className={classes.modalContainer}>
-            <HealthInfoModal />
-          </div>
-          <FormControl variant="standard">
-            <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
-            <Select
-              className={classes.select}
-              labelId="selectLabel"
-              value={pagination.limit || ''}
-              onChange={(e) =>
-                setPagination((prev) => ({
-                  ...prev,
-                  page: 1,
-                  limit: parseInt(e.target.value),
-                }))
-              }
-              fullWidth
-            >
-              {limitOptions.map((option, index) => (
-                <MenuItem key={`limit-${option}-${index}`} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
         </div>
         <div className={classes.searchWrapper}>
           <SearchBar
@@ -95,7 +93,7 @@ const EndpointsList = () => {
           <LinearProgress />
         ) : (
           <>
-            {!!producers?.length ? ( 
+            {!!producers?.length ? (
               <EndpointsTable producers={producers} />
             ) : (
               <NoResults />

@@ -11,6 +11,9 @@ const Pagination = lazy(() => import('@mui/material/Pagination'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
 const InformationCard = lazy(() => import('../../components/InformationCard'))
 const NoResults = lazy(() => import('../../components/NoResults'))
+const ProducersUpdateLog = lazy(() =>
+  import('../../components/ProducersUpdateLog'),
+)
 
 const useStyles = makeStyles(styles)
 
@@ -23,6 +26,7 @@ const Nodes = () => {
 
   return (
     <>
+      <ProducersUpdateLog />
       <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
         <SearchBar
           filters={filters}
