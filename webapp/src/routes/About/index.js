@@ -25,21 +25,21 @@ const About = () => {
             <Logo className={classes.logo} />
           </div>
           <div className={classes.boxInfo}>
-            <Typography variant="body2" align="justify" paragraph>
+            <Typography variant="body2" paragraph>
               {t('body.paragraph1')}
             </Typography>
             <Typography variant="h4">{t('subtitle1')}</Typography>
-            <Typography variant="body2" align="justify" paragraph>
+            <Typography variant="body2" paragraph>
               {t('body1.paragraph1')}
             </Typography>
             <Typography variant="h4">{t('subtitle2')}</Typography>
-            <Typography variant="body2" align="justify" paragraph>
+            <Typography variant="body2" paragraph>
               {t('body2.paragraph1')}
             </Typography>
             <Typography variant="h4">{t('subtitle3')}</Typography>
             {eosConfig.networkName !== 'lacchain' ? (
               <>
-                <Typography variant="body2" align="justify" paragraph>
+                <Typography variant="body2" paragraph>
                   {t('body3.paragraph1Text1')}{' '}
                   <RouterLink to="/accounts?account=eosio&table=producers">
                     eosio
@@ -54,13 +54,13 @@ const About = () => {
                   </a>
                 </Typography>
 
-                <Typography variant="body2" align="justify" paragraph>
+                <Typography variant="body2" paragraph>
                   {t('body3.paragraph2')}
                 </Typography>
-                <Typography variant="body2" align="justify" paragraph>
+                <Typography variant="body2" paragraph>
                   {t('body3.paragraph3')}
                 </Typography>
-                <Typography variant="body2" align="justify" paragraph>
+                <Typography variant="body2" paragraph>
                   {t('body3.paragraph4Text1')}{' '}
                   <a
                     href="https://edenia.com/chains.json"
@@ -83,7 +83,7 @@ const About = () => {
                 </Typography>
               </>
             ) : (
-              <Typography variant="body2" align="justify" paragraph>
+              <Typography variant="body2" paragraph>
                 {t('body3.paragraph1Text1')}{' '}
                 <RouterLink to="/accounts?account=eosio&table=entity">
                   eosio
@@ -91,7 +91,7 @@ const About = () => {
                 .
               </Typography>
             )}
-            <Typography variant="body2" align="justify" paragraph>
+            <Typography variant="body2" paragraph>
               {t('body3.paragraph5')}
             </Typography>
           </div>
