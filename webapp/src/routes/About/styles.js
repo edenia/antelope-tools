@@ -13,21 +13,28 @@ export default (theme) => ({
       marginBottom: theme.spacing(4),
     },
   },
+  logoContainer: {
+    [theme.breakpoints.down('md')]: {
+      order: 1,
+    },
+  },
   logo: {
     width: 569,
     height: 498,
+    float: 'right',
     [theme.breakpoints.down('md')]: {
-      width: '85%',
+      width: '100%',
     },
   },
   cardShadow: {
     boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
   },
   mainText: {
-    display: 'flex',
-    flexDirection: 'row',
+    width: '100%',
+    overflow: 'hidden',
     [theme.breakpoints.down('md')]: {
-      flexDirection: 'column'
+      display: 'flex',
+      flexDirection: 'column',
     },
-  }
+  },
 })
