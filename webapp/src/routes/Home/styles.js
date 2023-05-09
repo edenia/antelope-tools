@@ -102,6 +102,9 @@ export default (theme) => ({
     [theme.breakpoints.down('md')]: {
       marginBottom: '10px',
     },
+    '& .MuiPaper-root': {
+      height: '100%',
+    },
   },
   cardGrow: {
     flexGrow: '1',
@@ -109,6 +112,9 @@ export default (theme) => ({
     [theme.breakpoints.down('md')]: {
       flexBasis: 'calc(100%/3)',
       marginBottom: '10px',
+    },
+    '& .MuiPaper-root': {
+      height: '100%',
     },
   },
   uniquelocations: {
