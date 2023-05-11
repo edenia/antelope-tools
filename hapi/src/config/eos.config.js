@@ -23,6 +23,8 @@ module.exports = {
   eosmechanics: {
     account: process.env.HAPI_EOS_MECHANICS_ACCOUNT,
     password: process.env.HAPI_EOS_MECHANICS_PASSWORD,
+    customPermission:
+      process.env.HAPI_EOS_MECHANICS_CUSTOM_PERMISSION || 'active',
     includeTransaction: process.env.HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION
       ? JSON.parse(process.env.HAPI_EOS_MECHANICS_INCLUDE_TRANSACTION)
       : ''
