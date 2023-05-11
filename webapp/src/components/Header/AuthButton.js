@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import AccountIcon from '@mui/icons-material/AccountCircle'
-import FingerprintIcon from '@mui/icons-material/Fingerprint'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import ExitIcon from '@mui/icons-material/ExitToApp'
+
+import Tooltip from 'components/Tooltip'
 
 import useAuthBottonState from './useAuthBottonState'
 
@@ -13,30 +15,53 @@ const AuthButton = ({ classes }) => {
   const { t } = useTranslation()
   const [{ state }, { handleCloseMenu, handleSignOut, login }] =
     useAuthBottonState()
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handlePopoverOpen = (target) => {
+    setAnchorEl(target)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const openPopOver = (event) => {
+    handlePopoverOpen(event.target)
+  }
 
   return (
     <React.Fragment>
       <div className={classes.authBox}>
         {state?.ual?.activeUser ? (
           <>
-            <Button className={classes.userBtn} startIcon={<AccountIcon />}>
-              {state?.ual?.accountName || ''}
-            </Button>
-            <Button
-              startIcon={<ExitIcon />}
-              onClick={handleSignOut}
-              className={classes.loginBtn}
+            <Tooltip 
+              anchorEl={anchorEl}
+              open={anchorEl !== null}
+              hideCloseButton
+              onClose={handlePopoverClose}
             >
-              {t('logout')}
+              <Button
+                startIcon={<ExitIcon />}
+                onClick={handleSignOut}
+                className={classes.loginBtn}
+              >
+                {t('logout')}
+              </Button>
+            </Tooltip> 
+            <Button className={classes.userBtn} startIcon={<AccountIcon />} onClick={openPopOver}>
+              {state?.ual?.accountName || ''}
             </Button>
           </>
         ) : (
           <Button
-            onClick={() => login('anchor')}
+            onClick={() => {
+              login('anchor')
+              handlePopoverClose()
+            }}
             className={classes.loginBtn}
-            startIcon={<FingerprintIcon />}
+            startIcon={<AccountBalanceWalletIcon />}
           >
-            {t('login')}
+            {t('connectWallet')}
           </Button>
         )}
       </div>

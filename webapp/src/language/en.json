@@ -16,6 +16,7 @@
     "producers": "Producers",
     "producer": "Producer",
     "login": "Login",
+    "connectWallet": "Connect Wallet",
     "logout": "Logout",
     "keys": "Keys",
     "download": "Download",

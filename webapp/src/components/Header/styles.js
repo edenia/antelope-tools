@@ -8,10 +8,25 @@ export default (theme) => ({
   },
   btnLanguage: {
     fontWeight: '600 !important',
+    [theme.breakpoints.down('sm')]: {
+      minWidth: 'auto !important',
+      width: '36px',
+      '& .MuiButton-startIcon': {
+        margin: '0 !important',
+      }
+    },
+  },
+  mobileHidden: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   imgHeaderLogo: {
     width: '145px',
-    marginTop: '8px',
+    marginTop: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      width: '110px',
+    },
   },
   appBar: {
     backgroundColor: '#fff !important',
@@ -74,6 +89,7 @@ export default (theme) => ({
     letterSpacing: '1px !important',
     textTransform: 'capitalize !important',
     fontWeight: '600 !important',
+    color: '#757575 !important',
   },
   userBtn: {
     textTransform: 'lowercase !important',
@@ -86,4 +102,9 @@ export default (theme) => ({
     },
   },
   authBox: { display: 'flex', alignItems: 'center', textAlign: 'center' },
+  cardShadow: {
+    '& .MuiPaper-root': {
+      boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+    },
+  },
 })

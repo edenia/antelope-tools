@@ -72,13 +72,16 @@ const LanguageMenu = () => {
         onClick={toggleMenu}
         className={classes.btnLanguage}
       >
-        {currentLanguaje.toUpperCase()}
+        <span className={classes.mobileHidden}>
+          {currentLanguaje.toUpperCase()}
+        </span>
       </Button>
       <Menu
         id="menu-appbar"
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
+        className={classes.cardShadow}
       >
         {languages.map((language) => (
           <MenuItem
