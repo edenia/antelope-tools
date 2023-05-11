@@ -55,7 +55,10 @@
     "bugRequest": "Reportar un problema / Solicitar una característica ",
     "moreInfo": "Más Información",
     "openLink": "Visitar Sitio",
-    "table": "Tabla"
+    "table": "Tabla",
+    "noOptions": "Sin coincidencias",
+    "updatedAt": "Última actualización",
+    "nextUpdateAt": "Próxima actualización"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -215,10 +218,16 @@
     },
     "subtitle3": "¿De dónde se obtienen los datos?",
     "body3": {
-      "paragraph1": "Antelope Tools proporciona una visualización detallada y gráfica de la información relevante de las entidades que ejecutan los nodos y la infraestructura de la cadena de bloques. Obtenemos los datos on-chain directamente de las tablas públicas de blockchain y de la información proporcionada por los productores de bloques en sus archivos bp.json.",
-      "paragraph2": "Para mayor información acerca Antelope Tools, visite nuestro repositorio en GitHub o contáctenos en nuestro grupo de Telegram. Póngase en contacto con nosotros y únase a nuestro esfuerzo por hacer que las blockchains de EOSIO sean aún más transparentes y fáciles de usar."
+      "paragraph1Text1": "Antelope Tools proporciona una visualización detallada y gráfica de la información relevante de las entidades que ejecutan los nodos y la infraestructura de la cadena de bloques. Obtenemos los datos on-chain directamente de la tabla pública de producers en la cuenta",
+      "paragraph1Text2": ", descartando aquellos que no están activos. De la lista se obtienen las direcciones url de los BPs para recuperar sus datos mediante el",
+      "paragraph2": "El bp.json contiene información sobre el productor, sus nodos y endpoints. Sin embargo, no se consulta directamente, ya que existen varias redes basadas en el protocolo de Antelope, en cambio, se consulta el objeto chains.json bajo la dirección del sitio web del productor, de este modo se obtiene la dirección correcta del bp.json según el chain_id de la red.",
+      "paragraph3": "Es importante destacar que si el objeto chains.json no es accesible o no contiene el chain_id, se consulta directamente /bp.json. Sin embargo, este puede pertenecer a otra red, por lo que solo se utiliza la información organizacional del productor y el resto se omite.",
+      "paragraph4Text1": "Si se considera que la url registrada es https://edenia.com/ entonces primero se recupera",
+      "paragraph4Text2": "y se obtiene el bp.json asociado al id. Si no existe se intenta con",
+      "paragraph4Text3": ", pero, los nodos y endpoints no se incluyen",
+      "paragraph5": "Para mayor información acerca Antelope Tools, visite nuestro repositorio en GitHub o contáctenos en nuestro grupo de Telegram. Póngase en contacto con nosotros y únase a nuestro esfuerzo por hacer que las blockchains de EOSIO sean aún más transparentes y fáciles de usar."
     },
-    "bpjsonexample": "Ejemplo de bp.json"
+    "standard": "estándar del bp.json"
   },
   "helpRoute": {
     "title": "¡Gracias por usar el monitor de red Blockchain de Antelope Tools!",

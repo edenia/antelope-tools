@@ -51,19 +51,23 @@ const useHealthCheckState = () => {
   useEffect(() => {
     if (!producers?.length) return
 
-    setProducersNames(
-      producers.map(producer => ({
-        id: producer.id,
-        name: producer?.bp_json?.org?.candidate_name,
-      })),
-    )
+    const formattedProducers = producers.map((producer) => ({
+      id: producer.id,
+      name:
+        producer?.bp_json?.org?.candidate_name ||
+        producer?.bp_json?.org?.organization_name ||
+        producer?.owner,
+    }))
+
+    setProducersNames(formattedProducers)
 
     const id = location?.state?.producerId
     const producer =
-      producers.find(producer => producer.id === id) || producers[0]
+      formattedProducers.find(producer => producer.id === id) ||
+      formattedProducers[0]
 
-    setSelected(id || producers[0]?.id)
-    setSelectedName(producer?.bp_json?.org?.candidate_name)
+    setSelected(id || formattedProducers[0]?.id)
+    setSelectedName(producer?.name)
     window.history.replaceState({}, document.title)
   }, [producers, location])
 

@@ -59,7 +59,10 @@ const start = async () => {
     settingService.syncEOSPrice,
     workersConfig.syncExchangeRate
   )
-  run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
+
+  if (eosConfig.eosmechanics.account && eosConfig.eosmechanics.password) {
+    run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
+  }
 
   if (eosConfig.stateHistoryPluginEndpoint) {
     run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)

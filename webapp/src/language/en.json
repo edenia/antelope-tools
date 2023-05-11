@@ -44,7 +44,10 @@
     "bugRequest": "Report a bug / Request a feature",
     "moreInfo": "More Info",
     "openLink": "Visit Site",
-    "table": "Table"
+    "table": "Table",
+    "noOptions": "No matches",
+    "updatedAt": "Updated at",
+    "nextUpdateAt": "Next updated at"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -208,10 +211,16 @@
     },
     "subtitle3": "Where Does the Data Come From?",
     "body3": {
-      "paragraph1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public blockchain tables and information provided by Block Producers in their bp.json files.",
-      "paragraph2": "For more information about Antelope Tools, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
+      "paragraph1Text1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public table of producers in the account",
+      "paragraph1Text2": ", discarding those that aren't active. From the list, we obtain the URL addresses of the BPs to retrieve their data using the",
+      "paragraph2": "The bp.json contains information about the producer, its nodes, and endpoints. However, it's not queried directly, as there are several networks based on the Antelope protocol, the chains.json object is queried under the producer's website address, thus the correct address of the bp.json is obtained according to the chain_id of the network.",
+      "paragraph3": "It's important to note that if the chains.json object is not accessible or doesn't contain the chain_id, /bp.json is directly queried. However, this may belong to another network, so only the organizational information of the producer is used and the rest is omitted.",
+      "paragraph4Text1": "If the registered URL is https://edenia.com/ then it's retrieved first",
+      "paragraph4Text2": "and the bp.json associated with the id is retrieved. If it does not exist then it's tried with",
+      "paragraph4Text3": ", but, nodes and endpoints aren't included",
+      "paragraph5": "For more information about Antelope Tools, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
     },
-    "bpjsonexample": "Bp.json example"
+    "standard": "bp.json standard"
   },
   "helpRoute": {
     "title": "Thank you for using Antelope Tools Blockchain Network Monitor !",
@@ -333,7 +342,6 @@
   },
   "endpointsListRoute": {
     "title": "Endpoints available by",
-    "updatedAt": "Updated at",
     "endpointsResponding": "Only endpoints responding",
     "showList": "Show List"
   },

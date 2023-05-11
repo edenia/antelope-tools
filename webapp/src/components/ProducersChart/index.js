@@ -59,22 +59,39 @@ const CustomBarLabel = memo(
       outerRadius - gap,
       midAngle,
     )
-    const cartesianText = polarToCartesian(cx, cy, outerRadius + 8, midAngle)
+    const spacing = sm ? 16 : 12
+    const cartesianText = polarToCartesian(
+      cx,
+      cy,
+      outerRadius + spacing,
+      midAngle,
+    )
     const link = generalConfig.eosRateLink
       ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
       : payload.url
+
+    const getNameTextAnchor = (x, cx) => {
+      if (x + 30 >= cx && x < cx) {
+        return 'middle'
+      } else if (x > cx) {
+        return 'start'
+      } else {
+        return 'end'
+      }
+    }
 
     const ProducerName = () => {
       const Content = () => (
         <text
           transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
-          textAnchor={x > cx ? 'start' : 'end'}
+          textAnchor={getNameTextAnchor(x, cx)}
           dominantBaseline="central"
           fill={
             fill === theme.palette.primary.dark
               ? theme.palette.primary.dark
               : theme.palette.primary.light
           }
+          fontSize={sm ? 14 : 12}
           fontFamily="Roboto, Helvetica, Arial, sans-serif;"
           fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
         >
