@@ -25,7 +25,7 @@ export default (theme) => ({
     width: '145px',
     marginTop: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
-      width: '110px',
+      width: '100%',
     },
   },
   appBar: {
@@ -44,9 +44,33 @@ export default (theme) => ({
   userBox: {
     display: 'flex',
     alignItems: 'center',
+    gap: theme.spacing(2),
     '& button': {
       color: '#757575',
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      maxWidth: '250px',
+      gap: 0,
+      justifyContent: 'space-between',
+    }
+  },
+  accountContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    lineHeight: '16px !important',
+    textAlign: 'center',
+    letterSpacing: '1px !important',
+    padding: theme.spacing(0, 2, 0),
+    '& span': {
+      paddingLeft: theme.spacing(1),
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '1rem',
+      },
+    }
   },
   iconsHeader: {
     display: 'flex',
@@ -82,14 +106,15 @@ export default (theme) => ({
     },
   },
   loginBtn: {
-    fontStyle: 'normal',
-    lineHeight: '16px !important',
+    color: 'white !important',
+    cursor: 'pointer',
+  },
+  logoutContainer: {
+    display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
-    letterSpacing: '1px !important',
-    textTransform: 'capitalize !important',
-    fontWeight: '600 !important',
-    color: '#757575 !important',
+    padding: theme.spacing(2),
+    borderLeft: '0.8px solid white',
   },
   userBtn: {
     textTransform: 'lowercase !important',
@@ -101,7 +126,17 @@ export default (theme) => ({
       marginRight: theme.spacing(1),
     },
   },
-  authBox: { display: 'flex', alignItems: 'center', textAlign: 'center' },
+  authBox: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    textAlign: 'center',
+    background: '#1675CA',
+    borderRadius: '10px',
+    transition: 'ease-in-out background 2s',
+    '&:hover': {
+      background: 'rgb(22, 117, 202, 0.8)',
+    }
+  },
   cardShadow: {
     '& .MuiPaper-root': {
       boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',

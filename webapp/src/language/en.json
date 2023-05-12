@@ -15,9 +15,7 @@
     "color": "Color",
     "producers": "Producers",
     "producer": "Producer",
-    "login": "Login",
     "connectWallet": "Connect Wallet",
-    "logout": "Logout",
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
@@ -171,7 +169,7 @@
   "nodesRoute": {},
   "nodesDistributionRoute": {},
   "accountsRoute": {
-    "loginBeforeUseAction": "Please login before execute an action",
+    "loginBeforeUseAction": "Please connect the wallet before execute an action",
     "unknownError": "Unknown error processing action",
     "notFound": "not found",
     "successMessage": "Success transaction",
@@ -181,7 +179,7 @@
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
-    "notLogin": "Please log in to use this tool.",
+    "notLogin": "Please connect the wallet to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool.",
     "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
   },
