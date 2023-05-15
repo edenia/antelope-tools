@@ -41,6 +41,12 @@ const options = {
     title: {
       text: ' ',
     },
+    labels: {
+      format: '{text} μs',
+    },
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.y} μs<b>',
   },
   credits: {
     enabled: false,
@@ -76,48 +82,55 @@ const CPUBenchmark = () => {
     const info = {}
     const summary = {}
 
-    for (let index = 0; index < data.items.length; index++) {
-      const item = data.items[index]
-
+    for (const item of data.items) {
       if (!info[item.account]) {
+        info[item.account] = {
+          name: item.account,
+          data: [],
+        }
         summary[item.account] = {
           name: item.account,
-          transactions: 0,
           count: 0,
+          index: 0,
           total: 0,
           average: 0,
           lowest: parseInt(item.usage),
           highest: 0,
         }
-        info[item.account] = {
-          name: item.account,
-          data: [],
-        }
       }
 
-      summary[item.account].total += parseInt(item.usage)
       summary[item.account].count++
-      summary[item.account].average =
-        summary[item.account].total / summary[item.account].count
-      summary[item.account].lowest =
-        parseInt(item.usage) < summary[item.account].lowest
-          ? parseInt(item.usage)
-          : summary[item.account].lowest
-      summary[item.account].highest =
-        parseInt(item.usage) > summary[item.account].highest
-          ? parseInt(item.usage)
-          : summary[item.account].highest
-
       info[item.account].data.push([
         new Date(item.datetime).getTime(),
         parseFloat(item.usage),
       ])
     }
+
+    setSeries(Object.values(info))
+
+    for (const item of data.items) {
+      const usage = parseInt(item.usage)
+
+      summary[item.account].total += usage
+      summary[item.account].index++
+      summary[item.account].lowest =
+        usage < summary[item.account].lowest
+          ? usage
+          : summary[item.account].lowest
+      summary[item.account].highest =
+        usage > summary[item.account].highest
+          ? usage
+          : summary[item.account].highest
+
+      if (summary[item.account].index === summary[item.account].count) {
+        summary[item.account].average =
+          summary[item.account].total / summary[item.account].count
+      }
+    }
+
     setProducers(
       Object.values(summary).sort((a, b) => (a.average > b.average ? 1 : -1)),
     )
-
-    setSeries(Object.values(info))
   }, [data])
 
   return (
@@ -134,10 +147,10 @@ const CPUBenchmark = () => {
             <Select
               labelId="demo-simple-select-label"
               value={range}
-              onChange={(e) => setRange(e.target.value)}
+              onChange={e => setRange(e.target.value)}
               fullWidth
             >
-              {rangeOptions.map((option) => (
+              {rangeOptions.map(option => (
                 <MenuItem key={option} value={option}>
                   {t(option)}
                 </MenuItem>
@@ -164,16 +177,16 @@ const CPUBenchmark = () => {
                 </TableHead>
                 <TableBody>
                   {producers.map((item, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={`${item.name}-cpu-benchmark-${index}`}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell align="right">
-                        {formatWithThousandSeparator(item.lowest, 2)}
+                        {formatWithThousandSeparator(item.lowest, 2)} μs
                       </TableCell>
                       <TableCell align="right">
-                        {formatWithThousandSeparator(item.highest, 2)}
+                        {formatWithThousandSeparator(item.highest, 2)} μs
                       </TableCell>
                       <TableCell align="right">
-                        {formatWithThousandSeparator(item.average, 2)}
+                        {formatWithThousandSeparator(item.average, 2)} μs
                       </TableCell>
                     </TableRow>
                   ))}
