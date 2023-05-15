@@ -24,7 +24,7 @@
     "/node-config>moreDescription": "Use this tool to obtain example config files to help configure a new node on the network.",
     "/ricardian-contract>moreDescription": "The on-chain ricardian contract that describes the validator node agreement of this network.",
     "/>moreDescription": "Find information on the Ultra Test Network and its current status.",
-    "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
+    "/cpu-benchmark>moreDescription": "A visualization of CPU usage in microseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
     "/block-producers>moreDescription": "A list of the block producers in the network – blockchain accounts registered to run nodes on the network. It includes information from chain tables and their bp.json files.",
     "/nodes>moreDescription": "A list of all the nodes run by block producers comprising the network with specific information such as endpoints and location.",
     "/endpoints>moreDescription": "An updated list of public API endpoints provided by node operators and their health status.",

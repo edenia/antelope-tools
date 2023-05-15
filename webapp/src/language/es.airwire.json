@@ -18,7 +18,7 @@
     "/node-config>moreDescription": "Utilice esta herramienta para obtener archivos de configuración de ejemplo para ayudar a configurar un nuevo nodo en la red.",
     "/ricardian-contract>moreDescription": "Lea más sobre el Acuerdo de nodo de validación de esta red. Contáctenos si tiene alguna consulta.",
     "/>moreDescription": "Encuentre datos de redes blockchain utilizando la tecnología EOSIO. Vea más redes aquí: https://antelope.tools/.",
-    "/cpu-benchmark>moreDescription": "Una visualización del uso de CPU en milisegundos por cuentas de nodos productores de bloques, con datos de uso más bajos, más altos y promedio.",
+    "/cpu-benchmark>moreDescription": "Una visualización del uso de CPU en microsegundos por cuentas de nodos productores de bloques, con datos de uso más bajos, más altos y promedio.",
     "/block-producers>moreDescription": "Una lista de los productores de bloques en la red: cuentas de blockchain registradas para ejecutar nodos en la red. Incluye información de tablas en cadena y sus archivos bp.json.",
     "/nodes>moreDescription": "Una lista de todos los nodos ejecutados por entidades que componen la red con información específica como puntos finales y ubicación.",
     "/endpoints>moreDescription": "Una lista actualizada de los puntos finales de la API pública proporcionada por los operadores de nodos en la red.",

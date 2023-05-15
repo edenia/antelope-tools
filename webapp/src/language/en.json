@@ -346,7 +346,7 @@
     "showList": "Show List"
   },
   "cpuBenchmarkRoute": {
-    "title": "CPU Usage in Milliseconds",
+    "title": "CPU Usage in Microseconds",
     "lowest": "Lowest",
     "highest": "Highest",
     "average": "Average"
