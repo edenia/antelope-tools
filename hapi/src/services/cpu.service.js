@@ -22,6 +22,22 @@ const saveBenchmark = async payload => {
   return data.insert_cpu_one
 }
 
+const cleanOldBenchmarks = async () => {
+  const date = new Date()
+
+  date.setFullYear(date.getFullYear() - 1)
+
+  const mutation = `
+    mutation ($date: timestamptz) {
+      delete_cpu (where: {created_at: {_lt: $date}}) {
+        affected_rows
+      }
+    }
+  `
+
+  await hasuraUtil.request(mutation, { date })
+}
+
 const worker = async () => {
   if (!eosConfig.eosmechanics.account || !eosConfig.eosmechanics.password) {
     return
@@ -36,6 +52,8 @@ const worker = async () => {
   } catch (error) {
     console.error('cpuService.sync', error)
   }
+
+  await cleanOldBenchmarks()
 }
 
 const getBenchmark = async (range = '3 Hours') => {
