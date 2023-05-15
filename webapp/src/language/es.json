@@ -55,6 +55,7 @@
     "moreInfo": "Más Información",
     "openLink": "Visitar Sitio",
     "table": "Tabla",
+    "options": "Opciones",
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
     "nextUpdateAt": "Próxima actualización"
@@ -117,7 +118,8 @@
     "telegram": "Grupo en Telegram",
     "readMore": "Ver más",
     "readLess": "Ver menos",
-    "moreDescription": "Este es un componente de lectura de texto para los usuarios que necesitan un poco de ayuda o son nuevos en el sistema. Un conjunto claro pero no demasiado extenso de términos e instrucciones puede ayudar a los usuarios a comenzar sin tener que escribir demasiado sobre títulos o etiquetas como la que se encuentra en la tarjeta de búsqueda a continuación. ¡Echar un vistazo! Una tercera línea también es posible y probablemente más que suficiente."
+    "moreDescription": "Este es un componente de lectura de texto para los usuarios que necesitan un poco de ayuda o son nuevos en el sistema. Un conjunto claro pero no demasiado extenso de términos e instrucciones puede ayudar a los usuarios a comenzar sin tener que escribir demasiado sobre títulos o etiquetas como la que se encuentra en la tarjeta de búsqueda a continuación. ¡Echar un vistazo! Una tercera línea también es posible y probablemente más que suficiente.",
+    "setLanguage>sidebar": "Cambiar a Inglés - EN"
   },
   "homeRoute": {
     "currentProducer": "Productor de Bloque Actual",

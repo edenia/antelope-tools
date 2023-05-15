@@ -66,13 +66,13 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <>
+    <Hidden smDown implementation="css">
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
         className={classes.btnLanguage}
       >
-        <span className={classes.mobileHidden}>
+        <span>
           {currentLanguaje.toUpperCase()}
         </span>
       </Button>
@@ -92,7 +92,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </Hidden>
   )
 }
 

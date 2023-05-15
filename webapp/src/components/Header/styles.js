@@ -16,11 +16,6 @@ export default (theme) => ({
       },
     },
   },
-  mobileHidden: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none !important',
-    },
-  },
   imgHeaderLogo: {
     width: '145px',
     marginTop: theme.spacing(2),
