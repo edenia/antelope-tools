@@ -26,34 +26,34 @@ const AuthButton = ({ classes }) => {
   return (
     <React.Fragment>
       <div className={classes.authBox}>
-        {state?.ual?.activeUser ? (
-          <>
-            <div className={classes.accountContainer}>
+        <div className={classes.accountContainer}>
+          {state?.ual?.activeUser ? (
+            <>
               <AccountIcon className={classes.userBtn} />
               <Typography component="span" variant="h5">
                 {state?.ual?.accountName || ''}
               </Typography>
-            </div>
-            <LogOutButton handleSignOut={handleSignOut} classes={classes} />
-          </>
-        ) : (
-          <>
-            <div className={classes.accountContainer}>
-              <Button
-                onClick={() => login('anchor')}
-                className={classes.loginBtn}
-              >
-                <AccountBalanceWalletIcon />
-                <Typography component="span" variant="h5">
-                  {t('connectWallet')}
-                </Typography>
-              </Button>
-            </div>
-            <div className={classes.mobileHidden}>
-              <LogOutButton handleSignOut={handleSignOut} classes={classes} />
-            </div>
-          </>
-        )}
+            </>
+          ) : (
+            <Button
+              onClick={() => login('anchor')}
+              className={`${classes.loginBtn} ${classes.connectWalletBtn}`}
+            >
+              <AccountBalanceWalletIcon />
+              <Typography component="span" variant="h5">
+                {t('connectWallet')}
+              </Typography>
+            </Button>
+          )}
+        </div>
+        <LogOutButton
+          handleSignOut={() => {
+            if (state?.ual?.activeUser) {
+              handleSignOut()
+            }
+          }}
+          classes={classes}
+        />
       </div>
       <Menu
         className={classes.menuBox}
