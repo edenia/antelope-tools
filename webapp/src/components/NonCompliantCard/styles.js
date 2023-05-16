@@ -8,7 +8,7 @@ export default (theme) => ({
   },
   title: {
     fontWeight: 'bold !important',
-    fontSize: '14px !important',
+    fontSize: '12px !important',
     textTransform: 'uppercase',
   },
   bold: {
