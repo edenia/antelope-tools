@@ -171,7 +171,7 @@
   "nodesRoute": {},
   "nodesDistributionRoute": {},
   "accountsRoute": {
-    "loginBeforeUseAction": "Please connect the wallet before execute an action",
+    "loginBeforeUseAction": "Please connect your wallet in order to execute an action",
     "unknownError": "Unknown error processing action",
     "notFound": "not found",
     "successMessage": "Success transaction",
@@ -181,7 +181,7 @@
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
-    "notLogin": "Please connect the wallet to use this tool.",
+    "notLogin": "Please connect your wallet to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool.",
     "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
   },
