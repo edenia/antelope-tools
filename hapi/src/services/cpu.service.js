@@ -52,8 +52,6 @@ const worker = async () => {
   } catch (error) {
     console.error('cpuService.sync', error)
   }
-
-  await cleanOldBenchmarks()
 }
 
 const getBenchmark = async (range = '3 Hours') => {
@@ -87,5 +85,6 @@ const getBenchmark = async (range = '3 Hours') => {
 
 module.exports = {
   worker,
-  getBenchmark
+  getBenchmark,
+  cleanOldBenchmarks
 }
