@@ -15,8 +15,7 @@
     "color": "Color",
     "producers": "Productores",
     "producer": "Productor",
-    "login": "Ingresar",
-    "logout": "Salir",
+    "connectWallet": "Conectar Wallet",
     "keys": "Llaves",
     "download": "Descargar",
     "healthStatus": "Salud del nodo",
@@ -56,6 +55,7 @@
     "moreInfo": "Más Información",
     "openLink": "Visitar Sitio",
     "table": "Tabla",
+    "options": "Opciones",
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
     "nextUpdateAt": "Próxima actualización"
@@ -118,7 +118,8 @@
     "telegram": "Grupo en Telegram",
     "readMore": "Ver más",
     "readLess": "Ver menos",
-    "moreDescription": "Este es un componente de lectura de texto para los usuarios que necesitan un poco de ayuda o son nuevos en el sistema. Un conjunto claro pero no demasiado extenso de términos e instrucciones puede ayudar a los usuarios a comenzar sin tener que escribir demasiado sobre títulos o etiquetas como la que se encuentra en la tarjeta de búsqueda a continuación. ¡Echar un vistazo! Una tercera línea también es posible y probablemente más que suficiente."
+    "moreDescription": "Este es un componente de lectura de texto para los usuarios que necesitan un poco de ayuda o son nuevos en el sistema. Un conjunto claro pero no demasiado extenso de términos e instrucciones puede ayudar a los usuarios a comenzar sin tener que escribir demasiado sobre títulos o etiquetas como la que se encuentra en la tarjeta de búsqueda a continuación. ¡Echar un vistazo! Una tercera línea también es posible y probablemente más que suficiente.",
+    "setLanguage>sidebar": "Cambiar a Inglés - EN"
   },
   "homeRoute": {
     "currentProducer": "Productor de Bloque Actual",
@@ -176,7 +177,7 @@
   "nodesRoute": {},
   "nodesDistributionRoute": {},
   "accountsRoute": {
-    "loginBeforeUseAction": "Inicie sesión antes de ejecutar una acción",
+    "loginBeforeUseAction": "Conecte su wallet para ejecutar una acción",
     "unknownError": "Error desconocido al procesar la acción",
     "notFound": "no encontrada",
     "successMessage": "Transacción exitosa",
@@ -186,7 +187,7 @@
   },
   "bpJsonRoute": {
     "loadText": "Cargando información del nodo . . .",
-    "notLogin": "Por favor, inicie sesión para utilizar esta herramienta.",
+    "notLogin": "Por favor, conecte su wallet para utilizar esta herramienta.",
     "notRegisterNode": "Debe tener una cuenta registrada como un nodo activo para usar esta herramienta.",
     "bpjsonInconsistency": "El bp.json on chain y en of chain no coincide revisalo y realiza los cambios necesarios"
   },

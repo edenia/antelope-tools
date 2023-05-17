@@ -66,7 +66,7 @@
     "entityType2": "Non-Partner"
   },
   "lacchainManagement": {
-    "loginWarning": "Please login with your LACChain account to use this feature.",
+    "loginWarning": "Please log in with your LACChain account to use this feature.",
     "noneActionWarning": "There is no actions available for your account.",
     "setentinfoTitle": "Set Entity Info",
     "setentinfoTooltip": "Set on-chain information for your LACChain entity.",
