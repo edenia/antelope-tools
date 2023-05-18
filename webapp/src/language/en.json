@@ -349,7 +349,11 @@
     "title": "CPU Usage in Microseconds",
     "lowest": "Lowest",
     "highest": "Highest",
-    "average": "Average"
+    "average": "Average",
+    "hideAll": "Hide All",
+    "showAll": "Show All",
+    "selectTo": "Select an account to toggle or",
+    "zoomTo": "Drag or pinch to zoom the chart"
   },
   "producerSearchComponent": {
     "partner": "Partner",

@@ -354,7 +354,11 @@
     "title": "Resumen del uso de la CPU en Microsegundos",
     "lowest": "Más bajo",
     "highest": "Más alto",
-    "average": "Promedio"
+    "average": "Promedio",
+    "hideAll": "Ocultar Todas",
+    "showAll": "Muestrar Todas",
+    "selectTo": "Seleccionar una cuenta para activar o",
+    "zoomTo": "Arrastre o pellizque para ampliar el gráfico"
   },
   "producerSearchComponent": {
     "partner": "Partner",

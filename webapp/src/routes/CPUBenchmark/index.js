@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Button from '@mui/material/Button'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
@@ -28,6 +29,10 @@ import { CPU_BENCHMARK } from '../../gql'
 const useStyles = makeStyles(styles)
 
 const options = {
+  chart: {
+    type: 'spline',
+    zoomType: 'x'
+  },
   time: {
     timezoneOffset: new Date().getTimezoneOffset(),
   },
@@ -56,9 +61,9 @@ const options = {
       label: {
         connectorAllowed: false,
       },
+      events: {},
     },
   },
-
   series: [],
 }
 
@@ -69,6 +74,43 @@ const CPUBenchmark = () => {
   const [producers, setProducers] = useState([])
   const [load, { loading, data }] = useLazyQuery(CPU_BENCHMARK)
   const classes = useStyles()
+
+  const updateSeries = (name, visible) => {
+    const targetIndex = series.findIndex(set => set.name === name)
+    const seriesCopy = [...series]
+
+    seriesCopy[targetIndex].visible = visible
+    setSeries(seriesCopy)
+  }
+
+  options.plotOptions.series.events.hide = event => {
+    updateSeries(event.target.getName(), false)
+  }
+
+  options.plotOptions.series.events.show = event => {
+    updateSeries(event.target.getName(), true)
+  }
+
+  const areAllHidden = () => {
+    return Boolean(series.length) && !series.some(set => set.visible)
+  }
+
+  const toggleAll = () => {
+    setSeries(prev => {
+      const visible = areAllHidden()
+
+      return prev.map(set => {
+        set.visible = visible
+        return set
+      })
+    })
+  }
+
+  const getFixedNumber = (string, number) => {
+    const index = string.indexOf(".")
+    
+    return parseFloat(string.substring(0,index) + "." + string.substring(index+1,index+1+number)) 
+  }
 
   useEffect(() => {
     load({
@@ -84,9 +126,12 @@ const CPUBenchmark = () => {
 
     for (const item of data.items) {
       if (!info[item.account]) {
+        const set = series.find(set => set.name === item.account)
+
         info[item.account] = {
           name: item.account,
           data: [],
+          visible: set ? Boolean(set?.visible) : true,
         }
         summary[item.account] = {
           name: item.account,
@@ -102,7 +147,7 @@ const CPUBenchmark = () => {
       summary[item.account].count++
       info[item.account].data.push([
         new Date(item.datetime).getTime(),
-        parseFloat(item.usage),
+        getFixedNumber(item.usage, 4),
       ])
     }
 
@@ -147,7 +192,7 @@ const CPUBenchmark = () => {
             <Select
               labelId="demo-simple-select-label"
               value={range}
-              onChange={e => setRange(e.target.value)}
+              onChange={event => setRange(event.target.value)}
               fullWidth
             >
               {rangeOptions.map(option => (
@@ -165,6 +210,13 @@ const CPUBenchmark = () => {
               highcharts={Highcharts}
               options={{ ...options, series }}
             />
+            <div className={classes.infoContainer}>
+              {t('selectTo')}
+              <Button onClick={toggleAll}>
+                {Boolean(series.length) && !series.some(set => set.visible) ? t('showAll') : t('hideAll')}
+              </Button>
+              {t('zoomTo')}.
+            </div>
             <TableContainer>
               <Table>
                 <TableHead>
