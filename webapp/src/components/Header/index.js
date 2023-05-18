@@ -66,19 +66,22 @@ const LanguageMenu = () => {
   }, [i18n.language])
 
   return (
-    <>
+    <Hidden smDown implementation="css">
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
         className={classes.btnLanguage}
       >
-        {currentLanguaje.toUpperCase()}
+        <span>
+          {currentLanguaje.toUpperCase()}
+        </span>
       </Button>
       <Menu
         id="menu-appbar"
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
+        className={classes.cardShadow}
       >
         {languages.map((language) => (
           <MenuItem
@@ -89,7 +92,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </Hidden>
   )
 }
 

@@ -22,7 +22,7 @@
     "/>title": "LACChain EOSIO Network Monitor and Infrastructure Dashboard",
     "/>moreDescription": "Monitor the infrastructure of blockchain networks using Antelope + EOSIO blockchain technology.",
     "/cpu-benchmark>title": "CPU Benchmarks  - LACChain EOSIO + Antelope Network Dashboard",
-    "/cpu-benchmark>moreDescription": "A visualization of CPU usage in milliseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
+    "/cpu-benchmark>moreDescription": "A visualization of CPU usage in microseconds by block producer nodes accounts, with lowest, highest, and average usage data.",
     "/block-producers>title": "Block Producers - LACChain EOSIO + Antelope Network Dashboard",
     "/block-producers>moreDescription": "A list of the block producers in the network – blockchain accounts registered to run nodes on the network. It includes information from chain tables and their bp.json files.",
     "/rewards-distribution>title": "Rewards Distribution - LACChain EOSIO + Antelope Network Dashboard",
@@ -66,7 +66,7 @@
     "entityType2": "Non-Partner"
   },
   "lacchainManagement": {
-    "loginWarning": "Please login with your LACChain account to use this feature.",
+    "loginWarning": "Please log in with your LACChain account to use this feature.",
     "noneActionWarning": "There is no actions available for your account.",
     "setentinfoTitle": "Set Entity Info",
     "setentinfoTooltip": "Set on-chain information for your LACChain entity.",

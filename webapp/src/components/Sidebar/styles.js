@@ -25,6 +25,7 @@ export default (theme, rgba) => ({
     flexDirection: 'column !important',
     alignItems: 'start !important',
     justifyContent: 'center !important',
+    cursor: 'pointer'
   },
   brand: {
     fontSize: theme.typography.h5.fontSize,

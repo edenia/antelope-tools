@@ -15,8 +15,7 @@
     "color": "Color",
     "producers": "Producers",
     "producer": "Producer",
-    "login": "Login",
-    "logout": "Logout",
+    "connectWallet": "Connect Wallet",
     "keys": "Keys",
     "download": "Download",
     "healthStatus": "Health Status",
@@ -45,6 +44,7 @@
     "moreInfo": "More Info",
     "openLink": "Visit Site",
     "table": "Table",
+    "options": "Options",
     "noOptions": "No matches",
     "updatedAt": "Updated at",
     "nextUpdateAt": "Next updated at"
@@ -112,7 +112,8 @@
     "telegram": "Telegram Channel",
     "readMore": "Read more",
     "readLess": "Read less",
-    "moreDescription": "This is a read more text component for users that either need a bit of help or are new to the system. A clear but not too extensive set of terms and instructions can help users get going without having to over write titles or labels like the one on the search card below. Take a look! A third line is also possible and probably more than enough."
+    "moreDescription": "This is a read more text component for users that either need a bit of help or are new to the system. A clear but not too extensive set of terms and instructions can help users get going without having to over write titles or labels like the one on the search card below. Take a look! A third line is also possible and probably more than enough.",
+    "setLanguage>sidebar": "Change to Spanish - ES"
   },
   "homeRoute": {
     "currentProducer": "Current Producer",
@@ -170,7 +171,7 @@
   "nodesRoute": {},
   "nodesDistributionRoute": {},
   "accountsRoute": {
-    "loginBeforeUseAction": "Please login before execute an action",
+    "loginBeforeUseAction": "Please connect your wallet in order to execute an action",
     "unknownError": "Unknown error processing action",
     "notFound": "not found",
     "successMessage": "Success transaction",
@@ -180,7 +181,7 @@
   },
   "bpJsonRoute": {
     "loadText": "Loading node information . . .",
-    "notLogin": "Please log in to use this tool.",
+    "notLogin": "Please connect your wallet to use this tool.",
     "notRegisterNode": "You must have an account registered as an active node to use this tool.",
     "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
   },
@@ -346,10 +347,14 @@
     "showList": "Show List"
   },
   "cpuBenchmarkRoute": {
-    "title": "CPU Usage in Milliseconds",
+    "title": "CPU Usage in Microseconds",
     "lowest": "Lowest",
     "highest": "Highest",
-    "average": "Average"
+    "average": "Average",
+    "hideAll": "Hide All",
+    "showAll": "Show All",
+    "selectTo": "Select an account to toggle or",
+    "zoomTo": "Drag or pinch to zoom the chart"
   },
   "producerSearchComponent": {
     "partner": "Partner",

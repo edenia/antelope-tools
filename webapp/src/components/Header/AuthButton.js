@@ -2,12 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import Typography from '@mui/material/Typography'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import AccountIcon from '@mui/icons-material/AccountCircle'
-import FingerprintIcon from '@mui/icons-material/Fingerprint'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import ExitIcon from '@mui/icons-material/ExitToApp'
 
 import useAuthBottonState from './useAuthBottonState'
+
+const LogOutButton = ({ handleSignOut, classes }) => {
+  return (
+    <div className={classes.logoutContainer}>
+      <ExitIcon onClick={handleSignOut} className={classes.loginBtn} />
+    </div>
+  )
+}
 
 const AuthButton = ({ classes }) => {
   const { t } = useTranslation()
@@ -17,28 +26,34 @@ const AuthButton = ({ classes }) => {
   return (
     <React.Fragment>
       <div className={classes.authBox}>
-        {state?.ual?.activeUser ? (
-          <>
-            <Button className={classes.userBtn} startIcon={<AccountIcon />}>
-              {state?.ual?.accountName || ''}
-            </Button>
+        <div className={classes.accountContainer}>
+          {state?.ual?.activeUser ? (
+            <>
+              <AccountIcon className={classes.userBtn} />
+              <Typography component="span" variant="h5">
+                {state?.ual?.accountName || ''}
+              </Typography>
+            </>
+          ) : (
             <Button
-              startIcon={<ExitIcon />}
-              onClick={handleSignOut}
-              className={classes.loginBtn}
+              onClick={() => login('anchor')}
+              className={`${classes.loginBtn} ${classes.connectWalletBtn}`}
             >
-              {t('logout')}
+              <AccountBalanceWalletIcon />
+              <Typography component="span" variant="h5">
+                {t('connectWallet')}
+              </Typography>
             </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => login('anchor')}
-            className={classes.loginBtn}
-            startIcon={<FingerprintIcon />}
-          >
-            {t('login')}
-          </Button>
-        )}
+          )}
+        </div>
+        <LogOutButton
+          handleSignOut={() => {
+            if (state?.ual?.activeUser) {
+              handleSignOut()
+            }
+          }}
+          classes={classes}
+        />
       </div>
       <Menu
         className={classes.menuBox}

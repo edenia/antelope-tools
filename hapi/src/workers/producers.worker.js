@@ -62,6 +62,7 @@ const start = async () => {
 
   if (eosConfig.eosmechanics.account && eosConfig.eosmechanics.password) {
     run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
+    run('CPU WORKER CLEANUP', cpuService.cleanOldBenchmarks, 86400)
   }
 
   if (eosConfig.stateHistoryPluginEndpoint) {
