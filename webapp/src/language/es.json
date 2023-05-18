@@ -44,7 +44,7 @@
     "4 Days": "4 Días",
     "7 Days": "7 Días",
     "14 Days": "14 Días",
-    "1 Month": "6 Mes",
+    "1 Month": "1 Mes",
     "2 Months": "2 Meses",
     "3 Months": "3 Meses",
     "6 Months": "6 Meses",
@@ -352,10 +352,14 @@
     "showList": "Ver la lista"
   },
   "cpuBenchmarkRoute": {
-    "title": "Resumen del uso de la CPU en Milisegundos",
+    "title": "Resumen del uso de la CPU en Microsegundos",
     "lowest": "Más bajo",
     "highest": "Más alto",
-    "average": "Promedio"
+    "average": "Promedio",
+    "hideAll": "Ocultar Todas",
+    "showAll": "Muestrar Todas",
+    "selectTo": "Seleccionar una cuenta para activar o",
+    "zoomTo": "Arrastre o pellizque para ampliar el gráfico"
   },
   "producerSearchComponent": {
     "partner": "Partner",

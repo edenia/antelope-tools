@@ -12,6 +12,7 @@ import {
   Inbox as InboxIcon,
   Cpu as CpuIcon,
 } from 'react-feather'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -121,7 +122,7 @@ const defaultRoutes = [
   },
   {
     name: 'endpointsStats',
-    icon: <ActivityIcon />,
+    icon: <QueryStatsIcon />,
     component: EndpointsStats,
     path: '/endpoints-stats',
     exact: true,
@@ -181,7 +182,7 @@ const lacchainRoutes = [
   },
   {
     name: 'endpointsStats',
-    icon: <ActivityIcon />,
+    icon: <QueryStatsIcon />,
     component: EndpointsStats,
     path: '/endpoints-stats',
     exact: true,
