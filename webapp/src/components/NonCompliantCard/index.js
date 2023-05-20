@@ -56,7 +56,9 @@ const NonCompliantCard = ({ producer, stats }) => {
         </Link>
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
-        <Typography variant="overline">{t('info')}</Typography>
+        <Typography variant="body1" className={classes.title}>
+          {t('info')}
+        </Typography>
         <div className={classes.flex}>
           <Typography
             variant="body1"
@@ -98,7 +100,9 @@ const NonCompliantCard = ({ producer, stats }) => {
         />
       </div>
       <div className={`${classes.content} ${classes.borderLine}`}>
-        <Typography variant="overline">{t('dailyRewards')}</Typography>
+        <Typography variant="body1" className={classes.title}>
+          {t('dailyRewards')}
+        </Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
           value={`$${formatWithThousandSeparator(
@@ -110,7 +114,9 @@ const NonCompliantCard = ({ producer, stats }) => {
           title={`${t('rewards')} (${eosConfig.tokenSymbol})`}
           value={`${formatWithThousandSeparator(producer.total_rewards, 0)}`}
         />
-        <Typography variant="overline">{t('yearlyRewards')}</Typography>
+        <Typography variant="body1" className={classes.title}>
+          {t('yearlyRewards')}
+        </Typography>
         <RowInfo
           title={`${t('rewards')} (USD)`}
           value={`$${formatWithThousandSeparator(

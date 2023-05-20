@@ -19,7 +19,7 @@ const RewardsStats = ({ stats }) => {
     <>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography component="h4">{t('paidProducers')}</Typography>
+          <Typography component="h2">{t('paidProducers')}</Typography>
           <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
             <Typography variant="h6" component="p">
               {stats.quantity || 0}
@@ -29,7 +29,7 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography component="h4">{t('dailyRewards')}</Typography>
+          <Typography component="h2">{t('dailyRewards')}</Typography>
           <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
             <Typography variant="h6" component="p" className={classes.price}>
               {`${formatWithThousandSeparator(stats.dailyRewards, 0)} ${
@@ -47,7 +47,7 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography component="h4">{t('yearlyRewards')}</Typography>
+          <Typography component="h2">{t('yearlyRewards')}</Typography>
           <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
             <Typography variant="h6" component="p" className={classes.price}>
               {`${formatWithThousandSeparator(stats.yearlyRewards, 0)} ${
@@ -65,7 +65,7 @@ const RewardsStats = ({ stats }) => {
       </div>
       <div className={`${classes.cardHeader} ${classes.cardShadow}`}>
         <div className={classes.rewardsCards}>
-          <Typography component="h4">{t('rewardsPercentage')}</Typography>
+          <Typography component="h2">{t('rewardsPercentage')}</Typography>
           <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
             <Typography variant="h6" component="p">
               {`${stats.percentageRewards?.toFixed(2)}%`}
