@@ -176,6 +176,7 @@ const CPUBenchmark = () => {
     setProducers(
       Object.values(summary).sort((a, b) => (a.average > b.average ? 1 : -1)),
     )
+    // eslint-disable-next-line
   }, [data])
 
   return (
