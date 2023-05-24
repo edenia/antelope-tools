@@ -37,7 +37,7 @@ jobs:
           REACT_APP_TITLE: 'Proton Testnet Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/proton.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Proton Website", "src": "https://www.protonchain.com/" },{ "text": "Block Explorer", "src": "https://testnet.protonscan.io" },{"text": "Developer Docs","src": "https://docs.protonchain.com/sdk/"},{"text": "Proton Testnet Network Monitor","src": "https://antelope.tools"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Proton Website", "src": "https://www.protonchain.com/" },{ "text": "Block Explorer", "src": "https://testnet.protonscan.io" },{"text": "Developer Docs","src": "https://docs.protonchain.com/"},{"text": "Proton Testnet Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
