@@ -46,7 +46,7 @@ const Faucet = () => {
       )
         return
     } else {
-      if (!reCaptchaToken || createAccountValues.publicKey) return
+      if (!reCaptchaToken || !createAccountValues.publicKey) return
     }
 
     try {

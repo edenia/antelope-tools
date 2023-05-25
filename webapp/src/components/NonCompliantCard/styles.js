@@ -2,9 +2,17 @@ export default (theme) => ({
   flex: {
     display: 'flex',
     flexWrap: 'wrap',
+    '& .MuiTypography-body1': {
+      margin: theme.spacing(1),
+    },
+  },
+  title: {
+    fontWeight: 'bold !important',
+    fontSize: '12px !important',
+    textTransform: 'uppercase',
   },
   bold: {
-    fontWeight: 'bold !important',
+    fontWeight: '600 !important',
   },
   text: {
     width: '60px',

@@ -26,7 +26,7 @@ export default (theme) => ({
     height: '100%',
     minHeight: '125px',
     padding: theme.spacing(4),
-    '& h4': {
+    '& h2': {
       fontWeight: 'bold',
     },
   },
@@ -68,13 +68,6 @@ export default (theme) => ({
     background: theme.palette.common.white,
     '& .MuiTypography-h6': {
       display: 'flex',
-    },
-    '& .MuiTypography-overline': {
-      marginLeft: 0,
-      fontWeight: '700',
-    },
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1),
     },
     [theme.breakpoints.down('md')]: {
       justifyContent: 'center',
