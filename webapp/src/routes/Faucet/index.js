@@ -58,7 +58,7 @@ const Faucet = () => {
         variables: {
           token: reCaptchaToken,
           public_key: createAccountValues.publicKey,
-          name: createAccountValues.accountName,
+          name: createAccountValues.accountName || '',
         },
       })
 
