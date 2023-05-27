@@ -2,6 +2,10 @@ const { eosConfig } = require('../config')
 
 const eosUtil = require('./eos.util')
 
+const includesTransaction = (block, transactionId) => {
+  return block?.transactions.some(trx => trx?.trx?.id === transactionId)
+}
+
 const transact = async actions => {
   if (eosConfig.eosmechanics.includeTransaction) {
     actions.push(eosConfig.eosmechanics.includeTransaction)
@@ -13,24 +17,19 @@ const transact = async actions => {
     eosConfig.eosmechanics.password
   )
 
-  const findTransaction = trx => trx?.trx?.id === transaction?.processed?.id
+  const { id: transactionId, block_num: blockNum } = transaction?.processed
   const maxAttempts = 3
   let currentAttempt = 0
   let block
 
   await new Promise(resolve => setTimeout(() => resolve(), 1000))
 
-  while (
-    !block?.transactions.some(findTransaction) &&
-    currentAttempt < maxAttempts
-  ) {
-    block = await eosUtil.getBlock(
-      transaction.processed.block_num + currentAttempt
-    )
+  while (!includesTransaction(block, transactionId) && currentAttempt < maxAttempts) {
+    block = await eosUtil.getBlock(blockNum + currentAttempt)
     currentAttempt += 1
   }
 
-  if (!block?.transactions.some(findTransaction)) {
+  if (!includesTransaction(block, transactionId)) {
     throw new Error(
       'Attempts to find the block in which the transaction was added have been exhausted.'
     )
