@@ -13,8 +13,28 @@ const transact = async actions => {
     eosConfig.eosmechanics.password
   )
 
-  await new Promise((resolve) => setTimeout(() => resolve(), 1000))
-  const block = await eosUtil.getBlock(transaction.processed.block_num)
+  const findTransaction = trx => trx?.trx?.id === transaction?.processed?.id
+  const maxAttempts = 3
+  let currentAttempt = 0
+  let block
+
+  await new Promise(resolve => setTimeout(() => resolve(), 1000))
+
+  while (
+    !block?.transactions.some(findTransaction) &&
+    currentAttempt < maxAttempts
+  ) {
+    block = await eosUtil.getBlock(
+      transaction.processed.block_num + currentAttempt
+    )
+    currentAttempt += 1
+  }
+
+  if (!block?.transactions.some(findTransaction)) {
+    throw new Error(
+      'Attempts to find the block in which the transaction was added have been exhausted.'
+    )
+  }
 
   return {
     transaction,
