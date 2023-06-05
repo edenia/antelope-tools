@@ -61,11 +61,14 @@ const callWithTimeout = async (promise, ms) => {
     timeoutID = setTimeout(() => reject(new Error(timeoutMessage)), ms)
   })
 
-  return Promise.race([promise, timeoutPromise]).then((response) => {
-    clearTimeout(timeoutID)
-
-    return response
-  })
+  return Promise.race([promise, timeoutPromise])
+    .then(response => response)
+    .catch(error => {
+      throw error
+    })
+    .finally(() => {
+      clearTimeout(timeoutID)
+    })
 }
 
 const newAccount = async accountName => {

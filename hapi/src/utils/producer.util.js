@@ -2,6 +2,7 @@ const axiosUtil = require('./axios.util')
 const eosUtil = require('./eos.util')
 const hasuraUtil = require('./hasura.util')
 const net = require('node:net')
+const os = require('node:os')
 
 const { eosConfig } = require('../config')
 
@@ -22,21 +23,35 @@ const isP2PResponding = async endpoint => {
   const splitted = endpoint?.split(':') || {}
   const { [0]: host, [1]: port } = splitted
 
-  if (splitted.length !== 2 || !host || !port) return false
+  if (splitted.length !== 2 || !host || !port)
+    return { status: 'Failed', statusText: 'Invalid endpoint format' }
 
   const isResponding = new Promise((resolve, _) => {
     const client = net.createConnection({ host, port }, () => {
       client.destroy()
-      resolve(true)
+      resolve({ status: 'Success', statusText: 'Connection established' })
     })
 
-    client.on('error', _ => {
-      resolve(false)
+    client.on('error', err => {
+      let errorMessage = ''
+
+      switch (Math.abs(err?.errno)) {
+        case os.constants.errno.ECONNREFUSED:
+          errorMessage = 'Connection refused'
+          break
+        case os.constants.errno.ETIMEDOUT:
+          errorMessage = 'Operation timed out'
+          break
+        default:
+          errorMessage = 'Connection error'
+      }
+
+      resolve({ status: 'Failed', statusText: errorMessage })
     })
   })
 
-  return eosUtil.callWithTimeout(isResponding, 60000).catch(_ => {
-    return false
+  return eosUtil.callWithTimeout(isResponding, 60000).catch((_) => {
+    return { status: 'Failed', statusText: 'Timeout Exhausted' }
   })
 }
 

@@ -145,9 +145,14 @@ const syncNodes = async producers => {
 }
 
 const syncEndpoints = async () => {
+  await syncAPIEndpoints()
+  await syncP2PEndpoints()
+}
+
+const syncAPIEndpoints = async () => {
   const query = `
     {
-      endpoint_aggregate(where: {type: {_in: ["api", "ssl", "p2p"]}}) {
+      endpoint_aggregate(where: {type: {_in: ["api", "ssl"]}}) {
         aggregate {
           count
         }
@@ -155,7 +160,7 @@ const syncEndpoints = async () => {
       producers : producer(where: {nodes: {endpoints: {_and: [{value: {_gt: ""}}]}}}, order_by: {rank: asc}) {
         id
         nodes {
-          endpoints(where: {type: {_in: ["api", "ssl", "p2p"]}}) {
+          endpoints(where: {type: {_in: ["api", "ssl"]}}) {
             id
             value
             type
@@ -191,6 +196,40 @@ const syncEndpoints = async () => {
   )
 
   await healthCheckHistoryService.saveHealthRegister(endpoints.flat())
+}
+
+const syncP2PEndpoints = async () => {
+  const query = `
+    {
+      endpoint_aggregate(where: {type: {_in: ["p2p"]}}) {
+        aggregate {
+          count
+        }
+      }
+      endpoints : endpoint(where: {type: {_in: ["p2p"]}}) {
+        id
+        value
+        type
+      }
+    }
+  `
+  const {
+    endpoints,
+    endpoint_aggregate: {
+      aggregate: { count }
+    }
+  } = await hasuraUtil.request(query)
+
+  if (!count) return
+
+  for (const endpoint of endpoints){
+    const result = await producerUtil.isP2PResponding(endpoint.value)
+
+    endpoint.response = result
+    endpoint.updated_at = new Date()
+
+    await nodeService.updateEndpointInfo(endpoint)
+  }
 }
 
 const endpointsHealth = async (endpoints, producerId) => {
@@ -240,17 +279,6 @@ const endpointsHealth = async (endpoints, producerId) => {
 const getHealthCheckResponse = async endpoint => {
   let startTime
   let response
-
-  if (endpoint.type === 'p2p') {
-    startTime = new Date()
-    const result = await producerUtil.isP2PResponding(endpoint.value)
-
-    return {
-      startTime,
-      status: result ? 200 : null,
-      statusText: result ? 'P2P is responding' : null
-    }
-  }
 
   if (endpoint?.features?.length) {
     for (const API of eosConfig.healthCheckAPIs) {
