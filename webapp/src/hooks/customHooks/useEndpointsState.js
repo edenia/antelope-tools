@@ -46,7 +46,8 @@ const useEndpointsState = () => {
 
   const handleFilter = useCallback(value => {
     const filter = value
-      ? { response: { _contains: { status: 200 } } }
+      ? { _or: [{ response: { _contains: { status: 200 } } }, 
+                {response: { _contains: { status: "Success" }}}]}
       : { value: { _gt: '' } }
 
     setPagination(prev => ({
@@ -54,7 +55,7 @@ const useEndpointsState = () => {
       page: 1,
       where: { ...prev.where, nodes: { endpoints: filter } },
       endpointFilter: value
-        ? { _or: [{ type: { _eq: 'p2p' } }, filter] }
+        ? filter
         : undefined,
     }))
   }, [setPagination])

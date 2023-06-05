@@ -72,7 +72,6 @@ const EndpointsChips = ({ node }) => {
     )
   }
 
-  const checkedEndpoints = node.endpoints.filter(endpoint => endpoint.type !== 'p2p')
   const status = {
     totalEndpoints: 0,
     failingEndpoints: [],
@@ -80,14 +79,14 @@ const EndpointsChips = ({ node }) => {
     isLoading: false
   }
 
-  for (const endpoint of checkedEndpoints){
+  for (const endpoint of node.endpoints){
     if (endpoint?.response?.status === undefined) {
       status.isLoading = true
 
       break
     }
 
-    if (endpoint?.response?.status !== 200) {
+    if (endpoint?.response?.status !== 200 && endpoint?.response?.status !== 'Success') {
       status.failingEndpoints.push(endpoint.type)
     }
 
@@ -99,7 +98,7 @@ const EndpointsChips = ({ node }) => {
     <>
       <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
         {t('endpoints')}
-        {!!checkedEndpoints.length && <EndpointsInfo status={status} />}
+        {!!node.endpoints.length && <EndpointsInfo status={status} />}
       </dt>
       <ChipList
         list={node.endpoints.map(({ type, value }) => {
