@@ -147,7 +147,7 @@ const syncNodes = async producers => {
 const syncEndpoints = async () => {
   const query = `
     {
-      endpoint_aggregate(where: {type: {_in: ["api", "ssl"]}}) {
+      endpoint_aggregate(where: {type: {_in: ["api", "ssl", "p2p"]}}) {
         aggregate {
           count
         }
@@ -155,7 +155,7 @@ const syncEndpoints = async () => {
       producers : producer(where: {nodes: {endpoints: {_and: [{value: {_gt: ""}}]}}}, order_by: {rank: asc}) {
         id
         nodes {
-          endpoints(where: {type: {_in: ["api", "ssl"]}}) {
+          endpoints(where: {type: {_in: ["api", "ssl", "p2p"]}}) {
             id
             value
             type
@@ -240,6 +240,17 @@ const endpointsHealth = async (endpoints, producerId) => {
 const getHealthCheckResponse = async endpoint => {
   let startTime
   let response
+
+  if (endpoint.type === 'p2p') {
+    startTime = new Date()
+    const result = await producerUtil.isP2PResponding(endpoint.value)
+
+    return {
+      startTime,
+      status: result ? 200 : null,
+      statusText: result ? 'P2P is responding' : null
+    }
+  }
 
   if (endpoint?.features?.length) {
     for (const API of eosConfig.healthCheckAPIs) {

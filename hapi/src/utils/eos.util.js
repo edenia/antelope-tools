@@ -259,6 +259,7 @@ const getProducers = async options =>
 const getInfo = options => eosApi.getInfo(options || {})
 
 module.exports = {
+  callWithTimeout,
   newAccount,
   generateRandomAccountName,
   getAccount,

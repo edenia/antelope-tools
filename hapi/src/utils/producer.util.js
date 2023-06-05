@@ -1,6 +1,8 @@
 const axiosUtil = require('./axios.util')
 const eosUtil = require('./eos.util')
 const hasuraUtil = require('./hasura.util')
+const net = require('node:net')
+
 const { eosConfig } = require('../config')
 
 const getUrlStatus = async (url, api = '') => {
@@ -14,6 +16,28 @@ const getUrlStatus = async (url, api = '') => {
   } catch (error) {
     return error.response
   }
+}
+
+const isP2PResponding = async endpoint => {
+  const splitted = endpoint?.split(':') || {}
+  const { [0]: host, [1]: port } = splitted
+
+  if (splitted.length !== 2 || !host || !port) return false
+
+  const isResponding = new Promise((resolve, _) => {
+    const client = net.createConnection({ host, port }, () => {
+      client.destroy()
+      resolve(true)
+    })
+
+    client.on('error', _ => {
+      resolve(false)
+    })
+  })
+
+  return eosUtil.callWithTimeout(isResponding, 60000).catch(_ => {
+    return false
+  })
 }
 
 const getNodeInfo = async (url, api = '/v1/chain/get_info') => {
@@ -263,6 +287,7 @@ const jsonParse = (string) => {
 }
 
 module.exports = {
+  isP2PResponding,
   getNodeInfo,
   getEndpoints,
   getExpectedRewards,

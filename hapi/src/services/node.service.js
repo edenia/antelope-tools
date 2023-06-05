@@ -42,7 +42,7 @@ const updateNodes = async (nodes = []) => {
 }
 
 const updateEndpointInfo = async endpoint => {
-  if (!endpoint.type || !['api', 'ssl'].includes(endpoint.type)) return
+  if (!endpoint.type || !['api', 'ssl', 'p2p'].includes(endpoint.type)) return
 
   const updateMutation = `
     mutation ($id: uuid, $head_block_time: timestamptz, $response: jsonb, $updated_at: timestamptz,) {
