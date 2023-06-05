@@ -96,7 +96,9 @@ const EndpointsList = () => {
             {!!producers?.length ? (
               <EndpointsTable producers={producers} />
             ) : (
-              <NoResults />
+              <div className={classes.noShadow}>
+                <NoResults />
+              </div>
             )}
             {pagination.pages > 1 && (
               <div className={classes.pagination}>
