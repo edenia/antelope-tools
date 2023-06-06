@@ -45,9 +45,12 @@ const worker = async () => {
 
   try {
     const { block, transaction } = await eosmechanicsUtil.cpu()
+
     await saveBenchmark({
       account: block.producer,
-      usage: transaction.processed.receipt.cpu_usage_us
+      usage: block?.transactions.find(
+        trx => trx?.trx?.id === transaction.processed.id
+      ).cpu_usage_us
     })
   } catch (error) {
     console.error('cpuService.sync', error)
