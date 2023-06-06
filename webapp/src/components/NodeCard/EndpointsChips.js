@@ -86,7 +86,7 @@ const EndpointsChips = ({ node }) => {
       break
     }
 
-    if (endpoint?.response?.status !== 200 && endpoint?.response?.status !== 'Success') {
+    if (!endpoint?.response?.isWorking) {
       status.failingEndpoints.push(endpoint.type)
     }
 

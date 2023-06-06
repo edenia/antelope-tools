@@ -46,8 +46,7 @@ const useEndpointsState = () => {
 
   const handleFilter = useCallback(value => {
     const filter = value
-      ? { _or: [{ response: { _contains: { status: 200 } } }, 
-                {response: { _contains: { status: "Success" }}}]}
+      ? {response: { _contains: { isWorking: true }}}
       : { value: { _gt: '' } }
 
     setPagination(prev => ({
