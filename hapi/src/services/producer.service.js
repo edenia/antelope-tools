@@ -145,8 +145,7 @@ const syncNodes = async producers => {
 }
 
 const syncEndpoints = async () => {
-  await syncAPIEndpoints()
-  await syncP2PEndpoints()
+  Promise.all([syncP2PEndpoints(), syncAPIEndpoints()])
 }
 
 const syncAPIEndpoints = async () => {
@@ -222,14 +221,14 @@ const syncP2PEndpoints = async () => {
 
   if (!count) return
 
-  for (const endpoint of endpoints){
+  await Promise.all(endpoints.map(async endpoint =>{
     const result = await producerUtil.isP2PResponding(endpoint.value)
 
     endpoint.response = result
     endpoint.updated_at = new Date()
 
     await nodeService.updateEndpointInfo(endpoint)
-  }
+  }))
 }
 
 const endpointsHealth = async (endpoints, producerId) => {

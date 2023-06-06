@@ -40,7 +40,7 @@ const isP2PResponding = async endpoint => {
           errorMessage = 'Connection refused'
           break
         case os.constants.errno.ETIMEDOUT:
-          errorMessage = 'Operation timed out'
+          errorMessage = 'Connection timeout exceeded'
           break
         default:
           errorMessage = 'Connection error'
@@ -51,7 +51,7 @@ const isP2PResponding = async endpoint => {
   })
 
   return eosUtil.callWithTimeout(isResponding, 60000).catch((_) => {
-    return { status: 'Failed', statusText: 'Timeout Exhausted' }
+    return { status: 'Failed', statusText: 'Connection timeout exceeded' }
   })
 }
 
