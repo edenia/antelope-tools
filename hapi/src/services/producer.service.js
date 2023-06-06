@@ -224,7 +224,7 @@ const syncP2PEndpoints = async () => {
   await Promise.all(endpoints.map(async endpoint =>{
     const result = await producerUtil.isP2PResponding(endpoint.value)
 
-    endpoint.response = result
+    endpoint.response = {...result, isWorking: result.status === 'Success'}
     endpoint.updated_at = new Date()
 
     await nodeService.updateEndpointInfo(endpoint)
@@ -255,7 +255,8 @@ const endpointsHealth = async (endpoints, producerId) => {
       endpoint.time = (new Date() - startTime) / 1000
       endpoint.response = {
         status: response?.status,
-        statusText: response?.statusText
+        statusText: response?.statusText,
+        isWorking: response?.status === StatusCodes.OK
       }
       endpoint.head_block_time = nodeInfo?.head_block_time || null
       endpoint.updated_at = new Date()
@@ -267,7 +268,7 @@ const endpointsHealth = async (endpoints, producerId) => {
       checkedList.push({
         ...endpoint,
         producer_id: producerId,
-        isWorking: Number(endpoint?.response?.status === StatusCodes.OK)
+        isWorking: Number(endpoint?.response?.isWorking)
       })
     }
   }
