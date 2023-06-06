@@ -17,7 +17,7 @@ const EndpointsTextList = ({ type }) => {
   // Gets all responding endpoints
   useEffect(() => {
     setPagination(prev => ({ ...prev, limit: null }))
-    handleFilter(type !== 'p2p')
+    handleFilter(true)
   }, [type, handleFilter, setPagination])
 
   useEffect(() => {

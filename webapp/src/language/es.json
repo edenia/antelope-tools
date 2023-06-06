@@ -392,7 +392,13 @@
     "Payment Required": "La solicitud requiere un pago",
     "Forbidden": "La solicitud está prohibida",
     "Request Timeout": "Tiempo de la solicitud superado",
-    "Too Many Request": "Demasiadas solicitudes"
+    "Too Many Request": "Demasiadas solicitudes",
+    "Connection refused": "Conexión rechazada",
+    "Connection timeout exceeded": "Tiempo de espera de conexión excedido",
+    "Connection error": "Error de conexión",
+    "Connection established": "Conexión establecida",
+    "Success": "Éxitosa",
+    "Failed": "Fallida"
   },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
