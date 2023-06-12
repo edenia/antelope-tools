@@ -94,10 +94,7 @@ const syncProducers = async () => {
     await saveEstimateNextUpdate(new Date())
     await syncNodes(producers.slice(0, eosConfig.eosTopLimit))
     await syncEndpoints()
-
-    if (!eosConfig.stateHistoryPluginEndpoint) {
-      await statsService.sync()
-    }
+    await statsService.sync()
   }
 }
 
