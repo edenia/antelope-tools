@@ -11,7 +11,9 @@ const getUrlStatus = async (url, api = '') => {
   url = url.replace(urlRegex, '')
 
   try {
-    const response = await axiosUtil.instance.get(`${url}${api}`, { timeout: 30000 })
+    const response = await axiosUtil.instance.get(`${url}${api}`, {
+      timeout: 30000
+    })
 
     return response
   } catch (error) {
@@ -19,9 +21,9 @@ const getUrlStatus = async (url, api = '') => {
   }
 }
 
-const isP2PResponding = async endpoint => {
+const isP2PResponding = async (endpoint) => {
   const splitted = endpoint?.split(':') || {}
-  const { [0]: host, [1]: port } = splitted
+  const { 0: host, 1: port } = splitted
 
   if (splitted.length !== 2 || !host || !port)
     return { status: 'Failed', statusText: 'Invalid endpoint format' }
@@ -32,7 +34,7 @@ const isP2PResponding = async endpoint => {
       resolve({ status: 'Success', statusText: 'Connection established' })
     })
 
-    client.on('error', err => {
+    client.on('error', (err) => {
       let errorMessage = ''
 
       switch (Math.abs(err?.errno)) {
@@ -70,7 +72,8 @@ const getSupportedAPIs = async (api) => {
 
   try {
     const response = await axiosUtil.instance.get(
-      `${api}/v1/node/get_supported_apis`, { timeout: 30000 }
+      `${api}/v1/node/get_supported_apis`,
+      { timeout: 30000 }
     )
 
     supportedAPIs = response.data?.apis

@@ -47,7 +47,7 @@ export default (theme) => ({
     boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
   },
   noShadow: {
-    '& .MuiPaper-root':{
+    '& .MuiPaper-root': {
       boxShadow: 'none !important'
     }
   }
