@@ -66,7 +66,6 @@ const start = async () => {
   }
 
   if (eosConfig.stateHistoryPluginEndpoint) {
-    run('SYNC STATS INFO', statsService.sync, workersConfig.syncStatsInterval)
     run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
     run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
     run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)

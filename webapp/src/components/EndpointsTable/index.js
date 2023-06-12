@@ -52,11 +52,13 @@ const EndpointsTable = ({ producers }) => {
   const getStatus = endpoint => {
     if (endpoint.response.status === undefined) return
 
+    if (endpoint.response?.isWorking) {
+      return !endpoint.head_block_time || isSynchronized(endpoint)
+        ? 'greenLight'
+        : 'timerOff'
+    }
+
     switch (Math.floor(endpoint.response?.status / 100)) {
-      case 2:
-        return !endpoint.head_block_time || isSynchronized(endpoint)
-          ? 'greenLight'
-          : 'timerOff'
       case 4:
       case 5:
         return 'yellowLight'
@@ -77,11 +79,9 @@ const EndpointsTable = ({ producers }) => {
               key={`${producer?.name}-${endpointType}-${index}`}
             >
               {endpoint.value}
-              {endpointType !== 'p2p' && (
-                <HealthCheck status={getStatus(endpoint)}>
-                  <HealthCheckInfo healthCheck={endpoint} />
-                </HealthCheck>
-              )}
+              <HealthCheck status={getStatus(endpoint)}>
+                <HealthCheckInfo healthCheck={endpoint} />
+              </HealthCheck>
             </div>
           ))
         )}
