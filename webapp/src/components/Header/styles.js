@@ -139,11 +139,11 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
-    background: '#1675CA',
+    background: theme.palette.primary.main,
     borderRadius: '10px',
     transition: 'ease-in-out all 0.5s',
     '&:hover': {
-      boxShadow: '0px 0px 3px 3px #1675CA',
+      boxShadow: `0px 0px 3px 3px ${theme.palette.primary.main}`,
     },
   },
   cardShadow: {

@@ -9,7 +9,7 @@ export default (theme) => ({
     color: 'black',
     cursor: 'pointer',
     '&:hover': {
-      color: '#1565c0',
+      color: theme.palette.primary.main,
     },
   },
 })

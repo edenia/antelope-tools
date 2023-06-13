@@ -391,6 +391,7 @@
     "not working": "The endpoint is not responding"
   },
   "copyToClipboardComponent": {
+    "copy": "Copy",
     "copyToClipboard": "Copy to clipboard",
     "copied": "Copied!"
   },

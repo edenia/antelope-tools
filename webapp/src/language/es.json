@@ -415,6 +415,7 @@
     "not working": "El punto final no responde"
   },
   "copyToClipboardComponent": {
+    "copy": "Copiar",
     "copyToClipboard": "Copiar al portapapeles",
     "copied": "¡Copiado!"
   },

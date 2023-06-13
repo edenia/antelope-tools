@@ -23,7 +23,7 @@ const EndpointsTextList = ({ type }) => {
   useEffect(() => {
     if (!producers?.length) return
 
-    let endpointsList = `# List of available ${type} endpoints \n`
+    let endpointsList = `# List of responding ${type} endpoints \n`
 
     producers.forEach(producer => {
       if (!!producer?.endpoints[type]?.length) {

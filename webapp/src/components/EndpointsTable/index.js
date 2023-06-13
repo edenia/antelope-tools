@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -95,6 +96,14 @@ const EndpointsTable = ({ producers }) => {
         anchorEl={anchorEl}
         open={anchorEl !== null}
         onClose={handlePopoverClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'right',
+          horizontal: 'right',
+        }}
       >
         <EndpointsTextList type={type} />
       </Tooltip>
@@ -107,11 +116,16 @@ const EndpointsTable = ({ producers }) => {
                 <div className={classes.titleCell}>
                   {t('api')}
                   <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'api')
-                      }}
-                    />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'api')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                   </MUITooltip>
                 </div>
               </TableCell>
@@ -119,11 +133,16 @@ const EndpointsTable = ({ producers }) => {
                 <div className={classes.titleCell}>
                   {t('ssl')}
                   <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'ssl')
-                      }}
-                    />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'ssl')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                   </MUITooltip>
                 </div>
               </TableCell>
@@ -131,11 +150,16 @@ const EndpointsTable = ({ producers }) => {
                 <div className={classes.titleCell}>
                   {t('p2p')}
                   <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'p2p')
-                      }}
-                    />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'p2p')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                   </MUITooltip>
                 </div>
               </TableCell>
@@ -153,7 +177,7 @@ const EndpointsTable = ({ producers }) => {
                         component={RouterLink}
                         state={{ producerId: producer.id }}
                         to="/endpoints-stats"
-                        color="secondary"
+                        color="primary"
                       >
                         <QueryStatsIcon />
                       </Link>
