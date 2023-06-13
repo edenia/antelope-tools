@@ -9,7 +9,7 @@ const HealthCheckInfo = ({ healthCheck }) => {
   return (
     <>
       <Typography>
-        {t('status')}: {healthCheck.response?.status || t('error')}
+        {t('status')}: {t(healthCheck.response?.status) || t('error')}
       </Typography>
       <Typography>
         {t('response')}: {t(healthCheck.response?.statusText || 'noResponse')}

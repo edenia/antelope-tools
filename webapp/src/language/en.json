@@ -290,8 +290,8 @@
     "cpuBenchmark": "CPU Benchmark Average",
     "isFull": "Is full",
     "supportedApis": "Supported APIs",
-    "allWorking": "All API and SSL endpoints are responding",
-    "noneWorking": "No API or SSL endpoints are responding",
+    "allWorking": "All endpoints are responding",
+    "noneWorking": "No endpoints are responding",
     "endpointPlural": "Endpoints not responding are the",
     "endpointSingular": "Endpoint not responding is the"
   },
