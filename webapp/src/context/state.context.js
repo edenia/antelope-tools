@@ -42,6 +42,48 @@ const sharedStateReducer = (state, action) => {
       }
     }
 
+    case 'pushTPB': {
+      if (state.tpb[0].blocks[0] === action.payload.blocks[0]) return { ...state }
+
+      const tpb = JSON.parse(JSON.stringify(state.tpb))
+
+      if (tpb.length >= 60) {
+        tpb.pop()
+      }
+
+      return {
+        ...state,
+        tpsWaitingBlock: !state.tpsWaitingBlock ? action.payload : null,
+        tpb: [action.payload, ...tpb],
+      }
+    }
+
+    case 'pushTPS': {
+      const previousBlock = state.tpb[1]
+
+      if (!state.tpsWaitingBlock || !previousBlock) return { ...state }
+
+      let tps = JSON.parse(JSON.stringify(state.tps))
+
+      if (state.tps.length >= 30) {
+        tps.pop()
+      }
+
+      return {
+        ...state,
+        tps: [
+          {
+            blocks: [previousBlock.blocks[0], action.payload.blocks[0]],
+            transactions:
+              previousBlock.transactions + action.payload.transactions,
+            cpu: action.payload.cpu + previousBlock.cpu,
+            net: action.payload.net + previousBlock.net,
+          },
+          ...tps,
+        ],
+      }
+    }
+
     case 'updateTransactionsStats': {
       return {
         ...state,
@@ -107,7 +149,7 @@ export const SharedStateProvider = ({ ...props }) => {
 
 export const useSharedState = () => {
   const context = React.useContext(SharedStateContext)
-  const [lastBlock, setLastBlock] = useState()
+  const [intervalNumber, setIntervalNumber] = useState(null)
 
   if (!context) {
     throw new Error(`useSharedState must be used within a SharedStateContext`)
@@ -139,75 +181,45 @@ export const useSharedState = () => {
     })
   }
 
-  const getBlock = useCallback( async (block) => {
-    try {
-      const data = await eosApi.getBlock(block)
-      let tpb = state.tpb
+  const getUsage = block => {
+    return block?.transactions?.reduce(
+      (total, current) => {
+        total.cpu += current.cpu_usage_us
+        total.net += current.net_usage_words
+        return total
+      },
+      { net: 0, cpu: 0 },
+    )
+  }
 
-      if (state.tpb.length >= 60) {
-        tpb.pop()
-      }
+  const getBlock = useCallback(
+    async (block) => {
+      try {
+        const data = await eosApi.getBlock(block)
 
-      tpb = [
-        {
-          blocks: [block],
-          transactions: data.transactions.length,
-        },
-        ...tpb,
-      ]
-
-      if (!state.tpsWaitingBlock) {
         dispatch({
-          type: 'updateTransactionsStats',
+          type: 'pushTPB',
           payload: {
-            tpb,
-            tpsWaitingBlock: {
-              block,
-              transactions: data.transactions.length,
-            },
+            blocks: [block],
+            transactions: data.transactions.length,
+            ...getUsage(data),
           },
         })
 
-        return
+        dispatch({
+          type: 'pushTPS',
+          payload: {
+            blocks: [block],
+            transactions: data.transactions.length,
+            ...getUsage(data),
+          },
+        })
+      } catch (error) {
+        console.error(error?.message || error)
       }
-
-      let tps = state.tps
-
-      if (state.tps.length >= 30) {
-        tps.pop()
-      }
-
-      tps = [
-        {
-          blocks: [state.tpsWaitingBlock.block, block],
-          transactions:
-            state.tpsWaitingBlock.transactions + data.transactions.length,
-        },
-        ...tps,
-      ]
-
-      dispatch({
-        type: 'updateTransactionsStats',
-        payload: {
-          tps,
-          tpb,
-          tpsWaitingBlock: null,
-        },
-      })
-    } catch (error) {
-      console.error(error?.message || error)
-    }
-  }, [dispatch, state.tpb, state.tps, state.tpsWaitingBlock])
-
-  useEffect(() => {
-    if (!lastBlock) return
-
-    const updateTransactions = async () => {
-      await getBlock(lastBlock)
-    }
-
-    updateTransactions()
-  }, [lastBlock, getBlock])
+    },
+    [dispatch],
+  )
 
   const startTrackingProducerSchedule = async ({ interval = 120 } = {}) => {
     if (scheduleInterval) return
@@ -221,7 +233,7 @@ export const useSharedState = () => {
         console.error(error?.message || error)
 
         if (error?.message === ENDPOINTS_ERROR) {
-          await stopTrackingProducerSchedule()
+          stopTrackingProducerSchedule()
           setTimeout(() => {
             startTrackingProducerSchedule({ interval })
           }, waitTrackingInterval)
@@ -248,37 +260,28 @@ export const useSharedState = () => {
           payload: { ...info },
         })
 
-        setLastBlock(info.head_block_num)
+        await getBlock(info.head_block_num)
       } catch (error) {
         console.error(error?.message || error)
 
         if (error?.message === ENDPOINTS_ERROR) {
-          await stopTrackingInfo()
-          setTimeout(() => {
-            startTrackingInfo({ interval })
-          }, waitTrackingInterval)
+          clearInterval(infoInterval)
         }
       }
     }
 
-    if (interval === 0) {
-      await handle()
-      return
-    }
-
-    await handle()
-
     if (infoInterval) return
 
     infoInterval = setInterval(handle, interval * 1000)
+    setIntervalNumber(infoInterval)
   }
 
-  const stopTrackingInfo = async () => {
-    if (!infoInterval) return
+  const stopTrackingInfo = useCallback(() => {
+    if (!intervalNumber) return
 
-    clearInterval(infoInterval)
-    infoInterval = null
-  }
+    clearInterval(intervalNumber)
+    setIntervalNumber(null)
+  }, [intervalNumber])
 
   const stopTrackingProducerSchedule = () => {
     if (!scheduleInterval) return
