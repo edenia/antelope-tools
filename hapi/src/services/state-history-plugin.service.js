@@ -166,20 +166,16 @@ const worker = async () => {
   if (lastBlockNum >= LIB) {
     await sleepFor(1)
   } else {
-    try {
-      const block = await eosUtil.getBlock(blockNum)
+    const block = await eosUtil.getBlock(blockNum)
 
-      await saveBlockHistory({
-        producer: block.producer,
-        schedule_version: block.schedule_version,
-        block_id: block.id,
-        block_num: block.block_num,
-        transactions_length: block.transactions.length,
-        timestamp: block.timestamp
-      })
-    } catch (error) {
-      throw error
-    }
+    await saveBlockHistory({
+      producer: block.producer,
+      schedule_version: block.schedule_version,
+      block_id: block.id,
+      block_num: block.block_num,
+      transactions_length: block.transactions.length,
+      timestamp: block.timestamp
+    })
   }
 
   await worker()
