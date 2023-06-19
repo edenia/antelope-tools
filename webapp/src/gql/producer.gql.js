@@ -212,7 +212,7 @@ export const EOSRATE_STATS_QUERY = gql`
 `
 
 export const FASTEST_ENDPOINTS_QUERY = gql`query($today: date){
-  endpoints: check_history_by_endpoint(limit: 5, order_by: [{availability: desc, avg_time: asc}], where: {date: {_eq: $today}}, distinct_on: [value]) {
+  endpoints: check_history_by_endpoint(limit: 5, order_by: [{availability: desc, avg_time: asc}], where: {date: {_eq: $today}}) {
     value
     avg_time
     availability
