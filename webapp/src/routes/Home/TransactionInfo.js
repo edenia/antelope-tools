@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
+import { makeStyles } from '@mui/styles'
 import { useTheme } from '@mui/material/styles'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
@@ -14,17 +15,25 @@ import Typography from '@mui/material/Typography'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
 
-import { TRANSACTION_HISTORY_QUERY } from '../../gql'
+import { TRANSACTION_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { useSharedState } from '../../context/state.context'
-import { generalConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const options = ['Live (30s)', ...rangeOptions]
 
-const TransactionInfo = ({ t, classes }) => {
+const TransactionInfo = ({
+  t,
+  startTrackingInfo,
+  stopTrackingInfo,
+  historyEnabled,
+}) => {
+  const classes = useStyles()
   const theme = useTheme()
   const [{ tps, tpb }] = useSharedState()
   const [graphicData, setGraphicData] = useState([
@@ -40,7 +49,7 @@ const TransactionInfo = ({ t, classes }) => {
   const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
   const [getTransactionHistory, { data, loading }] = useLazyQuery(
-    TRANSACTION_HISTORY_QUERY,
+    TRANSACTION_QUERY,
     { fetchPolicy: 'network-only' },
   )
 
@@ -53,6 +62,8 @@ const TransactionInfo = ({ t, classes }) => {
     for (let index = 0; index < tpb.length; index++) {
       trxPerBlock.push({
         name: `Block: ${tpb[index].blocks.join()}`,
+        cpu: tpb[index].cpu,
+        net: tpb[index].net,
         y: tpb[index].transactions,
         x: index > 0 ? index / 2 : index,
       })
@@ -61,6 +72,8 @@ const TransactionInfo = ({ t, classes }) => {
     for (let index = 0; index < tps.length; index++) {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
+        cpu: tpb[index].cpu,
+        net: tps[index].net,
         y: tps[index].transactions,
         x: index,
       })
@@ -82,34 +95,37 @@ const TransactionInfo = ({ t, classes }) => {
   }, [option, tps, tpb])
 
   useEffect(() => {
-    if (option === options[0]) return
+    if (option === options[0]) {
+      setPause(false)
+      startTrackingInfo()
+      return
+    }
+
+    stopTrackingInfo()
 
     setGraphicData([])
     getTransactionHistory({
-      variables: {},
+      variables: {
+        range: option,
+      },
     })
+    // eslint-disable-next-line
   }, [option, getTransactionHistory])
 
   useEffect(() => {
-    const trxHistory = data?.trxHistory?.length
-      ? data.trxHistory[0].transaction_history
-      : null
-
     if (option === option[0]) return
 
-    if (!trxHistory) {
+    if (!data?.transactions.length) {
       setGraphicData([])
       return
     }
 
-    const intervalGraphicData = (trxHistory[option] || []).map(
-      (transactionHistory) => {
-        return [
-          new Date(transactionHistory.datetime).getTime(),
-          transactionHistory.transactions_count || 0,
-        ]
-      },
-    )
+    const intervalGraphicData = data.transactions.map((transactionHistory) => {
+      return [
+        new Date(transactionHistory.datetime).getTime(),
+        transactionHistory.transactions_count || 0,
+      ]
+    })
 
     setGraphicData([
       {
@@ -137,7 +153,7 @@ const TransactionInfo = ({ t, classes }) => {
           </Typography>
           <div className={classes.formControl}>
             <FormControl>
-              {generalConfig.historyEnabled && (
+              {historyEnabled && (
                 <>
                   <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
                   <Select
@@ -156,7 +172,16 @@ const TransactionInfo = ({ t, classes }) => {
               )}
             </FormControl>
             <div
-              onClick={() => option === options[0] && setPause(!pause)}
+              onClick={() => {
+                if (option === options[0]) {
+                  setPause(!pause)
+                  if (pause) {
+                    startTrackingInfo()
+                  } else {
+                    stopTrackingInfo()
+                  }
+                }
+              }}
               className={clsx(classes.pauseButton, {
                 [classes.disableButton]: option !== options[0],
               })}
@@ -209,11 +234,15 @@ const TransactionInfo = ({ t, classes }) => {
 
 TransactionInfo.propTypes = {
   t: PropTypes.any,
-  classes: PropTypes.object,
+  startTrackingInfo: PropTypes.func,
+  stopTrackingInfo: PropTypes.func,
+  historyEnabled: PropTypes.bool,
 }
 
 TransactionInfo.defaultProps = {
-  classes: {},
+  startTrackingInfo: () => {},
+  stopTrackingInfo: () => {},
+  historyEnabled: false,
 }
 
 export default TransactionInfo
