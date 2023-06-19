@@ -64,19 +64,14 @@ const start = async () => {
     run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
     run('CPU WORKER CLEANUP', cpuService.cleanOldBenchmarks, 86400)
   }
-
-  if (eosConfig.blockHistoryEnabled) {
-    run('BLOCK HISTORY CLEANUP', stateHistoryPluginService.cleanOldBlocks, 43200)
-    run('BLOCK HISTORY WORKER', stateHistoryPluginService.worker)
-  }
   
   if (eosConfig.stateHistoryPluginEndpoint) {
+    run('BLOCK HISTORY CLEANUP', stateHistoryPluginService.cleanOldBlocks, 43200)
     run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
     run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
     run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)
     run('SYNC SCHEDULE HISTORY', demuxService.init)
     run('SYNC TPS', statsService.syncTPSAllTimeHigh)
-    run('SYNC TRX BY INTERVALS', statsService.formatTransactionHistory, 10800)
     run(
       'SYNC TRANSACTIONS INFO',
       statsService.syncTransactionsInfo,
