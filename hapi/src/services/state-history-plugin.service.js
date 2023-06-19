@@ -4,7 +4,7 @@ const { Serialize } = require('eosjs')
 
 const statsService = require('./stats.service')
 const { eosConfig } = require('../config')
-const { hasuraUtil, sleepFor } = require('../utils')
+const { hasuraUtil, sleepFor, eosUtil } = require('../utils')
 
 let types
 let ws
@@ -132,6 +132,59 @@ const handleBlocksResult = async data => {
   }
 }
 
+const cleanOldBlocks = async () => {
+  const date = new Date()
+  const days = eosConfig.keepBlockHistoryForDays
+
+  date.setSeconds(date.getSeconds() - 60 * 60 * 24 * days)
+
+  const mutation = `
+    mutation ($date: timestamptz) {
+      delete_block_history (where: {timestamp: {_lt: $date}}) {
+        affected_rows
+      }
+    }
+  `
+
+  await hasuraUtil.request(mutation, { date })
+}
+
+const worker = async () => {
+  const info = await eosUtil.getInfo()
+  const LIB = info?.last_irreversible_block_num
+  const lastBlockNum = await getLastBlockNumInDatabase()
+  let blockNum = lastBlockNum + 1
+
+  if (lastBlockNum === 0) {
+    const days = eosConfig.keepBlockHistoryForDays
+    const date = new Date()
+
+    date.setSeconds(date.getSeconds() - 60 * 60 * 24 * days)
+    blockNum = Math.ceil(LIB - ((new Date() - date) / 1000) * 2)
+  }
+
+  if (lastBlockNum >= LIB) {
+    await sleepFor(1)
+  } else {
+    try {
+      const block = await eosUtil.getBlock(blockNum)
+
+      await saveBlockHistory({
+        producer: block.producer,
+        schedule_version: block.schedule_version,
+        block_id: block.id,
+        block_num: block.block_num,
+        transactions_length: block.transactions.length,
+        timestamp: block.timestamp
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  await worker()
+}
+
 const init = async () => {
   if (!eosConfig.stateHistoryPluginEndpoint) {
     return
@@ -177,5 +230,7 @@ const init = async () => {
 }
 
 module.exports = {
+  worker,
+  cleanOldBlocks,
   init
 }

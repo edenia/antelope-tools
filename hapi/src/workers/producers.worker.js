@@ -65,6 +65,11 @@ const start = async () => {
     run('CPU WORKER CLEANUP', cpuService.cleanOldBenchmarks, 86400)
   }
 
+  if (eosConfig.blockHistoryEnabled) {
+    run('BLOCK HISTORY CLEANUP', stateHistoryPluginService.cleanOldBlocks, 43200)
+    run('BLOCK HISTORY WORKER', stateHistoryPluginService.worker)
+  }
+  
   if (eosConfig.stateHistoryPluginEndpoint) {
     run('SYNC BLOCK HISTORY', stateHistoryPluginService.init)
     run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
