@@ -82,6 +82,9 @@
     "/nodes-distribution>sidebar": "Geo Distribución",
     "/nodes-distribution>title": "Distribución Geográfica de Nodos",
     "/nodes-distribution>heading": "Distribución Geográfica",
+    "/stress-test>title": "Panel de Prueba de Estrés",
+    "/stress-test>sidebar": "Prueba de Estrés",
+    "/stress-test>heading": "Prueba de Estrés",
     "/accounts>sidebar": "Cuentas y Contratos",
     "/accounts>title": "Cuentas y Contratos - Panel",
     "/accounts>heading": "Cuentas y Contratos",
@@ -156,7 +159,9 @@
     "netLimitPerBlock": "Límite Red por bloque",
     "chainCpuLimit": "Límite de CPU en cadena",
     "chainNetLimit": "Límite de Net en cadena",
-    "timeToFinality": "Tiempo para finalidad"
+    "timeToFinality": "Tiempo para finalidad",
+    "cpuUsage": "Uso del CPU",
+    "netUsage": "Uso de NET"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {

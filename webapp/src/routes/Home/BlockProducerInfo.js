@@ -3,10 +3,11 @@ import React, { lazy, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 
+import eosApi from '../../utils/eosapi'
 import { formatWithThousandSeparator } from '../../utils'
 import { PRODUCERS_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
 import { useSharedState } from '../../context/state.context'
-import { eosConfig } from '../../config'
+import { eosConfig, generalConfig } from '../../config'
 
 const Card = lazy(() => import('@mui/material/Card'))
 const CardContent = lazy(() => import('@mui/material/CardContent'))
@@ -25,9 +26,31 @@ const BlockProducerInfo = ({ t, classes }) => {
   const { data: producersSummary, loading: producersLoading } = useQuery(
     PRODUCERS_SUMMARY_QUERY,
   )
-  const [{ schedule: scheduleInfo, info }] = useSharedState()
+  const [{ schedule: scheduleInfo, info, tps }] = useSharedState()
   const [total, setTotal] = useState(0)
   const [schedule, setSchedule] = useState({ producers: [] })
+  const [globalConfig, setGlobalConfig] = useState()
+
+  useEffect(() => {
+    const getTable = async () => {
+      try {
+        const { rows } = await eosApi.getTableRows({
+          code: 'eosio',
+          scope: 'eosio',
+          table: 'global',
+          json: true,
+          lower_bound: null,
+        })
+
+        setGlobalConfig({
+          maxBlockCPU: rows[0]?.max_block_cpu_usage,
+          maxBlockNET: rows[0]?.max_block_net_usage,
+        })
+      } catch (error) {}
+    }
+
+    getTable()
+  }, [])
 
   useEffect(() => {
     const newProducers = scheduleInfo.producers.map((item) => {
@@ -140,7 +163,11 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
         <div className={classes.divTrans}>
-          <TransactionInfo t={t} classes={classes} />
+          <TransactionInfo
+            t={t}
+            classes={classes}
+            historyEnabled={generalConfig.historyEnabled}
+          />
         </div>
       </div>
       {loading && <LinearProgress />}
@@ -161,6 +188,44 @@ const BlockProducerInfo = ({ t, classes }) => {
             </>
           }
         />
+        {globalConfig && (
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('cpuUsage')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {`${formatWithThousandSeparator(
+                    (tps[0]?.cpu / globalConfig.maxBlockCPU) * 100 || 0,
+                    2,
+                  )} %`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+        {globalConfig && (
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{t('netUsage')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {`${formatWithThousandSeparator(
+                    (tps[0]?.net / globalConfig.maxBlockNET) * 100 || 0,
+                    2,
+                  )} %`}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        )}
         <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>

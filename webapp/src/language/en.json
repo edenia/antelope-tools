@@ -89,6 +89,9 @@
     "/missed-blocks>sidebar": "Missed Blocks",
     "/missed-blocks>title": "Missed Blocks - EOSIO + Antelope Network Dashboard",
     "/missed-blocks>heading": "Missed Blocks",
+    "/stress-test>title": "Stress Test Dashboard",
+    "/stress-test>sidebar": "Stress Test",
+    "/stress-test>heading": "Stress Test",
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
@@ -150,7 +153,9 @@
     "netLimitPerBlock": "Net Limit Per Block",
     "chainCpuLimit": "Chain CPU Limit",
     "chainNetLimit": "Chain Net Limit",
-    "timeToFinality": "Time to Finality"
+    "timeToFinality": "Time to Finality",
+    "cpuUsage": "CPU Usage",
+    "netUsage": "NET Usage"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {

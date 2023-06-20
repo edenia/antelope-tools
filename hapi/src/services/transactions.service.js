@@ -17,7 +17,8 @@ const getTransactions = async (range = '3 Hours') => {
     FROM
       interval
     LEFT JOIN 
-      block_history ON date_trunc('${granularity}', block_history.timestamp) = interval.value
+      ( SELECT * FROM block_history WHERE transactions_length > 0 ) 
+      AS block_history ON date_trunc('${granularity}', block_history.timestamp) = interval.value
     GROUP BY
       1
     ORDER BY

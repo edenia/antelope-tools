@@ -11,6 +11,7 @@ import {
   HelpCircle as HelpIcon,
   Inbox as InboxIcon,
   Cpu as CpuIcon,
+  BarChart as BarChartIcon,
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
@@ -25,6 +26,7 @@ import {
   TopologySvg,
   RewardsSvg,
 } from '../components/Icons'
+import StressTestDashboard from './StressTestDashboard'
 
 const Home = lazy(() => import('./Home'))
 const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
@@ -111,6 +113,13 @@ const defaultRoutes = [
     icon: <InboxIcon />,
     component: MissedBlocks,
     path: '/missed-blocks',
+    exact: true,
+  },
+  {
+    name: 'stressTest',
+    icon: <BarChartIcon />,
+    component: StressTestDashboard,
+    path: '/stress-test',
     exact: true,
   },
   {

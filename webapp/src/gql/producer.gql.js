@@ -220,7 +220,7 @@ export const FASTEST_ENDPOINTS_QUERY = gql`query($today: date){
 }`
 
 export const HISTORY_ENDPOINTS_BY_PRODUCER_QUERY = gql`query($id: Int){
-  endpoints: check_history_by_endpoint(order_by: [{value: asc},{date: asc}], where: {producer_id: {_eq: $id}}, distinct_on: [value]) {
+  endpoints: check_history_by_endpoint(order_by: [{value: asc},{date: asc}], where: {producer_id: {_eq: $id}}) {
     value
     date
     avg_time
