@@ -132,6 +132,23 @@ const handleBlocksResult = async data => {
   }
 }
 
+const cleanOldBlocks = async () => {
+  const date = new Date()
+  const days = eosConfig.keepBlockHistoryForDays
+
+  date.setSeconds(date.getSeconds() - 60 * 60 * 24 * days)
+
+  const mutation = `
+    mutation ($date: timestamptz) {
+      delete_block_history (where: {timestamp: {_lt: $date}}) {
+        affected_rows
+      }
+    }
+  `
+
+  await hasuraUtil.request(mutation, { date })
+}
+
 const init = async () => {
   if (!eosConfig.stateHistoryPluginEndpoint) {
     return
@@ -177,5 +194,6 @@ const init = async () => {
 }
 
 module.exports = {
+  cleanOldBlocks,
   init
 }

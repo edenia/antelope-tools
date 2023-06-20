@@ -68,6 +68,7 @@ services:
       HAPI_EOSRATE_GET_STATS_URL: '${HAPI_EOSRATE_GET_STATS_URL}'
       HAPI_EOSRATE_GET_STATS_USER: '${HAPI_EOSRATE_GET_STATS_USER}'
       HAPI_EOSRATE_GET_STATS_PASSWORD: '${HAPI_EOSRATE_GET_STATS_PASSWORD}'
+      HAPI_EOS_BLOCK_HISTORY_DAYS: '${HAPI_EOS_BLOCK_HISTORY_DAYS}'
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
     image: hasura/graphql-engine:v2.16.0.cli-migrations-v3
