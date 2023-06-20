@@ -4,7 +4,7 @@ const { Serialize } = require('eosjs')
 
 const statsService = require('./stats.service')
 const { eosConfig } = require('../config')
-const { hasuraUtil, sleepFor, eosUtil } = require('../utils')
+const { hasuraUtil, sleepFor } = require('../utils')
 
 let types
 let ws
