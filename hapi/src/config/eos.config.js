@@ -8,6 +8,8 @@ module.exports = {
     : '',
   stateHistoryPluginEndpoint:
     process.env.HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT,
+  missedBlocksServiceEnabled:
+    Boolean(process.env.HAPI_EOS_MISSED_BLOCKS_ENABLED) || false,
   keepBlockHistoryForDays:
     parseInt(process.env.HAPI_EOS_BLOCK_HISTORY_DAYS) || 0,
   chainId: process.env.HAPI_EOS_API_CHAIN_ID,
