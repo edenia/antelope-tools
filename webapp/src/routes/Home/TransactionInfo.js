@@ -19,6 +19,7 @@ import { TRANSACTION_QUERY } from '../../gql'
 import { rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { useSharedState } from '../../context/state.context'
+import { generalConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
 import styles from './styles'
@@ -31,7 +32,6 @@ const TransactionInfo = ({
   t,
   startTrackingInfo,
   stopTrackingInfo,
-  historyEnabled,
 }) => {
   const classes = useStyles()
   const theme = useTheme()
@@ -153,7 +153,7 @@ const TransactionInfo = ({
           </Typography>
           <div className={classes.formControl}>
             <FormControl>
-              {historyEnabled && (
+              {generalConfig.historyEnabled && (
                 <>
                   <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
                   <Select
@@ -237,13 +237,11 @@ TransactionInfo.propTypes = {
   t: PropTypes.any,
   startTrackingInfo: PropTypes.func,
   stopTrackingInfo: PropTypes.func,
-  historyEnabled: PropTypes.bool,
 }
 
 TransactionInfo.defaultProps = {
   startTrackingInfo: () => {},
   stopTrackingInfo: () => {},
-  historyEnabled: false,
 }
 
 export default TransactionInfo

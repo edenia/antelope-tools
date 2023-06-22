@@ -26,8 +26,7 @@ const StressTestDashboard = () => {
         startTrackingInfo={() => {
           startTrackingInfo({ interval: 0.5 })
         }}
-        historyEnabled
-        />
+      />
       <TransactionsHistory t={t} />
     </>
   )

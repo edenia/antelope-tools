@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { formatWithThousandSeparator } from '../../utils'
 import { PRODUCERS_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
 import { useSharedState } from '../../context/state.context'
-import { eosConfig, generalConfig } from '../../config'
+import { eosConfig } from '../../config'
 
 const Card = lazy(() => import('@mui/material/Card'))
 const CardContent = lazy(() => import('@mui/material/CardContent'))
@@ -19,6 +19,7 @@ const TransactionsHistory = lazy(() =>
 const TransactionInfo = lazy(() => import('./TransactionInfo'))
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
+const SimpleDataCard = lazy(() => import('../../components/SimpleDataCard'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(PRODUCERS_QUERY)
@@ -83,50 +84,30 @@ const BlockProducerInfo = ({ t, classes }) => {
   return (
     <>
       <div className={classes.divMargin}>
-        <div className={classes.cardHeader}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('currentProducer')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {info.head_block_producer}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardHeader}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('scheduleVersion')}</Typography>
-              <Typography component="p" variant="h6">
-                {schedule?.version}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardHeader}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('headBlock')}</Typography>
-              <Typography component="p" variant="h6">
-                {formatWithThousandSeparator(info.head_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardHeader}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('lastBlock')}</Typography>
-              <Typography component="p" variant="h6">
-                {formatWithThousandSeparator(info.last_irreversible_block_num)}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+        <SimpleDataCard header>
+          <Typography>{t('currentProducer')}</Typography>
+          <Typography component="p" variant="h6" className={classes.lowercase}>
+            {info.head_block_producer}
+          </Typography>
+        </SimpleDataCard>
+        <SimpleDataCard header>
+          <Typography>{t('scheduleVersion')}</Typography>
+          <Typography component="p" variant="h6">
+            {schedule?.version}
+          </Typography>
+        </SimpleDataCard>
+        <SimpleDataCard header>
+          <Typography>{t('headBlock')}</Typography>
+          <Typography component="p" variant="h6">
+            {formatWithThousandSeparator(info.head_block_num)}
+          </Typography>
+        </SimpleDataCard>
+        <SimpleDataCard header>
+          <Typography>{t('lastBlock')}</Typography>
+          <Typography component="p" variant="h6">
+            {formatWithThousandSeparator(info.last_irreversible_block_num)}
+          </Typography>
+        </SimpleDataCard>
       </div>
       <div className={classes.graphicBox}>
         <div className={classes.divTrans}>
@@ -140,15 +121,11 @@ const BlockProducerInfo = ({ t, classes }) => {
           </Card>
         </div>
         <div className={classes.divTrans}>
-          <TransactionInfo
-            t={t}
-            classes={classes}
-            historyEnabled={generalConfig.historyEnabled}
-          />
+          <TransactionInfo t={t} />
         </div>
       </div>
       {loading && <LinearProgress />}
-      <div className={classes.wrapper}>
+      <>
         <TransactionsHistory
           t={t}
           classes={classes}
@@ -156,34 +133,29 @@ const BlockProducerInfo = ({ t, classes }) => {
             <>
               <ProducersSummary
                 t={t}
-                classes={classes}
                 data={producersSummary}
                 loading={producersLoading}
                 total={total}
               />
-              <NodesSummary t={t} classes={classes} />
+              <NodesSummary t={t} />
+              <SimpleDataCard>
+                <Typography>{t('timeToFinality')}</Typography>
+                <Typography
+                  component="p"
+                  variant="h6"
+                  className={classes.lowercase}
+                >
+                  {schedule.producers
+                    ? `${
+                        (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
+                      } s`
+                    : '0 s'}
+                </Typography>
+              </SimpleDataCard>
             </>
           }
         />
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('timeToFinality')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {schedule.producers
-                  ? `${
-                      (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
-                    } s`
-                  : '0 s'}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      </>
     </>
   )
 }
