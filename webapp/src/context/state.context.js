@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
@@ -149,7 +149,6 @@ export const SharedStateProvider = ({ ...props }) => {
 
 export const useSharedState = () => {
   const context = React.useContext(SharedStateContext)
-  const [intervalNumber, setIntervalNumber] = useState(null)
 
   if (!context) {
     throw new Error(`useSharedState must be used within a SharedStateContext`)
@@ -270,18 +269,15 @@ export const useSharedState = () => {
       }
     }
 
-    if (infoInterval) return
-
     infoInterval = setInterval(handle, interval * 1000)
-    setIntervalNumber(infoInterval)
   }
 
-  const stopTrackingInfo = useCallback(() => {
-    if (!intervalNumber) return
+  const stopTrackingInfo =() => {
+    if (!infoInterval) return
 
-    clearInterval(intervalNumber)
-    setIntervalNumber(null)
-  }, [intervalNumber])
+    clearInterval(infoInterval)
+    infoInterval = null
+  }
 
   const stopTrackingProducerSchedule = () => {
     if (!scheduleInterval) return

@@ -59,6 +59,10 @@ export default (theme) => ({
     '& .MuiFormControl-root': {
       width: 200,
     },
+    '& .MuiInputLabel-formControl': {
+      position: 'relative',
+      marginBottom: `-${theme.spacing(2)}`,
+    },
     [theme.breakpoints.up('lg')]: {
       width: 300,
     },

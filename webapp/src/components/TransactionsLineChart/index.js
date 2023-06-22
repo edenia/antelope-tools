@@ -3,7 +3,7 @@ import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 
-const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
+const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps, zoomEnabled }) => {
   const options = {
     time: {
       timezoneOffset: new Date().getTimezoneOffset(),
@@ -14,12 +14,16 @@ const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps }) => {
     chart: {
       animation: false,
       type: 'spline',
+      zoomType: zoomEnabled ? 'x' : ''
     },
     credits: {
       enabled: false,
     },
     xAxis: xAxisProps,
     yAxis: yAxisProps,
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.y}</b><br/>Net usage:<b>{point.net}</b><br/>CPU usage:<b>{point.cpu}</b>',
+    },
   }
 
   return (
@@ -40,6 +44,7 @@ TransactionsLineChart.propTypes = {
   xAxisProps: PropTypes.object,
   yAxisProps: PropTypes.object,
   title: PropTypes.string,
+  zoomEnabled: PropTypes.bool,
 }
 
 TransactionsLineChart.defaultProps = {
@@ -47,6 +52,7 @@ TransactionsLineChart.defaultProps = {
   xAxisProps: { xAxisVisible: false },
   yAxisProps: {},
   title: '',
+  zoomEnabled: false,
 }
 
 export default TransactionsLineChart

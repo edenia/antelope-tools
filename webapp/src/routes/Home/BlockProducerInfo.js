@@ -3,7 +3,6 @@ import React, { lazy, useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 
-import eosApi from '../../utils/eosapi'
 import { formatWithThousandSeparator } from '../../utils'
 import { PRODUCERS_QUERY, PRODUCERS_SUMMARY_QUERY } from '../../gql'
 import { useSharedState } from '../../context/state.context'
@@ -26,31 +25,9 @@ const BlockProducerInfo = ({ t, classes }) => {
   const { data: producersSummary, loading: producersLoading } = useQuery(
     PRODUCERS_SUMMARY_QUERY,
   )
-  const [{ schedule: scheduleInfo, info, tps }] = useSharedState()
+  const [{ schedule: scheduleInfo, info }] = useSharedState()
   const [total, setTotal] = useState(0)
   const [schedule, setSchedule] = useState({ producers: [] })
-  const [globalConfig, setGlobalConfig] = useState()
-
-  useEffect(() => {
-    const getTable = async () => {
-      try {
-        const { rows } = await eosApi.getTableRows({
-          code: 'eosio',
-          scope: 'eosio',
-          table: 'global',
-          json: true,
-          lower_bound: null,
-        })
-
-        setGlobalConfig({
-          maxBlockCPU: rows[0]?.max_block_cpu_usage,
-          maxBlockNET: rows[0]?.max_block_net_usage,
-        })
-      } catch (error) {}
-    }
-
-    getTable()
-  }, [])
 
   useEffect(() => {
     const newProducers = scheduleInfo.producers.map((item) => {
@@ -188,98 +165,6 @@ const BlockProducerInfo = ({ t, classes }) => {
             </>
           }
         />
-        {globalConfig && (
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('cpuUsage')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {`${formatWithThousandSeparator(
-                    (tps[0]?.cpu / globalConfig.maxBlockCPU) * 100 || 0,
-                    2,
-                  )} %`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-        {globalConfig && (
-          <div className={classes.cardGrow}>
-            <Card className={classes.cardShadow}>
-              <CardContent className={classes.cards}>
-                <Typography>{t('netUsage')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {`${formatWithThousandSeparator(
-                    (tps[0]?.net / globalConfig.maxBlockNET) * 100 || 0,
-                    2,
-                  )} %`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('cpuLimitPerBlock')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('netLimitPerBlock')}</Typography>
-              <Typography component="p" variant="h6">
-                {`${formatWithThousandSeparator(
-                  info.block_net_limit / 1024,
-                  0,
-                )} KB`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('chainCpuLimit')}</Typography>
-              <Typography
-                component="p"
-                variant="h6"
-                className={classes.lowercase}
-              >
-                {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{t('chainNetLimit')}</Typography>
-              <Typography component="p" variant="h6">
-                {`${formatWithThousandSeparator(
-                  info.virtual_block_net_limit / 1024,
-                  0,
-                )} KB`}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
         <div className={classes.cardGrow}>
           <Card className={classes.cardShadow}>
             <CardContent className={classes.cards}>

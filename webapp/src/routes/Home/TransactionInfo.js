@@ -72,7 +72,7 @@ const TransactionInfo = ({
     for (let index = 0; index < tps.length; index++) {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
-        cpu: tpb[index].cpu,
+        cpu: tps[index].cpu,
         net: tps[index].net,
         y: tps[index].transactions,
         x: index,
@@ -205,6 +205,7 @@ const TransactionInfo = ({
         </div>
         {loading && <LinearProgress color="primary" />}
         <TransactionsLineChart
+          zoomEnabled={option !== options[0]}
           yAxisProps={{
             reversed: false,
             title: {

@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
+import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -8,9 +9,15 @@ import LinearProgress from '@mui/material/LinearProgress'
 import LaunchIcon from '@mui/icons-material/Launch'
 import { useSubscription } from '@apollo/client'
 
+import eosApi from '../../utils/eosapi'
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import { useSharedState } from '../../context/state.context'
 import { formatWithThousandSeparator, getBlockNumUrl } from '../../utils'
 import { generalConfig } from '../../config'
+
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const BodyGraphValue = ({ loading, value, classes, href }) => {
   if (loading) return <LinearProgress />
@@ -40,12 +47,36 @@ BodyGraphValue.defaultProps = {
   classes: {},
 }
 
-const TransactionsHistory = ({ t, classes, nodesChildren }) => {
+const TransactionsHistory = ({ t, nodesChildren }) => {
+  const classes = useStyles()
+  const [{ info, tps }] = useSharedState()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [
     blockWithHighestTransactionsCount,
     setBlockWithHighestTransactionsCount,
   ] = useState({})
+  const [globalConfig, setGlobalConfig] = useState()
+
+  useEffect(() => {
+    const getTable = async () => {
+      try {
+        const { rows } = await eosApi.getTableRows({
+          code: 'eosio',
+          scope: 'eosio',
+          table: 'global',
+          json: true,
+          lower_bound: null,
+        })
+
+        setGlobalConfig({
+          maxBlockCPU: rows[0]?.max_block_cpu_usage,
+          maxBlockNET: rows[0]?.max_block_net_usage,
+        })
+      } catch (error) {}
+    }
+
+    getTable()
+  }, [])
 
   useEffect(() => {
     if (!data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
@@ -163,15 +194,111 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
           </CardContent>
         </Card>
       </div>
-      {nodesChildren && nodesChildren}
+      {globalConfig && (
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('cpuUsage')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${formatWithThousandSeparator(
+                  (tps[0]?.cpu / globalConfig.maxBlockCPU) * 100 || 0,
+                  2,
+                )} %`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+      {globalConfig && (
+        <div className={classes.cardGrow}>
+          <Card className={classes.cardShadow}>
+            <CardContent className={classes.cards}>
+              <Typography>{t('netUsage')}</Typography>
+              <Typography
+                component="p"
+                variant="h6"
+                className={classes.lowercase}
+              >
+                {`${formatWithThousandSeparator(
+                  (tps[0]?.net / globalConfig.maxBlockNET) * 100 || 0,
+                  2,
+                )} %`}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+      {nodesChildren && (
+        <>
+          {nodesChildren}
+          <div className={classes.cardGrow}>
+            <Card className={classes.cardShadow}>
+              <CardContent className={classes.cards}>
+                <Typography>{`${t('uniqueLocations')}`}</Typography>
+                <BodyGraphValue
+                  value={data?.stats?.[0]?.unique_locations?.count || 0}
+                  loading={loading}
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </>
+      )}
       <div className={classes.cardGrow}>
         <Card className={classes.cardShadow}>
           <CardContent className={classes.cards}>
-            <Typography>{`${t('uniqueLocations')}`}</Typography>
-            <BodyGraphValue
-              value={data?.stats?.[0]?.unique_locations?.count || 0}
-              loading={loading}
-            />
+            <Typography>{t('cpuLimitPerBlock')}</Typography>
+            <Typography
+              component="p"
+              variant="h6"
+              className={classes.lowercase}
+            >
+              {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <div className={classes.cardGrow}>
+        <Card className={classes.cardShadow}>
+          <CardContent className={classes.cards}>
+            <Typography>{t('netLimitPerBlock')}</Typography>
+            <Typography component="p" variant="h6">
+              {`${formatWithThousandSeparator(
+                info.block_net_limit / 1024,
+                0,
+              )} KB`}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <div className={classes.cardGrow}>
+        <Card className={classes.cardShadow}>
+          <CardContent className={classes.cards}>
+            <Typography>{t('chainCpuLimit')}</Typography>
+            <Typography
+              component="p"
+              variant="h6"
+              className={classes.lowercase}
+            >
+              {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <div className={classes.cardGrow}>
+        <Card className={classes.cardShadow}>
+          <CardContent className={classes.cards}>
+            <Typography>{t('chainNetLimit')}</Typography>
+            <Typography component="p" variant="h6">
+              {`${formatWithThousandSeparator(
+                info.virtual_block_net_limit / 1024,
+                0,
+              )} KB`}
+            </Typography>
           </CardContent>
         </Card>
       </div>
@@ -181,13 +308,11 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
 
 TransactionsHistory.propTypes = {
   t: PropTypes.func,
-  classes: PropTypes.object,
   nodesChildren: PropTypes.node,
 }
 
 TransactionsHistory.defaultProps = {
   t: (text) => text,
-  classes: {},
 }
 
 export default memo(TransactionsHistory)
