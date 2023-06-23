@@ -1,16 +1,21 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
+import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import LaunchIcon from '@mui/icons-material/Launch'
 import { useSubscription } from '@apollo/client'
 
 import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
+import { useSharedState } from '../../context/state.context'
 import { formatWithThousandSeparator, getBlockNumUrl } from '../../utils'
 import { generalConfig } from '../../config'
+import SimpleDataCard from '../SimpleDataCard'
+
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const BodyGraphValue = ({ loading, value, classes, href }) => {
   if (loading) return <LinearProgress />
@@ -40,7 +45,9 @@ BodyGraphValue.defaultProps = {
   classes: {},
 }
 
-const TransactionsHistory = ({ t, classes, nodesChildren }) => {
+const TransactionsHistory = ({ t, nodesChildren }) => {
+  const classes = useStyles()
+  const [{ info, tps }] = useSharedState()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [
     blockWithHighestTransactionsCount,
@@ -59,29 +66,11 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
     setBlockWithHighestTransactionsCount(blockWithHighestTransactionsCount)
   }, [data])
 
-  if (!generalConfig.historyEnabled)
-    return (
-      <>
-        {nodesChildren && nodesChildren}
-        <div className={classes.cardGrow}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{`${t('uniqueLocations')}`}</Typography>
-              <BodyGraphValue
-                value={data?.stats?.[0]?.unique_locations?.count || 0}
-                loading={loading}
-              />
-            </CardContent>
-          </Card>
-        </div>
-      </>
-    )
-
   return (
     <div className={classes.wrapper}>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+      {generalConfig.historyEnabled && (
+        <>
+          <SimpleDataCard>
             <Typography>{t('tpsAllTimeHigh')}</Typography>
             <BodyGraphValue
               value={data?.stats[0]?.tps_all_time_high?.transactions_count}
@@ -89,12 +78,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               classes={classes}
               href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
             />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+          <SimpleDataCard>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
               value={`${formatWithThousandSeparator(
@@ -105,12 +90,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+          <SimpleDataCard>
             <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -118,12 +99,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               )}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+          <SimpleDataCard>
             <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -131,12 +108,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               )}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+          <SimpleDataCard>
             <Typography>{`${t('transactions')} ${t(
               'dailyAverage',
             )}`}</Typography>
@@ -147,12 +120,8 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               )}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+          <SimpleDataCard>
             <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
             <BodyGraphValue
               value={formatWithThousandSeparator(
@@ -160,34 +129,73 @@ const TransactionsHistory = ({ t, classes, nodesChildren }) => {
               )}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
-      {nodesChildren && nodesChildren}
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
+          </SimpleDataCard>
+        </>
+      )}
+      {nodesChildren && (
+        <>
+          {nodesChildren}
+          <SimpleDataCard>
             <Typography>{`${t('uniqueLocations')}`}</Typography>
             <BodyGraphValue
               value={data?.stats?.[0]?.unique_locations?.count || 0}
               loading={loading}
             />
-          </CardContent>
-        </Card>
-      </div>
+          </SimpleDataCard>
+        </>
+      )}
+      <SimpleDataCard>
+        <Typography>{t('cpuUsage')}</Typography>
+        <Typography component="p" variant="h6" className={classes.lowercase}>
+          {`${formatWithThousandSeparator(tps[0]?.cpu, 2)} %`}
+        </Typography>
+      </SimpleDataCard>
+
+      <SimpleDataCard>
+        <Typography>{t('netUsage')}</Typography>
+        <Typography component="p" variant="h6" className={classes.lowercase}>
+          {`${formatWithThousandSeparator(tps[0]?.net, 3)} %`}
+        </Typography>
+      </SimpleDataCard>
+
+      <SimpleDataCard>
+        <Typography>{t('cpuLimitPerBlock')}</Typography>
+        <Typography component="p" variant="h6" className={classes.lowercase}>
+          {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
+        </Typography>
+      </SimpleDataCard>
+      <SimpleDataCard>
+        <Typography>{t('netLimitPerBlock')}</Typography>
+        <Typography component="p" variant="h6">
+          {`${formatWithThousandSeparator(info.block_net_limit / 1024, 0)} KB`}
+        </Typography>
+      </SimpleDataCard>
+      <SimpleDataCard>
+        <Typography>{t('chainCpuLimit')}</Typography>
+        <Typography component="p" variant="h6" className={classes.lowercase}>
+          {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
+        </Typography>
+      </SimpleDataCard>
+      <SimpleDataCard>
+        <Typography>{t('chainNetLimit')}</Typography>
+        <Typography component="p" variant="h6">
+          {`${formatWithThousandSeparator(
+            info.virtual_block_net_limit / 1024,
+            0,
+          )} KB`}
+        </Typography>
+      </SimpleDataCard>
     </div>
   )
 }
 
 TransactionsHistory.propTypes = {
   t: PropTypes.func,
-  classes: PropTypes.object,
   nodesChildren: PropTypes.node,
 }
 
 TransactionsHistory.defaultProps = {
   t: (text) => text,
-  classes: {},
 }
 
 export default memo(TransactionsHistory)
