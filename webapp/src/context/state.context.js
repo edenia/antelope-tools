@@ -43,7 +43,8 @@ const sharedStateReducer = (state, action) => {
     }
 
     case 'pushTPB': {
-      if (state.tpb[0].blocks[0] === action.payload.blocks[0]) return { ...state }
+      if (state.tpb[0].blocks[0] === action.payload.blocks[0])
+        return { ...state }
 
       const tpb = JSON.parse(JSON.stringify(state.tpb))
 
@@ -158,6 +159,7 @@ export const useSharedState = () => {
   const waitTrackingInterval = 30000
   let infoInterval
   let scheduleInterval
+  let global
 
   const update = (payload) => dispatch({ type: 'update', payload })
   const login = (type) => {
@@ -180,11 +182,36 @@ export const useSharedState = () => {
     })
   }
 
-  const getUsage = block => {
+  const getGlobalConfig = async () => {
+    if (!global) {
+      try {
+        const { rows } = await eosApi.getTableRows({
+          code: 'eosio',
+          scope: 'eosio',
+          table: 'global',
+          json: true,
+          lower_bound: null,
+        })
+
+        global = {
+          maxBlockCPU: rows[0]?.max_block_cpu_usage,
+          maxBlockNET: rows[0]?.max_block_net_usage,
+        }
+      } catch (error) {}
+    }
+
+    return global
+  }
+
+  const getUsage = async block => {
+    const globalConfig = await getGlobalConfig()
+
     return block?.transactions?.reduce(
       (total, current) => {
-        total.cpu += current.cpu_usage_us
-        total.net += current.net_usage_words
+        total.cpu +=
+          (current.cpu_usage_us / globalConfig.maxBlockCPU) * 100 || 0
+        total.net +=
+          (current.net_usage_words / globalConfig.maxBlockNET) * 100 || 0
         return total
       },
       { net: 0, cpu: 0 },
@@ -192,31 +219,30 @@ export const useSharedState = () => {
   }
 
   const getBlock = useCallback(
-    async (block) => {
+    async blockNum => {
       try {
-        const data = await eosApi.getBlock(block)
+        const block = await eosApi.getBlock(blockNum)
+        const blockUsage = await getUsage(block)
+        const payload = {
+          blocks: [blockNum],
+          transactions: block.transactions.length,
+          ...blockUsage,
+        }
 
         dispatch({
           type: 'pushTPB',
-          payload: {
-            blocks: [block],
-            transactions: data.transactions.length,
-            ...getUsage(data),
-          },
+          payload,
         })
 
         dispatch({
           type: 'pushTPS',
-          payload: {
-            blocks: [block],
-            transactions: data.transactions.length,
-            ...getUsage(data),
-          },
+          payload,
         })
       } catch (error) {
         console.error(error?.message || error)
       }
     },
+    // eslint-disable-next-line
     [dispatch],
   )
 
@@ -272,7 +298,7 @@ export const useSharedState = () => {
     infoInterval = setInterval(handle, interval * 1000)
   }
 
-  const stopTrackingInfo =() => {
+  const stopTrackingInfo = () => {
     if (!infoInterval) return
 
     clearInterval(infoInterval)

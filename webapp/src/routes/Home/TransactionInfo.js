@@ -16,7 +16,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import { TRANSACTION_QUERY } from '../../gql'
-import { rangeOptions } from '../../utils'
+import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { useSharedState } from '../../context/state.context'
 import { generalConfig } from '../../config'
@@ -62,8 +62,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tpb.length; index++) {
       trxPerBlock.push({
         name: `Block: ${tpb[index].blocks.join()}`,
-        cpu: tpb[index].cpu,
-        net: tpb[index].net,
+        cpu: formatWithThousandSeparator(tpb[index].cpu,2),
+        net: formatWithThousandSeparator(tpb[index].net,3),
         y: tpb[index].transactions,
         x: index > 0 ? index / 2 : index,
       })
@@ -72,8 +72,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tps.length; index++) {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
-        cpu: tps[index].cpu,
-        net: tps[index].net,
+        cpu: formatWithThousandSeparator(tps[index].cpu,2),
+        net: formatWithThousandSeparator(tps[index].net,3),
         y: tps[index].transactions,
         x: index,
       })

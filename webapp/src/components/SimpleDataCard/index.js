@@ -8,11 +8,11 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const SimpleDataCard = ({ key, header, children }) => {
+const SimpleDataCard = ({ header, children }) => {
   const classes = useStyles()
 
   return (
-    <div className={header ? classes.cardHeader : classes.cardGrow} key={key}>
+    <div className={header ? classes.cardHeader : classes.cardGrow} >
       <Card className={classes.cardShadow}>
         <CardContent className={classes.cards}>{children}</CardContent>
       </Card>
@@ -21,13 +21,11 @@ const SimpleDataCard = ({ key, header, children }) => {
 }
 
 SimpleDataCard.propTypes = {
-  key: PropTypes.string,
   header: PropTypes.bool,
   children: PropTypes.node,
 }
 
 SimpleDataCard.defaultProps = {
-  key: '',
   header: false,
 }
 

@@ -22,7 +22,7 @@ const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps, zoomEnable
     xAxis: xAxisProps,
     yAxis: yAxisProps,
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.y}</b><br/>Net usage:<b>{point.net}</b><br/>CPU usage:<b>{point.cpu}</b>',
+      pointFormat: '{series.name}: <b>{point.y}</b><br/>Net usage:<b>{point.net} %</b><br/>CPU usage:<b>{point.cpu} %</b>',
     },
   }
 
