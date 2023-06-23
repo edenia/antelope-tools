@@ -59,6 +59,10 @@ export default (theme) => ({
     '& .MuiFormControl-root': {
       width: 200,
     },
+    '& .MuiInputLabel-formControl': {
+      position: 'relative',
+      marginBottom: `-${theme.spacing(2)}`,
+    },
     [theme.breakpoints.up('lg')]: {
       width: 300,
     },
@@ -77,10 +81,6 @@ export default (theme) => ({
     fontSize: 15,
     marginBottom: 2,
   },
-  svgLink: {
-    fontSize: 18,
-    marginLeft: theme.spacing(2),
-  },
   lowercase: {
     textTransform: 'lowercase !important',
   },
@@ -96,27 +96,6 @@ export default (theme) => ({
       display: 'block',
     },
   },
-  cardHeader: {
-    flexGrow: '1',
-    flexBasis: 'calc(100%/5)',
-    [theme.breakpoints.down('md')]: {
-      marginBottom: '10px',
-    },
-    '& .MuiPaper-root': {
-      height: '100%',
-    },
-  },
-  cardGrow: {
-    flexGrow: '1',
-    flexBasis: 'calc(100%/5)',
-    [theme.breakpoints.down('md')]: {
-      flexBasis: 'calc(100%/3)',
-      marginBottom: '10px',
-    },
-    '& .MuiPaper-root': {
-      height: '100%',
-    },
-  },
   uniquelocations: {
     flexGrow: '1 !important',
   },
@@ -125,14 +104,6 @@ export default (theme) => ({
     [theme.breakpoints.down('md')]: {
       width: '100%',
       marginBottom: '10px',
-    },
-  },
-  wrapper: {
-    display: 'flex',
-    gap: '10px',
-    flexWrap: 'wrap',
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
     },
   },
 })

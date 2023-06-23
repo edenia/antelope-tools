@@ -1,13 +1,12 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import { ENTITY_TYPE } from '../../utils/lacchain'
 import { eosConfig } from '../../config'
+import SimpleDataCard from '../SimpleDataCard'
 
 const BodyGraphValue = ({ loading, value }) => {
   if (loading) return <LinearProgress />
@@ -21,15 +20,15 @@ const BodyGraphValue = ({ loading, value }) => {
 
 BodyGraphValue.propTypes = {
   loading: PropTypes.bool,
-  value: PropTypes.number
+  value: PropTypes.number,
 }
 
 BodyGraphValue.defaultProps = {
   value: 0,
-  loading: false
+  loading: false,
 }
 
-const ProducersSummary = ({ t, classes, data, loading, total }) => {
+const ProducersSummary = ({ t, data, loading, total }) => {
   const [nodes, setNodes] = useState([])
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
 
       producers.push({
         ...producer,
-        type: ENTITY_TYPE[producer.type] || 'N/A'
+        type: ENTITY_TYPE[producer.type] || 'N/A',
       })
     }
 
@@ -55,27 +54,16 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
 
   return (
     <>
-      <div className={classes.cardGrow}>
-        <Card className={classes.cardShadow}>
-          <CardContent className={classes.cards}>
-            <Typography>{`${t('total')} ${t('producers')}`}</Typography>
-            <BodyGraphValue value={total} loading={loading} />
-          </CardContent>
-        </Card>
-      </div>
+      <SimpleDataCard>
+        <Typography>{`${t('total')} ${t('producers')}`}</Typography>
+        <BodyGraphValue value={total} loading={loading} />
+      </SimpleDataCard>
 
       {nodes.map((node, index) => (
-        <div className={classes.cardGrow} key={index}>
-          <Card className={classes.cardShadow}>
-            <CardContent className={classes.cards}>
-              <Typography>{`${t(node.type)} ${t('producers')}`}</Typography>
-              <BodyGraphValue
-                value={node.entities_count || 0}
-                loading={loading}
-              />
-            </CardContent>
-          </Card>
-        </div>
+        <SimpleDataCard key={index}>
+          <Typography>{`${t(node.type)} ${t('producers')}`}</Typography>
+          <BodyGraphValue value={node.entities_count || 0} loading={loading} />
+        </SimpleDataCard>
       ))}
     </>
   )
@@ -83,18 +71,16 @@ const ProducersSummary = ({ t, classes, data, loading, total }) => {
 
 ProducersSummary.propTypes = {
   t: PropTypes.func,
-  classes: PropTypes.object,
   data: PropTypes.object,
   loading: PropTypes.bool,
-  total: PropTypes.number
+  total: PropTypes.number,
 }
 
 ProducersSummary.defaultProps = {
   t: (text) => text,
-  classes: {},
   data: {},
   loading: false,
-  total: 0
+  total: 0,
 }
 
 export default memo(ProducersSummary)

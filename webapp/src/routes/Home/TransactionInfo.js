@@ -16,9 +16,10 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import { TRANSACTION_QUERY } from '../../gql'
-import { rangeOptions } from '../../utils'
+import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { useSharedState } from '../../context/state.context'
+import { generalConfig } from '../../config'
 
 import EqualIcon from './EqualIcon'
 import styles from './styles'
@@ -31,7 +32,6 @@ const TransactionInfo = ({
   t,
   startTrackingInfo,
   stopTrackingInfo,
-  historyEnabled,
 }) => {
   const classes = useStyles()
   const theme = useTheme()
@@ -62,8 +62,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tpb.length; index++) {
       trxPerBlock.push({
         name: `Block: ${tpb[index].blocks.join()}`,
-        cpu: tpb[index].cpu,
-        net: tpb[index].net,
+        cpu: formatWithThousandSeparator(tpb[index].cpu,2),
+        net: formatWithThousandSeparator(tpb[index].net,3),
         y: tpb[index].transactions,
         x: index > 0 ? index / 2 : index,
       })
@@ -72,8 +72,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tps.length; index++) {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
-        cpu: tpb[index].cpu,
-        net: tps[index].net,
+        cpu: formatWithThousandSeparator(tps[index].cpu,2),
+        net: formatWithThousandSeparator(tps[index].net,3),
         y: tps[index].transactions,
         x: index,
       })
@@ -153,7 +153,7 @@ const TransactionInfo = ({
           </Typography>
           <div className={classes.formControl}>
             <FormControl>
-              {historyEnabled && (
+              {generalConfig.historyEnabled && (
                 <>
                   <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
                   <Select
@@ -205,6 +205,7 @@ const TransactionInfo = ({
         </div>
         {loading && <LinearProgress color="primary" />}
         <TransactionsLineChart
+          zoomEnabled={option !== options[0]}
           yAxisProps={{
             reversed: false,
             title: {
@@ -236,13 +237,11 @@ TransactionInfo.propTypes = {
   t: PropTypes.any,
   startTrackingInfo: PropTypes.func,
   stopTrackingInfo: PropTypes.func,
-  historyEnabled: PropTypes.bool,
 }
 
 TransactionInfo.defaultProps = {
   startTrackingInfo: () => {},
   stopTrackingInfo: () => {},
-  historyEnabled: false,
 }
 
 export default TransactionInfo
