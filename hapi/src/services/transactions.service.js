@@ -13,7 +13,7 @@ const getTransactions = async (range = '3 Hours') => {
 
     SELECT
       interval.value as datetime,
-      sum(block_history.transactions_length)::integer as transactions_count
+      avg(block_history.transactions_length)::integer as transactions_count
     FROM
       interval
     LEFT JOIN 
