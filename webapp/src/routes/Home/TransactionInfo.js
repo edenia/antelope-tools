@@ -28,11 +28,7 @@ const useStyles = makeStyles(styles)
 
 const options = ['Live (30s)', ...rangeOptions]
 
-const TransactionInfo = ({
-  t,
-  startTrackingInfo,
-  stopTrackingInfo,
-}) => {
+const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
   const classes = useStyles()
   const theme = useTheme()
   const [{ tps, tpb }] = useSharedState()
@@ -62,8 +58,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tpb.length; index++) {
       trxPerBlock.push({
         name: `Block: ${tpb[index].blocks.join()}`,
-        cpu: formatWithThousandSeparator(tpb[index].cpu,2),
-        net: formatWithThousandSeparator(tpb[index].net,3),
+        cpu: formatWithThousandSeparator(tpb[index].cpu, 2),
+        net: formatWithThousandSeparator(tpb[index].net, 3),
         y: tpb[index].transactions,
         x: index > 0 ? index / 2 : index,
       })
@@ -72,8 +68,8 @@ const TransactionInfo = ({
     for (let index = 0; index < tps.length; index++) {
       trxPerSecond.push({
         name: `Blocks: ${tps[index].blocks.join(', ')}`,
-        cpu: formatWithThousandSeparator(tps[index].cpu,2),
-        net: formatWithThousandSeparator(tps[index].net,3),
+        cpu: formatWithThousandSeparator(tps[index].cpu, 2),
+        net: formatWithThousandSeparator(tps[index].net, 3),
         y: tps[index].transactions,
         x: index,
       })
@@ -120,18 +116,35 @@ const TransactionInfo = ({
       return
     }
 
-    const intervalGraphicData = data.transactions.map((transactionHistory) => {
-      return [
-        new Date(transactionHistory.datetime).getTime(),
-        transactionHistory.transactions_count || 0,
-      ]
-    })
+    const { trxPerBlock, trxPerSecond } = data.transactions.reduce(
+      (history, transactionHistory) => {
+        history.trxPerBlock.push([
+          new Date(transactionHistory.datetime).getTime(),
+          transactionHistory.transactions_count || 0,
+        ])
+
+        history.trxPerSecond.push([
+          new Date(transactionHistory.datetime).getTime(),
+          transactionHistory.transactions_count * 2 || 0,
+        ])
+
+        return history
+      },
+      { trxPerBlock: [], trxPerSecond: [] },
+    )
+
+    console.log(trxPerSecond)
 
     setGraphicData([
       {
+        name: t('transactionsPerSecond'),
+        color: theme.palette.secondary.main,
+        data: trxPerSecond,
+      },
+      {
         name: t('transactionsPerBlock'),
         color: '#00C853',
-        data: intervalGraphicData,
+        data: trxPerBlock,
       },
     ])
     // eslint-disable-next-line
