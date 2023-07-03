@@ -1,17 +1,16 @@
 table:
-  schema: public
   name: block_history
+  schema: public
 select_permissions:
   - role: guest
     permission:
       columns:
-        - id
-        - block_id
         - block_num
-        - transactions_length
         - timestamp
-        - created_at
-        - updated_at
+        - transactions_length
         - producer
+        - cpu_usage
+        - net_usage
         - schedule_version
+        - created_at
       filter: {}
