@@ -118,22 +118,22 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
 
     const { trxPerBlock, trxPerSecond } = data.transactions.reduce(
       (history, transactionHistory) => {
-        history.trxPerBlock.push([
-          new Date(transactionHistory.datetime).getTime(),
-          transactionHistory.transactions_count || 0,
-        ])
+        history.trxPerBlock.push({
+          cpu: transactionHistory.cpu || 0,
+          net: transactionHistory.net || 0,
+          y: transactionHistory.transactions_count || 0,
+          x: new Date(transactionHistory.datetime).getTime(),
+        })
 
-        history.trxPerSecond.push([
-          new Date(transactionHistory.datetime).getTime(),
-          transactionHistory.transactions_count * 2 || 0,
-        ])
+        history.trxPerSecond.push({
+          y: transactionHistory.transactions_count * 2 || 0,
+          x: new Date(transactionHistory.datetime).getTime(),
+        })
 
         return history
       },
       { trxPerBlock: [], trxPerSecond: [] },
     )
-
-    console.log(trxPerSecond)
 
     setGraphicData([
       {
