@@ -8,11 +8,3 @@ export const TRANSACTION_QUERY = gql`
     }
   }
 `
-
-export const TRANSACTION_HISTORY_QUERY = gql`
-  query getTrxHistoryStats {
-    trxHistory: stat(limit: 1) {
-      transaction_history
-    }
-  }
-`
