@@ -4,7 +4,7 @@ const { Serialize } = require('eosjs')
 
 const statsService = require('./stats.service')
 const { eosConfig } = require('../config')
-const { hasuraUtil, sleepFor } = require('../utils')
+const { hasuraUtil, sleepFor, eosUtil } = require('../utils')
 
 let types
 let ws
@@ -13,7 +13,6 @@ const getLastBlockNumInDatabase = async () => {
   const query = `
     query {
       blocks: block_history(limit: 1, order_by: {block_num: desc}, where: {producer: {_neq: "NULL"}}) {
-        id
         block_num
       }
     }
@@ -23,18 +22,16 @@ const getLastBlockNumInDatabase = async () => {
   return data?.blocks?.length > 0 ? data.blocks[0].block_num : 0
 }
 
-const saveBlockHistory = async payload => {
-  const mutation = `
-    mutation ($payload: block_history_insert_input!) {
-      block: insert_block_history_one(object: $payload, on_conflict: {constraint: block_history_block_num_key, update_columns: [producer,schedule_version,block_id,timestamp,transactions_length]}) {
-        id
+const saveBlocks = async blocks => {
+  const upsertMutation = `
+    mutation ($blocks: [block_history_insert_input!]!) {
+      insert_block_history(objects: $blocks, on_conflict: {constraint: block_history_pkey, update_columns: [block_num,producer,schedule_version,timestamp,transactions_length,cpu_usage,net_usage]}) {
+        affected_rows,
       }
-    }  
+    }
   `
 
-  const data = await hasuraUtil.request(mutation, { payload })
-
-  return data.block
+  await hasuraUtil.request(upsertMutation, { blocks })
 }
 
 const deserialize = (type, array) => {
@@ -84,7 +81,7 @@ const requestBlocks = (requestArgs = {}) => {
       {
         start_block_num: 0,
         end_block_num: 4294967295,
-        max_messages_in_flight: 1000,
+        max_messages_in_flight: 1,
         have_positions: [],
         fetch_block: true,
         irreversible_only: false,
@@ -96,7 +93,9 @@ const requestBlocks = (requestArgs = {}) => {
   )
 }
 
-const handleBlocksResult = async data => {
+let blocksData = []
+
+const handleBlocksResult = async (data) => {
   try {
     if (!data.block || !data.block.length) {
       send(
@@ -114,14 +113,30 @@ const handleBlocksResult = async data => {
       prev_block: data.prev_block
     }
 
-    await saveBlockHistory({
+    const usage = block?.transactions?.reduce(
+      (total, current) => {
+        total.cpu_usage +=
+          (current.cpu_usage_us / eosConfig.maxBlockCpuUsage) * 100 || 0
+        total.net_usage +=
+          (current.net_usage_words / eosConfig.maxBlockNetUsage) * 100 || 0
+        return total
+      },
+      { net_usage: 0, cpu_usage: 0 }
+    )
+
+    blocksData.push({
       producer: block.producer,
       schedule_version: block.schedule_version,
-      block_id: block.this_block.block_id,
       block_num: block.this_block.block_num,
       transactions_length: block.transactions.length,
-      timestamp: block.timestamp
+      timestamp: block.timestamp,
+      ...usage
     })
+
+    if (blocksData.length === 50) {
+      await saveBlocks(blocksData)
+      blocksData = []
+    }
 
     await statsService.udpateStats({ last_block_at: block.timestamp })
     send(
@@ -149,12 +164,31 @@ const cleanOldBlocks = async () => {
   await hasuraUtil.request(mutation, { date })
 }
 
+const getStartBlockNum = async () => {
+  let startBlockNum = await getLastBlockNumInDatabase()
+
+  if (startBlockNum === 0) {
+    const info = await eosUtil.getInfo()
+    const LIB = info?.last_irreversible_block_num
+    const days = eosConfig.keepBlockHistoryForDays
+    const date = new Date()
+
+    date.setSeconds(date.getSeconds() - 60 * 60 * 24 * days)
+
+    const estimatedBlockNum = Math.ceil(LIB - ((new Date() - date) / 1000) * 2)
+
+    return estimatedBlockNum > 0 ? estimatedBlockNum : 0
+  }
+
+  return startBlockNum
+}
+
 const init = async () => {
   if (!eosConfig.stateHistoryPluginEndpoint) {
     return
   }
 
-  const startBlockNum = await getLastBlockNumInDatabase()
+  const startBlockNum = await getStartBlockNum()
 
   ws = new WebSocket(eosConfig.stateHistoryPluginEndpoint, {
     perMessageDeflate: false,
@@ -191,6 +225,11 @@ const init = async () => {
   })
 
   ws.on('error', error => console.error(error))
+
+  ws.on('close', async () => {
+    await sleepFor(60)
+    init()
+  })
 }
 
 module.exports = {
