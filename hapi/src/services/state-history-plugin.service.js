@@ -22,7 +22,7 @@ const getLastBlockNumInDatabase = async () => {
   return data?.blocks?.length > 0 ? data.blocks[0].block_num : 0
 }
 
-const saveBlocks = async blocks => {
+const saveBlocks = async (blocks) => {
   const upsertMutation = `
     mutation ($blocks: [block_history_insert_input!]!) {
       insert_block_history(objects: $blocks, on_conflict: {constraint: block_history_pkey, update_columns: [block_num,producer,schedule_version,timestamp,transactions_length,cpu_usage,net_usage]}) {
@@ -63,7 +63,7 @@ const serialize = (type, value) => {
   return buffer.asUint8Array()
 }
 
-const send = async message => {
+const send = async (message) => {
   if (ws.readyState === 1) {
     return ws.send(message)
   }
@@ -163,7 +163,7 @@ const cleanOldBlocks = async () => {
 }
 
 const getStartBlockNum = async () => {
-  let startBlockNum = await getLastBlockNumInDatabase()
+  const startBlockNum = await getLastBlockNumInDatabase()
 
   if (startBlockNum === 0) {
     const info = await eosUtil.getInfo()
@@ -197,7 +197,7 @@ const init = async () => {
     console.log('🚀 Connected to state_history_plugin socket')
   })
 
-  ws.on('message', data => {
+  ws.on('message', (data) => {
     if (!types) {
       const abi = JSON.parse(data)
       types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
@@ -218,7 +218,7 @@ const init = async () => {
     }
   })
 
-  ws.on('error', error => console.error('STATE HISTORY PLUGIN',error))
+  ws.on('error', (error) => console.error('STATE HISTORY PLUGIN', error))
 
   ws.on('close', async () => {
     await sleepFor(60)
