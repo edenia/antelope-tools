@@ -3,7 +3,6 @@ const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
 const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
-const transactionService = require('./transactions.service')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
@@ -152,7 +151,6 @@ const getStats = async () => {
         last_block_at
         tps_all_time_high
         missed_blocks
-        transaction_history
         updated_at
         created_at
       }
@@ -161,38 +159,6 @@ const getStats = async () => {
   const data = await hasuraUtil.request(query)
 
   return data.stat
-}
-
-const formatTransactionHistory = async () => {
-  let txrHistory = {}
-  const intervals = [
-    '3 Hours',
-    '6 Hours',
-    '12 Hours',
-    '1 Day',
-    '4 Days',
-    '7 Days',
-    '14 Days',
-    '1 Month',
-    '2 Months',
-    '3 Months',
-    '6 Months',
-    '1 Year'
-  ]
-
-  const stats = await getStats()
-
-  if (!stats) return
-
-  for (const interval of intervals) {
-    const data = await transactionService.getTransactions(interval)
-
-    txrHistory = { ...txrHistory, [interval]: data }
-  }
-
-  await udpateStats({
-    transaction_history: txrHistory
-  })
 }
 
 const getCurrentMissedBlock = async () => {
@@ -386,7 +352,6 @@ const syncTPSAllTimeHigh = async () => {
         interval.value as datetime,
         sum(block_history.transactions_length) as transactions_count,
         array_to_string(array_agg(block_history.block_num), ',') as blocks
-
       FROM 
         interval
       INNER JOIN 
@@ -491,6 +456,5 @@ module.exports = {
   getBlockDistribution,
   getStats,
   udpateStats,
-  getCurrentMissedBlock,
-  formatTransactionHistory
+  getCurrentMissedBlock
 }

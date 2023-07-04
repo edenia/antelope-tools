@@ -8,6 +8,7 @@ const getGranularityFromRange = range => {
       granularity = 'minute'
       break
     case '1 Day':
+    case '2 Days':
     case '4 Days':
     case '7 Days':
     case '14 Days':
