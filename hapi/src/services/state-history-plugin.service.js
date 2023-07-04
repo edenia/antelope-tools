@@ -69,9 +69,7 @@ const send = async message => {
   }
 
   console.log('waiting for ready state before send message')
-  await sleepFor(1)
-
-  return send(message)
+  ws.close()
 }
 
 const requestBlocks = (requestArgs = {}) => {
@@ -200,31 +198,27 @@ const init = async () => {
   })
 
   ws.on('message', data => {
-    try {
-      if (!types) {
-        const abi = JSON.parse(data)
-        types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
-        requestBlocks({ start_block_num: startBlockNum })
+    if (!types) {
+      const abi = JSON.parse(data)
+      types = Serialize.getTypesFromAbi(Serialize.createInitialTypes(), abi)
+      requestBlocks({ start_block_num: startBlockNum })
 
-        return
-      }
+      return
+    }
 
-      const [type, response] = deserialize('result', data)
+    const [type, response] = deserialize('result', data)
 
-      switch (type) {
-        case 'get_blocks_result_v0':
-          handleBlocksResult(response)
-          break
-        default:
-          console.log(`unsupported result ${type}`)
-          break
-      }
-    } catch (error) {
-      console.log(`ws message error: ${error.message}`)
+    switch (type) {
+      case 'get_blocks_result_v0':
+        handleBlocksResult(response)
+        break
+      default:
+        console.log(`unsupported result ${type}`)
+        break
     }
   })
 
-  ws.on('error', error => console.error(error))
+  ws.on('error', error => console.error('STATE HISTORY PLUGIN',error))
 
   ws.on('close', async () => {
     await sleepFor(60)
