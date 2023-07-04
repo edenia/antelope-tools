@@ -3,7 +3,6 @@ const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
 const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
-const transactionService = require('./transactions.service')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
