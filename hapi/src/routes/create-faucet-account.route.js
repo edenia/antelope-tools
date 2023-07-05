@@ -6,7 +6,8 @@ const {
   eosUtil,
   axiosUtil,
   googleRecaptchaEnterpriseUtil,
-  getCreateAccountDataUtil
+  getCreateAccountDataUtil,
+  sleepFor
 } = require('../utils')
 
 module.exports = {
@@ -43,25 +44,29 @@ module.exports = {
         eosConfig.faucet.password
       )
 
+      await sleepFor(1)
+
       const {
-        data: { account_name: account, permissions }
+        data: { accounts }
       } = await axiosUtil.instance.post(
-        `${eosConfig.apiEndpoint}/v1/chain/get_account`,
+        `${eosConfig.apiEndpoint}/v1/chain/get_accounts_by_authorizers`,
         {
-          account_name: input.name
+          keys: [input.public_key]
         }
       )
 
-      const keys = permissions[0]?.required_auth?.keys || []
-      const key = keys[0]?.key
+      const response = accounts.find(account => account.account_name === input.name)
 
-      if (account === input.name && key === input.public_key) {
-        return { account }
-      }
+      if (!response) throw new Error('Account creation failed')
 
-      return Boom.badData('Wrong key format')
+      return { account: input.name }
     } catch (err) {
-      throw Boom.badRequest(err.message)
+      const errorDetail =
+        err?.response?.data?.error?.details[0]?.message?.substring(0, 11)
+
+      return 'unknown key' === errorDetail
+        ? Boom.badRequest('Account creation failed')
+        : Boom.badRequest(err.message)
     }
   },
   options: {
