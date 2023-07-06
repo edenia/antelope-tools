@@ -22,7 +22,7 @@ module.exports = {
         throw Boom.badRequest('Are you a human?')
       }
 
-      await eosUtil.transact(
+      const transaction = await eosUtil.transact(
         [
           {
             authorization: [
