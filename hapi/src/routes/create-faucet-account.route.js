@@ -59,7 +59,9 @@ module.exports = {
         input.name = transaction?.processed?.action_traces[0]?.act?.data?.name
       }
 
-      const response = accounts.find(account => account.account_name === input.name)
+      const response = accounts.find(
+        account => account.account_name === input.name || !input.name
+      )
 
       if (!response) throw new Error('Account creation failed')
 
