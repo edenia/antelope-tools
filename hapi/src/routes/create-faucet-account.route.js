@@ -60,7 +60,7 @@ module.exports = {
       }
 
       const newAccount = accounts.find(
-        account => account.account_name === input.name || !input.name
+        (account) => account.account_name === input.name || !input.name
       )
 
       if (!newAccount) throw new Error('Account creation failed')
@@ -70,7 +70,7 @@ module.exports = {
       const errorDetail =
         err?.response?.data?.error?.details[0]?.message?.substring(0, 11)
 
-      return 'unknown key' === errorDetail
+      return errorDetail === 'unknown key'
         ? Boom.badRequest('Account creation failed')
         : Boom.badRequest(err.message)
     }
