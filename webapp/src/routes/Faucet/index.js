@@ -30,7 +30,7 @@ const Faucet = () => {
   const [createAccountValues, setCreateAccountValues] = useState({})
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
   const [createFaucetAccount, { loading: loadingCreateAccount }] = useMutation(
-    CREATE_ACCOUNT_MUTATION( eosConfig.networkName !== 'ultra-testnet' ),
+    CREATE_ACCOUNT_MUTATION(eosConfig.networkName !== 'ultra-testnet'),
   )
   const [transferFaucetTokens, { loading: loadingTransferFaucetTokens }] =
     useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
@@ -52,6 +52,14 @@ const Faucet = () => {
       return
     }
 
+    if (!isValidAccountName(createAccountValues.accountName)) {
+      showMessage({
+        type: 'error',
+        content: 'Please enter a valid account name',
+      })
+      return
+    }
+
     try {
       const {
         data: {
@@ -61,7 +69,7 @@ const Faucet = () => {
         variables: {
           token: reCaptchaToken,
           public_key: createAccountValues.publicKey,
-          name: createAccountValues.accountName
+          name: createAccountValues.accountName,
         },
       })
 
@@ -74,10 +82,9 @@ const Faucet = () => {
         ),
       })
     } catch (err) {
-      const errorMessage = err.message.replace('GraphQL error:','').replace(
-        'assertion failure with message: ',
-        '',
-      )
+      const errorMessage = err.message
+        .replace('GraphQL error:', '')
+        .replace('assertion failure with message: ', '')
 
       showMessage({
         type: 'error',
@@ -93,6 +100,14 @@ const Faucet = () => {
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
     if (!reCaptchaToken || !account) return
+
+    if (!isValidAccountName(account)) {
+      showMessage({
+        type: 'error',
+        content: 'Please enter a valid account name',
+      })
+      return
+    }
 
     try {
       const result = await transferFaucetTokens({
@@ -131,7 +146,7 @@ const Faucet = () => {
     setAccount('')
   }
 
-  const isValidName = name => {
+  const isValidAccountName = name => {
     const regex = /^[.12345abcdefghijklmnopqrstuvwxyz]+$/i
 
     return name?.length < 13 && regex.test(name)
@@ -173,7 +188,7 @@ const Faucet = () => {
                         ...{ accountName: e.target.value },
                       })
                     }
-                    error={!isValidName(createAccountValues.accountName)}
+                    error={!isValidAccountName(createAccountValues.accountName)}
                     required
                   />
                 </div>
@@ -212,7 +227,8 @@ const Faucet = () => {
                   variant="outlined"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
-                  error={!isValidName(account)}
+                  error={!isValidAccountName(account)}
+                  required
                 />
               </div>
               <div>
