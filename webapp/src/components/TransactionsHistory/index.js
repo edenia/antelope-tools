@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
@@ -49,22 +49,6 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
   const classes = useStyles()
   const [{ info, tps }] = useSharedState()
   const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
-  const [
-    blockWithHighestTransactionsCount,
-    setBlockWithHighestTransactionsCount,
-  ] = useState({})
-
-  useEffect(() => {
-    if (!data?.stats?.[0]?.tps_all_time_high?.blocks?.length) {
-      return
-    }
-
-    const blockWithHighestTransactionsCount =
-      data.stats[0].tps_all_time_high.blocks.sort((first, second) =>
-        first.transactions_count > second.transactions_count ? -1 : 1,
-      )[0]
-    setBlockWithHighestTransactionsCount(blockWithHighestTransactionsCount)
-  }, [data])
 
   return (
     <div className={classes.wrapper}>
@@ -76,18 +60,30 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
               value={data?.stats[0]?.tps_all_time_high?.transactions_count}
               loading={loading}
               classes={classes}
-              href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
+              href={getBlockNumUrl(
+                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
+              )}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{t('cpuUtilizationAllTimeHigh')}</Typography>
+            <BodyGraphValue
+              value={data?.stats[0]?.tps_all_time_high?.cpu_usage || 0}
+              classes={classes}
+              href={getBlockNumUrl(
+                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
+              )}
+              loading={loading}
             />
           </SimpleDataCard>
           <SimpleDataCard>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={`${formatWithThousandSeparator(
-                blockWithHighestTransactionsCount.cpu_usage_percent * 100 || 0,
-                2,
-              )}%`}
+              value={data?.stats[0]?.tps_all_time_high?.net_usage || 0}
               classes={classes}
-              href={getBlockNumUrl(blockWithHighestTransactionsCount.block_num)}
+              href={getBlockNumUrl(
+                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
+              )}
               loading={loading}
             />
           </SimpleDataCard>

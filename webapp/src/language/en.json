@@ -137,6 +137,7 @@
     "scheduleVersion": "Schedule Version",
     "secondsAgo": "Seconds Ago",
     "tpsAllTimeHigh": "TPS All Time High",
+    "cpuUtilizationAllTimeHigh": "CPU Utilization All Time High",
     "networkUtilizationAllTimeHigh": "Network Utilization All Time High",
     "transactionsPerSecond": "Transactions per Second",
     "transactionsPerBlock": "Transactions per Block",
