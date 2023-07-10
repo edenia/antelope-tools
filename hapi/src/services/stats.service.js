@@ -2,7 +2,7 @@ const Boom = require('@hapi/boom')
 const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
-const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
+const { hasuraUtil, sequelizeUtil, sleepFor } = require('../utils')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
@@ -281,59 +281,48 @@ const getLastTPSAllTimeHigh = async () => {
       last_block_at: stats.last_block_at
     }
   }
-
-  const scheduleHistoryInfo = await _getScheduleHystory()
-
-  if (!scheduleHistoryInfo) return null
-
-  return {
-    transactions_count: 0,
-    last_block_at: stats.last_block_at,
-    checked_at: moment(scheduleHistoryInfo.first_block_at)
-      .subtract(1, 'second')
-      .toISOString()
-  }
 }
 
-const getBlockUsage = async blockNum => {
-  const block = await eosUtil.getBlock(blockNum)
-  const info = await eosUtil.getInfo()
-  let cpuUsage = 0
-  let netUsage = 0
+const getTimestampBlock = async position => {
+  const query = `
+      query {
+        blocks: block_history(limit: 1, order_by: {block_num: ${
+          position === 'first' ? 'asc' : 'desc'
+        }}, where: {producer: {_neq: "NULL"}}) {
+          timestamp
+        }
+      }
+    `
 
-  block.transactions.forEach(transaction => {
-    cpuUsage += transaction.cpu_usage_us
-    netUsage += transaction.net_usage_words
-  })
+  const data = await hasuraUtil.request(query)
 
-  return {
-    id: block.id,
-    block_num: block.block_num,
-    transactions_count: block.transactions.length,
-    cpu_usage_us: cpuUsage,
-    block_cpu_limit: info.block_cpu_limit,
-    cpu_usage_percent: cpuUsage / info.block_cpu_limit,
-    net_usage_words: netUsage,
-    block_net_limit: info.block_net_limit,
-    net_usage_percent: netUsage / info.block_net_limit
-  }
+  return data?.blocks[0]?.timestamp
 }
 
 const syncTPSAllTimeHigh = async () => {
   const lastValue = await getLastTPSAllTimeHigh()
 
-  if (!lastValue) {
-    await sleepFor(60)
-    syncTPSAllTimeHigh()
+  let start
+  let end
 
-    return
+  if (!lastValue) {
+    const firstBlockInDB = new Date(await getTimestampBlock('first'))
+
+    start = moment(firstBlockInDB)
+    end = moment(start).add(
+      59 + (500 - firstBlockInDB.getMilliseconds()) / 1000,
+      'seconds'
+    )
+  } else {
+    start = moment(lastValue.checked_at).add(0.5, 'second')
+    end = moment(start).add(59.5, 'seconds')
   }
 
-  const start = moment(lastValue.checked_at).add(1, 'second')
-  const end = moment(start).add(59, 'seconds')
+  const lastBlockInDB = await getTimestampBlock('last')
+  const diff = end.diff(moment(new Date(lastBlockInDB)), 'seconds')
 
-  if (_checkDateGap(lastValue.last_block_at, end)) {
-    await sleepFor(moment(lastValue.last_block_at).diff(end, 'seconds'))
+  if (diff >= 0) {
+    await sleepFor(diff)
     syncTPSAllTimeHigh()
 
     return
@@ -351,6 +340,8 @@ const syncTPSAllTimeHigh = async () => {
       SELECT
         interval.value as datetime,
         sum(block_history.transactions_length) as transactions_count,
+        avg(block_history.cpu_usage) as cpu_usage,
+        avg(block_history.net_usage) as net_usage,
         array_to_string(array_agg(block_history.block_num), ',') as blocks
       FROM 
         interval
@@ -361,7 +352,7 @@ const syncTPSAllTimeHigh = async () => {
       ORDER BY 
         2 DESC
      )
-     SELECT datetime, transactions_count::integer, blocks FROM tps LIMIT 1
+     SELECT datetime, transactions_count::integer, cpu_usage::numeric(5,2), net_usage::numeric(6,3), blocks FROM tps LIMIT 1
   `)
 
   if (!rows.length) {
@@ -378,10 +369,14 @@ const syncTPSAllTimeHigh = async () => {
 
   const newValue = rows[0]
 
-  if (parseInt(newValue.transactions_count) < lastValue.transactions_count) {
+  if (
+    !lastValue ||
+    parseInt(newValue.transactions_count) >= lastValue.transactions_count
+  ) {
     await udpateStats({
       tps_all_time_high: {
-        ...lastValue,
+        ...newValue,
+        blocks: newValue.blocks.split(','),
         checked_at: end.toISOString()
       }
     })
@@ -390,23 +385,15 @@ const syncTPSAllTimeHigh = async () => {
     return
   }
 
-  const blocks = newValue.blocks.split(',')
-
-  for (let index = 0; index < blocks.length; index++) {
-    const block = await getBlockUsage(blocks[index])
-
-    blocks[index] = block
-  }
-
   await udpateStats({
     tps_all_time_high: {
-      ...newValue,
-      checked_at: end.toISOString(),
-      transactions_count: parseInt(newValue.transactions_count),
-      blocks
+      ...lastValue,
+      checked_at: end.toISOString()
     }
   })
   syncTPSAllTimeHigh()
+
+  return
 }
 
 const sync = async () => {
