@@ -44,14 +44,16 @@ const _getMissedBlock = async (start, end) => {
 const getTransactionsInTimeRage = async (start, end) => {
   const [rows] = await sequelizeUtil.query(`
     SELECT
-      sum(transactions_length)::integer as transactions_count
+      sum(transactions_length)::integer as transactions_count,
+      avg(block_history.cpu_usage)::numeric(5,2) as cpu_usage,
+      avg(block_history.net_usage)::numeric(6,3) as net_usage
     FROM
       block_history
     WHERE
       timestamp between '${start.toISOString()}' and '${end.toISOString()}'
   `)
 
-  return rows?.[0]?.transactions_count || 0
+  return rows?.[0]
 }
 
 const getNodesSummary = async () => {
@@ -275,12 +277,7 @@ const getLastTPSAllTimeHigh = async () => {
 
   if (!stats || !stats.last_block_at) return null
 
-  if (stats.tps_all_time_high) {
-    return {
-      ...stats.tps_all_time_high,
-      last_block_at: stats.last_block_at
-    }
-  }
+  return stats.tps_all_time_high
 }
 
 const getTimestampBlock = async position => {
@@ -355,23 +352,12 @@ const syncTPSAllTimeHigh = async () => {
      SELECT datetime, transactions_count::integer, cpu_usage::numeric(5,2), net_usage::numeric(6,3), blocks FROM tps LIMIT 1
   `)
 
-  if (!rows.length) {
-    await udpateStats({
-      tps_all_time_high: {
-        ...lastValue,
-        checked_at: end.toISOString()
-      }
-    })
-    syncTPSAllTimeHigh()
-
-    return
-  }
-
   const newValue = rows[0]
 
   if (
-    !lastValue ||
-    parseInt(newValue.transactions_count) >= lastValue.transactions_count
+    newValue &&
+    (!lastValue ||
+      parseInt(newValue.transactions_count) >= lastValue.transactions_count)
   ) {
     await udpateStats({
       tps_all_time_high: {
@@ -410,27 +396,40 @@ const sync = async () => {
   await insertStats(payload)
 }
 
-const syncTransactionsInfo = async () => {
-  const transactionsInLastWeek = await getTransactionsInTimeRage(
-    moment().subtract(1, 'week'),
+const getTransactionsStats = async range => {
+  const transactionsStats = await getTransactionsInTimeRage(
+    moment().subtract(1, range),
     moment()
   )
-  const payload = {
-    transactions_in_last_hour: await getTransactionsInTimeRage(
-      moment().subtract(1, 'hour'),
-      moment()
-    ),
-    transactions_in_last_day: await getTransactionsInTimeRage(
-      moment().subtract(1, 'day'),
-      moment()
-    ),
-    transactions_in_last_week: transactionsInLastWeek,
-    average_daily_transactions_in_last_week: transactionsInLastWeek / 7
+
+  return {
+    [`transactions_in_last_${range}`]: transactionsStats?.transactions_count || 0,
+    [`average_cpu_usage_in_last_${range}`]: transactionsStats?.cpu_usage || 0,
+    [`average_net_usage_in_last_${range}`]: transactionsStats?.net_usage || 0
   }
+}
+
+const syncTransactionsInfo = async () => {
+  const ranges = ['day', 'hour', 'week']
+  let payload
+
+  for (const range of ranges) {
+    const stats = await getTransactionsStats(range)
+
+    payload = {
+      ...payload,
+      ...stats
+    }
+  }
+
+  payload.average_daily_transactions_in_last_week =
+    payload.transactions_in_last_day / 7 || 0
+
   const stats = await getStats()
 
   if (stats) {
     await udpateStats(payload)
+
     return
   }
   await insertStats(payload)
