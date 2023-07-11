@@ -68,7 +68,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
           <SimpleDataCard>
             <Typography>{t('cpuUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={data?.stats[0]?.tps_all_time_high?.cpu_usage || 0}
+              value={`${data?.stats[0]?.tps_all_time_high?.cpu_usage || 0} %`}
               classes={classes}
               href={getBlockNumUrl(
                 data?.stats?.[0]?.tps_all_time_high?.blocks[0],
@@ -79,7 +79,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
           <SimpleDataCard>
             <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
             <BodyGraphValue
-              value={data?.stats[0]?.tps_all_time_high?.net_usage || 0}
+              value={`${data?.stats[0]?.tps_all_time_high?.net_usage || 0} %`}
               classes={classes}
               href={getBlockNumUrl(
                 data?.stats?.[0]?.tps_all_time_high?.blocks[0],
@@ -123,6 +123,48 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
               value={formatWithThousandSeparator(
                 data?.stats?.[0]?.transactions_in_last_week || 0,
               )}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('cpuUtilization')} ${t('lastHour')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_cpu_usage_in_hour || 0} %`}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('cpuUtilization')} ${t('lastDay')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_cpu_usage_in_last_day || 0} %`}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('cpuUtilization')} ${t('lastWeek')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_cpu_usage_in_week || 0} %`}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('netUtilization')} ${t('lastHour')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_net_usage_in_hour || 0} %`}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('netUtilization')} ${t('lastDay')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_net_usage_in_last_day || 0} %`}
+              loading={loading}
+            />
+          </SimpleDataCard>
+          <SimpleDataCard>
+            <Typography>{`${t('netUtilization')} ${t('lastWeek')}`}</Typography>
+            <BodyGraphValue
+              value={`${data?.stats?.[0]?.average_net_usage_in_week || 0} %`}
               loading={loading}
             />
           </SimpleDataCard>
