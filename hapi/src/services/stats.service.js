@@ -69,7 +69,7 @@ const getNodesSummary = async () => {
       type
   `)
 
-  rows.forEach(row => {
+  rows.forEach((row) => {
     payload[row.node_type || 'unknown'] = row.nodes_count
     total += row.nodes_count
   })
@@ -121,12 +121,12 @@ const getBlockDistribution = async (range = '1 day') => {
     `
     const data = await hasuraUtil.request(query, { startTime })
 
-    data.items.forEach(item => {
+    data.items.forEach((item) => {
       totalBloks += item.blocks
     })
 
     return data.items
-      .map(item => ({
+      .map((item) => ({
         account: item.producer || 'N/A',
         blocks: item.blocks,
         percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
@@ -227,7 +227,7 @@ const getCurrentMissedBlock = async () => {
 
   let newData = data
 
-  rows.forEach(element => {
+  rows.forEach((element) => {
     if (newData[element.account]) {
       newData = {
         ...newData,
@@ -250,7 +250,7 @@ const getCurrentMissedBlock = async () => {
   getCurrentMissedBlock()
 }
 
-const udpateStats = async payload => {
+const udpateStats = async (payload) => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -261,7 +261,7 @@ const udpateStats = async payload => {
   await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
-const insertStats = async payload => {
+const insertStats = async (payload) => {
   const mutation = `
     mutation ($payload: stat_insert_input!) {
       insert_stat_one(object: $payload) {
@@ -280,7 +280,7 @@ const getLastTPSAllTimeHigh = async () => {
   return stats.tps_all_time_high
 }
 
-const getTimestampBlock = async position => {
+const getTimestampBlock = async (position) => {
   const query = `
       query {
         blocks: block_history(limit: 1, order_by: {block_num: ${
@@ -378,8 +378,6 @@ const syncTPSAllTimeHigh = async () => {
     }
   })
   syncTPSAllTimeHigh()
-
-  return
 }
 
 const sync = async () => {
@@ -396,14 +394,15 @@ const sync = async () => {
   await insertStats(payload)
 }
 
-const getTransactionsStats = async range => {
+const getTransactionsStats = async (range) => {
   const transactionsStats = await getTransactionsInTimeRage(
     moment().subtract(1, range),
     moment()
   )
 
   return {
-    [`transactions_in_last_${range}`]: transactionsStats?.transactions_count || 0,
+    [`transactions_in_last_${range}`]:
+      transactionsStats?.transactions_count || 0,
     [`average_cpu_usage_in_last_${range}`]: transactionsStats?.cpu_usage || 0,
     [`average_net_usage_in_last_${range}`]: transactionsStats?.net_usage || 0
   }
