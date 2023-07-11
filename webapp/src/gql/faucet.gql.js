@@ -1,8 +1,12 @@
 import gql from 'graphql-tag'
 
-export const CREATE_ACCOUNT_MUTATION = gql`
-  mutation ($token: String!, $public_key: String!, $name: String) {
-    createAccount(token: $token, public_key: $public_key, name: $name) {
+export const CREATE_ACCOUNT_MUTATION = (includeName = true) => gql`
+  mutation ($token: String!, $public_key: String! ${
+    includeName ? ', $name: String' : ''
+  }) {
+    createAccount(token: $token, public_key: $public_key ${
+      includeName ? ', name: $name' : ''
+    }) {
       account
     }
   }
