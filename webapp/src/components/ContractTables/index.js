@@ -2,11 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-import FormControl from '@mui/material/FormControl'
+import Autocomplete from '@mui/material/Autocomplete'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import TextField from '@mui/material/TextField'
-import InputLabel from '@mui/material/InputLabel'
 import Button from '@mui/material/Button'
 import RefreshIcon from '@mui/icons-material/Refresh'
 
@@ -24,26 +23,42 @@ const ContractTables = ({
   onGetTableRows,
   tableName,
 }) => {
+  const keys = [
+    'i64',
+    'i128',
+    'i256',
+    'float64',
+    'float128',
+    'sha256',
+    'ripemd160',
+    'name',
+  ]
   const initData = {
     table: '',
     scope: '',
+    index: '',
+    keyType: 'i64',
     lowerBound: null,
     upperBound: null,
     limit: 10,
+    reverse: false
   }
   const formFields = [
     { name: 'scope', type: 'text' },
-    { name: 'lowerBound', type: 'number' },
-    { name: 'upperBound', type: 'number' },
+    { name: 'index', type: 'text' },
+    { name: 'keyType', type: 'text', component: 'select', options: keys },
+    { name: 'lowerBound', type: 'text' },
+    { name: 'upperBound', type: 'text' },
     { name: 'limit', type: 'number' },
   ]
-  const DELAY = 300
+  const DELAY = 500
 
   const { t } = useTranslation('contractTablesComponent')
   const classes = useStyles()
   const [tables, setTables] = useState([])
   const [fields, setFields] = useState([])
   const [filters, setFilters] = useState(initData)
+  const [selectedTable,setSelectedTable]= useState(tableName)
   const debouncedFilter = useDebounceState(filters, DELAY)
 
   const getValidValue = (value, type) => {
@@ -78,6 +93,9 @@ const ContractTables = ({
         table: filters.table,
         code: accountName,
         json: true,
+        key_type: filters.keyType,
+        index_position: filters.index,
+        reverse: filters.reverse,
         lower_bound: nextKey || filters.lowerBound,
         upper_bound: filters.upperBound,
         loadMore: !!nextKey,
@@ -85,6 +103,19 @@ const ContractTables = ({
     },
     [accountName, onGetTableRows, filters],
   )
+
+  const handleTableSelect = (_event, value) => {
+    setSelectedTable(value || '')
+    if (tables.includes(value)) {
+      handleTableChange(value)
+    }
+  }
+
+  const handleFilterSelect = (newValue, name, type) => {
+    handleOnChange({
+      target: { name, type, value: newValue || '' },
+    })
+  }
 
   useEffect(() => {
     if (!abi) {
@@ -127,52 +158,79 @@ const ContractTables = ({
   }, [debouncedFilter])
 
   return (
-    <div>
+    <>
       <div className={classes.form}>
-        <FormControl
-          variant="outlined"
-          className={`${classes.formControl} ${classes.tableEmpty}`}
-        >
-          <InputLabel id="tableLabel">{t('table')}</InputLabel>
-          <Select
-            labelId="tableLabel"
-            id="table"
-            value={filters.table}
-            onChange={(event) => handleTableChange(event.target.value)}
-            label={t('table')}
-          >
-            {tables.map((item) => (
-              <MenuItem key={`table-menu-item-${item}`} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {formFields.map(({ name, type }, index) => (
-          <TextField
-            key={`field-${name}-${index}`}
-            label={t(name)}
-            name={name}
-            type={type}
-            variant="outlined"
-            className={classes.formControl}
-            value={filters[name] ?? ''}
-            onChange={(event) => handleOnChange(event)}
+        <div  className={classes.fieldsContainer}>
+          <Autocomplete
+            className={classes.textField}
+            options={tables}
+            value={selectedTable}
+            inputValue={selectedTable}
+            onChange={handleTableSelect}
+            onInputChange={handleTableSelect}            
+            renderInput={params => (
+              <TextField {...params} label={t('table')} />
+            )}
+            noOptionsText={t('noOptions')}
           />
-        ))}
 
-        {filters.table && (
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.refreshButton}
-            onClick={() => handleSubmit()}
-          >
-            <RefreshIcon />
-            {t('refreshData')}
-          </Button>
-        )}
+          {formFields.map(({ name, type, component, options }, index) =>
+            component === 'select' ? (
+              <Autocomplete
+              className={classes.textField}
+                key={`field-${name}-${index}`}
+                options={options}
+                value={filters[name] ?? ''}
+                inputValue={filters[name] ?? ''}
+                onChange={(_e,value) => {handleFilterSelect(value,name,type)}}
+                onInputChange={(_e,value) => {handleFilterSelect(value,name,type)}}
+                renderInput={(params) => (
+                  <TextField {...params} label={t(name)} />
+                )}
+                noOptionsText={t('noOptions')}
+              />
+            ) : (
+              <TextField
+              className={classes.textField}
+                key={`field-${name}-${index}`}
+                label={t(name)}
+                name={name}
+                type={type}
+                variant="outlined"
+                value={filters[name] ?? ''}
+                onChange={(event) => handleOnChange(event)}
+              />
+            ),
+          )}  
+
+          <FormControlLabel
+            className={classes.checkBox}
+            control={
+              <Checkbox
+              checked={filters.reverse}
+              onChange={(event) => {
+                setFilters((prev) => ({ ...prev, reverse: event.target.checked }))
+              }}
+            />
+            }
+            label={t('reverse')}
+            labelPlacement="top"
+          />
+        </div>
+        
+        <div>
+          {filters.table && (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.refreshButton}
+              onClick={() => handleSubmit()}
+            >
+              <RefreshIcon />
+              {t('refreshData')}
+            </Button>
+          )}
+        </div>
       </div>
 
       <TableData
@@ -180,7 +238,7 @@ const ContractTables = ({
         fields={fields}
         handleSubmit={handleSubmit}
       />
-    </div>
+    </>
   )
 }
 

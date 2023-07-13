@@ -4,15 +4,22 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
+    gap: theme.spacing(1),
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column'
+    }
   },
   formControl: {
     display: 'block',
-    width: '100%',
-    minWidth: '180px',
-    [theme.breakpoints.up('md')]: {
-      width: '15%',
-      marginRight: theme.spacing(2),
+    width: '12%',
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down('lg')]: {
+      width: '10%',
     },
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      minWidth: '180px',
+    }
   },
   refreshButton: {
     [theme.breakpoints.up('md')]: {
@@ -28,9 +35,30 @@ export default (theme) => ({
     padding: theme.spacing(4),
   },
   tableEmpty: {
-    [theme.breakpoints.up('md')]: {
-      width: '150px !important',
+    [theme.breakpoints.down('lg')]: {
+      width: '100px !important',
     },
+    [theme.breakpoints.down('md')]: {
+      width: '100% !important',
+    },
+    width: '120px !important',
     display: 'inline-block',
   },
+  fieldsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '80%',
+    gap: '8px',
+  },
+  textField: {
+    width: '200px',
+    [theme.breakpoints.down('md')]: {
+      width: '100%'
+    }
+  },
+  checkBox: {
+    '& .MuiCheckbox-root':{
+      padding: `${theme.spacing(1)} !important`,
+    }
+  }
 })

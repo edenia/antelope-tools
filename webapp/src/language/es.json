@@ -331,9 +331,11 @@
   },
   "contractTablesComponent": {
     "table": "Tabla",
-    "scope": "Alcance",
+    "scope": "Ámbito",
     "lowerBound": "Límite inferior",
     "upperBound": "Límite superior",
+    "index": "Posición del Índice",
+    "keyType": "Tipo del Índice",
     "limit": "Límite",
     "refreshData": "Actualizar Datos",
     "loadMore": "Carga Más",
