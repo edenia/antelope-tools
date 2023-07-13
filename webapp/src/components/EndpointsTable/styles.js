@@ -8,7 +8,7 @@ export default (theme) => ({
       maxWidth: '300px',
       wordBreak: 'normal',
     },
-    [theme.breakpoints.up('xl')]:{
+    [theme.breakpoints.up('xl')]: {
       maxWidth: '350px',
     }
   },

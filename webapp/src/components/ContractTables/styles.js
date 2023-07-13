@@ -57,7 +57,7 @@ export default (theme) => ({
     }
   },
   checkBox: {
-    '& .MuiCheckbox-root':{
+    '& .MuiCheckbox-root': {
       padding: `${theme.spacing(1)} !important`,
     }
   }
