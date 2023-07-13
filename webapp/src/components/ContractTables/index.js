@@ -23,7 +23,7 @@ const ContractTables = ({
   onGetTableRows,
   tableName,
 }) => {
-  const keys = [
+  const keysTypes = [
     'i64',
     'i128',
     'i256',
@@ -37,16 +37,16 @@ const ContractTables = ({
     table: '',
     scope: '',
     index: '',
-    keyType: 'i64',
+    keyType: keysTypes[0],
     lowerBound: null,
     upperBound: null,
     limit: 10,
-    reverse: false
+    reverse: false,
   }
   const formFields = [
     { name: 'scope', type: 'text' },
     { name: 'index', type: 'text' },
-    { name: 'keyType', type: 'text', component: 'select', options: keys },
+    { name: 'keyType', type: 'text', component: 'select', options: keysTypes },
     { name: 'lowerBound', type: 'text' },
     { name: 'upperBound', type: 'text' },
     { name: 'limit', type: 'number' },
@@ -58,7 +58,7 @@ const ContractTables = ({
   const [tables, setTables] = useState([])
   const [fields, setFields] = useState([])
   const [filters, setFilters] = useState(initData)
-  const [selectedTable,setSelectedTable]= useState(tableName)
+  const [selectedTable, setSelectedTable] = useState(tableName)
   const debouncedFilter = useDebounceState(filters, DELAY)
 
   const getValidValue = (value, type) => {
@@ -134,10 +134,12 @@ const ContractTables = ({
       return
     }
 
+    setSelectedTable(filters.table)
+
     const tableType = abi.tables.find(
-      (item) => item.name === filters.table,
+      item => item.name === filters.table,
     )?.type
-    const struct = abi.structs.find((struct) => struct.name === tableType)
+    const struct = abi.structs.find(struct => struct.name === tableType)
     setFields(struct?.fields || [])
   }, [filters.table, abi])
 
@@ -160,14 +162,14 @@ const ContractTables = ({
   return (
     <>
       <div className={classes.form}>
-        <div  className={classes.fieldsContainer}>
+        <div className={classes.fieldsContainer}>
           <Autocomplete
             className={classes.textField}
             options={tables}
             value={selectedTable}
             inputValue={selectedTable}
             onChange={handleTableSelect}
-            onInputChange={handleTableSelect}            
+            onInputChange={handleTableSelect}
             renderInput={params => (
               <TextField {...params} label={t('table')} />
             )}
@@ -177,47 +179,54 @@ const ContractTables = ({
           {formFields.map(({ name, type, component, options }, index) =>
             component === 'select' ? (
               <Autocomplete
-              className={classes.textField}
+                className={classes.textField}
                 key={`field-${name}-${index}`}
                 options={options}
                 value={filters[name] ?? ''}
                 inputValue={filters[name] ?? ''}
-                onChange={(_e,value) => {handleFilterSelect(value,name,type)}}
-                onInputChange={(_e,value) => {handleFilterSelect(value,name,type)}}
-                renderInput={(params) => (
+                onChange={(_e, value) => {
+                  handleFilterSelect(value, name, type)
+                }}
+                onInputChange={(_e, value) => {
+                  handleFilterSelect(value, name, type)
+                }}
+                renderInput={params => (
                   <TextField {...params} label={t(name)} />
                 )}
                 noOptionsText={t('noOptions')}
               />
             ) : (
               <TextField
-              className={classes.textField}
+                className={classes.textField}
                 key={`field-${name}-${index}`}
                 label={t(name)}
                 name={name}
                 type={type}
                 variant="outlined"
                 value={filters[name] ?? ''}
-                onChange={(event) => handleOnChange(event)}
+                onChange={event => handleOnChange(event)}
               />
             ),
-          )}  
+          )}
 
           <FormControlLabel
             className={classes.checkBox}
             control={
               <Checkbox
-              checked={filters.reverse}
-              onChange={(event) => {
-                setFilters((prev) => ({ ...prev, reverse: event.target.checked }))
-              }}
-            />
+                checked={filters.reverse}
+                onChange={event => {
+                  setFilters(prev => ({
+                    ...prev,
+                    reverse: event.target.checked,
+                  }))
+                }}
+              />
             }
             label={t('reverse')}
             labelPlacement="top"
           />
         </div>
-        
+
         <div>
           {filters.table && (
             <Button
