@@ -72,6 +72,26 @@ services:
       HAPI_EOS_MAX_CPU_BLOCK: '${HAPI_EOS_MAX_CPU_BLOCK}'
       HAPI_EOS_MAX_NET_BLOCK: '${HAPI_EOS_MAX_NET_BLOCK}'
       HAPI_EOS_MISSED_BLOCKS_ENABLED: '${HAPI_EOS_MISSED_BLOCKS_ENABLED}'
+  hapi-evm:
+    container_name: '${STAGE}-${APP_NAME}-hapi-evm'
+    build: ./hapi-evm
+    ports:
+      - '9091:9090'
+    volumes:
+      - ./tmp/hapi-evm/node_modules/:/app/node_modules/
+      - type: bind
+        source: ./hapi-evm
+        target: /app
+    working_dir: /app
+    command: bash -c "yarn && yarn start:dev"
+    environment:
+      HAPI_EVM_SERVER_PORT: '${HAPI_EVM_SERVER_PORT}'
+      HAPI_EVM_SERVER_ADDRESS: '${HAPI_EVM_SERVER_ADDRESS}'
+      HAPI_EVM_API_ENDPOINTS: '${HAPI_EVM_API_ENDPOINTS}'
+      HAPI_EVM_NETWORK_CHAIN_ID: '${HAPI_EVM_NETWORK_CHAIN_ID}'
+      HAPI_EVM_EOS_EVM_ACCOUNT: '${HAPI_EVM_EOS_EVM_ACCOUNT}'
+      HAPI_EVM_HASURA_URL: '${HAPI_EVM_HASURA_URL}'
+      HAPI_EVM_HASURA_ADMIN_SECRET: '${HAPI_EVM_HASURA_ADMIN_SECRET}'
   hasura:
     container_name: '${STAGE}-${APP_NAME}-hasura'
     image: hasura/graphql-engine:v2.16.0.cli-migrations-v3

@@ -1,0 +1,45 @@
+{
+  "name": "backend-boilerplate",
+  "version": "1.0.0",
+  "description": "AntelopeIO Boilerplate for backend development",
+  "main": "dist/index.js",
+  "author": "edenia.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon",
+    "prepare": "cd .. && husky install hapi/.husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint . --ext .ts",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/hapi": "^21.3.2",
+    "axios": "^1.4.0",
+    "eosjs": "^22.1.0",
+    "eosjs-api": "^7.0.4",
+    "graphql": "16",
+    "graphql-request": "^6.0.0",
+    "joi": "^17.9.2",
+    "node-fetch": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
