@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import isLogoValid from '../../utils/validate-image'
-import { generalConfig } from '../../config'
+import { eosConfig, generalConfig } from '../../config'
 
 import styles from './styles'
 
@@ -192,7 +192,9 @@ const CustomTooltip = memo(({ active, payload }) => {
             {t('rewards')}:{' '}
             <span className={classes.description}>
               {' '}
-              {formatWithThousandSeparator(payload[0].payload.rewards, 2)}
+              {`${formatWithThousandSeparator(payload[0].payload.rewards, 2)} ${
+                eosConfig.tokenSymbol
+              }`}
             </span>
           </Typography>
         )}
