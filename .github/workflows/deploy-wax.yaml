@@ -39,7 +39,7 @@ jobs:
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/wax.jpg'
           REACT_APP_FOOTER_LINKS: '[{ "text": "WAX Website", "src": "https://www.wax.io/" },{ "text": "WAX Block Explorer", "src": "https://wax.bloks.io" },{"text": "Developer Guidelines","src": "https://developer.wax.io/"},{"text": "WAX Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
-          REACT_APP_USE_REWARDS: 'false'
+          REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-wax.antelope.tools/v1/graphql'
           REACT_APP_EOS_API_NETWORK_NAME: 'wax'
