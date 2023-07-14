@@ -227,7 +227,7 @@ const ContractActionForm = ({ accountName, action, abi, onSubmitAction }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Chip label={t(field.type)} />
+                  <Chip label={field.type} />
                 </InputAdornment>
               ),
             }}

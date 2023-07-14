@@ -17,17 +17,17 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const BodyGraphValue = ({ loading, value, classes, href }) => {
+const BodyGraphValue = ({ loading, value, classes, links }) => {
   if (loading) return <LinearProgress />
 
   return (
     <Typography component="p" variant="h6">
       {value}
-      {href && (
-        <a href={href} target="_blank" rel="noopener noreferrer">
+      {links && links.map((href, index) => (
+        <a key={`link-body-graph-${index}`} href={href} target="_blank" rel="noopener noreferrer">
           <LaunchIcon className={classes.svgLink} color="primary" />
         </a>
-      )}
+      ))}
     </Typography>
   )
 }
@@ -60,9 +60,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
               value={data?.stats[0]?.tps_all_time_high?.transactions_count}
               loading={loading}
               classes={classes}
-              href={getBlockNumUrl(
-                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
-              )}
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
             />
           </SimpleDataCard>
           <SimpleDataCard>
@@ -70,9 +68,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
             <BodyGraphValue
               value={`${data?.stats[0]?.tps_all_time_high?.cpu_usage || 0} %`}
               classes={classes}
-              href={getBlockNumUrl(
-                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
-              )}
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
               loading={loading}
             />
           </SimpleDataCard>
@@ -81,9 +77,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
             <BodyGraphValue
               value={`${data?.stats[0]?.tps_all_time_high?.net_usage || 0} %`}
               classes={classes}
-              href={getBlockNumUrl(
-                data?.stats?.[0]?.tps_all_time_high?.blocks[0],
-              )}
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
               loading={loading}
             />
           </SimpleDataCard>

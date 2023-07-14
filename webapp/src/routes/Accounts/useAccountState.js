@@ -61,7 +61,9 @@ const useAccountState = () => {
       try {
         const actionError = JSON.parse(error?.message).error.details[0].message
 
-        return actionError ? `${resultRequested} ${t('notFound')}` : ''
+        return actionError?.substring(0, 11) === 'unknown key'
+          ? `${resultRequested} ${t('notFound')}`
+          : actionError
       } catch (error) {
         return t('unknownError')
       }
