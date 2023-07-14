@@ -78,7 +78,6 @@ services:
     ports:
       - '9091:9090'
     volumes:
-      - ./tmp/hapi-evm/node_modules/:/app/node_modules/
       - type: bind
         source: ./hapi-evm
         target: /app
