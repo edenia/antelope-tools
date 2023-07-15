@@ -30,7 +30,7 @@ const Faucet = () => {
   const [createAccountValues, setCreateAccountValues] = useState({})
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
   const [createFaucetAccount, { loading: loadingCreateAccount }] = useMutation(
-    CREATE_ACCOUNT_MUTATION,
+    CREATE_ACCOUNT_MUTATION(eosConfig.networkName !== 'ultra-testnet'),
   )
   const [transferFaucetTokens, { loading: loadingTransferFaucetTokens }] =
     useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
@@ -39,14 +39,25 @@ const Faucet = () => {
   const createAccount = async () => {
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    if (eosConfig.networkName === 'libre-testnet') {
-      if (
-        !reCaptchaToken ||
-        (!createAccountValues.publicKey && !createAccountValues.accountName)
-      )
-        return
-    } else {
-      if (!reCaptchaToken || !createAccountValues.publicKey) return
+    if (
+      !reCaptchaToken ||
+      !createAccountValues.publicKey ||
+      (eosConfig.networkName !== 'ultra-testnet' &&
+        !createAccountValues.accountName)
+    ) {
+      showMessage({
+        type: 'error',
+        content: 'Fill out the fields to create an account',
+      })
+      return
+    }
+
+    if (!isValidAccountName(createAccountValues.accountName)) {
+      showMessage({
+        type: 'error',
+        content: 'Please enter a valid account name',
+      })
+      return
     }
 
     try {
@@ -58,7 +69,7 @@ const Faucet = () => {
         variables: {
           token: reCaptchaToken,
           public_key: createAccountValues.publicKey,
-          name: createAccountValues.accountName || '',
+          name: createAccountValues.accountName,
         },
       })
 
@@ -71,10 +82,9 @@ const Faucet = () => {
         ),
       })
     } catch (err) {
-      const errorMessage = err.message.replace(
-        'GraphQL error: assertion failure with message: ',
-        '',
-      )
+      const errorMessage = err.message
+        .replace('GraphQL error:', '')
+        .replace('assertion failure with message: ', '')
 
       showMessage({
         type: 'error',
@@ -90,6 +100,14 @@ const Faucet = () => {
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
     if (!reCaptchaToken || !account) return
+
+    if (!isValidAccountName(account)) {
+      showMessage({
+        type: 'error',
+        content: 'Please enter a valid account name',
+      })
+      return
+    }
 
     try {
       const result = await transferFaucetTokens({
@@ -128,6 +146,12 @@ const Faucet = () => {
     setAccount('')
   }
 
+  const isValidAccountName = name => {
+    const regex = /^[.12345abcdefghijklmnopqrstuvwxyz]+$/i
+
+    return name?.length < 13 && regex.test(name)
+  }
+
   return (
     <div className={classes.test}>
       <div className={classes.card}>
@@ -147,9 +171,11 @@ const Faucet = () => {
                       ...{ publicKey: e.target.value },
                     })
                   }
+                  error={!createAccountValues.publicKey}
+                  required
                 />
               </div>
-              {eosConfig.networkName === 'libre-testnet' && (
+              {eosConfig.networkName !== 'ultra-testnet' && (
                 <div>
                   <TextField
                     key="action-field-issue-tokens"
@@ -162,6 +188,8 @@ const Faucet = () => {
                         ...{ accountName: e.target.value },
                       })
                     }
+                    error={!isValidAccountName(createAccountValues.accountName)}
+                    required
                   />
                 </div>
               )}
@@ -195,10 +223,12 @@ const Faucet = () => {
               <div>
                 <TextField
                   key="action-field-issue-tokens"
-                  label={`Account (500 ${eosConfig.tokenSymbol})`}
+                  label={`${t('account')} (500 ${eosConfig.tokenSymbol})`}
                   variant="outlined"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
+                  error={!isValidAccountName(account)}
+                  required
                 />
               </div>
               <div>
