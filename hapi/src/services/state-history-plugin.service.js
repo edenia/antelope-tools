@@ -133,10 +133,10 @@ const handleBlocksResult = async (data) => {
 
     if (blocksData.length === 50) {
       await saveBlocks(blocksData)
+      await statsService.udpateStats({ last_block_at: block.timestamp })
       blocksData = []
     }
 
-    await statsService.udpateStats({ last_block_at: block.timestamp })
     send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
     )
