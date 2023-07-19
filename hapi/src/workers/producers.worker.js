@@ -72,7 +72,7 @@ const start = async () => {
     if (eosConfig.missedBlocksServiceEnabled) {
       run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
       run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)
-      run('SYNC SCHEDULE HISTORY', demuxService.init)
+      run('SYNC SCHEDULE HISTORY', missedBlocksService.syncCurrentSchedule, 60)
     }
 
     run('SYNC TPS', statsService.syncTPSAllTimeHigh)
