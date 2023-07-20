@@ -215,7 +215,7 @@ const syncMissedBlocks = async () => {
   if (
     moment(lastRound.last_block_at).diff(end, 'seconds') < lastRound.interval
   ) {
-    await sleepFor(2)
+    await sleepFor(10)
     syncMissedBlocks()
 
     return
