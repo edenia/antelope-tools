@@ -30,9 +30,7 @@ const useBlockProducerState = () => {
     { filters, pagination, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
-  const { data: dataHistory, loading: loadingHistory } = useSubscription(
-    BLOCK_TRANSACTIONS_HISTORY,
-  )
+  const { data: dataHistory } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
   const [loadStats, { loading = true, data: { eosrate_stats: stats } = {} }] =
     useLazyQuery(EOSRATE_STATS_QUERY)
   const [items, setItems] = useState([])
@@ -91,7 +89,7 @@ const useBlockProducerState = () => {
     if (dataHistory?.stats.length) {
       setMissedBlocks(dataHistory?.stats[0].missed_blocks)
     }
-  }, [dataHistory, loadingHistory])
+  }, [dataHistory])
 
   return [
     {

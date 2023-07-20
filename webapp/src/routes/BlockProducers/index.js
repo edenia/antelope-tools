@@ -71,7 +71,7 @@ const Producers = () => {
               <div className={classes.card} key={`producer-card-${index}`}>
                 <InformationCard
                   type="entity"
-                  producer={{ ...producer, missedBlocks }}
+                  producer={{ ...producer, missed_blocks: missedBlocks[producer.owner] }}
                   rank={producer.rank}
                 />
               </div>
