@@ -3,7 +3,7 @@ import { useLazyQuery, useSubscription } from '@apollo/client'
 
 import {
   PRODUCERS_QUERY,
-  BLOCK_TRANSACTIONS_HISTORY,
+  MISSED_BLOCKS_SUBSCRIPTION,
   EOSRATE_STATS_QUERY,
 } from '../../gql'
 import { eosConfig } from '../../config'
@@ -30,7 +30,7 @@ const useBlockProducerState = () => {
     { filters, pagination, producers },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ query: PRODUCERS_QUERY })
-  const { data: dataHistory } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
+  const { data: dataHistory } = useSubscription(MISSED_BLOCKS_SUBSCRIPTION)
   const [loadStats, { loading = true, data: { eosrate_stats: stats } = {} }] =
     useLazyQuery(EOSRATE_STATS_QUERY)
   const [items, setItems] = useState([])
