@@ -1,0 +1,1 @@
+CREATE TABLE "evm"."transaction" ("block_hash" varchar NOT NULL, "block_number" numeric NOT NULL, "gas" numeric NOT NULL, "gas_price" numeric NOT NULL, "hash" varchar NOT NULL, PRIMARY KEY ("hash") );

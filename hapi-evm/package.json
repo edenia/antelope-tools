@@ -20,13 +20,16 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.2",
+    "@types/web3": "^1.2.2",
     "axios": "^1.4.0",
     "eosjs": "^22.1.0",
     "eosjs-api": "^7.0.4",
     "graphql": "16",
     "graphql-request": "^6.0.0",
     "joi": "^17.9.2",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^3.3.1",
+    "web3": "^4.0.3",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "@types/node": "^20.1.5",

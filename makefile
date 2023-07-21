@@ -99,7 +99,7 @@ stop:
 
 start:
 	make start-postgres
-	make start-wallet
+	# make start-wallet
 	make start-hapi
 	make start-hapi-evm
 	make start-hasura

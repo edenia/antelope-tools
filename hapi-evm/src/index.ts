@@ -3,6 +3,7 @@ import { Server } from '@hapi/hapi'
 
 import routes from './routes'
 import { serverConfig } from './config'
+import workerService from './services/worker'
 
 const init = async () => {
   const server: Server = Hapi.server({
@@ -17,6 +18,8 @@ const init = async () => {
   routes(server)
 
   await server.start()
+
+  workerService.init()
 
   console.log(`🚀 Server ready at ${server.info.uri}`)
   server.table().forEach(route => console.log(`${route.method}\t${route.path}`))
