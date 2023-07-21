@@ -10,7 +10,6 @@ export const formatData = (
     rank,
     owner,
     updatedAt,
-    missedBlocks = [],
     nodes,
     healthStatus,
     dataType,
@@ -39,16 +38,6 @@ export const formatData = (
     if (rank > 21 && totalRewards >= 100) return 'Paid Standby'
 
     return 'Non-Paid Standby'
-  }
-
-  const getEntitiesMissedBlocks = () => {
-    if (!nodes.length) return 0
-
-    const producerNode = nodes.find((node) => node?.node_type === 'producer')
-
-    if (producerNode) return 0
-
-    return missedBlocks[owner] || 0
   }
 
   if (!data?.social?.github && typeof data?.github_user === 'string') {
@@ -87,7 +76,6 @@ export const formatData = (
           votes: 'N/A',
           rewards: 0,
           lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-          missedBlocks: getEntitiesMissedBlocks(),
         },
         nodes,
         healthStatus,
