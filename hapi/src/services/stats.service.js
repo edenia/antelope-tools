@@ -153,6 +153,7 @@ const getStats = async () => {
         last_block_at
         tps_all_time_high
         missed_blocks
+        missed_blocks_checked_at
         updated_at
         created_at
       }
@@ -173,7 +174,7 @@ const getCurrentMissedBlock = async () => {
 
   if (!stats) return
 
-  if (stats.missed_blocks) {
+  if (stats.missed_blocks_checked_at) {
     data = stats.missed_blocks
     lastBlockAt = stats.last_block_at
   } else {
@@ -189,9 +190,8 @@ const getCurrentMissedBlock = async () => {
 
     if (!rowsInitial.length) {
       await udpateStats({
-        missed_blocks: {
-          checked_at: end.toISOString()
-        }
+        missed_blocks: {},
+        missed_blocks_checked_at: end.toISOString()
       })
 
       getCurrentMissedBlock()
@@ -200,7 +200,7 @@ const getCurrentMissedBlock = async () => {
     }
   }
 
-  start = moment(data.checked_at).add(1, 'second')
+  start = moment(stats.missed_blocks_checked_at).add(1, 'second')
   end = moment(start).add(59, 'seconds')
 
   if (_checkDateGap(lastBlockAt, end)) {
@@ -214,10 +214,8 @@ const getCurrentMissedBlock = async () => {
 
   if (!rows.length) {
     await udpateStats({
-      missed_blocks: {
-        ...data,
-        checked_at: end.toISOString()
-      }
+      missed_blocks: data,
+      missed_blocks_checked_at: end.toISOString()
     })
 
     getCurrentMissedBlock()
@@ -228,16 +226,16 @@ const getCurrentMissedBlock = async () => {
   let newData = data
 
   rows.forEach(element => {
-    if (element.sum > 0) {
-      newData[element.account] = element.sum + (parseInt(newData[element.account]) || 0)
+    const sum = parseInt(element.sum)
+
+    if (sum > 0) {
+      newData[element.account] = sum + (parseInt(newData[element.account]) || 0)
     }
   })
 
   await udpateStats({
-    missed_blocks: {
-      ...newData,
-      checked_at: end.toISOString()
-    }
+    missed_blocks: newData,
+    missed_blocks_checked_at: end.toISOString()
   })
 
   getCurrentMissedBlock()
