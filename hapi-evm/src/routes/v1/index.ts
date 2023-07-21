@@ -25,6 +25,9 @@ const baseRoute = '/v1'
 
 // Average gas usage: Show to average gas usage in the last 100 blocks.
 // Average transactions per second (block and eosio.token -> ERC20).
+// - internal TLOS transactions. (tEVM address -> tEVM address)
+// - incoming TLOS transactions. (EOS address -> tEVM address)
+// - outgoing TLOS transactions. (tEVM address -> EOS address) HOW?
 // Daily transactions.
 // ATH.
 
