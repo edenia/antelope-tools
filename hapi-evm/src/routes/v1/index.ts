@@ -23,13 +23,13 @@ const baseRoute = '/v1'
 // - last block number
 // - ATH
 
-// Average gas usage: Show to average gas usage in the last 100 blocks.
-// Average transactions per second (block and eosio.token -> ERC20).
-// - internal TLOS transactions. (tEVM address -> tEVM address)
-// - incoming TLOS transactions. (EOS address -> tEVM address)
-// - outgoing TLOS transactions. (tEVM address -> EOS address) HOW?
-// Daily transactions.
-// ATH.
+// (OK) Average gas usage: Show to average gas usage in the last 100 blocks.
+// () Average transactions per second (block and eosio.token -> ERC20).
+// - () internal TLOS transactions. (tEVM address -> tEVM address)
+// - () incoming TLOS transactions. (EOS address -> tEVM address)
+// - () outgoing TLOS transactions. (tEVM address -> EOS address) HOW?
+// (OK) Daily transactions.
+// (OK) ATH.
 
 export default (server: Server) => {
   // exampleRoutes.routes(server, baseRoute)

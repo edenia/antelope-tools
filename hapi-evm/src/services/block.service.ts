@@ -8,7 +8,7 @@ const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
 const web3 = new Web3(httpProvider)
 
 // const test = async () => {
-//   const tempBlock: Block = await web3.eth.getBlock(246383575)
+//   const tempBlock: Block = await web3.eth.getBlock(0)
 //   console.log('🚀 ~ tempBlock:', tempBlock)
 
 //   const trx: TransactionInfo = await web3.eth.getTransaction(
@@ -19,6 +19,8 @@ const web3 = new Web3(httpProvider)
 // }
 
 // test()
+
+// TODO: syncronize passed blocks
 
 const getBlock = async () => {
   const blockNumber = await web3.eth.getBlockNumber()
