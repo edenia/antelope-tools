@@ -174,9 +174,9 @@ const getCurrentMissedBlock = async () => {
 
   if (!stats) return
 
-  if (stats.missed_blocks_checked_at) {
+  if (stats.missed_blocks_checked_at && stats.last_round) {
     data = stats.missed_blocks
-    lastBlockAt = stats.last_block_at
+    lastBlockAt = stats.last_round.completed_at
   } else {
     const scheduleHistoryInfo = await _getScheduleHystory()
 

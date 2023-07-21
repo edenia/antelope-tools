@@ -156,6 +156,9 @@ const cleanOldBlocks = async () => {
       delete_block_history (where: {timestamp: {_lt: $date}}) {
         affected_rows
       }
+      delete_round_history (where: {completed_at: {_lt: $date}}) {
+        affected_rows
+      }
     }
   `
 
