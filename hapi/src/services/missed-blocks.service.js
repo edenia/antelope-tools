@@ -12,7 +12,7 @@ const {
 const setScheduleHistory = items => {
   const mutation = `
     mutation ($items: [schedule_history_insert_input!]!) {
-      insert_schedule_history(objects: $items, on_conflict: {constraint: schedule_history_version_key, update_columns: [first_block_at, last_block_at, first_block, last_block, producers, current, round_interval]}) {
+      insert_schedule_history(objects: $items, on_conflict: {constraint: schedule_history_version_key, update_columns: [first_block_at, first_block, producers, round_interval]}) {
         affected_rows
       }
     }
@@ -37,9 +37,7 @@ const setScheduleByDemux = async (state, payload) => {
     SELECT
       schedule_version as version,
       min(timestamp) as first_block_at,
-      max(timestamp) as last_block_at,
       min(block_num) as first_block,
-      max(block_num) as last_block
     FROM
       block_history
     WHERE schedule_version = ${currentVersion + 1}
@@ -89,11 +87,8 @@ const syncCurrentSchedule = async () => {
     await setScheduleHistory({
       version: schedule.version,
       first_block: firstBlock.block_num,
-      last_block: -1, // dont use it
       first_block_at: firstBlock.timestamp,
-      last_block_at: new Date('January 1, 1970'), // dont use it
       producers, 
-      current: false, // dont use it
       round_interval: producers.length * 6
     })
   }
@@ -257,10 +252,8 @@ const syncMissedBlocks = async () => {
       schedule: lastRound.schedule,
       number: lastRound.number,
       account: producer,
-      started_at: start.toISOString(),
       completed_at: end.toISOString(),
-      missed_blocks: 12 - producerBlocks.length,
-      produced_blocks: producerBlocks.length
+      missed_blocks: 12 - producerBlocks.length
     }
   })
 
@@ -285,8 +278,8 @@ const getMissedBlocks = async (range = '3 Hours') => {
       interval.value as datetime,
       round_history.account,
       sum(round_history.missed_blocks) as missed,
-      sum(round_history.produced_blocks) as produced,
-      sum(round_history.missed_blocks)+sum(round_history.produced_blocks) as scheduled
+      count(1) * 12 - sum(round_history.missed_blocks) as produced,
+      count(1) * 12 as scheduled
     FROM 
       interval
     INNER JOIN 
