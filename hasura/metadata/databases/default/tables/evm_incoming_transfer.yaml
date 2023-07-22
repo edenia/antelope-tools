@@ -1,0 +1,3 @@
+table:
+  name: incoming_transfer
+  schema: evm

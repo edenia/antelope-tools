@@ -15,6 +15,6 @@ export type TableType = keyof typeof Tables
 
 export interface Worker {
   name: string
-  intervalSec: number
+  intervalSec?: number
   action: () => Promise<void>
 }

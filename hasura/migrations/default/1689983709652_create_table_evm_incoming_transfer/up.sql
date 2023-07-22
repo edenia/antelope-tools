@@ -1,0 +1,2 @@
+CREATE TABLE "evm"."incoming_transfer" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "block" numeric NOT NULL, "transaction_id" varchar NOT NULL, "from" varchar NOT NULL, "to" varchar NOT NULL, "amount" numeric NOT NULL, "symbol" varchar NOT NULL, "memo" varchar NOT NULL, "quantity" varchar NOT NULL, PRIMARY KEY ("id") );COMMENT ON TABLE "evm"."incoming_transfer" IS E'Incoming TLOS token transfer. (EOS account -> tEVM address)';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

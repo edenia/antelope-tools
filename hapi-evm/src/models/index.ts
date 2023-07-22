@@ -1,4 +1,5 @@
-export * as gasModel from './gas'
+export * as defaultModel from './default.model'
 export * as blockModel from './block'
 export * as transactionModel from './transaction'
-export * as defaultModel from './default.model'
+export * as hyperionStateModel from './hyperion-state'
+export * as incomingTransferModel from './incoming-transfer'
