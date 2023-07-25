@@ -13,11 +13,14 @@ const getTransactions = async (range = '3 Hours') => {
 
     SELECT
       interval.value as datetime,
-      sum(block_history.transactions_length)::integer as transactions_count
+      avg(block_history.transactions_length)::integer as transactions_count,
+      avg(block_history.cpu_usage)::numeric(5,2) as cpu,
+      avg(block_history.net_usage)::numeric(6,3) as net
     FROM
       interval
     LEFT JOIN 
-      block_history ON date_trunc('${granularity}', block_history.timestamp) = interval.value
+      ( SELECT * FROM block_history WHERE transactions_length > 0 ) 
+      AS block_history ON date_trunc('${granularity}', block_history.timestamp) = interval.value
     GROUP BY
       1
     ORDER BY

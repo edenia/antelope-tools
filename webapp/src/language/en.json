@@ -89,6 +89,9 @@
     "/missed-blocks>sidebar": "Missed Blocks",
     "/missed-blocks>title": "Missed Blocks - EOSIO + Antelope Network Dashboard",
     "/missed-blocks>heading": "Missed Blocks",
+    "/stress-test>title": "Stress Test Dashboard",
+    "/stress-test>sidebar": "Stress Test",
+    "/stress-test>heading": "Stress Test",
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
@@ -134,7 +137,10 @@
     "scheduleVersion": "Schedule Version",
     "secondsAgo": "Seconds Ago",
     "tpsAllTimeHigh": "TPS All Time High",
-    "networkUtilizationAllTimeHigh": "Network Utilization All Time High",
+    "cpuUtilization": "CPU Usage",
+    "netUtilization": "NET Usage",
+    "cpuUtilizationAllTimeHigh": "CPU Usage in TPS All Time High",
+    "networkUtilizationAllTimeHigh": "NET Usage in TPS All Time High",
     "transactionsPerSecond": "Transactions per Second",
     "transactionsPerBlock": "Transactions per Block",
     "nodes": "Nodes",
@@ -150,7 +156,9 @@
     "netLimitPerBlock": "Net Limit Per Block",
     "chainCpuLimit": "Chain CPU Limit",
     "chainNetLimit": "Chain Net Limit",
-    "timeToFinality": "Time to Finality"
+    "timeToFinality": "Time to Finality",
+    "cpuUsage": "CPU Usage",
+    "netUsage": "NET Usage"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -320,6 +328,8 @@
     "upperBound": "Upper Bound",
     "limit": "Limit",
     "refreshData": "Refresh Data",
+    "index": "Index Position",
+    "keyType": "Index Type",
     "loadMore": "Load More",
     "emptyTable": "Empty Table"
   },

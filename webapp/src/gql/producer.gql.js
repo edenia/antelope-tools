@@ -127,6 +127,12 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
       transactions_in_last_day
       transactions_in_last_week
       average_daily_transactions_in_last_week
+      average_cpu_usage_in_last_day
+      average_net_usage_in_last_day
+      average_cpu_usage_in_last_hour
+      average_net_usage_in_last_hour
+      average_cpu_usage_in_last_week
+      average_net_usage_in_last_week
       tps_all_time_high
       unique_locations
       missed_blocks
@@ -220,7 +226,7 @@ export const FASTEST_ENDPOINTS_QUERY = gql`query($today: date){
 }`
 
 export const HISTORY_ENDPOINTS_BY_PRODUCER_QUERY = gql`query($id: Int){
-  endpoints: check_history_by_endpoint(order_by: [{value: asc},{date: asc}], where: {producer_id: {_eq: $id}}, distinct_on: [value]) {
+  endpoints: check_history_by_endpoint(order_by: [{value: asc},{date: asc}], where: {producer_id: {_eq: $id}}) {
     value
     date
     avg_time

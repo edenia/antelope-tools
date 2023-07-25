@@ -113,8 +113,7 @@ const getBlocksInRange = async (start, end) => {
       SELECT
         schedule_version,
         producer,
-        block_num,
-        block_id
+        block_num
       FROM
         block_history
       WHERE 

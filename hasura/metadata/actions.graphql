@@ -80,6 +80,8 @@ type CPUBenchmark {
 type Transaction {
   datetime: String
   transactions_count: Int
+  cpu: Float
+  net: Float
 }
 
 type ProducersSummary {

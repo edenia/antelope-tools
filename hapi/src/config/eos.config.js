@@ -8,6 +8,10 @@ module.exports = {
     : '',
   stateHistoryPluginEndpoint:
     process.env.HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT,
+  missedBlocksServiceEnabled:
+    Boolean(process.env.HAPI_EOS_MISSED_BLOCKS_ENABLED) || false,
+  keepBlockHistoryForDays:
+    parseInt(process.env.HAPI_EOS_BLOCK_HISTORY_DAYS) || 0,
   chainId: process.env.HAPI_EOS_API_CHAIN_ID,
   eosChainId:
     'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
@@ -56,5 +60,7 @@ module.exports = {
   rewardsToken: process.env.HAPI_REWARDS_TOKEN,
   eosRateUrl: process.env.HAPI_EOSRATE_GET_STATS_URL,
   eosRateUser: process.env.HAPI_EOSRATE_GET_STATS_USER,
-  eosRatePassword: process.env.HAPI_EOSRATE_GET_STATS_PASSWORD
+  eosRatePassword: process.env.HAPI_EOSRATE_GET_STATS_PASSWORD,
+  maxBlockNetUsage: parseInt(process.env.HAPI_EOS_MAX_NET_BLOCK) || 1048576,
+  maxBlockCpuUsage: parseInt(process.env.HAPI_EOS_MAX_CPU_BLOCK) || 100000
 }
