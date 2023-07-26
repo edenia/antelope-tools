@@ -223,9 +223,9 @@ const getCurrentMissedBlock = async () => {
     return
   }
 
-  let newData = data
+  const newData = data
 
-  rows.forEach(element => {
+  rows.forEach((element) => {
     const sum = parseInt(element.sum)
 
     if (sum > 0) {
