@@ -27,7 +27,7 @@ const baseRoute = '/v1'
 // () Average transactions per second (block and eosio.token -> ERC20).
 // - (NO) internal TLOS transactions. (tEVM address -> tEVM address)
 // - (OK) incoming TLOS transactions. (EOS address -> tEVM address)
-// - () outgoing TLOS transactions. (tEVM address -> EOS address) HOW?
+// - (OK) outgoing TLOS transactions. (tEVM address -> EOS address) HOW?
 // (OK) Daily transactions.
 // (OK) ATH.
 

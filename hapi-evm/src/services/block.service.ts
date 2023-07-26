@@ -31,7 +31,6 @@ const getBlock = async () => {
   }
 
   const blockExist = await blockModel.queries.exist(block.hash.toString())
-  console.log(`🚀 ~ blockExist(${block.hash.toString()}): ${blockExist}`)
 
   if (blockExist) return
 
@@ -54,7 +53,6 @@ const getBlock = async () => {
         trxHash: TransactionHash
       ): Promise<transactionModel.interfaces.CappedTransaction[]> => {
         const transactionExist = await transactionModel.queries.exist(trxHash)
-        console.log('🚀 ~ getBlock ~ transactionExist:', transactionExist)
 
         if (transactionExist) {
           return acc

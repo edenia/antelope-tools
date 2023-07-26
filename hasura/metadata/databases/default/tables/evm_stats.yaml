@@ -1,0 +1,3 @@
+table:
+  name: stats
+  schema: evm
