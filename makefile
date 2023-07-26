@@ -99,9 +99,9 @@ stop:
 
 start:
 	make start-postgres
-	# make start-wallet
+	make start-wallet
 	make start-hapi
-	make start-hapi-evm
+	# make start-hapi-evm
 	make start-hasura
 	make -j 3 start-hasura-cli start-logs start-webapp
 
