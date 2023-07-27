@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 
 import useEndpointsState from '../../hooks/customHooks/useEndpointsState'
@@ -10,6 +11,7 @@ const useStyles = makeStyles(styles)
 
 const EndpointsTextList = ({ type }) => {
   const classes = useStyles()
+  const { t } = useTranslation('endpointsListRoute')
   const [textList, setTextList] = useState('')
   const [{ loading, producers }, { handleFilter, setPagination }] =
     useEndpointsState({ useCache: true })
@@ -23,7 +25,7 @@ const EndpointsTextList = ({ type }) => {
   useEffect(() => {
     if (!producers?.length) return
 
-    let endpointsList = `# List of responding ${type} endpoints \n`
+    let endpointsList = `# List of available ${type.toUpperCase()} endpoints \n`
 
     producers.forEach(producer => {
       if (!!producer?.endpoints[type]?.length) {
@@ -44,6 +46,7 @@ const EndpointsTextList = ({ type }) => {
     <>
       {!loading && !!textList?.length && (
         <div className={classes.container}>
+          <p>{t('listOfResponding')}</p>
           <CopyToClipboard text={textList} />
           {textList}
         </div>

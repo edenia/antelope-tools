@@ -12,7 +12,6 @@ const useStyles = makeStyles(styles)
 const Tooltip = ({
   anchorEl,
   anchorOrigin,
-  transformOrigin,
   open,
   onClose,
   closeOnMouseLeave,
@@ -26,7 +25,10 @@ const Tooltip = ({
       open={open}
       onClose={onClose}
       anchorOrigin={anchorOrigin}
-      transformOrigin={transformOrigin}
+      transformOrigin={{
+        vertical: 'center',
+        horizontal: 'center',
+      }}
       PaperProps={{ onMouseLeave: closeOnMouseLeave ? onClose : () => {} }}
       classes={{
         paper: classes.paper,
@@ -51,7 +53,6 @@ Tooltip.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.node,
   anchorOrigin: PropTypes.object,
-  transformOrigin: PropTypes.object,
   closeOnMouseLeave: PropTypes.bool,
   hideCloseButton: PropTypes.bool,
 }
@@ -60,10 +61,6 @@ Tooltip.defaultProps = {
   onClose: () => {},
   closeOnMouseLeave: false,
   anchorOrigin: {
-    vertical: 'center',
-    horizontal: 'center',
-  },
-  transformOrigin: {
     vertical: 'center',
     horizontal: 'center',
   },

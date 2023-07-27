@@ -359,7 +359,10 @@
     "title": "Endpoints disponibles por",
     "updatedAt": "Actualizado por última vez",
     "endpointsResponding": "Solo puntos finales que responden",
-    "showList": "Ver la lista"
+    "showList": "Ver la lista",
+    "listOfResponding": "Lista de los puntos finales que responden",
+    "linkToStats": "Ir a estadísticas",
+    "filterEndpoints": "Filtrar puntos finales"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Microsegundos",

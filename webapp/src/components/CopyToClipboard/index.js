@@ -28,7 +28,8 @@ const CopyToClipboard = ({ text }) => {
       arrow
     >
       <Button
-        variant="contained"
+        size="small"
+        variant="outlined"
         color="primary"
         onClick={copyText}
         className={classes.icon}
