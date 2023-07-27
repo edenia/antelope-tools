@@ -27,7 +27,7 @@ export default (theme) => ({
       letterSpacing: '0.1px',
       textDecoration: 'none',
       [theme.breakpoints.down('md')]: {
-        color: '#1565c0',
+        color: theme.palette.primary.main,
       },
     },
     [theme.breakpoints.down('md')]: {

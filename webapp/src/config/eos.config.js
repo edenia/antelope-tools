@@ -13,6 +13,7 @@ export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
 export const tokenSymbol = process.env.REACT_APP_TOKEN_SYMBOL
 
 let _nodeTypes = null
+let _nodeChips = null
 let _producerTypes = null
 
 switch (networkName) {
@@ -53,6 +54,15 @@ switch (networkName) {
       },
     ]
     _producerTypes = ['top21', 'paidStandby', 'nonPaidStandby']
+    _nodeChips = [
+      ..._nodeTypes,
+      {
+        name: 'hyperion-v2',
+      },
+      {
+        name: 'history-v1',
+      },
+    ]
     break
 }
 
@@ -76,6 +86,7 @@ export const endpoints = (JSON.parse(
 )
 
 export const nodeTypes = _nodeTypes
+export const nodeChips = _nodeChips || _nodeTypes
 export const producerTypes = _producerTypes
 export const includeDefaultTransaction = process.env
   .REACT_APP_EOS_INCLUDE_TRANSACTION

@@ -12,20 +12,12 @@ const useNodeState = () => {
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
     query: PRODUCERS_QUERY,
+    where: { nodes: { type: { _neq: [] } } },
   })
   const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
   const [items, setItems] = useState([])
 
-  const chips = [
-    { name: 'all' },
-    ...eosConfig.nodeTypes,
-    {
-      name: 'hyperion-v2',
-    },
-    {
-      name: 'history-v1',
-    },
-  ]
+  const chips = [{ name: 'all' }, ...eosConfig.nodeChips]
 
   const getOrderNode = (node) => {
     return (
