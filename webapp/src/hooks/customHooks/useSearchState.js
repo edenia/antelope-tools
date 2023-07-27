@@ -7,17 +7,21 @@ const useSearchState = ({ query, where, limit }) => {
   const [loadProducers, { loading = true, data: { producers, info } = {} }] =
     useLazyQuery(query)
   const location = useLocation()
-  const [pagination, setPagination] = useState({
-    page: 1,
-    pages: 1,
+  const defaultVariables = {
     limit: limit ?? 28,
     offset: 0,
+    endpointFilter: undefined,
     where: {
       owner: { _like: '%%' },
       ...(where ?? { bp_json: { _is_null: false } }),
-    },
+    }
+  }
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pages: 1,
+    ...defaultVariables
   })
-  const [variables, setVariables] = useState(pagination)
+  const [variables, setVariables] = useState(defaultVariables)
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = useCallback(newFilters => {
@@ -81,7 +85,7 @@ const useSearchState = ({ query, where, limit }) => {
 
     setPagination(prev => ({
       ...prev,
-      pages: Math.ceil(info.producers?.count / prev.limit),
+      pages: prev.limit ? Math.ceil(info.producers?.count / prev.limit) : 1,
     }))
   }, [info])
 

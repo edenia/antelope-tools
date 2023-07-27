@@ -11,12 +11,21 @@ const useNodeState = () => {
     { filters, pagination, variables },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
-    query: PRODUCERS_QUERY
+    query: PRODUCERS_QUERY,
   })
   const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
   const [items, setItems] = useState([])
 
-  const chips = [{ name: 'all' }, ...eosConfig.nodeTypes]
+  const chips = [
+    { name: 'all' },
+    ...eosConfig.nodeTypes,
+    {
+      name: 'hyperion-v2',
+    },
+    {
+      name: 'history-v1',
+    },
+  ]
 
   const getOrderNode = (node) => {
     return (
@@ -27,17 +36,28 @@ const useNodeState = () => {
     )
   }
 
+  const isFeature = (filter) => {
+    return (
+      filter !== 'all' &&
+      eosConfig.nodeTypes.findIndex((nodeType) => nodeType.name === filter) < 0
+    )
+  }
+
   useEffect(() => {
     let nodesFilter = { type: { _neq: [] } }
 
     if (filters.name !== 'all') {
+      const filter = isFeature(filters.name) ? 'query' : filters.name
+
       nodesFilter = {
-        _and: [nodesFilter, { type: { _contains: filters.name } }],
+        _and: [nodesFilter, { type: { _contains: filter } }],
       }
     }
 
     setPagination((prev) => ({
       ...prev,
+      limit: 28,
+      ...(isFeature(filters.name) && { limit: null, pages: 1 }),
       where: {
         ...prev.where,
         nodes: nodesFilter,
@@ -49,9 +69,18 @@ const useNodeState = () => {
     if (!data) return
 
     const { producers } = data
+    const isFilterByFeature = isFeature(filters.name)
 
     const list = producers.flatMap((producer) => {
       if (!producer?.nodes?.length) return []
+
+      if (
+        isFilterByFeature &&
+        !producer.nodes.some((node) =>
+          node.node_info[0]?.features?.list?.includes(filters.name),
+        )
+      )
+        return []
 
       producer.nodes.sort((a, b) => {
         return getOrderNode(a) - getOrderNode(b)
