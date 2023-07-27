@@ -126,6 +126,8 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
         })
 
         history.trxPerSecond.push({
+          cpu: transactionHistory.cpu / 2 || 0,
+          net: transactionHistory.net / 2 || 0,
           y: transactionHistory.transactions_count * 2 || 0,
           x: new Date(transactionHistory.datetime).getTime(),
         })

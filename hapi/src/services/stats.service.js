@@ -2,14 +2,14 @@ const Boom = require('@hapi/boom')
 const { StatusCodes } = require('http-status-codes')
 const moment = require('moment')
 
-const { hasuraUtil, sequelizeUtil, sleepFor, eosUtil } = require('../utils')
+const { hasuraUtil, sequelizeUtil, sleepFor } = require('../utils')
 
 const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 
 const _getScheduleHystory = async () => {
   const query = `
     query {
-      schedule_history (where: {version: {_eq: 0}}) {
+      schedule_history (limit: 1, order_by: {version: asc}) {
         first_block_at
       }
     }
@@ -33,7 +33,7 @@ const _getMissedBlock = async (start, end) => {
   const [rows] = await sequelizeUtil.query(`
     SELECT account, sum(missed_blocks)
     FROM round_history
-    WHERE updated_at
+    WHERE completed_at
     BETWEEN '${start}'::timestamp AND '${end}'::timestamp
     GROUP BY account
   `)
@@ -44,14 +44,16 @@ const _getMissedBlock = async (start, end) => {
 const getTransactionsInTimeRage = async (start, end) => {
   const [rows] = await sequelizeUtil.query(`
     SELECT
-      sum(transactions_length)::integer as transactions_count
+      sum(transactions_length)::integer as transactions_count,
+      avg(block_history.cpu_usage)::numeric(5,2) as cpu_usage,
+      avg(block_history.net_usage)::numeric(6,3) as net_usage
     FROM
       block_history
     WHERE
       timestamp between '${start.toISOString()}' and '${end.toISOString()}'
   `)
 
-  return rows?.[0]?.transactions_count || 0
+  return rows?.[0]
 }
 
 const getNodesSummary = async () => {
@@ -67,7 +69,7 @@ const getNodesSummary = async () => {
       type
   `)
 
-  rows.forEach(row => {
+  rows.forEach((row) => {
     payload[row.node_type || 'unknown'] = row.nodes_count
     total += row.nodes_count
   })
@@ -119,12 +121,12 @@ const getBlockDistribution = async (range = '1 day') => {
     `
     const data = await hasuraUtil.request(query, { startTime })
 
-    data.items.forEach(item => {
+    data.items.forEach((item) => {
       totalBloks += item.blocks
     })
 
     return data.items
-      .map(item => ({
+      .map((item) => ({
         account: item.producer || 'N/A',
         blocks: item.blocks,
         percent: item.blocks === 0 ? 0 : item.blocks / totalBloks
@@ -151,6 +153,7 @@ const getStats = async () => {
         last_block_at
         tps_all_time_high
         missed_blocks
+        missed_blocks_checked_at
         updated_at
         created_at
       }
@@ -171,9 +174,9 @@ const getCurrentMissedBlock = async () => {
 
   if (!stats) return
 
-  if (stats.missed_blocks) {
+  if (stats.missed_blocks_checked_at && stats.last_round) {
     data = stats.missed_blocks
-    lastBlockAt = stats.last_block_at
+    lastBlockAt = stats.last_round.completed_at
   } else {
     const scheduleHistoryInfo = await _getScheduleHystory()
 
@@ -187,9 +190,8 @@ const getCurrentMissedBlock = async () => {
 
     if (!rowsInitial.length) {
       await udpateStats({
-        missed_blocks: {
-          checked_at: end.toISOString()
-        }
+        missed_blocks: {},
+        missed_blocks_checked_at: end.toISOString()
       })
 
       getCurrentMissedBlock()
@@ -198,7 +200,7 @@ const getCurrentMissedBlock = async () => {
     }
   }
 
-  start = moment(data.checked_at).add(1, 'second')
+  start = moment(stats.missed_blocks_checked_at).add(1, 'second')
   end = moment(start).add(59, 'seconds')
 
   if (_checkDateGap(lastBlockAt, end)) {
@@ -212,10 +214,8 @@ const getCurrentMissedBlock = async () => {
 
   if (!rows.length) {
     await udpateStats({
-      missed_blocks: {
-        ...data,
-        checked_at: end.toISOString()
-      }
+      missed_blocks: data,
+      missed_blocks_checked_at: end.toISOString()
     })
 
     getCurrentMissedBlock()
@@ -223,32 +223,25 @@ const getCurrentMissedBlock = async () => {
     return
   }
 
-  let newData = data
+  const newData = data
 
-  rows.forEach(element => {
-    if (newData[element.account]) {
-      newData = {
-        ...newData,
-        [element.account]: `${
-          parseInt(newData[element.account]) + parseInt(element.sum)
-        }`
-      }
-    } else {
-      newData = { ...newData, [element.account]: element.sum }
+  rows.forEach((element) => {
+    const sum = parseInt(element.sum)
+
+    if (sum > 0) {
+      newData[element.account] = sum + (parseInt(newData[element.account]) || 0)
     }
   })
 
   await udpateStats({
-    missed_blocks: {
-      ...newData,
-      checked_at: end.toISOString()
-    }
+    missed_blocks: newData,
+    missed_blocks_checked_at: end.toISOString()
   })
 
   getCurrentMissedBlock()
 }
 
-const udpateStats = async payload => {
+const udpateStats = async (payload) => {
   const mutation = `
     mutation ($id: uuid!, $payload: stat_set_input!) {
       update_stat_by_pk(pk_columns: {id: $id}, _set: $payload) {
@@ -259,7 +252,7 @@ const udpateStats = async payload => {
   await hasuraUtil.request(mutation, { id: STAT_ID, payload })
 }
 
-const insertStats = async payload => {
+const insertStats = async (payload) => {
   const mutation = `
     mutation ($payload: stat_insert_input!) {
       insert_stat_one(object: $payload) {
@@ -275,65 +268,49 @@ const getLastTPSAllTimeHigh = async () => {
 
   if (!stats || !stats.last_block_at) return null
 
-  if (stats.tps_all_time_high) {
-    return {
-      ...stats.tps_all_time_high,
-      last_block_at: stats.last_block_at
-    }
-  }
-
-  const scheduleHistoryInfo = await _getScheduleHystory()
-
-  if (!scheduleHistoryInfo) return null
-
-  return {
-    transactions_count: 0,
-    last_block_at: stats.last_block_at,
-    checked_at: moment(scheduleHistoryInfo.first_block_at)
-      .subtract(1, 'second')
-      .toISOString()
-  }
+  return stats.tps_all_time_high
 }
 
-const getBlockUsage = async blockNum => {
-  const block = await eosUtil.getBlock(blockNum)
-  const info = await eosUtil.getInfo()
-  let cpuUsage = 0
-  let netUsage = 0
+const getTimestampBlock = async (position) => {
+  const query = `
+      query {
+        blocks: block_history(limit: 1, order_by: {block_num: ${
+          position === 'first' ? 'asc' : 'desc'
+        }}, where: {producer: {_neq: "NULL"}}) {
+          timestamp
+        }
+      }
+    `
 
-  block.transactions.forEach(transaction => {
-    cpuUsage += transaction.cpu_usage_us
-    netUsage += transaction.net_usage_words
-  })
+  const data = await hasuraUtil.request(query)
 
-  return {
-    id: block.id,
-    block_num: block.block_num,
-    transactions_count: block.transactions.length,
-    cpu_usage_us: cpuUsage,
-    block_cpu_limit: info.block_cpu_limit,
-    cpu_usage_percent: cpuUsage / info.block_cpu_limit,
-    net_usage_words: netUsage,
-    block_net_limit: info.block_net_limit,
-    net_usage_percent: netUsage / info.block_net_limit
-  }
+  return data?.blocks[0]?.timestamp
 }
 
 const syncTPSAllTimeHigh = async () => {
   const lastValue = await getLastTPSAllTimeHigh()
 
-  if (!lastValue) {
-    await sleepFor(60)
-    syncTPSAllTimeHigh()
+  let start
+  let end
 
-    return
+  if (!lastValue) {
+    const firstBlockInDB = new Date(await getTimestampBlock('first'))
+
+    start = moment(firstBlockInDB)
+    end = moment(start).add(
+      59 + (500 - firstBlockInDB.getMilliseconds()) / 1000,
+      'seconds'
+    )
+  } else {
+    start = moment(lastValue.checked_at).add(0.5, 'second')
+    end = moment(start).add(59.5, 'seconds')
   }
 
-  const start = moment(lastValue.checked_at).add(1, 'second')
-  const end = moment(start).add(59, 'seconds')
+  const lastBlockInDB = await getTimestampBlock('last')
+  const diff = end.diff(moment(new Date(lastBlockInDB)), 'seconds')
 
-  if (_checkDateGap(lastValue.last_block_at, end)) {
-    await sleepFor(moment(lastValue.last_block_at).diff(end, 'seconds'))
+  if (diff >= 0) {
+    await sleepFor(diff)
     syncTPSAllTimeHigh()
 
     return
@@ -351,6 +328,8 @@ const syncTPSAllTimeHigh = async () => {
       SELECT
         interval.value as datetime,
         sum(block_history.transactions_length) as transactions_count,
+        avg(block_history.cpu_usage) as cpu_usage,
+        avg(block_history.net_usage) as net_usage,
         array_to_string(array_agg(block_history.block_num), ',') as blocks
       FROM 
         interval
@@ -361,49 +340,32 @@ const syncTPSAllTimeHigh = async () => {
       ORDER BY 
         2 DESC
      )
-     SELECT datetime, transactions_count::integer, blocks FROM tps LIMIT 1
+     SELECT datetime, transactions_count::integer, cpu_usage::numeric(5,2), net_usage::numeric(6,3), blocks FROM tps LIMIT 1
   `)
-
-  if (!rows.length) {
-    await udpateStats({
-      tps_all_time_high: {
-        ...lastValue,
-        checked_at: end.toISOString()
-      }
-    })
-    syncTPSAllTimeHigh()
-
-    return
-  }
 
   const newValue = rows[0]
 
-  if (parseInt(newValue.transactions_count) < lastValue.transactions_count) {
+  if (
+    newValue &&
+    (!lastValue ||
+      parseInt(newValue.transactions_count) >= lastValue.transactions_count)
+  ) {
     await udpateStats({
       tps_all_time_high: {
-        ...lastValue,
+        ...newValue,
+        blocks: newValue.blocks.split(','),
         checked_at: end.toISOString()
       }
     })
     syncTPSAllTimeHigh()
 
     return
-  }
-
-  const blocks = newValue.blocks.split(',')
-
-  for (let index = 0; index < blocks.length; index++) {
-    const block = await getBlockUsage(blocks[index])
-
-    blocks[index] = block
   }
 
   await udpateStats({
     tps_all_time_high: {
-      ...newValue,
-      checked_at: end.toISOString(),
-      transactions_count: parseInt(newValue.transactions_count),
-      blocks
+      ...lastValue,
+      checked_at: end.toISOString()
     }
   })
   syncTPSAllTimeHigh()
@@ -423,27 +385,41 @@ const sync = async () => {
   await insertStats(payload)
 }
 
-const syncTransactionsInfo = async () => {
-  const transactionsInLastWeek = await getTransactionsInTimeRage(
-    moment().subtract(1, 'week'),
+const getTransactionsStats = async (range) => {
+  const transactionsStats = await getTransactionsInTimeRage(
+    moment().subtract(1, range),
     moment()
   )
-  const payload = {
-    transactions_in_last_hour: await getTransactionsInTimeRage(
-      moment().subtract(1, 'hour'),
-      moment()
-    ),
-    transactions_in_last_day: await getTransactionsInTimeRage(
-      moment().subtract(1, 'day'),
-      moment()
-    ),
-    transactions_in_last_week: transactionsInLastWeek,
-    average_daily_transactions_in_last_week: transactionsInLastWeek / 7
+
+  return {
+    [`transactions_in_last_${range}`]:
+      transactionsStats?.transactions_count || 0,
+    [`average_cpu_usage_in_last_${range}`]: transactionsStats?.cpu_usage || 0,
+    [`average_net_usage_in_last_${range}`]: transactionsStats?.net_usage || 0
   }
+}
+
+const syncTransactionsInfo = async () => {
+  const ranges = ['day', 'hour', 'week']
+  let payload
+
+  for (const range of ranges) {
+    const stats = await getTransactionsStats(range)
+
+    payload = {
+      ...payload,
+      ...stats
+    }
+  }
+
+  payload.average_daily_transactions_in_last_week =
+    payload.transactions_in_last_day / 7 || 0
+
   const stats = await getStats()
 
   if (stats) {
     await udpateStats(payload)
+
     return
   }
   await insertStats(payload)

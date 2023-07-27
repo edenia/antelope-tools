@@ -37,7 +37,7 @@ jobs:
           REACT_APP_TITLE: 'Libre Testnet Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/libre.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://libre-testnet-explorer.edenia.cloud/" },{"text": "Documentation","src": "https://libre-chain.gitbook.io/"},{"text": "Libre Network Monitor","src": "https://libre-testnet.antelope.tools"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "Libre Website", "src": "https://libre.org/" },{ "text": "Libre Block Explorer", "src": "https://testnet.libre.org/v2/explore" },{"text": "Documentation","src": "https://libre-chain.gitbook.io/"},{"text": "Libre Network Monitor","src": "https://libre-testnet.antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
@@ -56,8 +56,8 @@ jobs:
           REACT_APP_SYNC_TOLERANCE_INTERVAL: 180000
           REACT_APP_TOKEN_SYMBOL: 'LIBRE'
           REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"pair":"eos","icon":"eos","order":5},{"label":"Proton","value":"https://proton.antelope.tools","mainnet":true,"pair":"proton","icon":"proton","order":3},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"pair":"wax","icon":"wax","order":4},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"pair":"telos","icon":"telos","order":1},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"pair":"libre","icon":"libre","order":2},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"pair":null,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"pair":"eos","icon":"jungle","order":5},{"label":"Proton Testnet","value":"https://proton-testnet.antelope.tools","mainnet":false,"pair":"proton","icon":"proton","order":3},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"pair":"wax","icon":"wax","order":4},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"pair":"telos","icon":"telos","order":1},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"pair":"libre","icon":"libre","order":2},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"pair":"ultra","icon":"ultra","order":6}]'
-          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://libre-testnet-explorer.edenia.cloud/transaction/(transaction)'
+          REACT_APP_DISABLED_MENU_ITEMS: '[]'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://testnet.libre.org/v2/explore/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'true'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
@@ -83,9 +83,9 @@ jobs:
           HAPI_EOS_API_NETWORK_NAME: libre
           HAPI_EOS_API_ENDPOINTS: '["https://libre-testnet.edenia.cloud","https://api.testnet.libre.cryptobloks.io","https://libre-testnet.eosphere.io"]'
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://api-node.libre-testnet:8080'
-          HAPI_EOS_MISSED_BLOCKS_ENABLED: 'false'
+          HAPI_EOS_MISSED_BLOCKS_ENABLED: 'true'
           HAPI_EOS_BLOCK_HISTORY_DAYS: 90
-          HAPI_EOS_MAX_CPU_BLOCK: 100000
+          HAPI_EOS_MAX_CPU_BLOCK: 250000
           HAPI_EOS_MAX_NET_BLOCK: 1048576
           HAPI_EOS_API_CHAIN_ID: b64646740308df2ee06c6b72f34c0f7fa066d940e831f752db2006fcc2b78dee
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}

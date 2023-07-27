@@ -127,10 +127,23 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
       transactions_in_last_day
       transactions_in_last_week
       average_daily_transactions_in_last_week
+      average_cpu_usage_in_last_day
+      average_net_usage_in_last_day
+      average_cpu_usage_in_last_hour
+      average_net_usage_in_last_hour
+      average_cpu_usage_in_last_week
+      average_net_usage_in_last_week
       tps_all_time_high
       unique_locations
+    }
+  }
+`
+
+export const MISSED_BLOCKS_SUBSCRIPTION = gql`
+  subscription {
+    stats: stat(limit: 1) {
+      id
       missed_blocks
-      updated_at
     }
   }
 `

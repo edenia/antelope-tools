@@ -77,8 +77,8 @@ const sharedStateReducer = (state, action) => {
             blocks: [previousBlock.blocks[0], action.payload.blocks[0]],
             transactions:
               previousBlock.transactions + action.payload.transactions,
-            cpu: action.payload.cpu + previousBlock.cpu,
-            net: action.payload.net + previousBlock.net,
+            cpu: (action.payload.cpu + previousBlock.cpu) / 2,
+            net: (action.payload.net + previousBlock.net) / 2,
           },
           ...tps,
         ],
@@ -185,17 +185,11 @@ export const useSharedState = () => {
   const getGlobalConfig = async () => {
     if (!global) {
       try {
-        const { rows } = await eosApi.getTableRows({
-          code: 'eosio',
-          scope: 'eosio',
-          table: 'global',
-          json: true,
-          lower_bound: null,
-        })
+        const info = await eosApi.getInfo({})
 
         global = {
-          maxBlockCPU: rows[0]?.max_block_cpu_usage,
-          maxBlockNET: rows[0]?.max_block_net_usage,
+          maxBlockCPU: info?.block_cpu_limit,
+          maxBlockNET: info?.block_net_limit,
         }
       } catch (error) {}
     }
