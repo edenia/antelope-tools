@@ -40,10 +40,7 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
           <div className={classes.rowWrapper}>
             <Typography variant="body1">
               {`${t('missedBlocks')}: `}
-              {missedBlocks.reduce(
-                (result, current) => result + current.value,
-                0,
-              )}
+              {missedBlocks || 0}
             </Typography>
           </div>
         )}
@@ -53,7 +50,7 @@ const Stats = ({ missedBlocks, t, classes, votes, rewards, eosRate }) => {
 }
 
 Stats.propTypes = {
-  missedBlocks: PropTypes.array,
+  missedBlocks: PropTypes.number,
   t: PropTypes.func,
   classes: PropTypes.object,
   votes: PropTypes.string,

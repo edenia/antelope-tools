@@ -133,10 +133,10 @@ const handleBlocksResult = async (data) => {
 
     if (blocksData.length === 50) {
       await saveBlocks(blocksData)
+      await statsService.udpateStats({ last_block_at: block.timestamp })
       blocksData = []
     }
 
-    await statsService.udpateStats({ last_block_at: block.timestamp })
     send(
       serialize('request', ['get_blocks_ack_request_v0', { num_messages: 1 }])
     )
@@ -154,6 +154,9 @@ const cleanOldBlocks = async () => {
   const mutation = `
     mutation ($date: timestamptz) {
       delete_block_history (where: {timestamp: {_lt: $date}}) {
+        affected_rows
+      }
+      delete_round_history (where: {completed_at: {_lt: $date}}) {
         affected_rows
       }
     }
