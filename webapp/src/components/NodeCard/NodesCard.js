@@ -1,15 +1,13 @@
 /* eslint camelcase: 0 */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import { useSubscription } from '@apollo/client'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import 'flag-icon-css/css/flag-icons.css'
 
-import { BLOCK_TRANSACTIONS_HISTORY } from '../../gql'
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
@@ -29,22 +27,12 @@ const NodesCard = ({ nodes }) => {
   if (!nodes?.length) return
 
   const HealthStatus = ({ node }) => {
-    const { data, loading } = useSubscription(BLOCK_TRANSACTIONS_HISTORY)
-    const [missedBlocks, setMissedBlocks] = useState({})
-
-    useEffect(() => {
-      if (data?.stats?.length) {
-        setMissedBlocks(data.stats[0].missed_blocks)
-      }
-    }, [data, loading])
-
     if (!node?.health_status?.length) return <></>
 
     return (
       <>
         <dt className={classes.bold}>{t('healthStatus')}</dt>
         <dd>
-          {missedBlocks && `${t('missedBlocks')}: ${missedBlocks}`}
           <ProducerHealthIndicators producer={node} />
         </dd>
       </>

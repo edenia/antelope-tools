@@ -45,7 +45,7 @@ const Nodes = () => {
                 <InformationCard
                   key={`node-${producer.owner}-${index}`}
                   type="node"
-                  producer={{ ...producer, missedBlocks: undefined }}
+                  producer={producer}
                   rank={producer.rank}
                 />
               ))

@@ -5,13 +5,14 @@ const {
   sequelizeUtil,
   hasuraUtil,
   sleepFor,
-  getGranularityFromRange
+  getGranularityFromRange,
+  eosUtil
 } = require('../utils')
 
 const setScheduleHistory = items => {
   const mutation = `
     mutation ($items: [schedule_history_insert_input!]!) {
-      insert_schedule_history(objects: $items, on_conflict: {constraint: schedule_history_version_key, update_columns: [first_block_at, last_block_at, first_block, last_block, producers, current, round_interval]}) {
+      insert_schedule_history(objects: $items, on_conflict: {constraint: schedule_history_version_key, update_columns: [first_block_at, first_block, producers, round_interval]}) {
         affected_rows
       }
     }
@@ -36,9 +37,7 @@ const setScheduleByDemux = async (state, payload) => {
     SELECT
       schedule_version as version,
       min(timestamp) as first_block_at,
-      max(timestamp) as last_block_at,
       min(block_num) as first_block,
-      max(block_num) as last_block
     FROM
       block_history
     WHERE schedule_version = ${currentVersion + 1}
@@ -56,16 +55,50 @@ const setScheduleByDemux = async (state, payload) => {
   await setScheduleHistory(schedules)
 }
 
+const getScheduleFirstBlock = async version => {
+  const [rows] = await sequelizeUtil.query(`
+  SELECT 
+    block_history.block_num, timestamp, producer
+  FROM 
+    block_history
+  INNER JOIN(
+    SELECT
+      min(block_num) as block_num
+    FROM
+      block_history
+    WHERE 
+      schedule_version = ${version}
+  ) as first_block
+  ON block_history.block_num = first_block.block_num`)
+
+  return rows[0]
+}
+
+const syncCurrentSchedule = async () => {
+  const current = await getCurrentVersion()
+  const { active: schedule } = await eosUtil.getProducerSchedule()
+  const producers = schedule.producers.map(producer => producer.producer_name)
+
+  if(schedule.version > current) {
+    const firstBlock = await getScheduleFirstBlock(schedule.version)
+
+    if (!firstBlock) return
+
+    await setScheduleHistory({
+      version: schedule.version,
+      first_block: firstBlock.block_num,
+      first_block_at: firstBlock.timestamp,
+      producers, 
+      round_interval: producers.length * 6
+    })
+  }
+}
+
 const getLastRoundInfo = async () => {
   const stats = await statsService.getStats()
 
-  // if there is no stats we should try later
-  if (!stats) {
-    return null
-  }
-
   // if there is no last block we should try later
-  if (!stats.last_block_at) {
+  if (!stats?.last_block_at) {
     return null
   }
 
@@ -76,10 +109,10 @@ const getLastRoundInfo = async () => {
     }
   }
 
-  // if there is no previous round we should start from round 0 and version 0
+  // if there is no previous round we should start from the first available schedule
   const query = `
     query {
-      schedule_history (where: {version: {_eq: 0}}) {
+      schedule_history (limit: 1, order_by: {version: asc}) {
         schedule: version,
         first_block_at,
         interval: round_interval,
@@ -126,13 +159,14 @@ const getBlocksInRange = async (start, end) => {
   }))
 }
 
-const getScheduleByVersion = async version => {
+const getNextScheduleByVersion = async version => {
   const query = `
     query {
-      schedule_history(where: {version: {_eq: ${version}}}, limit: 1) {
+      schedule_history(where: {version: {_gte: ${version}}}, order_by: {version: asc}, limit: 1) {
         version
         producers
         round_interval
+        first_block_at
       }
     }  
   `
@@ -172,11 +206,11 @@ const syncMissedBlocks = async () => {
   // if the diference between the
   // last block time and the end time
   // is less than the round interval
-  // then wait until the round end
+  // then wait for block history synchronization
   if (
     moment(lastRound.last_block_at).diff(end, 'seconds') < lastRound.interval
   ) {
-    await sleepFor(60)
+    await sleepFor(10)
     syncMissedBlocks()
 
     return
@@ -184,12 +218,12 @@ const syncMissedBlocks = async () => {
 
   const blocks = await getBlocksInRange(start, end)
 
-  // if the first block comes from different schedule_version
-  // then it's the end of the version in use
-  if (blocks.length > 0 && blocks[0].schedule_version !== lastRound.schedule) {
-    const newSchedule = await getScheduleByVersion(lastRound.schedule + 1)
+  if (!blocks.length || blocks.length > 0 && blocks[0].schedule_version !== lastRound.schedule) {
+    const newSchedule = await getNextScheduleByVersion(
+      lastRound.schedule + 1
+    )
 
-    // schedule version no yet in the history
+    // schedule version no yet in the DB
     if (!newSchedule) {
       await sleepFor(60)
       syncMissedBlocks()
@@ -197,10 +231,11 @@ const syncMissedBlocks = async () => {
       return
     }
 
-    lastRound.schedule += 1
+    lastRound.schedule = newSchedule.version
     lastRound.number = 0
     lastRound.interval = newSchedule.round_interval
     lastRound.producers = newSchedule.producers
+    lastRound.completed_at = newSchedule.first_block_at
 
     await statsService.udpateStats({ last_round: lastRound })
     syncMissedBlocks()
@@ -210,22 +245,21 @@ const syncMissedBlocks = async () => {
 
   lastRound.number += 1
   lastRound.completed_at = end.toISOString()
-  const roundHistory = lastRound.producers.map(producer => {
-    const producerBlocks = blocks.filter(block => block.producer === producer)
+  const roundHistory = lastRound.producers.map((producer) => {
+    const producerBlocks = blocks.filter((block) => block.producer === producer)
 
     return {
       schedule: lastRound.schedule,
       number: lastRound.number,
       account: producer,
-      started_at: start.toISOString(),
       completed_at: end.toISOString(),
-      missed_blocks: 12 - producerBlocks.length,
-      produced_blocks: producerBlocks.length
+      missed_blocks: 12 - producerBlocks.length
     }
   })
 
   await addRoundHistory(roundHistory)
   await statsService.udpateStats({ last_round: lastRound })
+
   syncMissedBlocks()
 }
 
@@ -244,8 +278,8 @@ const getMissedBlocks = async (range = '3 Hours') => {
       interval.value as datetime,
       round_history.account,
       sum(round_history.missed_blocks) as missed,
-      sum(round_history.produced_blocks) as produced,
-      sum(round_history.missed_blocks)+sum(round_history.produced_blocks) as scheduled
+      count(1) * 12 - sum(round_history.missed_blocks) as produced,
+      count(1) * 12 as scheduled
     FROM 
       interval
     INNER JOIN 
@@ -261,6 +295,7 @@ const getMissedBlocks = async (range = '3 Hours') => {
 
 module.exports = {
   syncMissedBlocks,
+  syncCurrentSchedule,
   getMissedBlocks,
   setScheduleByDemux
 }

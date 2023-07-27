@@ -4,8 +4,7 @@ const {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService,
-  demuxService
+  statsService
 } = require('../services')
 const { workersConfig, hasuraConfig, eosConfig } = require('../config')
 const { axiosUtil, sleepFor } = require('../utils')
@@ -72,7 +71,7 @@ const start = async () => {
     if (eosConfig.missedBlocksServiceEnabled) {
       run('SYNC MISSED BLOCKS', missedBlocksService.syncMissedBlocks)
       run('SYNC MISSED BLOCKS PER PRODUCER', statsService.getCurrentMissedBlock)
-      run('SYNC SCHEDULE HISTORY', demuxService.init)
+      run('SYNC SCHEDULE HISTORY', missedBlocksService.syncCurrentSchedule, 60)
     }
 
     run('SYNC TPS', statsService.syncTPSAllTimeHigh)

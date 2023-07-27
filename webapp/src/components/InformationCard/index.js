@@ -50,10 +50,7 @@ const InformationCard = ({ producer, rank, type }) => {
       <div className={classes.rowWrapper}>
         <Typography variant="body1">
           {`${t('missedBlocks')}: `}
-          {(producer.missed_blocks || []).reduce(
-            (result, current) => result + current.value,
-            0,
-          )}
+          {producer.missed_blocks || 0}
         </Typography>
       </div>
     )
@@ -82,7 +79,7 @@ const InformationCard = ({ producer, rank, type }) => {
           t={t}
           type={type}
           classes={classes}
-          missedBlocks={producer.missed_blocks || []}
+          missedBlocks={producer.missed_blocks || 0}
           votes={formatWithThousandSeparator(
             producer.total_votes_eos || '0',
             0,
@@ -132,7 +129,6 @@ const InformationCard = ({ producer, rank, type }) => {
           rank,
           owner: producer.owner,
           updatedAt: producer.updated_at,
-          missedBlocks: producer.missedBlocks || [],
           nodes: producer.bp_json?.nodes || [],
           healthStatus: producer.health_status,
           dataType: producer.bp_json?.type,

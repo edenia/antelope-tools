@@ -9,7 +9,7 @@ const STAT_ID = 'bceb5b75-6cb9-45af-9735-5389e0664847'
 const _getScheduleHystory = async () => {
   const query = `
     query {
-      schedule_history (where: {version: {_eq: 0}}) {
+      schedule_history (limit: 1, order_by: {version: asc}) {
         first_block_at
       }
     }
@@ -33,7 +33,7 @@ const _getMissedBlock = async (start, end) => {
   const [rows] = await sequelizeUtil.query(`
     SELECT account, sum(missed_blocks)
     FROM round_history
-    WHERE updated_at
+    WHERE completed_at
     BETWEEN '${start}'::timestamp AND '${end}'::timestamp
     GROUP BY account
   `)
@@ -153,6 +153,7 @@ const getStats = async () => {
         last_block_at
         tps_all_time_high
         missed_blocks
+        missed_blocks_checked_at
         updated_at
         created_at
       }
@@ -173,9 +174,9 @@ const getCurrentMissedBlock = async () => {
 
   if (!stats) return
 
-  if (stats.missed_blocks) {
+  if (stats.missed_blocks_checked_at && stats.last_round) {
     data = stats.missed_blocks
-    lastBlockAt = stats.last_block_at
+    lastBlockAt = stats.last_round.completed_at
   } else {
     const scheduleHistoryInfo = await _getScheduleHystory()
 
@@ -189,9 +190,8 @@ const getCurrentMissedBlock = async () => {
 
     if (!rowsInitial.length) {
       await udpateStats({
-        missed_blocks: {
-          checked_at: end.toISOString()
-        }
+        missed_blocks: {},
+        missed_blocks_checked_at: end.toISOString()
       })
 
       getCurrentMissedBlock()
@@ -200,7 +200,7 @@ const getCurrentMissedBlock = async () => {
     }
   }
 
-  start = moment(data.checked_at).add(1, 'second')
+  start = moment(stats.missed_blocks_checked_at).add(1, 'second')
   end = moment(start).add(59, 'seconds')
 
   if (_checkDateGap(lastBlockAt, end)) {
@@ -214,10 +214,8 @@ const getCurrentMissedBlock = async () => {
 
   if (!rows.length) {
     await udpateStats({
-      missed_blocks: {
-        ...data,
-        checked_at: end.toISOString()
-      }
+      missed_blocks: data,
+      missed_blocks_checked_at: end.toISOString()
     })
 
     getCurrentMissedBlock()
@@ -225,26 +223,19 @@ const getCurrentMissedBlock = async () => {
     return
   }
 
-  let newData = data
+  const newData = data
 
   rows.forEach((element) => {
-    if (newData[element.account]) {
-      newData = {
-        ...newData,
-        [element.account]: `${
-          parseInt(newData[element.account]) + parseInt(element.sum)
-        }`
-      }
-    } else {
-      newData = { ...newData, [element.account]: element.sum }
+    const sum = parseInt(element.sum)
+
+    if (sum > 0) {
+      newData[element.account] = sum + (parseInt(newData[element.account]) || 0)
     }
   })
 
   await udpateStats({
-    missed_blocks: {
-      ...newData,
-      checked_at: end.toISOString()
-    }
+    missed_blocks: newData,
+    missed_blocks_checked_at: end.toISOString()
   })
 
   getCurrentMissedBlock()
