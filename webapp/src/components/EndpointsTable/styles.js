@@ -14,10 +14,11 @@ export default (theme) => ({
   },
   titleCell: {
     display: 'flex',
-    '& svg': {
+    gap: theme.spacing(2),
+    alignItems: 'center',
+    '& .MuiButton-root': {
       alignSelf: 'center',
       marginLeft: theme.spacing(2),
-      cursor: 'pointer',
-    },
+    }
   },
 })

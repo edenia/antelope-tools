@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
+import { Tooltip as MUITooltip } from '@mui/material'
 
 import Tooltip from '../Tooltip'
 
@@ -45,12 +46,14 @@ const InfoModal = ({ lights = defaultLights }) => {
 
   return (
     <>
-      <HelpOutlineIcon
-        className={classes.helpIcon}
-        onClick={(e) => {
-          handlePopoverOpen(e.target)
-        }}
-      />
+      <MUITooltip title={t('help')} arrow>
+        <HelpOutlineIcon
+          className={classes.helpIcon}
+          onClick={(e) => {
+            handlePopoverOpen(e.target)
+          }}
+        />
+      </MUITooltip>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
