@@ -1,7 +1,7 @@
 {
-  "name": "backend-boilerplate",
+  "name": "evm-backend",
   "version": "1.0.0",
-  "description": "AntelopeIO Boilerplate for backend development",
+  "description": "EVM Dashbaord Backend Service",
   "main": "dist/index.js",
   "author": "edenia.com",
   "license": "MIT",

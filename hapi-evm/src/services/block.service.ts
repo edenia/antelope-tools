@@ -81,6 +81,10 @@ const getBlock = async () => {
   await Promise.all(transactionsPromises)
 }
 
+const syncOldBlocks = async (): Promise<void> => {
+  // code
+}
+
 const blockWorker = async () => {
   getBlock()
 }
@@ -93,6 +97,15 @@ const syncBlockWorker = (): defaultModel.Worker => {
   }
 }
 
+const syncOldBlockWorker = (): defaultModel.Worker => {
+  return {
+    name: 'SYNC OLD BLOCK WORKER',
+    intervalSec: 1,
+    action: syncOldBlocks
+  }
+}
+
 export default {
-  syncBlockWorker
+  syncBlockWorker,
+  syncOldBlockWorker
 }

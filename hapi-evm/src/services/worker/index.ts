@@ -21,6 +21,7 @@ const run = async (worker: defaultModel.Worker) => {
 const init = async () => {
   await coreUtil.hasura.hasuraAssembled()
 
+  run(blockService.syncOldBlockWorker())
   // run(blockService.syncBlockWorker())
   run(hyperionService.syncWorker())
 }
