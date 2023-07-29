@@ -103,10 +103,12 @@ const syncOldBlocks = async (): Promise<void> => {
 
   if (!isUpToDate) {
     const nextBlockTo = await blockModel.queries.default.getNextBlock(nextBlock)
-    const nextBlockToNumber = nextBlockTo[0].number || 0
+    const nextBlockToNumber = nextBlockTo[0]?.number || 0
 
     if (nextBlockToNumber > nextBlock) {
-      console.log(`🚦 ${nextBlockToNumber - nextBlock} blocks behind`)
+      console.log(
+        `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
+      )
     }
 
     await syncFullBlock(nextBlock)
