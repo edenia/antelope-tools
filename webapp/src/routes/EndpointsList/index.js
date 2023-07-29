@@ -50,6 +50,7 @@ const EndpointsList = () => {
                 {t('endpointsResponding')}
               </Typography>
               <Switch
+                inputProps = {{ 'aria-label': t('filterEndpoints') }}
                 onChange={(event) => {
                   handleFilter(event.target?.checked)
                 }}
@@ -59,10 +60,10 @@ const EndpointsList = () => {
               <HealthInfoModal />
             </div>
             <FormControl variant="standard">
-              <InputLabel id="selectLabel">{t('itemsPerPage')}</InputLabel>
+              <InputLabel htmlFor='selectLabel'>{t('itemsPerPage')}</InputLabel>
               <Select
                 className={classes.select}
-                labelId="selectLabel"
+                inputProps={{id: 'selectLabel'}}
                 value={pagination.limit || ''}
                 onChange={(e) =>
                   setPagination((prev) => ({

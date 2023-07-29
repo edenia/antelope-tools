@@ -52,7 +52,10 @@ const Faucet = () => {
       return
     }
 
-    if (!isValidAccountName(createAccountValues.accountName)) {
+    if (
+      eosConfig.networkName !== 'ultra-testnet' &&
+      !isValidAccountName(createAccountValues.accountName)
+    ) {
       showMessage({
         type: 'error',
         content: 'Please enter a valid account name',

@@ -27,7 +27,7 @@ export default (theme) => ({
       letterSpacing: '0.1px',
       textDecoration: 'none',
       [theme.breakpoints.down('md')]: {
-        color: '#1565c0',
+        color: theme.palette.primary.main,
       },
     },
     [theme.breakpoints.down('md')]: {
@@ -103,8 +103,7 @@ export default (theme) => ({
     justifyContent: 'center',
     borderRadius: '10px',
     textAlign: 'center',
-    backgroundColor: `#1675CA !important`,
-
+    backgroundColor: `${theme.palette.primary.main} !important`,
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',
       color: theme.sidebar.badge.color,

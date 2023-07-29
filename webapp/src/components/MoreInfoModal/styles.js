@@ -1,8 +1,8 @@
-export default () => ({
+export default (theme) => ({
   clickableIcon: {
     cursor: 'pointer',
     '&:hover': {
-      color: '#1565c0',
+      color: theme.palette.primary.main,
     },
   },
 })

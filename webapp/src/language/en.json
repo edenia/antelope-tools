@@ -354,7 +354,10 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "endpointsResponding": "Only endpoints responding",
-    "showList": "Show List"
+    "showList": "Show List",
+    "listOfResponding": "List of endpoints that are responding",
+    "linkToStats": "Go to stats",
+    "filterEndpoints": "Filter responding endpoints"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Microseconds",
@@ -401,6 +404,7 @@
     "not working": "The endpoint is not responding"
   },
   "copyToClipboardComponent": {
+    "copy": "Click to copy",
     "copyToClipboard": "Copy to clipboard",
     "copied": "Copied!"
   },

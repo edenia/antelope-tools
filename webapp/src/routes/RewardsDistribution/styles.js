@@ -127,7 +127,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     fontSize: '12px !important',
     textAlign: 'center',
     borderRadius: '90px !important',
-    backgroundColor: '#1565c0 !important',
+    backgroundColor: `${theme.palette.primary.main} !important`,
   },
   expandIcon: {
     cursor: 'pointer',

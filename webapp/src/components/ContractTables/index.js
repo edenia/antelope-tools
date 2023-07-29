@@ -85,12 +85,12 @@ const ContractTables = ({
 
   const handleSubmit = useCallback(
     (nextKey) => {
-      if (!onGetTableRows || !filters.table) return
+      if (!onGetTableRows || !selectedTable) return
 
       onGetTableRows({
         scope: filters.scope,
         limit: filters.limit,
-        table: filters.table,
+        table: selectedTable,
         code: accountName,
         json: true,
         key_type: filters.keyType,
@@ -101,7 +101,7 @@ const ContractTables = ({
         loadMore: !!nextKey,
       })
     },
-    [accountName, onGetTableRows, filters],
+    [accountName, onGetTableRows, filters, selectedTable],
   )
 
   const handleTableSelect = (_event, value) => {
@@ -134,12 +134,12 @@ const ContractTables = ({
       return
     }
 
-    setSelectedTable(filters.table)
-
     const tableType = abi.tables.find(
       item => item.name === filters.table,
     )?.type
     const struct = abi.structs.find(struct => struct.name === tableType)
+
+    setSelectedTable(tableType ? filters.table : '')
     setFields(struct?.fields || [])
   }, [filters.table, abi])
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -95,6 +96,10 @@ const EndpointsTable = ({ producers }) => {
         anchorEl={anchorEl}
         open={anchorEl !== null}
         onClose={handlePopoverClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
       >
         <EndpointsTextList type={type} />
       </Tooltip>
@@ -106,37 +111,49 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('api')}
-                  <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'api')
-                      }}
-                    />
-                  </MUITooltip>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'api')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('ssl')}
-                  <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'ssl')
-                      }}
-                    />
-                  </MUITooltip>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'ssl')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('p2p')}
-                  <MUITooltip title={t('showList')} arrow>
-                    <ListAltIcon
-                      onClick={(e) => {
-                        handlePopoverOpen(e.target, 'p2p')
-                      }}
-                    />
-                  </MUITooltip>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<ListAltIcon />}
+                    onClick={(e) => {
+                      handlePopoverOpen(e.target, 'p2p')
+                    }}
+                  >
+                    {t('showList')}
+                  </Button>
                 </div>
               </TableCell>
             </TableRow>
@@ -149,14 +166,17 @@ const EndpointsTable = ({ producers }) => {
                     {producer.name}
                     {!!producer.endpoints.api.length +
                       producer.endpoints.ssl.length && (
-                      <Link
-                        component={RouterLink}
-                        state={{ producerId: producer.id }}
-                        to="/endpoints-stats"
-                        color="secondary"
-                      >
-                        <QueryStatsIcon />
-                      </Link>
+                      <MUITooltip title={t('linkToStats')} arrow>
+                        <Link
+                          aria-label={`Link to endpoints stats of ${producer.name}`}
+                          component={RouterLink}
+                          state={{ producerId: producer.id }}
+                          to="/endpoints-stats"
+                          color="primary"
+                        >
+                          <QueryStatsIcon />
+                        </Link>
+                      </MUITooltip>
                     )}
                   </div>
                 </TableCell>

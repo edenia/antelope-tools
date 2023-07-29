@@ -1,5 +1,6 @@
 export default (theme) => ({
   icon: {
-    cursor: 'pointer',
+    alignSelf: 'center',
+    marginBottom: `${theme.spacing(2)} !important`,
   },
 })

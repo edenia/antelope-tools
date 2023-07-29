@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined'
 
@@ -26,7 +27,16 @@ const CopyToClipboard = ({ text }) => {
       }}
       arrow
     >
-      <FileCopyOutlinedIcon className={classes.icon} onClick={copyText} />
+      <Button
+        size="small"
+        variant="outlined"
+        color="primary"
+        onClick={copyText}
+        className={classes.icon}
+        startIcon={<FileCopyOutlinedIcon />}
+      >
+         {t('copy')}
+      </Button>
     </Tooltip>
   )
 }
