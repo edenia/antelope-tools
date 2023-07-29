@@ -1,7 +1,12 @@
 import { Web3 } from 'web3'
 import { Block, TransactionInfo, TransactionHash } from 'web3-types'
 
-import { defaultModel, blockModel, transactionModel } from '../models'
+import {
+  defaultModel,
+  blockModel,
+  transactionModel,
+  paramModel
+} from '../models'
 import { networkConfig } from '../config'
 
 const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
@@ -22,8 +27,7 @@ const web3 = new Web3(httpProvider)
 
 // TODO: syncronize passed blocks
 
-const getBlock = async () => {
-  const blockNumber = await web3.eth.getBlockNumber()
+const syncFullBlock = async (blockNumber: number | bigint) => {
   const block: Block = await web3.eth.getBlock(blockNumber)
 
   if (!block.hash) {
@@ -81,8 +85,37 @@ const getBlock = async () => {
   await Promise.all(transactionsPromises)
 }
 
+const getBlock = async () => {
+  const blockNumber = await web3.eth.getBlockNumber()
+
+  await syncFullBlock(blockNumber)
+}
+
 const syncOldBlocks = async (): Promise<void> => {
-  // code
+  const paramStats = await paramModel.queries.getState()
+
+  if (paramStats.isSynced) return
+
+  const nextBlock = paramStats.nextBlock
+  const isUpToDate = await blockModel.queries.default.get({
+    number: { _eq: nextBlock }
+  })
+
+  if (!isUpToDate) {
+    const nextBlockTo = await blockModel.queries.default.getNextBlock(nextBlock)
+    const nextBlockToNumber = nextBlockTo[0].number || 0
+
+    if (nextBlockToNumber > nextBlock) {
+      console.log(`🚦 ${nextBlockToNumber - nextBlock} blocks behind`)
+    }
+
+    await syncFullBlock(nextBlock)
+  }
+
+  await paramModel.queries.saveOrUpdate(
+    nextBlock + 1 * Number(!isUpToDate),
+    !!isUpToDate
+  )
 }
 
 const blockWorker = async () => {
@@ -100,7 +133,7 @@ const syncBlockWorker = (): defaultModel.Worker => {
 const syncOldBlockWorker = (): defaultModel.Worker => {
   return {
     name: 'SYNC OLD BLOCK WORKER',
-    intervalSec: 1,
+    intervalSec: 0.1,
     action: syncOldBlocks
   }
 }

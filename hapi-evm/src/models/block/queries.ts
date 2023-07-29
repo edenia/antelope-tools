@@ -45,12 +45,16 @@ const internal_get = async <T>(
   })
 }
 
-export const exist = async (hash: string) => {
+export const exist = async (hashOrNumber: string | number) => {
   const result = await internal_get<BlockAggregateResponse>(
     'query',
     'evm_block',
     '$where: evm_block_bool_exp!',
-    { hash: { _eq: hash } },
+    {
+      [typeof hashOrNumber === 'string' ? 'hash' : 'number']: {
+        _eq: hashOrNumber
+      }
+    },
     'aggregate { count }',
     'aggregate'
   )
@@ -68,6 +72,28 @@ const get = async (where: object, many = false) => {
   )
 
   return many ? result.evm_block : result.evm_block[0]
+}
+
+const getCustom = async (query: string) => {
+  const data = await coreUtil.hasura.default.request<BlockResponse>(query)
+
+  return data.evm_block
+}
+
+const getNextBlock = async (block: number) => {
+  const query = gql`
+    query {
+      evm_block(
+        limit: 1
+        order_by: { number: asc }
+        where: { number: { _gt: ${block} } }
+      ) {
+        number
+      }
+    }
+  `
+
+  return await getCustom(query)
 }
 
 export const add_or_modify = async (block: CappedBlock) => {
@@ -88,5 +114,6 @@ export const add_or_modify = async (block: CappedBlock) => {
 
 export default {
   exist,
-  get
+  get,
+  getNextBlock
 }
