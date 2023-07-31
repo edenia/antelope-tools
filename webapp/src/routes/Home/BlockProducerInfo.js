@@ -125,7 +125,6 @@ const BlockProducerInfo = ({ t, classes }) => {
       <>
         <TransactionsHistory
           t={t}
-          classes={classes}
           nodesChildren={
             <>
               <ProducersSummary

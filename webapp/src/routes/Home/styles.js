@@ -10,24 +10,6 @@ export default (theme) => ({
       display: 'block',
     },
   },
-  bottomRow: {
-    [theme.breakpoints.up('md')]: {
-      paddingTop: theme.spacing(1),
-    },
-  },
-  boxIrreversible: {
-    display: 'flex',
-    alignItems: 'baseline',
-    paddingTop: theme.spacing(3),
-    '& .MuiTypography-body1': {
-      marginBottom: '0 !important',
-      letterSpacing: '0.09px',
-      color: 'rgba(0, 0, 0, 0.54)',
-      '& strong': {
-        color: '#212121',
-      },
-    },
-  },
   pauseButton: {
     display: 'flex',
     width: 75,
@@ -67,20 +49,6 @@ export default (theme) => ({
       width: 300,
     },
   },
-  cards: {
-    textTransform: 'capitalize',
-    minHeight: '90px',
-    '& .MuiTypography-h6': {
-      display: 'flex',
-      justifyContent: 'center',
-      textAlign: 'center',
-      marginTop: theme.spacing(2),
-    },
-  },
-  cardLink: {
-    fontSize: 15,
-    marginBottom: 2,
-  },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
@@ -92,9 +60,6 @@ export default (theme) => ({
     [theme.breakpoints.down('md')]: {
       display: 'block',
     },
-  },
-  uniquelocations: {
-    flexGrow: '1 !important',
   },
   divTrans: {
     width: '50%',

@@ -2,7 +2,6 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
-import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import LaunchIcon from '@mui/icons-material/Launch'
 import { useSubscription } from '@apollo/client'
