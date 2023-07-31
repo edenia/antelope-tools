@@ -17,30 +17,33 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const BodyGraphValue = ({ loading, value, classes, links }) => {
+const BodyGraphValue = ({ loading, classes, links }) => {
   if (loading) return <LinearProgress />
 
   return (
-    <Typography component="p" variant="h6">
-      {value}
-      {links && links.map((href, index) => (
-        <a key={`link-body-graph-${index}`} href={href} target="_blank" rel="noopener noreferrer">
-          <LaunchIcon className={classes.svgLink} color="primary" />
-        </a>
-      ))}
-    </Typography>
+    <>
+      {links &&
+        links.map((href, index) => (
+          <a
+            key={`link-body-graph-${index}`}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LaunchIcon className={classes.svgLink} color="primary" />
+          </a>
+        ))}
+    </>
   )
 }
 
 BodyGraphValue.propTypes = {
   loading: PropTypes.bool,
-  value: PropTypes.any,
   classes: PropTypes.object,
   href: PropTypes.string,
 }
 
 BodyGraphValue.defaultProps = {
-  value: 0,
   loading: false,
   classes: {},
 }
@@ -54,169 +57,147 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
     <div className={classes.wrapper}>
       {generalConfig.historyEnabled && (
         <>
-          <SimpleDataCard>
-            <Typography>{t('tpsAllTimeHigh')}</Typography>
+          <SimpleDataCard
+            title={t('tpsAllTimeHigh')}
+            value={data?.stats[0]?.tps_all_time_high?.transactions_count}
+            loading={loading}
+          >
             <BodyGraphValue
-              value={data?.stats[0]?.tps_all_time_high?.transactions_count}
-              loading={loading}
               classes={classes}
-              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map((block) =>
+                getBlockNumUrl(block),
+              )}
             />
           </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{t('cpuUtilizationAllTimeHigh')}</Typography>
+          <SimpleDataCard
+            title={t('cpuUtilizationAllTimeHigh')}
+            value={`${data?.stats[0]?.tps_all_time_high?.cpu_usage || 0} %`}
+            loading={loading}
+          >
             <BodyGraphValue
-              value={`${data?.stats[0]?.tps_all_time_high?.cpu_usage || 0} %`}
               classes={classes}
-              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
-              loading={loading}
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map((block) =>
+                getBlockNumUrl(block),
+              )}
             />
           </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{t('networkUtilizationAllTimeHigh')}</Typography>
+          <SimpleDataCard
+            title={t('networkUtilizationAllTimeHigh')}
+            value={`${data?.stats[0]?.tps_all_time_high?.net_usage || 0} %`}
+            loading={loading}
+          >
             <BodyGraphValue
-              value={`${data?.stats[0]?.tps_all_time_high?.net_usage || 0} %`}
               classes={classes}
-              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map(block => getBlockNumUrl(block))}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('transactions')} ${t('lastHour')}`}</Typography>
-            <BodyGraphValue
-              value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_hour || 0,
+              links={data?.stats?.[0]?.tps_all_time_high?.blocks.map((block) =>
+                getBlockNumUrl(block),
               )}
-              loading={loading}
             />
           </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('transactions')} ${t('lastDay')}`}</Typography>
-            <BodyGraphValue
-              value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_day || 0,
-              )}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('transactions')} ${t(
-              'dailyAverage',
-            )}`}</Typography>
-            <BodyGraphValue
-              value={formatWithThousandSeparator(
-                data?.stats?.[0]?.average_daily_transactions_in_last_week || 0,
-                0,
-              )}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('transactions')} ${t('lastWeek')}`}</Typography>
-            <BodyGraphValue
-              value={formatWithThousandSeparator(
-                data?.stats?.[0]?.transactions_in_last_week || 0,
-              )}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('cpuUtilization')} ${t('lastHour')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_cpu_usage_in_hour || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('cpuUtilization')} ${t('lastDay')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_cpu_usage_in_last_day || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('cpuUtilization')} ${t('lastWeek')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_cpu_usage_in_week || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('netUtilization')} ${t('lastHour')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_net_usage_in_hour || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('netUtilization')} ${t('lastDay')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_net_usage_in_last_day || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
-          <SimpleDataCard>
-            <Typography>{`${t('netUtilization')} ${t('lastWeek')}`}</Typography>
-            <BodyGraphValue
-              value={`${data?.stats?.[0]?.average_net_usage_in_week || 0} %`}
-              loading={loading}
-            />
-          </SimpleDataCard>
+          <SimpleDataCard
+            title={`${t('transactions')} ${t('lastHour')}`}
+            value={formatWithThousandSeparator(
+              data?.stats?.[0]?.transactions_in_last_hour || 0,
+            )}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('transactions')} ${t('lastDay')}`}
+            value={formatWithThousandSeparator(
+              data?.stats?.[0]?.transactions_in_last_day || 0,
+            )}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('transactions')} ${t('dailyAverage')}`}
+            value={formatWithThousandSeparator(
+              data?.stats?.[0]?.average_daily_transactions_in_last_week || 0,
+              0,
+            )}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('transactions')} ${t('lastWeek')}`}
+            value={formatWithThousandSeparator(
+              data?.stats?.[0]?.transactions_in_last_week || 0,
+            )}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('cpuUtilization')} ${t('lastHour')}`}
+            value={`${data?.stats?.[0]?.average_cpu_usage_in_hour || 0} %`}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('cpuUtilization')} ${t('lastDay')}`}
+            value={`${data?.stats?.[0]?.average_cpu_usage_in_last_day || 0} %`}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('cpuUtilization')} ${t('lastWeek')}`}
+            value={`${data?.stats?.[0]?.average_cpu_usage_in_week || 0} %`}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('netUtilization')} ${t('lastHour')}`}
+            value={`${data?.stats?.[0]?.average_net_usage_in_hour || 0} %`}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('netUtilization')} ${t('lastDay')}`}
+            value={`${data?.stats?.[0]?.average_net_usage_in_last_day || 0} %`}
+            loading={loading}
+          />
+          <SimpleDataCard
+            title={`${t('netUtilization')} ${t('lastWeek')}`}
+            value={`${data?.stats?.[0]?.average_net_usage_in_week || 0} %`}
+            loading={loading}
+          />
         </>
       )}
       {nodesChildren && (
         <>
           {nodesChildren}
-          <SimpleDataCard>
-            <Typography>{`${t('uniqueLocations')}`}</Typography>
-            <BodyGraphValue
-              value={data?.stats?.[0]?.unique_locations?.count || 0}
-              loading={loading}
-            />
-          </SimpleDataCard>
+          <SimpleDataCard
+            title={`${t('uniqueLocations')}`}
+            value={data?.stats?.[0]?.unique_locations?.count || 0}
+            loading={loading}
+          />
         </>
       )}
-      <SimpleDataCard>
-        <Typography>{t('cpuUsage')}</Typography>
-        <Typography component="p" variant="h6" className={classes.lowercase}>
-          {`${formatWithThousandSeparator(tps[0]?.cpu, 2)} %`}
-        </Typography>
-      </SimpleDataCard>
-
-      <SimpleDataCard>
-        <Typography>{t('netUsage')}</Typography>
-        <Typography component="p" variant="h6" className={classes.lowercase}>
-          {`${formatWithThousandSeparator(tps[0]?.net, 3)} %`}
-        </Typography>
-      </SimpleDataCard>
-
-      <SimpleDataCard>
-        <Typography>{t('cpuLimitPerBlock')}</Typography>
-        <Typography component="p" variant="h6" className={classes.lowercase}>
-          {`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
-        </Typography>
-      </SimpleDataCard>
-      <SimpleDataCard>
-        <Typography>{t('netLimitPerBlock')}</Typography>
-        <Typography component="p" variant="h6">
-          {`${formatWithThousandSeparator(info.block_net_limit / 1024, 0)} KB`}
-        </Typography>
-      </SimpleDataCard>
-      <SimpleDataCard>
-        <Typography>{t('chainCpuLimit')}</Typography>
-        <Typography component="p" variant="h6" className={classes.lowercase}>
-          {`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
-        </Typography>
-      </SimpleDataCard>
-      <SimpleDataCard>
-        <Typography>{t('chainNetLimit')}</Typography>
-        <Typography component="p" variant="h6">
-          {`${formatWithThousandSeparator(
-            info.virtual_block_net_limit / 1024,
-            0,
-          )} KB`}
-        </Typography>
-      </SimpleDataCard>
+      <SimpleDataCard
+        lowercase
+        title={t('cpuUsage')}
+        value={`${formatWithThousandSeparator(tps[0]?.cpu, 2)} %`}
+      />
+      <SimpleDataCard
+        lowercase
+        title={t('netUsage')}
+        value={`${formatWithThousandSeparator(tps[0]?.net, 3)} %`}
+      />
+      <SimpleDataCard
+        lowercase
+        title={t('cpuLimitPerBlock')}
+        value={`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
+      />
+      <SimpleDataCard
+        title={t('netLimitPerBlock')}
+        value={`${formatWithThousandSeparator(
+          info.block_net_limit / 1024,
+          0,
+        )} KB`}
+      />
+      <SimpleDataCard
+        lowercase
+        title={t('chainCpuLimit')}
+        value={`${(info.virtual_block_cpu_limit * 0.001).toFixed(0)} ms`}
+      />
+      <SimpleDataCard
+        title={t('chainNetLimit')}
+        value={`${formatWithThousandSeparator(
+          info.virtual_block_net_limit / 1024,
+          0,
+        )} KB`}
+      />
     </div>
   )
 }

@@ -33,4 +33,7 @@ export default (theme) => ({
         height: '100%',
       },
     },
+    lowercase: {
+      textTransform: 'lowercase !important',
+    },
   })

@@ -81,9 +81,6 @@ export default (theme) => ({
     fontSize: 15,
     marginBottom: 2,
   },
-  lowercase: {
-    textTransform: 'lowercase !important',
-  },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
