@@ -24,6 +24,7 @@ const BodyGraphValue = ({ loading, classes, links }) => {
       {links &&
         links.map((href, index) => (
           <a
+            aria-label={`Link to block explorer`}
             key={`link-body-graph-${index}`}
             href={href}
             target="_blank"

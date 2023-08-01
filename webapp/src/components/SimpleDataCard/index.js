@@ -48,7 +48,7 @@ SimpleDataCard.propTypes = {
   lowercase: PropTypes.bool,
   loading: PropTypes.bool,
   title: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.node,
 }
 

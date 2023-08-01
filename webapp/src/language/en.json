@@ -89,9 +89,12 @@
     "/missed-blocks>sidebar": "Missed Blocks",
     "/missed-blocks>title": "Missed Blocks - EOSIO + Antelope Network Dashboard",
     "/missed-blocks>heading": "Missed Blocks",
-    "/stress-test>title": "Stress Test Dashboard",
+    "/stress-test>title": "Stress Test Dashboard - EOSIO + Antelope Network Dashboard",
     "/stress-test>sidebar": "Stress Test",
     "/stress-test>heading": "Stress Test",
+    "/evm>title": "EVM Dashboard - EOSIO + Antelope Network Dashboard",
+    "/evm>sidebar": "EVM Dashboard",
+    "/evm>heading": "EVM Dashboard",
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
@@ -424,5 +427,16 @@
     "charTitle": "Average Response Time from Costa Rica",
     "list": "List of endpoints",
     "timeInSecs": "Time in seconds"
+  },
+  "evmDashboardRoute": {
+    "totalWallets": "Total wallets created",
+    "avgBlockTime": "Average block time",
+    "gasPrice": "Gas price",
+    "avgGasUsage": "Average gas usage",
+    "totalIncoming": "Total (TOKEN) incoming",
+    "totalOutgoing": "Total (TOKEN) outgoing",
+    "avgTX": "Average transaction per day",
+    "transactionsPerDay": "Transactions per Day",
+    "ATH": "All Time High"
   }
 }

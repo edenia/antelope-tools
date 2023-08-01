@@ -14,6 +14,7 @@ import {
   BarChart as BarChartIcon,
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
+import StackedLineChartIcon from '@mui/icons-material/StackedLineChart'
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -46,6 +47,7 @@ const BlockDistribution = lazy(() => import('./BlockDistribution'))
 const MissedBlocks = lazy(() => import('./MissedBlocks'))
 const EndpointsList = lazy(() => import('./EndpointsList'))
 const NonCompliantBPs = lazy(() => import('./NonCompliantBPs'))
+const EVMDashboard = lazy(() => import('./EVMDashboard'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -144,6 +146,14 @@ const defaultRoutes = [
     exact: true,
   },
   {
+    header: 'EVM',
+    name: 'evm',
+    icon: <StackedLineChartIcon />,
+    component: EVMDashboard,
+    path: '/evm',
+    exact: true,
+  },
+  {
     header: 'tools',
     name: 'accounts',
     icon: <UserIcon />,
@@ -159,6 +169,7 @@ const defaultRoutes = [
     exact: true,
   },
 ]
+
 const lacchainRoutes = [
   {
     header: 'networkInformation',

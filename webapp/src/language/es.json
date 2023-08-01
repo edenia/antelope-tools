@@ -448,5 +448,16 @@
     "charTitle": "Tiempo de respuesta promedio desde Costa Rica",
     "list": "Lista de puntos finales",
     "timeInSecs": "Tiempo en segundos"
+  },
+  "evmDashboardRoute": {
+    "totalWallets": "Total de wallets creadas",
+    "avgBlockTime": "Tiempo promedio de bloque",
+    "gasPrice": "Precio de gas",
+    "avgGasUsage": "Uso promedio de gas",
+    "totalIncoming": "Total (TOKEN) entrantes",
+    "totalOutgoing": "Total (TOKEN) salientes",
+    "avgTX": "Promedio de transacciones por día",
+    "transactionsPerDay": "Transacciones por día",
+    "ATH": "Máximo histórico"
   }
 }
