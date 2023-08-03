@@ -47,7 +47,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('avgGasUsage')}
-          value={EVMStats?.block_gas_avg || 0}
+          value={EVMStats?.avg_gas_used || 0}
           loading={loading}
         />
         <SimpleDataCard

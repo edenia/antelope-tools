@@ -25,19 +25,17 @@ const useEVMState = () => {
   }
 
   useEffect(() => {
+    if (!data) return
+
     const getStats = async () => {
       const amount = await getWalletsCreated()
       const stats = { wallets_created_count: amount }
 
-      if (!data) {
-        setEVMStats(stats)
-      } else {
-        setEVMStats({ ...stats, ...data.evm_stats[0] })
-      }
+      setEVMStats({ ...stats, ...data.evm_stats[0] })
     }
 
     getStats()
-  }, [data])
+  }, [data, loading])
 
   return [{ EVMStats, loading }]
 }

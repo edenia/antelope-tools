@@ -1,21 +1,22 @@
-import { eosConfig } from "config"
+import { eosConfig } from 'config'
 
-let _avgBlockTime 
+let _avgBlockTime = 'N/A'
+let _gasPrice = 'N/A'
 
-switch(eosConfig.networkName){
-    case 'telos-testnet':
-    case 'telos':
-        _avgBlockTime = '0.5 s'
-        break
-    case 'jungle':
-    case 'eos':
-        _avgBlockTime = '1 s'
-        break
-    default:
-        _avgBlockTime = 'N/A'
-        break
+switch (eosConfig.networkName) {
+  case 'telos-testnet':
+  case 'telos':
+    _avgBlockTime = '0.5 s'
+    _gasPrice = '550 Gwei'
+    break
+  case 'jungle':
+  case 'eos':
+    _avgBlockTime = '1 s'
+    _gasPrice = '150 Gwei'
+    break
+  default:
+    break
 }
 
-
-export const gasPrice = '550 Gwei'
-export const avgBlockTime = _avgBlockTime 
+export const gasPrice = _gasPrice
+export const avgBlockTime = _avgBlockTime
