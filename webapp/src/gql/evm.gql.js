@@ -15,7 +15,7 @@ export const EVM_STATS_SUBSCRIPTION = gql`
 export const EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION = gql`
   subscription {
     evm_transaction_aggregate {
-      aggregate{
+      aggregate {
         count
       }
     }
