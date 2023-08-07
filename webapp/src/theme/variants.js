@@ -10,6 +10,10 @@ const lightVariant = {
     secondary: {
       main: blue[600],
       contrastText: '#FFF'
+    },
+    tertiary: {
+      main: '#00C853',
+      contrastText: '#FFF'
     }
   },
   header: {

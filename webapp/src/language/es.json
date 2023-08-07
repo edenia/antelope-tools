@@ -456,8 +456,10 @@
     "avgGasUsage": "Uso promedio de gas",
     "totalIncoming": "Total (TOKEN) entrantes",
     "totalOutgoing": "Total (TOKEN) salientes",
+    "incoming": "Entrantes",
+    "outgoing": "Salientes",
     "avgTX": "Promedio de transacciones por día",
     "transactionsPerDay": "Transacciones por día",
-    "ATH": "Máximo histórico"
+    "ATH": "TPS Máximo histórico"
   }
 }

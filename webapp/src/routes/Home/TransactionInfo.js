@@ -14,6 +14,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import LinearProgress from '@mui/material/LinearProgress'
+import moment from 'moment'
 
 import { TRANSACTION_QUERY } from '../../gql'
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
@@ -83,7 +84,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
       },
       {
         name: t('transactionsPerBlock'),
-        color: '#00C853',
+        color: theme.palette.tertiary.main,
         data: trxPerBlock,
       },
     ])
@@ -119,6 +120,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     const { trxPerBlock, trxPerSecond } = data.transactions.reduce(
       (history, transactionHistory) => {
         history.trxPerBlock.push({
+          name: moment(transactionHistory.datetime)?.format('ll'),
           cpu: transactionHistory.cpu || 0,
           net: transactionHistory.net || 0,
           y: transactionHistory.transactions_count || 0,
@@ -126,6 +128,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
         })
 
         history.trxPerSecond.push({
+          name: moment(transactionHistory.datetime)?.format('ll'),
           cpu: transactionHistory.cpu / 2 || 0,
           net: transactionHistory.net / 2 || 0,
           y: transactionHistory.transactions_count * 2 || 0,
@@ -145,7 +148,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
       },
       {
         name: t('transactionsPerBlock'),
-        color: '#00C853',
+        color: theme.palette.tertiary.main,
         data: trxPerBlock,
       },
     ])
@@ -242,6 +245,18 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
             maxPadding: 0.05,
           }}
           data={graphicData}
+          customFormatter={ element => {
+            const series = element?.series
+            const point = element?.point
+
+            const pointName = point?.name ? `${point.name}<br />` : ''
+            const resourcesDetail =
+              point?.net && point?.cpu
+                ? `<br/>Net usage:<b>${point.net} %</b><br/>CPU usage:<b>${point.cpu} %</b>`
+                : ''
+
+            return pointName + `${series?.name}: <b>${point?.y}</b>` + resourcesDetail
+          }}
         />
       </CardContent>
     </Card>

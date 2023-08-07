@@ -9,6 +9,8 @@ const TransactionsLineChart = ({
   title,
   yAxisProps,
   zoomEnabled,
+  shared,
+  customFormatter
 }) => {
   const options = {
     time: {
@@ -28,15 +30,8 @@ const TransactionsLineChart = ({
     xAxis: xAxisProps,
     yAxis: yAxisProps,
     tooltip: {
-      formatter() {
-        const { series, point } = this
-        const resourcesString =
-          point?.net && point?.cpu
-            ? `<br/>Net usage:<b>${point.net} %</b><br/>CPU usage:<b>${point.cpu} %</b>`
-            : ''
-
-        return `${series.name}: <b>${point.y}</b>` + resourcesString
-      },
+      shared,
+      ...(customFormatter && { formatter() { return customFormatter(this) } })
     },
   }
 
@@ -59,6 +54,8 @@ TransactionsLineChart.propTypes = {
   yAxisProps: PropTypes.object,
   title: PropTypes.string,
   zoomEnabled: PropTypes.bool,
+  shared: PropTypes.bool,
+  customFormatter: PropTypes.func
 }
 
 TransactionsLineChart.defaultProps = {
@@ -67,6 +64,8 @@ TransactionsLineChart.defaultProps = {
   yAxisProps: {},
   title: '',
   zoomEnabled: false,
+  shared: false,
+  customFormatter: undefined
 }
 
 export default TransactionsLineChart

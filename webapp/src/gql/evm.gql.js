@@ -11,3 +11,23 @@ export const EVM_STATS_SUBSCRIPTION = gql`
     }
   }
 `
+
+export const EVM_TRANSACTION_QUERY = gql`
+  query ($range: String!) {
+    transactions: evm_transactions_history(range: $range) {
+      datetime
+      transactions_count
+      gas_used
+    }
+  }
+`
+
+export const EVM_TOKEN_QUERY = gql`
+  query ($range: String!) {
+    evm_token_history(range: $range) {
+      datetime
+      incoming
+      outgoing
+    }
+  }
+`

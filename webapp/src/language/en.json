@@ -435,8 +435,10 @@
     "avgGasUsage": "Average gas usage",
     "totalIncoming": "Total (TOKEN) incoming",
     "totalOutgoing": "Total (TOKEN) outgoing",
+    "incoming": "Incoming",    
+    "outgoing": "Outgoing",
     "avgTX": "Average transaction per day",
     "transactionsPerDay": "Transactions per Day",
-    "ATH": "All Time High"
+    "ATH": "TPS All Time High"
   }
 }
