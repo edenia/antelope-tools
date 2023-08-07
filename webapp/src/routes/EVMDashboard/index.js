@@ -31,6 +31,18 @@ const EVMDashboard = () => {
 
   return (
     <>
+      <div className={`${classes.container} ${classes.cardsContainer}`}>
+        <SimpleDataCard
+          title={t('lastBlock')}
+          value={EVMStats?.last_block || 0}
+          loading={loading}
+        />
+        <SimpleDataCard
+          title={t('totalTxs')}
+          value={EVMStats?.transactions_count || 0}
+          loading={loading}
+        />
+      </div>
       <div className={`${classes.container} ${classes.chartsContainer}`}>
         <div className={classes.column}>
           <ChartHistory
@@ -40,7 +52,22 @@ const EVMDashboard = () => {
             data={transactionsHistoryData}
             options={options}
             value={selected['txs']}
-            onSelect={(option) => handleSelect('txs', option)}
+            onSelect={option => handleSelect('txs', option)}
+            customFormatter={element => {
+              const series = element?.series
+              const point = element?.point
+
+              const pointName = point?.name ? `${point.name}<br />` : ''
+              const resourcesDetail = point?.gas
+                ? `<br/>Gas used:<b>${point?.gas}</b>`
+                : ''
+
+              return (
+                pointName +
+                `${series?.name}: <b>${point?.y}</b>` +
+                resourcesDetail
+              )
+            }}
           />
         </div>
         <div className={classes.column}>
@@ -54,7 +81,7 @@ const EVMDashboard = () => {
             data={tokenHistoryData}
             options={options}
             value={selected['token']}
-            onSelect={(option) => handleSelect('token', option)}
+            onSelect={option => handleSelect('token', option)}
           />
         </div>
       </div>
@@ -92,7 +119,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('gasPrice')}
-          value={evmConfig.gasPrice || 'N/A'}
+          value={EVMStats?.gas_price || 'N/A'}
           loading={loading}
         />
         <SimpleDataCard

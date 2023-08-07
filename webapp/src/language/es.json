@@ -459,7 +459,8 @@
     "incoming": "Entrantes",
     "outgoing": "Salientes",
     "avgTX": "Promedio de transacciones por día",
-    "transactionsPerDay": "Transacciones por día",
-    "ATH": "TPS Máximo histórico"
+    "ATH": "TPS Máximo histórico",
+    "lastBlock": "Último bloque",
+    "totalTxs": "Total de transacciones"
   }
 }

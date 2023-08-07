@@ -4,15 +4,20 @@ import moment from 'moment'
 
 import {
   EVM_STATS_SUBSCRIPTION,
+  EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION,
   EVM_TRANSACTION_QUERY,
   EVM_TOKEN_QUERY,
 } from '../../gql'
 import eosApi from '../../utils/eosapi'
-import { rangeOptions } from '../../utils'
+import ethApi from '../../utils/ethapi'
+import { formatWithThousandSeparator, rangeOptions } from '../../utils'
+import { evmConfig } from 'config'
 
 const useEVMState = (theme, t) => {
-  const [EVMStats, setEVMStats] = useState()
   const { data, loading } = useSubscription(EVM_STATS_SUBSCRIPTION)
+  const { data: txsCountData } = useSubscription(
+    EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION,
+  )
   const [getTransactionHistory, { data: transactionsData }] = useLazyQuery(
     EVM_TRANSACTION_QUERY,
     { fetchPolicy: 'network-only' },
@@ -20,9 +25,12 @@ const useEVMState = (theme, t) => {
   const [getTokenHistory, { data: tokenData }] = useLazyQuery(EVM_TOKEN_QUERY, {
     fetchPolicy: 'network-only',
   })
-  const [selected, setSelected] = useState({ txs: '1 Month', token: '1 Month' })
+
+  const [EVMStats, setEVMStats] = useState()
   const [transactionsHistoryData, setTransactionsHistoryData] = useState()
   const [tokenHistoryData, setTokenHistoryData] = useState()
+
+  const [selected, setSelected] = useState({ txs: '1 Month', token: '1 Month' })
 
   const handleSelect = (chart, option) => {
     setSelected(prev => ({ ...prev, [chart]: option }))
@@ -41,6 +49,22 @@ const useEVMState = (theme, t) => {
     }
   }
 
+  const getWalletsCreated = async () => {
+    try {
+      const { rows } = await eosApi.getTableRows({
+        code: evmConfig.account,
+        scope: evmConfig.account,
+        table: 'account',
+        reverse: true,
+        limit: 1,
+        json: true,
+        lower_bound: null,
+      })
+
+      return rows[0]?.index + 1
+    } catch (error) {}
+  }
+
   useEffect(() => {
     getTransactionHistory({
       variables: {
@@ -52,7 +76,6 @@ const useEVMState = (theme, t) => {
         range: selected['token'],
       },
     })
-
     // eslint-disable-next-line
   }, [])
 
@@ -99,14 +122,14 @@ const useEVMState = (theme, t) => {
     if (transactionsData?.transactions) {
       const data = transactionsData?.transactions.map((transaction) => ({
         name: moment(transaction.datetime)?.format('ll'),
-        gas: transaction.gas_used || 0,
+        gas: transaction.avg_gas_used || 0,
         y: transaction.transactions_count || 0,
         x: new Date(transaction.datetime).getTime(),
       }))
 
       setTransactionsHistoryData([
         {
-          name: t('transactionsPerDay'),
+          name: t('transactions'),
           color: theme.palette.secondary.main,
           data,
         },
@@ -114,30 +137,32 @@ const useEVMState = (theme, t) => {
     }
   }, [transactionsData, t, theme])
 
-  const getWalletsCreated = async () => {
-    try {
-      const { rows } = await eosApi.getTableRows({
-        code: 'eosio.evm',
-        scope: 'eosio.evm',
-        table: 'account',
-        reverse: true,
-        limit: 1,
-        json: true,
-        lower_bound: null,
-      })
+  useEffect(() => {
+    if (!txsCountData) return
 
-      return rows[0]?.index + 1
-    } catch (error) {}
-  }
+    const count = txsCountData.evm_transaction_aggregate.aggregate.count
+
+    setEVMStats(prev => ({ ...prev, transactions_count: count }))
+  }, [txsCountData])
 
   useEffect(() => {
     if (!data) return
 
+    setEVMStats(prev => ({ ...prev, ...data.evm_stats[0] }))
+  }, [data, loading])
+
+  useEffect(() => {
     const getStats = async () => {
       const amount = await getWalletsCreated()
-      const stats = { wallets_created_count: amount }
+      const gasPrice = await ethApi.getGasPrice()
+      const lastBlock = await ethApi.getLastBlock()
+      const stats = {
+        wallets_created_count: amount,
+        gas_price: formatWithThousandSeparator(gasPrice / 10 ** 9, 1) + ' Gwei',
+        last_block: lastBlock,
+      }
 
-      setEVMStats({ ...stats, ...data.evm_stats[0] })
+      setEVMStats(prev => ({ ...prev, ...stats }))
     }
 
     getStats()

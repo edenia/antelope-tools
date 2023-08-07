@@ -12,12 +12,22 @@ export const EVM_STATS_SUBSCRIPTION = gql`
   }
 `
 
+export const EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION = gql`
+  subscription {
+    evm_transaction_aggregate {
+      aggregate{
+        count
+      }
+    }
+  }
+`
+
 export const EVM_TRANSACTION_QUERY = gql`
   query ($range: String!) {
     transactions: evm_transactions_history(range: $range) {
       datetime
       transactions_count
-      gas_used
+      avg_gas_used
     }
   }
 `

@@ -27,6 +27,7 @@ const ChartHistory = ({
   shared,
   loading,
   data,
+  customFormatter
 }) => {
   const classes = useStyles()
   const { t } = useTranslation()
@@ -75,6 +76,7 @@ const ChartHistory = ({
           }}
           data={data}
           shared={shared}
+          customFormatter={customFormatter}
           zoomEnabled
         />
       </CardContent>
@@ -92,6 +94,7 @@ ChartHistory.propTypes = {
   shared: PropTypes.bool,
   loading: PropTypes.bool,
   data: PropTypes.array,
+  customFormatter: PropTypes.func
 }
 
 ChartHistory.defaultProps = {
@@ -100,6 +103,7 @@ ChartHistory.defaultProps = {
   yAxisText: '',
   shared: false,
   loading: false,
+  customFormatter: undefined
 }
 
 export default ChartHistory

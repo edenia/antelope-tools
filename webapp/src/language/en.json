@@ -438,7 +438,8 @@
     "incoming": "Incoming",    
     "outgoing": "Outgoing",
     "avgTX": "Average transaction per day",
-    "transactionsPerDay": "Transactions per Day",
-    "ATH": "TPS All Time High"
+    "ATH": "TPS All Time High",
+    "lastBlock": "Last block",
+    "totalTxs": "Total transactions"
   }
 }
