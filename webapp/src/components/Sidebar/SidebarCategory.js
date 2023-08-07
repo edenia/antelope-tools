@@ -39,7 +39,7 @@ const SidebarCategory = ({
   showOnlyIcons,
   ...rest
 }) => {
-  if (showOnlyIcons) return <Category {...rest}>{icon}</Category>
+  if (showOnlyIcons) return <Category {...rest} aria-label={`Link to ${name}`}>{icon}</Category>
 
   return (
     <Category {...rest}>
