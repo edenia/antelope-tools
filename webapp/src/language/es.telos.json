@@ -28,6 +28,7 @@
     "/nodes-distribution>moreDescription": "Una visualización de la distribución geográfica de los nodos de esta red.",
     "/accounts>moreDescription": "Esta herramienta le ayuda a buscar información sobre cuentas y contratos de la red. Escriba el nombre de un contrato o cuenta en el espacio provisto para comenzar a buscar. Obtendrá los datos de las acciones del contrato, tablas de contrato, alcance, límites superior e inferior y límites.",
     "/block-distribution>moreDescription": "Una visualización de la distribución de bloques producida por los nodos de la red.",
-    "/missed-blocks>moreDescription": "Una lista de bloques programados, producidos y perdidos por cada cuenta en la red."
+    "/missed-blocks>moreDescription": "Una lista de bloques programados, producidos y perdidos por cada cuenta en la red.",
+    "/evm>moreDescription": "Supervise las estadísticas del EVM, como el histórico de la cantidad de transacciones, el precio del gas y las wallets creadas totales."
   }
 }
