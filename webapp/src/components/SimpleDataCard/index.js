@@ -19,13 +19,14 @@ const SimpleDataCard = ({
   children,
 }) => {
   const classes = useStyles()
+  const isNotLoading = !loading ?? !!value
 
   return (
     <div className={header ? classes.cardHeader : classes.cardGrow}>
       <Card className={classes.cardShadow}>
         <CardContent className={classes.cards}>
           {title && <Typography>{title}</Typography>}
-          {!loading ? (
+          {isNotLoading ? (
             <Typography
               component="p"
               variant="h6"

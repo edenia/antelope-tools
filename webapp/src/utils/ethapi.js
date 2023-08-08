@@ -13,7 +13,7 @@ const queryEthApi = async method => {
       jsonrpc: '2.0',
     })
 
-    return parseInt(result)
+    return parseInt(result) || result
   } catch (error) {}
 }
 

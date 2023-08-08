@@ -10,7 +10,7 @@ import {
 } from '../../gql'
 import eosApi from '../../utils/eosapi'
 import ethApi from '../../utils/ethapi'
-import { formatWithThousandSeparator, rangeOptions } from '../../utils'
+import { rangeOptions } from '../../utils'
 import { evmConfig } from 'config'
 
 const useEVMState = (theme, t) => {
@@ -158,7 +158,7 @@ const useEVMState = (theme, t) => {
       const lastBlock = await ethApi.getLastBlock()
       const stats = {
         wallets_created_count: amount,
-        gas_price: formatWithThousandSeparator(gasPrice / 10 ** 9, 1) + ' Gwei',
+        gas_price: gasPrice / 10 ** 9,
         last_block: lastBlock,
       }
 

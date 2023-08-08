@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 
+import { formatWithThousandSeparator } from '../../utils'
 import SimpleDataCard from '../../components/SimpleDataCard'
 import { eosConfig, evmConfig } from 'config'
 
@@ -34,12 +35,12 @@ const EVMDashboard = () => {
       <div className={`${classes.container} ${classes.cardsContainer}`}>
         <SimpleDataCard
           title={t('lastBlock')}
-          value={EVMStats?.last_block || 0}
+          value={formatWithThousandSeparator(EVMStats?.last_block) || 0}
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalTxs')}
-          value={EVMStats?.transactions_count || 0}
+          value={formatWithThousandSeparator(EVMStats?.transactions_count) || 0}
           loading={loading}
         />
       </div>
@@ -93,17 +94,23 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('avgTX')}
-          value={EVMStats?.daily_transaction_count || 0}
+          value={
+            formatWithThousandSeparator(EVMStats?.daily_transaction_count) || 0
+          }
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
-          value={EVMStats?.incoming_tlos_count || 0}
+          value={
+            formatWithThousandSeparator(EVMStats?.incoming_tlos_count) || 0
+          }
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
-          value={EVMStats?.outgoing_tlos_count || 0}
+          value={
+            formatWithThousandSeparator(EVMStats?.outgoing_tlos_count) || 0
+          }
           loading={loading}
         />
         <SimpleDataCard
@@ -114,17 +121,24 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalWallets')}
-          value={EVMStats?.wallets_created_count || 'N/A'}
+          value={
+            formatWithThousandSeparator(EVMStats?.wallets_created_count) ||
+            'N/A'
+          }
           loading={loading}
         />
         <SimpleDataCard
           title={t('gasPrice')}
-          value={EVMStats?.gas_price || 'N/A'}
+          value={
+            EVMStats?.gas_price
+              ? formatWithThousandSeparator(EVMStats?.gas_price, 1) + ' Gwei'
+              : 'N/A'
+          }
           loading={loading}
         />
         <SimpleDataCard
           title={t('avgGasUsage')}
-          value={EVMStats?.avg_gas_used || 0}
+          value={formatWithThousandSeparator(EVMStats?.avg_gas_used) || 0}
           loading={loading}
         />
       </div>
