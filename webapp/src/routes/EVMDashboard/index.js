@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 
 import { formatWithThousandSeparator } from '../../utils'
+import { eosConfig, evmConfig } from '../../config'
 import SimpleDataCard from '../../components/SimpleDataCard'
-import { eosConfig, evmConfig } from 'config'
+import TransactionsChartContainer from '../../components/TransactionsChartContainer'
 
 import styles from './styles'
 import useEVMState from './useEVMstate'
-import ChartHistory from './ChartHistory'
 
 const useStyles = makeStyles(styles)
 
@@ -26,8 +26,10 @@ const EVMDashboard = () => {
       options,
       loading,
       selected,
+      isPaused,
+      isLive
     },
-    { handleSelect },
+    { handleSelect, handlePause },
   ] = useEVMState(theme, t)
 
   return (
@@ -43,46 +45,63 @@ const EVMDashboard = () => {
           value={formatWithThousandSeparator(EVMStats?.transactions_count) || 0}
           loading={loading}
         />
-      </div>
+      </div>  
       <div className={`${classes.container} ${classes.chartsContainer}`}>
         <div className={classes.column}>
-          <ChartHistory
-            ariaLabel="Transactions chart select"
+          <TransactionsChartContainer
             title={t('transactions')}
-            yAxisText={t('transactions')}
+            ariaLabel="Transactions chart select"
+            handlePause={handlePause}
+            isPaused={isPaused}
+            historyState={{
+              options: ['Live (30s)', ...options],
+              value: selected['txs'],
+              onSelect: option => handleSelect('txs', option),
+              isLive: isLive,
+              isHistoryEnabled: true,
+            }}
             data={transactionsHistoryData}
-            options={options}
-            value={selected['txs']}
-            onSelect={option => handleSelect('txs', option)}
-            customFormatter={element => {
-              const series = element?.series
-              const point = element?.point
+            chartLabelFormat={{
+              yAxisText: t('transactions'),
+              blockTime: evmConfig.avgBlockTime,
+              customFormatter: (element) => {
+                const series = element?.series
+                const point = element?.point
 
-              const pointName = point?.name ? `${point.name}<br />` : ''
-              const resourcesDetail = point?.gas
-                ? `<br/>Gas used:<b>${point?.gas}</b>`
-                : ''
+                const pointName = point?.name ? `${point.name}<br />` : ''
+                const resourcesDetail = point?.gas
+                  ? `<br/>${t('gasUsed')}:<b> ${formatWithThousandSeparator(
+                      point?.gas,
+                      3,
+                    )} %</b>`
+                  : ''
 
-              return (
-                pointName +
-                `${series?.name}: <b>${point?.y}</b>` +
-                resourcesDetail
-              )
+                return (
+                  pointName +
+                  `${series?.name}: <b>${point?.y}</b>` +
+                  resourcesDetail
+                )
+              },
             }}
           />
         </div>
         <div className={classes.column}>
-          <ChartHistory
-            ariaLabel="TLOS chart select"
-            yAxisText={eosConfig.tokenSymbol}
+          <TransactionsChartContainer
+            ariaLabel= "TLOS chart select"
             title={`${eosConfig.tokenSymbol} ${t('incoming')} / ${t(
               'outgoing',
             )}`}
-            shared
+            historyState={{
+              value: selected['token'],
+              options: options,
+              onSelect: option => handleSelect('token', option),
+              isHistoryEnabled: true,
+            }}
             data={tokenHistoryData}
-            options={options}
-            value={selected['token']}
-            onSelect={option => handleSelect('token', option)}
+            chartLabelFormat={{
+              yAxisText: eosConfig.tokenSymbol,
+              shared: true
+            }}
           />
         </div>
       </div>
@@ -116,7 +135,7 @@ const EVMDashboard = () => {
         <SimpleDataCard
           lowercase
           title={t('avgBlockTime')}
-          value={evmConfig.avgBlockTime || 'N/A'}
+          value={evmConfig.avgBlockTime ? evmConfig.avgBlockTime + ' s' : 'N/A'}
           loading={loading}
         />
         <SimpleDataCard

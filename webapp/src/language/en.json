@@ -47,7 +47,8 @@
     "options": "Options",
     "noOptions": "No matches",
     "updatedAt": "Updated at",
-    "nextUpdateAt": "Next updated at"
+    "nextUpdateAt": "Next update at",
+    "secondsAgo": "Seconds Ago"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -138,7 +139,6 @@
     "Last Week": "Last Week",
     "Last Year": "Last Year",
     "scheduleVersion": "Schedule Version",
-    "secondsAgo": "Seconds Ago",
     "tpsAllTimeHigh": "TPS All Time High",
     "cpuUtilization": "CPU Usage",
     "netUtilization": "NET Usage",
@@ -440,6 +440,8 @@
     "avgTX": "Average transaction per day",
     "ATH": "TPS All Time High",
     "lastBlock": "Last block",
-    "totalTxs": "Total transactions"
+    "totalTxs": "Total EVM transactions",
+    "transactions": "EVM transactions",
+    "gasUsed": "Gas Used"
   }
 }

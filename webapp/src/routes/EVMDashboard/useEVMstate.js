@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSubscription, useLazyQuery } from '@apollo/client'
 import moment from 'moment'
 
@@ -27,19 +27,36 @@ const useEVMState = (theme, t) => {
   })
 
   const [EVMStats, setEVMStats] = useState()
+  const [blocksList, setBlockList] = useState(
+    new Array(evmConfig.maxTPSDataSize).fill({ y: 0 }),
+  )
   const [transactionsHistoryData, setTransactionsHistoryData] = useState()
   const [tokenHistoryData, setTokenHistoryData] = useState()
 
-  const [selected, setSelected] = useState({ txs: '1 Month', token: '1 Month' })
+  const [pause, setPause] = useState(false)
+  const [selected, setSelected] = useState({
+    txs: 'Live (30s)',
+    token: '1 Month',
+  })
+
+  const pauseRef = useRef(pause)
+  const timeoutId = useRef(0)
+
+  pauseRef.current = pause
 
   const handleSelect = (chart, option) => {
     setSelected(prev => ({ ...prev, [chart]: option }))
     if (chart === 'txs') {
-      getTransactionHistory({
-        variables: {
-          range: option,
-        },
-      })
+      if (option !== 'Live (30s)') {
+        setPause(true)
+        getTransactionHistory({
+          variables: {
+            range: option,
+          },
+        })
+      } else {
+        setPause(false)
+      }
     } else {
       getTokenHistory({
         variables: {
@@ -66,16 +83,47 @@ const useEVMState = (theme, t) => {
   }
 
   useEffect(() => {
-    getTransactionHistory({
-      variables: {
-        range: selected['txs'],
-      },
-    })
+    if (!data) return
+
+    setEVMStats(prev => ({ ...prev, ...data.evm_stats[0] }))
+  }, [data, loading])
+
+  useEffect(() => {
+    const updateStats = async () => {
+      const amount = await getWalletsCreated()
+      const lastBlock = await ethApi.getLastBlock()
+      const stats = {
+        wallets_created_count: amount,
+        last_block: lastBlock,
+      }
+
+      setEVMStats(prev => ({ ...prev, ...stats }))
+    }
+
+    updateStats()
+  }, [data, loading])
+
+  useEffect(() => {
+    const updateGasPrice = async () => {
+      const gasPrice = await ethApi.getGasPrice()
+
+      setEVMStats(prev => ({ ...prev, gas_price: gasPrice / 10 ** 9 }))
+    }
+
+    if (selected['txs'] !== 'Live (30s)') {
+      getTransactionHistory({
+        variables: {
+          range: selected['txs'],
+        },
+      })
+    }
     getTokenHistory({
       variables: {
         range: selected['token'],
       },
     })
+
+    updateGasPrice()
     // eslint-disable-next-line
   }, [])
 
@@ -146,38 +194,74 @@ const useEVMState = (theme, t) => {
   }, [txsCountData])
 
   useEffect(() => {
-    if (!data) return
-
-    setEVMStats(prev => ({ ...prev, ...data.evm_stats[0] }))
-  }, [data, loading])
-
-  useEffect(() => {
-    const getStats = async () => {
-      const amount = await getWalletsCreated()
-      const gasPrice = await ethApi.getGasPrice()
-      const lastBlock = await ethApi.getLastBlock()
-      const stats = {
-        wallets_created_count: amount,
-        gas_price: gasPrice / 10 ** 9,
-        last_block: lastBlock,
+    const updateTPB = async blockNum => {
+      if (!blockNum) {
+        blockNum = await ethApi.getLastBlock()
       }
 
-      setEVMStats(prev => ({ ...prev, ...stats }))
+      if (!pauseRef.current) {
+        ethApi.getBlock(blockNum).then(block => {
+          setBlockList(prev => {
+            let data = JSON.parse(JSON.stringify(prev))
+
+            if (data.length >= evmConfig.maxTPSDataSize) {
+              data.pop()
+            }
+
+            data = [
+              {
+                name: `Block Height: ${blockNum}`,
+                gas: (block?.gasUsed / block?.gasLimit) * 100 || 0,
+                y: block?.transactions?.length || 0,
+              },
+              ...data,
+            ]
+
+            return data.map((point, index) => {
+              point.x = index
+              return point
+            })
+          })
+        })
+      }
+
+      timeoutId.current = setTimeout(() => {
+        updateTPB(blockNum + 1)
+      }, evmConfig.avgBlockTime * 1000)
     }
 
-    getStats()
-  }, [data, loading])
+    updateTPB()
+
+    return () => {
+      clearTimeout(timeoutId.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    setTransactionsHistoryData([{
+      name: t('transactions'),
+      color: theme.palette.secondary.main,
+      data: blocksList,
+    }])
+  }, [blocksList, t, theme])
 
   return [
     {
       EVMStats,
       options: rangeOptions,
       selected,
+      isPaused: pause,
+      isLive: selected.txs === 'Live (30s)',
       transactionsHistoryData,
       tokenHistoryData,
       loading,
     },
-    { handleSelect },
+    {
+      handleSelect,
+      handlePause: () => {
+        setPause(prev => !prev)
+      },
+    },
   ]
 }
 

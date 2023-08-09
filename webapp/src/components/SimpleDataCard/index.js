@@ -19,7 +19,7 @@ const SimpleDataCard = ({
   children,
 }) => {
   const classes = useStyles()
-  const isNotLoading = !loading ?? !!value
+  const isNotLoading = !loading || !!value?.toString()
 
   return (
     <div className={header ? classes.cardHeader : classes.cardGrow}>

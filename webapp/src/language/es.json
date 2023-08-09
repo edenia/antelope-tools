@@ -58,7 +58,8 @@
     "options": "Opciones",
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
-    "nextUpdateAt": "Próxima actualización"
+    "nextUpdateAt": "Próxima actualización",
+    "secondsAgo": "Hace Segundos"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -140,7 +141,6 @@
     "Last Week": "Última Semana",
     "Last Year": "Último Año",
     "scheduleVersion": "Versión de Programa",
-    "secondsAgo": "Hace Segundos",   
     "cpuUtilization": "Uso de CPU",
     "netUtilization": "Uso de NET",
     "cpuUtilizationAllTimeHigh": "Uso de CPU en TPS máximo histórico",
@@ -461,6 +461,8 @@
     "avgTX": "Promedio de transacciones por día",
     "ATH": "TPS Máximo histórico",
     "lastBlock": "Último bloque",
-    "totalTxs": "Total de transacciones"
+    "totalTxs": "Total de transacciones EVM",
+    "transactions": "Transacciones EVM",
+    "gasUsed": "Gas Usado"
   }
 }

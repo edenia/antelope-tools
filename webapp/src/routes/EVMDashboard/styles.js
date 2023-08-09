@@ -18,22 +18,4 @@ export default (theme) => ({
       flexDirection: 'column',
     }
   },
-  cardShadow: {
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-    padding: theme.spacing(1),
-    gap: theme.spacing(1),
-    flexWrap: 'wrap',
-    [theme.breakpoints.up('lg')]: {
-      alignItems: 'center',
-    },
-    '& .MuiInputLabel-formControl': {
-      position: 'relative',
-      marginBottom: `-${theme.spacing(2)}`,
-    },
-  },
 })
