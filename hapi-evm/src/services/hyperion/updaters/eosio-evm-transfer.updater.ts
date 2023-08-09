@@ -1,5 +1,3 @@
-import { isAddress } from 'web3-validator'
-
 import { transferModel } from '../../../models'
 
 // TODO: handle this as a network function, for example, base on the
