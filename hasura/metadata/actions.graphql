@@ -22,6 +22,18 @@ type Query {
   eosrate_stats: [EOSRateStats]
 }
 
+type Query {
+  evm_token_history(
+    range: String!
+  ): [EVMTokenHistory]
+}
+
+type Query {
+  evm_transactions_history(
+    range: String!
+  ): [EVMTransaction]
+}
+
 type Mutation {
   getProducersInfo(
     bpParams: GetProducersInfoInput!
@@ -111,5 +123,17 @@ type EOSRateStats {
   development: Float
   community: Float
   trustiness: Float
+}
+
+type EVMTransaction {
+  datetime: String
+  transactions_count: Int
+  avg_gas_used: Float
+}
+
+type EVMTokenHistory {
+  datetime: String
+  incoming: Float
+  outgoing: Float
 }
 
