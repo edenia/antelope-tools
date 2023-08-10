@@ -107,6 +107,7 @@ services:
       HASURA_GRAPHQL_METADATA_DIR: /metadata
       HASURA_GRAPHQL_SEEDS_DIR: /seeds
       HASURA_GRAPHQL_ACTION_BASE_URL: '${HASURA_GRAPHQL_ACTION_BASE_URL}'
+      HASURA_GRAPHQL_ACTION_EVM_URL: '${HASURA_GRAPHQL_ACTION_EVM_URL}'
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       # Local Development Configurations It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: 'true'
