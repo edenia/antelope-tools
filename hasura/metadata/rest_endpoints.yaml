@@ -1,9 +1,9 @@
-- definition:
+- comment: null
+  definition:
     query:
       collection_name: allowed-queries
       query_name: get-producers-info
-  url: get-producers-info
   methods:
     - POST
   name: get-producers-info
-  comment: null
+  url: get-producers-info

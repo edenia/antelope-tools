@@ -1,6 +1,6 @@
 table:
-  schema: public
   name: node
+  schema: public
 object_relationships:
   - name: producer
     using:
@@ -11,15 +11,15 @@ array_relationships:
       foreign_key_constraint_on:
         column: node_id
         table:
-          schema: public
           name: endpoint
+          schema: public
   - name: node_info
     using:
       foreign_key_constraint_on:
         column: node_id
         table:
-          schema: public
           name: node_info
+          schema: public
 select_permissions:
   - role: guest
     permission:

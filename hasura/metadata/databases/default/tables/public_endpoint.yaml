@@ -1,6 +1,6 @@
 table:
-  schema: public
   name: endpoint
+  schema: public
 object_relationships:
   - name: node
     using:

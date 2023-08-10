@@ -20,6 +20,7 @@ clean:
 	@docker-compose stop
 	@rm -rf tmp/postgres
 	@rm -rf tmp/hapi
+	@rm -rf tmp/hapi-evm
 	@rm -rf tmp/webapp
 	@docker system prune
 
@@ -100,6 +101,7 @@ start:
 	make start-postgres
 	make start-wallet
 	make start-hapi
+	# make start-hapi-evm
 	make start-hasura
 	make -j 3 start-hasura-cli start-logs start-webapp
 
@@ -112,6 +114,9 @@ start-wallet:
 start-hapi:
 	@docker-compose up -d --build hapi
 
+start-hapi-evm:
+	@docker-compose up -d --build hapi-evm
+
 start-hasura:
 	$(eval -include .env)
 	@until \
@@ -121,6 +126,10 @@ start-hasura:
 	@until \
 		curl http://localhost:9090/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi service"; \
+		sleep 5; done;
+	@until \
+		curl http://localhost:9091/healthz; \
+		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi-evm service"; \
 		sleep 5; done;
 	@echo "..."
 	@docker-compose stop hasura
@@ -145,7 +154,7 @@ start-webapp:
 	@echo "done webapp"
 
 start-logs:
-	@docker-compose logs -f hapi webapp
+	@docker-compose logs -f hapi hapi-evm webapp
 
 build-kubernetes: ##@devops Generate proper k8s files based on the templates
 build-kubernetes: ./kubernetes
