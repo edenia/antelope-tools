@@ -33,9 +33,10 @@ const useEVMState = (theme, t) => {
   const [transactionsHistoryData, setTransactionsHistoryData] = useState()
   const [tokenHistoryData, setTokenHistoryData] = useState()
 
+  const liveOption = 'Live (30s)'
   const [pause, setPause] = useState(false)
   const [selected, setSelected] = useState({
-    txs: 'Live (30s)',
+    txs: liveOption,
     token: '1 Month',
   })
 
@@ -47,7 +48,7 @@ const useEVMState = (theme, t) => {
   const handleSelect = (chart, option) => {
     setSelected(prev => ({ ...prev, [chart]: option }))
     if (chart === 'txs') {
-      if (option !== 'Live (30s)') {
+      if (option !== liveOption) {
         setPause(true)
         getTransactionHistory({
           variables: {
@@ -89,28 +90,28 @@ const useEVMState = (theme, t) => {
   }, [data, loading])
 
   useEffect(() => {
-    const updateStats = async () => {
-      const amount = await getWalletsCreated()
+    const updateLastBlock = async () => {
       const lastBlock = await ethApi.getLastBlock()
-      const stats = {
-        wallets_created_count: amount,
-        last_block: lastBlock,
-      }
 
-      setEVMStats(prev => ({ ...prev, ...stats }))
+      setEVMStats(prev => ({ ...prev, last_block: lastBlock }))
     }
 
-    updateStats()
+    updateLastBlock()
   }, [data, loading])
 
   useEffect(() => {
-    const updateGasPrice = async () => {
+    const updateStats = async () => {
       const gasPrice = await ethApi.getGasPrice()
+      const amount = await getWalletsCreated()
 
-      setEVMStats(prev => ({ ...prev, gas_price: gasPrice / 10 ** 9 }))
+      setEVMStats(prev => ({
+        ...prev,
+        gas_price: gasPrice / 10 ** 9,
+        wallets_created_count: amount,
+      }))
     }
 
-    if (selected['txs'] !== 'Live (30s)') {
+    if (selected['txs'] !== liveOption) {
       getTransactionHistory({
         variables: {
           range: selected['txs'],
@@ -123,7 +124,7 @@ const useEVMState = (theme, t) => {
       },
     })
 
-    updateGasPrice()
+    updateStats()
     // eslint-disable-next-line
   }, [])
 
@@ -248,10 +249,11 @@ const useEVMState = (theme, t) => {
   return [
     {
       EVMStats,
+      liveOption,
       options: rangeOptions,
       selected,
       isPaused: pause,
-      isLive: selected.txs === 'Live (30s)',
+      isLive: selected.txs === liveOption,
       transactionsHistoryData,
       tokenHistoryData,
       loading,

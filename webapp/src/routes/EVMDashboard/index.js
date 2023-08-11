@@ -24,6 +24,7 @@ const EVMDashboard = () => {
       tokenHistoryData,
       transactionsHistoryData,
       options,
+      liveOption,
       loading,
       selected,
       isPaused,
@@ -54,7 +55,7 @@ const EVMDashboard = () => {
             handlePause={handlePause}
             isPaused={isPaused}
             historyState={{
-              options: ['Live (30s)', ...options],
+              options: [liveOption, ...options],
               value: selected['txs'],
               onSelect: option => handleSelect('txs', option),
               isLive: isLive,
@@ -100,7 +101,27 @@ const EVMDashboard = () => {
             data={tokenHistoryData}
             chartLabelFormat={{
               yAxisText: eosConfig.tokenSymbol,
-              shared: true
+              shared: true,
+              customFormatter: (element) => {
+                const points = element?.points
+                const pointName = points[0]?.point?.name || ''
+
+                return (
+                  pointName +
+                  points.reduce((tooltipText, point) => {
+                    const series = point?.series
+
+                    return (
+                      tooltipText +
+                      '<br>' +
+                      `${series?.name}: <b>${formatWithThousandSeparator(
+                        point?.y,
+                        2,
+                      )}</b>`
+                    )
+                  }, '')
+                )
+              },
             }}
           />
         </div>
@@ -121,14 +142,14 @@ const EVMDashboard = () => {
         <SimpleDataCard
           title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.incoming_tlos_count) || 0
+            formatWithThousandSeparator(EVMStats?.incoming_tlos_count, 2) || 0
           }
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.outgoing_tlos_count) || 0
+            formatWithThousandSeparator(EVMStats?.outgoing_tlos_count, 2) || 0
           }
           loading={loading}
         />

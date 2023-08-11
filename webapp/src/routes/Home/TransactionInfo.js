@@ -125,12 +125,12 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
 
     setGraphicData([
       {
-        name: t('transactionsPerSecond'),
+        name: t('average') + ' ' + t('transactionsPerSecond'),
         color: theme.palette.secondary.main,
         data: trxPerSecond,
       },
       {
-        name: t('transactionsPerBlock'),
+        name: t('average') + ' ' + t('transactionsPerBlock'),
         color: theme.palette.tertiary.main,
         data: trxPerBlock,
       },

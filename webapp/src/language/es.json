@@ -164,7 +164,8 @@
     "chainNetLimit": "Límite de Net en cadena",
     "timeToFinality": "Tiempo para finalidad",
     "cpuUsage": "Uso del CPU",
-    "netUsage": "Uso de NET"
+    "netUsage": "Uso de NET",
+    "average": "Promedio"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
