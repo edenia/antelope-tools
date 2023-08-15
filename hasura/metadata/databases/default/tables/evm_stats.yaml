@@ -1,3 +1,13 @@
 table:
   name: stats
   schema: evm
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - ath_transaction_sum
+        - daily_transaction_count
+        - incoming_tlos_count
+        - outgoing_tlos_count
+        - block_gas_avg
+      filter: {}
