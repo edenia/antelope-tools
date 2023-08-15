@@ -26,6 +26,14 @@ actions:
       handler: '{{HASURA_GRAPHQL_ACTION_BASE_URL}}/get-eos-rate'
     permissions:
       - role: guest
+  - name: evm_token_history
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_EVM_URL}}/evm-token-history'
+  - name: evm_transactions_history
+    definition:
+      kind: ""
+      handler: '{{HASURA_GRAPHQL_ACTION_EVM_URL}}/evm-transactions-history'
   - name: getProducersInfo
     definition:
       kind: synchronous
@@ -72,4 +80,6 @@ custom_types:
     - name: TransferFaucetTokensOutput
     - name: GetProducersInfoOutput
     - name: EOSRateStats
+    - name: EVMTransaction
+    - name: EVMTokenHistory
   scalars: []
