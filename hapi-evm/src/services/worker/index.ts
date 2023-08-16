@@ -1,6 +1,7 @@
 import { timeUtil, coreUtil } from '../../utils'
 import { defaultModel } from '../../models'
 import blockService from '../block.service'
+import transferService from '../transfer.service'
 import hyperionService from '../hyperion'
 
 const run = async (worker: defaultModel.Worker) => {
@@ -23,6 +24,9 @@ const init = async () => {
 
   run(blockService.syncBlockWorker())
   run(blockService.syncOldBlockWorker())
+  run(blockService.syncATHWorker())
+  run(blockService.cleanOldBlocksWorker())
+  run(transferService.cleanOldTransfersWorker())
   run(hyperionService.syncWorker())
 }
 

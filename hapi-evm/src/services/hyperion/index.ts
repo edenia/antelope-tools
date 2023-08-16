@@ -2,7 +2,7 @@ import moment, { DurationInputArg2 } from 'moment'
 
 import { hyperionConfig } from '../../config'
 import { coreUtil, timeUtil } from '../../utils'
-import { hyperionStateModel } from '../../models'
+import { historicalStatsModel, hyperionStateModel } from '../../models'
 
 import updaters from './updaters'
 
