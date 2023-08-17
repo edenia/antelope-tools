@@ -111,18 +111,12 @@ export const add_or_modify = async (block: CappedBlock) => {
       }
     }
   `
+  const { insert_evm_block_one: data } =
+    await coreUtil.hasura.default.request<BlockInsertOneResponse>(mutation, {
+      evm_block: block
+    })
 
-  try {
-    const { insert_evm_block_one: data } =
-      await coreUtil.hasura.default.request<BlockInsertOneResponse>(mutation, {
-        evm_block: block
-      })
-
-    return data
-  } catch (error) {
-    //console.log('ERROR', block.number)
-    //throw error
-  }
+  return data
 }
 
 export const deleteOldBlocks = async () => {

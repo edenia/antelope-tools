@@ -149,6 +149,8 @@ const syncATH = async () => {
   const currentState = await historicalStatsModel.queries.getState()
   const partialATH = await StatsModel.queries.getPartialATH()
 
+  if (!partialATH) return
+
   if (
     currentState.tps_all_time_high.transactions_count ||
     0 < partialATH.ath_transactions_count
