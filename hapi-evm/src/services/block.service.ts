@@ -103,7 +103,17 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 }
 
 const getBlock = async () => {
-  const blockNumber = await web3.eth.getBlockNumber()
+  let blockNumber: bigint
+  const lastBlockInDB = (await blockModel.queries.default.get(
+    { timestamp: { _gt: moment().subtract(30, 'minutes') } },
+    { number: 'desc' }
+  )) as blockModel.interfaces.CappedBlock
+
+  if (!lastBlockInDB) {
+    blockNumber = await web3.eth.getBlockNumber()
+  } else {
+    blockNumber = BigInt(lastBlockInDB.number + 1)
+  }
 
   await syncFullBlock(blockNumber)
 }
