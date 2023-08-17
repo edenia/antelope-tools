@@ -2,7 +2,7 @@ import moment from 'moment'
 import { gql } from 'graphql-request'
 
 import { coreUtil } from '../../utils'
-import { Transfer } from './interfaces'
+import { Transfer, Type } from './interfaces'
 import { historicalStatsModel } from '..'
 
 // interface TransferResponse {
@@ -31,8 +31,8 @@ export const save = async (payload: Transfer) => {
   `
 
   await historicalStatsModel.queries.saveOrIncrement({
-    total_incoming_token: Number(payload.type === 'incoming'),
-    total_outgoing_token: Number(payload.type === 'outgoing')
+    total_incoming_token: Number(payload.type === Type.incoming),
+    total_outgoing_token: Number(payload.type === Type.outgoing)
   })
 
   if (moment(payload.timestamp).isBefore(moment().subtract(1, 'years'))) {
