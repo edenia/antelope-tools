@@ -438,7 +438,6 @@
     "totalOutgoing": "Total (TOKEN) outgoing",
     "incoming": "Incoming",    
     "outgoing": "Outgoing",
-    "avgTX": "Average transaction per day",
     "ATH": "TPS All Time High",
     "lastBlock": "Last block",
     "totalTxs": "Total EVM transactions",

@@ -19,3 +19,4 @@ export const avgBlockTime = _avgBlockTime
 export const maxTPSDataSize = 30 / _avgBlockTime
 export const account = 'eosio.evm'
 export const endpoint = process.env.REACT_APP_EVM_ENDPOINT
+export const blockExplorerUrl = process.env.REACT_APP_EVM_BLOCK_EXPLORER_URL

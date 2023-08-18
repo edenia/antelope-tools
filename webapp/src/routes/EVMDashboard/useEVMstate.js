@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import {
   EVM_STATS_SUBSCRIPTION,
-  EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION,
+  EVM_HISTORICAL_STATS_SUBSCRIPTION,
   EVM_TRANSACTION_QUERY,
   EVM_TOKEN_QUERY,
 } from '../../gql'
@@ -14,9 +14,9 @@ import { rangeOptions } from '../../utils'
 import { evmConfig } from 'config'
 
 const useEVMState = (theme, t) => {
-  const { data, loading } = useSubscription(EVM_STATS_SUBSCRIPTION)
-  const { data: txsCountData } = useSubscription(
-    EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION,
+  const { data: stats, loading } = useSubscription(EVM_STATS_SUBSCRIPTION)
+  const { data: historicalStats, loading: historicalLoading } = useSubscription(
+    EVM_HISTORICAL_STATS_SUBSCRIPTION,
   )
   const [getTransactionHistory, { data: transactionsData }] = useLazyQuery(
     EVM_TRANSACTION_QUERY,
@@ -84,20 +84,19 @@ const useEVMState = (theme, t) => {
   }
 
   useEffect(() => {
-    if (!data) return
-
-    setEVMStats(prev => ({ ...prev, ...data.evm_stats[0] }))
-  }, [data, loading])
-
-  useEffect(() => {
-    const updateLastBlock = async () => {
+    const updateStats = async () => {
       const lastBlock = await ethApi.getLastBlock()
 
-      setEVMStats(prev => ({ ...prev, last_block: lastBlock }))
+      setEVMStats(prev => ({
+        ...prev,
+        last_block: lastBlock,
+        ...(historicalStats && historicalStats.evm_historical_stats[0]),
+        ...(stats && stats.evm_stats[0]),
+      }))
     }
 
-    updateLastBlock()
-  }, [data, loading])
+    updateStats()
+  }, [stats, loading, historicalStats, historicalLoading])
 
   useEffect(() => {
     const updateStats = async () => {
@@ -187,14 +186,6 @@ const useEVMState = (theme, t) => {
   }, [transactionsData, t, theme])
 
   useEffect(() => {
-    if (!txsCountData) return
-
-    const count = txsCountData.evm_transaction_aggregate.aggregate.count
-
-    setEVMStats(prev => ({ ...prev, transactions_count: count }))
-  }, [txsCountData])
-
-  useEffect(() => {
     const updateTPB = async blockNum => {
       if (!blockNum) {
         blockNum = await ethApi.getLastBlock()
@@ -239,11 +230,13 @@ const useEVMState = (theme, t) => {
   }, [])
 
   useEffect(() => {
-    setTransactionsHistoryData([{
-      name: t('transactions'),
-      color: theme.palette.secondary.main,
-      data: blocksList,
-    }])
+    setTransactionsHistoryData([
+      {
+        name: t('transactions'),
+        color: theme.palette.secondary.main,
+        data: blocksList,
+      },
+    ])
   }, [blocksList, t, theme])
 
   return [

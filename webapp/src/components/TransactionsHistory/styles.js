@@ -1,8 +1,4 @@
 export default (theme) => ({
-    svgLink: {
-      fontSize: 18,
-      marginLeft: theme.spacing(2),
-    },
     wrapper: {
       display: 'flex',
       gap: '10px',

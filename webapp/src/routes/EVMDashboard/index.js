@@ -3,9 +3,10 @@ import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 
-import { formatWithThousandSeparator } from '../../utils'
+import { formatWithThousandSeparator, getEVMBlockNumUrl } from '../../utils'
 import { eosConfig, evmConfig } from '../../config'
 import SimpleDataCard from '../../components/SimpleDataCard'
+import BodyGraphValue from '../../components/SimpleDataCard/BodyGraphValue'
 import TransactionsChartContainer from '../../components/TransactionsChartContainer'
 
 import styles from './styles'
@@ -43,7 +44,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalTxs')}
-          value={formatWithThousandSeparator(EVMStats?.transactions_count) || 0}
+          value={formatWithThousandSeparator(EVMStats?.total_transactions) || 0}
           loading={loading}
         />
       </div>  
@@ -129,11 +130,17 @@ const EVMDashboard = () => {
       <div className={`${classes.container} ${classes.cardsContainer}`}>
         <SimpleDataCard
           title={t('ATH')}
-          value={EVMStats?.ath_transaction_sum || 0}
+          value={EVMStats?.tps_all_time_high?.transactions_count || 0}
           loading={loading}
-        />
+        >
+          <BodyGraphValue
+            links={EVMStats?.tps_all_time_high?.blocks.map(block =>
+              getEVMBlockNumUrl(block),
+            )}
+          />
+        </SimpleDataCard>
         <SimpleDataCard
-          title={t('avgTX')}
+          title={`${t('transactions')} ${t('lastDay')}`}
           value={
             formatWithThousandSeparator(EVMStats?.daily_transaction_count) || 0
           }
@@ -142,14 +149,14 @@ const EVMDashboard = () => {
         <SimpleDataCard
           title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.incoming_tlos_count, 2) || 0
+            formatWithThousandSeparator(EVMStats?.total_incoming_token, 2) || 0
           }
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.outgoing_tlos_count, 2) || 0
+            formatWithThousandSeparator(EVMStats?.total_outgoing_token, 2) || 0
           }
           loading={loading}
         />

@@ -5,19 +5,17 @@ export const EVM_STATS_SUBSCRIPTION = gql`
     evm_stats(limit: 1) {
       avg_gas_used: block_gas_avg
       daily_transaction_count
-      ath_transaction_sum
-      incoming_tlos_count
-      outgoing_tlos_count
     }
   }
 `
 
-export const EVM_TOTAL_TRANSACTIONS_SUBSCRIPTION = gql`
+export const EVM_HISTORICAL_STATS_SUBSCRIPTION = gql`
   subscription {
-    evm_transaction_aggregate {
-      aggregate {
-        count
-      }
+    evm_historical_stats{
+      total_incoming_token
+      total_outgoing_token
+      total_transactions
+      tps_all_time_high
     }
   }
 `
