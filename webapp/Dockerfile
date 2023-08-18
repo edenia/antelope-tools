@@ -30,6 +30,7 @@ ARG react_app_google_analitic_page_id
 ARG react_app_public_re_captcha_key
 ARG react_app_sync_tolerance_interval
 ARG react_app_evm_endpoint
+ARG react_app_evm_block_explorer_url
 
 ENV WORK_DIR /usr/src/app
 ENV PATH $WORK_DIR/node_modules/.bin:$PATH
@@ -64,6 +65,7 @@ ENV REACT_APP_GOOGLE_ANALITIC_PAGE_ID $react_app_google_analitic_page_id
 ENV REACT_APP_PUBLIC_RE_CAPTCHA_KEY $react_app_public_re_captcha_key
 ENV REACT_APP_SYNC_TOLERANCE_INTERVAL $react_app_sync_tolerance_interval
 ENV REACT_APP_EVM_ENDPOINT $react_app_evm_endpoint
+ENV REACT_APP_EVM_BLOCK_EXPLORER_URL $react_app_evm_block_explorer_url
 
 RUN mkdir -p $WORK_DIR
 WORKDIR $WORK_DIR
