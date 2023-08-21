@@ -55,8 +55,8 @@ const EVMEndpointsList = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t('rpcEndpoint')}</TableCell>
-                  <TableCell>{t('lastBlock')}</TableCell>
-                  <TableCell>{t('latency')}</TableCell>
+                  <TableCell align="right">{t('lastBlock')}</TableCell>
+                  <TableCell align="right">{t('latency')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -70,10 +70,10 @@ const EVMEndpointsList = () => {
                         </HealthCheck>
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="right">
                       {formatWithThousandSeparator(endpoint.height) || 'N/A'}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="right">
                       {endpoint.latency
                         ? `${formatWithThousandSeparator(endpoint.latency)} ms`
                         : 'N/A'}
