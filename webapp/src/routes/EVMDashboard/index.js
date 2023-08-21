@@ -70,7 +70,14 @@ const EVMDashboard = () => {
                 const series = element?.series
                 const point = element?.point
 
-                const pointName = point?.name ? `${point.name}<br />` : ''
+                let pointName = ''
+
+                if (point?.name) {
+                  pointName = !isLive
+                    ? `${point.name}`
+                    : `Block Height: ${formatWithThousandSeparator(point.name)}`
+                }
+
                 const resourcesDetail = point?.gas
                   ? `<br/>${t('gasUsed')}:<b> ${formatWithThousandSeparator(
                       point?.gas,
@@ -79,7 +86,7 @@ const EVMDashboard = () => {
                   : ''
 
                 return (
-                  pointName +
+                  pointName + '<br />' +
                   `${series?.name}: <b>${point?.y}</b>` +
                   resourcesDetail
                 )

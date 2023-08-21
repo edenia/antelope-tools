@@ -202,7 +202,7 @@ const useEVMState = (theme, t) => {
 
             data = [
               {
-                name: `Block Height: ${blockNum}`,
+                name: blockNum,
                 gas: (block?.gasUsed / block?.gasLimit) * 100 || 0,
                 y: block?.transactions?.length || 0,
               },
