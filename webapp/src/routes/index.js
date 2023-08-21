@@ -15,6 +15,7 @@ import {
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 import StackedLineChartIcon from '@mui/icons-material/StackedLineChart'
+import ListAltOutlined from '@mui/icons-material/ListAltOutlined';
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -27,7 +28,6 @@ import {
   TopologySvg,
   RewardsSvg,
 } from '../components/Icons'
-import StressTestDashboard from './StressTestDashboard'
 
 const Home = lazy(() => import('./Home'))
 const CPUBenchmark = lazy(() => import('./CPUBenchmark'))
@@ -47,7 +47,9 @@ const BlockDistribution = lazy(() => import('./BlockDistribution'))
 const MissedBlocks = lazy(() => import('./MissedBlocks'))
 const EndpointsList = lazy(() => import('./EndpointsList'))
 const NonCompliantBPs = lazy(() => import('./NonCompliantBPs'))
+const StressTestDashboard = lazy(() => import('./StressTestDashboard'))
 const EVMDashboard = lazy(() => import('./EVMDashboard'))
+const EVMEndpointsList = lazy(() => import('./EVMEndpointsList'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
@@ -151,6 +153,13 @@ const defaultRoutes = [
     icon: <StackedLineChartIcon />,
     component: EVMDashboard,
     path: '/evm',
+    exact: true,
+  },
+  {
+    name: 'evm-rpc-endpoints',
+    icon: <ListAltOutlined />,
+    component: EVMEndpointsList,
+    path: '/evm-rpc-endpoints',
     exact: true,
   },
   {

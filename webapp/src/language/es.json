@@ -412,7 +412,8 @@
     "Connection error": "Error de conexión",
     "Connection established": "Conexión establecida",
     "Success": "Éxitosa",
-    "Failed": "Fallida"
+    "Failed": "Fallida",
+    "Network Error": "Error de red"
   },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
@@ -464,5 +465,12 @@
     "totalTxs": "Total de transacciones EVM",
     "transactions": "Transacciones EVM",
     "gasUsed": "Gas Usado"
+  },
+  "evmEndpointsRoute": {
+    "title": "Lista de puntos finales RPC de EVM",
+    "rpcEndpoint": "Punto final RPC",
+    "latency": "Latencia",
+    "lastBlock": "Último bloque",
+    "rerun": "Reejecutar las pruebas"
   }
 }

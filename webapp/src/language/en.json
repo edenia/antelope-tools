@@ -96,6 +96,9 @@
     "/evm>title": "EVM Dashboard - EOSIO + Antelope Network Dashboard",
     "/evm>sidebar": "EVM Dashboard",
     "/evm>heading": "EVM Dashboard",
+    "/evm-rpc-endpoints>title": "EVM RPC Endpoints - EOSIO + Antelope Network Dashboard",
+    "/evm-rpc-endpoints>sidebar": "EVM RPC Endpoints",
+    "/evm-rpc-endpoints>heading": "EVM RPC Endpoints",
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
@@ -443,5 +446,12 @@
     "totalTxs": "Total EVM transactions",
     "transactions": "EVM transactions",
     "gasUsed": "Gas Used"
+  },
+  "evmEndpointsRoute": {
+    "title": "EVM RPC endpoints list",
+    "rpcEndpoint": "RPC Endpoint",
+    "latency": "Latency",
+    "lastBlock": "Last block",
+    "rerun": "Re-run health checks"
   }
 }
