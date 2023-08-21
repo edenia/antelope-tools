@@ -30,7 +30,7 @@ const useRPCEndpointsState = () => {
     try {
       const {
         data: { result: height },
-      } = await customAxios.post(endpointUrl, {
+      } = await axios.post(endpointUrl, {
         method: 'eth_blockNumber',
         params: [],
         id: 1,
@@ -42,7 +42,7 @@ const useRPCEndpointsState = () => {
         {
           method: 'eth_getBlockByNumber',
           params: [height.toString(), false],
-          id: 1,
+          id: 2,
           jsonrpc: '2.0',
         },
       )

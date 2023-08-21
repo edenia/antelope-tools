@@ -19,7 +19,7 @@ import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 
 import styles from './styles'
 import useRPCEndpointsState from './useRPCEndpointsState'
-import { getStatus } from 'utils'
+import { getStatus, formatWithThousandSeparator } from 'utils'
 
 const useStyles = makeStyles(styles)
 
@@ -70,9 +70,13 @@ const EVMEndpointsList = () => {
                         </HealthCheck>
                       </div>
                     </TableCell>
-                    <TableCell>{endpoint.height || 'N/A'}</TableCell>
                     <TableCell>
-                      {endpoint.latency ? `${endpoint.latency} ms` : 'N/A'}
+                      {formatWithThousandSeparator(endpoint.height) || 'N/A'}
+                    </TableCell>
+                    <TableCell>
+                      {endpoint.latency
+                        ? `${formatWithThousandSeparator(endpoint.latency)} ms`
+                        : 'N/A'}
                     </TableCell>
                   </TableRow>
                 ))}

@@ -408,7 +408,8 @@
     "updated": "The endpoint is working",
     "outdated": "The endpoint works but is outdated with the last block",
     "error": "Error in the endpoint request",
-    "not working": "The endpoint is not responding"
+    "not working": "The endpoint is not responding",
+    "helpText": "Hover or click the icons to display the endpoint health status data"
   },
   "copyToClipboardComponent": {
     "copy": "Click to copy",

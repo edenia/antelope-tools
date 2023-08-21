@@ -427,7 +427,8 @@
     "updated": "El punto final funciona",
     "outdated": "El punto final funciona, pero no está actualizado con el último bloque",
     "error": "Error en la consulta del punto final",
-    "not working": "El punto final no responde"
+    "not working": "El punto final no responde",
+    "helpText": "Pase el cursor o haga clic en los iconos para ver el estado de salud de un endpoint"
   },
   "copyToClipboardComponent": {
     "copy": "Copiar",
