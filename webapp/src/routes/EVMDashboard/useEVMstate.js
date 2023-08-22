@@ -110,16 +110,16 @@ const useEVMState = (theme, t) => {
       }))
     }
 
-    if (selected['txs'] !== liveOption) {
+    if (selected.txs !== liveOption) {
       getTransactionHistory({
         variables: {
-          range: selected['txs'],
+          range: selected.txs,
         },
       })
     }
     getTokenHistory({
       variables: {
-        range: selected['token'],
+        range: selected.token,
       },
     })
 

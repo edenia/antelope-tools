@@ -4,7 +4,7 @@ import axios from 'axios'
 import { evmConfig } from '../../config'
 
 const useRPCEndpointsState = () => {
-  const [endpoints, setEndpoints] = useState(evmConfig.endpoints.map(url => ({url, response: {}})))
+  const [endpoints, setEndpoints] = useState(evmConfig.endpoints.map(url => ({ url, response: {} })))
 
   const customAxios = axios.create()
 
@@ -70,7 +70,7 @@ const useRPCEndpointsState = () => {
 
   const runHealthCheck = useCallback(() => {
     setEndpoints(prev => prev.map(endpoint => ({ url: endpoint.url, response: {} })))
-    
+
     const rpcList = JSON.parse(JSON.stringify(endpoints))
 
     rpcList.forEach(async ({ url }, index) => {
