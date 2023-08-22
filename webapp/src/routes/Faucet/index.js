@@ -25,12 +25,13 @@ const useStyles = makeStyles(styles)
 const Faucet = () => {
   const classes = useStyles()
   const { t } = useTranslation('faucetRoute')
+  const isUltraTestnet = eosConfig.networkName === 'ultra-testnet'
   const [, { showMessage }] = useSnackbarMessageState()
   const [account, setAccount] = useState('')
   const [createAccountValues, setCreateAccountValues] = useState({})
   const [transferTokensTransaction, setTransferTokensTransaction] = useState('')
   const [createFaucetAccount, { loading: loadingCreateAccount }] = useMutation(
-    CREATE_ACCOUNT_MUTATION(eosConfig.networkName !== 'ultra-testnet'),
+    CREATE_ACCOUNT_MUTATION(!isUltraTestnet),
   )
   const [transferFaucetTokens, { loading: loadingTransferFaucetTokens }] =
     useMutation(TRANFER_FAUCET_TOKENS_MUTATION)
@@ -42,23 +43,23 @@ const Faucet = () => {
     if (
       !reCaptchaToken ||
       !createAccountValues.publicKey ||
-      (eosConfig.networkName !== 'ultra-testnet' &&
+      (!isUltraTestnet &&
         !createAccountValues.accountName)
     ) {
       showMessage({
         type: 'error',
-        content: 'Fill out the fields to create an account',
+        content: t('emptyFields'),
       })
       return
     }
 
     if (
-      eosConfig.networkName !== 'ultra-testnet' &&
+      !isUltraTestnet &&
       !isValidAccountName(createAccountValues.accountName)
     ) {
       showMessage({
         type: 'error',
-        content: 'Please enter a valid account name',
+        content: t('invalidAccount'),
       })
       return
     }
@@ -107,7 +108,7 @@ const Faucet = () => {
     if (!isValidAccountName(account)) {
       showMessage({
         type: 'error',
-        content: 'Please enter a valid account name',
+        content: t('invalidAccount'),
       })
       return
     }
@@ -150,13 +151,18 @@ const Faucet = () => {
   }
 
   const isValidAccountName = name => {
-    const regex = /^[.12345abcdefghijklmnopqrstuvwxyz]+$/i
+    const regex = /^[.12345abcdefghijklmnopqrstuvwxyz]+$/
 
     return name?.length < 13 && regex.test(name)
   }
 
   return (
-    <div className={classes.test}>
+    <div
+      className={classes.test}
+      style={{
+        height: isUltraTestnet ? '250px' : '350px',
+      }}
+    >
       <div className={classes.card}>
         <Card>
           <CardContent>
@@ -175,10 +181,11 @@ const Faucet = () => {
                     })
                   }
                   error={!createAccountValues.publicKey}
+                  helperText={t('keyFormat')}
                   required
                 />
               </div>
-              {eosConfig.networkName !== 'ultra-testnet' && (
+              {!isUltraTestnet && (
                 <div>
                   <TextField
                     key="action-field-issue-tokens"
@@ -192,6 +199,7 @@ const Faucet = () => {
                       })
                     }
                     error={!isValidAccountName(createAccountValues.accountName)}
+                    helperText={t('accountFormat')}
                     required
                   />
                 </div>
@@ -221,16 +229,17 @@ const Faucet = () => {
       <div className={classes.card}>
         <Card>
           <CardContent>
-            <Typography variant="h5">{t('issueTokens')}</Typography>
+            <Typography variant="h5">{`${t('issueTokens')} (500 ${eosConfig.tokenSymbol})`}</Typography>
             <div className={classes.formControl}>
               <div>
                 <TextField
                   key="action-field-issue-tokens"
-                  label={`${t('account')} (500 ${eosConfig.tokenSymbol})`}
+                  label={`${t('accountName')}`}
                   variant="outlined"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
                   error={!isValidAccountName(account)}
+                  helperText={t('accountFormat')}
                   required
                 />
               </div>

@@ -203,11 +203,15 @@
     "createAccount": "Crear Cuenta Faucet",
     "newCreatedAccount": "Su nueva cuenta es",
     "transferTokensTransaction": "Tokens transferidos correctamente. Puede revisar la transacción aquí",
-    "createButton": "Crear",
+    "createButton": "Crear Cuenta",
     "issueTokens": "Emitir Tokens",
     "getTokens": "Obtener Tokens",
     "publicKey": "Llave pública (Active/Owner)",
-    "accountName": "Nombre de la cuenta"
+    "accountName": "Nombre de la cuenta",
+    "invalidAccount": "Ingrese un nombre de cuenta válido",
+    "emptyFields": "Rellene todos los campos para crear la cuenta",
+    "accountFormat": "Debe tener 12 caracteres o menos y puede contener desde la a 'a' la 'z' en minúsculas y números del 1 al 5",
+    "keyFormat": "Ingrese una llave válida. Puede generarla con cleos o cualquier wallet compatible"
   },
   "ricardianContractRoute": {
     "title": "Acuerdo de Productor de Bloques"

@@ -197,11 +197,15 @@
     "createAccount": "Create Faucet Account",
     "newCreatedAccount": "Your new account is",
     "transferTokensTransaction": "Tokens transferred correctly. Check it on explorer here",
-    "createButton": "Create",
+    "createButton": "Create Account",
     "issueTokens": "Issue Tokens",
     "getTokens": "Get Tokens",
     "publicKey": "Public Key (Active/Owner)",
-    "accountName": "Account Name"
+    "accountName": "Account Name",
+    "invalidAccount": "Please enter a valid account name",
+    "emptyFields": "Fill out the fields to create an account",
+    "accountFormat": "Must be 12 or less characters and can contain from 'a' to 'z' in lower case and numbers from 1 to 5",
+    "keyFormat": "Please enter a valid key. Generate it with cleos or a compatible wallet"
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"
