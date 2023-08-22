@@ -66,7 +66,8 @@ jobs:
         id: build_kubernetes_files
         run: |
           make \
-            build-kubernetes
+            build-kubernetes \
+            build-kubernetes-evm
         env:
           # general
           NAMESPACE: telos-testnet-dashboard
