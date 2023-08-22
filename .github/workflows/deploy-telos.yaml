@@ -111,7 +111,7 @@ jobs:
           HAPI_EVM_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
           HAPI_EVM_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_EVM_HASURA_ADMIN_SECRET }}
           HAPI_EVM_DATABASE_URL: ${{ secrets.HAPI_EVM_DATABASE_URL }}
-          HAPI_EVM_ENDPOINT: 'https://telos.net/evm'
+          HAPI_EVM_ENDPOINT: 'https://mainnet.telos.net/evm'
           HAPI_EVM_API_ENDPOINTS: '["https://telos.greymass.com","https://telos.eosphere.io","telos.caleos.io","mainnet.telosusa.io"]'
           HAPI_EVM_NETWORK_CHAIN_ID: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
           HAPI_EVM_EOS_EVM_ACCOUNT: ${{ secrets.HAPI_EVM_EOS_EVM_ACCOUNT }}
@@ -124,6 +124,7 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
+          HASURA_GRAPHQL_ACTION_EVM_URL: http://dashboard-hapi-evm:9090
 
       - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@v1.1.0

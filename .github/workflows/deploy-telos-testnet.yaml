@@ -124,6 +124,7 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
+          HASURA_GRAPHQL_ACTION_EVM_URL: http://dashboard-hapi-evm:9090
 
       - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@v1.1.0
