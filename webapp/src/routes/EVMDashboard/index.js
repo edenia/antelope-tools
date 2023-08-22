@@ -124,7 +124,6 @@ const EVMDashboard = () => {
                       '<br>' +
                       `${series?.name}: <b>${formatWithThousandSeparator(
                         point?.y,
-                        2,
                       )}</b>`
                     )
                   }, '')
@@ -156,14 +155,14 @@ const EVMDashboard = () => {
         <SimpleDataCard
           title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.total_incoming_token, 2) || 0
+            formatWithThousandSeparator(EVMStats?.total_incoming_token) || 0
           }
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
           value={
-            formatWithThousandSeparator(EVMStats?.total_outgoing_token, 2) || 0
+            formatWithThousandSeparator(EVMStats?.total_outgoing_token) || 0
           }
           loading={loading}
         />
