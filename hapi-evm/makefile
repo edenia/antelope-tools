@@ -17,26 +17,26 @@ run: node_modules
 
 build-docker: ##@devops Build the docker image
 build-docker: ./Dockerfile
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(VERSION) || true
 	@docker build \
 		--target release \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(LATEST_TAG) \
 		.
 
 pull-image: ##@devops Pull the latest image from registry for caching
 pull-image:
-	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) || true
+	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(LATEST_TAG) || true
 
 build-docker-cached: ##@devops Build the docker image using cached layers
 build-docker-cached: ./Dockerfile
 	@docker build \
 		--target prod-stage \
-		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) \
-		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) \
+		--cache-from $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(LATEST_TAG) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(VERSION) \
+		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(LATEST_TAG) \
 		.
 
 push-image: ##@devops Push the freshly built image and tag with release or latest tag
 push-image:
-	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION)
+	@docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI_EVM):$(VERSION)
