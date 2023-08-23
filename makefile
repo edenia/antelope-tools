@@ -10,6 +10,7 @@ RESET  := $(shell tput -Txterm sgr0)
 
 K8S_BUILD_DIR ?= ./build_k8s
 K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
+K8S_FILES_EVM := $(shell find ./kubernetes-evm -name '*.yaml' | sed 's:./kubernetes-evm/::g')
 
 run:
 	@echo "$(BLUE)running action $(filter-out $@,$(MAKECMDGOALS))$(RESET)"
@@ -163,6 +164,15 @@ build-kubernetes: ./kubernetes
 	@for file in $(K8S_FILES); do \
 		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
 		$(SHELL_EXPORT) envsubst <./kubernetes/$$file >$(K8S_BUILD_DIR)/$$file; \
+	done
+
+build-kubernetes-evm: ##@devops Generate proper k8s files based on the templates for evm
+build-kubernetes-evm: ./kubernetes-evm
+	@echo "Build kubernetes files for evm..."
+	@mkdir -p $(K8S_BUILD_DIR)
+	@for file in $(K8S_FILES_EVM); do \
+		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
+		$(SHELL_EXPORT) envsubst <./kubernetes-evm/$$file >$(K8S_BUILD_DIR)/$$file; \
 	done
 
 deploy-kubernetes: ##@devops Publish the build k8s files
