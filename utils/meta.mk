@@ -9,7 +9,7 @@ IMAGE_NAME_HASURA=dashboard-hasura
 IMAGE_NAME_WALLET=dashboard-wallet
 
 DOCKER_REGISTRY=ghcr.io/edenia
-SUBDIRS = webapp hapi hasura wallet
+SUBDIRS = webapp hapi hasura wallet hapi-evm
 
 MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME_WEBAPP IMAGE_NAME_HAPI IMAGE_NAME_HAPI_EVM IMAGE_NAME_WALLET IMAGE_NAME_HASURA
 
