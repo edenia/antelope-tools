@@ -15,8 +15,8 @@ export const getTokenHistory = async (range: string) => {
 
     SELECT
       interval.value as datetime,
-      sum(CASE WHEN transfer.type = 'incoming' THEN transfer.amount END)::numeric as incoming,
-      sum(CASE WHEN transfer.type = 'outgoing' THEN transfer.amount END)::numeric as outgoing
+      COUNT(CASE WHEN transfer.type = 'incoming' THEN 1 END) as incoming,
+      COUNT(CASE WHEN transfer.type = 'outgoing' THEN 1 END) as outgoing
     FROM
       interval
     LEFT JOIN 
