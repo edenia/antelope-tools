@@ -11,7 +11,7 @@ import {
 import eosApi from '../../utils/eosapi'
 import ethApi from '../../utils/ethapi'
 import { rangeOptions } from '../../utils'
-import { evmConfig } from 'config'
+import { evmConfig } from '../../config'
 
 const useEVMState = (theme, t) => {
   const { data: stats, loading } = useSubscription(EVM_STATS_SUBSCRIPTION)

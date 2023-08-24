@@ -29,7 +29,7 @@ const EVMDashboard = () => {
       loading,
       selected,
       isPaused,
-      isLive
+      isLive,
     },
     { handleSelect, handlePause },
   ] = useEVMState(theme, t)
@@ -47,7 +47,7 @@ const EVMDashboard = () => {
           value={formatWithThousandSeparator(EVMStats?.total_transactions) || 0}
           loading={loading}
         />
-      </div>  
+      </div>
       <div className={`${classes.container} ${classes.chartsContainer}`}>
         <div className={classes.column}>
           <TransactionsChartContainer
@@ -86,7 +86,8 @@ const EVMDashboard = () => {
                   : ''
 
                 return (
-                  pointName + '<br />' +
+                  pointName +
+                  '<br />' +
                   `${series?.name}: <b>${point?.y}</b>` +
                   resourcesDetail
                 )
@@ -96,7 +97,7 @@ const EVMDashboard = () => {
         </div>
         <div className={classes.column}>
           <TransactionsChartContainer
-            ariaLabel= "TLOS chart select"
+            ariaLabel="TLOS chart select"
             title={`${eosConfig.tokenSymbol} ${t('incoming')} / ${t(
               'outgoing',
             )}`}
