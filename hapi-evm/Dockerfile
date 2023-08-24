@@ -6,11 +6,12 @@ WORKDIR /app
 FROM base AS builder
 COPY package.json yarn.lock ./
 RUN yarn --ignore-optional
-COPY ./dist ./src
+COPY ./ ./
+RUN yarn build
 
 # ---------- Release ----------
 FROM base AS release
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/src ./src
+COPY --from=builder /app/dist ./src
 USER node
 CMD ["node", "./src/index.js"]
