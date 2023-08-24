@@ -6,7 +6,7 @@ WORKDIR /app
 FROM base AS builder
 COPY package.json yarn.lock ./
 RUN yarn --ignore-optional
-COPY ./src ./src
+COPY ./dist ./src
 
 # ---------- Release ----------
 FROM base AS release
