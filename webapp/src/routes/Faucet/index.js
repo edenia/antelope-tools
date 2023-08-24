@@ -103,9 +103,9 @@ const Faucet = () => {
 
     const reCaptchaToken = await executeRecaptcha?.('submit')
 
-    if (!reCaptchaToken || !account) return
+    if (!reCaptchaToken) return
 
-    if (!isValidAccountName(account)) {
+    if (!account || !isValidAccountName(account)) {
       showMessage({
         type: 'error',
         content: t('invalidAccount'),
@@ -160,7 +160,7 @@ const Faucet = () => {
     <div
       className={classes.test}
       style={{
-        height: isUltraTestnet ? '250px' : '350px',
+        height: isUltraTestnet ? '250px' : '375px',
       }}
     >
       <div className={classes.card}>
@@ -180,7 +180,6 @@ const Faucet = () => {
                       ...{ publicKey: e.target.value },
                     })
                   }
-                  error={!createAccountValues.publicKey}
                   helperText={t('keyFormat')}
                   required
                 />
@@ -198,7 +197,7 @@ const Faucet = () => {
                         ...{ accountName: e.target.value },
                       })
                     }
-                    error={!isValidAccountName(createAccountValues.accountName)}
+                    error={!!createAccountValues.accountName && !isValidAccountName(createAccountValues.accountName)}
                     helperText={t('accountFormat')}
                     required
                   />
@@ -238,7 +237,7 @@ const Faucet = () => {
                   variant="outlined"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
-                  error={!isValidAccountName(account)}
+                  error={!!account && !isValidAccountName(account)}
                   helperText={t('accountFormat')}
                   required
                 />

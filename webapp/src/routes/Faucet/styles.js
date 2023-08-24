@@ -1,6 +1,6 @@
 export default (theme) => ({
   formControl: {
-    margin: theme.spacing(4),
+    margin: theme.spacing(6, 4, 4),
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(4),

@@ -204,8 +204,8 @@
     "accountName": "Account Name",
     "invalidAccount": "Please enter a valid account name",
     "emptyFields": "Fill out the fields to create an account",
-    "accountFormat": "Must be 12 or less characters and can contain from 'a' to 'z' in lower case and numbers from 1 to 5",
-    "keyFormat": "Please enter a valid key. Generate it with cleos or a compatible wallet"
+    "accountFormat": "Must be 12 or less characters and can contain from 'a' to 'z' in lowercase and numbers from 1 to 5",
+    "keyFormat": "Please enter a ECC valid key. Generate it with cleos or a compatible wallet"
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"
