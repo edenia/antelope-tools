@@ -62,7 +62,7 @@ jobs:
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
           REACT_APP_EVM_ENDPOINT: 'https://mainnet.telos.net/evm'
-          REACT_APP_EVM_BLOCK_EXPLORER_URL: https://www.teloscan.io/block/(block)
+          REACT_APP_EVM_BLOCK_EXPLORER_URL: 'https://www.teloscan.io/block/(block)'
           REACT_APP_EVM_ENDPOINTS: '[\"https://rpc1.eu.telos.net/evm\",\"https://api.kainosbp.com/evm\",\"https://mainnet.telos.net/evm\",\"https://rpc1.us.telos.net/evm\",\"https://rpc2.eu.telos.net/evm\",\"https://rpc2.us.telos.net/evm\",\"https://evm.teloskorea.com/evm\",\"https://rpc2.teloskorea.com/evm\",\"https://rpc01.us.telosunlimited.io/evm\"]'
 
       - name: Build and deploy kubernetes files
