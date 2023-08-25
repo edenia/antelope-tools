@@ -200,7 +200,7 @@
     "bpjsonInconsistency": "El bp.json on chain y en of chain no coincide revisalo y realiza los cambios necesarios"
   },
   "faucetRoute": {
-    "createAccount": "Crear Cuenta Faucet",
+    "createAccount": "Crear una Nueva Cuenta",
     "newCreatedAccount": "Su nueva cuenta es",
     "transferTokensTransaction": "Tokens transferidos correctamente. Puede revisar la transacción aquí",
     "createButton": "Crear Cuenta",
