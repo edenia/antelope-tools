@@ -7,3 +7,18 @@ export const eosEndpoints =
 export const blockIntervalSec = parseFloat(
   process.env.HAPI_EVM_BLOCK_INTERVAL_SEC || '0.5'
 )
+export const oldBlockIntervalSec = parseFloat(
+  process.env.HAPI_EVM_OLD_BLOCK_INTERVAL_SEC || '0.1'
+)
+export const ATHIntervalSec = parseFloat(
+  process.env.HAPI_EVM_ATH_INTERVAL_SEC || '60'
+)
+export const cleanOldBlockIntervalSec = parseFloat(
+  process.env.HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC || '86400'
+)
+export const cleanOldTransferIntervalSec = parseFloat(
+  process.env.HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC || '86400'
+)
+export const keepHistoryForYears = parseFloat(
+  process.env.HAPI_EVM_KEEP_HISTORY_FOR_YEARS || '1'
+)

@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { gql } from 'graphql-request'
 
+import { networkConfig } from '../../config'
 import { coreUtil } from '../../utils'
 import { Transfer, Type } from './interfaces'
 import { historicalStatsModel } from '..'
@@ -59,6 +60,8 @@ export const deleteOldTransfers = async () => {
   `
 
   await coreUtil.hasura.default.request<TransferDeleteResponse>(mutation, {
-    date: moment().subtract(1, 'years').format('YYYY-MM-DD')
+    date: moment()
+      .subtract(networkConfig.keepHistoryForYears, 'years')
+      .format('YYYY-MM-DD')
   })
 }

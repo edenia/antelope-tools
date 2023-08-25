@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { gql } from 'graphql-request'
 
+import { networkConfig } from '../../config'
 import { coreUtil } from '../../utils'
 import { OperationType, TableType, Operation } from '../default.model'
 import { CappedBlock } from './interfaces'
@@ -139,7 +140,9 @@ export const deleteOldBlocks = async () => {
   `
 
   await coreUtil.hasura.default.request<BlockDeleteResponse>(mutation, {
-    date: moment().subtract(1, 'years').format('YYYY-MM-DD')
+    date: moment()
+      .subtract(networkConfig.keepHistoryForYears, 'years')
+      .format('YYYY-MM-DD')
   })
 }
 
