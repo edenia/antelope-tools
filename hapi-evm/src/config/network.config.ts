@@ -19,6 +19,6 @@ export const cleanOldBlockIntervalSec = parseFloat(
 export const cleanOldTransferIntervalSec = parseFloat(
   process.env.HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC || '86400'
 )
-export const keepHistoryForYears = parseFloat(
+export const keepHistoryForYears = parseInt(
   process.env.HAPI_EVM_KEEP_HISTORY_FOR_YEARS || '1'
 )
