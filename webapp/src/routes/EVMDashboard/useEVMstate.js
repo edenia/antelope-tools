@@ -136,13 +136,13 @@ const useEVMState = (theme, t) => {
 
           history.incoming.push({
             name,
-            y: tokenHistory.incoming || 0,
+            y: parseInt(tokenHistory.incoming) || 0,
             x: datetime,
           })
 
           history.outgoing.push({
             name,
-            y: tokenHistory.outgoing || 0,
+            y: parseInt(tokenHistory.outgoing) || 0,
             x: datetime,
           })
 
@@ -171,7 +171,7 @@ const useEVMState = (theme, t) => {
       const data = transactionsData?.transactions.map((transaction) => ({
         name: moment(transaction.datetime)?.format('ll'),
         gas: transaction.avg_gas_used || 0,
-        y: transaction.transactions_count || 0,
+        y: parseInt(transaction.transactions_count) || 0,
         x: new Date(transaction.datetime).getTime(),
       }))
 

@@ -106,6 +106,7 @@ const EVMDashboard = () => {
               options: options,
               onSelect: option => handleSelect('token', option),
               isHistoryEnabled: true,
+              isLive: false,
             }}
             data={tokenHistoryData}
             chartLabelFormat={{
