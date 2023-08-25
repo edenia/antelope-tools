@@ -47,7 +47,8 @@
     "options": "Options",
     "noOptions": "No matches",
     "updatedAt": "Updated at",
-    "nextUpdateAt": "Next updated at"
+    "nextUpdateAt": "Next update at",
+    "secondsAgo": "Seconds Ago"
   },
   "routes": {
     "/>sidebar": "Dashboard",
@@ -89,9 +90,15 @@
     "/missed-blocks>sidebar": "Missed Blocks",
     "/missed-blocks>title": "Missed Blocks - EOSIO + Antelope Network Dashboard",
     "/missed-blocks>heading": "Missed Blocks",
-    "/stress-test>title": "Stress Test Dashboard",
+    "/stress-test>title": "Stress Test Dashboard - EOSIO + Antelope Network Dashboard",
     "/stress-test>sidebar": "Stress Test",
     "/stress-test>heading": "Stress Test",
+    "/evm>title": "EVM Dashboard - EOSIO + Antelope Network Dashboard",
+    "/evm>sidebar": "EVM Dashboard",
+    "/evm>heading": "EVM Dashboard",
+    "/evm-rpc-endpoints>title": "EVM RPC Endpoints - EOSIO + Antelope Network Dashboard",
+    "/evm-rpc-endpoints>sidebar": "EVM RPC Endpoints",
+    "/evm-rpc-endpoints>heading": "EVM RPC Endpoints",
     "/endpoints>sidebar": "API Endpoints",
     "/endpoints>title": "API Endpoints - EOSIO + Antelope Network Dashboard",
     "/endpoints>heading": "API Endpoints",
@@ -135,7 +142,6 @@
     "Last Week": "Last Week",
     "Last Year": "Last Year",
     "scheduleVersion": "Schedule Version",
-    "secondsAgo": "Seconds Ago",
     "tpsAllTimeHigh": "TPS All Time High",
     "cpuUtilization": "CPU Usage",
     "netUtilization": "NET Usage",
@@ -158,7 +164,8 @@
     "chainNetLimit": "Chain Net Limit",
     "timeToFinality": "Time to Finality",
     "cpuUsage": "CPU Usage",
-    "netUsage": "NET Usage"
+    "netUsage": "NET Usage",
+    "average": "Average"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -401,7 +408,8 @@
     "updated": "The endpoint is working",
     "outdated": "The endpoint works but is outdated with the last block",
     "error": "Error in the endpoint request",
-    "not working": "The endpoint is not responding"
+    "not working": "The endpoint is not responding",
+    "helpText": "Hover or click the icons to display the endpoint health status data"
   },
   "copyToClipboardComponent": {
     "copy": "Click to copy",
@@ -424,5 +432,27 @@
     "charTitle": "Average Response Time from Costa Rica",
     "list": "List of endpoints",
     "timeInSecs": "Time in seconds"
+  },
+  "evmDashboardRoute": {
+    "totalWallets": "Total wallets created",
+    "avgBlockTime": "Average block time",
+    "gasPrice": "Gas price",
+    "avgGasUsage": "Average gas usage",
+    "totalIncoming": "Total (TOKEN) incoming",
+    "totalOutgoing": "Total (TOKEN) outgoing",
+    "incoming": "Incoming",    
+    "outgoing": "Outgoing",
+    "ATH": "TPS All Time High",
+    "lastBlock": "Last block",
+    "totalTxs": "Total EVM transactions",
+    "transactions": "EVM transactions",
+    "gasUsed": "Gas Used"
+  },
+  "evmEndpointsRoute": {
+    "title": "EVM RPC endpoints list",
+    "rpcEndpoint": "RPC Endpoint",
+    "latency": "Latency",
+    "lastBlock": "Last block",
+    "rerun": "Re-run health checks"
   }
 }

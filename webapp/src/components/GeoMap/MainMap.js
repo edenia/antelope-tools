@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
+import { useTheme } from '@mui/material/styles'
 
 import { countries } from '../../utils/countries'
 
@@ -14,6 +15,7 @@ const MainMap = ({ data, map, setMap }) => {
   const classes = useStyles()
   const { t } = useTranslation('mainMapComponent')
   const myRef = useRef()
+  const theme = useTheme()
 
   const setupMapData = useCallback(
     (data = [], map) => {
@@ -61,7 +63,7 @@ const MainMap = ({ data, map, setMap }) => {
             },
             states: {
               hover: {
-                color: '#1565C0',
+                color: theme.palette.primary.main,
               },
             },
             dataLabels: {
@@ -84,7 +86,7 @@ const MainMap = ({ data, map, setMap }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [setMap, t],
+    [setMap, t, theme.palette],
   )
 
   useEffect(() => {

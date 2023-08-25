@@ -84,30 +84,27 @@ const BlockProducerInfo = ({ t, classes }) => {
   return (
     <>
       <div className={classes.divMargin}>
-        <SimpleDataCard header>
-          <Typography>{t('currentProducer')}</Typography>
-          <Typography component="p" variant="h6" className={classes.lowercase}>
-            {info.head_block_producer}
-          </Typography>
-        </SimpleDataCard>
-        <SimpleDataCard header>
-          <Typography>{t('scheduleVersion')}</Typography>
-          <Typography component="p" variant="h6">
-            {schedule?.version}
-          </Typography>
-        </SimpleDataCard>
-        <SimpleDataCard header>
-          <Typography>{t('headBlock')}</Typography>
-          <Typography component="p" variant="h6">
-            {formatWithThousandSeparator(info.head_block_num)}
-          </Typography>
-        </SimpleDataCard>
-        <SimpleDataCard header>
-          <Typography>{t('lastBlock')}</Typography>
-          <Typography component="p" variant="h6">
-            {formatWithThousandSeparator(info.last_irreversible_block_num)}
-          </Typography>
-        </SimpleDataCard>
+        <SimpleDataCard
+          header
+          lowercase
+          title={t('currentProducer')}
+          value={info.head_block_producer}
+        />
+        <SimpleDataCard
+          header
+          title={t('scheduleVersion')}
+          value={schedule?.version}
+        />
+        <SimpleDataCard
+          header
+          title={t('headBlock')}
+          value={formatWithThousandSeparator(info.head_block_num)}
+        />
+        <SimpleDataCard
+          header
+          title={t('lastBlock')}
+          value={formatWithThousandSeparator(info.last_irreversible_block_num)}
+        />
       </div>
       <div className={classes.graphicBox}>
         <div className={classes.divTrans}>
@@ -128,7 +125,6 @@ const BlockProducerInfo = ({ t, classes }) => {
       <>
         <TransactionsHistory
           t={t}
-          classes={classes}
           nodesChildren={
             <>
               <ProducersSummary
@@ -138,20 +134,17 @@ const BlockProducerInfo = ({ t, classes }) => {
                 total={total}
               />
               <NodesSummary t={t} />
-              <SimpleDataCard>
-                <Typography>{t('timeToFinality')}</Typography>
-                <Typography
-                  component="p"
-                  variant="h6"
-                  className={classes.lowercase}
-                >
-                  {schedule.producers
+              <SimpleDataCard
+                lowercase
+                title={t('timeToFinality')}
+                value={
+                  schedule.producers
                     ? `${
                         (Math.ceil((schedule.producers.length / 3) * 2) + 1) * 6
                       } s`
-                    : '0 s'}
-                </Typography>
-              </SimpleDataCard>
+                    : '0 s'
+                }
+              />
             </>
           }
         />

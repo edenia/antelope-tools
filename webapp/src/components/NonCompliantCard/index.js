@@ -7,7 +7,7 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
-import { eosConfig } from '../../config'
+import { eosConfig, generalConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
 import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
@@ -21,9 +21,10 @@ const useStyles = makeStyles(styles)
 const NonCompliantCard = ({ producer, stats }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
+  const { healthLights } = generalConfig
 
-  const getHealthStatus = (healthCheck) => {
-    return healthCheck.valid ? 'greenLight' : 'redLight'
+  const getHealthStatus = healthCheck => {
+    return healthCheck.valid ? healthLights.greenLight : healthLights.redLight
   }
 
   const RowInfo = ({ title, value }) => {

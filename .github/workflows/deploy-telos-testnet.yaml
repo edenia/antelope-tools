@@ -61,6 +61,9 @@ jobs:
           REACT_APP_STATE_HISTORY_ENABLED=: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
+          REACT_APP_EVM_ENDPOINT: 'https://testnet.telos.net/evm'
+          REACT_APP_EVM_BLOCK_EXPLORER_URL: 'https://testnet.teloscan.io/block/(block)'
+          REACT_APP_EVM_ENDPOINTS: '[\"https://testnet.telos.net/evm\"]'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files

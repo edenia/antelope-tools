@@ -18,7 +18,7 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
-import { eosConfig } from '../../config'
+import { getStatus } from 'utils'
 
 import styles from './styles'
 import Tooltip from '../Tooltip'
@@ -39,33 +39,6 @@ const EndpointsTable = ({ producers }) => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
-  }
-
-  const syncToleranceInterval = eosConfig.syncToleranceInterval
-
-  const isSynchronized = endpoint => {
-    const diffBlockTimems =
-      new Date(endpoint.updated_at) - new Date(endpoint.head_block_time)
-
-    return diffBlockTimems <= syncToleranceInterval
-  }
-
-  const getStatus = endpoint => {
-    if (endpoint.response.status === undefined) return
-
-    if (endpoint.response?.isWorking) {
-      return !endpoint.head_block_time || isSynchronized(endpoint)
-        ? 'greenLight'
-        : 'timerOff'
-    }
-
-    switch (Math.floor(endpoint.response?.status / 100)) {
-      case 4:
-      case 5:
-        return 'yellowLight'
-      default:
-        return 'redLight'
-    }
   }
 
   const CellList = ({ producer, endpointType }) => {

@@ -33,4 +33,11 @@ export default (theme) => ({
         height: '100%',
       },
     },
+    lowercase: {
+      textTransform: 'lowercase !important',
+    },
+    svgLink: {
+      fontSize: 18,
+      marginLeft: theme.spacing(2),
+    },
   })

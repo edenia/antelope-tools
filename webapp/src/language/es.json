@@ -58,7 +58,8 @@
     "options": "Opciones",
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
-    "nextUpdateAt": "Próxima actualización"
+    "nextUpdateAt": "Próxima actualización",
+    "secondsAgo": "Hace Segundos"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -140,7 +141,6 @@
     "Last Week": "Última Semana",
     "Last Year": "Último Año",
     "scheduleVersion": "Versión de Programa",
-    "secondsAgo": "Hace Segundos",   
     "cpuUtilization": "Uso de CPU",
     "netUtilization": "Uso de NET",
     "cpuUtilizationAllTimeHigh": "Uso de CPU en TPS máximo histórico",
@@ -164,7 +164,8 @@
     "chainNetLimit": "Límite de Net en cadena",
     "timeToFinality": "Tiempo para finalidad",
     "cpuUsage": "Uso del CPU",
-    "netUsage": "Uso de NET"
+    "netUsage": "Uso de NET",
+    "average": "Promedio"
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -411,7 +412,8 @@
     "Connection error": "Error de conexión",
     "Connection established": "Conexión establecida",
     "Success": "Éxitosa",
-    "Failed": "Fallida"
+    "Failed": "Fallida",
+    "Network Error": "Error de red"
   },
   "nodeSearchComponent": {
     "title": "Buscar Nodo",
@@ -425,7 +427,8 @@
     "updated": "El punto final funciona",
     "outdated": "El punto final funciona, pero no está actualizado con el último bloque",
     "error": "Error en la consulta del punto final",
-    "not working": "El punto final no responde"
+    "not working": "El punto final no responde",
+    "helpText": "Pase el cursor o haga clic en los iconos para ver el estado de salud de un endpoint"
   },
   "copyToClipboardComponent": {
     "copy": "Copiar",
@@ -448,5 +451,27 @@
     "charTitle": "Tiempo de respuesta promedio desde Costa Rica",
     "list": "Lista de puntos finales",
     "timeInSecs": "Tiempo en segundos"
+  },
+  "evmDashboardRoute": {
+    "totalWallets": "Total de wallets creadas",
+    "avgBlockTime": "Tiempo promedio de bloque",
+    "gasPrice": "Precio de gas",
+    "avgGasUsage": "Uso promedio de gas",
+    "totalIncoming": "Total (TOKEN) entrantes",
+    "totalOutgoing": "Total (TOKEN) salientes",
+    "incoming": "Entrantes",
+    "outgoing": "Salientes",
+    "ATH": "TPS Máximo histórico",
+    "lastBlock": "Último bloque",
+    "totalTxs": "Total de transacciones EVM",
+    "transactions": "Transacciones EVM",
+    "gasUsed": "Gas Usado"
+  },
+  "evmEndpointsRoute": {
+    "title": "Lista de puntos finales RPC de EVM",
+    "rpcEndpoint": "Punto final RPC",
+    "latency": "Latencia",
+    "lastBlock": "Último bloque",
+    "rerun": "Reejecutar las pruebas"
   }
 }

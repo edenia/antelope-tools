@@ -24,8 +24,8 @@ export default (theme) => ({
     marginBlock: '2px',
   },
   helpIcon: {
-    width: '15px !important',
-    height: '15px !important',
+    width: '18px !important',
+    height: '18px !important',
     cursor: 'pointer',
   },
   greenLight: {
