@@ -201,14 +201,18 @@
     "bpjsonInconsistency": "El bp.json on chain y en of chain no coincide revisalo y realiza los cambios necesarios"
   },
   "faucetRoute": {
-    "createAccount": "Crear Cuenta Faucet",
-    "newCreatedAccount": "Su nueva cuenta es",
-    "transferTokensTransaction": "Tokens transferidos correctamente. Puede revisar la transacción aquí",
-    "createButton": "Crear",
-    "issueTokens": "Emitir Tokens",
-    "getTokens": "Obtener Tokens",
-    "publicKey": "Llave pública (Active/Owner)",
-    "accountName": "Nombre de la cuenta"
+    "createAccount": "Cree su Cuenta",
+    "newCreatedAccount": "¡Felicidades! Su nueva cuenta ha sido creada:",
+    "transferTokensTransaction": "Los tokens han sido transferidos exitosamente. Vea la transacción en el explorador:",
+    "createButton": "Cree su Cuenta",
+    "issueTokens": "Distribuya Tokens",
+    "getTokens": "Reciba Tokens",
+    "publicKey": "Introduzca la Clave Pública (Activa/Propietario)",
+    "accountName": "Elija un Nombre de Cuenta",
+    "invalidAccount": "Por favor, introduzca un nombre de cuenta válido.",
+    "emptyFields": "Complete todos los campos para continuar con la creación de la cuenta.",
+    "accountFormat": "El nombre de la cuenta debe tener 12 caracteres o menos. Utilice solo letras minúsculas (a-z) y números (1-5).",
+    "keyFormat": "Introduzca una clave ECC válida. Puede generar una usando cleos o cualquier billetera compatible."
   },
   "ricardianContractRoute": {
     "title": "Acuerdo de Productor de Bloques"

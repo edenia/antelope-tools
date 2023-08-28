@@ -201,14 +201,18 @@
     "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
   },
   "faucetRoute": {
-    "createAccount": "Create Faucet Account",
-    "newCreatedAccount": "Your new account is",
-    "transferTokensTransaction": "Tokens transferred correctly. Check it on explorer here",
-    "createButton": "Create",
-    "issueTokens": "Issue Tokens",
-    "getTokens": "Get Tokens",
-    "publicKey": "Public Key (Active/Owner)",
-    "accountName": "Account Name"
+    "createAccount": "Create Your Account",
+    "newCreatedAccount": "Congratulations! Your new account has been created:",
+    "transferTokensTransaction": "Tokens have been successfully transferred. View the transaction on the explorer:",
+    "createButton": "Create Your Account",
+    "issueTokens": "Distribute Tokens",
+    "getTokens": "Receive Tokens",
+    "publicKey": "Enter Public Key (Active/Owner)",
+    "accountName": "Choose an Account Name",
+    "invalidAccount": "Enter a valid account name, please.",
+    "emptyFields": "Complete all fields to proceed with account creation.",
+    "accountFormat": "Account name should be 12 characters or fewer. Use lowercase letters (a-z) and numbers (1-5) only.",
+    "keyFormat": "Enter a valid ECC key. You can generate one using cleos or any compatible wallet."
   },
   "ricardianContractRoute": {
     "title": "Block Producer Agreement"
