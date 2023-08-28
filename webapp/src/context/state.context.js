@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 
 import useLightUAL from '../hooks/useUAL'
 import { ualConfig } from '../config'
@@ -155,9 +155,11 @@ export const useSharedState = () => {
     throw new Error(`useSharedState must be used within a SharedStateContext`)
   }
 
+  const lastBlock = useRef()
+  const infoInterval = useRef(null)
+  
   const [state, dispatch] = context
   const waitTrackingInterval = 30000
-  let infoInterval
   let scheduleInterval
   let global
 
@@ -268,7 +270,7 @@ export const useSharedState = () => {
   }
 
   const startTrackingInfo = async ({ interval = 1 } = {}) => {
-    if (infoInterval) return
+    if (infoInterval.current) return
 
     const handle = async () => {
       try {
@@ -279,24 +281,31 @@ export const useSharedState = () => {
           payload: { ...info },
         })
 
-        await getBlock(info.head_block_num)
+        if (!lastBlock.current) {
+          lastBlock.current = info.head_block_num
+        } else {
+          lastBlock.current += 1
+        }
+
+        await getBlock(lastBlock.current)
       } catch (error) {
         console.error(error?.message || error)
 
         if (error?.message === ENDPOINTS_ERROR) {
-          clearInterval(infoInterval)
+          clearInterval(infoInterval.current)
         }
       }
     }
 
-    infoInterval = setInterval(handle, interval * 1000)
+    infoInterval.current = setInterval(handle, interval * 1000)
   }
 
   const stopTrackingInfo = () => {
-    if (!infoInterval) return
+    if (!infoInterval.current) return
 
-    clearInterval(infoInterval)
-    infoInterval = null
+    clearInterval(infoInterval.current)
+    infoInterval.current = null
+    lastBlock.current = null
   }
 
   const stopTrackingProducerSchedule = () => {

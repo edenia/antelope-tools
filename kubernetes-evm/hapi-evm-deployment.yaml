@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dashboard-hapi-evm
+  name: dashboard-hapi-evm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-hapi-evm
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: dashboard-hapi-evm
+    spec:
+      imagePullSecrets:
+          - name: regcred
+      containers:
+      - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HAPI_EVM}:${VERSION}
+        imagePullPolicy: "Always"
+        name: "dashboard-hapi-evm"
+        envFrom:
+        - configMapRef:
+            name: dashboard-hapi-evm-config
+        ports:
+        - containerPort: 9090

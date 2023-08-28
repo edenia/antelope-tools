@@ -1,0 +1,13 @@
+table:
+  name: historical_stats
+  schema: evm
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - id
+        - total_transactions
+        - tps_all_time_high
+        - total_incoming_token
+        - total_outgoing_token
+      filter: {}

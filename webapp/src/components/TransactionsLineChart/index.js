@@ -3,7 +3,15 @@ import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 
-const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps, zoomEnabled }) => {
+const TransactionsLineChart = ({
+  data,
+  xAxisProps,
+  title,
+  yAxisProps,
+  zoomEnabled,
+  shared,
+  customFormatter
+}) => {
   const options = {
     time: {
       timezoneOffset: new Date().getTimezoneOffset(),
@@ -14,7 +22,7 @@ const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps, zoomEnable
     chart: {
       animation: false,
       type: 'spline',
-      zoomType: zoomEnabled ? 'x' : ''
+      zoomType: zoomEnabled ? 'x' : '',
     },
     credits: {
       enabled: false,
@@ -22,7 +30,8 @@ const TransactionsLineChart = ({ data, xAxisProps, title, yAxisProps, zoomEnable
     xAxis: xAxisProps,
     yAxis: yAxisProps,
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.y}</b><br/>Net usage:<b>{point.net} %</b><br/>CPU usage:<b>{point.cpu} %</b>',
+      shared,
+      ...(customFormatter && { formatter() { return customFormatter(this) } })
     },
   }
 
@@ -45,6 +54,8 @@ TransactionsLineChart.propTypes = {
   yAxisProps: PropTypes.object,
   title: PropTypes.string,
   zoomEnabled: PropTypes.bool,
+  shared: PropTypes.bool,
+  customFormatter: PropTypes.func
 }
 
 TransactionsLineChart.defaultProps = {
@@ -53,6 +64,8 @@ TransactionsLineChart.defaultProps = {
   yAxisProps: {},
   title: '',
   zoomEnabled: false,
+  shared: false,
+  customFormatter: undefined
 }
 
 export default TransactionsLineChart

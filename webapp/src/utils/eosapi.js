@@ -30,7 +30,11 @@ const callEosApi = async method => {
       const headBlockTime = response.head_block_time
 
       if (headBlockTime) {
-        const diffBlockTimems = new Date() - new Date(headBlockTime)
+        const nowUTC = new Date()
+
+        nowUTC.setMinutes(nowUTC.getMinutes() + nowUTC.getTimezoneOffset())
+
+        const diffBlockTimems = nowUTC - new Date(headBlockTime)
 
         if (diffBlockTimems > eosConfig.syncToleranceInterval) {
           throw new Error(`The endpoint ${eosApi.endpoint} is outdated`)

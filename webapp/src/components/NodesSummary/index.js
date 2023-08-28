@@ -1,8 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
 import { useQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 
@@ -26,26 +24,6 @@ const NODES_ORDER = [
     unknown: 10,
   },
 ]
-
-const BodyGraphValue = ({ loading, value }) => {
-  if (loading) return <LinearProgress />
-
-  return (
-    <Typography component="p" variant="h6">
-      {value}
-    </Typography>
-  )
-}
-
-BodyGraphValue.propTypes = {
-  loading: PropTypes.bool,
-  value: PropTypes.number,
-}
-
-BodyGraphValue.defaultProps = {
-  value: 0,
-  loading: false,
-}
 
 const NodesSummary = ({ t }) => {
   const { data, loading } = useQuery(NODES_SUMMARY_QUERY)
@@ -93,20 +71,23 @@ const NodesSummary = ({ t }) => {
 
   return (
     <>
-      <SimpleDataCard>
-        <Typography>{`${t('total')} ${t('nodes')}`}</Typography>
-        <BodyGraphValue value={total} loading={loading} />
-      </SimpleDataCard>
-
+      <SimpleDataCard
+        title={`${t('total')} ${t('nodes')}`}
+        value={total}
+        loading={loading}
+      />
       {nodes &&
         nodes.map((node) => (
-          <SimpleDataCard key={node.type}>
-            <Typography>
-              {currentLanguaje === 'es' ? t('nodes') : ''} {t(node.type)}{' '}
-              {currentLanguaje !== 'es' ? t('nodes') : ''}
-            </Typography>
-            <BodyGraphValue value={node.value || 0} loading={loading} />
-          </SimpleDataCard>
+          <SimpleDataCard
+            key={node.type}
+            title={
+              currentLanguaje === 'es'
+                ? t('nodes') + ' ' + t(node.type)
+                : t(node.type) + ' ' + t('nodes')
+            }
+            value={node.value || 0}
+            loading={loading}
+          />
         ))}
     </>
   )

@@ -34,6 +34,7 @@ const InfoModal = ({ lights = defaultLights }) => {
     return (
       <div className={classes.modal}>
         <p>{t('help')}</p>
+        {t('helpText')}
         {lights &&
           Object.keys(lights).map((light, index) => (
             <div className={classes.item} key={`light-${light}-${index}`}>

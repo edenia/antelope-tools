@@ -1,35 +1,19 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import { makeStyles } from '@mui/styles'
 import { useTheme } from '@mui/material/styles'
-import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import Select from '@mui/material/Select'
-import Card from '@mui/material/Card'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import LinearProgress from '@mui/material/LinearProgress'
+import moment from 'moment'
 
 import { TRANSACTION_QUERY } from '../../gql'
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
-import TransactionsLineChart from '../../components/TransactionsLineChart'
 import { useSharedState } from '../../context/state.context'
 import { generalConfig } from '../../config'
-
-import EqualIcon from './EqualIcon'
-import styles from './styles'
-
-const useStyles = makeStyles(styles)
+import TransactionsChartContainer from '../../components/TransactionsChartContainer'
 
 const options = ['Live (30s)', ...rangeOptions]
 
 const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
-  const classes = useStyles()
   const theme = useTheme()
   const [{ tps, tpb }] = useSharedState()
   const [graphicData, setGraphicData] = useState([
@@ -39,7 +23,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     },
     {
       name: t('transactionsPerBlock'),
-      color: '#00C853',
+      color: theme.palette.tertiary.main,
     },
   ])
   const [option, setOption] = useState(options[0])
@@ -83,7 +67,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
       },
       {
         name: t('transactionsPerBlock'),
-        color: '#00C853',
+        color: theme.palette.tertiary.main,
         data: trxPerBlock,
       },
     ])
@@ -119,6 +103,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     const { trxPerBlock, trxPerSecond } = data.transactions.reduce(
       (history, transactionHistory) => {
         history.trxPerBlock.push({
+          name: moment(transactionHistory.datetime)?.format('ll'),
           cpu: transactionHistory.cpu || 0,
           net: transactionHistory.net || 0,
           y: transactionHistory.transactions_count || 0,
@@ -126,6 +111,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
         })
 
         history.trxPerSecond.push({
+          name: moment(transactionHistory.datetime)?.format('ll'),
           cpu: transactionHistory.cpu / 2 || 0,
           net: transactionHistory.net / 2 || 0,
           y: transactionHistory.transactions_count * 2 || 0,
@@ -139,13 +125,13 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
 
     setGraphicData([
       {
-        name: t('transactionsPerSecond'),
+        name: t('average') + ' ' + t('transactionsPerSecond'),
         color: theme.palette.secondary.main,
         data: trxPerSecond,
       },
       {
-        name: t('transactionsPerBlock'),
-        color: '#00C853',
+        name: t('average') + ' ' + t('transactionsPerBlock'),
+        color: theme.palette.tertiary.main,
         data: trxPerBlock,
       },
     ])
@@ -153,98 +139,50 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
   }, [data, t])
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent
-        style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div className={classes.headerTransactionLine}>
-          <Typography component="p" variant="h6">
-            {t('transactions')}
-          </Typography>
-          <div className={classes.formControl}>
-            <FormControl>
-              {generalConfig.historyEnabled && (
-                <>
-                  <InputLabel id="option-linebar">{t('timeFrame')}</InputLabel>
-                  <Select
-                    labelId="option-linebar"
-                    value={option}
-                    onChange={(e) => setOption(e.target.value)}
-                    fullWidth
-                  >
-                    {options.map((item, index) => (
-                      <MenuItem key={index} value={item}>
-                        {t(item)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </>
-              )}
-            </FormControl>
-            <div
-              onClick={() => {
-                if (option === options[0]) {
-                  setPause(!pause)
-                  if (pause) {
-                    startTrackingInfo()
-                  } else {
-                    stopTrackingInfo()
-                  }
-                }
-              }}
-              className={clsx(classes.pauseButton, {
-                [classes.disableButton]: option !== options[0],
-              })}
-            >
-              {pause ? (
-                <PlayArrowIcon />
-              ) : (
-                <EqualIcon
-                  width={20}
-                  height={20}
-                  color={
-                    option !== options[0]
-                      ? theme.palette.action.disabled
-                      : theme.palette.common.black
-                  }
-                />
-              )}
-              <Typography>{pause ? t('play') : t('pause')}</Typography>
-            </div>
-          </div>
-        </div>
-        {loading && <LinearProgress color="primary" />}
-        <TransactionsLineChart
-          zoomEnabled={option !== options[0]}
-          yAxisProps={{
-            reversed: false,
-            title: {
-              enabled: true,
-              text: t('transactions'),
-            },
-            maxPadding: 0.05,
-          }}
-          xAxisProps={{
-            type: 'datetime',
-            reversed: option === options[0],
-            title: {
-              enabled: option === options[0],
-              text: t('secondsAgo'),
-            },
-            labels: {
-              format: option === options[0] ? '{value}s' : null,
-            },
-            maxPadding: 0.05,
-          }}
-          data={graphicData}
-        />
-      </CardContent>
-    </Card>
+    <TransactionsChartContainer 
+      title={t('transactions')}
+      isPaused={pause}
+      loading={loading}
+      handlePause={() => {
+        if (option === options[0]) {
+          setPause(!pause)
+          if (pause) {
+            startTrackingInfo()
+          } else {
+            stopTrackingInfo()
+          }
+        }
+      }}
+      historyState={{
+        value: option,
+        options: options,
+        isLive: option === options[0],
+        isHistoryEnabled: generalConfig.historyEnabled,
+        onSelect: setOption,
+      }}
+      data={graphicData}
+      chartLabelFormat={{
+        ariaLabel: 'select time filter',
+        yAxisText: t('transactions'),
+        blockTime: 1,
+        customFormatter: element => {
+          const series = element?.series
+          const point = element?.point
+
+          const pointName = point?.name ? `${point.name}<br />` : ''
+          const resourcesDetail =
+            point?.net && point?.cpu
+              ? `<br/>${t('netUsage')}:<b>${point.net} %</b><br/>${t(
+                  'cpuUsage',
+                )}:<b>${point.cpu} %</b>`
+              : ''
+
+          return (
+            pointName + `${series?.name}: <b>${point?.y}</b>` + resourcesDetail
+          )
+        },
+      }}
+    />
   )
 }
 

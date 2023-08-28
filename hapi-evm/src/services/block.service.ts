@@ -5,9 +5,12 @@ import {
   defaultModel,
   blockModel,
   transactionModel,
-  paramModel
+  paramModel,
+  historicalStatsModel,
+  StatsModel
 } from '../models'
 import { networkConfig } from '../config'
+import moment from 'moment'
 
 const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
 const web3 = new Web3(httpProvider)
@@ -26,7 +29,6 @@ const web3 = new Web3(httpProvider)
 // test()
 
 // TODO: syncronize passed blocks
-
 const syncFullBlock = async (blockNumber: number | bigint) => {
   const block: Block = await web3.eth.getBlock(blockNumber)
 
@@ -38,12 +40,27 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
   if (blockExist) return
 
+  const transactionsCount = block.transactions?.length
+
+  if (transactionsCount) {
+    await historicalStatsModel.queries.saveOrIncrement({
+      total_transactions: transactionsCount
+    })
+  }
+
+  const blockTimestamp = new Date(Number(block.timestamp) * 1000)
+  const isBefore = moment(blockTimestamp).isBefore(
+    moment().subtract(1, 'years')
+  )
+
+  if (isBefore) return
+
   const cappedBlock = {
     hash: block.hash.toString(),
     gas_used: Number(block.gasUsed),
     transactions: (block.transactions || []) as TransactionHash[],
     number: Number(block.number),
-    timestamp: new Date(Number(block.timestamp) * 1000)
+    timestamp: blockTimestamp
   }
 
   await blockModel.queries.add_or_modify(cappedBlock)
@@ -86,7 +103,17 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 }
 
 const getBlock = async () => {
-  const blockNumber = await web3.eth.getBlockNumber()
+  let blockNumber: bigint
+  const lastBlockInDB = (await blockModel.queries.default.get(
+    { timestamp: { _gt: moment().subtract(30, 'minutes') } },
+    { number: 'desc' }
+  )) as blockModel.interfaces.CappedBlock
+
+  if (!lastBlockInDB) {
+    blockNumber = await web3.eth.getBlockNumber()
+  } else {
+    blockNumber = BigInt(lastBlockInDB.number + 1)
+  }
 
   await syncFullBlock(blockNumber)
 }
@@ -124,6 +151,30 @@ const blockWorker = async () => {
   getBlock()
 }
 
+const cleanOldBlocks = async () => {
+  await blockModel.queries.deleteOldBlocks()
+}
+
+const syncATH = async () => {
+  const currentState = await historicalStatsModel.queries.getState()
+  const partialATH = await StatsModel.queries.getPartialATH()
+
+  if (!partialATH) return
+
+  if (
+    currentState.tps_all_time_high.transactions_count ||
+    0 < partialATH.ath_transactions_count
+  ) {
+    await historicalStatsModel.queries.saveOrUpdate({
+      tps_all_time_high: {
+        blocks: partialATH.ath_blocks.split(','),
+        transactions_count: partialATH.ath_transactions_count,
+        gas_used: partialATH.ath_gas_used
+      }
+    })
+  }
+}
+
 const syncBlockWorker = (): defaultModel.Worker => {
   return {
     name: 'SYNC BLOCK WORKER',
@@ -140,7 +191,25 @@ const syncOldBlockWorker = (): defaultModel.Worker => {
   }
 }
 
+const syncATHWorker = (): defaultModel.Worker => {
+  return {
+    name: 'SYNC ATH WORKER',
+    intervalSec: 60,
+    action: syncATH
+  }
+}
+
+const cleanOldBlocksWorker = (): defaultModel.Worker => {
+  return {
+    name: 'CLEAN UP OLD BLOCKS WORKER',
+    intervalSec: 86400,
+    action: cleanOldBlocks
+  }
+}
+
 export default {
   syncBlockWorker,
-  syncOldBlockWorker
+  syncOldBlockWorker,
+  cleanOldBlocksWorker,
+  syncATHWorker
 }

@@ -6,6 +6,7 @@ import moment from 'moment'
 
 import ChipList from '../ChipList'
 import HealthCheck from '../HealthCheck'
+import { generalConfig } from '../../config'
 
 import styles from './styles'
 
@@ -14,25 +15,26 @@ const useStyles = makeStyles(styles)
 const EndpointsChips = ({ node }) => {
   const classes = useStyles()
   const { t } = useTranslation('nodeCardComponent')
+  const { healthLights } = generalConfig
 
   if (!node?.endpoints?.length) return <></>
 
   const getHealthStatus = (totalEndpoints, workingEndpoints) => {
     switch (workingEndpoints) {
       case totalEndpoints:
-        return 'greenLight'
+        return healthLights.greenLight
       case 0:
-        return 'redLight'
+        return healthLights.redLight
       default:
-        return 'yellowLight'
+        return healthLights.yellowLight
     }
   }
 
   const getStatusMessage = (healthStatus, failingEndpoints) => {
     switch (healthStatus) {
-      case 'greenLight':
+      case healthLights.greenLight:
         return t('allWorking')
-      case 'redLight':
+      case healthLights.redLight:
         return t('noneWorking')
       default:
         const beginning =
