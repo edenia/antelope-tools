@@ -130,7 +130,11 @@ const Faucet = () => {
       showMessage({
         type: 'success',
         content: (
-          <a href={eosConfig.blockExplorerUrl.replace('(transaction)', tx)}>
+          <a
+            href={eosConfig.blockExplorerUrl.replace('(transaction)', tx)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {`${t('transferTokensTransaction')} ${tx.slice(0, 7)}`}
           </a>
         ),
