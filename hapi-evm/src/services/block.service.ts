@@ -50,7 +50,7 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
   const blockTimestamp = new Date(Number(block.timestamp) * 1000)
   const isBefore = moment(blockTimestamp).isBefore(
-    moment().subtract(1, 'years')
+    moment().subtract(networkConfig.keepHistoryForYears, 'years')
   )
 
   if (isBefore) return
@@ -186,7 +186,7 @@ const syncBlockWorker = (): defaultModel.Worker => {
 const syncOldBlockWorker = (): defaultModel.Worker => {
   return {
     name: 'SYNC OLD BLOCK WORKER',
-    intervalSec: 0.1,
+    intervalSec: networkConfig.oldBlockIntervalSec,
     action: syncOldBlocks
   }
 }
@@ -194,7 +194,7 @@ const syncOldBlockWorker = (): defaultModel.Worker => {
 const syncATHWorker = (): defaultModel.Worker => {
   return {
     name: 'SYNC ATH WORKER',
-    intervalSec: 60,
+    intervalSec: networkConfig.ATHIntervalSec,
     action: syncATH
   }
 }
@@ -202,7 +202,7 @@ const syncATHWorker = (): defaultModel.Worker => {
 const cleanOldBlocksWorker = (): defaultModel.Worker => {
   return {
     name: 'CLEAN UP OLD BLOCKS WORKER',
-    intervalSec: 86400,
+    intervalSec: networkConfig.cleanOldBlockIntervalSec,
     action: cleanOldBlocks
   }
 }
