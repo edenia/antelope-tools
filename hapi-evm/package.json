@@ -1,0 +1,51 @@
+{
+  "name": "evm-backend",
+  "version": "1.0.0",
+  "description": "EVM Dashbaord Backend Service",
+  "main": "dist/index.js",
+  "author": "edenia.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon",
+    "prepare": "cd .. && husky install hapi/.husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint . --ext .ts",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/hapi": "^21.3.2",
+    "@types/web3": "^1.2.2",
+    "axios": "^1.4.0",
+    "eosjs": "^22.1.0",
+    "eosjs-api": "^7.0.4",
+    "graphql": "16",
+    "graphql-request": "^6.0.0",
+    "joi": "^17.9.2",
+    "moment": "^2.29.4",
+    "node-fetch": "^3.3.1",
+    "pg": "^8.6.0",
+    "sequelize": "^6.32.1",
+    "web3": "^4.0.3",
+    "websocket": "^1.0.34"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.5",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}

@@ -1,0 +1,13 @@
+table:
+  name: block
+  schema: evm
+object_relationships:
+  - name: BlockToTransaction
+    using:
+      manual_configuration:
+        column_mapping:
+          hash: block_hash
+        insertion_order: null
+        remote_table:
+          name: transaction
+          schema: evm

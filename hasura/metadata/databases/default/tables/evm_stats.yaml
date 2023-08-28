@@ -1,0 +1,10 @@
+table:
+  name: stats
+  schema: evm
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - block_gas_avg
+        - daily_transaction_count
+      filter: {}

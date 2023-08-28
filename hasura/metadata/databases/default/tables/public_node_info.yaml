@@ -1,6 +1,6 @@
 table:
-  schema: public
   name: node_info
+  schema: public
 object_relationships:
   - name: node
     using:

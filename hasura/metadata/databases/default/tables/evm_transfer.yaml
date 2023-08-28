@@ -1,0 +1,3 @@
+table:
+  name: transfer
+  schema: evm

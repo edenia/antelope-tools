@@ -10,6 +10,7 @@ RESET  := $(shell tput -Txterm sgr0)
 
 K8S_BUILD_DIR ?= ./build_k8s
 K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
+K8S_FILES_EVM := $(shell find ./kubernetes-evm -name '*.yaml' | sed 's:./kubernetes-evm/::g')
 
 run:
 	@echo "$(BLUE)running action $(filter-out $@,$(MAKECMDGOALS))$(RESET)"
@@ -20,6 +21,7 @@ clean:
 	@docker-compose stop
 	@rm -rf tmp/postgres
 	@rm -rf tmp/hapi
+	@rm -rf tmp/hapi-evm
 	@rm -rf tmp/webapp
 	@docker system prune
 
@@ -100,6 +102,7 @@ start:
 	make start-postgres
 	make start-wallet
 	make start-hapi
+	# make start-hapi-evm
 	make start-hasura
 	make -j 3 start-hasura-cli start-logs start-webapp
 
@@ -112,6 +115,9 @@ start-wallet:
 start-hapi:
 	@docker-compose up -d --build hapi
 
+start-hapi-evm:
+	@docker-compose up -d --build hapi-evm
+
 start-hasura:
 	$(eval -include .env)
 	@until \
@@ -121,6 +127,10 @@ start-hasura:
 	@until \
 		curl http://localhost:9090/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi service"; \
+		sleep 5; done;
+	@until \
+		curl http://localhost:9091/healthz; \
+		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi-evm service"; \
 		sleep 5; done;
 	@echo "..."
 	@docker-compose stop hasura
@@ -145,7 +155,7 @@ start-webapp:
 	@echo "done webapp"
 
 start-logs:
-	@docker-compose logs -f hapi webapp
+	@docker-compose logs -f hapi hapi-evm webapp
 
 build-kubernetes: ##@devops Generate proper k8s files based on the templates
 build-kubernetes: ./kubernetes
@@ -154,6 +164,15 @@ build-kubernetes: ./kubernetes
 	@for file in $(K8S_FILES); do \
 		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
 		$(SHELL_EXPORT) envsubst <./kubernetes/$$file >$(K8S_BUILD_DIR)/$$file; \
+	done
+
+build-kubernetes-evm: ##@devops Generate proper k8s files based on the templates for evm
+build-kubernetes-evm: ./kubernetes-evm
+	@echo "Build kubernetes files for evm..."
+	@mkdir -p $(K8S_BUILD_DIR)
+	@for file in $(K8S_FILES_EVM); do \
+		mkdir -p `dirname "$(K8S_BUILD_DIR)/$$file"`; \
+		$(SHELL_EXPORT) envsubst <./kubernetes-evm/$$file >$(K8S_BUILD_DIR)/$$file; \
 	done
 
 deploy-kubernetes: ##@devops Publish the build k8s files

@@ -22,3 +22,9 @@ export const historyEnabled =
 export const googleAnaliticPageId =
   process.env.REACT_APP_GOOGLE_ANALITIC_PAGE_ID
 export const highchartsMapURL = 'https://code.highcharts.com/mapdata/countries/'
+export const healthLights = Object.freeze({
+  greenLight: 'greenLight',
+  timerOff: 'timerOff',
+  yellowLight: 'yellowLight',
+  redLight: 'redLight',
+})

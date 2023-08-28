@@ -1,32 +1,10 @@
 /* eslint camelcase: 0 */
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
 
 import { ENTITY_TYPE } from '../../utils/lacchain'
 import { eosConfig } from '../../config'
 import SimpleDataCard from '../SimpleDataCard'
-
-const BodyGraphValue = ({ loading, value }) => {
-  if (loading) return <LinearProgress />
-
-  return (
-    <Typography component="p" variant="h6">
-      {value}
-    </Typography>
-  )
-}
-
-BodyGraphValue.propTypes = {
-  loading: PropTypes.bool,
-  value: PropTypes.number,
-}
-
-BodyGraphValue.defaultProps = {
-  value: 0,
-  loading: false,
-}
 
 const ProducersSummary = ({ t, data, loading, total }) => {
   const [nodes, setNodes] = useState([])
@@ -54,16 +32,18 @@ const ProducersSummary = ({ t, data, loading, total }) => {
 
   return (
     <>
-      <SimpleDataCard>
-        <Typography>{`${t('total')} ${t('producers')}`}</Typography>
-        <BodyGraphValue value={total} loading={loading} />
-      </SimpleDataCard>
-
+      <SimpleDataCard
+        title={`${t('total')} ${t('producers')}`}
+        value={total}
+        loading={loading}
+      />
       {nodes.map((node, index) => (
-        <SimpleDataCard key={index}>
-          <Typography>{`${t(node.type)} ${t('producers')}`}</Typography>
-          <BodyGraphValue value={node.entities_count || 0} loading={loading} />
-        </SimpleDataCard>
+        <SimpleDataCard
+          key={index}
+          title={`${t(node.type)} ${t('producers')}`}
+          value={node.entities_count || 0}
+          loading={loading}
+        />
       ))}
     </>
   )
