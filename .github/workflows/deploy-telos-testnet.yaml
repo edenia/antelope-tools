@@ -117,15 +117,15 @@ jobs:
           HAPI_EVM_ENDPOINT: 'https://testnet.telos.net/evm'
           HAPI_EVM_API_ENDPOINTS: '["https://telos-testnet.edenia.cloud","https://telos-testnet.cryptolions.io","https://testnet.telos.eosrio.io","https://test.telos.eosusa.io"]'
           HAPI_EVM_NETWORK_CHAIN_ID: 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
-          HAPI_EVM_EOS_EVM_ACCOUNT: ${{ secrets.HAPI_EVM_EOS_EVM_ACCOUNT }}
-          HAPI_EVM_BLOCK_INTERVAL_SEC: ${{ secrets.HAPI_EVM_BLOCK_INTERVAL_SEC }}
-          HAPI_EVM_OLD_BLOCK_INTERVAL_SEC: ${{ secrets.HAPI_EVM_OLD_BLOCK_INTERVAL_SEC }}
-          HAPI_EVM_ATH_INTERVAL_SEC: ${{ secrets.HAPI_EVM_ATH_INTERVAL_SEC }}
-          HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: ${{ secrets.HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC }}
-          HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: ${{ secrets.HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC }}
-          HAPI_EVM_KEEP_HISTORY_FOR_YEARS: ${{ secrets.HAPI_EVM_KEEP_HISTORY_FOR_YEARS }}
-          HAPI_EVM_HYPERION_API: ${{ secrets.HAPI_EVM_HYPERION_API }}
-          HAPI_EVM_HYPERION_START_AT: ${{ secrets.HAPI_EVM_HYPERION_START_AT }}
+          HAPI_EVM_EOS_EVM_ACCOUNT: eosio.evm
+          HAPI_EVM_BLOCK_INTERVAL_SEC: 0.5
+          HAPI_EVM_OLD_BLOCK_INTERVAL_SEC: 0.1
+          HAPI_EVM_ATH_INTERVAL_SEC: 60
+          HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: 86400
+          HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: 86400
+          HAPI_EVM_KEEP_HISTORY_FOR_YEARS: 1
+          HAPI_EVM_HYPERION_API: https://test.telos.eosusa.io
+          HAPI_EVM_HYPERION_START_AT: 2021-06-02T00:00:00.000+00:00
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
