@@ -63,7 +63,24 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     timestamp: blockTimestamp
   }
 
-  await blockModel.queries.add_or_modify(cappedBlock)
+  try {
+    await blockModel.queries.add_or_modify(cappedBlock)
+  } catch (error: any) {
+    const CONSTRAINT_VIOLATION = 'constraint-violation'
+    const errorDetails = error?.response?.errors[0]?.extensions
+
+    if (errorDetails) {
+      if (errorDetails?.code === CONSTRAINT_VIOLATION) {
+        console.log('error: trying to insert a duplicated block')
+      } else {
+        console.log(errorDetails.message)
+      }
+    } else {
+      console.log(error)
+    }
+
+    return
+  }
 
   // TODO: review this logic
 
