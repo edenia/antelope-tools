@@ -40,20 +40,16 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
   if (blockExist) return
 
-  const transactionsCount = block.transactions?.length
-
-  if (transactionsCount) {
-    await historicalStatsModel.queries.saveOrIncrement({
-      total_transactions: transactionsCount
-    })
-  }
-
   const blockTimestamp = new Date(Number(block.timestamp) * 1000)
   const isBefore = moment(blockTimestamp).isBefore(
     moment().subtract(networkConfig.keepHistoryForYears, 'years')
   )
 
-  if (isBefore) return
+  if (isBefore) {
+    await incrementTotalTransactions(block.transactions?.length)
+
+    return
+  }
 
   const cappedBlock = {
     hash: block.hash.toString(),
@@ -63,7 +59,26 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     timestamp: blockTimestamp
   }
 
-  await blockModel.queries.add_or_modify(cappedBlock)
+  try {
+    await blockModel.queries.add_or_modify(cappedBlock)
+  } catch (error: any) {
+    const CONSTRAINT_VIOLATION = 'constraint-violation'
+    const errorDetails = error?.response?.errors[0]?.extensions
+
+    if (errorDetails) {
+      if (errorDetails?.code === CONSTRAINT_VIOLATION) {
+        console.log('error: trying to insert a duplicated block')
+      } else {
+        console.log(errorDetails.message)
+      }
+    } else {
+      console.log(error)
+    }
+
+    return
+  }
+
+  await incrementTotalTransactions(block.transactions?.length)
 
   // TODO: review this logic
 
@@ -100,6 +115,14 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
   ]
 
   await Promise.all(transactionsPromises)
+}
+
+const incrementTotalTransactions = async (transactionsCount: number) => {
+  if (transactionsCount) {
+    await historicalStatsModel.queries.saveOrIncrement({
+      total_transactions: transactionsCount
+    })
+  }
 }
 
 const getBlock = async () => {

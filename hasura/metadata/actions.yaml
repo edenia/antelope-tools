@@ -30,10 +30,14 @@ actions:
     definition:
       kind: ""
       handler: '{{HASURA_GRAPHQL_ACTION_EVM_URL}}/evm-token-history'
+    permissions:
+      - role: guest
   - name: evm_transactions_history
     definition:
       kind: ""
       handler: '{{HASURA_GRAPHQL_ACTION_EVM_URL}}/evm-transactions-history'
+    permissions:
+      - role: guest
   - name: getProducersInfo
     definition:
       kind: synchronous
