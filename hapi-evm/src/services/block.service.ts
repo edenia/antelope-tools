@@ -40,20 +40,16 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
   if (blockExist) return
 
-  const transactionsCount = block.transactions?.length
-
-  if (transactionsCount) {
-    await historicalStatsModel.queries.saveOrIncrement({
-      total_transactions: transactionsCount
-    })
-  }
-
   const blockTimestamp = new Date(Number(block.timestamp) * 1000)
   const isBefore = moment(blockTimestamp).isBefore(
     moment().subtract(networkConfig.keepHistoryForYears, 'years')
   )
 
-  if (isBefore) return
+  if (isBefore) {
+    await incrementTotalTransactions(block.transactions?.length)
+
+    return
+  }
 
   const cappedBlock = {
     hash: block.hash.toString(),
@@ -81,6 +77,8 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
     return
   }
+
+  await incrementTotalTransactions(block.transactions?.length)
 
   // TODO: review this logic
 
@@ -117,6 +115,14 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
   ]
 
   await Promise.all(transactionsPromises)
+}
+
+const incrementTotalTransactions = async (transactionsCount: number) => {
+  if (transactionsCount) {
+    await historicalStatsModel.queries.saveOrIncrement({
+      total_transactions: transactionsCount
+    })
+  }
 }
 
 const getBlock = async () => {
