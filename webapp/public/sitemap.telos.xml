@@ -37,6 +37,14 @@
       <lastmod>2022-10-20</lastmod>
    </url>
    <url>
+      <loc>https://telos.antelope.tools/evm</loc>
+      <lastmod>2023-08-31</lastmod>
+   </url>
+      <url>
+      <loc>https://telos.antelope.tools/evm-rpc-endpoints</loc>
+      <lastmod>2023-08-31</lastmod>
+   </url>
+   <url>
       <loc>https://telos.antelope.tools/accounts</loc>
       <lastmod>2022-10-20</lastmod>
    </url>
