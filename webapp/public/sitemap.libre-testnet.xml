@@ -36,6 +36,18 @@
       <lastmod>2022-10-20</lastmod>
    </url>
    <url>
+      <loc>https://libre-testnet.antelope.tools/missed-blocks</loc>
+      <lastmod>2023-06-20</lastmod>
+   </url>
+   <url>
+      <loc>https://libre-testnet.antelope.tools/stress-test</loc>
+      <lastmod>2023-06-23</lastmod>
+   </url>
+   <url>
+      <loc>https://libre-testnet.antelope.tools/cpu-benchmark</loc>
+      <lastmod>2023-05-18</lastmod>
+   </url>
+   <url>
       <loc>https://libre-testnet.antelope.tools/ricardian-contract</loc>
       <lastmod>2022-10-20</lastmod>
    </url>
@@ -49,7 +61,7 @@
    </url>
    <url>
       <loc>https://libre-testnet.antelope.tools/faucet</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-08-30</lastmod>
    </url>
    <url>
       <loc>https://libre-testnet.antelope.tools/about</loc>

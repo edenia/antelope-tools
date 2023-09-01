@@ -24,6 +24,18 @@
       <lastmod>2022-10-20</lastmod>
    </url>
    <url>
+      <loc>https://libre.antelope.tools/block-distribution</loc>
+      <lastmod>2023-07-16</lastmod>
+   </url>
+      <url>
+      <loc>https://libre.antelope.tools/missed-blocks</loc>
+      <lastmod>2023-06-29</lastmod>
+   </url>
+   <url>
+      <loc>https://libre.antelope.tools/cpu-benchmark</loc>
+      <lastmod>2023-06-07</lastmod>
+   </url>
+   <url>
       <loc>https://libre.antelope.tools/endpoints-stats</loc>
       <lastmod>2023-04-25</lastmod>
    </url>
