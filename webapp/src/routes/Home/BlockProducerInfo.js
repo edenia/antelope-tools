@@ -93,16 +93,19 @@ const BlockProducerInfo = ({ t, classes }) => {
         <SimpleDataCard
           header
           title={t('scheduleVersion')}
+          helperText={t('tooltip.scheduleVersion')}
           value={schedule?.version}
         />
         <SimpleDataCard
           header
           title={t('headBlock')}
+          helperText={t('tooltip.headBlock')}
           value={formatWithThousandSeparator(info.head_block_num)}
         />
         <SimpleDataCard
           header
           title={t('lastBlock')}
+          helperText={t('tooltip.lastBlock')}
           value={formatWithThousandSeparator(info.last_irreversible_block_num)}
         />
       </div>
@@ -137,6 +140,7 @@ const BlockProducerInfo = ({ t, classes }) => {
               <SimpleDataCard
                 lowercase
                 title={t('timeToFinality')}
+                helperText={t('tooltip.timeToFinality')}
                 value={
                   schedule.producers
                     ? `${

@@ -39,11 +39,13 @@ const EVMDashboard = () => {
       <div className={`${classes.container} ${classes.cardsContainer}`}>
         <SimpleDataCard
           title={t('lastBlock')}
+          helperText={t('tooltip.lastBlock')}
           value={formatWithThousandSeparator(EVMStats?.last_block) || 0}
           loading={loading}
         />
         <SimpleDataCard
           title={t('totalTxs')}
+          helperText={t('tooltip.totalTxs')}
           value={formatWithThousandSeparator(EVMStats?.total_transactions) || 0}
           loading={loading}
         />
@@ -138,6 +140,7 @@ const EVMDashboard = () => {
       <div className={`${classes.container} ${classes.cardsContainer}`}>
         <SimpleDataCard
           title={t('ATH')}
+          helperText={t('tooltip.ATH')}
           value={EVMStats?.tps_all_time_high?.transactions_count || 0}
           loading={loading}
         >
@@ -156,6 +159,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
+          helperText={t('tooltip.totalIncoming').replace('(ACCOUNT)', evmConfig.account)}
           value={
             formatWithThousandSeparator(EVMStats?.total_incoming_token) || 0
           }
@@ -163,6 +167,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
+          helperText={t('tooltip.totalOutgoing').replace('(ACCOUNT)', evmConfig.account)}
           value={
             formatWithThousandSeparator(EVMStats?.total_outgoing_token) || 0
           }
@@ -171,6 +176,7 @@ const EVMDashboard = () => {
         <SimpleDataCard
           lowercase
           title={t('avgBlockTime')}
+          helperText={t('tooltip.avgBlockTime')}
           value={evmConfig.avgBlockTime ? evmConfig.avgBlockTime + ' s' : 'N/A'}
           loading={loading}
         />
@@ -184,6 +190,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('gasPrice')}
+          helperText={t('tooltip.gasPrice')}
           value={
             EVMStats?.gas_price
               ? formatWithThousandSeparator(EVMStats?.gas_price, 1) + ' Gwei'
@@ -193,6 +200,7 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('avgGasUsage')}
+          helperText={t('tooltip.avgGasUsage')}
           value={formatWithThousandSeparator(EVMStats?.avg_gas_used) || 0}
           loading={loading}
         />

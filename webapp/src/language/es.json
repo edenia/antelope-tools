@@ -141,8 +141,6 @@
     "Last Week": "Última Semana",
     "Last Year": "Último Año",
     "scheduleVersion": "Versión de Programa",
-    "cpuUtilization": "Uso de CPU",
-    "netUtilization": "Uso de NET",
     "cpuUtilizationAllTimeHigh": "Uso de CPU en TPS máximo histórico",
     "networkUtilizationAllTimeHigh": "Uso de NET en TPS máximo histórico",
     "tpsAllTimeHigh": "TPS máximo histórico",
@@ -165,7 +163,30 @@
     "timeToFinality": "Tiempo para finalidad",
     "cpuUsage": "Uso del CPU",
     "netUsage": "Uso de NET",
-    "average": "Promedio"
+    "average": "Promedio",
+    "tooltip": {
+      "currentProducer": "",
+      "headBlock": "El último bloque pendiente producido",
+      "lastBlock": "El último bloque confirmado producido",
+      "scheduleVersion": "El número de iteración actual de la lista de top 21 productores de bloques",
+      "tpsAllTimeHigh": "Máximo número de transacciones por segundo (TPS)",
+      "cpuUtilizationAllTimeHigh": "El uso de CPU en el TPS máximo histórico",
+      "networkUtilizationAllTimeHigh": "El uso de NET en el TPS máximo histórico",
+      "nodes": "",
+      "full": "Nodo que provee datos desde el primer bloque",
+      "seed": "Nodo que provee puntos finales P2P publicos",
+      "query": "Nodo que provee puntos finales HTTP(S) API publicos",
+      "producer": "Nodo encargado de la produción de bloques",
+      "uniqueLocations": "Cantidad de países con productores de bloques, calculado con los bp.json",
+      "cpuLimitPerBlock": "Máximo CPU en ms que un bloque puede utilizar",
+      "netLimitPerBlock": "Máximo NET en KB que un bloque puede utilizar",
+      "chainCpuLimit": "",
+      "chainNetLimit": "",
+      "timeToFinality": "El tiempo que le toma a la cadena para confirmar una transacción",
+      "cpuUsage": "Porcentaje actual de CPU usados en el último segundo",
+      "netUsage": "Porcentaje actual de NET usados en el último segundo",
+      "totalProducers": "Cantidad de productores de bloques registrados en la red, recuperados de la cuenta eosio"
+    }
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -469,7 +490,18 @@
     "lastBlock": "Último bloque",
     "totalTxs": "Total de transacciones EVM",
     "transactions": "Transacciones EVM",
-    "gasUsed": "Gas Usado"
+    "gasUsed": "Gas Usado",
+    "tooltip": {
+      "totalWallets": "",
+      "avgBlockTime": "Tiempo promedio en que se genera un nuevo bloque",
+      "gasPrice": "Un combustible virtual fijo expresado en gigaweis usado para ejecutar contratos inteligentes",
+      "avgGasUsage": "Gas promedio utilizado en los últimos 100 bloques",
+      "totalIncoming": "Cantidad de transacciones transfer hacia (ACCOUNT)",
+      "totalOutgoing": "Cantidad de transacciones transfer desde (ACCOUNT)",
+      "ATH": "Cantidad máxima registrada de transacciones por segundo (TPS)",
+      "lastBlock": "El Ethereum block height, el número de bloques confirmados",
+      "totalTxs": "Cantidad de transacciones desde el primer bloque"
+    }
   },
   "evmEndpointsRoute": {
     "title": "Lista de puntos finales RPC de EVM",

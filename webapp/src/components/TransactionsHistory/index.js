@@ -26,6 +26,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
         <>
           <SimpleDataCard
             title={t('tpsAllTimeHigh')}
+            helperText={t('tooltip.tpsAllTimeHigh')}
             value={data?.stats[0]?.tps_all_time_high?.transactions_count}
             loading={loading}
           >
@@ -37,6 +38,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
           </SimpleDataCard>
           <SimpleDataCard
             title={t('cpuUtilizationAllTimeHigh')}
+            helperText={t('tooltip.cpuUtilizationAllTimeHigh')}
             value={`${data?.stats[0]?.tps_all_time_high?.cpu_usage || 0} %`}
             loading={loading}
           >
@@ -48,6 +50,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
           </SimpleDataCard>
           <SimpleDataCard
             title={t('networkUtilizationAllTimeHigh')}
+            helperText={t('tooltip.networkUtilizationAllTimeHigh')}
             value={`${data?.stats[0]?.tps_all_time_high?.net_usage || 0} %`}
             loading={loading}
           >
@@ -87,32 +90,32 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('cpuUtilization')} ${t('lastHour')}`}
+            title={`${t('cpuUsage')} ${t('lastHour')}`}
             value={`${data?.stats?.[0]?.average_cpu_usage_in_hour || 0} %`}
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('cpuUtilization')} ${t('lastDay')}`}
+            title={`${t('cpuUsage')} ${t('lastDay')}`}
             value={`${data?.stats?.[0]?.average_cpu_usage_in_last_day || 0} %`}
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('cpuUtilization')} ${t('lastWeek')}`}
+            title={`${t('cpuUsage')} ${t('lastWeek')}`}
             value={`${data?.stats?.[0]?.average_cpu_usage_in_week || 0} %`}
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('netUtilization')} ${t('lastHour')}`}
+            title={`${t('netUsage')} ${t('lastHour')}`}
             value={`${data?.stats?.[0]?.average_net_usage_in_hour || 0} %`}
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('netUtilization')} ${t('lastDay')}`}
+            title={`${t('netUsage')} ${t('lastDay')}`}
             value={`${data?.stats?.[0]?.average_net_usage_in_last_day || 0} %`}
             loading={loading}
           />
           <SimpleDataCard
-            title={`${t('netUtilization')} ${t('lastWeek')}`}
+            title={`${t('netUsage')} ${t('lastWeek')}`}
             value={`${data?.stats?.[0]?.average_net_usage_in_week || 0} %`}
             loading={loading}
           />
@@ -123,6 +126,7 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
           {nodesChildren}
           <SimpleDataCard
             title={`${t('uniqueLocations')}`}
+            helperText={`${t('tooltip.uniqueLocations')}`}
             value={data?.stats?.[0]?.unique_locations?.count || 0}
             loading={loading}
           />
@@ -131,20 +135,24 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
       <SimpleDataCard
         lowercase
         title={t('cpuUsage')}
+        helperText={t('tooltip.cpuUsage')}
         value={`${formatWithThousandSeparator(tps[0]?.cpu, 2)} %`}
       />
       <SimpleDataCard
         lowercase
         title={t('netUsage')}
+        helperText={t('tooltip.netUsage')}
         value={`${formatWithThousandSeparator(tps[0]?.net, 3)} %`}
       />
       <SimpleDataCard
         lowercase
         title={t('cpuLimitPerBlock')}
+        helperText={t('tooltip.cpuLimitPerBlock')}
         value={`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
       />
       <SimpleDataCard
         title={t('netLimitPerBlock')}
+        helperText={t('tooltip.netLimitPerBlock')}
         value={`${formatWithThousandSeparator(
           info.block_net_limit / 1024,
           0,

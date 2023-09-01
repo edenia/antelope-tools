@@ -143,8 +143,6 @@
     "Last Year": "Last Year",
     "scheduleVersion": "Schedule Version",
     "tpsAllTimeHigh": "TPS All Time High",
-    "cpuUtilization": "CPU Usage",
-    "netUtilization": "NET Usage",
     "cpuUtilizationAllTimeHigh": "CPU Usage in TPS All Time High",
     "networkUtilizationAllTimeHigh": "NET Usage in TPS All Time High",
     "transactionsPerSecond": "Transactions per Second",
@@ -165,7 +163,30 @@
     "timeToFinality": "Time to Finality",
     "cpuUsage": "CPU Usage",
     "netUsage": "NET Usage",
-    "average": "Average"
+    "average": "Average",
+    "tooltip": {
+      "currentProducer": "",
+      "headBlock": "The last pending block produced",
+      "lastBlock": "The last confirmed block produced",
+      "scheduleVersion": "Current iteration number of the top 21 block producer list",
+      "tpsAllTimeHigh": "Maximum number of transactions per second (TPS)",
+      "cpuUtilizationAllTimeHigh": "The CPU usage in the all time high TPS",
+      "networkUtilizationAllTimeHigh": "The NET usage in the all time high TPS",
+      "nodes": "",
+      "full": "Node that provides data since the first block",
+      "seed": "Node that provides P2P endpoints to the public",
+      "query": "Node that provides HTTP(S) API endpoints to the public",
+      "producer": "Node in charge of block production",
+      "uniqueLocations": "Amount of countries with block producers, calculated from bp.json objects",
+      "cpuLimitPerBlock": "Maximum billable CPU in ms that a block can use",
+      "netLimitPerBlock": "Maximum NET in KB that a block can use",
+      "chainCpuLimit": "",
+      "chainNetLimit": "",
+      "timeToFinality": "The time it takes for the blockchain to confirm a transaction",
+      "cpuUsage": "Current percentage of CPU used in the last second",
+      "netUsage": "Current percentage of NET used in the last second",
+      "totalProducers": "Amount of block producers registered in the network, obtained directly from the eosio contract"
+    }
   },
   "blockProducersRoute": {},
   "rewardsDistributionRoute": {
@@ -444,13 +465,24 @@
     "avgGasUsage": "Average gas usage",
     "totalIncoming": "Total (TOKEN) incoming",
     "totalOutgoing": "Total (TOKEN) outgoing",
-    "incoming": "Incoming",    
+    "incoming": "Incoming",
     "outgoing": "Outgoing",
     "ATH": "TPS All Time High",
     "lastBlock": "Last block",
     "totalTxs": "Total EVM transactions",
     "transactions": "EVM transactions",
-    "gasUsed": "Gas Used"
+    "gasUsed": "Gas Used",
+    "tooltip": {
+      "totalWallets": "",
+      "avgBlockTime": "Average time a new block is generated",
+      "gasPrice": "A fixed virtual fuel expressed in gigawei used to execute smart contracts",
+      "avgGasUsage": "Average gas used in the last 100 blocks",
+      "totalIncoming": "Amount of transfer transactions to (ACCOUNT)",
+      "totalOutgoing": "Amount of transfer transactions from (ACCOUNT)",
+      "ATH": "Maximum number of transactions per second (TPS)",
+      "lastBlock": "The Ethereum block height, the number of confirmed blocks",
+      "totalTxs": "Amount of transactions since the first block"
+    }
   },
   "evmEndpointsRoute": {
     "title": "EVM RPC endpoints list",

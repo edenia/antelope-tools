@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 
 import { NODES_SUMMARY_QUERY } from '../../gql'
-import { generalConfig } from '../../config'
+import { eosConfig } from '../../config'
 import SimpleDataCard from '../SimpleDataCard'
 
 const NODES_ORDER = [
@@ -41,7 +41,7 @@ const NodesSummary = ({ t }) => {
 
     setTotal(total)
 
-    const nodesOrderByNet = generalConfig.historyEnabled
+    const nodesOrderByNet = eosConfig.networkName === 'lacchain'
       ? NODES_ORDER[0]
       : NODES_ORDER[1]
     const sortedNodes = Object.keys(nodes)
@@ -73,6 +73,7 @@ const NodesSummary = ({ t }) => {
     <>
       <SimpleDataCard
         title={`${t('total')} ${t('nodes')}`}
+        helperText={t('tooltip.nodes')}
         value={total}
         loading={loading}
       />
@@ -80,6 +81,14 @@ const NodesSummary = ({ t }) => {
         nodes.map((node) => (
           <SimpleDataCard
             key={node.type}
+            helperText={
+              eosConfig.networkName !== 'lacchain' &&
+              eosConfig.nodeTypes
+                .map((nodeType) => nodeType.name)
+                .includes(node.type)
+                ? t(`tooltip.${node.type}`)
+                : ''
+            }
             title={
               currentLanguaje === 'es'
                 ? t('nodes') + ' ' + t(node.type)

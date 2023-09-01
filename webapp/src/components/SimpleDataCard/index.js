@@ -3,10 +3,11 @@ import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
+import Typography from '@mui/material/Typography'
 
 import styles from './styles'
+import MoreInfoTooltip from './MoreInfoTooltip'
 
 const useStyles = makeStyles(styles)
 
@@ -14,6 +15,7 @@ const SimpleDataCard = ({
   header,
   lowercase,
   title,
+  helperText,
   value,
   loading,
   children,
@@ -25,7 +27,12 @@ const SimpleDataCard = ({
     <div className={header ? classes.cardHeader : classes.cardGrow}>
       <Card className={classes.cardShadow}>
         <CardContent className={classes.cards}>
-          {title && <Typography>{title}</Typography>}
+          {title && (
+            <div className={classes.titleContainer}>
+              <Typography>{title}</Typography>
+              {helperText && <MoreInfoTooltip helperText={helperText} />}
+            </div>
+          )}
           {isNotLoading ? (
             <Typography
               component="p"
@@ -50,6 +57,7 @@ SimpleDataCard.propTypes = {
   loading: PropTypes.bool,
   title: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  helperText: PropTypes.string,
   children: PropTypes.node,
 }
 
@@ -59,6 +67,7 @@ SimpleDataCard.defaultProps = {
   lowercase: false,
   title: '',
   value: '',
+  helperText: '',
 }
 
 export default memo(SimpleDataCard)
