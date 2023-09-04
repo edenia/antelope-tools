@@ -42,6 +42,7 @@ export default (theme) => ({
     margin: '0px',
     flexGrow: '1',
     background: theme.palette.common.white,
+    borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       width: '200px',
     },
@@ -66,6 +67,7 @@ export default (theme) => ({
     minHeight: '125px',
     padding: theme.spacing(2),
     background: theme.palette.common.white,
+    borderRadius: theme.spacing(1),
     '& .MuiTypography-h6': {
       display: 'flex',
     },

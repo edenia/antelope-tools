@@ -103,7 +103,12 @@ const CustomBarLabel = memo(
       }
 
       return (
-        <a href={link} target="_blank" rel="noopener noreferrer">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Link to ${payload.owner} bp page`}
+        >
           <Content />
         </a>
       )
@@ -124,7 +129,12 @@ const CustomBarLabel = memo(
       }
 
       return (
-        <a href={link} target="_blank" rel="noopener noreferrer">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Link to ${payload.owner} bp page`}
+        >
           <Content />
         </a>
       )
