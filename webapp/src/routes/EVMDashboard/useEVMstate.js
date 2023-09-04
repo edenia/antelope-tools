@@ -168,7 +168,9 @@ const useEVMState = (theme, t) => {
 
   useEffect(() => {
     if (transactionsData?.transactions) {
-      const data = transactionsData?.transactions.map((transaction) => ({
+      setPause(true)
+
+      const data = transactionsData?.transactions.map(transaction => ({
         name: moment(transaction.datetime)?.format('ll'),
         gas: transaction.avg_gas_used || 0,
         y: parseInt(transaction.transactions_count) || 0,
