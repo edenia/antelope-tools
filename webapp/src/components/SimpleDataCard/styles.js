@@ -43,13 +43,13 @@ export default (theme) => ({
   titleContainer: {
     display: 'flex',
     gap: theme.spacing(2),
-    '& svg': {
-      width: 20,
-      height: 20,
-      '&:hover': {
-        cursor: 'pointer',
-        color: theme.palette.primary.main,
-      },
+  },
+  tooltip: {
+    width: '20px !important',
+    height: '20px !important',
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.palette.primary.main,
     },
   },
   tooltipPopper: {

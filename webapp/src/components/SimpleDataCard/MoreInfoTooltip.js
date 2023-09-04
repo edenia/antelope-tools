@@ -18,6 +18,7 @@ const MoreInfoTooltip = ({ helperText }) => {
       arrow
       enterTouchDelay={0}
       disableFocusListener
+      className={classes.tooltip}
       classes={{ popper: classes.tooltipPopper }}
     >
       <InfoOutlinedIcon />

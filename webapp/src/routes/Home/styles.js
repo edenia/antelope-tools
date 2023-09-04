@@ -29,4 +29,11 @@ export default (theme) => ({
       marginBottom: '10px',
     },
   },
+  titleContainer: {
+    display: 'flex',
+    gap: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      marginBottom: theme.spacing(3),
+    },
+  },
 })

@@ -20,6 +20,7 @@ const TransactionInfo = lazy(() => import('./TransactionInfo'))
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 const SimpleDataCard = lazy(() => import('../../components/SimpleDataCard'))
+const MoreInfoTooltip = lazy(() => import('../../components/SimpleDataCard/MoreInfoTooltip'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(PRODUCERS_QUERY)
@@ -113,9 +114,12 @@ const BlockProducerInfo = ({ t, classes }) => {
         <div className={classes.divTrans}>
           <Card className={classes.cardShadow}>
             <CardContent>
-              <Typography component="p" variant="h6">
-                {t('bpSchedule')}
-              </Typography>
+              <div className={classes.titleContainer}>
+                <Typography component="p" variant="h6">
+                  {t('bpSchedule')}
+                </Typography>
+                <MoreInfoTooltip helperText={t('tooltip.bpSchedule')} />
+              </div>
               <ProducersChart info={info} producers={schedule.producers} />
             </CardContent>
           </Card>
