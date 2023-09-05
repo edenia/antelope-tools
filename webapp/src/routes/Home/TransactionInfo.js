@@ -28,7 +28,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
   ])
   const [option, setOption] = useState(options[0])
   const [pause, setPause] = useState(false)
-  const [getTransactionHistory, { data, loading }] = useLazyQuery(
+  const [getTransactionHistory, { data: transactionsData , loading }] = useLazyQuery(
     TRANSACTION_QUERY,
     { fetchPolicy: 'network-only' },
   )
@@ -90,57 +90,41 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
       },
     })
     // eslint-disable-next-line
-  }, [option, getTransactionHistory])
+  }, [option, theme.palette, getTransactionHistory])
 
   useEffect(() => {
     if (option === option[0]) return
 
-    if (!data?.transactions.length) {
+    if (!transactionsData?.transactions.length) {
       setGraphicData([])
       return
     }
 
-    const { trxPerBlock, trxPerSecond } = data.transactions.reduce(
-      (history, transactionHistory) => {
-        history.trxPerBlock.push({
-          name: moment(transactionHistory.datetime)?.format('ll'),
-          cpu: transactionHistory.cpu || 0,
-          net: transactionHistory.net || 0,
-          y: transactionHistory.transactions_count || 0,
-          x: new Date(transactionHistory.datetime).getTime(),
+    const data = transactionsData.transactions.map(
+      transaction => 
+        ({
+          name: moment(transaction.datetime)?.format('ll'),
+          cpu: transaction.cpu || 0,
+          net: transaction.net || 0,
+          y: transaction.transactions_count || 0,
+          x: new Date(transaction.datetime).getTime(),
         })
-
-        history.trxPerSecond.push({
-          name: moment(transactionHistory.datetime)?.format('ll'),
-          cpu: transactionHistory.cpu / 2 || 0,
-          net: transactionHistory.net / 2 || 0,
-          y: transactionHistory.transactions_count * 2 || 0,
-          x: new Date(transactionHistory.datetime).getTime(),
-        })
-
-        return history
-      },
-      { trxPerBlock: [], trxPerSecond: [] },
     )
 
     setGraphicData([
       {
-        name: t('average') + ' ' + t('transactionsPerSecond'),
+        name: t('transactions'),
         color: theme.palette.secondary.main,
-        data: trxPerSecond,
-      },
-      {
-        name: t('average') + ' ' + t('transactionsPerBlock'),
-        color: theme.palette.tertiary.main,
-        data: trxPerBlock,
+        data
       },
     ])
     // eslint-disable-next-line
-  }, [data, t])
+  }, [transactionsData, theme.palette, t])
 
   return (
     <TransactionsChartContainer 
       title={t('transactions')}
+      ariaLabel="Transactions chart select"
       isPaused={pause}
       loading={loading}
       handlePause={() => {

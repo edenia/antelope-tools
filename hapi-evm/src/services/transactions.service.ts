@@ -16,8 +16,8 @@ export const getTransactions = async (range: string) => {
   const [rows] = await sequelizeUtil.sequelize.query(`
     WITH interval AS (
       SELECT generate_series(
-        date_trunc('${granularity}', now()) - '${range}'::interval,
-        date_trunc('${granularity}', now()),
+        date_trunc('${granularity}', (now() - '00:30:00'::interval)) - '${range}'::interval,
+        date_trunc('${granularity}', (now() - '00:30:00'::interval)),
         '1 ${granularity}'::interval
       ) AS value
     )
