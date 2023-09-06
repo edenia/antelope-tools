@@ -176,7 +176,6 @@ const EVMDashboard = () => {
         <SimpleDataCard
           lowercase
           title={t('avgBlockTime')}
-          helperText={t('tooltip.avgBlockTime')}
           value={evmConfig.avgBlockTime ? evmConfig.avgBlockTime + ' s' : 'N/A'}
           loading={loading}
         />

@@ -100,7 +100,6 @@ const BlockProducerInfo = ({ t, classes }) => {
         <SimpleDataCard
           header
           title={t('headBlock')}
-          helperText={t('tooltip.headBlock')}
           value={formatWithThousandSeparator(info.head_block_num)}
         />
         <SimpleDataCard

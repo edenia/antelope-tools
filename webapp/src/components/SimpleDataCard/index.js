@@ -29,19 +29,27 @@ const SimpleDataCard = ({
         <CardContent className={classes.cards}>
           {title && (
             <div className={classes.titleContainer}>
-              <Typography>{title}</Typography>
+              <Typography component="h2" className={classes.title}>
+                {title}
+              </Typography>
               {helperText && <MoreInfoTooltip helperText={helperText} />}
             </div>
           )}
           {isNotLoading ? (
-            <Typography
-              component="p"
-              variant="h6"
-              className={lowercase ? classes.lowercase : ''}
-            >
-              {value}
-              {children}
-            </Typography>
+            value ? (
+              <Typography
+                component="p"
+                variant="h6"
+                className={`${classes.textValue} ${
+                  lowercase ? classes.lowercase : ''
+                }`}
+              >
+                {value}
+                {children}
+              </Typography>
+            ) : (
+              <>{children}</>
+            )
           ) : (
             <LinearProgress />
           )}

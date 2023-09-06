@@ -165,7 +165,6 @@
     "netUsage": "Uso de NET",
     "average": "Promedio",
     "tooltip": {
-      "headBlock": "El último bloque pendiente producido",
       "lastBlock": "El último bloque confirmado producido",
       "bpSchedule": "Top 21 Productores de bloques actuales",
       "scheduleVersion": "El número de iteración actual de la lista de top 21 productores de bloques",
@@ -176,16 +175,14 @@
       "seed": "Nodo que provee puntos finales P2P publicos",
       "query": "Nodo que provee puntos finales HTTP(S) API publicos",
       "producer": "Nodo encargado de la produción de bloques",
+      "nodes": "Cantidad de nodos de los primeros 150 productores",
       "uniqueLocations": "Cantidad de países con productores de bloques, calculado con los bp.json",
-      "cpuLimitPerBlock": "Máximo CPU en ms que un bloque puede utilizar",
-      "netLimitPerBlock": "Máximo NET en KB que un bloque puede utilizar",
       "timeToFinality": "El tiempo que le toma a la cadena para confirmar una transacción",
       "cpuUsage": "Porcentaje actual de CPU usados en el último segundo",
       "netUsage": "Porcentaje actual de NET usados en el último segundo",
       "totalProducers": "Cantidad de productores de bloques registrados en la red, recuperados de la cuenta eosio"
     }
   },
-  "blockProducersRoute": {},
   "rewardsDistributionRoute": {
     "dailyRewards": "Recompensas Diarias Totales",
     "yearlyRewards": "Recompensas Anuales Totales",
@@ -489,13 +486,12 @@
     "transactions": "Transacciones EVM",
     "gasUsed": "Gas Usado",
     "tooltip": {
-      "avgBlockTime": "Tiempo promedio en que se genera un nuevo bloque",
-      "gasPrice": "Un combustible virtual fijo expresado en gigaweis usado para ejecutar contratos inteligentes",
+      "gasPrice": "Combustible virtual usado para ejecutar contratos inteligentes en EVM",
       "avgGasUsage": "Gas promedio utilizado en los últimos 100 bloques",
       "totalIncoming": "Cantidad de transacciones transfer hacia (ACCOUNT)",
       "totalOutgoing": "Cantidad de transacciones transfer desde (ACCOUNT)",
       "ATH": "Cantidad máxima registrada de transacciones por segundo (TPS)",
-      "lastBlock": "El Ethereum block height, el número de bloques confirmados",
+      "lastBlock": "Ethereum block height, el número de bloques confirmados",
       "totalTxs": "Cantidad de transacciones desde el primer bloque"
     }
   },

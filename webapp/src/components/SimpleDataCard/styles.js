@@ -2,12 +2,7 @@ export default (theme) => ({
   cards: {
     textTransform: 'capitalize',
     minHeight: '90px',
-    '& .MuiTypography-h6': {
-      display: 'flex',
-      justifyContent: 'center',
-      textAlign: 'center',
-      marginTop: theme.spacing(2),
-    },
+    height: '100%',
   },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
@@ -36,6 +31,12 @@ export default (theme) => ({
   lowercase: {
     textTransform: 'lowercase !important',
   },
+  textValue: {
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginTop: `${theme.spacing(2)} !important`,
+  },
   svgLink: {
     fontSize: 18,
     marginLeft: theme.spacing(2),
@@ -43,10 +44,15 @@ export default (theme) => ({
   titleContainer: {
     display: 'flex',
     gap: theme.spacing(2),
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontWeight: 'bold !important',
   },
   tooltip: {
-    width: '20px !important',
-    height: '20px !important',
+    width: '18px !important',
+    height: '18px !important',
+    color: '#3d3d3dde',
     '&:hover': {
       cursor: 'pointer',
       color: theme.palette.primary.main,

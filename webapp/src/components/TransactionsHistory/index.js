@@ -136,23 +136,21 @@ const TransactionsHistory = ({ t, nodesChildren }) => {
         lowercase
         title={t('cpuUsage')}
         helperText={t('tooltip.cpuUsage')}
-        value={`${formatWithThousandSeparator(tps[0]?.cpu, 2)} %`}
+        value={`${formatWithThousandSeparator(tps[0]?.cpu || 0, 2)} %`}
       />
       <SimpleDataCard
         lowercase
         title={t('netUsage')}
         helperText={t('tooltip.netUsage')}
-        value={`${formatWithThousandSeparator(tps[0]?.net, 3)} %`}
+        value={`${formatWithThousandSeparator(tps[0]?.net || 0, 3)} %`}
       />
       <SimpleDataCard
         lowercase
         title={t('cpuLimitPerBlock')}
-        helperText={t('tooltip.cpuLimitPerBlock')}
         value={`${(info.block_cpu_limit * 0.001).toFixed(0)} ms`}
       />
       <SimpleDataCard
         title={t('netLimitPerBlock')}
-        helperText={t('tooltip.netLimitPerBlock')}
         value={`${formatWithThousandSeparator(
           info.block_net_limit / 1024,
           0,

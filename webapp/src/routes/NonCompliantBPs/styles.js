@@ -20,14 +20,7 @@ export default (theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       flexFlow: 'row wrap',
-    },
-  },
-  rewardsCards: {
-    height: '100%',
-    minHeight: '125px',
-    padding: theme.spacing(4),
-    '& h2': {
-      fontWeight: 'bold',
+      gap: theme.spacing(2),
     },
   },
   verticallyCenter: {
@@ -35,17 +28,10 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-  cardHeader: {
-    width: '100px',
-    height: 'auto',
-    margin: '0px',
-    flexGrow: '1',
-    background: theme.palette.common.white,
-    borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
-      width: '200px',
-    },
+      minWidth: '150px',
+      minHeight: '55px',
+    }
   },
   bpsContainer: {
     display: 'grid',
