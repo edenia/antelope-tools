@@ -8,11 +8,19 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const MoreInfoTooltip = ({ helperText }) => {
+const MoreInfoTooltip = ({
+  helperText,
+  open,
+  handleOpenTooltip,
+  handleCloseTooltip,
+}) => {
   const classes = useStyles()
 
   return (
     <Tooltip
+      open={open}
+      onOpen={handleOpenTooltip}
+      onClose={handleCloseTooltip}
       title={<div>{helperText}</div>}
       placement="top"
       arrow
@@ -28,10 +36,14 @@ const MoreInfoTooltip = ({ helperText }) => {
 
 MoreInfoTooltip.propTypes = {
   helperText: PropTypes.string,
+  open: PropTypes.bool,
+  handleOpenTooltip: PropTypes.func,
+  handleCloseTooltip: PropTypes.func,
 }
 
 MoreInfoTooltip.defaultProps = {
   helperText: '',
+  open: false,
 }
 
 export default memo(MoreInfoTooltip)

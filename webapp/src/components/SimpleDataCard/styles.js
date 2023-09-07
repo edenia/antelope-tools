@@ -49,6 +49,15 @@ export default (theme) => ({
   title: {
     fontWeight: 'bold !important',
   },
+  tooltipHover: {
+    '&:hover': {
+      border: `0.5px solid ${theme.palette.primary.main}`,
+      '& svg': {
+        cursor: 'pointer',
+        color: theme.palette.primary.main,
+      }
+    },
+  },
   tooltip: {
     width: '18px !important',
     height: '18px !important',
