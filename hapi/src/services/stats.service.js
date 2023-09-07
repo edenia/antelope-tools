@@ -70,7 +70,7 @@ const getNodesSummary = async () => {
   `)
 
   rows.forEach(row => {
-    const nodeType = row.node_type || 'unknown'
+    let nodeType = row.node_type || 'unknown'
 
     if (Array.isArray(nodeType)) {
       nodeType = nodeType.map(type => (type === 'p2p' ? 'seed' : type))
