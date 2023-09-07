@@ -176,11 +176,11 @@
       "query": "Node that provides HTTP(S) API endpoints to the public",
       "producer": "Node in charge of block production",
       "nodes": "Amount of nodes of the first 150 producers",
-      "uniqueLocations": "Amount of countries with block producers, calculated from bp.json objects",
+      "uniqueLocations": "Amount of countries with block producers, calculated from bp.jsons",
       "timeToFinality": "The time it takes for the blockchain to confirm a transaction",
       "cpuUsage": "Current percentage of CPU used in the last second",
       "netUsage": "Current percentage of NET used in the last second",
-      "totalProducers": "Amount of block producers registered in the network, obtained directly from the eosio contract"
+      "totalProducers": "Block Producers registered, obtained from the eosio contract"
     }
   },
   "rewardsDistributionRoute": {
@@ -481,6 +481,7 @@
     "rpcEndpoint": "RPC Endpoint",
     "latency": "Latency",
     "lastBlock": "Last block",
-    "rerun": "Re-run health checks"
+    "rerun": "Re-run health checks",
+    "filterEndpoints": "Filter responding endpoints"
   }
 }

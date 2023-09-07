@@ -45,6 +45,12 @@ export default (theme) => ({
     display: 'flex',
     gap: theme.spacing(2),
     justifyContent: 'space-between',
+    '&:hover': {
+      '& svg': {
+        cursor: 'pointer',
+        color: theme.palette.primary.main,
+      }
+    }
   },
   title: {
     fontWeight: 'bold !important',

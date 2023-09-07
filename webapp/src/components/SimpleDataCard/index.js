@@ -1,10 +1,12 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
+
+import useOpenModalState from 'hooks/customHooks/useOpenModalState'
 
 import styles from './styles'
 import MoreInfoTooltip from './MoreInfoTooltip'
@@ -22,22 +24,14 @@ const SimpleDataCard = ({
 }) => {
   const classes = useStyles()
   const isNotLoading = !loading || !!value?.toString()
-  const [open, setOpen] = useState(false)
-
-  const handleOpenTooltip = () => {
-    setOpen(true)
-  }
-
-  const handleCloseTooltip = () => {
-    setOpen(false)
-  }
+  const [{ open }, { handleOpen, handleClose }] = useOpenModalState()
 
   return (
     <div className={header ? classes.cardHeader : classes.cardGrow}>
       <Card
-        onMouseOver={helperText ? handleOpenTooltip : null}
-        onMouseMove={helperText ? handleOpenTooltip : null}
-        onMouseOut={helperText ? handleCloseTooltip : null}
+        onMouseOver={helperText ? handleOpen : null}
+        onMouseMove={helperText ? handleOpen : null}
+        onMouseOut={helperText ? handleClose : null}
         className={`${classes.cardShadow} ${
           helperText ? classes.tooltipHover : ''
         }`}
@@ -52,8 +46,8 @@ const SimpleDataCard = ({
                 <MoreInfoTooltip
                   helperText={helperText}
                   open={open}
-                  handleOpenTooltip={handleOpenTooltip}
-                  handleCloseTooltip={handleCloseTooltip}
+                  handleOpenTooltip={handleOpen}
+                  handleCloseTooltip={handleClose}
                 />
               )}
             </div>

@@ -176,11 +176,11 @@
       "query": "Nodo que provee puntos finales HTTP(S) API publicos",
       "producer": "Nodo encargado de la produción de bloques",
       "nodes": "Cantidad de nodos de los primeros 150 productores",
-      "uniqueLocations": "Cantidad de países con productores de bloques, calculado con los bp.json",
+      "uniqueLocations": "Cantidad de países con productores, calculada con los bp.json",
       "timeToFinality": "El tiempo que le toma a la cadena para confirmar una transacción",
       "cpuUsage": "Porcentaje actual de CPU usados en el último segundo",
       "netUsage": "Porcentaje actual de NET usados en el último segundo",
-      "totalProducers": "Cantidad de productores de bloques registrados en la red, recuperados de la cuenta eosio"
+      "totalProducers": "Productores de bloques registrados, recuperados del contrato eosio"
     }
   },
   "rewardsDistributionRoute": {
@@ -500,6 +500,7 @@
     "rpcEndpoint": "Punto final RPC",
     "latency": "Latencia",
     "lastBlock": "Último bloque",
-    "rerun": "Reejecutar las pruebas"
+    "rerun": "Reejecutar las pruebas",
+    "filterEndpoints": "Filtrar puntos finales"
   }
 }
