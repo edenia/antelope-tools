@@ -5,6 +5,11 @@ import { evmConfig } from '../../config'
 
 const useRPCEndpointsState = () => {
   const [endpoints, setEndpoints] = useState(evmConfig.endpoints.map(url => ({ url, response: {} })))
+  const [filter, setFilter] = useState(true)
+
+  const handleFilter = () => {
+    setFilter(prev => !prev)
+  }
 
   const customAxios = axios.create()
 
@@ -102,7 +107,7 @@ const useRPCEndpointsState = () => {
      // eslint-disable-next-line
   }, [])
 
-  return [{ endpoints }, { runHealthCheck }]
+  return [{ endpoints, filter }, { runHealthCheck, handleFilter }]
 }
 
 export default useRPCEndpointsState

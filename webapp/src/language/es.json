@@ -476,6 +476,7 @@
     "rpcEndpoint": "Punto final RPC",
     "latency": "Latencia",
     "lastBlock": "Último bloque",
-    "rerun": "Reejecutar las pruebas"
+    "rerun": "Reejecutar las pruebas",
+    "filterEndpoints": "Filtrar puntos finales"
   }
 }

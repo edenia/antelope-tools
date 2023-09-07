@@ -457,6 +457,7 @@
     "rpcEndpoint": "RPC Endpoint",
     "latency": "Latency",
     "lastBlock": "Last block",
-    "rerun": "Re-run health checks"
+    "rerun": "Re-run health checks",
+    "filterEndpoints": "Filter responding endpoints"
   }
 }
