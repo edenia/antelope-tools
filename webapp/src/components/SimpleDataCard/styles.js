@@ -7,6 +7,9 @@ export default (theme) => ({
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
+  border: {
+    border: '0.5px solid transparent',
+  },
   cardHeader: {
     flexGrow: '1',
     flexBasis: 'calc(100%/5)',
@@ -58,6 +61,7 @@ export default (theme) => ({
   tooltipHover: {
     '&:hover': {
       border: `0.5px solid ${theme.palette.primary.main}`,
+      boxShadow: '0px 0px 40px -30px #1565c0bf inset !important',
       '& svg': {
         cursor: 'pointer',
         color: theme.palette.primary.main,

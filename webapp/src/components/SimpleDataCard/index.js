@@ -32,7 +32,7 @@ const SimpleDataCard = ({
         onMouseOver={helperText ? handleOpen : null}
         onMouseMove={helperText ? handleOpen : null}
         onMouseOut={helperText ? handleClose : null}
-        className={`${classes.cardShadow} ${
+        className={`${classes.cardShadow} ${classes.border} ${
           helperText ? classes.tooltipHover : ''
         }`}
       >
