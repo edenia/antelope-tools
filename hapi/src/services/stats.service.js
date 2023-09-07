@@ -69,8 +69,16 @@ const getNodesSummary = async () => {
       type
   `)
 
-  rows.forEach((row) => {
-    payload[row.node_type || 'unknown'] = row.nodes_count
+  rows.forEach(row => {
+    const nodeType = row.node_type || 'unknown'
+    row.node_type.sort()
+
+    if (payload[nodeType]) {
+      payload[nodeType] += row.nodes_count
+    } else {
+      payload[nodeType] = row.nodes_count
+    }
+
     total += row.nodes_count
   })
 
