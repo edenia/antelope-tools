@@ -14,8 +14,8 @@ import Typography from '@mui/material/Typography'
 import Switch from '@mui/material/Switch'
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined'
 
-import HealthCheck from 'components/HealthCheck'
-import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
+import HealthCheck from '../../components/HealthCheck'
+import HealthCheckInfo from '../../components/HealthCheck/HealthCheckInfo'
 import HealthInfoModal from '../../components/HealthCheck/InfoModal'
 
 import styles from './styles'
@@ -28,7 +28,8 @@ const useStyles = makeStyles(styles)
 const EVMEndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('evmEndpointsRoute')
-  const [{ endpoints, filter }, { runHealthCheck, handleFilter }] = useRPCEndpointsState()
+  const [{ endpoints, filter }, { runHealthCheck, handleFilter }] =
+    useRPCEndpointsState()
   const { healthLights } = generalConfig
 
   return (
@@ -42,15 +43,15 @@ const EVMEndpointsList = () => {
         </div>
         <div className={classes.formContainer}>
           <div className={classes.buttonContainer}>
-          <Button
-            size="small"
-            variant="outlined"
-            color="primary"
-            onClick={runHealthCheck}
-            startIcon={<AutorenewOutlinedIcon />}
-          >
-            {t('rerun')}
-          </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              onClick={runHealthCheck}
+              startIcon={<AutorenewOutlinedIcon />}
+            >
+              {t('rerun')}
+            </Button>
           </div>
           <div className={classes.switchContainer}>
             <Typography component="p" variant="caption">
@@ -58,7 +59,7 @@ const EVMEndpointsList = () => {
             </Typography>
             <Switch
               checked={filter}
-              inputProps = {{ 'aria-label': t('filterEndpoints') }}
+              inputProps={{ 'aria-label': t('filterEndpoints') }}
               onChange={event => {
                 handleFilter(event.target?.checked)
               }}

@@ -104,10 +104,13 @@ const useRPCEndpointsState = () => {
 
   useEffect(() => {
     runHealthCheck()
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [])
 
-  return [{ endpoints, filter }, { runHealthCheck, handleFilter }]
+  return [
+    { endpoints, filter },
+    { runHealthCheck, handleFilter },
+  ]
 }
 
 export default useRPCEndpointsState

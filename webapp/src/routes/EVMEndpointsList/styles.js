@@ -51,7 +51,7 @@ export default (theme) => ({
       },
       [theme.breakpoints.up('lg')]: {
         width: '50%',
-      }
+      },
     },
   },
 })
