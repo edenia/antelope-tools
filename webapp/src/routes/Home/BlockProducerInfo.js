@@ -20,6 +20,7 @@ const TransactionInfo = lazy(() => import('./TransactionInfo'))
 const NodesSummary = lazy(() => import('../../components/NodesSummary'))
 const ProducersSummary = lazy(() => import('../../components/ProducersSummary'))
 const SimpleDataCard = lazy(() => import('../../components/SimpleDataCard'))
+const CardTooltip = lazy(() => import('../../components/SimpleDataCard/CardTooltip'))
 
 const BlockProducerInfo = ({ t, classes }) => {
   const { data: { loading, producers } = {} } = useQuery(PRODUCERS_QUERY)
@@ -93,6 +94,7 @@ const BlockProducerInfo = ({ t, classes }) => {
         <SimpleDataCard
           header
           title={t('scheduleVersion')}
+          helperText={t('tooltip.scheduleVersion')}
           value={schedule?.version}
         />
         <SimpleDataCard
@@ -103,6 +105,7 @@ const BlockProducerInfo = ({ t, classes }) => {
         <SimpleDataCard
           header
           title={t('lastBlock')}
+          helperText={t('tooltip.lastBlock')}
           value={formatWithThousandSeparator(info.last_irreversible_block_num)}
         />
       </div>
@@ -110,9 +113,11 @@ const BlockProducerInfo = ({ t, classes }) => {
         <div className={classes.divTrans}>
           <Card className={classes.cardShadow}>
             <CardContent>
-              <Typography component="p" variant="h6">
-                {t('bpSchedule')}
-              </Typography>
+              <CardTooltip helperText={t('tooltip.bpSchedule')}>   
+                <Typography component="p" variant="h6">
+                  {t('bpSchedule')}
+                </Typography>
+              </CardTooltip> 
               <ProducersChart info={info} producers={schedule.producers} />
             </CardContent>
           </Card>
@@ -137,6 +142,7 @@ const BlockProducerInfo = ({ t, classes }) => {
               <SimpleDataCard
                 lowercase
                 title={t('timeToFinality')}
+                helperText={t('tooltip.timeToFinality')}
                 value={
                   schedule.producers
                     ? `${

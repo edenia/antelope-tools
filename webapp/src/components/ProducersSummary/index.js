@@ -34,6 +34,7 @@ const ProducersSummary = ({ t, data, loading, total }) => {
     <>
       <SimpleDataCard
         title={`${t('total')} ${t('producers')}`}
+        helperText={t('tooltip.totalProducers')}
         value={total}
         loading={loading}
       />

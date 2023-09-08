@@ -68,14 +68,20 @@ const Footer = () => {
         <List
           className={`${classes.footerMenuWrapper} ${classes.sidebarFooter}`}
         >
-          <a
-            className={classes.noUnderline}
-            href="https://github.com/edenia/antelope-tools/issues/new/choose"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('bugRequest')}
-          </a>
+          <ListItem>
+            <ListItemText
+              primary={
+                <a
+                  className={classes.noUnderline}
+                  href="https://github.com/edenia/antelope-tools/issues/new/choose"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('bugRequest')}
+                </a>
+              }
+            />
+          </ListItem>
         </List>
       </div>
     </div>

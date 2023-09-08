@@ -25,35 +25,35 @@ const LogoSvg = ({ name }) => {
 
   switch (name) {
     case 'jungle':
-      return <img src={jungleImg} alt="jungle" className={classes.jungleImg} />
+      return <img src={jungleImg} alt="jungle logo" className={classes.jungleImg} />
 
     case 'telos':
-      return <img src={telosImg} alt="telos" className={classes.telosImg} />
+      return <img src={telosImg} alt="telos logo" className={classes.telosImg} />
 
     case 'wax':
-      return <img src={waxImg} alt="wax" className={classes.waxImg} />
+      return <img src={waxImg} alt="wax logo" className={classes.waxImg} />
 
     case 'lacchain':
       return (
-        <img src={lacchainImg} alt="lacchain" className={classes.lacchainImg} />
+        <img src={lacchainImg} alt="lacchain logo" className={classes.lacchainImg} />
       )
 
     case 'proton':
-      return <img src={protonImg} alt="proton" className={classes.protonImg} />
+      return <img src={protonImg} alt="proton logo" className={classes.protonImg} />
 
     case 'airwire':
       return (
-        <img src={airwireImg} alt="airwire" className={classes.airwireImg} />
+        <img src={airwireImg} alt="airwire logo" className={classes.airwireImg} />
       )
 
     case 'ultra':
-      return <img src={ultraImg} alt="ultra" className={classes.ultraImg} />
+      return <img src={ultraImg} alt="ultra logo" className={classes.ultraImg} />
 
     case 'libre':
-      return <img src={libreImg} alt="libre" className={classes.libreImg} />
+      return <img src={libreImg} alt="libre logo" className={classes.libreImg} />
 
     default:
-      return <img src={eosImg} alt="eos" className={classes.eosImg} />
+      return <img src={eosImg} alt="eos logo" className={classes.eosImg} />
   }
 }
 
