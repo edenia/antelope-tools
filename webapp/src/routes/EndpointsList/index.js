@@ -32,7 +32,7 @@ const EndpointsList = () => {
   const [
     { loading, pagination, producers, filters },
     { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
-  ] = useEndpointsState({ useCache: false })
+  ] = useEndpointsState()
 
   return (
     <Card className={classes.cardShadow}>

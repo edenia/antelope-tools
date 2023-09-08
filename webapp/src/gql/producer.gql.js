@@ -38,6 +38,19 @@ export const PRODUCERS_QUERY = gql`
     }
   }
 `
+
+export const PRODUCERS_COUNT_QUERY = gql`
+  query producer(
+    $where: producer_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+  }
+`
+
 export const NODES_SUBSCRIPTION = gql`
   subscription ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
     producers: producer(
@@ -91,6 +104,24 @@ export const ENDPOINTS_SUBSCRIPTION = gql`
         head_block_time
         response
         updated_at
+      }
+    }
+  }
+`
+
+export const ENDPOINTS_QUERY = gql`
+  query producer(
+    $where: endpoints_by_producer_id_bool_exp!
+  ) {
+    producers: producer(
+      where: {endpoints_list: {_and: [{type: {_gt: ""}}, $where]}}
+      order_by: { total_votes_percent: desc }
+    ) {
+      id
+      owner
+      endpoints: endpoints_list(where: $where) {
+        type
+        value
       }
     }
   }

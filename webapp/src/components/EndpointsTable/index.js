@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLazyQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,35 +11,62 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import { Tooltip as MUITooltip } from '@mui/material'
-import ListAltIcon from '@mui/icons-material/ListAlt'
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@mui/material/Link'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
+import CopyToClipboard from '../CopyToClipboard'
 import HealthCheck from '../HealthCheck'
-import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
+import HealthCheckInfo from '../HealthCheck/HealthCheckInfo'
 import { getStatus } from 'utils'
+import { ENDPOINTS_QUERY } from '../../gql'
 
 import styles from './styles'
-import Tooltip from '../Tooltip'
-import EndpointsTextList from '../EndpointsTextList'
 
 const useStyles = makeStyles(styles)
 
 const EndpointsTable = ({ producers }) => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [type, setType] = useState('')
+  const [textLists, setTextLists] = useState({})
+  const [loadProducers, { data: { producers: bpsWorkingEndpoints } = {} }] =
+    useLazyQuery(ENDPOINTS_QUERY)
 
-  const handlePopoverOpen = (target, type) => {
-    setAnchorEl(target)
-    setType(type)
-  }
+  useEffect(()=>{
+    loadProducers({
+      variables: {
+        where: {
+          response: { _contains: { isWorking: true } },
+        },
+      },
+    })
+  },[loadProducers])
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
+  useEffect(() => {
+    if (!bpsWorkingEndpoints?.length) return
+
+    let endpointsList = {api:'',p2p:'',ssl:''}
+
+    Object.keys(endpointsList).forEach(type => {
+      endpointsList[type] += `# List of available ${type.toUpperCase()} endpoints \n`
+
+      bpsWorkingEndpoints.forEach(producer => {
+        if (!!producer?.endpoints?.length && producer.endpoints.some(endpoint=>endpoint.type===type)) {
+          endpointsList[type] += `# ${producer.owner} \n`
+          producer.endpoints.forEach(endpoint => {
+            if (endpoint.type === type) {
+              endpointsList[type] += `${type === 'p2p' ? 'p2p-peer-address = ' : ''} ${
+                endpoint.value
+              } \n`
+            }
+          })
+          endpointsList[type] += '\n'
+        }
+      })
+    })
+    
+    setTextLists(endpointsList)
+  }, [bpsWorkingEndpoints])
 
   const CellList = ({ producer, endpointType }) => {
     return (
@@ -65,17 +92,6 @@ const EndpointsTable = ({ producers }) => {
 
   return (
     <>
-      <Tooltip
-        anchorEl={anchorEl}
-        open={anchorEl !== null}
-        onClose={handlePopoverClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <EndpointsTextList type={type} />
-      </Tooltip>
       <TableContainer>
         <Table>
           <TableHead>
@@ -84,49 +100,19 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('api')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'api')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
-                </div>
+                  <CopyToClipboard text={textLists.api}/>
+                </div> 
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('ssl')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'ssl')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
+                  <CopyToClipboard text={textLists.ssl}/>
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('p2p')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'p2p')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
+                  <CopyToClipboard text={textLists.p2p}/>
                 </div>
               </TableCell>
             </TableRow>

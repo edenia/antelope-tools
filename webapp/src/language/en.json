@@ -365,8 +365,6 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "endpointsResponding": "Only endpoints responding",
-    "showList": "Show List",
-    "listOfResponding": "List of endpoints that are responding",
     "linkToStats": "Go to stats",
     "filterEndpoints": "Filter responding endpoints"
   },

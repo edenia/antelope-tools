@@ -1,21 +1,34 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useSubscription } from '@apollo/client'
+import { useSubscription, useLazyQuery } from '@apollo/client'
 
-import { PRODUCERS_QUERY, ENDPOINTS_SUBSCRIPTION } from '../../gql'
+import { ENDPOINTS_SUBSCRIPTION, PRODUCERS_COUNT_QUERY } from '../../gql'
 
 import useSearchState from './useSearchState'
 
 const useEndpointsState = () => {
-  const [
-    { filters, pagination, variables },
-    { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({
-    query: PRODUCERS_QUERY,
-    where: { nodes: { endpoints: { value: { _gt: '' } } } },
+  const defaultVariables = {
     limit: 20,
-  })
+    offset: 0,
+    endpointFilter: undefined,
+    where: {
+      owner: { _like: '%%' },
+      nodes: { endpoints: { value: { _gt: '' } } },
+    },
+  }
+  const [variables, setVariables] = useState(defaultVariables)
+  const [loadProducers, { data: { info } = {} }] = useLazyQuery(PRODUCERS_COUNT_QUERY)
   const { data, loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, { variables })
   const [items, setItems] = useState()
+
+  const [
+    { filters, pagination },
+    { handleOnSearch, handleOnPageChange, setPagination },
+  ] = useSearchState({
+    loadProducers,
+    info,
+    variables,
+    setVariables,
+  })
 
   useEffect(() => {
     if (!data) return
@@ -42,7 +55,7 @@ const useEndpointsState = () => {
         }
       }),
     )
-  }, [data])
+  }, [data, info])
 
   const handleFilter = useCallback(value => {
       const filter = value
@@ -58,7 +71,12 @@ const useEndpointsState = () => {
     }, [setPagination])
 
   return [
-    { loading, pagination, producers: items, filters },
+    {
+      loading: loading && !items?.length,
+      pagination,
+      producers: items,
+      filters,
+    },
     { handleFilter, handleOnPageChange, handleOnSearch, setPagination },
   ]
 }
