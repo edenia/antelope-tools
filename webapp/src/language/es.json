@@ -141,8 +141,6 @@
     "Last Week": "Última Semana",
     "Last Year": "Último Año",
     "scheduleVersion": "Versión de Programa",
-    "cpuUtilization": "Uso de CPU",
-    "netUtilization": "Uso de NET",
     "cpuUtilizationAllTimeHigh": "Uso de CPU en TPS máximo histórico",
     "networkUtilizationAllTimeHigh": "Uso de NET en TPS máximo histórico",
     "tpsAllTimeHigh": "TPS máximo histórico",
@@ -165,9 +163,26 @@
     "timeToFinality": "Tiempo para finalidad",
     "cpuUsage": "Uso del CPU",
     "netUsage": "Uso de NET",
-    "average": "Promedio"
+    "average": "Promedio",
+    "tooltip": {
+      "lastBlock": "El último bloque confirmado producido",
+      "bpSchedule": "Top 21 Productores de bloques actuales",
+      "scheduleVersion": "El número de iteración actual de la lista de top 21 productores de bloques",
+      "tpsAllTimeHigh": "Máximo número de transacciones por segundo (TPS)",
+      "cpuUtilizationAllTimeHigh": "El uso de CPU en el TPS máximo",
+      "networkUtilizationAllTimeHigh": "El uso de NET en el TPS máximo",
+      "full": "Nodo que provee datos desde el primer bloque",
+      "seed": "Nodo que provee puntos finales P2P públicos",
+      "query": "Nodo que provee puntos finales HTTP(S) API públicos",
+      "producer": "Nodo encargado de la producción de bloques",
+      "nodes": "Cantidad de nodos de los primeros 150 productores",
+      "uniqueLocations": "Cantidad de países con productores, calculada con los bp.json",
+      "timeToFinality": "El tiempo que le toma a la cadena para confirmar una transacción",
+      "cpuUsage": "Porcentaje actual de CPU usados en el último segundo",
+      "netUsage": "Porcentaje actual de NET usados en el último segundo",
+      "totalProducers": "Productores de bloques registrados, recuperados del contrato eosio"
+    }
   },
-  "blockProducersRoute": {},
   "rewardsDistributionRoute": {
     "dailyRewards": "Recompensas Diarias Totales",
     "yearlyRewards": "Recompensas Anuales Totales",
@@ -469,13 +484,23 @@
     "lastBlock": "Último bloque",
     "totalTxs": "Total de transacciones EVM",
     "transactions": "Transacciones EVM",
-    "gasUsed": "Gas Usado"
+    "gasUsed": "Gas Usado",
+    "tooltip": {
+      "gasPrice": "Combustible virtual usado para ejecutar contratos inteligentes en EVM",
+      "avgGasUsage": "Gas promedio utilizado en los últimos 100 bloques",
+      "totalIncoming": "Cantidad de transacciones transfer hacia (ACCOUNT)",
+      "totalOutgoing": "Cantidad de transacciones transfer desde (ACCOUNT)",
+      "ATH": "Cantidad máxima registrada de transacciones por segundo (TPS)",
+      "lastBlock": "Ethereum block height, el número de bloques confirmados",
+      "totalTxs": "Cantidad de transacciones desde el primer bloque"
+    }
   },
   "evmEndpointsRoute": {
     "title": "Lista de puntos finales RPC de EVM",
     "rpcEndpoint": "Punto final RPC",
     "latency": "Latencia",
     "lastBlock": "Último bloque",
-    "rerun": "Reejecutar las pruebas"
+    "rerun": "Reejecutar las pruebas",
+    "filterEndpoints": "Filtrar puntos finales"
   }
 }

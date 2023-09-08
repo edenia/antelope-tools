@@ -26,6 +26,9 @@ export default (theme) => ({
     [theme.breakpoints.up('lg')]: {
       width: 300,
     },
+    [theme.breakpoints.down('lg')]: {
+      marginTop: theme.spacing(3),
+    },
   },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',

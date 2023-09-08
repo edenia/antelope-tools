@@ -2,46 +2,46 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://dashboard.airwire.io/</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/block-producers</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/nodes</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/endpoints</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/nodes-distribution</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/rewards-distribution</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/ricardian-contract</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/accounts</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/bpjson</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/about</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
    <url>
       <loc>https://dashboard.airwire.io/help</loc>
-      <lastmod>2022-10-20</lastmod>
+      <lastmod>2023-09-07</lastmod>
    </url>
 </urlset>

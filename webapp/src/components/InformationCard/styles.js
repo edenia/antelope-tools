@@ -354,6 +354,10 @@ export default (theme) => ({
       textAlign: 'center',
       color: '#3d3d3dde',
     },
+    '& a': {
+      color: theme.palette.primary.main,
+      textDecorationColor: theme.palette.primary.main,
+    },
   },
   horizontalLine: {
     [theme.breakpoints.down('lg')]: {

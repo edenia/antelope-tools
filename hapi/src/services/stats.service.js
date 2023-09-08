@@ -69,8 +69,20 @@ const getNodesSummary = async () => {
       type
   `)
 
-  rows.forEach((row) => {
-    payload[row.node_type || 'unknown'] = row.nodes_count
+  rows.forEach(row => {
+    let nodeType = row.node_type || 'unknown'
+
+    if (Array.isArray(nodeType)) {
+      nodeType = nodeType.map(type => (type === 'p2p' ? 'seed' : type))
+      nodeType.sort()
+    }
+
+    if (payload[nodeType]) {
+      payload[nodeType] += row.nodes_count
+    } else {
+      payload[nodeType] = row.nodes_count
+    }
+
     total += row.nodes_count
   })
 

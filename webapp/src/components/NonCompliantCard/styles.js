@@ -33,6 +33,10 @@ export default (theme) => ({
     height: 'auto',
     margin: '0px',
     flexGrow: '1',
+    '& a': {
+      color: theme.palette.primary.main,
+      textDecorationColor: theme.palette.primary.main,
+    },
     [theme.breakpoints.down('lg')]: {
       width: '150px',
     },
