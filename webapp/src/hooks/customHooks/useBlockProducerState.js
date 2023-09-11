@@ -45,8 +45,8 @@ const useBlockProducerState = () => {
   const [
     { filters, pagination },
     { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({ loadProducers, info, variables, setVariables  })
-  
+  ] = useSearchState({ loadProducers, info, variables, setVariables })
+
   useEffect(() => {
     loadStats({})
   }, [loadStats])
