@@ -59,19 +59,19 @@ const EndpointsTable = ({ producers, textLists }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('api')}
-                  <CopyToClipboard text={textLists?.api} />
+                  <CopyToClipboard text={textLists?.api} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('ssl')}
-                  <CopyToClipboard text={textLists?.ssl} />
+                  <CopyToClipboard text={textLists?.ssl} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('p2p')}
-                  <CopyToClipboard text={textLists?.p2p} />
+                  <CopyToClipboard text={textLists?.p2p} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
             </TableRow>

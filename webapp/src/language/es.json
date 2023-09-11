@@ -365,7 +365,8 @@
     "updatedAt": "Actualizado por última vez",
     "endpointsResponding": "Solo puntos finales que responden",
     "linkToStats": "Ir a estadísticas",
-    "filterEndpoints": "Filtrar puntos finales"
+    "filterEndpoints": "Filtrar puntos finales",
+    "copyToClipboard": "Copiar los puntos finales que responden de la columna al portapapeles"
   },
   "cpuBenchmarkRoute": {
     "title": "Resumen del uso de la CPU en Microsegundos",
@@ -373,7 +374,7 @@
     "highest": "Más alto",
     "average": "Promedio",
     "hideAll": "Ocultar Todas",
-    "showAll": "Muestrar Todas",
+    "showAll": "Mostrar Todas",
     "selectTo": "Seleccionar una cuenta para activar o",
     "zoomTo": "Arrastre o pellizque para ampliar el gráfico"
   },

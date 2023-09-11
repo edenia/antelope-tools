@@ -9,7 +9,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const CopyToClipboard = ({ text }) => {
+const CopyToClipboard = ({ text, helperText }) => {
   const classes = useStyles()
   const { t } = useTranslation('copyToClipboardComponent')
   const [status, setStatus] = useState('copyToClipboard')
@@ -21,11 +21,12 @@ const CopyToClipboard = ({ text }) => {
 
   return (
     <Tooltip
-      title={t(status)}
+      title={helperText ?? t(status)}
+      arrow
       onMouseLeave={() => {
         setStatus('copyToClipboard')
       }}
-      arrow
+      classes={{ popper: classes.tooltip }}
     >
       <Button
         size="small"
