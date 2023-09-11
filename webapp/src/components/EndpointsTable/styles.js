@@ -18,7 +18,7 @@ export default (theme) => ({
     alignItems: 'center',
     '& .MuiButton-root': {
       alignSelf: 'center',
-      marginLeft: theme.spacing(2),
+      margin: `${theme.spacing(0, 0, 0, 2)} !important`,
     }
   },
 })
