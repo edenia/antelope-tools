@@ -109,24 +109,6 @@ export const ENDPOINTS_SUBSCRIPTION = gql`
   }
 `
 
-export const ENDPOINTS_QUERY = gql`
-  query producer(
-    $where: endpoints_by_producer_id_bool_exp!
-  ) {
-    producers: producer(
-      where: {endpoints_list: {_and: [{type: {_gt: ""}}, $where]}}
-      order_by: { total_votes_percent: desc }
-    ) {
-      id
-      owner
-      endpoints: endpoints_list(where: $where) {
-        type
-        value
-      }
-    }
-  }
-`
-
 export const NODE_CPU_BENCHMARK = gql`
   query ($account: String) {
     cpu(

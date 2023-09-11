@@ -32,6 +32,7 @@ const CopyToClipboard = ({ text }) => {
         variant="outlined"
         color="primary"
         onClick={copyText}
+        disabled={!text}
         className={classes.icon}
         startIcon={<FileCopyOutlinedIcon />}
       >
