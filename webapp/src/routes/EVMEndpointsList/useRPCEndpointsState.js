@@ -77,10 +77,12 @@ const useRPCEndpointsState = () => {
     setEndpoints(prev => prev.map(endpoint => ({ url: endpoint.url, response: {} })))
 
     const rpcList = JSON.parse(JSON.stringify(endpoints))
+    let checked = 0
 
     rpcList.forEach(async ({ url }, index) => {
       const endpoint = await getEndpointHealthCheck(url)
 
+      checked += 1
       setEndpoints(prev => {
         const newEndpoints = [
           ...prev.slice(0, index),
@@ -88,7 +90,10 @@ const useRPCEndpointsState = () => {
           ...prev.slice(index + 1),
         ]
 
-        if (newEndpoints.every(endpoint => !!endpoint.response.statusText)) {
+        if (
+          newEndpoints.length === checked ||
+          newEndpoints.every(endpoint => !!endpoint.response.statusText)
+        ) {
           newEndpoints.sort((e1, e2) =>
             e1?.height === e2?.height
               ? e1?.latency - e2?.latency

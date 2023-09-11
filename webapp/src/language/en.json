@@ -395,7 +395,7 @@
     "status": "Status",
     "response": "Response",
     "headBlockTime": "Head Block Time",
-    "updatedAt": "Updated at",
+    "updatedAt": "Last check",
     "error": "Error",
     "noResponse": "No response"
   },

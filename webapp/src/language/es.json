@@ -394,7 +394,7 @@
     "status": "Estado",
     "response": "Respuesta",
     "headBlockTime": "Fecha del último bloque",
-    "updatedAt": "Actualizado por última vez",
+    "updatedAt": "Comprobado por última vez",
     "error": "Error",
     "noResponse": "Sin respuesta",
     "Bad Gateway": "Mal puerta de enlace",

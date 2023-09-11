@@ -63,11 +63,11 @@ const EndpointsChips = ({ node }) => {
           <span>{`${workingEndpoints}/${totalEndpoints}`}</span>
         )}
         <HealthCheck status={healthStatus}>
-          <Typography>{t('status')}</Typography>
+          <Typography>{t('status')}:</Typography>
           <Typography>
             {getStatusMessage(healthStatus, failingEndpoints)}
           </Typography>
-          <Typography>{t('updatedAt')}</Typography>
+          <Typography>{t('updatedAt')}:</Typography>
           {moment(updatedAt).format('lll') || 'N/A'}
         </HealthCheck>
       </div>
