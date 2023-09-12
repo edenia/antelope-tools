@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
+import Autocomplete from '@mui/material/Autocomplete'
 import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
+import TextField from '@mui/material/TextField'
 
 import ContractActionForm from '../ContractActionForm'
 
@@ -32,25 +31,24 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
   return (
     <div className={classes.formControl}>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="actionNameLabel">{t('action')}</InputLabel>
-        <Select
-          labelId="actionNameLabel"
-          id="actionName"
-          value={action}
-          onChange={(event) => setAction(event.target.value)}
-          label={t('action')}
-        >
-          {actions.map((item) => (
-            <MenuItem key={`action-menu-item-${item}`} value={item}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
+        <Autocomplete
+            id="actionName"
+            labelId="actionNameLabel"
+            options={actions}
+            value={action}
+            inputValue={action}
+            onChange={(_e, value) => setAction(value || '')}
+            onInputChange={(_e, value) => setAction(value || '')}
+            renderInput={params => (
+              <TextField {...params} label={t('action')} />
+            )}
+            noOptionsText={t('noOptions')}
+          />
       </FormControl>
 
       <ContractActionForm
         accountName={accountName}
-        action={action}
+        action={actions.find(element => element === action)}
         abi={abi}
         onSubmitAction={onSubmitAction}
       />
