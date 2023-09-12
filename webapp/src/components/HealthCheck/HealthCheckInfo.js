@@ -16,11 +16,11 @@ const HealthCheckInfo = ({ healthCheck }) => {
       </Typography>
       {healthCheck.head_block_time && healthCheck.response?.status === 200 && (
         <>
-          <Typography>{t('headBlockTime')}</Typography>
+          <Typography>{t('headBlockTime')}:</Typography>
           {moment(healthCheck.head_block_time).format('lll') || 'N/A'}
         </>
       )}
-      <Typography>{t('updatedAt')}</Typography>
+      <Typography>{t('updatedAt')}:</Typography>
       {moment(healthCheck.updated_at).format('lll') || 'N/A'}
     </>
   )

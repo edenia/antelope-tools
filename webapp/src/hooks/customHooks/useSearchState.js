@@ -1,27 +1,14 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useLazyQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-const useSearchState = ({ query, where, limit }) => {
-  const [loadProducers, { loading = true, data: { producers, info } = {} }] =
-    useLazyQuery(query)
+const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
   const location = useLocation()
-  const defaultVariables = {
-    limit: limit ?? 28,
-    offset: 0,
-    endpointFilter: undefined,
-    where: {
-      owner: { _like: '%%' },
-      ...(where ?? { bp_json: { _is_null: false } }),
-    }
-  }
   const [pagination, setPagination] = useState({
     page: 1,
     pages: 1,
-    ...defaultVariables
+    ...variables,
   })
-  const [variables, setVariables] = useState(defaultVariables)
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
   const handleOnSearch = useCallback(newFilters => {
@@ -47,16 +34,15 @@ const useSearchState = ({ query, where, limit }) => {
 
   useEffect(() => {
     const variables = {
-      where: pagination.where,
-      offset: (pagination.page - 1) * pagination.limit,
       limit: pagination.limit,
+      offset: (pagination.page - 1) * pagination.limit,
       endpointFilter: pagination.endpointFilter,
+      where: pagination.where,
     }
 
-    loadProducers({ variables })
+    loadProducers({ variables: { where: pagination.where } })
 
     setVariables(variables)
-    // eslint-disable-next-line
   }, [
     pagination.where,
     pagination.page,
@@ -64,6 +50,7 @@ const useSearchState = ({ query, where, limit }) => {
     pagination.offset,
     pagination.endpointFilter,
     setVariables,
+    loadProducers,
   ])
 
   useEffect(() => {
@@ -78,6 +65,7 @@ const useSearchState = ({ query, where, limit }) => {
     }))
 
     setFilters(prev => ({ ...prev, owner: params.owner }))
+    // eslint-disable-next-line
   }, [location.search])
 
   useEffect(() => {
@@ -87,16 +75,15 @@ const useSearchState = ({ query, where, limit }) => {
       ...prev,
       pages: prev.limit ? Math.ceil(info.producers?.count / prev.limit) : 1,
     }))
-  }, [info])
+  }, [info, pagination.limit])
 
   return [
-    { filters, pagination, loading, producers, info, variables },
+    { filters, pagination },
     {
       handleOnSearch,
       handleOnPageChange,
       setFilters,
       setPagination,
-      loadProducers,
     },
   ]
 }

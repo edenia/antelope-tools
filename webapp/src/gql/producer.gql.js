@@ -38,6 +38,19 @@ export const PRODUCERS_QUERY = gql`
     }
   }
 `
+
+export const PRODUCERS_COUNT_QUERY = gql`
+  query producer(
+    $where: producer_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+  }
+`
+
 export const NODES_SUBSCRIPTION = gql`
   subscription ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
     producers: producer(

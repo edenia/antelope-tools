@@ -24,15 +24,15 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const limitOptions = [10, 20, 30, 50, 80, 130]
+const limitOptions = [10, 20, 30, 50, 80, 150]
 
 const EndpointsList = () => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
   const [
-    { loading, pagination, producers, filters },
+    { loading, pagination, producers, textLists, filters },
     { handleFilter, handleOnSearch, handleOnPageChange, setPagination },
-  ] = useEndpointsState({ useCache: false })
+  ] = useEndpointsState()
 
   return (
     <Card className={classes.cardShadow}>
@@ -95,7 +95,7 @@ const EndpointsList = () => {
         ) : (
           <>
             {!!producers?.length ? (
-              <EndpointsTable producers={producers} />
+              <EndpointsTable producers={producers} textLists={textLists} />
             ) : (
               <div className={classes.noShadow}>
                 <NoResults />
