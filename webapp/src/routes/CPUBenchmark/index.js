@@ -187,11 +187,11 @@ const CPUBenchmark = () => {
             {t('title')}
           </Typography>
           <FormControl variant="standard">
-            <InputLabel id="select-range-label">
+            <InputLabel htmlFor="select-range-label">
               {t('timeFrame')}
             </InputLabel>
             <Select
-              labelid="select-range-label"
+              inputProps={{ id: 'select-range-label' }}
               value={range}
               onChange={event => setRange(event.target.value)}
               fullWidth
