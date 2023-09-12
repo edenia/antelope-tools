@@ -380,10 +380,9 @@
   "endpointsListRoute": {
     "title": "Endpoints available by",
     "endpointsResponding": "Only endpoints responding",
-    "showList": "Show List",
-    "listOfResponding": "List of endpoints that are responding",
     "linkToStats": "Go to stats",
-    "filterEndpoints": "Filter responding endpoints"
+    "filterEndpoints": "Filter responding endpoints",
+    "copyToClipboard": "Copy responding endpoints from the column to the clipboard"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Microseconds",
@@ -411,7 +410,7 @@
     "status": "Status",
     "response": "Response",
     "headBlockTime": "Head Block Time",
-    "updatedAt": "Updated at",
+    "updatedAt": "Last check",
     "error": "Error",
     "noResponse": "No response"
   },

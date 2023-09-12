@@ -1,21 +1,36 @@
 import { useState, useEffect } from 'react'
-import { useSubscription } from '@apollo/client'
+import { useSubscription, useLazyQuery } from '@apollo/client'
 
-import { PRODUCERS_QUERY, NODES_SUBSCRIPTION } from '../../gql'
+import { NODES_SUBSCRIPTION, PRODUCERS_COUNT_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
 
 import useSearchState from './useSearchState'
 
 const useNodeState = () => {
-  const [
-    { filters, pagination, variables },
-    { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({
-    query: PRODUCERS_QUERY,
-    where: { nodes: { type: { _neq: [] } } },
-  })
+  const defaultVariables = {
+    limit: 28,
+    offset: 0,
+    endpointFilter: undefined,
+    where: {
+      owner: { _like: '%%' },
+      nodes: { type: { _neq: [] } },
+    },
+  }
+  const [variables, setVariables] = useState(defaultVariables)
+  const [loadProducers, { data: { info } = {} }] = useLazyQuery(
+    PRODUCERS_COUNT_QUERY,
+  )
   const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
   const [items, setItems] = useState([])
+  const [
+    { filters, pagination },
+    { handleOnSearch, handleOnPageChange, setPagination },
+  ] = useSearchState({
+    loadProducers,
+    info,
+    variables,
+    setVariables,
+  })
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeChips]
 

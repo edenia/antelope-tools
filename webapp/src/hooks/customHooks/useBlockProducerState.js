@@ -26,15 +26,26 @@ const CHIPS_FILTERS = [
 const CHIPS_NAMES = ['all', ...eosConfig.producerTypes]
 
 const useBlockProducerState = () => {
-  const [
-    { filters, pagination, producers },
-    { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({ query: PRODUCERS_QUERY })
+  const defaultVariables = {
+    limit: 20,
+    offset: 0,
+    endpointFilter: undefined,
+    where: {
+      owner: { _like: '%%' },
+      nodes: { endpoints: { value: { _gt: '' } } },
+    }
+  }
+  const [variables, setVariables] = useState(defaultVariables)
+  const [loadProducers, { data: { info, producers } = {} }] = useLazyQuery(PRODUCERS_QUERY, { variables })
   const { data: dataHistory } = useSubscription(MISSED_BLOCKS_SUBSCRIPTION)
   const [loadStats, { loading = true, data: { eosrate_stats: stats } = {} }] =
     useLazyQuery(EOSRATE_STATS_QUERY)
   const [items, setItems] = useState([])
   const [missedBlocks, setMissedBlocks] = useState({})
+  const [
+    { filters, pagination },
+    { handleOnSearch, handleOnPageChange, setPagination },
+  ] = useSearchState({ loadProducers, info, variables, setVariables })
 
   useEffect(() => {
     loadStats({})

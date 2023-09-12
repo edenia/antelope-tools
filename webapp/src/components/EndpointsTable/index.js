@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,35 +10,22 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import { Tooltip as MUITooltip } from '@mui/material'
-import ListAltIcon from '@mui/icons-material/ListAlt'
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@mui/material/Link'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
+import CopyToClipboard from '../CopyToClipboard'
 import HealthCheck from '../HealthCheck'
-import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
+import HealthCheckInfo from '../HealthCheck/HealthCheckInfo'
 import { getStatus } from 'utils'
 
 import styles from './styles'
-import Tooltip from '../Tooltip'
-import EndpointsTextList from '../EndpointsTextList'
 
 const useStyles = makeStyles(styles)
 
-const EndpointsTable = ({ producers }) => {
+const EndpointsTable = ({ producers, textLists }) => {
   const classes = useStyles()
   const { t } = useTranslation('endpointsListRoute')
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [type, setType] = useState('')
-
-  const handlePopoverOpen = (target, type) => {
-    setAnchorEl(target)
-    setType(type)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
 
   const CellList = ({ producer, endpointType }) => {
     return (
@@ -65,17 +51,6 @@ const EndpointsTable = ({ producers }) => {
 
   return (
     <>
-      <Tooltip
-        anchorEl={anchorEl}
-        open={anchorEl !== null}
-        onClose={handlePopoverClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <EndpointsTextList type={type} />
-      </Tooltip>
       <TableContainer>
         <Table>
           <TableHead>
@@ -84,49 +59,19 @@ const EndpointsTable = ({ producers }) => {
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('api')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'api')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
+                  <CopyToClipboard text={textLists?.api} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('ssl')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'ssl')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
+                  <CopyToClipboard text={textLists?.ssl} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
               <TableCell>
                 <div className={classes.titleCell}>
                   {t('p2p')}
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<ListAltIcon />}
-                    onClick={(e) => {
-                      handlePopoverOpen(e.target, 'p2p')
-                    }}
-                  >
-                    {t('showList')}
-                  </Button>
+                  <CopyToClipboard text={textLists?.p2p} helperText={t('copyToClipboard')} />
                 </div>
               </TableCell>
             </TableRow>
@@ -167,6 +112,7 @@ const EndpointsTable = ({ producers }) => {
 
 EndpointsTable.propTypes = {
   producers: PropTypes.array,
+  textLists: PropTypes.object,
 }
 
 export default EndpointsTable
