@@ -87,6 +87,7 @@ const EndpointsTable = ({ producers, textLists }) => {
                       <MUITooltip title={t('linkToStats')} arrow>
                         <Link
                           aria-label={`Link to endpoints stats of ${producer.name}`}
+                          title={`${producer.name} endpoints stats`}
                           component={RouterLink}
                           state={{ producerId: producer.id }}
                           to="/endpoints-stats"
