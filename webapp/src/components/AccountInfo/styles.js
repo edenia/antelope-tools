@@ -30,7 +30,13 @@ export default (theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     minWidth: '100px',
-    paddingTop: theme.spacing(1),
+    paddingTop: theme.spacing(2),
+    '& p': {
+      marginRight: theme.spacing(2),
+    },
+    '& p:first-child': {
+      minWidth: '80px',
+    },
   },
   keyIcon: {
     marginRight: theme.spacing(1),
