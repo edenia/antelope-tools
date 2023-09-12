@@ -35,12 +35,16 @@ const RicardianContract = ({ abi, hash }) => {
               onError={useDefaultLogo}
             />
             <div className={classes.boxText}>
-              <Typography color="primary" variant="h5">
-                {_title || name}
-              </Typography>
-              <Typography color="primary" variant="subtitle2">
-                {version}
-              </Typography>
+              {_title && name && (
+                <Typography color="primary" variant="h5">
+                  {_title || name}
+                </Typography>
+              )}
+              {version && (
+                <Typography color="primary" variant="subtitle2">
+                  {version}
+                </Typography>
+              )}
             </div>
           </div>
           <Divider className={classes.divider} />

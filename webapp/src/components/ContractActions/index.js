@@ -33,7 +33,7 @@ const ContractActions = ({ accountName, abi, onSubmitAction }) => {
       <FormControl variant="outlined" className={classes.formControl}>
         <Autocomplete
             id="actionName"
-            labelId="actionNameLabel"
+            labelid="actionNameLabel"
             options={actions}
             value={action}
             inputValue={action}
