@@ -6,6 +6,7 @@ import { makeStyles } from '@mui/styles'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
+import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import 'flag-icon-css/css/flag-icons.css'
 
 import ChipList from '../ChipList'
@@ -51,7 +52,7 @@ const NodesCard = ({ nodes }) => {
         {Object.keys(keys).map((key, i) => (
           <div key={i} className={classes.keysContainer}>
             <p className={classes.bold}>{key}:</p>
-            <MoreInfoModal>
+            <MoreInfoModal Icon={KeyOutlinedIcon}>
               <p className={classes.keys}>{keys[key]}</p>
             </MoreInfoModal>
           </div>

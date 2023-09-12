@@ -28,7 +28,9 @@ export default (theme) => ({
     display: 'flex',
     textTransform: 'capitalize',
     justifyContent: 'space-between',
+    alignItems: 'center',
     minWidth: '100px',
+    paddingTop: theme.spacing(1),
   },
   keyIcon: {
     marginRight: theme.spacing(1),
@@ -104,5 +106,10 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  cardPadding: {
+    [theme.breakpoints.up('lg')]: {
+      paddingRight: theme.spacing(4),
+    },
   },
 })
