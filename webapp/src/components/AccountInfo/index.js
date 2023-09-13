@@ -9,6 +9,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 
 import RicardianContract from '../RicardianContract'
 import ContractActions from '../ContractActions'
@@ -116,7 +117,7 @@ const AccountInfo = ({
       {!!info && (
         <>
           <div className={classes.boxHeaderCard}>
-            <div className="identicon">
+            <div className={`identicon ${classes.cardPadding}`}>
               <div className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
@@ -159,24 +160,22 @@ const AccountInfo = ({
                 {t('keys')}
               </Typography>
               <div className="keys">
-                <dl>
-                  {info.keys.map((key) => (
-                    <span key={`account-key-${key.label}`}>
-                      <dt className={classes.keyItem}>
-                        <Typography>{key.label}</Typography>
-                        {key.value ? (
-                          <MoreInfoModal>
-                            <Typography className={classes.keyLabel}>
-                              {key.value}
-                            </Typography>
-                          </MoreInfoModal>
-                        ) : (
-                          <p>-</p>
-                        )}
-                      </dt>
-                    </span>
-                  ))}
-                </dl>
+                {info.keys.map(key => (
+                  <span key={`account-key-${key.label}`}>
+                    <div className={classes.keyItem}>
+                      <Typography>{key.label}</Typography>
+                      {key.value ? (
+                        <MoreInfoModal Icon={KeyOutlinedIcon}>
+                          <Typography className={classes.keyLabel}>
+                            {key.value}
+                          </Typography>
+                        </MoreInfoModal>
+                      ) : (
+                        <p>-</p>
+                      )}
+                    </div>
+                  </span>
+                ))}
               </div>
             </div>
           </div>

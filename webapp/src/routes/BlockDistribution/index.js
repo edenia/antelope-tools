@@ -103,11 +103,11 @@ const BlockDistribution = () => {
           </Typography>
           <div className={classes.formControl}>
             <FormControl variant="standard">
-              <InputLabel id="demo-simple-select-label">
+              <InputLabel htmlFor="select-range-label">
                 {t('timeFrame')}
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
+                inputProps={{ id: 'select-range-label' }}
                 value={range}
                 onChange={(e) => setRange(e.target.value)}
                 fullWidth

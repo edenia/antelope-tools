@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
@@ -10,7 +10,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const MoreInfoModal = ({ hideCloseButton, children }) => {
+const MoreInfoModal = ({ hideCloseButton, Icon, children }) => {
   const classes = useStyles()
   const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -26,12 +26,21 @@ const MoreInfoModal = ({ hideCloseButton, children }) => {
   return (
     <>
       <MUITooltip title={t('moreInfo')} arrow placement="right">
-        <InfoOutlinedIcon
-          className={classes.clickableIcon}
-          onClick={(e) => {
-            handlePopoverOpen(e.target)
-          }}
-        />
+        {Icon ? (
+          <Icon
+            className={classes.clickableIcon}
+            onClick={(e) => {
+              handlePopoverOpen(e.target)
+            }}
+          />
+        ) : (
+          <InfoOutlinedIcon
+            className={classes.clickableIcon}
+            onClick={(e) => {
+              handlePopoverOpen(e.target)
+            }}
+          />
+        )}
       </MUITooltip>
       <Tooltip
         anchorEl={anchorEl}
@@ -45,8 +54,8 @@ const MoreInfoModal = ({ hideCloseButton, children }) => {
   )
 }
 
-Tooltip.defaultProps = {
+MoreInfoModal.defaultProps = {
   hideCloseButton: false,
 }
 
-export default MoreInfoModal
+export default memo(MoreInfoModal)

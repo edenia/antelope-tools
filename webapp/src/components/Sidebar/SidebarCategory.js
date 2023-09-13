@@ -6,6 +6,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
 import styled from 'styled-components'
 import { darken } from 'polished'
+import { eosConfig } from 'config'
 
 const Category = styled(MuiListItem)`
   font-weight: ${(props) => props.theme.typography.fontWeightRegular};
@@ -39,10 +40,23 @@ const SidebarCategory = ({
   showOnlyIcons,
   ...rest
 }) => {
-  if (showOnlyIcons) return <Category {...rest} aria-label={`Link to ${name}`}>{icon}</Category>
+  if (showOnlyIcons)
+    return (
+      <Category
+        {...rest}
+        aria-label={`Link to ${name}`}
+        title={`${eosConfig.networkLabel} ${name}`}
+      >
+        {icon}
+      </Category>
+    )
 
   return (
-    <Category {...rest}>
+    <Category
+      {...rest}
+      aria-label={`Link to ${name}`}
+      title={`${eosConfig.networkLabel} ${name}`}
+    >
       {icon}
       <ListItemText className={classes.categoryText}>{name}</ListItemText>
       {isCollapsable ? (
