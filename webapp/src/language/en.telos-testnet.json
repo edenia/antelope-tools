@@ -32,6 +32,6 @@
     "/block-distribution>moreDescription": "A visualization of the distribution of blocks produced by the nodes in the network.",
     "/missed-blocks>moreDescription": "A list of scheduled, produced, and missed blocks by each account in the network.",
     "/evm>moreDescription": "Monitor Telos EVM statistics (tEVM), such as transaction amount history, gas price and total wallets created.",
-    "/evm-rpc-endpoints>moreDescription": "A list of Telos EVM endpoints, with their health status and latency in milliseconds."
+    "/evm-rpc-endpoints>moreDescription": "A list of Telos EVM (tEVM) endpoints, with their health status and latency in milliseconds."
   }
 }

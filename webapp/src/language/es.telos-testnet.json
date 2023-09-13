@@ -30,6 +30,6 @@
     "/block-distribution>moreDescription": "Una visualización de la distribución de bloques producida por los nodos de la red.",
     "/missed-blocks>moreDescription": "Una lista de bloques programados, producidos y perdidos por cada cuenta en la red.",
     "/evm>moreDescription": "Supervise las estadísticas del Telos EVM (tEVM), como el histórico de la cantidad de transacciones, el precio del gas y las wallets creadas totales.",
-    "/evm-rpc-endpoints>moreDescription": "Una lista de puntos finales de Telos EVM, con sus estado de salud y latencia en milisegundos."
+    "/evm-rpc-endpoints>moreDescription": "Una lista de puntos finales de Telos EVM (tEVM), con sus estado de salud y latencia en milisegundos."
   }
 }

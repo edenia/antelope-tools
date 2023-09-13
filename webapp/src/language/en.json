@@ -476,7 +476,7 @@
     }
   },
   "evmEndpointsRoute": {
-    "title": "EVM RPC endpoints list",
+    "title": "EVM endpoints list",
     "rpcEndpoint": "RPC Endpoint",
     "latency": "Latency",
     "lastBlock": "Last block",

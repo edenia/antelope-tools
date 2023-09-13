@@ -496,7 +496,7 @@
     }
   },
   "evmEndpointsRoute": {
-    "title": "Lista de puntos finales RPC de EVM",
+    "title": "Lista de puntos finales de EVM",
     "rpcEndpoint": "Punto final RPC",
     "latency": "Latencia",
     "lastBlock": "Último bloque",
