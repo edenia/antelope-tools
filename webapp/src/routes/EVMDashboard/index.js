@@ -158,16 +158,20 @@ const EVMDashboard = () => {
           loading={loading}
         />
         <SimpleDataCard
-          title={t('totalIncoming').replace('(TOKEN)', eosConfig.tokenSymbol)}
-          helperText={t('tooltip.totalIncoming').replace('(ACCOUNT)', evmConfig.account)}
+          title={t('totalIncoming', { token: eosConfig.tokenSymbol })}
+          helperText={t('tooltip.totalIncoming', {
+            accountName: evmConfig.account,
+          })}
           value={
             formatWithThousandSeparator(EVMStats?.total_incoming_token) || 0
           }
           loading={loading}
         />
         <SimpleDataCard
-          title={t('totalOutgoing').replace('(TOKEN)', eosConfig.tokenSymbol)}
-          helperText={t('tooltip.totalOutgoing').replace('(ACCOUNT)', evmConfig.account)}
+          title={t('totalOutgoing', { token: eosConfig.tokenSymbol })}
+          helperText={t('tooltip.totalOutgoing', {
+            accountName: evmConfig.account,
+          })}
           value={
             formatWithThousandSeparator(EVMStats?.total_outgoing_token) || 0
           }
