@@ -72,7 +72,7 @@ const EndpointsStats = () => {
       </Card>
       <Card className={`${classes.cardByProducer} ${classes.cardShadow}`}>
         <CardContent>
-          <Typography component="p" variant="h6">
+          <Typography component="h2" variant="h6">
             {t('byProducer')}
           </Typography>
           {producersNames?.length && (

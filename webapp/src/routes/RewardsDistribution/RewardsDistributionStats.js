@@ -32,7 +32,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={`${classes.cards} ${classes.totalDailyCard}`}>
-            <Typography component="h4">{t('dailyRewards')}</Typography>
+            <Typography component="h2">{t('dailyRewards')}</Typography>
             <div className={classes.verticallyCenter}>
               <Typography variant="h6" component="p">
                 {!summary?.dailyRewards > 0 && (
@@ -67,7 +67,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
       <div className={classes.cardHeader}>
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
-            <Typography component="h4">
+            <Typography component="h2">
               {t('topCountryDailyRewards')}
             </Typography>
             <Typography variant="h6" component="p">
@@ -109,7 +109,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
         <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
           <CardContent className={classes.cards}>
             <div className={classes.notLocated}>
-              <Typography component="h4">{t('paidProducers')}</Typography>
+              <Typography component="h2">{t('paidProducers')}</Typography>
               {!!summary?.producersWithoutProperBpJson.quantity && (
                 <Button
                   className={classes.nonCompliantButton}

@@ -98,7 +98,7 @@ const BlockDistribution = () => {
     <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.textDiv}>
-          <Typography component="p" variant="h6">
+          <Typography component="h2" variant="h6">
             {t('title')}
           </Typography>
           <div className={classes.formControl}>

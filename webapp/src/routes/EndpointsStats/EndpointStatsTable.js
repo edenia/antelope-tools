@@ -18,7 +18,7 @@ const EndpointsTable = ({ endpoints, title }) => {
 
   return (
     <>
-      <Typography component="p" variant="h6">
+      <Typography component="h2" variant="h6">
         {title}
       </Typography>
       <TableContainer>

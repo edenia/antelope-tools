@@ -105,7 +105,7 @@ const Dashboard = ({ children }) => {
         <div className={classes.mainContent}>
           <div className={classes.subHeader}>
             <div className={classes.boxHeader}>
-              {routeName.pathname && (
+              {routeName.pathname && routeName.dynamicTitle && (
                 <Typography
                   variant="h3"
                   component="h1"

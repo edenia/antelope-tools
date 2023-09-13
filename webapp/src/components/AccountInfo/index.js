@@ -32,7 +32,7 @@ const AccordionWrapper = ({ children, title, ...props }) => {
           root: classes.accordionSummary,
         }}
       >
-        <Typography variant="h6" color="primary">
+        <Typography component="h4" variant="h6" color="primary">
           {title}
         </Typography>
       </AccordionSummary>
@@ -126,6 +126,7 @@ const AccountInfo = ({
                 />
               </div>
               <Typography
+                component="h2"
                 variant="h4"
                 color="primary"
                 className={classes.accountName}
@@ -134,7 +135,7 @@ const AccountInfo = ({
               </Typography>
             </div>
             <div className={classes.border}>
-              <Typography variant="h6" color="primary" className="columTitle">
+              <Typography component="h3" variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
               <div className="resourceUsage">
@@ -156,7 +157,7 @@ const AccountInfo = ({
               </div>
             </div>
             <div className={classes.border}>
-              <Typography variant="h6" color="primary" className="columTitle">
+              <Typography component="h3" variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
               <div className="keys">
