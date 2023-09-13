@@ -56,19 +56,19 @@
     "/>heading": "Welcome to {{networkName}}",
     "/cpu-benchmark>sidebar": "CPU Benchmarks",
     "/cpu-benchmark>title": "CPU Benchmarks - EOSIO + Antelope Network Dashboard",
-    "/cpu-benchmark>heading": "Block Producer Nodes CPU Benchmarks in {{networkName}}",
+    "/cpu-benchmark>heading": "Block Producer Nodes CPU Benchmarks on {{networkName}}",
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - EOSIO + Antelope Network Dashboard",
-    "/block-producers>heading": "Block Producers in {{networkName}}",
+    "/block-producers>heading": "Block Producers on {{networkName}}",
     "/undiscoverable-bps>sidebar": "Undiscoverable BPs",
     "/undiscoverable-bps>title": "Undiscoverable Block Producers or Sock Puppet BPs - EOSIO + Antelope Network Dashboard",
-    "/undiscoverable-bps>heading": "Undiscoverable Paid Block Producers in {{networkName}}",
+    "/undiscoverable-bps>heading": "Undiscoverable Paid Block Producers on {{networkName}}",
     "/rewards-distribution>sidebar": "Rewards Distribution",
     "/rewards-distribution>title": "Rewards Distribution - EOSIO + Antelope Network Dashboard",
     "/rewards-distribution>heading": "Rewards Distribution of {{networkName}}",
     "/nodes>sidebar": "Nodes",
     "/nodes>title": "Nodes - EOSIO + Antelope Network Dashboard",
-    "/nodes>heading": "Nodes in {{networkName}}",
+    "/nodes>heading": "Nodes on {{networkName}}",
     "/nodes-distribution>sidebar": "Geo Distribution",
     "/nodes-distribution>title": "Geographic Distribution of Nodes - EOSIO + Antelope Network Dashboard",
     "/nodes-distribution>heading": "Geographic Distribution of {{networkName}} Nodes",
@@ -86,10 +86,10 @@
     "/ricardian-contract>heading": "",
     "/block-distribution>sidebar": "Block Distribution",
     "/block-distribution>title": "Block Production Distribution - EOSIO + Antelope Network Dashboard",
-    "/block-distribution>heading": "Block Production Distribution in {{networkName}}",
+    "/block-distribution>heading": "Block Production Distribution on {{networkName}}",
     "/missed-blocks>sidebar": "Missed Blocks",
     "/missed-blocks>title": "Missed Blocks - EOSIO + Antelope Network Dashboard",
-    "/missed-blocks>heading": "Missed Blocks in {{networkName}}",
+    "/missed-blocks>heading": "Missed Blocks on {{networkName}}",
     "/stress-test>title": "Stress Test Dashboard - EOSIO + Antelope Network Dashboard",
     "/stress-test>sidebar": "Stress Test",
     "/stress-test>heading": "{{networkName}} Stress Test",
@@ -234,7 +234,7 @@
   },
   "aboutRoute": {
     "body": {
-      "paragraph1": "The Antelope Tools gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the EOS public mainnet and a list of registered entities on the LACChain public-permissioned network. The Antelope Tools is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
+      "paragraph1": "The Antelope Tools gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the public {{networkName}} and a list of registered entities on the LACChain public-permissioned network. The Antelope Tools is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
     },
     "subtitle1": "Why Use Antelope Tools?",
     "body1": {
@@ -242,7 +242,7 @@
     },
     "subtitle2": "Why It's Important?",
     "body2": {
-      "paragraph1": "On the EOS network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. Antelope Tools's main objective is to help you visualize objective and reliable information about each node and its activity."
+      "paragraph1": "On the {{networkName}} network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. Antelope Tools's main objective is to help you visualize objective and reliable information about each node and its activity."
     },
     "subtitle3": "Where Does the Data Come From?",
     "body3": {

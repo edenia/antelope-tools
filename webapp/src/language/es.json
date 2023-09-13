@@ -235,7 +235,7 @@
   },
   "aboutRoute": {
     "body": {
-      "paragraph1": "Antelope Tools recolecta datos y permite una visualización fácil del estado de los nodos y estadísticas de las blockchains de EOSIO. Esto también permite visualizar el método de consenso en tiempo real junto con información específica de la red, tales como la distribución de recompensas de los productores de bloques en la mainnet de EOS y una lista de entidades registradas en la red con permiso público LACChain. Antelope Tools es una herramienta open-source para que la comunidad de EOSIO acceda a los datos, apoye las votaciones por los productores de bloques y afine su infraestructura."
+      "paragraph1": "Antelope Tools recolecta datos y permite una visualización fácil del estado de los nodos y estadísticas de las blockchains de EOSIO. Esto también permite visualizar el método de consenso en tiempo real junto con información específica de la red, tales como la distribución de recompensas de los productores de bloques en {{networkName}} y una lista de entidades registradas en la red con permiso público LACChain. Antelope Tools es una herramienta open-source para que la comunidad de EOSIO acceda a los datos, apoye las votaciones por los productores de bloques y afine su infraestructura."
     },
     "title": "EOSIO Tablero",
     "subtitle1": "¿Por qué usar Antelope Tools?",
@@ -244,7 +244,7 @@
     },
     "subtitle2": "¿Por qué es importante?",
     "body2": {
-      "paragraph1": "En la red EOS, los poseedores de tokens deben votar por los Productores de Bloques basándose en la información disponible. En las redes con permiso, como LACChain, los operadores de nodos son responsables de que la red funcione sin problemas. Creemos que la supervisión de la red es esencial para mejorar y medir la transparencia de los nodos. El objetivo principal de Antelope Tools es ayudar a visualizar información objetiva y fiable sobre cada nodo y su actividad."
+      "paragraph1": "En la red {{networkName}}, los poseedores de tokens deben votar por los Productores de Bloques basándose en la información disponible. En las redes con permiso, como LACChain, los operadores de nodos son responsables de que la red funcione sin problemas. Creemos que la supervisión de la red es esencial para mejorar y medir la transparencia de los nodos. El objetivo principal de Antelope Tools es ayudar a visualizar información objetiva y fiable sobre cada nodo y su actividad."
     },
     "subtitle3": "¿De dónde se obtienen los datos?",
     "body3": {

@@ -16,6 +16,11 @@ const useStyles = makeStyles(styles)
 const About = () => {
   const classes = useStyles()
   const { t } = useTranslation('aboutRoute')
+  const networkNameLabel = (
+    eosConfig.networkName !== 'lacchain' ? eosConfig.networkLabel : 'EOS'
+  )
+    .replace(' Mainnet', '')
+    .replace(' Testnet', '')
 
   return (
     <Card className={classes.cardShadow}>
@@ -26,17 +31,26 @@ const About = () => {
           </div>
           <div className={classes.boxInfo}>
             <Typography variant="body2" paragraph>
-              {t('body.paragraph1')}
+              {t('body.paragraph1', { networkName: networkNameLabel })}
             </Typography>
-            <Typography component="h2" variant="h4">{t('subtitle1')}</Typography>
+            <Typography component="h2" variant="h4">
+              {t('subtitle1')}
+            </Typography>
             <Typography variant="body2" paragraph>
               {t('body1.paragraph1')}
             </Typography>
-            <Typography component="h2" variant="h4">{t('subtitle2')}</Typography>
-            <Typography variant="body2" paragraph>
-              {t('body2.paragraph1')}
+            <Typography component="h2" variant="h4">
+              {t('subtitle2')}
             </Typography>
-            <Typography component="h2" variant="h4" id='where-does-the-data-come-from'>{t('subtitle3')}</Typography>
+            <Typography variant="body2" paragraph>
+              {t('body2.paragraph1', { networkName: networkNameLabel })}
+            </Typography>
+            <Typography
+              component="h2"
+              variant="h4"
+            >
+              {t('subtitle3')}
+            </Typography>
             {eosConfig.networkName !== 'lacchain' ? (
               <>
                 <Typography variant="body2" paragraph>

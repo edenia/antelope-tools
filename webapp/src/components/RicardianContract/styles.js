@@ -14,9 +14,6 @@ export default (theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(6),
     marginBottom: theme.spacing(1),
-    '& img': {
-      width: 25,
-    },
   },
   boxText: {
     display: 'flex',
