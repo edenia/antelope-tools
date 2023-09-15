@@ -25,7 +25,6 @@ const drawerWidth = 70
 const openDrawerWidth = drawerWidth * (24 / 7)
 const INIT_VALUES = {
   dynamicTitle: '',
-  networkTitle: '',
   pathname: null,
 }
 const useStyles = makeStyles((theme) => styles(theme))
@@ -66,8 +65,9 @@ const Dashboard = ({ children }) => {
         dynamicTitle:
           location.pathname === '/management'
             ? managementCardTitle
-            : t(`${location.pathname}>heading`),
-        networkTitle: location.pathname === '/' ? eosConfig.networkLabel : '',
+            : t(`${location.pathname}>heading`, {
+                networkName: eosConfig.networkLabel,
+              }),
         pathname: location.pathname,
         pageTitle: `${location.pathname}>title`,
       })
@@ -105,17 +105,18 @@ const Dashboard = ({ children }) => {
         <div className={classes.mainContent}>
           <div className={classes.subHeader}>
             <div className={classes.boxHeader}>
-              <Typography
-                variant="h3"
-                className={clsx(
-                  classes.textAlignReadMore,
-                  classes.marginBottom,
-                )}
-              >
-                {routeName.pathname
-                  ? `${routeName.dynamicTitle} ${routeName.networkTitle}`
-                  : ''}
-              </Typography>
+              {routeName.pathname && routeName.dynamicTitle && (
+                <Typography
+                  variant="h3"
+                  component="h1"
+                  className={clsx(
+                    classes.textAlignReadMore,
+                    classes.marginBottom,
+                  )}
+                >
+                  {routeName.dynamicTitle}
+                </Typography>
+              )}
               <Typography className={classes.textAlignReadMore}>
                 {i18n.exists(`routes:${location.pathname}>moreDescription`)
                   ? t(`${location.pathname}>moreDescription`)

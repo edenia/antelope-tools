@@ -30,7 +30,10 @@ const RicardianContract = ({ abi, hash }) => {
         <div key={`ricardian-item-${name}-${version}`}>
           <div className={classes.boxTitle}>
             <img
-              alt="icon"
+              width={25}
+              height={25}
+              alt=""
+              loading="lazy"
               src={_icon || defaultIcon}
               onError={useDefaultLogo}
             />
