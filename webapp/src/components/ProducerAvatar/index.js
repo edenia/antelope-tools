@@ -3,15 +3,20 @@ import PropTypes from 'prop-types'
 
 import { generalConfig } from '../../config'
 import { onImgError } from '../../utils'
-import isLogoValid from '../../utils/validate-image'
+import useBPLogoState from 'hooks/customHooks/useBPLogoState'
 
 const ProducerAvatar = ({ logo, name, classes }) => {
+  const defaultLogo = generalConfig.defaultProducerLogo
+  const [{ src, logoRef }, { handleLoad }] = useBPLogoState(logo, defaultLogo)
+
   return (
     <img
       loading="lazy"
       className={classes?.avatar}
-      src={isLogoValid(logo) ? logo : generalConfig.defaultProducerLogo}
-      onError={onImgError(generalConfig.defaultProducerLogo)}
+      src={src}
+      ref={logoRef}
+      onLoad={handleLoad}
+      onError={onImgError(defaultLogo)}
       alt={`${name} logo`}
     />
   )
