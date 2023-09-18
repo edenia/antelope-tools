@@ -81,7 +81,15 @@ const Dashboard = ({ children }) => {
     <div className={classes.root}>
       <CssBaseline />
       <GlobalStyle />
-      <PageTitle title={t(routeName.pageTitle)} />
+      <PageTitle
+        title={t(routeName.pageTitle)}
+        metaTitle={routeName.dynamicTitle || t('metaTitle')}
+        metaDescription={
+          (i18n.exists(`routes:${location.pathname}>moreDescription`)
+            ? t(`${location.pathname}>moreDescription`)
+            : t('metaDescription')) || t('metaDescription')
+        }
+      />
       <div className={classes.header}>
         <Header onDrawerToggle={handleDrawerToggle} />
       </div>
