@@ -140,7 +140,8 @@
     "/nodes-distribution>moreDescription": "A visualization of the geographic distribution of the nodes in this network.",
     "/accounts>moreDescription": "This tool helps find information about accounts and interact with contracts on the network. Enter an account name and obtain account information, smart contract actions, and table data.",
     "/block-distribution>moreDescription": "A visualization of the distribution of blocks produced by the nodes in the network.",
-    "/missed-blocks>moreDescription": "A list of scheduled, produced, and missed blocks by each account in the network."
+    "/missed-blocks>moreDescription": "A list of scheduled, produced, and missed blocks by each account in the network.",
+    "/stress-test>moreDescription": "Monitor current and historical data about transactions, such as resource utilization and all-time high TPS."
   },
   "homeRoute": {
     "currentProducer": "Current Producer",
