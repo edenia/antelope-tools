@@ -170,7 +170,7 @@ const Faucet = () => {
       <div className={classes.card}>
         <Card>
           <CardContent>
-            <Typography variant="h5">{t('createAccount')}</Typography>
+            <Typography component="h2" variant="h5">{t('createAccount')}</Typography>
             <div className={classes.formControl}>
               <div>
                 <TextField
@@ -232,7 +232,7 @@ const Faucet = () => {
       <div className={classes.card}>
         <Card>
           <CardContent>
-            <Typography variant="h5">{`${t('issueTokens')} (500 ${eosConfig.tokenSymbol})`}</Typography>
+            <Typography component="h2" variant="h5">{`${t('issueTokens')} (500 ${eosConfig.tokenSymbol})`}</Typography>
             <div className={classes.formControl}>
               <div>
                 <TextField

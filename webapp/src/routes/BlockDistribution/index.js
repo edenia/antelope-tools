@@ -98,16 +98,16 @@ const BlockDistribution = () => {
     <Card className={classes.cardShadow}>
       <CardContent>
         <div className={classes.textDiv}>
-          <Typography component="p" variant="h6">
+          <Typography component="h2" variant="h6">
             {t('title')}
           </Typography>
           <div className={classes.formControl}>
             <FormControl variant="standard">
-              <InputLabel id="demo-simple-select-label">
+              <InputLabel htmlFor="select-range-label">
                 {t('timeFrame')}
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
+                inputProps={{ id: 'select-range-label' }}
                 value={range}
                 onChange={(e) => setRange(e.target.value)}
                 fullWidth

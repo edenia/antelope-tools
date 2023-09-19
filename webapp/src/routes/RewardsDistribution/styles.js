@@ -103,7 +103,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    '& h4': {
+    '& h2': {
       fontWeight: 'bold'
     },
   },
@@ -153,7 +153,7 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    '& h4': {
+    '& h2': {
       width: 'calc(100% - 125px)',
       paddingBottom: theme.spacing(2),
     },

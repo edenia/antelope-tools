@@ -114,7 +114,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           <Card className={classes.cardShadow}>
             <CardContent>
               <CardTooltip helperText={t('tooltip.bpSchedule')}>   
-                <Typography component="p" variant="h6">
+                <Typography component="h2" variant="h6">
                   {t('bpSchedule')}
                 </Typography>
               </CardTooltip> 

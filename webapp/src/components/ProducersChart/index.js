@@ -9,7 +9,6 @@ import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
-import isLogoValid from '../../utils/validate-image'
 import { eosConfig, generalConfig } from '../../config'
 
 import styles from './styles'
@@ -158,7 +157,7 @@ const CustomBarLabel = memo(
                 width="100"
                 height="100"
                 href={
-                  isLogoValid(payload.logo)
+                  payload.logo?.startsWith('https')
                     ? payload.logo
                     : generalConfig.defaultProducerLogo
                 }

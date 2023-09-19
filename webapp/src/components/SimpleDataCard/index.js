@@ -53,7 +53,7 @@ const SimpleDataCard = ({
             </div>
           )}
           {isNotLoading ? (
-            value ? (
+            value.toString() ? (
               <Typography
                 component="p"
                 variant="h6"

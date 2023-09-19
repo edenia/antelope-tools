@@ -63,6 +63,7 @@ export const NODES_SUBSCRIPTION = gql`
       owner
       rank
       producer_key
+      bp_json
       nodes {
         type
         full

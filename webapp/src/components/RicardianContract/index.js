@@ -30,17 +30,24 @@ const RicardianContract = ({ abi, hash }) => {
         <div key={`ricardian-item-${name}-${version}`}>
           <div className={classes.boxTitle}>
             <img
-              alt="icon"
+              width={25}
+              height={25}
+              alt=""
+              loading="lazy"
               src={_icon || defaultIcon}
               onError={useDefaultLogo}
             />
             <div className={classes.boxText}>
-              <Typography color="primary" variant="h5">
-                {_title || name}
-              </Typography>
-              <Typography color="primary" variant="subtitle2">
-                {version}
-              </Typography>
+              {_title && name && (
+                <Typography color="primary" variant="h5">
+                  {_title || name}
+                </Typography>
+              )}
+              {version && (
+                <Typography color="primary" variant="subtitle2">
+                  {version}
+                </Typography>
+              )}
             </div>
           </div>
           <Divider className={classes.divider} />

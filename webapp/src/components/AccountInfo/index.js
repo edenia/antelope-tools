@@ -9,6 +9,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 
 import RicardianContract from '../RicardianContract'
 import ContractActions from '../ContractActions'
@@ -31,7 +32,7 @@ const AccordionWrapper = ({ children, title, ...props }) => {
           root: classes.accordionSummary,
         }}
       >
-        <Typography variant="h6" color="primary">
+        <Typography component="h4" variant="h6" color="primary">
           {title}
         </Typography>
       </AccordionSummary>
@@ -116,7 +117,7 @@ const AccountInfo = ({
       {!!info && (
         <>
           <div className={classes.boxHeaderCard}>
-            <div className="identicon">
+            <div className={`identicon ${classes.cardPadding}`}>
               <div className={classes.iconBorder}>
                 <Identicon
                   string={info.account_name || 'default'}
@@ -125,6 +126,7 @@ const AccountInfo = ({
                 />
               </div>
               <Typography
+                component="h2"
                 variant="h4"
                 color="primary"
                 className={classes.accountName}
@@ -133,7 +135,7 @@ const AccountInfo = ({
               </Typography>
             </div>
             <div className={classes.border}>
-              <Typography variant="h6" color="primary" className="columTitle">
+              <Typography component="h3" variant="h6" color="primary" className="columTitle">
                 {t('resources')}
               </Typography>
               <div className="resourceUsage">
@@ -155,28 +157,26 @@ const AccountInfo = ({
               </div>
             </div>
             <div className={classes.border}>
-              <Typography variant="h6" color="primary" className="columTitle">
+              <Typography component="h3" variant="h6" color="primary" className="columTitle">
                 {t('keys')}
               </Typography>
               <div className="keys">
-                <dl>
-                  {info.keys.map((key) => (
-                    <span key={`account-key-${key.label}`}>
-                      <dt className={classes.keyItem}>
-                        <Typography>{key.label}</Typography>
-                        {key.value ? (
-                          <MoreInfoModal>
-                            <Typography className={classes.keyLabel}>
-                              {key.value}
-                            </Typography>
-                          </MoreInfoModal>
-                        ) : (
-                          <p>-</p>
-                        )}
-                      </dt>
-                    </span>
-                  ))}
-                </dl>
+                {info.keys.map(key => (
+                  <span key={`account-key-${key.label}`}>
+                    <div className={classes.keyItem}>
+                      <Typography>{key.label}</Typography>
+                      {key.value ? (
+                        <MoreInfoModal Icon={KeyOutlinedIcon}>
+                          <Typography className={classes.keyLabel}>
+                            {key.value}
+                          </Typography>
+                        </MoreInfoModal>
+                      ) : (
+                        <p>-</p>
+                      )}
+                    </div>
+                  </span>
+                ))}
               </div>
             </div>
           </div>

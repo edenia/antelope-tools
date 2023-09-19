@@ -20,7 +20,7 @@ const Help = () => {
   return (
     <Card className={classes.cardShadow}>
       <CardContent>
-        <Typography variant="h4" className={classes.title}>
+        <Typography component="h2" variant="h4" className={classes.title}>
           {t('title')}
         </Typography>
         <Typography variant="body2" align="justify" paragraph>
