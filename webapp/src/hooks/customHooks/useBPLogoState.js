@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 
-const useBPLogoState = ( logo, defaultLogo ) => {
+const useBPLogoState = (logo, defaultLogo) => {
   const [src, setSrc] = useState(logo?.startsWith('https') ? logo : defaultLogo)
   const logoRef = useRef(null)
 
