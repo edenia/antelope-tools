@@ -2,7 +2,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/client'
-import { useTranslation } from 'react-i18next'
 
 import { NODES_SUMMARY_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
@@ -27,8 +26,6 @@ const NODES_ORDER = [
 
 const NodesSummary = ({ t }) => {
   const { data, loading } = useQuery(NODES_SUMMARY_QUERY)
-  const { i18n } = useTranslation('translations')
-  const [currentLanguaje, setCurrentLanguaje] = useState('')
   const [total, setTotal] = useState()
   const [nodes, setNodes] = useState()
 
@@ -65,10 +62,6 @@ const NodesSummary = ({ t }) => {
     setNodes(sortedNodes)
   }, [data])
 
-  useEffect(() => {
-    setCurrentLanguaje(i18n.language.substring(0, 2))
-  }, [i18n.language])
-
   return (
     <>
       <SimpleDataCard
@@ -89,11 +82,7 @@ const NodesSummary = ({ t }) => {
                 ? t(`tooltip.${node.type}`)
                 : ''
             }
-            title={
-              currentLanguaje === 'es'
-                ? t('nodes') + ' ' + t(node.type)
-                : t(node.type) + ' ' + t('nodes')
-            }
+            title={t('nodeType', { nodeType: node.type })}
             value={node.value || 0}
             loading={loading}
           />
