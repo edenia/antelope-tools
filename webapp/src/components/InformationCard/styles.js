@@ -61,6 +61,7 @@ export default (theme) => ({
     '& img': {
       width: 82,
       height: 82,
+      aspectRatio: '1 / 1',
     },
     '& .bpName': {
       fontSize: 28,
