@@ -18,8 +18,8 @@
   "dependencies": {
     "@google-cloud/recaptcha-enterprise": "^3.0.1",
     "@hapi/boom": "^10.0.0",
-    "@hapi/hapi": "^20.2.2",
-    "axios": "^0.27.2",
+    "@hapi/hapi": "^21.3.2",
+    "axios": "^1.5.0",
     "demux": "^4.0.0",
     "demux-eos": "^4.0.1",
     "eosjs": "^22.1.0",
@@ -33,7 +33,7 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
     "pino-pretty": "^9.1.0",
-    "sequelize": "^6.6.2",
+    "sequelize": "^6.33.0",
     "ws": "^8.8.1"
   },
   "devDependencies": {
