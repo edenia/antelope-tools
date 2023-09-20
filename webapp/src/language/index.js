@@ -17,10 +17,10 @@ import enJungle from './en.jungle.json'
 import esJungle from './es.jungle.json'
 import enMainnet from './en.mainnet.json'
 import esMainnet from './es.mainnet.json'
-import enProtonTestnet from './en.proton-testnet.json'
-import esProtonTestnet from './es.proton-testnet.json'
-import enProton from './en.proton.json'
-import esProton from './es.proton.json'
+import enXPRTestnet from './en.proton-testnet.json'
+import esXPRTestnet from './es.proton-testnet.json'
+import enXPR from './en.proton.json'
+import esXPR from './es.proton.json'
 import enWaxTestnet from './en.wax-testnet.json'
 import esWaxTestnet from './es.wax-testnet.json'
 import enWax from './en.wax.json'
@@ -39,8 +39,8 @@ const languajes = {
   'en.lacchain': enLacchain,
   'es.telos': esTelos,
   'en.telos': enTelos,
-  'es.proton': esProton,
-  'en.proton': enProton,
+  'es.xpr': esXPR,
+  'en.xpr': enXPR,
   'es.wax': esWax,
   'en.wax': enWax,
   'es.jungle': esJungle,
@@ -53,8 +53,8 @@ const languajes = {
   'en.libre-testnet': enLibreTestnet,
   'es.libre': esLibre,
   'en.libre': enLibre,
-  'es.proton-testnet': esProtonTestnet,
-  'en.proton-testnet': enProtonTestnet,
+  'es.xpr-testnet': esXPRTestnet,
+  'en.xpr-testnet': enXPRTestnet,
   'es.wax-testnet': esWaxTestnet,
   'en.wax-testnet': enWaxTestnet,
   'es.airwire': esAirwire,

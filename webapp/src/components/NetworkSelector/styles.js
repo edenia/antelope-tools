@@ -161,7 +161,7 @@ export default (theme) => ({
     height: '24px !important',
     marginRight: theme.spacing(2),
   },
-  protonImg: {
+  xprNetworkImg: {
     width: '21px !important',
     height: '21px !important',
     marginRight: theme.spacing(2),
