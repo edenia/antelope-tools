@@ -37,12 +37,12 @@ jobs:
           REACT_APP_TITLE: 'XPR Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/proton.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "XPR Website", "src": "https://xprnetwork.org/" },{ "text": "Block Explorer", "src": "https://www.protonscan.io" },{"text": "Developer Docs","src": "https://docs.protonchain.com/"},{"text": "XPR Network Monitor","src": "https://antelope.tools"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "XPR Network Website", "src": "https://xprnetwork.org/" },{ "text": "Block Explorer", "src": "https://www.protonscan.io" },{"text": "Developer Docs","src": "https://docs.xprnetwork.org/"},{"text": "XPR Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
           REACT_APP_HASURA_URL: 'https://graphql-proton.antelope.tools/v1/graphql'
-          REACT_APP_EOS_API_NETWORK_NAME: 'proton'
+          REACT_APP_EOS_API_NETWORK_NAME: 'xpr'
           REACT_APP_EOS_API_NETWORK_LABEL: 'XPR Network Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/proton.png'
           REACT_APP_EOS_API_HOSTS: '[\"proton.edenia.cloud\",\"proton.eosusa.io\",\"proton.greymass.com\",\"proton.eosargentina.io\"]'
@@ -73,7 +73,7 @@ jobs:
           INGRESS_HOST: proton.antelope.tools
           INGRESS_GRAPHQL_HOST: graphql-proton.antelope.tools
           # webapp
-          REACT_APP_EOS_API_NETWORK_NAME: proton
+          REACT_APP_EOS_API_NETWORK_NAME: xpr
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
