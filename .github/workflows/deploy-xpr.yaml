@@ -1,14 +1,14 @@
-name: Build images for proton testnet environment
+name: Build images for xpr mainnet environment
 
 on:
   push:
     tags:
-      - proton-testnet-v*
+      - xpr-v*
 
 jobs:
-  create-proton-image:
+  create-xpr-image:
     runs-on: ubuntu-latest
-    environment: proton-testnet
+    environment: xpr
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -34,21 +34,21 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: '80'
-          REACT_APP_TITLE: 'XPR Testnet Network Dashboard'
+          REACT_APP_TITLE: 'XPR Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
           REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/proton.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "XPR Network Website", "src": "https://xprnetwork.org/" },{ "text": "Block Explorer", "src": "https://testnet.protonscan.io" },{"text": "Developer Docs","src": "https://docs.xprnetwork.org/"},{"text": "XPR Testnet Network Monitor","src": "https://antelope.tools"}]'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "XPR Network Website", "src": "https://xprnetwork.org/" },{ "text": "Block Explorer", "src": "https://www.protonscan.io" },{"text": "Developer Docs","src": "https://docs.xprnetwork.org/"},{"text": "XPR Network Monitor","src": "https://antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-proton-testnet.antelope.tools/v1/graphql'
-          REACT_APP_EOS_API_NETWORK_NAME: 'xpr-testnet'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'XPR Network Testnet'
+          REACT_APP_HASURA_URL: 'https://graphql-xpr.antelope.tools/v1/graphql'
+          REACT_APP_EOS_API_NETWORK_NAME: 'xpr'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'XPR Network Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/proton.png'
-          REACT_APP_EOS_API_HOSTS: '[\"test.proton.eosusa.io\",\"proton-testnet.edenia.cloud\",\"api.testnet.totalproton.tech\",\"tn1.protonnz.com\"]'
+          REACT_APP_EOS_API_HOSTS: '[\"proton.edenia.cloud\",\"proton.eosusa.io\",\"proton.greymass.com\",\"proton.eosargentina.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
-          REACT_APP_EOS_CHAIN_ID: '71ee83bcf52142d61019d95f9cc5427ba6a0d7ff8accd9e2088ae2abeaf3d3dd'
+          REACT_APP_EOS_CHAIN_ID: '384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0'
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
@@ -57,7 +57,7 @@ jobs:
           REACT_APP_TOKEN_SYMBOL: 'XPR'
           REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"icon":"eos","order":5},{"label":"XPR Network","value":"https://xpr.antelope.tools","mainnet":true,"icon":"xpr","order":3},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"icon":"wax","order":4},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"icon":"telos","order":1},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"icon":"libre","order":2},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"icon":"jungle","order":5},{"label":"XPR Network Testnet","value":"https://xpr-testnet.antelope.tools","mainnet":false,"icon":"xpr","order":3},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"icon":"wax","order":4},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"icon":"telos","order":1},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"icon":"libre","order":2},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"icon":"ultra","order":6}]'
           REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/stress-test","/evm","/evm-rpc-endpoints"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://testnet.protonscan.io/transaction/(transaction)'
+          REACT_APP_BLOCK_EXPLORER_URL: 'https://www.protonscan.io/transaction/(transaction)'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
@@ -69,19 +69,19 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: proton-testnet-dashboard
-          INGRESS_HOST: proton-testnet.antelope.tools
-          INGRESS_GRAPHQL_HOST: graphql-proton-testnet.antelope.tools
+          NAMESPACE: xpr-dashboard
+          INGRESS_HOST: xpr.antelope.tools
+          INGRESS_GRAPHQL_HOST: graphql-xpr.antelope.tools
           # webapp
-          REACT_APP_EOS_API_NETWORK_NAME: xpr-testnet
+          REACT_APP_EOS_API_NETWORK_NAME: xpr
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_ENDPOINTS: '["https://proton-testnet.edenia.cloud","https://test.proton.eosusa.io","https://api.testnet.totalproton.tech","https://tn1.protonnz.com"]'
-          HAPI_EOS_API_CHAIN_ID: 71ee83bcf52142d61019d95f9cc5427ba6a0d7ff8accd9e2088ae2abeaf3d3dd
+          HAPI_EOS_API_ENDPOINTS: '["https://proton.edenia.cloud","https://proton.eosusa.io","https://proton.greymass.com","https://proton.eosargentina.io"]'
+          HAPI_EOS_API_CHAIN_ID: 384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
@@ -115,7 +115,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: proton-testnet-dashboard
+          NAMESPACE: xpr-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
