@@ -1,20 +1,20 @@
 {
   "routes": {
-    "/>title": "Proton Testnet Network Monitor and Infrastructure Dashboard",
-    "/cpu-benchmark>title": "CPU Benchmarks  - Proton Testnet Network Dashboard",
-    "/block-producers>title": "Block Producers - Proton Testnet Network Dashboard",
-    "/rewards-distribution>title": "Rewards Distribution - Proton Testnet Network Dashboard",
-    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - Proton Testnet Network Dashboard",
-    "/nodes>title": "Proton Testnet Nodes Status Monitor",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - Proton Testnet Network Dashboard",
-    "/accounts>title": "Accounts and Contracts - Proton Testnet Network Dashboard",
-    "/bpjson>title": "BP JSON - Proton Testnet Network Dashboard",
-    "/ricardian-contract>title": "BP Agreement - Proton Testnet Network Dashboard",
-    "/block-distribution>title": "Block Production Distribution - Proton Testnet Network Dashboard",
-    "/missed-blocks>title": "Missed Blocks - Proton Testnet Network Dashboard",
-    "/endpoints>title": "API Endpoints - Proton Testnet Network Dashboard",
-    "/endpoints-stats>title": "API Endpoints Stats- Proton Testnet Network Dashboard",
-    "/about>title": "About - Proton Testnet Network Dashboard",
-    "/help>title": "Help - Proton Testnet Network Dashboard"
+    "/>title": "{{networkName}} Monitor and Infrastructure Dashboard",
+    "/cpu-benchmark>title": "CPU Benchmarks  - {{networkName}} Dashboard",
+    "/block-producers>title": "Block Producers - {{networkName}} Dashboard",
+    "/rewards-distribution>title": "Rewards Distribution - {{networkName}} Dashboard",
+    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - {{networkName}} Dashboard",
+    "/nodes>title": "{{networkName}} Nodes Status Monitor",
+    "/nodes-distribution>title": "Geographic Distribution of Nodes - {{networkName}} Dashboard",
+    "/accounts>title": "Accounts and Contracts - {{networkName}} Dashboard",
+    "/bpjson>title": "BP JSON - {{networkName}} Dashboard",
+    "/ricardian-contract>title": "BP Agreement - {{networkName}} Dashboard",
+    "/block-distribution>title": "Block Production Distribution - {{networkName}} Dashboard",
+    "/missed-blocks>title": "Missed Blocks - {{networkName}} Dashboard",
+    "/endpoints>title": "API Endpoints - {{networkName}} Dashboard",
+    "/endpoints-stats>title": "API Endpoints Stats- {{networkName}} Dashboard",
+    "/about>title": "About - {{networkName}} Dashboard",
+    "/help>title": "Help - {{networkName}} Dashboard"
   }
 }

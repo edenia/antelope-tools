@@ -1,21 +1,3 @@
 {
-  "routes": {
-    "/>title": "Libre Mainnet Network Monitor and Infrastructure Dashboard",
-    "/cpu-benchmark>title": "CPU Benchmarks  - Libre Mainnet Network Dashboard",
-    "/block-producers>title": "Block Producers - Libre Mainnet Network Dashboard",
-    "/rewards-distribution>title": "Rewards Distribution - Libre Mainnet Network Dashboard",
-    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - Libre Mainnet Network Dashboard",
-    "/nodes>title": "Libre Mainnet Nodes Status Monitor",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - Libre Mainnet Network Dashboard",
-    "/accounts>title": "Accounts and Contracts - Libre Mainnet Network Dashboard",
-    "/bpjson>title": "BP JSON - Libre Mainnet Network Dashboard",
-    "/ricardian-contract>title": "BP Agreement - Libre Mainnet Network Dashboard",
-    "/block-distribution>title": "Block Production Distribution - Libre Mainnet Network Dashboard",
-    "/missed-blocks>title": "Missed Blocks - Libre Mainnet Network Dashboard",
-    "/endpoints>title": "API Endpoints - Libre Mainnet Network Dashboard",
-    "/endpoints-stats>title": "API Endpoints Stats- Libre Mainnet Network Dashboard",
-    "/about>title": "About - Libre Mainnet Network Dashboard",
-    "/help>title": "Help - Libre Mainnet Network Dashboard",
-    "/faucet>moreDescription": "This tool allows you to create an account and get LIBRE testnet tokens."
-  }
+  "routes": {}
 }

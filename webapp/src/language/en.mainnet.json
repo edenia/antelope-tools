@@ -4,7 +4,6 @@
     "/cpu-benchmark>title": "CPU Benchmarks  - EOS Network Monitor",
     "/block-producers>title": "Block Producers - EOS Network Monitor",
     "/rewards-distribution>title": "Rewards Distribution - EOS Network Monitor",
-    "/nodes>title": "EOS Mainnet Block Producer Nodes Status Monitor",
     "/nodes-distribution>title": "Geographic Distribution of Nodes - EOS Network Monitor",
     "/accounts>title": "Accounts and Contracts - EOS Network Monitor",
     "/bpjson>title": "BP JSON - EOS Network Monitor",
@@ -15,6 +14,7 @@
     "/endpoints-stats>title": "API Endpoints Stats- EOS Network Monitor",
     "/about>title": "About - EOS Network Monitor",
     "/help>title": "Help - EOS Network Monitor",
+    "/undiscoverable-bps>title": "Undiscoverable Block Producers or Sock Puppet BPs - EOS Network Monitor",
     "/evm>moreDescription": "Monitor EVM statistics, such as transaction amount history, gas price and total wallets created."
   }
 }

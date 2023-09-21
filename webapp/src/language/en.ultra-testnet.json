@@ -1,23 +1,6 @@
 {
   "routes": {
-    "/>title": "Ultra Testnet Dashboard and Infrastructure Monitor",
-    "/cpu-benchmark>title": "CPU Benchmarks  - Ultra Testnet Dashboard",
-    "/block-producers>title": "Block Producers - Ultra Testnet Dashboard",
-    "/rewards-distribution>title": "Rewards Distribution - Ultra Testnet Dashboard",
-    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - Ultra Testnet Dashboard",
-    "/nodes>title": "Ultra Nodes Status Monitor",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - Ultra Testnet Dashboard",
-    "/accounts>title": "Accounts and Contracts - Ultra Testnet Dashboard",
-    "/bpjson>title": "BP JSON - Ultra Testnet Dashboard",
-    "/faucet>title": "Faucet - Ultra Testnet Dashboard",
-    "/ricardian-contract>title": "BP Agreement - Ultra Testnet Dashboard",
-    "/block-distribution>title": "Block Production Distribution - Ultra Testnet Dashboard",
-    "/missed-blocks>title": "Missed Blocks - Ultra Testnet Dashboard",
-    "/endpoints>title": "API Endpoints - Ultra Testnet Dashboard",
-    "/endpoints-Stats>title": "API Endpoints Stats- Ultra Testnet Dashboard",
-    "/about>title": "About - Ultra Testnet Dashboard",
-    "/help>title": "Help - Ultra Testnet Dashboard",
     "/faucet>moreDescription": "This tool allows you to create an account and get UOS testnet tokens.",
-    "/>moreDescription": "Find information on the Ultra Test Network and its current status."
+    "/>moreDescription": "Find information on the {{networkName}} Network and its current status."
   }
 }

@@ -1,18 +1,18 @@
 {
   "routes": {
-    "/>title": "Monitor de infraestructura y panel de control de red Proton",
-    "/cpu-benchmark>title": "Benchmark de CPU - Panel",
-    "/block-producers>title": "Productores de Bloques - Panel",
-    "/rewards-distribution>title": "Distribución de recompensas - Panel",
-    "/nodes>title": "Nodos - Panel",
-    "/nodes-distribution>title": "Distribución Geográfica de Nodos",
-    "/accounts>title": "Cuentas y Contratos - Panel",
-    "/bpjson>title": "BP JSON - Panel",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Proton",
-    "/block-distribution>title": "Distribución de bloques - Proton",
-    "/endpoints>title": "URL's - Proton",
-    "/endpoints-stats>title": "Estadísticas de URL's - Proton",
-    "/about>title": "Acerca de - Panel",
-    "/help>title": "Ayuda - Panel"
+    "/>title": "Monitor de infraestructura y panel de control de red {{networkName}}",
+    "/cpu-benchmark>title": "Benchmark de CPU - Panel de {{networkName}}",
+    "/block-producers>title": "Productores de Bloques - Panel de {{networkName}}",
+    "/rewards-distribution>title": "Distribución de recompensas - Panel de {{networkName}}",
+    "/nodes>title": "Nodos - Panel de {{networkName}}",
+    "/nodes-distribution>title": "Distribución Geográfica de Nodos - Panel de {{networkName}}",
+    "/accounts>title": "Cuentas y Contratos - Panel de {{networkName}}",
+    "/bpjson>title": "BP JSON - Panel de {{networkName}}",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Panel de {{networkName}}",
+    "/block-distribution>title": "Distribución de bloques - Panel de {{networkName}}",
+    "/endpoints>title": "URL's - Panel de {{networkName}}",
+    "/endpoints-stats>title": "Estadísticas de URL's - Panel de {{networkName}}",
+    "/about>title": "Acerca de - Panel de {{networkName}}",
+    "/help>title": "Ayuda - Panel de {{networkName}}"
   }
 }

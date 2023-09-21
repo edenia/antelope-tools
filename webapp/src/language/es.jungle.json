@@ -1,19 +1,5 @@
 {
   "routes": {
-    "/>title": "Monitor de infraestructura y panel de control de red Jungle4 Testnet",
-    "/cpu-benchmark>title": "Benchmark de CPU - Panel",
-    "/block-producers>title": "Productores de Bloques - Panel",
-    "/rewards-distribution>title": "Distribución de recompensas - Panel",
-    "/nodes>title": "Nodos - Panel",
-    "/nodes-distribution>title": "Distribución Geográfica de Nodos",
-    "/accounts>title": "Cuentas y Contratos - Panel",
-    "/bpjson>title": "BP JSON - Panel",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Jungle4 Testnet",
-    "/block-distribution>title": "Distribución de bloques - Jungle4 Testnet",
-    "/endpoints>title": "URL's - Jungle4 Testnet",
-    "/endpoints-stats>title": "Estadísticas de URL's - Jungle4 Testnet",
-    "/about>title": "Acerca de - Panel",
-    "/help>title": "Ayuda - Panel",
     "/rewards-distribution>moreDescription": "Una lista de entidades que forman parte de la red. Pueden ser entidades asociadas o no asociadas.",
     "/evm>moreDescription": "Supervise las estadísticas del EVM, como el histórico de la cantidad de transacciones, el precio del gas y las wallets creadas totales."
   }
