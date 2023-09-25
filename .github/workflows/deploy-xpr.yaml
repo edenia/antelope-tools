@@ -8,7 +8,7 @@ on:
 jobs:
   create-xpr-image:
     runs-on: ubuntu-latest
-    environment: xpr
+    environment: proton
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -69,7 +69,7 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: xpr-dashboard
+          NAMESPACE: proton-dashboard
           INGRESS_HOST: xpr.antelope.tools
           INGRESS_GRAPHQL_HOST: graphql-xpr.antelope.tools
           # webapp
@@ -115,7 +115,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: xpr-dashboard
+          NAMESPACE: proton-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
