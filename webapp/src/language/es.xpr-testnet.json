@@ -1,0 +1,18 @@
+{
+  "routes": {
+    "/>title": "Monitor de infraestructura y panel de control de {{networkName}}",
+    "/cpu-benchmark>title": "Benchmark de CPU - Panel de {{networkName}}",
+    "/block-producers>title": "Productores de Bloques - Panel de {{networkName}}",
+    "/rewards-distribution>title": "Distribución de recompensas - Panel de {{networkName}}",
+    "/nodes>title": "Nodos - Panel de {{networkName}}",
+    "/nodes-distribution>title": "Distribución Geográfica de Nodos - Panel de {{networkName}}",
+    "/accounts>title": "Cuentas y Contratos - Panel de {{networkName}}",
+    "/bpjson>title": "BP JSON - Panel de {{networkName}}",
+    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Panel de {{networkName}}",
+    "/block-distribution>title": "Distribución de bloques - Panel de {{networkName}}",
+    "/endpoints>title": "URL's - Panel de {{networkName}}",
+    "/endpoints-stats>title": "Estadísticas de URL's - Panel de {{networkName}}",
+    "/about>title": "Acerca de - Panel de {{networkName}}",
+    "/help>title": "Ayuda - Panel de {{networkName}}"
+  }
+}

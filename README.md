@@ -100,8 +100,8 @@ antelope-tools/
 ├── .env.libre
 ├── .env.libretestnet
 ├── .env.mainnet
-├── .env.proton
-├── .env.protontestnet
+├── .env.xpr
+├── .env.xprtestnet
 ├── .env.telos
 ├── .env.telostestnet
 ├── .env.ultratestnet

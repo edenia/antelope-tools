@@ -482,7 +482,6 @@ p {
 
   .name-networks {
     width: 73px;
-    height: 48px;
     flex-grow: 0;
     margin: 8px 4.2px 0 3px;
     font-size: 20px;
@@ -608,7 +607,7 @@ p {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.23px;
-    margin: 22px 0px 16px;
+    margin: 22px 0px 40px;
   }
 
   .flex-text p {
@@ -1094,7 +1093,7 @@ p {
   .box-paragraph-text > p {
     width: 550px;
     height: 96px;
-    margin-bottom: 60px;
+    margin-bottom: 120px;
     font-size: 57px;
     font-weight: 800;
     line-height: 1.11;

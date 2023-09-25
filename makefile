@@ -45,13 +45,13 @@ lacchain:
 	make stop
 	make start
 
-protontestnet:
-	@cat ".env.protontestnet" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+xprtestnet:
+	@cat ".env.xprtestnet" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
-proton:
-	@cat ".env.proton" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
+xpr:
+	@cat ".env.xpr" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
 	make start
 
@@ -218,10 +218,10 @@ release:
 	@git tag -a $(version) -m "Create release tag $(version)"
 	@git tag -a mainnet-$(version) -m "Create release tag mainnet-$(version)"
 	@git tag -a lacchain-$(version) -m "Create release tag lacchain-$(version)"
-	@git tag -a proton-$(version) -m "Create release tag proton-$(version)"
+	@git tag -a xpr-$(version) -m "Create release tag xpr-$(version)"
 	@git tag -a wax-$(version) -m "Create release tag wax-$(version)"
 	@git tag -a telos-$(version) -m "Create release tag telos-$(version)"
-	@git tag -a proton-testnet-$(version) -m "Create release tag proton-testnet-$(version)"
+	@git tag -a xpr-testnet-$(version) -m "Create release tag xpr-testnet-$(version)"
 	@git tag -a wax-testnet-$(version) -m "Create release tag wax-testnet-$(version)"
 	@git tag -a telos-testnet-$(version) -m "Create release tag telos-testnet-$(version)"
 	@git push --tags
