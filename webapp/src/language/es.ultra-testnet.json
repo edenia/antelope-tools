@@ -1,20 +1,5 @@
 {
   "routes": {
-    "/>title": "Monitor de infraestructura y panel de control de red Ultra",
-    "/cpu-benchmark>title": "Benchmark de CPU - Panel",
-    "/block-producers>title": "Productores de Bloques - Panel",
-    "/rewards-distribution>title": "Distribución de recompensas - Panel",
-    "/nodes>title": "Nodos - Panel",
-    "/nodes-distribution>title": "Distribución Geográfica de Nodos",
-    "/accounts>title": "Cuentas y Contratos - Panel",
-    "/bpjson>title": "BP JSON - Panel",
-    "/faucet>title": "Faucet - Panel",
-    "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Ultra",
-    "/block-distribution>title": "Distribución de bloques - Ultra",
-    "/endpoints>title": "URL's - Ultra",
-    "/endpoints-stats>title": "Estadísticas de URL's - Ultra",
-    "/about>title": "Acerca de - Panel",
-    "/help>title": "Ayuda - Panel",
-    "/faucet>moreDescription": "Esta herramienta permite crear cuentas y transferir tokens."
+    "/faucet>moreDescription": "Esta herramienta permite crear cuentas y transferir UOS testnet tokens."
   }
 }

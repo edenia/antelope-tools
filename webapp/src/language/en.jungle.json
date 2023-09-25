@@ -1,21 +1,5 @@
 {
   "routes": {
-    "/>title": "Jungle4 Testnet Network Monitor and Infrastructure Dashboard",
-    "/cpu-benchmark>title": "CPU Benchmarks  - Jungle4 Testnet Network Dashboard",
-    "/block-producers>title": "Block Producers - Jungle4 Testnet Network Dashboard",
-    "/rewards-distribution>title": "Rewards Distribution - Jungle4 Testnet Network Dashboard",
-    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - Jungle4 Testnet Network Dashboard",
-    "/nodes>title": "Nodes - Jungle4 Testnet Network Dashboard",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - Jungle4 Testnet Network Dashboard",
-    "/accounts>title": "Accounts and Contracts - Jungle4 Testnet Network Dashboard",
-    "/bpjson>title": "BP JSON - Jungle4 Testnet Network Dashboard",
-    "/ricardian-contract>title": "BP Agreement - Jungle4 Testnet Network Dashboard",
-    "/block-distribution>title": "Block Production Distribution - Jungle4 Testnet Network Dashboard",
-    "/missed-blocks>title": "Missed Blocks - Jungle4 Testnet Network Dashboard",
-    "/endpoints>title": "API Endpoints - Jungle4 Testnet Network Dashboard",
-    "/endpoints-stats>title": "API Endpoints Stats - Jungle4 Testnet Network Dashboard",
-    "/about>title": "About - Jungle4 Testnet Network Dashboard",
-    "/help>title": "Help - Jungle4 Testnet Network Dashboard",
     "/evm>moreDescription": "Monitor EVM statistics, such as transaction amount history, gas price and total wallets created."
   }
 }

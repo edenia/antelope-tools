@@ -69,7 +69,9 @@ const Dashboard = ({ children }) => {
                 networkName: eosConfig.networkLabel,
               }),
         pathname: location.pathname,
-        pageTitle: `${location.pathname}>title`,
+        pageTitle: t(`${location.pathname}>title`, {
+          networkName: eosConfig.networkLabel,
+        }),
       })
     } else {
       setRouteName(INIT_VALUES)
@@ -82,7 +84,7 @@ const Dashboard = ({ children }) => {
       <CssBaseline />
       <GlobalStyle />
       <PageTitle
-        title={t(routeName.pageTitle)}
+        title={routeName.pageTitle}
         metaTitle={routeName.dynamicTitle || t('metaTitle')}
         metaDescription={
           (i18n.exists(`routes:${location.pathname}>moreDescription`)

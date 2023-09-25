@@ -10,7 +10,7 @@ import jungleImg from '../../assets/jungle.webp'
 import waxImg from '../../assets/wax.webp'
 import lacchainImg from '../../assets/lacchain.webp'
 import telosImg from '../../assets/telos.webp'
-import protonImg from '../../assets/proton.webp'
+import xprNetworkImg from '../../assets/xpr.webp'
 import eosImg from '../../assets/eos.webp'
 import airwireImg from '../../assets/airwire.png'
 import ultraImg from '../../assets/ultra.webp'
@@ -38,8 +38,8 @@ const LogoSvg = ({ name }) => {
         <img src={lacchainImg} alt="lacchain logo" className={classes.lacchainImg} />
       )
 
-    case 'proton':
-      return <img src={protonImg} alt="proton logo" className={classes.protonImg} />
+    case 'xpr':
+      return <img src={xprNetworkImg} alt="xpr network logo" className={classes.xprNetworkImg} />
 
     case 'airwire':
       return (
