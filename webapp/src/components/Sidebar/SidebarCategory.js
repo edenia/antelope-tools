@@ -47,16 +47,12 @@ const SidebarCategory = ({
         aria-label={`Link to ${name}`}
         title={`${eosConfig.networkLabel} ${name}`}
       >
-        {icon}
+        <span title="">{icon}</span>
       </Category>
     )
 
   return (
-    <Category
-      {...rest}
-      aria-label={`Link to ${name}`}
-      title={`${eosConfig.networkLabel} ${name}`}
-    >
+    <Category {...rest} aria-label={`Link to ${name}`}>
       {icon}
       <ListItemText className={classes.categoryText}>{name}</ListItemText>
       {isCollapsable ? (
