@@ -6,6 +6,9 @@ import EndpointSvg from './Endpoint'
 import MissingBlocksSvg from './MissingBlocks'
 import TopologySvg from './Topology'
 import RewardsSvg from './Rewards'
+import EVMDashboardSvg from './EVMDashboard'
+import EVMEndpointsSvg from './EVMEndpoints'
+import NodesSvg from './Nodes'
 
 export {
   BlockDistributionSvg,
@@ -16,4 +19,7 @@ export {
   MissingBlocksSvg,
   TopologySvg,
   RewardsSvg,
+  EVMDashboardSvg,
+  EVMEndpointsSvg,
+  NodesSvg
 }

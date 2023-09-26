@@ -114,7 +114,8 @@ export default (theme, rgba) => ({
     '& svg': {
       width: 30,
       height: 30,
-      color: 'rgba(0, 0, 0, 0.54)',
+      color: theme.sidebar.color,
+      opacity: 0.5
     },
   },
   tooltip: {
