@@ -20,6 +20,10 @@ const Category = styled(MuiListItem)`
     width: 20px;
     height: 20px;
   }
+  .iconContainer {
+    width: 20px;
+    height: 20px;
+  }
   &:hover,
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
@@ -47,7 +51,9 @@ const SidebarCategory = ({
         aria-label={`Link to ${name}`}
         title={`${eosConfig.networkLabel} ${name}`}
       >
-        <span title="">{icon}</span>
+        <span title="" className="iconContainer">
+          {icon}
+        </span>
       </Category>
     )
 
