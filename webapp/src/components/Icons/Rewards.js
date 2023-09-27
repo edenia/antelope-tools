@@ -4,7 +4,7 @@ const RewardsSvg = () => (
   <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
     <path
       fillRule="evenodd"
-      stroke="#000"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
@@ -12,7 +12,7 @@ const RewardsSvg = () => (
       clipRule="evenodd"
     />
     <path
-      stroke="#000"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"

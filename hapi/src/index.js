@@ -37,7 +37,6 @@ const init = async () => {
     {
       plugin: require('hapi-pino'),
       options: {
-        prettyPrint: true,
         logEvents: ['request-error']
       }
     }

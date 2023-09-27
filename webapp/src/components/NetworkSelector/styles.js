@@ -4,9 +4,9 @@ export default (theme) => ({
     width: 200,
     marginTop: 35,
     '& img': {
-      width: 45,
-      height: 45,
-      borderRadius: 15,
+      width: 44,
+      height: 44,
+      borderRadius: 50,
       backgroundColor: theme.palette.primary.contrastText,
     },
     [theme.breakpoints.up('sm')]: {

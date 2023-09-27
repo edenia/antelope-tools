@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta content="" name="csrf_token" />
-  <meta content="website" property="type" />
-  <meta content="https://antelope.tools/" property="url" />
-  <meta content="#ffffff" name="theme-color" />
-  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" name="title" />
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="" name="csrf_token">
+  <meta content="website" property="type">
+  <meta content="https://antelope.tools/" property="url">
+  <meta content="#ffffff" name="theme-color">
+  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" name="title">
   <meta
     content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
-    name="description" />
-  <meta content="https://antelope.tools/images/maskable_icon.png" property="image" />
-  <meta content="website" property="og:type" />
-  <meta content="summary_large_image" property="twitter:card" />
-  <meta content="https://antelope.tools/" property="twitter:url" />
-  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" property="og:title" />
-  <meta content="https://antelope.tools/images/maskable_icon.png" property="og:image" />
-  <meta content="image/*" property="og:image:type" />
-  <meta content="https://antelope.tools/" property="og:url" />
-  <meta content="Antelope Tools Dashboard" property="og:site_name" />
+    name="description">
+  <meta name="keywords" content="Blockchain, EOSIO, Antelope, Network Monitor, Dashboard">
+  <meta content="https://antelope.tools/images/maskable_icon.png" property="image">
+  <meta content="website" property="og:type">
+  <meta content="summary_large_image" property="twitter:card">
+  <meta content="https://antelope.tools/" property="twitter:url">
+  <meta content="Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard" property="og:title">
+  <meta content="https://antelope.tools/images/maskable_icon.png" property="og:image">
+  <meta content="image/*" property="og:image:type">
+  <meta content="https://antelope.tools/" property="og:url">
+  <meta content="Antelope Tools Dashboard" property="og:site_name">
   <meta
     content="Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains."
-    property="og:description" />
-  <link href="https://antelope.tools/images/favicon.ico" rel="shortcut icon" />
-  <link href="https://antelope.tools/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-  <link href="https://antelope.tools/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-  <link href="https://antelope.tools/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-  <link href="https://antelope.tools/images/safari-pinned-tab.svg" rel="mask-icon" />
-  <link href="styles.css" rel="stylesheet" />
+    property="og:description">
+  <link href="https://antelope.tools/images/favicon.ico" rel="shortcut icon">
+  <link href="https://antelope.tools/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+  <link href="https://antelope.tools/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+  <link href="https://antelope.tools/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+  <link href="https://antelope.tools/images/safari-pinned-tab.svg" rel="mask-icon">
+  <link href="styles.css" rel="stylesheet">
   <title>Antelope + EOSIO Blockchain Network Monitor and Infrastructure Dashboard</title>
   <style>
     /* Google Font loaded inline for faster performance */
@@ -38,45 +38,46 @@
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
       src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOOaBTMnFcQIG.woff2) format('woff2');
       unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
         U+A640-A69F, U+FE2E-FE2F;
     }
-
     /* cyrillic */
     @font-face {
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
       src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIMeaBTMnFcQIG.woff2) format('woff2');
       unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
     }
-
     /* vietnamese */
     @font-face {
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
       src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIOuaBTMnFcQIG.woff2) format('woff2');
       unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
         U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
     }
-
     /* latin-ext */
     @font-face {
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
       src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofIO-aBTMnFcQIG.woff2) format('woff2');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
         U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
-
     /* latin */
     @font-face {
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 400;
+      font-display: swap;
       src: url(https://fonts.gstatic.com/s/nunito/v16/XRXV3I6Li01BKofINeaBTMnFcQ.woff2) format('woff2');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
         U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
@@ -84,65 +85,74 @@
     }
   </style>
 </head>
-
 <body>
   <div class="header">
-      <div class="image-box">
-        <img alt="Antelope Tools Logo" id="middle-logo" src="./images/antelope-tools.svg" />
-        <img alt="" id="bg-image-mobile" src="./images/background-mobile.png" />
-      </div>
-      <div class="image-box-desktop">
-        <img alt="Antelope Tools Logo" src="./images/antelope-tools.svg" />
-      </div>
-      <div class="box-paragraph-text" id="d-version">
-        <p>Real Time Visibility of Antelope blockchains</p>
-        <div class="text-container">
-          <div class="flex">
-            <div class="Line-4"></div>
-            <p>
-              Monitor network health through our intuitive dashboards. 
-            </p>
-          </div>
-          <div class="flex">
-            <div class="Line-4"></div>
-            <p>
-              Community public good tool promoting transparency and reliability.
-            </p>
-          </div>
+    <div class="image-box">
+      <img alt="Antelope Tools Logo" id="middle-logo" src="./images/antelope-tools.svg">
+      <img alt="" id="bg-image-mobile" src="./images/background-mobile.png">
+    </div>
+    <div class="image-box-desktop">
+      <img alt="Antelope Tools Logo" src="./images/antelope-tools.svg">
+    </div>
+    <div class="box-paragraph-text" id="d-version">
+      <p>Unlock Real-Time Visibility into Antelope Blockchains</p>
+      <div class="text-container">
+        <div class="flex">
+          <div class="Line-4"></div>
+          <p>
+            Get instant insights into blockchain networks with our intuitive dashboards. 
+          </p>
         </div>
-        <a href="#nav" class="myButton">
-          <div class="visit-text">Explore our dashboards</div>
-        </a>
+        <div class="flex">
+          <div class="Line-4"></div>
+          <p>
+            A community-driven tool for unparalleled transparency and reliability.
+          </p>
+        </div>
       </div>
+      <a href="#nav" class="myButton">
+        <div class="visit-text">View Monitored Networks</div>
+      </a>
+    </div>
   </div>
-
   <div id="networks">
     <div class="box-network">
       <div class="flex2">
         <div class="flex-text">
           <div class="Line-5"></div>
           <p id="nav">
-            Blockchains
+            Blockchain Networks
           </p>
         </div>
       </div>
-      <div id="network-desktop">
+      <div id="mainnet-desktop">
         <section>
           <div class="grid">
-            <a class="grid-item" href="https://telos.antelope.tools/"><img alt="Telos Mainnet Antelope Tools Dashboard" height="188.3px"
-                src="./images/telos-grid.png" width="188.3px" /><span class="name-networks">Telos Mainnet</span></a>
-            <a class="grid-item" href="https://libre.antelope.tools/"><img alt="Libre Mainnet Antelope Tools Dashboard" height="188.3px"
-              src="./images/libre.png" width="188.3px" /><span class="name-networks">Libre Mainnet</span></a>
-            <a class="grid-item" href="https://xpr.antelope.tools/"><img alt="XPR Network Mainnet Antelope Tools Dashboard" height="188.3px"
-                src="./images/xpr-grid.png" width="169.5px" /><span class="name-networks">XPR Network Mainnet</span></a>
-            <a class="grid-item" href="https://wax.antelope.tools/"><img alt="Wax Mainnet Antelope Tools Dashboard" height="188.3px"
-              src="./images/wax-grid.png" width="188.3px" /><span class="name-networks">Wax Mainnet</span></a>
-            <a class="grid-item" href="https://eos.antelope.tools/"><img alt="EOS Antelope Tools Dashboard" height="188.3px"
-              src="./images/eos-grid.png" width="197.9px" /><span class="name-networks">EOS Mainnet</span></a>
-            <a class="grid-item" href="https://lacchain.antelope.tools/"><img alt="LACChain EOSIO Antelope Tools Dashboard" height="188.3px"
-                src="./images/lacchain-grid.png" width="160px" />
+            <a class="grid-item" href="https://telos.antelope.tools/">
+              <img alt="Telos Mainnet Antelope Tools Dashboard" src="./images/telos-grid.png">
+              <span class="name-networks">Telos Mainnet</span>
+            </a>
+            <a class="grid-item" href="https://libre.antelope.tools/">
+              <img alt="Libre Mainnet Antelope Tools Dashboard" src="./images/libre.png">
+              <span class="name-networks">Libre Mainnet</span>
+            </a>
+            <a class="grid-item" href="https://xpr.antelope.tools/">
+              <img alt="XPR Network Mainnet Antelope Tools Dashboard" src="./images/xpr-grid.png" width="169">
+              <span class="name-networks">XPR Mainnet</span>
+            </a>
+            <a class="grid-item" href="https://wax.antelope.tools/">
+              <img alt="Wax Mainnet Antelope Tools Dashboard" src="./images/wax-grid.png">
+              <span class="name-networks">Wax Mainnet</span>
+            </a>
+            <a class="grid-item" href="https://eos.antelope.tools/">
+              <img alt="EOS Antelope Tools Dashboard" src="./images/eos-grid.png" width="197">
+              <span class="name-networks">EOS Mainnet</span>
+            </a>
+            <a class="grid-item" href="https://lacchain.antelope.tools/">
+              <img alt="LACChain EOSIO Antelope Tools Dashboard" src="./images/lacchain-grid.png" width="160">
               <span class="name-networks">LACChain EOSIO</span>
             </a>
+          </div>
         </section>
       </div>
     </div>
@@ -155,48 +165,54 @@
           </p>
         </div>
       </div>
-      <div id="network-desktop">
+      <div id="testnet-desktop">
         <section>
           <div class="grid">
-            <a class="grid-item" href="https://telos-testnet.antelope.tools/"><img alt="Telos Testnet Antelope Tools Dashboard" height="188.1px"
-              src="./images/telos-grid.png" width="188.1px" /><span class="name-networks">Telos
-              Testnet</span></a>
-            <a class="grid-item" href="https://libre-testnet.antelope.tools/"><img alt="Libre Tesnet Antelope Tools Dashboard" height="188.1px"
-              src="./images/libre.png" width="188.1px" /><span class="name-networks">Libre Testnet</span></a>
-            <a class="grid-item" href="https://xpr-testnet.antelope.tools/"><img alt="XPR Network Testnet Antelope Tools Dashboard"
-              height="188.1px" src="./images/xpr-grid.png" width="169.3px" /><span class="name-networks">XPR Network
-              Testnet</span></a>
-            <a class="grid-item" href="https://wax-testnet.antelope.tools/"><img alt="Wax Testnet Antelope Tools Dashboard" height="188.1px"
-              src="./images/wax-grid.png" width="188.1px" /><span class="name-networks">Wax
-              Testnet</span></a>
-            <a class="grid-item" href="https://jungle.antelope.tools/"><img alt="Jungle4 Testnet Antelope Tools Dashboard" height="188.1px"
-              src="./images/jungle-grid.png" width="127.9px" /><span class="name-networks">Jungle4 Testnet</span></a>
-            <a class="grid-item" href="https://ultra-testnet.antelope.tools/"><img alt="Ultra Testnet Antelope Tools Dashboard" height="188.1px"
-                src="./images/ultra-grid.png" width="188.1px" />
+            <a class="grid-item" href="https://telos-testnet.antelope.tools/">
+              <img alt="Telos Testnet Antelope Tools Dashboard" height="188" src="./images/telos-grid.png" width="188">
+              <span class="name-networks">Telos Testnet</span>
+            </a>
+            <a class="grid-item" href="https://libre-testnet.antelope.tools/">
+              <img alt="Libre Tesnet Antelope Tools Dashboard" height="188" src="./images/libre.png" width="188">
+              <span class="name-networks">Libre Testnet</span>
+            </a>
+            <a class="grid-item" href="https://xpr-testnet.antelope.tools/">
+              <img alt="XPR Network Testnet Antelope Tools Dashboard" height="188" src="./images/xpr-grid.png" width="169">
+              <span class="name-networks">XPR Testnet</span>
+            </a>
+            <a class="grid-item" href="https://wax-testnet.antelope.tools/">
+              <img alt="Wax Testnet Antelope Tools Dashboard" height="188" src="./images/wax-grid.png" width="188">
+              <span class="name-networks">Wax Testnet</span>
+            </a>
+            <a class="grid-item" href="https://jungle.antelope.tools/">
+              <img alt="Jungle4 Testnet Antelope Tools Dashboard" height="188" src="./images/jungle-grid.png" width="127">
+              <span class="name-networks">Jungle4 Testnet</span>
+            </a>
+            <a class="grid-item" href="https://ultra-testnet.antelope.tools/">
+              <img alt="Ultra Testnet Antelope Tools Dashboard" height="188" src="./images/ultra-grid.png" width="188">
               <span class="name-networks">Ultra Testnet</span>
             </a>
+          </div>
         </section>
       </div>
     </div>
   </div>
-
   <div class="content">
     <div class="section-wrapper">
       <div class="box-paragraph">
         <section>
           <details>
             <summary>
-              <div class="info-icon"><img src="./images/feather-icon.png" alt=""><span>What is Antelope Tools?</span></div>
+              <span class="info-icon">
+                <img src="./images/feather-icon.png" alt="">
+                <span>What is Antelope Tools?</span>
+              </span>
             </summary>
             <p>
-              Antelope Tools Dashboard is a community-driven open-source tool built by a
-              group of blockchain developers that believe transparency is
-              fundamental to operate blockchain networks. We intend to provide a
-              useful and straightforward app that will help visualize the Block
-              Producers’ relevant information to promote
-              <b>transparency and reliability</b>.
+              Unlock the Power of Transparency with Antelope Tools! Designed by blockchain enthusiasts at <a href="https://edenia.com" target="_blank">Edenia</a> 
+              as an open-source public good for the blockchain community, our dashboard serves as your ultimate guide to critical blockchain data. We're not just another app;
+              we're a movement aimed at elevating <b>transparency and reliability</b> in blockchain networks.
             </p>
-
           </details>
         </section>
       </div>
@@ -204,41 +220,35 @@
         <section>
           <details>
             <summary>
-              <div class="info-icon"><img src="./images/feather-icon.png" alt=""><span>Why is it important?</span></div>
+              <span class="info-icon"><img src="./images/feather-icon.png" alt="">
+                <span>Why is it important?</span>
+              </span>
             </summary>
             <p>
-              On DPoS blockchain networks token holders must
-              <b>vote for Block Producers</b> based on information they have , and
-              on permissioned networks such as LACChain node operators are
-              responsible for the network running smoothly. So, we believe that
-              monitoring what’s happening on the network is essential to improve
-              and measure node transparency. Antelope Tools Dashboard’s main objective is
-              to help you visualize objective and reliable information about each
-              node and its activity.
+              In the complex world of DPoS blockchain networks, token holders are often required to cast votes for Block Producers. Similarly, 
+              in permissioned networks like LACChain, node operators play a pivotal role in ensuring seamless network operations. 
+              That's where Antelope Tools comes in. We believe that real-time network monitoring is not just a feature—it's a necessity. 
+              Our dashboard empowers you to make informed decisions by providing transparent, reliable information on each node's activity.
             </p>
           </details>
         </section>
-
       </div>
       <div class="box-paragraph">
         <section>
           <details>
             <summary>
-              <div class="info-icon"><img src="./images/feather-icon.png" alt=""><span>Where does the data come from?</span>
-              </div>
+              <span class="info-icon">
+                <img src="./images/feather-icon.png" alt="">
+                <span>Where does the data come from?</span>
+              </span>
             </summary>
             <p>
-              Antelope Tools Dashboard provides clear and graphic visualization of relevant
-              information of entities running
-              <b>nodes and blockchain infrastructure</b>. We source data on-chain
-              directly from the public blockchain tables and information provided
-              by Block Producers in their
-              <a href="https://github.com/eosrio/bp-info-standard" target="_blank">bp.json files</a>. For more
-              information
-              about Antelope Tools Dashboard, visit our
-              <a href="https://github.com/edenia/antelope-tools" target="_blank">GitHub</a>
-              repo or contact us on our
-              <a href="https://t.me/eoscr" target="_blank">Telegram group</a>.
+              Transparency is our mantra, and we practice what we preach. Antelope Tools Dashboard offers a visually engaging 
+              and clear representation of vital blockchain metrics. Our data is sourced directly from public blockchain tables 
+              and enriched with information from Block Producers' <a href="https://github.com/eosrio/bp-info-standard" target="_blank"></a>bp.json files.
+              <b>Want to dig deeper? </b>
+              Feel free to explore our <a href="https://github.com/edenia/antelope-tools" target="_blank">GitHub repository</a> 
+              or join the conversation in our <a href="https://t.me/eoscr" target="_blank">Telegram group</a>.
             </p>
           </details>
         </section>
@@ -248,28 +258,33 @@
   <div class="footer">
     <div class="contact-us">
       <p>
-       Get in touch and help us make Antelope chains even more
-       transparent and easy to use.
+        Ready to contribute to a more transparent blockchain ecosystem? Reach out to us!
       </p>
     </div>
     <div class="box-social-media">
-      <a class="twitter" href="https://twitter.com/EdeniaWeb3" target="_blank"><img class="footerSocialMedia" alt="twitter"
-          src="./images/twitter.png" /></a>
-      <a href="https://t.me/eoscr" target="_blank"><img class="footerSocialMedia" alt="telegram"
-          src="./images/telegram.png" /></a>
-      <a href="https://github.com/edenia/antelope-tools" target="_blank"><img class="footerSocialMedia" alt="github"
-          src="./images/github.png" /></a>
-      <a href="https://www.linkedin.com/company/edeniaweb3" target="_blank"><img class="footerSocialMedia" alt="linkedin"
-          src="./images/linkedin.png" /></a>
+      <a class="twitter" href="https://twitter.com/EdeniaWeb3" target="_blank">
+        <img class="footerSocialMedia" alt="twitter" src="./images/twitter.png">
+      </a>
+      <a href="https://t.me/eoscr" target="_blank">
+        <img class="footerSocialMedia" alt="telegram" src="./images/telegram.png">
+      </a>
+      <a href="https://github.com/edenia/antelope-tools" target="_blank">
+        <img class="footerSocialMedia" alt="github" src="./images/github.png">
+      </a>
+      <a href="https://www.linkedin.com/company/edeniaweb3" target="_blank">
+        <img class="footerSocialMedia" alt="linkedin" src="./images/linkedin.png">
+      </a>
     </div>
     <div class="eos-costa-rica">
       <h4 class="project-by">A Community Public Good built by</h4>
       <div class="logo-text">
-        <a href="https://edenia.com/" target="_blank"><img class="edeniaLogo" alt="EdeniaWeb3"
-            src="./images/edenia-logo.png" /></a>
+        <a href="https://edenia.com/" target="_blank">
+          <img class="edeniaLogo" alt="EdeniaWeb3" src="./images/edenia-logo.png">
+        </a>
       </div>
     </div>
     <p id="copyright">antelope.tools - Copyright 2023</p>
+    <a href="#" id="back-to-top">Back to Top</a>
   </div>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6Y0EC9FT8"></script>
   <script>
@@ -282,5 +297,4 @@
     gtag('config', 'G-E6Y0EC9FT8')
   </script>
 </body>
-
 </html>
