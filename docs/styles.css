@@ -377,7 +377,7 @@ p {
 
   .box-paragraph-text > p {
     height: 58px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: normal;
@@ -425,15 +425,15 @@ p {
   }
 
   .Line-5 {
-    width: 120px;
+    width: 250px;
     height: 2px;
     flex-grow: 0;
-    margin: 5px 0px 0px;
+    margin: 10px 0 0 0;
     background-color: var(--colors-primary);
   }
 
   .flex-text p {
-    width: 104px;
+    width: 250px;
     height: 18px;
     flex-grow: 0;
     margin: 0 2px 2px;
@@ -603,7 +603,7 @@ p {
   .box-paragraph-text > p {
     width: 270px;
     height: 68px;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.23px;
@@ -611,7 +611,7 @@ p {
   }
 
   .flex-text p {
-    width: 169px;
+    width: 450px;
     height: 18px;
     margin: 4px 0 4px 4px;
     font-family: Nunito;
@@ -852,7 +852,7 @@ p {
   .box-paragraph-text > p {
     width: 400px;
     height: 114.2px;
-    font-size: 42px;
+    font-size: 32px;
     font-weight: 800;
     line-height: 1.27;
     letter-spacing: -0.68px;
@@ -860,7 +860,7 @@ p {
   }
 
   .flex-text p {
-    width: 149px;
+    width: 450px;
     height: 28px;
     flex-grow: 0;
     margin: 6px 0 6px 8.9px;
@@ -1312,5 +1312,9 @@ p {
     font-size: 18px;
     line-height: 1.59;
     letter-spacing: 0.53px;
+  }
+
+  #back-to-top {
+    width:auto;
   }
 }
