@@ -3,7 +3,6 @@ import {
   Activity as ActivityIcon,
   Grid as GridIcon,
   Users as UsersIcon,
-  Server as ServerIcon,
   Sliders as SlidersIcon,
   User as UserIcon,
   UserX as UserXIcon,
@@ -14,8 +13,6 @@ import {
   BarChart as BarChartIcon,
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
-import StackedLineChartIcon from '@mui/icons-material/StackedLineChart'
-import ListAltOutlined from '@mui/icons-material/ListAltOutlined';
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -27,6 +24,9 @@ import {
   MissingBlocksSvg,
   TopologySvg,
   RewardsSvg,
+  EVMDashboardSvg,
+  EVMEndpointsSvg,
+  NodesSvg
 } from '../components/Icons'
 
 const Home = lazy(() => import('./Home'))
@@ -79,7 +79,7 @@ const defaultRoutes = [
   },
   {
     name: 'nodes',
-    icon: <ServerIcon />,
+    icon: <NodesSvg />,
     component: Nodes,
     path: '/nodes',
     exact: true,
@@ -150,14 +150,14 @@ const defaultRoutes = [
   {
     header: 'EVM',
     name: 'evm',
-    icon: <StackedLineChartIcon />,
+    icon: <EVMDashboardSvg />,
     component: EVMDashboard,
     path: '/evm',
     exact: true,
   },
   {
     name: 'evm-rpc-endpoints',
-    icon: <ListAltOutlined />,
+    icon: <EVMEndpointsSvg />,
     component: EVMEndpointsList,
     path: '/evm-rpc-endpoints',
     exact: true,
@@ -197,7 +197,7 @@ const lacchainRoutes = [
   },
   {
     name: 'nodes',
-    icon: <ServerIcon />,
+    icon: <NodesSvg />,
     component: Nodes,
     path: '/nodes',
     exact: true,
