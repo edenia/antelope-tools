@@ -23,6 +23,7 @@ import ComplianceBar from 'components/ComplianceBar'
 import CountryFlag from 'components/CountryFlag'
 import EmptyStateRow from './EmptyStateRow'
 import MainSocialLinks from './MainSocialLinks'
+import ViewBPProfile from 'components/ViewBPProfile'
 
 const useStyles = makeStyles(styles)
 
@@ -64,6 +65,7 @@ const InformationCard = ({ producer, rank, type }) => {
           pass={producerOrg?.compliance?.pass}
         />
         <MainSocialLinks />
+        <ViewBPProfile name={producer.owner} producer={producer} />
       </>
     )
   }

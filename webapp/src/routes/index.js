@@ -53,6 +53,7 @@ const EVMEndpointsList = lazy(() => import('./EVMEndpointsList'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
+const ProducerProfile = lazy(() => import('./ProducerProfile'))
 
 const defaultRoutes = [
   {
@@ -68,6 +69,11 @@ const defaultRoutes = [
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
+    exact: true,
+  },
+  {
+    component: ProducerProfile,
+    path: '/block-producers/:bpName',
     exact: true,
   },
   {
