@@ -38,7 +38,7 @@
     "net": "NET",
     "cpu": "CPU",
     "footer1": "This App is a Community Public Good",
-    "footer2": "Developed by Edenia",
+    "footer2": "Proudly Engineered by Edenia",
     "executeTransaction": "Execute Transaction",
     "bugRequest": "Report a bug / Request a feature",
     "moreInfo": "More Info",
@@ -179,22 +179,22 @@
     "average": "Average",
     "nodeType":"{{nodeType}} $t(nodes)",
     "tooltip": {
-      "lastBlock": "The last confirmed block produced",
-      "bpSchedule": "Current top 21 block producers",
-      "scheduleVersion": "Current iteration number of the top 21 block producer list",
-      "tpsAllTimeHigh": "Maximum number of transactions per second (TPS)",
-      "cpuUtilizationAllTimeHigh": "The CPU usage in the all time high TPS",
-      "networkUtilizationAllTimeHigh": "The NET usage in the all time high TPS",
-      "full": "Node that provides data since the first block",
-      "seed": "Node that provides P2P endpoints to the public",
-      "query": "Node that provides HTTP(S) API endpoints to the public",
-      "producer": "Node in charge of block production",
-      "nodes": "Amount of nodes of the first 150 producers",
-      "uniqueLocations": "Amount of countries with block producers, calculated from bp.jsons",
-      "timeToFinality": "The time it takes for the blockchain to confirm a transaction",
-      "cpuUsage": "Current percentage of CPU used in the last second",
-      "netUsage": "Current percentage of NET used in the last second",
-      "totalProducers": "Block Producers registered, obtained from the eosio contract"
+      "lastBlock": "The most recently verified block in the blockchain",
+      "bpSchedule": "The current roster of top 21 block producers",
+      "scheduleVersion": "The active version number for the list of top 21 block producers",
+      "tpsAllTimeHigh": "Peak Transactions Per Second (TPS) ever recorded",
+      "cpuUtilizationAllTimeHigh": "CPU utilization at the time of peak TPS",
+      "networkUtilizationAllTimeHigh": "Network (NET) utilization at the time of peak TPS",
+      "full": "Node that archives data back to the genesis block",
+      "seed": "Node offering public P2P connectivity endpoints",
+      "query": "Node offering public HTTP(S) API access points",
+      "producer": "Node responsible for generating new blocks",
+      "nodes": "Total number of nodes among the top 150 block producers",
+      "uniqueLocations": "Count of distinct countries hosting block producers, derived from bp.json files",
+      "timeToFinality": "Duration required for a transaction to gain full blockchain confirmation",
+      "cpuUsage": "Percentage of CPU resources consumed in the most recent second",
+      "netUsage": "Percentage of Network (NET) resources consumed in the most recent second",
+      "totalProducers": "Total number of registered Block Producers, as per the eosio smart contract"
     }
   },
   "rewardsDistributionRoute": {
@@ -216,18 +216,18 @@
   "nodesDistributionRoute": {},
   "accountsRoute": {
     "loginBeforeUseAction": "Please connect your wallet in order to execute an action",
-    "unknownError": "Unknown error processing action",
+    "unknownError": "An unexpected error occurred while processing your action.",
     "notFound": "not found",
-    "successMessage": "Success transaction",
+    "successMessage": "Transaction completed successfully.",
     "placeholder": "Account or Contract Name",
-    "title": "Search for account information, view tables and execute actions for any contract.",
-    "endpointFailure": "Endpoint failure. Try again later"
+    "title": "Explore account details, view contract tables, and execute actions seamlessly.",
+    "endpointFailure": "Endpoint issue. Please try again later."
   },
   "bpJsonRoute": {
-    "loadText": "Loading node information . . .",
-    "notLogin": "Please connect your wallet to use this tool.",
-    "notRegisterNode": "You must have an account registered as an active node to use this tool.",
-    "bpjsonInconsistency": "The bp.json on chain and of chain does not match, review it and make the necessary changes"
+    "loadText": "Fetching node details...",
+    "notLogin": "Connect your wallet to access this feature.",
+    "notRegisterNode": "An active node account is required to utilize this tool.",
+    "bpjsonInconsistency": "Mismatch detected between on-chain and off-chain bp.json. Please review and update accordingly."
   },
   "faucetRoute": {
     "createAccount": "Create Your Account",
@@ -406,7 +406,7 @@
     "hideAll": "Hide All",
     "showAll": "Show All",
     "selectTo": "Select an account to toggle or",
-    "zoomTo": "Drag or pinch to zoom the chart"
+    "zoomTo": "Drag or Pinch to Zoom In/Out on the Chart"
   },
   "producerSearchComponent": {
     "partner": "Partner",
@@ -437,21 +437,21 @@
     "noResultsFound": "No results found"
   },
   "healthCheckComponent": {
-    "updated": "The endpoint is working",
-    "outdated": "The endpoint works but is outdated with the last block",
-    "error": "Error in the endpoint request",
-    "not working": "The endpoint is not responding",
-    "helpText": "Hover or click the icons to display the endpoint health status data"
+    "updated": "Endpoint is fully operational",
+    "outdated": "Endpoint is functional but lagging behind the latest block",
+    "error": "An error occurred while accessing the endpoint",
+    "not working": "Endpoint is currently unresponsive",
+    "helpText": "Hover over or click the icons to reveal the current health status of each endpoint"
   },
   "copyToClipboardComponent": {
-    "copy": "Click to copy",
-    "copyToClipboard": "Copy to clipboard",
-    "copied": "Copied!"
+    "copy": "Click to Copy",
+    "copyToClipboard": "Copy to Clipboard",
+    "copied": "Successfully Copied!"
   },
   "noFound": {
-    "subTitle": "Page not found.",
-    "message": "The page you are looking for might have been removed.",
-    "return": "Return to website"
+    "subTitle": "Oops! Page Not Found.",
+    "message": "The page you're searching for has either been moved or doesn't exist.",
+    "return": "Go Back to Home Page"
   },
   "mainMapComponent": {
     "numberOfNodes": "Number of Nodes"
@@ -480,21 +480,21 @@
     "transactions": "EVM transactions",
     "gasUsed": "Gas Used",
     "tooltip": {
-      "gasPrice": "Fixed virtual fuel used to execute smart contracts in EVM",
-      "avgGasUsage": "Average gas used in the last 100 blocks",
-      "totalIncoming": "Amount of transfer transactions to {{accountName}}",
-      "totalOutgoing": "Amount of transfer transactions from {{accountName}}",
-      "ATH": "Maximum number of transactions per second (TPS)",
-      "lastBlock": "Ethereum block height, the number of confirmed blocks",
-      "totalTxs": "Amount of transactions since the first block"
+      "gasPrice": "The cost of computational work in EVM, measured in Gas",
+      "avgGasUsage": "Average Gas Consumed Over the Last 100 Blocks",
+      "totalIncoming": "Total Transfers Received by {{accountName}}",
+      "totalOutgoing": "Total Transfers Sent by {{accountName}}",
+      "ATH": "Peak Transactions Per Second (TPS) Recorded",
+      "lastBlock": "Latest Confirmed Ethereum Block",
+      "totalTxs": "Total Transactions Since Genesis Block"
     }
   },
   "evmEndpointsRoute": {
-    "title": "EVM endpoints list",
+    "title": "List of EVM Endpoints",
     "rpcEndpoint": "RPC Endpoint",
-    "latency": "Latency",
+    "latency": "Network Latency",
     "lastBlock": "Last block",
     "rerun": "Re-run health checks",
-    "filterEndpoints": "Filter responding endpoints"
+    "filterEndpoints": "Filter Active Endpoints"
   }
 }
