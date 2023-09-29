@@ -50,7 +50,7 @@ export const formatData = (
       if (eosConfig.networkName === 'lacchain') {
         newData.title = owner
       } else {
-        newData.title = rank ? `#${rank} - ${owner}` : owner
+        newData.title = rank ? `#${rank} - ${owner}` : owner 
       }
 
       newData = {
@@ -80,6 +80,10 @@ export const formatData = (
         nodes,
         healthStatus,
         social: data.social,
+        compliance: {
+          total: healthStatus?.length,
+          pass: healthStatus?.reduce((a,b)=>a+Number(b.valid),0)
+        }
       }
 
       break
