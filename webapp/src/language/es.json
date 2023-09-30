@@ -112,7 +112,7 @@
     "/evm>title": "EVM Dashboard - Panel de red de {{networkName}}",
     "/evm-rpc-endpoints>title": "EVM RPC Endpoints - Panel de red de {{networkName}}",
     "/about>sidebar": "Acerca de",
-    "/about>title": "Acerca de - Panel de red de {{networkName}}",
+    "/about>title": "Acerca de - Monitor de Infraestructura Blockchain de {{networkName}}",
     "/about>heading": "Acerca de Antelope Tools",
     "/help>sidebar": "Ayuda",
     "/help>title": "Ayuda - Panel de red de {{networkName}}",
