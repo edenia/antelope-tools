@@ -2,22 +2,22 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://ultra-testnet.antelope.tools/</loc>
-      <lastmod>2023-09-07</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/accounts</loc>
-      <lastmod>2023-09-07</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/faucet</loc>
-      <lastmod>2023-09-07</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/about</loc>
-      <lastmod>2023-09-07</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/help</loc>
-      <lastmod>2023-09-07</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
 </urlset>
