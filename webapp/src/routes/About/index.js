@@ -2,7 +2,6 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import { Link as RouterLink } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 
@@ -37,76 +36,68 @@ const About = () => {
               {t('subtitle1')}
             </Typography>
             <Typography variant="body2" paragraph>
+              <a
+                href="https://edenia.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('body1.edenia')}
+              </a>{' '}
               {t('body1.paragraph1')}
             </Typography>
             <Typography component="h2" variant="h4">
               {t('subtitle2')}
             </Typography>
             <Typography variant="body2" paragraph>
-              {t('body2.paragraph1', { networkName: networkNameLabel })}
+              {t('body2.paragraph1')}
             </Typography>
-            <Typography
-              component="h2"
-              variant="h4"
-            >
+            <Typography component="h2" variant="h4">
               {t('subtitle3')}
             </Typography>
-            {eosConfig.networkName !== 'lacchain' ? (
-              <>
-                <Typography variant="body2" paragraph>
-                  {t('body3.paragraph1Text1')}{' '}
-                  <RouterLink to="/accounts?account=eosio&table=producers">
-                    eosio
-                  </RouterLink>
-                  {t('body3.paragraph1Text2')}{' '}
-                  <a
-                    href="https://github.com/eosrio/bp-info-standard"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t('standard')}.
-                  </a>
-                </Typography>
-
-                <Typography variant="body2" paragraph>
-                  {t('body3.paragraph2')}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  {t('body3.paragraph3')}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  {t('body3.paragraph4Text1')}{' '}
-                  <a
-                    href="https://edenia.com/chains.json"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    https://edenia.com/chains.json
-                  </a>{' '}
-                  {t('body3.paragraph4Text2')}{' '}
-                  <a
-                    href="https://edenia.com/bp.json"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    https://edenia.com/bp.json
-                  </a>
-                  {eosConfig.networkName !== 'mainnet' &&
-                    t('body3.paragraph4Text3')}
-                  .
-                </Typography>
-              </>
-            ) : (
-              <Typography variant="body2" paragraph>
-                {t('body3.paragraph1Text1')}{' '}
-                <RouterLink to="/accounts?account=eosio&table=entity">
-                  eosio
-                </RouterLink>
-                .
-              </Typography>
-            )}
             <Typography variant="body2" paragraph>
-              {t('body3.paragraph5')}
+              {t('body3.paragraph1', { networkName: networkNameLabel })}
+            </Typography>
+            <Typography component="h2" variant="h4">
+              {t('subtitle4')}
+            </Typography>
+            <Typography variant="body2" paragraph>
+              {t('body4.paragraph1')}
+            </Typography>
+            <Typography component="h2" variant="h4">
+              {t('subtitle5')}
+            </Typography>
+            <Typography variant="body2" paragraph>
+              {t('body5.paragraph1')}{' '}
+              <a
+                href="https://pomelo.io/grants/eosiodashboa"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('body5.pomelo')}
+              </a>
+              {t('body5.paragraph2')}
+            </Typography>
+            <Typography component="h2" variant="h4">
+              {t('subtitle6')}
+            </Typography>
+            <Typography variant="body2" paragraph>
+              {t('body6.paragraph1')}
+              <a
+                href="https://github.com/edenia/antelope-tools"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('body6.github')}
+              </a>
+              {' '}{t('body6.paragraph2')}
+              <a
+                href="https://t.me/eoscr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('body6.telegram')}
+              </a>
+              {'. '}{t('body6.paragraph3')}
             </Typography>
           </div>
         </div>

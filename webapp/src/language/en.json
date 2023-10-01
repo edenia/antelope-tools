@@ -108,12 +108,12 @@
     "/endpoints-stats>title": "API Endpoints Stats- {{networkName}} Network Dashboard",
     "/endpoints-stats>heading": "{{networkName}} API Endpoints Stats",
     "/about>sidebar": "About",
-    "/about>title": "About - {{networkName}} Network Dashboard",
-    "/about>heading": "About",
+    "/about>title": "About - {{networkName}} Network Monitor and Infrastructure Dashboard",
+    "/about>heading": "About Antelope Tools",
     "/about>moreDescription": "",
     "/help>sidebar": "Help",
     "/help>title": "Help - {{networkName}} Network Dashboard",
-    "/help>heading": "Help",
+    "/help>heading": "Welcome to the Antelope Tools Help Center",
     "/help>moreDescription": "",
     "networkInformation": "Network Information",
     "tools": "Tools",
@@ -177,7 +177,7 @@
     "cpuUsage": "CPU Usage",
     "netUsage": "NET Usage",
     "average": "Average",
-    "nodeType":"{{nodeType}} $t(nodes)",
+    "nodeType": "{{nodeType}} $t(nodes)",
     "tooltip": {
       "lastBlock": "The most recently verified block in the blockchain",
       "bpSchedule": "The current roster of top 21 block producers",
@@ -248,35 +248,70 @@
   },
   "aboutRoute": {
     "body": {
-      "paragraph1": "The Antelope Tools gathers data and enables easy visualization of node status and stats for EOSIO blockchains. It also allows you to visualize the blockchain consensus mechanism in real-time along with other network-specific information, such as the distribution of block producer rewards on the public {{networkName}} and a list of registered entities on the LACChain public-permissioned network. The Antelope Tools is an open-source tool for the EOSIO community to access data, support voting for Block Producers, and fine-tune their infrastructure."
+      "paragraph1": "Welcome to Antelope Tools, your one-stop solution for real-time visualization and monitoring of Antelope and EOSIO blockchains. Designed to be the ultimate blockchain network monitoring tool, we provide real-time data analytics, Block Producer insights, and much more."
     },
-    "subtitle1": "Why Use Antelope Tools?",
+    "subtitle1": "About Edenia",
     "body1": {
-      "paragraph1": "Antelope Tools is a community-driven open-source tool built by blockchain developers who believe transparency is fundamental to operating blockchain networks. We intend to provide a useful and straightforward app to visualize the Block Producers' relevant information to promote transparency and reliability."
+      "edenia": "Edenia",
+      "paragraph1": "is the dedicated team of blockchain experts behind Antelope Tools. With years of experience in blockchain technology and a passion for transparency and reliability, we aim to make the Web3 ecosystem more accessible and user-friendly. Our team is committed to continuous innovation, ensuring that Antelope Tools remains the leading Antelope blockchain network monitoring tool."
     },
-    "subtitle2": "Why It's Important?",
+    "subtitle2": "Why Choose Antelope Tools?",
     "body2": {
-      "paragraph1": "On the {{networkName}} network, token holders must vote for Block Producers based on available information. On permissioned networks such as LACChain, the node operators are responsible for the network running smoothly. We believe that monitoring the network is essential to improve and measure node transparency. Antelope Tools's main objective is to help you visualize objective and reliable information about each node and its activity."
+      "paragraph1": "Antelope Tools is a community-centric, open-source platform developed by blockchain enthusiasts committed to transparency and reliability. Our mission is to offer a user-friendly interface to access critical information about Block Producers, thereby fostering network transparency. Experience the difference by trying Antelope Tools today!"
     },
-    "subtitle3": "Where Does the Data Come From?",
+    "subtitle3": "The Importance of Network Monitoring",
     "body3": {
-      "paragraph1Text1": "Antelope Tools provides a detailed and graphic visualization of relevant information of entities running nodes and blockchain infrastructure. We source data on-chain directly from the public table of producers in the account",
-      "paragraph1Text2": ", discarding those that aren't active. From the list, we obtain the URL addresses of the BPs to retrieve their data using the",
-      "paragraph2": "The bp.json contains information about the producer, its nodes, and endpoints. However, it's not queried directly, as there are several networks based on the Antelope protocol, the chains.json object is queried under the producer's website address, thus the correct address of the bp.json is obtained according to the chain_id of the network.",
-      "paragraph3": "It's important to note that if the chains.json object is not accessible or doesn't contain the chain_id, /bp.json is directly queried. However, this may belong to another network, so only the organizational information of the producer is used and the rest is omitted.",
-      "paragraph4Text1": "If the registered URL is https://edenia.com/ then it's retrieved first",
-      "paragraph4Text2": "and the bp.json associated with the id is retrieved. If it does not exist then it's tried with",
-      "paragraph4Text3": ", but, nodes and endpoints aren't included",
-      "paragraph5": "For more information about Antelope Tools, visit our GitHub repo or contact us on our Telegram group. Contact us and join our effort to make EOSIO chains even more transparent and easy to use."
+      "paragraph1": "Whether you're on the {{networkName}}, or any other EOSIO-based DPoS network,  token holders rely on available data to vote for Block Producers. In permissioned networks like LACChain, node operators must ensure seamless network functionality. Antelope Tools is your reliable source for objective data and node performance metrics."
     },
-    "standard": "bp.json standard"
+    "subtitle4": "Data Source",
+    "body4": {
+      "paragraph1": "We offer rich, graphical insights into entities operating nodes and blockchain infrastructures. Our data is sourced directly from the public table of producers in the system contracts and is updated in real-time to focus only on active entities. We then use the bp.json standard to retrieve additional data from the Block Producers' URLs."
+    },
+    "subtitle5": "Funding and Support",
+    "body5": {
+      "paragraph1": "Antelope Tools is generously funded through",
+      "pomelo": "Pomelo Grants",
+      "paragraph2": ", a community-driven funding platform. This financial support enables us to maintain, improve, and expand our services. If you find value in what we do, consider supporting us in the next Pomelo Grant round to help us continue making blockchain networks more transparent and efficient."
+    },
+    "subtitle6": "Get Involved",
+    "body6": {
+      "paragraph1": "For more insights into Antelope Tools, check out our ",
+      "github": "GitHub Repository",
+      "paragraph2": "or join the conversation in our ",
+      "telegram": "Telegram Channel",
+      "paragraph3": "Become a part of our community and let's make blockchain networks more transparent and user-friendly together!"
+    }
   },
   "helpRoute": {
-    "title": "Thank you for using Antelope Tools Blockchain Network Monitor !",
-    "paragraph": "Antelope Tools is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "Edenia GitHub Repo",
-    "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Edenia Website "
+    "title": "Thank You for Choosing Antelope Tools",
+    "paragraph": "We're thrilled you've chosen Antelope Tools for your blockchain network monitoring needs.",
+    "title2": "Configuring bp.json and chains.json Files: A Guide for Node Operators",
+    "body3": {
+      "paragraph1Text1": "Antelope Tools offers detailed, real-time visualization and analytics for entities running nodes and blockchain infrastructure. Our data is sourced directly on-chain from the public ",
+      "eosioAccount": "producers table in the eosio system account.",
+      "paragraph1Text2": "We then query the URLs of all active Block Producers to retrieve essential information"
+    },
+    "subtitle3": "Leveraging the bp.json Standard for Block Producer and Node Details",
+    "standard": "using the bp.json standard",
+    "paragraph2": "If you're a node operator and your data isn't displaying as it should on our dashboard, you'll need to configure your bp.json and chains.json files. Here's a step-by-step guide:",
+    "bullet1Title": "Setting Up Your bp.json File:",
+    "bullet1": "Publish a /bp.json file on the website you used when registering via the 'regproducer' action on the eosio system contract. This file should include all pertinent information about your organization and the nodes you operate.",
+    "bullet2Title": "Managing Multiple Networks:",
+    "bullet2": "If you're operating nodes on multiple EOSIO-based blockchains, you'll need a chains.json file. This file maps each network's chain ID to the appropriate bp.json file.",
+    "subBullet2Title": "Example:",
+    "subBullet2": "If your registered URL is ",
+    "subBullet2b": ", the system first tries to access ",
+    "subBullet2c": ". If this file is not available, it defaults to ",
+    "bullet3Title": "Chain ID Importance:",
+    "bullet3": "Ensure your chains.json file contains the chain ID for proper network identification. If the chain ID is missing, only your organizational details will be displayed, omitting nodes and endpoints.",
+    "title3": "Utilize Our BP JSON Generator Tool",
+    "paragraph3": "We offer a BP JSON generator tool to simplify the creation and updating of your bp.json file. This tool gathers your Block Producer information and generates a bp.json file in the correct format. It also enables on-chain publishing to the `producerjson` smart contract.",
+    "bpjsonGenerator": "Check out our BP.JSON Generator",
+    "title4": "Contact Us",
+    "paragraph4": "Your feedback is crucial as we aim to continually enhance our platform. Feel free to suggest improvements, report issues, or contribute to our codebase.",
+    "githubEOSCR": "Visit our Edenia GitHub Repo",
+    "telegramChannel": "Join the Conversation in Our Telegram Channel",
+    "websiteEOSCR": "Discover Web3 Development Services by Edenia"
   },
   "producerCardComponent": {
     "rank": "Rank",
@@ -317,7 +352,7 @@
     "noData": "No Data",
     "peer_keys": "Peer Key",
     "account_key": "Account Key",
-    "hs_bpJson": "BP Json",
+    "hs_bpJson": "BP JSON",
     "emptyState": "This block producer does not provide any information.",
     "average": "average rating",
     "ratings": "ratings",
