@@ -2,58 +2,58 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://xpr-testnet.antelope.tools/</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/block-producers</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/nodes</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/endpoints</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/rewards-distribution</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/endpoints-stats</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/undiscoverable-bps</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/nodes-distribution</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/cpu-benchmark</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/ricardian-contract</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/accounts</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/bpjson</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/about</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://xpr-testnet.antelope.tools/help</loc>
-      <lastmod>2023-09-22</lastmod>
+      <lastmod>2023-09-30</lastmod>
    </url>
 </urlset>
