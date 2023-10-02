@@ -35,6 +35,52 @@ export const PRODUCERS_QUERY = gql`
         type
         value
       }
+      nodes {
+        type
+        full
+        location
+        node_info {
+          features
+          version
+        }
+        endpoints(order_by: { type: asc }) {
+          value
+          type
+          response
+          updated_at
+        }
+      }
+    
+    }
+  }
+`
+
+export const SMALL_PRODUCERS_QUERY = gql`
+  query producer(
+    $offset: Int = 0
+    $limit: Int = 21
+    $where: producer_bool_exp
+    $endpointFilter: endpoints_by_producer_id_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      id
+      owner
+      url
+      bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
     }
   }
 `
@@ -149,15 +195,6 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
       average_net_usage_in_last_week
       tps_all_time_high
       unique_locations
-    }
-  }
-`
-
-export const MISSED_BLOCKS_SUBSCRIPTION = gql`
-  subscription {
-    stats: stat(limit: 1) {
-      id
-      missed_blocks
     }
   }
 `

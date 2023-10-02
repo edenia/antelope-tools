@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useLazyQuery, useSubscription } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 
-import {
-  PRODUCERS_QUERY,
-  MISSED_BLOCKS_SUBSCRIPTION,
-  EOSRATE_STATS_QUERY,
-} from '../../gql'
+import { SMALL_PRODUCERS_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
 
 import useSearchState from './useSearchState'
@@ -33,23 +29,16 @@ const useBlockProducerState = () => {
     where: {
       owner: { _like: '%%' },
       nodes: { endpoints: { value: { _gt: '' } } },
-    }
+    },
   }
   const [variables, setVariables] = useState(defaultVariables)
-  const [loadProducers, { data: { info, producers } = {} }] = useLazyQuery(PRODUCERS_QUERY, { variables })
-  const { data: dataHistory } = useSubscription(MISSED_BLOCKS_SUBSCRIPTION)
-  const [loadStats, { loading = true, data: { eosrate_stats: stats } = {} }] =
-    useLazyQuery(EOSRATE_STATS_QUERY)
+  const [loadProducers, { loading, data: { info, producers } = {} }] =
+    useLazyQuery(SMALL_PRODUCERS_QUERY, { variables })
   const [items, setItems] = useState([])
-  const [missedBlocks, setMissedBlocks] = useState({})
   const [
     { filters, pagination },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({ loadProducers, info, variables, setVariables })
-
-  useEffect(() => {
-    loadStats({})
-  }, [loadStats])
 
   const chips = CHIPS_NAMES.map((e) => {
     return { name: e }
@@ -82,25 +71,8 @@ const useBlockProducerState = () => {
       )
     }
 
-    if (newItems?.length && stats?.length) {
-      newItems = newItems.map((producer) => {
-        return {
-          ...producer,
-          eosRate: Object.keys(producer.bp_json).length
-            ? stats.find((rate) => rate.bp === producer.owner)
-            : undefined,
-        }
-      })
-    }
-
     setItems(newItems)
-  }, [filters.name, stats, producers])
-
-  useEffect(() => {
-    if (dataHistory?.stats.length) {
-      setMissedBlocks(dataHistory?.stats[0].missed_blocks)
-    }
-  }, [dataHistory])
+  }, [filters.name, producers])
 
   return [
     {
@@ -108,7 +80,6 @@ const useBlockProducerState = () => {
       chips,
       items,
       loading,
-      missedBlocks,
       pagination,
     },
     {

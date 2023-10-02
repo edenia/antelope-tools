@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@mui/material/Link'
 import LanguageIcon from '@mui/icons-material/Language'
@@ -8,7 +8,6 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import RedditIcon from '@mui/icons-material/Reddit'
 import TelegramIcon from '@mui/icons-material/Telegram'
-import Typography from '@mui/material/Typography'
 
 const prefix = {
   hive: 'https://hive.blog/@',
@@ -34,26 +33,47 @@ const icons = {
   telegram: <TelegramIcon />,
 }
 
-const ProducerSocialLinks = ({ items, message }) => {
-  const itemsArray = Object.keys(items).filter((key) => !!items[key])
+const order = {
+  twitter: 0,
+  github: 1,
+  telegram: 2,
+  medium: 3,
+  youtube: 4,
+  reddit: 5,
+  wechat: 6,
+  keybase: 7,
+  steemit: 8,
+  hive: 9,
+  facebook: 10,
+}
 
-  if (!itemsArray?.length) return <Typography>{message}</Typography>
+const getOrder = name => order[name] ?? Infinity
 
-  return itemsArray.map((key, i) => (
+const ProducerSocialLinks = ({ items }) => {
+  const itemsArray = Object.keys(items).sort((a,b) => getOrder(a) - getOrder(b)).flatMap((key) =>
+    !!items[key]
+      ? {
+          name: key,
+          url: `${prefix[key] ?? 'https://' + key + '/'}${items[key]}`,
+        }
+      : [],
+  )
+
+  return itemsArray.map((items, i) => (
     <Link
       key={`social-link${i}`}
-      href={`${prefix[key] ?? 'https://' + key + '/'}${items[key]}`}
+      href={items.url}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={items.url}
     >
-      {icons[key] || <LanguageIcon />} {key}
+      {icons[items.name] || <LanguageIcon />}
     </Link>
   ))
 }
 
 ProducerSocialLinks.propTypes = {
   items: PropTypes.object,
-  message: PropTypes.string,
 }
 
-export default ProducerSocialLinks
+export default memo(ProducerSocialLinks)
