@@ -103,7 +103,7 @@ const InformationCard = ({ producer, rank, type }) => {
         <Typography variant="h2" component="p">{`#${producer?.rank}`}</Typography>
         <ProducerName
           logo={producerOrg?.media?.logo}
-          position={producerOrg?.media?.account}
+          text={producerOrg?.media?.account}
           name={producerOrg?.media?.name}
         />
         {type === 'node' ? (
@@ -114,7 +114,7 @@ const InformationCard = ({ producer, rank, type }) => {
             className={classes.collapse}
           >
             <div className={classes.nodesContainer}>
-              <NodesCard nodes={producerOrg.nodes} />{' '}
+              <NodesCard nodes={producerOrg.nodes} hideFeatures />{' '}
             </div>
           </Collapse>
         ) : (

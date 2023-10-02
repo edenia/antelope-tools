@@ -1,14 +1,17 @@
 export default (theme) => ({
-  card: {},
   container: {
     display: 'flex',
-    flexWrap: 'nowrap',
+    flexWrap: 'wrap',
     gap: theme.spacing(4),
+    marginTop: theme.spacing(5),
   },
   profile: {
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(6),
+    '& > div + div': {
+        padding: theme.spacing(0, 6),
+    }
   },
   socialLinks: {
     display: 'flex',
@@ -38,11 +41,15 @@ export default (theme) => ({
   },
   OrgDataContainer: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
   OrgDataItem: {
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center',
     flexGrow: '1',
-  }
+    '& > p > span': {
+      textTransform: 'uppercase',
+    },
+  },
 })

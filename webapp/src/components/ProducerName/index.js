@@ -6,15 +6,22 @@ import Typography from '@mui/material/Typography'
 
 const useStyles = makeStyles(styles)
 
-const ProducerName = ({ name, logo, position }) => {
+const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
-      <ProducerAvatar logo={logo} name={name} />
+      <ProducerAvatar
+        logo={logo}
+        name={name}
+        classes={{
+          avatar: size === 'big' ? classes.bigAvatar : classes.smallAvatar,
+        }}
+      />
       <div className={classes.nameContainer}>
+        {account && <Typography variant="body1">{account}</Typography>}
         <Typography variant="h2">{name}</Typography>
-        <Typography variant="body1">{position}</Typography>
+        <Typography variant="body1">{text}</Typography>
       </div>
     </div>
   )

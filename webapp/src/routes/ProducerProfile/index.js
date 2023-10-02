@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 
 import { eosConfig, generalConfig } from '../../config'
 import ProducerName from 'components/ProducerName'
@@ -99,10 +101,12 @@ const ProducerProfile = () => {
 
   const WrapperContainer = ({ title, children }) => {
     return (
-      <div className={classes.card}>
-        <Typography variant="h3">{title}</Typography>
-        <div className={classes.container}>{children}</div>
-      </div>
+      <Card>
+        <CardContent>
+          <Typography variant="h3">{title}</Typography>
+          <div className={classes.container}>{children}</div>
+        </CardContent>
+      </Card>
     )
   }
 
@@ -111,7 +115,7 @@ const ProducerProfile = () => {
     return (
       <MoreInfoModal>
         {data.map((url, index) => (
-          <div className={classes.dd} key={`more-info-${url}-${index}`}>
+          <div key={`more-info-${url}-${index}`}>
             <a href={url} target="_blank" rel="noopener noreferrer">
               {url}
             </a>
@@ -121,66 +125,65 @@ const ProducerProfile = () => {
     )
   }
 
+  const OrganizationItem = ({ title, value, url = '', type = 'text' }) => {
+    return (
+      <span className={classes.OrgDataItem}>
+        <p>
+          <Typography variant="caption">{title}</Typography> <br />
+          {type === 'text' && value}
+          {type === 'hiddenLink' && <VisitSite url={url || value} />}
+          {type === 'modal' && <URLModal data={value} />}
+          {type === 'link' && (
+            <Link href={url || value} target="_blank" rel="noopener noreferrer">
+              {value}
+            </Link>
+          )}
+        </p>
+      </span>
+    )
+  }
+
   const OrganizationData = ({ producer }) => {
     return (
-      <div className={classes.OrgDataContainer}>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('location')} <br />
-            {producer?.bp_json?.org?.location?.name}
-          </p>
-        </span>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('email')} <br />
-            <Link
-              href={`mailto:${producer?.bp_json?.org?.email}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {producer?.bp_json?.org?.email}
-            </Link>
-          </p>
-        </span>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('website')} <br />
-            <Link
-              href={producer?.bp_json?.org?.website}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {producer?.bp_json?.org?.website}
-            </Link>
-          </p>
-        </span>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('codeofconduct')} <br />
-            <VisitSite url={producer?.bp_json?.org?.code_of_conduct} />
-          </p>
-        </span>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('ownershipDisclosure')} <br />
-            <VisitSite url={producer?.bp_json?.org?.ownership_disclosure} />
-          </p>
-        </span>
-        <span className={classes.OrgDataItem}>
-          <p>
-            {t('chainResources')} <br />
-            <VisitSite url={producer?.bp_json?.org?.chain_resources} />
-          </p>
-        </span>
+      <Card className={classes.OrgDataContainer}>
+        <OrganizationItem
+          title={t('location')}
+          value={producer?.bp_json?.org?.location?.name}
+        />
+        <OrganizationItem
+          title={t('email')}
+          value={producer?.bp_json?.org?.email}
+          url={`mailto:${producer?.bp_json?.org?.email}`}
+          type="link"
+        />
+        <OrganizationItem
+          title={t('website')}
+          value={producer?.bp_json?.org?.website}
+          type="link"
+        />
+        <OrganizationItem
+          title={t('codeofconduct')}
+          value={producer?.bp_json?.org?.code_of_conduct}
+          type="hiddenLink"
+        />
+        <OrganizationItem
+          title={t('ownershipDisclosure')}
+          value={producer?.bp_json?.org?.ownership_disclosure}
+          type="hiddenLink"
+        />
+        <OrganizationItem
+          title={t('chainResources')}
+          value={producer?.bp_json?.org?.chain_resources}
+          type="hiddenLink"
+        />
         {producer?.bp_json?.org?.other_resources?.length && (
-          <span className={classes.OrgDataItem}>
-            <p>
-              {t('otherResources')} <br />
-              <URLModal data={producer?.bp_json?.org?.other_resources} />
-            </p>
-          </span>
+          <OrganizationItem
+            title={t('otherResources')}
+            value={producer?.bp_json?.org?.other_resources}
+            type="modal"
+          />
         )}
-      </div>
+      </Card>
     )
   }
 
@@ -189,14 +192,14 @@ const ProducerProfile = () => {
       <Helmet title={producer?.owner}>
         {ldJson && <script type="application/ld+json">{ldJson}</script>}
       </Helmet>
-      <div className={classes.profile}>
+      <Card className={classes.profile}>
         {Object.keys(producer?.bp_json?.org?.social || {})?.length && (
           <div className={classes.socialLinks}>
             <ProducerSocialLinks items={producer?.bp_json?.org?.social} />
           </div>
         )}
-        <ProducerName name={producer?.owner} />
-      </div>
+        <ProducerName name={producer?.bp_json?.org?.candidate_name} account={producer?.owner} text={"Block Producer"} size="big"/>
+      </Card>
       <OrganizationData producer={producer} />
       <WrapperContainer title={'General Information'}>
         <GeneralInformation producer={producer} />
