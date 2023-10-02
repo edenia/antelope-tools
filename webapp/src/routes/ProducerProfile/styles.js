@@ -1,17 +1,21 @@
 export default (theme) => ({
-  container: {
+  dataContainer: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: theme.spacing(4),
     marginTop: theme.spacing(5),
+    '& > div': {
+      padding: 0,
+      gap: theme.spacing(4),
+    },
   },
   profile: {
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(6),
     '& > div + div': {
-        padding: theme.spacing(0, 6),
-    }
+      padding: theme.spacing(0, 6),
+    },
   },
   socialLinks: {
     display: 'flex',

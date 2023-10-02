@@ -33,15 +33,18 @@ export default (theme) => ({
     width: '280px',
     padding: theme.spacing(0, 3, 0),
     overflowX: 'auto',
-    borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
     '& .MuiCardContent-root:last-child': {
       paddingBottom: theme.spacing(4),
     },
+    boxShadow: '2px 3px 4px 0px #0000002E',
+    backgroundColor: '#f6f9fd',
+    borderRadius: theme.spacing(3),
   },
   nodesWrapper: {
     display: 'flex',
     width: 'max-content',
-    flexFlow: 'row nowrap',
+    flexFlow: 'row wrap',
+    gap: theme.spacing(2),
     padding: theme.spacing(0, 2, 0),
     [theme.breakpoints.up('lg')]: {
       paddingRight: '250px',

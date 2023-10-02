@@ -10,7 +10,7 @@ const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.container}>
+    <div className={classes.producerNameContainer}>
       <ProducerAvatar
         logo={logo}
         name={name}

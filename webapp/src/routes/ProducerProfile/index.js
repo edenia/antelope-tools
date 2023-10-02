@@ -18,6 +18,7 @@ import { formatWithThousandSeparator } from 'utils'
 import LightIcon from 'components/HealthCheck/LightIcon'
 import VisitSite from 'components/VisitSite'
 import MoreInfoModal from 'components/MoreInfoModal'
+import CountryFlag from 'components/CountryFlag'
 
 import styles from './styles'
 import useProducerProfileState from './useProducerProfileState'
@@ -104,7 +105,7 @@ const ProducerProfile = () => {
       <Card>
         <CardContent>
           <Typography variant="h3">{title}</Typography>
-          <div className={classes.container}>{children}</div>
+          <div className={classes.dataContainer}>{children}</div>
         </CardContent>
       </Card>
     )
@@ -148,7 +149,12 @@ const ProducerProfile = () => {
       <Card className={classes.OrgDataContainer}>
         <OrganizationItem
           title={t('location')}
-          value={producer?.bp_json?.org?.location?.name}
+          value={
+            <>
+            {producer?.bp_json?.org?.location?.name}
+            <CountryFlag code={producer?.bp_json?.org?.location?.country} />{' '}
+            </>
+          }
         />
         <OrganizationItem
           title={t('email')}
@@ -198,7 +204,13 @@ const ProducerProfile = () => {
             <ProducerSocialLinks items={producer?.bp_json?.org?.social} />
           </div>
         )}
-        <ProducerName name={producer?.bp_json?.org?.candidate_name} account={producer?.owner} text={"Block Producer"} size="big"/>
+        <ProducerName
+          name={producer?.bp_json?.org?.candidate_name}
+          account={producer?.owner}
+          text={t('BPonNetwork', { networkName: eosConfig.networkLabel })}
+          logo={producer?.bp_json?.org?.branding?.logo_256}
+          size="big"
+        />
       </Card>
       <OrganizationData producer={producer} />
       <WrapperContainer title={'General Information'}>

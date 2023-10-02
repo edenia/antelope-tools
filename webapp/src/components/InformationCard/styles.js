@@ -37,11 +37,6 @@ export default (theme) => ({
         lineHeight: '0',
       },
     },
-    '& .flag-icon': {
-      borderRadius: '50%',
-      width: '24px !important',
-      height: '24px !important',
-    },
   },
   nodesContainer: {
     width: '100%',
@@ -100,7 +95,7 @@ export default (theme) => ({
     flexDirection: 'column !important',
   },
   collapse: {
-    width: '100%',
+    width: '50%',
   },
   infoIcon: {
     cursor: 'pointer',

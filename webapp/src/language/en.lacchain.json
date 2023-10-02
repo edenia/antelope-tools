@@ -46,7 +46,9 @@
   "producerCardComponent": {
     "entityType": "Entity type",
     "entityType1": "Partner",
-    "entityType2": "Non-Partner"
+    "entityType2": "Non-Partner",
+    "viewProfile": "View Entity Profile",
+    "BPonNetwork": "Entity on {{networkName}}"
   },
   "lacchainAddEntityActionEntityTypeFieldComponent": {
     "entityType1": "Partner",

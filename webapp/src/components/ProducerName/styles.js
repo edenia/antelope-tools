@@ -1,7 +1,7 @@
 export default (theme) => ({
-  container: {
+  producerNameContainer: {
     display: 'flex',
-    gap: theme.spacing(2),
+    gap: theme.spacing(3),
     '& img': {
       borderRadius: '50%',
       aspectRatio: '1 / 1',
@@ -29,5 +29,6 @@ export default (theme) => ({
   bigAvatar: {
     width: '104px',
     height: '104px',
+    border: `solid 2px ${theme.palette.primary.main}`,
   },
 })

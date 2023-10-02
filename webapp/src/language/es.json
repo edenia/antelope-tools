@@ -331,7 +331,9 @@
     "invalidUrl": "URL inválida",
     "viewList": "Ver lista de BPs indetectables",
     "bpJson": "BP.json",
-    "bpJsonGenerator": "Generar BP JSON"
+    "bpJsonGenerator": "Generar BP JSON",
+    "viewProfile": "Ver Perfil del BP",
+    "BPonNetwork": "Productor de Bloques en {{networkName}}"
   },
   "nodeCardComponent": {
     "features": "Características",

@@ -49,8 +49,8 @@ const InformationCard = ({ producer, rank, type }) => {
 
     return (
       <>
-        <CountryFlag code={producerOrg?.info?.country} />{' '}
         <Typography>{producerOrg?.info?.location}</Typography>
+        <CountryFlag code={producerOrg?.info?.country} />{' '}
         <Typography variant="body1">{producerOrg?.info?.website}</Typography>
         <Typography variant="body1">{formatWithThousandSeparator(
             producer?.total_votes_eos || '0',
@@ -65,7 +65,7 @@ const InformationCard = ({ producer, rank, type }) => {
           pass={producerOrg?.compliance?.pass}
         />
         <MainSocialLinks />
-        <ViewBPProfile name={producer.owner} producer={producer} />
+        <ViewBPProfile producer={producer} />
       </>
     )
   }
@@ -107,6 +107,7 @@ const InformationCard = ({ producer, rank, type }) => {
           name={producerOrg?.media?.name}
         />
         {type === 'node' ? (
+          <>
           <Collapse
             in={matches ? true : expanded}
             timeout="auto"
@@ -117,6 +118,8 @@ const InformationCard = ({ producer, rank, type }) => {
               <NodesCard nodes={producerOrg.nodes} hideFeatures />{' '}
             </div>
           </Collapse>
+          <ViewBPProfile producer={producer} />
+          </>
         ) : (
           <BlockProducerInfo />
         )}
