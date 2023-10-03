@@ -40,52 +40,43 @@ const InformationCard = ({ producer, rank, type }) => {
   }
 
   const BlockProducerInfo = () => {
-    const bpJsonHealthStatus = producerOrg.healthStatus.find(
-      (status) => status.name === 'bpJson',
-    )
-
-    if (!bpJsonHealthStatus?.valid && eosConfig.networkName !== 'lacchain')
+    if (producerOrg?.hasEmptyBPJson)
       return <EmptyStateRow classes={classes} t={t} />
 
     return (
       <>
-        <Typography>{producerOrg?.info?.location}</Typography>
-        <CountryFlag code={producerOrg?.info?.country} />{' '}
-        <Typography variant="body1">{producerOrg?.info?.website}</Typography>
-        <Typography variant="body1">{formatWithThousandSeparator(
-            producer?.total_votes_eos || '0',
-            0,
-          )}</Typography>
+        <Typography>{producerOrg?.location}</Typography>
+        <CountryFlag code={producerOrg?.country} />{' '}
+        <Typography variant="body1">{producerOrg?.media?.website}</Typography>
+        <Typography variant="body1">
+          {formatWithThousandSeparator(producer?.total_votes_eos || '0', 0)}
+        </Typography>
         <Typography variant="body1">{`${formatWithThousandSeparator(
-            producer?.total_rewards || '0',
-            0,
-          )} ${eosConfig.tokenSymbol}`}</Typography>
+          producer?.total_rewards || '0',
+          0,
+        )} ${eosConfig.tokenSymbol}`}</Typography>
         <ComplianceBar
           total={producerOrg?.compliance?.total}
           pass={producerOrg?.compliance?.pass}
         />
-        <MainSocialLinks />
-        <ViewBPProfile producer={producer} />
+        <MainSocialLinks
+          social={producerOrg?.social}
+          name={producerOrg?.media?.name}
+        />
       </>
     )
   }
 
   useEffect(() => {
     setProducerOrg(
-      formatData(
-        {
-          data: producer.bp_json?.org || {},
-          rank,
-          owner: producer.owner,
-          updatedAt: producer.updated_at,
-          nodes: producer.bp_json?.nodes || [],
-          healthStatus: producer.health_status,
-          dataType: producer.bp_json?.type,
-          totalRewards: producer.total_rewards,
-        },
-        type,
-        t,
-      ),
+      formatData({
+        data: producer.bp_json?.org || {},
+        rank,
+        owner: producer.owner,
+        healthStatus: producer.health_status,
+        dataType: producer.bp_json?.type,
+        totalRewards: producer.total_rewards,
+      }),
     )
     // eslint-disable-next-line
   }, [producer])
@@ -100,7 +91,10 @@ const InformationCard = ({ producer, rank, type }) => {
           type === 'node' ? classes.hideScroll : ''
         }`}
       >
-        <Typography variant="h2" component="p">{`#${producer?.rank}`}</Typography>
+        <Typography
+          variant="h2"
+          component="p"
+        >{`#${producer?.rank}`}</Typography>
         <ProducerName
           logo={producerOrg?.media?.logo}
           text={producerOrg?.media?.account}
@@ -108,21 +102,21 @@ const InformationCard = ({ producer, rank, type }) => {
         />
         {type === 'node' ? (
           <>
-          <Collapse
-            in={matches ? true : expanded}
-            timeout="auto"
-            unmountOnExit
-            className={classes.collapse}
-          >
-            <div className={classes.nodesContainer}>
-              <NodesCard nodes={producerOrg.nodes} hideFeatures />{' '}
-            </div>
-          </Collapse>
-          <ViewBPProfile producer={producer} />
+            <Collapse
+              in={matches ? true : expanded}
+              timeout="auto"
+              unmountOnExit
+              className={classes.collapse}
+            >
+              <div className={classes.nodesContainer}>
+                <NodesCard nodes={producer.bp_json?.nodes} hideFeatures />{' '}
+              </div>
+            </Collapse>
           </>
         ) : (
           <BlockProducerInfo />
         )}
+        <ViewBPProfile producer={producer} />
       </div>
       {type === 'node' && !matches && (
         <CardActions disableSpacing className={classes.cardActions}>

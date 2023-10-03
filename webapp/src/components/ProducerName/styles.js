@@ -11,6 +11,11 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  bigContainer:{
+    width: '100%',
+  },
+  smallContainer: {
     width: '200px',
   },
   socialContainer: {

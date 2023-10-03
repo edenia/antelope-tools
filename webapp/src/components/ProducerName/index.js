@@ -8,6 +8,7 @@ const useStyles = makeStyles(styles)
 
 const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
   const classes = useStyles()
+  const isBig = size === 'big'
 
   return (
     <div className={classes.producerNameContainer}>
@@ -15,10 +16,10 @@ const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
         logo={logo}
         name={name}
         classes={{
-          avatar: size === 'big' ? classes.bigAvatar : classes.smallAvatar,
+          avatar: isBig ? classes.bigAvatar : classes.smallAvatar,
         }}
       />
-      <div className={classes.nameContainer}>
+      <div className={`${classes.nameContainer} ${isBig ? classes.bigContainer : classes.smallContainer}`}>
         {account && <Typography variant="body1">{account}</Typography>}
         <Typography variant="h2">{name}</Typography>
         <Typography variant="body1">{text}</Typography>

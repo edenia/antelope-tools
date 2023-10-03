@@ -35,6 +35,28 @@ export const PRODUCERS_QUERY = gql`
         type
         value
       }
+    }
+  }
+`
+
+export const PRODUCER_INFO_QUERY = gql`
+  query producer(
+    $where: producer_bool_exp
+  ) {
+    producers: producer(
+      where: $where
+      offset: 0
+      limit: 1
+    ) {
+      id
+      owner
+      url
+      bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
+      producer_key
       nodes {
         type
         full
@@ -50,7 +72,6 @@ export const PRODUCERS_QUERY = gql`
           updated_at
         }
       }
-    
     }
   }
 `
@@ -81,6 +102,7 @@ export const SMALL_PRODUCERS_QUERY = gql`
       total_rewards
       health_status
       rank
+      producer_key
     }
   }
 `
@@ -92,6 +114,28 @@ export const PRODUCERS_COUNT_QUERY = gql`
     info: producer_aggregate(where: $where) {
       producers: aggregate {
         count
+      }
+    }
+  }
+`
+
+export const NODES_BY_PRODUCER_SUBSCRIPTION = gql`
+  subscription ($where: node_bool_exp) {
+    nodes: node(
+      where: $where
+    ) {
+      type
+      full
+      location
+      node_info {
+        features
+        version
+      }
+      endpoints(order_by: { type: asc }) {
+        value
+        type
+        response
+        updated_at
       }
     }
   }
@@ -110,6 +154,10 @@ export const NODES_SUBSCRIPTION = gql`
       rank
       producer_key
       bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
       nodes {
         type
         full

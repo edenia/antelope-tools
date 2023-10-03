@@ -30,7 +30,7 @@ export default (theme) => ({
     wordBreak: 'break-word',
   },
   nodes: {
-    width: '280px',
+    width: '260px',
     padding: theme.spacing(0, 3, 0),
     overflowX: 'auto',
     '& .MuiCardContent-root:last-child': {
@@ -39,6 +39,9 @@ export default (theme) => ({
     boxShadow: '2px 3px 4px 0px #0000002E',
     backgroundColor: '#f6f9fd',
     borderRadius: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      width: '230px',
+    },
   },
   nodesWrapper: {
     display: 'flex',
@@ -46,9 +49,6 @@ export default (theme) => ({
     flexFlow: 'row wrap',
     gap: theme.spacing(2),
     padding: theme.spacing(0, 2, 0),
-    [theme.breakpoints.up('lg')]: {
-      paddingRight: '250px',
-    },
   },
   endpointsTitle: {
     display: 'flex',

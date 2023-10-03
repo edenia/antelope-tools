@@ -330,7 +330,10 @@
     "bpJson": "BP.json",
     "bpJsonGenerator": "BP JSON Generator",
     "viewProfile": "View BP Profile",
-    "BPonNetwork": "Block Producer on {{networkName}}"
+    "BPonNetwork": "{{position}} Block Producer on {{networkName}}",
+    "generalInformation": "General Information",
+    "logo_256": "Logo",
+    "organization_name": "Name"
   },
   "nodeCardComponent": {
     "features": "Features",

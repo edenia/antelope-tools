@@ -333,7 +333,9 @@
     "bpJson": "BP.json",
     "bpJsonGenerator": "Generar BP JSON",
     "viewProfile": "Ver Perfil del BP",
-    "BPonNetwork": "Productor de Bloques en {{networkName}}"
+    "BPonNetwork": "{{position}} Productor de Bloques en {{networkName}}",
+    "generalInformation": "Información General",
+    "organization_name": "Nombre"
   },
   "nodeCardComponent": {
     "features": "Características",

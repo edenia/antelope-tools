@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, useLocation } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
@@ -29,19 +29,15 @@ const ProducerProfile = () => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
   let { bpName } = useParams()
-  const [{ ldJson, producer }] = useProducerProfileState(bpName)
+  const location = useLocation()
+  const [{ ldJson, producer }] = useProducerProfileState(bpName,location?.state?.producer)
   const { healthLights } = generalConfig
+
+  window.history.replaceState({}, document.title)
 
   if (!producer) return <></>
 
   if (!producer?.owner) return <Navigate to="/404" />
-
-  const bpJsonHealthStatus = producer?.health_status?.find(
-    (status) => status.name === 'bpJson',
-  )
-
-  if (!bpJsonHealthStatus?.valid && eosConfig.networkName !== 'lacchain')
-    return <EmptyState t={t} />
 
   const GeneralInformation = ({ producer }) => {
     const eosRate = producer?.eosRate
@@ -131,13 +127,23 @@ const ProducerProfile = () => {
       <span className={classes.OrgDataItem}>
         <p>
           <Typography variant="caption">{title}</Typography> <br />
-          {type === 'text' && value}
-          {type === 'hiddenLink' && <VisitSite url={url || value} />}
-          {type === 'modal' && <URLModal data={value} />}
-          {type === 'link' && (
-            <Link href={url || value} target="_blank" rel="noopener noreferrer">
-              {value}
-            </Link>
+          {value ? (
+            <>
+              {type === 'text' && value}
+              {type === 'hiddenLink' && <VisitSite url={url || value} />}
+              {type === 'modal' && <URLModal data={value} />}
+              {type === 'link' && (
+                <Link
+                  href={url || value}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {value}
+                </Link>
+              )}
+            </>
+          ) : (
+            <LightIcon status={healthLights.redLight} />
           )}
         </p>
       </span>
@@ -151,41 +157,41 @@ const ProducerProfile = () => {
           title={t('location')}
           value={
             <>
-            {producer?.bp_json?.org?.location?.name}
-            <CountryFlag code={producer?.bp_json?.org?.location?.country} />{' '}
+              {producer?.location}
+              <CountryFlag code={producer?.country} />{' '}
             </>
           }
         />
         <OrganizationItem
           title={t('email')}
-          value={producer?.bp_json?.org?.email}
-          url={`mailto:${producer?.bp_json?.org?.email}`}
+          value={producer?.media?.email}
+          url={`mailto:${producer?.media?.email}`}
           type="link"
         />
         <OrganizationItem
           title={t('website')}
-          value={producer?.bp_json?.org?.website}
+          value={producer?.media?.website}
           type="link"
         />
         <OrganizationItem
           title={t('codeofconduct')}
-          value={producer?.bp_json?.org?.code_of_conduct}
+          value={producer?.info?.codeOfConduct}
           type="hiddenLink"
         />
         <OrganizationItem
           title={t('ownershipDisclosure')}
-          value={producer?.bp_json?.org?.ownership_disclosure}
+          value={producer?.info?.ownership}
           type="hiddenLink"
         />
         <OrganizationItem
           title={t('chainResources')}
-          value={producer?.bp_json?.org?.chain_resources}
+          value={producer?.info?.chainResources}
           type="hiddenLink"
         />
-        {producer?.bp_json?.org?.other_resources?.length && (
+        {producer?.info?.otherResources?.length && (
           <OrganizationItem
             title={t('otherResources')}
-            value={producer?.bp_json?.org?.other_resources}
+            value={producer?.info?.otherResources}
             type="modal"
           />
         )}
@@ -199,26 +205,35 @@ const ProducerProfile = () => {
         {ldJson && <script type="application/ld+json">{ldJson}</script>}
       </Helmet>
       <Card className={classes.profile}>
-        {Object.keys(producer?.bp_json?.org?.social || {})?.length && (
-          <div className={classes.socialLinks}>
-            <ProducerSocialLinks items={producer?.bp_json?.org?.social} />
-          </div>
-        )}
         <ProducerName
-          name={producer?.bp_json?.org?.candidate_name}
+          name={producer?.media?.name}
           account={producer?.owner}
-          text={t('BPonNetwork', { networkName: eosConfig.networkLabel })}
-          logo={producer?.bp_json?.org?.branding?.logo_256}
+          text={t('BPonNetwork', {
+            networkName: eosConfig.networkLabel,
+            position: producer?.media?.account,
+          })}
+          logo={producer?.media?.logo}
           size="big"
         />
+        {producer?.social?.length && (
+          <div className={classes.socialLinks}>
+            <ProducerSocialLinks items={producer?.social} />
+          </div>
+        )}
       </Card>
       <OrganizationData producer={producer} />
-      <WrapperContainer title={'General Information'}>
+      <WrapperContainer title={t('generalInformation')}>
         <GeneralInformation producer={producer} />
       </WrapperContainer>
-      <WrapperContainer title={t('nodes')}>
-        <NodesCard nodes={producer.nodes} />
-      </WrapperContainer>
+      {!producer?.hasEmptyBPJson ? (
+        <WrapperContainer title={t('nodes')}>
+          <NodesCard nodes={producer.nodes} />
+        </WrapperContainer>
+      ) : (
+        <WrapperContainer>
+          <EmptyState t={t} />
+        </WrapperContainer>
+      )}
     </>
   )
 }

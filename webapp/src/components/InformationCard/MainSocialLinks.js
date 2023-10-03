@@ -4,24 +4,41 @@ import styles from './styles'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import TelegramIcon from '@mui/icons-material/Telegram'
-import Link  from '@mui/material/Link'
+import Link from '@mui/material/Link'
 
 const useStyles = makeStyles(styles)
 
-const MainSocialLinks = ({ social }) => {
+const MainSocialLinks = ({ social, name }) => {
   const classes = useStyles()
+  const socialMediaNames = ['twitter', 'github', 'telegram']
+  const links = {}
+
+  const icons = {
+    twitter: <TwitterIcon />,
+    github: <GitHubIcon />,
+    telegram: <TelegramIcon />,
+  }
+
+  social.forEach((item, index) => {
+    if (index > socialMediaNames.length || !socialMediaNames.includes(item?.name)) return
+    links[item?.name] = item.url
+  })
 
   return (
     <div className={classes.socialLinksContainer}>
-        <Link>
-      <TwitterIcon />
-        </Link>
-      <Link>
-      <GitHubIcon />
-      </Link>
-      <Link>
-      <TelegramIcon />
-      </Link>
+      {socialMediaNames.map(
+        (socialMedia) =>
+          links[socialMedia] && (
+            <Link
+              href={links[socialMedia]}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${name} ${socialMedia}`}
+            >
+              {icons[socialMedia]}
+            </Link>
+          ),
+      )}
     </div>
   )
 }

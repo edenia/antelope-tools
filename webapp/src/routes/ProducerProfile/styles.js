@@ -7,6 +7,9 @@ export default (theme) => ({
     '& > div': {
       padding: 0,
       gap: theme.spacing(4),
+      [theme.breakpoints.down('sm')]: {
+        justifyContent: 'center',
+      }
     },
   },
   profile: {
@@ -21,10 +24,17 @@ export default (theme) => ({
     display: 'flex',
     gap: theme.spacing(5),
     alignSelf: 'end',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(4),
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignSelf: 'center',
+    },
   },
   healthContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     marginTop: theme.spacing(4),
   },
   healthIndicator: {
@@ -32,6 +42,9 @@ export default (theme) => ({
     flexDirection: 'column',
     width: 'calc( 100% / 3 )',
     textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      width: 'calc( 100% / 2 )',
+    },
     '& > *': {
       alignSelf: 'center',
     },
@@ -46,6 +59,7 @@ export default (theme) => ({
   OrgDataContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+    padding: theme.spacing(4),
   },
   OrgDataItem: {
     display: 'flex',
