@@ -16,14 +16,14 @@ import 'flag-icon-css/css/flag-icons.css'
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
 import NodesCard from '../NodeCard/NodesCard'
-
-import styles from './styles'
 import ProducerName from 'components/ProducerName'
 import ComplianceBar from 'components/ComplianceBar'
 import CountryFlag from 'components/CountryFlag'
-import EmptyStateRow from './EmptyStateRow'
-import MainSocialLinks from './MainSocialLinks'
 import ViewBPProfile from 'components/ViewBPProfile'
+
+import styles from './styles'
+import MainSocialLinks from './MainSocialLinks'
+import EmptyStateRow from './EmptyStateRow'
 
 const useStyles = makeStyles(styles)
 

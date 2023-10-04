@@ -1,8 +1,10 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import styles from './styles'
-import ProducerAvatar from 'components/ProducerAvatar'
 import Typography from '@mui/material/Typography'
+
+import ProducerAvatar from 'components/ProducerAvatar'
+
+import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
@@ -19,9 +21,17 @@ const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
           avatar: isBig ? classes.bigAvatar : classes.smallAvatar,
         }}
       />
-      <div className={`${classes.nameContainer} ${isBig ? classes.bigContainer : classes.smallContainer}`}>
-        {account && <Typography variant="body1" className={classes.bold}>{account}</Typography>}
-        <Typography variant="h2">{name}</Typography>
+      <div
+        className={`${classes.nameContainer} ${
+          isBig ? classes.bigContainer : classes.smallContainer
+        }`}
+      >
+        {account && (
+          <Typography variant="body1" className={classes.bold}>
+            {account}
+          </Typography>
+        )}
+        {name && <Typography variant="h2">{name}</Typography>}
         <Typography variant="body2">{text}</Typography>
       </div>
     </div>

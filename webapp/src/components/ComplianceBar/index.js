@@ -1,8 +1,9 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
-import styles from './styles'
 import styled from 'styled-components'
+import { makeStyles } from '@mui/styles'
 import Typography from '@mui/material/Typography'
+
+import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
@@ -16,7 +17,7 @@ const ComplianceBar = ({ pass, total }) => {
     width: ${maxWidth}px;
     height: 8px;
     & div {
-      border-radius: ${(props) => props.theme.spacing(4)};
+      border-radius: ${props => props.theme.spacing(4)};
       position: relative;
       height: 100%;
       max-width: 100%;
@@ -25,7 +26,7 @@ const ComplianceBar = ({ pass, total }) => {
   const CompliancePercentageBar = styled.div`
     width: ${percentage * maxWidth}px;
     top: -100%;
-    background-color: ${(props) =>
+    background-color: ${props =>
       percentage >= 0.8
         ? props.theme.palette.success.main
         : percentage >= 0.5

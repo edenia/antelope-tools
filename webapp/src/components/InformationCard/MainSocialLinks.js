@@ -1,10 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import styles from './styles'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import Link from '@mui/material/Link'
+
+import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
