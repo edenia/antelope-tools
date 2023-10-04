@@ -1,16 +1,19 @@
+const Joi = require('joi')
+
 const { eosConfig } = require('../config')
 const { axiosUtil } = require('../utils')
 
 module.exports = {
   method: 'POST',
   path: '/get-eos-rate',
-  handler: async () => {
+  handler: async ({ payload: { input } }) => {
     if (
       !eosConfig.eosRateUrl ||
       !eosConfig.eosRateUser ||
-      !eosConfig.eosRatePassword
+      !eosConfig.eosRatePassword ||
+      !input?.bp
     ) {
-      return []
+      return {}
     }
 
     const buf = Buffer.from(
@@ -27,9 +30,16 @@ module.exports = {
       }
     )
 
-    return data?.getRatesStats?.bpsStats || []
+    return data?.getRatesStats?.bpsStats?.find(rating => rating?.bp === input?.bp) || {}
   },
   options: {
+    validate: {
+      payload: Joi.object({
+        input: Joi.object({
+          bp: Joi.string().required()
+        }).required()
+      }).options({ stripUnknown: true })
+    },
     auth: false
   }
 }
