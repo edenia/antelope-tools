@@ -42,6 +42,11 @@ const ProducerProfile = () => {
 
   if (!producer?.owner) return <Navigate to="/404" />
 
+  const metaData = {
+    bpName: producer?.media?.name || bpName,
+    networkName: eosConfig.networkLabel,
+  }
+
   const GeneralInformation = ({ producer }) => {
     const eosRate = producer?.eosRate
 
@@ -206,7 +211,26 @@ const ProducerProfile = () => {
 
   return (
     <>
-      <Helmet title={producer?.owner}>
+      <Helmet>
+        <title>
+          {t('bpProfile>title', metaData)}
+        </title>
+        <meta
+          name="title"
+          content={t('bpProfile>title', metaData)}
+        />
+        <meta
+          name="description"
+          content={t('bpProfile>metaDescription', metaData)}
+        />
+        <meta
+          property="og:title"
+          content={t('bpProfile>metaTitle', metaData)}
+        />
+        <meta
+          property="og:description"
+          content={t('bpProfile>metaDescription', metaData)}
+        />
         {ldJson && <script type="application/ld+json">{ldJson}</script>}
       </Helmet>
       <Card className={classes.card}>

@@ -74,6 +74,7 @@ const defaultRoutes = [
   {
     component: ProducerProfile,
     path: '/block-producers/:bpName',
+    useParams: true,
     exact: true,
   },
   {
@@ -204,6 +205,7 @@ const lacchainRoutes = [
   {
     component: ProducerProfile,
     path: '/entities/:bpName',
+    useParams: true,
     exact: true,
   },
   {

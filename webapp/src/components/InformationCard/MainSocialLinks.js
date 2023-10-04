@@ -28,9 +28,10 @@ const MainSocialLinks = ({ social, name }) => {
   return (
     <div className={classes.socialLinksContainer}>
       {socialMediaNames.map(
-        (socialMedia) =>
+        (socialMedia, index) =>
           links[socialMedia] && (
             <Link
+              key={`${name}-${socialMedia}-${index}`}
               href={links[socialMedia]}
               target="_blank"
               rel="noopener noreferrer"

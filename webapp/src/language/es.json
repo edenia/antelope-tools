@@ -71,6 +71,8 @@
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel de red de {{networkName}}",
     "/block-producers>heading": "Productores de Bloques en {{networkName}}",
+    "/block-producers/bpName>heading": "Perfil de Block Producer",
+    "/entities/bpName>heading": "Perfil de Entidad",
     "/undiscoverable-bps>sidebar": "Productores Indetectables",
     "/undiscoverable-bps>title": "Productores de Bloques Indetectables - Panel de red de {{networkName}}",
     "/undiscoverable-bps>heading": "Productores de Bloques Pagados e Indetectables en {{networkName}}",

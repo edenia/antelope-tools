@@ -62,6 +62,8 @@
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - {{networkName}} Network Dashboard",
     "/block-producers>heading": "Block Producers on {{networkName}}",
+    "/block-producers/bpName>heading": "Block Producer Profile",
+    "/entities/bpName>heading": "Entity Profile",
     "/undiscoverable-bps>sidebar": "Undiscoverable BPs",
     "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - {{networkName}} Network Dashboard",
     "/undiscoverable-bps>heading": "Undiscoverable Paid Block Producers on {{networkName}}",
@@ -279,6 +281,9 @@
     "websiteEOSCR": "Edenia Website "
   },
   "producerCardComponent": {
+    "bpProfile>title": "{{bpName}} Block Producer - {{networkName}} Dashboard",
+    "bpProfile>metaTitle": "{{bpName}} Block Producer on {{networkName}}",
+    "bpProfile>metaDescription": "Data of the Block Producer {{bpName}} on {{networkName}}, such as its rank, nodes and endpoints",
     "rank": "Rank",
     "account": "Account",
     "website": "Website",

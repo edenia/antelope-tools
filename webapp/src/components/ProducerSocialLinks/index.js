@@ -33,7 +33,7 @@ const ProducerSocialLinks = ({ items }) => {
 }
 
 ProducerSocialLinks.propTypes = {
-  items: PropTypes.object,
+  items: PropTypes.array,
 }
 
 export default memo(ProducerSocialLinks)
