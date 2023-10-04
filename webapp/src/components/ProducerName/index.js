@@ -8,7 +8,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
+const ProducerName = ({ name, logo, text, lazy = true, account = '', size = 'small' }) => {
   const classes = useStyles()
   const isBig = size === 'big'
 
@@ -17,6 +17,7 @@ const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
       <ProducerAvatar
         logo={logo}
         name={name}
+        lazy={lazy}
         classes={{
           avatar: isBig ? classes.bigAvatar : classes.smallAvatar,
         }}

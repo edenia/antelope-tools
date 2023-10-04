@@ -7,14 +7,8 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ComplianceBar = ({ pass, total }) => {
-  const classes = useStyles()
-
-  const maxWidth = 120
-  const percentage = pass / total ?? 0
-
-  const Bar = styled.div`
-    width: ${maxWidth}px;
+const PercentageBar = styled.div`
+    width: ${props => props.width}px;
     height: 8px;
     & div {
       border-radius: ${props => props.theme.spacing(4)};
@@ -22,25 +16,28 @@ const ComplianceBar = ({ pass, total }) => {
       height: 100%;
       max-width: 100%;
     }
+    & > div + div {
+      width: ${props => props.percentage * props.width}px;
+      top: -100%;
+      background-color: ${props =>
+        props.percentage >= 0.8
+          ? props.theme.palette.success.main
+          : props.percentage >= 0.5
+          ? props.theme.palette.warning.main
+          : props.theme.palette.error.main};
+    }
   `
-  const CompliancePercentageBar = styled.div`
-    width: ${percentage * maxWidth}px;
-    top: -100%;
-    background-color: ${props =>
-      percentage >= 0.8
-        ? props.theme.palette.success.main
-        : percentage >= 0.5
-        ? props.theme.palette.warning.main
-        : props.theme.palette.error.main};
-  `
+
+const ComplianceBar = ({ pass, total }) => {
+  const classes = useStyles()
 
   return (
     <div className={classes.container}>
       <Typography variant="body1">{`${pass}/${total}`}</Typography>
-      <Bar>
+      <PercentageBar width={120} percentage={pass / total ?? 0}>
         <div className={classes.bar}></div>
-        <CompliancePercentageBar />
-      </Bar>
+        <div />
+      </PercentageBar>
     </div>
   )
 }

@@ -99,6 +99,7 @@ const InformationCard = ({ producer, rank, type }) => {
           logo={producerOrg?.media?.logo}
           text={producerOrg?.media?.account}
           name={producerOrg?.media?.name}
+          lazy={producer?.rank > 5}
         />
         {type === 'node' ? (
           <>

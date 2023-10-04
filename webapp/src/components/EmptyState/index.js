@@ -1,9 +1,17 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { makeStyles } from '@mui/styles'
+import { useTranslation } from 'react-i18next'
 import Link from '@mui/material/Link'
-import PropTypes from 'prop-types'
 
-const EmptyState = ({ classes, t }) => {
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
+
+const EmptyState = () => {
+  const classes = useStyles()
+  const { t } = useTranslation('producerCardComponent')
+
   return (
     <div className={classes.emptyState}>
       <img
@@ -26,13 +34,4 @@ const EmptyState = ({ classes, t }) => {
   )
 }
 
-EmptyState.propTypes = {
-  classes: PropTypes.object,
-  t: PropTypes.func,
-}
-
-EmptyState.defaultProps = {
-  classes: {},
-}
-
-export default memo(EmptyState)
+export default EmptyState
