@@ -21,34 +21,13 @@ const useProducerProfileState = (name, previousData) => {
   const [ldJson, setLdJson] = useState()
   const [loadProducers, { loading, data: { producers } = {} }] =
     useLazyQuery(PRODUCER_INFO_QUERY)
-  const { data } = useSubscription(NODES_BY_PRODUCER_SUBSCRIPTION, {
+  const [loadStats, { data: { eosrate_stats: eosRate } = {} }] =
+    useLazyQuery(EOSRATE_STATS_QUERY)
+  const { data: nodesSubscription } = useSubscription(NODES_BY_PRODUCER_SUBSCRIPTION, {
     variables: { where: { producer: defaultVariables.where } },
   })
-  const [loadStats, { data: { eosrate_stats: stats } = {} }] =
-    useLazyQuery(EOSRATE_STATS_QUERY)
   
   const isValidName = isValidAccountName(name)
-
-  useEffect(() => {
-    loadStats({})
-  }, [loadStats])
-
-  useEffect(()=>{
-    if(!stats?.length) return
-
-    const eosRate = stats.find(x=>x.bp === name)
-
-    setProducer(prev => ({...prev, eosRate}))
-  },[stats, name])
-
-  useEffect(() => {
-    if (!data?.nodes || !producerKey) return
-
-    setProducer((prev) => ({
-      ...prev,
-      nodes: sortNodes(data?.nodes, producerKey),
-    }))
-  }, [data, producerKey])
 
   const getProducerData = (bpData) => {
     return bpData
@@ -69,19 +48,37 @@ const useProducerProfileState = (name, previousData) => {
   }
 
   useEffect(() => {
-    if (previousData) {
-      setProducer(getProducerData(previousData))
-      setProducerKey(previousData?.producer_key)
-
-      return
-    }
     if (isValidName) {
-      loadProducers({ variables: defaultVariables })
-    } else {
+      loadStats({
+        variables: { bp: name }
+      })
+
+      if (previousData) {
+        setProducer(getProducerData(previousData))
+        setProducerKey(previousData?.producer_key)
+      } else {
+        loadProducers({ variables: defaultVariables })
+      }
+    }else{
       setProducer({})
     }
     // eslint-disable-next-line
   }, [])
+
+  useEffect(()=>{
+    if(!eosRate) return
+
+    setProducer(prev => ({...prev, eosRate}))
+  },[eosRate])
+
+  useEffect(() => {
+    if (!nodesSubscription?.nodes || !producerKey) return
+
+    setProducer((prev) => ({
+      ...prev,
+      nodes: sortNodes(nodesSubscription?.nodes, producerKey),
+    }))
+  }, [nodesSubscription, producerKey])
 
   useEffect(() => {
     if (Array.isArray(producers) && !producers.length) {
