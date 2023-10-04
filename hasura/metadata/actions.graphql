@@ -19,7 +19,9 @@ type Mutation {
 }
 
 type Query {
-  eosrate_stats: [EOSRateStats]
+  eosrate_stats(
+    bp: String!
+  ): EOSRateStats
 }
 
 type Query {
