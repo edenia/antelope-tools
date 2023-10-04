@@ -20,9 +20,9 @@ const ProducerName = ({ name, logo, text, account = '', size = 'small' }) => {
         }}
       />
       <div className={`${classes.nameContainer} ${isBig ? classes.bigContainer : classes.smallContainer}`}>
-        {account && <Typography variant="body1">{account}</Typography>}
+        {account && <Typography variant="body1" className={classes.bold}>{account}</Typography>}
         <Typography variant="h2">{name}</Typography>
-        <Typography variant="body1">{text}</Typography>
+        <Typography variant="body2">{text}</Typography>
       </div>
     </div>
   )

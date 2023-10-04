@@ -36,4 +36,7 @@ export default (theme) => ({
     height: '104px',
     border: `solid 2px ${theme.palette.primary.main}`,
   },
+  bold: {
+    fontWeight: 'bold !important',
+  }
 })

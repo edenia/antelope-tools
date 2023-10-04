@@ -94,7 +94,7 @@ const InformationCard = ({ producer, rank, type }) => {
         <Typography
           variant="h2"
           component="p"
-        >{`#${producer?.rank}`}</Typography>
+        >{`${producer?.rank}`}</Typography>
         <ProducerName
           logo={producerOrg?.media?.logo}
           text={producerOrg?.media?.account}

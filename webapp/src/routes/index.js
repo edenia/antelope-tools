@@ -202,6 +202,11 @@ const lacchainRoutes = [
     exact: true,
   },
   {
+    component: ProducerProfile,
+    path: '/entities/:bpName',
+    exact: true,
+  },
+  {
     name: 'nodes',
     icon: <NodesSvg />,
     component: Nodes,

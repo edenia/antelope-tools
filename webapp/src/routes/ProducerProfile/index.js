@@ -30,7 +30,10 @@ const ProducerProfile = () => {
   const { t } = useTranslation('producerCardComponent')
   let { bpName } = useParams()
   const location = useLocation()
-  const [{ ldJson, producer }] = useProducerProfileState(bpName,location?.state?.producer)
+  const [{ ldJson, producer }] = useProducerProfileState(
+    bpName,
+    location?.state?.producer,
+  )
   const { healthLights } = generalConfig
 
   window.history.replaceState({}, document.title)
@@ -44,7 +47,7 @@ const ProducerProfile = () => {
 
     return (
       <>
-        <SimpleDataCard title={t('rank')} value={`#${producer?.rank}`} />
+        <SimpleDataCard title={t('rank')} value={`${producer?.rank}`} />
         <SimpleDataCard
           title={t('votes')}
           value={`${formatWithThousandSeparator(
@@ -60,19 +63,21 @@ const ProducerProfile = () => {
           )} ${eosConfig.tokenSymbol}`}
         />
         {eosRate && (
-          <SimpleDataCard
-            title={t('eosRate')}
-            value={eosRate.average.toFixed(2)}
-          >
-            <span>
-              <Typography variant="body1">
-                {` ${t('average')} (${eosRate.ratings_cntr} ${t('ratings')})`}
+          <SimpleDataCard title={t('eosRate')}>
+            <div className={classes.eosRateContainer}>
+              <Typography component="p" variant="h6">
+                {eosRate.average.toFixed(2)}
               </Typography>
-              <VisitSite
-                title={t('openLink')}
-                url={`${generalConfig.eosRateLink}/block-producers/${eosRate.bp}`}
-              />
-            </span>
+              <span>
+                <Typography variant="body1">
+                  {` ${t('average')} (${eosRate.ratings_cntr} ${t('ratings')})`}
+                  <VisitSite
+                    title={t('openLink')}
+                    url={`${generalConfig.eosRateLink}block-producers/${eosRate.bp}`}
+                  />
+                </Typography>
+              </span>
+            </div>
           </SimpleDataCard>
         )}
         <SimpleDataCard title={t('compliance')}>
@@ -98,7 +103,7 @@ const ProducerProfile = () => {
 
   const WrapperContainer = ({ title, children }) => {
     return (
-      <Card>
+      <Card className={classes.card}>
         <CardContent>
           <Typography variant="h3">{title}</Typography>
           <div className={classes.dataContainer}>{children}</div>
@@ -152,7 +157,7 @@ const ProducerProfile = () => {
 
   const OrganizationData = ({ producer }) => {
     return (
-      <Card className={classes.OrgDataContainer}>
+      <div className={classes.OrgDataContainer}>
         <OrganizationItem
           title={t('location')}
           value={
@@ -195,7 +200,7 @@ const ProducerProfile = () => {
             type="modal"
           />
         )}
-      </Card>
+      </div>
     )
   }
 
@@ -204,34 +209,33 @@ const ProducerProfile = () => {
       <Helmet title={producer?.owner}>
         {ldJson && <script type="application/ld+json">{ldJson}</script>}
       </Helmet>
-      <Card className={classes.profile}>
-        <ProducerName
-          name={producer?.media?.name}
-          account={producer?.owner}
-          text={t('BPonNetwork', {
-            networkName: eosConfig.networkLabel,
-            position: producer?.media?.account,
-          })}
-          logo={producer?.media?.logo}
-          size="big"
-        />
-        {producer?.social?.length && (
-          <div className={classes.socialLinks}>
-            <ProducerSocialLinks items={producer?.social} />
-          </div>
-        )}
+      <Card className={classes.card}>
+        <div className={classes.profile}>
+          <ProducerName
+            name={producer?.media?.name}
+            account={producer?.owner}
+            text={t('BPonNetwork', {
+              networkName: eosConfig.networkLabel,
+              position: producer?.media?.account,
+            })}
+            logo={producer?.media?.logo}
+            size="big"
+          />
+          {producer?.social?.length && (
+            <div className={classes.socialLinks}>
+              <ProducerSocialLinks items={producer?.social} />
+            </div>
+          )}
+        </div>
+        <OrganizationData producer={producer} />
       </Card>
-      <OrganizationData producer={producer} />
       <WrapperContainer title={t('generalInformation')}>
         <GeneralInformation producer={producer} />
+        {producer?.hasEmptyBPJson && <EmptyState t={t} classes={classes} />}
       </WrapperContainer>
-      {!producer?.hasEmptyBPJson ? (
+      {!producer?.hasEmptyBPJson && !!producer?.nodes?.length && (
         <WrapperContainer title={t('nodes')}>
           <NodesCard nodes={producer.nodes} />
-        </WrapperContainer>
-      ) : (
-        <WrapperContainer>
-          <EmptyState t={t} />
         </WrapperContainer>
       )}
     </>

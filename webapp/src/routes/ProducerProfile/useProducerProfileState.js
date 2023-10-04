@@ -39,7 +39,7 @@ const useProducerProfileState = (name, previousData) => {
     const eosRate = stats.find(x=>x.bp === name)
 
     setProducer(prev => ({...prev, eosRate}))
-  },[stats])
+  },[stats, name])
 
   useEffect(() => {
     if (!data?.nodes || !producerKey) return
