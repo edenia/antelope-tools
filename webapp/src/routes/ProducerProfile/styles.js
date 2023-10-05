@@ -34,7 +34,7 @@ export default (theme) => ({
       justifyContent: 'center',
       alignSelf: 'center',
     },
-    '& svg':{
+    '& svg': {
       color: '#000000DE',
       '&:hover': {
         color: theme.palette.primary.main,

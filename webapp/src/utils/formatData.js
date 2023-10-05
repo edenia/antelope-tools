@@ -22,7 +22,7 @@ export const formatData = ({
   }
 
   if (!Object.keys(data || {}).length && eosConfig.networkName !== 'lacchain') {
-    return { hasEmptyBPJson: true,  health_status: [{ name: "bpJson", valid: false }], media: { name: owner, account: getSubTitle(), website: url } }
+    return { hasEmptyBPJson: true, health_status: [{ name: "bpJson", valid: false }], media: { name: owner, account: getSubTitle(), website: url } }
   }
 
   let newData = {
@@ -43,7 +43,6 @@ export const formatData = ({
     wechat: 'https://wechat.com/',
   }
 
-  
   const order = {
     twitter: 0,
     github: 1,
@@ -65,7 +64,7 @@ export const formatData = ({
   const socialArray = Object.keys(prefix || {})
     .sort((a, b) => getOrder(a) - getOrder(b))
     .flatMap((key) =>
-      !!data.social[key]
+      data.social[key]
         ? {
             name: key,
             url: `${prefix[key] ?? 'https://' + key + '/'}${data.social[key]}`,

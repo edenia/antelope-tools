@@ -26,7 +26,7 @@ const useProducerProfileState = (name, previousData) => {
   const { data: nodesSubscription } = useSubscription(NODES_BY_PRODUCER_SUBSCRIPTION, {
     variables: { where: { producer: defaultVariables.where } },
   })
-  
+
   const isValidName = isValidAccountName(name)
 
   const getProducerData = (bpData) => {
@@ -59,16 +59,16 @@ const useProducerProfileState = (name, previousData) => {
       } else {
         loadProducers({ variables: defaultVariables })
       }
-    }else{
+    } else {
       setProducer({})
     }
     // eslint-disable-next-line
   }, [])
 
-  useEffect(()=>{
-    if(!eosRate) return
+  useEffect(() => {
+    if (!eosRate) return
 
-    setProducer(prev => ({...prev, eosRate}))
+    setProducer(prev => ({ ...prev, eosRate }))
   },[eosRate])
 
   useEffect(() => {

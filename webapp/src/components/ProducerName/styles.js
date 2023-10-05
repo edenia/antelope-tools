@@ -12,7 +12,7 @@ export default (theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  bigContainer:{
+  bigContainer: {
     width: '100%',
   },
   smallContainer: {
