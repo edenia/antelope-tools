@@ -69,7 +69,7 @@ const useProducerProfileState = (name, previousData) => {
     if (!eosRate) return
 
     setProducer(prev => ({ ...prev, eosRate }))
-  },[eosRate])
+  }, [eosRate])
 
   useEffect(() => {
     if (!nodesSubscription?.nodes || !producerKey) return
