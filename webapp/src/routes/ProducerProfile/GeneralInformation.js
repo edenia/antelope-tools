@@ -17,24 +17,29 @@ const GeneralInformation = ({ producer }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
   const { healthLights } = generalConfig
+  const isLacchain = eosConfig.networkName === 'lacchain'
 
   return (
     <>
-      <SimpleDataCard title={t('rank')} value={`${producer?.rank}`} />
-      <SimpleDataCard
-        title={t('votes')}
-        value={`${formatWithThousandSeparator(
-          producer?.total_votes_eos || 0,
-          0,
-        )}`}
-      />
-      <SimpleDataCard
-        title={t('rewards')}
-        value={`${formatWithThousandSeparator(
-          producer?.total_rewards || 0,
-          0,
-        )} ${eosConfig.tokenSymbol}`}
-      />
+      {!isLacchain && (
+        <>
+          <SimpleDataCard title={t('rank')} value={`${producer?.rank}`} />
+          <SimpleDataCard
+            title={t('votes')}
+            value={`${formatWithThousandSeparator(
+              producer?.total_votes_eos || 0,
+              0,
+            )}`}
+          />
+          <SimpleDataCard
+            title={t('rewards')}
+            value={`${formatWithThousandSeparator(
+              producer?.total_rewards || 0,
+              0,
+            )} ${eosConfig.tokenSymbol}`}
+          />
+        </>
+      )}
       {producer?.eosRate && (
         <SimpleDataCard title={t('eosRate')}>
           <div className={classes.eosRateContainer}>

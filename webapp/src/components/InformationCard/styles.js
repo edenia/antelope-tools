@@ -95,7 +95,11 @@ export default (theme) => ({
     flexDirection: 'column !important',
   },
   collapse: {
-    width: '50%',
+    width: '100%',
+    marginRight: theme.spacing(4),
+    [theme.breakpoints.up('lg')]: {
+      width: '55%',
+    },
   },
   infoIcon: {
     cursor: 'pointer',
@@ -150,6 +154,7 @@ export default (theme) => ({
   emptyStateRow: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     '& span': {
       width: '16em',
       height: '45px',

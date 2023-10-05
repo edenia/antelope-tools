@@ -34,6 +34,7 @@ const InformationCard = ({ producer, rank, type }) => {
   const matches = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(false)
   const [producerOrg, setProducerOrg] = useState({})
+  const isLacchain = eosConfig.networkName === 'lacchain'
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -48,13 +49,17 @@ const InformationCard = ({ producer, rank, type }) => {
         <Typography>{producerOrg?.location}</Typography>
         <CountryFlag code={producerOrg?.country} />{' '}
         <Typography variant="body1">{producerOrg?.media?.website}</Typography>
-        <Typography variant="body1">
-          {formatWithThousandSeparator(producer?.total_votes_eos || '0', 0)}
-        </Typography>
-        <Typography variant="body1">{`${formatWithThousandSeparator(
-          producer?.total_rewards || '0',
-          0,
-        )} ${eosConfig.tokenSymbol}`}</Typography>
+        {!isLacchain && (
+          <>
+            <Typography variant="body1">
+              {formatWithThousandSeparator(producer?.total_votes_eos || '0', 0)}
+            </Typography>
+            <Typography variant="body1">{`${formatWithThousandSeparator(
+              producer?.total_rewards || '0',
+              0,
+            )} ${eosConfig.tokenSymbol}`}</Typography>
+          </>
+        )}
         <ComplianceBar
           total={producerOrg?.compliance?.total}
           pass={producerOrg?.compliance?.pass}
@@ -91,10 +96,12 @@ const InformationCard = ({ producer, rank, type }) => {
           type === 'node' ? classes.hideScroll : ''
         }`}
       >
-        <Typography
-          variant="h2"
-          component="p"
-        >{`${producer?.rank}`}</Typography>
+        {producer?.rank && (
+          <Typography
+            variant="h2"
+            component="p"
+          >{`${producer?.rank}`}</Typography>
+        )}
         <ProducerName
           logo={producerOrg?.media?.logo}
           text={producerOrg?.media?.account}
