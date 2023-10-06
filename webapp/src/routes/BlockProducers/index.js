@@ -6,10 +6,10 @@ import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
 
 import SearchBar from '../../components/SearchBar'
-import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
-import ProducersUpdateLog from 'components/ProducersUpdateLog'
+import ProducersUpdateLog from '../../components/ProducersUpdateLog'
+import ProducersTable from '../../components/InformationCard/ProducersTable'
 
 import styles from './styles'
 
@@ -64,22 +64,12 @@ const Producers = () => {
       </div>
       {loading ? (
         <LinearProgress />
-      ) : (
-        <div className={classes.container}>
-          {!!items?.length ? (
-            items.map((producer, index) => (
-              <div className={classes.card} key={`producer-card-${index}`}>
-                <InformationCard
-                  type="entity"
-                  producer={producer}
-                  rank={producer.rank}
-                />
-              </div>
-            ))
-          ) : (
-            <NoResults />
-          )}
+      ) : !!items?.length ? (
+        <div className={`${classes.container} ${classes.cardShadow}`}>
+          <ProducersTable producers={items} />
         </div>
+      ) : (
+        <NoResults />
       )}
       <PaginationWrapper
         classes={classes.pagination}

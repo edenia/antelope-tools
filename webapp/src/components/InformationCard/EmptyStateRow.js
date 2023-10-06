@@ -1,14 +1,12 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
+import AlertSvg from 'components/Icons/Alert'
+
 const EmptyStateRow = ({ classes, t }) => {
   return (
     <div className={classes.emptyStateRow}>
-      <img
-        src="/empty-states/Alert.webp"
-        loading="lazy"
-        alt=""
-      />
+      <AlertSvg />
       <span>{t('emptyState')}</span>
     </div>
   )

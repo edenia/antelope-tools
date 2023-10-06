@@ -54,7 +54,7 @@ const EVMEndpointsList = () => {
             </Button>
           </div>
           <div className={classes.switchContainer}>
-            <Typography component="p" variant="caption">
+            <Typography component="p" variant="body1">
               {t('filterEndpoints')}
             </Typography>
             <Switch

@@ -16,7 +16,10 @@ export default (theme) => ({
     width: '100%',
   },
   smallContainer: {
-    width: '200px',
+    width: '170px',
+    [theme.breakpoints.down('md')]: {
+      width: '150px',
+    },
   },
   socialContainer: {
     display: 'flex',

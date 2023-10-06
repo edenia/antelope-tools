@@ -34,7 +34,7 @@ const MainSocialLinks = ({ social, name }) => {
               key={`${name}-${socialMedia}-${index}`}
               href={links[socialMedia]}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               aria-label={`${name} ${socialMedia}`}
             >
               {icons[socialMedia]}

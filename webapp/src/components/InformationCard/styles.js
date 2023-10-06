@@ -166,15 +166,58 @@ export default (theme) => ({
       letterSpacing: '-0.22px',
       textAlign: 'center',
       color: '#3d3d3dde',
+      marginLeft: theme.spacing(5),
     },
   },
   socialLinksContainer: {
     display: 'flex',
     gap: theme.spacing(4),
+    justifyContent: 'center',
     '& svg': {
-      width: '32px',
-      height: '32px',
+      width: '30px',
+      height: '30px',
       cursor: 'pointer',
+      '&:hover': {
+        transform: 'scale(1.3)',
+      },
     },
   },
+  tableRow: {
+    '& .MuiTableCell-root': {
+      padding: `${theme.spacing(1, 2)} !important`,
+    },
+    '& .MuiTypography-h2': {
+      fontSize: '1.5rem',
+      [theme.breakpoints.down('md')]: {
+        fontSize: '1.2rem',
+      },
+    },
+    '&:hover': {
+      backgroundColor: '#f0f3fa',
+    },
+  },
+  tableHead: {
+    borderBottom: `2px solid ${theme.palette.primary.main} !important`,
+    '& .MuiTableCell-root': {
+      padding: `${theme.spacing(0, 2, 2)} !important`,
+    },
+  },
+  hideOnMobile: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  },
+  website: {
+    [theme.breakpoints.down('xl')]: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis', 
+      width: '140px',
+    },
+  },
+  country: {
+    [theme.breakpoints.down('md')]: {
+      textAlign: 'center'
+    },
+  }
 })
