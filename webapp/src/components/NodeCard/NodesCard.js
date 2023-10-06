@@ -21,7 +21,7 @@ import EndpointsChips from './EndpointsChips'
 
 const useStyles = makeStyles(styles)
 
-const NodesCard = ({ nodes }) => {
+const NodesCard = ({ nodes, hideFeatures = false }) => {
   const classes = useStyles()
   const { t } = useTranslation('nodeCardComponent')
 
@@ -61,7 +61,7 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const NodeInfo = ({ node }) => {
+  const NodeInfo = ({ node, hideFeatures }) => {
     return (
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
@@ -77,11 +77,15 @@ const NodesCard = ({ nodes }) => {
           </div>
         )}
         <EndpointsChips node={node} />
-        <ChipList
-          title={t('features')}
-          list={node?.node_info[0]?.features?.list}
-        />
-        <SupportedAPIs list={node?.node_info[0]?.features?.supportedAPIs} />
+        {!hideFeatures && (
+          <>
+            <ChipList
+              title={t('features')}
+              list={node?.node_info[0]?.features?.list}
+            />
+            <SupportedAPIs list={node?.node_info[0]?.features?.supportedAPIs} />
+          </>
+        )}
         <Keys node={node} />
         <HealthStatus node={node} />
       </>
@@ -143,7 +147,7 @@ const NodesCard = ({ nodes }) => {
             subheader={showLocations(node)}
           />
           <CardContent className={classes.content}>
-            <NodeInfo node={node} />
+            <NodeInfo node={node} hideFeatures={hideFeatures}/>
           </CardContent>
         </div>
       ))}
@@ -153,5 +157,6 @@ const NodesCard = ({ nodes }) => {
 
 NodesCard.propTypes = {
   nodes: PropTypes.array,
+  hideFeatures: PropTypes.bool
 }
 export default NodesCard

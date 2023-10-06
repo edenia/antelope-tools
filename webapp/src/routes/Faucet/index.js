@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { eosConfig } from '../../config'
+import isValidAccountName from 'utils/validate-account-name'
 import {
   CREATE_ACCOUNT_MUTATION,
   TRANFER_FAUCET_TOKENS_MUTATION,
@@ -152,12 +153,6 @@ const Faucet = () => {
     }
 
     setAccount('')
-  }
-
-  const isValidAccountName = name => {
-    const regex = /^[.12345abcdefghijklmnopqrstuvwxyz]+$/
-
-    return name?.length < 13 && regex.test(name)
   }
 
   return (

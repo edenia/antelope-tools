@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@mui/material/Link'
 import LanguageIcon from '@mui/icons-material/Language'
@@ -8,22 +8,6 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import RedditIcon from '@mui/icons-material/Reddit'
 import TelegramIcon from '@mui/icons-material/Telegram'
-import Typography from '@mui/material/Typography'
-
-const prefix = {
-  hive: 'https://hive.blog/@',
-  twitter: 'https://twitter.com/',
-  youtube: 'https://youtube.com/',
-  facebook: 'https://facebook.com/',
-  github: 'https://github.com/',
-  reddit: 'https://www.reddit.com/user/',
-  keybase: 'https://keybase.io/',
-  telegram: 'https://t.me/',
-  wechat: 'https://wechat.com/',
-  steemit: 'https://steemit.com/@',
-  discord: 'https://discord/',
-  medium: 'https://medium.com/@',
-}
 
 const icons = {
   twitter: <TwitterIcon />,
@@ -34,26 +18,22 @@ const icons = {
   telegram: <TelegramIcon />,
 }
 
-const ProducerSocialLinks = ({ items, message }) => {
-  const itemsArray = Object.keys(items).filter((key) => !!items[key])
-
-  if (!itemsArray?.length) return <Typography>{message}</Typography>
-
-  return itemsArray.map((key, i) => (
+const ProducerSocialLinks = ({ items }) => {
+  return items.map((item, i) => (
     <Link
       key={`social-link${i}`}
-      href={`${prefix[key] ?? 'https://' + key + '/'}${items[key]}`}
+      href={item.url}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={item.url}
     >
-      {icons[key] || <LanguageIcon />} {key}
+      {icons[item.name] || <LanguageIcon />}
     </Link>
   ))
 }
 
 ProducerSocialLinks.propTypes = {
-  items: PropTypes.object,
-  message: PropTypes.string,
+  items: PropTypes.array,
 }
 
-export default ProducerSocialLinks
+export default memo(ProducerSocialLinks)

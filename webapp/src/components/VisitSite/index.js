@@ -17,6 +17,7 @@ const VisitSite = ({ title, url, placement = 'left' }) => {
         target="_blank"
         rel="noopener noreferrer"
         className={classes.link}
+        aria-label={url}
       >
         <LaunchIcon className={classes.clickableIcon} />
       </a>

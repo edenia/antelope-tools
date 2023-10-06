@@ -39,6 +39,74 @@ export const PRODUCERS_QUERY = gql`
   }
 `
 
+export const PRODUCER_INFO_QUERY = gql`
+  query producer(
+    $where: producer_bool_exp
+  ) {
+    producers: producer(
+      where: $where
+      offset: 0
+      limit: 1
+    ) {
+      id
+      owner
+      url
+      bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
+      producer_key
+      nodes {
+        type
+        full
+        location
+        node_info {
+          features
+          version
+        }
+        endpoints(order_by: { type: asc }) {
+          value
+          type
+          response
+          updated_at
+        }
+      }
+    }
+  }
+`
+
+export const SMALL_PRODUCERS_QUERY = gql`
+  query producer(
+    $offset: Int = 0
+    $limit: Int = 21
+    $where: producer_bool_exp
+    $endpointFilter: endpoints_by_producer_id_bool_exp
+  ) {
+    info: producer_aggregate(where: $where) {
+      producers: aggregate {
+        count
+      }
+    }
+    producers: producer(
+      where: $where
+      order_by: { total_votes_percent: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      id
+      owner
+      url
+      bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
+      producer_key
+    }
+  }
+`
+
 export const PRODUCERS_COUNT_QUERY = gql`
   query producer(
     $where: producer_bool_exp
@@ -46,6 +114,28 @@ export const PRODUCERS_COUNT_QUERY = gql`
     info: producer_aggregate(where: $where) {
       producers: aggregate {
         count
+      }
+    }
+  }
+`
+
+export const NODES_BY_PRODUCER_SUBSCRIPTION = gql`
+  subscription ($where: node_bool_exp) {
+    nodes: node(
+      where: $where
+    ) {
+      type
+      full
+      location
+      node_info {
+        features
+        version
+      }
+      endpoints(order_by: { type: asc }) {
+        value
+        type
+        response
+        updated_at
       }
     }
   }
@@ -64,6 +154,10 @@ export const NODES_SUBSCRIPTION = gql`
       rank
       producer_key
       bp_json
+      total_votes_eos
+      total_rewards
+      health_status
+      rank
       nodes {
         type
         full
@@ -153,15 +247,6 @@ export const BLOCK_TRANSACTIONS_HISTORY = gql`
   }
 `
 
-export const MISSED_BLOCKS_SUBSCRIPTION = gql`
-  subscription {
-    stats: stat(limit: 1) {
-      id
-      missed_blocks
-    }
-  }
-`
-
 export const NODES_SUMMARY_QUERY = gql`
   query {
     stats: stat(limit: 1) {
@@ -229,8 +314,8 @@ export const ALL_NODES_QUERY = gql`
 `
 
 export const EOSRATE_STATS_QUERY = gql`
-  query {
-    eosrate_stats {
+  query ($bp: String!){
+    eosrate_stats (bp: $bp){
       bp
       average
       ratings_cntr

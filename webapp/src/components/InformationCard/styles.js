@@ -27,19 +27,11 @@ export default (theme) => ({
       marginLeft: 0,
       fontWeight: '700',
     },
-    '& .bodyWrapper': {
-      display: 'flex',
-      flexDirection: 'column',
-    },
     [theme.breakpoints.up('lg')]: {
       minWidth: 980,
       overflowY: 'hidden',
       flexDirection: 'row',
-      '& .bodyWrapper': {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '100%',
-      },
+      alignItems: 'center',
       '& .MuiTypography-overline': {
         marginLeft: theme.spacing(3),
         lineHeight: '0',
@@ -52,30 +44,6 @@ export default (theme) => ({
   },
   hideScroll: {
     overflowX: 'hidden',
-  },
-  media: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(0, 2),
-    '& img': {
-      width: 82,
-      height: 82,
-      aspectRatio: '1 / 1',
-    },
-    '& .bpName': {
-      fontSize: 28,
-      lineHeight: '34px',
-      letterSpacing: '-0.233333px',
-      marginBottom: theme.spacing(1),
-      textAlign: 'center',
-    },
-    [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 6),
-      width: 250,
-      minWidth: 250,
-      justifyContent: 'center',
-    },
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -95,36 +63,10 @@ export default (theme) => ({
       textTransform: 'capitalize',
     },
   },
-  info: {
-    borderLeft: 'none',
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-  },
-  entity: {
-    [theme.breakpoints.up('lg')]: {
-      width: 260,
-      marginBottom: 0,
-    },
-  },
   node: {
     [theme.breakpoints.up('lg')]: {
       width: 260,
       marginBottom: 0,
-    },
-  },
-  textEllipsis: {
-    margin: theme.spacing(1, 0),
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    width: 350,
-    '& a': {
-      marginLeft: theme.spacing(1),
     },
   },
   textWrap: {
@@ -146,57 +88,6 @@ export default (theme) => ({
   breakLine: {
     wordBreak: 'break-word',
   },
-  borderLine: {
-    marginTop: theme.spacing(2),
-    borderLeft: 'none',
-    height: 'calc(100% - 25px)',
-    marginBottom: theme.spacing(3),
-    [theme.breakpoints.up('lg')]: {
-      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-      padding: theme.spacing(0, 3),
-    },
-  },
-  nodes: {
-    borderLeft: 'none',
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-    '& .MuiSvgIcon-root': {
-      marginLeft: theme.spacing(1),
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 140,
-    },
-  },
-  rowWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    '& .listBox': {
-      marginLeft: theme.spacing(1),
-    },
-    '& .listLabel': {
-      height: '100%',
-      '& .MuiSvgIcon-root': {
-        marginRight: theme.spacing(1),
-        fontSize: 15,
-      },
-      '& .MuiTypography-body1': {
-        whiteSpace: 'nowrap',
-      },
-    },
-    [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
-    },
-  },
-  ratings: {
-    [theme.breakpoints.up('lg')]: {
-      whiteSpace: 'pre-line !important',
-    },
-  },
   boxLabel: {
     alignItems: 'baseline !important',
   },
@@ -205,69 +96,10 @@ export default (theme) => ({
   },
   collapse: {
     width: '100%',
-  },
-  healthStatus: {
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-    '& .MuiSvgIcon-root': {
-      marginLeft: theme.spacing(1),
-      height: '22px',
-      widht: '22px',
-    },
-    '& .success': {
-      color: theme.palette.success.main,
-    },
-    '& .error': {
-      color: theme.palette.error.main,
-    },
-    '& .warning': {
-      color: theme.palette.warning.main,
-    },
+    marginRight: theme.spacing(4),
     [theme.breakpoints.up('lg')]: {
-      minWidth: 130,
+      width: '55%',
     },
-  },
-  stats: {
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-  },
-  social: {
-    borderLeft: 'none',
-    width: 100,
-    '& .MuiTypography-body1': {
-      margin: theme.spacing(1, 0),
-      display: 'flex',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-    '& a': {
-      display: 'flex',
-    },
-    '& svg': {
-      marginRight: theme.spacing(1),
-    },
-    [theme.breakpoints.up('lg')]: {
-      minWidth: 120,
-    },
-  },
-  dd: {
-    marginLeft: theme.spacing(1),
-    margin: theme.spacing(1, 0),
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    width: '100%',
   },
   infoIcon: {
     cursor: 'pointer',
@@ -307,11 +139,6 @@ export default (theme) => ({
       minWidth: 150,
     },
   },
-  flex: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
   clickableIcon: {
     cursor: 'pointer',
     '&:hover': {
@@ -324,25 +151,10 @@ export default (theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
-  textEllipsisNodes: {
-    margin: theme.spacing(1, 0),
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    width: '100%',
-    '& a': {
-      marginLeft: theme.spacing(1),
-    },
-  },
-  centerWrapper: {
-    width: '100%',
+  emptyStateRow: {
     display: 'flex',
-    justifyContent: 'center',
-  },
-  emptyState: {
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
     '& span': {
       width: '16em',
       height: '45px',
@@ -355,28 +167,14 @@ export default (theme) => ({
       textAlign: 'center',
       color: '#3d3d3dde',
     },
-    '& a': {
-      color: theme.palette.primary.main,
-      textDecorationColor: theme.palette.primary.main,
-    },
   },
-  horizontalLine: {
-    [theme.breakpoints.down('lg')]: {
-      width: '270px',
-      height: '1px',
-      margin: '15.2px 32px 40px 33px',
-      backgroundColor: '#e0e0e0',
+  socialLinksContainer: {
+    display: 'flex',
+    gap: theme.spacing(4),
+    '& svg': {
+      width: '32px',
+      height: '32px',
+      cursor: 'pointer',
     },
-  },
-  imgError: {
-    [theme.breakpoints.down('lg')]: {
-      width: '200px',
-      height: '120px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '260px',
-      height: '160px',
-    },
-    objectFit: 'contain',
   },
 })

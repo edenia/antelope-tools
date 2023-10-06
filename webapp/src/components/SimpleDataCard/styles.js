@@ -38,7 +38,8 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center',
-    marginTop: `${theme.spacing(2)} !important`,
+    height: '100%',
+    alignItems: 'center',
   },
   svgLink: {
     fontSize: 18,

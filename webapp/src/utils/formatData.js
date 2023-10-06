@@ -1,37 +1,18 @@
 /* eslint complexity: 0 */
 /* eslint camelcase: 0 */
-import moment from 'moment'
-
 import { eosConfig } from '../config'
 
-export const formatData = (
-  {
-    data,
-    rank,
-    owner,
-    updatedAt,
-    nodes,
-    healthStatus,
-    dataType,
-    totalRewards,
-  },
-  type,
-  t,
-) => {
-  let newData = {
-    title: '',
-    media: {},
-    info: {},
-    stats: {},
-    nodes: [],
-    healthStatus: [],
-    social: {},
-    endpoints: {},
-  }
-
+export const formatData = ({
+  data,
+  rank,
+  owner,
+  healthStatus,
+  dataType,
+  totalRewards,
+  url
+}) => {
   const getSubTitle = () => {
-    if (eosConfig.networkName === 'lacchain')
-      return `${t(`entityType${dataType}`)} Entity`
+    if (eosConfig.networkName === 'lacchain') return `${dataType} Entity`
 
     if (rank <= 21) return 'Top 21'
 
@@ -40,52 +21,81 @@ export const formatData = (
     return 'Non-Paid Standby'
   }
 
+  if (!Object.keys(data || {}).length && eosConfig.networkName !== 'lacchain') {
+    return { hasEmptyBPJson: true, health_status: [{ name: "bpJson", valid: false }], media: { name: owner, account: getSubTitle(), website: url } }
+  }
+
+  let newData = {
+    media: {},
+    info: {},
+    social: {},
+  }
+
+  const prefix = {
+    keybase: 'https://keybase.io/',
+    telegram: 'https://t.me/',
+    twitter: 'https://twitter.com/',
+    github: 'https://github.com/',
+    youtube: 'https://youtube.com/',
+    facebook: 'https://facebook.com/',
+    hive: 'https://hive.blog/@',
+    reddit: 'https://www.reddit.com/user/',
+    wechat: 'https://wechat.com/',
+  }
+
+  const order = {
+    twitter: 0,
+    github: 1,
+    telegram: 2,
+    youtube: 3,
+    reddit: 4,
+    wechat: 5,
+    keybase: 6,
+    hive: 7,
+    facebook: 8,
+  }
+
+  const getOrder = name => order[name] ?? Infinity
+
   if (!data?.social?.github && typeof data?.github_user === 'string') {
     data.social.github = data.github_user
   }
 
-  switch (type) {
-    case 'entity':
-    case 'node':
-      if (eosConfig.networkName === 'lacchain') {
-        newData.title = owner
-      } else {
-        newData.title = rank ? `#${rank} - ${owner}` : owner
-      }
+  const socialArray = Object.keys(prefix || {})
+    .sort((a, b) => getOrder(a) - getOrder(b))
+    .flatMap((key) =>
+      data.social[key]
+        ? {
+            name: key,
+            url: `${prefix[key] ?? 'https://' + key + '/'}${data.social[key]}`,
+          }
+        : [],
+    )
 
-      newData = {
-        ...newData,
-        media: {
-          logo: data.branding?.logo_256,
-          name: data.candidate_name || data.organization_name || owner,
-          account: getSubTitle(),
-        },
-        info: {
-          location: data.location?.name || 'N/A',
-          country: data.location?.country || null,
-          website: data?.website || '',
-          email: data.email,
-          code_of_conduct: data?.code_of_conduct || null,
-          ownership: data?.ownership_disclosure || null,
-          bussinesContact: data.bussines_contact || null,
-          technicalContact: data.technical_contact || null,
-          chain: data?.chain_resources || null,
-          otherResources: data?.other_resources || [],
-        },
-        stats: {
-          votes: 'N/A',
-          rewards: 0,
-          lastChecked: moment(new Date()).diff(moment(updatedAt), 'seconds'),
-        },
-        nodes,
-        healthStatus,
-        social: data.social,
-      }
-
-      break
-
-    default:
-      break
+  newData = {
+    ...newData,
+    media: {
+      logo: data?.branding?.logo_256,
+      name: data?.candidate_name || data?.organization_name || owner,
+      account: getSubTitle(),
+      website: data?.website || '',
+      email: data?.email,
+    },
+    location: data?.location?.name || 'N/A',
+    country: data?.location?.country || null,
+    info: {
+      codeOfConduct: data?.code_of_conduct,
+      ownership: data?.ownership_disclosure,
+      chainResources: data?.chain_resources,
+      otherResources: data?.other_resources,
+    },
+    social: socialArray,
+    ...(healthStatus && {
+      compliance: {
+        total: healthStatus?.length,
+        pass: healthStatus?.reduce((a, b) => a + Number(b.valid), 0),
+      },
+    }),
   }
 
   return newData

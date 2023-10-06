@@ -47,7 +47,7 @@ PaginationWrapper.propTypes = {
 const Producers = () => {
   const classes = useStyles()
   const [
-    { filters, chips, items, loading, missedBlocks, pagination },
+    { filters, chips, items, loading, pagination },
     { handleOnSearch, handleOnPageChange },
   ] = useBlockProducerState()
 
@@ -71,7 +71,7 @@ const Producers = () => {
               <div className={classes.card} key={`producer-card-${index}`}>
                 <InformationCard
                   type="entity"
-                  producer={{ ...producer, missed_blocks: missedBlocks ? missedBlocks[producer.owner] : 0 }}
+                  producer={producer}
                   rank={producer.rank}
                 />
               </div>

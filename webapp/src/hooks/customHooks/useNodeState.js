@@ -3,6 +3,7 @@ import { useSubscription, useLazyQuery } from '@apollo/client'
 
 import { NODES_SUBSCRIPTION, PRODUCERS_COUNT_QUERY } from '../../gql'
 import { eosConfig } from '../../config'
+import sortNodes from 'utils/sort-nodes'
 
 import useSearchState from './useSearchState'
 
@@ -33,15 +34,6 @@ const useNodeState = () => {
   })
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeChips]
-
-  const getOrderNode = (node) => {
-    return (
-      (node.type?.includes('full') ? 0.5 : 0) +
-      (node.endpoints?.length || 0) +
-      Boolean(node?.node_info[0]?.version?.length) +
-      (node.node_info[0]?.features?.list?.length || 0)
-    )
-  }
 
   const isFeature = (filter) => {
     return (
@@ -89,37 +81,7 @@ const useNodeState = () => {
       )
         return []
 
-      producer.nodes.sort((a, b) => {
-        return getOrderNode(a) - getOrderNode(b)
-      })
-
-      let nodes = []
-      let producerNode
-
-      for (const node in producer.nodes) {
-        const current = producer.nodes[node]
-
-        if (current?.type[0] === 'producer') {
-          if (!producerNode) {
-            const features = { keys: { producer_key: producer.producer_key } }
-
-            producerNode = {
-              ...current,
-              locations: [],
-              node_info: [{ features }],
-            }
-          }
-
-          producerNode.locations.push(current.location)
-        } else {
-          nodes = JSON.parse(JSON.stringify(producer.nodes.slice(node)))
-          nodes.reverse()
-
-          if (producerNode) nodes.push(producerNode)
-
-          break
-        }
-      }
+      const nodes = sortNodes(producer.nodes, producer.producer_key)
 
       return nodes.length
         ? {

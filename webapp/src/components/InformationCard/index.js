@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { memo, useState, useEffect } from 'react'
-import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
@@ -16,16 +15,15 @@ import 'flag-icon-css/css/flag-icons.css'
 
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
-import ProducerHealthIndicators from '../ProducerHealthIndicators'
 import NodesCard from '../NodeCard/NodesCard'
+import ProducerName from 'components/ProducerName'
+import ComplianceBar from 'components/ComplianceBar'
+import CountryFlag from 'components/CountryFlag'
+import ViewBPProfile from 'components/ViewBPProfile'
 
-import EmptyState from './EmptyState'
-import ProducerInformation from './ProducerInformation'
-import Nodes from './Nodes'
-import Social from './Social'
-import Media from './Media'
-import Stats from './Stats'
 import styles from './styles'
+import MainSocialLinks from './MainSocialLinks'
+import EmptyStateRow from './EmptyStateRow'
 
 const useStyles = makeStyles(styles)
 
@@ -36,107 +34,54 @@ const InformationCard = ({ producer, rank, type }) => {
   const matches = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(false)
   const [producerOrg, setProducerOrg] = useState({})
+  const isLacchain = eosConfig.networkName === 'lacchain'
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
-  const missedBlock = (producer, nodeType, type) => {
-    if (eosConfig.networkName !== 'lacchain') return <></>
-
-    if (type !== 'node' || nodeType !== 'validator') return <></>
-
-    return (
-      <div className={classes.rowWrapper}>
-        <Typography variant="body1">
-          {`${t('missedBlocks')}: `}
-          {producer.missed_blocks || 0}
-        </Typography>
-      </div>
-    )
-  }
-
   const BlockProducerInfo = () => {
-    const bpJsonHealthStatus = producerOrg.healthStatus.find(
-      (status) => status.name === 'bpJson',
-    )
-
-    if (!bpJsonHealthStatus?.valid && eosConfig.networkName !== 'lacchain')
-      return <EmptyState classes={classes} t={t} />
+    if (producerOrg?.hasEmptyBPJson)
+      return <EmptyStateRow classes={classes} t={t} />
 
     return (
-      <div className="bodyWrapper">
-        <div className={clsx(classes.info, classes[type])}>
-          <Typography variant="overline">{t('info')}</Typography>
-          <ProducerInformation
-            info={producerOrg.info}
-            classes={classes}
-            t={t}
-            type={type}
-          />
-        </div>
-        <Stats
-          t={t}
-          type={type}
-          classes={classes}
-          missedBlocks={producer.missed_blocks || 0}
-          votes={formatWithThousandSeparator(
-            producer.total_votes_eos || '0',
-            0,
-          )}
-          rewards={formatWithThousandSeparator(
-            producer.total_rewards || '0',
-            0,
-          )}
-          eosRate={producer?.eosRate}
+      <>
+        <Typography>{producerOrg?.location}</Typography>
+        <CountryFlag code={producerOrg?.country} />{' '}
+        <Typography variant="body1">{producerOrg?.media?.website}</Typography>
+        {!isLacchain && (
+          <>
+            <Typography variant="body1">
+              {formatWithThousandSeparator(producer?.total_votes_eos || '0', 0)}
+            </Typography>
+            <Typography variant="body1">{`${formatWithThousandSeparator(
+              producer?.total_rewards || '0',
+              0,
+            )} ${eosConfig.tokenSymbol}`}</Typography>
+          </>
+        )}
+        <ComplianceBar
+          total={producerOrg?.compliance?.total}
+          pass={producerOrg?.compliance?.pass}
         />
-        <Nodes
-          nodes={producerOrg.nodes}
-          producer={producer}
-          t={t}
-          type={type}
-          classes={classes}
+        <MainSocialLinks
+          social={producerOrg?.social}
+          name={producerOrg?.media?.name}
         />
-        <div className={classes.healthStatus}>
-          <Typography variant="overline">{t('health')}</Typography>
-          <div className={classes.borderLine}>
-            {missedBlock(producer, producerOrg?.media?.account, type)}
-            <ProducerHealthIndicators
-              message={t('noData')}
-              producer={
-                producerOrg?.healthStatus
-                  ? { health_status: producerOrg.healthStatus }
-                  : { health_status: [] }
-              }
-            />
-          </div>
-        </div>
-        <Social
-          social={producerOrg?.social || {}}
-          type={type}
-          t={t}
-          classes={classes}
-        />
-      </div>
+      </>
     )
   }
 
   useEffect(() => {
     setProducerOrg(
-      formatData(
-        {
-          data: producer.bp_json?.org || {},
-          rank,
-          owner: producer.owner,
-          updatedAt: producer.updated_at,
-          nodes: producer.bp_json?.nodes || [],
-          healthStatus: producer.health_status,
-          dataType: producer.bp_json?.type,
-          totalRewards: producer.total_rewards,
-        },
-        type,
-        t,
-      ),
+      formatData({
+        data: producer.bp_json?.org || {},
+        rank,
+        owner: producer.owner,
+        healthStatus: producer.health_status,
+        dataType: producer.bp_json?.type,
+        totalRewards: producer.total_rewards,
+      }),
     )
     // eslint-disable-next-line
   }, [producer])
@@ -145,31 +90,43 @@ const InformationCard = ({ producer, rank, type }) => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={producerOrg.title} />
+      <CardHeader />
       <div
         className={`${classes.wrapper} ${
           type === 'node' ? classes.hideScroll : ''
         }`}
       >
-        <div className={classes.media}>
-          <Media classes={classes} media={producerOrg.media || {}} />
-        </div>
-        <Collapse
-          in={matches ? true : expanded}
-          timeout="auto"
-          unmountOnExit
-          className={classes.collapse}
-        >
-          {type === 'node' ? (
-            <div className={classes.nodesContainer}>
-              <NodesCard nodes={producerOrg.nodes} />{' '}
-            </div>
-          ) : (
-            <BlockProducerInfo />
-          )}
-        </Collapse>
+        {producer?.rank && (
+          <Typography
+            variant="h2"
+            component="p"
+          >{`${producer?.rank}`}</Typography>
+        )}
+        <ProducerName
+          logo={producerOrg?.media?.logo}
+          text={producerOrg?.media?.account}
+          name={producerOrg?.media?.name}
+          lazy={producer?.rank > 5}
+        />
+        {type === 'node' ? (
+          <>
+            <Collapse
+              in={matches ? true : expanded}
+              timeout="auto"
+              unmountOnExit
+              className={classes.collapse}
+            >
+              <div className={classes.nodesContainer}>
+                <NodesCard nodes={producer.bp_json?.nodes} hideFeatures />{' '}
+              </div>
+            </Collapse>
+          </>
+        ) : (
+          <BlockProducerInfo />
+        )}
+        <ViewBPProfile producer={producer} />
       </div>
-      {!matches && (
+      {type === 'node' && !matches && (
         <CardActions disableSpacing className={classes.cardActions}>
           <div className={classes.expandMore}>
             <Button color="primary" onClick={handleExpandClick}>
