@@ -14,13 +14,12 @@ const useStyles = makeStyles(styles)
 const ViewBPProfile = ({ producer }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
-  const route = eosConfig.networkName !== 'lacchain' ? 'block-producers' : 'entities'
 
   return (
     <Button
       className={classes.button}
       component={Link}
-      to={`/${route}/${producer?.owner}`}
+      to={`/${eosConfig.producersRoute}/${producer?.owner}`}
       state={{ producer }}
       variant="contained"
       color="secondary"

@@ -107,3 +107,4 @@ export const producerColumns = [
 ].flatMap((col) =>
   !col?.disabled || !col?.disabled[networkName] ? col?.name : [],
 )
+export const producersRoute = networkName !== 'lacchain' ? 'block-producers' : 'entities'
