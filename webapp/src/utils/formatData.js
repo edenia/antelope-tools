@@ -1,6 +1,7 @@
 /* eslint complexity: 0 */
 /* eslint camelcase: 0 */
 import { eosConfig } from '../config'
+import { ENTITY_TYPE } from './lacchain'
 
 export const formatData = ({
   data,
@@ -12,7 +13,7 @@ export const formatData = ({
   url
 }) => {
   const getSubTitle = () => {
-    if (eosConfig.networkName === 'lacchain') return `${dataType} Entity`
+    if (eosConfig.networkName === 'lacchain') return `${ENTITY_TYPE[dataType]}`
 
     if (rank <= 21) return 'Top 21'
 
@@ -21,7 +22,7 @@ export const formatData = ({
     return 'Non-Paid Standby'
   }
 
-  if (!Object.keys(data || {}).length && eosConfig.networkName !== 'lacchain') {
+  if (!Object.keys(data || {}).length) {
     return { hasEmptyBPJson: true, health_status: [{ name: "bpJson", valid: false }], media: { name: owner, account: getSubTitle(), website: url } }
   }
 
