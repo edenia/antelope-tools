@@ -45,16 +45,6 @@ export default (theme) => ({
   hideScroll: {
     overflowX: 'hidden',
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   expandMore: {
     width: '100%',
     display: 'flex',
@@ -63,36 +53,11 @@ export default (theme) => ({
       textTransform: 'capitalize',
     },
   },
-  node: {
-    [theme.breakpoints.up('lg')]: {
-      width: 260,
-      marginBottom: 0,
-    },
-  },
-  textWrap: {
-    width: 210,
-    wordWrap: 'break-word',
-    display: 'block !important',
-    overflow: 'visible !important',
-    whiteSpace: 'normal !important',
-    [theme.breakpoints.up('lg')]: {
-      width: 290,
-    },
-  },
   cardActions: {
     display: 'flex',
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
-  },
-  breakLine: {
-    wordBreak: 'break-word',
-  },
-  boxLabel: {
-    alignItems: 'baseline !important',
-  },
-  flexColumn: {
-    flexDirection: 'column !important',
   },
   collapse: {
     width: '100%',
@@ -100,56 +65,6 @@ export default (theme) => ({
     [theme.breakpoints.up('lg')]: {
       width: '55%',
     },
-  },
-  infoIcon: {
-    cursor: 'pointer',
-    flexDirection: 'flex-end',
-  },
-  dt: {
-    maxWidth: 100,
-  },
-  shadow: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      padding: theme.spacing(3),
-      maxWidth: '250px',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      borderRadius: '5px',
-    },
-  },
-  infoItems: {
-    display: 'flex',
-    flexDirection: 'column',
-    '& .listBox': {
-      marginLeft: theme.spacing(1),
-    },
-    '& .listLabel': {
-      height: '100%',
-      '& .MuiSvgIcon-root': {
-        marginRight: theme.spacing(1),
-        fontSize: 15,
-      },
-      '& .MuiTypography-body1': {
-        whiteSpace: 'nowrap',
-      },
-    },
-    [theme.breakpoints.up('lg')]: {
-      minWidth: 150,
-    },
-  },
-  clickableIcon: {
-    cursor: 'pointer',
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
-  },
-  popoverStyle: {
-    paddingRight: theme.spacing(2),
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
   },
   emptyStateRow: {
     display: 'flex',

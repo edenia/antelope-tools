@@ -71,6 +71,9 @@ export default (theme) => ({
         width: '50%',
       },
     },
+    [theme.breakpoints.down('sm')]: {
+      top: 85,
+    },
     [theme.breakpoints.up('sm')]: {
       left: -189,
       width: 320,
@@ -110,6 +113,13 @@ export default (theme) => ({
     height: 50,
     borderRadius: theme.spacing(2),
     color: theme.palette.common.black,
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(6, 0, 4),
+      textAlign: 'center',
+      '& > p':{
+        maxWidth: 130,
+      },
+    },
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 22,
       borderRadius: theme.spacing(2, 4, 4, 2),

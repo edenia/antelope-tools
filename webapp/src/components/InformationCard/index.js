@@ -12,17 +12,12 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-import { formatData, formatWithThousandSeparator } from '../../utils'
-import { eosConfig } from '../../config'
+import { formatData } from '../../utils'
 import NodesCard from '../NodeCard/NodesCard'
 import ProducerName from 'components/ProducerName'
-import ComplianceBar from 'components/ComplianceBar'
-import CountryFlag from 'components/CountryFlag'
 import ViewBPProfile from 'components/ViewBPProfile'
 
 import styles from './styles'
-import MainSocialLinks from './MainSocialLinks'
-import EmptyStateRow from './EmptyStateRow'
 
 const useStyles = makeStyles(styles)
 
@@ -33,42 +28,9 @@ const InformationCard = ({ producer, rank, type }) => {
   const matches = useMediaQuery(theme.breakpoints.up('lg'))
   const [expanded, setExpanded] = useState(false)
   const [producerOrg, setProducerOrg] = useState({})
-  const isLacchain = eosConfig.networkName === 'lacchain'
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
-  }
-
-  const BlockProducerInfo = () => {
-    if (producerOrg?.hasEmptyBPJson)
-      return <EmptyStateRow classes={classes} t={t} />
-
-    return (
-      <>
-        <Typography>{producerOrg?.location}</Typography>
-        <CountryFlag code={producerOrg?.country} />{' '}
-        <Typography variant="body1">{producerOrg?.media?.website}</Typography>
-        {!isLacchain && (
-          <>
-            <Typography variant="body1">
-              {formatWithThousandSeparator(producer?.total_votes_eos || '0', 0)}
-            </Typography>
-            <Typography variant="body1">{`${formatWithThousandSeparator(
-              producer?.total_rewards || '0',
-              0,
-            )} ${eosConfig.tokenSymbol}`}</Typography>
-          </>
-        )}
-        <ComplianceBar
-          total={producerOrg?.compliance?.total}
-          pass={producerOrg?.compliance?.pass}
-        />
-        <MainSocialLinks
-          social={producerOrg?.social}
-          name={producerOrg?.media?.name}
-        />
-      </>
-    )
   }
 
   useEffect(() => {
@@ -107,7 +69,7 @@ const InformationCard = ({ producer, rank, type }) => {
           name={producerOrg?.media?.name}
           lazy={producer?.rank > 5}
         />
-        {type === 'node' ? (
+        {type === 'node' && (
           <>
             <Collapse
               in={matches ? true : expanded}
@@ -120,8 +82,6 @@ const InformationCard = ({ producer, rank, type }) => {
               </div>
             </Collapse>
           </>
-        ) : (
-          <BlockProducerInfo />
         )}
         <ViewBPProfile producer={producer} />
       </div>
