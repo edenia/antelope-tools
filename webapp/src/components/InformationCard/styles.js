@@ -167,12 +167,13 @@ export default (theme) => ({
       textAlign: 'center',
       color: '#3d3d3dde',
       marginLeft: theme.spacing(5),
+      marginTop: theme.spacing(1),
     },
   },
   socialLinksContainer: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     gap: theme.spacing(4),
-    justifyContent: 'center',
     '& svg': {
       width: '30px',
       height: '30px',

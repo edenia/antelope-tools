@@ -29,7 +29,7 @@ const MainSocialLinks = ({ social, name }) => {
     <div className={classes.socialLinksContainer}>
       {socialMediaNames.map(
         (socialMedia, index) =>
-          links[socialMedia] && (
+          links[socialMedia] ? (
             <Link
               key={`${name}-${socialMedia}-${index}`}
               href={links[socialMedia]}
@@ -39,6 +39,8 @@ const MainSocialLinks = ({ social, name }) => {
             >
               {icons[socialMedia]}
             </Link>
+          ) : (
+            <span></span>
           ),
       )}
     </div>

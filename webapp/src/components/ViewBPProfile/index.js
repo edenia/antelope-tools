@@ -22,7 +22,7 @@ const ViewBPProfile = ({ producer }) => {
       to={`/${eosConfig.producersRoute}/${producer?.owner}`}
       state={{ producer }}
       variant="contained"
-      color="secondary"
+      color="primary"
       mt={2}
       endIcon={<LaunchIcon/>}
     >

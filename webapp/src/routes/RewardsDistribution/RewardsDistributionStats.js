@@ -116,7 +116,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                   component={Link}
                   to="/undiscoverable-bps"
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   mt={2}
                 >
                   {t('viewList')}
