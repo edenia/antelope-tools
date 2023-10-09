@@ -127,7 +127,7 @@ export default (theme) => ({
     [theme.breakpoints.down('xl')]: {
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-      textOverflow: 'ellipsis', 
+      textOverflow: 'ellipsis',
       width: '140px',
     },
   },

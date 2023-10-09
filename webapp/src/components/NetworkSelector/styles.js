@@ -116,7 +116,7 @@ export default (theme) => ({
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(6, 0, 4),
       textAlign: 'center',
-      '& > p':{
+      '& > p': {
         maxWidth: 130,
       },
     },
