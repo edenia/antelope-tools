@@ -23,13 +23,16 @@ const useProducerProfileState = (name, previousData) => {
     useLazyQuery(PRODUCER_INFO_QUERY)
   const [loadStats, { data: { eosrate_stats: eosRate } = {} }] =
     useLazyQuery(EOSRATE_STATS_QUERY)
-  const { data: nodesSubscription } = useSubscription(NODES_BY_PRODUCER_SUBSCRIPTION, {
-    variables: { where: { producer: defaultVariables.where } },
-  })
+  const { data: nodesSubscription } = useSubscription(
+    NODES_BY_PRODUCER_SUBSCRIPTION,
+    {
+      variables: { where: { producer: defaultVariables.where } },
+    },
+  )
 
   const isValidName = isValidAccountName(name)
 
-  const getProducerData = (bpData) => {
+  const getProducerData = bpData => {
     return bpData
       ? {
           ...bpData,
@@ -50,7 +53,7 @@ const useProducerProfileState = (name, previousData) => {
   useEffect(() => {
     if (isValidName) {
       loadStats({
-        variables: { bp: name }
+        variables: { bp: name },
       })
 
       if (previousData) {
@@ -74,7 +77,7 @@ const useProducerProfileState = (name, previousData) => {
   useEffect(() => {
     if (!nodesSubscription?.nodes || !producerKey) return
 
-    setProducer((prev) => ({
+    setProducer(prev => ({
       ...prev,
       nodes: sortNodes(nodesSubscription?.nodes, producerKey),
     }))
@@ -92,24 +95,27 @@ const useProducerProfileState = (name, previousData) => {
     const bp = getProducerData(producers?.at(0))
 
     setProducerKey(bp.producer_key)
+    setProducer(prev => ({ ...prev, ...bp }))
+  }, [producers])
+
+  useEffect(() => {
+    if (!producer || !Object?.keys(producer).length) return
 
     setLdJson(
       JSON.stringify({
         '@context': 'http://schema.org',
         '@type': 'Organization',
-        name: bp?.media?.name,
-        url: bp?.media?.website,
+        name: producer?.media?.name,
+        url: producer?.media?.website,
         contactPoint: {
           '@type': 'ContactPoint',
-          email: bp?.media?.email,
+          email: producer?.media?.email,
           contactType: 'customer service',
         },
-        logo: bp?.media?.logo,
+        logo: producer?.media?.logo,
       }),
     )
-
-    setProducer((prev) => ({ ...prev, ...bp }))
-  }, [producers])
+  }, [producer])
 
   return [{ loading, producer, ldJson }, {}]
 }

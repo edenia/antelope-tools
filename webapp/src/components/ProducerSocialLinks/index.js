@@ -24,7 +24,7 @@ const ProducerSocialLinks = ({ items }) => {
       key={`social-link${i}`}
       href={item.url}
       target="_blank"
-      rel="noopener noreferrer"
+      rel="nofollow noopener noreferrer"
       aria-label={item.url}
     >
       {icons[item.name] || <LanguageIcon />}

@@ -27,7 +27,7 @@ const ProfileCard = ({ producer }) => {
       <MoreInfoModal>
         {data.map((url, index) => (
           <div key={`more-info-${url}-${index}`}>
-            <a href={url} target="_blank" rel="noopener noreferrer">
+            <a href={url} target="_blank" rel="nofollow noopener noreferrer">
               {url}
             </a>
           </div>
@@ -50,7 +50,7 @@ const ProfileCard = ({ producer }) => {
                 <Link
                   href={url || value}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                 >
                   {value}
                 </Link>

@@ -30,7 +30,7 @@ const Page404 = () => {
         component={Link}
         to="/"
         variant="contained"
-        color="secondary"
+        color="primary"
         mt={2}
       >
         {t('return')}

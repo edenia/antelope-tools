@@ -87,9 +87,6 @@ export default (theme) => ({
     textAlign: 'center',
     flexGrow: '1',
     '& > p': {
-      '& span': {
-        textTransform: 'uppercase',
-      },
       '& > a': {
         margin: 0,
       },

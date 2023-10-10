@@ -15,7 +15,7 @@ const VisitSite = ({ title, url, placement = 'left' }) => {
       <a
         href={url}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow noopener noreferrer"
         className={classes.link}
         aria-label={url}
       >

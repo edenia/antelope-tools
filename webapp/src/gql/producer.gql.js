@@ -81,13 +81,7 @@ export const SMALL_PRODUCERS_QUERY = gql`
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
-    $endpointFilter: endpoints_by_producer_id_bool_exp
   ) {
-    info: producer_aggregate(where: $where) {
-      producers: aggregate {
-        count
-      }
-    }
     producers: producer(
       where: $where
       order_by: { total_votes_percent: desc }
