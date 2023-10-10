@@ -9,19 +9,15 @@ export default (theme) => ({
     gap: theme.spacing(4),
     marginTop: theme.spacing(5),
     '& > div': {
-      padding: 0,
       gap: theme.spacing(4),
-      [theme.breakpoints.down('sm')]: {
-        justifyContent: 'center',
-      }
     },
   },
   profile: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'space-between',
     padding: theme.spacing(6),
     '& > div + div': {
-      padding: theme.spacing(0, 6),
+      padding: theme.spacing(0, 6, 2),
     },
   },
   socialLinks: {

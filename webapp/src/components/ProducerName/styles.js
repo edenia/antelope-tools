@@ -14,11 +14,19 @@ export default (theme) => ({
   },
   bigContainer: {
     width: '100%',
+    padding: theme.spacing(0, 4, 0)
   },
   smallContainer: {
     width: '170px',
     [theme.breakpoints.down('md')]: {
       width: '150px',
+    },
+    '& .MuiTypography-h2': {
+      fontWeight: 'bold',
+      fontSize: '1.5rem',
+      [theme.breakpoints.down('xl')]: {
+        fontSize: '1rem',
+      },
     },
   },
   socialContainer: {

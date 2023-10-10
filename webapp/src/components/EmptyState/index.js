@@ -13,7 +13,7 @@ const EmptyState = () => {
   const { t } = useTranslation('producerCardComponent')
 
   return (
-    <div className={classes.emptyState}>
+    <div className={`${classes.emptyStateContainer} ${classes.emptyState}`}>
       <img
         className={classes.imgError}
         src="/empty-states/Error.webp"

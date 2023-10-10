@@ -16,7 +16,7 @@ import ViewBPProfile from 'components/ViewBPProfile'
 
 import styles from './styles'
 import MainSocialLinks from './MainSocialLinks'
-import EmptyStateRow from './EmptyStateRow'
+import EmptyStateRow from 'components/EmptyState/EmptyStateRow'
 
 const useStyles = makeStyles(styles)
 

@@ -8,7 +8,6 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import { useQuery } from '@apollo/client'
-import 'flag-icon-css/css/flag-icons.css'
 
 import { NODE_CPU_BENCHMARK } from '../../gql'
 
@@ -87,7 +86,7 @@ const NodeCard = ({ producer, node }) => {
         title={title}
         subheader={
           <>
-            <span className={classes.country}>
+            <span>
               {node.location?.name || 'N/A'}
             </span>
             <CountryFlag code={node.location?.country} />

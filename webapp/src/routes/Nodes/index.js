@@ -1,15 +1,14 @@
 /* eslint camelcase: 0 */
 import React, { lazy, memo } from 'react'
 import { makeStyles } from '@mui/styles'
-
 import useNodeState from '../../hooks/customHooks/useNodeState'
 
 import styles from './styles'
 
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const Pagination = lazy(() => import('@mui/material/Pagination'))
+const NodesList = lazy(() => import('../../components/NodesList'))
 const SearchBar = lazy(() => import('../../components/SearchBar'))
-const InformationCard = lazy(() => import('../../components/InformationCard'))
 const NoResults = lazy(() => import('../../components/NoResults'))
 const ProducersUpdateLog = lazy(() =>
   import('../../components/ProducersUpdateLog'),
@@ -41,14 +40,7 @@ const Nodes = () => {
         <>
           <div className={classes.container}>
             {!!items?.length ? (
-              items.map((producer, index) => (
-                <InformationCard
-                  key={`node-${producer.owner}-${index}`}
-                  type="node"
-                  producer={producer}
-                  rank={producer.rank}
-                />
-              ))
+              <NodesList producers={items}/>
             ) : (
               <NoResults />
             )}

@@ -1,5 +1,5 @@
 export default (theme) => ({
     button: {
-      minWidth: '156px !important',
+      minWidth: '132px !important',
     },
   })

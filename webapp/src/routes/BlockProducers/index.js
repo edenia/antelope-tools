@@ -12,7 +12,7 @@ import SearchBar from '../../components/SearchBar'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
 import ProducersUpdateLog from '../../components/ProducersUpdateLog'
-import ProducersTable from '../../components/InformationCard/ProducersTable'
+import ProducersTable from '../../components/ProducersTable'
 
 import styles from './styles'
 

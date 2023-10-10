@@ -4,6 +4,12 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
+    '& a': {
+      color: theme.palette.primary.main,
+      textDecorationColor: theme.palette.primary.main,
+    },
+  },
+  emptyStateContainer: {
     '& span': {
       width: '16em',
       height: '45px',
@@ -16,9 +22,14 @@ export default (theme) => ({
       textAlign: 'center',
       color: '#3d3d3dde',
     },
-    '& a': {
-      color: theme.palette.primary.main,
-      textDecorationColor: theme.palette.primary.main,
+  },
+  emptyStateRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& span': {
+      marginLeft: theme.spacing(5),
+      marginTop: theme.spacing(1),
     },
   },
   imgError: {
