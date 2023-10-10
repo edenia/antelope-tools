@@ -61,7 +61,7 @@ const NodesRow = ({ producer }) => {
       >
         <>
           <Typography variant="h2" component="p" padding={4}>
-            {t('nodes')}
+            {t('bpNodes', {bpName: producerOrg?.media?.name })}
           </Typography>
           <NodesCard nodes={producer.bp_json?.nodes} hideFeatures />{' '}
         </>
