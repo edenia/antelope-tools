@@ -5,6 +5,7 @@ export default (theme) => ({
     '& img': {
       borderRadius: '50%',
       aspectRatio: '1 / 1',
+      backgroundColor: '#FFF',
     },
   },
   nameContainer: {
@@ -14,7 +15,11 @@ export default (theme) => ({
   },
   bigContainer: {
     width: '100%',
-    padding: theme.spacing(0, 4, 0)
+    minWidth: '270px',
+    padding: theme.spacing(0, 4, 0),
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '150px',
+    },
   },
   smallContainer: {
     width: '140px',

@@ -1,7 +1,9 @@
 export default (theme) => ({
-  card: {
+  container: {
     margin: theme.spacing(4, 0),
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+  },
+  profileContainer: {
+    padding: '0 !important',
   },
   dataContainer: {
     display: 'flex',
@@ -16,17 +18,23 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: theme.spacing(6),
-    '& > div + div': {
-      padding: theme.spacing(0, 6, 2),
+    backgroundImage: 'url(https://antelope.tools/images/profile-bg-image.webp)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column'
     },
   },
   socialLinks: {
     display: 'flex',
     gap: theme.spacing(5),
     alignSelf: 'end',
+    padding: theme.spacing(0, 0, 2),
+    [theme.breakpoints.down('md')]: {
+      flexWrap: 'wrap',
+    },
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(8),
-      flexWrap: 'wrap',
       justifyContent: 'center',
       alignSelf: 'center',
     },
