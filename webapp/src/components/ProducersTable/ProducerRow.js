@@ -60,7 +60,7 @@ const ProducerRow = ({ producer, index }) => {
               {producerOrg?.media?.website}
             </Typography>
           </Link>
-          <span className={`${classes.website} ${classes.hideOnDesktop}`}>
+          <span className={`${classes.websiteContainer} ${classes.hideOnDesktop}`}>
             <VisitSite url={producerOrg?.media?.website} Icon={LanguageIcon} />
           </span>
         </TableCell>
