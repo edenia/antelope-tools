@@ -53,7 +53,7 @@ const useProducerProfileState = (name, previousData) => {
 
   useEffect(() => {
     if (isValidName) {
-      if (generalConfig.eosRateLink){
+      if (generalConfig.eosRateLink) {
         loadStats({
           variables: { bp: name },
         })
