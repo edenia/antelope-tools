@@ -7,14 +7,14 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
+import { eosConfig } from '../../config'
 import { formatData } from '../../utils'
 import NodesCard from '../NodeCard/NodesCard'
 import ProducerName from 'components/ProducerName'
 import ViewBPProfile from 'components/ViewBPProfile'
+import Tooltip from 'components/Tooltip'
 
 import styles from './styles'
-import Tooltip from 'components/Tooltip'
-import { eosConfig } from 'config'
 
 const useStyles = makeStyles(styles)
 

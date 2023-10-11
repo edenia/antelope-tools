@@ -2,8 +2,9 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 
-import styles from './styles'
 import AlertSvg from 'components/Icons/Alert'
+
+import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
