@@ -8,7 +8,7 @@ import styles from './styles'
 const useStyles = makeStyles(styles)
 
 const PercentageBar = styled.div`
-    width: 100%;
+    width: 80%;
     height: 8px;
     & div {
       border-radius: ${props => props.theme.spacing(4)};

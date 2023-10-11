@@ -20,7 +20,7 @@ const NodeList = ({ producers }) => {
   const Header = () => {
     return (
       <div
-        className={`card ${classes.columnsContainer} ${classes.cardRow} ${classes.hideOnMobile}`}
+        className={`simple-card ${classes.columnsContainer} ${classes.cardRow} ${classes.hideOnMobile}`}
       >
         {eosConfig.producerColumns?.includes('rank') ? (
           <Typography variant="caption">{t('rank')}</Typography>

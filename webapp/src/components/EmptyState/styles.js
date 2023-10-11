@@ -28,7 +28,6 @@ export default (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     '& span': {
-      marginLeft: theme.spacing(5),
       marginTop: theme.spacing(1),
     },
   },

@@ -77,19 +77,22 @@ const Producers = () => {
       {loading ? (
         <LinearProgress />
       ) : !!items?.length ? (
-        <div className={`${classes.container} ${classes.cardShadow}`}>
-          <ProducersTable producers={items} />
-        </div>
+        <>
+          <div className={`${classes.container} ${classes.cardShadow}`}>
+            <ProducersTable producers={items} />
+          </div>
+          <PaginationWrapper
+            classes={classes.pagination}
+            totalPages={pagination.pages}
+            page={pagination.page}
+            onPageChange={handleOnPageChange}
+            loading={loading}
+          />
+        </>
       ) : (
         <NoResults />
       )}
-      <PaginationWrapper
-        classes={classes.pagination}
-        totalPages={pagination.pages}
-        page={pagination.page}
-        onPageChange={handleOnPageChange}
-        loading={loading}
-      />
+      
     </>
   )
 }

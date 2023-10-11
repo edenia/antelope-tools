@@ -17,9 +17,9 @@ export default (theme) => ({
     padding: theme.spacing(0, 4, 0)
   },
   smallContainer: {
-    width: '170px',
+    width: '140px',
     [theme.breakpoints.down('md')]: {
-      width: '150px',
+      width: '120px',
     },
     '& .MuiTypography-h2': {
       fontWeight: 'bold',

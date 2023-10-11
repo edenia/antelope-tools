@@ -36,15 +36,20 @@ export default (theme) => ({
         display: 'none !important',
       },
     },
-    website: {
+    websiteContainer: {
       [theme.breakpoints.down('xl')]: {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis', 
         width: '140px',
       },
+      [theme.breakpoints.down('md')]: {
+          '& > a': {
+            margin: 0,
+          },
+      },
     },
-    country: {
+    countryContainer: {
       [theme.breakpoints.down('md')]: {
         textAlign: 'center'
       },

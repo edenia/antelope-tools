@@ -53,7 +53,7 @@ const NodesRow = ({ producer }) => {
   if (!producerOrg || !Object.keys(producerOrg)?.length) return <></>
 
   return (
-    <div className={`card ${classes.cardRow} ${classes.nodesRow}`}>
+    <div className={`simple-card ${classes.cardRow} ${classes.nodesRow}`}>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
