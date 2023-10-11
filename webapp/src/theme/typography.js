@@ -47,7 +47,6 @@ const typography = {
     lineHeight: 1.2
   },
   caption: {
-    color: '#4e4e4e',
     textTransform: 'uppercase',
     fontWeight: 700,
     lineHeight: 1.2,

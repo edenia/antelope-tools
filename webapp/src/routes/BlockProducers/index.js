@@ -78,7 +78,7 @@ const Producers = () => {
         <LinearProgress />
       ) : !!items?.length ? (
         <>
-          <div className={`${classes.container} ${classes.cardShadow}`}>
+          <div className={'simple-card'}>
             <ProducersTable producers={items} />
           </div>
           <PaginationWrapper

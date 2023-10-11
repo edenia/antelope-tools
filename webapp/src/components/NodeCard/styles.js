@@ -31,7 +31,7 @@ export default (theme) => ({
       paddingBottom: theme.spacing(4),
     },
     boxShadow: '2px 3px 4px 0px #0000002E',
-    backgroundColor: '#f6f9fd',
+    backgroundColor: theme.palette.background.light,
     borderRadius: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       width: '230px',

@@ -14,7 +14,7 @@ export default (theme) => ({
     gap: theme.spacing(6),
     margin: `${theme.spacing(6)} 24px ${theme.spacing(4)}`,
     paddingBottom: theme.spacing(4),
-    borderBottom: '1px solid #e0e0e0',
+    borderBottom: `1px solid ${theme.palette.neutral.light}`,
     [theme.breakpoints.down('lg')]: {
       margin: theme.spacing(6, 0, 4),
     },

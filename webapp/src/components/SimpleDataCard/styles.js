@@ -72,7 +72,7 @@ export default (theme) => ({
   tooltip: {
     width: '18px !important',
     height: '18px !important',
-    color: '#3d3d3dde',
+    color: theme.palette.neutral.darker,
     '&:hover': {
       cursor: 'pointer',
       color: theme.palette.primary.main,

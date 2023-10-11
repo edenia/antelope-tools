@@ -19,7 +19,7 @@ export default (theme) => ({
       fontStyle: 'normal',
       letterSpacing: '-0.22px',
       textAlign: 'center',
-      color: '#3d3d3dde',
+      color: theme.palette.neutral.darker,
     },
   },
   emptyStateRow: {

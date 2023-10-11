@@ -17,7 +17,7 @@ export default (theme) => ({
         padding: `${theme.spacing(1, 2)} !important`,
       },
       '&:hover': {
-        backgroundColor: '#f0f3fa',
+        backgroundColor: `${theme.palette.neutral.lighter}`,
       },
     },
     tableHead: {

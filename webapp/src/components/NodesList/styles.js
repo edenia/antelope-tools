@@ -36,7 +36,7 @@ export default (theme) => ({
       width: 'auto',
     },
     '&:hover': {
-      backgroundColor: '#f0f3fa',
+      backgroundColor: `${theme.palette.neutral.lighter}`,
     },
   },
   columnsContainer: {
