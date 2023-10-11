@@ -54,20 +54,15 @@ const ProducerRow = ({ producer, index }) => {
             href={producerOrg?.media?.website}
             target="_blank"
             rel="nofollow noopener noreferrer"
+            className={classes.hideOnMobile}
           >
-            <Typography
-              variant="body1"
-              className={`${classes.websiteContainer} ${classes.hideOnMobile}`}
-            >
+            <Typography variant="body1" className={classes.websiteContainer}>
               {producerOrg?.media?.website}
             </Typography>
-            <span className={`${classes.website} ${classes.hideOnDesktop}`}>
-              <VisitSite
-                url={producerOrg?.media?.website}
-                Icon={LanguageIcon}
-              />
-            </span>
           </Link>
+          <span className={`${classes.website} ${classes.hideOnDesktop}`}>
+            <VisitSite url={producerOrg?.media?.website} Icon={LanguageIcon} />
+          </span>
         </TableCell>
         {eosConfig.producerColumns?.includes('votes') && (
           <TableCell align="center">

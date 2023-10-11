@@ -43,7 +43,7 @@ const MainSocialLinks = ({ social, name }) => {
             {icons[socialMedia]}
           </Link>
         ) : (
-          <span />
+          <span key={`${name}-${index}`}/>
         ),
       )}
     </div>
