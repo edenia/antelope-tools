@@ -23,12 +23,12 @@ const NodeList = ({ producers }) => {
         className={`simple-card ${classes.columnsContainer} ${classes.cardRow} ${classes.hideOnMobile}`}
       >
         {eosConfig.producerColumns?.includes('rank') ? (
-          <Typography variant="caption">{t('rank')}</Typography>
+          <Typography variant="capSubtitle">{t('rank')}</Typography>
         ) : (
           <span />
         )}
-        <Typography variant="caption">{t('producerName')}</Typography>
-        <Typography variant="caption">{t('nodes')}</Typography>
+        <Typography variant="capSubtitle">{t('producerName')}</Typography>
+        <Typography variant="capSubtitle">{t('nodes')}</Typography>
         <span />
       </div>
     )

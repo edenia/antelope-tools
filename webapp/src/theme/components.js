@@ -8,10 +8,17 @@ const components = {
           border-radius: 4px;
           padding: ${theme.spacing(4)};
         },
-        .MuiTypography-caption {
+        .MuiTypography-capSubtitle {
           color: ${theme.palette.neutral.dark};
         }
       `,
+  },
+  MuiTypography: {
+    defaultProps: {
+      variantMapping: {
+        capSubtitle: 'span',
+      },
+    },
   },
   MuiButton: {
     styleOverrides: {

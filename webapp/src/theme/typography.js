@@ -46,7 +46,8 @@ const typography = {
     fontWeight: 600,
     lineHeight: 1.2
   },
-  caption: {
+  capSubtitle: {
+    fontSize: '0.75rem',
     textTransform: 'uppercase',
     fontWeight: 700,
     lineHeight: 1.2,
