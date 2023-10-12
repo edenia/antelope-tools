@@ -60,7 +60,7 @@ const Dashboard = ({ children }) => {
   const removeParam = route => route.substring(0,route.lastIndexOf('/'))
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/,'')
+    const path = location.pathname.replace(/\/$/,'') || '/'
     const route = routes.find(route => 
       route.useParams ? 
         removeParam(route.path) === removeParam(path)

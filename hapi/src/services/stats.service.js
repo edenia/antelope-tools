@@ -425,7 +425,7 @@ const syncTransactionsInfo = async () => {
   }
 
   payload.average_daily_transactions_in_last_week =
-    payload.transactions_in_last_day / 7 || 0
+    payload.transactions_in_last_week / 7 || 0
 
   const stats = await getStats()
 
