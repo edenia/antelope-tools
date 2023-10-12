@@ -371,7 +371,9 @@
     "viewProfile": "Ver Perfil del BP",
     "BPonNetwork": "{{position}} Productor de Bloques en {{networkName}}",
     "generalInformation": "Información General",
-    "organization_name": "Nombre"
+    "organization_name": "Nombre",
+    "viewNodes": "Ver {{totalNodes}} nodos",
+    "bpNodes": "Nodos de {{bpName}}"
   },
   "nodeCardComponent": {
     "features": "Características",

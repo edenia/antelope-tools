@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import TableCell from '@mui/material/TableCell'
+import LanguageIcon from '@mui/icons-material/Language'
 
 import { formatData, formatWithThousandSeparator } from '../../utils'
 import { eosConfig } from '../../config'
@@ -13,10 +14,11 @@ import ProducerName from 'components/ProducerName'
 import ComplianceBar from 'components/ComplianceBar'
 import CountryFlag from 'components/CountryFlag'
 import ViewBPProfile from 'components/ViewBPProfile'
+import EmptyStateRow from 'components/EmptyState/EmptyStateRow'
+import VisitSite from 'components/VisitSite'
 
 import styles from './styles'
 import MainSocialLinks from './MainSocialLinks'
-import EmptyStateRow from './EmptyStateRow'
 
 const useStyles = makeStyles(styles)
 
@@ -28,19 +30,23 @@ const ProducerRow = ({ producer, index }) => {
   const BlockProducerInfo = () => {
     if (producerOrg?.hasEmptyBPJson)
       return (
-        <TableCell align="center" colSpan={eosConfig.networkName !== 'lacchain' ? 6 : 4}>
+        <TableCell
+          align="center"
+          colSpan={eosConfig.networkName !== 'lacchain' ? 6 : 4}
+        >
           <EmptyStateRow classes={classes} t={t} />
         </TableCell>
       )
 
     return (
       <>
-        <TableCell>
-          <Typography className={classes.country}>
+        <TableCell align="center">
+          <Typography className={classes.countryContainer}>
+            <CountryFlag code={producerOrg?.country} />
             <span className={classes.hideOnMobile}>
+              <br />
               {producerOrg?.location}
             </span>
-            <CountryFlag code={producerOrg?.country} />
           </Typography>
         </TableCell>
         <TableCell align="center">
@@ -48,11 +54,15 @@ const ProducerRow = ({ producer, index }) => {
             href={producerOrg?.media?.website}
             target="_blank"
             rel="nofollow noopener noreferrer"
+            className={classes.hideOnMobile}
           >
-            <Typography variant="body1" className={classes.website}>
+            <Typography variant="body1" className={classes.websiteContainer}>
               {producerOrg?.media?.website}
             </Typography>
           </Link>
+          <span className={`${classes.websiteContainer} ${classes.hideOnDesktop}`}>
+            <VisitSite url={producerOrg?.media?.website} Icon={LanguageIcon} />
+          </span>
         </TableCell>
         {eosConfig.producerColumns?.includes('votes') && (
           <TableCell align="center">

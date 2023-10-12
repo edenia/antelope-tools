@@ -4,21 +4,30 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    '& span': {
-      width: '16em',
-      height: '45px',
-      fontSize: '1.2em',
-      fontWeight: 'bold',
-      fontStretch: 'normal',
-      fontStyle: 'normal',
-      lineHeight: '1.12',
-      letterSpacing: '-0.22px',
-      textAlign: 'center',
-      color: '#3d3d3dde',
-    },
     '& a': {
       color: theme.palette.primary.main,
       textDecorationColor: theme.palette.primary.main,
+    },
+  },
+  emptyStateContainer: {
+    '& span': {
+      width: '16em',
+      height: '45px',
+      fontSize: '1em',
+      fontWeight: 'bold',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      letterSpacing: '-0.22px',
+      textAlign: 'center',
+      color: theme.palette.neutral.darker,
+    },
+  },
+  emptyStateRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& span': {
+      marginTop: theme.spacing(1),
     },
   },
   imgError: {

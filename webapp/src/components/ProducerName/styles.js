@@ -5,6 +5,7 @@ export default (theme) => ({
     '& img': {
       borderRadius: '50%',
       aspectRatio: '1 / 1',
+      backgroundColor: '#FFF',
     },
   },
   nameContainer: {
@@ -14,11 +15,23 @@ export default (theme) => ({
   },
   bigContainer: {
     width: '100%',
+    minWidth: '270px',
+    padding: theme.spacing(0, 4, 0),
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '150px',
+    },
   },
   smallContainer: {
-    width: '170px',
+    width: '140px',
     [theme.breakpoints.down('md')]: {
-      width: '150px',
+      width: '120px',
+    },
+    '& .MuiTypography-h2': {
+      fontWeight: 'bold',
+      fontSize: '1.5rem',
+      [theme.breakpoints.down('xl')]: {
+        fontSize: '1rem',
+      },
     },
   },
   socialContainer: {

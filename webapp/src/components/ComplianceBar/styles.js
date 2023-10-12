@@ -5,6 +5,6 @@ export default (theme) => ({
     alignItems: 'center',
   },
   bar: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: theme.palette.neutral.light,
   },
 })

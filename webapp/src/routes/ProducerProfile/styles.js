@@ -1,7 +1,9 @@
 export default (theme) => ({
-  card: {
+  container: {
     margin: theme.spacing(4, 0),
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+  },
+  profileContainer: {
+    padding: '0 !important',
   },
   dataContainer: {
     display: 'flex',
@@ -9,33 +11,35 @@ export default (theme) => ({
     gap: theme.spacing(4),
     marginTop: theme.spacing(5),
     '& > div': {
-      padding: 0,
       gap: theme.spacing(4),
-      [theme.breakpoints.down('sm')]: {
-        justifyContent: 'center',
-      }
     },
   },
   profile: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'space-between',
     padding: theme.spacing(6),
-    '& > div + div': {
-      padding: theme.spacing(0, 6),
+    backgroundImage: 'url(https://antelope.tools/images/profile-bg-image.webp)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column'
     },
   },
   socialLinks: {
     display: 'flex',
     gap: theme.spacing(5),
     alignSelf: 'end',
+    padding: theme.spacing(0, 0, 2),
+    [theme.breakpoints.down('md')]: {
+      flexWrap: 'wrap',
+    },
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(8),
-      flexWrap: 'wrap',
       justifyContent: 'center',
       alignSelf: 'center',
     },
     '& svg': {
-      color: '#000000DE',
+      color: theme.palette.neutral.dark,
       '&:hover': {
         color: theme.palette.primary.main,
         transform: 'scale(1.3)',
@@ -73,7 +77,7 @@ export default (theme) => ({
     padding: theme.spacing(4),
     borderBottom: `2px solid ${theme.palette.primary.main}`,
     boxShadow: '0px -2px 8px 0px #0000004D',
-    backgroundColor: '#F6F9FD',
+    backgroundColor: theme.palette.background.light,
     [theme.breakpoints.down('md')]: {
       gap: theme.spacing(4),
     },

@@ -21,27 +21,30 @@ const MainSocialLinks = ({ social, name }) => {
   }
 
   social.forEach((item, index) => {
-    if (index > socialMediaNames.length || !socialMediaNames.includes(item?.name)) return
+    if (
+      index > socialMediaNames.length ||
+      !socialMediaNames.includes(item?.name)
+    )
+      return
     links[item?.name] = item.url
   })
 
   return (
     <div className={classes.socialLinksContainer}>
-      {socialMediaNames.map(
-        (socialMedia, index) =>
-          links[socialMedia] ? (
-            <Link
-              key={`${name}-${socialMedia}-${index}`}
-              href={links[socialMedia]}
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              aria-label={`${name} ${socialMedia}`}
-            >
-              {icons[socialMedia]}
-            </Link>
-          ) : (
-            <span></span>
-          ),
+      {socialMediaNames.map((socialMedia, index) =>
+        links[socialMedia] ? (
+          <Link
+            key={`${name}-${socialMedia}-${index}`}
+            href={links[socialMedia]}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            aria-label={`${name} ${socialMedia}`}
+          >
+            {icons[socialMedia]}
+          </Link>
+        ) : (
+          <span key={`${name}-${index}`}/>
+        ),
       )}
     </div>
   )

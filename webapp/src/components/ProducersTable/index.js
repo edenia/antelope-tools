@@ -29,7 +29,7 @@ const ProducersTable = ({ producers }) => {
           <TableRow>
             {eosConfig.producerColumns.map((name) => (
               <TableCell align="center" key={name}>
-                <Typography variant="caption">
+                <Typography variant="capSubtitle">
                 {t(name)}
                 </Typography>
               </TableCell>

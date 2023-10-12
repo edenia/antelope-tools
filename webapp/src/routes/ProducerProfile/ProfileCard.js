@@ -40,7 +40,7 @@ const ProfileCard = ({ producer }) => {
     return (
       <span className={classes.OrgDataItem}>
         <p>
-          <Typography variant="caption">{title}</Typography> <br />
+          <Typography variant="capSubtitle">{title}</Typography> <br />
           {value ? (
             <>
               {type === 'text' && value}

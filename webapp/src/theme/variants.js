@@ -5,26 +5,39 @@ const lightVariant = {
   palette: {
     primary: {
       main: blue[800],
-      contrastText: '#FFF'
+      contrastText: '#FFF',
     },
     secondary: {
       main: blue[600],
-      contrastText: '#FFF'
+      contrastText: '#FFF',
     },
     tertiary: {
       main: '#00C853',
-      contrastText: '#FFF'
+      contrastText: '#FFF',
+    },
+    text: {
+      primary: '#000',
+    },
+    background: {
+      main: '#FFF',
+      light: '#F6F9FD',
+    },
+    neutral: {
+      lighter: '#F0F3FA',
+      light: '#E0E0E0',
+      dark: '#4E4E4E',
+      darker: '#3D3D3DDE'
     }
   },
   header: {
     color: grey[500],
     background: '#FFF',
     search: {
-      color: grey[800]
+      color: grey[800],
     },
     indicator: {
-      background: blue[600]
-    }
+      background: blue[600],
+    },
   },
   sidebar: {
     color: grey[900],
@@ -33,23 +46,23 @@ const lightVariant = {
       color: blue[800],
       background: '#FFF',
       brand: {
-        color: blue[800]
-      }
+        color: blue[800],
+      },
     },
     footer: {
       color: '#424242',
-      background: '#FFF'
+      background: '#FFF',
     },
     category: {
-      fontWeight: 'normal'
+      fontWeight: 'normal',
     },
     badge: {
-      color: '#FFF'
-    }
+      color: '#FFF',
+    },
   },
   body: {
-    background: '#F7F9FC'
-  }
+    background: '#F7F9FC',
+  },
 }
 
 const darkVariant = {
@@ -57,22 +70,39 @@ const darkVariant = {
   palette: {
     primary: {
       main: blue[700],
-      contrastText: '#FFF'
+      contrastText: '#FFF',
     },
     secondary: {
-      main: blue[500],
-      contrastText: '#FFF'
+      main: blue[600],
+      contrastText: '#FFF',
+    },
+    tertiary: {
+      main: '#00C853',
+      contrastText: '#FFF',
+    },
+    text: {
+      primary: '#FFF',
+    },
+    background: {
+      main: '#1B2430',
+      light: '#F6F9FD',
+    },
+    neutral: {
+      lighter: '#f0f3fa',
+      light: '#E0E0E0',
+      dark: '#4E4E4E',
+      darker: '#3D3D3DDE'
     }
   },
   header: {
     color: grey[500],
     background: '#FFFFFF',
     search: {
-      color: grey[800]
+      color: grey[800],
     },
     indicator: {
-      background: blue[600]
-    }
+      background: blue[600],
+    },
   },
   sidebar: {
     color: grey[200],
@@ -81,27 +111,27 @@ const darkVariant = {
       color: grey[200],
       background: '#232f3e',
       brand: {
-        color: blue[500]
-      }
+        color: blue[500],
+      },
     },
     footer: {
       color: grey[200],
       background: '#232f3e',
       online: {
-        background: green[500]
-      }
+        background: green[500],
+      },
     },
     category: {
-      fontWeight: 400
+      fontWeight: 400,
     },
     badge: {
       color: '#FFF',
-      background: blue[500]
-    }
+      background: blue[500],
+    },
   },
   body: {
-    background: '#F7F9FC'
-  }
+    background: '#F7F9FC',
+  },
 }
 
 const variants = [lightVariant, darkVariant]

@@ -2,19 +2,10 @@ export default (theme) => ({
   container: {
     display: 'flex',
     flexFlow: 'row wrap',
-    justifyContent: 'space-between',
-    paddingTop: theme.spacing(2),
-  },
-  card: {
-    width: '100%',
-    display: 'flex',
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'center',
-      flex: 'content',
-    },
-    [theme.breakpoints.down('sm')]: {
-      flex: 'auto',
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.down('md')]: {
+      gap: theme.spacing(4),
+      justifyContent: 'space-between',
     },
   },
   pagination: {

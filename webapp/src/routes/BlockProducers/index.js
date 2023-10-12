@@ -12,7 +12,7 @@ import SearchBar from '../../components/SearchBar'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
 import ProducersUpdateLog from '../../components/ProducersUpdateLog'
-import ProducersTable from '../../components/InformationCard/ProducersTable'
+import ProducersTable from '../../components/ProducersTable'
 
 import styles from './styles'
 
@@ -77,19 +77,22 @@ const Producers = () => {
       {loading ? (
         <LinearProgress />
       ) : !!items?.length ? (
-        <div className={`${classes.container} ${classes.cardShadow}`}>
-          <ProducersTable producers={items} />
-        </div>
+        <>
+          <div className={'simple-card'}>
+            <ProducersTable producers={items} />
+          </div>
+          <PaginationWrapper
+            classes={classes.pagination}
+            totalPages={pagination.pages}
+            page={pagination.page}
+            onPageChange={handleOnPageChange}
+            loading={loading}
+          />
+        </>
       ) : (
         <NoResults />
       )}
-      <PaginationWrapper
-        classes={classes.pagination}
-        totalPages={pagination.pages}
-        page={pagination.page}
-        onPageChange={handleOnPageChange}
-        loading={loading}
-      />
+      
     </>
   )
 }

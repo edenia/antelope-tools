@@ -1,9 +1,4 @@
 export default (theme) => ({
-  container: {
-    padding: theme.spacing(4),
-    backgroundColor: '#FFF',
-    borderRadius: '4px !impotant',
-  },
   searchWrapper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),

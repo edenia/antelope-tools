@@ -7,7 +7,6 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
-import 'flag-icon-css/css/flag-icons.css'
 
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
@@ -113,7 +112,7 @@ const NodesCard = ({ nodes, hideFeatures = false }) => {
   const Location = ({ location }) => {
     return (
       <>
-        <span className={classes.country}>{location?.name || 'N/A'}</span>
+        <span>{location?.name || 'N/A'}</span>
         <CountryFlag code={location?.country} />
       </>
     )

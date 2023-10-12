@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
-import LaunchIcon from '@mui/icons-material/Launch'
 
 import { eosConfig } from '../../config'
 
@@ -24,7 +23,6 @@ const ViewBPProfile = ({ producer }) => {
       variant="contained"
       color="primary"
       mt={2}
-      endIcon={<LaunchIcon/>}
     >
       {t('viewProfile')}
     </Button>

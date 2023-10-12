@@ -13,12 +13,6 @@ export default (theme) => ({
       textTransform: 'unset !important',
     },
   },
-  avatar: {
-    width: 30,
-    height: 30,
-    borderRadius: '100%',
-    backgroundColor: theme.palette.primary.contrastText,
-  },
   dl: {
     marginTop: -16,
     marginBottom: -16,
@@ -37,7 +31,7 @@ export default (theme) => ({
       paddingBottom: theme.spacing(4),
     },
     boxShadow: '2px 3px 4px 0px #0000002E',
-    backgroundColor: '#f6f9fd',
+    backgroundColor: theme.palette.background.light,
     borderRadius: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       width: '230px',
@@ -48,7 +42,13 @@ export default (theme) => ({
     width: 'max-content',
     flexFlow: 'row wrap',
     gap: theme.spacing(2),
-    padding: theme.spacing(0, 2, 0),
+    padding: theme.spacing(0, 2, 2),
+    [theme.breakpoints.down('md')]: {
+      justifyContent: 'center',
+      width: 'auto',
+      padding: 0,
+      marginBottom: theme.spacing(8),
+    },
   },
   endpointsTitle: {
     display: 'flex',

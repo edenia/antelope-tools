@@ -2,8 +2,6 @@ import React, { lazy, Suspense } from 'react'
 import { useParams, Navigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 
@@ -48,12 +46,10 @@ const ProducerProfile = () => {
 
   const WrapperContainer = ({ title, children }) => {
     return (
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h3">{title}</Typography>
-          <div className={classes.dataContainer}>{children}</div>
-        </CardContent>
-      </Card>
+      <div className={`simple-card ${classes.container}`}>
+        <Typography variant="h3">{title}</Typography>
+        <div className={classes.dataContainer}>{children}</div>
+      </div>
     )
   }
 
@@ -65,9 +61,9 @@ const ProducerProfile = () => {
         metaDescription={metaDescription}
         ldJson={ldJson}
       />
-      <Card className={classes.card}>
+      <div className={`simple-card ${classes.container} ${classes.profileContainer}`}>
         <ProfileCard producer={producer}/>
-      </Card>
+      </div>
       <WrapperContainer title={t('generalInformation')}>
         <GeneralInformation producer={producer} />
         {producer?.hasEmptyBPJson && (

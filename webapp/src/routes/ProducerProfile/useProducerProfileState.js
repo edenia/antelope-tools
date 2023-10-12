@@ -6,8 +6,9 @@ import {
   NODES_BY_PRODUCER_SUBSCRIPTION,
   EOSRATE_STATS_QUERY,
 } from '../../gql'
-import isValidAccountName from 'utils/validate-account-name'
+import { generalConfig } from '../../config'
 import { formatData } from '../../utils/formatData'
+import isValidAccountName from 'utils/validate-account-name'
 import sortNodes from 'utils/sort-nodes'
 
 const useProducerProfileState = (name, previousData) => {
@@ -52,9 +53,11 @@ const useProducerProfileState = (name, previousData) => {
 
   useEffect(() => {
     if (isValidName) {
-      loadStats({
-        variables: { bp: name },
-      })
+      if (generalConfig.eosRateLink) {
+        loadStats({
+          variables: { bp: name },
+        })
+      }
 
       if (previousData) {
         setProducer(getProducerData(previousData))

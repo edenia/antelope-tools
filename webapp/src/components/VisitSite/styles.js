@@ -6,7 +6,7 @@ export default (theme) => ({
     marginLeft: theme.spacing(3),
   },
   clickableIcon: {
-    color: 'black',
+    color: theme.palette.text.primary,
     cursor: 'pointer',
     '&:hover': {
       color: theme.palette.primary.main,
