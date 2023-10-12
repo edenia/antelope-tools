@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import { Hidden, Menu, MenuItem, AppBar, IconButton } from '@mui/material'
+import Hidden from '@mui/material/Hidden'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import AppBar from '@mui/material/AppBar'
+import IconButton from '@mui/material/IconButton'
+import Skeleton from '@mui/material/Skeleton'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -10,8 +15,9 @@ import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import 'moment/locale/es'
 
-import AuthButton from './AuthButton'
 import styles from './styles'
+
+const AuthButton = lazy(() => import('./AuthButton'))
 
 const useStyles = makeStyles(styles)
 
@@ -72,9 +78,7 @@ const LanguageMenu = () => {
         onClick={toggleMenu}
         className={classes.btnLanguage}
       >
-        <span>
-          {currentLanguaje.toUpperCase()}
-        </span>
+        <span>{currentLanguaje.toUpperCase()}</span>
       </Button>
       <Menu
         id="menu-appbar"
@@ -96,7 +100,7 @@ const LanguageMenu = () => {
   )
 }
 
-const Header = ({ onDrawerToggle }) => {
+const Header = ({ onDrawerToggle, useConnectWallet = false }) => {
   const classes = useStyles()
 
   return (
@@ -118,7 +122,15 @@ const Header = ({ onDrawerToggle }) => {
           </div>
           <div className={classes.userBox}>
             <LanguageMenu />
-            <AuthButton classes={classes} />
+            {useConnectWallet && (
+              <Suspense
+                fallback={
+                  <Skeleton variant="rectangular" width={210} height={40} />
+                }
+              >
+                <AuthButton classes={classes} />
+              </Suspense>
+            )}
           </div>
         </div>
       </Toolbar>
@@ -128,6 +140,7 @@ const Header = ({ onDrawerToggle }) => {
 
 Header.propTypes = {
   onDrawerToggle: PropTypes.func,
+  useConnectWallet: PropTypes.bool,
 }
 
 export default Header

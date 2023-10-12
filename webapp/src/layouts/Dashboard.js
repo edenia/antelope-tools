@@ -83,6 +83,7 @@ const Dashboard = ({ children }) => {
         pageTitle: t(`${pathName}>title`, {
           networkName: eosConfig.networkLabel,
         }),
+        useConnectWallet: Boolean(route.useConnectWallet)
       })
     } else {
       setRouteName(INIT_VALUES)
@@ -104,7 +105,7 @@ const Dashboard = ({ children }) => {
         }
       />
       <div className={classes.header}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+        <Header onDrawerToggle={handleDrawerToggle} useConnectWallet={routeName.useConnectWallet} />
       </div>
       <div
         className={classes.drawer}
