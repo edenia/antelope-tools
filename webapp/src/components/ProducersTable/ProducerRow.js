@@ -42,10 +42,10 @@ const ProducerRow = ({ producer, index }) => {
       <>
         <TableCell align="center">
           <Typography className={classes.countryContainer}>
-            <CountryFlag code={producerOrg?.country} />
+            <CountryFlag code={producerOrg?.location?.country} />
             <span className={classes.hideOnMobile}>
               <br />
-              {producerOrg?.location}
+              {producerOrg?.location?.name}
             </span>
           </Typography>
         </TableCell>

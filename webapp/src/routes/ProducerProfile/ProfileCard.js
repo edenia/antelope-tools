@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 
 import { eosConfig, generalConfig } from '../../config'
+import isValidUrl from '../../utils/validate-url'
 import ProducerName from 'components/ProducerName'
 import ProducerSocialLinks from 'components/ProducerSocialLinks'
 import LightIcon from 'components/HealthCheck/LightIcon'
@@ -71,8 +72,8 @@ const ProfileCard = ({ producer }) => {
           title={t('location')}
           value={
             <>
-              {producer?.location}
-              <CountryFlag code={producer?.country} />{' '}
+              {producer?.location?.name}
+              <CountryFlag code={producer?.location?.country} />{' '}
             </>
           }
         />
@@ -84,7 +85,7 @@ const ProfileCard = ({ producer }) => {
         />
         <OrganizationItem
           title={t('website')}
-          value={producer?.media?.website}
+          value={isValidUrl(producer?.media?.website) ? producer?.media?.website : '' }
           type="link"
         />
         <OrganizationItem
@@ -102,7 +103,7 @@ const ProfileCard = ({ producer }) => {
           value={producer?.info?.chainResources}
           type="hiddenLink"
         />
-        {producer?.info?.otherResources?.length && (
+        {!!producer?.info?.otherResources?.length && (
           <OrganizationItem
             title={t('otherResources')}
             value={producer?.info?.otherResources}
@@ -127,7 +128,7 @@ const ProfileCard = ({ producer }) => {
           lazy={false}
           size="big"
         />
-        {producer?.social?.length && (
+        {!!producer?.social?.length && (
           <div className={classes.socialLinks}>
             <ProducerSocialLinks items={producer?.social} />
           </div>

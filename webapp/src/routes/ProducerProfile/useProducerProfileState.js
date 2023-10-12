@@ -102,22 +102,54 @@ const useProducerProfileState = (name, previousData) => {
   }, [producers])
 
   useEffect(() => {
-    if (!producer || !Object?.keys(producer).length) return
+    if (!producer || !Object?.keys(producer).length || !producer?.media?.name)
+      return
 
-    setLdJson(
-      JSON.stringify({
+    setLdJson(prev => {
+      if (prev) return prev
+
+      const sameAs = producer.social?.map(socialMedia => socialMedia.url)
+      const hasValidLocation = Object.keys(producer.location || {}).every(key => !!producer.location[key])
+
+      if (producer.info?.codeOfConduct) {
+        sameAs.push(producer.info?.codeOfConduct)
+      }
+
+      if (producer.info?.ownership) {
+        sameAs.push(producer.info?.ownership)
+      }
+
+      return JSON.stringify({
         '@context': 'http://schema.org',
         '@type': 'Organization',
         name: producer?.media?.name,
         url: producer?.media?.website,
-        contactPoint: {
-          '@type': 'ContactPoint',
-          email: producer?.media?.email,
-          contactType: 'customer service',
-        },
-        logo: producer?.media?.logo,
-      }),
-    )
+        ...(producer?.media?.logo && { logo: producer.media?.logo }),
+        ...(producer.media?.email && {
+          contactPoint: {
+            '@type': 'ContactPoint',
+            email: producer?.media?.email,
+            contactType: 'customer service',
+          },
+        }),
+        ...(hasValidLocation && {
+          location: {
+            '@type': 'Place',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: producer.location.name,
+              addressCountry: producer.location.country,
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: producer.location.latitude,
+              longitude: producer.location.longitude,
+            },
+          },
+        }),
+        ...(sameAs.length && { sameAs }),
+      })
+    })
   }, [producer])
 
   return [{ loading, producer, ldJson }, {}]
