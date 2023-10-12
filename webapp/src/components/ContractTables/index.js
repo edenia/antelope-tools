@@ -234,8 +234,8 @@ const ContractTables = ({
               color="primary"
               className={classes.refreshButton}
               onClick={() => handleSubmit()}
+              startIcon={<RefreshIcon />}
             >
-              <RefreshIcon />
               {t('refreshData')}
             </Button>
           )}

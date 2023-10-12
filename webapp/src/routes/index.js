@@ -13,6 +13,7 @@ import {
   BarChart as BarChartIcon,
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
+import GavelIcon from '@mui/icons-material/Gavel';
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -149,7 +150,7 @@ const defaultRoutes = [
   },
   {
     name: 'ricardianContract',
-    icon: <InfoIcon />,
+    icon: <GavelIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
     exact: true,
@@ -175,6 +176,7 @@ const defaultRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -182,6 +184,7 @@ const defaultRoutes = [
     icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
+    useConnectWallet: true,
     exact: true,
   },
 ]
@@ -266,7 +269,7 @@ const lacchainRoutes = [
   },
   {
     name: 'ricardianContract',
-    icon: <InfoIcon />,
+    icon: <GavelIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
     exact: true,
@@ -277,6 +280,7 @@ const lacchainRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -284,6 +288,7 @@ const lacchainRoutes = [
     icon: <SlidersIcon />,
     component: LacchainManagement,
     path: '/management',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -291,6 +296,7 @@ const lacchainRoutes = [
     icon: <ConfigSvg />,
     component: LacchainNodeConfig,
     path: '/node-config',
+    useConnectWallet: true,
     exact: true,
   },
 ]
