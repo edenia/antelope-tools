@@ -1,4 +1,4 @@
-const getOrderNode = (node) => {
+const getOrderNode = node => {
   return (
     (node.type?.includes('full') ? 0.5 : 0) +
     (node.endpoints?.length || 0) +
@@ -7,7 +7,7 @@ const getOrderNode = (node) => {
   )
 }
 
-const sortNodes = (unsortedNodes, key) => {
+export const sortNodes = (unsortedNodes, key) => {
   let nodes = []
   let producerNode
 
