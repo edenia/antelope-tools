@@ -108,7 +108,7 @@ const useProducerProfileState = (name, previousData) => {
     if (!producer || !Object?.keys(producer).length || !producer?.media?.name)
       return
 
-    setLdJson(prev => prev ? prev : JSON.stringify(getBPStructuredData(producer)))
+    setLdJson(prev => prev || JSON.stringify(getBPStructuredData(producer)))
   }, [producer])
 
   return [{ loading, producer, ldJson }, {}]
