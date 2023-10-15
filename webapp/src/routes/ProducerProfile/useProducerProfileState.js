@@ -7,9 +7,12 @@ import {
   EOSRATE_STATS_QUERY,
 } from '../../gql'
 import { generalConfig } from '../../config'
-import { formatData } from '../../utils/formatData'
-import isValidAccountName from 'utils/validate-account-name'
-import sortNodes from 'utils/sort-nodes'
+import {
+  getBPStructuredData,
+  formatData,
+  sortNodes,
+  isValidAccountName,
+} from '../../utils'
 
 const useProducerProfileState = (name, previousData) => {
   const defaultVariables = {
@@ -102,22 +105,10 @@ const useProducerProfileState = (name, previousData) => {
   }, [producers])
 
   useEffect(() => {
-    if (!producer || !Object?.keys(producer).length) return
+    if (!producer || !Object?.keys(producer).length || !producer?.media?.name)
+      return
 
-    setLdJson(
-      JSON.stringify({
-        '@context': 'http://schema.org',
-        '@type': 'Organization',
-        name: producer?.media?.name,
-        url: producer?.media?.website,
-        contactPoint: {
-          '@type': 'ContactPoint',
-          email: producer?.media?.email,
-          contactType: 'customer service',
-        },
-        logo: producer?.media?.logo,
-      }),
-    )
+    setLdJson(prev => prev || JSON.stringify(getBPStructuredData(producer)))
   }, [producer])
 
   return [{ loading, producer, ldJson }, {}]

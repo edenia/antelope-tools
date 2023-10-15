@@ -47,7 +47,7 @@ const NodesCard = ({ nodes, hideFeatures = false }) => {
 
     return (
       <>
-        <dt className={classes.bold}>{t('keys')}</dt>
+        <span className={classes.bold}>{t('keys')}</span>
         {Object.keys(keys).map((key, i) => (
           <div key={i} className={classes.keysContainer}>
             <p className={classes.bold}>{key}:</p>

@@ -9,7 +9,11 @@ const useBPLogoState = (logo, defaultLogo) => {
 
     const { naturalHeight, naturalWidth } = logoRef.current
 
-    if (naturalHeight < 100 || naturalHeight !== naturalWidth) {
+    const ratio =
+      Math.min(naturalHeight, naturalWidth) /
+      Math.max(naturalHeight, naturalWidth)
+
+    if (naturalHeight < 100 || naturalWidth < 100 || ratio < 0.8) {
       setSrc(defaultLogo)
     }
   }

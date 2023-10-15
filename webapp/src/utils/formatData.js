@@ -82,8 +82,7 @@ export const formatData = ({
       website: data?.website || '',
       email: data?.email,
     },
-    location: data?.location?.name || 'N/A',
-    country: data?.location?.country || null,
+    location: data?.location,
     info: {
       codeOfConduct: data?.code_of_conduct,
       ownership: data?.ownership_disclosure,
