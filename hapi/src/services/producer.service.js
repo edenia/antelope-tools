@@ -279,7 +279,7 @@ const getHealthCheckResponse = async endpoint => {
 
   if (endpoint?.features?.length) {
     for (const API of eosConfig.healthCheckAPIs) {
-      if (endpoint.features?.some(feature => feature === API.name)) {
+      if (endpoint.features?.some(feature => API.pattern?.test(feature))) {
         startTime = new Date()
         response = await producerUtil.getNodeInfo(endpoint.value, API.api)
 

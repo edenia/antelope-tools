@@ -12,7 +12,7 @@
     "/node-config>sidebar": "Configuración de nodo",
     "/node-config>title": "Configuración de nodo - Panel de red de {{networkName}}",
     "/node-config>heading": "Configurar un nuevo nodo",
-    "/ricardian-contract>sidebar": "Acuerdo de Nodos Validadores - Panel de red de {{networkName}}",
+    "/ricardian-contract>sidebar": "Acuerdo de Nodos Validadores",
     "/ricardian-contract>heading": "",
     "/entities>moreDescription": "Una lista de entidades que forman parte de la red. Pueden ser entidades socias o no socias.",
     "/lacchain/network>moreDescription": "Una representación visual de los nodos actuales de la red.",
@@ -32,7 +32,9 @@
   "producerCardComponent": {
     "entityType": "Tipo de entidad",
     "entityType1": "Partner",
-    "entityType2": "Non-Partner"
+    "entityType2": "Non-Partner",
+    "viewProfile": "View Perfil de la entidad",
+    "BPonNetwork": "Entidad en {{networkName}}"
   },
   "lacchainAddEntityActionEntityTypeFieldComponent": {
     "entityType1": "Partner",

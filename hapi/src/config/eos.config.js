@@ -52,10 +52,11 @@ module.exports = {
     wax: 'wax'
   },
   healthCheckAPIs: [
-    { name: 'chain-api', api: '/v1/chain/get_info' },
-    { name: 'atomic-assets-api', api: '/atomicassets/v1/config' },
-    { name: 'hyperion-v2', api: '/v2/health' },
-    { name: 'light-api', api: '/api/status' }
+    { pattern: /^chain-api$/, api: '/v1/chain/get_info' },
+    { pattern: /^atomic-assets-api$/, api: '/atomicassets/v1/config' },
+    { pattern: /^hyperion-v2$/, api: '/v2/health' },
+    { pattern: /^light-api$/, api: '/api/status' },
+    { pattern: /^libre-.+$/, api: ''},
   ],
   rewardsToken: process.env.HAPI_REWARDS_TOKEN,
   eosRateUrl: process.env.HAPI_EOSRATE_GET_STATS_URL,

@@ -46,12 +46,20 @@ const typography = {
     fontWeight: 600,
     lineHeight: 1.2
   },
+  capSubtitle: {
+    fontSize: '0.75rem',
+    textTransform: 'uppercase',
+    fontWeight: 700,
+    lineHeight: 1.2,
+    textAlign: 'center',
+    letterSpacing: '0.83px'
+  },
   body1: {
     fontSize: 14
   },
   button: {
     textTransform: 'none'
-  }
+  },
 }
 
 export default typography

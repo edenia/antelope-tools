@@ -95,3 +95,16 @@ export const includeDefaultTransaction = process.env
 export const blockExplorerUrl = process.env.REACT_APP_BLOCK_EXPLORER_URL
 export const syncToleranceInterval =
   process.env.REACT_APP_SYNC_TOLERANCE_INTERVAL || 180000
+export const producerColumns = [
+  { name: 'rank', disabled: { lacchain: true } },
+  { name: 'producerName' },
+  { name: 'country' },
+  { name: 'website' },
+  { name: 'votes', disabled: { lacchain: true } },
+  { name: 'rewards', disabled: { lacchain: true } },
+  { name: 'health' },
+  { name: 'social' },
+].flatMap((col) =>
+  !col?.disabled || !col?.disabled[networkName] ? col?.name : [],
+)
+export const producersRoute = networkName !== 'lacchain' ? 'block-producers' : 'entities'

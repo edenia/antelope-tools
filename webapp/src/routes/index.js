@@ -13,6 +13,7 @@ import {
   BarChart as BarChartIcon,
 } from 'react-feather'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
+import GavelIcon from '@mui/icons-material/Gavel';
 
 import { eosConfig, generalConfig } from '../config'
 import {
@@ -53,6 +54,7 @@ const EVMEndpointsList = lazy(() => import('./EVMEndpointsList'))
 const LacchainNetwork = lazy(() => import('./Lacchain/LacchainNetwork'))
 const LacchainManagement = lazy(() => import('./Lacchain/LacchainManagement'))
 const LacchainNodeConfig = lazy(() => import('./Lacchain/LacchainNodeConfig'))
+const ProducerProfile = lazy(() => import('./ProducerProfile'))
 
 const defaultRoutes = [
   {
@@ -68,6 +70,12 @@ const defaultRoutes = [
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/block-producers',
+    exact: true,
+  },
+  {
+    component: ProducerProfile,
+    path: '/block-producers/:bpName',
+    useParams: true,
     exact: true,
   },
   {
@@ -142,7 +150,7 @@ const defaultRoutes = [
   },
   {
     name: 'ricardianContract',
-    icon: <InfoIcon />,
+    icon: <GavelIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
     exact: true,
@@ -168,6 +176,7 @@ const defaultRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -175,6 +184,7 @@ const defaultRoutes = [
     icon: <BPJsonSvg />,
     component: BPJson,
     path: '/bpjson',
+    useConnectWallet: true,
     exact: true,
   },
 ]
@@ -193,6 +203,12 @@ const lacchainRoutes = [
     icon: <UsersIcon />,
     component: BlockProducers,
     path: '/entities',
+    exact: true,
+  },
+  {
+    component: ProducerProfile,
+    path: '/entities/:bpName',
+    useParams: true,
     exact: true,
   },
   {
@@ -253,7 +269,7 @@ const lacchainRoutes = [
   },
   {
     name: 'ricardianContract',
-    icon: <InfoIcon />,
+    icon: <GavelIcon />,
     component: RicardianContract,
     path: '/ricardian-contract',
     exact: true,
@@ -264,6 +280,7 @@ const lacchainRoutes = [
     icon: <UserIcon />,
     component: Accounts,
     path: '/accounts',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -271,6 +288,7 @@ const lacchainRoutes = [
     icon: <SlidersIcon />,
     component: LacchainManagement,
     path: '/management',
+    useConnectWallet: true,
     exact: true,
   },
   {
@@ -278,6 +296,7 @@ const lacchainRoutes = [
     icon: <ConfigSvg />,
     component: LacchainNodeConfig,
     path: '/node-config',
+    useConnectWallet: true,
     exact: true,
   },
 ]

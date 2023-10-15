@@ -7,7 +7,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const VisitSite = ({ title, url, placement = 'left' }) => {
+const VisitSite = ({ title, url, Icon, placement = 'left' }) => {
   const classes = useStyles()
 
   return (
@@ -15,10 +15,15 @@ const VisitSite = ({ title, url, placement = 'left' }) => {
       <a
         href={url}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow noopener noreferrer"
         className={classes.link}
+        aria-label={url}
       >
-        <LaunchIcon className={classes.clickableIcon} />
+        {Icon ? (
+          <Icon className={classes.clickableIcon} />
+        ) : (
+          <LaunchIcon className={classes.clickableIcon} />
+        )}
       </a>
     </Tooltip>
   )

@@ -46,7 +46,7 @@ const EndpointsList = () => {
           </div>
           <div className={classes.controlFormContainer}>
             <div className={classes.switchContainer}>
-              <Typography component="p" variant="caption">
+              <Typography component="p" variant="body1">
                 {t('endpointsResponding')}
               </Typography>
               <Switch

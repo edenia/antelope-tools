@@ -51,7 +51,7 @@ export default (theme) => ({
     alignItems: 'center',
     marginBottom: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-    borderBottom: '1px solid #e0e0e0',
+    borderBottom: `1px solid ${theme.palette.neutral.light}`,
     width: '100%',
     '& h3': {
       marginTop: theme.spacing(4),

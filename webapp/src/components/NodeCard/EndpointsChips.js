@@ -98,10 +98,10 @@ const EndpointsChips = ({ node }) => {
 
   return (
     <>
-      <dt className={`${classes.bold} ${classes.endpointsTitle}`}>
+      <span className={`${classes.bold} ${classes.endpointsTitle}`}>
         {t('endpoints')}
         {!!node.endpoints.length && <EndpointsInfo status={status} />}
-      </dt>
+      </span>
       <ChipList
         list={node.endpoints.map(({ type, value }) => {
           return (

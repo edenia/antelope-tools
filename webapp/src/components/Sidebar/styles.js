@@ -98,7 +98,7 @@ export default (theme, rgba) => ({
   divider: {
     height: '1px',
     margin: theme.spacing(4),
-    backgroundColor: '#e0e0e0',
+    backgroundColor: theme.palette.neutral.light,
   },
   sidebarSection: {
     color: theme.sidebar.color,

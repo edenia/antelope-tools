@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 
 import LightIcon from '../HealthCheck/LightIcon'
+import { generalConfig } from '../../config'
 
 import styles from './styles'
 
@@ -14,6 +15,7 @@ const useStyles = makeStyles(styles)
 const ProducerHealthIndicators = ({ producer, message }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerHealthIndicatorsComponent')
+  const { healthLights } = generalConfig
 
   if (!producer.health_status.length) return <Typography>{message}</Typography>
 
@@ -25,8 +27,8 @@ const ProducerHealthIndicators = ({ producer, message }) => {
           key={`health-indicator-${producer?.owner || ''}-${index}`}
         >
           <Typography>{`${t(`hs_${item.name}`)}`}</Typography>
-          {item.valid && <LightIcon status="greenLight" />}
-          {!item.valid && <LightIcon status="redLight" />}
+          {item.valid && <LightIcon status={healthLights.greenLight} />}
+          {!item.valid && <LightIcon status={healthLights.redLight} />}
         </div>
       ))}
     </>

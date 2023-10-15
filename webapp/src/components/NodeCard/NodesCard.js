@@ -7,7 +7,6 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
-import 'flag-icon-css/css/flag-icons.css'
 
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
@@ -21,7 +20,7 @@ import EndpointsChips from './EndpointsChips'
 
 const useStyles = makeStyles(styles)
 
-const NodesCard = ({ nodes }) => {
+const NodesCard = ({ nodes, hideFeatures = false }) => {
   const classes = useStyles()
   const { t } = useTranslation('nodeCardComponent')
 
@@ -48,7 +47,7 @@ const NodesCard = ({ nodes }) => {
 
     return (
       <>
-        <dt className={classes.bold}>{t('keys')}</dt>
+        <span className={classes.bold}>{t('keys')}</span>
         {Object.keys(keys).map((key, i) => (
           <div key={i} className={classes.keysContainer}>
             <p className={classes.bold}>{key}:</p>
@@ -61,7 +60,7 @@ const NodesCard = ({ nodes }) => {
     )
   }
 
-  const NodeInfo = ({ node }) => {
+  const NodeInfo = ({ node, hideFeatures }) => {
     return (
       <>
         <ShowInfo value={node?.full} title={t('isFull')} />
@@ -77,11 +76,15 @@ const NodesCard = ({ nodes }) => {
           </div>
         )}
         <EndpointsChips node={node} />
-        <ChipList
-          title={t('features')}
-          list={node?.node_info[0]?.features?.list}
-        />
-        <SupportedAPIs list={node?.node_info[0]?.features?.supportedAPIs} />
+        {!hideFeatures && (
+          <>
+            <ChipList
+              title={t('features')}
+              list={node?.node_info[0]?.features?.list}
+            />
+            <SupportedAPIs list={node?.node_info[0]?.features?.supportedAPIs} />
+          </>
+        )}
         <Keys node={node} />
         <HealthStatus node={node} />
       </>
@@ -109,7 +112,7 @@ const NodesCard = ({ nodes }) => {
   const Location = ({ location }) => {
     return (
       <>
-        <span className={classes.country}>{location?.name || 'N/A'}</span>
+        <span>{location?.name || 'N/A'}</span>
         <CountryFlag code={location?.country} />
       </>
     )
@@ -143,7 +146,7 @@ const NodesCard = ({ nodes }) => {
             subheader={showLocations(node)}
           />
           <CardContent className={classes.content}>
-            <NodeInfo node={node} />
+            <NodeInfo node={node} hideFeatures={hideFeatures}/>
           </CardContent>
         </div>
       ))}
@@ -153,5 +156,6 @@ const NodesCard = ({ nodes }) => {
 
 NodesCard.propTypes = {
   nodes: PropTypes.array,
+  hideFeatures: PropTypes.bool
 }
 export default NodesCard

@@ -25,7 +25,7 @@ const CountryFlag = ({ code = '' }) => {
 }
 
 CountryFlag.propTypes = {
-  code: PropTypes.string
+  code: PropTypes.string,
 }
 
 export default CountryFlag

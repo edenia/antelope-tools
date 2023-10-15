@@ -11,7 +11,7 @@ import { eosConfig, generalConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
 import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
-import isUrlValid from '../../utils/validate-url'
+import isValidUrl from '../../utils/validate-url'
 import VisitSite from 'components/VisitSite'
 
 import styles from './styles'
@@ -67,7 +67,7 @@ const NonCompliantCard = ({ producer, stats }) => {
           >
             {t('website')}:
           </Typography>
-          {isUrlValid(producer.url) ? (
+          {isValidUrl(producer.url) ? (
             <>
               <VisitSite title={t('openLink')} url={producer.url} />
               <div className={classes.lightIcon}>
@@ -80,7 +80,7 @@ const NonCompliantCard = ({ producer, stats }) => {
             <Typography variant="body1">{t('invalidUrl')}</Typography>
           )}
         </div>
-        {isUrlValid(producer.url) && (
+        {isValidUrl(producer.url) && (
           <div className={classes.flex}>
             <Typography
               variant="body1"

@@ -71,6 +71,8 @@
     "/block-producers>sidebar": "Productores de Bloques",
     "/block-producers>title": "Productores de Bloques - Panel de red de {{networkName}}",
     "/block-producers>heading": "Productores de Bloques en {{networkName}}",
+    "/block-producers/bpName>heading": "Perfil de Block Producer",
+    "/entities/bpName>heading": "Perfil de Entidad",
     "/undiscoverable-bps>sidebar": "Productores Indetectables",
     "/undiscoverable-bps>title": "Productores de Bloques Indetectables - Panel de red de {{networkName}}",
     "/undiscoverable-bps>heading": "Productores de Bloques Pagados e Indetectables en {{networkName}}",
@@ -365,7 +367,13 @@
     "invalidUrl": "URL inválida",
     "viewList": "Ver lista de BPs indetectables",
     "bpJson": "BP.json",
-    "bpJsonGenerator": "Generar BP JSON"
+    "bpJsonGenerator": "Generar BP JSON",
+    "viewProfile": "Ver Perfil del BP",
+    "BPonNetwork": "{{position}} Productor de Bloques en {{networkName}}",
+    "generalInformation": "Información General",
+    "organization_name": "Nombre",
+    "viewNodes": "Ver {{totalNodes}} nodos",
+    "bpNodes": "Nodos de {{bpName}}"
   },
   "nodeCardComponent": {
     "features": "Características",

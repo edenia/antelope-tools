@@ -57,21 +57,33 @@ const Dashboard = ({ children }) => {
     setMobileOpen(!mobileOpen)
   }
 
+  const removeParam = route => route.substring(0,route.lastIndexOf('/'))
+
   useEffect(() => {
-    if (routes.some((route) => route.path === location.pathname)) {
+    const path = location.pathname.replace(/\/$/,'') || '/'
+    const route = routes.find(route => 
+      route.useParams ? 
+        removeParam(route.path) === removeParam(path)
+      :
+        route.path === path
+    )
+    
+    if (route) {
+      const pathName = route.path.replace(':','')
       const managementCardTitle = lacchain.dynamicTitle || ''
 
       setRouteName({
         dynamicTitle:
-          location.pathname === '/management'
+          pathName === '/management'
             ? managementCardTitle
-            : t(`${location.pathname}>heading`, {
+            : t(`${pathName}>heading`, {
                 networkName: eosConfig.networkLabel,
               }),
-        pathname: location.pathname,
-        pageTitle: t(`${location.pathname}>title`, {
+        pathname: pathName,
+        pageTitle: t(`${pathName}>title`, {
           networkName: eosConfig.networkLabel,
         }),
+        useConnectWallet: Boolean(route.useConnectWallet)
       })
     } else {
       setRouteName(INIT_VALUES)
@@ -87,13 +99,13 @@ const Dashboard = ({ children }) => {
         title={routeName.pageTitle}
         metaTitle={routeName.dynamicTitle || t('metaTitle')}
         metaDescription={
-          (i18n.exists(`routes:${location.pathname}>moreDescription`)
-            ? t(`${location.pathname}>moreDescription`)
+          (i18n.exists(`routes:${routeName.pathname}>moreDescription`)
+            ? t(`${routeName.pathname}>moreDescription`)
             : t('metaDescription')) || t('metaDescription')
         }
       />
       <div className={classes.header}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+        <Header onDrawerToggle={handleDrawerToggle} useConnectWallet={routeName.useConnectWallet} />
       </div>
       <div
         className={classes.drawer}
@@ -128,8 +140,8 @@ const Dashboard = ({ children }) => {
                 </Typography>
               )}
               <Typography className={classes.textAlignReadMore}>
-                {i18n.exists(`routes:${location.pathname}>moreDescription`)
-                  ? t(`${location.pathname}>moreDescription`)
+                {i18n.exists(`routes:${routeName.pathname}>moreDescription`)
+                  ? t(`${routeName.pathname}>moreDescription`)
                   : ''}
               </Typography>
             </div>

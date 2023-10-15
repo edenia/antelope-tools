@@ -62,6 +62,8 @@
     "/block-producers>sidebar": "Block Producers",
     "/block-producers>title": "Block Producers - {{networkName}} Network Dashboard",
     "/block-producers>heading": "Block Producers on {{networkName}}",
+    "/block-producers/bpName>heading": "Block Producer Profile",
+    "/entities/bpName>heading": "Entity Profile",
     "/undiscoverable-bps>sidebar": "Undiscoverable BPs",
     "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - {{networkName}} Network Dashboard",
     "/undiscoverable-bps>heading": "Undiscoverable Paid Block Producers on {{networkName}}",
@@ -314,6 +316,9 @@
     "websiteEOSCR": "Discover Web3 Development Services by Edenia"
   },
   "producerCardComponent": {
+    "bpProfile>title": "{{bpName}} Block Producer - {{networkName}} Dashboard",
+    "bpProfile>metaTitle": "{{bpName}} Block Producer on {{networkName}}",
+    "bpProfile>metaDescription": "Data of the Block Producer {{bpName}} on {{networkName}}, such as its rank, nodes and endpoints",
     "rank": "Rank",
     "account": "Account",
     "website": "Website",
@@ -363,7 +368,14 @@
     "invalidUrl": "Invalid URL",
     "viewList": "View undiscoverable BPs list",
     "bpJson": "BP.json",
-    "bpJsonGenerator": "BP JSON Generator"
+    "bpJsonGenerator": "BP JSON Generator",
+    "viewProfile": "View BP Profile",
+    "BPonNetwork": "{{position}} Block Producer on {{networkName}}",
+    "generalInformation": "General Information",
+    "logo_256": "Logo",
+    "organization_name": "Name",
+    "viewNodes": "View {{totalNodes}} nodes",
+    "bpNodes": "{{bpName}} Nodes"
   },
   "nodeCardComponent": {
     "features": "Features",

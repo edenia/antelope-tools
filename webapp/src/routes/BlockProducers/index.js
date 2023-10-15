@@ -1,15 +1,18 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
+import PaginationItem from '@mui/material/PaginationItem'
 
+import { eosConfig } from '../../config'
 import SearchBar from '../../components/SearchBar'
-import InformationCard from '../../components/InformationCard'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
-import ProducersUpdateLog from 'components/ProducersUpdateLog'
+import ProducersUpdateLog from '../../components/ProducersUpdateLog'
+import ProducersTable from '../../components/ProducersTable'
 
 import styles from './styles'
 
@@ -32,6 +35,15 @@ const PaginationWrapper = ({
       onChange={onPageChange}
       variant="outlined"
       shape="rounded"
+      renderItem={item =>
+        item.page !== page && item.page > 0 && item.page <= totalPages ? (
+          <Link to={`/${eosConfig.producersRoute}?page=${item.page}`}>
+            <PaginationItem {...item} />
+          </Link>
+        ) : (
+          <PaginationItem {...item} />
+        )
+      }
     />
   )
 }
@@ -47,7 +59,7 @@ PaginationWrapper.propTypes = {
 const Producers = () => {
   const classes = useStyles()
   const [
-    { filters, chips, items, loading, missedBlocks, pagination },
+    { filters, chips, items, loading, pagination },
     { handleOnSearch, handleOnPageChange },
   ] = useBlockProducerState()
 
@@ -64,30 +76,23 @@ const Producers = () => {
       </div>
       {loading ? (
         <LinearProgress />
+      ) : !!items?.length ? (
+        <>
+          <div className={'simple-card'}>
+            <ProducersTable producers={items} />
+          </div>
+          <PaginationWrapper
+            classes={classes.pagination}
+            totalPages={pagination.pages}
+            page={pagination.page}
+            onPageChange={handleOnPageChange}
+            loading={loading}
+          />
+        </>
       ) : (
-        <div className={classes.container}>
-          {!!items?.length ? (
-            items.map((producer, index) => (
-              <div className={classes.card} key={`producer-card-${index}`}>
-                <InformationCard
-                  type="entity"
-                  producer={{ ...producer, missed_blocks: missedBlocks ? missedBlocks[producer.owner] : 0 }}
-                  rank={producer.rank}
-                />
-              </div>
-            ))
-          ) : (
-            <NoResults />
-          )}
-        </div>
+        <NoResults />
       )}
-      <PaginationWrapper
-        classes={classes.pagination}
-        totalPages={pagination.pages}
-        page={pagination.page}
-        onPageChange={handleOnPageChange}
-        loading={loading}
-      />
+      
     </>
   )
 }

@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 
 import variants from './variants'
 import typography from './typography'
-import overrides from './overrides'
+import components from './components'
 import breakpoints from './breakpoints'
 import props from './props'
 import shadows from './shadows'
@@ -12,11 +12,11 @@ const theme = (variant) => {
     {
       spacing: 4,
       breakpoints,
-      overrides,
       props,
       typography,
       shadows,
-      palette: variant.palette
+      palette: variant.palette,
+      components
     },
     {
       name: variant.name,
