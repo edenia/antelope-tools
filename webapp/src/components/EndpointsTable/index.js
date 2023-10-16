@@ -18,6 +18,7 @@ import CopyToClipboard from '../CopyToClipboard'
 import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from '../HealthCheck/HealthCheckInfo'
 import { getStatus } from 'utils'
+import { eosConfig } from '../../config'
 
 import styles from './styles'
 
@@ -81,7 +82,14 @@ const EndpointsTable = ({ producers, textLists }) => {
               <TableRow key={`${producer.name}-${index}`}>
                 <TableCell>
                   <div className={classes.healthContainer}>
-                    {producer.name}
+                    <Link
+                      aria-label={`BP ${producer.name} Profile`}
+                      component={RouterLink}
+                      to={`/${eosConfig.producersRoute}/${producer.name}`}
+                      color="primary"
+                    >
+                      {producer.name}
+                    </Link>
                     {!!producer.endpoints.api.length +
                       producer.endpoints.ssl.length && (
                       <MUITooltip title={t('linkToStats')} arrow>
