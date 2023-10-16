@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
-import Tooltip from '../Tooltip'
-import NodeCard from '../NodeCard'
+import { eosConfig } from '../../config'
 
 import HighMapsWrapper from './HighMapsWrapper'
 import styles from './styles'
@@ -13,21 +13,8 @@ const useStyles = makeStyles(styles)
 
 const ClusterMap = ({ data, map, mapCode }) => {
   const classes = useStyles()
+  const navigate = useNavigate()
   const myRef = useRef()
-  const [openTooltip, setOpenTooltip] = useState(false)
-  const [pointData, setPointData] = useState({
-    vertical: 'center',
-    horizontal: 'center',
-  })
-
-  const handlePopoverOpen = useCallback((values) => {
-    setPointData(values)
-    setOpenTooltip(true)
-  }, [])
-
-  const handlePopoverClose = () => {
-    setOpenTooltip(false)
-  }
 
   const setupMapData = useCallback(
     (data, map, mapCode = '') => {
@@ -61,14 +48,21 @@ const ClusterMap = ({ data, map, mapCode }) => {
         },
         plotOptions: {
           series: {
+            dataLabels: {
+              enabled: true,
+              formatter: function () {
+                const producer = this?.point?.producer
+
+                return producer?.owner
+                  ? `<a href=/${eosConfig.producersRoute}/${producer?.owner}>${producer?.owner}</a>`
+                  : ''
+              },
+            },
             events: {
               click: function (e) {
-                handlePopoverOpen({
-                  node: e.point.node,
-                  producer: e.point.producer,
-                  horizontal: e.screenX,
-                  vertical: e.screenY,
-                })
+                navigate(
+                  `/${eosConfig.producersRoute}/${e.point.producer?.owner}`,
+                )
               },
             },
           },
@@ -93,7 +87,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [handlePopoverOpen],
+    [navigate],
   )
 
   useEffect(() => {
@@ -105,17 +99,6 @@ const ClusterMap = ({ data, map, mapCode }) => {
   return (
     <>
       <div ref={myRef} className={classes.divRef} />
-      <Tooltip
-        open={openTooltip}
-        onClose={handlePopoverClose}
-        anchorEl={null}
-        anchorOrigin={{
-          vertical: pointData.vertical,
-          horizontal: pointData.horizontal,
-        }}
-      >
-        <NodeCard node={pointData?.node} producer={pointData?.producer} />
-      </Tooltip>
     </>
   )
 }
