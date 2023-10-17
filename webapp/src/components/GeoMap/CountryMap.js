@@ -50,6 +50,12 @@ const ClusterMap = ({ data, map, mapCode }) => {
           series: {
             dataLabels: {
               enabled: true,
+              useHTML: true,
+              style: {
+                fontWeight: 'bold',
+                fontSize: '0.8rem',
+                paddingBottom: '8px',
+              },
               formatter: function () {
                 const producer = this?.point?.producer
 
@@ -96,11 +102,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
     }
   }, [data, map, mapCode, setupMapData])
 
-  return (
-    <>
-      <div ref={myRef} className={classes.divRef} />
-    </>
-  )
+  return <div ref={myRef} className={classes.divRef} />
 }
 
 ClusterMap.propTypes = {
