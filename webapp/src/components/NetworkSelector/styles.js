@@ -20,7 +20,7 @@ export default (theme) => ({
   },
   list: {
     transition: 'max-height .6s ease-out',
-    backgroundColor: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.background.default,
     maxHeight: 0,
     overflow: 'hidden',
     margin: 0,
@@ -90,17 +90,17 @@ export default (theme) => ({
     cursor: 'pointer',
     listStyle: 'none',
     paddingLeft: theme.spacing(2),
-    background: theme.palette.primary.contrastText,
+    background: theme.palette.background.default,
     '& a': {
       width: '100%',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.common.black,
+      color: theme.palette.text.primary,
     },
     '&:hover': {
-      background: '#f4f4f4',
+      background: theme.palette.neutral.lighter,
     },
   },
   listItemActive: {
@@ -112,7 +112,6 @@ export default (theme) => ({
     alignItems: 'center',
     height: 50,
     borderRadius: theme.spacing(2),
-    color: theme.palette.common.black,
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(6, 0, 4),
       textAlign: 'center',

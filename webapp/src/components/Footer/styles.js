@@ -4,7 +4,7 @@ export default (theme) => ({
     flexBasis: 'auto',
     flexWrap: 'wrap',
     padding: `1px ${theme.spacing(1)}`,
-    background: theme.palette.common.white,
+    background: theme.palette.background.default,
     alignItems: 'center',
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
     justifyContent: 'space-between',
@@ -37,7 +37,6 @@ export default (theme) => ({
     },
   },
   sidebarFooter: {
-    backgroundColor: `${theme.sidebar.footer.background} !important`,
     padding: theme.spacing(2.75, 4),
     minHeight: 61,
     display: 'flex',

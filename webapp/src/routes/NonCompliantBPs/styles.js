@@ -52,7 +52,7 @@ export default (theme) => ({
     flexFlow: 'row nowrap',
     minHeight: '125px',
     padding: theme.spacing(2),
-    background: theme.palette.common.white,
+    background: theme.palette.background.default,
     borderRadius: theme.spacing(1),
     '& .MuiTypography-h6': {
       display: 'flex',

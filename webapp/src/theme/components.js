@@ -3,7 +3,7 @@ const components = {
     styleOverrides: theme =>
       `
         .simple-card {
-          background-color: ${theme.palette.background.main};
+          background-color: ${theme.palette.background.default};
           box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
           border-radius: 4px;
           padding: ${theme.spacing(4)};

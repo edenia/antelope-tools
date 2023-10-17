@@ -6,6 +6,7 @@ export default (theme) => ({
   },
   cardShadow: {
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
+    backgroundColor: `${theme.palette.background.default} !important`,
   },
   border: {
     border: '0.5px solid transparent',

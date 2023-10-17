@@ -3,6 +3,7 @@ export default (theme, rgba) => ({
     minWidth: '70px',
     borderRight: 0,
     height: '100%',
+    backgroundColor: theme.sidebar.background,
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
@@ -15,6 +16,7 @@ export default (theme, rgba) => ({
   },
   scrollbar: {
     backgroundColor: theme.sidebar.background,
+    paddingBottom: theme.spacing(4),
   },
   list: {
     backgroundColor: theme.sidebar.background,
@@ -83,7 +85,7 @@ export default (theme, rgba) => ({
     height: '20px !important',
     position: 'absolute',
     right: 12,
-    backgroundColor: `${theme.palette.secondary.main} !important`,
+    backgroundColor: `${theme.palette.primary.main} !important`,
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',

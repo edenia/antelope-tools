@@ -4,10 +4,6 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    '& a': {
-      color: theme.palette.primary.main,
-      textDecorationColor: theme.palette.primary.main,
-    },
   },
   emptyStateContainer: {
     '& span': {

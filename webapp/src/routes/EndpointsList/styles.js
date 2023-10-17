@@ -43,9 +43,6 @@ export default (theme) => ({
     padding: theme.spacing(4),
     justifyContent: 'center',
   },
-  cardShadow: {
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
-  },
   noShadow: {
     '& .MuiPaper-root': {
       boxShadow: 'none !important'

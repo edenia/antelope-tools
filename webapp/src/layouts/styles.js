@@ -7,7 +7,6 @@ export default (theme) => ({
     display: 'flex',
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     zIndex: 2,
-    paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('md')]: {
       width: '0 !important',
       flexShrink: 0,
@@ -28,7 +27,6 @@ export default (theme) => ({
   mainContent: {
     padding: theme.spacing(4),
     minHeight: '90vh',
-    background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
       flex: 'none',
     },

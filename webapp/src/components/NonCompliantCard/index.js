@@ -50,7 +50,7 @@ const NonCompliantCard = ({ producer, stats }) => {
           state={{ owner: producer.owner, url: producer.url }}
           to="/bpjson"
           variant="contained"
-          color="secondary"
+          color="primary"
           mt={2}
         >
           {t('bpJsonGenerator')}

@@ -1,6 +1,4 @@
 import React from 'react'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
@@ -22,27 +20,25 @@ const BPJson = () => {
   ] = useBPJsonState()
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent>
-        {loading && (
-          <>
-            <Typography variant="h5" align="center">
-              {t('loadText')}
-            </Typography>
-            <LinearProgress color="primary" />
-          </>
-        )}
-        {error && <Alert severity="error">{error}</Alert>}
-        {inconsistencyMessage && (
-          <Alert severity="warning">{inconsistencyMessage}</Alert>
-        )}
-        <BPJsonGenerator
-          accountName={ual.activeUser?.accountName || initData.account_name}
-          bpJson={producer?.bpJson || initData}
-          onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
-        />
-      </CardContent>
-    </Card>
+    <div className="simple-card">
+      {loading && (
+        <>
+          <Typography variant="h5" align="center">
+            {t('loadText')}
+          </Typography>
+          <LinearProgress color="primary" />
+        </>
+      )}
+      {error && <Alert severity="error">{error}</Alert>}
+      {inconsistencyMessage && (
+        <Alert severity="warning">{inconsistencyMessage}</Alert>
+      )}
+      <BPJsonGenerator
+        accountName={ual.activeUser?.accountName || initData.account_name}
+        bpJson={producer?.bpJson || initData}
+        onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
+      />
+    </div>
   )
 }
 
