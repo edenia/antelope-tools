@@ -17,15 +17,19 @@ export default (theme) => ({
     },
   },
   imgHeaderLogo: {
-    width: '145px',
-    marginTop: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      width: '70%',
-      marginLeft: theme.spacing(2.5),
-    },
+    '& svg':{
+      height: '64px',
+      width: '145px',
+      marginTop: theme.spacing(2),
+      color: theme.palette.text.primary,
+      [theme.breakpoints.down('sm')]: {
+        width: '70%',
+        marginLeft: theme.spacing(2.5),
+      },
+    }
   },
   appBar: {
-    backgroundColor: `${theme.palette.common.white} !important`,
+    backgroundColor: `${theme.palette.background.main} !important`,
     color: theme.header.color,
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     height: '100%',
@@ -42,7 +46,7 @@ export default (theme) => ({
     alignItems: 'center',
     gap: theme.spacing(2),
     '& button': {
-      color: '#757575',
+      color: theme.palette.neutral.dark,
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '250px',

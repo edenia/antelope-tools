@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -62,47 +60,43 @@ const SearchBar = ({
   }, [debouncedFilter])
 
   return (
-    <>
-      <Card>
-        <CardContent className={classes.cardContent}>
-          <Typography className={classes.title}>{`${t('title')}:`}</Typography>
-          <TextField
-            label={t('placeholder')}
-            variant="outlined"
-            className={classes.formControl}
-            value={filters.owner || ''}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleOnClick}
-                    edge="end"
-                    aria-label="search"
-                  >
-                    <SearchOutlinedIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            onKeyDown={handleOnKeyDown}
-            onChange={handleOnChange('owner')}
+    <div className="simple-card">
+      <Typography className={classes.title}>{`${t('title')}:`}</Typography>
+      <TextField
+        label={t('placeholder')}
+        variant="outlined"
+        className={classes.formControl}
+        value={filters.owner || ''}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleOnClick}
+                edge="end"
+                aria-label="search"
+              >
+                <SearchOutlinedIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        onKeyDown={handleOnKeyDown}
+        onChange={handleOnChange('owner')}
+      />
+      <div className={classes.chipWrapper}>
+        {chips.map((chip, index) => (
+          <Chip
+            key={`chip-${chip.name}-${index}`}
+            label={t(chip.name)}
+            clickable
+            onClick={() => handleOnClickChip(chip.name)}
+            className={clsx({
+              [classes.selected]: selected === chip.name,
+            })}
           />
-          <div className={classes.chipWrapper}>
-            {chips.map((chip, index) => (
-              <Chip
-                key={`chip-${chip.name}-${index}`}
-                label={t(chip.name)}
-                clickable
-                onClick={() => handleOnClickChip(chip.name)}
-                className={clsx({
-                  [classes.selected]: selected === chip.name,
-                })}
-              />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </>
+        ))}
+      </div>
+    </div>
   )
 }
 
