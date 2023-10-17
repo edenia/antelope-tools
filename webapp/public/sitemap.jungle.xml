@@ -5,19 +5,19 @@
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/nodes</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/endpoints</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/nodes-distribution</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/rewards-distribution</loc>
@@ -137,6 +137,10 @@
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/batinthedark</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://jungle.antelope.tools/block-producers/sentnlagents</loc>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>
