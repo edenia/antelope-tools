@@ -1,9 +1,4 @@
 export default (theme) => ({
-  root: {
-    height: '100%',
-    display: 'flex',
-    flexFlow: 'column',
-  },
   content: {
     flex: 1,
   },
@@ -13,15 +8,8 @@ export default (theme) => ({
       textTransform: 'unset !important',
     },
   },
-  dl: {
-    marginTop: -16,
-    marginBottom: -16,
-  },
   bold: {
     fontWeight: 'bold',
-  },
-  breakLine: {
-    wordBreak: 'break-word',
   },
   nodes: {
     width: '260px',
