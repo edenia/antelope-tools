@@ -62,7 +62,8 @@ export const formatData = ({
     data.social.github = data.github_user
   }
 
-  const socialArray = data?.social ? Object.keys(prefix || {})
+  const socialArray = data?.social
+? Object.keys(prefix || {})
     .sort((a, b) => getOrder(a) - getOrder(b))
     .flatMap((key) =>
       data.social[key]
@@ -71,7 +72,8 @@ export const formatData = ({
             url: `${prefix[key] ?? 'https://' + key + '/'}${data.social[key]}`,
           }
         : [],
-    ) : []
+    )
+: []
 
   newData = {
     ...newData,
