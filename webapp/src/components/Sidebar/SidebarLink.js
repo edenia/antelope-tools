@@ -9,10 +9,10 @@ import NavLink from './NavLink'
 
 const Link = styled(MuiListItem)`
   span {
-    color: ${(props) => rgba(props.theme.palette.neutral.darker, 0.7)};
+    color: ${(props) => props.theme.palette.neutral.darker};
   }
   &:hover span {
-    color: ${(props) => rgba(props.theme.palette.neutral.darker, 0.9)};
+    color: ${(props) => props.theme.palette.neutral.darker};
   }
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>

@@ -22,8 +22,9 @@ const lightVariant = {
     neutral: {
       lighter: '#F0F3FA',
       light: '#E0E0E0',
+      main: '#0003',
       dark: '#4E4E4E',
-      darker: '#3D3D3DDE',
+      darker: '#2E2E2E',
     },
   },
 }
@@ -93,6 +94,7 @@ const darkVariant = {
     neutral: {
       lighter: grey[800],
       light: grey[600],
+      main: grey[300],
       dark: grey[200],
       darker: grey[100],
     },

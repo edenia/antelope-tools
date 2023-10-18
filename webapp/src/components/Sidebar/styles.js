@@ -66,10 +66,10 @@ export default (theme, rgba) => ({
     },
   },
   categoryIconLess: {
-    color: rgba(theme.palette.neutral.darker, 0.5),
+    color: theme.palette.neutral.darker,
   },
   categoryIconMore: {
-    color: rgba(theme.palette.neutral.darker, 0.5),
+    color: theme.palette.neutral.darker,
   },
   linkText: {
     color: theme.palette.neutral.darker,

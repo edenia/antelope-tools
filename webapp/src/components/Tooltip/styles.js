@@ -1,6 +1,6 @@
 export default (theme) => ({
   paper: {
-    border: '1px solid rgba(0, 0, 0, 0.12)',
+    border: `1px solid ${theme.palette.neutral.light}`,
     boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
   },
   popover: {

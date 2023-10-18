@@ -42,7 +42,7 @@ const MainMap = ({ data, map, setMap }) => {
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
           backgroundColor: theme.palette.background.default,
-          border: '1px solid rgba(0, 0, 0, 0.12)',
+          border: `1px solid ${theme.palette.neutral.light}`,
           boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
         },
         series: [

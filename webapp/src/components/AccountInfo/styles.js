@@ -19,7 +19,7 @@ export default (theme) => ({
     boxShadow: 'none',
     width: '100%',
     borderRadius: 0,
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    borderBottom: `1px solid ${theme.palette.neutral.light}`,
   },
   accordionSummary: {
     padding: 0,
@@ -97,7 +97,7 @@ export default (theme) => ({
   },
   border: {
     [theme.breakpoints.up('lg')]: {
-      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+      borderLeft: `1px solid ${theme.palette.neutral.main}`,
     },
   },
   iconBorder: {
