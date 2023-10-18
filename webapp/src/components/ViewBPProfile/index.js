@@ -16,6 +16,7 @@ const ViewBPProfile = ({ producer }) => {
 
   return (
     <Button
+      aria-label={`BP ${producer?.owner} Profile Page`}
       className={classes.button}
       component={Link}
       to={`/${eosConfig.producersRoute}/${producer?.owner}`}

@@ -5,15 +5,15 @@
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/entities</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/nodes</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/endpoints</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/endpoints-stats</loc>
@@ -25,7 +25,7 @@
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/nodes-distribution</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/block-distribution</loc>
@@ -62,5 +62,9 @@
    <url>
       <loc>https://lacchain.antelope.tools/help</loc>
       <lastmod>2023-09-30</lastmod>
+   </url>
+   <url>
+      <loc>https://lacchain.antelope.tools/entities/costarica</loc>
+      <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

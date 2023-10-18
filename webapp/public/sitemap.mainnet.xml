@@ -5,19 +5,19 @@
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/endpoints</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes-distribution</loc>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/endpoints-stats</loc>
@@ -50,5 +50,101 @@
    <url>
       <loc>https://eos.antelope.tools/help</loc>
       <lastmod>2023-09-30</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/aus1genereos</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/newdex.bp</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/big.one</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eoseouldotio</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/binancestake</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/atticlabeosb</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/ivote4eosusa</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/starteosiobp</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosnationftw</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosflytomars</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosiosg11111</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/blockpooleos</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosphereiobp</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/bp.defi</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eoslaomaocom</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/hashfineosio</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosasia11111</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eoscannonchn</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/eosinfstones</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/whaleex.com</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/bitfinexeos1</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers/costaricaeos</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers?page=2</loc>
+      <lastmod>2023-10-17</lastmod>
+   </url>
+   <url>
+      <loc>https://eos.antelope.tools/block-producers?page=3</loc>
+      <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

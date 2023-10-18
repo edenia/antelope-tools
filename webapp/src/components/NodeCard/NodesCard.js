@@ -6,17 +6,16 @@ import { makeStyles } from '@mui/styles'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
-import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 
 import ChipList from '../ChipList'
 import CountryFlag from '../CountryFlag'
 import ProducerHealthIndicators from '../ProducerHealthIndicators'
-import MoreInfoModal from '../MoreInfoModal'
 
 import ShowInfo from './ShowInfo'
-import styles from './styles'
 import SupportedAPIs from './SupportedAPIs'
 import EndpointsChips from './EndpointsChips'
+import Keys from './Keys'
+import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
@@ -35,27 +34,6 @@ const NodesCard = ({ nodes, hideFeatures = false }) => {
         <dd>
           <ProducerHealthIndicators producer={node} />
         </dd>
-      </>
-    )
-  }
-
-  const Keys = ({ node }) => {
-    if (!node?.node_info?.length || !node?.node_info[0]?.features?.keys)
-      return <></>
-
-    const keys = node.node_info[0].features.keys
-
-    return (
-      <>
-        <span className={classes.bold}>{t('keys')}</span>
-        {Object.keys(keys).map((key, i) => (
-          <div key={i} className={classes.keysContainer}>
-            <p className={classes.bold}>{key}:</p>
-            <MoreInfoModal Icon={KeyOutlinedIcon}>
-              <p className={classes.keys}>{keys[key]}</p>
-            </MoreInfoModal>
-          </div>
-        ))}
       </>
     )
   }
