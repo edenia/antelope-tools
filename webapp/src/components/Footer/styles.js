@@ -21,14 +21,11 @@ export default (theme) => ({
       color: theme.palette.common.black,
     },
     '& a': {
-      color: theme.sidebar.footer.color,
+      color: theme.palette.neutral.dark,
       lineHeight: '20px',
       textAlign: 'center',
       letterSpacing: '0.1px',
       textDecoration: 'none',
-      [theme.breakpoints.down('md')]: {
-        color: theme.palette.primary.main,
-      },
     },
     [theme.breakpoints.down('md')]: {
       textAlign: 'center !important',
@@ -44,7 +41,6 @@ export default (theme) => ({
     alignItems: 'center',
   },
   sidebarFooterText: {
-    color: theme.sidebar.footer.color,
     lineHeight: '20px',
     textAlign: 'center',
     letterSpacing: '0.1px',
@@ -52,7 +48,6 @@ export default (theme) => ({
     justifyContent: 'center !important',
   },
   sidebarFooterSubText: {
-    color: theme.sidebar.footer.color,
     fontSize: '0.725rem',
     display: 'block',
     padding: 1,
@@ -61,7 +56,6 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '& a': {
-      color: theme.sidebar.footer.color,
       fontSize: 14,
       lineHeight: '20px',
       textAlign: 'center',
@@ -98,14 +92,14 @@ export default (theme) => ({
     height: '20px !important',
     alignItems: 'center',
     padding: '2px 6px',
-    color: '#FFFF',
+    color: theme.palette.primary.contrastText,
     justifyContent: 'center',
     borderRadius: '10px',
     textAlign: 'center',
     backgroundColor: `${theme.palette.primary.main} !important`,
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',
-      color: theme.sidebar.badge.color,
+      color: theme.palette.background.default,
       paddingleft: theme.spacing(2),
       paddingRight: theme.spacing(2),
     },

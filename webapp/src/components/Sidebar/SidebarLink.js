@@ -9,16 +9,16 @@ import NavLink from './NavLink'
 
 const Link = styled(MuiListItem)`
   span {
-    color: ${(props) => rgba(props.theme.sidebar.color, 0.7)};
+    color: ${(props) => rgba(props.theme.palette.neutral.darker, 0.7)};
   }
   &:hover span {
-    color: ${(props) => rgba(props.theme.sidebar.color, 0.9)};
+    color: ${(props) => rgba(props.theme.palette.neutral.darker, 0.9)};
   }
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
-      darken(0.06, props.theme.sidebar.background)};
+      darken(0.06, props.theme.palette.background.default)};
     span {
-      color: ${(props) => props.theme.sidebar.color};
+      color: ${(props) => props.theme.palette.neutral.darker};
     }
   }
 `

@@ -78,7 +78,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
         series: [
           {
             name: 'NodeDistribution',
-            borderColor: '#8F9DA4',
+            borderColor: theme.palette.neutral.dark,
             nullColor: theme.palette.neutral.lighter,
             showInLegend: false,
           },
@@ -95,7 +95,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [navigate, theme.palette.neutral.lighter],
+    [navigate, theme.palette.neutral],
   )
 
   useEffect(() => {

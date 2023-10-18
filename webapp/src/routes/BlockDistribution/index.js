@@ -51,8 +51,8 @@ const BlockDistribution = () => {
     },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
-      backgroundColor: theme.palette.background.main,
-      borderColor: theme.palette.background.main,
+      backgroundColor: theme.palette.common.white,
+      borderColor: theme.palette.common.white,
       borderRadius: 10,
       borderWidth: 1,
     },

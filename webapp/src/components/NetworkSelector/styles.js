@@ -39,8 +39,8 @@ export default (theme) => ({
         alignItems: 'center',
         width: '50%',
         height: 50,
-        borderLeft: '1px solid #EEEEEE',
-        borderBottom: '1px solid #EEEEEE',
+        borderLeft: `1px solid ${theme.palette.neutral.lighter}`,
+        borderBottom: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& .titlesBoxLeft': {
         paddingLeft: theme.spacing(2),
@@ -48,7 +48,7 @@ export default (theme) => ({
         alignItems: 'center',
         height: 50,
         width: '50%',
-        borderBottom: '1px solid #EEEEEE',
+        borderBottom: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& p': {
         fontWeight: 'bold',
@@ -65,7 +65,7 @@ export default (theme) => ({
       },
       '& .listsBoxRight': {
         width: '50%',
-        borderLeft: '1px solid #EEEEEE',
+        borderLeft: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& .listsBoxLeft': {
         width: '50%',

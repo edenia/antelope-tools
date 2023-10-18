@@ -26,40 +26,6 @@ const lightVariant = {
       darker: '#3D3D3DDE',
     },
   },
-  header: {
-    color: grey[500],
-    background: '#FFF',
-    search: {
-      color: grey[800],
-    },
-    indicator: {
-      background: blue[600],
-    },
-  },
-  sidebar: {
-    color: grey[900],
-    background: '#FFF',
-    header: {
-      color: blue[800],
-      background: '#FFF',
-      brand: {
-        color: blue[800],
-      },
-    },
-    footer: {
-      color: '#424242',
-      background: '#FFF',
-    },
-    category: {
-      fontWeight: 'normal',
-    },
-    badge: {
-      color: '#FFF',
-    },
-  },
-  body: {
-    background: '#F7F9FC',
-  },
 }
 
 const darkVariant = {
@@ -124,7 +90,6 @@ const darkVariant = {
       focusOpacity: '0.12',
       activatedOpacity: '0.24',
     },
-
     neutral: {
       lighter: grey[800],
       light: grey[600],
@@ -132,45 +97,6 @@ const darkVariant = {
       darker: grey[100],
     },
     
-  },
-
-  header: {
-    color: grey[500],
-    background: '#000',
-    search: {
-      color: grey[800],
-    },
-    indicator: {
-      background: blue[600],
-    },
-  },
-  sidebar: {
-    color: grey[200],
-    background: '#1B2430',
-    header: {
-      color: grey[200],
-      background: '#232f3e',
-      brand: {
-        color: blue[500],
-      },
-    },
-    footer: {
-      color: grey[200],
-      background: '#232f3e',
-      online: {
-        background: green[500],
-      },
-    },
-    category: {
-      fontWeight: 400,
-    },
-    badge: {
-      color: '#FFF',
-      background: blue[500],
-    },
-  },
-  body: {
-    background: '#000',
   },
 }
 

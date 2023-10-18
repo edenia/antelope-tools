@@ -3,7 +3,7 @@ export default (theme, rgba) => ({
     minWidth: '70px',
     borderRight: 0,
     height: '100%',
-    backgroundColor: theme.sidebar.background,
+    backgroundColor: theme.palette.background.default,
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
@@ -15,11 +15,11 @@ export default (theme, rgba) => ({
     },
   },
   scrollbar: {
-    backgroundColor: theme.sidebar.background,
+    backgroundColor: theme.palette.background.default,
     paddingBottom: theme.spacing(4),
   },
   list: {
-    backgroundColor: theme.sidebar.background,
+    backgroundColor: theme.palette.background.default,
   },
   listItem: {
     padding: '2px 6px 2px 6px !important',
@@ -32,8 +32,8 @@ export default (theme, rgba) => ({
   brand: {
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.fontWeightMedium,
-    color: theme.sidebar.header.color,
-    backgroundColor: theme.sidebar.header.background,
+    color: theme.palette.neutral.light,
+    backgroundColor: theme.palette.background.default,
     fontFamily: theme.typography.fontFamily,
     minHeight: 56,
     paddingLeft: theme.spacing(6),
@@ -44,7 +44,7 @@ export default (theme, rgba) => ({
       minHeight: 64,
     },
     '&:hover': {
-      backgroundColor: theme.sidebar.header.background,
+      backgroundColor: theme.palette.background.default,
     },
   },
   brandIcon: {
@@ -59,20 +59,20 @@ export default (theme, rgba) => ({
   categoryText: {
     margin: 0,
     '& span': {
-      color: theme.sidebar.color,
+      color: theme.palette.neutral.darker,
       fontSize: theme.typography.body1.fontSize,
-      fontWeight: theme.sidebar.category.fontWeight,
+      fontWeight: 400,
       padding: theme.spacing(0, 4),
     },
   },
   categoryIconLess: {
-    color: rgba(theme.sidebar.color, 0.5),
+    color: rgba(theme.palette.neutral.darker, 0.5),
   },
   categoryIconMore: {
-    color: rgba(theme.sidebar.color, 0.5),
+    color: rgba(theme.palette.neutral.darker, 0.5),
   },
   linkText: {
-    color: theme.sidebar.color,
+    color: theme.palette.neutral.darker,
     '& span': {
       fontSize: theme.typography.body1.fontSize,
     },
@@ -89,7 +89,7 @@ export default (theme, rgba) => ({
 
     '& span.MuiChip-label, & span.MuiChip-label:hover': {
       cursor: 'pointer',
-      color: theme.sidebar.badge.color,
+      color: theme.palette.background.default,
       paddingleft: theme.spacing(2),
       paddingRight: theme.spacing(2),
     },
@@ -103,7 +103,7 @@ export default (theme, rgba) => ({
     backgroundColor: theme.palette.neutral.light,
   },
   sidebarSection: {
-    color: theme.sidebar.color,
+    color: theme.palette.neutral.darker,
     padding: theme.spacing(0, 4),
     opacity: 0.9,
     display: 'block',
@@ -116,7 +116,7 @@ export default (theme, rgba) => ({
     '& svg': {
       width: 30,
       height: 30,
-      color: theme.sidebar.color,
+      color: theme.palette.neutral.darker,
       opacity: 0.5
     },
   },

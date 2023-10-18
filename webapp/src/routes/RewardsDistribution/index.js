@@ -166,11 +166,11 @@ const RewardsDistribution = () => {
                       className={classes.geography}
                       key={geo.rsmKey}
                       geography={geo}
-                      stroke="#8F9DA4"
+                      stroke={theme.palette.neutral.dark}
                       fill={
                         nodeData && nodeData.rewards > 0
                           ? colorScale(parseInt(nodeData.rewards))
-                          : '#EEEEEE'
+                          : theme.palette.neutral.lighter
                       }
                     />
                   )

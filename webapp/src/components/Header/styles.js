@@ -30,7 +30,6 @@ export default (theme) => ({
   },
   appBar: {
     backgroundColor: `${theme.palette.background.default} !important`,
-    color: theme.header.color,
     boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     height: '100%',
   },
@@ -38,7 +37,7 @@ export default (theme) => ({
     '& svg': {
       width: 22,
       height: 22,
-      color: 'rgba(0, 0, 0, 0.54)',
+      color: theme.palette.neutral.darker,
     },
   },
   userBox: {
