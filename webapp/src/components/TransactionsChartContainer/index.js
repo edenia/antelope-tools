@@ -32,15 +32,7 @@ const TransactionsChartContainer = ({
   const { t } = useTranslation()
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent
-        style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
+    <Card>
         <div className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {title}
@@ -105,7 +97,6 @@ const TransactionsChartContainer = ({
           shared={chartLabelFormat?.shared}
           customFormatter={chartLabelFormat?.customFormatter}
         />
-      </CardContent>
     </Card>
   )
 }

@@ -9,4 +9,8 @@ export default (theme) => ({
   description: {
     fontWeight: 'normal',
   },
+  chartContainer:{
+    display: 'flex',
+    alignItems: 'center',
+  }
 })

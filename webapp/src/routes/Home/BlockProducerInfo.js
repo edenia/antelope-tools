@@ -9,7 +9,6 @@ import { useSharedState } from '../../context/state.context'
 import { eosConfig } from '../../config'
 
 const Card = lazy(() => import('@mui/material/Card'))
-const CardContent = lazy(() => import('@mui/material/CardContent'))
 const Typography = lazy(() => import('@mui/material/Typography'))
 const LinearProgress = lazy(() => import('@mui/material/LinearProgress'))
 const ProducersChart = lazy(() => import('../../components/ProducersChart'))
@@ -110,18 +109,14 @@ const BlockProducerInfo = ({ t, classes }) => {
         />
       </div>
       <div className={classes.graphicBox}>
-        <div className={classes.divTrans}>
-          <Card className={classes.cardShadow}>
-            <CardContent>
-              <CardTooltip helperText={t('tooltip.bpSchedule')}>   
-                <Typography component="h2" variant="h6">
-                  {t('bpSchedule')}
-                </Typography>
-              </CardTooltip> 
-              <ProducersChart info={info} producers={schedule.producers} />
-            </CardContent>
-          </Card>
-        </div>
+        <Card className={classes.divTrans}>
+          <CardTooltip helperText={t('tooltip.bpSchedule')}>   
+            <Typography component="h2" variant="h6">
+              {t('bpSchedule')}
+            </Typography>
+          </CardTooltip> 
+          <ProducersChart info={info} producers={schedule.producers} />
+        </Card>
         <div className={classes.divTrans}>
           <TransactionInfo t={t} />
         </div>

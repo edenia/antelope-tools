@@ -30,7 +30,4 @@ export default (theme) => ({
       marginTop: theme.spacing(3),
     },
   },
-  cardShadow: {
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-  },
 })
