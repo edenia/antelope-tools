@@ -43,7 +43,7 @@ const MainMap = ({ data, map, setMap }) => {
           headerFormat: '<b>{series.name}</b><br>',
           backgroundColor: theme.palette.background.default,
           border: `1px solid ${theme.palette.neutral.light}`,
-          boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+          boxShadow: `${theme.palette.shadows.tooltip} !important`,
         },
         series: [
           {

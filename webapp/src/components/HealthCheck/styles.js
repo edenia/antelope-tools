@@ -40,9 +40,6 @@ export default (theme) => ({
   redLight: {
     color: theme.palette.error.main,
   },
-  test: {
-    boxShadow: '10px 5px 5px red !important',
-  },
   loading: {
     width: '18px !important',
     height: '18px !important',

@@ -65,7 +65,6 @@ const RewardsDistribution = () => {
       aria-haspopup="true"
     >
       <Popover
-        className={classes.shadow}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         PaperProps={{ onMouseLeave: handlePopoverClose }}

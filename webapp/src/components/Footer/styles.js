@@ -6,7 +6,7 @@ export default (theme) => ({
     padding: `1px ${theme.spacing(1)}`,
     background: theme.palette.background.default,
     alignItems: 'center',
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+    boxShadow: theme.palette.shadows.card,
     justifyContent: 'space-between',
     [theme.breakpoints.down('md')]: {
       flexDirection: 'column',

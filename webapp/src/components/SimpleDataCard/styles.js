@@ -60,7 +60,7 @@ export default (theme) => ({
   tooltipHover: {
     '&:hover': {
       border: `0.5px solid ${theme.palette.primary.main}`,
-      boxShadow: '0px 0px 40px -30px #1565c0bf inset !important',
+      boxShadow: `${theme.palette.shadows.hover} !important`,
       '& svg': {
         cursor: 'pointer',
         color: theme.palette.primary.main,

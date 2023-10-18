@@ -26,6 +26,13 @@ const lightVariant = {
       dark: '#4E4E4E',
       darker: '#2E2E2E',
     },
+    shadows: {
+      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
+      nodeCard: '2px 3px 4px 0px #0000002E',
+      profileCard: '0px -2px 8px 0px #0000004D',
+      hover: '0px 0px 40px -30px #1565c0bf inset',
+    } 
   },
 }
 
@@ -98,7 +105,13 @@ const darkVariant = {
       dark: grey[200],
       darker: grey[100],
     },
-    
+    shadows: {
+      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
+      nodeCard: '2px 3px 4px 0px #0000002E',
+      profileCard: '0px -2px 8px 0px #0000004D',
+      hover: '0px 0px 40px -30px #1565c0bf inset',
+    } 
   },
 }
 

@@ -113,12 +113,6 @@ export default (theme) => ({
       paddingBottom: theme.spacing(2),
     },
   },
-  shadow: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      padding: theme.spacing(1),
-    },
-  },
   nonCompliantButton: {
     height: '30px',
     fontSize: '12px !important',
