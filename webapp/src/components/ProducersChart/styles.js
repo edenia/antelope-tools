@@ -12,5 +12,6 @@ export default (theme) => ({
   chartContainer:{
     display: 'flex',
     alignItems: 'center',
+    paddingBottom: theme.spacing(2),
   }
 })

@@ -80,7 +80,6 @@ const LanguageMenu = () => {
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
-        className={classes.cardShadow}
       >
         {languages.map((language) => (
           <MenuItem

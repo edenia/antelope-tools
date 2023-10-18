@@ -29,8 +29,6 @@ export default (theme) => ({
     }
   },
   appBar: {
-    backgroundColor: `${theme.palette.background.default} !important`,
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     height: '100%',
   },
   iconButton: {
@@ -147,11 +145,6 @@ export default (theme) => ({
     transition: 'ease-in-out all 0.5s',
     '&:hover': {
       boxShadow: `0px 0px 3px 3px ${theme.palette.primary.main}`,
-    },
-  },
-  cardShadow: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
     },
   },
 })

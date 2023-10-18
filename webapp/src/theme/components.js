@@ -5,6 +5,9 @@ const components = {
         .MuiTypography-capSubtitle {
           color: ${theme.palette.neutral.dark};
         }
+        .MuiAppBar-root {
+          background-color: ${theme.palette.background.paper} !important;
+        }
       `,
   },
   MuiTypography: {

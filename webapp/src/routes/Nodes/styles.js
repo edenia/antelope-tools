@@ -13,9 +13,6 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  cardShadow: {
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)',
-  },
   searchWrapper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(1),

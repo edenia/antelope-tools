@@ -1,7 +1,4 @@
 export default (theme) => ({
-  cardShadow: {
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-  },
   statsText: {
     textAlign: 'center',
   },
@@ -51,9 +48,6 @@ export default (theme) => ({
     display: 'flex',
     flexFlow: 'row nowrap',
     minHeight: '125px',
-    padding: theme.spacing(2),
-    background: theme.palette.background.default,
-    borderRadius: theme.spacing(1),
     '& .MuiTypography-h6': {
       display: 'flex',
     },

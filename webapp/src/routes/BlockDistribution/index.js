@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
@@ -97,70 +96,68 @@ const BlockDistribution = () => {
   }, [data])
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent>
-        <div className={classes.textDiv}>
-          <Typography component="h2" variant="h6">
-            {t('title')}
-          </Typography>
-          <div className={classes.formControl}>
-            <FormControl variant="standard">
-              <InputLabel htmlFor="select-range-label">
-                {t('timeFrame')}
-              </InputLabel>
-              <Select
-                inputProps={{ id: 'select-range-label' }}
-                value={range}
-                onChange={(e) => setRange(e.target.value)}
-                fullWidth
-              >
-                {rangeOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {t(option)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
+    <Card>
+      <div className={classes.textDiv}>
+        <Typography component="h2" variant="h6">
+          {t('title')}
+        </Typography>
+        <div className={classes.formControl}>
+          <FormControl variant="standard">
+            <InputLabel htmlFor="select-range-label">
+              {t('timeFrame')}
+            </InputLabel>
+            <Select
+              inputProps={{ id: 'select-range-label' }}
+              value={range}
+              onChange={(e) => setRange(e.target.value)}
+              fullWidth
+            >
+              {rangeOptions.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {t(option)}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
-        {loading && <LinearProgress />}
-        {!loading && data?.items?.length > 0 && (
-          <>
-            <HighchartsReact
-              highcharts={Highcharts}
-              options={{ ...options, series }}
-            />
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>{t('account')}</TableCell>
-                    <TableCell align="right">{t('blocksProduced')}</TableCell>
-                    <TableCell align="right">{t('percent')}</TableCell>
+      </div>
+      {loading && <LinearProgress />}
+      {!loading && data?.items?.length > 0 && (
+        <>
+          <HighchartsReact
+            highcharts={Highcharts}
+            options={{ ...options, series }}
+          />
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>{t('account')}</TableCell>
+                  <TableCell align="right">{t('blocksProduced')}</TableCell>
+                  <TableCell align="right">{t('percent')}</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.items.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{item.account}</TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.blocks)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(
+                        Math.ceil(item.percent * 100),
+                        1,
+                      )}
+                      %
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data?.items.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{item.account}</TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.blocks)}
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(
-                          Math.ceil(item.percent * 100),
-                          1,
-                        )}
-                        %
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </>
-        )}
-      </CardContent>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      )}
     </Card>
   )
 }
