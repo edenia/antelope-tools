@@ -2,6 +2,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import InputLabel from '@mui/material/InputLabel'
@@ -33,7 +34,7 @@ const EndpointsList = () => {
   ] = useEndpointsState()
 
   return (
-    <div className="simple-card">
+    <Card>
       <div className={classes.titleContainer}>
         <div className={classes.dateContainer}>
           <Typography component="p" variant="h6">
@@ -80,7 +81,7 @@ const EndpointsList = () => {
           </FormControl>
         </div>
       </div>
-      <div className={classes.searchWrapper}>
+      <div className={`${classes.searchWrapper} ${classes.noShadow}`}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
@@ -111,7 +112,7 @@ const EndpointsList = () => {
           )}
         </>
       )}
-    </div>
+    </Card>
   )
 }
 

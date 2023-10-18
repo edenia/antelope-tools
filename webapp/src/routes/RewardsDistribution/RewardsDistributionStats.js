@@ -4,7 +4,6 @@ import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Typography from '@mui/material/Typography'
 import Skeleton from '@mui/material/Skeleton'
@@ -25,8 +24,8 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
   return (
     <div className={classes.divMargin}>
       <div className={classes.cardHeader}>
-        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={`${classes.cards} ${classes.totalDailyCard}`}>
+        <Card className={classes.cardContent}>
+          <div className={`${classes.cards} ${classes.totalDailyCard}`}>
             <Typography component="h2">{t('dailyRewards')}</Typography>
             <div className={classes.verticallyCenter}>
               <Typography variant="h6" component="p">
@@ -56,12 +55,12 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                 )}
               </Typography>
             </div>
-          </CardContent>
+          </div>
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={classes.cards}>
+        <Card className={classes.cardContent}>
+          <div className={classes.cards}>
             <Typography component="h2">
               {t('topCountryDailyRewards')}
             </Typography>
@@ -97,12 +96,12 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                 onClick={handlePopoverOpen(summary?.topCountryByRewards)}
               />
             </div>
-          </CardContent>
+          </div>
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={classes.cards}>
+        <Card className={classes.cardContent}>
+          <div className={classes.cards}>
             <div className={classes.notLocated}>
               <Typography component="h2">{t('paidProducers')}</Typography>
               {!!summary?.producersWithoutProperBpJson.quantity && (
@@ -151,12 +150,12 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                 />
               )}
             </Typography>
-          </CardContent>
+          </div>
         </Card>
       </div>
       <div className={classes.cardHeader}>
-        <Card className={`${classes.cardContent} ${classes.cardShadow}`}>
-          <CardContent className={`${classes.cards} ${classes.exchangeCard}`}>
+        <Card className={classes.cardContent}>
+          <div className={`${classes.cards} ${classes.exchangeCard}`}>
             <div className={classes.center}>
               <Typography
                 variant="subtitle1"
@@ -202,7 +201,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
                 )}
               </Typography>
             </div>
-          </CardContent>
+          </div>
         </Card>
       </div>
     </div>

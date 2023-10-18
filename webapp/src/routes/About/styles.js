@@ -28,7 +28,6 @@ export default (theme) => ({
   },
   mainText: {
     width: '100%',
-    overflow: 'hidden',
     [theme.breakpoints.down('md')]: {
       display: 'flex',
       flexDirection: 'column',

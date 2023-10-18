@@ -2,6 +2,7 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Card from '@mui/material/Card'
 
 import { eosConfig } from '../../config'
 
@@ -20,7 +21,7 @@ const About = () => {
     .replace(' Testnet', '')
 
   return (
-    <div className={`simple-card ${classes.mainText}`}>
+    <Card className={classes.mainText}>
       <div className={classes.logoContainer}>
         <Logo className={classes.logo} />
       </div>
@@ -96,7 +97,7 @@ const About = () => {
           {'. '}{t('body6.paragraph3')}
         </Typography>
       </div>
-    </div>
+    </Card>
   )
 }
 

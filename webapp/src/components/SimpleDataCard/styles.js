@@ -1,12 +1,8 @@
 export default (theme) => ({
   cards: {
     textTransform: 'capitalize',
-    minHeight: '90px',
+    minHeight: '58px',
     height: '100%',
-  },
-  cardShadow: {
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-    backgroundColor: `${theme.palette.background.default} !important`,
   },
   border: {
     border: '0.5px solid transparent',
@@ -41,6 +37,7 @@ export default (theme) => ({
     textAlign: 'center',
     height: '100%',
     alignItems: 'center',
+    paddingBottom: theme.spacing(4),
   },
   svgLink: {
     fontSize: 18,

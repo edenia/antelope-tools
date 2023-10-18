@@ -30,9 +30,6 @@ export default (theme) => ({
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
       flex: 'none',
     },
-    '& .MuiPaper-root .MuiPaper-root': {
-      boxShadow: 'none',
-    },
   },
   header: {
     flex: '100%',

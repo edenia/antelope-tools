@@ -1,7 +1,8 @@
 import React from 'react'
 import LinearProgress from '@mui/material/LinearProgress'
-import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
+import Card from '@mui/material/Card'
+import Typography from '@mui/material/Typography'
 import { BPJsonGenerator } from '@eoscostarica/eoscr-components'
 
 import { eosConfig } from '../../config'
@@ -15,7 +16,7 @@ const BPJson = () => {
   ] = useBPJsonState()
 
   return (
-    <div className="simple-card">
+    <Card>
       {loading && (
         <>
           <Typography variant="h5" align="center">
@@ -33,7 +34,7 @@ const BPJson = () => {
         bpJson={producer?.bpJson || initData}
         onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
       />
-    </div>
+    </Card>
   )
 }
 

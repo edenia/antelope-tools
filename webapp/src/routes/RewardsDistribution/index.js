@@ -145,7 +145,7 @@ const RewardsDistribution = () => {
         handlePopoverOpen={handlePopoverOpen}
       />
       {!loading && (
-        <Paper className={`${classes.mapWrapper} ${classes.cardShadow}`}>
+        <Paper className={classes.mapWrapper}>
           <ComposableMap
             projectionConfig={{
               scale: 170,

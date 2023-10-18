@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
-import { rgba, darken } from 'polished'
+import { darken } from 'polished'
 import styled from 'styled-components'
 
 import NavLink from './NavLink'

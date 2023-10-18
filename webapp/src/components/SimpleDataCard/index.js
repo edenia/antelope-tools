@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
 
@@ -32,11 +31,11 @@ const SimpleDataCard = ({
         onMouseOver={helperText ? handleOpen : null}
         onMouseMove={helperText ? handleOpen : null}
         onMouseOut={helperText ? handleClose : null}
-        className={`${classes.cardShadow} ${classes.border} ${
+        className={`${classes.border} ${
           helperText ? classes.tooltipHover : ''
         }`}
       >
-        <CardContent className={classes.cards}>
+        <div className={classes.cards}>
           {title && (
             <div className={classes.titleContainer}>
               <Typography component="h2" className={classes.title}>
@@ -70,7 +69,7 @@ const SimpleDataCard = ({
           ) : (
             <LinearProgress />
           )}
-        </CardContent>
+        </div>
       </Card>
     </div>
   )

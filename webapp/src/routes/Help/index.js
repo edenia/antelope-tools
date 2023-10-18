@@ -2,6 +2,7 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Card from '@mui/material/Card'
 import Link from '@mui/material/Link'
 import HttpIcon from '@mui/icons-material/Http'
 import TelegramIcon from '@mui/icons-material/Telegram'
@@ -19,7 +20,7 @@ const Help = () => {
   const { t } = useTranslation('helpRoute')
 
   return (
-    <div className='simple-card'>
+    <Card>
       <Typography component="h2" variant="h4" className={classes.title}>
         {t('title')}
       </Typography>
@@ -142,7 +143,7 @@ const Help = () => {
           <Typography variant="body1">{t('websiteEOSCR')}</Typography>
         </Link>
       </div>
-    </div>
+    </Card>
   )
 }
 

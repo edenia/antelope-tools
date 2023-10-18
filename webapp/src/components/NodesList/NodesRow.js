@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
 import { formatData } from '../../utils'
@@ -53,7 +54,7 @@ const NodesRow = ({ producer }) => {
   if (!producerOrg || !Object.keys(producerOrg)?.length) return <></>
 
   return (
-    <div className={`simple-card ${classes.cardRow} ${classes.nodesRow}`}>
+    <Card className={`${classes.cardRow} ${classes.nodesRow}`}>
       <Tooltip
         anchorEl={anchorEl}
         open={anchorEl !== null}
@@ -94,7 +95,7 @@ const NodesRow = ({ producer }) => {
       <div className={`${classes.nodesContainer} ${classes.hideOnMobile}`}>
         <NodesCard nodes={producer?.bp_json?.nodes} hideFeatures />{' '}
       </div>
-    </div>
+    </Card>
   )
 }
 

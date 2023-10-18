@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -60,7 +61,7 @@ const SearchBar = ({
   }, [debouncedFilter])
 
   return (
-    <div className="simple-card">
+    <Card>
       <Typography className={classes.title}>{`${t('title')}:`}</Typography>
       <TextField
         label={t('placeholder')}
@@ -96,7 +97,7 @@ const SearchBar = ({
           />
         ))}
       </div>
-    </div>
+    </Card>
   )
 }
 

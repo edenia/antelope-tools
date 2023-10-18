@@ -2,12 +2,6 @@ const components = {
   MuiCssBaseline: {
     styleOverrides: theme =>
       `
-        .simple-card {
-          background-color: ${theme.palette.background.default};
-          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
-          border-radius: 4px;
-          padding: ${theme.spacing(4)};
-        },
         .MuiTypography-capSubtitle {
           color: ${theme.palette.neutral.dark};
         }
@@ -24,6 +18,21 @@ const components = {
     styleOverrides: {
       root: {
         borderRadius: 30,
+      },
+    },
+  },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      },
+    },
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        backgroundImage: 'none',
+        padding: 16
       },
     },
   },

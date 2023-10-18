@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -31,7 +32,7 @@ const EVMEndpointsList = () => {
   const { healthLights } = generalConfig
 
   return (
-    <div className="simple-card">
+    <Card>
       <div className={classes.titleContainer}>
         <Typography component="h2" variant="h6">
           {t('title')}
@@ -100,7 +101,7 @@ const EVMEndpointsList = () => {
           </Table>
         </TableContainer>
       </div>
-    </div>
+    </Card>
   )
 }
 

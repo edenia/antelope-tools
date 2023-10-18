@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 
 import { RicardianContract as RicardianContractComponent } from '@eoscostarica/eoscr-components'
 
@@ -14,7 +15,7 @@ const RicardianContract = () => {
   const { t } = useTranslation('ricardianContractRoute')
 
   return (
-    <div className={`simple-card ${classes.root}`}>
+    <Card className={classes.root}>
       <RicardianContractComponent
         contractName="eosio"
         actionName=""
@@ -22,7 +23,7 @@ const RicardianContract = () => {
         LinearProgressColor="primary"
         title={t('title')}
       />
-    </div>
+    </Card>
   )
 }
 
