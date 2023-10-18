@@ -19,6 +19,7 @@ import Select from '@mui/material/Select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { BLOCK_DISTRIBUTION_QUERY } from '../../gql'
@@ -27,48 +28,49 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const options = {
-  time: {
-    timezoneOffset: new Date().getTimezoneOffset(),
-  },
-  title: {
-    text: ' ',
-  },
-  chart: {
-    plotBackgroundColor: null,
-    plotBorderWidth: null,
-    plotShadow: false,
-    type: 'pie',
-  },
-  tooltip: {
-    pointFormat: '<b>{point.percentage:.1f}%</b>',
-    backgroundColor: '#fff',
-    borderColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 1,
-  },
-  credits: {
-    enabled: false,
-  },
-  plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: 'pointer',
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-      },
-    },
-  },
-  series: [],
-}
-
 const BlockDistribution = () => {
   const { t } = useTranslation('blockDistributionRoute')
   const [range, setRange] = useState(rangeOptions[0])
   const [series, setSeries] = useState([])
   const [load, { loading, data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
   const classes = useStyles()
+  const theme = useTheme()
+
+  const options = {
+    time: {
+      timezoneOffset: new Date().getTimezoneOffset(),
+    },
+    title: {
+      text: ' ',
+    },
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie',
+    },
+    tooltip: {
+      pointFormat: '<b>{point.percentage:.1f}%</b>',
+      backgroundColor: theme.palette.background.main,
+      borderColor: theme.palette.background.main,
+      borderRadius: 10,
+      borderWidth: 1,
+    },
+    credits: {
+      enabled: false,
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+        },
+      },
+    },
+    series: [],
+  }
 
   useEffect(() => {
     load({

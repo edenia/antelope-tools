@@ -16,12 +16,7 @@ import { eosConfig } from '../../config'
 import styles from './styles'
 import TokenToUSD from './TokenToUSD'
 
-const lowestRewardsColor = '#B6EBF3'
-const highestRewardsColor = '#265F63'
-
-const useStyles = makeStyles((theme) =>
-  styles(theme, lowestRewardsColor, highestRewardsColor),
-)
+const useStyles = makeStyles(styles)
 
 const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
   const classes = useStyles()

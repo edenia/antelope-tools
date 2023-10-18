@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
+import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
@@ -58,6 +59,7 @@ const AccountInfo = ({
   onGetTableRows,
 }) => {
   const classes = useStyles()
+  const theme = useTheme()
   const [info, setInfo] = useState(null)
   const { t } = useTranslation('accountInfoComponent')
 
@@ -122,7 +124,7 @@ const AccountInfo = ({
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
-                  fg="#757575"
+                  fg={theme.palette.neutral.dark}
                 />
               </div>
               <Typography

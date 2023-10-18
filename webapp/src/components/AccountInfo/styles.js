@@ -38,10 +38,6 @@ export default (theme) => ({
       minWidth: '80px',
     },
   },
-  keyIcon: {
-    marginRight: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.54)',
-  },
   keyLabel: {
     wordBreak: 'break-all',
   },
@@ -105,7 +101,7 @@ export default (theme) => ({
     },
   },
   iconBorder: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: theme.palette.neutral.lighter,
     borderRadius: 50,
     width: 85,
     height: 85,

@@ -41,10 +41,10 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'inline-block',
   },
   lowestRewards: {
-    backgroundColor: lowestRewardsColor,
+    backgroundColor: theme.palette.primary.light,
   },
   highestRewards: {
-    backgroundColor: highestRewardsColor,
+    backgroundColor: theme.palette.primary.dark,
   },
   rewardsColorSchema: {
     display: 'flex',

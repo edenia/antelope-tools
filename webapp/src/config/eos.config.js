@@ -21,12 +21,11 @@ switch (networkName) {
     _nodeTypes = [
       {
         name: 'validator',
-        color: '#4f4363',
         description: 'Node with signing key',
       },
-      { name: 'boot', color: '#6ec4e0', description: 'Boot node' },
-      { name: 'writer', color: '#5484b3', description: 'Writer node' },
-      { name: 'observer', color: '#000', description: 'Observer node' },
+      { name: 'boot', description: 'Boot node' },
+      { name: 'writer', description: 'Writer node' },
+      { name: 'observer', description: 'Observer node' },
     ]
     _producerTypes = ['partners', 'nonPartners']
     break
@@ -34,22 +33,18 @@ switch (networkName) {
     _nodeTypes = [
       {
         name: 'producer',
-        color: '#4f4363',
         description: 'Node with signing key',
       },
       {
         name: 'full',
-        color: '#6ec4e0',
         description: 'Node in front of producer',
       },
       {
         name: 'query',
-        color: '#5484b3',
         description: 'Node that provides HTTP(S) API to the public',
       },
       {
         name: 'seed',
-        color: '#000',
         description: 'Node that provides P2P and/or BNET to the public',
       },
     ]

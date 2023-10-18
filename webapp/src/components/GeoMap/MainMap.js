@@ -53,7 +53,7 @@ const MainMap = ({ data, map, setMap }) => {
             name: t('numberOfNodes'),
             cursor: 'pointer',
             borderColor: '#8F9DA4',
-            nullColor: '#EEEEEE',
+            nullColor: theme.palette.neutral.lighter,
             point: {
               events: {
                 click: function (e) {

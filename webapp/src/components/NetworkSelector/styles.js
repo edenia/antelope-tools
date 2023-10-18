@@ -7,7 +7,7 @@ export default (theme) => ({
       width: 44,
       height: 44,
       borderRadius: 50,
-      backgroundColor: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.common.white,
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: 0,
