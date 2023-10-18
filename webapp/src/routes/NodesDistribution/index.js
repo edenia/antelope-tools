@@ -1,7 +1,8 @@
 /* eslint camelcase: 0 */
 import React, { lazy } from 'react'
-import LinearProgress from '@mui/material/LinearProgress'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
+import LinearProgress from '@mui/material/LinearProgress'
 
 import useNodeDistributionState from '../../hooks/customHooks/useNodeDistributionState'
 
@@ -18,14 +19,14 @@ const Nodes = () => {
 
   return (
     <>
-    <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
-      <SearchBar 
-        filters={filters}
-        onChange={handleOnFiltersChange}
-        chips={chips}
-        translationScope="producerSearchComponent"
-      />
-      </div>
+      <Card className={classes.searchWrapper}>
+        <SearchBar 
+          filters={filters}
+          onChange={handleOnFiltersChange}
+          chips={chips}
+          translationScope="producerSearchComponent"
+        />
+      </Card>
       {loading && <LinearProgress />}
       {!loading && <GeoMap data={nodes || []} />}
     </>

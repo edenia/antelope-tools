@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Identicon from 'react-identicons'
+import Card from '@mui/material/Card'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -115,7 +116,7 @@ const AccountInfo = ({
   }, [account])
 
   return (
-    <div className={classes.paper}>
+    <Card className={classes.paper}>
       {!!info && (
         <>
           <div className={classes.boxHeaderCard}>
@@ -208,7 +209,7 @@ const AccountInfo = ({
           )}
         </>
       )}
-    </div>
+    </Card>
   )
 }
 

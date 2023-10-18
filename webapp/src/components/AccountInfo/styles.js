@@ -1,25 +1,19 @@
 export default (theme) => ({
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
-    borderRadius: 10,
-    padding: theme.spacing(4),
     width: '100%',
-    direction: 'column',
-    justify: 'space-between',
     height: 'auto',
     '&:focus': {
       outline: 'none',
     },
     marginTop: theme.spacing(2),
-    justifyContent: 'space-between',
-    flexDirection: 'column',
   },
   accordion: {
-    boxShadow: 'none',
+    boxShadow: 'none !important',
     width: '100%',
-    borderRadius: 0,
     borderBottom: `1px solid ${theme.palette.neutral.light}`,
+    '& .MuiPaper-root': {
+      boxShadow: 'none !important',
+    },
   },
   accordionSummary: {
     padding: 0,
