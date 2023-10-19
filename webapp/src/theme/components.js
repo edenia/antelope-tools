@@ -2,6 +2,9 @@ const components = {
   MuiCssBaseline: {
     styleOverrides: theme =>
       `
+        body {
+          background-color: ${theme.palette.background.light};
+        }
         .MuiTypography-capSubtitle {
           color: ${theme.palette.neutral.dark};
         }
