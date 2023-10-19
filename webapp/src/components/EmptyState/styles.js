@@ -22,7 +22,7 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    '& svg':{ 
+    '& svg': {
       color: theme.palette.error.light
     },
     '& span': {

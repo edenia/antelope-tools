@@ -15,7 +15,7 @@ export default (theme) => ({
     marginBottom: `${theme.spacing(2)} !important`
   },
   searchWrapper: {
-    '& .MuiPaper-root':{
+    '& .MuiPaper-root': {
       boxShadow: 'none',
       padding: 0,
     }

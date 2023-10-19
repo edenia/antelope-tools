@@ -17,7 +17,7 @@ export default (theme) => ({
     },
   },
   imgHeaderLogo: {
-    '& svg':{
+    '& svg': {
       height: '64px',
       width: '145px',
       marginTop: theme.spacing(2),

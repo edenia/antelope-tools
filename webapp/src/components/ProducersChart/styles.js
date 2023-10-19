@@ -8,7 +8,7 @@ export default (theme) => ({
   description: {
     fontWeight: 'normal',
   },
-  chartContainer:{
+  chartContainer: {
     display: 'flex',
     alignItems: 'center',
     paddingBottom: theme.spacing(2),
