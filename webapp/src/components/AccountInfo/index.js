@@ -125,7 +125,7 @@ const AccountInfo = ({
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
-                  fg={theme.palette.neutral.dark}
+                  fg={theme.palette.neutral.main}
                 />
               </div>
               <Typography
