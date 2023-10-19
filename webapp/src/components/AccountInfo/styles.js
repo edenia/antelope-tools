@@ -91,7 +91,7 @@ export default (theme) => ({
   },
   border: {
     [theme.breakpoints.up('lg')]: {
-      borderLeft: `1px solid ${theme.palette.neutral.main}`,
+      borderLeft: `1px solid ${theme.palette.neutral.light}`,
     },
   },
   iconBorder: {

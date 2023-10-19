@@ -22,7 +22,7 @@ const lightVariant = {
     neutral: {
       lighter: '#F0F3FA',
       light: '#E0E0E0',
-      main: '#0003',
+      main: '#858585',
       dark: '#4E4E4E',
       darker: '#2E2E2E',
     },
@@ -32,6 +32,8 @@ const lightVariant = {
       nodeCard: '2px 3px 4px 0px #0000002E',
       profileCard: '0px -2px 8px 0px #0000004D',
       hover: '0px 0px 40px -30px #1565c0bf inset',
+      authBox: `0px 0px 3px 3px ${blue[800]}`,
+      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     } 
   },
 }
@@ -111,6 +113,8 @@ const darkVariant = {
       nodeCard: '2px 3px 4px 0px #0000002E',
       profileCard: '0px -2px 8px 0px #0000004D',
       hover: '0px 0px 40px -30px #1565c0bf inset',
+      authBox: `0px 0px 3px 3px ${blue[800]}`,
+      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     } 
   },
 }

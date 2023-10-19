@@ -22,6 +22,9 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& svg':{ 
+      color: theme.palette.error.light
+    },
     '& span': {
       marginTop: theme.spacing(1),
     },

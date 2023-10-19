@@ -32,10 +32,10 @@ export default (theme) => ({
     color: theme.palette.success.main,
   },
   timerOff: {
-    color: 'orange',
+    color: theme.palette.warning.light,
   },
   yellowLight: {
-    color: theme.palette.warning.main,
+    color: theme.palette.warning.dark,
   },
   redLight: {
     color: theme.palette.error.main,

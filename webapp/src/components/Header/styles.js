@@ -144,7 +144,7 @@ export default (theme) => ({
     borderRadius: '10px',
     transition: 'ease-in-out all 0.5s',
     '&:hover': {
-      boxShadow: `0px 0px 3px 3px ${theme.palette.primary.main}`,
+      boxShadow: theme.palette.shadows.authBox,
     },
   },
 })

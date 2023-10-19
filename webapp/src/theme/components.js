@@ -2,12 +2,6 @@ const components = {
   MuiCssBaseline: {
     styleOverrides: theme =>
       `
-        .MuiPaper-root {
-          box-shadow: ${theme.palette.shadows.card} !important;
-        }
-        .MuiAppBar-root {
-          background-color: ${theme.palette.background.paper} !important;
-        }
         .MuiTypography-capSubtitle {
           color: ${theme.palette.neutral.dark};
         }
@@ -20,18 +14,32 @@ const components = {
       },
     },
   },
-  MuiButton: {
+  MuiPaper: {
     styleOverrides: {
-      root: {
-        borderRadius: 30,
-      },
+      root: ({ theme }) => ({
+        boxShadow: theme.palette.shadows.card,
+        backgroundImage: 'none',
+      }),
     },
   },
   MuiCard: {
     styleOverrides: {
       root: {
-        backgroundImage: 'none',
         padding: 16
+      },
+    },
+  },
+  MuiAppBar: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.background.paper,
+      }),
+    },
+  },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        borderRadius: 30,
       },
     },
   },

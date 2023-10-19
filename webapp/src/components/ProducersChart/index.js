@@ -150,7 +150,7 @@ const CustomBarLabel = memo(
               width="100%"
               viewBox="0 0 100 100"
             >
-              <rect height="100" width="100" fill="#fff" />
+              <rect height="100" width="100" fill={theme.palette.common.white} />
               <image
                 x="0"
                 y="0"

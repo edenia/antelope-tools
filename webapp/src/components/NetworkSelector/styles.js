@@ -148,7 +148,6 @@ export default (theme) => ({
   expandIcon: {
     marginTop: theme.spacing(1),
     marginRight: 0,
-    color: theme.palette.text.hint,
   },
   jungleImg: {
     width: '22px !important',

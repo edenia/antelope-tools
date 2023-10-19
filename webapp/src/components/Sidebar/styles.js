@@ -1,4 +1,4 @@
-export default (theme, rgba) => ({
+export default (theme) => ({
   drawer: {
     minWidth: '70px',
     borderRight: 0,

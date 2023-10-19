@@ -52,7 +52,7 @@ const MainMap = ({ data, map, setMap }) => {
             joinBy: ['iso-a2', 'country'],
             name: t('numberOfNodes'),
             cursor: 'pointer',
-            borderColor: theme.palette.neutral.dark,
+            borderColor: theme.palette.neutral.main,
             nullColor: theme.palette.neutral.lighter,
             point: {
               events: {
