@@ -1,7 +1,6 @@
 import React from 'react'
-import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
-import Highcharts from 'highcharts'
+import HighchartsWrapper from '../HighChartsWrapper'
 
 const TransactionsLineChart = ({
   data,
@@ -37,8 +36,7 @@ const TransactionsLineChart = ({
 
   return (
     <div>
-      <HighchartsReact
-        highcharts={Highcharts}
+      <HighchartsWrapper
         options={{
           ...options,
           series: data,

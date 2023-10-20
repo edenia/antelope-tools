@@ -16,14 +16,13 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Button from '@mui/material/Button'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { CPU_BENCHMARK } from '../../gql'
+import HighchartsWrapper from 'components/HighChartsWrapper'
 
 const useStyles = makeStyles(styles)
 
@@ -205,8 +204,7 @@ const CPUBenchmark = () => {
       {loading && <LinearProgress />}
       {!loading && data?.items.length > 0 && (
         <>
-          <HighchartsReact
-            highcharts={Highcharts}
+          <HighchartsWrapper
             options={{ ...options, series }}
           />
           <div className={classes.infoContainer}>

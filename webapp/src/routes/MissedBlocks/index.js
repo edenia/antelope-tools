@@ -15,12 +15,12 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { MISSED_BLOCKS } from '../../gql'
+import HighchartsWrapper from 'components/HighChartsWrapper'
+
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
@@ -137,8 +137,7 @@ const BlockDistribution = () => {
       {loading && <LinearProgress />}
       {!loading && data?.items.length > 0 && (
         <>
-          <HighchartsReact
-            highcharts={Highcharts}
+          <HighchartsWrapper
             options={{ ...options, series }}
           />
           <TableContainer>

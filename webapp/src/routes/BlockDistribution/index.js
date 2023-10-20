@@ -15,13 +15,11 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
-import { useTheme } from '@mui/material/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { BLOCK_DISTRIBUTION_QUERY } from '../../gql'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 
 import styles from './styles'
 
@@ -33,7 +31,6 @@ const BlockDistribution = () => {
   const [series, setSeries] = useState([])
   const [load, { loading, data }] = useLazyQuery(BLOCK_DISTRIBUTION_QUERY)
   const classes = useStyles()
-  const theme = useTheme()
 
   const options = {
     time: {
@@ -50,10 +47,6 @@ const BlockDistribution = () => {
     },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
-      backgroundColor: theme.palette.common.white,
-      borderColor: theme.palette.common.white,
-      borderRadius: 10,
-      borderWidth: 1,
     },
     credits: {
       enabled: false,
@@ -65,6 +58,9 @@ const BlockDistribution = () => {
         dataLabels: {
           enabled: true,
           format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          style: {
+            textOutline: 'none'
+          }
         },
       },
     },
@@ -124,8 +120,7 @@ const BlockDistribution = () => {
       {loading && <LinearProgress />}
       {!loading && data?.items?.length > 0 && (
         <>
-          <HighchartsReact
-            highcharts={Highcharts}
+          <HighchartsWrapper
             options={{ ...options, series }}
           />
           <TableContainer>

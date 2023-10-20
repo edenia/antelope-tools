@@ -104,9 +104,11 @@ const GeoMap = ({ data }) => {
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={handleGoBack}
-        className={clsx(classes.goBackBtn, {
+        className={clsx({
           [classes.goBackBtnHidden]: !mapSelected,
         })}
+        color="primary"
+        variant="outlined"
       >
         Go Back
       </Button>

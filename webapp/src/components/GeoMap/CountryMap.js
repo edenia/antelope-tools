@@ -23,12 +23,16 @@ const ClusterMap = ({ data, map, mapCode }) => {
       const options = {
         chart: {
           map,
+          backgroundColor: theme.palette.background.default,
         },
         legend: {
           enabled: false,
         },
         title: {
           text: countries[mapCode].name,
+          style: {
+            color: theme.palette.text.primary,
+          }
         },
         mapNavigation: {
           enableButtons: false,
@@ -88,6 +92,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
             enableMouseTracking: true,
             colorKey: 'clusterPointsAmount',
             name: 'Countries',
+            color: theme.palette.neutral.darker,
             data: data || [],
           },
         ],
@@ -95,7 +100,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [navigate, theme.palette.neutral],
+    [navigate, theme.palette],
   )
 
   useEffect(() => {
