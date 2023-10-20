@@ -76,7 +76,7 @@ export default (theme) => ({
     flexWrap: 'wrap',
     padding: theme.spacing(4),
     borderBottom: `2px solid ${theme.palette.primary.main}`,
-    boxShadow: '0px -2px 8px 0px #0000004D',
+    boxShadow: theme.palette.shadows.profileCard,
     backgroundColor: theme.palette.background.light,
     [theme.breakpoints.down('md')]: {
       gap: theme.spacing(4),

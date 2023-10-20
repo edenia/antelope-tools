@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.body.background};
+    background: ${(props) => props.theme.background.light};
   }
 `
 

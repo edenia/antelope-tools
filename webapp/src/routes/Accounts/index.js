@@ -2,7 +2,6 @@ import React, { lazy } from 'react'
 import { makeStyles } from '@mui/styles'
 import LinearProgress from '@mui/material/LinearProgress'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 
 import SearchBar from '../../components/SearchBar'
 
@@ -22,15 +21,13 @@ const Accounts = () => {
 
   return (
     <>
-      <Card className={classes.cardShadow}>
-        <CardContent className={classes.cardContent}>
-          <SearchBar
-            filters={filters}
-            onChange={handleOnSearch}
-            delay={1500}
-            translationScope="accountsRoute"
-          />
-        </CardContent>
+      <Card className={classes.searchWrapper}>
+        <SearchBar
+          filters={filters}
+          onChange={handleOnSearch}
+          delay={1500}
+          translationScope="accountsRoute"
+        />
       </Card>
       {loading && <LinearProgress color="primary" />}
       {account && (

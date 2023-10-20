@@ -2,7 +2,6 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import PropTypes from 'prop-types'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
@@ -32,15 +31,7 @@ const TransactionsChartContainer = ({
   const { t } = useTranslation()
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent
-        style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
+    <Card>
         <div className={classes.headerTransactionLine}>
           <Typography component="p" variant="h6">
             {title}
@@ -105,7 +96,6 @@ const TransactionsChartContainer = ({
           shared={chartLabelFormat?.shared}
           customFormatter={chartLabelFormat?.customFormatter}
         />
-      </CardContent>
     </Card>
   )
 }

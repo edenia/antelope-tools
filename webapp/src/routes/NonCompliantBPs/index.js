@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import useNonCompliantState from '../../hooks/customHooks/useNonCompliantState'
@@ -29,12 +30,12 @@ const NonCompliantBPs = () => {
               </div>
               <div className={classes.bpsContainer}>
                 {items.map((producer, index) => (
-                  <div
-                    className={`${classes.card} ${classes.cardShadow}`}
+                  <Card
+                    className={classes.card}
                     key={`producer-card-${index}`}
                   >
                     <NonCompliantCard producer={producer} stats={stats} />
-                  </div>
+                  </Card>
                 ))}
               </div>
             </>

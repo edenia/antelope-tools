@@ -22,7 +22,7 @@ const Styles = makeStyles((theme) => ({
     fontSize: 20,
   },
   tooltip: {
-    backgroundColor: 'rgba(97, 97, 97, 0.92)',
+    backgroundColor: theme.palette.neutral.main,
     borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1),
   },

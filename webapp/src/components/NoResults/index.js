@@ -1,8 +1,8 @@
 import React  from 'react'
 import { makeStyles } from '@mui/styles'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
 import { useTranslation } from 'react-i18next'
+import Card from '@mui/material/Card'
+import Typography from '@mui/material/Typography'
 
 import styles from './styles'
 
@@ -14,7 +14,7 @@ const NoResults = () => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={t('noResultsFound')} />
+      <Typography variant="h4" component="p">{t('noResultsFound')}</Typography>
     </Card>
   )
 }

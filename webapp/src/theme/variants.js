@@ -8,129 +8,151 @@ const lightVariant = {
       contrastText: '#FFF',
     },
     secondary: {
-      main: blue[600],
-      contrastText: '#FFF',
-    },
-    tertiary: {
-      main: '#00C853',
+      main: green.A700,
       contrastText: '#FFF',
     },
     text: {
       primary: '#000',
     },
     background: {
-      main: '#FFF',
-      light: '#F6F9FD',
+      light: '#F7F9FC',
+      default: '#FFF',
+      paper: '#FFF',
     },
     neutral: {
       lighter: '#F0F3FA',
       light: '#E0E0E0',
+      main: '#858585',
       dark: '#4E4E4E',
-      darker: '#3D3D3DDE'
+      darker: '#2E2E2E',
+    },
+    error: {
+      main: '#D32F2F',
+      light: '#EF5350',
+      dark: '#C62828',
+      contrastText: '#FFF',
+    },
+    warning: {
+      main: '#ED6C02',
+      light: '#FF9800',
+      dark: '#E65100',
+      contrastText: '#FFF',
+    },
+    info: {
+      main: '#0288D1',
+      light: '#03A9F4',
+      dark: '#01579B',
+      contrastText: '#FFF',
+    },
+    success: {
+      main: '#2E7D32',
+      light: '#4CAF50',
+      dark: '#1B5E20',
+      contrastText: '#FFF',
+    },
+    action: {
+      active: 'rgba(0, 0, 0, 0.54)',
+      hover: 'rgba(0, 0, 0, 0.04)',
+      hoverOpacity: '0.04',
+      selected: 'rgba(0, 0, 0, 0.08)',
+      selectedOpacity: '0.08',
+      disabled: 'rgba(0, 0, 0, 0.26)',
+      disabledBackground: 'rgba(0, 0, 0, 0.12)',
+      disabledOpacity: '0.38',
+      focus: 'rgba(0, 0, 0, 0.12)',
+      focusOpacity: '0.12',
+      activatedOpacity: '0.12',
+    },
+    shadows: {
+      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
+      nodeCard: '2px 3px 4px 0px #0000002E',
+      profileCard: '0px -2px 8px 0px #0000004D',
+      hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
+      authBox: `0px 0px 3px 3px ${blue[800]}`,
+      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     }
-  },
-  header: {
-    color: grey[500],
-    background: '#FFF',
-    search: {
-      color: grey[800],
-    },
-    indicator: {
-      background: blue[600],
-    },
-  },
-  sidebar: {
-    color: grey[900],
-    background: '#FFF',
-    header: {
-      color: blue[800],
-      background: '#FFF',
-      brand: {
-        color: blue[800],
-      },
-    },
-    footer: {
-      color: '#424242',
-      background: '#FFF',
-    },
-    category: {
-      fontWeight: 'normal',
-    },
-    badge: {
-      color: '#FFF',
-    },
-  },
-  body: {
-    background: '#F7F9FC',
   },
 }
 
 const darkVariant = {
   name: 'Dark',
   palette: {
+    mode: 'dark',
     primary: {
-      main: blue[700],
+      main: blue[800],
       contrastText: '#FFF',
     },
     secondary: {
-      main: blue[600],
-      contrastText: '#FFF',
-    },
-    tertiary: {
-      main: '#00C853',
-      contrastText: '#FFF',
+      main: '#CE93D8',
+      light: '#F3E5F5',
+      dark: '#AB47BC',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     text: {
       primary: '#FFF',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+      disabled: 'rgba(255, 255, 255, 0.5)',
+      icon: 'rgba(255, 255, 255, 0.12)',
     },
     background: {
-      main: '#1B2430',
-      light: '#F6F9FD',
+      light: '#000',
+      default: '#1B2430',
+      paper: '#1B2430'
     },
     neutral: {
-      lighter: '#f0f3fa',
-      light: '#E0E0E0',
-      dark: '#4E4E4E',
-      darker: '#3D3D3DDE'
+      lighter: grey[800],
+      light: grey[600],
+      main: grey[300],
+      dark: grey[200],
+      darker: grey[100],
+    },
+    error: {
+      main: '#F44336',
+      light: '#E57373',
+      dark: '#D32F2F',
+      contrastText: '#FFF',
+    },
+    warning: {
+      main: '#FFA726',
+      light: '#FFB74D',
+      dark: '#F57C00',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
+    },
+    info: {
+      main: '#29B6F6',
+      light: '#4FC3F7',
+      dark: '#0288D1',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
+    },
+    success: {
+      main: '#66BB6A',
+      light: '#81C784',
+      dark: '#388E3C',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
+    },
+    action: {
+      active: '#FFF',
+      hover: 'rgba(255, 255, 255, 0.08)',
+      hoverOpacity: '0.08',
+      selected: 'rgba(255, 255, 255, 0.16)',
+      selectedOpacity: '0.16',
+      disabled: 'rgba(255, 255, 255, 0.3)',
+      disabledBackground: 'rgba(255, 255, 255, 0.12)',
+      disabledOpacity: '0.38',
+      focus: 'rgba(255, 255, 255, 0.12)',
+      focusOpacity: '0.12',
+      activatedOpacity: '0.24',
+    },
+    shadows: {
+      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
+      nodeCard: '2px 3px 4px 0px #0000002E',
+      profileCard: '0px -2px 8px 0px #0000004D',
+      hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
+      authBox: `0px 0px 3px 3px ${blue[800]}`,
+      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     }
-  },
-  header: {
-    color: grey[500],
-    background: '#FFFFFF',
-    search: {
-      color: grey[800],
-    },
-    indicator: {
-      background: blue[600],
-    },
-  },
-  sidebar: {
-    color: grey[200],
-    background: '#1B2430',
-    header: {
-      color: grey[200],
-      background: '#232f3e',
-      brand: {
-        color: blue[500],
-      },
-    },
-    footer: {
-      color: grey[200],
-      background: '#232f3e',
-      online: {
-        background: green[500],
-      },
-    },
-    category: {
-      fontWeight: 400,
-    },
-    badge: {
-      color: '#FFF',
-      background: blue[500],
-    },
-  },
-  body: {
-    background: '#F7F9FC',
   },
 }
 

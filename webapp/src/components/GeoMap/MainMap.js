@@ -41,9 +41,9 @@ const MainMap = ({ data, map, setMap }) => {
         },
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
-          backgroundColor: '#FFFFFF',
-          border: '1px solid rgba(0, 0, 0, 0.12)',
-          boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+          backgroundColor: theme.palette.background.default,
+          border: `1px solid ${theme.palette.neutral.light}`,
+          boxShadow: `${theme.palette.shadows.tooltip} !important`,
         },
         series: [
           {
@@ -52,8 +52,8 @@ const MainMap = ({ data, map, setMap }) => {
             joinBy: ['iso-a2', 'country'],
             name: t('numberOfNodes'),
             cursor: 'pointer',
-            borderColor: '#8F9DA4',
-            nullColor: '#EEEEEE',
+            borderColor: theme.palette.neutral.main,
+            nullColor: theme.palette.neutral.lighter,
             point: {
               events: {
                 click: function (e) {

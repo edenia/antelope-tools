@@ -1,10 +1,12 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
+import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Identicon from 'react-identicons'
+import Card from '@mui/material/Card'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -58,6 +60,7 @@ const AccountInfo = ({
   onGetTableRows,
 }) => {
   const classes = useStyles()
+  const theme = useTheme()
   const [info, setInfo] = useState(null)
   const { t } = useTranslation('accountInfoComponent')
 
@@ -113,7 +116,7 @@ const AccountInfo = ({
   }, [account])
 
   return (
-    <div className={classes.paper}>
+    <Card className={classes.paper}>
       {!!info && (
         <>
           <div className={classes.boxHeaderCard}>
@@ -122,7 +125,7 @@ const AccountInfo = ({
                 <Identicon
                   string={info.account_name || 'default'}
                   size={60}
-                  fg="#757575"
+                  fg={theme.palette.neutral.main}
                 />
               </div>
               <Typography
@@ -206,7 +209,7 @@ const AccountInfo = ({
           )}
         </>
       )}
-    </div>
+    </Card>
   )
 }
 

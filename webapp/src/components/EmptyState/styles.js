@@ -4,10 +4,6 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    '& a': {
-      color: theme.palette.primary.main,
-      textDecorationColor: theme.palette.primary.main,
-    },
   },
   emptyStateContainer: {
     '& span': {
@@ -26,6 +22,9 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& svg': {
+      color: theme.palette.error.light
+    },
     '& span': {
       marginTop: theme.spacing(1),
     },

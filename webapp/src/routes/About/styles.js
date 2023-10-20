@@ -26,12 +26,8 @@ export default (theme) => ({
       width: '100%',
     },
   },
-  cardShadow: {
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
-  },
   mainText: {
     width: '100%',
-    overflow: 'hidden',
     [theme.breakpoints.down('md')]: {
       display: 'flex',
       flexDirection: 'column',

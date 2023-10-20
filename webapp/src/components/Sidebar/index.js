@@ -13,7 +13,6 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import LanguageIcon from '@mui/icons-material/Language'
 import { makeStyles } from '@mui/styles'
-import { rgba } from 'polished'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -28,7 +27,7 @@ import ExternalLink from './ExternalLink'
 import SidebarCategory from './SidebarCategory'
 import SidebarLink from './SidebarLink'
 
-const useStyles = makeStyles((theme) => styles(theme, rgba))
+const useStyles = makeStyles(styles)
 
 const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
   const { t } = useTranslation('routes')

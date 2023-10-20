@@ -154,12 +154,12 @@ const useEVMState = (theme, t) => {
       setTokenHistoryData([
         {
           name: t('incoming'),
-          color: theme.palette.secondary.main,
+          color: theme.palette.primary.main,
           data: incoming,
         },
         {
           name: t('outgoing'),
-          color: theme.palette.tertiary.main,
+          color: theme.palette.secondary.main,
           data: outgoing,
         },
       ])
@@ -180,7 +180,7 @@ const useEVMState = (theme, t) => {
       setTransactionsHistoryData([
         {
           name: t('transactions'),
-          color: theme.palette.secondary.main,
+          color: theme.palette.primary.main,
           data,
         },
       ])
@@ -235,7 +235,7 @@ const useEVMState = (theme, t) => {
     setTransactionsHistoryData([
       {
         name: t('transactions'),
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
         data: blocksList,
       },
     ])

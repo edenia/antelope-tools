@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
@@ -180,75 +179,73 @@ const CPUBenchmark = () => {
   }, [data])
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent>
-        <div className={classes.textDiv}>
-          <Typography component="h2" variant="h6">
-            {t('title')}
-          </Typography>
-          <FormControl variant="standard">
-            <InputLabel htmlFor="select-range-label">
-              {t('timeFrame')}
-            </InputLabel>
-            <Select
-              inputProps={{ id: 'select-range-label' }}
-              value={range}
-              onChange={event => setRange(event.target.value)}
-              fullWidth
-            >
-              {rangeOptions.map(option => (
-                <MenuItem key={option} value={option}>
-                  {t(option)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-        {loading && <LinearProgress />}
-        {!loading && data?.items.length > 0 && (
-          <>
-            <HighchartsReact
-              highcharts={Highcharts}
-              options={{ ...options, series }}
-            />
-            <div className={classes.infoContainer}>
-              {t('selectTo')}
-              <Button onClick={toggleAll}>
-                {Boolean(series.length) && !series.some(set => set.visible) ? t('showAll') : t('hideAll')}
-              </Button>
-              {t('zoomTo')}.
-            </div>
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>{t('account')}</TableCell>
-                    <TableCell align="right">{t('lowest')}</TableCell>
-                    <TableCell align="right">{t('highest')}</TableCell>
-                    <TableCell align="right">{t('average')}</TableCell>
+    <Card>
+      <div className={classes.textDiv}>
+        <Typography component="h2" variant="h6">
+          {t('title')}
+        </Typography>
+        <FormControl variant="standard">
+          <InputLabel htmlFor="select-range-label">
+            {t('timeFrame')}
+          </InputLabel>
+          <Select
+            inputProps={{ id: 'select-range-label' }}
+            value={range}
+            onChange={event => setRange(event.target.value)}
+            fullWidth
+          >
+            {rangeOptions.map(option => (
+              <MenuItem key={option} value={option}>
+                {t(option)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      {loading && <LinearProgress />}
+      {!loading && data?.items.length > 0 && (
+        <>
+          <HighchartsReact
+            highcharts={Highcharts}
+            options={{ ...options, series }}
+          />
+          <div className={classes.infoContainer}>
+            {t('selectTo')}
+            <Button onClick={toggleAll}>
+              {Boolean(series.length) && !series.some(set => set.visible) ? t('showAll') : t('hideAll')}
+            </Button>
+            {t('zoomTo')}.
+          </div>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>{t('account')}</TableCell>
+                  <TableCell align="right">{t('lowest')}</TableCell>
+                  <TableCell align="right">{t('highest')}</TableCell>
+                  <TableCell align="right">{t('average')}</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {producers.map((item, index) => (
+                  <TableRow key={`${item.name}-cpu-benchmark-${index}`}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.lowest, 2)} μs
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.highest, 2)} μs
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.average, 2)} μs
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {producers.map((item, index) => (
-                    <TableRow key={`${item.name}-cpu-benchmark-${index}`}>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.lowest, 2)} μs
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.highest, 2)} μs
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.average, 2)} μs
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </>
-        )}
-      </CardContent>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      )}
     </Card>
   )
 }

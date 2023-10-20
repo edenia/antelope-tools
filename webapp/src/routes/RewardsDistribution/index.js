@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React, { useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
+import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
@@ -24,19 +25,16 @@ import RewardsDistributionStats from './RewardsDistributionStats'
 import TokenToUSD from './TokenToUSD'
 import useRewardsDistributionState from 'hooks/customHooks/useRewardsDistributionState'
 
-const lowestRewardsColor = '#B6EBF3'
-const highestRewardsColor = '#265F63'
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/v2/topojson-maps/world-110m.json'
 
-const useStyles = makeStyles((theme) =>
-  styles(theme, lowestRewardsColor, highestRewardsColor),
-)
+const useStyles = makeStyles(styles)
 
 const RewardsDistribution = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [currentNode, setCurrentNode] = useState(null)
   const classes = useStyles()
+  const theme = useTheme()
   const { t } = useTranslation('rewardsDistributionRoute')
   const open = Boolean(anchorEl)
   const [{ loading, nodes, setting, summary }] = useRewardsDistributionState()
@@ -56,9 +54,9 @@ const RewardsDistribution = () => {
   const colorScale = useCallback(
     scaleLinear()
       .domain([0, summary?.topCountryByRewards?.rewards - 1])
-      .range([lowestRewardsColor, highestRewardsColor])
+      .range([theme.palette.primary.light, theme.palette.primary.dark])
       .interpolate(interpolateHcl),
-    [summary],
+    [summary, theme.palette.primary],
   )
 
   return (
@@ -67,7 +65,6 @@ const RewardsDistribution = () => {
       aria-haspopup="true"
     >
       <Popover
-        className={classes.shadow}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
         PaperProps={{ onMouseLeave: handlePopoverClose }}
@@ -147,7 +144,7 @@ const RewardsDistribution = () => {
         handlePopoverOpen={handlePopoverOpen}
       />
       {!loading && (
-        <Paper className={`${classes.mapWrapper} ${classes.cardShadow}`}>
+        <Paper className={classes.mapWrapper}>
           <ComposableMap
             projectionConfig={{
               scale: 170,
@@ -168,11 +165,11 @@ const RewardsDistribution = () => {
                       className={classes.geography}
                       key={geo.rsmKey}
                       geography={geo}
-                      stroke="#8F9DA4"
+                      stroke={theme.palette.neutral.main}
                       fill={
                         nodeData && nodeData.rewards > 0
                           ? colorScale(parseInt(nodeData.rewards))
-                          : '#EEEEEE'
+                          : theme.palette.neutral.lighter
                       }
                     />
                   )

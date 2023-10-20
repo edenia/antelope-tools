@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
+import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
@@ -13,6 +14,7 @@ const useStyles = makeStyles(styles)
 
 const ClusterMap = ({ data, map, mapCode }) => {
   const classes = useStyles()
+  const theme = useTheme()
   const navigate = useNavigate()
   const myRef = useRef()
 
@@ -76,8 +78,8 @@ const ClusterMap = ({ data, map, mapCode }) => {
         series: [
           {
             name: 'NodeDistribution',
-            borderColor: '#8F9DA4',
-            nullColor: '#EEEEEE',
+            borderColor: theme.palette.neutral.main,
+            nullColor: theme.palette.neutral.lighter,
             showInLegend: false,
           },
           {
@@ -93,7 +95,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [navigate],
+    [navigate, theme.palette.neutral],
   )
 
   useEffect(() => {

@@ -19,11 +19,11 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
   const [graphicData, setGraphicData] = useState([
     {
       name: t('transactionsPerSecond'),
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
     {
       name: t('transactionsPerBlock'),
-      color: theme.palette.tertiary.main,
+      color: theme.palette.secondary.main,
     },
   ])
   const [option, setOption] = useState(options[0])
@@ -62,12 +62,12 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     setGraphicData([
       {
         name: t('transactionsPerSecond'),
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
         data: trxPerSecond,
       },
       {
         name: t('transactionsPerBlock'),
-        color: theme.palette.tertiary.main,
+        color: theme.palette.secondary.main,
         data: trxPerBlock,
       },
     ])
@@ -114,7 +114,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     setGraphicData([
       {
         name: t('transactions'),
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
         data
       },
     ])

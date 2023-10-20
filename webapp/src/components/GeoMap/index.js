@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import clsx from 'clsx'
 import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { generalConfig } from '../../config'
@@ -99,7 +100,7 @@ const GeoMap = ({ data }) => {
   }, [mapSelected, data])
 
   return (
-    <div className={clsx({ [classes.mapWrapper]: mapSelected && mapGeoData })}>
+    <Card className={clsx({ [classes.mapWrapper]: mapSelected && mapGeoData })}>
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={handleGoBack}
@@ -122,7 +123,7 @@ const GeoMap = ({ data }) => {
           setMap={setMapSelected}
         />
       )}
-    </div>
+    </Card>
   )
 }
 

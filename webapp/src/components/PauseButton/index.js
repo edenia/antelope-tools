@@ -35,7 +35,7 @@ const PauseButton = ({ isPaused, handlePause, isEnabled }) => {
             color={
               !isEnabled
                 ? theme.palette.action.disabled
-                : theme.palette.common.black
+                : theme.palette.text.primary
             }
           />
         )}

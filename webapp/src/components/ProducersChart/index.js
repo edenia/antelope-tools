@@ -150,7 +150,7 @@ const CustomBarLabel = memo(
               width="100%"
               viewBox="0 0 100 100"
             >
-              <rect height="100" width="100" fill="#fff" />
+              <rect height="100" width="100" fill={theme.palette.common.white} />
               <image
                 x="0"
                 y="0"
@@ -236,6 +236,7 @@ CustomTooltip.propTypes = {
 
 const ProducersChart = ({ producers, info }) => {
   const [entries, setEntries] = useState([])
+  const classes = useStyles()
   const theme = useTheme()
 
   useEffect(() => {
@@ -243,7 +244,7 @@ const ProducersChart = ({ producers, info }) => {
   }, [producers])
 
   return (
-    <ResponsiveContainer width="100%" aspect={1.45}>
+    <ResponsiveContainer width="100%" aspect={1.45} className={classes.chartContainer}>
       <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip content={<CustomTooltip />} />
         <Pie

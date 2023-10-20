@@ -27,16 +27,13 @@ const INIT_VALUES = {
   dynamicTitle: '',
   pathname: null,
 }
-const useStyles = makeStyles((theme) => styles(theme))
+const useStyles = makeStyles(styles)
 
 const GlobalStyle = createGlobalStyle`
   html,
   body,
   #root {
     height: 100%;
-  }
-  body {
-    background: ${(props) => props.theme.body.background};
   }
   .MuiCardHeader-action .MuiIconButton-root {
     padding: 4px;

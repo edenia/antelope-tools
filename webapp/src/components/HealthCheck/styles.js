@@ -32,16 +32,13 @@ export default (theme) => ({
     color: theme.palette.success.main,
   },
   timerOff: {
-    color: 'orange',
+    color: theme.palette.warning.light,
   },
   yellowLight: {
-    color: theme.palette.warning.main,
+    color: theme.palette.warning.dark,
   },
   redLight: {
     color: theme.palette.error.main,
-  },
-  test: {
-    boxShadow: '10px 5px 5px red !important',
   },
   loading: {
     width: '18px !important',

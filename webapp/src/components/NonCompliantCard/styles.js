@@ -24,7 +24,7 @@ export default (theme) => ({
     alignItems: 'center',
     alignSelf: 'center',
     [theme.breakpoints.down('sm')]: {
-      borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+      borderBottom: `1px solid ${theme.palette.neutral.main}`,
       paddingBottom: theme.spacing(4),
     },
   },
@@ -33,10 +33,6 @@ export default (theme) => ({
     height: 'auto',
     margin: '0px',
     flexGrow: '1',
-    '& a': {
-      color: theme.palette.primary.main,
-      textDecorationColor: theme.palette.primary.main,
-    },
     [theme.breakpoints.down('lg')]: {
       width: '150px',
     },
@@ -48,7 +44,7 @@ export default (theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(3),
-      borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
+      borderLeft: `1px solid ${theme.palette.neutral.main}`,
       padding: theme.spacing(0, 3, 0),
     },
     [theme.breakpoints.down('sm')]: {

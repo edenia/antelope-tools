@@ -10,7 +10,7 @@ export default (theme) => ({
       width: '300px',
     },
   },
-  test: {
+  container: {
     display: 'flex',
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
@@ -18,13 +18,9 @@ export default (theme) => ({
       height: '100% !important',
     },
     marginBottom: theme.spacing(4),
+    gap: theme.spacing(4),
   },
   card: {
-    padding: '10px',
     height: '100%',
-    '& .MuiPaper-root': {
-      height: '100%',
-      boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
-    },
   },
 })

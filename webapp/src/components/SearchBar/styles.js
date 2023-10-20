@@ -13,10 +13,7 @@ export default (theme) => ({
   },
   selected: {
     backgroundColor: `${theme.palette.primary.main} !important`,
-    color: `${theme.palette.common.white} !important`
-  },
-  cardContent: {
-    padding: `${theme.spacing(2)} !important`
+    color: `${theme.palette.primary.contrastText} !important`
   },
   title: {
     fontSize: '17px !important',

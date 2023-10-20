@@ -27,10 +27,6 @@ export default (theme) => ({
       lineHeight: 1,
     },
   },
-  defaultIcon: {
-    fontSize: 65,
-    color: '#484158',
-  },
   divider: {
     marginBottom: theme.spacing(2),
   },

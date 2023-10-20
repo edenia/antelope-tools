@@ -16,6 +16,7 @@ import moment from 'moment'
 import 'moment/locale/es'
 
 import styles from './styles'
+import AntelopeLogoSvg from './AntelopeLogo'
 
 const AuthButton = lazy(() => import('./AuthButton'))
 
@@ -35,14 +36,8 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <a href="https://antelope.tools/" rel="external">
-      <img
-        alt="antelope tools dashboard"
-        src={'/antelope-tools.svg'}
-        width={145}
-        height={64}
-        className={classes.imgHeaderLogo}
-      />
+    <a href="https://antelope.tools/" rel="external" className={classes.imgHeaderLogo}>
+      <AntelopeLogoSvg />
     </a>
   )
 }
@@ -85,7 +80,6 @@ const LanguageMenu = () => {
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
-        className={classes.cardShadow}
       >
         {languages.map((language) => (
           <MenuItem

@@ -10,7 +10,7 @@ import { eosConfig } from 'config'
 
 const Category = styled(MuiListItem)`
   font-weight: ${(props) => props.theme.typography.fontWeightRegular};
-  color: ${(props) => props.theme.sidebar.color};
+  color: ${(props) => props.theme.palette.neutral.darker};
   display: flex;
   flex-direction: row;
   svg {
@@ -27,7 +27,7 @@ const Category = styled(MuiListItem)`
   &:hover,
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
-      darken(0.05, props.theme.sidebar.background)};
+      darken(0.05, props.theme.palette.background.default)};
     svg {
       opacity: 1;
     }
