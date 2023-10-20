@@ -36,7 +36,7 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <a href="https://antelope.tools/" rel="external" className={classes.imgHeaderLogo}>
+    <a href="https://antelope.tools/" rel="external" aria-label='Antelope Tools Homepage' className={classes.imgHeaderLogo}>
       <AntelopeLogoSvg />
     </a>
   )
