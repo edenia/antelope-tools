@@ -7,5 +7,8 @@ export default (theme) => ({
   },
   divRef: {
     height: '100vh',
+    '& a': {
+      color: theme.palette.primary.main
+    }
   },
 })
