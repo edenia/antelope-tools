@@ -12,9 +12,6 @@ const TransactionsLineChart = ({
   customFormatter
 }) => {
   const options = {
-    time: {
-      timezoneOffset: new Date().getTimezoneOffset(),
-    },
     title: {
       text: title,
     },
@@ -35,14 +32,12 @@ const TransactionsLineChart = ({
   }
 
   return (
-    <div>
-      <HighchartsWrapper
-        options={{
-          ...options,
-          series: data,
-        }}
-      />
-    </div>
+    <HighchartsWrapper
+      options={{
+        ...options,
+        series: data,
+      }}
+    />
   )
 }
 

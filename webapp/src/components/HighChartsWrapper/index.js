@@ -10,6 +10,11 @@ const useStyles = makeStyles(styles)
 const HighchartsWrapper = ({ options }) => {
   const classes = useStyles()
 
+  options.time = {
+    timezoneOffset: new Date().getTimezoneOffset(),
+    ...options?.time,
+  }
+
   options.tooltip = {
     ...options?.tooltip,
     borderRadius: 10,

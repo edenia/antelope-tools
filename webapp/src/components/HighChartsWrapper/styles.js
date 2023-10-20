@@ -7,5 +7,8 @@ export default (theme) => ({
       {
         fill: `${theme.palette.text.primary} !important`,
       },
+    '& .highcharts-legend-item-hidden text': {
+      fill: `${theme.palette.neutral.light} !important`,
+    },
   },
 })
