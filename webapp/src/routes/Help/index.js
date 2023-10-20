@@ -82,37 +82,37 @@ const Help = () => {
         <li>
           <b>{t('bullet2Title')} </b>
           {t('bullet2')}
+          <ul>
+            <li>
+              <b>{t('subBullet2Title')} </b>
+              {t('subBullet2')}
+              <Link
+                href="https://edenia.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://edenia.com
+              </Link>
+              {t('subBullet2b')}
+              <Link
+                href="https://edenia.com/chains.json"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://edenia.com/chains.json
+              </Link>
+              {t('subBullet2c')}
+              <Link
+                href="https://edenia.com/bp.json"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://edenia.com/bp.json
+              </Link>
+              {'.'}
+            </li>
+          </ul>
         </li>
-        <ul>
-          <li>
-            <b>{t('subBullet2Title')} </b>
-            {t('subBullet2')}
-            <Link
-              href="https://edenia.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://edenia.com
-            </Link>
-            {t('subBullet2b')}
-            <Link
-              href="https://edenia.com/chains.json"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://edenia.com/chains.json
-            </Link>
-            {t('subBullet2c')}
-            <Link
-              href="https://edenia.com/bp.json"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://edenia.com/bp.json
-            </Link>
-            {'.'}
-          </li>
-        </ul>
         <li>
           <b>{t('bullet3Title')} </b>
           {t('bullet3')}

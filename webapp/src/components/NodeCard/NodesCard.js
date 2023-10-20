@@ -30,10 +30,8 @@ const NodesCard = ({ nodes, hideFeatures = false }) => {
 
     return (
       <>
-        <dt className={classes.bold}>{t('healthStatus')}</dt>
-        <dd>
-          <ProducerHealthIndicators producer={node} />
-        </dd>
+        <span className={classes.bold}>{t('healthStatus')}</span>
+        <ProducerHealthIndicators producer={node} />
       </>
     )
   }
