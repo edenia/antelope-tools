@@ -10,5 +10,8 @@ export default (theme) => ({
     '& .highcharts-legend-item-hidden text': {
       fill: `${theme.palette.neutral.light} !important`,
     },
+    '& .highcharts-yaxis-grid > .highcharts-grid-line, .highcharts-xaxis > .highcharts-axis-line': {
+      stroke: theme.palette.neutral.light
+    },
   },
 })
