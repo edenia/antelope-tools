@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
+import Link from '@mui/material/Link'
 
 import { eosConfig } from '../../config'
 
@@ -33,13 +34,13 @@ const About = () => {
           {t('subtitle1')}
         </Typography>
         <Typography variant="body2" paragraph>
-          <a
+          <Link
             href="https://edenia.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             {t('body1.edenia')}
-          </a>{' '}
+          </Link>{' '}
           {t('body1.paragraph1')}
         </Typography>
         <Typography component="h2" variant="h4">
@@ -65,13 +66,13 @@ const About = () => {
         </Typography>
         <Typography variant="body2" paragraph>
           {t('body5.paragraph1')}{' '}
-          <a
+          <Link
             href="https://pomelo.io/grants/eosiodashboa"
             target="_blank"
             rel="noopener noreferrer"
           >
             {t('body5.pomelo')}
-          </a>
+          </Link>
           {t('body5.paragraph2')}
         </Typography>
         <Typography component="h2" variant="h4">
@@ -79,22 +80,23 @@ const About = () => {
         </Typography>
         <Typography variant="body2" paragraph>
           {t('body6.paragraph1')}
-          <a
+          <Link
             href="https://github.com/edenia/antelope-tools"
             target="_blank"
             rel="noopener noreferrer"
           >
             {t('body6.github')}
-          </a>
-          {' '}{t('body6.paragraph2')}
-          <a
+          </Link>{' '}
+          {t('body6.paragraph2')}
+          <Link
             href="https://t.me/eoscr"
             target="_blank"
             rel="noopener noreferrer"
           >
             {t('body6.telegram')}
-          </a>
-          {'. '}{t('body6.paragraph3')}
+          </Link>
+          {'. '}
+          {t('body6.paragraph3')}
         </Typography>
       </div>
     </Card>

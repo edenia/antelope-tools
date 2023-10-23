@@ -4,13 +4,12 @@ import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Autocomplete from '@mui/material/Autocomplete'
 import Card from '@mui/material/Card'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import LinearProgress from '@mui/material/LinearProgress'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import useHealthCheckState from '../../hooks/customHooks/useHealthCheckHistoryState'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 
 import styles from './styles'
 import EndpointsTable from './EndpointStatsTable'
@@ -96,8 +95,7 @@ const EndpointsStats = () => {
           />
         )}
         {historyData && (
-          <HighchartsReact
-            highcharts={Highcharts}
+          <HighchartsWrapper
             options={{
               ...options,
               xAxis: {

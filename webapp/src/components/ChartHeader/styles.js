@@ -1,11 +1,11 @@
 export default (theme) => ({
-  headerTransactionLine: {
+  headerContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
     alignItems: 'baseline',
     padding: theme.spacing(1),
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row',
@@ -30,4 +30,7 @@ export default (theme) => ({
       marginTop: theme.spacing(3),
     },
   },
+  onlySelect: {
+    width: 150,
+  }
 })

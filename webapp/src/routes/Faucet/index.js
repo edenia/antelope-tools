@@ -262,6 +262,8 @@ const Faucet = () => {
                   '(transaction)',
                   transferTokensTransaction,
                 )}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {transferTokensTransaction.slice(0, 7)}
               </a>

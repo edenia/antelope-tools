@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
 import moment from 'moment'
 
 import ChipList from '../ChipList'
@@ -107,9 +108,9 @@ const EndpointsChips = ({ node }) => {
           return (
             <>
               <span>{type.toUpperCase()}</span>:{' '}
-              <a href={value} target="_blank" rel="noopener noreferrer">
+              <Link href={value} target="_blank" rel="nofollow noopener noreferrer">
                 {value || 'N/A'}
-              </a>
+              </Link>
             </>
           )
         })}

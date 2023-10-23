@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
-import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -11,19 +10,15 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
 import Button from '@mui/material/Button'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import { makeStyles } from '@mui/styles'
 
 import styles from './styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { CPU_BENCHMARK } from '../../gql'
+import ChartHeader from '../../components/ChartHeader'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 
 const useStyles = makeStyles(styles)
 
@@ -31,9 +26,6 @@ const options = {
   chart: {
     type: 'spline',
     zoomType: 'x'
-  },
-  time: {
-    timezoneOffset: new Date().getTimezoneOffset(),
   },
   title: {
     text: ' ',
@@ -180,33 +172,18 @@ const CPUBenchmark = () => {
 
   return (
     <Card>
-      <div className={classes.textDiv}>
-        <Typography component="h2" variant="h6">
-          {t('title')}
-        </Typography>
-        <FormControl variant="standard">
-          <InputLabel htmlFor="select-range-label">
-            {t('timeFrame')}
-          </InputLabel>
-          <Select
-            inputProps={{ id: 'select-range-label' }}
-            value={range}
-            onChange={event => setRange(event.target.value)}
-            fullWidth
-          >
-            {rangeOptions.map(option => (
-              <MenuItem key={option} value={option}>
-                {t(option)}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+       <ChartHeader
+        title={t('title')}
+        ariaLabel={'cpu-time-range-label'}
+        value={range}
+        onSelect={setRange}
+        options={rangeOptions}
+        isHistoryEnabled
+      />
       {loading && <LinearProgress />}
       {!loading && data?.items.length > 0 && (
         <>
-          <HighchartsReact
-            highcharts={Highcharts}
+          <HighchartsWrapper
             options={{ ...options, series }}
           />
           <div className={classes.infoContainer}>

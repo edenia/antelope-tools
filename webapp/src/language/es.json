@@ -59,7 +59,8 @@
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
     "nextUpdateAt": "Próxima actualización",
-    "secondsAgo": "Hace Segundos"
+    "secondsAgo": "Hace Segundos",
+    "goBack": "Regresar"
   },
   "routes": {
     "/>sidebar": "Panel",

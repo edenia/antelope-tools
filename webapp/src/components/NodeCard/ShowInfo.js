@@ -12,8 +12,8 @@ const ShowInfo = ({ cond, title, value }) => {
 
   return (
     <>
-      <dt className={classes.bold}>{title}</dt>
-      <dd>{value}</dd>
+      <span className={classes.bold}>{title}</span>
+      {value}
     </>
   )
 }

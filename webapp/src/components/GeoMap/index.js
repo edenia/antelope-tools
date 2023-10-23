@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { makeStyles } from '@mui/styles'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import clsx from 'clsx'
@@ -18,6 +19,7 @@ const useStyles = makeStyles(styles)
 
 const GeoMap = ({ data }) => {
   const classes = useStyles()
+  const { t } = useTranslation()
   const [mapOptions, setMapOptions] = useState()
   const [mapSelected, setMapSelected] = useState()
   const [mapGeoData, setMapGeoData] = useState()
@@ -104,11 +106,13 @@ const GeoMap = ({ data }) => {
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={handleGoBack}
-        className={clsx(classes.goBackBtn, {
+        className={clsx({
           [classes.goBackBtnHidden]: !mapSelected,
         })}
+        color="primary"
+        variant="outlined"
       >
-        Go Back
+        {t('goBack')}
       </Button>
       {mapSelected && mapGeoData ? (
         <CountryMap
