@@ -17,8 +17,8 @@ import styles from './styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { CPU_BENCHMARK } from '../../gql'
-import ChartHeader from 'components/ChartHeader'
-import HighchartsWrapper from 'components/HighChartsWrapper'
+import ChartHeader from '../../components/ChartHeader'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 
 const useStyles = makeStyles(styles)
 

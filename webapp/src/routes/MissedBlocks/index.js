@@ -13,7 +13,7 @@ import TableRow from '@mui/material/TableRow'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { MISSED_BLOCKS } from '../../gql'
-import HighchartsWrapper from 'components/HighChartsWrapper'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 import ChartHeader from 'components/ChartHeader'
 
 const options = {

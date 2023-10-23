@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import useHealthCheckState from '../../hooks/customHooks/useHealthCheckHistoryState'
-import HighchartsWrapper from 'components/HighChartsWrapper'
+import HighchartsWrapper from '../../components/HighChartsWrapper'
 
 import styles from './styles'
 import EndpointsTable from './EndpointStatsTable'
