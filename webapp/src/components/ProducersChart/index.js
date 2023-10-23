@@ -83,6 +83,7 @@ const CustomBarLabel = memo(
       return (
         <Link
           to={link}
+          underline="none"
           component={RouterLink}
           aria-label={`BP ${owner} Profile Page`}
         >
