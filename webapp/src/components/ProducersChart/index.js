@@ -180,7 +180,7 @@ const CustomTooltip = memo(({ active, payload }) => {
 
   if (active && payload.length > 0) {
     return (
-      <div className={classes.wrapper}>
+      <div className={classes.tooltip}>
         <Typography variant="h6">
           {t('name')}:{' '}
           <span className={classes.description}>

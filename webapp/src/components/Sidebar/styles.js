@@ -10,7 +10,7 @@ export default (theme) => ({
       [theme.breakpoints.up('md')]: {
         maxWidth: '240px',
         position: 'sticky !important',
-        height: 'auto',
+        height: '100%',
       },
     },
   },

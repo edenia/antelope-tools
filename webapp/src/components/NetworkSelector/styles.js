@@ -30,7 +30,6 @@ export default (theme) => ({
     width: 310,
     top: 48,
     left: -55,
-    boxShadow: theme.palette.shadows.tooltip,
     '& .titles': {
       display: 'flex',
       '& .titlesBoxRight': {
@@ -82,6 +81,7 @@ export default (theme) => ({
   listActive: {
     maxHeight: 1000,
     opacity: 1,
+    boxShadow: theme.palette.shadows.card,
   },
   listItem: {
     height: 50,

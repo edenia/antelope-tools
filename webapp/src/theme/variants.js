@@ -66,12 +66,10 @@ const lightVariant = {
     },
     shadows: {
       card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
       nodeCard: '2px 3px 4px 0px #0000002E',
       profileCard: '0px -2px 8px 0px #0000004D',
       hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
       authBox: `0px 0px 3px 3px ${blue[800]}`,
-      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     },
     sidebar: {
       activeLink: '#f2f2f2',
@@ -150,12 +148,10 @@ const darkVariant = {
     },
     shadows: {
       card: '0px 0px 14px 0px #3540520D',
-      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
-      nodeCard: '2px 3px 4px 0px #0000002E',
-      profileCard: '0px -2px 8px 0px #0000004D',
+      nodeCard: '2px 3px 4px 0px #FFFFFF0A',
+      profileCard: '0px -2px 8px 0px #FFFFFF4D',
       hover: `0px 0px 40px -30px #1CCBFFBF inset`,
-      authBox: `0px 0px 3px 3px #1CCBFF`,
-      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
+      authBox: `0px 0px 3px 1px #1CCBFF`,
     },
     sidebar: {
       activeLink: '#166CCD',
