@@ -1,13 +1,24 @@
 .grecaptcha-badge {
-    width: 70px !important;
-    overflow: hidden !important;
-    transition: all 0.3s ease !important;
-    right: 0px !important;
-    bottom: 70px !important;
-    }
-    
-    .grecaptcha-badge:hover {
-    width: 256px !important;
-    }
-  
-  
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  right: 0px !important;
+  bottom: 70px !important;
+}
+
+.grecaptcha-badge:hover {
+  width: 256px !important;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: #FFF;
+    color: #000;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1B2430;
+    color: #FFF;
+  }
+}

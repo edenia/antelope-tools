@@ -1,12 +1,11 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { ApolloProvider } from '@apollo/client'
-import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import { StylesProvider } from '@mui/styles'
-import { ThemeProvider } from 'styled-components'
+
+import { ThemeStateProvider } from 'context/theme.context'
 
 import App from './App'
-import theme from './theme'
 import { client } from './graphql'
 import * as serviceWorker from './serviceWorker'
 import './i18n'
@@ -17,11 +16,9 @@ const root = createRoot(container)
 root.render(
   <ApolloProvider client={client}>
     <StylesProvider injectFirst>
-      <MuiThemeProvider theme={theme[0]}>
-        <ThemeProvider theme={theme[0]}>
-          <App />
-        </ThemeProvider>
-      </MuiThemeProvider>
+      <ThemeStateProvider>
+        <App />
+      </ThemeStateProvider>
     </StylesProvider>
   </ApolloProvider>,
 )

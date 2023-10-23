@@ -15,8 +15,10 @@ import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import 'moment/locale/es'
 
-import styles from './styles'
+import ToggleColorMode from 'components/ToggleColorMode'
+
 import AntelopeLogoSvg from './AntelopeLogo'
+import styles from './styles'
 
 const AuthButton = lazy(() => import('./AuthButton'))
 
@@ -115,6 +117,7 @@ const Header = ({ onDrawerToggle, useConnectWallet = false }) => {
             <HeaderLogo />
           </div>
           <div className={classes.userBox}>
+            <ToggleColorMode />
             <LanguageMenu />
             {useConnectWallet && (
               <Suspense

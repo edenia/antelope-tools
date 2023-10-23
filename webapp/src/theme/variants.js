@@ -3,6 +3,7 @@ import { blue, green, grey } from '@mui/material/colors'
 const lightVariant = {
   name: 'Light',
   palette: {
+    mode: 'light',
     primary: {
       main: blue[800],
       contrastText: '#FFF',
