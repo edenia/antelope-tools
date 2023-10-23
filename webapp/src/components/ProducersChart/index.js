@@ -2,7 +2,9 @@
 import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
+import { Link as RouterLink } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
@@ -65,9 +67,7 @@ const CustomBarLabel = memo(
       outerRadius + spacing,
       midAngle,
     )
-    const link = generalConfig.eosRateLink
-      ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
-      : payload.url
+    const link = `${eosConfig.producersRoute}/${payload.owner}`
 
     const getNameTextAnchor = (x, cx) => {
       if (x + 30 >= cx && x < cx) {
@@ -77,6 +77,18 @@ const CustomBarLabel = memo(
       } else {
         return 'end'
       }
+    }
+
+    const ProfileLink = ({ link, owner, Content }) => {
+      return (
+        <Link
+          to={link}
+          component={RouterLink}
+          aria-label={`BP ${owner} Profile Page`}
+        >
+          <Content />
+        </Link>
+      )
     }
 
     const ProducerName = () => {
@@ -97,20 +109,8 @@ const CustomBarLabel = memo(
           {payload.owner}
         </text>
       )
-      if (!link) {
-        return <Content />
-      }
 
-      return (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Link to ${payload.owner} bp page`}
-        >
-          <Content />
-        </a>
-      )
+      return <ProfileLink link={link} owner={payload.owner} Content={Content} />
     }
 
     const ProducerLogo = () => {
@@ -123,20 +123,7 @@ const CustomBarLabel = memo(
         />
       )
 
-      if (!link) {
-        return <Content />
-      }
-
-      return (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Link to ${payload.owner} bp page`}
-        >
-          <Content />
-        </a>
-      )
+      return <ProfileLink link={link} owner={payload.owner} Content={Content} />
     }
 
     return (
@@ -150,7 +137,11 @@ const CustomBarLabel = memo(
               width="100%"
               viewBox="0 0 100 100"
             >
-              <rect height="100" width="100" fill={theme.palette.common.white} />
+              <rect
+                height="100"
+                width="100"
+                fill={theme.palette.common.white}
+              />
               <image
                 x="0"
                 y="0"
@@ -244,7 +235,11 @@ const ProducersChart = ({ producers, info }) => {
   }, [producers])
 
   return (
-    <ResponsiveContainer width="100%" aspect={1.45} className={classes.chartContainer}>
+    <ResponsiveContainer
+      width="100%"
+      aspect={1.45}
+      className={classes.chartContainer}
+    >
       <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip content={<CustomTooltip />} />
         <Pie
