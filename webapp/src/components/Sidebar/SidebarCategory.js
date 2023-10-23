@@ -5,7 +5,6 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
 import styled from 'styled-components'
-import { darken } from 'polished'
 import { eosConfig } from 'config'
 
 const Category = styled(MuiListItem)`
@@ -26,11 +25,17 @@ const Category = styled(MuiListItem)`
   }
   &:hover,
   &.${(props) => props.activeclassname} {
-    background-color: ${(props) =>
-      darken(0.05, props.theme.palette.background.default)};
     svg {
       opacity: 1;
     }
+  }
+  &:hover {
+    background-color: ${(props) =>
+      props.theme.palette.neutral.lighter};
+  }
+  &.${(props) => props.activeclassname} {
+    background-color: ${(props) =>
+      props.theme.palette.sidebar.activeLink};
   }
 `
 

@@ -106,7 +106,6 @@ export default (theme) => ({
     },
   },
   loginBtn: {
-    color: `${theme.palette.common.white} !important`,
     cursor: 'pointer',
   },
   connectWalletBtn: {
@@ -119,8 +118,8 @@ export default (theme) => ({
     alignItems: 'center',
     textAlign: 'center',
     padding: theme.spacing(2),
-    border: `0 solid ${theme.palette.common.white}`,
-    borderLeft: `0.8px solid ${theme.palette.common.white}`,
+    border: `0 solid ${theme.palette.primary.contrastText}`,
+    borderLeft: `0.8px solid ${theme.palette.primary.contrastText}`,
     background: 'transparent',
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2, 1, 2, 1),
@@ -141,10 +140,14 @@ export default (theme) => ({
     alignItems: 'center',
     textAlign: 'center',
     background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     borderRadius: '10px',
     transition: 'ease-in-out all 0.5s',
     '&:hover': {
       boxShadow: theme.palette.shadows.authBox,
+    },
+    '& button': {
+      color: theme.palette.primary.contrastText,
     },
   },
 })
