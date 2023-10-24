@@ -248,7 +248,7 @@
     "keyFormat": "Enter a valid ECC key. You can generate one using cleos or any compatible wallet."
   },
   "ricardianContractRoute": {
-    "title": "Block Producer Agreement"
+    "title": "Ricardian Contract"
   },
   "aboutRoute": {
     "body": {

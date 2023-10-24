@@ -98,14 +98,10 @@ const CustomBarLabel = memo(
           transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
           textAnchor={getNameTextAnchor(x, cx)}
           dominantBaseline="central"
-          fill={
-            fill === theme.palette.primary.dark
-              ? theme.palette.primary.dark
-              : theme.palette.primary.light
-          }
+          fill={theme.palette.primary.main}
           fontSize={sm ? 14 : 12}
           fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-          fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
+          fontWeight={fill === theme.palette.primary.main ? 'bold' : 'normal'}
         >
           {payload.owner}
         </text>
@@ -259,7 +255,7 @@ const ProducersChart = ({ producers, info }) => {
                 key={`cell-${index}`}
                 fill={
                   entry.owner === info.head_block_producer
-                    ? theme.palette.primary.dark
+                    ? theme.palette.primary.main
                     : theme.palette.primary.light
                 }
               />

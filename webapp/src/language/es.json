@@ -252,7 +252,7 @@
     "keyFormat": "Introduzca una clave ECC válida. Puede generar una usando cleos o cualquier billetera compatible."
   },
   "ricardianContractRoute": {
-    "title": "Acuerdo de Productor de Bloques"
+    "title": "Contrato Ricardiano"
   },
   "aboutRoute": {
     "body": {

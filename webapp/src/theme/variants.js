@@ -83,6 +83,7 @@ const darkVariant = {
     mode: 'dark',
     primary: {
       main: '#1CCBFF',
+      light: '#0D4380',
       contrastText: '#000',
     },
     secondary: {

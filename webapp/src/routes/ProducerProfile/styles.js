@@ -21,7 +21,7 @@ export default (theme) => ({
     backgroundImage: 'url(https://antelope.tools/images/profile-bg-image.webp)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundBlendMode: 'multiply',
+    backgroundBlendMode: theme.palette.mode === 'light' ? 'normal' : 'soft-light',
     backgroundColor: theme.palette.background.default,
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column'

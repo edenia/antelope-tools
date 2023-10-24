@@ -13,6 +13,9 @@ const ToggleColorMode = () => {
   return (
     <IconButton
       onClick={toggleColorMode}
+      aria-label={`Change to ${
+        theme.palette.mode === 'light' ? 'dark' : 'light'
+      } mode`}
     >
       {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
     </IconButton>
