@@ -169,7 +169,7 @@ const RewardsDistribution = () => {
                       fill={
                         nodeData && nodeData.rewards > 0
                           ? colorScale(parseInt(nodeData.rewards))
-                          : theme.palette.neutral.lighter
+                          : theme.palette.neutral.light
                       }
                     />
                   )

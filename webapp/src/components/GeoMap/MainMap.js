@@ -56,14 +56,14 @@ const MainMap = ({ data, map, setMap }) => {
           {
             data: data.map(item => ({
               ...item,
-              color: theme.palette.neutral.light,
+              color: theme.palette.neutral.lighter,
             })),
             mapData: map,
             joinBy: ['iso-a2', 'country'],
             name: t('numberOfNodes'),
             cursor: 'pointer',
             borderColor: theme.palette.neutral.main,
-            nullColor: theme.palette.neutral.lighter,
+            nullColor: theme.palette.neutral.light,
             point: {
               events: {
                 click: function (e) {
