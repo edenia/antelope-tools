@@ -149,7 +149,7 @@ const darkVariant = {
     shadows: {
       card: '0px 0px 14px 0px #3540520D',
       nodeCard: '2px 3px 4px 0px #FFFFFF0A',
-      profileCard: '0px -2px 8px 0px #FFFFFF4D',
+      profileCard: '0px 0px 8px 0px #FFFFFF4D',
       hover: `0px 0px 40px -30px #1CCBFFBF inset`,
       authBox: `0px 0px 3px 1px #1CCBFF`,
     },
