@@ -7,6 +7,9 @@ export default (theme) => ({
       fontSize: '15px !important',
       fontWeight: '600',
     },
+    '& h6': {
+      color: theme.palette.neutral.dark
+    },
     '& a': {
       lineBreak: 'anywhere',
     },
