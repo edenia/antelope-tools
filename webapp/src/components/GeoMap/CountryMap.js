@@ -83,7 +83,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
           {
             name: 'NodeDistribution',
             borderColor: theme.palette.neutral.main,
-            nullColor: theme.palette.neutral.lighter,
+            nullColor: theme.palette.neutral.light,
             showInLegend: false,
           },
           {

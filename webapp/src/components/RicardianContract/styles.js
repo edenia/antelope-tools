@@ -22,6 +22,7 @@ export default (theme) => ({
     '& h6': {
       fontStyle: 'italic',
       lineHeight: 1,
+      color: theme.palette.neutral.dark
     },
     '& h5': {
       lineHeight: 1,

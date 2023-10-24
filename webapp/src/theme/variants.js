@@ -3,6 +3,7 @@ import { blue, green, grey } from '@mui/material/colors'
 const lightVariant = {
   name: 'Light',
   palette: {
+    mode: 'light',
     primary: {
       main: blue[800],
       contrastText: '#FFF',
@@ -65,12 +66,13 @@ const lightVariant = {
     },
     shadows: {
       card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
       nodeCard: '2px 3px 4px 0px #0000002E',
       profileCard: '0px -2px 8px 0px #0000004D',
       hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
       authBox: `0px 0px 3px 3px ${blue[800]}`,
-      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
+    },
+    sidebar: {
+      activeLink: '#f2f2f2',
     }
   },
 }
@@ -80,11 +82,12 @@ const darkVariant = {
   palette: {
     mode: 'dark',
     primary: {
-      main: blue[800],
-      contrastText: '#FFF',
+      main: '#1CCBFF',
+      light: '#0D4380',
+      contrastText: '#000',
     },
     secondary: {
-      main: '#CE93D8',
+      main: '#00C853',
       light: '#F3E5F5',
       dark: '#AB47BC',
       contrastText: 'rgba(0, 0, 0, 0.87)',
@@ -96,13 +99,13 @@ const darkVariant = {
       icon: 'rgba(255, 255, 255, 0.12)',
     },
     background: {
-      light: '#000',
-      default: '#1B2430',
-      paper: '#1B2430'
+      light: '#041426',
+      default: '#051B34',
+      paper: '#051B34',
     },
     neutral: {
-      lighter: grey[800],
-      light: grey[600],
+      lighter: '#0E4480',
+      light: '#FFFFFF33',
       main: grey[300],
       dark: grey[200],
       darker: grey[100],
@@ -145,14 +148,15 @@ const darkVariant = {
       activatedOpacity: '0.24',
     },
     shadows: {
-      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      tooltip: '0px 1px 5px rgba(0, 0, 0, 0.15)',
-      nodeCard: '2px 3px 4px 0px #0000002E',
-      profileCard: '0px -2px 8px 0px #0000004D',
-      hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
-      authBox: `0px 0px 3px 3px ${blue[800]}`,
-      producerChart: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
-    }
+      card: '0px 0px 14px 0px #3540520D',
+      nodeCard: '2px 3px 4px 0px #FFFFFF0A',
+      profileCard: '0px 0px 8px 0px #FFFFFF4D',
+      hover: `0px 0px 40px -30px #1CCBFFBF inset`,
+      authBox: `0px 0px 3px 1px #1CCBFF`,
+    },
+    sidebar: {
+      activeLink: '#166CCD',
+    },
   },
 }
 
