@@ -376,7 +376,8 @@
     "logo_256": "Logo",
     "organization_name": "Name",
     "viewNodes": "View {{totalNodes}} nodes",
-    "bpNodes": "{{bpName}} Nodes"
+    "bpNodes": "{{bpName}} Nodes",
+    "viewNodesProfile": "See Full Nodes Info"
   },
   "nodeCardComponent": {
     "features": "Features",

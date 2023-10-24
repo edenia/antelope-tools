@@ -131,7 +131,7 @@ const ProducerRow = ({ producer, index }) => {
       </TableCell>
       <BlockProducerInfo />
       <TableCell align="center">
-        <ViewBPProfile producer={producer} />
+        <ViewBPProfile producer={producer} text={t('viewProfile')} />
       </TableCell>
     </>
   )

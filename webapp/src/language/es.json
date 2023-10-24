@@ -374,7 +374,8 @@
     "generalInformation": "Información General",
     "organization_name": "Nombre",
     "viewNodes": "Ver {{totalNodes}} nodos",
-    "bpNodes": "Nodos de {{bpName}}"
+    "bpNodes": "Nodos de {{bpName}}",
+    "viewNodesProfile": "Ver Información de los Nodos"
   },
   "nodeCardComponent": {
     "features": "Características",

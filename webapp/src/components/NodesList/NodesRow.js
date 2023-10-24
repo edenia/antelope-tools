@@ -89,7 +89,7 @@ const NodesRow = ({ producer }) => {
           </Button>
         </div>
         <div className={classes.buttonContainer}>
-          <ViewBPProfile producer={producer} />
+          <ViewBPProfile producer={producer} text={t('viewNodesProfile')} />
         </div>
       </span>
       <div className={`${classes.nodesContainer} ${classes.hideOnMobile}`}>

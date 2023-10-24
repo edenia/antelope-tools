@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
-import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
 
 import { eosConfig } from '../../config'
@@ -10,9 +9,8 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ViewBPProfile = ({ producer }) => {
+const ViewBPProfile = ({ producer, text }) => {
   const classes = useStyles()
-  const { t } = useTranslation('producerCardComponent')
 
   return (
     <Button
@@ -25,7 +23,7 @@ const ViewBPProfile = ({ producer }) => {
       color="primary"
       mt={2}
     >
-      {t('viewProfile')}
+      {text}
     </Button>
   )
 }
