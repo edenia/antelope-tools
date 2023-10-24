@@ -4,6 +4,7 @@ export default (theme) => ({
     borderRight: 0,
     height: '100%',
     backgroundColor: theme.palette.background.default,
+    boxShadow: theme.palette.shadows.card,
     '& > div': {
       minWidth: '70px',
       borderRight: 0,
@@ -11,6 +12,7 @@ export default (theme) => ({
         maxWidth: '240px',
         position: 'sticky !important',
         height: 'auto',
+        boxShadow: 'none',
       },
     },
   },
