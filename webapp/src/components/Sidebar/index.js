@@ -190,7 +190,7 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
                         category.path.includes('http') ? ExternalLink : NavLink
                       }
                       icon={category.icon}
-                      exact
+                      exact="true"
                       badge={category.badge}
                       showOnlyIcons={!rest.open}
                       classes={classesStyle}

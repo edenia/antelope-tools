@@ -72,7 +72,7 @@ const lightVariant = {
       authBox: `0px 0px 3px 3px ${blue[800]}`,
     },
     sidebar: {
-      activeLink: '#f2f2f2',
+      activeLink: '#E6ECF0',
     },
     charts: {
       colors: [
