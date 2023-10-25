@@ -29,7 +29,7 @@ export default (theme) => ({
     flexDirection: 'column !important',
     alignItems: 'start !important',
     justifyContent: 'center !important',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   brand: {
     fontSize: theme.typography.h5.fontSize,
@@ -105,9 +105,9 @@ export default (theme) => ({
       alignSelf: 'center',
       height: '1px',
       width: '90%',
-      margin: theme.spacing(4,0,4,0),
+      margin: theme.spacing(4, 0, 4, 0),
       backgroundColor: theme.palette.neutral.light,
-    }
+    },
   },
   sidebarSection: {
     color: theme.palette.neutral.darker,
@@ -124,7 +124,7 @@ export default (theme) => ({
       width: 30,
       height: 30,
       color: theme.palette.neutral.darker,
-      opacity: 0.5
+      opacity: 0.5,
     },
   },
   tooltip: {
