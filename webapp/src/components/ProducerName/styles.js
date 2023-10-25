@@ -5,7 +5,7 @@ export default (theme) => ({
     '& img': {
       borderRadius: '50%',
       aspectRatio: '1 / 1',
-      backgroundColor: '#FFF',
+      backgroundColor: theme.palette.common.white,
     },
   },
   nameContainer: {

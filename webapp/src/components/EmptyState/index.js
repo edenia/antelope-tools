@@ -25,7 +25,7 @@ const EmptyState = () => {
         component={RouterLink}
         to="/undiscoverable-bps"
         variant="contained"
-        color="secondary"
+        color="primary"
         mt={2}
       >
         {t('viewList')}

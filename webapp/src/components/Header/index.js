@@ -15,6 +15,9 @@ import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import 'moment/locale/es'
 
+import ToggleColorMode from 'components/ToggleColorMode'
+
+import AntelopeLogoSvg from './AntelopeLogo'
 import styles from './styles'
 
 const AuthButton = lazy(() => import('./AuthButton'))
@@ -35,14 +38,8 @@ const languages = [
 const HeaderLogo = () => {
   const classes = useStyles()
   return (
-    <a href="https://antelope.tools/" rel="external">
-      <img
-        alt="antelope tools dashboard"
-        src={'/antelope-tools.svg'}
-        width={145}
-        height={64}
-        className={classes.imgHeaderLogo}
-      />
+    <a href="https://antelope.tools/" rel="external" aria-label='Antelope Tools Homepage' className={classes.imgHeaderLogo}>
+      <AntelopeLogoSvg />
     </a>
   )
 }
@@ -85,7 +82,6 @@ const LanguageMenu = () => {
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
-        className={classes.cardShadow}
       >
         {languages.map((language) => (
           <MenuItem
@@ -121,6 +117,7 @@ const Header = ({ onDrawerToggle, useConnectWallet = false }) => {
             <HeaderLogo />
           </div>
           <div className={classes.userBox}>
+            <ToggleColorMode />
             <LanguageMenu />
             {useConnectWallet && (
               <Suspense

@@ -20,6 +20,9 @@ const MainMap = ({ data, map, setMap }) => {
   const setupMapData = useCallback(
     (data = [], map) => {
       const options = {
+        chart: {
+          backgroundColor: theme.palette.background.default,
+        },
         title: {
           text: '',
         },
@@ -41,19 +44,26 @@ const MainMap = ({ data, map, setMap }) => {
         },
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
-          backgroundColor: '#FFFFFF',
-          border: '1px solid rgba(0, 0, 0, 0.12)',
-          boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.background.default,
+          style: {
+            color: theme.palette.text.primary,
+          },
         },
         series: [
           {
-            data,
+            data: data.map(item => ({
+              ...item,
+              color: theme.palette.neutral.lighter,
+            })),
             mapData: map,
             joinBy: ['iso-a2', 'country'],
             name: t('numberOfNodes'),
             cursor: 'pointer',
-            borderColor: '#8F9DA4',
-            nullColor: '#EEEEEE',
+            borderColor: theme.palette.neutral.main,
+            nullColor: theme.palette.neutral.light,
             point: {
               events: {
                 click: function (e) {

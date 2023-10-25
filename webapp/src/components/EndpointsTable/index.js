@@ -90,8 +90,8 @@ const EndpointsTable = ({ producers, textLists }) => {
                     >
                       {producer.name}
                     </Link>
-                    {!!producer.endpoints.api.length +
-                      producer.endpoints.ssl.length && (
+                    {(producer.endpoints.api.length +
+                      producer.endpoints.ssl.length) > 0 && (
                       <MUITooltip title={t('linkToStats')} arrow>
                         <Link
                           aria-label={`Link to endpoints stats of ${producer.name}`}

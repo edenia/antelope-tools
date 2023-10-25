@@ -27,7 +27,7 @@ export default (theme) => ({
     },
   },
   tableCell: {
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    borderBottom: `1px solid ${theme.palette.neutral.light}`,
   },
   loadMore: {
     display: 'flex',

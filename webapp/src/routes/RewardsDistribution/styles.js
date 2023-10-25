@@ -1,4 +1,4 @@
-export default (theme, lowestRewardsColor, highestRewardsColor) => ({
+export default (theme) => ({
   spaceBetween: {
     display: 'flex',
     alignItems: 'center',
@@ -41,10 +41,10 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     display: 'inline-block',
   },
   lowestRewards: {
-    backgroundColor: lowestRewardsColor,
+    backgroundColor: theme.palette.primary.light,
   },
   highestRewards: {
-    backgroundColor: highestRewardsColor,
+    backgroundColor: theme.palette.primary.dark,
   },
   rewardsColorSchema: {
     display: 'flex',
@@ -72,9 +72,6 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
   },
   boxPadding: {
     padding: '10px',
-  },
-  cardShadow: {
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
   },
   divMargin: {
     display: 'grid',
@@ -114,12 +111,6 @@ export default (theme, lowestRewardsColor, highestRewardsColor) => ({
     justifyContent: 'flex-start',
     '& .MuiTypography-h6': {
       paddingBottom: theme.spacing(2),
-    },
-  },
-  shadow: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-      padding: theme.spacing(1),
     },
   },
   nonCompliantButton: {

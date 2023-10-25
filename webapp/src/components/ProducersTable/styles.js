@@ -18,6 +18,7 @@ export default (theme) => ({
     },
     '&:hover': {
       backgroundColor: `${theme.palette.neutral.lighter}`,
+      cursor: 'pointer',
     },
   },
   tableHead: {

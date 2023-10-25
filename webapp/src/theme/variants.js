@@ -3,134 +3,228 @@ import { blue, green, grey } from '@mui/material/colors'
 const lightVariant = {
   name: 'Light',
   palette: {
+    mode: 'light',
     primary: {
       main: blue[800],
       contrastText: '#FFF',
     },
     secondary: {
-      main: blue[600],
-      contrastText: '#FFF',
-    },
-    tertiary: {
-      main: '#00C853',
+      main: green.A700,
       contrastText: '#FFF',
     },
     text: {
       primary: '#000',
     },
     background: {
-      main: '#FFF',
-      light: '#F6F9FD',
+      light: '#F7F9FC',
+      default: '#FFF',
+      paper: '#FFF',
     },
     neutral: {
       lighter: '#F0F3FA',
       light: '#E0E0E0',
+      main: '#858585',
       dark: '#4E4E4E',
-      darker: '#3D3D3DDE'
-    }
-  },
-  header: {
-    color: grey[500],
-    background: '#FFF',
-    search: {
-      color: grey[800],
+      darker: '#2E2E2E',
     },
-    indicator: {
-      background: blue[600],
+    error: {
+      main: '#D32F2F',
+      light: '#EF5350',
+      dark: '#C62828',
+      contrastText: '#FFF',
     },
-  },
-  sidebar: {
-    color: grey[900],
-    background: '#FFF',
-    header: {
-      color: blue[800],
-      background: '#FFF',
-      brand: {
-        color: blue[800],
-      },
+    warning: {
+      main: '#ED6C02',
+      light: '#FF9800',
+      dark: '#E65100',
+      contrastText: '#FFF',
     },
-    footer: {
-      color: '#424242',
-      background: '#FFF',
+    info: {
+      main: '#0288D1',
+      light: '#03A9F4',
+      dark: '#01579B',
+      contrastText: '#FFF',
     },
-    category: {
-      fontWeight: 'normal',
+    success: {
+      main: '#2E7D32',
+      light: '#4CAF50',
+      dark: '#1B5E20',
+      contrastText: '#FFF',
     },
-    badge: {
-      color: '#FFF',
+    action: {
+      active: 'rgba(0, 0, 0, 0.54)',
+      hover: 'rgba(0, 0, 0, 0.04)',
+      hoverOpacity: '0.04',
+      selected: 'rgba(0, 0, 0, 0.08)',
+      selectedOpacity: '0.08',
+      disabled: 'rgba(0, 0, 0, 0.26)',
+      disabledBackground: 'rgba(0, 0, 0, 0.12)',
+      disabledOpacity: '0.38',
+      focus: 'rgba(0, 0, 0, 0.12)',
+      focusOpacity: '0.12',
+      activatedOpacity: '0.12',
     },
-  },
-  body: {
-    background: '#F7F9FC',
+    shadows: {
+      card: '0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      nodeCard: '2px 3px 4px 0px #0000002E',
+      profileCard: '0px -2px 8px 0px #0000004D',
+      hover: `0px 0px 40px -30px ${blue[800]}bf inset`,
+      authBox: `0px 0px 3px 3px ${blue[800]}`,
+    },
+    sidebar: {
+      activeLink: '#E6ECF0',
+    },
+    charts: {
+      colors: [
+        '#1565c0',
+        '#00c853',
+        '#24CBE5',
+        '#664021',
+        '#434348',
+        '#6AF9C4',
+        '#DA1F07',
+        '#058DC7',
+        '#996404',
+        '#2C445B',
+        '#1F6E6D',
+        '#1214C2',
+        '#73283A',
+        '#487874',
+        '#C310C3',
+        '#FF9655',
+        '#1663B7',
+        '#C50943',
+        '#50B432',
+        '#484B87',
+        '#59511C',
+        '#DE1214',
+        '#DDDF00',
+        '#ED561B',
+        '#A45E12',
+        '#1909DA',
+        '#AC33E8',
+        '#AC3E3E',
+        '#952CC9',
+        '#0B09B8',
+      ],
+    },
   },
 }
 
 const darkVariant = {
   name: 'Dark',
   palette: {
+    mode: 'dark',
     primary: {
-      main: blue[700],
-      contrastText: '#FFF',
+      main: '#1CCBFF',
+      light: '#0D4380',
+      contrastText: '#000',
     },
     secondary: {
-      main: blue[600],
-      contrastText: '#FFF',
-    },
-    tertiary: {
       main: '#00C853',
-      contrastText: '#FFF',
+      light: '#F3E5F5',
+      dark: '#AB47BC',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     text: {
       primary: '#FFF',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+      disabled: 'rgba(255, 255, 255, 0.5)',
+      icon: 'rgba(255, 255, 255, 0.12)',
     },
     background: {
-      main: '#1B2430',
-      light: '#F6F9FD',
+      light: '#041426',
+      default: '#051B34',
+      paper: '#051B34',
     },
     neutral: {
-      lighter: '#f0f3fa',
-      light: '#E0E0E0',
-      dark: '#4E4E4E',
-      darker: '#3D3D3DDE'
-    }
-  },
-  header: {
-    color: grey[500],
-    background: '#FFFFFF',
-    search: {
-      color: grey[800],
+      lighter: '#0E4480',
+      light: '#FFFFFF33',
+      main: grey[300],
+      dark: grey[200],
+      darker: grey[100],
     },
-    indicator: {
-      background: blue[600],
+    error: {
+      main: '#F44336',
+      light: '#E57373',
+      dark: '#D32F2F',
+      contrastText: '#FFF',
     },
-  },
-  sidebar: {
-    color: grey[200],
-    background: '#1B2430',
-    header: {
-      color: grey[200],
-      background: '#232f3e',
-      brand: {
-        color: blue[500],
-      },
+    warning: {
+      main: '#FFA726',
+      light: '#FFB74D',
+      dark: '#F57C00',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
-    footer: {
-      color: grey[200],
-      background: '#232f3e',
-      online: {
-        background: green[500],
-      },
+    info: {
+      main: '#29B6F6',
+      light: '#4FC3F7',
+      dark: '#0288D1',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
-    category: {
-      fontWeight: 400,
+    success: {
+      main: '#66BB6A',
+      light: '#81C784',
+      dark: '#388E3C',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
-    badge: {
-      color: '#FFF',
-      background: blue[500],
+    action: {
+      active: '#FFF',
+      hover: 'rgba(255, 255, 255, 0.08)',
+      hoverOpacity: '0.08',
+      selected: 'rgba(255, 255, 255, 0.16)',
+      selectedOpacity: '0.16',
+      disabled: 'rgba(255, 255, 255, 0.3)',
+      disabledBackground: 'rgba(255, 255, 255, 0.12)',
+      disabledOpacity: '0.38',
+      focus: 'rgba(255, 255, 255, 0.12)',
+      focusOpacity: '0.12',
+      activatedOpacity: '0.24',
     },
-  },
-  body: {
-    background: '#F7F9FC',
+    shadows: {
+      card: '0px 0px 14px 0px #3540520D',
+      nodeCard: '2px 3px 4px 0px #FFFFFF0A',
+      profileCard: '0px 0px 8px 0px #FFFFFF4D',
+      hover: `0px 0px 40px -30px #1CCBFFBF inset`,
+      authBox: `0px 0px 3px 1px #1CCBFF`,
+    },
+    sidebar: {
+      activeLink: '#166CCD',
+    },
+    charts: {
+      colors: [
+        '#1CCBFF',
+        '#00C853',
+        '#7cb5ec',
+        '#BD7B44',
+        '#898993',
+        '#90ed7d',
+        '#FD6762',
+        '#058DC7',
+        '#f7a35c',
+        '#989CFC',
+        '#34A8A6',
+        '#42CECD',
+        '#FD7C97',
+        '#11FF86',
+        '#F016F0',
+        '#f45b5b',
+        '#228AFB',
+        '#FF2E19',
+        '#50B432',
+        '#7C81E1',
+        '#A7993C',
+        '#DE1214',
+        '#e4d354',
+        '#64E572',
+        '#ED561B',
+        '#28BBFF',
+        '#AC33E8',
+        '#06FFFD',
+        '#1093CC',
+        '#91e8e1',
+      ],
+    },
   },
 }
 

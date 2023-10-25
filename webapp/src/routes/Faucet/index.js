@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
@@ -157,127 +156,121 @@ const Faucet = () => {
 
   return (
     <div
-      className={classes.test}
+      className={classes.container}
       style={{
         height: isUltraTestnet ? '250px' : '375px',
       }}
     >
-      <div className={classes.card}>
-        <Card>
-          <CardContent>
-            <Typography component="h2" variant="h5">{t('createAccount')}</Typography>
-            <div className={classes.formControl}>
-              <div>
-                <TextField
-                  key="action-field-issue-tokens"
-                  label={t('publicKey')}
-                  variant="outlined"
-                  value={createAccountValues.publicKey || ''}
-                  onChange={(e) =>
-                    setCreateAccountValues({
-                      ...createAccountValues,
-                      ...{ publicKey: e.target.value },
-                    })
-                  }
-                  helperText={t('keyFormat')}
-                  required
-                />
-              </div>
-              {!isUltraTestnet && (
-                <div>
-                  <TextField
-                    key="action-field-issue-tokens"
-                    label={t('accountName')}
-                    variant="outlined"
-                    value={createAccountValues.accountName || ''}
-                    onChange={(e) =>
-                      setCreateAccountValues({
-                        ...createAccountValues,
-                        ...{ accountName: e.target.value },
-                      })
-                    }
-                    error={!!createAccountValues.accountName && !isValidAccountName(createAccountValues.accountName)}
-                    helperText={t('accountFormat')}
-                    required
-                  />
-                </div>
-              )}
-              <div>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={loadingCreateAccount}
-                  endIcon={
-                    loadingCreateAccount ? (
-                      <CircularProgress size={20} />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  onClick={createAccount}
-                >
-                  {t('createButton')}
-                </Button>
-              </div>
+      <Card className={classes.card}>
+        <Typography component="h2" variant="h5">{t('createAccount')}</Typography>
+        <div className={classes.formControl}>
+          <div>
+            <TextField
+              key="action-field-issue-tokens"
+              label={t('publicKey')}
+              variant="outlined"
+              value={createAccountValues.publicKey || ''}
+              onChange={(e) =>
+                setCreateAccountValues({
+                  ...createAccountValues,
+                  ...{ publicKey: e.target.value },
+                })
+              }
+              helperText={t('keyFormat')}
+              required
+            />
+          </div>
+          {!isUltraTestnet && (
+            <div>
+              <TextField
+                key="action-field-issue-tokens"
+                label={t('accountName')}
+                variant="outlined"
+                value={createAccountValues.accountName || ''}
+                onChange={(e) =>
+                  setCreateAccountValues({
+                    ...createAccountValues,
+                    ...{ accountName: e.target.value },
+                  })
+                }
+                error={!!createAccountValues.accountName && !isValidAccountName(createAccountValues.accountName)}
+                helperText={t('accountFormat')}
+                required
+              />
             </div>
-          </CardContent>
-        </Card>
-      </div>
-      <div className={classes.card}>
-        <Card>
-          <CardContent>
-            <Typography component="h2" variant="h5">{`${t('issueTokens')} (500 ${eosConfig.tokenSymbol})`}</Typography>
-            <div className={classes.formControl}>
-              <div>
-                <TextField
-                  key="action-field-issue-tokens"
-                  label={`${t('accountName')}`}
-                  variant="outlined"
-                  value={account}
-                  onChange={(e) => setAccount(e.target.value)}
-                  error={!!account && !isValidAccountName(account)}
-                  helperText={t('accountFormat')}
-                  required
-                />
-              </div>
-              <div>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={loadingTransferFaucetTokens}
-                  endIcon={
-                    loadingTransferFaucetTokens ? (
-                      <CircularProgress size={20} />
-                    ) : (
-                      <></>
-                    )
-                  }
-                  onClick={transferTokens}
-                >
-                  {t('getTokens')}
-                </Button>
-              </div>
-              {transferTokensTransaction && (
-                <div>
-                  <Typography variant="h5">
-                    {t('transferTokensTransaction')}
-                  </Typography>
-                  <a
-                    href={eosConfig.blockExplorerUrl.replace(
-                      '(transaction)',
-                      transferTokensTransaction,
-                    )}
-                  >
-                    {transferTokensTransaction.slice(0, 7)}
-                  </a>
-                </div>
-              )}
+          )}
+          <div>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loadingCreateAccount}
+              endIcon={
+                loadingCreateAccount ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  <></>
+                )
+              }
+              onClick={createAccount}
+            >
+              {t('createButton')}
+            </Button>
+          </div>
+        </div>
+      </Card>
+      <Card className={classes.card}>
+        <Typography component="h2" variant="h5">{`${t('issueTokens')} (500 ${eosConfig.tokenSymbol})`}</Typography>
+        <div className={classes.formControl}>
+          <div>
+            <TextField
+              key="action-field-issue-tokens"
+              label={`${t('accountName')}`}
+              variant="outlined"
+              value={account}
+              onChange={(e) => setAccount(e.target.value)}
+              error={!!account && !isValidAccountName(account)}
+              helperText={t('accountFormat')}
+              required
+            />
+          </div>
+          <div>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loadingTransferFaucetTokens}
+              endIcon={
+                loadingTransferFaucetTokens ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  <></>
+                )
+              }
+              onClick={transferTokens}
+            >
+              {t('getTokens')}
+            </Button>
+          </div>
+          {transferTokensTransaction && (
+            <div>
+              <Typography variant="h5">
+                {t('transferTokensTransaction')}
+              </Typography>
+              <a
+                href={eosConfig.blockExplorerUrl.replace(
+                  '(transaction)',
+                  transferTokensTransaction,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {transferTokensTransaction.slice(0, 7)}
+              </a>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          )}
+        </div>
+      </Card>
     </div>
   )
 }

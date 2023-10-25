@@ -59,7 +59,8 @@
     "noOptions": "Sin coincidencias",
     "updatedAt": "Última actualización",
     "nextUpdateAt": "Próxima actualización",
-    "secondsAgo": "Hace Segundos"
+    "secondsAgo": "Hace Segundos",
+    "goBack": "Regresar"
   },
   "routes": {
     "/>sidebar": "Panel",
@@ -99,7 +100,7 @@
     "/faucet>heading": "Crear una Cuenta de {{networkName}} y Obtenga Tokens",
     "/ricardian-contract>sidebar": "Acuerdo de Productor de Bloques",
     "/ricardian-contract>title": "Acuerdo de Productor de Bloques - Panel de red de {{networkName}}",
-    "/ricardian-contract>heading": "",
+    "/ricardian-contract>heading": "Acuerdo de Productor de Bloques en {{networkName}}",
     "/block-distribution>sidebar": "Distribución de bloques",
     "/block-distribution>title": "Distribución de bloques - Panel de red de {{networkName}}",
     "/block-distribution>heading": "Distribución de bloques en {{networkName}}",
@@ -116,9 +117,11 @@
     "/about>sidebar": "Acerca de",
     "/about>title": "Acerca de - Monitor de Infraestructura Blockchain de {{networkName}}",
     "/about>heading": "Acerca de Antelope Tools",
+    "/about>moreDescription": "Conozca más sobre Edenia y Antelope Tools su importancia y como puede involucrarse",
     "/help>sidebar": "Ayuda",
     "/help>title": "Ayuda - Panel de red de {{networkName}}",
     "/help>heading": "Bienvenidos al Centro de Ayuda de Antelope Tools",
+    "/help>moreDescription": "Revise como se usa el estándar bp.json, resuelva la ausencia de datos de BP y contáctenos si tiene alguna sugerencia",
     "networkInformation": "Información de la red",
     "tools": "Herramientas",
     "docs": "Documentación",
@@ -138,6 +141,7 @@
     "/>moreDescription": "Encuentre datos de redes blockchain utilizando la tecnología EOSIO. Vea más redes aquí: https://antelope.tools/.",
     "/cpu-benchmark>moreDescription": "Una visualización del uso de CPU en microsegundos por cuentas de nodos productores de bloques, con datos de uso más bajos, más altos y promedio.",
     "/block-producers>moreDescription": "Una lista de los productores de bloques en la red: cuentas de blockchain registradas para ejecutar nodos en la red. Incluye información de tablas en cadena y sus archivos bp.json.",
+    "/block-producers/bpName>moreDescription": "Vea la información general del productor de bloques como el rango, recompensas y compliance.",
     "/nodes>moreDescription": "Una lista de todos los nodos ejecutados por entidades que componen la red con información específica como puntos finales y ubicación.",
     "/endpoints>moreDescription": "Una lista actualizada de los puntos finales de la API pública proporcionada por los operadores de nodos en la red.",
     "/endpoints-stats>moreDescription": "Estadísticas del tiempo de respuesta desde Costa Rica y la disponibilidad de los puntos finales de un productor",
@@ -248,7 +252,7 @@
     "keyFormat": "Introduzca una clave ECC válida. Puede generar una usando cleos o cualquier billetera compatible."
   },
   "ricardianContractRoute": {
-    "title": "Acuerdo de Productor de Bloques"
+    "title": "Contrato Ricardiano"
   },
   "aboutRoute": {
     "body": {
@@ -373,7 +377,8 @@
     "generalInformation": "Información General",
     "organization_name": "Nombre",
     "viewNodes": "Ver {{totalNodes}} nodos",
-    "bpNodes": "Nodos de {{bpName}}"
+    "bpNodes": "Nodos de {{bpName}}",
+    "viewNodesProfile": "Ver Información de los Nodos"
   },
   "nodeCardComponent": {
     "features": "Características",

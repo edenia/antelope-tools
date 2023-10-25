@@ -27,16 +27,13 @@ const INIT_VALUES = {
   dynamicTitle: '',
   pathname: null,
 }
-const useStyles = makeStyles((theme) => styles(theme))
+const useStyles = makeStyles(styles)
 
 const GlobalStyle = createGlobalStyle`
   html,
   body,
   #root {
     height: 100%;
-  }
-  body {
-    background: ${(props) => props.theme.body.background};
   }
   .MuiCardHeader-action .MuiIconButton-root {
     padding: 4px;
@@ -57,19 +54,18 @@ const Dashboard = ({ children }) => {
     setMobileOpen(!mobileOpen)
   }
 
-  const removeParam = route => route.substring(0,route.lastIndexOf('/'))
+  const removeParam = route => route.substring(0, route.lastIndexOf('/'))
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/,'') || '/'
-    const route = routes.find(route => 
-      route.useParams ? 
-        removeParam(route.path) === removeParam(path)
-      :
-        route.path === path
+    const path = location.pathname.replace(/\/$/, '') || '/'
+    const route = routes.find(route =>
+      route.useParams
+        ? removeParam(route.path) === removeParam(path)
+        : route.path === path,
     )
-    
+
     if (route) {
-      const pathName = route.path.replace(':','')
+      const pathName = route.path.replace(':', '')
       const managementCardTitle = lacchain.dynamicTitle || ''
 
       setRouteName({
@@ -83,7 +79,7 @@ const Dashboard = ({ children }) => {
         pageTitle: t(`${pathName}>title`, {
           networkName: eosConfig.networkLabel,
         }),
-        useConnectWallet: Boolean(route.useConnectWallet)
+        useConnectWallet: Boolean(route.useConnectWallet),
       })
     } else {
       setRouteName(INIT_VALUES)
@@ -105,7 +101,10 @@ const Dashboard = ({ children }) => {
         }
       />
       <div className={classes.header}>
-        <Header onDrawerToggle={handleDrawerToggle} useConnectWallet={routeName.useConnectWallet} />
+        <Header
+          onDrawerToggle={handleDrawerToggle}
+          useConnectWallet={routeName.useConnectWallet}
+        />
       </div>
       <div
         className={classes.drawer}
@@ -141,7 +140,9 @@ const Dashboard = ({ children }) => {
               )}
               <Typography className={classes.textAlignReadMore}>
                 {i18n.exists(`routes:${routeName.pathname}>moreDescription`)
-                  ? t(`${routeName.pathname}>moreDescription`)
+                  ? t(`${routeName.pathname}>moreDescription`, {
+                      networkName: eosConfig.networkLabel,
+                    })
                   : ''}
               </Typography>
             </div>

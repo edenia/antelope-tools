@@ -21,6 +21,8 @@ export default (theme) => ({
     backgroundImage: 'url(https://antelope.tools/images/profile-bg-image.webp)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    backgroundBlendMode: theme.palette.mode === 'light' ? 'normal' : 'soft-light',
+    backgroundColor: theme.palette.background.default,
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column'
     },
@@ -76,7 +78,7 @@ export default (theme) => ({
     flexWrap: 'wrap',
     padding: theme.spacing(4),
     borderBottom: `2px solid ${theme.palette.primary.main}`,
-    boxShadow: '0px -2px 8px 0px #0000004D',
+    boxShadow: theme.palette.shadows.profileCard,
     backgroundColor: theme.palette.background.light,
     [theme.breakpoints.down('md')]: {
       gap: theme.spacing(4),

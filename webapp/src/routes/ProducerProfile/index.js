@@ -3,6 +3,7 @@ import { useParams, Navigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import CircularProgress from '@mui/material/CircularProgress'
+import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
@@ -46,10 +47,10 @@ const ProducerProfile = () => {
 
   const WrapperContainer = ({ title, children }) => {
     return (
-      <div className={`simple-card ${classes.container}`}>
+      <Card className={`${classes.container}`}>
         <Typography variant="h3">{title}</Typography>
         <div className={classes.dataContainer}>{children}</div>
-      </div>
+      </Card>
     )
   }
 
@@ -61,9 +62,9 @@ const ProducerProfile = () => {
         metaDescription={metaDescription}
         ldJson={ldJson}
       />
-      <div className={`simple-card ${classes.container} ${classes.profileContainer}`}>
+      <Card className={`${classes.container} ${classes.profileContainer}`}>
         <ProfileCard producer={producer}/>
-      </div>
+      </Card>
       <WrapperContainer title={t('generalInformation')}>
         <GeneralInformation producer={producer} />
         {producer?.hasEmptyBPJson && (

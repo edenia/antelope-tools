@@ -38,6 +38,7 @@ const ResourceUsage = ({ percent, title, label }) => {
         textAnchor="middle"
         dominantBaseline="middle"
         className="progress-label"
+        fill={theme.palette.text.primary}
       >
         {title} {(percent * 100).toFixed(2)}%
       </text>
@@ -47,6 +48,7 @@ const ResourceUsage = ({ percent, title, label }) => {
         textAnchor="middle"
         dominantBaseline="middle"
         className="progress-label"
+        fill={theme.palette.text.primary}
       >
         {label}
       </text>

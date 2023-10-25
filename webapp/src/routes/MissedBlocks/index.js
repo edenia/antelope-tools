@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,24 +10,13 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
-import { makeStyles } from '@mui/styles'
 
 import { formatWithThousandSeparator, rangeOptions } from '../../utils'
 import { MISSED_BLOCKS } from '../../gql'
-import styles from './styles'
-
-const useStyles = makeStyles(styles)
+import HighchartsWrapper from '../../components/HighChartsWrapper'
+import ChartHeader from 'components/ChartHeader'
 
 const options = {
-  time: {
-    timezoneOffset: new Date().getTimezoneOffset(),
-  },
   title: {
     text: ' ',
   },
@@ -61,7 +48,6 @@ const BlockDistribution = () => {
   const [series, setSeries] = useState([])
   const [producers, setProducers] = useState([])
   const [load, { loading, data }] = useLazyQuery(MISSED_BLOCKS)
-  const classes = useStyles()
 
   useEffect(() => {
     load({
@@ -112,72 +98,55 @@ const BlockDistribution = () => {
   }, [data])
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent>
-        <div className={classes.textDiv}>
-          <Typography component="h2" variant="h6">
-            {t('title')}
-          </Typography>
-          <FormControl variant="standard">
-            <InputLabel htmlFor="select-range-label">
-              {t('timeFrame')}
-            </InputLabel>
-            <Select
-              inputProps={{ id: 'select-range-label' }}
-              value={range}
-              onChange={(e) => setRange(e.target.value)}
-              fullWidth
-            >
-              {rangeOptions.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {t(option)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-        {loading && <LinearProgress />}
-        {!loading && data?.items.length > 0 && (
-          <>
-            <HighchartsReact
-              highcharts={Highcharts}
-              options={{ ...options, series }}
-            />
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>{t('account')}</TableCell>
-                    <TableCell align="right">{t('scheduledBlocks')}</TableCell>
-                    <TableCell align="right">{t('producedBlocks')}</TableCell>
-                    <TableCell align="right">{t('missedBlocks')}</TableCell>
-                    <TableCell align="right">{t('availability')}</TableCell>
+    <Card>
+      <ChartHeader
+        title={t('title')}
+        ariaLabel={'missed-blocks-time-range-label'}
+        value={range}
+        onSelect={setRange}
+        options={rangeOptions}
+        isHistoryEnabled
+      />
+      {loading && <LinearProgress />}
+      {!loading && data?.items.length > 0 && (
+        <>
+          <HighchartsWrapper
+            options={{ ...options, series }}
+          />
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>{t('account')}</TableCell>
+                  <TableCell align="right">{t('scheduledBlocks')}</TableCell>
+                  <TableCell align="right">{t('producedBlocks')}</TableCell>
+                  <TableCell align="right">{t('missedBlocks')}</TableCell>
+                  <TableCell align="right">{t('availability')}</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {producers.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.scheduled)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.produced)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.missed)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {formatWithThousandSeparator(item.availability, 2)}%
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {producers.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.scheduled)}
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.produced)}
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.missed)}
-                      </TableCell>
-                      <TableCell align="right">
-                        {formatWithThousandSeparator(item.availability, 2)}%
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </>
-        )}
-      </CardContent>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      )}
     </Card>
   )
 }

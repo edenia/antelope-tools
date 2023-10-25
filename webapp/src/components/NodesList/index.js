@@ -4,6 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 
 import { eosConfig } from 'config'
@@ -19,8 +20,8 @@ const NodeList = ({ producers }) => {
 
   const Header = () => {
     return (
-      <div
-        className={`simple-card ${classes.columnsContainer} ${classes.cardRow} ${classes.hideOnMobile}`}
+      <Card
+        className={`${classes.columnsContainer} ${classes.cardRow} ${classes.hideOnMobile}`}
       >
         {eosConfig.producerColumns?.includes('rank') ? (
           <Typography variant="capSubtitle">{t('rank')}</Typography>
@@ -30,7 +31,7 @@ const NodeList = ({ producers }) => {
         <Typography variant="capSubtitle">{t('producerName')}</Typography>
         <Typography variant="capSubtitle">{t('nodes')}</Typography>
         <span />
-      </div>
+      </Card>
     )
   }
 

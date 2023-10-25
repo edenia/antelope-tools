@@ -20,9 +20,6 @@ const theme = (variant) => {
     },
     {
       name: variant.name,
-      body: variant.body,
-      header: variant.header,
-      sidebar: variant.sidebar
     }
   )
 }

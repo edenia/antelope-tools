@@ -2,7 +2,9 @@
 import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
+import { Link as RouterLink } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
@@ -65,9 +67,7 @@ const CustomBarLabel = memo(
       outerRadius + spacing,
       midAngle,
     )
-    const link = generalConfig.eosRateLink
-      ? `${generalConfig.eosRateLink}/block-producers/${payload.owner}`
-      : payload.url
+    const link = `${eosConfig.producersRoute}/${payload.owner}`
 
     const getNameTextAnchor = (x, cx) => {
       if (x + 30 >= cx && x < cx) {
@@ -79,38 +79,35 @@ const CustomBarLabel = memo(
       }
     }
 
+    const ProfileLink = ({ link, owner, Content }) => {
+      return (
+        <Link
+          to={link}
+          underline="none"
+          component={RouterLink}
+          aria-label={`BP ${owner} Profile Page`}
+        >
+          <Content />
+        </Link>
+      )
+    }
+
     const ProducerName = () => {
       const Content = () => (
         <text
           transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
           textAnchor={getNameTextAnchor(x, cx)}
           dominantBaseline="central"
-          fill={
-            fill === theme.palette.primary.dark
-              ? theme.palette.primary.dark
-              : theme.palette.primary.light
-          }
+          fill={theme.palette.primary.main}
           fontSize={sm ? 14 : 12}
           fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-          fontWeight={fill === theme.palette.primary.dark ? 'bold' : 'normal'}
+          fontWeight={fill === theme.palette.primary.main ? 'bold' : 'normal'}
         >
           {payload.owner}
         </text>
       )
-      if (!link) {
-        return <Content />
-      }
 
-      return (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Link to ${payload.owner} bp page`}
-        >
-          <Content />
-        </a>
-      )
+      return <ProfileLink link={link} owner={payload.owner} Content={Content} />
     }
 
     const ProducerLogo = () => {
@@ -123,20 +120,7 @@ const CustomBarLabel = memo(
         />
       )
 
-      if (!link) {
-        return <Content />
-      }
-
-      return (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Link to ${payload.owner} bp page`}
-        >
-          <Content />
-        </a>
-      )
+      return <ProfileLink link={link} owner={payload.owner} Content={Content} />
     }
 
     return (
@@ -150,7 +134,11 @@ const CustomBarLabel = memo(
               width="100%"
               viewBox="0 0 100 100"
             >
-              <rect height="100" width="100" fill="#fff" />
+              <rect
+                height="100"
+                width="100"
+                fill={theme.palette.common.white}
+              />
               <image
                 x="0"
                 y="0"
@@ -188,7 +176,7 @@ const CustomTooltip = memo(({ active, payload }) => {
 
   if (active && payload.length > 0) {
     return (
-      <div className={classes.wrapper}>
+      <div className={classes.tooltip}>
         <Typography variant="h6">
           {t('name')}:{' '}
           <span className={classes.description}>
@@ -236,6 +224,7 @@ CustomTooltip.propTypes = {
 
 const ProducersChart = ({ producers, info }) => {
   const [entries, setEntries] = useState([])
+  const classes = useStyles()
   const theme = useTheme()
 
   useEffect(() => {
@@ -243,7 +232,11 @@ const ProducersChart = ({ producers, info }) => {
   }, [producers])
 
   return (
-    <ResponsiveContainer width="100%" aspect={1.45}>
+    <ResponsiveContainer
+      width="100%"
+      aspect={1.45}
+      className={classes.chartContainer}
+    >
       <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
         <Tooltip content={<CustomTooltip />} />
         <Pie
@@ -262,7 +255,7 @@ const ProducersChart = ({ producers, info }) => {
                 key={`cell-${index}`}
                 fill={
                   entry.owner === info.head_block_producer
-                    ? theme.palette.primary.dark
+                    ? theme.palette.primary.main
                     : theme.palette.primary.light
                 }
               />

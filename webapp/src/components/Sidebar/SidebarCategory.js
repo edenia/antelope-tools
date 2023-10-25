@@ -5,14 +5,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
 import styled from 'styled-components'
-import { darken } from 'polished'
 import { eosConfig } from 'config'
 
 const Category = styled(MuiListItem)`
   font-weight: ${(props) => props.theme.typography.fontWeightRegular};
-  color: ${(props) => props.theme.sidebar.color};
+  color: ${(props) => props.theme.palette.neutral.darker};
   display: flex;
   flex-direction: row;
+  justify-content: center !important;
   svg {
     opacity: 0.5;
     object-fit: contain;
@@ -26,11 +26,18 @@ const Category = styled(MuiListItem)`
   }
   &:hover,
   &.${(props) => props.activeclassname} {
-    background-color: ${(props) =>
-      darken(0.05, props.theme.sidebar.background)};
+    border-radius: 10px;
     svg {
       opacity: 1;
     }
+  }
+  &:hover {
+    background-color: ${(props) =>
+      props.theme.palette.neutral.lighter};
+  }
+  &.${(props) => props.activeclassname} {
+    background-color: ${(props) =>
+      props.theme.palette.sidebar.activeLink};
   }
 `
 

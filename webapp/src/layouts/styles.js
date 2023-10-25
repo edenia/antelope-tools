@@ -5,9 +5,7 @@ export default (theme) => ({
   },
   drawer: {
     display: 'flex',
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     zIndex: 2,
-    paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('md')]: {
       width: '0 !important',
       flexShrink: 0,
@@ -28,12 +26,8 @@ export default (theme) => ({
   mainContent: {
     padding: theme.spacing(4),
     minHeight: '90vh',
-    background: theme.body.background,
     '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
       flex: 'none',
-    },
-    '& .MuiPaper-root .MuiPaper-root': {
-      boxShadow: 'none',
     },
   },
   header: {
@@ -64,28 +58,6 @@ export default (theme) => ({
       alignItems: 'flex-start',
       '& h3': {
         marginTop: 0,
-      },
-    },
-  },
-  boxReadmore: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    paddingTop: theme.spacing(2),
-    '& span': {
-      fontSize: 14,
-      letterSpacing: '0.3px',
-      color: '#1565C0',
-      marginLeft: theme.spacing(1),
-      '&:hover': {
-        cursor: 'pointer',
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'flex-start',
-      '& span': {
-        marginLeft: theme.spacing(4),
       },
     },
   },

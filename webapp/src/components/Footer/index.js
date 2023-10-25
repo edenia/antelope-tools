@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { List, ListItemText, ListItem } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import Link from '@mui/material/Link'
 
 import { generalConfig } from '../../config'
 
@@ -33,8 +34,8 @@ const Footer = () => {
 
       <div className={classes.gridFooter}>
         <div className={classes.midText}>{t('footer1')}</div>
-        <a
-          className={classes.noUnderline}
+        <Link
+          underline="none"
           href="https://edenia.com/"
           target="_blank"
           rel="noopener noreferrer"
@@ -42,13 +43,13 @@ const Footer = () => {
           <div className={classes.midFooter}>
             {t('footer2')}
             <img
-              alt="antelope tools dashboard"
+              alt="Edenia website"
               src={'/edenia.webp'}
               className={classes.imgHeaderLogo}
               loading="lazy"
             />
           </div>
-        </a>
+        </Link>
       </div>
 
       <div className={classes.footerAlign}>
@@ -71,14 +72,14 @@ const Footer = () => {
           <ListItem>
             <ListItemText
               primary={
-                <a
-                  className={classes.noUnderline}
+                <Link
+                  underline="none"
                   href="https://github.com/edenia/antelope-tools/issues/new/choose"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {t('bugRequest')}
-                </a>
+                </Link>
               }
             />
           </ListItem>

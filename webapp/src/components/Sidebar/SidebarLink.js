@@ -2,23 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Chip, ListItem as MuiListItem, ListItemText } from '@mui/material'
-import { rgba, darken } from 'polished'
+import { darken } from 'polished'
 import styled from 'styled-components'
 
 import NavLink from './NavLink'
 
 const Link = styled(MuiListItem)`
   span {
-    color: ${(props) => rgba(props.theme.sidebar.color, 0.7)};
+    color: ${(props) => props.theme.palette.neutral.darker};
   }
   &:hover span {
-    color: ${(props) => rgba(props.theme.sidebar.color, 0.9)};
+    color: ${(props) => props.theme.palette.neutral.darker};
   }
   &.${(props) => props.activeclassname} {
     background-color: ${(props) =>
-      darken(0.06, props.theme.sidebar.background)};
+      darken(0.06, props.theme.palette.background.default)};
     span {
-      color: ${(props) => props.theme.sidebar.color};
+      color: ${(props) => props.theme.palette.neutral.darker};
     }
   }
 `

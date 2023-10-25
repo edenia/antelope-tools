@@ -1,7 +1,7 @@
 import React from 'react'
-import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
-import Highcharts from 'highcharts'
+
+import HighchartsWrapper from '../HighChartsWrapper'
 
 const TransactionsLineChart = ({
   data,
@@ -13,9 +13,6 @@ const TransactionsLineChart = ({
   customFormatter
 }) => {
   const options = {
-    time: {
-      timezoneOffset: new Date().getTimezoneOffset(),
-    },
     title: {
       text: title,
     },
@@ -36,15 +33,12 @@ const TransactionsLineChart = ({
   }
 
   return (
-    <div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={{
-          ...options,
-          series: data,
-        }}
-      />
-    </div>
+    <HighchartsWrapper
+      options={{
+        ...options,
+        series: data,
+      }}
+    />
   )
 }
 

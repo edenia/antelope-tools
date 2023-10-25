@@ -18,7 +18,7 @@ export default (theme) => ({
     '& .MuiCardContent-root:last-child': {
       paddingBottom: theme.spacing(4),
     },
-    boxShadow: '2px 3px 4px 0px #0000002E',
+    boxShadow: theme.palette.shadows.nodeCard,
     backgroundColor: theme.palette.background.light,
     borderRadius: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {

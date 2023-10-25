@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 import LinearProgress from '@mui/material/LinearProgress'
 import Pagination from '@mui/material/Pagination'
 import PaginationItem from '@mui/material/PaginationItem'
@@ -66,7 +67,7 @@ const Producers = () => {
   return (
     <>
       <ProducersUpdateLog />
-      <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
+      <div className={classes.searchWrapper}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}
@@ -78,9 +79,9 @@ const Producers = () => {
         <LinearProgress />
       ) : !!items?.length ? (
         <>
-          <div className={'simple-card'}>
+          <Card>
             <ProducersTable producers={items} />
-          </div>
+          </Card>
           <PaginationWrapper
             classes={classes.pagination}
             totalPages={pagination.pages}

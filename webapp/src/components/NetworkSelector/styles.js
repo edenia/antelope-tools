@@ -7,7 +7,7 @@ export default (theme) => ({
       width: 44,
       height: 44,
       borderRadius: 50,
-      backgroundColor: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.common.white,
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: 0,
@@ -20,7 +20,7 @@ export default (theme) => ({
   },
   list: {
     transition: 'max-height .6s ease-out',
-    backgroundColor: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.background.default,
     maxHeight: 0,
     overflow: 'hidden',
     margin: 0,
@@ -30,7 +30,6 @@ export default (theme) => ({
     width: 310,
     top: 48,
     left: -55,
-    boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15)',
     '& .titles': {
       display: 'flex',
       '& .titlesBoxRight': {
@@ -39,8 +38,8 @@ export default (theme) => ({
         alignItems: 'center',
         width: '50%',
         height: 50,
-        borderLeft: '1px solid #EEEEEE',
-        borderBottom: '1px solid #EEEEEE',
+        borderLeft: `1px solid ${theme.palette.neutral.lighter}`,
+        borderBottom: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& .titlesBoxLeft': {
         paddingLeft: theme.spacing(2),
@@ -48,7 +47,7 @@ export default (theme) => ({
         alignItems: 'center',
         height: 50,
         width: '50%',
-        borderBottom: '1px solid #EEEEEE',
+        borderBottom: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& p': {
         fontWeight: 'bold',
@@ -65,7 +64,7 @@ export default (theme) => ({
       },
       '& .listsBoxRight': {
         width: '50%',
-        borderLeft: '1px solid #EEEEEE',
+        borderLeft: `1px solid ${theme.palette.neutral.lighter}`,
       },
       '& .listsBoxLeft': {
         width: '50%',
@@ -82,6 +81,7 @@ export default (theme) => ({
   listActive: {
     maxHeight: 1000,
     opacity: 1,
+    boxShadow: theme.palette.shadows.card,
   },
   listItem: {
     height: 50,
@@ -90,17 +90,17 @@ export default (theme) => ({
     cursor: 'pointer',
     listStyle: 'none',
     paddingLeft: theme.spacing(2),
-    background: theme.palette.primary.contrastText,
+    background: theme.palette.background.default,
     '& a': {
       width: '100%',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.common.black,
+      color: theme.palette.text.primary,
     },
     '&:hover': {
-      background: '#f4f4f4',
+      background: theme.palette.neutral.lighter,
     },
   },
   listItemActive: {
@@ -112,7 +112,6 @@ export default (theme) => ({
     alignItems: 'center',
     height: 50,
     borderRadius: theme.spacing(2),
-    color: theme.palette.common.black,
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(6, 0, 4),
       textAlign: 'center',
@@ -149,7 +148,6 @@ export default (theme) => ({
   expandIcon: {
     marginTop: theme.spacing(1),
     marginRight: 0,
-    color: theme.palette.text.hint,
   },
   jungleImg: {
     width: '22px !important',

@@ -50,19 +50,23 @@ const ProducerRow = ({ producer, index }) => {
           </Typography>
         </TableCell>
         <TableCell align="center">
-          <Link
-            href={producerOrg?.media?.website}
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            className={classes.hideOnMobile}
-          >
-            <Typography variant="body1" className={classes.websiteContainer}>
-              {producerOrg?.media?.website}
-            </Typography>
-          </Link>
-          <span className={`${classes.websiteContainer} ${classes.hideOnDesktop}`}>
-            <VisitSite url={producerOrg?.media?.website} Icon={LanguageIcon} />
-          </span>
+          {producerOrg?.media?.website && (
+            <>
+              <Link
+                href={producerOrg?.media?.website}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className={classes.hideOnMobile}
+              >
+                <Typography variant="body1" className={classes.websiteContainer}>
+                  {producerOrg?.media?.website}
+                </Typography>
+              </Link>
+              <span className={`${classes.websiteContainer} ${classes.hideOnDesktop}`}>
+                <VisitSite url={producerOrg?.media?.website} Icon={LanguageIcon} />
+              </span>
+            </>
+          )}
         </TableCell>
         {eosConfig.producerColumns?.includes('votes') && (
           <TableCell align="center">
@@ -131,7 +135,7 @@ const ProducerRow = ({ producer, index }) => {
       </TableCell>
       <BlockProducerInfo />
       <TableCell align="center">
-        <ViewBPProfile producer={producer} />
+        <ViewBPProfile producer={producer} text={t('viewProfile')} />
       </TableCell>
     </>
   )

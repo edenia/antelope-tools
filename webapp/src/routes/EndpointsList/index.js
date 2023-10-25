@@ -3,7 +3,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import InputLabel from '@mui/material/InputLabel'
@@ -35,86 +34,84 @@ const EndpointsList = () => {
   ] = useEndpointsState()
 
   return (
-    <Card className={classes.cardShadow}>
-      <CardContent>
-        <div className={classes.titleContainer}>
-          <div className={classes.dateContainer}>
-            <Typography component="p" variant="h6">
-              {t('title')} {t('producer')}
+    <Card>
+      <div className={classes.titleContainer}>
+        <div className={classes.dateContainer}>
+          <Typography component="p" variant="h6">
+            {t('title')} {t('producer')}
+          </Typography>
+          <ProducersUpdateLog />
+        </div>
+        <div className={classes.controlFormContainer}>
+          <div className={classes.switchContainer}>
+            <Typography component="p" variant="body1">
+              {t('endpointsResponding')}
             </Typography>
-            <ProducersUpdateLog />
+            <Switch
+              inputProps = {{ 'aria-label': t('filterEndpoints') }}
+              onChange={(event) => {
+                handleFilter(event.target?.checked)
+              }}
+            />
           </div>
-          <div className={classes.controlFormContainer}>
-            <div className={classes.switchContainer}>
-              <Typography component="p" variant="body1">
-                {t('endpointsResponding')}
-              </Typography>
-              <Switch
-                inputProps = {{ 'aria-label': t('filterEndpoints') }}
-                onChange={(event) => {
-                  handleFilter(event.target?.checked)
-                }}
+          <div className={classes.modalContainer}>
+            <HealthInfoModal />
+          </div>
+          <FormControl variant="standard">
+            <InputLabel htmlFor='selectLabel'>{t('itemsPerPage')}</InputLabel>
+            <Select
+              className={classes.select}
+              inputProps={{id: 'selectLabel'}}
+              value={pagination.limit || ''}
+              onChange={(e) =>
+                setPagination((prev) => ({
+                  ...prev,
+                  page: 1,
+                  limit: parseInt(e.target.value),
+                }))
+              }
+              fullWidth
+            >
+              {limitOptions.map((option, index) => (
+                <MenuItem key={`limit-${option}-${index}`} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+      <div className={`${classes.searchWrapper} ${classes.noShadow}`}>
+        <SearchBar
+          filters={filters}
+          onChange={handleOnSearch}
+          translationScope="producerSearchComponent"
+        />
+      </div>
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          {!!producers?.length ? (
+            <EndpointsTable producers={producers} textLists={textLists} />
+          ) : (
+            <div className={classes.noShadow}>
+              <NoResults />
+            </div>
+          )}
+          {pagination.pages > 1 && (
+            <div className={classes.pagination}>
+              <Pagination
+                count={pagination.pages}
+                page={pagination.page}
+                onChange={handleOnPageChange}
+                variant="outlined"
+                shape="rounded"
               />
             </div>
-            <div className={classes.modalContainer}>
-              <HealthInfoModal />
-            </div>
-            <FormControl variant="standard">
-              <InputLabel htmlFor='selectLabel'>{t('itemsPerPage')}</InputLabel>
-              <Select
-                className={classes.select}
-                inputProps={{id: 'selectLabel'}}
-                value={pagination.limit || ''}
-                onChange={(e) =>
-                  setPagination((prev) => ({
-                    ...prev,
-                    page: 1,
-                    limit: parseInt(e.target.value),
-                  }))
-                }
-                fullWidth
-              >
-                {limitOptions.map((option, index) => (
-                  <MenuItem key={`limit-${option}-${index}`} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        </div>
-        <div className={classes.searchWrapper}>
-          <SearchBar
-            filters={filters}
-            onChange={handleOnSearch}
-            translationScope="producerSearchComponent"
-          />
-        </div>
-        {loading ? (
-          <LinearProgress />
-        ) : (
-          <>
-            {!!producers?.length ? (
-              <EndpointsTable producers={producers} textLists={textLists} />
-            ) : (
-              <div className={classes.noShadow}>
-                <NoResults />
-              </div>
-            )}
-            {pagination.pages > 1 && (
-              <div className={classes.pagination}>
-                <Pagination
-                  count={pagination.pages}
-                  page={pagination.page}
-                  onChange={handleOnPageChange}
-                  variant="outlined"
-                  shape="rounded"
-                />
-              </div>
-            )}
-          </>
-        )}
-      </CardContent>
+          )}
+        </>
+      )}
     </Card>
   )
 }

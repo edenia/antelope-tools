@@ -26,7 +26,7 @@ const Nodes = () => {
   return (
     <>
       <ProducersUpdateLog />
-      <div className={`${classes.searchWrapper} ${classes.cardShadow}`}>
+      <div className={classes.searchWrapper}>
         <SearchBar
           filters={filters}
           onChange={handleOnSearch}

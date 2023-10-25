@@ -15,16 +15,14 @@ const RicardianContract = () => {
   const { t } = useTranslation('ricardianContractRoute')
 
   return (
-    <Card className={classes.cardShadow}>
-      <div className={classes.root}>
-        <RicardianContractComponent
-          contractName="eosio"
-          actionName=""
-          httpEndpoint={eosConfig.endpoint}
-          LinearProgressColor="primary"
-          title={t('title')}
-        />
-      </div>
+    <Card className={classes.root}>
+      <RicardianContractComponent
+        contractName="eosio"
+        actionName=""
+        httpEndpoint={eosConfig.endpoint}
+        LinearProgressColor="primary"
+        title={t('title')}
+      />
     </Card>
   )
 }

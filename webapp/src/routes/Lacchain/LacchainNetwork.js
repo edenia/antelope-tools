@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
+import { useTheme } from '@mui/material/styles'
 import zc from '@dvsl/zoomcharts'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
@@ -17,26 +18,23 @@ const useStyles = makeStyles(() => ({
 
 const LacchainNodesNetwork = () => {
   const classes = useStyles()
+  const theme = useTheme()
   const initData = useCallback(async () => {
     const nodeTypes = {
       1: {
         type: 'validator',
-        color: '#34eba2',
         image: '/node-types/validator.svg'
       },
       2: {
         type: 'writer',
-        color: '#c23044',
         image: '/node-types/writer.svg'
       },
       3: {
         type: 'boot',
-        color: '#1836de',
         image: '/node-types/boot.svg'
       },
       4: {
         type: 'observer',
-        color: '#e8df8b',
         image: '/node-types/observer.svg'
       }
     }
@@ -102,16 +100,16 @@ const LacchainNodesNetwork = () => {
           fillColor: 'transparent'
         },
         nodeHovered: {
-          fillColor: '#e0e0e0',
+          fillColor: theme.palette.neutral.light,
           radius: 60
         },
         nodeLabel: {
           padding: 4,
           backgroundStyle: {
-            fillColor: '#e0e0e0'
+            fillColor: theme.palette.neutral.light
           },
           textStyle: {
-            fillColor: 'black',
+            fillColor: theme.palette.text.primary,
             font: '18px Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol'
           }
         },
@@ -120,7 +118,7 @@ const LacchainNodesNetwork = () => {
           radius: 2
         },
         linkHovered: {
-          fillColor: 'red',
+          fillColor: theme.palette.error.main,
           radius: 4
         },
         nodeStyleFunction: (node) => {
@@ -135,7 +133,7 @@ const LacchainNodesNetwork = () => {
       }
     })
     chart.clearHistory()
-  }, [])
+  }, [theme.palette])
 
   useEffect(() => {
     initData()

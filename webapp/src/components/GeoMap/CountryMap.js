@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
+import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 
 import { countries } from '../../utils/countries'
@@ -13,6 +14,7 @@ const useStyles = makeStyles(styles)
 
 const ClusterMap = ({ data, map, mapCode }) => {
   const classes = useStyles()
+  const theme = useTheme()
   const navigate = useNavigate()
   const myRef = useRef()
 
@@ -21,12 +23,16 @@ const ClusterMap = ({ data, map, mapCode }) => {
       const options = {
         chart: {
           map,
+          backgroundColor: theme.palette.background.default,
         },
         legend: {
           enabled: false,
         },
         title: {
           text: countries[mapCode].name,
+          style: {
+            color: theme.palette.text.primary,
+          }
         },
         mapNavigation: {
           enableButtons: false,
@@ -76,8 +82,8 @@ const ClusterMap = ({ data, map, mapCode }) => {
         series: [
           {
             name: 'NodeDistribution',
-            borderColor: '#8F9DA4',
-            nullColor: '#EEEEEE',
+            borderColor: theme.palette.neutral.main,
+            nullColor: theme.palette.neutral.light,
             showInLegend: false,
           },
           {
@@ -86,6 +92,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
             enableMouseTracking: true,
             colorKey: 'clusterPointsAmount',
             name: 'Countries',
+            color: theme.palette.neutral.darker,
             data: data || [],
           },
         ],
@@ -93,7 +100,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
       new HighMapsWrapper['Map'](myRef.current, options)
     },
-    [navigate],
+    [navigate, theme.palette],
   )
 
   useEffect(() => {

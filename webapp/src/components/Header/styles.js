@@ -17,24 +17,25 @@ export default (theme) => ({
     },
   },
   imgHeaderLogo: {
-    width: '145px',
-    marginTop: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      width: '70%',
-      marginLeft: theme.spacing(2.5),
-    },
+    '& svg': {
+      height: '64px',
+      width: '145px',
+      marginTop: theme.spacing(2),
+      color: theme.palette.text.primary,
+      [theme.breakpoints.down('sm')]: {
+        width: '70%',
+        marginLeft: theme.spacing(2.5),
+      },
+    }
   },
   appBar: {
-    backgroundColor: `${theme.palette.common.white} !important`,
-    color: theme.header.color,
-    boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15) !important',
     height: '100%',
   },
   iconButton: {
     '& svg': {
       width: 22,
       height: 22,
-      color: 'rgba(0, 0, 0, 0.54)',
+      color: theme.palette.neutral.darker,
     },
   },
   userBox: {
@@ -42,7 +43,7 @@ export default (theme) => ({
     alignItems: 'center',
     gap: theme.spacing(2),
     '& button': {
-      color: '#757575',
+      color: theme.palette.neutral.dark,
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '250px',
@@ -105,7 +106,6 @@ export default (theme) => ({
     },
   },
   loginBtn: {
-    color: `${theme.palette.common.white} !important`,
     cursor: 'pointer',
   },
   connectWalletBtn: {
@@ -118,8 +118,8 @@ export default (theme) => ({
     alignItems: 'center',
     textAlign: 'center',
     padding: theme.spacing(2),
-    border: `0 solid ${theme.palette.common.white}`,
-    borderLeft: `0.8px solid ${theme.palette.common.white}`,
+    border: `0 solid ${theme.palette.primary.contrastText}`,
+    borderLeft: `0.8px solid ${theme.palette.primary.contrastText}`,
     background: 'transparent',
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2, 1, 2, 1),
@@ -140,15 +140,14 @@ export default (theme) => ({
     alignItems: 'center',
     textAlign: 'center',
     background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     borderRadius: '10px',
     transition: 'ease-in-out all 0.5s',
     '&:hover': {
-      boxShadow: `0px 0px 3px 3px ${theme.palette.primary.main}`,
+      boxShadow: theme.palette.shadows.authBox,
     },
-  },
-  cardShadow: {
-    '& .MuiPaper-root': {
-      boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.15) !important',
+    '& button': {
+      color: theme.palette.primary.contrastText,
     },
   },
 })
