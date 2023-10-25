@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
+import { useTheme } from '@mui/material/styles'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
@@ -9,6 +10,9 @@ const useStyles = makeStyles(styles)
 
 const HighchartsWrapper = ({ options }) => {
   const classes = useStyles()
+  const theme = useTheme()
+
+  options.colors = theme.palette.charts.colors
 
   options.time = {
     timezoneOffset: new Date().getTimezoneOffset(),
