@@ -17,7 +17,7 @@ const ToggleColorMode = () => {
         theme.palette.mode === 'light' ? 'dark' : 'light'
       } mode`}
     >
-      {theme.palette.mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
+      {theme.palette.mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
     </IconButton>
   )
 }

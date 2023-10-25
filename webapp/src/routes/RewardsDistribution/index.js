@@ -166,6 +166,7 @@ const RewardsDistribution = () => {
                       key={geo.rsmKey}
                       geography={geo}
                       stroke={theme.palette.neutral.main}
+                      strokeWidth={0.8}
                       fill={
                         nodeData && nodeData.rewards > 0
                           ? colorScale(parseInt(nodeData.rewards))

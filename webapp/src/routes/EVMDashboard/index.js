@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 
@@ -16,7 +15,6 @@ const useStyles = makeStyles(styles)
 
 const EVMDashboard = () => {
   const classes = useStyles()
-  const theme = useTheme()
   const { t } = useTranslation('evmDashboardRoute')
 
   const [
@@ -32,7 +30,7 @@ const EVMDashboard = () => {
       isLive,
     },
     { handleSelect, handlePause },
-  ] = useEVMState(theme, t)
+  ] = useEVMState(t)
 
   return (
     <>
