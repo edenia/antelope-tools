@@ -12,6 +12,7 @@ const Category = styled(MuiListItem)`
   color: ${(props) => props.theme.palette.neutral.darker};
   display: flex;
   flex-direction: row;
+  justify-content: center !important;
   svg {
     opacity: 0.5;
     object-fit: contain;
@@ -25,6 +26,7 @@ const Category = styled(MuiListItem)`
   }
   &:hover,
   &.${(props) => props.activeclassname} {
+    border-radius: 10px;
     svg {
       opacity: 1;
     }

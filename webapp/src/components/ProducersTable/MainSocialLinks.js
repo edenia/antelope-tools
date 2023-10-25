@@ -29,6 +29,8 @@ const MainSocialLinks = ({ social, name }) => {
     links[item?.name] = item.url
   })
 
+  if (!Object.keys(links).length) return <></>
+
   return (
     <div className={classes.socialLinksContainer}>
       {socialMediaNames.map((socialMedia, index) =>

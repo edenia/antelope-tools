@@ -445,7 +445,7 @@
     "endpointsResponding": "Only endpoints responding",
     "linkToStats": "Go to stats",
     "filterEndpoints": "Filter responding endpoints",
-    "copyToClipboard": "Copy responding endpoints from the column to the clipboard"
+    "copyToClipboard": "Click to Copy responding endpoints from the column to the clipboard"
   },
   "cpuBenchmarkRoute": {
     "title": "CPU Usage in Microseconds",

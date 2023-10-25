@@ -100,9 +100,14 @@ export default (theme) => ({
     top: 12,
   },
   divider: {
-    height: '1px',
-    margin: theme.spacing(4),
-    backgroundColor: theme.palette.neutral.light,
+    '&::before': {
+      content: '""',
+      alignSelf: 'center',
+      height: '1px',
+      width: '90%',
+      margin: theme.spacing(4,0,4,0),
+      backgroundColor: theme.palette.neutral.light,
+    }
   },
   sidebarSection: {
     color: theme.palette.neutral.darker,
@@ -112,7 +117,7 @@ export default (theme) => ({
     fontWeight: `${theme.typography.fontWeightBold} !important`,
   },
   button: {
-    padding: '4px 10px 0px',
+    padding: '8px 0px 0px 12px',
   },
   iconButton: {
     '& svg': {
