@@ -1,7 +1,6 @@
 /* eslint camelcase: 0 */
 import React, { useEffect, useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
-import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
@@ -14,16 +13,13 @@ import TransactionsChartContainer from '../../components/TransactionsChartContai
 const options = ['Live (30s)', ...rangeOptions]
 
 const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
-  const theme = useTheme()
   const [{ tps, tpb }] = useSharedState()
   const [graphicData, setGraphicData] = useState([
     {
       name: t('transactionsPerSecond'),
-      color: theme.palette.primary.main,
     },
     {
       name: t('transactionsPerBlock'),
-      color: theme.palette.secondary.main,
     },
   ])
   const [option, setOption] = useState(options[0])
@@ -62,12 +58,10 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     setGraphicData([
       {
         name: t('transactionsPerSecond'),
-        color: theme.palette.primary.main,
         data: trxPerSecond,
       },
       {
         name: t('transactionsPerBlock'),
-        color: theme.palette.secondary.main,
         data: trxPerBlock,
       },
     ])
@@ -90,7 +84,7 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
       },
     })
     // eslint-disable-next-line
-  }, [option, theme.palette, getTransactionHistory])
+  }, [option, getTransactionHistory])
 
   useEffect(() => {
     if (option === option[0]) return
@@ -114,12 +108,11 @@ const TransactionInfo = ({ t, startTrackingInfo, stopTrackingInfo }) => {
     setGraphicData([
       {
         name: t('transactions'),
-        color: theme.palette.primary.main,
         data
       },
     ])
     // eslint-disable-next-line
-  }, [transactionsData, theme.palette, t])
+  }, [transactionsData, t])
 
   return (
     <TransactionsChartContainer 

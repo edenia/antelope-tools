@@ -13,7 +13,7 @@ import ethApi from '../../utils/ethapi'
 import { rangeOptions } from '../../utils'
 import { evmConfig } from '../../config'
 
-const useEVMState = (theme, t) => {
+const useEVMState = t => {
   const { data: stats, loading } = useSubscription(EVM_STATS_SUBSCRIPTION)
   const { data: historicalStats, loading: historicalLoading } = useSubscription(
     EVM_HISTORICAL_STATS_SUBSCRIPTION,
@@ -154,17 +154,15 @@ const useEVMState = (theme, t) => {
       setTokenHistoryData([
         {
           name: t('incoming'),
-          color: theme.palette.primary.main,
           data: incoming,
         },
         {
           name: t('outgoing'),
-          color: theme.palette.secondary.main,
           data: outgoing,
         },
       ])
     }
-  }, [tokenData, t, theme])
+  }, [tokenData, t])
 
   useEffect(() => {
     if (transactionsData?.transactions) {
@@ -180,12 +178,11 @@ const useEVMState = (theme, t) => {
       setTransactionsHistoryData([
         {
           name: t('transactions'),
-          color: theme.palette.primary.main,
           data,
         },
       ])
     }
-  }, [transactionsData, t, theme])
+  }, [transactionsData, t])
 
   useEffect(() => {
     const updateTPB = async blockNum => {
@@ -235,11 +232,10 @@ const useEVMState = (theme, t) => {
     setTransactionsHistoryData([
       {
         name: t('transactions'),
-        color: theme.palette.primary.main,
         data: blocksList,
       },
     ])
-  }, [blocksList, t, theme])
+  }, [blocksList, t])
 
   return [
     {
