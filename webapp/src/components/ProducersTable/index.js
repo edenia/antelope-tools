@@ -24,8 +24,10 @@ const ProducersTable = ({ producers }) => {
   const navigate = useNavigate()
   const { t } = useTranslation('producerCardComponent')
 
-  const handleClickRow = (owner) => {
-    navigate(`/${eosConfig.producersRoute}/${owner}`)
+  const handleClickRow = producer => {
+    navigate(`/${eosConfig.producersRoute}/${producer?.owner}`, {
+      state: { producer },
+    })
   }
 
   return (
@@ -44,7 +46,7 @@ const ProducersTable = ({ producers }) => {
           {producers.map((producer, index) => (
             <TableRow
               onClick={() => {
-                handleClickRow(producer?.owner)
+                handleClickRow(producer)
               }}
               className={classes.tableRow}
               key={`bp-${producer?.owner}-${index}`}
