@@ -40,7 +40,7 @@ const NonCompliantBPs = () => {
               </div>
             </>
           ) : (
-            <NoResults />
+            <NoResults translationScope={'undiscoverableBPsRoute'}/>
           )}
         </>
       )}

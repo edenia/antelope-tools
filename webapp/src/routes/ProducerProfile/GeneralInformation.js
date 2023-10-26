@@ -53,7 +53,7 @@ const GeneralInformation = ({ producer }) => {
                 )})`}
                 <VisitSite
                   title={t('openLink')}
-                  url={`${generalConfig.eosRateLink}block-producers/${producer?.eosRate.bp}`}
+                  url={`${generalConfig.eosRateLink}/block-producers/${producer?.eosRate.bp}`}
                 />
               </Typography>
             </span>
