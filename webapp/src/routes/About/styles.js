@@ -36,14 +36,6 @@ export default (theme) => ({
       padding: theme.spacing(4, 0, 4, 0),
     },
   },
-  logo: {
-    width: 569,
-    height: 498,
-    float: 'right',
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
-    },
-  },
   mainText: {
     width: '100%',
     [theme.breakpoints.down('md')]: {
