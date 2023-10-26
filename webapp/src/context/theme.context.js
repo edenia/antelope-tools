@@ -8,9 +8,9 @@ import themes from '../theme'
 const ThemeStateContext = React.createContext({ toggleColorMode: () => {} })
 
 export const ThemeStateProvider = ({ children }) => {
-  const userRequest = useMediaQuery('(prefers-color-scheme: dark)')
+  const userRequestLightMode = useMediaQuery('(prefers-color-scheme: light)') && false
   const preference = localStorage.getItem('prefersDarkMode')
-  const prefersDarkMode = preference ? Boolean(JSON.parse(preference)) : userRequest
+  const prefersDarkMode = preference ? Boolean(JSON.parse(preference)) : !userRequestLightMode
 
   const [mode, setMode] = React.useState(prefersDarkMode ? 'dark' : 'light')
 
