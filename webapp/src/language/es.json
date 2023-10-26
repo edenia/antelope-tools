@@ -437,6 +437,9 @@
     "scheduledBlocks": "Bloques progamados",
     "availability": "Disponibilidad"
   },
+  "undiscoverableBPsRoute": {
+    "noResultsFound": "Bien Hecho! Todos los Productores de Bloques están Operando de Manera Transparente."
+  },
   "endpointsListRoute": {
     "title": "Endpoints disponibles por",
     "updatedAt": "Actualizado por última vez",
