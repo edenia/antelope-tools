@@ -13,17 +13,27 @@ export default (theme) => ({
       marginBottom: theme.spacing(4),
     },
   },
-  logoContainer: {
-    [theme.breakpoints.down('md')]: {
-      order: 1,
+  imageContainer: {
+    '& > img': {
+      float: 'right',
+      aspectRatio: '683 / 389',
+      [theme.breakpoints.down('xl')]: {
+        width: '550px',
+      },
+      [theme.breakpoints.down('lg')]: {
+        width: '500px',
+      },
+      [theme.breakpoints.down('md')]: {
+        width: '50%',
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: '80%',
+      },
     },
-  },
-  logo: {
-    width: 569,
-    height: 498,
-    float: 'right',
     [theme.breakpoints.down('md')]: {
-      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      padding: theme.spacing(4, 0, 4, 0),
     },
   },
   mainText: {

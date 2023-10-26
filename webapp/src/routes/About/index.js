@@ -1,30 +1,38 @@
 import React from 'react'
-import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Card from '@mui/material/Card'
 import Link from '@mui/material/Link'
+import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
+import aboutDarkImg from '../../assets/about-dark.webp'
+import aboutLightImg from '../../assets/about-light.webp'
 
-import Logo from './Logo'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
 const About = () => {
   const classes = useStyles()
+  const theme = useTheme()
   const { t } = useTranslation('aboutRoute')
   const networkNameLabel = (
     eosConfig.networkName !== 'lacchain' ? eosConfig.networkLabel : 'EOS'
   )
     .replace(' Mainnet', '')
     .replace(' Testnet', '')
-
+ 
   return (
     <Card className={classes.mainText}>
-      <div className={classes.logoContainer}>
-        <Logo className={classes.logo} />
+      <div className={classes.imageContainer}>
+        <img
+          src={theme.palette.mode === 'light' ? aboutLightImg : aboutDarkImg}
+          alt={
+            'All the networks on Antelope Tools with the Edenia logo in the middle'
+          }
+        />
       </div>
       <div className={classes.boxInfo}>
         <Typography variant="body2" paragraph>
