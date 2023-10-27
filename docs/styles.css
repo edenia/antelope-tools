@@ -4,12 +4,20 @@
   --colors-secondary-light: rgba(186, 239, 255, 0.6);
   --colors-secondary-dark: rgba(28, 203, 255, 0.2);
 
+  --shadows-button: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
+  --shadows-grid-item: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
+      0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadows-grid-item-md: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
+      0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
+  --shadows-grid-item-lg: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15),
+      0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
+
   --bg-main: #051b34;
   --bg-secondary: #041426;
   --text-color: white;
   --contrast-text-color: black;
 
-  --filter-img: invert(100%);
+  --filter-img: invert(100%) hue-rotate(180deg) saturate(10);
 }
 
 .light-mode {
@@ -267,7 +275,7 @@ p {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
+  box-shadow: var(--shadows-button);
   background-color: var(--colors-secondary);
 }
 
@@ -330,6 +338,10 @@ p {
   font-style: normal;
   text-align: center;
   color: var(--contrast-text-color);
+}
+
+.edeniaLogo, .image-box-desktop, #middle-logo{
+  filter: var(--filter-img);
 }
 
 @media screen and (max-width: 767px) {
@@ -493,8 +505,7 @@ p {
     margin: 0 8px 0 0;
     padding: 8px 29.4px 11.8px 30.4px;
     border-radius: 4px;
-    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
-      0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadows-grid-item)
   }
 
   .name-networks {
@@ -679,8 +690,7 @@ p {
     flex-grow: 0;
     padding: 12px;
     border-radius: 3.7px;
-    box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
-      0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadows-grid-item-md)
   }
 
   .Line-4 {
@@ -923,8 +933,7 @@ p {
     flex-grow: 0;
     padding: 12px;
     border-radius: 3.7px;
-    box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
-      0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadows-grid-item-md)
   }
 
   .Line-4 {
@@ -1232,8 +1241,7 @@ p {
     flex-grow: 0;
     padding: 19.8px 19.8px 18.6px;
     border-radius: 5px;
-    box-shadow: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15),
-      0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadows-grid-item-lg);
   }
 
   .name-networks {
