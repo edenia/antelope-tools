@@ -1,8 +1,23 @@
 :root {
-  --colors-white: #ffffff;
   --colors-primary: #1ccbff;
-  --colors-3-text-primary: rgba(0, 0, 0, 0.87);
-  --colors-2-secondary: #1e88e5;
+  --colors-secondary: #d6f5ff;
+  --colors-secondary-light: rgba(186, 239, 255, 0.6);
+  --colors-secondary-dark: rgba(28, 203, 255, 0.2);
+
+  --bg-main: #051b34;
+  --bg-secondary: #041426;
+  --text-color: white;
+  --contrast-text-color: black;
+
+  --filter-img: invert(100%);
+}
+
+.light-mode {
+  --bg-main: white;
+  --bg-secondary: #f7f9fc;
+  --text-color: black;
+
+  --filter-img: none;
 }
 
 * {
@@ -21,6 +36,8 @@ summary {
 html,
 body {
   overflow-x: hidden;
+  background-color: var(--bg-main);
+  color: var(--text-color);
 }
 body {
   margin: 0;
@@ -28,11 +45,11 @@ body {
 }
 
 details summary:hover {
-  background-color: #f1f1f1;
+  background-color: var(--bg-secondary);
 }
 
 details[open] summary {
-  background-color: rgba(28, 203, 255, 0.2);
+  background-color: var(--colors-secondary-dark);
 }
 details[open] summary ~ * {
   animation: open 0.3s ease-in-out;
@@ -55,7 +72,7 @@ summary {
 details summary {
   width: 100%;
   padding: 0.5rem 0;
-  background-color: #f9f9fc;
+  background-color: var(--bg-secondary);
   position: relative;
   cursor: pointer;
   margin-right: 10px;
@@ -67,6 +84,10 @@ details summary {
   padding-left: 104px;
 }
 
+.info-icon img {
+  filter: var(--filter-img);
+}
+
 .info-icon span {
   padding-left: 10px;
 }
@@ -76,6 +97,7 @@ details summary:after {
   position: absolute;
   right: 92px;
   transform: rotate(180deg);
+  filter: var(--filter-img);
 }
 details[open] summary::after {
   transform: rotate(0);
@@ -84,7 +106,6 @@ details[open] summary::after {
 p {
   margin: 0 0 0.4px 8.5px;
   font-family: 'Nunito';
-  color: #000;
 }
 
 #bg-image-mobile {
@@ -97,7 +118,7 @@ p {
 
 .box-paragraph a {
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
 }
 
 .box-paragraph a:hover {
@@ -133,7 +154,6 @@ p {
 
 .header {
   overflow: hidden;
-  background-color: #ffffff;
   margin-left: 40px;
   display: flex;
   flex-direction: column;
@@ -150,7 +170,6 @@ p {
 }
 
 .content {
-  background-color: #ffffff;
   padding-top: 36px;
   padding-bottom: 40px;
 }
@@ -159,7 +178,7 @@ p {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #f9f9fc;
+  background-color: var(--bg-secondary);
   padding-top: 32px;
   padding-bottom: 20px;
   width: 100%;
@@ -226,7 +245,6 @@ p {
   font-stretch: normal;
   font-style: normal;
   text-align: center;
-  color: #000;
 }
 
 .project-by {
@@ -236,7 +254,6 @@ p {
   font-style: normal;
   line-height: 1.75;
   text-align: center;
-  color: var(--colors-3-text-primary);
 }
 
 .box-paragraph-text > p {
@@ -251,7 +268,7 @@ p {
   justify-content: center;
   align-items: center;
   box-shadow: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
-  background-color: #d6f5ff;
+  background-color: var(--colors-secondary);
 }
 
 .myButton:hover {
@@ -289,6 +306,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: var(--bg-main);
 }
 
 .name-networks {
@@ -298,7 +316,7 @@ p {
   font-style: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #000;
+  color: var(--text-color);
 }
 
 .text-container {
@@ -311,7 +329,7 @@ p {
   font-stretch: normal;
   font-style: normal;
   text-align: center;
-  color: #000;
+  color: var(--contrast-text-color);
 }
 
 @media screen and (max-width: 767px) {
@@ -332,7 +350,6 @@ p {
     letter-spacing: 0.31px;
   }
   .content {
-    background-color: #ffffff;
     padding-top: 0px;
     padding-bottom: 10px;
   }
@@ -340,7 +357,7 @@ p {
   .box-network {
     flex-grow: 0;
     padding: 16px 0;
-    background-color: #f9f9fc;
+    background-color: var(--bg-secondary);
   }
 
   #middle-logo {
@@ -395,7 +412,7 @@ p {
     margin: 16px 8px 16px 0px;
     padding: 8px 4px;
     border-radius: 4px;
-    background-color: rgba(186, 239, 255, 0.6);
+    background-color: var(--colors-secondary-light);
     text-align: center;
   }
   .flex {
@@ -417,6 +434,7 @@ p {
     line-height: 1.2;
     letter-spacing: normal;
     margin: auto auto 16px;
+    color: var(--text-color);
   }
 
   .text-container {
@@ -477,7 +495,6 @@ p {
     border-radius: 4px;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
       0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    background-color: white;
   }
 
   .name-networks {
@@ -498,7 +515,6 @@ p {
     line-height: 1.61;
     letter-spacing: -0.54px;
     text-align: left;
-    color: #000;
     padding: 10px;
   }
 
@@ -558,7 +574,7 @@ p {
   }
 
   .myButton {
-    background-color: white;
+    background-color: var(--bg-main);
     box-shadow: none;
     display: block;
   }
@@ -665,7 +681,6 @@ p {
     border-radius: 3.7px;
     box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
       0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
-    background-color: var(--colors-white);
   }
 
   .Line-4 {
@@ -697,7 +712,6 @@ p {
     line-height: 1.61;
     letter-spacing: -0.54px;
     text-align: left;
-    color: #000;
     padding-left: calc(100% / 2 - 399px);
   }
 
@@ -911,7 +925,6 @@ p {
     border-radius: 3.7px;
     box-shadow: 0 0.9px 2.7px 0.9px rgba(0, 0, 0, 0.15),
       0 0.9px 1.8px 0 rgba(0, 0, 0, 0.3);
-    background-color: var(--colors-white);
   }
 
   .Line-4 {
@@ -942,7 +955,6 @@ p {
     line-height: 1.61;
     letter-spacing: -0.54px;
     text-align: left;
-    color: #000;
     padding-left: calc(100% / 2 - 620px);
   }
 
@@ -1222,7 +1234,6 @@ p {
     border-radius: 5px;
     box-shadow: 0 1.2px 3.7px 1.2px rgba(0, 0, 0, 0.15),
       0 1.2px 2.5px 0 rgba(0, 0, 0, 0.3);
-    background-color: var(--colors-white);
   }
 
   .name-networks {
@@ -1250,7 +1261,6 @@ p {
     line-height: 2.15;
     letter-spacing: -0.54px;
     text-align: left;
-    color: #000;
     padding-left: calc(100% / 2 - 900px);
   }
 
