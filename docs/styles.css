@@ -190,6 +190,10 @@ p {
   margin-bottom: 16px;
 }
 
+.box-social-media a:hover{
+  transform: scale(1.3);
+}
+
 .image-box-desktop {
   display: none;
 }
