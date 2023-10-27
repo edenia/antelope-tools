@@ -18,9 +18,8 @@ const ClusterMap = ({ data, map, mapCode }) => {
   const navigate = useNavigate()
   const myRef = useRef()
 
-  const find2DPointDistance = (p0, p1) => {
-    return Math.sqrt((p0.x - p1.x) ** 2 + (p0.y - p1.y) ** 2)
-  }
+  const find2DPointDistance = (p0, p1) =>
+    Math.sqrt((p0.x - p1.x) ** 2 + (p0.y - p1.y) ** 2)
 
   const getNew2DPoint = (p0, p1, distance) => ({
     x: (distance + 1) * p1.x + -distance * p0.x,
@@ -29,32 +28,17 @@ const ClusterMap = ({ data, map, mapCode }) => {
 
   const setupMapData = useCallback(
     (data, map, mapCode = '') => {
-
-      data = data.reduce((result, current) => {
-        if (result.every(node => node.name !== current.name)) {
-          result.push(current)
-        }
-
-        return result
-      }, [])
-
       for (const index in data) {
-        const node = data[index]
-        const point = { x: node.lon, y: node.lat }
+        const currentPoint = { x: data[index].lon, y: data[index].lat }
 
         for (const auxIndex in data) {
           if (parseInt(index) >= parseInt(auxIndex)) continue
 
           const auxPoint = { x: data[auxIndex].lon, y: data[auxIndex].lat }
-
-          const distance = find2DPointDistance(point,auxPoint)
+          const distance = find2DPointDistance(currentPoint, auxPoint)
 
           if (distance < 0.5) {
-            const newPoint = getNew2DPoint(
-              point,
-              auxPoint,
-              distance,
-            )
+            const newPoint = getNew2DPoint(currentPoint, auxPoint, distance)
 
             data[auxIndex].lon = newPoint.x
             data[auxIndex].lat = newPoint.y
