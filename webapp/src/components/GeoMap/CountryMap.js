@@ -18,12 +18,67 @@ const ClusterMap = ({ data, map, mapCode }) => {
   const navigate = useNavigate()
   const myRef = useRef()
 
+  const find2DPointDistance = (p0, p1) => {
+    return Math.sqrt((p0.x - p1.x) ** 2 + (p0.y - p1.y) ** 2)
+  }
+
+  const getNew2DPoint = (p0, p1, distance) => ({
+    x: (distance + 1) * p1.x + -distance * p0.x,
+    y: (distance + 1) * p1.y + -distance * p0.y,
+  })
+
   const setupMapData = useCallback(
     (data, map, mapCode = '') => {
+
+      data = data.reduce((result, current) => {
+        if (result.every(node => node.name !== current.name)) {
+          result.push(current)
+        }
+
+        return result
+      }, [])
+
+      for (const index in data) {
+        const node = data[index]
+        const point = { x: node.lon, y: node.lat }
+
+        for (const auxIndex in data) {
+          if (parseInt(index) >= parseInt(auxIndex)) continue
+
+          const auxPoint = { x: data[auxIndex].lon, y: data[auxIndex].lat }
+
+          const distance = find2DPointDistance(point,auxPoint)
+
+          if (distance < 0.5) {
+            const newPoint = getNew2DPoint(
+              point,
+              auxPoint,
+              distance,
+            )
+
+            data[auxIndex].lon = newPoint.x
+            data[auxIndex].lat = newPoint.y
+          }
+        }
+      }
+
       const options = {
         chart: {
           map,
           backgroundColor: theme.palette.background.default,
+          events: {
+            load() {
+              const chart = this
+
+              chart.renderer
+                .button('Reset zoom', chart.plotLeft, chart.plotTop + 70)
+                .on('click', () => {
+                  chart.zoomOut()
+                })
+                .add()
+                .toFront()
+            },
+          },
         },
         legend: {
           enabled: false,
@@ -32,15 +87,15 @@ const ClusterMap = ({ data, map, mapCode }) => {
           text: countries[mapCode].name,
           style: {
             color: theme.palette.text.primary,
-          }
+          },
         },
         mapNavigation: {
-          enableButtons: false,
-          enabled: false,
+          enableButtons: true,
+          enabled: true,
           enableDoubleClickZoom: false,
           enableDoubleClickZoomTo: false,
           enableMouseWheelZoom: false,
-          enableTouchZoom: false,
+          enableTouchZoom: true,
         },
         tooltip: {
           enabled: false,
@@ -59,7 +114,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
               useHTML: true,
               style: {
                 fontWeight: 'bold',
-                fontSize: '0.8rem',
+                fontSize: '1.1em',
                 paddingBottom: '8px',
               },
               formatter: function () {

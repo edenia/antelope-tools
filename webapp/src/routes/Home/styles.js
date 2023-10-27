@@ -22,5 +22,14 @@ export default (theme) => ({
       width: '100%',
       marginBottom: '10px',
     },
+    '& > .MuiCard-root': {
+      height: '100%',
+      '& :nth-child(2)': {
+        [theme.breakpoints.up('lg')]: {
+          position: 'relative',
+          top: 'calc(50% - 232px)',
+        },
+      }
+    }
   },
 })

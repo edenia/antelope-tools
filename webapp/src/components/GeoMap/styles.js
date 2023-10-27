@@ -9,6 +9,9 @@ export default (theme) => ({
     height: '100vh',
     '& a': {
       color: theme.palette.primary.main
+    },
+    '& .highcharts-label': {
+      opacity: '1 !important',
     }
   },
 })
