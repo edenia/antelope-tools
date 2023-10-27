@@ -3,6 +3,7 @@
   --colors-secondary: #d6f5ff;
   --colors-secondary-light: rgba(186, 239, 255, 0.6);
   --colors-secondary-dark: rgba(28, 203, 255, 0.2);
+  --colors-links: #1ccbff;
 
   --shadows-button: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
   --shadows-grid-item: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
@@ -21,6 +22,8 @@
 }
 
 .light-mode {
+  --colors-links: #1565c0;
+
   --bg-main: white;
   --bg-secondary: #f7f9fc;
   --text-color: black;
@@ -35,6 +38,10 @@
 
 a {
   text-decoration: none;
+}
+
+a, a:visited {
+  color: var(--colors-links);
 }
 
 summary {
@@ -133,31 +140,11 @@ p {
   text-decoration: underline;
 }
 
-.box-paragraph h4 {
-  font-family: 'Nunito';
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #000000;
-  margin: 0;
-}
-
 .box-paragraph p {
   font-style: normal;
   font-weight: normal;
   text-align: left;
   font-stretch: normal;
-}
-
-.box-network h4 {
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 38px;
-  letter-spacing: -0.219429px;
-  color: #000000;
-  margin: 0;
 }
 
 .header {
@@ -203,22 +190,6 @@ p {
   margin-bottom: 16px;
 }
 
-.box-column div {
-  width: 49%;
-  display: flex;
-  justify-content: center;
-}
-
-.box-column ul a {
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.1px;
-  color: #000000;
-}
-
 .image-box-desktop {
   display: none;
 }
@@ -226,18 +197,6 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-#contact-us {
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.0595px;
-  color: #000000;
-  margin: 0;
-  padding: 12px;
-  margin-bottom: 36px;
 }
 
 .logo-text {
@@ -342,6 +301,10 @@ p {
 
 .edeniaLogo, .image-box-desktop, #middle-logo{
   filter: var(--filter-img);
+}
+
+#back-to-top {
+  margin-top: 16px;
 }
 
 @media screen and (max-width: 767px) {
