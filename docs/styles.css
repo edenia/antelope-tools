@@ -308,7 +308,7 @@ p {
   display: block;
   height: 24px;
   width: 24px;
-  margin: 0px 4px 0px;
+  margin: 0px 4px;
 }
 
 .no-display {
@@ -573,7 +573,7 @@ p {
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
-    margin: 0px 0px 0px;
+    margin: 0px;
     margin-left: calc(100% / 2 - 348px);
   }
 
