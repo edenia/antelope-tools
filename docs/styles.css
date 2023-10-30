@@ -15,6 +15,8 @@
 
   --bg-main: #051b34;
   --bg-secondary: #041426;
+  --bg-contrast-transparent-color: rgba(255, 255, 255, 0.2);
+
   --text-color: white;
   --contrast-text-color: black;
 
@@ -26,6 +28,8 @@
 
   --bg-main: white;
   --bg-secondary: #f7f9fc;
+  --bg-contrast-transparent-color: rgba(0, 0, 0, 0.04);
+
   --text-color: black;
 
   --filter-img: none;
@@ -190,8 +194,8 @@ p {
   margin-bottom: 16px;
 }
 
-.box-social-media a:hover{
-  transform: scale(1.3);
+.box-social-media a:hover, .edeniaLogo:hover{
+  transform: scale(1.1);
 }
 
 .image-box-desktop {
@@ -309,6 +313,41 @@ p {
 
 #back-to-top {
   margin-top: 16px;
+}
+
+#toggle-color {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 48px;
+  padding: 32px;
+}
+
+#toggle-color-btn {
+  height: 32px;
+  width: 32px;
+  border: none;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--bg-main);
+  box-shadow: var(--shadows-grid-item);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#toggle-color-btn:hover {
+  background-color: var(--bg-contrast-transparent-color);
+}
+
+#toggle-color-btn svg {
+  display: block;
+  height: 24px;
+  width: 24px;
+  margin: 0px 4px 0px;
+}
+
+.no-display {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {
@@ -574,7 +613,7 @@ p {
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
-    margin: 36px 0px 0px;
+    margin: 0px 0px 0px;
     margin-left: calc(100% / 2 - 348px);
   }
 
@@ -824,7 +863,7 @@ p {
     background-position: top right;
     background-repeat: no-repeat;
     align-items: flex-start;
-    margin-top: 70px;
+    margin-top: 16px;
     margin-left: calc(100% / 2 - 570px);
   }
 
@@ -1061,7 +1100,7 @@ p {
     align-items: flex-start;
     width: 1740px;
     margin-left: calc(100% / 2 - 870px);
-    margin-top: 104px;
+    margin-top: 54px;
   }
 
   .box-network {

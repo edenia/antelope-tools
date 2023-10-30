@@ -84,8 +84,32 @@
         U+2212, U+2215, U+FEFF, U+FFFD;
     }
   </style>
-</head>
+  <script>
+    const toggleColorMode = () => {
+      const element = document.body
+      const isLightMode = element.classList.toggle('light-mode')
+
+      localStorage.setItem('prefersDarkMode', !isLightMode)
+
+      document.getElementById('light-mode-icon').classList.toggle('no-display')
+      document.getElementById('dark-mode-icon').classList.toggle('no-display')
+      document
+        .getElementById('toggle-color-btn')
+        .setAttribute(
+          'aria-label',
+          `Switch to ${isLightMode ? 'dark' : 'light'} mode`,
+        )
+    }
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  </head>
 <body>
+  <div id="toggle-color">
+    <button id="toggle-color-btn" aria-label="Switch to light mode" onclick="toggleColorMode()">
+      <span id="light-mode-icon" class="color-mode-icon"><i data-feather="sun"></i></span>
+      <span id="dark-mode-icon" class="color-mode-icon no-display"><i data-feather="moon"></i></span>
+    </button>
+  </div>
   <div class="header">
     <div class="image-box">
       <img alt="Antelope Tools Logo" id="middle-logo" src="./images/antelope-tools.svg">
@@ -295,6 +319,16 @@
     }
     gtag('js', new Date())
     gtag('config', 'G-E6Y0EC9FT8')
+  </script>
+  <script>
+    feather.replace();
+
+    const preference = localStorage.getItem('prefersDarkMode')
+    const prefersDarkMode = Boolean(JSON.parse(preference))
+
+    if (preference && !prefersDarkMode) {
+      toggleColorMode()
+    }
   </script>
 </body>
 </html>
