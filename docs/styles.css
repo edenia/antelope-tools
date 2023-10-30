@@ -38,7 +38,6 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Nunito';
 }
 
 a {
@@ -62,6 +61,8 @@ body {
 body {
   margin: 0;
   font-family: 'Nunito';
+  font-stretch: normal;
+  font-style: normal;
 }
 
 details summary:hover {
@@ -125,7 +126,6 @@ details[open] summary::after {
 
 p {
   margin: 0 0 0.4px 8.5px;
-  font-family: 'Nunito';
 }
 
 #bg-image-mobile {
@@ -134,13 +134,6 @@ p {
 
 .box-paragraph {
   margin-bottom: 24px;
-}
-
-.box-paragraph p {
-  font-style: normal;
-  font-weight: normal;
-  text-align: left;
-  font-stretch: normal;
 }
 
 .header {
@@ -207,26 +200,13 @@ p {
 
 #copyright {
   height: 22px;
-  font-family: Nunito;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   text-align: center;
 }
 
 .project-by {
-  font-family: Nunito;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.75;
   text-align: center;
-}
-
-.box-paragraph-text > p {
-  font-stretch: normal;
-  font-style: normal;
-  text-align: left;
 }
 
 .myButton {
@@ -247,10 +227,8 @@ p {
   top: 1px;
 }
 
-.contact-us p {
+.contact-us h3 {
   font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
   text-align: center;
   line-height: 1.38;
   letter-spacing: 0.14px;
@@ -277,10 +255,7 @@ p {
 }
 
 .name-networks {
-  font-family: Nunito;
   font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
   letter-spacing: normal;
   text-align: center;
   color: var(--text-color);
@@ -293,8 +268,6 @@ p {
 
 .visit-text {
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   text-align: center;
   color: var(--contrast-text-color);
 }
@@ -402,7 +375,7 @@ p {
     transform: rotate(0) scale(0.5);
   }
 
-  .box-paragraph-text > p {
+  .box-paragraph-text > h1 {
     height: 58px;
     font-size: 18px;
     font-weight: 600;
@@ -414,9 +387,7 @@ p {
   }
 
   .flex p {
-    font-family: Nunito;
     font-size: 12px;
-    font-weight: normal;
     width: 148px;
     height: 81px;
     margin: 16px 8px 16px 0px;
@@ -460,16 +431,15 @@ p {
     background-color: var(--colors-primary);
   }
 
-  .flex-text p {
+  .flex-text h2 {
     width: 250px;
     height: 18px;
     flex-grow: 0;
     margin: 0 2px 2px;
-    font-family: Nunito;
     font-size: 24px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.2;
     letter-spacing: normal;
     text-align: center;
@@ -516,14 +486,12 @@ p {
 
   .box-paragraph summary {
     flex-grow: 0;
-    font-family: Nunito;
     font-size: 20px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.61;
     letter-spacing: -0.54px;
-    text-align: left;
     padding: 10px;
   }
 
@@ -542,7 +510,7 @@ p {
     padding-top: 20px;
   }
 
-  .contact-us p {
+  .contact-us h3 {
     width: 306px;
     height: 71px;
     margin: 0px 0px 8px;
@@ -625,7 +593,7 @@ p {
     transform: rotate(0) scale(0.6);
   }
 
-  .box-paragraph-text > p {
+  .box-paragraph-text > h1 {
     width: 270px;
     height: 68px;
     font-size: 22px;
@@ -635,18 +603,16 @@ p {
     margin: 22px 0px 40px;
   }
 
-  .flex-text p {
+  .flex-text h2 {
     width: 450px;
     height: 18px;
     margin: 4px 0 4px 4px;
-    font-family: Nunito;
     font-size: 28px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.2;
     letter-spacing: -0.23px;
-    text-align: left;
   }
 
   .flex {
@@ -657,14 +623,11 @@ p {
     width: 260px;
     height: 16px;
     flex-grow: 0;
-    font-family: Nunito;
     font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.33;
     letter-spacing: 0.3px;
-    text-align: left;
   }
 
   .grid {
@@ -712,14 +675,12 @@ p {
   }
 
   .box-paragraph summary {
-    font-family: Nunito;
     font-size: 20px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.61;
     letter-spacing: -0.54px;
-    text-align: left;
     padding-left: calc(100% / 2 - 399px);
   }
 
@@ -813,7 +774,7 @@ p {
     height: 25.6px;
   }
 
-  .contact-us p {
+  .contact-us h3 {
     width: 550px;
     height: 64px;
     margin: 0 0 16px;
@@ -871,7 +832,7 @@ p {
     top: 0px;
   }
 
-  .box-paragraph-text > p {
+  .box-paragraph-text > h1 {
     width: 400px;
     height: 114.2px;
     font-size: 32px;
@@ -881,19 +842,17 @@ p {
     margin-bottom: 40px;
   }
 
-  .flex-text p {
+  .flex-text h2 {
     width: 450px;
     height: 28px;
     flex-grow: 0;
     margin: 6px 0 6px 8.9px;
-    font-family: Nunito;
     font-size: 32px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 0.85;
     letter-spacing: -0.16px;
-    text-align: left;
   }
 
   .flex {
@@ -904,14 +863,12 @@ p {
     width: 350.5px;
     height: 32px;
     flex-grow: 0;
-    font-family: Nunito;
     font-size: 16px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.49;
     letter-spacing: 0.87px;
-    text-align: left;
   }
 
   .grid {
@@ -954,14 +911,12 @@ p {
   }
 
   .box-paragraph summary {
-    font-family: Nunito;
     font-size: 20px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1.61;
     letter-spacing: -0.54px;
-    text-align: left;
     padding-left: calc(100% / 2 - 620px);
   }
 
@@ -1054,7 +1009,7 @@ p {
     width: 250px;
   }
 
-  .contact-us p {
+  .contact-us h3 {
     width: 860px;
     height: 108px;
     margin: 0 0 16px;
@@ -1109,7 +1064,7 @@ p {
     margin-left: calc(100% / 2 - 870px);
   }
 
-  .box-paragraph-text > p {
+  .box-paragraph-text > h1 {
     width: 550px;
     height: 96px;
     margin-bottom: 60px;
@@ -1124,14 +1079,12 @@ p {
     height: 71.3px;
     flex-grow: 0;
     margin: 0 0 0 6.5px;
-    font-family: Nunito;
     font-size: 24px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 1;
     letter-spacing: 0.73px;
-    text-align: left;
   }
 
   .Line-4 {
@@ -1154,19 +1107,17 @@ p {
     border-radius: 5px;
   }
 
-  .flex-text p {
+  .flex-text h2 {
     width: 450px;
     height: 28px;
     flex-grow: 0;
     margin: 6px 0 6px 8.9px;
-    font-family: Nunito;
     font-size: 45px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 0.76;
     letter-spacing: -0.16px;
-    text-align: left;
   }
 
   .image-box {
@@ -1259,14 +1210,12 @@ p {
 
   .box-paragraph summary {
     width: 100%;
-    font-family: Nunito;
     font-size: 45px;
     font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
+
+
     line-height: 2.15;
     letter-spacing: -0.54px;
-    text-align: left;
     padding-left: calc(100% / 2 - 900px);
   }
 
@@ -1310,7 +1259,7 @@ p {
     width: 250px;
   }
 
-  .contact-us p {
+  .contact-us h3 {
     width: 1606px;
     margin: 0 0 16px;
     font-size: 36px;
