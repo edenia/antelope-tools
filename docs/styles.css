@@ -235,7 +235,7 @@ p {
 }
 
 .grid-item:hover {
-  border: 2px solid var(--colors-primary);
+  outline: 2px solid var(--colors-primary);
   box-sizing: border-box;
 }
 
@@ -272,7 +272,7 @@ p {
   color: var(--contrast-text-color);
 }
 
-.edeniaLogo, .image-box-desktop, #middle-logo{
+.theme-filter-image{
   filter: var(--filter-img);
 }
 
