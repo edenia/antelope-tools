@@ -9,12 +9,9 @@ export default (theme) => ({
     display: 'flex',
     flexFlow: 'row nowrap',
     gap: theme.spacing(6),
-    margin: `${theme.spacing(6)} 24px ${theme.spacing(4)}`,
+    margin: theme.spacing(6, 0, 4),
     paddingBottom: theme.spacing(4),
     borderBottom: `1px solid ${theme.palette.neutral.light}`,
-    [theme.breakpoints.down('lg')]: {
-      margin: theme.spacing(6, 0, 4),
-    },
     [theme.breakpoints.down('sm')]: {
       flexFlow: 'row wrap',
       gap: theme.spacing(2),

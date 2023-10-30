@@ -2,8 +2,8 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import { Link as RouterLink } from 'react-router-dom'
-import Link from '@mui/material/Link'
+import LanguageIcon from '@mui/icons-material/Language'
+import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
@@ -18,121 +18,72 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const NonCompliantCard = ({ producer, stats }) => {
+const NonCompliantCard = ({ producer, tokenPrice }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
   const { healthLights } = generalConfig
 
-  const getHealthStatus = healthCheck => {
+  const getHealthStatus = (healthCheck) => {
     return healthCheck.valid ? healthLights.greenLight : healthLights.redLight
-  }
-
-  const RowInfo = ({ title, value }) => {
-    return (
-      <div className={classes.flex}>
-        <Typography variant="body1" className={classes.bold}>
-          {title}:
-        </Typography>
-        <Typography variant="body1">{value}</Typography>
-      </div>
-    )
   }
 
   return (
     <>
-      <div className={`${classes.content} ${classes.account}`}>
-        <Typography variant="h3" component="span">
-          {producer.owner}
-        </Typography>
-        <Typography variant="body1">{t('noInfo')}</Typography>
-        <Link
-          component={RouterLink}
-          state={{ owner: producer.owner, url: producer.url }}
-          to="/bpjson"
-          variant="contained"
-          color="primary"
-          mt={2}
-        >
-          {t('bpJsonGenerator')}
-        </Link>
-      </div>
-      <div className={`${classes.content} ${classes.borderLine}`}>
-        <Typography variant="body1" className={classes.title}>
-          {t('info')}
-        </Typography>
-        <div className={classes.flex}>
-          <Typography
-            variant="body1"
-            className={`${classes.bold} ${classes.text}`}
-          >
-            {t('website')}:
-          </Typography>
-          {isValidUrl(producer.url) ? (
-            <>
-              <VisitSite title={t('openLink')} url={producer.url} />
-              <div className={classes.lightIcon}>
-                <HealthCheck status={getHealthStatus(producer.healthCheck)}>
-                  <HealthCheckInfo healthCheck={producer.healthCheck} />
-                </HealthCheck>
-              </div>
-            </>
-          ) : (
-            <Typography variant="body1">{t('invalidUrl')}</Typography>
-          )}
-        </div>
-        {isValidUrl(producer.url) && (
-          <div className={classes.flex}>
-            <Typography
-              variant="body1"
-              className={`${classes.bold} ${classes.text}`}
-            >
-              {t('bpJson')}:
-            </Typography>
-            <VisitSite title={t('openLink')} url={producer.bp_json_url} />
+      <TableCell align="center">
+        <Typography variant="body1">{producer.owner}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        {isValidUrl(producer.url) ? (
+          <div className={classes.websiteContainer}>
+            <VisitSite
+              title={t('openLink')}
+              url={producer.url}
+              Icon={LanguageIcon}
+            />
+            <HealthCheck status={getHealthStatus(producer.healthCheck)}>
+              <HealthCheckInfo healthCheck={producer.healthCheck} />
+            </HealthCheck>
           </div>
+        ) : (
+          <Typography variant="body1">{t('invalidUrl')}</Typography>
         )}
-        <RowInfo
-          title={`${t('votes')}`}
-          value={`${formatWithThousandSeparator(producer.total_votes_eos, 0)}`}
-        />
-        <RowInfo
-          title={`${t('lastClaimTime')}`}
-          value={`${moment(producer.last_claim_time).format('ll')}`}
-        />
-      </div>
-      <div className={`${classes.content} ${classes.borderLine}`}>
-        <Typography variant="body1" className={classes.title}>
-          {t('dailyRewards')}
-        </Typography>
-        <RowInfo
-          title={`${t('rewards')} (USD)`}
-          value={`$${formatWithThousandSeparator(
-            producer.total_rewards * stats.tokenPrice,
-            0,
-          )}`}
-        />
-        <RowInfo
-          title={`${t('rewards')} (${eosConfig.tokenSymbol})`}
-          value={`${formatWithThousandSeparator(producer.total_rewards, 0)}`}
-        />
-        <Typography variant="body1" className={classes.title}>
-          {t('yearlyRewards')}
-        </Typography>
-        <RowInfo
-          title={`${t('rewards')} (USD)`}
-          value={`$${formatWithThousandSeparator(
-            producer.total_rewards * 365 * stats.tokenPrice,
-            0,
-          )}`}
-        />
-        <RowInfo
-          title={`${t('rewards')} (${eosConfig.tokenSymbol})`}
-          value={`${formatWithThousandSeparator(
-            producer.total_rewards * 365,
-            0,
-          )}`}
-        />
-      </div>
+      </TableCell>
+      <TableCell align="center">
+        {isValidUrl(producer.bp_json_url) && (
+          <VisitSite title={t('openLink')} url={producer.bp_json_url} />
+        )}
+      </TableCell>
+      <TableCell align="center">
+        <Typography variant="body1">{`${formatWithThousandSeparator(
+          producer.total_votes_eos,
+          0,
+        )}`}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Typography variant="body1">{`${moment(producer.last_claim_time).format(
+          'll',
+        )}`}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Typography variant="body1">{`$${formatWithThousandSeparator(
+          producer.total_rewards * tokenPrice,
+          0,
+        )}`}</Typography>
+        <Typography variant="body1">{`${formatWithThousandSeparator(
+          producer.total_rewards,
+          0,
+        )} ${eosConfig.tokenSymbol}`}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Typography variant="body1">{`$${formatWithThousandSeparator(
+          producer.total_rewards * 365 * tokenPrice,
+          0,
+        )}`}</Typography>
+        <Typography variant="body1">{`${formatWithThousandSeparator(
+          producer.total_rewards * 365,
+          0,
+        )} ${eosConfig.tokenSymbol}`}</Typography>
+      </TableCell>
     </>
   )
 }

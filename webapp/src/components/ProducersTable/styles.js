@@ -20,6 +20,9 @@ export default (theme) => ({
       backgroundColor: `${theme.palette.neutral.lighter}`,
       cursor: 'pointer',
     },
+    '& a': {
+      margin: 0,
+    },
   },
   tableHead: {
     borderBottom: `2px solid ${theme.palette.primary.main} !important`,
@@ -43,11 +46,6 @@ export default (theme) => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       width: '140px',
-    },
-    [theme.breakpoints.down('md')]: {
-      '& > a': {
-        margin: 0,
-      },
     },
   },
   countryContainer: {

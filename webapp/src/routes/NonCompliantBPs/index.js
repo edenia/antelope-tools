@@ -6,7 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 
 import useNonCompliantState from '../../hooks/customHooks/useNonCompliantState'
 import NoResults from '../../components/NoResults'
-import NonCompliantCard from '../../components/NonCompliantCard'
+import UndiscoverableBPsTable from '../../components/ProducersTable/UndiscoverableBPsTable'
 
 import styles from './styles'
 import RewardsStats from './RewardsStats'
@@ -28,16 +28,9 @@ const NonCompliantBPs = () => {
               <div className={classes.statsContainer}>
                 <RewardsStats stats={stats} />
               </div>
-              <div className={classes.bpsContainer}>
-                {items.map((producer, index) => (
-                  <Card
-                    className={classes.card}
-                    key={`producer-card-${index}`}
-                  >
-                    <NonCompliantCard producer={producer} stats={stats} />
-                  </Card>
-                ))}
-              </div>
+              <Card>
+                 <UndiscoverableBPsTable producers={items} tokenPrice={stats.tokenPrice}/>
+              </Card>
             </>
           ) : (
             <NoResults translationScope={'undiscoverableBPsRoute'}/>
