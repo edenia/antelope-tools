@@ -26,7 +26,7 @@ export default (theme) => ({
       color: theme.palette.error.light
     },
     '& span': {
-      marginTop: theme.spacing(1),
+      margin: theme.spacing(1, 4, 0),
     },
   },
   imgError: {

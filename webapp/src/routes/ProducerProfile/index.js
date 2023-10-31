@@ -69,7 +69,7 @@ const ProducerProfile = () => {
         <GeneralInformation producer={producer} />
         {producer?.hasEmptyBPJson && (
           <Suspense fallback={<CircularProgress />}>
-            <EmptyState />
+            <EmptyState isNonCompliant={producer?.total_rewards > 0}/>
           </Suspense>
         )}
       </WrapperContainer>

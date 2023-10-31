@@ -1,14 +1,14 @@
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import Link from '@mui/material/Link'
+import Button from '@mui/material/Button'
 
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const EmptyState = () => {
+const EmptyState = ({ isNonCompliant }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
 
@@ -21,15 +21,17 @@ const EmptyState = () => {
         alt=""
       />
       <span>{t('emptyState')}</span>
-      <Link
-        component={RouterLink}
-        to="/undiscoverable-bps"
-        variant="contained"
-        color="primary"
-        mt={2}
-      >
-        {t('viewList')}
-      </Link>
+      {isNonCompliant && (
+        <Button
+          component={Link}
+          to="/undiscoverable-bps"
+          variant="contained"
+          color="primary"
+          mt={2}
+        >
+          {t('viewList')}
+        </Button>
+      )}
     </div>
   )
 }
