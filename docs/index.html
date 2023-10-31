@@ -84,49 +84,73 @@
         U+2212, U+2215, U+FEFF, U+FFFD;
     }
   </style>
-</head>
+  <script>
+    const toggleColorMode = () => {
+      const element = document.body
+      const isLightMode = element.classList.toggle('light-mode')
+
+      localStorage.setItem('prefersDarkMode', !isLightMode)
+
+      document.getElementById('light-mode-icon').classList.toggle('no-display')
+      document.getElementById('dark-mode-icon').classList.toggle('no-display')
+      document
+        .getElementById('toggle-color-btn')
+        .setAttribute(
+          'aria-label',
+          `Switch to ${isLightMode ? 'dark' : 'light'} mode`,
+        )
+    }
+  </script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  </head>
 <body>
-  <div class="header">
-    <div class="image-box">
-      <img alt="Antelope Tools Logo" id="middle-logo" src="./images/antelope-tools.svg">
-      <img alt="" id="bg-image-mobile" src="./images/background-mobile.png">
-    </div>
-    <div class="image-box-desktop">
-      <img alt="Antelope Tools Logo" src="./images/antelope-tools.svg">
-    </div>
-    <div class="box-paragraph-text" id="d-version">
-      <p>Unlock Real-Time Visibility into Antelope Blockchains</p>
-      <div class="text-container">
-        <div class="flex">
-          <div class="Line-4"></div>
-          <p>
-            Get instant insights into blockchain networks with our intuitive dashboards. 
-          </p>
-        </div>
-        <div class="flex">
-          <div class="Line-4"></div>
-          <p>
-            A community-driven tool for unparalleled transparency and reliability.
-          </p>
-        </div>
-      </div>
-      <a href="#nav" class="myButton">
-        <div class="visit-text">View Monitored Networks</div>
-      </a>
-    </div>
+  <div id="toggle-color">
+    <button id="toggle-color-btn" aria-label="Switch to light mode" onclick="toggleColorMode()">
+      <span id="light-mode-icon" class="color-mode-icon"><i data-feather="sun"></i></span>
+      <span id="dark-mode-icon" class="color-mode-icon no-display"><i data-feather="moon"></i></span>
+    </button>
   </div>
-  <div id="networks">
-    <div class="box-network">
-      <div class="flex2">
-        <div class="flex-text">
-          <div class="Line-5"></div>
-          <p id="nav">
-            Blockchain Networks
-          </p>
-        </div>
+  <main>
+    <div class="header">
+      <div class="image-box">
+        <img alt="Antelope Tools Logo" id="middle-logo" class="theme-filter-image" src="./images/antelope-tools.svg">
+        <img alt="" id="bg-image-mobile" src="./images/background-mobile.png">
       </div>
-      <div id="mainnet-desktop">
-        <section>
+      <div class="image-box-desktop theme-filter-image">
+        <img alt="Antelope Tools Logo" src="./images/antelope-tools.svg">
+      </div>
+      <div class="box-paragraph-text" id="d-version">
+        <h1>Unlock Real-Time Visibility into Antelope Blockchains</h1>
+        <div class="text-container">
+          <div class="flex">
+            <div class="Line-4"></div>
+            <p>
+              Get instant insights into blockchain networks with our intuitive dashboards. 
+            </p>
+          </div>
+          <div class="flex">
+            <div class="Line-4"></div>
+            <p>
+              A community-driven tool for unparalleled transparency and reliability.
+            </p>
+          </div>
+        </div>
+        <a href="#nav" class="customButton">
+          <div class="visit-text">View Monitored Networks</div>
+        </a>
+      </div>
+    </div>
+    <div id="networks">
+      <div class="box-network">
+        <div class="flex2">
+          <div class="flex-text">
+            <div class="Line-5"></div>
+            <h2 id="nav">
+              Blockchain Networks
+            </h2>
+          </div>
+        </div>
+        <section id="mainnet-desktop">
           <div class="grid">
             <a class="grid-item" href="https://telos.antelope.tools/">
               <img alt="Telos Mainnet Antelope Tools Dashboard" src="./images/telos-grid.png">
@@ -155,18 +179,16 @@
           </div>
         </section>
       </div>
-    </div>
-    <div class="box-network">
-      <div class="flex2">
-        <div class="flex-text">
-          <div class="Line-5"></div>
-          <p>
-            Testnets
-          </p>
+      <div class="box-network">
+        <div class="flex2">
+          <div class="flex-text">
+            <div class="Line-5"></div>
+            <h2>
+              Testnets
+            </h2>
+          </div>
         </div>
-      </div>
-      <div id="testnet-desktop">
-        <section>
+        <section id="testnet-desktop">
           <div class="grid">
             <a class="grid-item" href="https://telos-testnet.antelope.tools/">
               <img alt="Telos Testnet Antelope Tools Dashboard" height="188" src="./images/telos-grid.png" width="188">
@@ -196,11 +218,9 @@
         </section>
       </div>
     </div>
-  </div>
-  <div class="content">
-    <div class="section-wrapper">
-      <div class="box-paragraph">
-        <section>
+    <div class="content">
+      <div class="section-wrapper">
+        <section class="box-paragraph">
           <details>
             <summary>
               <span class="info-icon">
@@ -215,9 +235,7 @@
             </p>
           </details>
         </section>
-      </div>
-      <div class="box-paragraph">
-        <section>
+        <section class="box-paragraph">
           <details>
             <summary>
               <span class="info-icon"><img src="./images/feather-icon.png" alt="">
@@ -232,9 +250,7 @@
             </p>
           </details>
         </section>
-      </div>
-      <div class="box-paragraph">
-        <section>
+        <section class="box-paragraph">
           <details>
             <summary>
               <span class="info-icon">
@@ -245,7 +261,7 @@
             <p>
               Transparency is our mantra, and we practice what we preach. Antelope Tools Dashboard offers a visually engaging 
               and clear representation of vital blockchain metrics. Our data is sourced directly from public blockchain tables 
-              and enriched with information from Block Producers' <a href="https://github.com/eosrio/bp-info-standard" target="_blank"></a>bp.json files.
+              and enriched with information from Block Producer's <a href="https://github.com/eosrio/bp-info-standard" target="_blank">bp.json files</a>.
               <b>Want to dig deeper? </b>
               Feel free to explore our <a href="https://github.com/edenia/antelope-tools" target="_blank">GitHub repository</a> 
               or join the conversation in our <a href="https://t.me/eoscr" target="_blank">Telegram group</a>.
@@ -254,32 +270,32 @@
         </section>
       </div>
     </div>
-  </div>
+  </main>
   <div class="footer">
     <div class="contact-us">
-      <p>
+      <h3>
         Ready to contribute to a more transparent blockchain ecosystem? Reach out to us!
-      </p>
+      </h3>
     </div>
     <div class="box-social-media">
       <a class="twitter" href="https://twitter.com/EdeniaWeb3" target="_blank">
-        <img class="footerSocialMedia" alt="twitter" src="./images/twitter.png">
+        <img class="footerSocialMedia" alt="Edenia Twitter" src="./images/twitter.png">
       </a>
       <a href="https://t.me/eoscr" target="_blank">
-        <img class="footerSocialMedia" alt="telegram" src="./images/telegram.png">
+        <img class="footerSocialMedia" alt="Edenia Telegram" src="./images/telegram.png">
       </a>
       <a href="https://github.com/edenia/antelope-tools" target="_blank">
-        <img class="footerSocialMedia" alt="github" src="./images/github.png">
+        <img class="footerSocialMedia" alt="Edenia Github" src="./images/github.png">
       </a>
       <a href="https://www.linkedin.com/company/edeniaweb3" target="_blank">
-        <img class="footerSocialMedia" alt="linkedin" src="./images/linkedin.png">
+        <img class="footerSocialMedia" alt="Edenia Linkedin" src="./images/linkedin.png">
       </a>
     </div>
     <div class="eos-costa-rica">
       <h4 class="project-by">A Community Public Good built by</h4>
       <div class="logo-text">
         <a href="https://edenia.com/" target="_blank">
-          <img class="edeniaLogo" alt="EdeniaWeb3" src="./images/edenia-logo.png">
+          <img class="edeniaLogo theme-filter-image" alt="Edenia website" src="./images/edenia-logo.png">
         </a>
       </div>
     </div>
@@ -295,6 +311,16 @@
     }
     gtag('js', new Date())
     gtag('config', 'G-E6Y0EC9FT8')
+  </script>
+  <script>
+    feather.replace();
+
+    const preference = localStorage.getItem('prefersDarkMode')
+    const prefersDarkMode = Boolean(JSON.parse(preference))
+
+    if (preference && !prefersDarkMode) {
+      toggleColorMode()
+    }
   </script>
 </body>
 </html>
