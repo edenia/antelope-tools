@@ -6,8 +6,6 @@
   --colors-secondary-light: rgb(88, 116, 124);
   --colors-secondary-dark: rgba(28, 203, 255, 0.2);
 
-  --colors-links: #1ccbff;
-
   --shadows-button: 5.8px -34.8px 40.6px 0 rgba(53, 64, 82, 0.05);
   --shadows-grid-item: 0 1px 3px 1px rgba(0, 0, 0, 0.15),
       0 1px 2px 0 rgba(0, 0, 0, 0.3);
@@ -27,15 +25,17 @@
 }
 
 .light-mode {
-  --colors-secondary-light: rgba(186, 239, 255, 0.6);
+  --colors-primary: #1565c0;
+  --colors-primary-dark: #0e4686;
 
-  --colors-links: #1565c0;
+  --colors-secondary-light: rgba(186, 239, 255, 0.6);
 
   --bg-main: white;
   --bg-secondary: #f7f9fc;
   --bg-contrast-transparent-color: rgba(0, 0, 0, 0.04);
 
   --text-color: black;
+  --contrast-text-color: white;
 
   --filter-img: none;
 }
@@ -49,7 +49,7 @@ a {
 }
 
 a, a:visited {
-  color: var(--colors-links);
+  color: var(--colors-primary);
 }
 
 summary {
@@ -219,19 +219,20 @@ p {
   justify-content: center;
   align-items: center;
   box-shadow: var(--shadows-button);
+  color: var(--contrast-text-color);
   background-color: var(--colors-primary);
   border-radius: 70px;
 }
 
 .customButton:hover {
   text-decoration: none;
+  color: var(--contrast-text-color);
   background-color: var(--colors-primary-dark);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.customButton:active {
-  position: relative;
-  top: 1px;
+.customButton:visited {
+  color: var(--contrast-text-color);
 }
 
 .contact-us h3 {
