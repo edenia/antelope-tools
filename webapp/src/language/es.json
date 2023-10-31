@@ -218,7 +218,12 @@
     "rewards": "Recompensas",
     "rewardsPercentage": "Porcentaje de recompensas",
     "viewList": "Ver lista completa",
-    "paidProducersText": "Recompensas Diarias"
+    "paidProducersText": "Recompensas Diarias",
+    "publishBPDetails": "Publicar datos de BP",
+    "generateBPjson": "Generar un BP.json",
+    "tooltip": {
+      "generateBPjson": "BPs pueden fácilmente crear y actualizar sus bp.json para ser transparentes."
+    }
   },
   "nodesRoute": {},
   "nodesDistributionRoute": {},

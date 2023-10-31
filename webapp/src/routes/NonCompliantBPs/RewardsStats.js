@@ -64,7 +64,7 @@ const RewardsStats = ({ stats }) => {
           </Typography>
         </div>
       </SimpleDataCard>
-      <SimpleDataCard title={'BP.json Generator'}>
+      <SimpleDataCard title={t('publishBPDetails')} helperText={t('tooltip.generateBPjson')}>
         <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
         <Button
           aria-label="BP.json Generator Tool"
@@ -74,7 +74,7 @@ const RewardsStats = ({ stats }) => {
           color="primary"
           mt={2}
         >
-          {'Generator Tool'}
+          {t('generateBPjson')}
         </Button>
         </div>
       </SimpleDataCard>
