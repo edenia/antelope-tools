@@ -5,7 +5,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 
 import useNonCompliantState from '../../hooks/customHooks/useNonCompliantState'
 import NoResults from '../../components/NoResults'
-import UndiscoverableBPsTable from '../../components/ProducersTable/UndiscoverableBPsTable'
+import UndiscoverableBPsTable from '../../components/ProducersList/UndiscoverableBPsTable'
 
 import RewardsStats from './RewardsStats'
 

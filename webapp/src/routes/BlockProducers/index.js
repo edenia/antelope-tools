@@ -13,7 +13,7 @@ import SearchBar from '../../components/SearchBar'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
 import ProducersUpdateLog from '../../components/ProducersUpdateLog'
-import ProducersTable from '../../components/ProducersTable'
+import ProducersList from '../../components/ProducersList'
 
 import styles from './styles'
 
@@ -80,7 +80,7 @@ const Producers = () => {
       ) : !!items?.length ? (
         <>
           <Card>
-            <ProducersTable producers={items} />
+            <ProducersList producers={items} />
           </Card>
           <PaginationWrapper
             classes={classes.pagination}

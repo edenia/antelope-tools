@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,25 +12,22 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 
-import NonCompliantCard from '../../components/NonCompliantCard'
+import { eosConfig } from '../../config'
 
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const UndiscoverableBPsTable = ({ producers, tokenPrice }) => {
+const ProducersTable = ({ columnsNames, producers, RowComponent, RowProps }) => {
   const classes = useStyles()
+  const navigate = useNavigate()
   const { t } = useTranslation('producerCardComponent')
-  const columnsNames = [
-    'rank',
-    'producerName',
-    'website',
-    'bpJson',
-    'votes',
-    'lastClaimTime',
-    'dailyRewards',
-    'yearlyRewards',
-  ]
+
+  const handleClickRow = producer => {
+    navigate(`/${eosConfig.producersRoute}/${producer?.owner}`, {
+      state: { producer },
+    })
+  }
 
   return (
     <TableContainer>
@@ -44,12 +42,15 @@ const UndiscoverableBPsTable = ({ producers, tokenPrice }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {producers.map((producer, index) => (
+        {producers.map((producer, index) => (
             <TableRow
+              onClick={() => {
+                handleClickRow(producer)
+              }}
               className={classes.tableRow}
               key={`bp-${producer?.owner}-${index}`}
             >
-              <NonCompliantCard producer={producer} tokenPrice={tokenPrice} />
+              <RowComponent producer={producer} index={index} {...RowProps} />
             </TableRow>
           ))}
         </TableBody>
@@ -58,12 +59,12 @@ const UndiscoverableBPsTable = ({ producers, tokenPrice }) => {
   )
 }
 
-UndiscoverableBPsTable.propTypes = {
+ProducersTable.propTypes = {
   producers: PropTypes.array,
 }
 
-UndiscoverableBPsTable.defaultProps = {
+ProducersTable.defaultProps = {
   producers: [],
 }
 
-export default UndiscoverableBPsTable
+export default ProducersTable

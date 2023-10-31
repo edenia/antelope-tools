@@ -23,7 +23,7 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
   const { t } = useTranslation('producerCardComponent')
   const { healthLights } = generalConfig
 
-  const getHealthStatus = (healthCheck) => {
+  const getHealthStatus = healthCheck => {
     return healthCheck.valid ? healthLights.greenLight : healthLights.redLight
   }
 
@@ -70,24 +70,24 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
         )}`}</Typography>
       </TableCell>
       <TableCell align="center">
-        <Typography variant="body1">{`$${formatWithThousandSeparator(
-          producer.total_rewards * tokenPrice,
-          0,
-        )}`}</Typography>
         <Typography variant="body1">{`${formatWithThousandSeparator(
           producer.total_rewards,
           0,
         )} ${eosConfig.tokenSymbol}`}</Typography>
+        <Typography variant="body1">{`$${formatWithThousandSeparator(
+          producer.total_rewards * tokenPrice,
+          0,
+        )} USD`}</Typography>
       </TableCell>
       <TableCell align="center">
-        <Typography variant="body1">{`$${formatWithThousandSeparator(
-          producer.total_rewards * 365 * tokenPrice,
-          0,
-        )}`}</Typography>
         <Typography variant="body1">{`${formatWithThousandSeparator(
           producer.total_rewards * 365,
           0,
         )} ${eosConfig.tokenSymbol}`}</Typography>
+        <Typography variant="body1">{`$${formatWithThousandSeparator(
+          producer.total_rewards * 365 * tokenPrice,
+          0,
+        )} USD`}</Typography>
       </TableCell>
     </>
   )
