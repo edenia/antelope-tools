@@ -20,7 +20,16 @@ const useStyles = makeStyles(styles)
 const UndiscoverableBPsTable = ({ producers, tokenPrice }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
-  const columnsNames = ['producerName','website','bpJson','votes','lastClaimTime','dailyRewards','yearlyRewards']
+  const columnsNames = [
+    'rank',
+    'producerName',
+    'website',
+    'bpJson',
+    'votes',
+    'lastClaimTime',
+    'dailyRewards',
+    'yearlyRewards',
+  ]
 
   return (
     <TableContainer>

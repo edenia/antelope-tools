@@ -30,7 +30,12 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
   return (
     <>
       <TableCell align="center">
-        <Typography variant="body1">{producer.owner}</Typography>
+        <Typography variant="h2" component="p">{`${producer.rank}`}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Typography variant="h6" component="h2">
+          {producer.owner}
+        </Typography>
       </TableCell>
       <TableCell align="center">
         {isValidUrl(producer.url) ? (
@@ -49,7 +54,7 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
         )}
       </TableCell>
       <TableCell align="center">
-        {isValidUrl(producer.bp_json_url) && (
+        {isValidUrl(producer.url) && (
           <VisitSite title={t('openLink')} url={producer.bp_json_url} />
         )}
       </TableCell>

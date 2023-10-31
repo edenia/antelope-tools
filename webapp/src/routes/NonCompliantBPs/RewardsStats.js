@@ -17,7 +17,7 @@ const RewardsStats = ({ stats }) => {
   const { t } = useTranslation('rewardsDistributionRoute')
 
   return (
-    <>
+    <div className={classes.statsContainer}>
       <SimpleDataCard title={t('paidProducers')}>
         <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
           <Typography variant="h6" component="p">
@@ -62,7 +62,7 @@ const RewardsStats = ({ stats }) => {
           </Typography>
         </div>
       </SimpleDataCard>
-    </>
+    </div>
   )
 }
 
