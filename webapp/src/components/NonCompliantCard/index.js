@@ -37,27 +37,29 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
           {producer.owner}
         </Typography>
       </TableCell>
-      <TableCell align="center">
-        {isValidUrl(producer.url) ? (
-          <div className={classes.websiteContainer}>
-            <VisitSite
-              title={t('openLink')}
-              url={producer.url}
-              Icon={LanguageIcon}
-            />
-            <HealthCheck status={getHealthStatus(producer.healthCheck)}>
-              <HealthCheckInfo healthCheck={producer.healthCheck} />
-            </HealthCheck>
-          </div>
-        ) : (
+      {isValidUrl(producer.url) ? (
+        <>
+          <TableCell align="center">
+            <div className={classes.websiteContainer}>
+              <VisitSite
+                title={t('openLink')}
+                url={producer.url}
+                Icon={LanguageIcon}
+              />
+              <HealthCheck status={getHealthStatus(producer.healthCheck)}>
+                <HealthCheckInfo healthCheck={producer.healthCheck} />
+              </HealthCheck>
+            </div>
+          </TableCell>
+          <TableCell align="center">
+            <VisitSite title={t('openLink')} url={producer.bp_json_url} />
+          </TableCell>
+        </>
+      ) : (
+        <TableCell align="center" colSpan={2}>
           <Typography variant="body1">{t('invalidUrl')}</Typography>
-        )}
-      </TableCell>
-      <TableCell align="center">
-        {isValidUrl(producer.url) && (
-          <VisitSite title={t('openLink')} url={producer.bp_json_url} />
-        )}
-      </TableCell>
+        </TableCell>
+      )}
       <TableCell align="center">
         <Typography variant="body1">{`${formatWithThousandSeparator(
           producer.total_votes_eos,

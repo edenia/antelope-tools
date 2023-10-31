@@ -1,7 +1,9 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
@@ -60,6 +62,20 @@ const RewardsStats = ({ stats }) => {
           <Typography variant="h6" component="p">
             {`${stats.percentageRewards?.toFixed(2)}%`}
           </Typography>
+        </div>
+      </SimpleDataCard>
+      <SimpleDataCard title={'BP.json Generator'}>
+        <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+        <Button
+          aria-label="BP.json Generator Tool"
+          component={Link}
+          to="/bpjson"
+          variant="contained"
+          color="primary"
+          mt={2}
+        >
+          {'Generator Tool'}
+        </Button>
         </div>
       </SimpleDataCard>
     </div>
