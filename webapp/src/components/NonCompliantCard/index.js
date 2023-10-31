@@ -30,7 +30,7 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
   return (
     <>
       <TableCell align="center">
-        <Typography variant="h2" component="p">{`${producer.rank}`}</Typography>
+        <Typography variant="h3" component="p">{`${producer.rank}`}</Typography>
       </TableCell>
       <TableCell align="center">
         <Typography variant="h6" component="h2">

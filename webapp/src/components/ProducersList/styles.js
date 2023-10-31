@@ -14,7 +14,7 @@ export default (theme) => ({
   },
   tableRow: {
     '& .MuiTableCell-root': {
-      padding: `${theme.spacing(1, 2)} !important`,
+      padding: `${theme.spacing(2)} !important`,
     },
     '&:hover': {
       backgroundColor: `${theme.palette.neutral.lighter}`,

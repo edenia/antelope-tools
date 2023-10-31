@@ -120,7 +120,7 @@ const ProducerRow = ({ producer, index }) => {
       {producer?.rank && eosConfig.producerColumns?.includes('rank') && (
         <TableCell align="center">
           <Typography
-            variant="h2"
+            variant="h3"
             component="p"
           >{`${producer?.rank}`}</Typography>
         </TableCell>
