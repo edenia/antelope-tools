@@ -87,9 +87,16 @@ const GeoMap = ({ data }) => {
     if (!mapSelected) return
 
     const getMap = async () => {
-      const mapDataSelected = data.filter(
-        ({ country }) => country === mapSelected.toUpperCase(),
-      )
+      const mapDataSelected = data.reduce((result, current) => {
+        if (
+          current.country === mapSelected.toUpperCase() &&
+          result.every(node => node.name !== current.name)
+        ) {
+          result.push(current)
+        }
+
+        return result
+      }, [])
       const { data: mapRes } = await axios.get(
         `${generalConfig.highchartsMapURL}${mapSelected}/${mapSelected}-all.geo.json`,
       )
