@@ -20,6 +20,7 @@ export default (theme) => ({
   },
   cardRow: {
     display: 'grid',
+    gap: theme.spacing(2),
     gridTemplateColumns: '60px 240px 4fr',
     alignItems: 'center',
     width: '100%',

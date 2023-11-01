@@ -1,8 +1,10 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import LanguageIcon from '@mui/icons-material/Language'
+import Link from '@mui/material/Link'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
@@ -34,7 +36,14 @@ const NonCompliantRow = ({ producer, tokenPrice }) => {
       </TableCell>
       <TableCell align="center">
         <Typography variant="h6" component="h2">
-          {producer.owner}
+          <Link
+            component={RouterLink}
+            to={`/${eosConfig.producersRoute}/${producer?.owner}`}
+            underline="none"
+            color="inherit"
+          >
+            {producer.owner}
+          </Link>
         </Typography>
       </TableCell>
       {isValidUrl(producer.url) ? (
