@@ -5,13 +5,13 @@ export default (theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    '& div > svg':{
+    '& div > svg': {
       marginTop: theme.spacing(1),
     },
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('md')]: {
       gap: theme.spacing(2),
     },
-    [theme.breakpoints.down('sm')]:{
+    [theme.breakpoints.down('sm')]: {
       gap: theme.spacing(8),
     },
   },

@@ -67,7 +67,7 @@ const RewardsStats = ({ stats }) => {
       <SimpleDataCard title={t('publishBPDetails')} helperText={t('tooltip.generateBPjson')}>
         <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
         <Button
-          aria-label="BP.json Generator Tool"
+          aria-label={t('generateBPjson')}
           component={Link}
           to="/bpjson"
           variant="contained"

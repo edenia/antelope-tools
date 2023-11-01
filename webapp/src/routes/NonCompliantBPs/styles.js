@@ -12,7 +12,7 @@ export default (theme) => ({
     margin: theme.spacing(6, 0, 4),
     paddingBottom: theme.spacing(4),
     borderBottom: `1px solid ${theme.palette.neutral.light}`,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexFlow: 'row wrap',
       gap: theme.spacing(2),
     },
@@ -22,7 +22,8 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    [theme.breakpoints.down('sm')]: {
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
       minWidth: '150px',
       minHeight: '55px',
     }

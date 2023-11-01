@@ -18,7 +18,12 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const ProducersTable = ({ columnsNames, producers, RowComponent, RowProps }) => {
+const ProducersTable = ({
+  columnsNames,
+  producers,
+  RowComponent,
+  RowProps,
+}) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const { t } = useTranslation('producerCardComponent')
@@ -34,7 +39,7 @@ const ProducersTable = ({ columnsNames, producers, RowComponent, RowProps }) => 
       <Table>
         <TableHead className={classes.tableHead}>
           <TableRow>
-            {columnsNames.map((name) => (
+            {columnsNames.map(name => (
               <TableCell align="center" key={name}>
                 <Typography variant="capSubtitle">{t(name)}</Typography>
               </TableCell>
@@ -42,7 +47,7 @@ const ProducersTable = ({ columnsNames, producers, RowComponent, RowProps }) => 
           </TableRow>
         </TableHead>
         <TableBody>
-        {producers.map((producer, index) => (
+          {producers.map((producer, index) => (
             <TableRow
               onClick={() => {
                 handleClickRow(producer)
