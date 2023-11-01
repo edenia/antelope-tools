@@ -23,10 +23,10 @@ export default (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     '& svg': {
-      color: theme.palette.error.light
+      color: theme.palette.error.light,
     },
     '& span': {
-      marginTop: theme.spacing(1),
+      margin: theme.spacing(1, 4, 0),
     },
   },
   imgError: {

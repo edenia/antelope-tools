@@ -14,11 +14,14 @@ export default (theme) => ({
   },
   tableRow: {
     '& .MuiTableCell-root': {
-      padding: `${theme.spacing(1, 2)} !important`,
+      padding: `${theme.spacing(2)} !important`,
     },
     '&:hover': {
       backgroundColor: `${theme.palette.neutral.lighter}`,
       cursor: 'pointer',
+    },
+    '& a': {
+      margin: 0,
     },
   },
   tableHead: {
@@ -43,11 +46,6 @@ export default (theme) => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       width: '140px',
-    },
-    [theme.breakpoints.down('md')]: {
-      '& > a': {
-        margin: 0,
-      },
     },
   },
   countryContainer: {

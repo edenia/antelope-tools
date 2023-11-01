@@ -46,6 +46,13 @@ const components = {
       },
     },
   },
+  MuiTooltip: {
+    styleOverrides: {
+      tooltip: {
+        backgroundColor: '#616161',
+      },
+    },
+  },
 }
 
 export default components

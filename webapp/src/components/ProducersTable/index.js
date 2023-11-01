@@ -15,11 +15,15 @@ import Typography from '@mui/material/Typography'
 import { eosConfig } from '../../config'
 
 import styles from './styles'
-import ProducerRow from './ProducerRow'
 
 const useStyles = makeStyles(styles)
 
-const ProducersTable = ({ producers }) => {
+const ProducersTable = ({
+  columnsNames,
+  producers,
+  RowComponent,
+  RowProps,
+}) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const { t } = useTranslation('producerCardComponent')
@@ -35,7 +39,7 @@ const ProducersTable = ({ producers }) => {
       <Table>
         <TableHead className={classes.tableHead}>
           <TableRow>
-            {eosConfig.producerColumns.map((name) => (
+            {columnsNames.map(name => (
               <TableCell align="center" key={name}>
                 <Typography variant="capSubtitle">{t(name)}</Typography>
               </TableCell>
@@ -51,7 +55,7 @@ const ProducersTable = ({ producers }) => {
               className={classes.tableRow}
               key={`bp-${producer?.owner}-${index}`}
             >
-              <ProducerRow producer={producer} index={index} />
+              <RowComponent producer={producer} index={index} {...RowProps} />
             </TableRow>
           ))}
         </TableBody>
