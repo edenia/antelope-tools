@@ -13,8 +13,8 @@ import SearchBar from '../../components/SearchBar'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
 import ProducersUpdateLog from '../../components/ProducersUpdateLog'
-import ProducersTable from '../../components/ProducersList/ProducersTable'
-import ProducerRow from '../../components/ProducersList/ProducerRow'
+import ProducersTable from '../../components/ProducersTable'
+import ProducerRow from '../../components/ProducersTable/ProducerRow'
 
 import styles from './styles'
 

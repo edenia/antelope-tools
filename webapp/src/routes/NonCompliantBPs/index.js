@@ -5,8 +5,8 @@ import LinearProgress from '@mui/material/LinearProgress'
 
 import useNonCompliantState from '../../hooks/customHooks/useNonCompliantState'
 import NoResults from '../../components/NoResults'
-import ProducersTable from '../../components/ProducersList/ProducersTable'
-import NonCompliantCard from '../../components/NonCompliantCard'
+import ProducersTable from '../../components/ProducersTable'
+import NonCompliantRow from '../../components/NonCompliantRow'
 
 import RewardsStats from './RewardsStats'
 
@@ -36,7 +36,7 @@ const NonCompliantBPs = () => {
                 <ProducersTable
                   columnsNames={columnsNames}
                   producers={items}
-                  RowComponent={NonCompliantCard}
+                  RowComponent={NonCompliantRow}
                   RowProps={{ tokenPrice: stats.tokenPrice || NaN }}
                 />
               </Card>

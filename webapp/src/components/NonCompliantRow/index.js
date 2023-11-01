@@ -18,7 +18,7 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const NonCompliantCard = ({ producer, tokenPrice }) => {
+const NonCompliantRow = ({ producer, tokenPrice }) => {
   const classes = useStyles()
   const { t } = useTranslation('producerCardComponent')
   const { healthLights } = generalConfig
@@ -95,6 +95,6 @@ const NonCompliantCard = ({ producer, tokenPrice }) => {
   )
 }
 
-NonCompliantCard.propTypes = {}
+NonCompliantRow.propTypes = {}
 
-export default memo(NonCompliantCard)
+export default memo(NonCompliantRow)
