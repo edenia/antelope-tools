@@ -122,7 +122,7 @@ jobs:
           HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: 86400
           HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: 86400
           HAPI_EVM_KEEP_HISTORY_FOR_YEARS: 1
-          HAPI_EVM_HYPERION_API: https://api.eossweden.org
+          HAPI_EVM_HYPERION_API: https://eos.eosusa.io
           HAPI_EVM_HYPERION_START_AT: 2022-01-01T00:00:00.000+00:00
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
