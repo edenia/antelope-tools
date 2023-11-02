@@ -63,7 +63,8 @@ jobs:
         id: build_kubernetes_files
         run: |
           make \
-            build-kubernetes
+            build-kubernetes \
+            build-kubernetes-evm
         env:
           # general
           NAMESPACE: jungle-dashboard
@@ -106,6 +107,25 @@ jobs:
           HAPI_EOSRATE_GET_STATS_URL: ${{ secrets.HAPI_EOSRATE_GET_STATS_URL }}
           HAPI_EOSRATE_GET_STATS_USER: ${{ secrets.HAPI_EOSRATE_GET_STATS_USER }}
           HAPI_EOSRATE_GET_STATS_PASSWORD: ${{ secrets.HAPI_EOSRATE_GET_STATS_PASSWORD }}
+          # hapi-evm
+          HAPI_EVM_SERVER_PORT: '9090'
+          HAPI_EVM_SERVER_ADDRESS: '0.0.0.0'
+          HAPI_EVM_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
+          HAPI_EVM_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_EVM_HASURA_ADMIN_SECRET }}
+          HAPI_EVM_DATABASE_URL: ${{ secrets.HAPI_EVM_DATABASE_URL }}
+          HAPI_EVM_ENDPOINT: 'https://api.testnet.evm.eosnetwork.com'
+          HAPI_EVM_API_ENDPOINTS: '["https://jungle.edenia.cloud","https://jungle4.eosphere.io","https://jungle4.api.eosnation.io","https://jungle4.eossweden.org"]'
+          HAPI_EVM_NETWORK: EOSIO
+          HAPI_EVM_NETWORK_CHAIN_ID: 73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d
+          HAPI_EVM_EOS_EVM_ACCOUNT: eosio.evm
+          HAPI_EVM_BLOCK_INTERVAL_SEC: 1
+          HAPI_EVM_OLD_BLOCK_INTERVAL_SEC: 0.1
+          HAPI_EVM_ATH_INTERVAL_SEC: 60
+          HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: 86400
+          HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: 86400
+          HAPI_EVM_KEEP_HISTORY_FOR_YEARS: 1
+          HAPI_EVM_HYPERION_API: https://jungle.eosusa.io
+          HAPI_EVM_HYPERION_START_AT: 2022-01-01T00:00:00.000+00:00
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: true
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
