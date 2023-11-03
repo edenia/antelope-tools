@@ -85,11 +85,8 @@ const useEVMState = t => {
 
   useEffect(() => {
     const updateStats = async () => {
-      const lastBlock = await ethApi.getLastBlock()
-
       setEVMStats(prev => ({
         ...prev,
-        last_block: lastBlock,
         ...(historicalStats && historicalStats.evm_historical_stats[0]),
         ...(stats && stats.evm_stats[0]),
       }))
@@ -189,6 +186,11 @@ const useEVMState = t => {
       if (!blockNum) {
         blockNum = await ethApi.getLastBlock()
       }
+
+      setEVMStats(prev => ({
+        ...prev,
+        last_block: blockNum,
+      }))
 
       if (!pauseRef.current) {
         ethApi.getBlock(blockNum).then(block => {
