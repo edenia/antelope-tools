@@ -44,8 +44,8 @@ export default (theme) => ({
     },
   },
   smallAvatar: {
-    width: '56px',
-    height: '56px',
+    width: '40px',
+    height: '40px',
   },
   bigAvatar: {
     width: '104px',

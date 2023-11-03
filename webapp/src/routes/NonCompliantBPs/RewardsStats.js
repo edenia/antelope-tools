@@ -1,7 +1,9 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
@@ -17,7 +19,7 @@ const RewardsStats = ({ stats }) => {
   const { t } = useTranslation('rewardsDistributionRoute')
 
   return (
-    <>
+    <div className={classes.statsContainer}>
       <SimpleDataCard title={t('paidProducers')}>
         <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
           <Typography variant="h6" component="p">
@@ -62,7 +64,21 @@ const RewardsStats = ({ stats }) => {
           </Typography>
         </div>
       </SimpleDataCard>
-    </>
+      <SimpleDataCard title={t('publishBPDetails')} helperText={t('tooltip.generateBPjson')}>
+        <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
+        <Button
+          aria-label={t('generateBPjson')}
+          component={Link}
+          to="/bpjson"
+          variant="contained"
+          color="primary"
+          mt={2}
+        >
+          {t('generateBPjson')}
+        </Button>
+        </div>
+      </SimpleDataCard>
+    </div>
   )
 }
 

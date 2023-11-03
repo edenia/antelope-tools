@@ -14,6 +14,7 @@ import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState
 import NoResults from '../../components/NoResults'
 import ProducersUpdateLog from '../../components/ProducersUpdateLog'
 import ProducersTable from '../../components/ProducersTable'
+import ProducerRow from '../../components/ProducersTable/ProducerRow'
 
 import styles from './styles'
 
@@ -80,7 +81,11 @@ const Producers = () => {
       ) : !!items?.length ? (
         <>
           <Card>
-            <ProducersTable producers={items} />
+            <ProducersTable
+              columnsNames={eosConfig.producerColumns}
+              producers={items}
+              RowComponent={ProducerRow}
+            />
           </Card>
           <PaginationWrapper
             classes={classes.pagination}
@@ -93,7 +98,6 @@ const Producers = () => {
       ) : (
         <NoResults />
       )}
-      
     </>
   )
 }

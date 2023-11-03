@@ -15,9 +15,7 @@ import useProducerProfileState from './useProducerProfileState'
 import styles from './styles'
 
 const NodesCard = lazy(() => import('./../../components/NodeCard/NodesCard'))
-const EmptyState = lazy(() =>
-  import('./../../components/EmptyState'),
-)
+const EmptyState = lazy(() => import('./../../components/EmptyState'))
 
 const useStyles = makeStyles(styles)
 
@@ -63,13 +61,13 @@ const ProducerProfile = () => {
         ldJson={ldJson}
       />
       <Card className={`${classes.container} ${classes.profileContainer}`}>
-        <ProfileCard producer={producer}/>
+        <ProfileCard producer={producer} />
       </Card>
       <WrapperContainer title={t('generalInformation')}>
         <GeneralInformation producer={producer} />
         {producer?.hasEmptyBPJson && (
           <Suspense fallback={<CircularProgress />}>
-            <EmptyState />
+            <EmptyState isNonCompliant={producer?.total_rewards > 0} />
           </Suspense>
         )}
       </WrapperContainer>

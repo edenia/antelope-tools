@@ -1,6 +1,5 @@
 const axiosUtil = require('./axios.util')
 const eosUtil = require('./eos.util')
-const hasuraUtil = require('./hasura.util')
 const net = require('node:net')
 const os = require('node:os')
 
@@ -108,6 +107,15 @@ const getEndpoints = (nodes) => {
   return endpoints
 }
 
+const getCurrencyStats = async () => {
+  const systemData = await eosUtil.getCurrencyStats({
+    symbol: eosConfig.rewardsToken,
+    code: 'eosio.token'
+  })
+
+  return systemData[eosConfig.rewardsToken]
+}
+
 const getExpectedRewards = async (producers, totalVotes) => {
   let rewards = []
 
@@ -162,39 +170,49 @@ const getLibreRewards = async (producers) => {
 }
 
 const getTelosRewards = async (producers) => {
-  const telosPrice = (await getEOSPrice()) || 0
-  const estimatedRewards = 8.34 * telosPrice ** -0.516 // approximate rewards per half hour
-  const producerRewards = Math.min(estimatedRewards * 48, 28000)
+  const currencyStats = await getCurrencyStats()
+  const { rows: payrateRows } = await eosUtil.getTableRows({
+    code: 'eosio',
+    scope: 'eosio',
+    table: 'payrate',
+    reverse: false,
+    limit: 1,
+    json: true,
+    lower_bound: null
+  })
 
-  const topProducers = producers.slice(0, 42)
+  const tokenSupply = parseFloat(currencyStats.supply)
+  const bPayRate = payrateRows?.at(0)?.bpay_rate / 100000
+  const toProducers = (bPayRate * tokenSupply) / 365 // (bPayRate * tokenSupply * secondsPerDay) / secondsPerYear
+
+  const MAX_PAID_PRODUCERS = 42
+  const topProducers = producers.slice(0, MAX_PAID_PRODUCERS)
+  const activeCount = topProducers.length
+  const shareCount =
+    activeCount <= 21
+      ? activeCount * 2
+      : MAX_PAID_PRODUCERS + (activeCount - 21)
+
+  const producerRewards = toProducers / shareCount
 
   return topProducers.map((producer, i) => {
-    const totalRewards = i < 21 ? producerRewards : producerRewards / 2
+    const totalRewards = i < 21 ? producerRewards * 2 : producerRewards
 
     return {
       producer: producer.owner,
-      vote_rewards: totalRewards * 0.75,
-      block_rewards: totalRewards * 0.25,
+      vote_rewards: 0,
+      block_rewards: totalRewards,
       total_rewards: totalRewards
     }
   })
 }
 
 const getEOSIORewards = async (producers, totalVotes) => {
-  const systemData = await eosUtil.getCurrencyStats({
-    symbol: eosConfig.rewardsToken,
-    code: 'eosio.token'
-  })
+  const currencyStats = await getCurrencyStats()
   let inflation = 0
 
-  if (
-    systemData[eosConfig.rewardsToken] &&
-    systemData[eosConfig.rewardsToken].supply
-  ) {
-    inflation =
-      parseInt(systemData[eosConfig.rewardsToken].supply.split(' ')[0]) /
-      100 /
-      365
+  if (currencyStats && currencyStats.supply) {
+    inflation = parseInt(currencyStats.supply.split(' ')[0]) / 100 / 365
   }
 
   let blockReward = 0.25 // reward for each block produced
@@ -263,7 +281,6 @@ const getEOSIORewards = async (producers, totalVotes) => {
 const getVotes = (votes) => {
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.telos:
-      return parseFloat(votes)
     case eosConfig.knownNetworks.libre:
       return parseFloat(votes) / 10000
     case eosConfig.knownNetworks.wax:
@@ -279,19 +296,6 @@ const getEOSIOVotes = (votes, weekHalfLife) => {
   const weight = date / (86400 * 7) / weekHalfLife // 86400 = seconds per day 24*3600
 
   return parseFloat(votes) / 2 ** weight
-}
-
-const getEOSPrice = async () => {
-  const query = `
-    query {
-      setting: setting_by_pk(id: 1) {
-        token_price
-      }
-    } 
-  `
-  const data = await hasuraUtil.request(query)
-
-  return data?.setting?.token_price
 }
 
 const jsonParse = (string) => {
