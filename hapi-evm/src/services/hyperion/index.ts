@@ -2,7 +2,7 @@ import moment, { DurationInputArg2 } from 'moment'
 
 import { hyperionConfig } from '../../config'
 import { coreUtil, timeUtil } from '../../utils'
-import { hyperionStateModel } from '../../models'
+import { hyperionStateModel, defaultModel } from '../../models'
 
 import updaters from './updaters'
 
@@ -10,6 +10,7 @@ interface GetActionsParams {
   after: string
   before: string
   skip: number
+  updater: Omit<defaultModel.BuilderListener, 'apply'>
 }
 
 interface GetActionsResponse {
@@ -81,9 +82,9 @@ const getActions = async (
     {
       params: {
         ...params,
-        account: 'eosio.evm', // TODO: get it from updater using the notified_account field
+        account: params.updater.notified_account,
         limit,
-        filter: updaters.map(updater => updater.type).join(','),
+        filter: params.updater.type,
         sort: 'asc',
         simple: true,
         checkLib: true
@@ -107,17 +108,11 @@ const getActions = async (
   }
 }
 
-const runUpdaters = async (actions: any[]) => {
-  for (let index = 0; index < actions.length; index++) {
-    const action = actions[index]
-    const updater = updaters.find(item =>
-      item.type.startsWith(`${action.contract}:${action.action}`)
-    )
-
-    if (!updater) {
-      continue
-    }
-
+const runUpdater = async (
+  updater: Omit<defaultModel.BuilderListener, 'notified_account'>,
+  actions: any[]
+) => {
+  for (const action of actions) {
     await updater.apply(action)
   }
 }
@@ -143,10 +138,22 @@ const sync = async (): Promise<void> => {
   }
 
   try {
-    while (hasMore) {
-      ;({ hasMore, actions } = await getActions({ after, before, skip }))
-      skip += actions.length
-      await runUpdaters(actions)
+    for (const updater of updaters) {
+      while (hasMore) {
+        ;({ hasMore, actions } = await getActions({
+          after,
+          before,
+          skip,
+          updater
+        }))
+        skip += actions.length
+
+        await runUpdater(updater, actions)
+      }
+
+      skip = 0
+      hasMore = true
+      actions = []
     }
   } catch (error: any) {
     console.error('hyperion error', error.message)

@@ -15,20 +15,6 @@ import moment from 'moment'
 const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
 const web3 = new Web3(httpProvider)
 
-// const test = async () => {
-//   const tempBlock: Block = await web3.eth.getBlock(0)
-//   console.log('🚀 ~ tempBlock:', tempBlock)
-
-//   const trx: TransactionInfo = await web3.eth.getTransaction(
-//     '0x4b00d79018d46210b31829285541ae72653e03229a9cff67f362416e5a1c274c'
-//   )
-//   console.log('🚀 ~ trx:', trx)
-//   console.log('🚀 ~ gas:', Number(trx.gas))
-// }
-
-// test()
-
-// TODO: syncronize passed blocks
 const syncFullBlock = async (blockNumber: number | bigint) => {
   const block: Block = await web3.eth.getBlock(blockNumber)
 
@@ -79,8 +65,6 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
   }
 
   await incrementTotalTransactions(block.transactions?.length)
-
-  // TODO: review this logic
 
   const transactionsPromises = [
     cappedBlock.transactions.reduce(
@@ -143,27 +127,21 @@ const getBlock = async () => {
 
 const syncOldBlocks = async (): Promise<void> => {
   const paramStats = await paramModel.queries.getState()
-
   if (paramStats.isSynced) return
-
   const nextBlock = paramStats.nextBlock
   const isUpToDate = await blockModel.queries.default.get({
     number: { _eq: nextBlock }
   })
-
   if (!isUpToDate) {
     const nextBlockTo = await blockModel.queries.default.getNextBlock(nextBlock)
     const nextBlockToNumber = nextBlockTo[0]?.number || 0
-
     if (nextBlockToNumber > nextBlock) {
       console.log(
         `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
       )
     }
-
     await syncFullBlock(nextBlock)
   }
-
   await paramModel.queries.saveOrUpdate(
     nextBlock + 1 * Number(!isUpToDate),
     !!isUpToDate
@@ -181,9 +159,7 @@ const cleanOldBlocks = async () => {
 const syncATH = async () => {
   const currentState = await historicalStatsModel.queries.getState()
   const partialATH = await StatsModel.queries.getPartialATH()
-
   if (!partialATH) return
-
   if (
     currentState.tps_all_time_high.transactions_count ||
     0 < partialATH.ath_transactions_count

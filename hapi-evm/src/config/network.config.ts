@@ -1,5 +1,9 @@
+import { AllowedNetworkType } from '../models/default.model'
+
 export const evmEndpoint =
   process.env.HAPI_EVM_ENDPOINT || 'http://localhost/evm'
+export const network: AllowedNetworkType =
+  (process.env.HAPI_EVM_NETWORK as AllowedNetworkType) || 'EOSIO'
 export const chainId = process.env.HAPI_EVM_NETWORK_CHAIN_ID || 'chainid1'
 export const evmAccount = process.env.HAPI_EVM_EOS_EVM_ACCOUNT || 'eosio.evm'
 export const eosEndpoints =

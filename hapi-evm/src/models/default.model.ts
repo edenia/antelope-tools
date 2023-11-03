@@ -18,3 +18,16 @@ export interface Worker {
   intervalSec?: number
   action: () => Promise<void>
 }
+
+export const AllowedNetwork = {
+  EOSIO: 'EOSIO',
+  TELOS: 'TELOS'
+} as const
+
+export type AllowedNetworkType = keyof typeof AllowedNetwork
+
+export interface BuilderListener {
+  type: string
+  notified_account: string
+  apply: (action: any) => Promise<void>
+}
