@@ -183,6 +183,9 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalWallets')}
+          helperText={t('tooltip.totalWallets', {
+            accountName: evmConfig.account,
+          })}
           value={
             formatWithThousandSeparator(EVMStats?.wallets_created_count) ||
             'N/A'
