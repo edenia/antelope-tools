@@ -522,6 +522,7 @@
     "transactions": "EVM transactions",
     "gasUsed": "Gas Used",
     "tooltip": {
+      "totalWallets": "EVM active addresses of the account table from {{accountName}} contract",
       "gasPrice": "The cost of computational work in EVM, measured in Gas",
       "avgGasUsage": "Average Gas Consumed Over the Last 100 Blocks",
       "totalIncoming": "Total Transfers Received by {{accountName}}",

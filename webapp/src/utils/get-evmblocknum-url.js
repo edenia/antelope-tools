@@ -5,7 +5,7 @@ export const getEVMBlockNumUrl = blockNum => {
     return
   }
 
-  return evmConfig.blockExplorerUrl.replace('(block)', blockNum)
+  return evmConfig.blockExplorerUrl.replace('(block)', parseInt(blockNum))
 }
 
 export default getEVMBlockNumUrl

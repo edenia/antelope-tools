@@ -79,7 +79,7 @@ const useEVMState = t => {
         lower_bound: null,
       })
 
-      return rows[0]?.index + 1
+      return rows[0]?.index + 1 || rows[0]?.id + 1
     } catch (error) {}
   }
 

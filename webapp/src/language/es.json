@@ -540,6 +540,7 @@
     "transactions": "Transacciones EVM",
     "gasUsed": "Gas Usado",
     "tooltip": {
+      "totalWallets": "Direcciones del EVM activas de la tabla account del contrato {{accountName}}",
       "gasPrice": "Combustible virtual usado para ejecutar contratos inteligentes en EVM",
       "avgGasUsage": "Gas promedio utilizado en los últimos 100 bloques",
       "totalIncoming": "Cantidad de transacciones transfer hacia {{accountName}}",
