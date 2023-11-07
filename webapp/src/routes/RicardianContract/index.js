@@ -22,6 +22,9 @@ const RicardianContract = () => {
         httpEndpoint={eosConfig.endpoint}
         LinearProgressColor="primary"
         title={t('title')}
+        url={eosConfig.blockExplorerAccount?.url}
+        abiParams={eosConfig.blockExplorerAccount?.abi || ''}
+        actionsParams={eosConfig.blockExplorerAccount?.actions || ''}
       />
     </Card>
   )
