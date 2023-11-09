@@ -30,19 +30,23 @@ const internal_get = async <T>(
   // TODO: not only accept where but also additional content
   // such as limit, order, etc
   where: object,
+  limit: number | null,
   attributes: string,
   operation?: string
 ): Promise<T> => {
   const gqlObj = gql`
       ${type} (${parameters}) {
-        ${table}${operation ? `_${operation}` : ''}(where: $where) {
+        ${table}${
+          operation ? `_${operation}` : ''
+        }(where: $where, limit: $limit) {
           ${attributes}
         }
       }
     `
 
   return await coreUtil.hasura.default.request<T>(gqlObj, {
-    where
+    where,
+    limit
   })
 }
 
@@ -50,8 +54,9 @@ export const exist = async (hash: string) => {
   const result = await internal_get<TransactionAggregateResponse>(
     Operation.query,
     'evm_transaction',
-    '$where: evm_transaction_bool_exp!',
+    '$where: evm_transaction_bool_exp!, $limit: Int',
     { hash: { _eq: hash } },
+    null,
     'aggregate { count }',
     'aggregate'
   )
@@ -63,9 +68,10 @@ const get = async (where: object, many = false) => {
   const result = await internal_get<TransactionResponse>(
     'query',
     'evm_transaction',
-    '$where: evm_transaction_bool_exp!',
+    '$where: evm_transaction_bool_exp!, $limit: Int',
     where,
-    'hash, gas_used, transactions, number, timestamp'
+    !many ? 1 : null,
+    'hash, block_hash, block_number, gas, gas_price'
   )
 
   return many ? result.evm_transaction : result.evm_transaction[0]
