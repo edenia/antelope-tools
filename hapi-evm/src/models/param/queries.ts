@@ -16,10 +16,15 @@ interface ParamOneResponse {
 const defaultParam = {
   id: '00000000-0000-0000-0000-000000000000',
   nextBlock: 0,
-  isSynced: false
+  isSynced: false,
+  completeAt: null
 }
 
-export const save = async (nextBlock: number, isSynced: boolean = false) => {
+export const save = async (
+  nextBlock: number,
+  isSynced: boolean = false,
+  completeAt: number
+) => {
   const mutation = gql`
     mutation ($payload: evm_param_insert_input!) {
       insert_evm_param_one(object: $payload) {
@@ -33,7 +38,8 @@ export const save = async (nextBlock: number, isSynced: boolean = false) => {
     {
       payload: {
         next_block: nextBlock,
-        is_synced: isSynced
+        is_synced: isSynced,
+        complete_at: completeAt
       }
     }
   )
@@ -44,7 +50,8 @@ export const save = async (nextBlock: number, isSynced: boolean = false) => {
 export const update = async (
   id: string,
   nextBlock: number,
-  isSynced: boolean = false
+  isSynced: boolean = false,
+  completeAt: number
 ) => {
   const mutation = gql`
     mutation ($id: uuid!, $payload: evm_param_set_input) {
@@ -60,7 +67,8 @@ export const update = async (
     id,
     payload: {
       next_block: nextBlock,
-      is_synced: isSynced
+      is_synced: isSynced,
+      complete_at: completeAt
     }
   })
 }
@@ -75,6 +83,7 @@ export const getState = async () => {
         id
         next_block
         is_synced
+        complete_at
       }
     }
   `
@@ -89,21 +98,23 @@ export const getState = async () => {
   return {
     id: state.id,
     nextBlock: state.next_block,
-    isSynced: state.is_synced
+    isSynced: state.is_synced,
+    completeAt: state.complete_at
   }
 }
 
 export const saveOrUpdate = async (
   nextBlock: number,
-  isSynced: boolean
+  isSynced: boolean,
+  completeAt: number
 ): Promise<void> => {
   const currentState = await getState()
 
   if (currentState === defaultParam) {
-    await save(nextBlock, isSynced)
+    await save(nextBlock, isSynced, completeAt)
 
     return
   }
 
-  await update(currentState.id, nextBlock, isSynced)
+  await update(currentState.id, nextBlock, isSynced, completeAt)
 }

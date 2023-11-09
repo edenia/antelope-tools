@@ -129,22 +129,23 @@ const syncOldBlocks = async (): Promise<void> => {
   const paramStats = await paramModel.queries.getState()
   if (paramStats.isSynced) return
   const nextBlock = paramStats.nextBlock
-  const isUpToDate = await blockModel.queries.default.get({
-    number: { _eq: nextBlock }
-  })
+  const nextBlockToNumber =
+    paramStats.completeAt ||
+    (await blockModel.queries.default.getNextBlock(nextBlock))[0]?.number
+  if (!nextBlockToNumber) return
+  const isUpToDate = nextBlock >= nextBlockToNumber
   if (!isUpToDate) {
-    const nextBlockTo = await blockModel.queries.default.getNextBlock(nextBlock)
-    const nextBlockToNumber = nextBlockTo[0]?.number || 0
-    if (nextBlockToNumber > nextBlock) {
-      console.log(
-        `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
-      )
-    }
+    console.log(
+      `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
+    )
     await syncFullBlock(nextBlock)
+  } else {
+    console.log(`Syncing old blocks complete at ${moment().format()}`)
   }
   await paramModel.queries.saveOrUpdate(
     nextBlock + 1 * Number(!isUpToDate),
-    !!isUpToDate
+    !!isUpToDate,
+    nextBlockToNumber
   )
 }
 
