@@ -126,6 +126,7 @@ const getBlock = async () => {
 }
 
 const syncOldBlocks = async (): Promise<void> => {
+  let blocksInserted = 1
   const paramStats = await paramModel.queries.getState()
   if (paramStats.isSynced) return
   const nextBlock = paramStats.nextBlock
@@ -138,12 +139,17 @@ const syncOldBlocks = async (): Promise<void> => {
     console.log(
       `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
     )
-    await syncFullBlock(nextBlock)
+    blocksInserted = Math.min(100, nextBlockToNumber - nextBlock)
+    const blockPromises = []
+    for (let index = 0; index < blocksInserted; index++) {
+      blockPromises.push(syncFullBlock(nextBlock + index))
+    }
+    await Promise.allSettled(blockPromises)
   } else {
     console.log(`Syncing old blocks complete at ${moment().format()}`)
   }
   await paramModel.queries.saveOrUpdate(
-    nextBlock + 1 * Number(!isUpToDate),
+    nextBlock + blocksInserted * Number(!isUpToDate),
     !!isUpToDate,
     nextBlockToNumber
   )
