@@ -38,6 +38,7 @@ const internal_get = async <T>(
   // such as limit, order, etc
   where: object,
   order: object | null,
+  limit: number | null,
   attributes: string,
   operation?: string
 ): Promise<T> => {
@@ -45,7 +46,7 @@ const internal_get = async <T>(
       ${type} (${parameters}) {
         ${table}${
           operation ? `_${operation}` : ''
-        }(where: $where, order_by: $order) {
+        }(where: $where, order_by: $order, limit: $limit) {
           ${attributes}
         }
       }
@@ -53,7 +54,8 @@ const internal_get = async <T>(
 
   return await coreUtil.hasura.default.request<T>(query, {
     where,
-    order
+    order,
+    limit
   })
 }
 
@@ -61,12 +63,13 @@ export const exist = async (hashOrNumber: string | number) => {
   const result = await internal_get<BlockAggregateResponse>(
     'query',
     'evm_block',
-    '$where: evm_block_bool_exp!, $order: [evm_block_order_by!]',
+    '$where: evm_block_bool_exp!, $order: [evm_block_order_by!], $limit: Int',
     {
       [typeof hashOrNumber === 'string' ? 'hash' : 'number']: {
         _eq: hashOrNumber
       }
     },
+    null,
     null,
     'aggregate { count }',
     'aggregate'
@@ -83,9 +86,10 @@ const get = async (
   const result = await internal_get<BlockResponse>(
     'query',
     'evm_block',
-    '$where: evm_block_bool_exp!, $order: [evm_block_order_by!]',
+    '$where: evm_block_bool_exp!, $order: [evm_block_order_by!], $limit: Int',
     where,
     order,
+    !many ? 1 : null,
     'hash, gas_used, transactions, number, timestamp'
   )
 
