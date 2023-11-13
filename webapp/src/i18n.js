@@ -1,6 +1,8 @@
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
+
+import { generalConfig } from './config'
 import resources from './language'
 
 i18n
@@ -10,7 +12,8 @@ i18n
     load: 'unspecific',
     resources,
     fallbackNS: 'common',
-    fallbackLng: 'en',
+    fallbackLng: generalConfig.defaultLanguage,
+    supportedLngs: generalConfig.languages,
     interpolation: {
       escapeValue: false
     }

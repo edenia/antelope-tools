@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
+import { useTranslation } from 'react-i18next'
 
 import jungleImg from '../../assets/jungle.webp'
 import waxImg from '../../assets/wax.webp'
@@ -15,6 +16,7 @@ import eosImg from '../../assets/eos.webp'
 import airwireImg from '../../assets/airwire.png'
 import ultraImg from '../../assets/ultra.webp'
 import libreImg from '../../assets/libre.webp'
+import { getLocaleUrl } from 'utils/url-localization'
 
 import styles from './styles'
 
@@ -70,6 +72,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
   const [selected] = useState(-1)
   const [open, setOpen] = useState(false)
   const [networks, setNetworks] = useState({ testnet: [], mainnet: [] })
+  const { i18n } = useTranslation('translations')
 
   const toggleDropdown = () => {
     setOpen(!open)
@@ -126,7 +129,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={option.value} target="_self">
+                  <a href={getLocaleUrl(option.value, i18n.language)} target="_self">
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>
@@ -143,7 +146,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={option.value} target="_self">
+                  <a href={getLocaleUrl(option.value, i18n.language)} target="_self">
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>

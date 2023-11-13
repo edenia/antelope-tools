@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
@@ -17,6 +16,7 @@ import {
   TRANFER_FAUCET_TOKENS_MUTATION,
 } from '../../gql'
 import { useSnackbarMessageState } from '../../context/snackbar-message.context'
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -80,9 +80,9 @@ const Faucet = () => {
       showMessage({
         type: 'success',
         content: (
-          <Link to={`/accounts?account=${account}`}>{`${t(
+          <LocaleLink to={`/accounts?account=${account}`}>{`${t(
             'newCreatedAccount',
-          )} ${account}`}</Link>
+          )} ${account}`}</LocaleLink>
         ),
       })
     } catch (err) {

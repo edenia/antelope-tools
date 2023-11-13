@@ -28,3 +28,5 @@ export const healthLights = Object.freeze({
   yellowLight: 'yellowLight',
   redLight: 'redLight',
 })
+export const languages = ['en','es']
+export const defaultLanguage = 'en'

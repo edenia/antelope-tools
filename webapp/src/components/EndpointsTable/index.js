@@ -10,7 +10,6 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import { Tooltip as MUITooltip } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
 import Link from '@mui/material/Link'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
@@ -19,6 +18,7 @@ import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from '../HealthCheck/HealthCheckInfo'
 import { getStatus } from 'utils'
 import { eosConfig } from '../../config'
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -84,7 +84,7 @@ const EndpointsTable = ({ producers, textLists }) => {
                   <div className={classes.healthContainer}>
                     <Link
                       aria-label={`BP ${producer.name} Profile`}
-                      component={RouterLink}
+                      component={LocaleLink}
                       to={`/${eosConfig.producersRoute}/${producer.name}`}
                       color="primary"
                     >
@@ -96,7 +96,7 @@ const EndpointsTable = ({ producers, textLists }) => {
                         <Link
                           aria-label={`Link to endpoints stats of ${producer.name}`}
                           title={`${producer.name} endpoints stats`}
-                          component={RouterLink}
+                          component={LocaleLink}
                           state={{ producerId: producer.id }}
                           to="/endpoints-stats"
                           color="primary"

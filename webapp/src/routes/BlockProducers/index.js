@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
@@ -9,6 +8,7 @@ import Pagination from '@mui/material/Pagination'
 import PaginationItem from '@mui/material/PaginationItem'
 
 import { eosConfig } from '../../config'
+import LocaleLink from '../../components/LocaleLink'
 import SearchBar from '../../components/SearchBar'
 import useBlockProducerState from '../../hooks/customHooks/useBlockProducerState'
 import NoResults from '../../components/NoResults'
@@ -39,9 +39,9 @@ const PaginationWrapper = ({
       shape="rounded"
       renderItem={item =>
         item.page !== page && item.page > 0 && item.page <= totalPages ? (
-          <Link to={`/${eosConfig.producersRoute}?page=${item.page}`}>
+          <LocaleLink to={`/${eosConfig.producersRoute}?page=${item.page}`}>
             <PaginationItem {...item} />
-          </Link>
+          </LocaleLink>
         ) : (
           <PaginationItem {...item} />
         )

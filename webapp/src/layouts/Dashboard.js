@@ -7,7 +7,8 @@ import Hidden from '@mui/material/Hidden'
 import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -20,6 +21,7 @@ import { useSharedState } from '../context/state.context'
 import routes from '../routes'
 
 import styles from './styles'
+import { getLanguageFromURL, getLocaleUrl } from 'utils/url-localization'
 
 const drawerWidth = 70
 const openDrawerWidth = drawerWidth * (24 / 7)
@@ -50,6 +52,8 @@ const Dashboard = ({ children }) => {
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
 
+  const navigate = useNavigate()
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -57,7 +61,26 @@ const Dashboard = ({ children }) => {
   const removeParam = route => route.substring(0, route.lastIndexOf('/'))
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/, '') || '/'
+    let path = location.pathname.replace(/\/$/, '') || '/'
+    const selectedLanguage = getLanguageFromURL(path)
+
+    if (selectedLanguage) {
+      path = path.substring(0, path.length - 3) || '/'
+
+      if (selectedLanguage !== i18n.language) {
+        moment.locale(selectedLanguage)
+        i18n.changeLanguage(selectedLanguage)
+      }
+
+      if (generalConfig.defaultLanguage === selectedLanguage) {
+        navigate(path + location.search)
+      }
+    } else {
+      if (generalConfig.defaultLanguage !== i18n.language) {
+        navigate(getLocaleUrl(path + location.search, i18n.language))
+      }
+    }
+
     const route = routes.find(route =>
       route.useParams
         ? removeParam(route.path) === removeParam(path)

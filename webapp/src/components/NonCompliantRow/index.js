@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import LanguageIcon from '@mui/icons-material/Language'
@@ -15,6 +14,7 @@ import HealthCheck from '../HealthCheck'
 import HealthCheckInfo from 'components/HealthCheck/HealthCheckInfo'
 import isValidUrl from '../../utils/validate-url'
 import VisitSite from 'components/VisitSite'
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -37,7 +37,7 @@ const NonCompliantRow = ({ producer, tokenPrice }) => {
       <TableCell align="center">
         <Typography variant="h6" component="h2">
           <Link
-            component={RouterLink}
+            component={LocaleLink}
             to={`/${eosConfig.producersRoute}/${producer?.owner}`}
             underline="none"
             color="inherit"
