@@ -63,7 +63,7 @@ const LanguageMenu = () => {
   }
 
   return (
-    <Hidden smDown implementation="css">
+    <>
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
@@ -89,7 +89,7 @@ const LanguageMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-    </Hidden>
+    </>
   )
 }
 

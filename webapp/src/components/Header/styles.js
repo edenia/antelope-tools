@@ -47,7 +47,6 @@ export default (theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '250px',
-      gap: 0,
       justifyContent: 'end',
     },
   },
