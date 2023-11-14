@@ -79,26 +79,28 @@ const LanguageMenu = () => {
         })}
         onClick={closeMenu}
       ></div>
-      <Card
-        className={clsx(classes.hideMenu, {
+      <div
+        className={clsx(classes.hiddenlanguageMenu, {
           [classes.languageMenu]: Boolean(anchorMenu),
         })}
       >
-        {languages.map(language => (
-          <Button
-            key={`language-menu-${language.value}`}
-            onClick={() => closeMenu(language.value)}
-            onFocus={toggleMenu}
-            onBlur={closeMenu}
-            component={LocaleLink}
-            to={location.pathname + location.search}
-            locale={language.value}
-            color='inherit'
-          >
-            {language.label}
-          </Button>
-        ))}
-      </Card>
+        <Card>
+          {languages.map(language => (
+            <Button
+              key={`language-menu-${language.value}`}
+              onClick={() => closeMenu(language.value)}
+              onFocus={toggleMenu}
+              onBlur={closeMenu}
+              component={LocaleLink}
+              to={location.pathname + location.search}
+              locale={language.value}
+              color="inherit"
+            >
+              {language.label}
+            </Button>
+          ))}
+        </Card>
+      </div>
     </>
   )
 }

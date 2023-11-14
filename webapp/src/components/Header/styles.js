@@ -149,27 +149,34 @@ export default (theme) => ({
       color: theme.palette.primary.contrastText,
     },
   },
-  hideMenu: {
-    maxHeight: 0,
-    margin: 0,
-    zIndex: 2,
-    width: 50,
-    position: 'absolute',
-    padding: '0 !important',
-    transition: 'none !important',
-    overflow: 'hidden !important',
-    boxShadow: 'none !important',
+  hiddenlanguageMenu: {
+    width: 0,
+    height: 0,
+    '& > div': {
+      maxHeight: 0,
+      margin: 0,
+      zIndex: 2,
+      width: 0,
+      position: 'relative',
+      padding: '0 !important',
+      transition: 'none !important',
+      overflow: 'hidden !important',
+      boxShadow: 'none !important',
+    }
   },
   languageMenu: {
-    maxHeight: 1000,
-    maxWidth: 50,
-    opacity: 1,
-    boxShadow: `${theme.palette.shadows.card} !important`,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    top: 60,
-    left: 'calc(100% - 70px)'
+    '& > div': {
+      maxWidth: 50,
+      width: 50,
+      maxHeight: 1000,
+      opacity: 1,
+      top: 25,
+      left: 'calc(100% - 65px)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: `${theme.palette.shadows.card} !important`
+    }
   },
   hideElement: {
     height: 0,
