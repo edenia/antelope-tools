@@ -139,7 +139,7 @@ const syncOldBlocks = async (): Promise<void> => {
     console.log(
       `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
     )
-    blocksInserted = Math.min(100, nextBlockToNumber - nextBlock)
+    blocksInserted = Math.min(25, nextBlockToNumber - nextBlock)
     const blockPromises = []
     for (let index = 0; index < blocksInserted; index++) {
       blockPromises.push(syncFullBlock(nextBlock + index))
