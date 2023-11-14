@@ -26,6 +26,12 @@ export const getLanguageFromURL = path => {
   return generalConfig.languages.find(lang => lang === language)
 }
 
+export const removeLanguageFromURL = path => {
+  const language = getLanguageFromURL(path)
+
+  return language ? path.substring(0, path.length - 3) || '/' : path
+}
+
 export const localizeRoutes = routes => {
   const languages = generalConfig.languages.filter(
     language => language !== generalConfig.defaultLanguage,

@@ -21,7 +21,7 @@ import { useSharedState } from '../context/state.context'
 import routes from '../routes'
 
 import styles from './styles'
-import { getLanguageFromURL, getLocaleUrl } from 'utils/url-localization'
+import { getLocaleUrl, getLanguageFromURL, removeLanguageFromURL } from 'utils/url-localization'
 
 const drawerWidth = 70
 const openDrawerWidth = drawerWidth * (24 / 7)
@@ -65,7 +65,7 @@ const Dashboard = ({ children }) => {
     const selectedLanguage = getLanguageFromURL(path)
 
     if (selectedLanguage) {
-      path = path.substring(0, path.length - 3) || '/'
+      path = removeLanguageFromURL(path)
 
       if (selectedLanguage !== i18n.language) {
         moment.locale(selectedLanguage)
