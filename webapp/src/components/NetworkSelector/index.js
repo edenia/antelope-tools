@@ -16,7 +16,7 @@ import eosImg from '../../assets/eos.webp'
 import airwireImg from '../../assets/airwire.png'
 import ultraImg from '../../assets/ultra.webp'
 import libreImg from '../../assets/libre.webp'
-import { getLocaleUrl } from 'utils/url-localization'
+import { getLocalePath } from 'utils/url-localization'
 
 import styles from './styles'
 
@@ -129,7 +129,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={getLocaleUrl(option.value, i18n.language)} target="_self">
+                  <a href={option.value + getLocalePath('/', i18n.language)} target="_self">
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>
@@ -146,7 +146,7 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={getLocaleUrl(option.value, i18n.language)} target="_self">
+                  <a href={option.value + getLocalePath('/', i18n.language)} target="_self">
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>

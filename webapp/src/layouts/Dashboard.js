@@ -21,7 +21,7 @@ import { useSharedState } from '../context/state.context'
 import routes from '../routes'
 
 import styles from './styles'
-import { getLocaleUrl, getLanguageFromURL, removeLanguageFromURL } from 'utils/url-localization'
+import { getLocalePath, getLanguageFromPath, removeLanguageFromPath } from 'utils/url-localization'
 
 const drawerWidth = 70
 const openDrawerWidth = drawerWidth * (24 / 7)
@@ -61,11 +61,17 @@ const Dashboard = ({ children }) => {
   const removeParam = route => route.substring(0, route.lastIndexOf('/'))
 
   useEffect(() => {
-    let path = location.pathname.replace(/\/$/, '') || '/'
-    const selectedLanguage = getLanguageFromURL(path)
+    const trailingSlashRegex = /\/$/
+    let path = location.pathname
+    
+    if (path !== '/' && trailingSlashRegex.test(path)){
+      navigate(path.replace(trailingSlashRegex, ''))
+    }
+    
+    const selectedLanguage = getLanguageFromPath(path)
 
     if (selectedLanguage) {
-      path = removeLanguageFromURL(path)
+      path = removeLanguageFromPath(path)
 
       if (selectedLanguage !== i18n.language) {
         moment.locale(selectedLanguage)
@@ -77,7 +83,7 @@ const Dashboard = ({ children }) => {
       }
     } else {
       if (generalConfig.defaultLanguage !== i18n.language) {
-        navigate(getLocaleUrl(path + location.search, i18n.language))
+        navigate(getLocalePath(path + location.search, i18n.language))
       }
     }
 

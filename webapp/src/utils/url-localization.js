@@ -1,35 +1,34 @@
 import { generalConfig } from '../config'
 
-export const getLocaleUrl = (url, newLocale) => {
+export const getLocalePath = (url, newLocale) => {
   let { 0: path, 1: search } = url.split('?')
-  const pathLanguage = getLanguageFromURL(path)
+  const pathLanguage = getLanguageFromPath(path)
+  const isDefaultLanguage = generalConfig.defaultLanguage === newLocale
 
-  if (generalConfig.defaultLanguage !== newLocale && pathLanguage === newLocale)
-    return url
+  if (!isDefaultLanguage && pathLanguage === newLocale) return url
 
   if (pathLanguage) {
-    path = path.substring(0, path.length - 3)
+    path = path.substring(3)
   }
 
   return (
+    (!isDefaultLanguage ? `/${newLocale}` : '') +
     path +
-    (/\/$/.test(path) ? '' : '/') +
-    (generalConfig.defaultLanguage !== newLocale ? newLocale : '') +
     (search ? `?${search}` : '')
   )
 }
 
-export const getLanguageFromURL = path => {
+export const getLanguageFromPath = path => {
   const { 0: pathname } = path.split('?')
-  const language = pathname.substring(pathname.length - 3).replace('/', '')
+  const language = pathname.substring(1, 4).replace(/\/$/, '')
 
   return generalConfig.languages.find(lang => lang === language)
 }
 
-export const removeLanguageFromURL = path => {
-  const language = getLanguageFromURL(path)
+export const removeLanguageFromPath = path => {
+  const language = getLanguageFromPath(path)
 
-  return language ? path.substring(0, path.length - 3) || '/' : path
+  return language ? path.substring(3) || '/' : path
 }
 
 export const localizeRoutes = routes => {
@@ -41,10 +40,9 @@ export const localizeRoutes = routes => {
     routes.flatMap(route =>
       route.path === '*'
         ? []
-        : languages.map(language => ({
+        : languages.map(lang => ({
             ...route,
-            path:
-              route.path === '/' ? '/' + language : route.path + '/' + language,
+            path: getLocalePath(route.path, lang),
           })),
     ),
   )
