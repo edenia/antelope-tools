@@ -1,10 +1,10 @@
 import React, { useState, lazy, Suspense } from 'react'
 import { useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import { makeStyles } from '@mui/styles'
+import Card from '@mui/material/Card'
 import Hidden from '@mui/material/Hidden'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import AppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import Skeleton from '@mui/material/Skeleton'
@@ -25,7 +25,7 @@ const AuthButton = lazy(() => import('./AuthButton'))
 
 const useStyles = makeStyles(styles)
 
-const languages = generalConfig.languages.map(language => ({
+const languages = generalConfig.languages.map((language) => ({
   value: language,
   label: language.toUpperCase(),
 }))
@@ -67,28 +67,38 @@ const LanguageMenu = () => {
       <Button
         startIcon={<LanguageIcon />}
         onClick={toggleMenu}
+        onFocus={toggleMenu}
+        onBlur={closeMenu}
         className={classes.btnLanguage}
       >
         <span>{i18n.language.substring(0, 2).toUpperCase()}</span>
       </Button>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorMenu}
-        open={Boolean(anchorMenu)}
-        onClose={closeMenu}
+      <div
+        className={clsx(classes.hideElement, {
+          [classes.popOverBackground]: Boolean(anchorMenu),
+        })}
+        onClick={closeMenu}
+      ></div>
+      <Card
+        className={clsx(classes.hideMenu, {
+          [classes.languageMenu]: Boolean(anchorMenu),
+        })}
       >
-        {languages.map((language) => (
-          <MenuItem
+        {languages.map(language => (
+          <Button
             key={`language-menu-${language.value}`}
             onClick={() => closeMenu(language.value)}
+            onFocus={toggleMenu}
+            onBlur={closeMenu}
             component={LocaleLink}
             to={location.pathname + location.search}
             locale={language.value}
+            color='inherit'
           >
             {language.label}
-          </MenuItem>
+          </Button>
         ))}
-      </Menu>
+      </Card>
     </>
   )
 }

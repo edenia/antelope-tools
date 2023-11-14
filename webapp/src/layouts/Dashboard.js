@@ -115,6 +115,7 @@ const Dashboard = ({ children }) => {
       <CssBaseline />
       <GlobalStyle />
       <PageTitle
+        language={i18n.language}
         title={routeName.pageTitle}
         metaTitle={routeName.dynamicTitle || t('metaTitle')}
         metaDescription={

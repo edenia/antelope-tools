@@ -149,4 +149,40 @@ export default (theme) => ({
       color: theme.palette.primary.contrastText,
     },
   },
+  hideMenu: {
+    maxHeight: 0,
+    margin: 0,
+    zIndex: 2,
+    width: 50,
+    position: 'absolute',
+    padding: '0 !important',
+    transition: 'none !important',
+    overflow: 'hidden !important',
+    boxShadow: 'none !important',
+  },
+  languageMenu: {
+    maxHeight: 1000,
+    maxWidth: 50,
+    opacity: 1,
+    boxShadow: `${theme.palette.shadows.card} !important`,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    top: 60,
+    left: 'calc(100% - 70px)'
+  },
+  hideElement: {
+    height: 0,
+    width: 0,
+    display: 'none',
+  },
+  popOverBackground: {
+    display: 'initial',
+    width: '100%',
+    height: '100vh',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1
+  },
 })
