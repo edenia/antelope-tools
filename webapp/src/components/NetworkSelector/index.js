@@ -74,6 +74,14 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
   const [networks, setNetworks] = useState({ testnet: [], mainnet: [] })
   const { i18n } = useTranslation('translations')
 
+  const openDropdown = () => {
+    setOpen(true)
+  }
+
+  const closeDropdown = () => {
+    setOpen(false)
+  }
+
   const toggleDropdown = () => {
     setOpen(!open)
   }
@@ -125,6 +133,8 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
               {networks.mainnet.map((option, i) => (
                 <li
                   key={i}
+                  onFocus={openDropdown}
+                  onBlur={closeDropdown}
                   className={clsx(classes.listItem, {
                     [classes.listItemActive]: i === selected,
                   })}
@@ -142,6 +152,8 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
               {networks.testnet.map((option, i) => (
                 <li
                   key={i}
+                  onFocus={openDropdown}
+                  onBlur={closeDropdown}
                   className={clsx(classes.listItem, {
                     [classes.listItemActive]: i === selected,
                   })}
