@@ -62,7 +62,7 @@
     "goBack": "Regresar"
   },
   "routes": {
-    "/>sidebar": "Panel",
+    "/>sidebar": "Monitor",
     "/>title": "Monitor de infraestructura y panel de control de la red {{networkName}}",
     "/>heading": "Bienvenido a {{networkName}}",
     "/cpu-benchmark>sidebar": "Benchmark de CPU",
@@ -85,7 +85,7 @@
     "/nodes-distribution>sidebar": "Geo Distribución",
     "/nodes-distribution>title": "Distribución Geográfica de Nodos - Monitor de red de {{networkName}}",
     "/nodes-distribution>heading": "Distribución Geográfica de los nodos de {{networkName}}",
-    "/stress-test>title": "Panel de Prueba de Estrés - Monitor de red de {{networkName}}",
+    "/stress-test>title": "Monitor de Prueba de Estrés - Monitor de red de {{networkName}}",
     "/stress-test>sidebar": "Prueba de Estrés",
     "/stress-test>heading": "Prueba de Estrés en {{networkName}}",
     "/accounts>sidebar": "Cuentas y Contratos",

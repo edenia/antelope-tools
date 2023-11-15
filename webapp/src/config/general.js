@@ -1,3 +1,5 @@
+import resources from '../language'
+
 export const useRewards = process.env.REACT_APP_USE_REWARDS === 'true'
 export const useVotes = process.env.REACT_APP_USE_VOTES === 'true'
 export const title = process.env.REACT_APP_TITLE
@@ -28,5 +30,6 @@ export const healthLights = Object.freeze({
   yellowLight: 'yellowLight',
   redLight: 'redLight',
 })
-export const languages = ['en','es']
 export const defaultLanguage = 'en'
+export const languageResources = resources
+export const languages = Object.keys(resources)
