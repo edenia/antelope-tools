@@ -4,6 +4,7 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://jungle.antelope.tools</loc>
+      <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
