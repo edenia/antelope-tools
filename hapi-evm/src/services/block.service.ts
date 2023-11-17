@@ -1,5 +1,10 @@
 import { Web3 } from 'web3'
-import { Block, TransactionInfo, TransactionHash } from 'web3-types'
+import {
+  Block,
+  TransactionInfo,
+  TransactionHash,
+  TransactionReceipt
+} from 'web3-types'
 
 import {
   defaultModel,
@@ -45,6 +50,21 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     timestamp: blockTimestamp
   }
 
+  if (block.transactions?.length && cappedBlock.gas_used <= 0) {
+    cappedBlock.gas_used = await cappedBlock.transactions.reduce(
+      async (
+        total: Promise<number>,
+        trxHash: TransactionHash
+      ): Promise<number> => {
+        const transactionReceipt: TransactionReceipt =
+          await web3.eth.getTransactionReceipt(trxHash.toString())
+
+        return (await total) + Number(transactionReceipt?.gasUsed)
+      },
+      Promise.resolve(0)
+    )
+  }
+
   try {
     await blockModel.queries.add_or_modify(cappedBlock)
   } catch (error: any) {
@@ -64,41 +84,29 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     return
   }
 
+  if (!block.transactions?.length) return
+
   await incrementTotalTransactions(block.transactions?.length)
 
-  const transactionsPromises = [
-    cappedBlock.transactions.reduce(
-      async (
-        acc: Promise<transactionModel.interfaces.CappedTransaction[]>,
-        trxHash: TransactionHash
-      ): Promise<transactionModel.interfaces.CappedTransaction[]> => {
-        const transactionExist = await transactionModel.queries.exist(trxHash)
+  const cappedTransactions = await Promise.all(
+    cappedBlock.transactions.map(async (trxHash: TransactionHash) => {
+      const trx: TransactionInfo = await web3.eth.getTransaction(
+        trxHash.toString()
+      )
 
-        if (transactionExist) {
-          return acc
-        }
+      const customTrx: transactionModel.interfaces.CappedTransaction = {
+        block_hash: trx.blockHash!.toString(),
+        block_number: Number(trx.blockNumber),
+        gas: Number(trx.gas),
+        gas_price: Number(trx.gasPrice),
+        hash: trx.hash.toString()
+      }
 
-        const trx: TransactionInfo = await web3.eth.getTransaction(
-          trxHash.toString()
-        )
+      return customTrx
+    })
+  )
 
-        const customTrx: transactionModel.interfaces.CappedTransaction = {
-          block_hash: trx.blockHash!.toString(),
-          block_number: Number(trx.blockNumber),
-          gas: Number(trx.gas),
-          gas_price: Number(trx.gasPrice),
-          hash: trx.hash.toString()
-        }
-
-        await transactionModel.queries.add_or_modify(customTrx)
-
-        return [...(await acc), customTrx]
-      },
-      Promise.resolve([])
-    )
-  ]
-
-  await Promise.all(transactionsPromises)
+  await transactionModel.queries.add_or_modify_many(cappedTransactions)
 }
 
 const incrementTotalTransactions = async (transactionsCount: number) => {
