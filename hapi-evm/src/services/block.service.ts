@@ -86,8 +86,6 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
 
   if (!block.transactions?.length) return
 
-  await incrementTotalTransactions(block.transactions?.length)
-
   const cappedTransactions = await Promise.all(
     cappedBlock.transactions.map(async (trxHash: TransactionHash) => {
       const trx: TransactionInfo = await web3.eth.getTransaction(
@@ -107,6 +105,7 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
   )
 
   await transactionModel.queries.add_or_modify_many(cappedTransactions)
+  await incrementTotalTransactions(block.transactions?.length)
 }
 
 const incrementTotalTransactions = async (transactionsCount: number) => {
