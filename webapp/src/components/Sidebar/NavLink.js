@@ -7,7 +7,13 @@ import { getLocalePath } from '../../utils/url-localization'
 const NavLink = forwardRef(function NavLink(props, ref) {
   const { i18n } = useTranslation()
 
-  return <RouterNavLink ref={ref} {...props} to={getLocalePath(props.to,i18n.language)}/>
+  return (
+    <RouterNavLink
+      {...props}
+      to={getLocalePath(props.to, i18n.language)}
+      ref={ref}
+    />
+  )
 })
 
 export default NavLink

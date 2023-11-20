@@ -28,7 +28,7 @@ PageTitle.defaultProps = {
   metaTitle: '',
   metaDescription: '',
   ldJson: null,
-  language: ''
+  language: '',
 }
 
 export default PageTitle

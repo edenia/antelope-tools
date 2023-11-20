@@ -29,5 +29,5 @@ export default {
   'en.wax-testnet': enWaxTestnet,
   'en.airwire': enAirwire,
   'en.airwire-testnet': enAirwireTestnet,
-  'en.ultra-testnet': enUltraTestnet
+  'en.ultra-testnet': enUltraTestnet,
 }

@@ -139,7 +139,10 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={option.value + getLocalePath('/', i18n.language)} target="_self">
+                  <a
+                    href={option.value + getLocalePath('/', i18n.language)}
+                    target="_self"
+                  >
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>
@@ -158,7 +161,10 @@ const NetworkSelector = ({ title, options, networkLogo }) => {
                     [classes.listItemActive]: i === selected,
                   })}
                 >
-                  <a href={option.value + getLocalePath('/', i18n.language)} target="_self">
+                  <a
+                    href={option.value + getLocalePath('/', i18n.language)}
+                    target="_self"
+                  >
                     <LogoSvg name={option.icon} />
                     {option.label}
                   </a>

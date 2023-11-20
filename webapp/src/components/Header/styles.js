@@ -26,7 +26,7 @@ export default (theme) => ({
         width: '70%',
         marginLeft: theme.spacing(2.5),
       },
-    }
+    },
   },
   appBar: {
     height: '100%',
@@ -162,7 +162,7 @@ export default (theme) => ({
       transition: 'none !important',
       overflow: 'hidden !important',
       boxShadow: 'none !important',
-    }
+    },
   },
   languageMenu: {
     '& > div': {
@@ -175,8 +175,8 @@ export default (theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      boxShadow: `${theme.palette.shadows.card} !important`
-    }
+      boxShadow: `${theme.palette.shadows.card} !important`,
+    },
   },
   hideElement: {
     height: 0,
@@ -190,6 +190,6 @@ export default (theme) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    zIndex: 1
+    zIndex: 1,
   },
 })
