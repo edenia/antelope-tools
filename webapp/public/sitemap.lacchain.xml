@@ -4,71 +4,139 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://lacchain.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/entities</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/entities"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/nodes"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/endpoints"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/endpoints-stats"/>
       <lastmod>2023-04-25</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/lacchain/network</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/lacchain/network"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/nodes-distribution"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/block-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/block-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/missed-blocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/missed-blocks"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/cpu-benchmark</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/cpu-benchmark"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/ricardian-contract"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/management</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/management"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/node-config</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/node-config"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/about"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/help"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://lacchain.antelope.tools/entities/costarica</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://lacchain.antelope.tools/es/entities/costarica"/>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

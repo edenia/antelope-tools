@@ -4,151 +4,299 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://libre.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/nodes"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/endpoints"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/nodes-distribution"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/rewards-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
       <url>
       <loc>https://libre.antelope.tools/missed-blocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/missed-blocks"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/cpu-benchmark</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/cpu-benchmark"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/endpoints-stats"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/undiscoverable-bps"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/ricardian-contract"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/bpjson"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/about"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/help"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/libretech</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/libretech"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/xennetwork</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/xennetwork"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/sweden</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/sweden"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/cryptobloks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/cryptobloks"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/hotstart</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/hotstart"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/teamgreymass</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/teamgreymass"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/eosphere</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/eosphere"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/goodblock</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/goodblock"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/quantum</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/quantum"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/heliosblocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/heliosblocks"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/blocktime</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/blocktime"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/edeniaedenia</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/edeniaedenia"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/draperx</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/draperx"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/interchainbp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/interchainbp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/rioblocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/rioblocks"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/libremt</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/libremt"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/cryptolions</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/cryptolions"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/genereos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/genereos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/eosusa</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/eosusa"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/cultureblock</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/cultureblock"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://libre.antelope.tools/block-producers/uberleap</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://libre.antelope.tools/es/block-producers/uberleap"/>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

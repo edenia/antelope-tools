@@ -4,155 +4,307 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://telos.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/nodes"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/endpoints"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/nodes-distribution"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/rewards-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/endpoints-stats"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/undiscoverable-bps"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/ricardian-contract"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/evm</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/evm"/>
       <lastmod>2023-09-30</lastmod>
    </url>
       <url>
       <loc>https://telos.antelope.tools/evm-rpc-endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/evm-rpc-endpoints"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/bpjson"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/about"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/help"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/caleosblocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/caleosblocks"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/infinitybloc</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/infinitybloc"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/teamgreymass</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/teamgreymass"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosgreenbp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosgreenbp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/eosphereiobp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/eosphereiobp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosunlimit</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosunlimit"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/kainosblkpro</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/kainosblkpro"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/votetelosusa</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/votetelosusa"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosmadrid1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosmadrid1"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/persiantelos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/persiantelos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosarabia1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosarabia1"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosglobal1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosglobal1"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/teleologytls</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/teleologytls"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/teloskitchen</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/teloskitchen"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/telosgermany</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/telosgermany"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/bp.boid</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/bp.boid"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/eosriobrazil</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/eosriobrazil"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/southafrica1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/southafrica1"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/argentinatls</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/argentinatls"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/amsterdam</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/amsterdam"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/creativblock</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/creativblock"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers/edeniaedenia</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers/edeniaedenia"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://telos.antelope.tools/block-producers?page=2</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://telos.antelope.tools/es/block-producers?page=2"/>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

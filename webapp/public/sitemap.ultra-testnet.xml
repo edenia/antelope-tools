@@ -4,23 +4,43 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://ultra-testnet.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://ultra-testnet.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://ultra-testnet.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/faucet</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://ultra-testnet.antelope.tools/es/faucet"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://ultra-testnet.antelope.tools/es/about"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://ultra-testnet.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://ultra-testnet.antelope.tools/es/help"/>
       <lastmod>2023-09-30</lastmod>
    </url>
 </urlset>

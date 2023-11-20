@@ -4,159 +4,315 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://eos.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/nodes"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/endpoints"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/nodes-distribution"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/endpoints-stats"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/rewards-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/undiscoverable-bps"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/ricardian-contract"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/evm</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/evm"/>
       <lastmod>2023-11-06</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/evm-rpc-endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/evm-rpc-endpoints"/>
       <lastmod>2023-11-06</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/bpjson"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/about"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/help"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/aus1genereos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/aus1genereos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/newdex.bp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/newdex.bp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/big.one</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/big.one"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eoseouldotio</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eoseouldotio"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/binancestake</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/binancestake"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/atticlabeosb</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/atticlabeosb"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/ivote4eosusa</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/ivote4eosusa"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/starteosiobp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/starteosiobp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosnationftw</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosnationftw"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosflytomars</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosflytomars"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosiosg11111</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosiosg11111"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/blockpooleos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/blockpooleos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosphereiobp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosphereiobp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/bp.defi</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/bp.defi"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eoslaomaocom</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eoslaomaocom"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/hashfineosio</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/hashfineosio"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosasia11111</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosasia11111"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eoscannonchn</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eoscannonchn"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/eosinfstones</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/eosinfstones"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/whaleex.com</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/whaleex.com"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/bitfinexeos1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/bitfinexeos1"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers/costaricaeos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers/costaricaeos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers?page=2</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers?page=2"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://eos.antelope.tools/block-producers?page=3</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://eos.antelope.tools/es/block-producers?page=3"/>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>

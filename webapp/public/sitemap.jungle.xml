@@ -4,155 +4,307 @@
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://jungle.antelope.tools</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es"/>
       <priority>1.0</priority>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/nodes"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/endpoints"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/nodes-distribution"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/rewards-distribution"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/endpoints-stats"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/undiscoverable-bps"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/cpu-benchmark</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/cpu-benchmark"/>
       <lastmod>2023-09-10</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/ricardian-contract"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/evm</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/evm"/>
       <lastmod>2023-11-04</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/evm-rpc-endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/evm-rpc-endpoints"/>
       <lastmod>2023-11-04</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/accounts"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/bpjson"/>
       <lastmod>2023-09-30</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/about"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/help"/>
       <lastmod>2023-11-02</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/lioninjungle</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/lioninjungle"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/ohtigertiger</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/ohtigertiger"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosriobrazil</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosriobrazil"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/alohaeostest</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/alohaeostest"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosamsterdam</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosamsterdam"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosphereiobp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosphereiobp"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/junglesweden</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/junglesweden"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/atticlabeosb</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/atticlabeosb"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/aus1genereos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/aus1genereos"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosarabianet</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosarabianet"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eoscostarica</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eoscostarica"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosdacserval</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosdacserval"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eoseouldotio</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eoseouldotio"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/eosnationftw</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/eosnationftw"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/ivote4eosusa</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/ivote4eosusa"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/gorillapower</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/gorillapower"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/thebluewhale</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/thebluewhale"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/funnyhamster</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/funnyhamster"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/hippopotamus</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/hippopotamus"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/jumpingfrogs</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/jumpingfrogs"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/batinthedark</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/batinthedark"/>
       <lastmod>2023-10-17</lastmod>
    </url>
    <url>
       <loc>https://jungle.antelope.tools/block-producers/sentnlagents</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="es"
+         href="https://jungle.antelope.tools/es/block-producers/sentnlagents"/>
       <lastmod>2023-10-17</lastmod>
    </url>
 </urlset>
