@@ -144,6 +144,9 @@ start-webapp:
 	@cd webapp && yarn && yarn start:local | cat
 	@echo "done webapp"
 
+update-sitemaps:
+	python3 ./scripts/updateSitemaps.py --path ./webapp/public/
+
 add-language-webapp: ##copy en files in a new folder based on lang=
 	@mkdir ./webapp/src/language/$(lang)
 	@cp ./webapp/src/language/en/en.* ./webapp/src/language/$(lang)/
