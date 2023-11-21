@@ -1,5 +1,6 @@
 import os
 import argparse
+from datetime import datetime
 
 NETWORKS = [
     'telos',
@@ -19,11 +20,13 @@ DEFAULT_LANGUAGE = 'en'
 LANGUAGES = ['en', 'es', 'ko', 'zh']
 
 parser = argparse.ArgumentParser(prog='Simple Sitemap Updater',description='Update the sitemaps alternate links and generate language versions using the sitemap-en.xml as source.')
-parser.add_argument('--path', type=str, default='./',
+parser.add_argument('-p', '--path', type=str, default='./',
                     help='path where the sitemaps are searched')
 parser.add_argument('--networks', nargs="*",
                     type=str,default=[],metavar='Network name',
                     help='the list of networks to update')
+parser.add_argument('--update_lastmod', action='store_true',
+                    help='update all lastmod with the current time')
 
 args = parser.parse_args()
 
@@ -120,7 +123,10 @@ for network in networks:
                         if '/>' in item:
                             include = True
                         continue
-                    if '<loc>' in item:
+                    if args.update_lastmod and '<lastmod>' in item:
+                        lastmod = datetime.utcnow().strftime('%Y-%m-%d')
+                        new_file += '      <lastmod>'+lastmod+'</lastmod>\n'
+                    elif '<loc>' in item:
                         url = remove_tags(item)
                         new_file += '      <loc>' + \
                             add_language(url, language)+'</loc>\n'
