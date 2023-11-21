@@ -10,8 +10,6 @@ import enXPRTestnet from './en.xpr-testnet.json'
 import enXPR from './en.xpr.json'
 import enWaxTestnet from './en.wax-testnet.json'
 import enWax from './en.wax.json'
-import enAirwire from './en.airwire.json'
-import enAirwireTestnet from './en.airwire-testnet.json'
 import enUltraTestnet from './en.ultra-testnet.json'
 
 export default {
@@ -27,7 +25,5 @@ export default {
   'en.libre': enLibre,
   'en.xpr-testnet': enXPRTestnet,
   'en.wax-testnet': enWaxTestnet,
-  'en.airwire': enAirwire,
-  'en.airwire-testnet': enAirwireTestnet,
   'en.ultra-testnet': enUltraTestnet,
 }

@@ -60,16 +60,6 @@ waxtestnet:
 	make stop
 	make start
 
-airwire:
-	@cat ".env.airwire" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
-	make stop
-	make start
-
-airwiretestnet:
-	@cat ".env.airwiretestnet" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
-	make stop
-	make start
-
 libre:
 	@cat ".env.libre" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop

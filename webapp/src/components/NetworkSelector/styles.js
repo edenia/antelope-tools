@@ -180,11 +180,6 @@ export default (theme) => ({
     marginRight: theme.spacing(1),
     marginLeft: -3,
   },
-  airwireImg: {
-    width: '24px !important',
-    height: '24px !important',
-    marginRight: theme.spacing(2),
-  },
   libreImg: {
     width: '24px !important',
     height: '24px !important',

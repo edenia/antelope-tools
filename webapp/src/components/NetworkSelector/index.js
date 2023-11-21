@@ -13,7 +13,6 @@ import lacchainImg from '../../assets/lacchain.webp'
 import telosImg from '../../assets/telos.webp'
 import xprNetworkImg from '../../assets/xpr.webp'
 import eosImg from '../../assets/eos.webp'
-import airwireImg from '../../assets/airwire.png'
 import ultraImg from '../../assets/ultra.webp'
 import libreImg from '../../assets/libre.webp'
 import { getLocalePath } from 'utils/url-localization'
@@ -42,11 +41,6 @@ const LogoSvg = ({ name }) => {
 
     case 'xpr':
       return <img src={xprNetworkImg} alt="xpr network logo" className={classes.xprNetworkImg} />
-
-    case 'airwire':
-      return (
-        <img src={airwireImg} alt="airwire logo" className={classes.airwireImg} />
-      )
 
     case 'ultra':
       return <img src={ultraImg} alt="ultra logo" className={classes.ultraImg} />

@@ -10,8 +10,6 @@ import esXPRTestnet from './es.xpr-testnet.json'
 import esXPR from './es.xpr.json'
 import esWaxTestnet from './es.wax-testnet.json'
 import esWax from './es.wax.json'
-import esAirwire from './es.airwire.json'
-import esAirwireTestnet from './es.airwire-testnet.json'
 import esUltraTestnet from './es.ultra-testnet.json'
 
 export default {
@@ -27,7 +25,5 @@ export default {
   'es.libre': esLibre,
   'es.xpr-testnet': esXPRTestnet,
   'es.wax-testnet': esWaxTestnet,
-  'es.airwire': esAirwire,
-  'es.airwire-testnet': esAirwireTestnet,
   'es.ultra-testnet': esUltraTestnet,
 }
