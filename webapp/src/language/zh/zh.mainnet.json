@@ -1,0 +1,20 @@
+{
+  "routes": {
+    "/>title": "EOS Network Monitor and Infrastructure Dashboard",
+    "/cpu-benchmark>title": "CPU Benchmarks  - EOS Network Monitor",
+    "/block-producers>title": "Block Producers - EOS Network Monitor",
+    "/rewards-distribution>title": "Rewards Distribution - EOS Network Monitor",
+    "/nodes-distribution>title": "Geographic Distribution of Nodes - EOS Network Monitor",
+    "/accounts>title": "Accounts and Contracts - EOS Network Monitor",
+    "/bpjson>title": "BP JSON - EOS Network Monitor",
+    "/ricardian-contract>title": "BP Agreement - EOS Network Monitor",
+    "/block-distribution>title": "Block Production Distribution - EOS Network Monitor",
+    "/missed-blocks>title": "Missed Blocks - EOS Network Monitor",
+    "/endpoints>title": "API Endpoints - EOS Network Monitor",
+    "/endpoints-stats>title": "API Endpoints Stats- EOS Network Monitor",
+    "/about>title": "About - EOS Network Monitor",
+    "/help>title": "Help - EOS Network Monitor",
+    "/undiscoverable-bps>title": "Undiscoverable Block Producers or Sock Puppet BPs - EOS Network Monitor",
+    "/evm>moreDescription": "Monitor EVM statistics, such as transaction amount history, gas price and total wallets created."
+  }
+}

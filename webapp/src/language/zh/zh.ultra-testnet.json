@@ -1,0 +1,6 @@
+{
+  "routes": {
+    "/faucet>moreDescription": "This tool allows you to create an account and get UOS testnet tokens.",
+    "/>moreDescription": "Find information on the {{networkName}} Network and its current status."
+  }
+}
