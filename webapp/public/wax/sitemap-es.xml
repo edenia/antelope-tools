@@ -3,11 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://wax.antelope.tools</loc>
+      <loc>https://wax.antelope.tools/es</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es"/>
+         hreflang="en"
+         href="https://wax.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -17,14 +17,14 @@
          hreflang="zh"
          href="https://wax.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers</loc>
+      <loc>https://wax.antelope.tools/es/block-producers</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -33,14 +33,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/nodes</loc>
+      <loc>https://wax.antelope.tools/es/nodes</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/nodes"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/nodes"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -49,14 +49,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/nodes"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/endpoints</loc>
+      <loc>https://wax.antelope.tools/es/endpoints</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/endpoints"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -65,14 +65,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/endpoints"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/nodes-distribution</loc>
+      <loc>https://wax.antelope.tools/es/nodes-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/nodes-distribution"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/nodes-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -81,14 +81,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/nodes-distribution"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/rewards-distribution</loc>
+      <loc>https://wax.antelope.tools/es/rewards-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/rewards-distribution"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/rewards-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -97,14 +97,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/rewards-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/endpoints-stats</loc>
+      <loc>https://wax.antelope.tools/es/endpoints-stats</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/endpoints-stats"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/endpoints-stats"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -113,14 +113,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/endpoints-stats"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/undiscoverable-bps</loc>
+      <loc>https://wax.antelope.tools/es/undiscoverable-bps</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/undiscoverable-bps"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/undiscoverable-bps"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -129,14 +129,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/undiscoverable-bps"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/ricardian-contract</loc>
+      <loc>https://wax.antelope.tools/es/ricardian-contract</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/ricardian-contract"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/ricardian-contract"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -145,14 +145,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/ricardian-contract"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/accounts</loc>
+      <loc>https://wax.antelope.tools/es/accounts</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/accounts"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -161,14 +161,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/bpjson</loc>
+      <loc>https://wax.antelope.tools/es/bpjson</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/bpjson"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/bpjson"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -177,14 +177,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/bpjson"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/about</loc>
+      <loc>https://wax.antelope.tools/es/about</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/about"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -193,14 +193,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/about"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/help</loc>
+      <loc>https://wax.antelope.tools/es/help</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/help"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -209,14 +209,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/help"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/nation.wax</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/nation.wax</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/nation.wax"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/nation.wax"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -225,14 +225,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/nation.wax"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/waxswedenorg</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/waxswedenorg</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/waxswedenorg"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/waxswedenorg"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -241,14 +241,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/waxswedenorg"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/eosriobrazil</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/eosriobrazil</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/eosriobrazil"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/eosriobrazil"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -257,14 +257,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/eosriobrazil"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/bountyblokbp</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/bountyblokbp</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/bountyblokbp"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/bountyblokbp"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -273,14 +273,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/bountyblokbp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/amsterdamwax</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/amsterdamwax</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/amsterdamwax"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/amsterdamwax"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -289,14 +289,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/amsterdamwax"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/ivote4waxusa</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/ivote4waxusa</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/ivote4waxusa"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/ivote4waxusa"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -305,14 +305,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/ivote4waxusa"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/alohaeosprod</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/alohaeosprod</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/alohaeosprod"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/alohaeosprod"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -321,14 +321,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/alohaeosprod"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/ledgerwiseio</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/ledgerwiseio</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/ledgerwiseio"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/ledgerwiseio"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -337,14 +337,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/ledgerwiseio"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/eosiodetroit</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/eosiodetroit</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/eosiodetroit"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/eosiodetroit"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -353,14 +353,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/eosiodetroit"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/cryptolions1</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/cryptolions1</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/cryptolions1"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/cryptolions1"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -369,14 +369,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/cryptolions1"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/eosphereiobp</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/eosphereiobp</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/eosphereiobp"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/eosphereiobp"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -385,14 +385,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/eosphereiobp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/teamgreymass</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/teamgreymass</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/teamgreymass"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/teamgreymass"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -401,14 +401,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/teamgreymass"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/guild.nefty</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/guild.nefty</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/guild.nefty"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/guild.nefty"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -417,14 +417,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/guild.nefty"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/eosauthority</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/eosauthority</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/eosauthority"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/eosauthority"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -433,14 +433,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/eosauthority"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/blacklusionx</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/blacklusionx</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/blacklusionx"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/blacklusionx"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -449,14 +449,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/blacklusionx"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/3dkrenderwax</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/3dkrenderwax</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/3dkrenderwax"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/3dkrenderwax"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -465,14 +465,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/3dkrenderwax"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/bp.wecan</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/bp.wecan</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/bp.wecan"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/bp.wecan"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -481,14 +481,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/bp.wecan"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/waxhiveguild</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/waxhiveguild</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/waxhiveguild"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/waxhiveguild"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -497,14 +497,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/waxhiveguild"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/guild.taco</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/guild.taco</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/guild.taco"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/guild.taco"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -513,14 +513,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/guild.taco"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/liquidstudio</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/liquidstudio</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/liquidstudio"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/liquidstudio"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -529,14 +529,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/liquidstudio"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/guild.waxdao</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/guild.waxdao</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/guild.waxdao"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/guild.waxdao"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -545,14 +545,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/guild.waxdao"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers/edeniaedenia</loc>
+      <loc>https://wax.antelope.tools/es/block-producers/edeniaedenia</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers/edeniaedenia"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers/edeniaedenia"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -561,14 +561,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers/edeniaedenia"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://wax.antelope.tools/block-producers?page=2</loc>
+      <loc>https://wax.antelope.tools/es/block-producers?page=2</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://wax.antelope.tools/es/block-producers?page=2"/>
+         hreflang="en"
+         href="https://wax.antelope.tools/block-producers?page=2"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -577,6 +577,6 @@
          rel="alternate"
          hreflang="zh"
          href="https://wax.antelope.tools/zh/block-producers?page=2"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>

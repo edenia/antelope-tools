@@ -3,11 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://ultra-testnet.antelope.tools</loc>
+      <loc>https://ultra-testnet.antelope.tools/es</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://ultra-testnet.antelope.tools/es"/>
+         hreflang="en"
+         href="https://ultra-testnet.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -17,14 +17,14 @@
          hreflang="zh"
          href="https://ultra-testnet.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://ultra-testnet.antelope.tools/accounts</loc>
+      <loc>https://ultra-testnet.antelope.tools/es/accounts</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://ultra-testnet.antelope.tools/es/accounts"/>
+         hreflang="en"
+         href="https://ultra-testnet.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -33,14 +33,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://ultra-testnet.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://ultra-testnet.antelope.tools/faucet</loc>
+      <loc>https://ultra-testnet.antelope.tools/es/faucet</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://ultra-testnet.antelope.tools/es/faucet"/>
+         hreflang="en"
+         href="https://ultra-testnet.antelope.tools/faucet"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -49,14 +49,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://ultra-testnet.antelope.tools/zh/faucet"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://ultra-testnet.antelope.tools/about</loc>
+      <loc>https://ultra-testnet.antelope.tools/es/about</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://ultra-testnet.antelope.tools/es/about"/>
+         hreflang="en"
+         href="https://ultra-testnet.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -65,14 +65,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://ultra-testnet.antelope.tools/zh/about"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://ultra-testnet.antelope.tools/help</loc>
+      <loc>https://ultra-testnet.antelope.tools/es/help</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://ultra-testnet.antelope.tools/es/help"/>
+         hreflang="en"
+         href="https://ultra-testnet.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -81,6 +81,6 @@
          rel="alternate"
          hreflang="zh"
          href="https://ultra-testnet.antelope.tools/zh/help"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>

@@ -3,7 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://xpr-testnet.antelope.tools</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -12,15 +16,15 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -29,14 +33,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/nodes</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/nodes"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -45,14 +49,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/nodes"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/nodes"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/endpoints</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -61,14 +65,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/endpoints"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/endpoints"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/rewards-distribution</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/rewards-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -77,14 +81,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/rewards-distribution"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/rewards-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/endpoints-stats</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/endpoints-stats"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -93,14 +97,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/endpoints-stats"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/endpoints-stats"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/undiscoverable-bps</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/undiscoverable-bps"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -109,14 +113,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/undiscoverable-bps"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/undiscoverable-bps"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/nodes-distribution</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/nodes-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -125,14 +129,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/nodes-distribution"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/nodes-distribution"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/cpu-benchmark</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/cpu-benchmark</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/cpu-benchmark"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -141,14 +145,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/cpu-benchmark"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/cpu-benchmark"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/ricardian-contract</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/ricardian-contract"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -157,14 +161,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/ricardian-contract"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/ricardian-contract"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/accounts</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -173,14 +177,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/accounts"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/bpjson</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/bpjson"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -189,14 +193,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/bpjson"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/bpjson"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/about</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -205,14 +209,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/about"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/about"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/help</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -221,14 +225,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/help"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/help"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/saltant</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/saltant</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/saltant"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -237,14 +241,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/saltant"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/saltant"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/testalvosec</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/testalvosec</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/testalvosec"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -253,14 +257,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/testalvosec"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/testalvosec"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/protonmadrid</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/protonmadrid</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/protonmadrid"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -269,14 +273,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/protonmadrid"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/protonmadrid"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/totalproton</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/totalproton</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/totalproton"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -285,14 +289,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/totalproton"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/totalproton"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/protonnz</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/protonnz</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/protonnz"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -301,14 +305,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/protonnz"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/protonnz"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/eosusa</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/eosusa</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/eosusa"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -317,14 +321,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/eosusa"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/eosusa"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/xprnodeonebp</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/xprnodeonebp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/xprnodeonebp"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -333,14 +337,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/xprnodeonebp"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/xprnodeonebp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/protonkiwi</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/protonkiwi</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/protonkiwi"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -349,14 +353,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/protonkiwi"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/protonkiwi"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/eosrio</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/eosrio</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/eosrio"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -365,14 +369,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/eosrio"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/eosrio"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/eosiodetroit</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/eosiodetroit</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/eosiodetroit"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -381,14 +385,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/eosiodetroit"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/eosiodetroit"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/protonuk</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/protonuk</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/protonuk"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -397,14 +401,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/protonuk"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/protonuk"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/genereos</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/genereos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/genereos"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -413,14 +417,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/genereos"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/genereos"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/edenia</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/edenia</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/edenia"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -429,14 +433,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/edenia"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/edenia"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/pinknetwork</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/pinknetwork</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/pinknetwork"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -445,14 +449,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/pinknetwork"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/pinknetwork"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/eosamsterdam</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/eosamsterdam</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/eosamsterdam"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -461,14 +465,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/eosamsterdam"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/eosamsterdam"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/metalnz</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/metalnz</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/metalnz"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -477,14 +481,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/metalnz"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/metalnz"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/eosarabianet</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/eosarabianet</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/eosarabianet"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -493,14 +497,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/eosarabianet"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/eosarabianet"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/ledgerwiseio</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/ledgerwiseio</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/ledgerwiseio"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -509,14 +513,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/ledgerwiseio"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/ledgerwiseio"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/dankbp</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/dankbp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/dankbp"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -525,14 +529,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/dankbp"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/dankbp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/gametest</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/gametest</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/gametest"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -541,14 +545,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/gametest"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/gametest"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://xpr-testnet.antelope.tools/block-producers/brotonbp</loc>
+      <loc>https://xpr-testnet.antelope.tools/zh/block-producers/brotonbp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://xpr-testnet.antelope.tools/block-producers/brotonbp"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -557,10 +561,6 @@
          rel="alternate"
          hreflang="ko"
          href="https://xpr-testnet.antelope.tools/ko/block-producers/brotonbp"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://xpr-testnet.antelope.tools/zh/block-producers/brotonbp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>

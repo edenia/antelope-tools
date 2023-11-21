@@ -3,7 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://telos-testnet.antelope.tools</loc>
+      <loc>https://telos-testnet.antelope.tools/zh</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -12,15 +16,15 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -29,14 +33,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/nodes</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/nodes</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/nodes"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -45,14 +49,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/nodes"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/nodes"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/endpoints</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -61,14 +65,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/endpoints"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/endpoints"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/nodes-distribution</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/nodes-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/nodes-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -77,14 +81,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/nodes-distribution"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/nodes-distribution"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/rewards-distribution</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/rewards-distribution</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/rewards-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -93,14 +97,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/rewards-distribution"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/rewards-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/endpoints-stats</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/endpoints-stats</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/endpoints-stats"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -109,14 +113,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/endpoints-stats"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/endpoints-stats"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/undiscoverable-bps</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/undiscoverable-bps</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/undiscoverable-bps"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -125,14 +129,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/undiscoverable-bps"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/undiscoverable-bps"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/ricardian-contract</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/ricardian-contract</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/ricardian-contract"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -141,14 +145,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/ricardian-contract"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/ricardian-contract"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/evm</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/evm</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/evm"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -157,14 +161,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/evm"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/evm"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
       <url>
-      <loc>https://telos-testnet.antelope.tools/evm-rpc-endpoints</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/evm-rpc-endpoints</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/evm-rpc-endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -173,14 +177,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/evm-rpc-endpoints"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/evm-rpc-endpoints"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/accounts</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/accounts</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -189,14 +193,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/accounts"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/bpjson</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/bpjson</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/bpjson"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -205,14 +209,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/bpjson"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/bpjson"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/about</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/about</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -221,14 +225,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/about"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/about"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/help</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/help</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -237,14 +241,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/help"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/help"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/southafrica1</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/southafrica1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/southafrica1"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -253,14 +257,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/southafrica1"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/southafrica1"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eosbarcelona</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eosbarcelona</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eosbarcelona"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -269,14 +273,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eosbarcelona"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eosbarcelona"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/goodblocktls</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/goodblocktls</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/goodblocktls"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -285,14 +289,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/goodblocktls"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/goodblocktls"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/swedencornet</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/swedencornet</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/swedencornet"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -301,14 +305,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/swedencornet"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/swedencornet"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/cryptolions1</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/cryptolions1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/cryptolions1"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -317,14 +321,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/cryptolions1"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/cryptolions1"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/telosunlimit</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/telosunlimit</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/telosunlimit"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -333,14 +337,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/telosunlimit"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/telosunlimit"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eosriobrazil</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eosriobrazil</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eosriobrazil"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -349,14 +353,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eosriobrazil"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eosriobrazil"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/telosmadrid1</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/telosmadrid1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/telosmadrid1"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -365,14 +369,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/telosmadrid1"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/telosmadrid1"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/votedutcheos</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/votedutcheos</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/votedutcheos"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -381,14 +385,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/votedutcheos"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/votedutcheos"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eosdublinwow</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eosdublinwow</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eosdublinwow"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -397,14 +401,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eosdublinwow"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eosdublinwow"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eosphereiobp</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eosphereiobp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eosphereiobp"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -413,14 +417,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eosphereiobp"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eosphereiobp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/caleosblocks</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/caleosblocks</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/caleosblocks"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -429,14 +433,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/caleosblocks"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/caleosblocks"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/telosgermany</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/telosgermany</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/telosgermany"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -445,14 +449,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/telosgermany"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/telosgermany"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eosiodetroit</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eosiodetroit</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eosiodetroit"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -461,14 +465,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eosiodetroit"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eosiodetroit"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/teamgreymass</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/teamgreymass</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/teamgreymass"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -477,14 +481,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/teamgreymass"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/teamgreymass"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/eostribeprod</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/eostribeprod</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/eostribeprod"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -493,14 +497,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/eostribeprod"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/eostribeprod"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/infinitybloc</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/infinitybloc</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/infinitybloc"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -509,14 +513,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/infinitybloc"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/infinitybloc"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/telosarabia1</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/telosarabia1</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/telosarabia1"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -525,14 +529,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/telosarabia1"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/telosarabia1"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/theteloscope</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/theteloscope</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/theteloscope"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -541,14 +545,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/theteloscope"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/theteloscope"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/teloskiwinzz</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/teloskiwinzz</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/teloskiwinzz"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -557,14 +561,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/teloskiwinzz"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/teloskiwinzz"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/hyperspacebp</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/hyperspacebp</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/hyperspacebp"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -573,14 +577,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/hyperspacebp"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/hyperspacebp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers/edeniaedenia</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers/edeniaedenia</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers/edeniaedenia"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -589,14 +593,14 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers/edeniaedenia"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers/edeniaedenia"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://telos-testnet.antelope.tools/block-producers?page=2</loc>
+      <loc>https://telos-testnet.antelope.tools/zh/block-producers?page=2</loc>
+      <xhtml:link
+         rel="alternate"
+         hreflang="en"
+         href="https://telos-testnet.antelope.tools/block-producers?page=2"/>
       <xhtml:link
          rel="alternate"
          hreflang="es"
@@ -605,10 +609,6 @@
          rel="alternate"
          hreflang="ko"
          href="https://telos-testnet.antelope.tools/ko/block-producers?page=2"/>
-      <xhtml:link
-         rel="alternate"
-         hreflang="zh"
-         href="https://telos-testnet.antelope.tools/zh/block-producers?page=2"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>

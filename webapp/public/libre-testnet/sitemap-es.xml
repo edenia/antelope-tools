@@ -3,11 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://libre-testnet.antelope.tools</loc>
+      <loc>https://libre-testnet.antelope.tools/es</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -17,14 +17,14 @@
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -33,14 +33,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/nodes</loc>
+      <loc>https://libre-testnet.antelope.tools/es/nodes</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/nodes"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/nodes"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -49,14 +49,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/nodes"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/endpoints</loc>
+      <loc>https://libre-testnet.antelope.tools/es/endpoints</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/endpoints"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -65,14 +65,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/endpoints"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/nodes-distribution</loc>
+      <loc>https://libre-testnet.antelope.tools/es/nodes-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/nodes-distribution"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/nodes-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -81,14 +81,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/nodes-distribution"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/rewards-distribution</loc>
+      <loc>https://libre-testnet.antelope.tools/es/rewards-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/rewards-distribution"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/rewards-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -97,14 +97,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/rewards-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/endpoints-stats</loc>
+      <loc>https://libre-testnet.antelope.tools/es/endpoints-stats</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/endpoints-stats"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/endpoints-stats"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -113,14 +113,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/endpoints-stats"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/undiscoverable-bps</loc>
+      <loc>https://libre-testnet.antelope.tools/es/undiscoverable-bps</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/undiscoverable-bps"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/undiscoverable-bps"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -129,14 +129,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/undiscoverable-bps"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
     <url>
-      <loc>https://libre-testnet.antelope.tools/block-distribution</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-distribution"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -145,14 +145,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/missed-blocks</loc>
+      <loc>https://libre-testnet.antelope.tools/es/missed-blocks</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/missed-blocks"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/missed-blocks"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -161,14 +161,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/missed-blocks"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/stress-test</loc>
+      <loc>https://libre-testnet.antelope.tools/es/stress-test</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/stress-test"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/stress-test"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -177,14 +177,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/stress-test"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/cpu-benchmark</loc>
+      <loc>https://libre-testnet.antelope.tools/es/cpu-benchmark</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/cpu-benchmark"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/cpu-benchmark"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -193,14 +193,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/cpu-benchmark"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/ricardian-contract</loc>
+      <loc>https://libre-testnet.antelope.tools/es/ricardian-contract</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/ricardian-contract"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/ricardian-contract"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -209,14 +209,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/ricardian-contract"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/accounts</loc>
+      <loc>https://libre-testnet.antelope.tools/es/accounts</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/accounts"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -225,14 +225,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/bpjson</loc>
+      <loc>https://libre-testnet.antelope.tools/es/bpjson</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/bpjson"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/bpjson"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -241,14 +241,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/bpjson"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/faucet</loc>
+      <loc>https://libre-testnet.antelope.tools/es/faucet</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/faucet"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/faucet"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -257,14 +257,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/faucet"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/about</loc>
+      <loc>https://libre-testnet.antelope.tools/es/about</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/about"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -273,14 +273,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/about"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/help</loc>
+      <loc>https://libre-testnet.antelope.tools/es/help</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/help"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -289,14 +289,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/help"/>
-      <lastmod>2023-11-02</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/rioblocks</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/rioblocks</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/rioblocks"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/rioblocks"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -305,14 +305,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/rioblocks"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/goodblock</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/goodblock</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/goodblock"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/goodblock"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -321,14 +321,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/goodblock"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/sweden</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/sweden</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/sweden"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/sweden"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -337,14 +337,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/sweden"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/interchainbp</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/interchainbp</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/interchainbp"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/interchainbp"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -353,14 +353,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/interchainbp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/uberleapnode</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/uberleapnode</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/uberleapnode"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/uberleapnode"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -369,14 +369,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/uberleapnode"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/eosarabianet</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/eosarabianet</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/eosarabianet"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/eosarabianet"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -385,14 +385,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/eosarabianet"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/cryptobloks</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/cryptobloks</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/cryptobloks"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/cryptobloks"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -401,14 +401,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/cryptobloks"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/blocktime</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/blocktime</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/blocktime"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/blocktime"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -417,14 +417,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/blocktime"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/draperx</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/draperx</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/draperx"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/draperx"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -433,14 +433,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/draperx"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/libremt</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/libremt</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/libremt"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/libremt"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -449,14 +449,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/libremt"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/blokcrafters</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/blokcrafters</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/blokcrafters"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/blokcrafters"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -465,14 +465,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/blokcrafters"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/heliosblocks</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/heliosblocks</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/heliosblocks"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/heliosblocks"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -481,14 +481,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/heliosblocks"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/amsterdam</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/amsterdam</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/amsterdam"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/amsterdam"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -497,14 +497,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/amsterdam"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/cultureblock</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/cultureblock</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/cultureblock"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/cultureblock"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -513,14 +513,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/cultureblock"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/teamgreymass</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/teamgreymass</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/teamgreymass"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/teamgreymass"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -529,14 +529,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/teamgreymass"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/libreindiabp</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/libreindiabp</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/libreindiabp"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/libreindiabp"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -545,14 +545,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/libreindiabp"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/eosphere</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/eosphere</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/eosphere"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/eosphere"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -561,14 +561,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/eosphere"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/detroit</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/detroit</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/detroit"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/detroit"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -577,14 +577,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/detroit"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/librenodeone</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/librenodeone</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/librenodeone"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/librenodeone"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -593,14 +593,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/librenodeone"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/edeniaedenia</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/edeniaedenia</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/edeniaedenia"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/edeniaedenia"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -609,14 +609,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/edeniaedenia"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://libre-testnet.antelope.tools/block-producers/echobasefour</loc>
+      <loc>https://libre-testnet.antelope.tools/es/block-producers/echobasefour</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://libre-testnet.antelope.tools/es/block-producers/echobasefour"/>
+         hreflang="en"
+         href="https://libre-testnet.antelope.tools/block-producers/echobasefour"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -625,6 +625,6 @@
          rel="alternate"
          hreflang="zh"
          href="https://libre-testnet.antelope.tools/zh/block-producers/echobasefour"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>

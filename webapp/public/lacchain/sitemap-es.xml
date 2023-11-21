@@ -3,11 +3,11 @@
    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
    xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
-      <loc>https://lacchain.antelope.tools</loc>
+      <loc>https://lacchain.antelope.tools/es</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -17,14 +17,14 @@
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh"/>
       <priority>1.0</priority>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/entities</loc>
+      <loc>https://lacchain.antelope.tools/es/entities</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/entities"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/entities"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -33,14 +33,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/entities"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/nodes</loc>
+      <loc>https://lacchain.antelope.tools/es/nodes</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/nodes"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/nodes"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -49,14 +49,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/nodes"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/endpoints</loc>
+      <loc>https://lacchain.antelope.tools/es/endpoints</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/endpoints"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/endpoints"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -65,14 +65,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/endpoints"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/endpoints-stats</loc>
+      <loc>https://lacchain.antelope.tools/es/endpoints-stats</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/endpoints-stats"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/endpoints-stats"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -81,14 +81,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/endpoints-stats"/>
-      <lastmod>2023-04-25</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/lacchain/network</loc>
+      <loc>https://lacchain.antelope.tools/es/lacchain/network</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/lacchain/network"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/lacchain/network"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -97,14 +97,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/lacchain/network"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/nodes-distribution</loc>
+      <loc>https://lacchain.antelope.tools/es/nodes-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/nodes-distribution"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/nodes-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -113,14 +113,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/nodes-distribution"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/block-distribution</loc>
+      <loc>https://lacchain.antelope.tools/es/block-distribution</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/block-distribution"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/block-distribution"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -129,14 +129,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/block-distribution"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/missed-blocks</loc>
+      <loc>https://lacchain.antelope.tools/es/missed-blocks</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/missed-blocks"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/missed-blocks"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -145,14 +145,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/missed-blocks"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/cpu-benchmark</loc>
+      <loc>https://lacchain.antelope.tools/es/cpu-benchmark</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/cpu-benchmark"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/cpu-benchmark"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -161,14 +161,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/cpu-benchmark"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/ricardian-contract</loc>
+      <loc>https://lacchain.antelope.tools/es/ricardian-contract</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/ricardian-contract"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/ricardian-contract"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -177,14 +177,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/ricardian-contract"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/accounts</loc>
+      <loc>https://lacchain.antelope.tools/es/accounts</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/accounts"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/accounts"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -193,14 +193,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/accounts"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/management</loc>
+      <loc>https://lacchain.antelope.tools/es/management</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/management"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/management"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -209,14 +209,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/management"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/node-config</loc>
+      <loc>https://lacchain.antelope.tools/es/node-config</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/node-config"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/node-config"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -225,14 +225,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/node-config"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/about</loc>
+      <loc>https://lacchain.antelope.tools/es/about</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/about"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/about"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -241,14 +241,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/about"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/help</loc>
+      <loc>https://lacchain.antelope.tools/es/help</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/help"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/help"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -257,14 +257,14 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/help"/>
-      <lastmod>2023-09-30</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
    <url>
-      <loc>https://lacchain.antelope.tools/entities/costarica</loc>
+      <loc>https://lacchain.antelope.tools/es/entities/costarica</loc>
       <xhtml:link
          rel="alternate"
-         hreflang="es"
-         href="https://lacchain.antelope.tools/es/entities/costarica"/>
+         hreflang="en"
+         href="https://lacchain.antelope.tools/entities/costarica"/>
       <xhtml:link
          rel="alternate"
          hreflang="ko"
@@ -273,6 +273,6 @@
          rel="alternate"
          hreflang="zh"
          href="https://lacchain.antelope.tools/zh/entities/costarica"/>
-      <lastmod>2023-10-17</lastmod>
+      <lastmod>2023-11-21</lastmod>
    </url>
 </urlset>
