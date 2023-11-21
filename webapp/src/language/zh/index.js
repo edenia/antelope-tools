@@ -27,4 +27,3 @@ export default {
   'zh.wax-testnet': zhWaxTestnet,
   'zh.ultra-testnet': zhUltraTestnet,
 }
-

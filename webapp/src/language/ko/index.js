@@ -27,4 +27,3 @@ export default {
   'ko.wax-testnet': koWaxTestnet,
   'ko.ultra-testnet': koUltraTestnet,
 }
-
