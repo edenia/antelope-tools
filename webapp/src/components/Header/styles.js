@@ -8,9 +8,10 @@ export default (theme) => ({
   },
   btnLanguage: {
     fontWeight: '600 !important',
+    wordBreak: 'keep-all',
     [theme.breakpoints.down('sm')]: {
       minWidth: 'auto !important',
-      width: '36px',
+      width: '50px',
       '& .MuiButton-startIcon': {
         margin: '0 !important',
       },
@@ -166,12 +167,12 @@ export default (theme) => ({
   },
   languageMenu: {
     '& > div': {
-      maxWidth: 50,
-      width: 50,
+      maxWidth: 80,
+      width: 80,
       maxHeight: 1000,
       opacity: 1,
       top: 25,
-      left: 'calc(100% - 65px)',
+      left: 'calc(100% - 80px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

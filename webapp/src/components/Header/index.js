@@ -27,7 +27,7 @@ const useStyles = makeStyles(styles)
 
 const languages = generalConfig.languages.map((language) => ({
   value: language,
-  label: language.toUpperCase(),
+  label: generalConfig.languagesLabels[language] || language.toUpperCase(),
 }))
 
 const HeaderLogo = () => {
@@ -71,7 +71,7 @@ const LanguageMenu = () => {
         onBlur={closeMenu}
         className={classes.btnLanguage}
       >
-        <span>{i18n.language.substring(0, 2).toUpperCase()}</span>
+        <span>{generalConfig.languagesLabels[i18n.language.substring(0, 2)]}</span>
       </Button>
       <div
         className={clsx(classes.hideElement, {
