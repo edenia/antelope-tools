@@ -50,7 +50,8 @@
     "secondsAgo": "Seconds Ago",
     "metaTitle": "Antelope Tools network monitors real-time infrastructure data for multiple Antelope and EOSIO chains.",
     "metaDescription": "Antelope Tools Dashboard is a network monitor featuring real-time data on block producer nodes and blockchain infrastructure for multiple Antelope and EOSIO chains.",
-    "goBack": "Go Back"
+    "goBack": "Go Back",
+    "translationInProgress": "This translation is in progress, if you find an error please let us know."
   },
   "routes": {
     "/>sidebar": "Dashboard",

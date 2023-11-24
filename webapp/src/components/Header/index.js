@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import LocaleLink from 'components/LocaleLink'
 import ToggleColorMode from 'components/ToggleColorMode'
 import { generalConfig } from '../../config'
+import useAlertTranslationState from '../../hooks/customHooks/useAlertTranslationState'
 
 import AntelopeLogoSvg from './AntelopeLogo'
 import styles from './styles'
@@ -49,6 +50,7 @@ const LanguageMenu = () => {
   const [anchorMenu, setAnchorMenu] = useState(null)
   const { i18n } = useTranslation('translations')
   const location = useLocation()
+  const [,{ showAlertMessage }] = useAlertTranslationState()
 
   const toggleMenu = (event) => {
     setAnchorMenu(event.currentTarget)
@@ -57,8 +59,9 @@ const LanguageMenu = () => {
   const closeMenu = (language) => {
     setAnchorMenu(null)
 
-    if (typeof language === 'string') {
+    if (typeof language === 'string' && language !== i18n.language) {
       i18n.changeLanguage(language)
+      showAlertMessage(language, true)
     }
   }
 

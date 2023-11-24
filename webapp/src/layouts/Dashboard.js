@@ -24,6 +24,7 @@ import {
   getLanguageFromPath,
   removeLanguageFromPath,
 } from 'utils/url-localization'
+import useAlertTranslationState from '../hooks/customHooks/useAlertTranslationState'
 
 import styles from './styles'
 
@@ -55,6 +56,7 @@ const Dashboard = ({ children }) => {
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
+  const [,{ showAlertMessage }] = useAlertTranslationState()
 
   const navigate = useNavigate()
 
@@ -89,6 +91,10 @@ const Dashboard = ({ children }) => {
       if (generalConfig.defaultLanguage !== i18n.language) {
         navigate(getLocalePath(path + location.search, i18n.language))
       }
+    }
+
+    if(generalConfig.languagesInProgress.includes(selectedLanguage)) {
+      showAlertMessage(selectedLanguage)
     }
 
     const route = routes.find(route =>

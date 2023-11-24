@@ -33,6 +33,7 @@ export const healthLights = Object.freeze({
 export const defaultLanguage = 'en'
 export const languageResources = resources
 export const languages = Object.keys(resources)
+export const languagesInProgress = ['ko','zh']
 export const languagesLabels = {
   'es': 'Español',
   'en': 'English',
