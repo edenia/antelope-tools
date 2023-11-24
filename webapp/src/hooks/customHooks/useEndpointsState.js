@@ -1,7 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSubscription, useLazyQuery } from '@apollo/client'
 
-import { ENDPOINTS_SUBSCRIPTION, PRODUCERS_COUNT_QUERY } from '../../gql'
+import {
+  ENDPOINTS_SUBSCRIPTION,
+  ENDPOINTS_QUERY,
+  PRODUCERS_COUNT_QUERY,
+} from '../../gql'
 
 import useSearchState from './useSearchState'
 
@@ -15,23 +19,11 @@ const useEndpointsState = () => {
       nodes: { endpoints: { value: { _gt: '' } } },
     },
   }
-  const [variables, setVariables] = useState(defaultVariables)
-  const [loadProducers, { data: { info } = {} }] = useLazyQuery(PRODUCERS_COUNT_QUERY)
-  const { data, loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, { variables })
+
   const [items, setItems] = useState()
   const [textLists, setTextLists] = useState()
 
-  const [
-    { filters, pagination },
-    { handleOnSearch, handleOnPageChange, setPagination },
-  ] = useSearchState({
-    loadProducers,
-    info,
-    variables,
-    setVariables,
-  })
-
-  useEffect(() => {
+  const handleSubscriptionData = data => {
     if (!data) return
 
     const { newItems, workingEndpoints } = data.producers.reduce(
@@ -93,7 +85,37 @@ const useEndpointsState = () => {
         return { ...state, [type]: endpointsList }
       }, {}),
     )
-  }, [data, info])
+  }
+
+  const isQueryExecuted = useRef(false)
+  const [loadProducers, { data: { info } = {} }] = useLazyQuery(PRODUCERS_COUNT_QUERY)
+  const [
+    { filters, pagination, variables },
+    { handleOnSearch, handleOnPageChange, setPagination },
+  ] = useSearchState({
+    loadProducers,
+    info,
+    defaultVariables,
+  })
+  const { loading } = useSubscription(ENDPOINTS_SUBSCRIPTION, {
+    variables,
+    onSubscriptionData: ({ subscriptionData }) => {
+      handleSubscriptionData(subscriptionData.data)
+    },
+  })
+
+  const [loadEndpoints] = useLazyQuery(ENDPOINTS_QUERY, {
+    onCompleted: (data) => {
+      handleSubscriptionData(data)
+    },
+  })
+
+  useEffect(() => {
+    if (!variables || isQueryExecuted.current) return
+
+    loadEndpoints({ variables })
+    isQueryExecuted.current = true
+  }, [variables, loadEndpoints])
 
   const handleFilter = useCallback(value => {
       const filter = value

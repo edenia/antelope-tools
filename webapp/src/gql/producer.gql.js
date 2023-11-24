@@ -135,8 +135,8 @@ export const NODES_BY_PRODUCER_SUBSCRIPTION = gql`
   }
 `
 
-export const NODES_SUBSCRIPTION = gql`
-  subscription ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
+const NODES_OPERATION = type => gql`
+  ${type} ($offset: Int = 0, $limit: Int = 21, $where: producer_bool_exp) {
     producers: producer(
       where: $where
       limit: $limit
@@ -171,8 +171,11 @@ export const NODES_SUBSCRIPTION = gql`
   }
 `
 
-export const ENDPOINTS_SUBSCRIPTION = gql`
-  subscription (
+export const NODES_SUBSCRIPTION = NODES_OPERATION('subscription')
+export const NODES_QUERY = NODES_OPERATION('query')
+
+const ENDPOINTS_OPERATION = type => gql`
+  ${type} (
     $offset: Int = 0
     $limit: Int = 21
     $where: producer_bool_exp
@@ -197,6 +200,9 @@ export const ENDPOINTS_SUBSCRIPTION = gql`
     }
   }
 `
+
+export const ENDPOINTS_SUBSCRIPTION = ENDPOINTS_OPERATION('subscription')
+export const ENDPOINTS_QUERY = ENDPOINTS_OPERATION('query')
 
 export const NODE_CPU_BENCHMARK = gql`
   query ($account: String) {
