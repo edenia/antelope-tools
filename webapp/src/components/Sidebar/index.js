@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {
   Collapse,
   Drawer as MuiDrawer,
-  Hidden,
   List as MuiList,
   ListItem as MuiListItem,
   Typography,
@@ -11,13 +10,11 @@ import {
   Tooltip,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import LanguageIcon from '@mui/icons-material/Language'
 import { makeStyles } from '@mui/styles'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
-import moment from 'moment'
 
 import routes from '../../routes'
 
@@ -53,7 +50,6 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
   }
 
   const [openRoutes, setOpenRoutes] = useState(() => initOpenRoutes())
-  const { i18n } = useTranslation('translations')
 
   const toggle = (index) => {
     // Collapse all elements
@@ -68,30 +64,6 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
     // Toggle selected element
     setOpenRoutes((openRoutes) =>
       Object.assign({}, openRoutes, { [index]: !openRoutes[index] }),
-    )
-  }
-
-  const LanguageSelector = () => {
-    return (
-      <MuiListItem
-        className={`${classesStyle.listItem} ${classesStyle.divider}`}
-      >
-        <Typography className={classesStyle.sidebarSection}>
-          {t('options')}
-        </Typography>
-        <SidebarCategory
-          isCollapsable={false}
-          name={t('setLanguage>sidebar')}
-          icon={<LanguageIcon />}
-          activeclassname="active"
-          showOnlyIcons={!rest.open}
-          classes={classesStyle}
-          onClick={() => {
-            moment.locale(i18n.language === 'es' ? 'en' : 'es')
-            i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es')
-          }}
-        />
-      </MuiListItem>
     )
   }
 
@@ -199,9 +171,6 @@ const Sidebar = ({ classes, staticContext, onDrawerToggle, ...rest }) => {
                 </MuiListItem>
               </Tooltip>
             ))}
-          <Hidden smUp>
-            <LanguageSelector />
-          </Hidden>
         </MuiList>
       </PerfectScrollbar>
     </MuiDrawer>

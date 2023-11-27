@@ -1,0 +1,20 @@
+{
+  "routes": {
+    "/>title": "EOS 网络监控和基础设施仪表板",
+    "/cpu-benchmark>title": "CPU 基准测试 - EOS 网络监控",
+    "/block-producers>title": "区块生产者 - EOS 网络监控",
+    "/rewards-distribution>title": "奖励分配 - EOS 网络监控",
+    "/nodes-distribution>title": "节点地理分布 - EOS 网络监控",
+    "/accounts>title": "账户和合约 - EOS 网络监控",
+    "/bpjson>title": "BP JSON - EOS 网络监控",
+    "/ricardian-contract>title": "BP 协议 - EOS 网络监控",
+    "/block-distribution>title": "区块生产分布 - EOS 网络监控",
+    "/missed-blocks>title": "错过的区块 - EOS 网络监控",
+    "/endpoints>title": "API 端点 - EOS 网络监控",
+    "/endpoints-stats>title": "API 端点统计 - EOS 网络监控",
+    "/about>title": "关于 - EOS 网络监控",
+    "/help>title": "帮助 - EOS 网络监控",
+    "/undiscoverable-bps>title": "无法发现的区块生产者或傀儡 BPs - EOS 网络监控",
+    "/evm>moreDescription": "监控 EVM 统计数据，例如交易金额历史、天然气价格和创建的总钱包数。"
+  }
+}

@@ -60,16 +60,6 @@ waxtestnet:
 	make stop
 	make start
 
-airwire:
-	@cat ".env.airwire" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
-	make stop
-	make start
-
-airwiretestnet:
-	@cat ".env.airwiretestnet" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
-	make stop
-	make start
-
 libre:
 	@cat ".env.libre" | sed -e 's/REACT_APP_VERSION=dev/REACT_APP_VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)/g' > ".env"
 	make stop
@@ -102,7 +92,7 @@ start:
 	make start-postgres
 	make start-wallet
 	make start-hapi
-	#make start-hapi-evm
+#	make start-hapi-evm
 	make start-hasura
 	make -j 3 start-hasura-cli start-logs start-webapp
 
@@ -128,7 +118,7 @@ start-hasura:
 		curl http://localhost:9090/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi service"; \
 		sleep 5; done;
-	@until \
+#	@until \
 		curl http://localhost:9091/healthz; \
 		do echo "$(BLUE)$(STAGE)-$(APP_NAME)-hasura |$(RESET) waiting for hapi-evm service"; \
 		sleep 5; done;
@@ -153,6 +143,27 @@ start-webapp:
 		sleep 5; done;
 	@cd webapp && yarn && yarn start:local | cat
 	@echo "done webapp"
+
+update-sitemaps:
+	python3 ./scripts/updateSitemaps.py --path ./webapp/public/
+
+add-language-webapp: ##copy en files in a new folder based on lang=
+	@mkdir ./webapp/src/language/$(lang)
+	@cp ./webapp/src/language/en/en.* ./webapp/src/language/$(lang)/
+#	rename every file
+	@file_names=$$(find ./webapp/src/language/$(lang)/ -name "en.*"); \
+	for file in $$file_names; do \
+		mv "$${file}" "$${file//en./$(lang).}"; \
+	done
+#	update import from /$(lang)/index.js
+	@cp ./webapp/src/language/en/index.js ./webapp/src/language/$(lang)/index.js
+	@file="./webapp/src/language/$(lang)/index.js"; \
+	while IFS= read -r line; do \
+	new_file="$${new_file}$${line//en/$(lang)}\n"; \
+	done <"$${file}"; \
+	echo -e "$${new_file}" > "$${file}"
+	@echo "$${lang} added successfully"
+	@echo "Now it can be important where it is needed"
 
 start-logs:
 	@docker-compose logs -f hapi hapi-evm webapp

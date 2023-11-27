@@ -1,6 +1,5 @@
 /* eslint camelcase: 0 */
 import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
@@ -8,6 +7,7 @@ import Typography from '@mui/material/Typography'
 
 import { eosConfig } from '../../config'
 import { formatWithThousandSeparator } from '../../utils'
+import LocaleLink from '../../components/LocaleLink'
 import SimpleDataCard from '../../components/SimpleDataCard'
 
 import styles from './styles'
@@ -68,7 +68,7 @@ const RewardsStats = ({ stats }) => {
         <div className={`${classes.statsText} ${classes.verticallyCenter}`}>
         <Button
           aria-label={t('generateBPjson')}
-          component={Link}
+          component={LocaleLink}
           to="/bpjson"
           variant="contained"
           color="primary"

@@ -8,9 +8,10 @@ export default (theme) => ({
   },
   btnLanguage: {
     fontWeight: '600 !important',
+    wordBreak: 'keep-all',
     [theme.breakpoints.down('sm')]: {
       minWidth: 'auto !important',
-      width: '36px',
+      width: '50px',
       '& .MuiButton-startIcon': {
         margin: '0 !important',
       },
@@ -26,7 +27,7 @@ export default (theme) => ({
         width: '70%',
         marginLeft: theme.spacing(2.5),
       },
-    }
+    },
   },
   appBar: {
     height: '100%',
@@ -47,7 +48,6 @@ export default (theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '250px',
-      gap: 0,
       justifyContent: 'end',
     },
   },
@@ -149,5 +149,48 @@ export default (theme) => ({
     '& button': {
       color: theme.palette.primary.contrastText,
     },
+  },
+  hiddenlanguageMenu: {
+    width: 0,
+    height: 0,
+    '& > div': {
+      maxHeight: 0,
+      margin: 0,
+      zIndex: 2,
+      width: 0,
+      position: 'relative',
+      padding: '0 !important',
+      transition: 'none !important',
+      overflow: 'hidden !important',
+      boxShadow: 'none !important',
+    },
+  },
+  languageMenu: {
+    '& > div': {
+      maxWidth: 80,
+      width: 80,
+      maxHeight: 1000,
+      opacity: 1,
+      top: 25,
+      left: 'calc(100% - 80px)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: `${theme.palette.shadows.card} !important`,
+    },
+  },
+  hideElement: {
+    height: 0,
+    width: 0,
+    display: 'none',
+  },
+  popOverBackground: {
+    display: 'initial',
+    width: '100%',
+    height: '100vh',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
   },
 })

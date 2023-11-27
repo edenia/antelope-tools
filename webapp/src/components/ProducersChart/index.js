@@ -2,7 +2,6 @@
 import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import { Link as RouterLink } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
@@ -12,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -67,7 +67,7 @@ const CustomBarLabel = memo(
       outerRadius + spacing,
       midAngle,
     )
-    const link = `${eosConfig.producersRoute}/${payload.owner}`
+    const link = `/${eosConfig.producersRoute}/${payload.owner}`
 
     const getNameTextAnchor = (x, cx) => {
       if (x + 30 >= cx && x < cx) {
@@ -84,7 +84,7 @@ const CustomBarLabel = memo(
         <Link
           to={link}
           underline="none"
-          component={RouterLink}
+          component={LocaleLink}
           aria-label={`BP ${owner} Profile Page`}
         >
           <Content />

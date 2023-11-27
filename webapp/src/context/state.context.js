@@ -99,6 +99,19 @@ const sharedStateReducer = (state, action) => {
       }
     }
 
+    case 'updateTranslationAlertsState': {
+      return {
+        ...state,
+        translationinProgress: {
+          ...state.translationinProgress,
+          isAlertShown: {
+            ...state.translationinProgress.isAlertShown,
+            [action.payload]: true
+          }
+        },
+      }
+    }
+
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
     }
@@ -122,6 +135,9 @@ const initialValue = {
   tps: new Array(30).fill({ blocks: [], transactions: 0 }),
   tpb: new Array(60).fill({ blocks: [], transactions: 0 }),
   tpsWaitingBlock: null,
+  translationinProgress: {
+    isAlertShown: {}
+  }
 }
 
 export const SharedStateProvider = ({ ...props }) => {
@@ -315,6 +331,13 @@ export const useSharedState = () => {
     scheduleInterval = null
   }
 
+  const updateTranslationAlertsState = language => {
+    dispatch({
+      type: 'updateTranslationAlertsState',
+      payload: language,
+    })
+  }
+
   return [
     state,
     {
@@ -327,6 +350,7 @@ export const useSharedState = () => {
       stopTrackingInfo,
       startTrackingInfo,
       startTrackingProducerSchedule,
+      updateTranslationAlertsState
     },
   ]
 }

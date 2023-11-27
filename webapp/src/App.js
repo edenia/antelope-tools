@@ -9,6 +9,7 @@ import Loader from './components/Loader'
 import DashboardLayout from './layouts/Dashboard'
 
 import { recaptchaConfig } from './config'
+import { localizeRoutes } from 'utils/url-localization'
 
 const App = () => {
   const renderRoutes = ({ children, component, ...props }, index) => {
@@ -47,7 +48,7 @@ const App = () => {
             <DashboardLayout>
               <Suspense fallback={<Loader />}>
                 <Routes>
-                  {routes
+                  {localizeRoutes(routes)
                     .filter((route) => !route?.path?.includes('http'))
                     .map(renderRoutes)}
                 </Routes>
