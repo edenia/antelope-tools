@@ -1,20 +1,20 @@
 {
   "routes": {
-    "/>title": "EOS Network Monitor and Infrastructure Dashboard",
-    "/cpu-benchmark>title": "CPU Benchmarks  - EOS Network Monitor",
-    "/block-producers>title": "Block Producers - EOS Network Monitor",
-    "/rewards-distribution>title": "Rewards Distribution - EOS Network Monitor",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - EOS Network Monitor",
-    "/accounts>title": "Accounts and Contracts - EOS Network Monitor",
-    "/bpjson>title": "BP JSON - EOS Network Monitor",
-    "/ricardian-contract>title": "BP Agreement - EOS Network Monitor",
-    "/block-distribution>title": "Block Production Distribution - EOS Network Monitor",
-    "/missed-blocks>title": "Missed Blocks - EOS Network Monitor",
-    "/endpoints>title": "API Endpoints - EOS Network Monitor",
-    "/endpoints-stats>title": "API Endpoints Stats- EOS Network Monitor",
-    "/about>title": "About - EOS Network Monitor",
-    "/help>title": "Help - EOS Network Monitor",
-    "/undiscoverable-bps>title": "Undiscoverable Block Producers or Sock Puppet BPs - EOS Network Monitor",
-    "/evm>moreDescription": "Monitor EVM statistics, such as transaction amount history, gas price and total wallets created."
+    "/>title": "EOS 네트워크 모니터 및 인프라 대시보드",
+    "/cpu-benchmark>title": "CPU 벤치마크 - EOS 네트워크 모니터",
+    "/block-producers>title": "블록 생산자 - EOS 네트워크 모니터",
+    "/rewards-distribution>title": "보상 분배 - EOS 네트워크 모니터",
+    "/nodes-distribution>title": "노드의 지리적 분포 - EOS 네트워크 모니터",
+    "/accounts>title": "계정 및 계약 - EOS 네트워크 모니터",
+    "/bpjson>title": "BP JSON - EOS 네트워크 모니터",
+    "/ricardian-contract>title": "BP 계약 - EOS 네트워크 모니터",
+    "/block-distribution>title": "블록 생산 분배 - EOS 네트워크 모니터",
+    "/missed-blocks>title": "누락된 블록 - EOS 네트워크 모니터",
+    "/endpoints>title": "API 엔드포인트 - EOS 네트워크 모니터",
+    "/endpoints-stats>title": "API 엔드포인트 통계 - EOS 네트워크 모니터",
+    "/about>title": "소개 - EOS 네트워크 모니터",
+    "/help>title": "도움말 - EOS 네트워크 모니터",
+    "/undiscoverable-bps>title": "탐지 불가능한 블록 생산자 또는 양면 인형 BPs - EOS 네트워크 모니터",
+    "/evm>moreDescription": "거래량 기록, 가스 가격 및 생성된 총 지갑과 같은 EVM 통계를 모니터링합니다."
   }
 }

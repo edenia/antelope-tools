@@ -1,20 +1,20 @@
 {
   "routes": {
-    "/>title": "{{networkName}} Monitor and Infrastructure Dashboard",
-    "/cpu-benchmark>title": "CPU Benchmarks  - {{networkName}} Dashboard",
-    "/block-producers>title": "Block Producers - {{networkName}} Dashboard",
-    "/rewards-distribution>title": "Rewards Distribution - {{networkName}} Dashboard",
-    "/undiscoverable-bps>title": "Paid undiscoverable Block Producers - {{networkName}} Dashboard",
-    "/nodes>title": "{{networkName}} Nodes Status Monitor",
-    "/nodes-distribution>title": "Geographic Distribution of Nodes - {{networkName}} Dashboard",
-    "/accounts>title": "Accounts and Contracts - {{networkName}} Dashboard",
-    "/bpjson>title": "BP JSON - {{networkName}} Dashboard",
-    "/ricardian-contract>title": "BP Agreement - {{networkName}} Dashboard",
-    "/block-distribution>title": "Block Production Distribution - {{networkName}} Dashboard",
-    "/missed-blocks>title": "Missed Blocks - {{networkName}} Dashboard",
-    "/endpoints>title": "API Endpoints - {{networkName}} Dashboard",
-    "/endpoints-stats>title": "API Endpoints Stats- {{networkName}} Dashboard",
-    "/about>title": "About - {{networkName}} Dashboard",
-    "/help>title": "Help - {{networkName}} Dashboard"
+    "/>title": "{{networkName}} 监控和基础设施仪表板",
+    "/cpu-benchmark>title": "CPU 基准测试 - {{networkName}} 仪表板",
+    "/block-producers>title": "区块生产者 - {{networkName}} 仪表板",
+    "/rewards-distribution>title": "奖励分配 - {{networkName}} 仪表板",
+    "/undiscoverable-bps>title": "无法发现的付费区块生产者 - {{networkName}} 仪表板",
+    "/nodes>title": "{{networkName}} 节点状态监控",
+    "/nodes-distribution>title": "节点地理分布 - {{networkName}} 仪表板",
+    "/accounts>title": "账户和合约 - {{networkName}} 仪表板",
+    "/bpjson>title": "BP JSON - {{networkName}} 仪表板",
+    "/ricardian-contract>title": "BP 协议 - {{networkName}} 仪表板",
+    "/block-distribution>title": "区块生产分布 - {{networkName}} 仪表板",
+    "/missed-blocks>title": "错过的区块 - {{networkName}} 仪表板",
+    "/endpoints>title": "API 端点 - {{networkName}} 仪表板",
+    "/endpoints-stats>title": "API 端点统计 - {{networkName}} 仪表板",
+    "/about>title": "关于 - {{networkName}} 仪表板",
+    "/help>title": "帮助 - {{networkName}} 仪表板"
   }
 }

@@ -1,5 +1,5 @@
 {
   "routes": {
-    "/evm>moreDescription": "Monitor EVM statistics, such as transaction amount history, gas price and total wallets created."
+    "/evm>moreDescription": "거래량 기록, 가스 가격 및 생성된 총 지갑과 같은 EVM 통계를 모니터링합니다."
   }
 }
