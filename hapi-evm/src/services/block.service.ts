@@ -5,6 +5,7 @@ import {
   TransactionHash,
   TransactionReceipt
 } from 'web3-types'
+import moment from 'moment'
 
 import {
   defaultModel,
@@ -15,7 +16,9 @@ import {
   StatsModel
 } from '../models'
 import { networkConfig } from '../config'
-import moment from 'moment'
+import { timeUtil } from '../utils'
+
+import { getATHInRange } from './partial-ath.service'
 
 const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
 const web3 = new Web3(httpProvider)
@@ -135,7 +138,10 @@ const getBlock = async () => {
 const syncOldBlocks = async (): Promise<void> => {
   let blocksInserted = 1
   const paramStats = await paramModel.queries.getState()
-  if (paramStats.isSynced) return
+  if (paramStats.isSynced) {
+    await timeUtil.sleep(86400)
+    return
+  }
   const nextBlock = paramStats.nextBlock
   const nextBlockToNumber =
     paramStats.completeAt ||
@@ -160,6 +166,11 @@ const syncOldBlocks = async (): Promise<void> => {
     !!isUpToDate,
     nextBlockToNumber
   )
+  const partialATH = await getATHInRange(
+    nextBlock - 1,
+    nextBlock + blocksInserted - 1
+  )
+  await StatsModel.queries.updateATH(partialATH)
 }
 
 const blockWorker = async () => {
@@ -171,21 +182,8 @@ const cleanOldBlocks = async () => {
 }
 
 const syncATH = async () => {
-  const currentState = await historicalStatsModel.queries.getState()
   const partialATH = await StatsModel.queries.getPartialATH()
-  if (!partialATH) return
-  if (
-    currentState.tps_all_time_high.transactions_count ||
-    0 < partialATH.ath_transactions_count
-  ) {
-    await historicalStatsModel.queries.saveOrUpdate({
-      tps_all_time_high: {
-        blocks: partialATH.ath_blocks.split(','),
-        transactions_count: partialATH.ath_transactions_count,
-        gas_used: partialATH.ath_gas_used
-      }
-    })
-  }
+  await StatsModel.queries.updateATH(partialATH)
 }
 
 const syncBlockWorker = (): defaultModel.Worker => {
