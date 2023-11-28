@@ -52,8 +52,8 @@ export const getATHInRange = async (
   const row = rows[0] as Stats
 
   return {
-    ath_blocks: row.ath_blocks,
-    ath_transactions_count: Number(row.ath_transactions_count) || 0,
-    ath_gas_used: Number(row.ath_gas_used)
+    ath_blocks: row?.ath_blocks,
+    ath_transactions_count: Number(row?.ath_transactions_count) || 0,
+    ath_gas_used: Number(row?.ath_gas_used) || 0
   } as Stats
 }
