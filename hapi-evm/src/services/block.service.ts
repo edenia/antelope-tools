@@ -161,16 +161,16 @@ const syncOldBlocks = async (): Promise<void> => {
   } else {
     console.log(`Syncing old blocks complete at ${moment().format()}`)
   }
-  await paramModel.queries.saveOrUpdate(
-    nextBlock + blocksInserted * Number(!isUpToDate),
-    !!isUpToDate,
-    nextBlockToNumber
-  )
   const partialATH = await getATHInRange(
     nextBlock - 1,
     nextBlock + blocksInserted - 1
   )
   await StatsModel.queries.updateATH(partialATH)
+  await paramModel.queries.saveOrUpdate(
+    nextBlock + blocksInserted * Number(!isUpToDate),
+    !!isUpToDate,
+    nextBlockToNumber
+  )
 }
 
 const blockWorker = async () => {
