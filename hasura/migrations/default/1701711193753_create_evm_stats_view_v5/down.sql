@@ -1,11 +1,12 @@
 -- Could not auto-generate a down migration.
 -- Please write an appropriate down migration for the SQL below:
+-- DROP VIEW IF EXISTS "evm"."stats";
 -- CREATE OR REPLACE VIEW "evm"."stats" AS
 --  SELECT COALESCE(evm_block.avg_gas_used, (0)::numeric) AS block_gas_avg,
 --     COALESCE(daily_transactions.total_transaction_count, (0)::bigint) AS daily_transaction_count,
---     partial_ath.blocks AS ath_blocks,
 --     COALESCE((partial_ath.max_transaction_sum)::numeric, (0)::numeric) AS ath_transactions_count,
---     COALESCE(partial_ath.gas_used_sum, (0)::numeric) AS ath_gas_used
+--     COALESCE(partial_ath.gas_used_sum, (0)::numeric) AS ath_gas_used,
+--     partial_ath.blocks AS ath_blocks
 --    FROM ((( SELECT avg(subquery_alias.gas_used) AS avg_gas_used
 --            FROM ( SELECT block.gas_used,
 --                     block."timestamp"

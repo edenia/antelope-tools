@@ -143,7 +143,7 @@ const EVMDashboard = () => {
           loading={loading}
         >
           <BodyGraphValue
-            links={EVMStats?.tps_all_time_high?.blocks.map(block =>
+            links={(EVMStats?.tps_all_time_high?.blocks || []).map(block =>
               getEVMBlockNumUrl(block),
             )}
           />
