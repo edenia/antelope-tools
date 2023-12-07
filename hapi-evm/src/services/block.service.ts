@@ -30,10 +30,6 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     throw new Error('Wrong block format')
   }
 
-  const blockExist = await blockModel.queries.exist(block.hash.toString())
-
-  if (blockExist) return
-
   const blockTimestamp = new Date(Number(block.timestamp) * 1000)
   const isBefore = moment(blockTimestamp).isBefore(
     moment().subtract(networkConfig.keepHistoryForYears, 'years')
@@ -119,17 +115,23 @@ const incrementTotalTransactions = async (transactionsCount: number) => {
   }
 }
 
-const getBlock = async () => {
-  let blockNumber: bigint
+const getLastBlockInDB = async () => {
   const lastBlockInDB = (await blockModel.queries.default.get(
     { timestamp: { _gt: moment().subtract(30, 'minutes') } },
     { number: 'desc' }
   )) as blockModel.interfaces.CappedBlock
 
+  return lastBlockInDB?.number || 0
+}
+
+const getBlock = async () => {
+  let blockNumber: bigint
+  const lastBlockInDB = await getLastBlockInDB()
+
   if (!lastBlockInDB) {
     blockNumber = await web3.eth.getBlockNumber()
   } else {
-    blockNumber = BigInt(lastBlockInDB.number + 1)
+    blockNumber = BigInt(lastBlockInDB + 1)
   }
 
   await syncFullBlock(blockNumber)
