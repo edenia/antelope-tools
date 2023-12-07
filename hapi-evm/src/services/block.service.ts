@@ -124,9 +124,9 @@ const getLastBlockInDB = async () => {
   return lastBlockInDB?.number || 0
 }
 
-const getBlock = async () => {
+const getBlock = async (lastInserted: number | null) => {
   let blockNumber: bigint
-  const lastBlockInDB = await getLastBlockInDB()
+  const lastBlockInDB = lastInserted || (await getLastBlockInDB())
 
   if (!lastBlockInDB) {
     blockNumber = await web3.eth.getBlockNumber()
@@ -135,6 +135,8 @@ const getBlock = async () => {
   }
 
   await syncFullBlock(blockNumber)
+
+  return Number(blockNumber)
 }
 
 const syncOldBlocks = async (): Promise<void> => {
@@ -175,8 +177,9 @@ const syncOldBlocks = async (): Promise<void> => {
   )
 }
 
+let lastInserted: number | null = null
 const blockWorker = async () => {
-  getBlock()
+  lastInserted = await getBlock(lastInserted)
 }
 
 const cleanOldBlocks = async () => {
