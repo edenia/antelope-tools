@@ -112,18 +112,41 @@ const saveEstimateNextUpdate = async lastUpdateAt => {
 }
 
 const getProducersSummary = async () => {
-  const [rows] = await sequelizeUtil.query(`
-    SELECT 
-        bp_json->>'type' as type, 
-        count(*)::integer as entities_count,
-        STRING_AGG (owner, ',') as entities
-    FROM producer
-    GROUP BY 
-        bp_json->>'type'
-    ;
-`)
+  if (eosConfig.networkName === eosConfig.knownNetworks.lacchain) {
+    const [rows] = await sequelizeUtil.query(`
+          SELECT 
+              bp_json->>'type' as type, 
+              count(*)::integer as entities_count,
+              STRING_AGG (owner, ',') as entities
+          FROM producer
+          GROUP BY 
+              bp_json->>'type'
+          ;
+      `)
 
-  return rows
+    return rows
+  } 
+  
+  const query = `
+    {
+      producer_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  `
+
+  const { 
+    producer_aggregate: { aggregate: { count } } 
+  } = await hasuraUtil.request(query)
+
+  return [
+    {
+      type: null,
+      entities_count: count
+    }
+  ]
 }
 
 const syncNodes = async producers => {

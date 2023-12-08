@@ -1,59 +1,71 @@
+import Web3 from 'web3'
+
 import { Stats } from '../models/stats/interfaces'
-import { sequelizeUtil } from '../utils'
+import { networkConfig } from '../config'
 
 export const getATHInRange = async (
   lowerBlockNumber: number,
   upperBlockNumber: number
 ) => {
-  const [rows] = await sequelizeUtil.sequelize.query(`
-  SELECT
-    ath_in_range.blocks AS ath_blocks,
-    COALESCE(
-        (ath_in_range.max_transaction_sum) :: numeric,
-        (0) :: numeric
-    ) AS ath_transactions_count,
-    COALESCE(ath_in_range.gas_used_sum, (0) :: numeric) AS ath_gas_used
-    FROM
-    (
-      WITH subquery AS (
-        SELECT
-          array_to_string(array_agg(block.number), ',' :: text) AS blocks,
-          sum(jsonb_array_length(block.transactions)) AS total_transaction_count,
-          sum(block.gas_used) AS gas_used_sum
-        FROM
-          evm.block
-        WHERE (block.number >= ${lowerBlockNumber} and block.number <= ${upperBlockNumber})
-        GROUP BY
-          block."timestamp"
+  const httpProvider = new Web3.providers.HttpProvider(
+    networkConfig.evmEndpoint
+  )
+  const web3 = new Web3(httpProvider)
+
+  const rangeOfBlocks = Array.from(
+    { length: upperBlockNumber - lowerBlockNumber },
+    (_, index) => index + lowerBlockNumber
+  )
+
+  const blocks = await Promise.allSettled(
+    rangeOfBlocks.map(async blockNumber => await web3.eth.getBlock(blockNumber))
+  )
+
+  const blocksPerSecond = blocks.reduce(
+    (status: { [timestamp: number]: Stats }, blockPromise) => {
+      if (blockPromise.status !== 'fulfilled') return status
+
+      const block = blockPromise.value
+      const timestamp = Number(block.timestamp)
+      const stats = {
+        ath_blocks: Number(block.number).toString(),
+        ath_transactions_count: block.transactions?.length || 0,
+        ath_gas_used: Number(block.gasUsed) || 0
+      }
+      if (!status[timestamp]) {
+        return { ...status, [timestamp]: stats }
+      } else {
+        return {
+          ...status,
+          [timestamp]: {
+            ath_blocks: status[timestamp].ath_blocks + ',' + stats.ath_blocks,
+            ath_transactions_count:
+              status[timestamp].ath_transactions_count +
+              stats.ath_transactions_count,
+            ath_gas_used: status[timestamp].ath_gas_used + stats.ath_gas_used
+          }
+        }
+      }
+    },
+    {}
+  )
+
+  const partialATH = Object.keys(blocksPerSecond || {}).reduce(
+    (max: Stats, current: string): Stats => {
+      if (
+        max.ath_transactions_count >
+        blocksPerSecond[Number(current)].ath_transactions_count
       )
-      SELECT
-        q2.blocks,
-        q1.max_transaction_sum,
-        q2.gas_used_sum
-      FROM
-        (
-          (
-            SELECT
-              max(subquery.total_transaction_count) AS max_transaction_sum
-            FROM
-              subquery
-          ) q1
-          JOIN subquery q2 ON (
-            (
-              q1.max_transaction_sum = q2.total_transaction_count
-            )
-          )
-        )
-      LIMIT
-        1
-    ) ath_in_range
-  `)
+        return max
 
-  const row = rows[0] as Stats
+      return blocksPerSecond[Number(current)]
+    },
+    {
+      ath_blocks: '',
+      ath_transactions_count: 0,
+      ath_gas_used: 0
+    }
+  )
 
-  return {
-    ath_blocks: row?.ath_blocks,
-    ath_transactions_count: Number(row?.ath_transactions_count) || 0,
-    ath_gas_used: Number(row?.ath_gas_used) || 0
-  } as Stats
+  return partialATH as Stats
 }
