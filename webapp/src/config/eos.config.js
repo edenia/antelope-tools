@@ -103,7 +103,7 @@ const blockExplorerLinks = JSON.parse(process.env.REACT_APP_BLOCK_EXPLORER_URL |
 
 export const nodeTypes = _nodeTypes
 export const nodeChips = _nodeChips || _nodeTypes
-export const additionalNodesTypes = _additionalNodesTypes
+export const additionalNodesTypes = _additionalNodesTypes || []
 export const producerTypes = _producerTypes
 export const includeDefaultTransaction = process.env
   .REACT_APP_EOS_INCLUDE_TRANSACTION
