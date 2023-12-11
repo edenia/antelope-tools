@@ -38,6 +38,13 @@ const BPJson = () => {
         accountName={ual.activeUser?.accountName || initData.account_name}
         bpJson={producer?.bpJson || initData}
         onSubmit={eosConfig.bpJsonOnChainContract ? handleOnSubmit : null}
+        additionalNodesTypes={eosConfig.additionalNodesTypes.reduce(
+          (result, type) => ({
+            ...result,
+            [type.name]: ['api_endpoint', 'ssl_endpoint', 'features'],
+          }),
+          {},
+        )}
       />
     </Card>
   )

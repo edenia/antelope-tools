@@ -122,8 +122,6 @@ const darkVariant = {
     },
     secondary: {
       main: '#00C853',
-      light: '#F3E5F5',
-      dark: '#AB47BC',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     text: {

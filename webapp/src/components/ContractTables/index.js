@@ -96,8 +96,8 @@ const ContractTables = ({
         key_type: filters.keyType,
         index_position: filters.index,
         reverse: filters.reverse,
-        lower_bound: nextKey || filters.lowerBound,
-        upper_bound: filters.upperBound,
+        lower_bound: !filters.reverse ? nextKey :  filters.lowerBound,
+        upper_bound: filters.reverse ? nextKey : filters.upperBound,
         loadMore: !!nextKey,
       })
     },

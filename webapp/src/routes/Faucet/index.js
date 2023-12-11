@@ -131,7 +131,7 @@ const Faucet = () => {
         type: 'success',
         content: (
           <a
-            href={eosConfig.blockExplorerUrl.replace('(transaction)', tx)}
+            href={eosConfig.blockExplorerTxUrl.replace('(transaction)', tx)}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -258,7 +258,7 @@ const Faucet = () => {
                 {t('transferTokensTransaction')}
               </Typography>
               <a
-                href={eosConfig.blockExplorerUrl.replace(
+                href={eosConfig.blockExplorerTxUrl.replace(
                   '(transaction)',
                   transferTokensTransaction,
                 )}
