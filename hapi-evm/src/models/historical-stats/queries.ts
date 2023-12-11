@@ -88,9 +88,8 @@ export const getState = async () => {
       }
     }
   `
-  const data = await coreUtil.hasura.default.request<HistoricalStatsResponse>(
-    query
-  )
+  const data =
+    await coreUtil.hasura.default.request<HistoricalStatsResponse>(query)
 
   if (!data.evm_historical_stats.length) {
     return defaultHistoricalStats

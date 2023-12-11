@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 
 import { generalConfig } from '../../config'
 
-const PageTitle = ({ title, metaTitle, metaDescription, ldJson }) => (
+const PageTitle = ({ title, metaTitle, metaDescription, ldJson, language }) => (
   <Helmet>
+    {language && <html lang={language} />}
     <title>{title}</title>
     <meta name="title" content={metaTitle} />
     <meta name="description" content={metaDescription} />
@@ -19,6 +20,7 @@ PageTitle.propTypes = {
   title: PropTypes.string,
   metaTitle: PropTypes.string,
   metaDescription: PropTypes.string,
+  language: PropTypes.string,
 }
 
 PageTitle.defaultProps = {
@@ -26,6 +28,7 @@ PageTitle.defaultProps = {
   metaTitle: '',
   metaDescription: '',
   ldJson: null,
+  language: '',
 }
 
 export default PageTitle

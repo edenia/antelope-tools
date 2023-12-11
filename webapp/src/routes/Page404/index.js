@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import { Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import { useTranslation } from 'react-i18next'
+
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -27,7 +28,7 @@ const Page404 = () => {
       </Typography>
 
       <Button
-        component={Link}
+        component={LocaleLink}
         to="/"
         variant="contained"
         color="primary"

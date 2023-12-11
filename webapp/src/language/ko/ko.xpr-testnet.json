@@ -1,0 +1,20 @@
+{
+  "routes": {
+    "/>title": "{{networkName}} 모니터 및 인프라 대시보드",
+    "/cpu-benchmark>title": "CPU 벤치마크 - {{networkName}} 대시보드",
+    "/block-producers>title": "블록 생산자 - {{networkName}} 대시보드",
+    "/rewards-distribution>title": "보상 분배 - {{networkName}} 대시보드",
+    "/undiscoverable-bps>title": "탐지 불가능한 유료 블록 생산자 - {{networkName}} 대시보드",
+    "/nodes>title": "{{networkName}} 노드 상태 모니터",
+    "/nodes-distribution>title": "노드의 지리적 분포 - {{networkName}} 대시보드",
+    "/accounts>title": "계정 및 계약 - {{networkName}} 대시보드",
+    "/bpjson>title": "BP JSON - {{networkName}} 대시보드",
+    "/ricardian-contract>title": "BP 계약 - {{networkName}} 대시보드",
+    "/block-distribution>title": "블록 생산 분배 - {{networkName}} 대시보드",
+    "/missed-blocks>title": "누락된 블록 - {{networkName}} 대시보드",
+    "/endpoints>title": "API 엔드포인트 - {{networkName}} 대시보드",
+    "/endpoints-stats>title": "API 엔드포인트 통계 - {{networkName}} 대시보드",
+    "/about>title": "소개 - {{networkName}} 대시보드",
+    "/help>title": "도움말 - {{networkName}} 대시보드"
+  }
+}

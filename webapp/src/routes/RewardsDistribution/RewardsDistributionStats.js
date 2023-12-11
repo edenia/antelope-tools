@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
@@ -9,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import Skeleton from '@mui/material/Skeleton'
 
 import { formatWithThousandSeparator } from '../../utils'
+import LocaleLink from '../../components/LocaleLink'
 import CountryFlag from '../../components/CountryFlag'
 import { eosConfig } from '../../config'
 
@@ -107,7 +107,7 @@ const RewardsDistributionStats = ({ summary, setting, handlePopoverOpen }) => {
               {!!summary?.producersWithoutProperBpJson.quantity && (
                 <Button
                   className={classes.nonCompliantButton}
-                  component={Link}
+                  component={LocaleLink}
                   to="/undiscoverable-bps"
                   variant="contained"
                   color="primary"

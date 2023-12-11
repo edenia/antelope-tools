@@ -53,18 +53,21 @@ jobs:
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/eos.png'
           REACT_APP_TOKEN_SYMBOL: 'EOS'
           REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"icon":"eos","order":5},{"label":"XPR Network","value":"https://xpr.antelope.tools","mainnet":true,"icon":"xpr","order":3},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"icon":"wax","order":4},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"icon":"telos","order":1},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"icon":"libre","order":2},{"label":"LACChain EOSIO","value":"https://lacchain.antelope.tools","mainnet":true,"icon":"lacchain","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"icon":"jungle","order":5},{"label":"XPR Testnet","value":"https://xpr-testnet.antelope.tools","mainnet":false,"icon":"xpr","order":3},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"icon":"wax","order":4},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"icon":"telos","order":1},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"icon":"libre","order":2},{"label":"Ultra Testnet","value":"https://ultra-testnet.antelope.tools","mainnet":false,"icon":"ultra","order":6}]'
-          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution","/stress-test","/evm","/evm-rpc-endpoints"]'
-          REACT_APP_BLOCK_EXPLORER_URL: 'https://bloks.io/transaction/(transaction)'
+          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution","/stress-test"]'
+          REACT_APP_BLOCK_EXPLORER_URL: '{"url": "https://bloks.io", "tx": "/transaction/(transaction)", "account": {"url":"/account/","abi":"?loadContract=true&tab=ABI","actions":"?loadContract=true&tab=Actions"}}'
           REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
           REACT_APP_EVM_ENDPOINT: 'https://api.evm.eosnetwork.com'
+          REACT_APP_EVM_BLOCK_EXPLORER_URL: 'https://explorer.evm.eosnetwork.com/block/(block)/transactions'
+          REACT_APP_EVM_ENDPOINTS: '["https://api.evm.eosnetwork.com"]'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
         run: |
           make \
-            build-kubernetes
+            build-kubernetes \
+            build-kubernetes-evm
         env:
           # general
           NAMESPACE: mainnet-dashboard
@@ -104,13 +107,32 @@ jobs:
           HAPI_EOSRATE_GET_STATS_URL: ${{ secrets.HAPI_EOSRATE_GET_STATS_URL }}
           HAPI_EOSRATE_GET_STATS_USER: ${{ secrets.HAPI_EOSRATE_GET_STATS_USER }}
           HAPI_EOSRATE_GET_STATS_PASSWORD: ${{ secrets.HAPI_EOSRATE_GET_STATS_PASSWORD }}
-
+          # hapi-evm
+          HAPI_EVM_SERVER_PORT: '9090'
+          HAPI_EVM_SERVER_ADDRESS: '0.0.0.0'
+          HAPI_EVM_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
+          HAPI_EVM_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_EVM_HASURA_ADMIN_SECRET }}
+          HAPI_EVM_DATABASE_URL: ${{ secrets.HAPI_EVM_DATABASE_URL }}
+          HAPI_EVM_ENDPOINT: 'https://api.evm.eosnetwork.com'
+          HAPI_EVM_API_ENDPOINTS: '["https://eos.edenia.cloud","https://api.main.alohaeos.com","https://eos.api.eosnation.io","https://eos.greymass.com","https://eos.eosphere.io","https://api.eosrio.io"]'
+          HAPI_EVM_NETWORK: EOSIO
+          HAPI_EVM_NETWORK_CHAIN_ID: aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906
+          HAPI_EVM_EOS_EVM_ACCOUNT: eosio.evm
+          HAPI_EVM_BLOCK_INTERVAL_SEC: 1
+          HAPI_EVM_OLD_BLOCK_INTERVAL_SEC: 0.1
+          HAPI_EVM_ATH_INTERVAL_SEC: 900
+          HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: 86400
+          HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: 86400
+          HAPI_EVM_KEEP_HISTORY_FOR_YEARS: 1
+          HAPI_EVM_HYPERION_API: https://eos.eosusa.io
+          HAPI_EVM_HYPERION_START_AT: 2022-01-01T00:00:00.000+00:00
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
+          HASURA_GRAPHQL_ACTION_EVM_URL: http://dashboard-hapi-evm:9091
 
       - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@v1.1.0

@@ -4,6 +4,7 @@ export default (theme) => ({
     justifyContent: 'space-between',
     flexDirection: 'column',
     alignItems: 'baseline',
+    minHeight: '60px',
     padding: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       justifyContent: 'space-between',

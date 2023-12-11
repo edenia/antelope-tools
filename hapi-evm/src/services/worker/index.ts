@@ -8,7 +8,7 @@ const run = async (worker: defaultModel.Worker) => {
   try {
     await worker.action()
   } catch (error: any) {
-    console.log(`${worker.name} ERROR =>`, error.message)
+    console.log(`${worker.name} ERROR =>`, error?.message || error)
   }
 
   if (!worker.intervalSec) {

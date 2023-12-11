@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
+import isTheSameObject from 'utils/is-same-object'
+
+const useSearchState = ({ loadProducers, info, defaultVariables }) => {
+  const [variables, setVariables] = useState()
   const location = useLocation()
   const [pagination, setPagination] = useState({
     page: 1,
     pages: 1,
-    ...variables,
   })
   const [filters, setFilters] = useState({ name: 'all', owner: '' })
 
@@ -33,6 +35,8 @@ const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
   }
 
   useEffect(() => {
+    if (!pagination.where || !pagination.limit) return
+
     const variables = {
       limit: pagination.limit,
       offset: (pagination.page - 1) * pagination.limit,
@@ -40,9 +44,12 @@ const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
       where: pagination.where,
     }
 
-    loadProducers({ variables: { where: pagination.where } })
+    setVariables(prev => {
+      if (isTheSameObject(prev, variables)) return prev
 
-    setVariables(variables)
+      loadProducers({ variables: { where: pagination.where } })
+      return variables
+    })
   }, [
     pagination.where,
     pagination.page,
@@ -56,9 +63,14 @@ const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
   useEffect(() => {
     const params = queryString.parse(location.search)
 
-    if (!params.owner) return
+    if (!params.owner) {
+      setPagination(prev => ({ ...prev, ...defaultVariables }))
+
+      return
+    }
 
     setPagination(prev => ({
+      ...defaultVariables,
       ...prev,
       page: 1,
       where: { owner: { _like: `%${params.owner}%` } },
@@ -78,7 +90,7 @@ const useSearchState = ({ loadProducers, info, variables, setVariables }) => {
   }, [info, pagination.limit])
 
   return [
-    { filters, pagination },
+    { filters, pagination, variables, setVariables },
     {
       handleOnSearch,
       handleOnPageChange,

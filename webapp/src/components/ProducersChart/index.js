@@ -2,7 +2,6 @@
 import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@mui/styles'
-import { Link as RouterLink } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
@@ -12,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 import { formatWithThousandSeparator, onImgError } from '../../utils'
 import { eosConfig, generalConfig } from '../../config'
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -67,7 +67,7 @@ const CustomBarLabel = memo(
       outerRadius + spacing,
       midAngle,
     )
-    const link = `${eosConfig.producersRoute}/${payload.owner}`
+    const link = `/${eosConfig.producersRoute}/${payload.owner}`
 
     const getNameTextAnchor = (x, cx) => {
       if (x + 30 >= cx && x < cx) {
@@ -84,7 +84,7 @@ const CustomBarLabel = memo(
         <Link
           to={link}
           underline="none"
-          component={RouterLink}
+          component={LocaleLink}
           aria-label={`BP ${owner} Profile Page`}
         >
           <Content />
@@ -93,15 +93,17 @@ const CustomBarLabel = memo(
     }
 
     const ProducerName = () => {
+      const isProducing = fill === theme.palette.primary.main
+
       const Content = () => (
         <text
           transform={`translate(${cartesianText.x}, ${cartesianText.y})`}
           textAnchor={getNameTextAnchor(x, cx)}
           dominantBaseline="central"
-          fill={theme.palette.primary.main}
+          fill={isProducing ? fill : theme.palette.text.primary}
           fontSize={sm ? 14 : 12}
           fontFamily="Roboto, Helvetica, Arial, sans-serif;"
-          fontWeight={fill === theme.palette.primary.main ? 'bold' : 'normal'}
+          fontWeight={isProducing ? 'bold' : 'normal'}
         >
           {payload.owner}
         </text>
@@ -258,6 +260,7 @@ const ProducersChart = ({ producers, info }) => {
                     ? theme.palette.primary.main
                     : theme.palette.primary.light
                 }
+                stroke={theme.palette.background.default}
               />
             )
           })}

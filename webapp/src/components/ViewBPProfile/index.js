@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import Button from '@mui/material/Button'
 
 import { eosConfig } from '../../config'
+
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -16,7 +17,7 @@ const ViewBPProfile = ({ producer, text }) => {
     <Button
       aria-label={`${text} ${producer?.owner} Page`}
       className={classes.button}
-      component={Link}
+      component={LocaleLink}
       to={`/${eosConfig.producersRoute}/${producer?.owner}`}
       state={{ producer }}
       variant="contained"

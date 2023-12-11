@@ -1,12 +1,12 @@
 import { eosConfig } from '../config'
 
 export const getBlockNumUrl = (blockNum) => {
-  if (!blockNum || !eosConfig.blockExplorerUrl) {
+  if (!blockNum || !eosConfig.blockExplorerTxUrl) {
     return
   }
 
   return (
-    eosConfig.blockExplorerUrl
+    eosConfig.blockExplorerTxUrl
       .replace('(transaction)', blockNum)
       .replace('tx', 'block')
       .replace('transaction', 'block')

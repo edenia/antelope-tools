@@ -1,0 +1,6 @@
+{
+  "routes": {
+    "/evm>moreDescription": "监控 Telos EVM（tEVM）的统计数据，如交易金额历史、天然气价格和创建的钱包总数。",
+    "/evm-rpc-endpoints>moreDescription": "Telos EVM（tEVM）端点的列表，包括它们的健康状态和以毫秒计的延迟。"
+  }
+}

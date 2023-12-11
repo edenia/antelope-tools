@@ -1,0 +1,5 @@
+{
+  "routes": {
+    "/evm>moreDescription": "监控 EVM 统计数据，例如交易金额历史、天然气价格和创建的总钱包数。"
+  }
+}

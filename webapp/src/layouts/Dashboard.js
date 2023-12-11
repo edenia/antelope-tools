@@ -7,7 +7,8 @@ import Hidden from '@mui/material/Hidden'
 import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 import Sidebar from '../components/Sidebar'
 import NetworkSelector from '../components/NetworkSelector'
@@ -18,6 +19,12 @@ import SnackbarMessage from '../components/SnackbarMessage'
 import { eosConfig, generalConfig } from '../config'
 import { useSharedState } from '../context/state.context'
 import routes from '../routes'
+import {
+  getLocalePath,
+  getLanguageFromPath,
+  removeLanguageFromPath,
+} from 'utils/url-localization'
+import useAlertTranslationState from '../hooks/customHooks/useAlertTranslationState'
 
 import styles from './styles'
 
@@ -49,6 +56,9 @@ const Dashboard = ({ children }) => {
   const location = useLocation()
   const [lacchain] = useSharedState()
   const [routeName, setRouteName] = useState(INIT_VALUES)
+  const [,{ showAlertMessage }] = useAlertTranslationState()
+
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -57,7 +67,36 @@ const Dashboard = ({ children }) => {
   const removeParam = route => route.substring(0, route.lastIndexOf('/'))
 
   useEffect(() => {
-    const path = location.pathname.replace(/\/$/, '') || '/'
+    const trailingSlashRegex = /\/$/
+    let path = location.pathname
+    
+    if (path !== '/' && trailingSlashRegex.test(path)) {
+      navigate(path.replace(trailingSlashRegex, ''))
+    }
+    
+    const selectedLanguage = getLanguageFromPath(path)
+
+    if (selectedLanguage) {
+      path = removeLanguageFromPath(path)
+
+      if (selectedLanguage !== i18n.language) {
+        moment.locale(selectedLanguage)
+        i18n.changeLanguage(selectedLanguage)
+      }
+
+      if (generalConfig.defaultLanguage === selectedLanguage) {
+        navigate(path + location.search)
+      }
+    } else {
+      if (generalConfig.defaultLanguage !== i18n.language) {
+        navigate(getLocalePath(path + location.search, i18n.language))
+      }
+    }
+
+    if(generalConfig.languagesInProgress.includes(selectedLanguage)) {
+      showAlertMessage(selectedLanguage)
+    }
+
     const route = routes.find(route =>
       route.useParams
         ? removeParam(route.path) === removeParam(path)
@@ -92,6 +131,7 @@ const Dashboard = ({ children }) => {
       <CssBaseline />
       <GlobalStyle />
       <PageTitle
+        language={i18n.language}
         title={routeName.pageTitle}
         metaTitle={routeName.dynamicTitle || t('metaTitle')}
         metaDescription={

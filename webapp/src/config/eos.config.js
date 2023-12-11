@@ -12,6 +12,7 @@ export const networkLabel = process.env.REACT_APP_EOS_API_NETWORK_LABEL
 export const networkLogo = process.env.REACT_APP_EOS_API_NETWORK_LOGO
 export const tokenSymbol = process.env.REACT_APP_TOKEN_SYMBOL
 
+let _additionalNodesTypes = null
 let _nodeTypes = null
 let _nodeChips = null
 let _producerTypes = null
@@ -48,6 +49,24 @@ switch (networkName) {
         description: 'Node that provides P2P and/or BNET to the public',
       },
     ]
+
+    if (networkName === 'libre' || networkName === 'libre-testnet') {
+      const libreNodeTypes = [
+        {
+          name: 'libre-api',
+        },
+        {
+          name: 'libre-dashboard',
+        },
+        {
+          name: 'libre-explorer',
+        },
+      ]
+
+      _nodeTypes = _nodeTypes.concat(libreNodeTypes)
+      _additionalNodesTypes = libreNodeTypes
+    }
+
     _producerTypes = ['top21', 'paidStandby', 'nonPaidStandby']
     _nodeChips = [
       ..._nodeTypes,
@@ -80,14 +99,22 @@ export const endpoints = (JSON.parse(
   ),
 )
 
+const blockExplorerLinks = JSON.parse(process.env.REACT_APP_BLOCK_EXPLORER_URL || '{}')
+
 export const nodeTypes = _nodeTypes
 export const nodeChips = _nodeChips || _nodeTypes
+export const additionalNodesTypes = _additionalNodesTypes || []
 export const producerTypes = _producerTypes
 export const includeDefaultTransaction = process.env
   .REACT_APP_EOS_INCLUDE_TRANSACTION
   ? JSON.parse(process.env.REACT_APP_EOS_INCLUDE_TRANSACTION)
   : null
-export const blockExplorerUrl = process.env.REACT_APP_BLOCK_EXPLORER_URL
+export const blockExplorerUrl = blockExplorerLinks?.url
+export const blockExplorerTxUrl = blockExplorerLinks?.url + blockExplorerLinks?.tx
+export const blockExplorerAccount = {
+  ...blockExplorerLinks?.account,
+  url: blockExplorerLinks?.url + blockExplorerLinks?.account?.url,
+}
 export const syncToleranceInterval =
   process.env.REACT_APP_SYNC_TOLERANCE_INTERVAL || 180000
 export const producerColumns = [

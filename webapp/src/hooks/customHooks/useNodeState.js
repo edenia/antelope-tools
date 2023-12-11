@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSubscription, useLazyQuery } from '@apollo/client'
 
-import { NODES_SUBSCRIPTION, PRODUCERS_COUNT_QUERY } from '../../gql'
+import {
+  NODES_SUBSCRIPTION,
+  NODES_QUERY,
+  PRODUCERS_COUNT_QUERY,
+} from '../../gql'
 import { eosConfig } from '../../config'
 import sortNodes from 'utils/sort-nodes'
 
@@ -17,21 +21,28 @@ const useNodeState = () => {
       nodes: { type: { _neq: [] } },
     },
   }
-  const [variables, setVariables] = useState(defaultVariables)
   const [loadProducers, { data: { info } = {} }] = useLazyQuery(
     PRODUCERS_COUNT_QUERY,
   )
-  const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
+  const isQueryExecuted = useRef(false)
   const [items, setItems] = useState([])
   const [
-    { filters, pagination },
+    { filters, pagination, variables },
     { handleOnSearch, handleOnPageChange, setPagination },
   ] = useSearchState({
     loadProducers,
     info,
-    variables,
-    setVariables,
+    defaultVariables,
   })
+  const { data, loading } = useSubscription(NODES_SUBSCRIPTION, { variables })
+  const [loadNodes, { data: queryData }] = useLazyQuery(NODES_QUERY)
+
+  useEffect(() => {
+    if (!variables || isQueryExecuted.current) return
+
+    loadNodes({ variables })
+    isQueryExecuted.current = true
+  }, [variables, loadNodes])
 
   const chips = [{ name: 'all' }, ...eosConfig.nodeChips]
 
@@ -65,9 +76,9 @@ const useNodeState = () => {
   }, [filters.name, setPagination])
 
   useEffect(() => {
-    if (!data) return
+    if (!data && !queryData) return
 
-    const { producers } = data
+    const { producers } = data || queryData
     const isFilterByFeature = isFeature(filters.name)
 
     const list = producers.flatMap((producer) => {
@@ -92,7 +103,7 @@ const useNodeState = () => {
     })
 
     setItems(list)
-  }, [filters.name, data])
+  }, [filters.name, data, queryData])
 
   return [
     { filters, chips, loading, items, pagination },

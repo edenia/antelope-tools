@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 import Button from '@mui/material/Button'
+
+import LocaleLink from 'components/LocaleLink'
 
 import styles from './styles'
 
@@ -23,7 +24,7 @@ const EmptyState = ({ isNonCompliant }) => {
       <span>{t('emptyState')}</span>
       {isNonCompliant && (
         <Button
-          component={Link}
+          component={LocaleLink}
           to="/undiscoverable-bps"
           variant="contained"
           color="primary"

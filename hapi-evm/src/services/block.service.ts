@@ -1,5 +1,11 @@
 import { Web3 } from 'web3'
-import { Block, TransactionInfo, TransactionHash } from 'web3-types'
+import {
+  Block,
+  TransactionInfo,
+  TransactionHash,
+  TransactionReceipt
+} from 'web3-types'
+import moment from 'moment'
 
 import {
   defaultModel,
@@ -10,35 +16,19 @@ import {
   StatsModel
 } from '../models'
 import { networkConfig } from '../config'
-import moment from 'moment'
+import { timeUtil } from '../utils'
+
+import { getATHInRange } from './partial-ath.service'
 
 const httpProvider = new Web3.providers.HttpProvider(networkConfig.evmEndpoint)
 const web3 = new Web3(httpProvider)
 
-// const test = async () => {
-//   const tempBlock: Block = await web3.eth.getBlock(0)
-//   console.log('🚀 ~ tempBlock:', tempBlock)
-
-//   const trx: TransactionInfo = await web3.eth.getTransaction(
-//     '0x4b00d79018d46210b31829285541ae72653e03229a9cff67f362416e5a1c274c'
-//   )
-//   console.log('🚀 ~ trx:', trx)
-//   console.log('🚀 ~ gas:', Number(trx.gas))
-// }
-
-// test()
-
-// TODO: syncronize passed blocks
 const syncFullBlock = async (blockNumber: number | bigint) => {
   const block: Block = await web3.eth.getBlock(blockNumber)
 
   if (!block.hash) {
     throw new Error('Wrong block format')
   }
-
-  const blockExist = await blockModel.queries.exist(block.hash.toString())
-
-  if (blockExist) return
 
   const blockTimestamp = new Date(Number(block.timestamp) * 1000)
   const isBefore = moment(blockTimestamp).isBefore(
@@ -57,6 +47,21 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     transactions: (block.transactions || []) as TransactionHash[],
     number: Number(block.number),
     timestamp: blockTimestamp
+  }
+
+  if (block.transactions?.length && cappedBlock.gas_used <= 0) {
+    cappedBlock.gas_used = await cappedBlock.transactions.reduce(
+      async (
+        total: Promise<number>,
+        trxHash: TransactionHash
+      ): Promise<number> => {
+        const transactionReceipt: TransactionReceipt =
+          await web3.eth.getTransactionReceipt(trxHash.toString())
+
+        return (await total) + Number(transactionReceipt?.gasUsed)
+      },
+      Promise.resolve(0)
+    )
   }
 
   try {
@@ -78,43 +83,28 @@ const syncFullBlock = async (blockNumber: number | bigint) => {
     return
   }
 
+  if (!block.transactions?.length) return
+
+  const cappedTransactions = await Promise.all(
+    cappedBlock.transactions.map(async (trxHash: TransactionHash) => {
+      const trx: TransactionInfo = await web3.eth.getTransaction(
+        trxHash.toString()
+      )
+
+      const customTrx: transactionModel.interfaces.CappedTransaction = {
+        block_hash: trx.blockHash!.toString(),
+        block_number: Number(trx.blockNumber),
+        gas: Number(trx.gas),
+        gas_price: Number(trx.gasPrice),
+        hash: trx.hash.toString()
+      }
+
+      return customTrx
+    })
+  )
+
+  await transactionModel.queries.add_or_modify_many(cappedTransactions)
   await incrementTotalTransactions(block.transactions?.length)
-
-  // TODO: review this logic
-
-  const transactionsPromises = [
-    cappedBlock.transactions.reduce(
-      async (
-        acc: Promise<transactionModel.interfaces.CappedTransaction[]>,
-        trxHash: TransactionHash
-      ): Promise<transactionModel.interfaces.CappedTransaction[]> => {
-        const transactionExist = await transactionModel.queries.exist(trxHash)
-
-        if (transactionExist) {
-          return acc
-        }
-
-        const trx: TransactionInfo = await web3.eth.getTransaction(
-          trxHash.toString()
-        )
-
-        const customTrx: transactionModel.interfaces.CappedTransaction = {
-          block_hash: trx.blockHash!.toString(),
-          block_number: Number(trx.blockNumber),
-          gas: Number(trx.gas),
-          gas_price: Number(trx.gasPrice),
-          hash: trx.hash.toString()
-        }
-
-        await transactionModel.queries.add_or_modify(customTrx)
-
-        return [...(await acc), customTrx]
-      },
-      Promise.resolve([])
-    )
-  ]
-
-  await Promise.all(transactionsPromises)
 }
 
 const incrementTotalTransactions = async (transactionsCount: number) => {
@@ -125,53 +115,71 @@ const incrementTotalTransactions = async (transactionsCount: number) => {
   }
 }
 
-const getBlock = async () => {
-  let blockNumber: bigint
+const getLastBlockInDB = async () => {
   const lastBlockInDB = (await blockModel.queries.default.get(
     { timestamp: { _gt: moment().subtract(30, 'minutes') } },
     { number: 'desc' }
   )) as blockModel.interfaces.CappedBlock
 
+  return lastBlockInDB?.number || 0
+}
+
+const getBlock = async (lastInserted: number | null) => {
+  let blockNumber: bigint
+  const lastBlockInDB = lastInserted || (await getLastBlockInDB())
+
   if (!lastBlockInDB) {
     blockNumber = await web3.eth.getBlockNumber()
   } else {
-    blockNumber = BigInt(lastBlockInDB.number + 1)
+    blockNumber = BigInt(lastBlockInDB + 1)
   }
 
   await syncFullBlock(blockNumber)
+
+  return Number(blockNumber)
 }
 
 const syncOldBlocks = async (): Promise<void> => {
+  let blocksInserted = 1
   const paramStats = await paramModel.queries.getState()
-
-  if (paramStats.isSynced) return
-
-  const nextBlock = paramStats.nextBlock
-  const isUpToDate = await blockModel.queries.default.get({
-    number: { _eq: nextBlock }
-  })
-
-  if (!isUpToDate) {
-    const nextBlockTo = await blockModel.queries.default.getNextBlock(nextBlock)
-    const nextBlockToNumber = nextBlockTo[0]?.number || 0
-
-    if (nextBlockToNumber > nextBlock) {
-      console.log(
-        `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
-      )
-    }
-
-    await syncFullBlock(nextBlock)
+  if (paramStats.isSynced) {
+    await timeUtil.sleep(86400)
+    return
   }
-
+  const nextBlock = paramStats.nextBlock
+  const nextBlockToNumber =
+    paramStats.completeAt ||
+    (await blockModel.queries.default.getNextBlock(nextBlock))[0]?.number
+  if (!nextBlockToNumber) return
+  const isUpToDate = nextBlock >= nextBlockToNumber
+  if (!isUpToDate) {
+    console.log(
+      `🚦 Syncing blocks behind, pending ${nextBlockToNumber - nextBlock} `
+    )
+    blocksInserted = Math.min(25, nextBlockToNumber - nextBlock)
+    const blockPromises = []
+    for (let index = 0; index < blocksInserted; index++) {
+      blockPromises.push(syncFullBlock(nextBlock + index))
+    }
+    await Promise.allSettled(blockPromises)
+  } else {
+    console.log(`Syncing old blocks complete at ${moment().format()}`)
+  }
+  const partialATH = await getATHInRange(
+    nextBlock - 1,
+    nextBlock + blocksInserted - 1
+  )
+  await StatsModel.queries.updateATH(partialATH)
   await paramModel.queries.saveOrUpdate(
-    nextBlock + 1 * Number(!isUpToDate),
-    !!isUpToDate
+    nextBlock + blocksInserted * Number(!isUpToDate),
+    !!isUpToDate,
+    nextBlockToNumber
   )
 }
 
+let lastInserted: number | null = null
 const blockWorker = async () => {
-  getBlock()
+  lastInserted = await getBlock(lastInserted)
 }
 
 const cleanOldBlocks = async () => {
@@ -179,23 +187,8 @@ const cleanOldBlocks = async () => {
 }
 
 const syncATH = async () => {
-  const currentState = await historicalStatsModel.queries.getState()
   const partialATH = await StatsModel.queries.getPartialATH()
-
-  if (!partialATH) return
-
-  if (
-    currentState.tps_all_time_high.transactions_count ||
-    0 < partialATH.ath_transactions_count
-  ) {
-    await historicalStatsModel.queries.saveOrUpdate({
-      tps_all_time_high: {
-        blocks: partialATH.ath_blocks.split(','),
-        transactions_count: partialATH.ath_transactions_count,
-        gas_used: partialATH.ath_gas_used
-      }
-    })
-  }
+  await StatsModel.queries.updateATH(partialATH)
 }
 
 const syncBlockWorker = (): defaultModel.Worker => {

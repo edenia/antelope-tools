@@ -143,7 +143,7 @@ const EVMDashboard = () => {
           loading={loading}
         >
           <BodyGraphValue
-            links={EVMStats?.tps_all_time_high?.blocks.map(block =>
+            links={(EVMStats?.tps_all_time_high?.blocks || []).map(block =>
               getEVMBlockNumUrl(block),
             )}
           />
@@ -183,6 +183,9 @@ const EVMDashboard = () => {
         />
         <SimpleDataCard
           title={t('totalWallets')}
+          helperText={t('tooltip.totalWallets', {
+            accountName: evmConfig.account,
+          })}
           value={
             formatWithThousandSeparator(EVMStats?.wallets_created_count) ||
             'N/A'

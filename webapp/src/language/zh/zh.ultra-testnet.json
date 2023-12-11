@@ -1,0 +1,6 @@
+{
+  "routes": {
+    "/faucet>moreDescription": "此工具允许您创建账户并获取 UOS 测试网代币。",
+    "/>moreDescription": "查找有关{{networkName}}网络及其当前状态的信息。"
+  }
+}
