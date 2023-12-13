@@ -115,9 +115,11 @@ const Dashboard = ({ children }) => {
                 networkName: eosConfig.networkLabel,
               }),
         pathname: pathName,
-        pageTitle: t(`${pathName}>title`, {
-          networkName: eosConfig.networkLabel,
-        }),
+        pageTitle: i18n.exists(`routes:${pathName}>title`)
+          ? t(`${pathName}>title`, {
+              networkName: eosConfig.networkLabel,
+            })
+          : '',
         useConnectWallet: Boolean(route.useConnectWallet),
       })
     } else {
