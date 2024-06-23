@@ -45,7 +45,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'fio-testnet'
           REACT_APP_EOS_API_NETWORK_LABEL: 'FIO Testnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/fio.png'
-          REACT_APP_EOS_API_HOSTS: '[\"fio-testnet.eosphere.io\"]'
+          REACT_APP_EOS_API_HOSTS: '[\"testnet.fioprotocol.io\",\"fio-testnet.eosphere.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: 'b20901380af44ef59c5918439a1f9a41d83669020319a80574b804a5f95cbd7e'
@@ -81,8 +81,8 @@ jobs:
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
           HAPI_EOS_API_NETWORK_NAME: fio-testnet
-          HAPI_EOS_API_ENDPOINTS: '["https://fio-testnet.eosphere.io"]'
-          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: 'ws://'
+          HAPI_EOS_API_ENDPOINTS: '["https://testnet.fioprotocol.io","https://fio-testnet.eosphere.io"]'
+          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: ''
           HAPI_EOS_MISSED_BLOCKS_ENABLED: 'false'
           HAPI_EOS_BLOCK_HISTORY_DAYS: 90
           HAPI_EOS_MAX_CPU_BLOCK: 250000
