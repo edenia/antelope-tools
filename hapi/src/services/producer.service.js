@@ -4,6 +4,7 @@ const { hasuraUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig, workersConfig } = require('../config')
 
 const lacchainService = require('./lacchain.service')
+const fioService = require('./fio.service')
 const eosioService = require('./eosio.service')
 const nodeService = require('./node.service')
 const statsService = require('./stats.service')
@@ -83,6 +84,9 @@ const syncProducers = async () => {
   switch (eosConfig.networkName) {
     case eosConfig.knownNetworks.lacchain:
       producers = await lacchainService.getProducers()
+      break
+    case eosConfig.knownNetworks.fio:
+      producers = await fioService.getProducers()
       break
     default:
       producers = await eosioService.getProducers()

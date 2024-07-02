@@ -6,7 +6,7 @@ const {
 } = require('../utils')
 const { eosConfig } = require('../config')
 
-const saveBenchmark = async payload => {
+const saveBenchmark = async (payload) => {
   const mutation = `
     mutation ($account: String!, $usage: Int!) {
       insert_cpu_one (object: {account: $account, usage: $usage}) {
@@ -39,7 +39,11 @@ const cleanOldBenchmarks = async () => {
 }
 
 const worker = async () => {
-  if (!eosConfig.eosmechanics.account || !eosConfig.eosmechanics.password) {
+  if (
+    eosConfig.eosmechanics.account === ' ' ||
+    !eosConfig.eosmechanics.account ||
+    !eosConfig.eosmechanics.password
+  ) {
     return
   }
 
@@ -49,7 +53,7 @@ const worker = async () => {
     await saveBenchmark({
       account: block.producer,
       usage: block?.transactions.find(
-        trx => trx?.trx?.id === transaction.processed.id
+        (trx) => trx?.trx?.id === transaction.processed.id
       ).cpu_usage_us
     })
   } catch (error) {
