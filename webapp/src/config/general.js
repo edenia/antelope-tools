@@ -15,7 +15,7 @@ export const disabledMenuItems = JSON.parse(
 )
 export const appVersion =
   process.env.REACT_APP_VERSION.split('/').pop() || 'v1.0'
-export const appName = process.env.REACT_APP_NAME || 'eosiodashboard'
+export const appName = process.env.REACT_APP_NAME || 'antelopetools'
 export const networkLinks = process.env.REACT_APP_NETWORK_URL
   ? JSON.parse(process.env.REACT_APP_NETWORK_URL)
   : []

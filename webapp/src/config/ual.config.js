@@ -1,6 +1,6 @@
 import { Anchor } from 'ual-anchor'
 
-const appName = process.env.REACT_APP_EOS_APP_NAME || 'eosiodashboard'
+const appName = process.env.REACT_APP_EOS_APP_NAME || 'antelopetools'
 const network = {
   chainId:
     process.env.REACT_APP_EOS_CHAIN_ID ||
