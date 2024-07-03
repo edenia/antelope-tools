@@ -45,7 +45,7 @@ jobs:
           REACT_APP_EOS_API_NETWORK_NAME: 'wax'
           REACT_APP_EOS_API_NETWORK_LABEL: 'WAX Mainnet'
           REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/wax.jpg'
-          REACT_APP_EOS_API_HOSTS: '[\"wax.api.eosnation.io\",\"wax.edenia.cloud\",\"wax.api.eosnation.io\",\"wax.greymass.com\"]'
+          REACT_APP_EOS_API_HOSTS: '[\"wax.api.eosnation.io\",\"wax.eosusa.io\",\"wax.api.eosnation.io\",\"wax.greymass.com\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
           REACT_APP_EOS_CHAIN_ID: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4'
@@ -81,7 +81,7 @@ jobs:
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
           HAPI_EOS_API_NETWORK_NAME: wax
-          HAPI_EOS_API_ENDPOINTS: '["https://wax.api.eosnation.io","https://wax.edenia.cloud","https://wax.api.eosnation.io","https://wax.greymass.com"]'
+          HAPI_EOS_API_ENDPOINTS: '["https://wax.api.eosnation.io","https://wax.eosusa.io","https://wax.api.eosnation.io","https://wax.greymass.com"]'
           HAPI_EOS_API_CHAIN_ID: 1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}

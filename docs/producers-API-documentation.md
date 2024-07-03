@@ -112,13 +112,13 @@ curl -X 'POST' \
                     "owner": "costaricaeos",
                     "endpoints": [
                         {
-                            "link": "eos.edenia.cloud:9876",
+                            "link": "eos.eosusa.io:9876",
                             "response": {},
                             "updated_at": "2022-11-14T17:23:00.174097+00:00",
                             "type": "p2p"
                         },
                         {
-                            "link": "https://eos.edenia.cloud",
+                            "link": "https://eos.eosusa.io",
                             "response": {
                                 "status": 200,
                                 "statusText": "OK"
@@ -239,7 +239,7 @@ curl -X 'POST' \
                     "owner": "costaricaeos",
                     "endpoints": [
                         {
-                            "link": "eos.edenia.cloud:9876",
+                            "link": "eos.eosusa.io:9876",
                             "response": {},
                             "updated_at": "2022-11-14T17:23:00.174097+00:00",
                             "type": "p2p"
