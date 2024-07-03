@@ -183,7 +183,7 @@ const CustomTooltip = memo(({ active, payload }) => {
           {t('name')}:{' '}
           <span className={classes.description}>
             {' '}
-            {payload[0].payload.owner}
+            {payload[0].payload.name || payload[0].payload.owner}
           </span>
         </Typography>
         {generalConfig.useRewards && (

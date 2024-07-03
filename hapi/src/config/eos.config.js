@@ -46,6 +46,7 @@ module.exports = {
     nodeTable: process.env.HAPI_EOS_BP_JSON_ON_CHAIN_TABLE2 || 'node'
   },
   knownNetworks: {
+    fio: 'fio',
     lacchain: 'lacchain',
     libre: 'libre',
     telos: 'telos',

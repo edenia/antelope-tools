@@ -1,6 +1,6 @@
 import { Anchor } from 'ual-anchor'
 
-const appName = process.env.REACT_APP_EOS_APP_NAME || 'eosiodashboard'
+const appName = process.env.REACT_APP_EOS_APP_NAME || 'antelopetools'
 const network = {
   chainId:
     process.env.REACT_APP_EOS_CHAIN_ID ||
@@ -11,7 +11,7 @@ const network = {
       protocol: process.env.REACT_APP_EOS_API_PROTOCOL || 'https',
       host:
         JSON.parse(process.env.REACT_APP_EOS_API_HOSTS)[0] ||
-        'jungle.edenia.cloud',
+        'jungle.eosusa.io',
       port: parseInt(process.env.REACT_APP_EOS_API_PORT || '443'),
     },
   ],
