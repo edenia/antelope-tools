@@ -218,7 +218,7 @@ const getCurrencyBalance = (code, account, symbol) =>
   eosApi.getCurrencyBalance(code, account, symbol)
 
 const getTableRows = options =>
-  eosApi.getTableRows({ json: true, ...options })
+  callEosApi('getTableRows', async eosApi => eosApi.getTableRows({ json: true, ...options }))
 
 const getProducerSchedule = () => eosApi.getProducerSchedule({})
 

@@ -35,6 +35,7 @@ export const PRODUCERS_QUERY = gql`
         type
         value
       }
+      fio_address
     }
   }
 `
