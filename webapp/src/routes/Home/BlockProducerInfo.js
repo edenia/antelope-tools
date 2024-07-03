@@ -48,7 +48,8 @@ const BlockProducerInfo = ({ t, classes }) => {
       return {
         logo: data?.bp_json?.org?.branding?.logo_256,
         url: data?.url,
-        owner: item.producer_name || data.owner,
+        name: data?.fio_address || data?.bp_json?.producer_account_name,
+        owner:  item.producer_name || data.owner,
         rewards: data.total_rewards || 0,
         total_votes_percent: data.total_votes_percent * 100 || 0,
         value: 20,
@@ -88,7 +89,7 @@ const BlockProducerInfo = ({ t, classes }) => {
           header
           lowercase
           title={t('currentProducer')}
-          value={info.head_block_producer}
+          value={schedule.producers?.find(p => p.owner === info.head_block_producer)?.name || info.head_block_producer}
         />
         <SimpleDataCard
           header
