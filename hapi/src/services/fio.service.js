@@ -13,9 +13,8 @@ const getProducers = async () => {
     while (hasMore) {
       const {
         rows,
-        more,
-        total_producer_vote_weight: _totalVoteWeight
-      } = await eosUtil.getTableRows({
+        more
+    } = await eosUtil.getTableRows({
         code: 'eosio',
         table: 'producers',
         scope: 'eosio',
@@ -26,9 +25,21 @@ const getProducers = async () => {
 
       hasMore = !!more
       nextKey = more
-      totalVoteWeight = parseFloat(_totalVoteWeight)
       producers.push(...rows)
     }
+
+    const {
+      rows,
+    } = await eosUtil.getTableRows({
+      code: 'eosio',
+      table: 'global',
+      scope: 'eosio',
+      limit: 1,
+      json: true,
+      lower_bound: nextKey
+    })
+
+    totalVoteWeight = parseFloat(rows?.at(0)?.total_producer_vote_weight)
   } catch (error) {
     console.error('PRODUCER SYNC ERROR', error)
     producers = await getProducersFromDB()
@@ -60,9 +71,9 @@ const getProducers = async () => {
       owner: producer.owner,
       ...(rewards[producer.owner] || nonPaidStandby),
       total_votes: producer.total_votes,
-    //   total_votes_percent: producer.total_votes / totalVoteWeight,
-    //   total_votes_eos: producerUtil.getVotes(producer.total_votes),
-    //   rank: index + 1,
+      total_votes_percent: producer.total_votes / totalVoteWeight,
+      total_votes_eos: producerUtil.getVotes(producer.total_votes),
+      rank: index + 1,
       producer_key: producer.producer_public_key,
       url: producer.url,
       unpaid_blocks: producer.unpaid_blocks,
@@ -72,7 +83,7 @@ const getProducers = async () => {
       is_active: !!producer.is_active,
       fio_address: producer.fio_address,
       addresshash: producer.addresshash,
-      last_bpclaim: producer.last_bpclaim
+      last_bpclaim: producer.last_bpclaim?.toString() || '0'
     }
   })
   producers = await getBPJsons(producers)
