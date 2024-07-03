@@ -30,18 +30,18 @@ HAPI_EOS_MECHANICS_PASSWORD=PW...
 Let's make sure that the wallet was created correctly:
 
 ```bash
-cleos -u https://jungle.edenia.cloud --wallet-url http://localhost:8888 wallet list
+cleos -u https://jungle.eosusa.io --wallet-url http://localhost:8888 wallet list
 ```
 
 If the wallet is present but locked, then execute the following command:
 
 ```bash
-cleos -u https://jungle.edenia.cloud --wallet-url http://localhost:8888 wallet unlock -n eosmechanics
+cleos -u https://jungle.eosusa.io --wallet-url http://localhost:8888 wallet unlock -n eosmechanics
 ```
 
 Finally, we will import an EOSIO key for reading information about statistics of the block
 producers called eosmechanics (Ask the admins about the key):
 
 ```bash
-cleos -u https://jungle.edenia.cloud --wallet-url http://localhost:8888 wallet import -n eosmechanics
+cleos -u https://jungle.eosusa.io --wallet-url http://localhost:8888 wallet import -n eosmechanics
 ```
