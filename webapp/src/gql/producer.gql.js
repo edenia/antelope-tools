@@ -20,6 +20,7 @@ export const PRODUCERS_QUERY = gql`
     ) {
       id
       owner
+      fio_address
       url
       total_votes
       bp_json
@@ -35,7 +36,6 @@ export const PRODUCERS_QUERY = gql`
         type
         value
       }
-      fio_address
     }
   }
 `
@@ -51,6 +51,7 @@ export const PRODUCER_INFO_QUERY = gql`
     ) {
       id
       owner
+      fio_address
       url
       bp_json
       total_votes_eos
@@ -91,6 +92,7 @@ export const SMALL_PRODUCERS_QUERY = gql`
     ) {
       id
       owner
+      fio_address
       url
       bp_json
       total_votes_eos
@@ -146,6 +148,7 @@ const NODES_OPERATION = type => gql`
     ) {
       id
       owner
+      fio_address
       rank
       producer_key
       bp_json
@@ -190,6 +193,7 @@ const ENDPOINTS_OPERATION = type => gql`
     ) {
       id
       owner
+      fio_address
       updated_at
       endpoints: endpoints_list(where: $endpointFilter, order_by: { value: asc }) {
         type
@@ -308,6 +312,7 @@ export const ALL_NODES_QUERY = gql`
     ) {
       id
       owner
+      fio_address
       bp_json
       updated_at
     }
