@@ -105,7 +105,7 @@ const ClusterMap = ({ data, map, mapCode }) => {
                 const producer = this?.point?.producer
 
                 return producer?.owner
-                  ? `<a href=/${eosConfig.producersRoute}/${producer?.owner}>${producer?.owner}</a>`
+                  ? `<a href=/${eosConfig.producersRoute}/${producer?.owner}>${producer?.fio_address || producer?.owner}</a>`
                   : ''
               },
             },
