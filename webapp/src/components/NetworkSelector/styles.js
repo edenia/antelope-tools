@@ -154,6 +154,11 @@ export default (theme) => ({
     height: '22px !important',
     marginRight: theme.spacing(2),
   },
+  fioImg: {
+    width: '22px !important',
+    height: '22px !important',
+    marginRight: theme.spacing(2),
+  },
   telosImg: {
     width: '21px !important',
     height: '21px !important',
