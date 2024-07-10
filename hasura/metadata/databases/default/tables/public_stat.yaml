@@ -5,6 +5,12 @@ select_permissions:
   - role: guest
     permission:
       columns:
+        - last_round
+        - missed_blocks
+        - nodes_summary
+        - tps_all_time_high
+        - transaction_history
+        - unique_locations
         - average_cpu_usage_in_last_day
         - average_cpu_usage_in_last_hour
         - average_cpu_usage_in_last_week
@@ -12,15 +18,12 @@ select_permissions:
         - average_net_usage_in_last_day
         - average_net_usage_in_last_hour
         - average_net_usage_in_last_week
-        - created_at
-        - id
-        - missed_blocks
-        - nodes_summary
-        - tps_all_time_high
-        - transaction_history
         - transactions_in_last_day
         - transactions_in_last_hour
         - transactions_in_last_week
-        - unique_locations
+        - created_at
+        - last_block_at
+        - missed_blocks_checked_at
         - updated_at
+        - id
       filter: {}

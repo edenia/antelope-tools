@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
 
+import fioImg from '../../assets/fio.png'
 import jungleImg from '../../assets/jungle.webp'
 import waxImg from '../../assets/wax.webp'
 import lacchainImg from '../../assets/lacchain.webp'
@@ -47,6 +48,9 @@ const LogoSvg = ({ name }) => {
 
     case 'libre':
       return <img src={libreImg} alt="libre logo" className={classes.libreImg} />
+
+    case 'fio':
+      return <img src={fioImg} alt="fio logo" className={classes.fioImg} />
 
     default:
       return <img src={eosImg} alt="eos logo" className={classes.eosImg} />

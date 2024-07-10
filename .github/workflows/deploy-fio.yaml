@@ -1,14 +1,14 @@
-name: Build images for telos environment
+name: Build images for FIO mainnet environment
 
 on:
   push:
     tags:
-      - telos-v*
+      - fio-v*
 
 jobs:
-  create-telos-testnet-image:
+  create-fio-mainnet-image:
     runs-on: ubuntu-latest
-    environment: telos
+    environment: fio
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -34,63 +34,67 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
           # webapp
           PORT: '80'
-          REACT_APP_TITLE: 'Telos Mainnet Network Dashboard'
+          REACT_APP_TITLE: 'FIO Network Dashboard'
           REACT_APP_VERSION: ${{github.ref}}
-          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/telos.png'
-          REACT_APP_FOOTER_LINKS: '[{ "text": "Telos Website", "src": "https://telos.net/" },{ "text": "Telos Block Explorer", "src": "https://explorer.telos.net/" },{"text": "Developer Docs","src": "https://docs.telos.net/"},{"text": "Telos Network Monitor","src": "https://antelope.tools"}]'
+          REACT_APP_DEFAULT_PRODUCER_LOGO: 'https://antelope.tools/images/fio.png'
+          REACT_APP_FOOTER_LINKS: '[{ "text": "FIO Website", "src": "https://fio.net/" },{ "text": "FIO Block Explorer", "src": "https://fio.bloks.io/" },{"text": "Documentation","src": "https://dev.fio.net/"},{"text": "FIO Testnet Monitor","src": "https://fio-testnet.antelope.tools"}]'
           REACT_APP_EOS_RATE_LINK: ''
           REACT_APP_USE_REWARDS: 'true'
           REACT_APP_USE_VOTES: 'true'
-          REACT_APP_HASURA_URL: 'https://graphql-telos.antelope.tools/v1/graphql'
-          REACT_APP_EOS_API_NETWORK_NAME: 'telos'
-          REACT_APP_EOS_API_NETWORK_LABEL: 'Telos Mainnet'
-          REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/telos.png'
-          REACT_APP_EOS_API_HOSTS: '[\"telos.greymass.com\",\"telos.api.eosnation.io\",\"telos.eosphere.io\",\"telos.caleos.io\",\"api.telosmadrid.io\",\"api.telos.telosgreen.com\",\"telos.eosrio.io\"]'
+          REACT_APP_HASURA_URL: 'https://graphql-fio.antelope.tools/v1/graphql'
+          REACT_APP_EOS_API_NETWORK_NAME: 'fio'
+          REACT_APP_EOS_API_NETWORK_LABEL: 'FIO'
+          REACT_APP_EOS_API_NETWORK_LOGO: 'https://antelope.tools/images/fio.png'
+          REACT_APP_EOS_API_HOSTS: '[\"fio.eosusa.io\",\"fio.greymass.com\",\"fio.eosphere.io\"]'
           REACT_APP_EOS_API_PORT: '443'
           REACT_APP_EOS_API_PROTOCOL: 'https'
-          REACT_APP_EOS_CHAIN_ID: '4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11'
+          REACT_APP_EOS_CHAIN_ID: '21dcae42c0182200e93f954a074011f9048a7624c6fe81d3c9541a614a88bd1c'
           REACT_APP_EOS_USE_BP_JSON_ON_CHAIN: 'false'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_CONTRACT: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_TABLE: 'producerjson'
           REACT_APP_EOS_BP_JSON_ON_CHAIN_SCOPE: 'producerjson'
           REACT_APP_SYNC_TOLERANCE_INTERVAL: 180000
-          REACT_APP_TOKEN_SYMBOL: 'TLOS'
+          REACT_APP_TOKEN_SYMBOL: 'FIO'
           REACT_APP_NETWORK_URL:  '[{"label":"EOS","value":"https://eos.antelope.tools","mainnet":true,"icon":"eos","order":1},{"label":"FIO","value":"https://fio.antelope.tools","mainnet":true,"icon":"fio","order":2},{"label":"Libre","value":"https://libre.antelope.tools","mainnet":true,"icon":"libre","order":3},{"label":"Telos","value":"https://telos.antelope.tools","mainnet":true,"icon":"telos","order":4},{"label":"WAX","value":"https://wax.antelope.tools","mainnet":true,"icon":"wax","order":5},{"label":"XPR Network","value":"https://xpr.antelope.tools","mainnet":true,"icon":"xpr","order":6},{"label":"Jungle4 Testnet","value":"https://jungle.antelope.tools","mainnet":false,"icon":"jungle","order":1},{"label":"FIO Testnet","value":"https://fio-testnet.antelope.tools","mainnet":false,"icon":"fio","order":2},{"label":"Libre Testnet","value":"https://libre-testnet.antelope.tools","mainnet":false,"icon":"libre","order":3},{"label":"Telos Testnet","value":"https://telos-testnet.antelope.tools","mainnet":false,"icon":"telos","order":4},{"label":"WAX Testnet","value":"https://wax-testnet.antelope.tools","mainnet":false,"icon":"wax","order":5},{"label":"XPR Testnet","value":"https://xpr-testnet.antelope.tools","mainnet":false,"icon":"xpr","order":6}]'
-          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks", "/cpu-benchmark","/block-distribution","/stress-test"]'
-          REACT_APP_BLOCK_EXPLORER_URL: '{"url": "https://explorer.telos.net", "tx": "/transaction/(transaction)", "account": {"url":"/account/","abi":"?tab=contract&tab1=abi","actions":"?tab=contract&tab1=actions"}}'
-          REACT_APP_STATE_HISTORY_ENABLED=: 'false'
+          REACT_APP_DISABLED_MENU_ITEMS: '["/missed-blocks","/block-distribution","/cpu-benchmark","/stress-test","/evm","/evm-rpc-endpoints"]'
+          REACT_APP_BLOCK_EXPLORER_URL: '{"url": "https://fio.bloks.io/", "tx": "/transaction/(transaction)", "account": {"url":"/account/","abi":"","actions":""}}'
+          REACT_APP_STATE_HISTORY_ENABLED: 'false'
           REACT_APP_GOOGLE_ANALITIC_PAGE_ID: 'G-E6Y0EC9FT8'
           REACT_APP_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.REACT_APP_PUBLIC_RE_CAPTCHA_KEY }}
-          REACT_APP_EVM_ENDPOINT: 'https://mainnet.telos.net/evm'
-          REACT_APP_EVM_BLOCK_EXPLORER_URL: 'https://www.teloscan.io/block/(block)'
-          REACT_APP_EVM_ENDPOINTS: '["https://rpc1.eu.telos.net/evm","https://api.kainosbp.com/evm","https://mainnet.telos.net/evm","https://rpc1.us.telos.net/evm","https://rpc2.eu.telos.net/evm","https://rpc2.us.telos.net/evm","https://evm.teloskorea.com/evm","https://rpc2.teloskorea.com/evm","https://rpc01.us.telosunlimited.io/evm"]'
 
       - name: Build and deploy kubernetes files
         id: build_kubernetes_files
         run: |
           make \
-            build-kubernetes \
-            build-kubernetes-evm
+            build-kubernetes
         env:
           # general
-          NAMESPACE: telos-dashboard
-          INGRESS_HOST: telos.antelope.tools
-          INGRESS_GRAPHQL_HOST: graphql-telos.antelope.tools
+          NAMESPACE: fio-dashboard
+          INGRESS_HOST: fio.antelope.tools
+          INGRESS_GRAPHQL_HOST: graphql-fio.antelope.tools
           # webapp
-          REACT_APP_EOS_API_NETWORK_NAME: telos
+          REACT_APP_EOS_API_NETWORK_NAME: fio
           # postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_NETWORK_NAME: telos
-          HAPI_EOS_API_ENDPOINTS: '["https://telos.greymass.com","https://telos.eosphere.io","https://telos.api.eosnation.io"]'
-          HAPI_EOS_API_CHAIN_ID: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+          HAPI_EOS_API_NETWORK_NAME: fio
+          HAPI_EOS_API_ENDPOINTS: '["https://fio.eosusa.io","https://fio.greymass.com","https://fio.eosphere.io"]'
+          HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: ''
+          HAPI_EOS_MISSED_BLOCKS_ENABLED: 'false'
+          HAPI_EOS_BLOCK_HISTORY_DAYS: 90
+          HAPI_EOS_MAX_CPU_BLOCK: 250000
+          HAPI_EOS_MAX_NET_BLOCK: 1048576
+          HAPI_EOS_API_CHAIN_ID: 21dcae42c0182200e93f954a074011f9048a7624c6fe81d3c9541a614a88bd1c
           HAPI_EOS_BASE_ACCOUNT: ${{ secrets.HAPI_EOS_BASE_ACCOUNT }}
           HAPI_EOS_BASE_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_BASE_ACCOUNT_PASSWORD }}
           HAPI_EOS_MECHANICS_ACCOUNT: ${{ secrets.HAPI_EOS_MECHANICS_ACCOUNT }}
           HAPI_EOS_MECHANICS_PASSWORD: ${{ secrets.HAPI_EOS_MECHANICS_PASSWORD }}
+          HAPI_EOS_MECHANICS_CUSTOM_PERMISSION: 'benchmark'
+          HAPI_EOS_FAUCET_ACCOUNT_PASSWORD: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT_PASSWORD }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
           HAPI_EOS_WALLET_URL: http://dashboard-wallet:8888
           HAPI_EOS_BP_JSON_ON_CHAIN: 'false'
           HAPI_EOS_BP_JSON_ON_CHAIN_CONTRACT: producerjson
@@ -105,41 +109,28 @@ jobs:
           HAPI_SYNC_PRODUCER_CPU_INTERVAL: '6'
           HAPI_SYNC_PRODUCER_INFO_INTERVAL: '1'
           HAPI_SYNC_SCHEDULE_HISTORY_INTERVAL: 86400
-          HAPI_EOS_EXCHANGE_RATE_API: 'https://api.coingecko.com/api/v3/simple/price?ids=telos&vs_currencies=usd'
-          HAPI_COINGECKO_API_TOKEN_ID: telos
-          HAPI_REWARDS_TOKEN: TLOS
-          # hapi-evm
-          HAPI_EVM_SERVER_PORT: '9090'
-          HAPI_EVM_SERVER_ADDRESS: '0.0.0.0'
-          HAPI_EVM_HASURA_URL: 'http://dashboard-hasura:8080/v1/graphql'
-          HAPI_EVM_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_EVM_HASURA_ADMIN_SECRET }}
-          HAPI_EVM_DATABASE_URL: ${{ secrets.HAPI_EVM_DATABASE_URL }}
-          HAPI_EVM_ENDPOINT: 'https://mainnet.telos.net/evm'
-          HAPI_EVM_API_ENDPOINTS: '["https://telos.greymass.com","https://telos.eosphere.io","telos.caleos.io","mainnet.telosusa.io"]'
-          HAPI_EVM_NETWORK: TELOS
-          HAPI_EVM_NETWORK_CHAIN_ID: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
-          HAPI_EVM_EOS_EVM_ACCOUNT: eosio.evm
-          HAPI_EVM_BLOCK_INTERVAL_SEC: 0.5
-          HAPI_EVM_OLD_BLOCK_INTERVAL_SEC: 0.1
-          HAPI_EVM_ATH_INTERVAL_SEC: 900
-          HAPI_EVM_CLEAN_OLD_BLOCK_INTERVAL_SEC: 86400
-          HAPI_EVM_CLEAN_OLD_TRANSFER_INTERVAL_SEC: 86400
-          HAPI_EVM_KEEP_HISTORY_FOR_YEARS: 1
-          HAPI_EVM_HYPERION_API: https://telos.eosusa.io
-          HAPI_EVM_HYPERION_START_AT: 2020-11-29T08:45:00.000+00:00
+          HAPI_SYNC_STATS_INTERVAL: 3600
+          HAPI_EOS_EXCHANGE_RATE_API: https://api.coingecko.com/api/v3/simple/price?ids=fio-protocol&vs_currencies=usd
+          HAPI_COINGECKO_API_TOKEN_ID: fio-protocol
+          HAPI_REWARDS_TOKEN: FIO
+          HAPI_CREATE_ACCOUNT_ACTION_NAME: newaccount
+          HAPI_EOS_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_FAUCET_ACCOUNT }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          HAPI_EOS_GET_FAUCET_ACCOUNT: ${{ secrets.HAPI_EOS_GET_FAUCET_ACCOUNT }}
+          HAPI_PUBLIC_RE_CAPTCHA_KEY: ${{ secrets.HAPI_PUBLIC_RE_CAPTCHA_KEY }}
+          HAPI_RE_CAPTCHA_PROJECT_ID: ${{ secrets.HAPI_RE_CAPTCHA_PROJECT_ID }}
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
           HASURA_GRAPHQL_ACTION_BASE_URL: http://dashboard-hapi:9090
-          HASURA_GRAPHQL_ACTION_EVM_URL: http://dashboard-hapi-evm:9091
 
       - name: Setup and deploy kubernetes environment
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: telos-dashboard
+          NAMESPACE: fio-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes

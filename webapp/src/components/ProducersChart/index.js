@@ -105,7 +105,7 @@ const CustomBarLabel = memo(
           fontFamily="Roboto, Helvetica, Arial, sans-serif;"
           fontWeight={isProducing ? 'bold' : 'normal'}
         >
-          {payload.owner}
+          {payload.name ? payload.name?.replace('@fiotestnet','')?.substring(0, 12) + '...' : payload.owner}
         </text>
       )
 

@@ -32,7 +32,8 @@ const useEndpointsState = () => {
         const inserted = []
 
         const bpName =
-          producer.bp_json?.org?.candidate_name ||
+          producer?.fio_address ||
+          producer?.bp_json?.org?.candidate_name ||
           producer?.bp_json?.org?.organization_name ||
           producer?.owner
 

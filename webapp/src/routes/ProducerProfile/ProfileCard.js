@@ -119,7 +119,7 @@ const ProfileCard = ({ producer }) => {
       <div className={classes.profile}>
         <ProducerName
           name={producer?.media?.name || producer?.owner}
-          account={producer?.media?.name ? producer?.owner : ''}
+          account={producer?.media?.name ? (producer?.fio_address || producer?.owner) : ''}
           text={t('BPonNetwork', {
             networkName: eosConfig.networkLabel,
             position: producer?.media?.account,
