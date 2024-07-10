@@ -6,7 +6,7 @@ on:
       - fio-v*
 
 jobs:
-  create-fio-testnet-image:
+  create-fio-mainnet-image:
     runs-on: ubuntu-latest
     environment: fio
     steps:
@@ -69,9 +69,9 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: fio-testnet-dashboard
-          INGRESS_HOST: fio-testnet.antelope.tools
-          INGRESS_GRAPHQL_HOST: graphql-fio-testnet.antelope.tools
+          NAMESPACE: fio-dashboard
+          INGRESS_HOST: fio.antelope.tools
+          INGRESS_GRAPHQL_HOST: graphql-fio.antelope.tools
           # webapp
           REACT_APP_EOS_API_NETWORK_NAME: fio
           # postgres
@@ -80,7 +80,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_NETWORK_NAME: fio-testnet
+          HAPI_EOS_API_NETWORK_NAME: fio
           HAPI_EOS_API_ENDPOINTS: '["https://fio.eosusa.io","https://fio.greymass.com","https://fio.eosphere.io"]'
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: ''
           HAPI_EOS_MISSED_BLOCKS_ENABLED: 'false'
@@ -130,7 +130,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: fio-testnet-dashboard
+          NAMESPACE: fio-dashboard
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes
