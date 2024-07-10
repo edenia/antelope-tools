@@ -22,44 +22,47 @@ select_permissions:
   - role: guest
     permission:
       columns:
-        - block_cpu_limit
-        - block_net_limit
-        - block_rewards
-        - bp_json
+        - is_active
+        - addresshash
         - bp_json_url
         - chain_id
-        - created_at
-        - endpoints
+        - fio_address
         - fork_db_head_block_id
-        - fork_db_head_block_num
         - head_block_id
-        - head_block_num
         - head_block_producer
-        - head_block_time
-        - health_status
-        - id
-        - is_active
-        - last_claim_time
+        - last_bpclaim
         - last_irreversible_block_id
-        - last_irreversible_block_num
-        - location
         - owner
-        - ping
-        - producer_authority
         - producer_key
-        - rank
         - server_full_version_string
         - server_version
         - server_version_string
-        - total_rewards
         - total_votes
-        - total_votes_eos
-        - total_votes_percent
-        - unpaid_blocks
-        - updated_at
         - url
+        - block_cpu_limit
+        - block_net_limit
+        - fork_db_head_block_num
+        - head_block_num
+        - id
+        - last_irreversible_block_num
+        - location
+        - ping
+        - rank
+        - unpaid_blocks
         - virtual_block_cpu_limit
         - virtual_block_net_limit
+        - bp_json
+        - endpoints
+        - health_status
+        - producer_authority
+        - block_rewards
+        - total_rewards
+        - total_votes_eos
+        - total_votes_percent
         - vote_rewards
+        - created_at
+        - head_block_time
+        - last_claim_time
+        - updated_at
       filter: {}
       allow_aggregations: true
