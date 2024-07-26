@@ -1,6 +1,7 @@
 const cpuService = require('./cpu.service')
 const missedBlocksService = require('./missed-blocks.service')
 const producerService = require('./producer.service')
+const fioService = require('./fio.service')
 const nodeService = require('./node.service')
 const healthCheckHistoryService = require('./health-check-history.service')
 const settingService = require('./setting.service')
@@ -14,6 +15,7 @@ module.exports = {
   cpuService,
   missedBlocksService,
   producerService,
+  fioService,
   nodeService,
   healthCheckHistoryService,
   settingService,

@@ -127,7 +127,6 @@ const getExpectedRewards = async (producers, totalVotes) => {
       rewards = await getTelosRewards(producers)
       break
     case eosConfig.knownNetworks.fio:
-        rewards = await getFioRewards(producers)
         break
     default:
       rewards = await getEOSIORewards(producers, totalVotes)
@@ -278,12 +277,6 @@ const getEOSIORewards = async (producers, totalVotes) => {
     }
   }
 
-  return producersRewards
-}
-
-const getFioRewards = async (producers) => {
-  const producersRewards = []
-  // ToDo : Calculate producer Rewards Based on FIO System Contracts
   return producersRewards
 }
 
