@@ -341,15 +341,19 @@ const syncRewards = async () => {
   const voteShares = await getVoteShares()
   const producers = await getProducersWithRewards(voteShares)
 
-  await updateRewards(producers)
+  if (!producers?.length) {
+    setTimeout(syncRewards, 120 * 1000)
+  } else {
+    await updateRewards(producers)
 
-  const scheduleTime = await getLastPaidScheduleTime()
+    const scheduleTime = await getLastPaidScheduleTime()
 
-  scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
+    scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
 
-  const nextScheduleUpdate = Math.ceil((scheduleTime - new Date()))
+    const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
 
-  setTimeout(syncRewards, nextScheduleUpdate)
+    setTimeout(syncRewards, nextScheduleUpdate)
+  }
 }
 
 module.exports = {
