@@ -352,7 +352,7 @@ const syncRewards = async () => {
     if (scheduleTimeMs > 0) {
       scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
 
-      const nextScheduleUpdate = Math.ceil((scheduleTimeMs - (new Date()).getTime()))
+      const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
   
       if (nextScheduleUpdate > 0) {
         console.log(`SYNCING FIO REWARDS - sync completed, next sync on ${scheduleTime.toISOString()}`)
