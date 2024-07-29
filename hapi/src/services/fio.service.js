@@ -342,7 +342,7 @@ const syncRewards = async () => {
   const producers = await getProducersWithRewards(voteShares)
 
   if (!producers?.length) {
-    setTimeout(syncRewards, 120 * 1000)
+    setTimeout(syncRewards, 2 * 60 * 1000)
   } else {
     await updateRewards(producers)
 
@@ -352,7 +352,12 @@ const syncRewards = async () => {
 
     const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
 
-    setTimeout(syncRewards, nextScheduleUpdate)
+    if (nextScheduleUpdate > 0) {
+      console.log(`SYNCING FIO REWARDS - sync completed, next sync on ${scheduleTime.toISOString()}`)
+      setTimeout(syncRewards, nextScheduleUpdate)
+    } else {
+      setTimeout(syncRewards, 5 * 60 * 1000)
+    }
   }
 }
 
