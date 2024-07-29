@@ -194,7 +194,7 @@ const getChains = async producerUrl => {
 }
 
 const isNonCompliant = producer => {
-  return !Object.keys(producer.bpJson).length && producer.total_rewards >= 100
+  return !Object.keys(producer.bpJson).length && producer.total_rewards > 0
 }
 
 const getProducerHealthStatus = async producer => {
