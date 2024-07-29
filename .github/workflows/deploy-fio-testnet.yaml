@@ -80,7 +80,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
           # hapi
-          HAPI_EOS_API_NETWORK_NAME: fio-testnet
+          HAPI_EOS_API_NETWORK_NAME: fio
           HAPI_EOS_API_ENDPOINTS: '["https://testnet.fioprotocol.io","https://fio-testnet.eosphere.io"]'
           HAPI_EOS_STATE_HISTORY_PLUGIN_ENDPOINT: ''
           HAPI_EOS_MISSED_BLOCKS_ENABLED: 'false'

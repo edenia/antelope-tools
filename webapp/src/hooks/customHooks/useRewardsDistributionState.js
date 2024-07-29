@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useLazyQuery } from '@apollo/client'
 
-import { countries } from 'utils/countries'
 import { PRODUCERS_QUERY, SETTING_QUERY } from '../../gql'
+
+import { countries } from 'utils/countries'
+import { eosConfig } from 'config'
 
 const useRewardsDistributionState = () => {
   const [loadSettings, { data: { setting } = {} }] = useLazyQuery(SETTING_QUERY)
@@ -10,17 +12,19 @@ const useRewardsDistributionState = () => {
     useLazyQuery(PRODUCERS_QUERY)
   const [summary, setSummary] = useState()
   const [items, setItems] = useState([])
+  const isFIO = eosConfig.networkName.replace('-testnet', '') === 'fio'
+  const minimumRewards = isFIO ? 1 : 100
 
   useEffect(() => {
     loadSettings({})
     loadProducers({
       variables: {
-        where: { total_rewards: { _gte: 100 } },
+        where: { total_rewards: { _gte: minimumRewards } },
         offset: 0,
         limit: 2100,
       },
     })
-  }, [loadSettings, loadProducers])
+  }, [loadSettings, loadProducers, minimumRewards])
 
   useEffect(() => {
     if (!producers) return

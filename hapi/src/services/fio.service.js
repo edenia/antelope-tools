@@ -1,7 +1,21 @@
 const { StatusCodes } = require('http-status-codes')
 
-const { axiosUtil, eosUtil, sequelizeUtil, producerUtil } = require('../utils')
+const { axiosUtil, hasuraUtil, eosUtil, sequelizeUtil, producerUtil } = require('../utils')
 const { eosConfig } = require('../config')
+
+const MAX_PAID_PRODUCERS = 42
+
+const updateRewards = async (producers = []) => {
+  const upsertMutation = `
+    mutation ($producers: [producer_insert_input!]!) {
+      insert_producer(objects: $producers, on_conflict: {constraint: producer_owner_key, update_columns: [ vote_rewards, block_rewards, total_rewards ]}) {
+        affected_rows,
+      }
+    }
+  `
+
+  await hasuraUtil.request(upsertMutation, { producers })
+}
 
 const getProducers = async () => {
   let producers = []
@@ -60,16 +74,9 @@ const getProducers = async () => {
       return 0
     })
 
-  const rewards = await producerUtil.getExpectedRewards(
-    producers,
-    totalVoteWeight
-  )
-  const nonPaidStandby = { vote_rewards: 0, block_rewards: 0, total_rewards: 0 }
-
   producers = producers.map((producer, index) => {
     return {
       owner: producer.owner,
-      ...(rewards[producer.owner] || nonPaidStandby),
       total_votes: producer.total_votes,
       total_votes_percent: producer.total_votes / totalVoteWeight,
       total_votes_eos: producerUtil.getVotes(producer.total_votes),
@@ -187,7 +194,7 @@ const getChains = async producerUrl => {
 }
 
 const isNonCompliant = producer => {
-  return !Object.keys(producer.bpJson).length && producer.total_rewards >= 100
+  return !Object.keys(producer.bpJson).length && producer.total_rewards > 0
 }
 
 const getProducerHealthStatus = async producer => {
@@ -251,6 +258,110 @@ const getProducersFromDB = async () => {
   return producers
 }
 
+const getVoteShares = async () => {
+  try {
+    const { rows } = await eosUtil.getTableRows({
+      code: 'fio.treasury',
+      scope: 'fio.treasury',
+      table: 'voteshares',
+      reverse: false,
+      limit: MAX_PAID_PRODUCERS,
+      json: true,
+      lower_bound: null
+    })
+
+    if (!Array.isArray(rows)) return []
+
+    return rows
+  } catch (error) {
+    console.warn('SYNC FIO REWARDS', error.message || error)
+
+    return []
+  }
+}
+
+const getFioRewards = async (producers, voteShares) => {
+  const activeProducers = producers.slice(0, MAX_PAID_PRODUCERS)
+
+  return voteShares.flatMap(producer => {
+    if (activeProducers.find(bp => bp.owner === producer.owner)) {
+      const expectedVoteReward = producer.abpayshare / 10 ** 9
+      const expectedBlockReward = producer.sbpayshare / 10 ** 9
+
+      return ({
+        owner: producer.owner,
+        vote_rewards: expectedVoteReward,
+        block_rewards: expectedBlockReward,
+        total_rewards: expectedVoteReward + expectedBlockReward
+      })
+    }
+
+    return []
+  })
+}
+
+const getProducersWithRewards = async (voteShares) => {
+  const producers = await getProducersFromDB()
+  const paidProducers = await getFioRewards(producers.slice(0, MAX_PAID_PRODUCERS), voteShares)
+  const nonPaidStandby = 
+    producers.slice(MAX_PAID_PRODUCERS).map(producer => ({        
+      owner: producer.owner,
+      vote_rewards: 0,
+      block_rewards: 0,
+      total_rewards: 0
+    }))
+
+  return paidProducers.concat(nonPaidStandby)
+}
+
+const getLastPaidScheduleTime = async () => {
+  try {
+    const { rows } = await eosUtil.getTableRows({
+      code: 'fio.treasury',
+      scope: 'fio.treasury',
+      table: 'clockstate',
+      reverse: false,
+      limit: 1,
+      json: true,
+      lower_bound: null
+    })
+
+    if (!rows?.at(0)?.payschedtimer) return
+
+    return new Date(rows?.at(0)?.payschedtimer * 1000)
+  } catch (error) {
+    console.warn('SYNC FIO REWARDS', error.message || error)
+  }
+}
+
+// Every day the `voteshare` table is populated with the rewards the BP can claim that day.
+const syncRewards = async () => {
+  console.log('SYNCING FIO REWARDS')
+
+  const voteShares = await getVoteShares()
+  const producers = await getProducersWithRewards(voteShares)
+
+  if (!producers?.length) {
+    setTimeout(syncRewards, 2 * 60 * 1000)
+  } else {
+    await updateRewards(producers)
+
+    const scheduleTime = await getLastPaidScheduleTime()
+
+    scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
+
+    const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
+
+    if (nextScheduleUpdate > 0) {
+      console.log(`SYNCING FIO REWARDS - sync completed, next sync on ${scheduleTime.toISOString()}`)
+      setTimeout(syncRewards, nextScheduleUpdate)
+    } else {
+      setTimeout(syncRewards, 5 * 60 * 1000)
+    }
+  }
+}
+
 module.exports = {
-  getProducers
+  getProducers,
+  syncRewards
 }
