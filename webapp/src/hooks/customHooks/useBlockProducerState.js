@@ -6,7 +6,7 @@ import { eosConfig } from '../../config'
 
 import useSearchState from './useBPSearchState'
 
-const isFIO = eosConfig.networkName.replace('-testnet','') === 'fio'
+const isFIO = eosConfig.networkName.replace('-testnet', '') === 'fio'
 const minimumRewards = isFIO ? 1 : 100
 const CHIPS_FILTERS = [
   { where: { owner: { _like: '%%' }, bp_json: { _is_null: false } } },

@@ -11,7 +11,7 @@ const useNonCompliantState = () => {
   const [loadSettings, { data: { setting } = {} }] = useLazyQuery(SETTING_QUERY)
   const [items, setItems] = useState([])
   const [stats, setStats] = useState()
-  const isFIO = eosConfig.networkName.replace('-testnet','') === 'fio'
+  const isFIO = eosConfig.networkName.replace('-testnet', '') === 'fio'
   const minimumRewards = isFIO ? 1 : 100
 
   useEffect(() => {

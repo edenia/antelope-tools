@@ -12,7 +12,7 @@ const useRewardsDistributionState = () => {
     useLazyQuery(PRODUCERS_QUERY)
   const [summary, setSummary] = useState()
   const [items, setItems] = useState([])
-  const isFIO = eosConfig.networkName.replace('-testnet','') === 'fio'
+  const isFIO = eosConfig.networkName.replace('-testnet', '') === 'fio'
   const minimumRewards = isFIO ? 1 : 100
 
   useEffect(() => {
