@@ -347,16 +347,21 @@ const syncRewards = async () => {
     await updateRewards(producers)
 
     const scheduleTime = await getLastPaidScheduleTime()
+    const scheduleTimeMs = scheduleTime?.getTime() || 0
 
-    scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
+    if (scheduleTimeMs > 0) {
+      scheduleTime.setSeconds(scheduleTime.getSeconds() + 86400)
 
-    const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
-
-    if (nextScheduleUpdate > 0) {
-      console.log(`SYNCING FIO REWARDS - sync completed, next sync on ${scheduleTime.toISOString()}`)
-      setTimeout(syncRewards, nextScheduleUpdate)
+      const nextScheduleUpdate = Math.ceil((scheduleTime.getTime() - (new Date()).getTime()))
+  
+      if (nextScheduleUpdate > 0) {
+        console.log(`SYNCING FIO REWARDS - sync completed, next sync on ${scheduleTime.toISOString()}`)
+        setTimeout(syncRewards, nextScheduleUpdate)
+      } else {
+        setTimeout(syncRewards, 5 * 60 * 1000)
+      }
     } else {
-      setTimeout(syncRewards, 5 * 60 * 1000)
+      setTimeout(syncRewards, 60 * 1000)
     }
   }
 }
