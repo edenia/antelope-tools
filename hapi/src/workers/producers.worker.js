@@ -4,7 +4,8 @@ const {
   producerService,
   settingService,
   stateHistoryPluginService,
-  statsService
+  statsService,
+  fioService,
 } = require('../services')
 const { workersConfig, hasuraConfig, eosConfig } = require('../config')
 const { axiosUtil, sleepFor } = require('../utils')
@@ -58,6 +59,13 @@ const start = async () => {
     settingService.syncEOSPrice,
     workersConfig.syncExchangeRate
   )
+
+  if (eosConfig.networkName === eosConfig.knownNetworks.fio) {
+    run(
+      'SYNC FIO REWARDS',
+      fioService.syncRewards
+    )
+  }
 
   if (eosConfig.eosmechanics.account && eosConfig.eosmechanics.password) {
     run('CPU WORKER', cpuService.worker, workersConfig.cpuWorkerInterval)
